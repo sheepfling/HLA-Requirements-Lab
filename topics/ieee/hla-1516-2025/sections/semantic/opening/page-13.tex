@@ -1,0 +1,73 @@
+% Native semantic reconstruction of source physical page 13 (printed page 12).
+% Provenance: IEEE Std 1516-2025, Clauses 1.4--1.4.3 and footnotes 8--9.
+\HLAStartSemanticPage{13}{12}
+\fontsize{10.02pt}{11.523pt}\selectfont
+\begingroup
+\enlargethispage{-11.8pt}
+\hbadness=10000\relax
+\addfontfeatures{FakeStretch=1.035}
+\vspace*{-0.81pt}
+
+\HLASubclauseHeading{clause-1.4}{1.4 Background}
+\vspace{10.63pt}
+
+The HLA is a technical architecture developed to facilitate the reuse and interoperation of simulation\linebreak
+systems and assets (e.g., federation managers, data collectors, passive viewers, real world (“live”) systems,\linebreak
+and other utilities). It was developed in response to the clear recognition of the value of modeling and\linebreak
+simulation (M\&S) in supporting a wide variety of applications as well as the need to manage M\&S assets\linebreak
+as cost effective tools. The selected definition of an architecture as intended in HLA---“major functional\linebreak
+elements, interfaces, and design rules, pertaining as feasible to all simulation applications, and providing a\linebreak
+common framework within which specific system architectures can be defined”---is one that is commonly\linebreak
+accepted and is consistent with the definition of architecture for computer simulations provided by the\linebreak
+IEEE.\par
+\vspace{20.48pt}
+
+\HLASubclauseHeading[10.02pt]{clause-1.4.1}{1.4.1 Components of the HLA standard}
+\vspace{10.18pt}
+
+The HLA provides a general framework within which developers can structure and describe their\linebreak
+simulation systems and/or assets and interoperate with other simulation systems and assets. The HLA\linebreak
+consists of three main components. The first is the HLA Framework and Rules (i.e., this standard), which\linebreak
+provides a set of ten rules, five applying to \textit{federates} (see 3.1) and five applying to \textit{federations} (see 3.1),\linebreak
+that together ensure the proper interaction of federates in a federation and define the responsibilities of\linebreak
+federates and federations. The second component is a specification of services that allow simulations to\linebreak
+connect to one another, exchange data, and coordinate activities during a distributed runtime execution.\linebreak
+This component is the HLA federate interface specification (found in IEEE Std 1516.1\HLAStandardMark-2025), which\linebreak
+describes the capabilities and principles of operation of an underlying software infrastructure, called the\linebreak
+\textit{runtime infrastructure (RTI)}, that will be required for runtime operation. The third component is the HLA\linebreak
+object model template (OMT) Specification (found in IEEE Std 1516.2\HLAStandardMark-2025).\textsuperscript{8} It provides a\linebreak
+specification for describing \textit{object models} (see 3.1) that define the information produced or required by a\linebreak
+simulation application and for reconciling definitions among simulations to produce a common data model\linebreak
+for mutual interoperation.\par
+\vspace{20.51pt}
+
+\HLASubclauseHeading[10.02pt]{clause-1.4.2}{1.4.2 Terminology}
+\vspace{10.19pt}
+
+Some terminology is necessary to give an overview of the HLA framework. A federate application is an\linebreak
+application that supports the HLA interface to a RTI and that is capable of joining a federation execution.\linebreak
+Note that, in addition to a simulation, a federate application may represent an interface to a live system or a\linebreak
+support utility such as an event logger or performance monitor. A federate application may be coupled with\linebreak
+other software applications and a RTI. A joined federate is a member of a federation execution, actualized\linebreak
+by a federate application invoking the \HLAService{Join Federation Execution} service. A federation is a named set of\linebreak
+federate applications and a common federation object model (FOM) that are used as a whole to achieve\linebreak
+some specific objective. A federation execution is the actual operation, over time, of a set of joined\linebreak
+federates that are interconnected by an RTI.\par
+\vspace{12.23pt}
+
+NOTE---Formal definitions for each of these terms can be found in the definitions clause of all three HLA\linebreak
+specifications.\textsuperscript{9}\par
+\vspace{18.29pt}
+
+\HLASubclauseHeading[10.02pt]{clause-1.4.3}{1.4.3 Object models}
+\vspace{10.18pt}
+
+There are three types of object models in the HLA framework. First is a simulation object model (SOM).\linebreak
+The SOM is a specification of the types of information that an individual federate application could provide\linebreak
+to HLA federations as well as the information that an individual joined federate can receive from other\linebreak
+joined federates in HLA federation executions. The SOM may be viewed as a federate application’s native\par
+
+\footnotetext[8]{Information on references can be found in Clause 2.}
+\footnotetext[9]{Notes in text, tables, and figures are given for information only and do not contain requirements needed to implement the standard.}
+\endgroup
+\clearpage

@@ -1,0 +1,58 @@
+% Native semantic reconstruction of source physical page 23 (printed page 22).
+% Provenance: IEEE Std 1516-2025, Clause 3.1, definitions optimistic logical time--owned.
+\HLAStartSemanticPage{23}{22}
+\setlength{\HLASemanticDefinitionGap}{12.04pt}
+\fontsize{10.02pt}{11.524pt}\selectfont
+\begingroup
+\hbadness=2500\relax
+\addfontfeatures{FakeStretch=1.035}
+\vspace*{2.95pt}
+
+\begin{hladefinition}[0pt]{def-optimistic-logical-time-olt}{optimistic logical time (OLT)}
+A supplementary logical time that facilitates optimistic time advancement. The optimistic logical time is provided, along with the update to the federate's logical time, in a \HLAService{Flush Queue Grant} \HLAPrintersDagger{} service call as a response to a \HLAService{Flush Queue Request} service call. It is the minimum of the time supplied in the \HLAService{Flush Queue Request} and the timestamps of any TSO messages delivered in response to that \HLAService{Flush Queue Request}. The optimistic logical time indicates a lower bound on the next logical time the federate could be advanced to if no TSO messages with a timestamp less than it are received in the future.
+\end{hladefinition}
+
+\begin{hladefinition}{def-optimistic-lookahead-ol}{optimistic lookahead (OL)}
+The lookahead the federate would have if actually granted to the optimistic logical time.
+\end{hladefinition}
+
+\begin{hladefinition}{def-order-type}{order type}
+A runtime infrastructure (RTI) means of ordering messages originating from multiple joined federates that are delivered to a single joined federate. Different categories of service are defined with different characteristics regarding whether and how an RTI orders messages that are to be delivered to a joined federate.
+\end{hladefinition}
+
+\begin{hladefinition}{def-out-of-scope}{out of scope}
+Of or pertaining to an instance attribute of an object instance for which one or more of the following are not true:
+\vspace*{2.13pt}
+\begin{hladefinitionlist}[32.04pt]
+\item The object instance is known to the joined federate.
+\item The instance attribute is owned by another joined federate.
+\item The instance attribute's corresponding class attribute is one of the following:
+  \begin{hladefinitionnumberlist}[22.02pt]
+  \item A subscribed attribute of the known class of the object instance, or
+  \item A subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute at the owning joined federate overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate.
+  \end{hladefinitionnumberlist}
+\end{hladefinitionlist}
+\par\addvspace{12.49pt}%
+\hspace*{49.68pt}{\fontsize{9pt}{10.8pt}\selectfont NOTE---See 6.1 of IEEE Std 1516.1\HLAStandardMark-2025.}\par
+\end{hladefinition}
+
+\begin{hladefinition}{def-overlap}{overlap}
+\vspace*{2.13pt}
+\begin{hladefinitionlist}[32.40pt]
+\item Pertaining to region sets: given two region sets, to have a region in each set such that the two regions overlap.
+\item Pertaining to regions: given two regions, to have at least one dimension in common if and only if, for each dimension, the regions have in common, their respective ranges in the common dimension overlap. If two regions do not have any dimensions in common, the regions do not overlap.
+\item Pertaining to ranges: given two ranges (\(A = [a_{\mathrm{lower}}, a_{\mathrm{upper}})\) and \(B = [b_{\mathrm{lower}}, b_{\mathrm{upper}})\)), to overlap if and only if
+  \begin{hladefinitionnumberlist}[22.02pt]
+  \item Either \(a_{\mathrm{lower}} = b_{\mathrm{lower}}\) or (\(a_{\mathrm{lower}} < b_{\mathrm{upper}}\) and \(b_{\mathrm{lower}} < a_{\mathrm{upper}}\)) or
+  \item The Allow Relaxed DDM switch is enabled and the RTI implementation makes the determination, based on implementation-specific criteria, that the ranges are sufficiently close to warrant an expanded interpretation of one or both ranges\HLASemicolon{} neither range may ever be reduced.
+  \end{hladefinitionnumberlist}
+\end{hladefinitionlist}
+\par\vspace*{-9.41pt}%
+\hspace*{28.02pt}{\fontsize{9pt}{10.8pt}\selectfont NOTE---See 9.1 of IEEE Std 1516.1\HLAStandardMark-2025.}\par
+\end{hladefinition}
+
+\begin{hladefinition}{def-owned}{owned}
+Pertaining to the relationship between an instance attribute and a joined federate: when the joined federate has the unique right to update the instance attribute's value.
+\end{hladefinition}
+\endgroup
+\clearpage

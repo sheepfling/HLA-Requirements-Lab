@@ -1,0 +1,65 @@
+% Native semantic reconstruction of source physical page 32 (printed page 31).
+% Provenance: IEEE Std 1516-2025, Clause 3.2 conclusion, Clause 4, and Rule 1 opening.
+\HLAStartSemanticPage{32}{31}
+\fontsize{10.02pt}{11.566pt}\selectfont
+\begingroup
+\hbadness=10000\relax
+\addfontfeatures{FakeStretch=1.035}
+\vspace*{-5.79pt}
+
+\begin{hlaacronymrows}
+\HLAAcronymRow{acro-som}{SOM}{simulation object model}
+\HLAAcronymRow{acro-tradt}{TRADT}{time representation abstract data type}
+\HLAAcronymRow{acro-tso}{TSO}{timestamp order}
+\HLAAcronymRow{acro-uri}{URI}{uniform resource identifier}
+\HLAAcronymRow{acro-url}{URL}{uniform resource locator}
+\HLAAcronymRow{acro-wsprc}{WSPRC}{Web Service Provider RTI Component}
+\HLAAcronymRow{acro-xml}{XML}{extensible markup language}
+\end{hlaacronymrows}
+\vspace{15.40pt}
+
+\HLAClauseHeading{clause-4}{4. Summary of the HLA rules}
+\vspace{13.12pt}
+
+The rules for federations are as follows:\par
+\vspace{15.06pt}
+
+\begin{hlasummaryrules}
+\HLASummaryRule{summary-rule-1}{Federations shall have an HLA FOM, documented in accordance with the HLA OMT.}
+\HLASummaryRule{summary-rule-2}{In a federation, all simulation-associated object instance representation shall be in the\linebreak federates, not in the RTI.}
+\HLASummaryRule{summary-rule-3}{During a federation execution, all exchange of FOM data among joined federates shall occur\linebreak via the RTI.}
+\HLASummaryRule{summary-rule-4}{During a federation execution, joined federates shall interact with the RTI in accordance with\linebreak the HLA interface specification.}
+\HLASummaryRule{summary-rule-5}{During a federation execution, an instance attribute shall be owned by at most one joined\linebreak federate at any given time.}
+\end{hlasummaryrules}
+\vspace{9.03pt}
+
+The rules for federates are as follows:\par
+\vspace{15.06pt}
+
+\begin{hlasummaryrules}
+\setcounter{enumi}{5}
+\HLASummaryRule{summary-rule-6}{Federates shall have an HLA SOM, documented in accordance with the HLA OMT.}
+\HLASummaryRule{summary-rule-7}{Federates shall be able to update and/or reflect any instance attributes and send and/or receive\linebreak interactions, as specified in their SOMs.}
+\HLASummaryRule{summary-rule-8}{Federates shall be able to transfer and/or accept ownership of instance attributes dynamically\linebreak during a federation execution, as specified in their SOMs.}
+\HLASummaryRule{summary-rule-9}{Federates shall be able to vary the conditions (e.g., thresholds) under which they provide\linebreak updates of instance attributes, as specified in their SOMs.}
+\HLASummaryRule{summary-rule-10}{Federates shall be able to manage local time in a way that allows them to coordinate data\linebreak exchange with other members of a federation.}
+\end{hlasummaryrules}
+\vspace{15.26pt}
+
+\HLAClauseHeading{clause-5}{5. Federation rules}
+\vspace{22.10pt}
+
+\HLADetailedRuleHeading{detailed-rule-1}{5.1 Rule 1}
+\vspace{10.78pt}
+
+\HLANormativeRuleStatement{Federations shall have an HLA FOM, documented in accordance with the HLA OMT.}
+\vspace{11.82pt}
+
+All data to be exchanged in accordance with the HLA shall be documented in a FOM. The FOM is\linebreak
+specified using one or more FOM modules and one MOM and Initialization Module (MIM). A FOM shall\linebreak
+document the agreement among federates on data to be exchanged using the HLA services during\linebreak
+federation execution and the minimal set of conditions of the data exchange (e.g., updates to be sent when\linebreak
+changes exceed a certain value). As such, a FOM is an essential element in defining a federation. The HLA\linebreak
+does not prescribe which data are included in a FOM (this task is the responsibility of the federation user\par
+\endgroup
+\clearpage

@@ -1,0 +1,70 @@
+% Native semantic reconstruction of source physical page 37 (printed page 36).
+% Provenance: IEEE Std 1516-2025, rationales for Rules 4--7.
+\HLAStartSemanticPage{37}{36}
+\fontsize{10.02pt}{11.566pt}\selectfont
+\begingroup
+\hbadness=10000\relax
+\addfontfeatures{FakeStretch=1.035}
+\vspace*{-0.32pt}
+
+\HLARationaleHeading{rationale-4}{A.1.4 Rationale for Rule 4}
+\vspace{12.25pt}
+
+\HLANormativeRuleStatement{During a federation execution, joined federates shall interact with the RTI in accordance with the HLA\linebreak interface specification.}
+\vspace{11.87pt}
+
+By requiring a standardized, common interface between federates and the RTI, along with a common\linebreak
+application programmer’s interface (API), the HLA allows for independent development and\linebreak
+implementation of federate applications. Federate developers can work independently and develop\linebreak
+interfaces to the RTI without regard to RTI implementation, and RTI developments can proceed without\linebreak
+explicit consideration of federate development. The separation of the interfaces from the requirements for\linebreak
+federate data exchange allows for the reuse of a common interface specification across the broad spectrum\linebreak
+of distributed M\&S applications, with specific application needs tailored through the FOM mechanism.\par
+\vspace{23.42pt}
+
+\HLARationaleHeading{rationale-5}{A.1.5 Rationale for Rule 5}
+\vspace{12.25pt}
+
+\HLANormativeRuleStatement{During a federation execution, an instance attribute shall be owned by at most one joined federate at any\linebreak given time.}
+\vspace{11.81pt}
+
+The HLA also provides the mechanism during federation execution to dynamically transfer ownership of\linebreak
+an instance attribute from one joined federate to another or for a joined federate to unconditionally divest\linebreak
+its ownership of an instance attribute. In this second case, the instance attribute becomes “unowned” by all\linebreak
+joined federates, hence the rule explicitly states that “an instance attribute shall be owned by at most one\linebreak
+joined federate at any given time.” Joined federates can request ownership of “unowned” instance\linebreak
+attributes. By defining ownership at the instance attribute level and providing the tools to hand off\linebreak
+ownership during federation execution, the HLA provides a flexible tool set for using various combinations\linebreak
+of joined federates to meet user needs.\par
+\vspace{21.64pt}
+
+\HLAClauseHeading[10.98pt]{clause-A.2}{A.2 Federate rules}
+\vspace{24.09pt}
+
+\HLARationaleHeading{rationale-6}{A.2.1 Rationale for Rule 6}
+\vspace{12.31pt}
+
+\HLANormativeRuleStatement{Federates shall have an HLA SOM, documented in accordance with the HLA OMT.}
+\vspace{11.80pt}
+
+A major goal of the HLA is to support interoperability and reuse of simulations. The HLA provides this\linebreak
+support by providing for reuse at the level of simulations (or, more generally, federates) and allowing\linebreak
+access to the representations in those simulations.\par
+\vspace{11.98pt}
+
+Lack of cost-effective access to information about the object representations available in federates inhibits\linebreak
+reuse. The requirement for a SOM addresses information access by requiring federates to document the\linebreak
+minimum essential, salient aspects of their capabilities to allow for easy identification of the federates’\linebreak
+potential application in new federations. Although the full set of information required by a potential user\linebreak
+will go well beyond the SOM contents, providing easy access to characterizations of simulation based on\linebreak
+reuse potential will enable users to decide more effectively whether to invest in further assessment of the\linebreak
+simulations to their applications. There are certain circumstances, such as dynamically configured passive\linebreak
+subscribers, where a federate’s SOM is based on the current FOM.\par
+\vspace{23.42pt}
+
+\HLARationaleHeading{rationale-7}{A.2.2 Rationale for Rule 7}
+\vspace{12.25pt}
+
+\HLANormativeRuleStatement{Federates shall be able to update and/or reflect any instance attributes and send and/or receive\linebreak interactions, as specified in their SOMs.}
+\endgroup
+\clearpage

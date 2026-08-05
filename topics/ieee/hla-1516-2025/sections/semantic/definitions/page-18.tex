@@ -1,0 +1,56 @@
+% Native semantic reconstruction of source physical page 18 (printed page 17).
+% Provenance: IEEE Std 1516-2025, Clause 3.1, definitions corresponding instance attributes--delete.
+% The source places this page's printed page number and copyright unusually low; the semantic page preserves that page-specific geometry.
+\HLAPhysicalPageMarker{18}
+\thispagestyle{empty}
+\HLASemanticHeader
+\setlength{\HLASemanticDefinitionGap}{13.60pt}
+\fontsize{9.96pt}{11.524pt}\selectfont
+
+\begin{hladefinition}[0pt]{def-corresponding-instance-attributes-of-a-class-attribute}{corresponding instance attributes of a class attribute}
+The instance attributes that, from the perspective of a given joined federate, are:
+\begin{hladefinitionlist}[32.04pt]
+\item Unowned instance attributes of object instances that have a known class at the joined federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute, or
+\item Instance attributes owned by the joined federate that belong to object instances that have a known class at the owning federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute.
+\end{hladefinitionlist}
+\end{hladefinition}
+
+\begin{hladefinition}{def-current-federation-object-model-fom}{current federation object model (FOM)}
+The union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2\HLAStandardMark-2025. When all FOM modules have been provided, the current FOM will be equal to the FOM\HLASemicolon{} and before this step has happened, the current FOM will be a true subset of the FOM.
+\end{hladefinition}
+
+\begin{hladefinition}{def-current-federation-object-model-fom-document-data-fdd}{current federation object model (FOM) Document Data (FDD)}
+The data and information used to configure the federation execution that is the union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2\HLAStandardMark-2025. When all FOM modules have been provided, the current FDD will be equal to the FDD\HLASemicolon{} and before this step has happened, the current FDD will be a true subset of the FDD.
+\end{hladefinition}
+
+\begin{hladefinition}{def-data-type}{data type}
+A representation convention for a data element establishing its format, resolution, cardinality, and ordinality.
+\end{hladefinition}
+
+\begin{hladefinition}{def-declared-attributes}{declared attributes}
+The set of class attributes of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.
+\end{hladefinition}
+
+\begin{hladefinition}{def-declared-directed-interaction}{declared directed interaction}
+The set of class directed interactions of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.
+\end{hladefinition}
+
+\begin{hladefinition}{def-declared-parameters}{declared parameters}
+The set of parameters of a particular interaction class that are listed in the federation object model (FOM) as being associated with that interaction class in the interaction class hierarchy tree.
+\end{hladefinition}
+
+\begin{hladefinition}{def-default-range}{default range}
+A range lower bound and a range upper bound, defined in the federation object model (FOM) Document Data (FDD) and specified in terms of [0, the dimension's upper bound), for a dimension.
+\end{hladefinition}
+
+\begin{hladefinition}{def-default-region}{default region}
+A multidimensional region provided by the runtime infrastructure (RTI) that is composed of one range for each dimension found in the federation object model (FOM) Document Data (FDD). The bounds of each of these ranges are (0, the range's dimension's upper bound). There is no way for a federate to refer to the default region.
+\HLADefinitionNote{See 9.1 in IEEE Std 1516.1\HLAStandardMark-2025.}
+\end{hladefinition}
+
+\begin{hladefinition}{def-delete}{delete}
+To invoke the \HLAService{Delete Object Instance} service to eliminate a particular object instance. \HLASeeAlso{\HLATermReference{remove}.}
+\HLADefinitionNote{See 6.16 in IEEE Std 1516.1\HLAStandardMark-2025.}
+\end{hladefinition}
+\HLASemanticFooter[low]{17}
+\clearpage

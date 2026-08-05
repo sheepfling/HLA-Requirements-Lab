@@ -1,5 +1,5 @@
 $pdf_mode = 5;
 $xelatex = 'xelatex -interaction=nonstopmode -halt-on-error -file-line-error %O %S';
-$xelatex = 'xelatex --disable-installer -interaction=nonstopmode -halt-on-error -file-line-error %O %S' if $^O eq 'MSWin32';
+$xelatex = 'xelatex --enable-installer -interaction=nonstopmode -halt-on-error -file-line-error %O %S' if $^O eq 'MSWin32';
 $out_dir = 'build';
 $aux_dir = 'build';

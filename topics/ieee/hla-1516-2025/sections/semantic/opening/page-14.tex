@@ -1,0 +1,75 @@
+% Native semantic reconstruction of source physical page 14 (printed page 13).
+% Provenance: IEEE Std 1516-2025, continuation of Clause 1.4.3 and Clause 1.4.4.
+\HLAStartSemanticPage{14}{13}
+\fontsize{10.02pt}{11.523pt}\selectfont
+\begingroup
+\hbadness=10000\relax
+\addfontfeatures{FakeStretch=0.950}
+\vspace*{-0.04pt}
+
+expression of its capabilities and data interfaces. The SOM facilitates simulation reuse and provides a\linebreak
+starting point for combining the simulation with other participating simulations for a common purpose.\linebreak
+Second is a federation object model (FOM). The FOM is a specification defining the information\linebreak
+exchanged at runtime to achieve a given set of federation objectives. This information includes object\linebreak
+classes, object class attributes, interaction classes, interaction parameters, Management Object Model\linebreak
+(MOM) contents, and other relevant information. Third is the MOM, which is a group of predefined\linebreak
+constructs that provide support for monitoring and controlling a federation execution. FOMs can be\linebreak
+developed from scratch by using relevant elements of the SOMs of the federate applications that will make\linebreak
+up the federation or by using existing FOMs or reference FOMs and any combination of these approaches.\linebreak
+If existing SOMs or FOMs are used, it is important to understand that there may be parts of these\linebreak
+SOMs/FOMs that may not be relevant to other federate applications in the federation and thus will not be\linebreak
+incorporated in the FOM. For example, a ship simulation may model boiler pressure, but if a federation\linebreak
+needs only to know ship location, boiler pressure may optionally be dropped from the FOM. Also, it may\linebreak
+be necessary to reconcile differing units and differing representations among simulations. The OMT\linebreak
+provides a standard structure and a set of representational conventions for specifying both SOMs and\linebreak
+FOMs.\par
+\vspace{18.95pt}
+
+\HLASubclauseHeading[10.02pt]{clause-1.4.4}{1.4.4 Service groups}
+\vspace{9.86pt}
+
+The federate interface specification defines the functional interface between federates and the RTI. The RTI\linebreak
+provides services to joined federates in a way that is analogous to how a distributed operating system\linebreak
+provides services to applications. The services are arranged into seven basic groups as, as follows:\par
+
+\vspace{2.02pt}
+\begin{hlaoverviewservicelist}
+\item Federation Management: These services allow for the coordination of federation-wide activities\linebreak
+throughout the life of a federation execution. Such services include federation execution creation\linebreak
+and destruction, federate application joining and resigning, federation synchronization points, and\linebreak
+save and restore operations.
+
+\item Declaration Management: These services allow joined federates to specify the types of data they\linebreak
+will supply to or receive from the federation execution. This process is done via a set of\linebreak
+publication and subscription services along with some related services.
+
+\item Object Management: These services support the life-cycle activities of the objects and interactions\linebreak
+used by the joined federates of a federation execution. These services provide for registering and\linebreak
+discovering object instances, updating and reflecting the instance attributes associated with these\linebreak
+object instances, deleting or removing object instances as well as sending and receiving\linebreak
+interactions and other related services. (Note: Formal definitions for each of these terms can be\linebreak
+found in the definitions clause of all three HLA specifications.)
+
+\item Ownership Management: These services are used to establish a specific joined federate’s privilege\linebreak
+to provide values for an object instance attribute as well as to facilitate dynamic transfer of this\linebreak
+privilege (ownership) to other joined federates during a federation execution.
+
+\item Time Management: These services allow joined federates to operate with a logical concept of time\linebreak
+and to jointly maintain a distributed virtual clock. These services support discrete event\linebreak
+simulations and assurance of causal ordering among events.
+
+\item Data Distribution Management: These services allow joined federates to further specify the\linebreak
+distribution conditions (beyond those provided via Declaration Management services) for the\linebreak
+specific data they send or ask to receive during a federation execution. The RTI uses this\linebreak
+information to route data from producers to consumers in a more tailored manner.
+
+\item Support Services: This group includes miscellaneous services utilized by joined federates for\linebreak
+performing such actions as name-to-handle and handle-to-name transformations, the setting of\linebreak
+advisory switches, region manipulations, and RTI startup and shutdown.
+\end{hlaoverviewservicelist}
+\vspace{1.02pt}
+
+The federate interface specification includes programming language-independent definitions of the syntax\linebreak
+and semantics of all the services in the interface. It also provides language bindings for Java and C.\par
+\endgroup
+\clearpage

@@ -1,0 +1,61 @@
+% Native semantic reconstruction of source physical page 16 (printed page 15).
+% Provenance: IEEE Std 1516-2025, Clause 3.1, definitions accuracy--available dimensions.
+\HLAStartSemanticPage{16}{15}
+\HLAContentMarker{clause-3}
+\HLAContentMarker{clause-3.1}
+\setlength{\HLASemanticDefinitionGap}{11.90pt}
+\fontsize{10.02pt}{11.523pt}\selectfont
+\vspace*{8.73pt}
+
+{\HLAFacSans\bfseries\fontsize{12pt}{14.4pt}\selectfont
+3. Definitions, acronyms, and abbreviations\par}
+\vspace{20.46pt}
+
+{\HLAFacSans\bfseries\fontsize{10.98pt}{13.18pt}\selectfont
+3.1 Definitions\par}
+\vspace{8.42pt}
+
+For the purposes of this document, the following terms \textit{and definitions apply. The IEEE Standards Dictionary Online} should be consulted for terms not defined in this clause.\footnotemark[12]\par
+
+\begin{hladefinition}{def-accuracy}{accuracy}
+The measure of the maximum deviation of an attribute or a parameter value in the simulation or federation from reality or some other chosen standard or referent.
+\end{hladefinition}
+
+\begin{hladefinition}{def-active-subscription}{active subscription}
+A request to the runtime infrastructure (RTI) for the kinds of data (class attributes as well as interactions) that the joined federate is currently interested in receiving. The RTI uses these data along with publication data received from other joined federates to support services, such as:
+\begin{hladefinitionlist}
+\item \HLAService{Start/Stop Registration}
+\item \HLAService{Turn On/Off Updates}
+\item \HLAService{Turn On/Off Interactions}
+\end{hladefinitionlist}
+The RTI also uses the subscription (and publication) data to determine how to route data to the joined federates that require that data.
+\end{hladefinition}
+
+\begin{hladefinition}{def-attribute}{attribute}
+A named characteristic of an object class or object instance. \HLASeeAlso{\HLATermReference{class attribute}\HLASemicolon{} \HLATermReference{instance attribute}.}
+\end{hladefinition}
+
+\begin{hladefinition}{def-attribute-ownership}{attribute ownership}
+The property of an instance attribute that gives a joined federate the capability to supply values for that instance attribute to its federation execution. \HLASeeAlso{\HLATermReference{instance attribute}.}
+\end{hladefinition}
+
+\begin{hladefinition}{def-authorizer}{authorizer}
+An interface used to determine if a specific set of service invocations (\HLAService{Connect}, \HLAService{Create Federation Execution}, \HLAService{Destroy Federation Execution}, and \HLAService{Join Federation Execution}) are allowed for the federate, given its credentials.
+\end{hladefinition}
+
+\begin{hladefinition}{def-available-attributes}{available attributes}
+The set of declared attributes of an object class in union with the set of inherited attributes of that object class.
+\end{hladefinition}
+
+\begin{hladefinition}{def-available-dimensions}{available dimensions}
+\begin{hladefinitionlist}
+\item Pertaining to an object class: the dimensions associated with that object class in union with the set of inherited dimensions in the federation object model (FOM).
+\item Pertaining to an attribute: The available dimensions of an instance attribute are the available dimensions of the known class. When registering, subscribing, unsubscribing, requesting updates with regions, or getting available dimensions, the available dimensions are the available dimensions of the object class specified in the service invocation.
+\item Pertaining to an interaction class: the dimensions associated with that interaction class in union with the set of inherited dimensions in the FOM. The available dimensions of a sent interaction are the available dimensions of the interaction class specified in the \HLAService{Send Interaction With Regions} service invocation.
+\end{hladefinitionlist}
+\HLADefinitionNote{See 9.1 in IEEE Std 1516.1\HLAStandardMark-2025.}
+\par\addvspace{9.96pt}See dimension.
+\end{hladefinition}
+
+\footnotetext[12]{\textit{IEEE Standards Dictionary Online} is available at: \textcolor{blue}{http://dictionary.ieee.org}. An IEEE account is required for access to the dictionary, and one can be created at no charge on the dictionary sign-in page.}
+\clearpage

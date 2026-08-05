@@ -1,0 +1,71 @@
+% Native semantic reconstruction of source physical page 34 (printed page 33).
+% Provenance: IEEE Std 1516-2025, Rule 5 and Federate Rules 6--8.
+\HLAStartSemanticPage{34}{33}
+\fontsize{10.02pt}{11.566pt}\selectfont
+\begingroup
+\hbadness=10000\relax
+\addfontfeatures{FakeStretch=1.025}
+\enlargethispage{28pt}
+\vspace*{-0.85pt}
+
+\HLADetailedRuleHeading{detailed-rule-5}{5.5 Rule 5}
+\vspace{12.79pt}
+
+\HLANormativeRuleStatement{During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any\linebreak given time.}
+\vspace{11.81pt}
+
+The HLA allows for different joined federates to own different attributes of the same object instance (e.g., a\linebreak
+simulation of an aircraft might own the location of the airborne sensor, whereas a sensor system model\linebreak
+might own other instance attributes of the sensor). To ensure data coherency across the federation, at most,\linebreak
+one joined federate may own any given instance attribute of an object instance at any given time. Joined\linebreak
+federates may request that the ownership of instance attributes be acquired or divested dynamically during\linebreak
+federation execution. Thus, ownership can be transferred dynamically during execution from one joined\linebreak
+federate to another.\par
+\vspace{24.35pt}
+
+\HLAClauseHeading{clause-6}{6. Federate rules}
+\vspace{13.08pt}
+
+This clause describes the five rules that apply to HLA federates. The rationale for the inclusion of each rule\linebreak
+is located in Annex A.\par
+\vspace{24.97pt}
+
+\HLADetailedRuleHeading{detailed-rule-6}{6.1 Rule 6}
+\vspace{12.79pt}
+
+\HLANormativeRuleStatement{Federates shall have an HLA SOM, documented in accordance with the HLA OMT.}
+\vspace{11.81pt}
+
+The HLA SOM shall include the object classes, class attributes, and interaction classes of the federate that\linebreak
+can be made public in a federation. The SOM is specified using one or more SOM modules and one\linebreak
+optional MIM. The HLA does not prescribe which data are included in the SOM\HLASemicolon{} this task shall be the\linebreak
+responsibility of the federate developer. SOMs shall be documented in the format prescribed in IEEE Std\linebreak
+1516.2-2025.\par
+\vspace{28.94pt}
+
+\HLADetailedRuleHeading{detailed-rule-7}{6.2 Rule 7}
+\vspace{12.79pt}
+
+\HLANormativeRuleStatement{Federates shall be able to update and/or reflect any instance attributes and send and/or receive\linebreak interactions, as specified in their SOMs.}
+\vspace{11.81pt}
+
+The HLA allows for joined federates to make internal object representations and interactions available for\linebreak
+external use as part of federation executions. These capabilities for external interaction shall be documented\linebreak
+in the SOM for the federate. If documented in the SOM, these federate capabilities shall include the\linebreak
+obligation to export updated values of instance attributes that are calculated internally in the federate and\linebreak
+the obligation to be able to exercise interactions represented externally (i.e., by other federates in a\linebreak
+federation).\par
+\vspace{28.94pt}
+
+\HLADetailedRuleHeading{detailed-rule-8}{6.3 Rule 8}
+\vspace{12.79pt}
+
+\HLANormativeRuleStatement{Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a\linebreak federation execution, as specified in their SOMs.}
+\vspace{11.81pt}
+
+The HLA allows ownership of instance attributes of an object instance to be transferred dynamically during\linebreak
+a federation execution. The instance attributes of a federate that can be either owned or reflected and whose\linebreak
+ownership can be dynamically acquired or divested during execution shall be documented in the SOM for\linebreak
+that federate.\par
+\endgroup
+\clearpage

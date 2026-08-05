@@ -1,0 +1,70 @@
+% Native semantic reconstruction of source physical page 17 (printed page 16).
+% Provenance: IEEE Std 1516-2025, Clause 3.1, definitions available directed interactions--corresponding class attribute.
+\HLAStartSemanticPage{17}{16}
+\setlength{\HLASemanticDefinitionGap}{13.60pt}
+\fontsize{9.96pt}{11.524pt}\selectfont
+
+\begin{hladefinition}[0pt]{def-available-directed-interactions}{available directed interactions}
+The set of directed interaction classes of an object class in union with the set of inherited directed interactions of that object class.
+\end{hladefinition}
+
+\begin{hladefinition}{def-available-parameters}{available parameters}
+The set of declared parameters of an interaction class in union with the set of inherited parameters of that interaction class.
+\end{hladefinition}
+
+\begin{hladefinition}{def-base-object-model-bom}{base object model (BOM)}
+A piece-part of a conceptual model, simulation object model (SOM), or federation object model (FOM) that can be used as a building block in the development and/or extension of a simulation or federation.
+\end{hladefinition}
+
+\begin{hladefinition}{def-best-effort}{best effort}
+A transportation type that does not provide any guarantee regarding delivery (messages may be out of order, duplicated, or dropped).
+\end{hladefinition}
+
+\begin{hladefinition}{def-candidate-discovery-class}{candidate discovery class}
+The registered class of an object instance, if subscribed. If the registered class of an object instance is not subscribed, the closest superclass of the registered class of the object instance to which the joined federate is subscribed. Candidate discovery class pertains to object instances only.
+\end{hladefinition}
+
+\begin{hladefinition}{def-candidate-received-class}{candidate received class}
+The sent class of an interaction, if subscribed. If the sent class of an interaction is not subscribed, the closest superclass of the sent class of the interaction to which the joined federate is subscribed. Candidate received class pertains to interactions and directed interactions only.
+\end{hladefinition}
+
+\begin{hladefinition}{def-class}{class}
+A description of a group of items with similar properties, common behavior, common relationships, and common semantics.
+\end{hladefinition}
+
+\begin{hladefinition}{def-class-attribute}{class attribute}
+A named characteristic of an object class denoted by a pair composed of an object class designator and an attribute designator.
+\end{hladefinition}
+
+\begin{hladefinition}{def-class-directed-interaction}{class directed interaction}
+A named characteristic of an object class denoted by a pair composed of an object class designator and an interaction class designator. The characteristic is the capability to have interactions directed to instances of the object class or its subclasses.
+\end{hladefinition}
+
+\begin{hladefinition}{def-class-hierarchy}{class hierarchy}
+A specification of a class-subclass or ``is-a'' relationship between classes in a given domain.
+\end{hladefinition}
+
+\begin{hladefinition}{def-coadunate}{coadunate}
+To attach an object instance handle and an object instance name to an object instance. The object instance name can be provided specifically by the federate or implicitly by the runtime infrastructure (RTI).
+\end{hladefinition}
+
+\begin{hladefinition}{def-collection}{collection}
+A group of elements in which an element may occur multiple times (this definition corresponds to the mathematical notion of a bag).
+\end{hladefinition}
+
+\begin{hladefinition}{def-collection-of-pairs}{collection of pairs}
+A group of pairs in which multiple pairs may have the same first component and a given pair may occur multiple times.
+\end{hladefinition}
+
+\begin{hladefinition}{def-compliant-object-model}{compliant object model}
+A High Level Architecture (HLA) federation object model (FOM) or simulation object model (SOM) that fully conforms with all of the rules and constraints specified in object model template (OMT).
+\end{hladefinition}
+
+\begin{hladefinition}{def-constrained-set-of-pairs}{constrained set of pairs}
+A group of pairs in which no two pairs have the same first component (this definition corresponds to the mathematical notion of a function). An example would be a group of instance attribute and value pairs\HLASemicolon{} each instance attribute may have at most one value associated with it.
+\end{hladefinition}
+
+\begin{hladefinition}{def-corresponding-class-attribute-of-an-instance-attribute}{corresponding class attribute of an instance attribute}
+The class attribute that, from the perspective of a given joined federate, is the class attribute of the joined federate's known class for the object instance containing the instance attribute that has the same attribute designator as the instance attribute.
+\end{hladefinition}
+\clearpage

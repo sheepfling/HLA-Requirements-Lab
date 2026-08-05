@@ -25,13 +25,14 @@ The current IEEE ingestion lives at:
 ```text
 topics/ieee/hla-1516.1-2025/
 topics/ieee/hla-1516.2-2025/
+topics/ieee/hla-1516-2025/
 ```
 
 Those projects expose thin document-level wrappers backed by the shared Python builder.
 
 ## Source-of-truth policy
 
-The repository should generally baseline the reconstruction source and evidence, not rendered or extracted binaries. PDFs, raster image files, archives, and build outputs are ignored by default. Use TikZ/LaTeX and Python to regenerate document visuals and rendered artifacts from committed text-based sources.
+The repository should generally baseline the reconstruction source and provenance notes, not rendered or extracted binaries. PDFs, raster image files, archives, and build outputs are ignored by default. Use TikZ/LaTeX and Python to regenerate document visuals and rendered artifacts from committed text-based sources.
 
 Binary files may remain in a local working tree when an upstream build or visual comparison needs them, but they should not be force-added to Git without an explicit reason.
 
@@ -52,6 +53,15 @@ python scripts/build.py build all
 python scripts/build.py build topics/siso/example-document
 python scripts/build.py clean
 ```
+
+On Windows with MiKTeX, enable one-time automatic installation of missing LaTeX packages with:
+
+```powershell
+initexmf --enable-installer
+```
+
+The document `latexmkrc` files opt into this setting for Windows builds. MiKTeX also exposes the same
+setting in MiKTeX Console under the package installation preferences.
 
 Document build scripts should write generated files to their local `output/` directory and keep source inputs in the document directory (or its `src/` and `assets/` subdirectories).
 
