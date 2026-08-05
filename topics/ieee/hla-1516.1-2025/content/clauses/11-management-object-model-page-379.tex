@@ -1,0 +1,252 @@
+\HLASourcePage{380}{379}
+\HLAServiceBookmark{12.12.1.2}{3}{Factory mechanism}
+\HLAServiceBookmark{12.12.2}{2}{Memory ownership semantics}
+\HLAServiceBookmark{12.12.3}{2}{Designators}
+\HLAServiceBookmark{12.12.4}{2}{Additional functionality}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The authorization library shall contain the implementation of the %
+  }
+  \HLAFixedBlock{360.600}{70.373}{243.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{504.540}{69.786}{99.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . An%
+  }
+  \HLAFixedBlock{90.000}{81.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI calls the static member function %
+  }
+  \HLAFixedBlock{264.120}{82.373}{339.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory::getAuthorization-}%
+  }
+  \HLAFixedBlock{90.000}{94.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Factory(std::wstring const \& authorizerName)}%
+  }
+  \HLAFixedBlock{368.580}{93.785}{235.420}{\rmfamily\raggedright}{9.96}{11.16}{%
+     to get the instance of the specified%
+  }
+  \HLAFixedBlock{90.000}{106.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{191.940}{105.785}{412.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . That factory is used in turn to get an instance of a user-provided subclass of%
+  }
+  \HLAFixedBlock{89.999}{118.373}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{149.939}{117.785}{454.061}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The %
+  }
+  \HLAFixedBlock{174.599}{118.373}{429.401}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{318.539}{117.785}{285.461}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall forward requests for other authorizer types,%
+  }
+  \HLAFixedBlock{89.999}{129.785}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e.g., the standardized authorizer type, to %
+  }
+  \HLAFixedBlock{256.619}{130.372}{347.381}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAauthorizer-FactoryFactory}%
+  }
+  \HLAFixedBlock{424.558}{129.785}{179.442}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The header file for the%
+  }
+  \HLAFixedBlock{89.998}{142.372}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{233.938}{141.785}{370.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+     declaration shall be in the libauth subdirectory.%
+  }
+  \HLAFixedBlock{89.998}{165.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    These libraries shall be named according to a specific nomenclature format based on operating system,%
+  }
+  \HLAFixedBlock{89.998}{177.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    compiler version, and other characteristics intrinsic to dynamic link compatibility. Because these factors%
+  }
+  \HLAFixedBlock{89.998}{189.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    change more frequently than this interface specification, the format and inputs to it are provided by the SISO%
+  }
+  \HLAFixedBlock{89.999}{201.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reference document %
+  }
+  \HLAFixedBlock{182.759}{201.784}{421.241}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{SISO-REF-080-2023 Reference for High Level Architecture (HLA) Product}%
+  }
+  \HLAFixedBlock{90.000}{213.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Development Group (PDG) Library Nomenclature}%
+  }
+  \HLAFixedBlock{292.440}{213.783}{311.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , available from @SISO.%
+  }
+  \HLAFixedBlock{90.000}{237.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI implementations shall link directly with any third-party libraries to help ensure that a federate can%
+  }
+  \HLAFixedBlock{90.000}{249.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    switch from using one RTI implementation to another without having to re-link against the third-party%
+  }
+  \HLAFixedBlock{90.000}{261.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    libraries required by the new implementation.%
+  }
+  \HLAFixedBlock{90.000}{285.643}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.1.2 Factory mechanism}%
+  }
+  \HLAFixedBlock{90.000}{309.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Implementations of the C++ API shall contain a definition of a %
+  }
+  \HLAFixedBlock{352.500}{310.370}{251.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassadorFactory}%
+  }
+  \HLAFixedBlock{472.440}{309.782}{131.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class in the%
+  }
+  \HLAFixedBlock{90.000}{321.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    rti1516\_2025 namespace that contains a public %
+  }
+  \HLAFixedBlock{280.440}{322.369}{323.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{createRTIambassador}%
+  }
+  \HLAFixedBlock{394.381}{321.782}{209.619}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that has no parameters.%
+  }
+  \HLAFixedBlock{90.001}{345.642}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.2 Memory ownership semantics}%
+  }
+  \HLAFixedBlock{90.001}{369.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Many programming errors in C++ can be traced back to the improper use of the %
+  }
+  \HLAFixedBlock{445.980}{370.369}{158.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{delete}%
+  }
+  \HLAFixedBlock{481.920}{369.781}{122.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+     operator.%
+  }
+  \HLAFixedBlock{90.000}{381.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Frequently, this tendency is a result of poor programming practice, rather than an inherent limitation of the%
+  }
+  \HLAFixedBlock{90.000}{393.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    C++ programming language. Considerable effort has been made to help prevent memory corruption and%
+  }
+  \HLAFixedBlock{90.000}{405.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    leaks resulting from the misuse of the %
+  }
+  \HLAFixedBlock{242.940}{406.368}{361.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{delete}%
+  }
+  \HLAFixedBlock{278.940}{405.780}{325.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     operator in the C++ API.%
+  }
+  \HLAFixedBlock{90.000}{429.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In particular, the federate programmer never explicitly deletes objects exchanged with the RTI. Simple%
+  }
+  \HLAFixedBlock{90.000}{441.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    objects are passed by value. More complex objects are either passed by constant reference%
+  }
+  \HLAFixedBlock{90.000}{453.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    (i.e., %
+  }
+  \HLAFixedBlock{110.820}{454.367}{493.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{T const \&}%
+  }
+  \HLAFixedBlock{166.021}{453.780}{437.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) or passed as a %
+  }
+  \HLAFixedBlock{230.880}{454.367}{373.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unique\_ptr<T>}%
+  }
+  \HLAFixedBlock{308.820}{453.780}{295.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+     object. In all three cases, the C++ compiler prevents%
+  }
+  \HLAFixedBlock{90.000}{465.779}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the federate programmer from calling the %
+  }
+  \HLAFixedBlock{257.640}{466.367}{346.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{delete}%
+  }
+  \HLAFixedBlock{293.640}{465.779}{310.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+     operator on the object.%
+  }
+  \HLAFixedBlock{90.000}{489.779}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    As explained in 12.12.6, the %
+  }
+  \HLAFixedBlock{212.700}{490.367}{391.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unique\_ptr<T>}%
+  }
+  \HLAFixedBlock{293.940}{489.786}{310.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implements the strong memory ownership and transfer%
+  }
+  \HLAFixedBlock{90.000}{501.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    semantics of the %
+  }
+  \HLAFixedBlock{157.440}{502.373}{446.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::unique\_ptr<T>}%
+  }
+  \HLAFixedBlock{267.420}{501.786}{336.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class%
+  }
+  \HLAFixedBlock{286.800}{499.590}{317.200}{\rmfamily\raggedright}{7.98}{8.94}{%
+    20%
+  }
+  \HLAFixedBlock{294.840}{501.786}{309.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{525.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.3 Designators}%
+  }
+  \HLAFixedBlock{90.000}{549.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The C++ interfaces that represent handles shall implement a %
+  }
+  \HLAFixedBlock{340.200}{550.372}{263.800}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hash()}%
+  }
+  \HLAFixedBlock{376.139}{549.785}{227.861}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that returns a %
+  }
+  \HLAFixedBlock{469.799}{550.372}{134.201}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{long}%
+  }
+  \HLAFixedBlock{493.739}{549.785}{110.261}{\rmfamily\raggedright}{9.96}{11.16}{%
+     that is%
+  }
+  \HLAFixedBlock{90.000}{561.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    suitable for use as a hash value for use in storing handles in a hash table. The hash value may not be unique%
+  }
+  \HLAFixedBlock{90.000}{573.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    across two separate handle values but will be equal given two separate instances of the same handle value.%
+  }
+  \HLAFixedBlock{90.000}{585.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The following are the properties of the hash value where H1 and H2 are separate instances of hash values.%
+  }
+  \HLAFixedBlock{100.020}{609.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{609.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    H1 == H2 implies H1.hashCode() == H2.hashCode()%
+  }
+  \HLAFixedBlock{100.020}{621.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{621.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    H1 != H2 does not imply H1.hashCode() != H2.hashCode()%
+  }
+  \HLAFixedBlock{90.001}{645.644}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.4 Additional functionality}%
+  }
+  \HLAFixedBlock{90.001}{669.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Implementations of the C++ API shall add the utility classes described in 12.12.4.1 and 12.12.4.2 to the%
+  }
+  \HLAFixedBlock{90.001}{681.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    rti1516\_2025 namespace. %
+  }
+  \HLAFixedBlock{90.000}{705.453}{514.000}{\rmfamily\raggedright}{6.36}{7.12}{%
+    20%
+  }
+  \HLAFixedBlock{96.360}{707.250}{507.640}{\rmfamily\raggedright}{7.98}{8.94}{%
+     See Stroustrup [B16] for a detailed description%
+  }
+  \HLAFixedBlock{247.620}{707.138}{356.380}{\rmfamily\raggedright}{7.98}{8.94}{%
+    .%
+  }
+\end{hlafixedpage}
+\clearpage

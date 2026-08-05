@@ -1,0 +1,136 @@
+\HLASourcePage{45}{44}
+\HLAAnchor{clause:4.1.3}
+\pdfbookmark[2]{4.1.3 Synchronization discussion}{bookmark:clause:4.1.3}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    \emph{Initiate Federate Save \textdagger{} }service at all nontime-constrained joined federates as soon as all of the time-\linebreak%
+  }
+  \HLAFixedBlock{90.000}{81.785}{262.524}{\rmfamily\raggedright}{9.96}{12.00}{%
+    constrained joined federates are eligible to be instructed to save.%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    When a joined federate receives an \emph{Initiate Federate Save \textdagger{}} service invocation and subsequently saves its\linebreak%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    state, it shall use the federation save label (that was specified by the joined federate requesting the save in\linebreak%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    the \emph{Request Federation Save} service), its federate type (that it specified when it joined the federation\linebreak%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    execution), and its federate designator (that was returned when it joined the federation execution) to\linebreak%
+  }
+  \HLAFixedBlock{90.001}{153.784}{142.090}{\rmfamily\raggedright}{9.96}{12.00}{%
+    distinguish the saved information.%
+  }
+  \HLAFixedBlock{90.001}{177.784}{431.999}{\rmfamily}{9.96}{12.00}{%
+    Once a federation execution save has begun, an RTI shall save all queued messages that have not been\linebreak%
+  }
+  \HLAFixedBlock{90.001}{189.784}{431.999}{\rmfamily}{9.96}{12.00}{%
+    delivered to the intended joined federates (e.g., future timestamp order (TSO) messages or receive order\linebreak%
+  }
+  \HLAFixedBlock{90.001}{201.784}{431.999}{\rmfamily}{9.96}{12.00}{%
+    (RO) messages that were sent by other joined federates not yet in the Federate Save in Progress state). All\linebreak%
+  }
+  \HLAFixedBlock{90.001}{213.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    saved information (by both the RTI and the joined federates) shall be persistent, i.e., it is stored onto disk or\linebreak%
+  }
+  \HLAFixedBlock{90.001}{225.783}{406.816}{\rmfamily\raggedright}{9.96}{12.00}{%
+    some other persistent medium, and it remains intact even after the federation execution is destroyed.%
+  }
+  \HLAFixedBlock{90.001}{249.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    The saved information can be used at a later date, by some new set of joined federates, to restore all joined\linebreak%
+  }
+  \HLAFixedBlock{90.001}{261.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    federates in the federation execution to the state in which they were when the save was accomplished. The\linebreak%
+  }
+  \HLAFixedBlock{90.001}{273.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    federation can then resume effecting the execution from that saved point. Once a restore has begun, any\linebreak%
+  }
+  \HLAFixedBlock{90.001}{285.782}{431.999}{\rmfamily}{9.96}{12.00}{%
+    messages that have not been delivered to the intended joined federates in the restoring federation execution\linebreak%
+  }
+  \HLAFixedBlock{90.001}{297.782}{431.999}{\rmfamily}{9.96}{12.00}{%
+    shall be lost. After a restore is complete, the RTI shall deliver all related saved messages as appropriate to\linebreak%
+  }
+  \HLAFixedBlock{90.001}{309.782}{431.999}{\rmfamily}{9.96}{12.00}{%
+    the joined federates in the restored federation execution (e.g., TSO messages at the federate’s appropriate\linebreak%
+  }
+  \HLAFixedBlock{90.001}{321.782}{315.067}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time position or RO messages as soon as possible in wall-clock time).%
+  }
+  \HLAFixedBlock{90.001}{345.781}{431.999}{\rmfamily}{9.96}{12.00}{%
+    The set of federates joined to a federation execution when state is restored from a previously saved state\linebreak%
+  }
+  \HLAFixedBlock{90.002}{357.781}{431.998}{\rmfamily}{9.96}{12.00}{%
+    need not be the exact set of federates that were joined to the federation execution when the state being\linebreak%
+  }
+  \HLAFixedBlock{90.003}{369.781}{431.997}{\rmfamily}{9.96}{12.00}{%
+    restored was saved. The number of federates of each federate type that are joined to the federation execution,\linebreak%
+  }
+  \HLAFixedBlock{90.003}{381.781}{431.997}{\rmfamily}{9.96}{12.00}{%
+    however, shall be the same. The federate-type argument supplied in the \emph{Join Federation Execution} service\linebreak%
+  }
+  \HLAFixedBlock{90.003}{393.781}{431.997}{\rmfamily}{9.96}{12.00}{%
+    invocation, therefore, is crucial to the save-and-restore process. Declaring a federate to be of a given type\linebreak%
+  }
+  \HLAFixedBlock{90.003}{405.780}{431.997}{\rmfamily}{9.96}{12.00}{%
+    shall be equivalent to asserting that the joined federate can be restored using the state information saved by\linebreak%
+  }
+  \HLAFixedBlock{90.003}{417.780}{156.191}{\rmfamily\raggedright}{9.96}{12.00}{%
+    any other joined federate of that type.%
+  }
+  \HLAFixedBlock{90.003}{441.780}{431.997}{\rmfamily}{9.96}{12.00}{%
+    There is no requirement that a save taken by one RTI implementation be restorable by another RTI\linebreak%
+  }
+  \HLAFixedBlock{90.003}{453.780}{71.266}{\rmfamily\raggedright}{9.96}{12.00}{%
+    implementation.%
+  }
+  \HLAFixedBlock{90.003}{477.640}{163.761}{\sffamily\bfseries\raggedright}{9.96}{12.00}{%
+    \textbf{4.1.3 Synchronization discussion}%
+  }
+  \HLAFixedBlock{90.003}{501.779}{431.997}{\rmfamily}{9.96}{12.00}{%
+    Figure 6 depicts the state of a federation execution with respect to synchronization points. In order to fully\linebreak%
+  }
+  \HLAFixedBlock{90.003}{513.779}{431.997}{\rmfamily}{9.96}{12.00}{%
+    explain synchronization points, both the state of the RTI and the state of each joined federate are detailed.\linebreak%
+  }
+  \HLAFixedBlock{90.003}{525.779}{431.997}{\rmfamily}{9.96}{12.00}{%
+    Because multiple joined federates are involved, each transition within this set of state charts includes an\linebreak%
+  }
+  \HLAFixedBlock{90.003}{537.778}{431.997}{\rmfamily}{9.96}{12.00}{%
+    argument denoting to which joined federate a service invocation applies (i.e., an argument of \emph{F}\raisebox{-2.2pt}{\fontsize{7.98pt}{8pt}\selectfont \emph{s}} denotes the\linebreak%
+  }
+  \HLAFixedBlock{90.000}{549.785}{85.728}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{s}th joined federate).%
+  }
+  \HLAFixedBlock{90.000}{573.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The RTI shall keep track of each synchronization point separately, and the treatment of an arbitrary\linebreak%
+  }
+  \HLAFixedBlock{89.999}{585.785}{432.001}{\rmfamily}{9.96}{12.00}{%
+    synchronization point by the RTI is expanded in Figure 7. Not shown in this diagram is how the RTI\linebreak%
+  }
+  \HLAFixedBlock{89.999}{597.785}{432.001}{\rmfamily}{9.96}{12.00}{%
+    calculates the synchronization set (shown as \emph{synch\_set} within the state chart); this information is detailed in\linebreak%
+  }
+  \HLAFixedBlock{89.998}{609.784}{432.002}{\rmfamily}{9.96}{12.00}{%
+    the service descriptions. Use of the synchronization set, however, is depicted in the state chart on the\linebreak%
+  }
+  \HLAFixedBlock{89.998}{621.784}{432.002}{\rmfamily}{9.96}{12.00}{%
+    transition from the Synchronizing (s, L) states to the Synch Point Not Registered state. This transition\linebreak%
+  }
+  \HLAFixedBlock{89.998}{633.784}{432.002}{\rmfamily}{9.96}{12.00}{%
+    denotes, by use of the universal quantifier over the synchronization set in the guard, that synchronization\linebreak%
+  }
+  \HLAFixedBlock{89.998}{645.784}{432.002}{\rmfamily}{9.96}{12.00}{%
+    throughout a federation is achieved only when all joined federates in the synchronization set have concluded\linebreak%
+  }
+  \HLAFixedBlock{89.998}{657.784}{432.002}{\rmfamily}{9.96}{12.00}{%
+    their individual synchronizations. A joined federate’s individual synchronization, from the RTI’s point of\linebreak%
+  }
+  \HLAFixedBlock{89.998}{669.783}{122.633}{\rmfamily\raggedright}{9.96}{12.00}{%
+    view, is detailed in Figure 8.%
+  }
+\end{hlafixedpage}
+\clearpage

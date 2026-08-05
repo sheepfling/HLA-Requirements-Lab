@@ -1,0 +1,225 @@
+\HLASourcePage{388}{387}
+\HLAServiceBookmark{12.12.5.34}{3}{Disconnect service}
+\HLAServiceBookmark{12.12.5.35}{3}{Evoke Callback service}
+\HLAServiceBookmark{12.12.5.36}{3}{Evoke Multiple Callbacks service}
+\HLAServiceBookmark{12.12.6}{2}{Abstract data types}
+\HLAServiceBookmark{12.12.6.1}{3}{Names, labels, and strings}
+\HLAServiceBookmark{12.12.6.2}{3}{Boolean values}
+\HLAServiceBookmark{12.12.6.3}{3}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.5.34 }%
+  }
+  \HLAFixedBlock{139.980}{69.646}{464.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Disconnect}}%
+  }
+  \HLAFixedBlock{193.860}{69.646}{410.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition to the specified exceptions listed with the description of this service, the C++ API may also%
+  }
+  \HLAFixedBlock{90.000}{105.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    throw a %
+  }
+  \HLAFixedBlock{125.340}{106.373}{478.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CallNotAllowedFromWithinCallback}%
+  }
+  \HLAFixedBlock{317.220}{105.785}{286.780}{\rmfamily\raggedright}{9.96}{11.16}{%
+     exception. This exception indicates that this RTI%
+  }
+  \HLAFixedBlock{90.001}{117.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ambassador service call cannot be made while the federate is processing a federate ambassador callback.%
+  }
+  \HLAFixedBlock{90.001}{141.645}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.5.35 }%
+  }
+  \HLAFixedBlock{139.981}{141.645}{464.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Evoke Callback}}%
+  }
+  \HLAFixedBlock{213.362}{141.645}{390.638}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.002}{165.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition to the specified exceptions listed with the description of this service, the C++ API may also%
+  }
+  \HLAFixedBlock{90.002}{177.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    throw a %
+  }
+  \HLAFixedBlock{125.342}{178.372}{478.658}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CallNotAllowedFromWithinCallback}%
+  }
+  \HLAFixedBlock{317.222}{177.784}{286.778}{\rmfamily\raggedright}{9.96}{11.16}{%
+     exception. This exception indicates that this RTI%
+  }
+  \HLAFixedBlock{90.003}{189.784}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ambassador service call cannot be made while the federate is processing a federate ambassador callback.%
+  }
+  \HLAFixedBlock{90.003}{213.644}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.5.36 }%
+  }
+  \HLAFixedBlock{139.983}{213.644}{464.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Evoke Multiple Callbacks}}%
+  }
+  \HLAFixedBlock{259.443}{213.644}{344.557}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.004}{237.783}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition to the specified exceptions listed with the description of this service, the C++ API may also%
+  }
+  \HLAFixedBlock{90.004}{249.783}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    throw a %
+  }
+  \HLAFixedBlock{125.344}{250.371}{478.656}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CallNotAllowedFromWithinCallback}%
+  }
+  \HLAFixedBlock{317.224}{249.783}{286.776}{\rmfamily\raggedright}{9.96}{11.16}{%
+     exception. This exception indicates that this RTI%
+  }
+  \HLAFixedBlock{90.005}{261.783}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ambassador service call cannot be made while the federate is processing a federate ambassador callback.%
+  }
+  \HLAFixedBlock{90.005}{285.643}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6 Abstract data types}%
+  }
+  \HLAFixedBlock{90.005}{309.782}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Subclause 1.4.4 in IEEE Std 1516.2-2025 presents general conventions used to describe the abstract data%
+  }
+  \HLAFixedBlock{90.005}{321.782}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    types used in Clause 4 through Clause 10. In 12.12.6.1 through 12.12.6.26, the abstract data types are further%
+  }
+  \HLAFixedBlock{90.005}{333.782}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    detailed by mapping an individual data type to its implementation in the C++ API. Note that the data types%
+  }
+  \HLAFixedBlock{90.005}{345.781}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    from Clause 11 are explained in that clause and are not repeated here. Additionally, designators are a subject%
+  }
+  \HLAFixedBlock{90.005}{357.781}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in their own right and are covered in 12.2.%
+  }
+  \HLAFixedBlock{90.005}{381.781}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The ISO/IEC committee ratified the C++ standard as ISO/IEC 14882 [B8]. The HLA C++ API utilizes%
+  }
+  \HLAFixedBlock{90.005}{393.781}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    standard C++ constructs to the fullest extent possible. For example, %
+  }
+  \HLAFixedBlock{368.225}{394.368}{235.775}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::wstring}%
+  }
+  \HLAFixedBlock{440.224}{393.781}{163.776}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is used to represent%
+  }
+  \HLAFixedBlock{90.004}{405.780}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    character strings that might previously have been represented with the C-style construct, pointer to %
+  }
+  \HLAFixedBlock{498.004}{406.368}{105.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{char}%
+  }
+  \HLAFixedBlock{90.004}{417.780}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    (i.e.,%
+  }
+  \HLAFixedBlock{109.980}{418.373}{494.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{char *}%
+  }
+  \HLAFixedBlock{145.800}{417.786}{458.200}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ). Additionally, several standard C++ containers are used to represent the sets, constrained sets%
+  }
+  \HLAFixedBlock{90.000}{429.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of pairs, and collections described in Clause 3. These containers are %
+  }
+  \HLAFixedBlock{365.280}{430.373}{238.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::set<T>}%
+  }
+  \HLAFixedBlock{431.220}{429.785}{172.780}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{436.440}{430.373}{167.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::map<T>}%
+  }
+  \HLAFixedBlock{502.380}{429.785}{101.620}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and%
+  }
+  \HLAFixedBlock{90.000}{442.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::vector<T>}%
+  }
+  \HLAFixedBlock{173.940}{441.785}{430.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . Also, the C++ standard %
+  }
+  \HLAFixedBlock{289.560}{442.373}{314.440}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::unique\_ptr<T>}%
+  }
+  \HLAFixedBlock{397.500}{441.785}{206.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is used to implement strict%
+  }
+  \HLAFixedBlock{90.000}{453.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    memory ownership transfer when passing instances of dynamically allocated data types across API.%
+  }
+  \HLAFixedBlock{90.000}{477.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A description of the nature and properties of these standard C++ constructs is well beyond the scope of this%
+  }
+  \HLAFixedBlock{90.000}{489.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    clause. Instead, readers are referred to the C++ ISO standard as well as any of the vast assortment of C++%
+  }
+  \HLAFixedBlock{90.000}{501.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    references. Two such excellent references are Austern [B1] and Stroustrup [B16].%
+  }
+  \HLAFixedBlock{90.000}{525.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.1 Names, labels, and strings}%
+  }
+  \HLAFixedBlock{90.000}{549.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The names, labels, and strings described in Clause 4 through Clause 10 of this specification are mapped to%
+  }
+  \HLAFixedBlock{89.999}{561.783}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{104.699}{562.371}{499.301}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{wstring}%
+  }
+  \HLAFixedBlock{146.700}{561.783}{457.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+     type.%
+  }
+  \HLAFixedBlock{89.999}{585.644}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.2 Boolean values}%
+  }
+  \HLAFixedBlock{89.999}{609.783}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Standard C++ provides a fundamental type, %
+  }
+  \HLAFixedBlock{270.479}{610.370}{333.521}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{bool}%
+  }
+  \HLAFixedBlock{294.419}{609.783}{309.581}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , intended for the representation of boolean values. This%
+  }
+  \HLAFixedBlock{89.999}{621.782}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    fundamental type is used for all boolean values in the C++ interface.%
+  }
+  \HLAFixedBlock{89.999}{645.643}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.3 Exceptions}%
+  }
+  \HLAFixedBlock{89.999}{669.782}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In keeping with the philosophy outlined in 12.12.6, exceptions in the C++ API have an interface similar to%
+  }
+  \HLAFixedBlock{89.999}{682.369}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{std::exception}%
+  }
+  \HLAFixedBlock{173.939}{681.781}{430.061}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . In fact, all exceptions in the C++ API inherit from a class named %
+  }
+  \HLAFixedBlock{445.079}{682.369}{158.921}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Exception}%
+  }
+  \HLAFixedBlock{499.020}{681.781}{104.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This%
+  }
+  \HLAFixedBlock{89.999}{693.781}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    hierarchy allows all exceptions in the C++ API to be caught as a single base class. The %
+  }
+  \HLAFixedBlock{445.680}{694.369}{158.320}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Exception}%
+  }
+  \HLAFixedBlock{499.620}{693.781}{104.380}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class%
+  }
+\end{hlafixedpage}
+\clearpage

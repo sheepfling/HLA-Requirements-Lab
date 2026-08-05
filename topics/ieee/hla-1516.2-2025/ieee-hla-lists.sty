@@ -1,0 +1,10 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee-hla-lists}[2026/07/31 v1.0.1 IEEE HLA recreation lists]
+
+\RequirePackage{enumitem}
+
+\newlist{HLADashList}{itemize}{1}
+\setlist[HLADashList]{label=—,leftmargin=28bp,labelsep=10bp,itemsep=1.5bp,topsep=0bp,parsep=0bp,partopsep=0bp}
+
+\newlist{HLAAlphaList}{enumerate}{1}
+\setlist[HLAAlphaList]{label=\alph*),leftmargin=28bp,labelsep=8bp,itemsep=1.5bp,topsep=0bp,parsep=0bp,partopsep=0bp}

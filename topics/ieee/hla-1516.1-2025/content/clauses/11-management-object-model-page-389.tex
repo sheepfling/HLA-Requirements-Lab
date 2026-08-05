@@ -1,0 +1,343 @@
+\HLASourcePage{390}{389}
+\HLAServiceBookmark{12.12.6.4}{3}{Handles}
+\HLAServiceBookmark{12.12.6.5}{3}{Resignation directive}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.4 Handles}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Most designators in the C++ API are handles. Each handle is a distinct type, but they all share a common%
+  }
+  \HLAFixedBlock{90.000}{105.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface, defined by the %
+  }
+  \HLAFixedBlock{198.060}{106.373}{405.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{DEFINE\_HANDLE\_CLASS}%
+  }
+  \HLAFixedBlock{312.000}{105.785}{292.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+     macro and specialized into one of the following%
+  }
+  \HLAFixedBlock{90.001}{117.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    concrete %
+  }
+  \HLAFixedBlock{134.439}{117.785}{469.561}{\rmfamily\raggedright}{9.96}{11.16}{%
+    classes: %
+  }
+  \HLAFixedBlock{175.501}{118.373}{428.499}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateHandle}%
+  }
+  \HLAFixedBlock{259.500}{117.785}{344.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{272.581}{118.373}{331.419}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ObjectClassHandle}%
+  }
+  \HLAFixedBlock{374.520}{117.785}{229.480}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{387.601}{118.373}{216.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{InteractionClassHandle}%
+  }
+  \HLAFixedBlock{519.481}{117.785}{84.519}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.001}{130.372}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ObjectInstanceHandle}%
+  }
+  \HLAFixedBlock{209.941}{129.785}{394.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{223.141}{130.372}{380.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AttributeHandle}%
+  }
+  \HLAFixedBlock{313.141}{129.785}{290.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{326.341}{130.372}{277.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandle}%
+  }
+  \HLAFixedBlock{416.340}{129.785}{187.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{429.540}{130.372}{174.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{DimensionHandle}%
+  }
+  \HLAFixedBlock{519.480}{129.785}{84.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.000}{142.372}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{MessageRetractionHandle}%
+  }
+  \HLAFixedBlock{227.940}{141.785}{376.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{249.840}{142.372}{354.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RegionHandle}%
+  }
+  \HLAFixedBlock{321.840}{141.785}{282.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{165.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Two instances of each class with identical types can be compared for equality or order (i.e., less than), and%
+  }
+  \HLAFixedBlock{90.000}{177.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    one can be assigned to the other. A copy constructor is provided as well. These handles are always generated%
+  }
+  \HLAFixedBlock{90.000}{189.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    by an RTI implementation; however, a default constructor is provided for convenience. Additionally, an%
+  }
+  \HLAFixedBlock{90.000}{202.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{encode()}%
+  }
+  \HLAFixedBlock{137.940}{201.784}{466.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method is provided that returns an encoded form of a handle, %
+  }
+  \HLAFixedBlock{386.940}{202.371}{217.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{VariableLengthData}%
+  }
+  \HLAFixedBlock{494.880}{201.784}{109.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{226.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{VariableLengthData}%
+  }
+  \HLAFixedBlock{197.940}{225.783}{406.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     has a %
+  }
+  \HLAFixedBlock{222.600}{226.371}{381.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{data() }%
+  }
+  \HLAFixedBlock{264.120}{225.783}{339.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method that returns an untyped pointer (i.e., a %
+  }
+  \HLAFixedBlock{447.660}{226.371}{156.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{void const *}%
+  }
+  \HLAFixedBlock{518.699}{225.783}{85.301}{\rmfamily\raggedright}{9.96}{11.16}{%
+    )%
+  }
+  \HLAFixedBlock{89.999}{237.783}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as well as a %
+  }
+  \HLAFixedBlock{138.839}{238.371}{465.161}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{size()}%
+  }
+  \HLAFixedBlock{174.779}{237.783}{429.221}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that returns the size in bytes (represented as a %
+  }
+  \HLAFixedBlock{395.278}{238.371}{208.722}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unsigned long}%
+  }
+  \HLAFixedBlock{473.578}{237.783}{130.422}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) of the data%
+  }
+  \HLAFixedBlock{89.997}{249.783}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    returned by the %
+  }
+  \HLAFixedBlock{152.997}{250.371}{451.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{data()}%
+  }
+  \HLAFixedBlock{188.997}{249.783}{415.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method. A copy constructor and a copy-assignment operator are also provided.%
+  }
+  \HLAFixedBlock{89.998}{273.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Using this interface, it is possible for the RTI user to save and restore any handle provided by the RTI as well%
+  }
+  \HLAFixedBlock{89.998}{285.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as to pass handles as attribute values or parameter values among federates. To send a handle as an attribute%
+  }
+  \HLAFixedBlock{89.998}{297.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    value or as a parameter value, the %
+  }
+  \HLAFixedBlock{235.858}{298.370}{368.142}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{encode()}%
+  }
+  \HLAFixedBlock{283.858}{297.782}{320.142}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method of the handle should be invoked by the federate%
+  }
+  \HLAFixedBlock{89.998}{309.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    programmer. The returned %
+  }
+  \HLAFixedBlock{197.338}{310.370}{406.662}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{VariableLengthData}%
+  }
+  \HLAFixedBlock{305.277}{309.782}{298.723}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class has a %
+  }
+  \HLAFixedBlock{352.197}{310.370}{251.803}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{data() }%
+  }
+  \HLAFixedBlock{394.017}{309.782}{209.983}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method and a %
+  }
+  \HLAFixedBlock{450.178}{310.370}{153.822}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{size() }%
+  }
+  \HLAFixedBlock{491.998}{309.782}{112.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method%
+  }
+  \HLAFixedBlock{89.998}{321.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    that can be used to fill in the attribute value or parameter value. Once delivered, the encoded handle can be%
+  }
+  \HLAFixedBlock{89.998}{333.782}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reconstituted into an instance of its corresponding handle class using that handle class’s constructor.%
+  }
+  \HLAFixedBlock{89.998}{357.781}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Note well that the pointer value returned by the %
+  }
+  \HLAFixedBlock{283.018}{358.369}{320.982}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{data()}%
+  }
+  \HLAFixedBlock{319.018}{357.781}{284.982}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method is not required to have any particular byte%
+  }
+  \HLAFixedBlock{89.998}{369.781}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    alignment. Consequently, naively attempting to simply type cast this pointer and assign its contents to some%
+  }
+  \HLAFixedBlock{89.998}{381.781}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    type may generate an exception in the processor’s memory management unit and likely result in the crash of%
+  }
+  \HLAFixedBlock{89.998}{393.781}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the program. If for some reason it is desirable to perform this type of operation, a function such as%
+  }
+  \HLAFixedBlock{89.998}{406.368}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{memcpy()}%
+  }
+  \HLAFixedBlock{137.938}{405.780}{466.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+     should be used.%
+  }
+  \HLAFixedBlock{89.998}{429.780}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.538}{430.368}{495.462}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{VariableLengthData}%
+  }
+  \HLAFixedBlock{216.477}{429.780}{387.523}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class has a constructor that requires the user to provide an untyped pointer%
+  }
+  \HLAFixedBlock{89.997}{441.780}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    (i.e., a %
+  }
+  \HLAFixedBlock{118.557}{442.367}{485.443}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{void const *}%
+  }
+  \HLAFixedBlock{193.017}{441.780}{410.983}{\rmfamily\raggedright}{9.96}{11.16}{%
+    )%
+  }
+  \HLAFixedBlock{199.377}{441.780}{404.623}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as well as the size in bytes (represented as a %
+  }
+  \HLAFixedBlock{382.377}{442.367}{221.623}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unsigned long}%
+  }
+  \HLAFixedBlock{461.577}{441.780}{142.423}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) of the data to%
+  }
+  \HLAFixedBlock{89.997}{453.780}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    which it points. Methods to return these values are provided as well as is a copy constructor and a copy-%
+  }
+  \HLAFixedBlock{89.997}{465.779}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    assignment operator.%
+  }
+  \HLAFixedBlock{89.997}{489.779}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Handle classes also provide a %
+  }
+  \HLAFixedBlock{214.017}{490.367}{389.983}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{toString()}%
+  }
+  \HLAFixedBlock{273.957}{489.779}{330.043}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that returns a printable form of a handle. The string%
+  }
+  \HLAFixedBlock{89.997}{501.779}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    produced, however, is not guaranteed to be the same as the name to which the handle corresponds (assuming%
+  }
+  \HLAFixedBlock{89.997}{513.779}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    there is a name that corresponds to that kind of handle). If the user needs the name form of a handle, employ%
+  }
+  \HLAFixedBlock{90.000}{525.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the appropriate support service from Clause 10.%
+  }
+  \HLAFixedBlock{90.000}{549.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.5 Resignation directive}%
+  }
+  \HLAFixedBlock{90.000}{573.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.720}{573.785}{495.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Resign Federation Execution }%
+  }
+  \HLAFixedBlock{229.920}{573.785}{374.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service allows the specification of one of six directives. To provide this%
+  }
+  \HLAFixedBlock{90.000}{585.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    specification, a %
+  }
+  \HLAFixedBlock{153.480}{586.372}{450.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ResignAction}%
+  }
+  \HLAFixedBlock{225.420}{585.785}{378.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+     enumeration is defined. The six different directives of %
+  }
+  \HLAFixedBlock{447.661}{585.785}{156.339}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Resign Federation}%
+  }
+  \HLAFixedBlock{90.001}{597.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Execution}%
+  }
+  \HLAFixedBlock{129.960}{597.784}{474.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+     are defined as the six enumerated values that instances of the %
+  }
+  \HLAFixedBlock{391.500}{598.372}{212.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ResignAction }%
+  }
+  \HLAFixedBlock{472.020}{597.784}{131.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumeration%
+  }
+  \HLAFixedBlock{90.000}{609.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    may take. The %
+  }
+  \HLAFixedBlock{149.220}{610.372}{454.780}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ResignAction }%
+  }
+  \HLAFixedBlock{227.160}{609.784}{376.840}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumeration has the following values:%
+  }
+  \HLAFixedBlock{100.020}{633.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{633.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{UNCONDITIONALLY\_DIVEST\_ATTRIBUTES}%
+  }
+  \HLAFixedBlock{100.019}{645.784}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{645.784}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{DELETE\_OBJECTS}%
+  }
+  \HLAFixedBlock{100.019}{657.784}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{657.784}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CANCEL\_PENDING\_OWNERSHIP\_ACQUISITIONS}%
+  }
+  \HLAFixedBlock{100.019}{669.783}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{669.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{DELETE\_OBJECTS\_THEN\_DIVEST}%
+  }
+  \HLAFixedBlock{100.019}{681.783}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{681.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CANCEL\_THEN\_DELETE\_THEN\_DIVEST}%
+  }
+  \HLAFixedBlock{100.019}{693.783}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{693.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{NO\_ACTION}%
+  }
+\end{hlafixedpage}
+\clearpage

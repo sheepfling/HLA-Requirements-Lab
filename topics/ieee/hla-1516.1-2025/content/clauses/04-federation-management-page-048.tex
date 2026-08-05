@@ -1,0 +1,157 @@
+\HLASourcePage{49}{48}
+\HLAAnchor{clause:4.1.4.1}
+\pdfbookmark[3]{4.1.4.1 Rules for combining information from FOM modules}{bookmark:clause:4.1.4.1}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    When the \emph{Create Federation Execution} service is invoked, the RTI shall initialize the federation execution\linebreak%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    using FDD first from the MIM and then from the specified FOM modules. A user-extended MIM may be\linebreak%
+  }
+  \HLAFixedBlock{90.000}{93.785}{309.912}{\rmfamily\raggedright}{9.96}{12.00}{%
+    provided; otherwise, the RTI shall provide the standard MIM automatically.%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    Additional FOM modules may be provided in the \emph{Join Federation Execution} service invocations. The FOM\linebreak%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    module designator arguments supplied to the \emph{Create Federation Execution} service and the \emph{Join Federation}\linebreak%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily}{9.96}{12.00}{%
+    \emph{Execution} service shall designate compliant FOM modules (IEEE Std 1516-2025 and IEEE Std 1516.2-\linebreak%
+  }
+  \HLAFixedBlock{90.000}{153.784}{432.000}{\rmfamily}{9.96}{12.00}{%
+    2025). \emph{Create Federation Execution} and \emph{Join Federation Execution} service invocations shall reject, issuing\linebreak%
+  }
+  \HLAFixedBlock{90.001}{165.784}{251.939}{\rmfamily\raggedright}{9.96}{12.00}{%
+    an exception, any entity that is not a compliant FOM module.%
+  }
+  \HLAFixedBlock{90.001}{189.644}{287.557}{\sffamily\bfseries\raggedright}{9.96}{12.00}{%
+    \textbf{4.1.4.1 Rules for combining information from FOM modules}%
+  }
+  \HLAFixedBlock{90.001}{213.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    The RTI shall combine the FDD data of the MIM and FOM modules according to the rules for combining\linebreak%
+  }
+  \HLAFixedBlock{90.001}{225.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    FOM data in IEEE Std 1516.2-2025 when the \emph{Create Federation Execution} service is invoked as well as\linebreak%
+  }
+  \HLAFixedBlock{90.001}{237.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    whenever the set of FOM modules has changed due to an invocation of the \emph{Join Federation Execution}\linebreak%
+  }
+  \HLAFixedBlock{90.001}{249.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    service. The RTI shall consider only the FDD when combining FOM modules. After combining switches\linebreak%
+  }
+  \HLAFixedBlock{90.001}{261.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    from all FDD provided during the Create Federation Execution service, if a switch remains unspecified, the\linebreak%
+  }
+  \HLAFixedBlock{90.001}{273.783}{431.999}{\rmfamily}{9.96}{12.00}{%
+    RTI shall provide a default value for the switch in the current FOM as specified in IEEE Std 1516.2-2025. In\linebreak%
+  }
+  \HLAFixedBlock{90.001}{285.782}{431.999}{\rmfamily}{9.96}{12.00}{%
+    case the FDD of the FOM modules provided in such a service call cannot be successfully combined or the\linebreak%
+  }
+  \HLAFixedBlock{90.001}{297.782}{431.999}{\rmfamily}{9.96}{12.00}{%
+    invocation fails for any other reason, the FDD provided in the call shall not be included in the current FOM.\linebreak%
+  }
+  \HLAFixedBlock{90.001}{321.782}{415.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall reject, issuing an exception, any attempt to load a FOM module for the following cases:%
+  }
+  \HLAFixedBlock{100.021}{345.781}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{345.781}{400.019}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named object class attribute that has different transportation or order when\linebreak%
+  }
+  \HLAFixedBlock{121.981}{357.781}{400.019}{\rmfamily}{9.96}{12.00}{%
+    compared to an already existing named object class attribute with the same name and belonging to\linebreak%
+  }
+  \HLAFixedBlock{121.981}{369.781}{172.529}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the same object class in the current FOM.%
+  }
+  \HLAFixedBlock{100.021}{384.781}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{384.781}{400.019}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named interaction class that has different transportation or order when\linebreak%
+  }
+  \HLAFixedBlock{121.982}{396.781}{400.018}{\rmfamily}{9.96}{12.00}{%
+    compared to an already existing named interaction class with the same qualified name in the current\linebreak%
+  }
+  \HLAFixedBlock{121.982}{408.780}{30.145}{\rmfamily\raggedright}{9.96}{12.00}{%
+    FOM.%
+  }
+  \HLAFixedBlock{100.022}{423.780}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{423.780}{400.018}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named dimension that has different upper bound or value when unspecified\linebreak%
+  }
+  \HLAFixedBlock{121.982}{435.780}{313.576}{\rmfamily\raggedright}{9.96}{12.00}{%
+    when compared to an already existing named dimension in the current FOM.%
+  }
+  \HLAFixedBlock{100.022}{450.780}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{450.780}{400.018}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named transportation type that has a different reliability when compared to\linebreak%
+  }
+  \HLAFixedBlock{121.982}{462.780}{400.018}{\rmfamily}{9.96}{12.00}{%
+    an already existing named transportation type in the current FOM. (Comment note - description is\linebreak%
+  }
+  \HLAFixedBlock{121.982}{474.779}{290.450}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not part of FDD nor should it be and thus cannot be used for rejection.)%
+  }
+  \HLAFixedBlock{100.022}{489.779}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{489.779}{400.018}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named update rate that has a different maximum rate when compared to an\linebreak%
+  }
+  \HLAFixedBlock{121.982}{501.779}{227.783}{\rmfamily\raggedright}{9.96}{12.00}{%
+    already existing named update rate in the current FOM.%
+  }
+  \HLAFixedBlock{100.022}{516.779}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{516.779}{400.018}{\rmfamily}{9.96}{12.00}{%
+    When trying to define a named switch that has a different definition when compared to an already\linebreak%
+  }
+  \HLAFixedBlock{121.983}{528.778}{177.910}{\rmfamily\raggedright}{9.96}{12.00}{%
+    existing named switch in the current FOM.%
+  }
+  \HLAFixedBlock{100.023}{543.778}{15.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.983}{543.778}{204.835}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the MIM or FOM module is noncompliant.%
+  }
+  \HLAFixedBlock{90.003}{567.778}{431.997}{\rmfamily}{9.96}{12.00}{%
+    If a FOM module or MIM contains any definition that is rejected by the RTI, the RTI shall reject the FOM\linebreak%
+  }
+  \HLAFixedBlock{90.003}{579.778}{297.214}{\rmfamily\raggedright}{9.96}{12.00}{%
+    module or MIM in its entirety and shall not add any element to the FDD.%
+  }
+  \HLAFixedBlock{90.003}{603.777}{431.997}{\rmfamily}{9.96}{12.00}{%
+    The union of all FOM modules in a given \emph{Create Federation Execution} or \emph{Join Federation Execution}\linebreak%
+  }
+  \HLAFixedBlock{90.003}{615.777}{431.997}{\rmfamily}{9.96}{12.00}{%
+    service when added to the previously existing current FOM shall not result in any object class or interaction\linebreak%
+  }
+  \HLAFixedBlock{90.003}{627.777}{431.997}{\rmfamily}{9.96}{12.00}{%
+    class not having a full definition. If this is the case, the entire service invocation shall fail. In case any of the\linebreak%
+  }
+  \HLAFixedBlock{90.003}{639.777}{376.295}{\rmfamily\raggedright}{9.96}{12.00}{%
+    FOM modules provided was rejected by the RTI, the entire service invocation shall also fail.%
+  }
+  \HLAFixedBlock{90.002}{663.776}{431.998}{\rmfamily}{9.96}{12.00}{%
+    After a \emph{Create Federation Execution} or \emph{Join Federation Execution} service has completed successfully, all\linebreak%
+  }
+  \HLAFixedBlock{90.001}{675.776}{431.999}{\rmfamily}{9.96}{12.00}{%
+    the provided FOM modules shall be available in the current FOM, and the corresponding MOM information\linebreak%
+  }
+  \HLAFixedBlock{90.001}{687.776}{128.639}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall be updated to reflect this.%
+  }
+\end{hlafixedpage}
+\clearpage

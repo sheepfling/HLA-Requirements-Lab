@@ -1,0 +1,183 @@
+\HLASourcePage{225}{224}
+\HLAServiceBookmark{9.1.6}{2}{Reinterpretation of selected object management services}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{142.020}{69.786}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    update region set of the specified instance attribute at the wall-clock time that the \emph{Update}%
+  }
+  \HLAFixedBlock{142.020}{81.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Values} service was invoked. An update shall be reflected at the subscribing joined%
+  }
+  \HLAFixedBlock{142.020}{93.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate at most once, regardless of another subscription to the class attribute using the%
+  }
+  \HLAFixedBlock{142.020}{105.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes} service.%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Expanded definitions and constraints replace corresponding items in 5.1.3 as follows:%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{141.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, an interaction class shall be subscribed if and only if %
+  }
+  \HLAFixedBlock{121.979}{156.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.036}{156.784}{379.964}{\rmfamily\raggedright}{9.96}{12.00}{%
+    It was an argument to a \emph{Subscribe Interaction Class }service invocation by that joined federate%
+  }
+  \HLAFixedBlock{142.019}{168.784}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that was not subsequently followed by an \emph{Unsubscribe Interaction Class} service invocation for%
+  }
+  \HLAFixedBlock{142.019}{180.784}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that interaction class, or%
+  }
+  \HLAFixedBlock{121.979}{195.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.032}{195.784}{379.968}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There is at least one region where the interaction class and region were arguments to a%
+  }
+  \HLAFixedBlock{142.020}{207.783}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Interaction Class With Regions }service invocation by that joined federate that was%
+  }
+  \HLAFixedBlock{142.020}{219.783}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not subsequently followed by an \emph{Unsubscribe Interaction Class With Regions} service%
+  }
+  \HLAFixedBlock{142.020}{231.783}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation for that interaction class and region.%
+  }
+  \HLAFixedBlock{100.020}{246.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.943}{246.783}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If an interaction class is subscribed, the joined federate shall be subscribed to that interaction class%
+  }
+  \HLAFixedBlock{121.980}{258.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    either actively or passively, but not both. If an interaction class is subscribed with region, the joined%
+  }
+  \HLAFixedBlock{121.980}{270.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate shall be subscribed to that interaction class with a given region either actively or passively,%
+  }
+  \HLAFixedBlock{121.980}{282.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    but not both.%
+  }
+  \HLAFixedBlock{100.021}{294.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{294.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federates may invoke the \emph{Send Interaction} and the \emph{Send Interaction With Regions} services%
+  }
+  \HLAFixedBlock{121.979}{306.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only with a published interaction class as an argument.%
+  }
+  \HLAFixedBlock{100.020}{318.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.979}{318.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The sent class of an interaction shall be the interaction class that was an argument to the \emph{Send}%
+  }
+  \HLAFixedBlock{121.980}{330.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction} or the \emph{Send Interaction With Regions} service invocation for that interaction.%
+  }
+  \HLAFixedBlock{100.020}{342.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.958}{342.781}{400.042}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Receive Interaction \textdagger{} }service shall be invoked at a joined federate only with a subscribed%
+  }
+  \HLAFixedBlock{121.980}{354.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class as an argument. An interaction shall be received at the joined federate at most once,%
+  }
+  \HLAFixedBlock{121.980}{366.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    regardless of another subscription to the interaction class using the \emph{Subscribe Interaction Class}%
+  }
+  \HLAFixedBlock{121.980}{378.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service.%
+  }
+  \HLAFixedBlock{100.020}{390.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.982}{390.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Only the available parameters of an interaction class may be used in a \emph{Send Interaction} and \emph{Send}%
+  }
+  \HLAFixedBlock{121.981}{402.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction With Regions} service invocation with that interaction class as an argument.%
+  }
+  \HLAFixedBlock{100.021}{414.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.981}{414.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The sent parameters of an interaction shall be the parameters that were arguments to the \emph{Send}%
+  }
+  \HLAFixedBlock{121.982}{426.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction }or\emph{ Send Interaction With Regions }service invocation for that interaction. %
+  }
+  \HLAServiceComponentHeadingAt{450.640}{%
+    \textbf{9.1.6 Reinterpretation of selected object management services}%
+  }
+  \HLAFixedBlock{90.000}{474.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Some DDM services can be used to perform similar functions to what is accomplished with object%
+  }
+  \HLAFixedBlock{90.000}{486.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    management services. When a joined federate uses DDM services, the RTI shall extend processing of three%
+  }
+  \HLAFixedBlock{90.000}{498.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the object management services described in Clause 6 to encompass the expanded interpretation of how%
+  }
+  \HLAFixedBlock{90.000}{510.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object management services work when used in conjunction with DDM services by a joined federate, from%
+  }
+  \HLAFixedBlock{90.000}{522.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the perspective of that joined federate.%
+  }
+  \HLAFixedBlock{90.000}{546.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate using DDM services shall interpret all uses of the following three object management%
+  }
+  \HLAFixedBlock{90.000}{558.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services by any joined federate in the federation execution (including itself):%
+  }
+  \HLAFixedBlock{100.020}{573.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{573.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Register Object Instance}%
+  }
+  \HLAFixedBlock{100.020}{588.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{588.777}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Send Interaction}%
+  }
+  \HLAFixedBlock{100.020}{603.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{603.777}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Request Attribute Value Update}%
+  }
+  \HLAFixedBlock{90.000}{627.777}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    as special cases of the following DDM services, respectively:%
+  }
+  \HLAFixedBlock{100.020}{642.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{642.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Register Object Instance With Regions}%
+  }
+  \HLAFixedBlock{100.020}{657.776}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{657.776}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Send Interaction With Regions}%
+  }
+  \HLAFixedBlock{100.020}{672.776}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{672.776}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Request Attribute Value Update With Regions}%
+  }
+\end{hlafixedpage}
+\clearpage

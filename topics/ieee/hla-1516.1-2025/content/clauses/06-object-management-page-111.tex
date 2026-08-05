@@ -1,0 +1,65 @@
+\HLASourcePage{112}{111}
+\HLAServiceBookmark{6.1.11}{2}{Transportation types}
+\HLAFigureAnchor{15}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFigureImageAt{82.080}{103.020}{447.840}{335.880}{assets/extracted/source-p112-xref13887.png}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 15 depicts the implications of ownership of an arbitrary instance attribute .%
+  }
+  \HLAFixedBlock{162.960}{439.666}{359.040}{\sffamily\raggedright}{9.96}{12.00}{%
+    \textbf{Figure 15---Implications of ownership of instance attribute (}\textbf{\emph{i}}\textbf{, }\textbf{\emph{k}}\textbf{, }\textbf{\emph{j}}\textbf{)}%
+  }
+  \HLAServiceComponentHeadingAt{488.686}{%
+    6.1.11 Transportation types%
+  }
+  \HLAFixedBlock{90.000}{512.825}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The type of transportation that carries instance attribute values and interactions can be controlled using%
+  }
+  \HLAFixedBlock{89.999}{524.825}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    various HLA facilities. A transportation type shall be defined as either reliable (which means that delivery of%
+  }
+  \HLAFixedBlock{89.999}{536.825}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    one copy of the data is guaranteed) or best effort (which means that data may be lost in transport). The%
+  }
+  \HLAFixedBlock{89.999}{548.825}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    following transportation types shall always be supported by an RTI:%
+  }
+  \HLAFixedBlock{100.019}{563.824}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{563.824}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    HLAreliable: which is the default reliable transportation type%
+  }
+  \HLAFixedBlock{100.019}{578.824}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{578.824}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    HLAbestEffort: which is the default best-effort transportation.%
+  }
+  \HLAFixedBlock{89.999}{602.824}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Other transportation types may be supported by the RTI. If a transportation type is requested by a joined%
+  }
+  \HLAFixedBlock{89.999}{614.824}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate or in the FDD but not supported by the RTI or other infrastructure components, the RTI may instead%
+  }
+  \HLAFixedBlock{89.999}{626.823}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    fall back to a corresponding (reliable or best-effort) transportation type of its choosing. Ultimately the RTI%
+  }
+  \HLAFixedBlock{89.999}{638.823}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall fallback to the corresponding default transportation type (HLAreliable or HLAbestEffort).%
+  }
+  \HLAFixedBlock{89.999}{662.823}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate may request a change of the transportation type for attributes that it owns using the%
+  }
+  \HLAFixedBlock{89.999}{674.823}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Request Attribute Transportation Type Change} service. When this operation has completed, the federate%
+  }
+  \HLAFixedBlock{89.998}{686.823}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall receive an invocation of the \emph{Confirm Attribute Transportation Type Change \textdagger{} }service, specifying the%
+  }
+  \HLAFixedBlock{89.999}{698.822}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    transportation type that was actually achieved, which may or may not have changed.%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,81 @@
+\HLASourcePage{44}{43}
+\HLAAnchor{clause:4.1.2}
+\pdfbookmark[2]{4.1.2 Federation execution save and restore}{bookmark:clause:4.1.2}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFigureImageAt{69.780}{207.240}{472.440}{397.620}{assets/extracted/source-p044-xref13872.png}
+  \HLAFigureCaptionAt{5}{584.51}{Normal Activity Permitted state}
+  \HLAInvisibleFixedCenteredBlock{90}{530.63}{432}{\sffamily\bfseries}{9.96}{12}{%
+    Figure 5---Normal Activity Permitted state%
+  }
+  \HLAFixedBlock{100.020}{69.786}{12.000}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{i}%
+  }
+  \HLAFixedBlock{127.980}{69.786}{98.747}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object class designator%
+  }
+  \HLAFixedBlock{100.020}{82.805}{12.000}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{j}%
+  }
+  \HLAFixedBlock{127.980}{82.805}{86.231}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Attribute designator%
+  }
+  \HLAFixedBlock{100.020}{95.765}{12.000}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{k}%
+  }
+  \HLAFixedBlock{127.980}{95.765}{112.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+  \HLAFixedBlock{100.020}{108.785}{13.191}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{m}%
+  }
+  \HLAFixedBlock{127.980}{108.785}{115.329}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction class designator%
+  }
+  \HLAFixedBlock{100.020}{121.805}{12.000}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{L}%
+  }
+  \HLAFixedBlock{127.980}{121.805}{93.430}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Synchronization label%
+  }
+  \HLAFixedBlock{100.020}{134.765}{12.000}{\rmfamily\itshape\raggedright}{9.96}{12.00}{%
+    \emph{s}%
+  }
+  \HLAFixedBlock{127.979}{134.765}{144.585}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{s}th joined federate; also used as \emph{F}\raisebox{-2.2pt}{\fontsize{7.98pt}{8pt}\selectfont \emph{s}}%
+  }
+  \HLAFixedBlock{90.000}{160.626}{432.000}{\rmfamily}{9.96}{12.00}{%
+    Another state chart notation that needs additional explanation is the deep history state, depicted by a state\linebreak%
+  }
+  \HLAFixedBlock{90.001}{172.625}{431.999}{\rmfamily}{9.96}{12.00}{%
+    labeled\textbf{ H}\HLASupMark{\textbf{*}}\textbf{.} This notation means to enter the most recently visited of all the states at the level of the\textbf{ H}\HLASupMark{\textbf{*}} state\linebreak%
+  }
+  \HLAFixedBlock{90.000}{184.625}{432.000}{\rmfamily}{9.96}{12.00}{%
+    or enter the initial state (as indicated by the dark-circle start transition) if this occurrence is the first entry and\linebreak%
+  }
+  \HLAFixedBlock{90.000}{196.625}{166.413}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to do the same for all relevant substates.%
+  }
+  \HLAFixedBlock{90.000}{616.665}{213.683}{\sffamily\bfseries\raggedright}{9.96}{12.00}{%
+    \textbf{4.1.2 Federation execution save and restore}%
+  }
+  \HLAFixedBlock{90.000}{640.804}{432.000}{\rmfamily}{9.96}{12.00}{%
+    Any joined federate in the federation execution may initiate a save by invoking the \emph{Request Federation Save}\linebreak%
+  }
+  \HLAFixedBlock{90.000}{652.804}{432.000}{\rmfamily}{9.96}{12.00}{%
+    service. If there is no timestamp argument provided with the invocation of this service, the RTI shall instruct\linebreak%
+  }
+  \HLAFixedBlock{90.000}{664.804}{432.000}{\rmfamily}{9.96}{12.00}{%
+    all of the joined federates in the federation execution (including the requesting joined federate) to save state\linebreak%
+  }
+  \HLAFixedBlock{90.000}{676.804}{432.000}{\rmfamily}{9.96}{12.00}{%
+    by invoking the \emph{Initiate Federate Save \textdagger{}} service at all of these joined federates as soon as possible. If there is\linebreak%
+  }
+  \HLAFixedBlock{90.000}{688.804}{432.000}{\rmfamily}{9.96}{12.00}{%
+    a timestamp argument provided, the RTI will invoke the \emph{Initiate Federate Save \textdagger{}} service at each of the time-\linebreak%
+  }
+  \HLAFixedBlock{90.000}{700.803}{432.000}{\rmfamily}{9.96}{12.00}{%
+    constrained joined federates when their time position advances to the value provided, and it will invoke the\linebreak%
+  }
+\end{hlafixedpage}
+\clearpage

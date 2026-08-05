@@ -1,0 +1,202 @@
+\HLASourcePage{397}{396}
+\HLAServiceBookmark{12.13.3.2}{3}{Services}
+\HLAServiceBookmark{12.13.3.3}{3}{HLA Service Arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{69.786}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A CallResponse message providing the return values or exceptions thrown, for example the%
+  }
+  \HLAFixedBlock{121.980}{81.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    CreateFederationExecutionResponse message or, in case of an exception, the generic ExceptionData%
+  }
+  \HLAFixedBlock{121.980}{93.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    message. This message is sent from the RTI to the federate.%
+  }
+  \HLAFixedBlock{90.000}{117.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    For a given HLA Service callback, two messages are used:%
+  }
+  \HLAFixedBlock{100.020}{141.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{141.785}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A CallbackRequest message representing the callback and its arguments, for example the%
+  }
+  \HLAFixedBlock{121.981}{153.784}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    DiscoverObjectInstance message. This message is sent from the RTI to the federate.%
+  }
+  \HLAFixedBlock{100.021}{165.784}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{165.784}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A CallbackResponse message indicating if an exception occurred and using the generic%
+  }
+  \HLAFixedBlock{121.981}{177.784}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ExceptionData message. This message is sent from the federate to the RTI.%
+  }
+  \HLAFixedBlock{90.001}{201.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Session layer provides a sequence number in the message header that enables:%
+  }
+  \HLAFixedBlock{100.021}{225.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{225.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A federate to match call requests with call responses;%
+  }
+  \HLAFixedBlock{100.021}{237.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{237.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI to match callback requests with callback responses.%
+  }
+  \HLAFixedBlock{90.001}{261.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The sequence number is also used for other purposes, e.g. error checking and session resumption. It is%
+  }
+  \HLAFixedBlock{90.001}{273.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    specified in section 12.13.5.%
+  }
+  \HLAFixedBlock{90.001}{297.643}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.3.2 Services }%
+  }
+  \HLAFixedBlock{90.001}{321.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All the HLA services in Clause 4 through Clause 10 are implemented in the Federate Protocol with the%
+  }
+  \HLAFixedBlock{90.001}{333.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    exception of the following HLA services related to callbacks, since the protocol allows for two-way%
+  }
+  \HLAFixedBlock{90.001}{345.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    simultaneous communication:%
+  }
+  \HLAFixedBlock{100.021}{369.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{369.781}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Evoke Callback%
+  }
+  \HLAFixedBlock{100.021}{381.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{381.781}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Evoke Multiple Callbacks%
+  }
+  \HLAFixedBlock{100.021}{393.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{393.781}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Enable Callbacks%
+  }
+  \HLAFixedBlock{100.021}{405.780}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{405.780}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Disable Callbacks%
+  }
+  \HLAFixedBlock{90.001}{429.780}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The following, related argument is omitted from the Connect call:%
+  }
+  \HLAFixedBlock{100.021}{453.780}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{453.780}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Callback Model%
+  }
+  \HLAFixedBlock{90.001}{477.640}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.3.3 HLA Service Arguments}%
+  }
+  \HLAFixedBlock{90.001}{501.779}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The following apply to HLA service arguments when invoked over the federate protocol:%
+  }
+  \HLAFixedBlock{100.021}{525.778}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{525.778}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FOM Modules}%
+  }
+  \HLAFixedBlock{186.840}{525.778}{417.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    : Service arguments indicating FOM modules shall be specified in one of the%
+  }
+  \HLAFixedBlock{121.981}{537.778}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    following three ways:%
+  }
+  \HLAFixedBlock{121.981}{549.778}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    1)%
+  }
+  \HLAFixedBlock{142.025}{549.778}{461.975}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Using a URL indicating the location of the FOM module;%
+  }
+  \HLAFixedBlock{121.981}{561.778}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    2)%
+  }
+  \HLAFixedBlock{142.026}{561.778}{461.974}{\rmfamily\raggedright}{9.96}{11.16}{%
+    By providing the full FOM module content;%
+  }
+  \HLAFixedBlock{121.981}{573.778}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    3)%
+  }
+  \HLAFixedBlock{142.026}{573.778}{461.974}{\rmfamily\raggedright}{9.96}{11.16}{%
+    By providing a compressed FOM module using ZIP (ISO/IEC 21320-1:2015) compression.%
+  }
+  \HLAFixedBlock{100.021}{585.777}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{585.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Time Representation}%
+  }
+  \HLAFixedBlock{211.201}{585.777}{392.799}{\rmfamily\raggedright}{9.96}{11.16}{%
+    : Arguments indicating Time Representation shall be specified using the name%
+  }
+  \HLAFixedBlock{121.981}{597.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of the HLA time type, for example HLAinteger64Time.%
+  }
+  \HLAFixedBlock{100.021}{609.777}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.981}{609.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Handles as arguments}%
+  }
+  \HLAFixedBlock{216.781}{609.777}{387.219}{\rmfamily\raggedright}{9.96}{11.16}{%
+    : All handle arguments shall be the series of opaque encoded bytes resulting%
+  }
+  \HLAFixedBlock{121.981}{621.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    from the handle's "encode" operation (see 12.11.6.4 and 12.12.6.4) with the following exception:%
+  }
+  \HLAFixedBlock{121.981}{633.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    1)%
+  }
+  \HLAFixedBlock{142.024}{633.777}{461.976}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Conveyed Regions: Conveyed Regions shall not be passed as handles but shall be passed as a%
+  }
+  \HLAFixedBlock{142.020}{645.776}{461.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    full encoding of their constituent parts using the ConveyedRegionSet data type, as specified in%
+  }
+  \HLAFixedBlock{142.020}{657.776}{461.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Annex D.%
+  }
+  \HLAFixedBlock{100.020}{669.776}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{669.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Handles as values:}%
+  }
+  \HLAFixedBlock{201.779}{669.776}{402.221}{\rmfamily\raggedright}{9.96}{11.16}{%
+     When receiving a handle as part of a value in an attribute or parameter handle%
+  }
+  \HLAFixedBlock{121.980}{681.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    value map, the handle shall be just the series of opaque encoded bytes as stated in c) .%
+  }
+  \HLAFixedBlock{100.020}{693.776}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e)%
+  }
+  \HLAFixedBlock{121.980}{693.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Names, labels and strings}%
+  }
+  \HLAFixedBlock{230.700}{693.776}{373.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    : The names, labels, and strings described in Clause 4 through Clause 10%
+  }
+  \HLAFixedBlock{121.980}{705.775}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of this specification shall be mapped to native strings according to the encoding in Annex D.%
+  }
+\end{hlafixedpage}
+\clearpage

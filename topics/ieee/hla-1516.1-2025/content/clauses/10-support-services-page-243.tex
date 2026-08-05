@@ -1,0 +1,150 @@
+\HLASourcePage{244}{243}
+\HLAServiceBookmark{10.1}{1}{Overview}
+\HLAServiceBookmark{10.1.1}{2}{Names}
+\HLAServiceBookmark{10.1.2}{2}{Switches}
+\HLAServiceBookmark{10.1.2.1}{2}{Advisory switches}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.120}{432.000}{\sffamily\raggedright}{12.00}{12.00}{%
+    \textbf{10. Support services}%
+  }
+  \HLAServiceHeadingAt{101.363}{%
+    \textbf{10.1 Overview}%
+  }
+  \HLAFixedBlock{90.000}{126.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This clause describes miscellaneous services utilized by joined federates for performing such actions as the%
+  }
+  \HLAFixedBlock{90.000}{138.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    following:%
+  }
+  \HLAFixedBlock{100.020}{153.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{153.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Performing name-to-handle and handle-to-name transformations%
+  }
+  \HLAFixedBlock{100.020}{168.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{168.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Getting and setting switch values%
+  }
+  \HLAFixedBlock{100.020}{183.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{183.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Manipulating regions%
+  }
+  \HLAFixedBlock{100.020}{198.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{198.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Getting update rate values.%
+  }
+  \HLAServiceComponentHeadingAt{222.645}{%
+    \textbf{10.1.1 Names}%
+  }
+  \HLAFixedBlock{90.000}{246.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All class name arguments shall be completely specified, including all superclass names, with the exception%
+  }
+  \HLAFixedBlock{90.000}{258.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the HLA root classes. The inclusion of HLAobjectRoot or HLAinteractionRoot shall be optional.%
+  }
+  \HLAFixedBlock{90.000}{282.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each name in an FDD (object classes, interactions, attributes, parameters, dimensions, transportation types,%
+  }
+  \HLAFixedBlock{90.000}{294.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    order types) shall have a unique, and unpredictable, federation execution-wide handle.%
+  }
+  \HLAFixedBlock{90.000}{318.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All names shall be case sensitive.%
+  }
+  \HLAServiceComponentHeadingAt{342.643}{%
+    \textbf{10.1.2 Switches}%
+  }
+  \HLAFixedBlock{90.000}{366.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The initial setting of RTI switches for a federation execution may be provided in the FDD(s) supplied to the%
+  }
+  \HLAFixedBlock{90.000}{378.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Create Federation Execution} service invocation. If no value is specified for a switch by the FDD(s) supplied%
+  }
+  \HLAFixedBlock{90.000}{390.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in the \emph{Create Federation Execution} service invocation, then the RTI will provide default values based on the%
+  }
+  \HLAFixedBlock{90.000}{402.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    switches defaults table in IEEE Std 1516.2-2025. Support services are provided that allow federates to get%
+  }
+  \HLAFixedBlock{90.000}{414.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the value of any of the switches. Support services are also provided to set the local value of the per federate%
+  }
+  \HLAFixedBlock{90.000}{426.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    switches that can be changed dynamically during federation execution.%
+  }
+  \HLAFixedBlock{90.000}{450.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The purpose of the switches is to allow a federate or federation to control certain characteristics of the RTI%
+  }
+  \HLAFixedBlock{90.000}{462.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    behavior when specific services are invoked. A basic description of each switch is given in IEEE Std%
+  }
+  \HLAFixedBlock{90.000}{474.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1516.2-2025. Additional descriptions of how the RTI behaves based on switch values are provided%
+  }
+  \HLAFixedBlock{90.000}{486.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    throughout this document where appropriate. The following section, 10.1.2.1, provides information about%
+  }
+  \HLAFixedBlock{90.000}{498.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the advisory switches (Object Class Relevance, Attribute Relevance, Interaction Relevance, and Attribute%
+  }
+  \HLAFixedBlock{90.000}{510.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Scope). The Auto-Provide Switch behavior is described in 6.1.9. The Convey Region Designator Sets%
+  }
+  \HLAFixedBlock{90.000}{522.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Switch behavior is described in 9.1.7. The Service Reporting Switch, Send Service Reports to File Switch,%
+  }
+  \HLAFixedBlock{90.000}{534.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and Exception Reporting Switch are described in 11.5. The Delay Subscription Evaluation Switch is%
+  }
+  \HLAFixedBlock{90.000}{546.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    described in 8.1.8. The Non-Regulated Grant Switch is described in 8.1.6. The Automatic Resign Directive%
+  }
+  \HLAFixedBlock{90.000}{558.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Switch is described in 4.1.1 and 4.1.6. The Advisories Use Known Class Switch is described in 6.1.5 and%
+  }
+  \HLAFixedBlock{90.000}{570.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    6.23. The Allow Relaxed DDM Switch is described in 9.1.8 and E.9.1.8.%
+  }
+  \HLAServiceComponentHeadingAt{594.639}{%
+    \textbf{10.1.2.1 Advisory switches}%
+  }
+  \HLAFixedBlock{90.000}{618.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The settings of the following per federate advisory switches may be modified by the switches support%
+  }
+  \HLAFixedBlock{90.000}{630.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services:%
+  }
+  \HLAFixedBlock{100.020}{645.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{645.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object Class Relevance Advisory Switch%
+  }
+  \HLAFixedBlock{100.020}{660.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{660.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Attribute Relevance Advisory Switch%
+  }
+  \HLAFixedBlock{100.020}{675.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{675.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Attribute Scope Advisory Switch%
+  }
+  \HLAFixedBlock{100.020}{690.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{690.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction Relevance Advisory Switch%
+  }
+\end{hlafixedpage}
+\clearpage

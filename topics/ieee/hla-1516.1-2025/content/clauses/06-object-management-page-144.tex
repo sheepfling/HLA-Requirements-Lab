@@ -1,0 +1,164 @@
+\HLASourcePage{145}{144}
+\HLAServiceBookmark{6.29.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.29.3}{2}{Preconditions}
+\HLAServiceBookmark{6.29.4}{2}{Postconditions}
+\HLAServiceBookmark{6.29.5}{2}{Exceptions}
+\HLAServiceBookmark{6.29.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.30}{1}{Request Interaction Transportation Type Change service}
+\HLAServiceBookmark{6.30.1}{2}{Supplied arguments}
+\HLAServiceBookmark{6.30.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.30.3}{2}{Preconditions}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.29.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    6.29.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{141.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{171.784}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has previously invoked the \emph{Query Attribute Transportation Type} service for the%
+  }
+  \HLAFixedBlock{121.981}{183.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance and instance attribute.%
+  }
+  \HLAFixedBlock{100.021}{198.784}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{198.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{213.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{213.783}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{237.644}{%
+    6.29.4 Postconditions%
+  }
+  \HLAFixedBlock{100.021}{261.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{261.783}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been informed about what transportation type is in use.%
+  }
+  \HLAServiceComponentHeadingAt{285.643}{%
+    6.29.5 Exceptions%
+  }
+  \HLAFixedBlock{100.021}{309.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{309.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error%
+  }
+  \HLAServiceComponentHeadingAt{333.642}{%
+    6.29.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.021}{357.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{357.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{387.383}{%
+    6.30 \emph{Request Interaction Transportation Type Change} service%
+  }
+  \HLAFixedBlock{90.000}{412.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The transportation type for each interaction shall be initialized from the interaction class description in the%
+  }
+  \HLAFixedBlock{89.999}{424.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    FDD. A joined federate may choose to change the transportation type during execution. Invoking the%
+  }
+  \HLAFixedBlock{89.999}{436.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Request Interaction Transportation Type Change} service shall attempt to change the transportation type for%
+  }
+  \HLAFixedBlock{89.999}{448.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    all future \emph{Send Interaction} and \emph{Send Interaction With Regions} service invocations for the specified%
+  }
+  \HLAFixedBlock{89.998}{460.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class for the invoking joined federate only. The RTI shall provide the achieved transportation%
+  }
+  \HLAFixedBlock{89.998}{472.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    type via the \emph{Confirm Interaction Transportation Type Change \textdagger{}} service invocation. The change shall take%
+  }
+  \HLAFixedBlock{89.998}{484.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    effect with the RTI invocation of the responding \emph{Confirm Interaction Transportation Type Change \textdagger{}}%
+  }
+  \HLAFixedBlock{89.998}{496.804}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service.%
+  }
+  \HLAServiceComponentHeadingAt{520.665}{%
+    6.30.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.018}{544.804}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{544.804}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction class designator%
+  }
+  \HLAFixedBlock{100.018}{559.803}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.978}{559.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Transportation type%
+  }
+  \HLAServiceComponentHeadingAt{583.664}{%
+    6.30.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.018}{607.803}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{607.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{631.663}{%
+    6.30.3 Preconditions%
+  }
+  \HLAFixedBlock{100.018}{655.802}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{655.802}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.018}{670.802}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.937}{670.802}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.018}{685.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.968}{685.801}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.018}{700.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.936}{700.801}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction class is defined in the FDD.%
+  }
+\end{hlafixedpage}
+\clearpage

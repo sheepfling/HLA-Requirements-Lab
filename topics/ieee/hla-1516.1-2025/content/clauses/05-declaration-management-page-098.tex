@@ -1,0 +1,174 @@
+\HLASourcePage{99}{98}
+\HLAServiceBookmark{5.9.1}{2}{Supplied arguments}
+\HLAServiceBookmark{5.9.2}{2}{Returned arguments}
+\HLAServiceBookmark{5.9.3}{2}{Preconditions}
+\HLAServiceBookmark{5.9.4}{2}{Postconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance discovery at the specified object class. Second, it could be used to unsubscribe specific class%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attributes and thereby inform the RTI that the joined federate shall no longer receive values for any of the%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unsubscribed class attributes corresponding instance attributes.%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional set of attribute designators argument is supplied, only those class attributes shall be%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unsubscribed for the joined federate. Otherwise, all subscribed class attributes of the specified class shall be%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unsubscribed for the joined federate. Invoking this service with an empty set of class attributes shall be%
+  }
+  \HLAFixedBlock{90.001}{153.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    equivalent to removing no subscriptions for the object class.%
+  }
+  \HLAFixedBlock{90.001}{177.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All in-scope instance attributes whose corresponding class attributes are unsubscribed by the service%
+  }
+  \HLAFixedBlock{90.001}{189.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall go out of scope. Refer to 9.1.1 for an expanded interpretation of this service when a joined%
+  }
+  \HLAFixedBlock{90.001}{201.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate is using DDM services in conjunction with DM services.%
+  }
+  \HLAFixedBlock{90.001}{225.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of this service, subject to other conditions, may cause an implicit out-of-scope situation for%
+  }
+  \HLAFixedBlock{90.001}{237.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    affected instance attributes, i.e., invoking joined federate shall NOT be notified via an invocation of the%
+  }
+  \HLAFixedBlock{90.001}{249.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attributes Out Of Scope \textdagger{}} service invocation when the instance attribute goes out of scope.%
+  }
+  \HLAServiceComponentHeadingAt{273.643}{%
+    5.9.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{297.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{297.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object class designator.%
+  }
+  \HLAFixedBlock{100.021}{309.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{309.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional set of attribute designators.%
+  }
+  \HLAServiceComponentHeadingAt{333.642}{%
+    5.9.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{357.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{357.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{381.641}{%
+    5.9.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{405.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{405.780}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.021}{417.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{417.780}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{429.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{429.780}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{441.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.939}{441.780}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object class is defined in the FDD.%
+  }
+  \HLAFixedBlock{100.021}{453.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{453.780}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional set of attribute designators argument is supplied, the specified class attributes are%
+  }
+  \HLAFixedBlock{121.981}{465.779}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available attributes of the specified object class.%
+  }
+  \HLAFixedBlock{100.021}{477.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.950}{477.779}{400.050}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{489.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.981}{489.779}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{513.639}{%
+    5.9.4 Postconditions%
+  }
+  \HLAFixedBlock{100.021}{537.778}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.967}{537.778}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional set of attribute designators argument is supplied, the specified attributes are not%
+  }
+  \HLAFixedBlock{121.981}{549.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribed by the joined federate.%
+  }
+  \HLAFixedBlock{100.021}{561.778}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{561.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional set of attribute designators argument is not supplied, no class attributes of the object%
+  }
+  \HLAFixedBlock{121.982}{573.778}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class are subscribed by the joined federate.%
+  }
+  \HLAFixedBlock{100.022}{585.777}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.979}{585.777}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If no class attributes of the specified class are still subscribed by the joined federate, the joined%
+  }
+  \HLAFixedBlock{121.982}{597.777}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate shall receive no subsequent \emph{Discover Object Instance} service invocations for the specified%
+  }
+  \HLAFixedBlock{121.982}{609.777}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object class.%
+  }
+  \HLAFixedBlock{100.022}{621.777}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.943}{621.777}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate shall receive no subsequent \emph{Reflect Attribute Values \textdagger{}} service invocations for%
+  }
+  \HLAFixedBlock{121.983}{633.777}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    any instance attributes whose corresponding class attributes are no longer subscribed by the joined%
+  }
+  \HLAFixedBlock{121.983}{645.776}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+  \HLAFixedBlock{100.023}{657.776}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.986}{657.776}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    May cause an implicit out-of-scope situation for affected instance attributes at invoking joined%
+  }
+  \HLAFixedBlock{121.983}{669.776}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+\end{hlafixedpage}
+\clearpage

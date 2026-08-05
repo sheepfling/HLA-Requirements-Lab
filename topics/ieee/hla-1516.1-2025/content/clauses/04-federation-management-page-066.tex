@@ -1,0 +1,191 @@
+\HLASourcePage{67}{66}
+\HLAServiceBookmark{4.19.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.19.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.19.3}{2}{Preconditions}
+\HLAServiceBookmark{4.19.4}{2}{Postconditions}
+\HLAServiceBookmark{4.19.5}{2}{Exceptions}
+\HLAServiceBookmark{4.19.6}{2}{Reference state charts}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When all time-constrained joined federates are eligible to be instructed to save, the RTI shall instruct all%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    nontime-constrained joined federates to save state.%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall instruct a joined federate to save state by invoking the \emph{Initiate Federate Save \textdagger{}} service at that%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate.%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    At most, one requested save shall be outstanding. A new save request shall replace any outstanding save%
+  }
+  \HLAFixedBlock{90.000}{153.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    request. However, a save request cannot happen during a federate save in progress, which is between the%
+  }
+  \HLAFixedBlock{90.000}{165.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI invocation of the \emph{Initiate Federate Save \textdagger{}} service and the RTI invocation of the \emph{Federation Saved \textdagger{}}%
+  }
+  \HLAFixedBlock{90.000}{177.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service.%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    4.19.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{225.783}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation save label.%
+  }
+  \HLAFixedBlock{100.020}{237.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{237.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional timestamp.%
+  }
+  \HLAServiceComponentHeadingAt{261.643}{%
+    4.19.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{285.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{285.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{309.642}{%
+    4.19.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{333.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{333.781}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{345.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{345.781}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{357.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{357.781}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{369.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{369.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If an optional timestamp is supplied, either%
+  }
+  \HLAFixedBlock{121.980}{384.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.022}{384.781}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is time-regulating, and the timestamp is a valid timestamp for the joined%
+  }
+  \HLAFixedBlock{142.019}{396.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate to send in a TSO message, or%
+  }
+  \HLAFixedBlock{121.980}{411.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.027}{411.780}{379.973}{\rmfamily\raggedright}{9.96}{12.00}{%
+    GALT is defined for the joined federate, and the timestamp is greater than the joined federate’s%
+  }
+  \HLAFixedBlock{142.019}{423.780}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    GALT value.%
+  }
+  \HLAFixedBlock{100.019}{438.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{438.780}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{450.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{450.780}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{474.640}{%
+    4.19.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{498.779}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{498.779}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A federation save has been requested.%
+  }
+  \HLAFixedBlock{100.019}{510.779}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{510.779}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All previous requested saves are canceled.%
+  }
+  \HLAServiceComponentHeadingAt{534.639}{%
+    4.19.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{558.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{558.778}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Timestamp has already passed (if optional timestamp argument supplied).%
+  }
+  \HLAFixedBlock{100.019}{570.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{570.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Timestamp is invalid (if optional timestamp argument is supplied).%
+  }
+  \HLAFixedBlock{100.019}{582.777}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.964}{582.777}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate may not use the timestamp argument (if optional timestamp argument is supplied).%
+  }
+  \HLAFixedBlock{100.019}{594.777}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{594.777}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{606.777}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.974}{606.777}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.019}{618.777}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.942}{618.777}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{630.777}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.979}{630.777}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{642.776}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.945}{642.776}{400.055}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{666.637}{%
+    4.19.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{690.776}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{690.776}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+\end{hlafixedpage}
+\clearpage

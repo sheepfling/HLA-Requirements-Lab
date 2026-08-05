@@ -1,0 +1,4898 @@
+{
+  "schema_version": 1,
+  "page_count": 124,
+  "outline": [
+    [
+      1,
+      "IEEE Std 1516.2™-2025 Front Cover",
+      1
+    ],
+    [
+      1,
+      "Title page",
+      2
+    ],
+    [
+      1,
+      "Important Notices and Disclaimers Concerning IEEE Standards Documents",
+      4
+    ],
+    [
+      2,
+      "Notice and Disclaimer of Liability Concerning the Use of IEEE Standards Documents",
+      4
+    ],
+    [
+      2,
+      "Translations",
+      5
+    ],
+    [
+      2,
+      "Official statements",
+      5
+    ],
+    [
+      2,
+      "Comments on standards",
+      5
+    ],
+    [
+      2,
+      "Laws and regulations",
+      5
+    ],
+    [
+      2,
+      "Data privacy",
+      6
+    ],
+    [
+      2,
+      "Copyrights",
+      6
+    ],
+    [
+      2,
+      "Photocopies",
+      6
+    ],
+    [
+      2,
+      "Updating of IEEE Standards documents",
+      6
+    ],
+    [
+      2,
+      "Errata",
+      6
+    ],
+    [
+      2,
+      "Patents",
+      7
+    ],
+    [
+      2,
+      "IMPORTANT NOTICE",
+      7
+    ],
+    [
+      1,
+      "Participants",
+      8
+    ],
+    [
+      1,
+      "Introduction",
+      10
+    ],
+    [
+      2,
+      "Schema, API, and Documentation",
+      10
+    ],
+    [
+      1,
+      "Contents",
+      11
+    ],
+    [
+      1,
+      "1. Overview",
+      13
+    ],
+    [
+      2,
+      "1.1 Scope",
+      13
+    ],
+    [
+      2,
+      "1.2 Purpose",
+      13
+    ],
+    [
+      2,
+      "1.3 Word Usage",
+      13
+    ],
+    [
+      2,
+      "1.4 Background",
+      14
+    ],
+    [
+      3,
+      "1.4.1 Object model template rationale",
+      14
+    ],
+    [
+      3,
+      "1.4.2 Federation object models",
+      14
+    ],
+    [
+      3,
+      "1.4.3 Simulation object models",
+      14
+    ],
+    [
+      3,
+      "1.4.4 Relationship of HLA and object-oriented concepts",
+      15
+    ],
+    [
+      1,
+      "2. Normative references",
+      16
+    ],
+    [
+      1,
+      "3. Definitions, acronyms, and abbreviations",
+      16
+    ],
+    [
+      2,
+      "3.1 Definitions",
+      16
+    ],
+    [
+      2,
+      "3.2 Abbreviations and acronyms",
+      31
+    ],
+    [
+      2,
+      "3.3 Conventions",
+      32
+    ],
+    [
+      3,
+      "3.3.1 Names",
+      32
+    ],
+    [
+      1,
+      "4. HLA OMT components",
+      33
+    ],
+    [
+      2,
+      "4.1 Object model identification table",
+      34
+    ],
+    [
+      3,
+      "4.1.1 Purpose/background",
+      34
+    ],
+    [
+      3,
+      "4.1.2 Table format",
+      35
+    ],
+    [
+      3,
+      "4.1.3 Inclusion criteria",
+      38
+    ],
+    [
+      3,
+      "4.1.4 Example",
+      38
+    ],
+    [
+      2,
+      "4.2 Object class structure table",
+      39
+    ],
+    [
+      3,
+      "4.2.1 Purpose/background",
+      39
+    ],
+    [
+      3,
+      "4.2.2 Table format",
+      40
+    ],
+    [
+      3,
+      "4.2.3 Inclusion criteria",
+      41
+    ],
+    [
+      3,
+      "4.2.4 Example",
+      42
+    ],
+    [
+      2,
+      "4.3 Interaction class structure table",
+      43
+    ],
+    [
+      3,
+      "4.3.1 Purpose/background",
+      43
+    ],
+    [
+      3,
+      "4.3.2 Table format",
+      44
+    ],
+    [
+      3,
+      "4.3.3 Inclusion criteria",
+      45
+    ],
+    [
+      3,
+      "4.3.4 Example",
+      45
+    ],
+    [
+      2,
+      "4.4 Directed interaction table",
+      46
+    ],
+    [
+      3,
+      "4.4.1 Purpose/background",
+      46
+    ],
+    [
+      3,
+      "4.4.2 Table format",
+      46
+    ],
+    [
+      3,
+      "4.4.3 Inclusion criteria",
+      47
+    ],
+    [
+      3,
+      "4.4.4 Example",
+      47
+    ],
+    [
+      2,
+      "4.5 Attribute table",
+      47
+    ],
+    [
+      3,
+      "4.5.1 Purpose/background",
+      47
+    ],
+    [
+      3,
+      "4.5.2 Table format",
+      48
+    ],
+    [
+      3,
+      "4.5.3 Inclusion criteria",
+      51
+    ],
+    [
+      3,
+      "4.5.4 Example",
+      51
+    ],
+    [
+      2,
+      "4.6 Parameter table",
+      52
+    ],
+    [
+      3,
+      "4.6.1 Purpose/background",
+      52
+    ],
+    [
+      3,
+      "4.6.2 Table format",
+      52
+    ],
+    [
+      3,
+      "4.6.3 Inclusion criteria",
+      53
+    ],
+    [
+      3,
+      "4.6.4 Example",
+      54
+    ],
+    [
+      2,
+      "4.7 Dimension table",
+      54
+    ],
+    [
+      3,
+      "4.7.1 Purpose/background",
+      54
+    ],
+    [
+      3,
+      "4.7.2 Table format",
+      55
+    ],
+    [
+      3,
+      "4.7.3 Inclusion criteria",
+      56
+    ],
+    [
+      3,
+      "4.7.4 Example",
+      57
+    ],
+    [
+      2,
+      "4.8 Time representation table",
+      57
+    ],
+    [
+      3,
+      "4.8.1 Purpose/background",
+      57
+    ],
+    [
+      3,
+      "4.8.2 Table format",
+      58
+    ],
+    [
+      3,
+      "4.8.3 Inclusion criteria",
+      59
+    ],
+    [
+      3,
+      "4.8.4 Example",
+      59
+    ],
+    [
+      2,
+      "4.9 User-supplied tag table",
+      59
+    ],
+    [
+      3,
+      "4.9.1 Purpose/background",
+      59
+    ],
+    [
+      3,
+      "4.9.2 Table format",
+      59
+    ],
+    [
+      3,
+      "4.9.3 Inclusion criteria",
+      61
+    ],
+    [
+      3,
+      "4.9.4 Example",
+      61
+    ],
+    [
+      2,
+      "4.10 Synchronization table",
+      61
+    ],
+    [
+      3,
+      "4.10.1 Purpose/background",
+      61
+    ],
+    [
+      3,
+      "4.10.2 Table format",
+      61
+    ],
+    [
+      3,
+      "4.10.3 Inclusion criteria",
+      62
+    ],
+    [
+      3,
+      "4.10.4 Example",
+      62
+    ],
+    [
+      2,
+      "4.11 Transportation type table",
+      62
+    ],
+    [
+      3,
+      "4.11.1 Purpose/background",
+      62
+    ],
+    [
+      3,
+      "4.11.2 Table format",
+      63
+    ],
+    [
+      3,
+      "4.11.3 Inclusion criteria",
+      63
+    ],
+    [
+      3,
+      "4.11.4 Example",
+      63
+    ],
+    [
+      2,
+      "4.12 Update rate table",
+      64
+    ],
+    [
+      3,
+      "4.12.1 Purpose/background",
+      64
+    ],
+    [
+      3,
+      "4.12.2 Table format",
+      64
+    ],
+    [
+      3,
+      "4.12.3 Inclusion criteria",
+      64
+    ],
+    [
+      3,
+      "4.12.4 Example",
+      64
+    ],
+    [
+      2,
+      "4.13 Switches table",
+      65
+    ],
+    [
+      3,
+      "4.13.1 Purpose/background",
+      65
+    ],
+    [
+      3,
+      "4.13.2 Table format",
+      65
+    ],
+    [
+      3,
+      "4.13.3 Inclusion criteria",
+      67
+    ],
+    [
+      3,
+      "4.13.4 Example",
+      67
+    ],
+    [
+      2,
+      "4.14 Data type tables",
+      68
+    ],
+    [
+      3,
+      "4.14.1 Purpose/background",
+      68
+    ],
+    [
+      3,
+      "4.14.2 Inclusion criteria",
+      68
+    ],
+    [
+      3,
+      "4.14.3 Basic data representation table",
+      68
+    ],
+    [
+      3,
+      "4.14.4 Simple data type table",
+      70
+    ],
+    [
+      3,
+      "4.14.5 Enumerated data type table",
+      72
+    ],
+    [
+      3,
+      "4.14.6 Array data type table",
+      74
+    ],
+    [
+      3,
+      "4.14.7 Fixed record data type table",
+      75
+    ],
+    [
+      3,
+      "4.14.8 Variant record data type table",
+      76
+    ],
+    [
+      3,
+      "4.14.9 Reference data type table",
+      79
+    ],
+    [
+      3,
+      "4.14.10 Predefined encodings for constructed data types",
+      79
+    ],
+    [
+      4,
+      "4.14.10.1 HLAfixedRecord",
+      80
+    ],
+    [
+      4,
+      "4.14.10.2 HLAvariantRecord",
+      81
+    ],
+    [
+      4,
+      "4.14.10.3 HLAextendableVariantRecord",
+      82
+    ],
+    [
+      4,
+      "4.14.10.4 HLAfixedArray",
+      83
+    ],
+    [
+      4,
+      "4.14.10.5 HLAvariableArray",
+      84
+    ],
+    [
+      2,
+      "4.15 Notes table",
+      86
+    ],
+    [
+      3,
+      "4.15.1 Purpose/background",
+      86
+    ],
+    [
+      3,
+      "4.15.2 Table format",
+      86
+    ],
+    [
+      3,
+      "4.15.3 Inclusion Criteria",
+      87
+    ],
+    [
+      3,
+      "4.15.4 Example",
+      87
+    ],
+    [
+      1,
+      "5. FOM/SOM lexicon",
+      88
+    ],
+    [
+      2,
+      "5.1 Purpose/background",
+      88
+    ],
+    [
+      2,
+      "5.2 Object class definition table",
+      88
+    ],
+    [
+      2,
+      "5.3 Interaction class definition table",
+      88
+    ],
+    [
+      2,
+      "5.4 Attribute definition table",
+      89
+    ],
+    [
+      2,
+      "5.5 Parameter definition table",
+      90
+    ],
+    [
+      1,
+      "6. Conformance",
+      90
+    ],
+    [
+      2,
+      "6.1 Conformance labels",
+      91
+    ],
+    [
+      3,
+      "6.1.1 Object model conformance",
+      91
+    ],
+    [
+      3,
+      "6.1.2 Object model tool conformance",
+      91
+    ],
+    [
+      3,
+      "6.1.3 XML product conformance",
+      91
+    ],
+    [
+      2,
+      "6.2 Conformance verification",
+      91
+    ],
+    [
+      3,
+      "6.2.1 Object model identification table",
+      91
+    ],
+    [
+      3,
+      "6.2.2 Object class structure table",
+      91
+    ],
+    [
+      3,
+      "6.2.3 Interaction class structure table",
+      92
+    ],
+    [
+      3,
+      "6.2.4 Directed interaction table",
+      92
+    ],
+    [
+      3,
+      "6.2.5 Attribute table",
+      92
+    ],
+    [
+      3,
+      "6.2.6 Parameter table",
+      92
+    ],
+    [
+      3,
+      "6.2.7 Dimension table",
+      93
+    ],
+    [
+      3,
+      "6.2.8 Time representation table",
+      93
+    ],
+    [
+      3,
+      "6.2.9 User-supplied tag table",
+      93
+    ],
+    [
+      3,
+      "6.2.10 Synchronization table",
+      93
+    ],
+    [
+      3,
+      "6.2.11 Transportation type table",
+      93
+    ],
+    [
+      3,
+      "6.2.12 Update rate table",
+      93
+    ],
+    [
+      3,
+      "6.2.13 Switches table",
+      94
+    ],
+    [
+      3,
+      "6.2.14 Basic data representation table",
+      94
+    ],
+    [
+      3,
+      "6.2.15 Simple data type table",
+      94
+    ],
+    [
+      3,
+      "6.2.16 Enumerated data type table",
+      94
+    ],
+    [
+      3,
+      "6.2.17 Reference data type table",
+      94
+    ],
+    [
+      3,
+      "6.2.18 Array data type table",
+      94
+    ],
+    [
+      3,
+      "6.2.19 Fixed record data type table",
+      95
+    ],
+    [
+      3,
+      "6.2.20 Variable record data type table",
+      95
+    ],
+    [
+      2,
+      "6.3 Interface specification services usage table",
+      95
+    ],
+    [
+      3,
+      "6.3.1 Purpose/background",
+      95
+    ],
+    [
+      3,
+      "6.3.2 Table format",
+      96
+    ],
+    [
+      3,
+      "6.3.3 Inclusion criteria",
+      96
+    ],
+    [
+      3,
+      "6.3.4 Example",
+      100
+    ],
+    [
+      1,
+      "7. FOM module/SOM module merging rules",
+      101
+    ],
+    [
+      1,
+      "Annex A (informative) Table entry notation",
+      106
+    ],
+    [
+      1,
+      "Annex B (normative) Common normalization functions",
+      107
+    ],
+    [
+      1,
+      "Annex C (normative) FOM module/SOM module merging principles",
+      109
+    ],
+    [
+      1,
+      "Annex D (normative) OMT data interchange format",
+      114
+    ],
+    [
+      1,
+      "Annex E (normative) OMT conformance XML Schema",
+      116
+    ],
+    [
+      1,
+      "Annex F (informative) OMT DIF SOM example",
+      117
+    ],
+    [
+      1,
+      "Annex G (informative) OMT DIF FOM example",
+      118
+    ],
+    [
+      1,
+      "Annex H (informative) Bibliography",
+      123
+    ],
+    [
+      1,
+      "Back Cover",
+      124
+    ]
+  ],
+  "page_labels": [
+    {
+      "startpage": 0,
+      "prefix": "Front Cover",
+      "firstpagenum": 1
+    },
+    {
+      "startpage": 1,
+      "prefix": "",
+      "firstpagenum": 1,
+      "style": "D"
+    },
+    {
+      "startpage": 123,
+      "prefix": "Back Cover",
+      "firstpagenum": 1
+    }
+  ],
+  "links": [
+    {
+      "source_page": 2,
+      "source_kind": 2,
+      "rectangle": [
+        90.18,
+        695.52002,
+        172.860001,
+        703.5
+      ],
+      "type": "uri",
+      "uri": "http://www.ieee.org/web/aboutus/whatis/policies/p9-26.html"
+    },
+    {
+      "source_page": 4,
+      "source_kind": 2,
+      "rectangle": [
+        321.299988,
+        531.959961,
+        431.160004,
+        544.919983
+      ],
+      "type": "uri",
+      "uri": "https://development.standards.ieee.org/myproject-web/public/view.html#landing"
+    },
+    {
+      "source_page": 4,
+      "source_kind": 2,
+      "rectangle": [
+        310.440002,
+        567.960022,
+        355.140015,
+        580.919983
+      ],
+      "type": "uri",
+      "uri": "https://standards.ieee.org/content/ieee-standards/en/about/contact/index.html"
+    },
+    {
+      "source_page": 5,
+      "source_kind": 2,
+      "rectangle": [
+        353.519989,
+        568.679993,
+        406.140015,
+        581.700012
+      ],
+      "type": "uri",
+      "uri": "https://ieeexplore.ieee.org/browse/standards/collection/ieee/"
+    },
+    {
+      "source_page": 5,
+      "source_kind": 2,
+      "rectangle": [
+        420.899994,
+        568.679993,
+        474.660004,
+        581.700012
+      ],
+      "type": "uri",
+      "uri": "https://standards.ieee.org/content/ieee-standards/en/about/contact/index.html"
+    },
+    {
+      "source_page": 5,
+      "source_kind": 2,
+      "rectangle": [
+        330.540009,
+        633.660034,
+        402.600006,
+        646.679993
+      ],
+      "type": "uri",
+      "uri": "https://standards.ieee.org/standard/index.html"
+    },
+    {
+      "source_page": 6,
+      "source_kind": 2,
+      "rectangle": [
+        362.820007,
+        70.679993,
+        415.920013,
+        81.659973
+      ],
+      "type": "uri",
+      "uri": "https://ieeexplore.ieee.org/browse/standards/collection/ieee/"
+    },
+    {
+      "source_page": 6,
+      "source_kind": 2,
+      "rectangle": [
+        306.480011,
+        133.679993,
+        398.940002,
+        146.640015
+      ],
+      "type": "uri",
+      "uri": "https://standards.ieee.org/about/sasb/patcom/materials.html"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        98.640015,
+        522.0,
+        109.679993
+      ],
+      "type": "goto",
+      "target_page": 12,
+      "target_point": [
+        90.0,
+        502.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4660"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        122.640015,
+        522.0,
+        133.679993
+      ],
+      "type": "goto",
+      "target_page": 12,
+      "target_point": [
+        90.0,
+        470.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4662"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        134.640015,
+        522.0,
+        145.679993
+      ],
+      "type": "goto",
+      "target_page": 12,
+      "target_point": [
+        90.0,
+        391.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4665"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        146.640015,
+        522.0,
+        157.679993
+      ],
+      "type": "goto",
+      "target_page": 12,
+      "target_point": [
+        90.0,
+        300.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.290858"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        158.640015,
+        522.0,
+        169.679993
+      ],
+      "type": "goto",
+      "target_page": 13,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4668"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        182.640015,
+        522.0,
+        193.679993
+      ],
+      "type": "goto",
+      "target_page": 15,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.189265"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        206.640015,
+        522.0,
+        217.679993
+      ],
+      "type": "goto",
+      "target_page": 15,
+      "target_point": [
+        90.0,
+        422.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4702"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        230.640015,
+        522.0,
+        241.679993
+      ],
+      "type": "goto",
+      "target_page": 15,
+      "target_point": [
+        90.0,
+        390.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.193073"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        242.640015,
+        522.0,
+        253.679993
+      ],
+      "type": "goto",
+      "target_page": 30,
+      "target_point": [
+        90.0,
+        542.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.227817"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        254.640015,
+        522.0,
+        265.679993
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        278.640015,
+        522.0,
+        289.679993
+      ],
+      "type": "goto",
+      "target_page": 32,
+      "target_point": [
+        90.0,
+        591.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5033"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        302.640015,
+        522.0,
+        313.679993
+      ],
+      "type": "goto",
+      "target_page": 33,
+      "target_point": [
+        90.0,
+        253.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5057"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        314.640015,
+        522.0,
+        325.679993
+      ],
+      "type": "goto",
+      "target_page": 38,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5224"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        326.640015,
+        522.0,
+        337.679993
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        90.0,
+        192.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114698"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        338.640015,
+        522.0,
+        349.679993
+      ],
+      "type": "goto",
+      "target_page": 45,
+      "target_point": [
+        90.0,
+        558.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.279029"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        350.640015,
+        522.0,
+        361.679993
+      ],
+      "type": "goto",
+      "target_page": 46,
+      "target_point": [
+        90.0,
+        364.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6060"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        362.640015,
+        522.0,
+        373.679993
+      ],
+      "type": "goto",
+      "target_page": 51,
+      "target_point": [
+        90.0,
+        488.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6541"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        374.640015,
+        522.0,
+        385.679993
+      ],
+      "type": "goto",
+      "target_page": 53,
+      "target_point": [
+        90.0,
+        378.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6747"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        386.640015,
+        522.0,
+        397.679993
+      ],
+      "type": "goto",
+      "target_page": 56,
+      "target_point": [
+        90.0,
+        145.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6888"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        398.640015,
+        522.0,
+        409.679993
+      ],
+      "type": "goto",
+      "target_page": 58,
+      "target_point": [
+        90.0,
+        252.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6969"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        410.640015,
+        522.0,
+        421.679993
+      ],
+      "type": "goto",
+      "target_page": 60,
+      "target_point": [
+        90.0,
+        394.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.7117"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        422.640015,
+        522.0,
+        433.679993
+      ],
+      "type": "goto",
+      "target_page": 61,
+      "target_point": [
+        90.0,
+        175.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101792"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        434.640015,
+        522.0,
+        445.679993
+      ],
+      "type": "goto",
+      "target_page": 63,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.121209"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        446.640015,
+        522.0,
+        457.679993
+      ],
+      "type": "goto",
+      "target_page": 64,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.121231"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        458.640015,
+        522.0,
+        469.679993
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        470.640015,
+        522.0,
+        481.679993
+      ],
+      "type": "goto",
+      "target_page": 85,
+      "target_point": [
+        90.0,
+        338.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9800"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        494.700012,
+        522.0,
+        505.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9859"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        518.700012,
+        522.0,
+        529.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        692.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9862"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        530.700012,
+        522.0,
+        541.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        589.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9865"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        542.700012,
+        522.0,
+        553.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        203.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.104186"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        554.700012,
+        522.0,
+        565.679993
+      ],
+      "type": "goto",
+      "target_page": 88,
+      "target_point": [
+        90.0,
+        453.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.10028"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        566.700012,
+        522.0,
+        577.679993
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        614.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.10139"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        590.700012,
+        522.0,
+        601.679993
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        181.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.112105"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        614.700012,
+        522.0,
+        625.679993
+      ],
+      "type": "goto",
+      "target_page": 90,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.112116"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        626.700012,
+        522.0,
+        637.679993
+      ],
+      "type": "goto",
+      "target_page": 90,
+      "target_point": [
+        90.0,
+        353.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.205560"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        638.700012,
+        522.0,
+        649.679993
+      ],
+      "type": "goto",
+      "target_page": 94,
+      "target_point": [
+        90.0,
+        274.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.153962"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        662.700012,
+        522.0,
+        673.679993
+      ],
+      "type": "goto",
+      "target_page": 100,
+      "target_point": [
+        90.0,
+        575.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.209411"
+    },
+    {
+      "source_page": 10,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        686.700012,
+        522.0,
+        697.679993
+      ],
+      "type": "goto",
+      "target_page": 105,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136160"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        69.840027,
+        522.0,
+        81.0
+      ],
+      "type": "goto",
+      "target_page": 106,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.33451"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        93.840027,
+        522.0,
+        105.0
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136924"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        117.840027,
+        522.0,
+        129.0
+      ],
+      "type": "goto",
+      "target_page": 113,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136925"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        141.840027,
+        522.0,
+        153.0
+      ],
+      "type": "goto",
+      "target_page": 115,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.10303"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        165.840027,
+        522.0,
+        177.0
+      ],
+      "type": "goto",
+      "target_page": 116,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.133434"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        189.840027,
+        522.0,
+        201.0
+      ],
+      "type": "goto",
+      "target_page": 117,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.133374"
+    },
+    {
+      "source_page": 11,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        213.840027,
+        522.0,
+        225.0
+      ],
+      "type": "goto",
+      "target_page": 122,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.150237"
+    },
+    {
+      "source_page": 14,
+      "source_kind": 2,
+      "rectangle": [
+        253.860001,
+        697.140015,
+        335.160004,
+        707.700012
+      ],
+      "type": "uri",
+      "uri": "http://dictionary.ieee.org/"
+    },
+    {
+      "source_page": 14,
+      "source_kind": 4,
+      "rectangle": [
+        270.720001,
+        610.02002,
+        305.399994,
+        621.359985
+      ],
+      "type": "goto",
+      "target_page": 15,
+      "target_point": [
+        90.0,
+        422.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.4702"
+    },
+    {
+      "source_page": 15,
+      "source_kind": 2,
+      "rectangle": [
+        274.140015,
+        697.140015,
+        355.440002,
+        707.700012
+      ],
+      "type": "uri",
+      "uri": "http://dictionary.ieee.org/"
+    },
+    {
+      "source_page": 33,
+      "source_kind": 4,
+      "rectangle": [
+        460.320007,
+        342.660004,
+        477.779999,
+        353.640015
+      ],
+      "type": "goto",
+      "target_page": 85,
+      "target_point": [
+        90.0,
+        338.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9800"
+    },
+    {
+      "source_page": 33,
+      "source_kind": 4,
+      "rectangle": [
+        396.480011,
+        494.700012,
+        431.160004,
+        505.679993
+      ],
+      "type": "goto",
+      "target_page": 100,
+      "target_point": [
+        90.0,
+        575.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.209411"
+    },
+    {
+      "source_page": 33,
+      "source_kind": 4,
+      "rectangle": [
+        349.559998,
+        505.679993,
+        356.76001,
+        516.660034
+      ],
+      "type": "goto",
+      "target_page": 105,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136160"
+    },
+    {
+      "source_page": 34,
+      "source_kind": 4,
+      "rectangle": [
+        264.0,
+        138.0,
+        294.299988,
+        149.340027
+      ],
+      "type": "goto",
+      "target_page": 34,
+      "target_point": [
+        90.0,
+        567.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.206746"
+    },
+    {
+      "source_page": 34,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        192.0,
+        120.239998,
+        203.340027
+      ],
+      "type": "named",
+      "name": "G3.135455"
+    },
+    {
+      "source_page": 34,
+      "source_kind": 4,
+      "rectangle": [
+        315.660004,
+        192.0,
+        345.899994,
+        203.340027
+      ],
+      "type": "goto",
+      "target_page": 34,
+      "target_point": [
+        90.0,
+        567.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.206746"
+    },
+    {
+      "source_page": 37,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        154.679993,
+        120.360001,
+        165.659973
+      ],
+      "type": "goto",
+      "target_page": 37,
+      "target_point": [
+        90.0,
+        581.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.203152"
+    },
+    {
+      "source_page": 39,
+      "source_kind": 4,
+      "rectangle": [
+        240.960007,
+        290.640015,
+        271.019989,
+        301.679993
+      ],
+      "type": "goto",
+      "target_page": 40,
+      "target_point": [
+        84.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.100077"
+    },
+    {
+      "source_page": 39,
+      "source_kind": 4,
+      "rectangle": [
+        389.76001,
+        374.640015,
+        409.799988,
+        385.679993
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 41,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        439.679993,
+        120.0,
+        450.660004
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        89.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114330"
+    },
+    {
+      "source_page": 42,
+      "source_kind": 4,
+      "rectangle": [
+        276.299988,
+        568.02002,
+        306.299988,
+        579.359985
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        89.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114330"
+    },
+    {
+      "source_page": 42,
+      "source_kind": 4,
+      "rectangle": [
+        420.600006,
+        579.660034,
+        438.119995,
+        591.359985
+      ],
+      "type": "goto",
+      "target_page": 85,
+      "target_point": [
+        90.0,
+        338.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9800"
+    },
+    {
+      "source_page": 43,
+      "source_kind": 4,
+      "rectangle": [
+        143.039993,
+        360.660004,
+        173.460007,
+        371.640015
+      ],
+      "type": "goto",
+      "target_page": 43,
+      "target_point": [
+        90.0,
+        315.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101280"
+    },
+    {
+      "source_page": 43,
+      "source_kind": 4,
+      "rectangle": [
+        159.360001,
+        444.660004,
+        179.399994,
+        455.640015
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 44,
+      "source_kind": 4,
+      "rectangle": [
+        127.980003,
+        550.02002,
+        159.720001,
+        561.359985
+      ],
+      "type": "goto",
+      "target_page": 45,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.20423"
+    },
+    {
+      "source_page": 44,
+      "source_kind": 4,
+      "rectangle": [
+        489.359985,
+        538.02002,
+        509.339996,
+        549.359985
+      ],
+      "type": "goto",
+      "target_page": 41,
+      "target_point": [
+        90.0,
+        384.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5418"
+    },
+    {
+      "source_page": 46,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        304.019989,
+        120.360001,
+        315.299988
+      ],
+      "type": "goto",
+      "target_page": 46,
+      "target_point": [
+        90.0,
+        441.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.279416"
+    },
+    {
+      "source_page": 46,
+      "source_kind": 4,
+      "rectangle": [
+        471.480011,
+        304.019989,
+        491.459991,
+        315.299988
+      ],
+      "type": "goto",
+      "target_page": 41,
+      "target_point": [
+        90.0,
+        384.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5418"
+    },
+    {
+      "source_page": 47,
+      "source_kind": 4,
+      "rectangle": [
+        259.679993,
+        548.700012,
+        279.660004,
+        559.679993
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 47,
+      "source_kind": 4,
+      "rectangle": [
+        383.700012,
+        632.700012,
+        408.660004,
+        643.679993
+      ],
+      "type": "goto",
+      "target_page": 73,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.8363"
+    },
+    {
+      "source_page": 47,
+      "source_kind": 4,
+      "rectangle": [
+        196.440002,
+        632.700012,
+        213.960007,
+        643.679993
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 49,
+      "source_kind": 4,
+      "rectangle": [
+        501.119995,
+        638.700012,
+        518.580017,
+        649.679993
+      ],
+      "type": "goto",
+      "target_page": 61,
+      "target_point": [
+        90.0,
+        175.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101792"
+    },
+    {
+      "source_page": 49,
+      "source_kind": 4,
+      "rectangle": [
+        268.26001,
+        546.0,
+        280.799988,
+        557.339966
+      ],
+      "type": "goto",
+      "target_page": 53,
+      "target_point": [
+        90.0,
+        378.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6747"
+    },
+    {
+      "source_page": 50,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        261.659973,
+        125.040001,
+        273.299988
+      ],
+      "type": "named",
+      "name": "G3.443963"
+    },
+    {
+      "source_page": 50,
+      "source_kind": 4,
+      "rectangle": [
+        214.440002,
+        105.960022,
+        249.600006,
+        117.299988
+      ],
+      "type": "named",
+      "name": "G3.193115"
+    },
+    {
+      "source_page": 50,
+      "source_kind": 4,
+      "rectangle": [
+        420.179993,
+        261.659973,
+        440.160004,
+        273.299988
+      ],
+      "type": "goto",
+      "target_page": 41,
+      "target_point": [
+        90.0,
+        384.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5418"
+    },
+    {
+      "source_page": 50,
+      "source_kind": 4,
+      "rectangle": [
+        239.580002,
+        286.019989,
+        257.040009,
+        297.299988
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 51,
+      "source_kind": 4,
+      "rectangle": [
+        463.920013,
+        283.679993,
+        481.380005,
+        294.660004
+      ],
+      "type": "goto",
+      "target_page": 85,
+      "target_point": [
+        90.0,
+        338.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9800"
+    },
+    {
+      "source_page": 51,
+      "source_kind": 4,
+      "rectangle": [
+        294.0,
+        283.679993,
+        329.279999,
+        294.660004
+      ],
+      "type": "named",
+      "name": "G3.443963"
+    },
+    {
+      "source_page": 51,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        195.0,
+        109.980003,
+        206.340027
+      ],
+      "type": "goto",
+      "target_page": 53,
+      "target_point": [
+        90.0,
+        651.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6665"
+    },
+    {
+      "source_page": 51,
+      "source_kind": 4,
+      "rectangle": [
+        169.380005,
+        636.0,
+        204.660004,
+        647.339966
+      ],
+      "type": "named",
+      "name": "G3.443329"
+    },
+    {
+      "source_page": 52,
+      "source_kind": 4,
+      "rectangle": [
+        231.479996,
+        331.980011,
+        251.460007,
+        343.320007
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 52,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        487.980011,
+        102.480003,
+        499.320007
+      ],
+      "type": "goto",
+      "target_page": 53,
+      "target_point": [
+        90.0,
+        378.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.6747"
+    },
+    {
+      "source_page": 52,
+      "source_kind": 4,
+      "rectangle": [
+        501.119995,
+        568.02002,
+        518.580017,
+        579.359985
+      ],
+      "type": "goto",
+      "target_page": 61,
+      "target_point": [
+        90.0,
+        175.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101792"
+    },
+    {
+      "source_page": 52,
+      "source_kind": 4,
+      "rectangle": [
+        141.059998,
+        432.0,
+        158.580002,
+        443.339996
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 53,
+      "source_kind": 4,
+      "rectangle": [
+        219.300003,
+        214.679993,
+        258.720001,
+        225.659973
+      ],
+      "type": "goto",
+      "target_page": 56,
+      "target_point": [
+        90.0,
+        507.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.387475"
+    },
+    {
+      "source_page": 53,
+      "source_kind": 4,
+      "rectangle": [
+        144.119995,
+        178.679993,
+        164.160004,
+        189.659973
+      ],
+      "type": "goto",
+      "target_page": 41,
+      "target_point": [
+        90.0,
+        384.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5418"
+    },
+    {
+      "source_page": 53,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        166.679993,
+        126.599998,
+        177.659973
+      ],
+      "type": "named",
+      "name": "G3.443457"
+    },
+    {
+      "source_page": 54,
+      "source_kind": 4,
+      "rectangle": [
+        381.480011,
+        520.02002,
+        416.76001,
+        531.359985
+      ],
+      "type": "goto",
+      "target_page": 54,
+      "target_point": [
+        85.0,
+        239.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101198"
+    },
+    {
+      "source_page": 55,
+      "source_kind": 4,
+      "rectangle": [
+        193.380005,
+        82.679993,
+        213.360001,
+        93.659973
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 55,
+      "source_kind": 4,
+      "rectangle": [
+        265.980011,
+        465.0,
+        272.640015,
+        476.339996
+      ],
+      "type": "goto",
+      "target_page": 106,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.33451"
+    },
+    {
+      "source_page": 55,
+      "source_kind": 4,
+      "rectangle": [
+        493.26001,
+        139.679993,
+        510.779999,
+        150.659973
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 56,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        124.97998,
+        126.18,
+        136.320007
+      ],
+      "type": "goto",
+      "target_page": 56,
+      "target_point": [
+        90.0,
+        507.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.387475"
+    },
+    {
+      "source_page": 57,
+      "source_kind": 4,
+      "rectangle": [
+        412.859985,
+        688.02002,
+        448.079987,
+        699.359985
+      ],
+      "type": "goto",
+      "target_page": 58,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.23561"
+    },
+    {
+      "source_page": 58,
+      "source_kind": 4,
+      "rectangle": [
+        502.019989,
+        210.0,
+        519.47998,
+        221.340027
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 58,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        403.980011,
+        125.279999,
+        415.320007
+      ],
+      "type": "goto",
+      "target_page": 58,
+      "target_point": [
+        90.0,
+        343.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.122678"
+    },
+    {
+      "source_page": 58,
+      "source_kind": 4,
+      "rectangle": [
+        470.579987,
+        655.02002,
+        505.859985,
+        666.359985
+      ],
+      "type": "goto",
+      "target_page": 59,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.387775"
+    },
+    {
+      "source_page": 59,
+      "source_kind": 4,
+      "rectangle": [
+        199.380005,
+        381.0,
+        216.899994,
+        392.339996
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 59,
+      "source_kind": 4,
+      "rectangle": [
+        420.899994,
+        424.019989,
+        456.299988,
+        435.359985
+      ],
+      "type": "goto",
+      "target_page": 59,
+      "target_point": [
+        90.0,
+        324.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.324350"
+    },
+    {
+      "source_page": 60,
+      "source_kind": 4,
+      "rectangle": [
+        100.260002,
+        537.0,
+        135.539993,
+        548.339966
+      ],
+      "type": "goto",
+      "target_page": 60,
+      "target_point": [
+        90.0,
+        222.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.24238"
+    },
+    {
+      "source_page": 60,
+      "source_kind": 4,
+      "rectangle": [
+        395.100006,
+        678.0,
+        415.079987,
+        689.339966
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 61,
+      "source_kind": 4,
+      "rectangle": [
+        210.0,
+        106.679993,
+        227.520004,
+        117.659973
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        597.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.211454"
+    },
+    {
+      "source_page": 62,
+      "source_kind": 4,
+      "rectangle": [
+        406.980011,
+        315.0,
+        426.959991,
+        326.339996
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 62,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        145.97998,
+        125.519997,
+        157.320007
+      ],
+      "type": "goto",
+      "target_page": 62,
+      "target_point": [
+        90.0,
+        602.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.134889"
+    },
+    {
+      "source_page": 63,
+      "source_kind": 4,
+      "rectangle": [
+        458.339996,
+        213.659973,
+        493.619995,
+        224.640015
+      ],
+      "type": "goto",
+      "target_page": 63,
+      "target_point": [
+        90.0,
+        546.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.121380"
+    },
+    {
+      "source_page": 63,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        503.700012,
+        125.400002,
+        514.679993
+      ],
+      "type": "goto",
+      "target_page": 63,
+      "target_point": [
+        90.0,
+        244.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.121424"
+    },
+    {
+      "source_page": 63,
+      "source_kind": 4,
+      "rectangle": [
+        352.559998,
+        351.660004,
+        372.540009,
+        362.640015
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 64,
+      "source_kind": 4,
+      "rectangle": [
+        239.339996,
+        475.019989,
+        274.619995,
+        486.359985
+      ],
+      "type": "goto",
+      "target_page": 64,
+      "target_point": [
+        90.0,
+        284.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.24637"
+    },
+    {
+      "source_page": 66,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        643.02002,
+        125.580002,
+        654.359985
+      ],
+      "type": "named",
+      "name": "G3.392354"
+    },
+    {
+      "source_page": 67,
+      "source_kind": 4,
+      "rectangle": [
+        235.740005,
+        81.659973,
+        260.700012,
+        92.640015
+      ],
+      "type": "goto",
+      "target_page": 66,
+      "target_point": [
+        90.0,
+        291.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.7361"
+    },
+    {
+      "source_page": 67,
+      "source_kind": 4,
+      "rectangle": [
+        303.720001,
+        584.940002,
+        323.700012,
+        595.919983
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 67,
+      "source_kind": 4,
+      "rectangle": [
+        317.399994,
+        298.920013,
+        342.420013,
+        309.959991
+      ],
+      "type": "goto",
+      "target_page": 67,
+      "target_point": [
+        90.0,
+        354.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101991"
+    },
+    {
+      "source_page": 67,
+      "source_kind": 4,
+      "rectangle": [
+        379.679993,
+        298.920013,
+        404.700012,
+        309.959991
+      ],
+      "type": "goto",
+      "target_page": 75,
+      "target_point": [
+        90.0,
+        161.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.8790"
+    },
+    {
+      "source_page": 69,
+      "source_kind": 4,
+      "rectangle": [
+        391.140015,
+        164.640015,
+        426.540009,
+        175.679993
+      ],
+      "type": "goto",
+      "target_page": 69,
+      "target_point": [
+        90.0,
+        584.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.25089"
+    },
+    {
+      "source_page": 69,
+      "source_kind": 4,
+      "rectangle": [
+        401.519989,
+        662.700012,
+        436.73999,
+        673.679993
+      ],
+      "type": "goto",
+      "target_page": 70,
+      "target_point": [
+        89.0,
+        677.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.192047"
+    },
+    {
+      "source_page": 70,
+      "source_kind": 4,
+      "rectangle": [
+        254.339996,
+        385.019989,
+        274.320007,
+        396.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 70,
+      "source_kind": 4,
+      "rectangle": [
+        153.600006,
+        325.73999,
+        170.039993,
+        337.679993
+      ],
+      "type": "goto",
+      "target_page": 122,
+      "target_point": [
+        90.0,
+        515.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.221618"
+    },
+    {
+      "source_page": 71,
+      "source_kind": 4,
+      "rectangle": [
+        189.240005,
+        439.920013,
+        224.460007,
+        450.899994
+      ],
+      "type": "goto",
+      "target_page": 71,
+      "target_point": [
+        89.0,
+        255.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.102027"
+    },
+    {
+      "source_page": 71,
+      "source_kind": 4,
+      "rectangle": [
+        275.700012,
+        504.899994,
+        295.679993,
+        515.880005
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 72,
+      "source_kind": 4,
+      "rectangle": [
+        375.359985,
+        193.02002,
+        410.579987,
+        204.299988
+      ],
+      "type": "named",
+      "name": "G3.445846"
+    },
+    {
+      "source_page": 72,
+      "source_kind": 4,
+      "rectangle": [
+        353.399994,
+        81.0,
+        373.380005,
+        92.340027
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 73,
+      "source_kind": 4,
+      "rectangle": [
+        234.539993,
+        105.659973,
+        270.119995,
+        116.640015
+      ],
+      "type": "goto",
+      "target_page": 73,
+      "target_point": [
+        90.0,
+        610.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.209771"
+    },
+    {
+      "source_page": 73,
+      "source_kind": 4,
+      "rectangle": [
+        348.359985,
+        696.660034,
+        383.519989,
+        707.700012
+      ],
+      "type": "goto",
+      "target_page": 74,
+      "target_point": [
+        88.0,
+        656.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.28252"
+    },
+    {
+      "source_page": 73,
+      "source_kind": 4,
+      "rectangle": [
+        225.179993,
+        349.679993,
+        245.160004,
+        360.660004
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 73,
+      "source_kind": 4,
+      "rectangle": [
+        480.540009,
+        643.679993,
+        510.540009,
+        654.660034
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 74,
+      "source_kind": 4,
+      "rectangle": [
+        254.339996,
+        699.0,
+        274.320007,
+        710.339966
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 74,
+      "source_kind": 4,
+      "rectangle": [
+        135.479996,
+        517.02002,
+        170.759995,
+        528.359985
+      ],
+      "type": "goto",
+      "target_page": 74,
+      "target_point": [
+        90.0,
+        242.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.28509"
+    },
+    {
+      "source_page": 75,
+      "source_kind": 4,
+      "rectangle": [
+        394.679993,
+        358.679993,
+        431.040009,
+        369.660004
+      ],
+      "type": "goto",
+      "target_page": 75,
+      "target_point": [
+        90.0,
+        341.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.29716"
+    },
+    {
+      "source_page": 75,
+      "source_kind": 4,
+      "rectangle": [
+        275.700012,
+        82.679993,
+        295.679993,
+        93.659973
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 75,
+      "source_kind": 4,
+      "rectangle": [
+        281.160004,
+        274.679993,
+        311.160004,
+        285.660004
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 75,
+      "source_kind": 4,
+      "rectangle": [
+        178.800003,
+        298.679993,
+        208.800003,
+        309.660004
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 76,
+      "source_kind": 4,
+      "rectangle": [
+        315.420013,
+        69.960022,
+        345.420013,
+        81.299988
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 76,
+      "source_kind": 4,
+      "rectangle": [
+        350.399994,
+        69.960022,
+        385.679993,
+        81.299988
+      ],
+      "type": "goto",
+      "target_page": 76,
+      "target_point": [
+        89.0,
+        677.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.102748"
+    },
+    {
+      "source_page": 76,
+      "source_kind": 4,
+      "rectangle": [
+        254.339996,
+        340.019989,
+        274.320007,
+        351.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 76,
+      "source_kind": 4,
+      "rectangle": [
+        275.700012,
+        376.019989,
+        295.679993,
+        387.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 76,
+      "source_kind": 4,
+      "rectangle": [
+        290.399994,
+        580.02002,
+        310.380005,
+        591.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 77,
+      "source_kind": 4,
+      "rectangle": [
+        227.940002,
+        154.679993,
+        257.940002,
+        165.659973
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 77,
+      "source_kind": 4,
+      "rectangle": [
+        421.200012,
+        130.679993,
+        451.200012,
+        141.659973
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        90.0,
+        250.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9087"
+    },
+    {
+      "source_page": 77,
+      "source_kind": 4,
+      "rectangle": [
+        100.019997,
+        571.97998,
+        135.0,
+        583.320007
+      ],
+      "type": "named",
+      "name": "G3.445846"
+    },
+    {
+      "source_page": 77,
+      "source_kind": 4,
+      "rectangle": [
+        417.0,
+        631.97998,
+        452.160004,
+        643.320007
+      ],
+      "type": "named",
+      "name": "G3.445846"
+    },
+    {
+      "source_page": 78,
+      "source_kind": 4,
+      "rectangle": [
+        485.700012,
+        91.97998,
+        522.0,
+        103.320007
+      ],
+      "type": "goto",
+      "target_page": 78,
+      "target_point": [
+        89.0,
+        463.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.232707"
+    },
+    {
+      "source_page": 78,
+      "source_kind": 4,
+      "rectangle": [
+        254.339996,
+        139.97998,
+        274.320007,
+        151.320007
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 78,
+      "source_kind": 4,
+      "rectangle": [
+        191.339996,
+        603.0,
+        228.779999,
+        614.339966
+      ],
+      "type": "goto",
+      "target_page": 79,
+      "target_point": [
+        90.0,
+        223.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9155"
+    },
+    {
+      "source_page": 78,
+      "source_kind": 4,
+      "rectangle": [
+        269.640015,
+        603.0,
+        307.079987,
+        614.339966
+      ],
+      "type": "goto",
+      "target_page": 83,
+      "target_point": [
+        90.0,
+        151.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9474"
+    },
+    {
+      "source_page": 79,
+      "source_kind": 4,
+      "rectangle": [
+        425.339996,
+        654.660034,
+        475.559998,
+        667.679993
+      ],
+      "type": "goto",
+      "target_page": 79,
+      "target_point": [
+        90.0,
+        117.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9158"
+    },
+    {
+      "source_page": 79,
+      "source_kind": 4,
+      "rectangle": [
+        387.839996,
+        187.679993,
+        423.059998,
+        198.659973
+      ],
+      "type": "goto",
+      "target_page": 79,
+      "target_point": [
+        90.0,
+        572.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.264643"
+    },
+    {
+      "source_page": 80,
+      "source_kind": 4,
+      "rectangle": [
+        142.199997,
+        653.160034,
+        192.419998,
+        664.5
+      ],
+      "type": "goto",
+      "target_page": 80,
+      "target_point": [
+        90.0,
+        116.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9280"
+    },
+    {
+      "source_page": 83,
+      "source_kind": 4,
+      "rectangle": [
+        289.320007,
+        200.700012,
+        339.540009,
+        213.659973
+      ],
+      "type": "goto",
+      "target_page": 83,
+      "target_point": [
+        90.0,
+        571.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.103074"
+    },
+    {
+      "source_page": 84,
+      "source_kind": 4,
+      "rectangle": [
+        161.639999,
+        93.659973,
+        211.860001,
+        105.299988
+      ],
+      "type": "goto",
+      "target_page": 84,
+      "target_point": [
+        90.0,
+        675.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.9477"
+    },
+    {
+      "source_page": 85,
+      "source_kind": 4,
+      "rectangle": [
+        357.059998,
+        668.52002,
+        392.279999,
+        679.859985
+      ],
+      "type": "goto",
+      "target_page": 86,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32231"
+    },
+    {
+      "source_page": 85,
+      "source_kind": 4,
+      "rectangle": [
+        275.700012,
+        705.179993,
+        295.679993,
+        716.160034
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        437.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5009"
+    },
+    {
+      "source_page": 86,
+      "source_kind": 4,
+      "rectangle": [
+        352.73999,
+        295.019989,
+        384.359985,
+        306.299988
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        89.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114330"
+    },
+    {
+      "source_page": 86,
+      "source_kind": 4,
+      "rectangle": [
+        390.779999,
+        295.019989,
+        427.380005,
+        306.299988
+      ],
+      "type": "named",
+      "name": "G3.443963"
+    },
+    {
+      "source_page": 86,
+      "source_kind": 4,
+      "rectangle": [
+        452.100006,
+        295.019989,
+        488.700012,
+        306.299988
+      ],
+      "type": "goto",
+      "target_page": 56,
+      "target_point": [
+        90.0,
+        507.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.387475"
+    },
+    {
+      "source_page": 86,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        295.019989,
+        126.599998,
+        306.299988
+      ],
+      "type": "goto",
+      "target_page": 86,
+      "target_point": [
+        90.0,
+        452.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32291"
+    },
+    {
+      "source_page": 87,
+      "source_kind": 4,
+      "rectangle": [
+        214.080002,
+        242.640015,
+        249.360001,
+        253.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        517.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32410"
+    },
+    {
+      "source_page": 87,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        443.640015,
+        125.459999,
+        454.679993
+      ],
+      "type": "goto",
+      "target_page": 87,
+      "target_point": [
+        90.0,
+        304.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.104166"
+    },
+    {
+      "source_page": 87,
+      "source_kind": 4,
+      "rectangle": [
+        197.160004,
+        627.660034,
+        232.380005,
+        639.660034
+      ],
+      "type": "goto",
+      "target_page": 88,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32478"
+    },
+    {
+      "source_page": 87,
+      "source_kind": 4,
+      "rectangle": [
+        205.440002,
+        139.679993,
+        240.360001,
+        150.659973
+      ],
+      "type": "goto",
+      "target_page": 32,
+      "target_point": [
+        90.0,
+        591.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5033"
+    },
+    {
+      "source_page": 87,
+      "source_kind": 4,
+      "rectangle": [
+        216.839996,
+        455.640015,
+        247.080002,
+        466.679993
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        89.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114330"
+    },
+    {
+      "source_page": 88,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        160.02002,
+        125.279999,
+        171.299988
+      ],
+      "type": "goto",
+      "target_page": 88,
+      "target_point": [
+        90.0,
+        587.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32573"
+    },
+    {
+      "source_page": 88,
+      "source_kind": 4,
+      "rectangle": [
+        341.279999,
+        378.0,
+        376.920013,
+        389.339996
+      ],
+      "type": "goto",
+      "target_page": 88,
+      "target_point": [
+        90.0,
+        369.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32643"
+    },
+    {
+      "source_page": 88,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        624.0,
+        125.940002,
+        635.339966
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32739"
+    },
+    {
+      "source_page": 88,
+      "source_kind": 4,
+      "rectangle": [
+        249.839996,
+        172.02002,
+        280.140015,
+        183.299988
+      ],
+      "type": "goto",
+      "target_page": 45,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.20423"
+    },
+    {
+      "source_page": 88,
+      "source_kind": 4,
+      "rectangle": [
+        231.539993,
+        636.0,
+        266.820007,
+        647.339966
+      ],
+      "type": "named",
+      "name": "G3.443963"
+    },
+    {
+      "source_page": 89,
+      "source_kind": 4,
+      "rectangle": [
+        377.100006,
+        217.02002,
+        414.179993,
+        228.299988
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        530.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32848"
+    },
+    {
+      "source_page": 89,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        451.019989,
+        125.400002,
+        462.359985
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        296.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.32897"
+    },
+    {
+      "source_page": 89,
+      "source_kind": 4,
+      "rectangle": [
+        252.899994,
+        463.019989,
+        288.179993,
+        474.359985
+      ],
+      "type": "named",
+      "name": "G3.443457"
+    },
+    {
+      "source_page": 90,
+      "source_kind": 4,
+      "rectangle": [
+        382.980011,
+        583.02002,
+        413.220001,
+        594.359985
+      ],
+      "type": "goto",
+      "target_page": 34,
+      "target_point": [
+        90.0,
+        567.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.206746"
+    },
+    {
+      "source_page": 90,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        412.019989,
+        125.220001,
+        423.359985
+      ],
+      "type": "goto",
+      "target_page": 115,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.10303"
+    },
+    {
+      "source_page": 90,
+      "source_kind": 4,
+      "rectangle": [
+        264.600006,
+        208.02002,
+        277.140015,
+        219.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 90,
+      "source_kind": 4,
+      "rectangle": [
+        354.899994,
+        568.02002,
+        367.380005,
+        579.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 90,
+      "source_kind": 4,
+      "rectangle": [
+        361.920013,
+        664.02002,
+        374.399994,
+        675.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 91,
+      "source_kind": 4,
+      "rectangle": [
+        374.700012,
+        111.960022,
+        387.179993,
+        123.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 91,
+      "source_kind": 4,
+      "rectangle": [
+        367.26001,
+        325.019989,
+        379.799988,
+        336.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 91,
+      "source_kind": 4,
+      "rectangle": [
+        391.140015,
+        580.02002,
+        403.679993,
+        591.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 92,
+      "source_kind": 4,
+      "rectangle": [
+        354.899994,
+        123.960022,
+        367.380005,
+        135.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 92,
+      "source_kind": 4,
+      "rectangle": [
+        428.459991,
+        430.019989,
+        441.0,
+        441.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 92,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        565.02002,
+        391.559998,
+        576.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 92,
+      "source_kind": 4,
+      "rectangle": [
+        411.540009,
+        646.02002,
+        424.019989,
+        657.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        232.02002,
+        391.559998,
+        243.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        313.019989,
+        391.559998,
+        324.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        394.019989,
+        391.559998,
+        405.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        412.380005,
+        436.019989,
+        424.859985,
+        447.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        499.019989,
+        391.559998,
+        510.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 93,
+      "source_kind": 4,
+      "rectangle": [
+        379.079987,
+        661.02002,
+        391.559998,
+        672.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 94,
+      "source_kind": 4,
+      "rectangle": [
+        410.399994,
+        175.02002,
+        422.940002,
+        186.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 94,
+      "source_kind": 4,
+      "rectangle": [
+        387.959991,
+        190.02002,
+        400.440002,
+        201.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 94,
+      "source_kind": 4,
+      "rectangle": [
+        410.399994,
+        310.019989,
+        422.940002,
+        321.299988
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 94,
+      "source_kind": 4,
+      "rectangle": [
+        417.359985,
+        325.019989,
+        429.839996,
+        336.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 94,
+      "source_kind": 4,
+      "rectangle": [
+        410.160004,
+        436.019989,
+        422.640015,
+        447.359985
+      ],
+      "type": "goto",
+      "target_page": 31,
+      "target_point": [
+        90.0,
+        499.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5007"
+    },
+    {
+      "source_page": 95,
+      "source_kind": 4,
+      "rectangle": [
+        364.980011,
+        250.679993,
+        400.079987,
+        261.659973
+      ],
+      "type": "goto",
+      "target_page": 95,
+      "target_point": [
+        90.0,
+        380.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.225893"
+    },
+    {
+      "source_page": 99,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        625.02002,
+        126.540001,
+        636.359985
+      ],
+      "type": "goto",
+      "target_page": 100,
+      "target_point": [
+        90.0,
+        723.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.209357"
+    },
+    {
+      "source_page": 100,
+      "source_kind": 4,
+      "rectangle": [
+        219.479996,
+        548.099976,
+        254.820007,
+        559.440002
+      ],
+      "type": "goto",
+      "target_page": 101,
+      "target_point": [
+        90.0,
+        701.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136694"
+    },
+    {
+      "source_page": 100,
+      "source_kind": 4,
+      "rectangle": [
+        417.179993,
+        536.099976,
+        454.140015,
+        547.440002
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136924"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        410.339996,
+        395.519989,
+        421.559998,
+        405.480011
+      ],
+      "type": "goto",
+      "target_page": 42,
+      "target_point": [
+        90.0,
+        192.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.114698"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        410.339996,
+        236.340027,
+        421.559998,
+        246.659973
+      ],
+      "type": "goto",
+      "target_page": 38,
+      "target_point": [
+        90.0,
+        724.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5224"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        410.339996,
+        157.5,
+        421.559998,
+        167.52002
+      ],
+      "type": "goto",
+      "target_page": 33,
+      "target_point": [
+        90.0,
+        253.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.5057"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        157.5,
+        495.059998,
+        167.52002
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        372.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.137453"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        236.52002,
+        495.059998,
+        246.47998
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        166.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136955"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        395.519989,
+        495.059998,
+        405.480011
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        166.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136955"
+    },
+    {
+      "source_page": 101,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        584.52002,
+        495.059998,
+        594.47998
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        166.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136955"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        617.52002,
+        495.059998,
+        627.47998
+      ],
+      "type": "goto",
+      "target_page": 112,
+      "target_point": [
+        90.0,
+        329.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.137057"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        558.47998,
+        495.059998,
+        568.5
+      ],
+      "type": "goto",
+      "target_page": 111,
+      "target_point": [
+        90.0,
+        212.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.137042"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        499.5,
+        495.059998,
+        509.519989
+      ],
+      "type": "goto",
+      "target_page": 111,
+      "target_point": [
+        90.0,
+        532.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.203500"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        440.519989,
+        495.059998,
+        450.480011
+      ],
+      "type": "goto",
+      "target_page": 110,
+      "target_point": [
+        90.0,
+        329.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.137008"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        194.52002,
+        495.059998,
+        204.47998
+      ],
+      "type": "goto",
+      "target_page": 108,
+      "target_point": [
+        90.0,
+        166.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136955"
+    },
+    {
+      "source_page": 102,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        253.5,
+        495.059998,
+        263.52002
+      ],
+      "type": "goto",
+      "target_page": 110,
+      "target_point": [
+        90.0,
+        652.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136993"
+    },
+    {
+      "source_page": 103,
+      "source_kind": 4,
+      "rectangle": [
+        482.339996,
+        135.47998,
+        495.059998,
+        145.5
+      ],
+      "type": "goto",
+      "target_page": 109,
+      "target_point": [
+        90.0,
+        487.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136981"
+    },
+    {
+      "source_page": 104,
+      "source_kind": 4,
+      "rectangle": [
+        410.339996,
+        224.52002,
+        421.559998,
+        234.47998
+      ],
+      "type": "goto",
+      "target_page": 94,
+      "target_point": [
+        90.0,
+        274.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.153962"
+    },
+    {
+      "source_page": 105,
+      "source_kind": 4,
+      "rectangle": [
+        382.619995,
+        158.640015,
+        400.980011,
+        169.679993
+      ],
+      "type": "named",
+      "name": "G3.189404"
+    },
+    {
+      "source_page": 106,
+      "source_kind": 4,
+      "rectangle": [
+        102.360001,
+        181.97998,
+        139.139999,
+        193.320007
+      ],
+      "type": "goto",
+      "target_page": 54,
+      "target_point": [
+        85.0,
+        239.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.101198"
+    },
+    {
+      "source_page": 108,
+      "source_kind": 4,
+      "rectangle": [
+        433.26001,
+        157.97998,
+        467.76001,
+        169.320007
+      ],
+      "type": "goto",
+      "target_page": 100,
+      "target_point": [
+        90.0,
+        575.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.209411"
+    },
+    {
+      "source_page": 110,
+      "source_kind": 4,
+      "rectangle": [
+        301.920013,
+        327.0,
+        316.079987,
+        338.339996
+      ],
+      "type": "goto",
+      "target_page": 109,
+      "target_point": [
+        90.0,
+        487.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136981"
+    },
+    {
+      "source_page": 110,
+      "source_kind": 4,
+      "rectangle": [
+        142.259995,
+        429.0,
+        156.419998,
+        440.339996
+      ],
+      "type": "goto",
+      "target_page": 109,
+      "target_point": [
+        90.0,
+        487.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136981"
+    },
+    {
+      "source_page": 110,
+      "source_kind": 4,
+      "rectangle": [
+        333.839996,
+        686.039978,
+        348.0,
+        697.320007
+      ],
+      "type": "goto",
+      "target_page": 109,
+      "target_point": [
+        90.0,
+        487.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136981"
+    },
+    {
+      "source_page": 111,
+      "source_kind": 4,
+      "rectangle": [
+        309.359985,
+        226.679993,
+        323.519989,
+        237.659973
+      ],
+      "type": "goto",
+      "target_page": 109,
+      "target_point": [
+        90.0,
+        487.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136981"
+    },
+    {
+      "source_page": 115,
+      "source_kind": 4,
+      "rectangle": [
+        166.320007,
+        182.640015,
+        201.059998,
+        193.679993
+      ],
+      "type": "goto",
+      "target_page": 89,
+      "target_point": [
+        90.0,
+        181.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.112105"
+    },
+    {
+      "source_page": 116,
+      "source_kind": 2,
+      "rectangle": [
+        90.0,
+        280.019989,
+        90.18,
+        291.299988
+      ],
+      "type": "uri",
+      "uri": "http://standards.ieee.org/downloads/1516/1516.2-2010/RestaurantSOMmodule.xml"
+    },
+    {
+      "source_page": 116,
+      "source_kind": 4,
+      "rectangle": [
+        232.979996,
+        157.97998,
+        269.100006,
+        169.320007
+      ],
+      "type": "goto",
+      "target_page": 113,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136925"
+    },
+    {
+      "source_page": 116,
+      "source_kind": 4,
+      "rectangle": [
+        312.359985,
+        193.97998,
+        348.720001,
+        205.320007
+      ],
+      "type": "goto",
+      "target_page": 113,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136925"
+    },
+    {
+      "source_page": 117,
+      "source_kind": 4,
+      "rectangle": [
+        90.0,
+        232.679993,
+        126.360001,
+        243.659973
+      ],
+      "type": "goto",
+      "target_page": 113,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136925"
+    },
+    {
+      "source_page": 117,
+      "source_kind": 4,
+      "rectangle": [
+        232.979996,
+        196.679993,
+        269.100006,
+        207.659973
+      ],
+      "type": "goto",
+      "target_page": 113,
+      "target_point": [
+        90.0,
+        725.0
+      ],
+      "zoom": 0.0,
+      "source_named_destination": "G3.136925"
+    },
+    {
+      "source_page": 123,
+      "source_kind": 2,
+      "rectangle": [
+        80.149902,
+        429.753998,
+        197.720993,
+        446.210999
+      ],
+      "type": "uri",
+      "uri": "https://twitter.com/ieeesa"
+    },
+    {
+      "source_page": 123,
+      "source_kind": 2,
+      "rectangle": [
+        80.149902,
+        446.210999,
+        216.442001,
+        463.217987
+      ],
+      "type": "uri",
+      "uri": "https://www.facebook.com/ieeesa/"
+    },
+    {
+      "source_page": 123,
+      "source_kind": 2,
+      "rectangle": [
+        80.149902,
+        463.217987,
+        248.141006,
+        480.174988
+      ],
+      "type": "uri",
+      "uri": "https://www.linkedin.com/groups/1791118/"
+    },
+    {
+      "source_page": 123,
+      "source_kind": 2,
+      "rectangle": [
+        80.149902,
+        480.174988,
+        182.979996,
+        497.182007
+      ],
+      "type": "uri",
+      "uri": "https://beyondstandards.ieee.org/"
+    },
+    {
+      "source_page": 123,
+      "source_kind": 2,
+      "rectangle": [
+        80.149902,
+        497.182007,
+        123.981003,
+        514.188965
+      ],
+      "type": "uri",
+      "uri": "https://www.youtube.com/ieeesa"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+\HLASourcePage{361}{360}
+\HLAServiceBookmark{12.11.2.1}{3}{Factory mechanism}
+\HLAServiceBookmark{12.11.2.1.1}{4}{Registration}
+\HLAServiceBookmark{12.11.2.1.2}{4}{RtiFactoryFactory}
+\HLAServiceBookmark{12.11.2.1.3}{4}{RtiFactory}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.2.1 Factory mechanism}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI implementation shall furnish an implementation of the %
+  }
+  \HLAFixedBlock{360.119}{94.373}{243.881}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.RtiFactory}%
+  }
+  \HLAFixedBlock{89.999}{105.785}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface.%
+  }
+  \HLAFixedBlock{89.999}{129.645}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.2.1.1 Registration}%
+  }
+  \HLAFixedBlock{89.999}{153.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI implementation shall register as a service by creating a file in the %
+  }
+  \HLAFixedBlock{394.140}{154.372}{209.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{services}%
+  }
+  \HLAFixedBlock{442.140}{153.784}{161.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+     subdirectory of the%
+  }
+  \HLAFixedBlock{90.000}{166.372}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{META-INF}%
+  }
+  \HLAFixedBlock{137.940}{165.784}{466.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     directory in the JAR file containing the RTI implementation. The file shall be named%
+  }
+  \HLAFixedBlock{90.000}{178.372}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.RtiFactory}%
+  }
+  \HLAFixedBlock{251.880}{177.784}{352.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and contain a line specifying the name of the class that implements%
+  }
+  \HLAFixedBlock{90.000}{189.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{104.700}{190.371}{499.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{164.700}{189.784}{439.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface, e.g.,%
+  }
+  \HLAFixedBlock{90.000}{214.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{org.someorganization.anrti.RtiFactoryImpl}%
+  }
+  \HLAFixedBlock{90.000}{237.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    It is possible to register multiple RTI implementations but this cannot be guaranteed to work due to potential%
+  }
+  \HLAFixedBlock{90.000}{249.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    conflicts related to PATH and CLASSPATH.%
+  }
+  \HLAFixedBlock{90.000}{273.643}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.2.1.2 RtiFactoryFactory}%
+  }
+  \HLAFixedBlock{90.000}{297.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To acquire a reference to an %
+  }
+  \HLAFixedBlock{204.840}{298.370}{399.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{264.780}{297.782}{339.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+     implementation, the federate uses the %
+  }
+  \HLAFixedBlock{420.060}{298.370}{183.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactoryFactory}%
+  }
+  \HLAFixedBlock{90.000}{309.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class provided with the standard.%
+  }
+  \HLAFixedBlock{90.000}{334.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory rtiFactory = RtiFactoryFactory.getRtiFactory();}%
+  }
+  \HLAFixedBlock{90.000}{346.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador \_rtiAmbassador = rtiFactory.createRtiAmbassador();}%
+  }
+  \HLAFixedBlock{90.000}{369.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    If the environment variable HLA\_RTI\_FACTORY\_NAME has a value, then that value will be used to%
+  }
+  \HLAFixedBlock{90.000}{381.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    acquire a named factory as if the method below were invoked instead.%
+  }
+  \HLAFixedBlock{90.000}{405.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate can also acquire a named RtiFactory by passing the name as a parameter to the getRtiFactory%
+  }
+  \HLAFixedBlock{90.000}{417.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method,%
+  }
+  \HLAFixedBlock{90.000}{442.367}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory rtiFactory = RtiFactoryFactory.getRtiFactory("SomeRTI");}%
+  }
+  \HLAFixedBlock{90.000}{454.367}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador \_rtiAmbassador = rtiFactory.createRtiAmbassador();}%
+  }
+  \HLAFixedBlock{90.000}{477.779}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    or get a list of available %
+  }
+  \HLAFixedBlock{186.600}{478.367}{417.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactories}%
+  }
+  \HLAFixedBlock{258.540}{477.779}{345.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{502.366}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Set<RtiFactory> rtiFactories = RtiFactoryFactory.getRtiFactories();}%
+  }
+  \HLAFixedBlock{90.000}{525.639}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.2.1.3 RtiFactory}%
+  }
+  \HLAFixedBlock{90.000}{549.778}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.720}{549.778}{495.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{155.340}{549.778}{448.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface contains methods for creating the classes necessary to run a federate, as well as%
+  }
+  \HLAFixedBlock{89.999}{561.778}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods for getting the name and version of the specific RTI.%
+  }
+  \HLAFixedBlock{89.999}{585.777}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.059}{585.777}{495.941}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{154.679}{585.777}{449.321}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface defines the following methods:%
+  }
+  \HLAFixedBlock{106.020}{609.777}{497.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador getRtiAmbassador()}%
+  }
+  \HLAFixedBlock{121.980}{621.777}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Returns an object instance that implements the RTIambassador interface%
+  }
+  \HLAFixedBlock{106.020}{633.777}{497.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{EncoderFactory getEncoderFactory()}%
+  }
+  \HLAFixedBlock{121.980}{645.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Returns an object instance that implements the EncoderFactory interface%
+  }
+  \HLAFixedBlock{106.020}{657.776}{497.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{String rtiName()}%
+  }
+  \HLAFixedBlock{121.980}{669.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Returns the name of the RTI%
+  }
+  \HLAFixedBlock{106.020}{681.776}{497.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{String rtiVersion()}%
+  }
+  \HLAFixedBlock{121.980}{693.776}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Returns the version of the RTI%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,163 @@
+\HLASourcePage{181}{180}
+\HLAServiceBookmark{8.1.3}{2}{Messages}
+\HLAServiceBookmark{8.1.4}{2}{Message order type}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.1.3 Messages}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The manner in which HLA services are coordinated with the time axis shall be through the concept of%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages as follows:%
+  }
+  \HLAFixedBlock{100.020}{120.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{120.785}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of the \emph{Update Attribute Values} service, \emph{Send Interaction} service, \emph{Send Interaction with}%
+  }
+  \HLAFixedBlock{121.980}{132.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions} service, or \emph{Delete Object Instance} service by a joined federate shall be called sending a%
+  }
+  \HLAFixedBlock{121.980}{144.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message. (Invocation of the \emph{Update Attribute Values} service may actually result in the sending of%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    multiple messages as each passel resulting from the invocation shall be considered a separate%
+  }
+  \HLAFixedBlock{121.980}{168.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message.)%
+  }
+  \HLAFixedBlock{100.020}{183.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{183.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of the \emph{Reflect Attribute Values \textdagger{}} service, \emph{Receive Interaction \textdagger{}} service, or \emph{Remove Object}%
+  }
+  \HLAFixedBlock{121.980}{195.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Instance \textdagger{}} service at a joined federate shall be called receiving a message.%
+  }
+  \HLAFixedBlock{89.999}{219.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Messages sent by one joined federate typically result in one or more other joined federates receiving a%
+  }
+  \HLAFixedBlock{89.999}{231.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    corresponding message. The mapping from one sent message to one or more received messages shall follow%
+  }
+  \HLAFixedBlock{89.999}{243.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the descriptions for \emph{Update Attribute Values }service (see 6.10), \emph{Reflect Attribute Values \textdagger{}} service (see 6.11),%
+  }
+  \HLAFixedBlock{89.998}{255.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Send Interaction} service (see 6.12), \emph{Received Interaction \textdagger{}} service (see 6.13), \emph{Delete Object Instance} service%
+  }
+  \HLAFixedBlock{89.999}{267.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (see 6.16), \emph{Remove Object Instance \textdagger{}} service (see 6.17), and \emph{Send Interaction With Regions} service (see%
+  }
+  \HLAFixedBlock{90.000}{279.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    9.12). For example, a sent message representing an \emph{Update Attribute Values} service invocation shall result%
+  }
+  \HLAFixedBlock{90.001}{291.782}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only in received messages representing \emph{Reflect Attribute Values \textdagger{}} service invocations at the appropriate%
+  }
+  \HLAFixedBlock{90.001}{303.782}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates depending on the normal ownership/subscription properties.%
+  }
+  \HLAServiceComponentHeadingAt{327.642}{%
+    \textbf{8.1.4 Message order type}%
+  }
+  \HLAFixedBlock{90.001}{351.781}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each message, sent or received, shall be either a timestamp order (TSO) message or an receive order (RO)%
+  }
+  \HLAFixedBlock{90.001}{363.781}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message (see 8.1.11). The order type of a message shall be determined by several factors:%
+  }
+  \HLAFixedBlock{100.020}{375.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{375.781}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Preferred order type: The preferred order type of a message shall be the same as the preferred order%
+  }
+  \HLAFixedBlock{121.981}{387.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    type of the data contained in the message (instance attribute values or interactions). Each class%
+  }
+  \HLAFixedBlock{121.981}{399.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute and interaction class shall be provided with a preferred order type in the FDD that indicates%
+  }
+  \HLAFixedBlock{121.981}{411.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the order type (TSO or RO) that shall be used when sending messages carrying values for instances%
+  }
+  \HLAFixedBlock{121.981}{423.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of these classes. In the case of sent messages representing a \emph{Delete Object Instance} service%
+  }
+  \HLAFixedBlock{121.981}{435.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation, the preferred order type of the message shall be based on the preferred order type of the%
+  }
+  \HLAFixedBlock{121.981}{447.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \textbf{HLAprivilegeToDeleteObject}\emph{ }attribute of the specified object instance. Joined federates may use%
+  }
+  \HLAFixedBlock{121.980}{459.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Change Attribute Order Type} service to change the preferred order type of instance attributes;%
+  }
+  \HLAFixedBlock{121.980}{471.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the preferred order type of class attributes may not be changed during a federation execution. Joined%
+  }
+  \HLAFixedBlock{121.980}{483.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates may use the \emph{Change Interaction Order Type} service to change the preferred order type of%
+  }
+  \HLAFixedBlock{121.981}{495.779}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction classes. %
+  }
+  \HLAFixedBlock{100.021}{507.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{507.779}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Presence of a timestamp: Each of the services that corresponds to sending a message shall include a%
+  }
+  \HLAFixedBlock{121.981}{519.779}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamp argument if the preferred order type of any instance attribute or interaction class specified%
+  }
+  \HLAFixedBlock{121.980}{531.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in the message is TSO and the joined federate is time-regulating. This timestamp argument is always%
+  }
+  \HLAFixedBlock{121.980}{543.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    optional, but it is recommended in such cases as the occurrence of a preferred order type of TSO and%
+  }
+  \HLAFixedBlock{121.980}{555.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a time-regulating joined federate indicate an intent for TSO messages to be sent.%
+  }
+  \HLAFixedBlock{100.020}{567.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.973}{567.785}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federate’s time status: Whether a joined federate is time-regulating shall determine whether a%
+  }
+  \HLAFixedBlock{121.980}{579.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate can send TSO messages. Similarly, whether a joined federate is time-constrained%
+  }
+  \HLAFixedBlock{121.980}{591.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall determine whether the joined federate can receive TSO messages.%
+  }
+  \HLAFixedBlock{100.019}{603.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.934}{603.784}{400.066}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Sent message order type: The order type of a received message shall depend on the order type of the%
+  }
+  \HLAFixedBlock{121.980}{615.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    corresponding sent message.%
+  }
+  \HLAFixedBlock{90.000}{639.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    These factors shall be considered together when determining if a given message is sent or received as a TSO%
+  }
+  \HLAFixedBlock{89.999}{651.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message or as an RO message.%
+  }
+  \HLAFixedBlock{89.999}{675.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The order type of a sent message shall be determined by the preferred order type of the message at the%
+  }
+  \HLAFixedBlock{89.999}{687.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    sending joined federate, regardless of whether that joined federate is time-regulating and whether a%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,153 @@
+\HLASourcePage{61}{60}
+\HLAServiceBookmark{4.12.5}{2}{Exceptions}
+\HLAServiceBookmark{4.12.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.13}{1}{Federate Resigned service}
+\HLAServiceBookmark{4.13.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.13.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.13.3}{2}{Preconditions}
+\HLAServiceBookmark{4.13.4}{2}{Postconditions}
+\HLAServiceBookmark{4.13.5}{2}{Exceptions}
+\HLAServiceBookmark{4.14}{1}{Register Federation Synchronization Point service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.12.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{93.785}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid resign directive.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Cannot resign due to pending attempt to acquire instance attribute ownership.%
+  }
+  \HLAFixedBlock{100.020}{117.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{117.785}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate owns instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{129.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.975}{141.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified federation execution does not exist.%
+  }
+  \HLAFixedBlock{100.020}{153.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.943}{153.784}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.946}{165.784}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{189.644}{%
+    4.12.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{213.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{213.783}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 1, Basic states of the federation execution.%
+  }
+  \HLAFixedBlock{100.020}{224.763}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{224.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAFixedBlock{100.020}{235.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{235.803}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 6, Federation execution and sync points.%
+  }
+  \HLAFixedBlock{100.020}{246.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{246.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 8, Awaiting synchronization (s, L).%
+  }
+  \HLAServiceHeadingAt{275.363}{%
+    4.13\ \emph{Federate Resigned \textdagger{}}\ service%
+  }
+  \HLAFixedBlock{90.000}{300.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The\ \emph{Federate Resigned \textdagger{}}\ service shall notify a previously joined federate that it has resigned from the\linebreak%
+    federation. The RTI shall invoke this service when the federate was resigned by any action except for the\linebreak%
+    federate itself invoking Resign Federation Execution. The federate shall remain connected to the RTI. If a\linebreak%
+    federate also disconnects from the RTI, a Federate Resigned \textdagger{} service is not required to be sent. A\linebreak%
+    \emph{Connection Lost \textdagger{}}\ service implies that the federate has resigned as well.%
+  }
+  \HLAServiceComponentHeadingAt{367.666}{%
+    4.13.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{391.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{122.000}{391.805}{400.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Text description of the reason for resigning.%
+  }
+  \HLAServiceComponentHeadingAt{415.665}{%
+    4.13.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{439.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{439.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{463.664}{%
+    4.13.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{487.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{487.803}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is joined to a federation.%
+  }
+  \HLAServiceComponentHeadingAt{511.664}{%
+    4.13.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{535.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{535.803}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate is notified that it is no longer joined to a federation.%
+  }
+  \HLAServiceComponentHeadingAt{559.663}{%
+    4.13.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{583.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{583.802}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceHeadingAt{613.403}{%
+    4.14\ \emph{Register Federation Synchronization Point}\ service%
+  }
+  \HLAFixedBlock{90.000}{638.826}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The\ \emph{Register Federation Synchronization Point}\ service shall be used to initiate the registration of an\linebreak%
+    upcoming synchronization point label. When a synchronization point label has been successfully registered\linebreak%
+    (indicated through the\ \emph{Confirm Synchronization Point Registration \textdagger{}}\ service), the RTI shall inform some or\linebreak%
+    all joined federates of the label’s existence by invoking the\ \emph{Announce Synchronization Point \textdagger{}}\ service at\linebreak%
+    those joined federates. If the optional set of joined federate designators is empty or not supplied, all joined\linebreak%
+    federates in the federation execution shall be informed of the label’s existence. If only a subset of joined\linebreak%
+    federates in the federation execution are to be informed of the label existence, the invoking joined federate%
+  }
+\end{hlafixedpage}
+\clearpage

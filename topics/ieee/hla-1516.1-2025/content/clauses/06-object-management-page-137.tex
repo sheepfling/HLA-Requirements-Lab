@@ -1,0 +1,170 @@
+\HLASourcePage{138}{137}
+\HLAServiceBookmark{6.21.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.22}{1}{Provide Attribute Value Update † service}
+\HLAServiceBookmark{6.22.1}{2}{Supplied arguments}
+\HLAServiceBookmark{6.22.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.22.3}{2}{Preconditions}
+\HLAServiceBookmark{6.22.4}{2}{Postconditions}
+\HLAServiceBookmark{6.22.5}{2}{Exceptions}
+\HLAServiceBookmark{6.22.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.23}{1}{Turn Updates On For Object Instance † service}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.21.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{91.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{91.805}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{116.363}{%
+    6.22 \emph{Provide Attribute Value Update \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{137.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Provide Attribute Value Update \textdagger{}} service requests the current values for attributes owned by the joined%
+  }
+  \HLAFixedBlock{90.000}{148.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate for a given object instance. The owning joined federate responds to the \emph{Provide Attribute Value}%
+  }
+  \HLAFixedBlock{90.000}{159.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Update \textdagger{} }service with an invocation of the \emph{Update Attribute Values} service to provide the requested instance%
+  }
+  \HLAFixedBlock{90.001}{170.765}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute values to the federation. The owning joined federate is not required to provide the values.%
+  }
+  \HLAFixedBlock{90.001}{191.765}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The user-supplied tag argument supplied to the corresponding \emph{Request Attribute Value Update} service%
+  }
+  \HLAFixedBlock{90.001}{202.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall be provided with all corresponding \emph{Provide Attribute Value Update \textdagger{}} service invocations.%
+  }
+  \HLAFixedBlock{90.001}{223.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A single \emph{Request Attribute Value Update} shall result in at most one \emph{Provide Attribute Value Update \textdagger{}}%
+  }
+  \HLAFixedBlock{90.001}{234.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation for each federate owning attributes included in the request.%
+  }
+  \HLAServiceComponentHeadingAt{255.644}{%
+    6.22.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{276.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{276.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+  \HLAFixedBlock{100.021}{291.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{291.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Set of attribute designators%
+  }
+  \HLAFixedBlock{100.021}{306.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.974}{306.783}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag%
+  }
+  \HLAServiceComponentHeadingAt{328.663}{%
+    6.22.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{350.762}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{350.762}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{372.642}{%
+    6.22.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{394.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{394.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{408.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{408.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{422.761}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.972}{422.761}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.021}{436.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.941}{436.801}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate owns the specified instance attributes.%
+  }
+  \HLAFixedBlock{100.021}{450.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{450.781}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{464.760}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.950}{464.760}{400.050}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{485.681}{%
+    6.22.4 Postconditions%
+  }
+  \HLAFixedBlock{100.021}{507.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{507.781}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been notified to provide updates of the specified instance attribute values.%
+  }
+  \HLAServiceComponentHeadingAt{529.661}{%
+    6.22.5 Exceptions%
+  }
+  \HLAFixedBlock{100.021}{551.820}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{551.820}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error%
+  }
+  \HLAServiceComponentHeadingAt{572.680}{%
+    6.22.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.021}{594.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{594.779}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 14, Object instance (i, k) known%
+  }
+  \HLAServiceHeadingAt{617.423}{%
+    6.23 \emph{Turn Updates On For Object Instance \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{640.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Turn Updates On For Object Instance \textdagger{}} service shall indicate to the joined federate that the values of%
+  }
+  \HLAFixedBlock{89.999}{651.786}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specified attributes of the specified object instance are required somewhere in the federation execution.%
+  }
+  \HLAFixedBlock{90.000}{662.825}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the \emph{Advisories Use Known Class Switch} is disabled, an attribute may be indicated as required even if it%
+  }
+  \HLAFixedBlock{89.999}{673.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    will not be reflected. This depends on the known class of the instance at the subscribing federate. The update%
+  }
+  \HLAFixedBlock{89.999}{684.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    rate designator argument shall not be provided if there exists a subscription with the default, unspecified%
+  }
+  \HLAFixedBlock{89.999}{695.825}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    rate. If no such subscription exists, then the provided update rate designator argument shall be the update%
+  }
+  \HLAFixedBlock{89.999}{706.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    rate designator of the maximum subscribed rate.%
+  }
+\end{hlafixedpage}
+\clearpage

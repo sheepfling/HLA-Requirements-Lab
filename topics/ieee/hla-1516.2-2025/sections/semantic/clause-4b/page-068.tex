@@ -1,0 +1,126 @@
+% M4 semantic reconstruction of physical page 68 / printed page 67.
+\begin{HLAClauseSemanticPage}{67}
+\HLAStableID{m4.page.068}
+\HLAStableID{m4.p068.t01}
+\HLATableGridCell{95.205}{108.675}{172.275}{15.315}
+\HLATableGridCell{267.480}{108.675}{249.345}{15.315}
+\HLATableGridCell{95.205}{123.990}{172.275}{12.030}
+\HLATableGridCell{267.480}{123.990}{249.345}{12.030}
+\HLATableGridCell{95.205}{136.020}{172.275}{12.060}
+\HLATableGridCell{267.480}{136.020}{249.345}{12.060}
+\HLATableGridCell{95.205}{148.080}{172.275}{12.060}
+\HLATableGridCell{267.480}{148.080}{249.345}{12.060}
+\HLATableGridCell{95.205}{160.140}{172.275}{12.060}
+\HLATableGridCell{267.480}{160.140}{249.345}{12.060}
+\HLATableGridCell{95.205}{172.200}{172.275}{12.405}
+\HLATableGridCell{267.480}{172.200}{249.345}{12.405}
+\HLATableGridOuter{95.205}{108.675}{421.620}{75.930}
+\HLATableHeavyHorizontalRule{95.205}{123.990}{421.620}
+\HLAStableID{m4.p068.b01}
+\HLAClausePlacedBlock{90.000}{69.786}{432.018}{%
+  \HLAClauseParagraph{\resizebox{432.018bp}{!}{\mbox{joining federates. The absence of the remaining switches from the table means that these switches will take}}\newline{}\resizebox{173.157bp}{!}{\mbox{on the default values as indicated in 4.13.3.}}}
+}
+\HLAStableID{m4.p068.b02}
+\HLAClausePlacedBlock{90.000}{195.683}{108.702}{%
+  \HLASubclauseHeading{4.14 Data type tables}
+}
+\HLAStableID{m4.p068.b03}
+\HLAClausePlacedBlock{90.000}{218.926}{130.522}{%
+  \HLAMinorClauseHeading{4.14.1 Purpose/background}
+}
+\HLAStableID{m4.p068.b04}
+\HLAClausePlacedBlock{90.000}{243.065}{432.119}{%
+  \HLAClauseParagraph{\resizebox{431.996bp}{!}{\mbox{Several of the OMT tables (attribute table, parameter table, dimension table, time representation table,}}\newline{}\resizebox{432.040bp}{!}{\mbox{user-supplied tag table, and synchronization table) provide columns for data type specifications. This}}\newline{}\resizebox{432.071bp}{!}{\mbox{subclause describes additional tables that shall be used to specify the characteristics of these data types. A}}\newline{}\resizebox{432.007bp}{!}{\mbox{data type used in these tables shall be specified in a row of one of the following tables: simple data type}}\newline{}\resizebox{432.007bp}{!}{\mbox{table, enumerated data type table, reference data type table, fixed record data type table, array data type}}\newline{}\resizebox{431.898bp}{!}{\mbox{table, or variant record data type table. As described in 4.14.3 through 4.14.8, members of these data type}}\newline{}\resizebox{432.119bp}{!}{\mbox{tables may contain members of other data type tables in order to create arbitrarily complex data types. In}}\newline{}\resizebox{431.948bp}{!}{\mbox{addition, the name of any data type or data representation shall be unique among all data types and data}}\newline{}\resizebox{62.982bp}{!}{\mbox{representations.}}}
+}
+\HLAStableID{m4.p068.b05}
+\HLAClausePlacedBlock{90.000}{351.944}{110.533}{%
+  \HLAMinorClauseHeading{4.14.2 Inclusion criteria}
+}
+\HLAStableID{m4.p068.b06}
+\HLAClausePlacedBlock{90.000}{374.043}{432.013}{%
+  \HLAClauseParagraph{\resizebox{431.983bp}{!}{\mbox{All federations shall describe and document the data types that are referenced in any OMT table that requires}}\newline{}\resizebox{431.993bp}{!}{\mbox{the specification of data types (attribute table, parameter table, dimension table, time representation table,}}\newline{}\resizebox{432.013bp}{!}{\mbox{user-supplied tag table, and synchronization table) in their FOM and relevant FOM modules. They shall also}}\newline{}\resizebox{431.938bp}{!}{\mbox{describe and document data types referenced in other data type tables. Similarly, federates shall document}}\newline{}\resizebox{331.154bp}{!}{\mbox{the data types referenced in these tables in their SOM and relevant SOM modules.}}}
+}
+\HLAStableID{m4.p068.b07}
+\HLAClausePlacedBlock{90.000}{438.943}{178.838}{%
+  \HLAMinorClauseHeading{4.14.3 Basic data representation table}
+}
+\HLAStableID{m4.p068.b08}
+\HLAClausePlacedBlock{89.997}{461.241}{432.098}{%
+  {\HLATimes\fontsize{9.000bp}{9.000bp}\selectfont\raggedright
+    \resizebox{432.012bp}{!}{\mbox{Basic data representation is the underpinning of all OMT data types. A set of widely-used basic data representations}}\newline{}
+    \resizebox{432.078bp}{!}{\mbox{have been pre-defined for use as the basis for the OMT data types and this list may be expanded. These basic data}}\newline{}
+    \resizebox{431.977bp}{!}{\mbox{representations cannot be directly used as a named data type in any OMT data type table, but rather are the basis upon}}\newline{}
+    \resizebox{432.042bp}{!}{\mbox{which named data types are built. Table 29 illustrates the format that shall be used for the basic representation of data.}}\newline{}
+    \makebox[432.053bp][l]{The table includes a predefined set of data representations (\textit{HLAinteger16BE,}\hfill{}\space{}\textit{HLAinteger32BE, HLAinteger64BE,}}\newline{}
+    \resizebox{432.068bp}{!}{\mbox{\textit{HLAunsignedInteger16BE, HLAunsignedInteger32BE, HLAunsignedInteger64BE, HLAfloat32BE, HLAfloat64BE,}}}\newline{}
+    \makebox[432.055bp][l]{\textit{HLAoctetPairBE,}\hfill{}\textit{HLAinteger16LE,}\hfill{}\textit{HLAinteger32LE,}\hfill{}\textit{HLAinteger64LE,}\hfill{}\textit{HLAunsignedInteger8,}}\newline{}
+    \resizebox{432.046bp}{!}{\mbox{\textit{HLAunsignedInteger16LE, HLAunsignedInteger32LE, HLAunsignedInteger64LE, HLAfloat32LE, HLAfloat64LE,}}}\newline{}
+    \resizebox{432.097bp}{!}{\mbox{\textit{HLAoctetPairLE, HLAoctet}) that shall be present in all FOMs, SOMs, and MIMs; other entries may be added after these}}\newline{}
+    \resizebox{432.011bp}{!}{\mbox{entries. Although these entries shall be present, there is no requirement that federates or federations use or support all of}}\newline{}
+    \resizebox{79.617bp}{!}{\mbox{these representations..}}\par}
+}
+\HLAStableID{m4.p068.b09}
+\HLAClausePlacedBlock{90.000}{572.046}{432.016}{%
+  \HLAClauseParagraph{\resizebox{432.016bp}{!}{\mbox{The first column (Name) shall identify the name of the basic data representation. Basic data representation}}\newline{}\resizebox{239.529bp}{!}{\mbox{names shall adhere to HLA naming conventions (see 3.3.1).}}}
+}
+\HLAStableID{m4.p068.b10}
+\HLAClausePlacedBlock{90.000}{606.065}{432.080}{%
+  \HLAClauseParagraph{\resizebox{432.080bp}{!}{\mbox{The second column (Size in bits) shall define the size of the data representation in terms of the number of}}\newline{}\resizebox{432.028bp}{!}{\mbox{bits contained in the data representation. Entries in this column shall be consistent with the associated}}\newline{}\resizebox{89.861bp}{!}{\mbox{encoding descriptions.}}}
+}
+\HLAStableID{m4.p068.b11}
+\HLAClausePlacedBlock{90.000}{649.084}{432.000}{%
+  \HLAClauseParagraph{\resizebox{394.701bp}{!}{\mbox{The third column (Interpretation) shall describe how the data representation should be interpreted.}}}
+}
+\HLAStableID{m4.p068.b12}
+\HLAClausePlacedBlock{224.880}{96.645}{162.284}{%
+  \HLATableCaption{Table 28—Switches table example}
+}
+\HLAStableID{m4.p068.t01.c001}
+\HLATableCellText{168.540}{113.501}{99.040}{9.000}{10.080}{l}{%
+  \resizebox{26.014bp}{!}{\mbox{\textbf{Switch}}}
+}
+\HLAStableID{m4.p068.t01.c002}
+\HLATableCellText{378.549}{113.501}{138.376}{9.000}{10.080}{l}{%
+  \resizebox{26.919bp}{!}{\mbox{\textbf{Setting}}}
+}
+\HLAStableID{m4.p068.t01.c003}
+\HLATableCellText{101.520}{126.446}{166.060}{9.960}{11.155}{l}{%
+  \resizebox{53.620bp}{!}{\mbox{Auto Provide}}
+}
+\HLAStableID{m4.p068.t01.c004}
+\HLATableCellText{375.599}{126.446}{141.326}{9.960}{11.155}{l}{%
+  \resizebox{32.734bp}{!}{\mbox{Enabled}}
+}
+\HLAStableID{m4.p068.t01.c005}
+\HLATableCellText{101.520}{138.505}{166.060}{9.960}{11.155}{l}{%
+  \resizebox{119.988bp}{!}{\mbox{Attribute Relevance Advisory}}
+}
+\HLAStableID{m4.p068.t01.c006}
+\HLATableCellText{375.648}{138.505}{141.277}{9.960}{11.155}{l}{%
+  \resizebox{32.743bp}{!}{\mbox{Enabled}}
+}
+\HLAStableID{m4.p068.t01.c007}
+\HLATableCellText{101.520}{150.626}{166.060}{9.960}{11.155}{l}{%
+  \resizebox{135.145bp}{!}{\mbox{Object Class Relevancy Advisory}}
+}
+\HLAStableID{m4.p068.t01.c008}
+\HLATableCellText{375.566}{150.626}{141.359}{9.960}{11.155}{l}{%
+  \resizebox{32.753bp}{!}{\mbox{Enabled}}
+}
+\HLAStableID{m4.p068.t01.c009}
+\HLATableCellText{101.520}{162.685}{166.060}{9.960}{11.155}{l}{%
+  \resizebox{127.701bp}{!}{\mbox{Interaction Relevancy Advisory}}
+}
+\HLAStableID{m4.p068.t01.c010}
+\HLATableCellText{375.621}{162.685}{141.304}{9.960}{11.155}{l}{%
+  \resizebox{32.734bp}{!}{\mbox{Enabled}}
+}
+\HLAStableID{m4.p068.t01.c011}
+\HLATableCellText{101.520}{174.745}{166.060}{9.960}{11.155}{l}{%
+  \resizebox{19.422bp}{!}{\mbox{Note}}
+}
+\HLAStableID{m4.p068.t01.c012}
+\HLATableCellText{384.781}{174.745}{132.144}{9.960}{11.155}{l}{%
+  \resizebox{14.389bp}{!}{\mbox{NA}}
+}
+\end{HLAClauseSemanticPage}

@@ -1,0 +1,150 @@
+\HLASourcePage{63}{62}
+\HLAServiceBookmark{4.15.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.15.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.15.3}{2}{Preconditions}
+\HLAServiceBookmark{4.15.4}{2}{Postconditions}
+\HLAServiceBookmark{4.15.5}{2}{Exceptions}
+\HLAServiceBookmark{4.15.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.16}{1}{Announce Synchronization Point service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    If the registration-success indicator argument indicates failure, the failure reason argument shall be provided\linebreak%
+    to identify the reason that the synchronization point registration failed. Possible reasons for the\linebreak%
+    synchronization point registration failure are the following:%
+  }
+  \HLAFixedBlock{100.019}{108.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{108.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified label is already in use.%
+  }
+  \HLAFixedBlock{100.019}{123.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{123.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A synchronization set member is not a joined federate.%
+  }
+  \HLAFixedBlock{89.999}{147.784}{432.001}{\rmfamily}{9.96}{12.00}{%
+    A registration attempt that ends with a negative success indicator shall have no other effect on the federation\linebreak%
+    execution.%
+  }
+  \HLAServiceComponentHeadingAt{183.644}{%
+    4.15.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.019}{207.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{207.783}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Synchronization point label.%
+  }
+  \HLAFixedBlock{100.019}{219.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{219.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Registration-success indicator.%
+  }
+  \HLAFixedBlock{100.019}{231.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.979}{231.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional failure reason.%
+  }
+  \HLAServiceComponentHeadingAt{255.643}{%
+    4.15.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.019}{279.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{279.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{303.643}{%
+    4.15.3 Preconditions%
+  }
+  \HLAFixedBlock{100.019}{327.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{327.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.019}{339.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{339.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.019}{351.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.975}{351.781}{400.025}{\rmfamily}{9.96}{12.00}{%
+    The joined federate has invoked\ \emph{Register Federation Synchronization Point}\ service for the specified\linebreak%
+    label.%
+  }
+  \HLAFixedBlock{100.019}{375.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{375.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{387.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{387.781}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{411.641}{%
+    4.15.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{435.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{435.780}{400.030}{\rmfamily}{9.96}{12.00}{%
+    If the registration-success indicator is positive, the specified label and associated user-supplied tag\linebreak%
+    shall be announced to the appropriate joined federates.%
+  }
+  \HLAFixedBlock{100.019}{459.779}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{459.779}{400.021}{\rmfamily}{9.96}{12.00}{%
+    If the registration-success indicator is negative, this service and the corresponding\ \emph{Register}\linebreak%
+    \emph{Federation Synchronization Point}\ service invocation have no consequence.%
+  }
+  \HLAServiceComponentHeadingAt{495.639}{%
+    4.15.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{519.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{519.778}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{543.639}{%
+    4.15.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{567.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.967}{567.778}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 7, Global synch label (L).%
+  }
+  \HLAFixedBlock{100.019}{579.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{579.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 9, Local synch label (s, L).%
+  }
+  \HLAServiceHeadingAt{609.383}{%
+    4.16\ \emph{Announce Synchronization Point \textdagger{}}\ service%
+  }
+  \HLAFixedBlock{90.000}{634.806}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The\ \emph{Announce Synchronization Point \textdagger{}}\ service shall inform a joined federate of the existence of a new\linebreak%
+    synchronization point label. When a synchronization point label has been registered with the\ \emph{Register}\linebreak%
+    \emph{Federation Synchronization Point}\ service, the RTI shall invoke the\ \emph{Announce Synchronization Point \textdagger{}}\linebreak%
+    service, either at all the joined federates in the federation execution or at the specified set of joined federates,\linebreak%
+    to inform them of the label existence. The joined federates informed of the existence of a given\linebreak%
+    synchronization point label via the\ \emph{Announce Synchronization Point \textdagger{}}\ service shall form the synchronization\linebreak%
+    set for that point. If the optional set of joined federate designators was null or not provided when the%
+  }
+\end{hlafixedpage}
+\clearpage

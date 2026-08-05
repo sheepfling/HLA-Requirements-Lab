@@ -1,0 +1,365 @@
+\HLASourcePage{393}{392}
+\HLAServiceBookmark{12.12.6.15}{3}{Passive subscription indicator}
+\HLAServiceBookmark{12.12.6.16}{3}{Constrained set of attribute designator and value pairs}
+\HLAServiceBookmark{12.12.6.17}{3}{Constrained set of interaction parameter designator and value pairs}
+\HLAServiceBookmark{12.12.6.18}{3}{Message order type}
+\HLAServiceBookmark{12.12.6.19}{3}{Transportation type}
+\HLAServiceBookmark{12.12.6.20}{3}{Ownership designator}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{69.786}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FEDERATE\_RESTORING}%
+  }
+  \HLAFixedBlock{100.020}{81.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{81.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FEDERATE\_WAITING\_FOR\_FEDERATION\_TO\_RESTORE}%
+  }
+  \HLAFixedBlock{90.000}{105.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.15 Passive subscription indicator}%
+  }
+  \HLAFixedBlock{90.000}{129.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.180}{129.785}{495.820}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Subscribe Object Class Attributes}%
+  }
+  \HLAFixedBlock{243.720}{129.785}{360.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{248.880}{129.785}{355.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Subscribe Interaction Class}%
+  }
+  \HLAFixedBlock{360.301}{129.785}{243.699}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{365.461}{129.785}{238.539}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Subscribe Object Class Attributes With}%
+  }
+  \HLAFixedBlock{90.001}{141.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Regions}%
+  }
+  \HLAFixedBlock{122.221}{141.785}{481.779}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{143.761}{141.785}{460.239}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Subscribe Interaction Class With Regions}%
+  }
+  \HLAFixedBlock{309.601}{141.785}{294.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services each may optionally provide an %
+  }
+  \HLAFixedBlock{474.062}{142.372}{129.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{bool}%
+  }
+  \HLAFixedBlock{498.061}{141.785}{105.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+     value%
+  }
+  \HLAFixedBlock{90.001}{153.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to indicate whether the subscription is active (%
+  }
+  \HLAFixedBlock{276.122}{154.372}{327.878}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{true}%
+  }
+  \HLAFixedBlock{300.121}{153.784}{303.879}{\rmfamily\raggedright}{9.96}{11.16}{%
+     means the subscription is active). In the C++ API, this%
+  }
+  \HLAFixedBlock{90.001}{165.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    is a default parameter to the methods corresponding to each of the services. The default value is %
+  }
+  \HLAFixedBlock{475.082}{166.372}{128.918}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{true}%
+  }
+  \HLAFixedBlock{499.081}{165.784}{104.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.001}{189.644}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.16 Constrained set of attribute designator and value pairs}%
+  }
+  \HLAFixedBlock{90.001}{213.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{109.141}{213.783}{494.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Update Attribute Values}%
+  }
+  \HLAFixedBlock{207.241}{213.783}{396.759}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{228.961}{213.783}{375.039}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Reflect Attribute Values †}%
+  }
+  \HLAFixedBlock{332.821}{213.783}{271.179}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services require a constrained set of attribute%
+  }
+  \HLAFixedBlock{90.001}{225.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    designator and value pairs as arguments. A constrained set of attribute designator and value pairs is%
+  }
+  \HLAFixedBlock{90.001}{237.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implemented in the C++ API as an %
+  }
+  \HLAFixedBlock{252.482}{238.371}{351.518}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{map<AttributeHandle, VariableLengthData>}%
+  }
+  \HLAFixedBlock{499.982}{237.783}{104.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . For%
+  }
+  \HLAFixedBlock{90.001}{249.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    convenience, this type has been aliased using a %
+  }
+  \HLAFixedBlock{285.362}{250.371}{318.638}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{typedef}%
+  }
+  \HLAFixedBlock{327.362}{249.783}{276.638}{\rmfamily\raggedright}{9.96}{11.16}{%
+     to the name %
+  }
+  \HLAFixedBlock{381.602}{250.371}{222.398}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AttributeHandleValueMap}%
+  }
+  \HLAFixedBlock{519.482}{249.783}{84.518}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.002}{261.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To help ensure maximum portability between RTI implementations, federate programmers should use only%
+  }
+  \HLAFixedBlock{90.002}{273.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    this %
+  }
+  \HLAFixedBlock{106.922}{274.370}{497.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{typedef}%
+  }
+  \HLAFixedBlock{148.923}{273.783}{455.077}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . %
+  }
+  \HLAFixedBlock{90.002}{297.643}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.17 Constrained set of interaction parameter designator and value pairs}%
+  }
+  \HLAFixedBlock{90.002}{321.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{111.422}{321.782}{492.578}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Interaction}%
+  }
+  \HLAFixedBlock{181.202}{321.782}{422.798}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{189.602}{321.782}{414.398}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Receive Interaction †}%
+  }
+  \HLAFixedBlock{278.522}{321.782}{325.478}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{307.262}{321.782}{296.738}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Interaction With Regions}%
+  }
+  \HLAFixedBlock{439.321}{321.782}{164.679}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services require a%
+  }
+  \HLAFixedBlock{90.001}{333.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    constrained set of parameter designator and value pairs as arguments. A constrained set of parameter%
+  }
+  \HLAFixedBlock{90.001}{345.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    designator and value pairs is implemented in the C++ API as an %
+  }
+  \HLAFixedBlock{402.061}{346.369}{201.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{map<ParameterHandle,}%
+  }
+  \HLAFixedBlock{90.001}{358.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{VariableLengthData>}%
+  }
+  \HLAFixedBlock{203.942}{357.781}{400.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . For convenience, this type has been aliased using a %
+  }
+  \HLAFixedBlock{427.322}{358.369}{176.678}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{typedef}%
+  }
+  \HLAFixedBlock{469.322}{357.781}{134.678}{\rmfamily\raggedright}{9.96}{11.16}{%
+     to the name%
+  }
+  \HLAFixedBlock{90.002}{370.369}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandleValueMap}%
+  }
+  \HLAFixedBlock{227.942}{369.781}{376.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . To help ensure maximum portability between RTI implementations,%
+  }
+  \HLAFixedBlock{90.002}{381.781}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate programmers should use only this %
+  }
+  \HLAFixedBlock{262.682}{382.368}{341.318}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{typedef}%
+  }
+  \HLAFixedBlock{304.621}{381.781}{299.379}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . %
+  }
+  \HLAFixedBlock{90.001}{405.641}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.18 Message order type}%
+  }
+  \HLAFixedBlock{90.001}{429.780}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Message order types are represented an enumeration named %
+  }
+  \HLAFixedBlock{334.202}{430.368}{269.798}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{OrderType}%
+  }
+  \HLAFixedBlock{388.142}{429.780}{215.858}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , which has the following values:%
+  }
+  \HLAFixedBlock{90.002}{442.367}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RECEIVE}%
+  }
+  \HLAFixedBlock{135.240}{441.786}{468.760}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{153.780}{442.373}{450.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TIMESTAMP}%
+  }
+  \HLAFixedBlock{207.780}{441.786}{396.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . These values can be passed to the RTI or compared to an instance of an%
+  }
+  \HLAFixedBlock{90.000}{454.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{OrderType}%
+  }
+  \HLAFixedBlock{143.940}{453.785}{460.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     object returned by the RTI.%
+  }
+  \HLAFixedBlock{90.000}{477.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.19 Transportation type}%
+  }
+  \HLAFixedBlock{90.000}{501.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    As with message order types described above, transportation types are represented by an enumeration. An%
+  }
+  \HLAFixedBlock{90.000}{513.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI shall provide the following enumerations: %
+  }
+  \HLAFixedBlock{300.719}{514.372}{303.281}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTI\_RELIABLE}%
+  }
+  \HLAFixedBlock{372.660}{513.784}{231.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{399.780}{514.372}{204.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTI\_BEST\_EFFORT}%
+  }
+  \HLAFixedBlock{489.779}{513.784}{114.221}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . These%
+  }
+  \HLAFixedBlock{89.999}{525.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumerations may be passed to the RTI or compared to an instance of a %
+  }
+  \HLAFixedBlock{414.059}{526.372}{189.941}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TransportationType}%
+  }
+  \HLAFixedBlock{90.000}{537.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumeration returned by the RTI.%
+  }
+  \HLAFixedBlock{90.000}{561.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    It is possible that a FDD may contain additional transportation types. In this case, the RTI implementation%
+  }
+  \HLAFixedBlock{90.000}{573.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall extend the %
+  }
+  \HLAFixedBlock{160.620}{574.371}{443.380}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TransportationType}%
+  }
+  \HLAFixedBlock{268.561}{573.784}{335.439}{\rmfamily\raggedright}{9.96}{11.16}{%
+     enumerated values to provide a unique value for each new%
+  }
+  \HLAFixedBlock{90.001}{585.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    transportation type. These new transportation type enumerated values shall be retrievable from the RTI via%
+  }
+  \HLAFixedBlock{90.001}{597.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{108.540}{598.371}{495.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{getTransportationType}%
+  }
+  \HLAFixedBlock{234.480}{597.783}{369.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service. In no case shall the existing %
+  }
+  \HLAFixedBlock{414.060}{598.371}{189.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TransportationType}%
+  }
+  \HLAFixedBlock{90.001}{609.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumerations or the Enums.h header file be modified or eliminated.%
+  }
+  \HLAFixedBlock{90.001}{633.643}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.12.6.20 Ownership designator}%
+  }
+  \HLAFixedBlock{90.001}{657.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.481}{657.782}{495.519}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Inform Attribute Ownership †}%
+  }
+  \HLAFixedBlock{228.181}{657.782}{375.819}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service supplies an ownership designator as one of its arguments. In the%
+  }
+  \HLAFixedBlock{90.001}{669.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    C++ %
+  }
+  \HLAFixedBlock{118.928}{669.782}{485.072}{\rmfamily\raggedright}{9.96}{11.16}{%
+    API, %
+  }
+  \HLAFixedBlock{151.737}{669.782}{452.263}{\rmfamily\raggedright}{9.96}{11.16}{%
+    this %
+  }
+  \HLAFixedBlock{180.358}{669.782}{423.642}{\rmfamily\raggedright}{9.96}{11.16}{%
+    corresponds %
+  }
+  \HLAFixedBlock{242.908}{669.782}{361.092}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to %
+  }
+  \HLAFixedBlock{264.879}{669.782}{339.121}{\rmfamily\raggedright}{9.96}{11.16}{%
+    three %
+  }
+  \HLAFixedBlock{299.081}{669.782}{304.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+    distinct %
+  }
+  \HLAFixedBlock{342.707}{669.782}{261.293}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods: %
+  }
+  \HLAFixedBlock{393.600}{670.370}{210.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{attributeIsNotOwned()}%
+  }
+  \HLAFixedBlock{519.481}{669.782}{84.519}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.001}{682.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{attributeIsOwnedByRTI()}%
+  }
+  \HLAFixedBlock{227.941}{681.782}{376.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and%
+  }
+  \HLAFixedBlock{248.041}{682.369}{355.959}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ informAttributeOwnership()}%
+  }
+  \HLAFixedBlock{411.601}{681.782}{192.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . All three methods take an%
+  }
+  \HLAFixedBlock{90.001}{694.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ObjectInstanceHandle}%
+  }
+  \HLAFixedBlock{224.581}{693.782}{379.419}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{253.622}{693.782}{350.378}{\rmfamily\raggedright}{9.96}{11.16}{%
+    an %
+  }
+  \HLAFixedBlock{277.681}{694.369}{326.319}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AttributeHandle}%
+  }
+  \HLAFixedBlock{382.261}{693.782}{221.739}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as %
+  }
+  \HLAFixedBlock{405.178}{693.782}{198.822}{\rmfamily\raggedright}{9.96}{11.16}{%
+    arguments. %
+  }
+  \HLAFixedBlock{463.789}{693.782}{140.211}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In %
+  }
+  \HLAFixedBlock{486.706}{693.782}{117.294}{\rmfamily\raggedright}{9.96}{11.16}{%
+    addition,%
+  }
+\end{hlafixedpage}
+\clearpage

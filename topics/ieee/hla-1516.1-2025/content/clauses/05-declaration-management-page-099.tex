@@ -1,0 +1,163 @@
+\HLASourcePage{100}{99}
+\HLAServiceBookmark{5.9.5}{2}{Exceptions}
+\HLAServiceBookmark{5.9.6}{2}{Reference state charts}
+\HLAServiceBookmark{5.10}{1}{Subscribe Interaction Class service}
+\HLAServiceBookmark{5.10.1}{2}{Supplied arguments}
+\HLAServiceBookmark{5.10.2}{2}{Returned arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    5.9.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{93.785}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified class attributes are not available attributes of the specified object class (if the optional%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    set of attribute designators argument is supplied).%
+  }
+  \HLAFixedBlock{100.020}{117.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.936}{117.785}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{129.785}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{141.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.020}{153.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.978}{153.784}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.943}{165.784}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{177.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.946}{177.784}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    5.9.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{225.783}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 11, Class attribute (i, j).%
+  }
+  \HLAFixedBlock{100.020}{237.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{237.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 12, Class attribute (i, HLAprivilegeToDeleteObject).%
+  }
+  \HLAServiceHeadingAt{267.383}{%
+    5.10 \emph{Subscribe Interaction Class} service%
+  }
+  \HLAFixedBlock{90.000}{292.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Subscribe Interaction Class} service specifies an interaction class for which the RTI shall notify the%
+  }
+  \HLAFixedBlock{90.000}{304.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate of sent interactions by invoking the \emph{Receive Interaction \textdagger{}} service at the joined federate.%
+  }
+  \HLAFixedBlock{89.999}{328.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When an interaction is received by a joined federate, the received class of the interaction shall be the%
+  }
+  \HLAFixedBlock{89.998}{340.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction’s sent class, if subscribed. Otherwise, the received class is the closest superclass of the sent class%
+  }
+  \HLAFixedBlock{89.998}{352.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is subscribed when the interaction is received. Only the parameters from the interaction’s received class%
+  }
+  \HLAFixedBlock{89.997}{364.805}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and its superclasses will be received.%
+  }
+  \HLAFixedBlock{89.997}{388.804}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a joined federate subscribes to multiple locations in an interaction class inheritance tree, each relevant%
+  }
+  \HLAFixedBlock{89.997}{400.804}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction sent shall result in at most one received interaction in the subscribing joined federate.%
+  }
+  \HLAFixedBlock{89.997}{424.804}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional passive subscription indicator indicates that this is a passive subscription state:%
+  }
+  \HLAFixedBlock{100.017}{436.803}{421.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{436.803}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The invocation of this service shall not cause the \emph{Turn Interactions On \textdagger{}} service to be invoked at any%
+  }
+  \HLAFixedBlock{121.978}{448.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    other joined federate, and%
+  }
+  \HLAFixedBlock{100.018}{460.803}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.941}{460.803}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If this invocation replaces a previous subscription that was active rather than passive, invocation of%
+  }
+  \HLAFixedBlock{121.978}{472.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    this service may cause the \emph{Turn Interactions Off \textdagger{}} service to be invoked at one or more other joined%
+  }
+  \HLAFixedBlock{121.978}{484.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates, depending on the joined federate’s publishing status.%
+  }
+  \HLAFixedBlock{89.998}{508.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional passive subscription indicator is not present or indicates that this is an active subscription, the%
+  }
+  \HLAFixedBlock{89.998}{520.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation of this service may cause the \emph{Turn Interactions On \textdagger{}} service to be invoked at one or more other%
+  }
+  \HLAFixedBlock{89.998}{532.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates.%
+  }
+  \HLAFixedBlock{89.998}{556.801}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a joined federate has the Service Reporting Switch Enabled, that joined federate shall not be able to%
+  }
+  \HLAFixedBlock{89.998}{568.801}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribe to the HLAmanager.HLAfederate.HLAreport.HLAreportServiceInvocation interaction class.%
+  }
+  \HLAServiceComponentHeadingAt{592.661}{%
+    5.10.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.018}{616.800}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{616.800}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction class designator.%
+  }
+  \HLAFixedBlock{100.018}{628.800}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.977}{628.800}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional passive subscription indicator.%
+  }
+  \HLAServiceComponentHeadingAt{652.660}{%
+    5.10.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.018}{676.799}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{676.799}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+\end{hlafixedpage}
+\clearpage

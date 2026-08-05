@@ -1,0 +1,239 @@
+\HLASourcePage{359}{358}
+\HLAServiceBookmark{12.9}{1}{Dynamic link compatibility}
+\HLAServiceBookmark{12.10}{1}{Callback representation of timestamps, order type, retraction handle and regions}
+\HLAServiceBookmark{12.11}{1}{Java}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{69.786}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    When in EVOKED mode, all RTI-initiated service invocations shall be made using the same thread%
+  }
+  \HLAFixedBlock{121.980}{81.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    context that was used in the invocation of the %
+  }
+  \HLAFixedBlock{305.460}{81.785}{298.540}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Evoke Callback/Evoke Multiple Callbacks}%
+  }
+  \HLAFixedBlock{474.540}{81.785}{129.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{100.020}{93.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{93.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall support concurrent joined federate-initiated service invocations to different%
+  }
+  \HLAFixedBlock{121.980}{105.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTIambassador instances. The calls shall be processed, in parallel or sequentially.%
+  }
+  \HLAFixedBlock{100.020}{117.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{117.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTIambassador instance shall be capable of creating concurrent federation executions.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{129.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall support invocation by a joined federate of a subset of joined federate-initiated services%
+  }
+  \HLAFixedBlock{121.980}{141.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    from within the context of an RTI-initiated service invocation on the same joined federate.%
+  }
+  \HLAFixedBlock{121.980}{153.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Invocation of joined federate-initiated services not within this subset shall generate the %
+  }
+  \HLAFixedBlock{486.540}{153.784}{117.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Call Not}%
+  }
+  \HLAFixedBlock{121.980}{165.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Allowed From Within Callback}%
+  }
+  \HLAFixedBlock{246.120}{165.784}{357.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+     exception. The allowed subset of joined federate-initiated services is%
+  }
+  \HLAFixedBlock{121.980}{177.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    all joined federate-initiated services except %
+  }
+  \HLAFixedBlock{295.500}{177.784}{308.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Connect}%
+  }
+  \HLAFixedBlock{328.800}{177.784}{275.200}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{333.660}{177.784}{270.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Disconnect}%
+  }
+  \HLAFixedBlock{378.660}{177.784}{225.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{383.519}{177.784}{220.481}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Join Federation Execution}%
+  }
+  \HLAFixedBlock{489.899}{177.784}{114.101}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{494.819}{177.784}{109.181}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Resign}%
+  }
+  \HLAFixedBlock{121.980}{189.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Federation Execution}%
+  }
+  \HLAFixedBlock{208.860}{189.784}{395.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{213.900}{189.784}{390.100}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Evoke Callback}%
+  }
+  \HLAFixedBlock{276.900}{189.784}{327.100}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{298.800}{189.784}{305.200}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Evoke Multiple Callbacks}%
+  }
+  \HLAFixedBlock{402.060}{189.784}{201.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{219.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.9 Dynamic link compatibility}%
+  }
+  \HLAFixedBlock{90.000}{244.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Application Programmer Interfaces (API) defined in this specification were designed to meet the%
+  }
+  \HLAFixedBlock{90.000}{256.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    purpose and objectives for dynamic link compatibility (DLC) of RTIs. In general, DLC is the ability to%
+  }
+  \HLAFixedBlock{90.000}{268.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    compile federate code that uses the RTI API such that RTI implementation libraries can be switchable at run-%
+  }
+  \HLAFixedBlock{90.000}{280.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    time without having to recompile the federate code. The precise details of dynamic link compatibility are%
+  }
+  \HLAFixedBlock{90.000}{292.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    language specific and are described in detail in the appropriate language sections.%
+  }
+  \HLAFixedBlock{90.000}{322.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{12.10 Callback representation of timestamps, order type, retraction handle and }}%
+  }
+  \HLAFixedBlock{90.000}{335.423}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{regions}}%
+  }
+  \HLAFixedBlock{90.000}{360.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The use of a timestamp in some object management services determines which parameters are represented in%
+  }
+  \HLAFixedBlock{90.000}{372.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the corresponding callback(s). When a timestamp is omitted when calling the %
+  }
+  \HLAFixedBlock{420.300}{372.785}{183.700}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Update Attribute Values}%
+  }
+  \HLAFixedBlock{519.479}{372.785}{84.521}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{89.999}{384.785}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Delete Object Instance}%
+  }
+  \HLAFixedBlock{181.739}{384.785}{422.261}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{186.838}{384.785}{417.162}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Interaction}%
+  }
+  \HLAFixedBlock{253.258}{384.785}{350.742}{\rmfamily\raggedright}{9.96}{11.16}{%
+     or %
+  }
+  \HLAFixedBlock{266.758}{384.785}{337.242}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Directed Interaction}%
+  }
+  \HLAFixedBlock{370.378}{384.785}{233.622}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services, the corresponding callbacks%
+  }
+  \HLAFixedBlock{89.998}{396.785}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    also omit a timestamp parameter, both sent and receive order parameters, as well as a retraction handle%
+  }
+  \HLAFixedBlock{89.998}{408.785}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    parameter. When the federate makes these service calls without a timestamp, there is no timestamp to%
+  }
+  \HLAFixedBlock{89.998}{420.785}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    deliver, the sent and receive order are always receive order and only TSO messages can be retracted. As a%
+  }
+  \HLAFixedBlock{89.998}{432.785}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    result, the APIs have one corresponding callback signature with these parameters and one without. When%
+  }
+  \HLAFixedBlock{89.998}{444.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    present in the signature, the retraction handle is provided as a reference (pointer in C++). The retraction%
+  }
+  \HLAFixedBlock{89.998}{456.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    handle parameter may have no value, indicated by a null reference, when the receive order is not TSO.%
+  }
+  \HLAFixedBlock{89.998}{468.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Similarly, if the signature includes a sent regions parameter, it is also provided as a reference that may have%
+  }
+  \HLAFixedBlock{89.998}{480.784}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    no value (no available dimensions or convey region designator switch is disabled, see 9.1.7).%
+  }
+  \HLAFixedBlock{90.000}{510.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.11 Java}%
+  }
+  \HLAFixedBlock{90.000}{535.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Java API shall be based on Java 11. The Java API is composed of interfaces and classes. Where an%
+  }
+  \HLAFixedBlock{90.000}{547.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface is specified, the RTI implementers shall furnish an implementation of the interface. For instance,%
+  }
+  \HLAFixedBlock{90.001}{560.393}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador}%
+  }
+  \HLAFixedBlock{167.941}{559.805}{436.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is specified as an interface. Therefore, an RTI implementer shall furnish an%
+  }
+  \HLAFixedBlock{90.001}{571.805}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation of the interface, for instance:%
+  }
+  \HLAFixedBlock{90.001}{596.392}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{package com.myrticompany.amazingrti; }%
+  }
+  \HLAFixedBlock{90.001}{608.392}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{public final class MyRTIimpl implements hla.rti1516\_2025.RTIambassador }%
+  }
+  \HLAFixedBlock{90.001}{620.392}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\{\textbackslash{}ldots\{\}\}}%
+  }
+  \HLAFixedBlock{90.001}{643.804}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Each such interface as specified remains part of the API. Thus, federate code can use the specified interface%
+  }
+  \HLAFixedBlock{90.001}{655.804}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    type. The %
+  }
+  \HLAFixedBlock{131.401}{656.391}{472.599}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{239.341}{655.804}{364.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , however, is an exception to this rule and shall be implemented by a%
+  }
+  \HLAFixedBlock{90.001}{667.803}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate developer. %
+  }
+  \HLAFixedBlock{90.001}{691.803}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Classes defined in the Java API, such as %
+  }
+  \HLAFixedBlock{253.681}{692.391}{350.319}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIexception}%
+  }
+  \HLAFixedBlock{325.621}{691.803}{278.379}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{345.421}{692.391}{258.579}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ResignAction}%
+  }
+  \HLAFixedBlock{417.361}{691.803}{186.639}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , shall be included in each%
+  }
+  \HLAFixedBlock{90.001}{703.803}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation of the RTI.%
+  }
+\end{hlafixedpage}
+\clearpage

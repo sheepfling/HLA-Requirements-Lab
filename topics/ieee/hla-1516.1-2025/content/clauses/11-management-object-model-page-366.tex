@@ -1,0 +1,311 @@
+\HLASourcePage{367}{366}
+\HLAServiceBookmark{12.11.5.11}{3}{Confirm Federation Restoration Request † service}
+\HLAServiceBookmark{12.11.5.12}{3}{Federate Restore Complete service}
+\HLAServiceBookmark{12.11.5.13}{3}{Federation Restored † service}
+\HLAServiceBookmark{12.11.5.14}{3}{Connect service}
+\HLAServiceBookmark{12.11.5.15}{3}{Unpublish Object Class Attributes service}
+\HLAServiceBookmark{12.11.5.16}{3}{Subscribe Object Class Attributes service}
+\HLAServiceBookmark{12.11.5.17}{3}{Unsubscribe Object Class Attributes service}
+\HLAServiceBookmark{12.11.5.18}{3}{Subscribe Interaction Class service}
+\HLAServiceBookmark{12.11.5.19}{3}{Reserve Object Instance Name service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.11 }%
+  }
+  \HLAFixedBlock{138.900}{69.646}{465.100}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Confirm Federation Restoration Request}}%
+  }
+  \HLAFixedBlock{331.620}{69.786}{272.380}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{ †}%
+  }
+  \HLAFixedBlock{339.120}{69.646}{264.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{89.999}{93.785}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service is mapped to the following two methods in the Java API: %
+  }
+  \HLAFixedBlock{372.059}{94.373}{231.941}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{requestFederationRestore-}%
+  }
+  \HLAFixedBlock{89.999}{106.373}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Succeeded()}%
+  }
+  \HLAFixedBlock{157.980}{105.786}{446.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{174.360}{106.373}{429.640}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{requestFederationRestoreFailed()}%
+  }
+  \HLAFixedBlock{366.300}{105.786}{237.700}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{129.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.12 }%
+  }
+  \HLAFixedBlock{139.440}{129.646}{464.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Federate Restore Complete}}%
+  }
+  \HLAFixedBlock{269.400}{129.646}{334.600}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{153.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service is mapped to the following two methods in the Java API: %
+  }
+  \HLAFixedBlock{372.061}{154.373}{231.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federateRestoreComplete()}%
+  }
+  \HLAFixedBlock{90.001}{165.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{106.440}{166.373}{497.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federateRestoreNotComplete()}%
+  }
+  \HLAFixedBlock{274.320}{165.786}{329.680}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{189.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.13 }%
+  }
+  \HLAFixedBlock{139.440}{189.646}{464.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Federation Restored}}%
+  }
+  \HLAFixedBlock{236.617}{189.785}{367.383}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{ †}%
+  }
+  \HLAFixedBlock{244.140}{189.646}{359.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{213.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service corresponds to two methods in the Java API: %
+  }
+  \HLAFixedBlock{380.820}{214.373}{223.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationRestored()}%
+  }
+  \HLAFixedBlock{507.600}{213.786}{96.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{226.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationNotRestored()}%
+  }
+  \HLAFixedBlock{227.940}{225.785}{376.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . A Restore Failure Reason (discussed in 12.11.6.12), in the form of a%
+  }
+  \HLAFixedBlock{90.000}{238.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RestoreFailureReason}%
+  }
+  \HLAFixedBlock{209.940}{237.785}{394.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , is passed as an argument to %
+  }
+  \HLAFixedBlock{326.340}{238.373}{277.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationNotRestored()}%
+  }
+  \HLAFixedBlock{464.280}{237.785}{139.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{261.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.14 }%
+  }
+  \HLAFixedBlock{139.440}{261.645}{464.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Connect}}%
+  }
+  \HLAFixedBlock{179.461}{261.645}{424.539}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{285.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition to the supplied arguments listed with the description of this service, the Java API requires the%
+  }
+  \HLAFixedBlock{90.001}{297.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate to supply an instance of the %
+  }
+  \HLAFixedBlock{274.921}{298.372}{329.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{interface }%
+  }
+  \HLAFixedBlock{347.931}{298.372}{256.069}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{455.882}{297.784}{148.118}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The optional%
+  }
+  \HLAFixedBlock{90.002}{310.372}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiConfiguration}%
+  }
+  \HLAFixedBlock{185.942}{309.784}{418.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+     parameter can contain RTI implementation-specific configuration information for%
+  }
+  \HLAFixedBlock{90.002}{321.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    configuration name, RTI address, and additional settings. Empty strings in the %
+  }
+  \HLAFixedBlock{426.062}{322.372}{177.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiConfiguration}%
+  }
+  \HLAFixedBlock{90.002}{333.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    parameter shall be used to indicate the default local settings.%
+  }
+  \HLAFixedBlock{90.002}{357.644}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.15 }%
+  }
+  \HLAFixedBlock{139.442}{357.644}{464.558}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Unpublish Object Class Attributes}}%
+  }
+  \HLAFixedBlock{301.263}{357.644}{302.737}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.003}{381.783}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional argument representing the set of attribute designators is implemented in the Java API as two%
+  }
+  \HLAFixedBlock{90.003}{393.783}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods: %
+  }
+  \HLAFixedBlock{130.383}{394.370}{473.617}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unpublishObjectClass()}%
+  }
+  \HLAFixedBlock{262.323}{393.783}{341.677}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{284.283}{394.370}{319.717}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unpublishObjectClassAttributes()}%
+  }
+  \HLAFixedBlock{476.163}{393.783}{127.837}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The latter%
+  }
+  \HLAFixedBlock{90.003}{405.783}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of the two takes an %
+  }
+  \HLAFixedBlock{168.003}{406.370}{435.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AttributeHandleSet}%
+  }
+  \HLAFixedBlock{275.942}{405.783}{328.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as an argument.%
+  }
+  \HLAFixedBlock{90.002}{429.643}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.16 }%
+  }
+  \HLAFixedBlock{139.443}{429.643}{464.557}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Subscribe Object Class Attributes}}%
+  }
+  \HLAFixedBlock{300.723}{429.643}{303.277}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.003}{453.782}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional passive subscription indicator and optional update rate designator are implemented in the Java%
+  }
+  \HLAFixedBlock{90.003}{465.782}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    API as two overloaded methods: %
+  }
+  \HLAFixedBlock{243.723}{466.369}{360.277}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{subscribeObjectClassAttributes()}%
+  }
+  \HLAFixedBlock{440.940}{465.786}{163.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{462.060}{466.373}{141.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{subscribe-}%
+  }
+  \HLAFixedBlock{90.000}{478.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ObjectClassAttributesPassively()}%
+  }
+  \HLAFixedBlock{281.881}{477.785}{322.119}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . One version of each method has only the required%
+  }
+  \HLAFixedBlock{90.000}{489.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    arguments, and the second version adds the optional %
+  }
+  \HLAFixedBlock{301.081}{490.373}{302.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{String updateRateDesignator}%
+  }
+  \HLAFixedBlock{462.961}{489.785}{141.039}{\rmfamily\raggedright}{9.96}{11.16}{%
+     argument.%
+  }
+  \HLAFixedBlock{90.000}{513.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.17 }%
+  }
+  \HLAFixedBlock{139.441}{513.645}{464.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Unsubscribe Object Class Attributes}}%
+  }
+  \HLAFixedBlock{312.901}{513.645}{291.099}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{537.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional argument representing the set of attribute designators is implemented in the Java API as two%
+  }
+  \HLAFixedBlock{90.001}{549.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods: %
+  }
+  \HLAFixedBlock{130.502}{550.372}{473.498}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unsubscribeObjectClass()}%
+  }
+  \HLAFixedBlock{274.382}{549.784}{329.618}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{296.522}{550.372}{307.478}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{unsubscribeObjectClassAttributes()}%
+  }
+  \HLAFixedBlock{500.402}{549.784}{103.598}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The%
+  }
+  \HLAFixedBlock{90.002}{561.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    latter of the two takes an %
+  }
+  \HLAFixedBlock{191.043}{562.372}{412.957}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AttributeHandleSet}%
+  }
+  \HLAFixedBlock{298.983}{561.784}{305.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as an argument.%
+  }
+  \HLAFixedBlock{90.003}{585.644}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.18 }%
+  }
+  \HLAFixedBlock{139.444}{585.644}{464.556}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Subscribe Interaction Class}}%
+  }
+  \HLAFixedBlock{271.084}{585.644}{332.916}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.004}{609.783}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional passive subscription indicator is implemented in the Java API as two methods:%
+  }
+  \HLAFixedBlock{90.004}{622.371}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{subscribeInteractionClass()}%
+  }
+  \HLAFixedBlock{251.884}{621.783}{352.116}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{271.324}{622.371}{332.676}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{subscribeInteractionClassPassively()}%
+  }
+  \HLAFixedBlock{487.204}{621.783}{116.796}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.004}{645.643}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.19 }%
+  }
+  \HLAFixedBlock{139.445}{645.643}{464.555}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Reserve Object Instance Name}}%
+  }
+  \HLAFixedBlock{285.545}{645.643}{318.455}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.005}{669.782}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional single name parameter or list of names parameter is implemented in the Java API as two%
+  }
+  \HLAFixedBlock{90.005}{681.782}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods: %
+  }
+  \HLAFixedBlock{139.686}{682.370}{464.314}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{reserveObjectInstanceName()}%
+  }
+  \HLAFixedBlock{314.645}{681.782}{289.355}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{342.126}{682.370}{261.874}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{reserveMultipleObjectInstance-}%
+  }
+  \HLAFixedBlock{90.005}{694.370}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Name()}%
+  }
+  \HLAFixedBlock{126.006}{693.782}{477.994}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+\end{hlafixedpage}
+\clearpage

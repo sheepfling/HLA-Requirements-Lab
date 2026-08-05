@@ -1,0 +1,85 @@
+\HLASourcePage{29}{28}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90}{69.79}{432}{\rmfamily}{9.96}{12}{%
+    the object instance (however, the object instance is not to be eliminated and may be rediscovered). \emph{See also}:\linebreak
+    \textbf{delete}.%
+  }
+
+  \HLADefinitionNoteAt{90}{105.98}{NOTE---See 6.18.}
+
+  \HLADefinitionAt{127.81}{%
+    \HLADefinitionAnchor{logical-time}\HLADefinitionTerm{logical time}: The representation of discrete points on the time axis. Logical time is used to represent a\linebreak
+    federate's time position and the timestamps of messages.%
+  }
+
+  \HLADefinitionAt{163.81}{%
+    \HLADefinitionAnchor{logical-time-interval}\HLADefinitionTerm{logical time interval}: The representation of the distance between two points on the time axis. Logical time\linebreak
+    interval is used to represent a time-regulating federate's lookahead and by the RTI to perform arithmetic on\linebreak
+    logical time values.%
+  }
+
+  \HLADefinitionAt{211.80}{%
+    \HLADefinitionAnchor{lookahead}\HLADefinitionTerm{lookahead}: A logical time interval provided by joined federates that become time-regulating. When added\linebreak
+    to the time-regulating joined federate's time position, the resulting timestamp is used to calculate the bound\linebreak
+    on the timestamps that the time-regulating joined federate can use to send timestamp order (TSO) messages.%
+  }
+
+  \HLADefinitionAt{259.80}{%
+    \HLADefinitionAnchor{lost-federate}\HLADefinitionTerm{lost federate}: A previously joined federate that, as a result of a fault, can no longer continue in the\linebreak
+    federation execution in a High Level Architecture (HLA) compliant manner.%
+  }
+
+  \HLADefinitionAt{295.80}{%
+    \HLADefinitionAnchor{management-object-model}\HLADefinitionTerm{Management Object Model (MOM)}: A group of predefined High Level Architecture (HLA) constructs\linebreak
+    (object and interaction classes) that provide the following:%
+  }
+
+  \HLAFixedAlphaList{100.02}{331.80}{421.98}{0}{%
+    \item Access to federation execution operating information
+    \item Insight into the operations of joined federates and the runtime infrastructure (RTI)
+    \item Control of the functioning of the RTI, the federation execution, and the individual joined federates
+  }
+
+  \HLADefinitionAt{379.80}{%
+    \HLADefinitionAnchor{management-object-model-and-initialization-module}\HLADefinitionTerm{Management Object Model (MOM) and Initialization Module (MIM)}: A subset of the federation object\linebreak
+    model (FOM) that contains object model template (OMT) tables that describe the High Level Architecture\linebreak
+    (HLA) MOM. The MIM also contains additional predefined HLA constructs such as object and interaction\linebreak
+    roots, data types, transportation types, and dimensions. HLA specifies a standard MIM that is incorporated\linebreak
+    into all FOM Document Data (FDD) automatically by the runtime infrastructure (RTI). The standard MIM\linebreak
+    can be replaced with a user-supplied MIM containing the standard MIM plus extensions.%
+  }
+
+  \HLADefinitionAt{463.80}{%
+    \HLADefinitionAnchor{message}\HLADefinitionTerm{message}: A change of object instance attribute value(s), an interaction, a directed interaction, or a deletion\linebreak
+    of an existing object instance, often associated with a particular point on the time axis, as denoted by the\linebreak
+    associated timestamp.%
+  }
+
+  \HLADefinitionAt{511.80}{%
+    \HLADefinitionAnchor{null-designator}\HLADefinitionTerm{null designator}: A designator reserved to indicate an empty value that is distinguishable from all other\linebreak
+    designators. A null designator is guaranteed to compare unequal to any other designator with a nonempty\linebreak
+    value.%
+  }
+
+  \HLADefinitionAt{559.80}{%
+    \HLADefinitionAnchor{object-class}\HLADefinitionTerm{object class}: A fundamental element of a conceptual representation for a federate that reflects the real world\linebreak
+    at levels of abstraction and resolution appropriate for federate interoperability. An object class is a template\linebreak
+    for a set of characteristics that is common to a group of object instances. These characteristics correspond to\linebreak
+    the class attributes and class directed interactions that individual federates may publish and to which other\linebreak
+    federates may subscribe.%
+  }
+
+  \HLADefinitionAt{631.80}{%
+    \HLADefinitionAnchor{object-instance}\HLADefinitionTerm{object instance}: A unique instantiation of an object class that is independent of all other instances of that\linebreak
+    object class. At any point during a federation execution, the state of a High Level Architecture (HLA) object\linebreak
+    instance is defined as the collection of the values of all its instance attributes.%
+  }
+
+  \HLADefinitionAt{679.80}{%
+    \HLADefinitionAnchor{object-model}\HLADefinitionTerm{object model}: A system specification defined primarily by class characteristics and relationships. The High\linebreak
+    Level Architecture (HLA) idea of an object model is similar in many ways, but not identical, to the common\linebreak
+    idea of an object model in object-oriented literature.%
+  }
+\end{hlafixedpage}
+\clearpage

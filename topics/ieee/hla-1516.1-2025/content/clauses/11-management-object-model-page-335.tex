@@ -1,0 +1,186 @@
+\HLASourcePage{336}{335}
+\special{pdf:put @thispage <</Rotate 90>>}
+\thispagestyle{hla-empty}
+\begin{hlafixedpage}
+  \HLARotatedLine{30.258}{435.300}{\sffamily}{7.98}{%
+    IEEE Std 1516.1-2025%
+  }
+  \HLARotatedLine{40.278}{543.000}{\sffamily}{7.98}{%
+    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---%
+  }
+  \HLARotatedLine{50.297}{451.920}{\sffamily}{7.98}{%
+    Federate Interface Specification%
+  }
+  \HLARotatedLine{546.226}{406.560}{\rmfamily}{9.96}{%
+    335%
+  }
+  \HLARotatedLine{559.878}{475.740}{\sffamily}{7.98}{%
+    Copyright \textcopyright{} 2025 IEEE. All rights reserved.%
+  }
+  \HLARotatedLine{127.750}{713.940}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLAreport %
+  }
+  \HLARotatedLine{135.730}{713.940}{\rmfamily}{7.98}{%
+    (cont.)%
+  }
+  \HLARotatedLine{127.750}{563.940}{\rmfamily}{7.98}{%
+    HLAreportObjectInstancesReflected%
+  }
+  \HLARotatedLine{127.750}{395.183}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{135.730}{395.160}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLArequestObjectInstancesReflected. It shall report the %
+  }
+  \HLARotatedLine{143.710}{395.160}{\rmfamily}{7.98}{%
+    number of object instances (by registered class of the object instances) for which the joined %
+  }
+  \HLARotatedLine{151.750}{395.160}{\rmfamily}{7.98}{%
+    federate has had a %
+  }
+  \HLARotatedLine{151.750}{336.780}{\rmfamily}{7.98}{%
+    \emph{Reflect Attribute Values † }%
+  }
+  \HLARotatedLine{151.750}{254.220}{\rmfamily}{7.98}{%
+    service invocation. If the joined federate has no object %
+  }
+  \HLARotatedLine{159.730}{395.160}{\rmfamily}{7.98}{%
+    instances that are reflected for a given transport type, then a single interaction shall be sent as a %
+  }
+  \HLARotatedLine{167.710}{395.160}{\rmfamily}{7.98}{%
+    NULL response with the HLAobjectInstanceCounts parameter having an undefined value.%
+  }
+  \HLARotatedLine{181.750}{563.941}{\rmfamily}{7.98}{%
+    HLAreportUpdatesSent%
+  }
+  \HLARotatedLine{181.750}{395.159}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{189.730}{395.160}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLArequestUpdatesSent. It shall report the number of %
+  }
+  \HLARotatedLine{197.710}{395.160}{\rmfamily}{7.98}{%
+    updates sent (by registered class of the object instances of the updates) by the joined federate since %
+  }
+  \HLARotatedLine{205.750}{395.160}{\rmfamily}{7.98}{%
+    the beginning of the federation execution. One interaction of this class shall be sent by the RTI for %
+  }
+  \HLARotatedLine{213.730}{395.160}{\rmfamily}{7.98}{%
+    each transportation type used. If the joined federate has no updates sent for a given transportation %
+  }
+  \HLARotatedLine{221.710}{395.160}{\rmfamily}{7.98}{%
+    type, then a single interaction shall be sent as a NULL response with the HLAupdateCounts %
+  }
+  \HLARotatedLine{229.749}{395.159}{\rmfamily}{7.98}{%
+    parameter having an undefined value.%
+  }
+  \HLARotatedLine{243.730}{563.940}{\rmfamily}{7.98}{%
+    HLAreportReflectionsReceived%
+  }
+  \HLARotatedLine{243.730}{395.206}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{251.769}{395.159}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLArequestReflectionsReceived. It shall report the %
+  }
+  \HLARotatedLine{259.750}{395.159}{\rmfamily}{7.98}{%
+    number of reflections received (by registered class of the object instances of the reflects) by the %
+  }
+  \HLARotatedLine{267.730}{395.159}{\rmfamily}{7.98}{%
+    joined federate since the beginning of the federation execution. One interaction of this class shall %
+  }
+  \HLARotatedLine{275.769}{395.159}{\rmfamily}{7.98}{%
+    be sent by the RTI for each transportation type used. If the joined federate has no reflections %
+  }
+  \HLARotatedLine{283.749}{395.159}{\rmfamily}{7.98}{%
+    received for a given transportation type, then a single interaction shall be sent as a NULL response %
+  }
+  \HLARotatedLine{291.729}{395.159}{\rmfamily}{7.98}{%
+    with the HLAreflectCounts parameter having an undefined value.%
+  }
+  \HLARotatedLine{305.769}{563.940}{\rmfamily}{7.98}{%
+    HLAreportInteractionsSent%
+  }
+  \HLARotatedLine{305.769}{395.211}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{313.749}{395.159}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLArequestInteractionsSent. It shall report the number %
+  }
+  \HLARotatedLine{321.729}{395.159}{\rmfamily}{7.98}{%
+    of interactions sent (by sent class of the interactions) by the joined federate since the beginning of %
+  }
+  \HLARotatedLine{329.769}{395.159}{\rmfamily}{7.98}{%
+    the federation execution. This count shall include interactions sent with region. One interaction of %
+  }
+  \HLARotatedLine{337.749}{395.159}{\rmfamily}{7.98}{%
+    this class shall be sent by the RTI for each transportation type used. If the joined federate has no %
+  }
+  \HLARotatedLine{345.729}{395.159}{\rmfamily}{7.98}{%
+    interactions sent for a given transportation type, then a single interaction shall be sent as a NULL %
+  }
+  \HLARotatedLine{353.769}{395.160}{\rmfamily}{7.98}{%
+    response with the HLAinteractionCounts parameter having an undefined value.%
+  }
+  \HLARotatedLine{367.749}{563.939}{\rmfamily}{7.98}{%
+    HLAreportInteractionsReceived%
+  }
+  \HLARotatedLine{367.749}{395.238}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{375.729}{395.159}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLArequestInteractionsReceived. It shall report the %
+  }
+  \HLARotatedLine{383.769}{395.159}{\rmfamily}{7.98}{%
+    number of interactions received (by sent class of the interactions) by the joined federate since the %
+  }
+  \HLARotatedLine{391.749}{395.160}{\rmfamily}{7.98}{%
+    beginning of the federation execution. One interaction of this class shall be sent by the RTI for %
+  }
+  \HLARotatedLine{399.729}{395.160}{\rmfamily}{7.98}{%
+    each transportation type used. If the joined federate has no interactions received for a given %
+  }
+  \HLARotatedLine{407.769}{395.160}{\rmfamily}{7.98}{%
+    transportation type, then a single interaction shall be sent as a NULL response with the %
+  }
+  \HLARotatedLine{415.749}{395.160}{\rmfamily}{7.98}{%
+    HLAinteractionCounts parameter having an undefined value.%
+  }
+  \HLARotatedLine{429.729}{563.941}{\rmfamily}{7.98}{%
+    HLAreportDirectedInteractionsSent%
+  }
+  \HLARotatedLine{429.729}{395.157}{\rmfamily}{7.98}{%
+    The interaction shall be sent by the RTI in response to an interaction of class %
+  }
+  \HLARotatedLine{437.769}{395.160}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLArequest.HLAreportDirectedInteractionsSent. It shall report the %
+  }
+  \HLARotatedLine{445.749}{395.160}{\rmfamily}{7.98}{%
+    number of directed interactions sent (by sent class of the interactions) by the joined federate since %
+  }
+  \HLARotatedLine{453.729}{395.160}{\rmfamily}{7.98}{%
+    the beginning of the federation execution. One interaction of this class shall be sent by the RTI for %
+  }
+  \HLARotatedLine{461.769}{395.160}{\rmfamily}{7.98}{%
+    each transportation type used. If the joined federate has no directed interactions sent for a given %
+  }
+  \HLARotatedLine{469.749}{395.160}{\rmfamily}{7.98}{%
+    transportation type, then a single interaction shall be sent as a NULL response with the %
+  }
+  \HLARotatedLine{477.729}{395.160}{\rmfamily}{7.98}{%
+    HLAinteractionCounts parameter having an undefined value.%
+  }
+  \HLARotatedLine{88.166}{544.980}{\sffamily\bfseries}{9.96}{%
+    \textbf{Table 18---MOM interaction class definitions table  }%
+  }
+  \HLARotatedLine{88.166}{304.680}{\sffamily\bfseries}{9.96}{%
+    \textbf{\emph{(continued)}}%
+  }
+  \HLARotatedLine{111.730}{576.660}{\rmfamily\bfseries}{7.98}{%
+    \textbf{Interaction}%
+  }
+  \HLARotatedLine{111.730}{255.540}{\rmfamily\bfseries}{7.98}{%
+    \textbf{Semantics}%
+  }
+\end{hlafixedpage}
+\clearpage

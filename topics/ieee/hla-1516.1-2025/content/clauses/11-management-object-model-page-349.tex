@@ -1,0 +1,201 @@
+\HLASourcePage{350}{349}
+\special{pdf:put @thispage <</Rotate 90>>}
+\thispagestyle{hla-empty}
+\begin{hlafixedpage}
+  \HLARotatedLine{30.258}{435.300}{\sffamily}{7.98}{%
+    IEEE Std 1516.1-2025%
+  }
+  \HLARotatedLine{40.278}{543.000}{\sffamily}{7.98}{%
+    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---%
+  }
+  \HLARotatedLine{50.297}{451.920}{\sffamily}{7.98}{%
+    Federate Interface Specification%
+  }
+  \HLARotatedLine{546.226}{406.560}{\rmfamily}{9.96}{%
+    349%
+  }
+  \HLARotatedLine{559.878}{475.740}{\sffamily}{7.98}{%
+    Copyright \textcopyright{} 2025 IEEE. All rights reserved.%
+  }
+  \HLARotatedLine{129.250}{719.280}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLAreport %
+  }
+  \HLARotatedLine{137.230}{719.280}{\rmfamily}{7.98}{%
+    (cont.)%
+  }
+  \HLARotatedLine{129.250}{574.140}{\rmfamily}{7.98}{%
+    HLAreportServiceInvocation (cont.)%
+  }
+  \HLARotatedLine{129.250}{415.075}{\rmfamily}{7.98}{%
+    HLAreturnedArgument%
+  }
+  \HLARotatedLine{129.250}{285.058}{\rmfamily}{7.98}{%
+    Textual depiction of the arguments returned by the service %
+  }
+  \HLARotatedLine{137.230}{284.940}{\rmfamily}{7.98}{%
+    invocation, following the format specified in IEEE 1516.1 Table %
+  }
+  \HLARotatedLine{145.210}{284.940}{\rmfamily}{7.98}{%
+    5. The argument type is Null if the service does not normally %
+  }
+  \HLARotatedLine{153.250}{284.940}{\rmfamily}{7.98}{%
+    return a value or if the HLAsuccessIndicator is HLAfalse. %
+  }
+  \HLARotatedLine{161.230}{284.940}{\rmfamily}{7.98}{%
+    Services that return multiple arguments will use the appropriate %
+  }
+  \HLARotatedLine{169.210}{284.940}{\rmfamily}{7.98}{%
+    composite HLAargumentType.%
+  }
+  \HLARotatedLine{180.730}{415.020}{\rmfamily}{7.98}{%
+    HLAexception%
+  }
+  \HLARotatedLine{180.730}{284.986}{\rmfamily}{7.98}{%
+    Textual description of the exception raised by this service %
+  }
+  \HLARotatedLine{188.710}{284.940}{\rmfamily}{7.98}{%
+    invocation if HLAsuccessIndicator is HLAfalse; otherwise, the %
+  }
+  \HLARotatedLine{196.750}{284.940}{\rmfamily}{7.98}{%
+    textual depiction is empty.%
+  }
+  \HLARotatedLine{208.210}{415.020}{\rmfamily}{7.98}{%
+    HLAserialNumber%
+  }
+  \HLARotatedLine{208.210}{284.972}{\rmfamily}{7.98}{%
+    This is a per-joined federate serial number that shall start at zero %
+  }
+  \HLARotatedLine{216.250}{284.940}{\rmfamily}{7.98}{%
+    and shall increment by 1 for each %
+  }
+  \HLARotatedLine{224.230}{284.940}{\rmfamily}{7.98}{%
+    HLAmanager.HLAfederate.HLAreport.HLAreportServiceInvoca%
+  }
+  \HLARotatedLine{232.270}{284.940}{\rmfamily}{7.98}{%
+    tion interaction that represents service invocations to or from the %
+  }
+  \HLARotatedLine{240.250}{284.940}{\rmfamily}{7.98}{%
+    respective joined federate.%
+  }
+  \HLARotatedLine{251.770}{574.141}{\rmfamily}{7.98}{%
+    HLAreportMOMexception%
+  }
+  \HLARotatedLine{251.770}{415.015}{\rmfamily}{7.98}{%
+    HLAservice%
+  }
+  \HLARotatedLine{251.770}{284.924}{\rmfamily}{7.98}{%
+    In the case in which the HLAreportMOMexception interaction is %
+  }
+  \HLARotatedLine{259.750}{284.940}{\rmfamily}{7.98}{%
+    sent by the RTI because a service interaction (an interaction that %
+  }
+  \HLARotatedLine{267.730}{284.940}{\rmfamily}{7.98}{%
+    imitates a federate’s invocation of an HLA service) was sent and %
+  }
+  \HLARotatedLine{275.769}{284.941}{\rmfamily}{7.98}{%
+    not all of the service’s preconditions are met, the value of this %
+  }
+  \HLARotatedLine{283.749}{284.941}{\rmfamily}{7.98}{%
+    parameter shall be the name of the %
+  }
+  \HLARotatedLine{291.729}{284.941}{\rmfamily}{7.98}{%
+    HLAinteractionRoot.HLA.Manager.HLAfederate.HLAservice %
+  }
+  \HLARotatedLine{299.769}{284.941}{\rmfamily}{7.98}{%
+    interaction that was sent. %
+  }
+  \HLARotatedLine{315.729}{284.941}{\rmfamily}{7.98}{%
+    In the case in which the HLAreportMOMexception interaction is %
+  }
+  \HLARotatedLine{323.769}{284.941}{\rmfamily}{7.98}{%
+    sent by the RTI because a MOM interaction without all of the %
+  }
+  \HLARotatedLine{331.749}{284.941}{\rmfamily}{7.98}{%
+    necessary parameters was sent, the value of this parameter shall %
+  }
+  \HLARotatedLine{339.729}{284.941}{\rmfamily}{7.98}{%
+    be the name of the class of the interaction that was sent.%
+  }
+  \HLARotatedLine{355.749}{284.940}{\rmfamily}{7.98}{%
+    The name of the interaction class provided shall always be fully %
+  }
+  \HLARotatedLine{363.729}{284.940}{\rmfamily}{7.98}{%
+    qualified, as defined in the OMT, so as to avoid potential %
+  }
+  \HLARotatedLine{371.769}{284.940}{\rmfamily}{7.98}{%
+    ambiguities.%
+  }
+  \HLARotatedLine{383.229}{415.021}{\rmfamily}{7.98}{%
+    HLAexception%
+  }
+  \HLARotatedLine{383.229}{284.987}{\rmfamily}{7.98}{%
+    Textual depiction of the problem/exception.%
+  }
+  \HLARotatedLine{394.749}{415.021}{\rmfamily}{7.98}{%
+    HLAparameterError%
+  }
+  \HLARotatedLine{394.749}{284.955}{\rmfamily}{7.98}{%
+    HLAtrue if there was an incorrect number of interaction %
+  }
+  \HLARotatedLine{402.729}{284.941}{\rmfamily}{7.98}{%
+    parameters or a parameter was incorrectly formatted. HLAfalse %
+  }
+  \HLARotatedLine{410.769}{284.941}{\rmfamily}{7.98}{%
+    otherwise.%
+  }
+  \HLARotatedLine{422.229}{574.141}{\rmfamily}{7.98}{%
+    HLAreportFederateLost%
+  }
+  \HLARotatedLine{422.229}{415.080}{\rmfamily}{7.98}{%
+    HLAfederateName%
+  }
+  \HLARotatedLine{422.229}{284.941}{\rmfamily}{7.98}{%
+    Name of the lost joined federate%
+  }
+  \HLARotatedLine{433.749}{415.022}{\rmfamily}{7.98}{%
+    HLAtimestamp%
+  }
+  \HLARotatedLine{433.749}{285.010}{\rmfamily}{7.98}{%
+    Last known time position to which the lost joined federate was %
+  }
+  \HLARotatedLine{441.729}{284.942}{\rmfamily}{7.98}{%
+    granted%
+  }
+  \HLARotatedLine{453.249}{415.023}{\rmfamily}{7.98}{%
+    HLAfaultDescription%
+  }
+  \HLARotatedLine{453.249}{284.957}{\rmfamily}{7.98}{%
+    Textual description of the fault%
+  }
+  \HLARotatedLine{464.769}{574.142}{\rmfamily}{7.98}{%
+    HLAreportFOMmoduleData %
+  }
+  \HLARotatedLine{464.769}{415.022}{\rmfamily}{7.98}{%
+    HLAFOMmoduleIndicator%
+  }
+  \HLARotatedLine{464.769}{284.976}{\rmfamily}{7.98}{%
+    Indicates order number of reported FOM module.%
+  }
+  \HLARotatedLine{476.229}{415.022}{\rmfamily}{7.98}{%
+    HLAFOMmoduleData%
+  }
+  \HLARotatedLine{476.229}{284.897}{\rmfamily}{7.98}{%
+    Contents of the reported FOM module.%
+  }
+  \HLARotatedLine{88.166}{530.100}{\sffamily\bfseries}{9.96}{%
+    \textbf{Table 20---MOM parameter definitions table  }%
+  }
+  \HLARotatedLine{88.166}{319.560}{\sffamily\bfseries}{9.96}{%
+    \textbf{\emph{(continued)}}%
+  }
+  \HLARotatedLine{115.750}{579.240}{\rmfamily\bfseries}{7.98}{%
+    \textbf{Class}%
+  }
+  \HLARotatedLine{115.750}{371.175}{\rmfamily\bfseries}{7.98}{%
+    \textbf{Parameter}%
+  }
+  \HLARotatedLine{115.750}{197.788}{\rmfamily\bfseries}{7.98}{%
+    \textbf{Semantics}%
+  }
+\end{hlafixedpage}
+\clearpage

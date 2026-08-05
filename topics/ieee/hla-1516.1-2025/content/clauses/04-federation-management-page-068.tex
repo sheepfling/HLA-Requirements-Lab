@@ -1,0 +1,182 @@
+\HLASourcePage{69}{68}
+\HLAServiceBookmark{4.21.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.21.3}{2}{Preconditions}
+\HLAServiceBookmark{4.21.4}{2}{Postconditions}
+\HLAServiceBookmark{4.21.5}{2}{Exceptions}
+\HLAServiceBookmark{4.21.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.22}{1}{Federate Save Complete service}
+\HLAServiceBookmark{4.22.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.22.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.22.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.21.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    4.21.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{141.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{153.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{153.784}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{165.784}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{177.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.937}{177.784}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has received an \emph{Initiate Federate Save \textdagger{}} invocation.%
+  }
+  \HLAFixedBlock{100.020}{189.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.976}{189.784}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is ready to start saving its state.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{201.784}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{223.664}{%
+    4.21.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{246.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{246.783}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI has been informed that the joined federate has begun saving its state.%
+  }
+  \HLAServiceComponentHeadingAt{270.643}{%
+    4.21.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{294.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{294.782}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Save not initiated.%
+  }
+  \HLAFixedBlock{100.020}{306.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{306.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{318.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{318.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{330.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{330.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{342.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.981}{342.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{364.662}{%
+    4.21.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{387.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{387.781}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{416.423}{%
+    4.22 \emph{Federate Save Complete} service%
+  }
+  \HLAFixedBlock{90.000}{441.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Federate Save Complete} service shall notify the RTI that the joined federate has completed its save%
+  }
+  \HLAFixedBlock{90.000}{453.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attempt. The save-success indicator shall inform the RTI that the joined federate save either succeeded or%
+  }
+  \HLAFixedBlock{89.999}{465.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    failed.%
+  }
+  \HLAServiceComponentHeadingAt{489.645}{%
+    4.22.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.019}{513.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{513.784}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save-success indicator.%
+  }
+  \HLAServiceComponentHeadingAt{537.645}{%
+    4.22.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.019}{561.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{561.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{585.644}{%
+    4.22.3 Preconditions%
+  }
+  \HLAFixedBlock{100.019}{609.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{609.783}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.019}{621.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.938}{621.783}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.019}{633.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{633.783}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.019}{645.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{645.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has invoked the \emph{Federate Save Begun} service for this save.%
+  }
+  \HLAFixedBlock{100.018}{657.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.968}{657.782}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has completed the attempt to save its state.%
+  }
+  \HLAFixedBlock{100.018}{669.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.947}{669.782}{400.053}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

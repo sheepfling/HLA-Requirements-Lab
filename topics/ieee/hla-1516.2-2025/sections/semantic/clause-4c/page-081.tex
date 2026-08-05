@@ -1,0 +1,178 @@
+% M4 semantic reconstruction of physical page 81 / printed page 80.
+\begin{HLAClauseSemanticPage}{80}
+\HLAStableID{m4.page.081}
+\HLAStableID{m4.p081.t01}
+\HLATableGridCell{91.965}{437.895}{428.100}{14.295}
+\HLATableGridCell{91.965}{452.190}{52.635}{13.980}
+\HLATableGridCell{144.600}{452.190}{25.200}{13.980}
+\HLATableGridCell{169.800}{452.190}{25.200}{13.980}
+\HLATableGridCell{195.000}{452.190}{25.200}{13.980}
+\HLATableGridCell{220.200}{452.190}{25.200}{13.980}
+\HLATableGridCell{245.400}{452.190}{21.600}{13.980}
+\HLATableGridCell{267.000}{452.190}{25.200}{13.980}
+\HLATableGridCell{292.200}{452.190}{25.200}{13.980}
+\HLATableGridCell{317.400}{452.190}{25.200}{13.980}
+\HLATableGridCell{342.600}{452.190}{25.200}{13.980}
+\HLATableGridCell{367.800}{452.190}{25.200}{13.980}
+\HLATableGridCell{393.000}{452.190}{25.200}{13.980}
+\HLATableGridCell{418.200}{452.190}{25.200}{13.980}
+\HLATableGridCell{443.400}{452.190}{25.200}{13.980}
+\HLATableGridCell{468.600}{452.190}{25.200}{13.980}
+\HLATableGridCell{493.800}{452.190}{26.265}{13.980}
+\HLATableGridCell{91.965}{466.170}{52.635}{11.355}
+\HLATableGridCell{144.600}{466.170}{25.200}{11.355}
+\HLATableGridCell{169.800}{466.170}{25.200}{11.355}
+\HLATableGridCell{195.000}{466.170}{25.200}{11.355}
+\HLATableGridCell{220.200}{466.170}{97.200}{11.355}
+\HLATableGridCell{317.400}{466.170}{202.665}{11.355}
+\HLATableGridOuter{91.965}{437.895}{428.100}{39.630}
+\HLATableHeavyHorizontalRule{91.965}{452.190}{428.100}
+\HLAStableID{m4.p081.b01}
+\HLAClausePlacedBlock{100.020}{69.786}{421.980}{%
+  \HLAClauseParagraph{\makebox[256.391bp][l]{\textit{Offset}\HLATextSub{\textit{i}}\hfill{}is the offset of the component\space{}\textit{i}\space{}of the record (in bytes)}\newline{}\makebox[255.234bp][l]{\textit{Size}\HLATextSub{\textit{i}}\hfill{}is the size of the component\space{}\textit{i}\space{}of the record (in bytes)}\newline{}\makebox[290.495bp][l]{V\HLATextSub{\textit{i+}}\HLATextSub{1}\hfill{}is the octet boundary value of component (\textit{i}\space{}+ 1) of the record}}
+}
+\HLAStableID{m4.p081.b02}
+\HLAClausePlacedBlock{90.000}{123.306}{432.000}{%
+  \HLAClauseParagraph{\resizebox{431.955bp}{!}{\mbox{Padding bytes shall not be added after the last component of the record. The size of a fixed record shall}}\newline{}\resizebox{133.575bp}{!}{\mbox{include any added padding bytes.}}}
+}
+\HLAStableID{m4.p081.b03}
+\HLAClausePlacedBlock{89.999}{159.305}{432.084}{%
+  \HLAClauseParagraph{\resizebox{432.084bp}{!}{\mbox{For example, consider a fixed record using the\space{}\textit{HLAfixedRecord}\space{}encoding that consists of a component}}\newline{}\resizebox{431.976bp}{!}{\mbox{based on\space{}\textit{HLAoctet,}\space{}an\space{}\textit{HLAboolean}\space{}component, and a component based on\space{}\textit{HLAfloat64BE}, in that order.}}\newline{}\resizebox{156.252bp}{!}{\mbox{The encoding calculation is as follows:}}}
+}
+\HLAStableID{m4.p081.b04}
+\HLAClausePlacedBlock{100.019}{207.305}{421.981}{%
+  \HLAClauseParagraph{\resizebox{167.764bp}{!}{\mbox{Field 1: (\textit{Offset}\HLATextSub{1}\space{}+\space{}\textit{Size}\HLATextSub{1}\space{}+\space{}\textit{P}\HLATextSub{\textit{1}}) mod\space{}\textit{V}\HLATextSub{2}\space{}= 0}}\newline{}\hspace*{34.981bp}\resizebox{91.381bp}{!}{\mbox{(0 + 1 +\space{}\textit{P}\HLATextSub{1}) mod 4 = 0}}\newline{}\hspace*{34.981bp}\resizebox{75.783bp}{!}{\mbox{(1 +\space{}\textit{P}\HLATextSub{1}) mod 4 = 0}}\newline{}\hspace*{34.981bp}\resizebox{25.742bp}{!}{\mbox{\textit{P}\HLATextSub{1}\space{}= 3}}}
+}
+\HLAStableID{m4.p081.b05}
+\HLAClausePlacedBlock{100.020}{274.626}{421.980}{%
+  \HLAClauseParagraph{\resizebox{167.762bp}{!}{\mbox{Field 2: (\textit{Offset}\HLATextSub{2}\space{}+\space{}\textit{Size}\HLATextSub{2}\space{}+\space{}\textit{P}\HLATextSub{2}) mod\space{}\textit{V}\HLATextSub{3}\space{}= 0}}\newline{}\hspace*{33.900bp}\resizebox{91.381bp}{!}{\mbox{(4 + 4 +\space{}\textit{P}\HLATextSub{\textit{2}}) mod 8 = 0}}\newline{}\hspace*{33.900bp}\resizebox{73.268bp}{!}{\mbox{(8 +\space{}\textit{P}\HLATextSub{\textit{2}}) mod 8= 0}}\newline{}\hspace*{33.900bp}\resizebox{25.742bp}{!}{\mbox{\textit{P}\HLATextSub{2}\space{}= 0}}}
+}
+\HLAStableID{m4.p081.b06}
+\HLAClausePlacedBlock{100.020}{341.946}{421.980}{%
+  \HLAClauseParagraph{\resizebox{268.054bp}{!}{\mbox{Field 3: No padding bytes are added after this, the last, component.}}}
+}
+\HLAStableID{m4.p081.b07}
+\HLAClausePlacedBlock{90.000}{365.946}{432.034}{%
+  \HLAClauseParagraph{\resizebox{431.902bp}{!}{\mbox{Thus, 3 padding bytes are added after the\space{}\textit{HLAoctet}-based component and no padding bytes after the}}\newline{}\resizebox{431.962bp}{!}{\mbox{\textit{HLAboolean}\space{}component or the\space{}\textit{HLAfloat64BE}-based component. The total size of this fixed record is}}\newline{}\makebox[432.033bp][l]{16\hfill{}bytes. A graphical representation of this example, showing the contents of each of the 16 bytes with}\newline{}\resizebox{184.282bp}{!}{\mbox{padding bytes represented as 0s, is as follows:}}}
+}
+\HLAStableID{m4.p081.b08}
+\HLAClausePlacedBlock{90.001}{500.945}{432.022}{%
+  \HLANoteBlock{\resizebox{432.022bp}{!}{\mbox{Note that if the fixed record consisted of the same three components, but in the reverse order, no padding}}\newline{}\resizebox{325.666bp}{!}{\mbox{bytes are added after any component, and the size of this fixed record is 13 bytes.}}}
+}
+\HLAStableID{m4.p081.b09}
+\HLAClausePlacedBlock{90.001}{532.845}{431.999}{%
+  \HLAClauseParagraph{\resizebox{132.123bp}{!}{\mbox{\textbf{4.14.10.2 HLAvariantRecord}}}}
+}
+\HLAStableID{m4.p081.b10}
+\HLAClausePlacedBlock{90.001}{552.965}{432.009}{%
+  \HLAClauseParagraph{\resizebox{432.009bp}{!}{\mbox{The HLAvariantRecord encoding shall consist of the discriminant followed by the alternative associated}}\newline{}\resizebox{368.071bp}{!}{\mbox{with the value of the discriminant. The discriminant shall be placed at offset 0 of the record.}}}
+}
+\HLAStableID{m4.p081.b11}
+\HLAClausePlacedBlock{90.001}{584.944}{431.999}{%
+  \HLAClauseParagraph{\resizebox{431.983bp}{!}{\mbox{If no alternative applies to the value contained in the discriminant, no padding bytes shall be added after the}}\newline{}\resizebox{52.469bp}{!}{\mbox{discriminant.}}}
+}
+\HLAStableID{m4.p081.b12}
+\HLAClausePlacedBlock{90.001}{616.983}{432.049}{%
+  \HLAClauseParagraph{\resizebox{432.049bp}{!}{\mbox{If there is an alternative for the value contained in the discriminant, padding bytes shall be added (if}}\newline{}\resizebox{432.045bp}{!}{\mbox{required) after the discriminant to ensure that the alternative is properly aligned. The number of padding}}\newline{}\resizebox{431.966bp}{!}{\mbox{bytes after such a discriminant of a variant record with this encoding is the smallest nonnegative value of\space{}\textit{P}}}\newline{}\resizebox{105.138bp}{!}{\mbox{that satisfies Equation (2):}}}
+}
+\HLAStableID{m4.p081.b13}
+\HLAClausePlacedBlock{100.022}{676.982}{421.997}{%
+  \HLAClauseParagraph{\makebox[421.997bp][l]{(\textit{Size}\space{}+\space{}\textit{P}) mod\space{}\textit{V}\space{}= 0\hfill{}(2)}}
+}
+\HLAStableID{m4.p081.b14}
+\HLAClausePlacedBlock{90.003}{698.942}{431.997}{%
+  \HLAClauseParagraph{\resizebox{24.400bp}{!}{\mbox{where}}}
+}
+\HLAStableID{m4.p081.t01.c001}
+\HLATableCellText{297.240}{440.621}{222.925}{9.000}{10.080}{l}{%
+  \resizebox{17.499bp}{!}{\mbox{\textbf{Byte}}}
+}
+\HLAStableID{m4.p081.t01.c002}
+\HLATableCellText{116.160}{454.661}{28.540}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{0}}}
+}
+\HLAStableID{m4.p081.t01.c003}
+\HLATableCellText{154.920}{454.661}{14.980}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{1}}}
+}
+\HLAStableID{m4.p081.t01.c004}
+\HLATableCellText{180.120}{454.661}{14.980}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{2}}}
+}
+\HLAStableID{m4.p081.t01.c005}
+\HLATableCellText{205.320}{454.661}{14.980}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{3}}}
+}
+\HLAStableID{m4.p081.t01.c006}
+\HLATableCellText{230.581}{454.661}{14.919}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{4}}}
+}
+\HLAStableID{m4.p081.t01.c007}
+\HLATableCellText{253.981}{454.661}{13.119}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{5}}}
+}
+\HLAStableID{m4.p081.t01.c008}
+\HLATableCellText{277.381}{454.661}{14.919}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{6}}}
+}
+\HLAStableID{m4.p081.t01.c009}
+\HLATableCellText{302.581}{454.661}{14.919}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{7}}}
+}
+\HLAStableID{m4.p081.t01.c010}
+\HLATableCellText{327.781}{454.661}{14.919}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{8}}}
+}
+\HLAStableID{m4.p081.t01.c011}
+\HLATableCellText{352.981}{454.661}{14.919}{9.000}{10.080}{l}{%
+  \resizebox{4.500bp}{!}{\mbox{\textbf{9}}}
+}
+\HLAStableID{m4.p081.t01.c012}
+\HLATableCellText{375.901}{454.661}{17.199}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{10}}}
+}
+\HLAStableID{m4.p081.t01.c013}
+\HLATableCellText{401.101}{454.661}{17.199}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{11}}}
+}
+\HLAStableID{m4.p081.t01.c014}
+\HLATableCellText{426.301}{454.661}{17.199}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{12}}}
+}
+\HLAStableID{m4.p081.t01.c015}
+\HLATableCellText{451.501}{454.661}{17.199}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{13}}}
+}
+\HLAStableID{m4.p081.t01.c016}
+\HLATableCellText{476.701}{454.661}{17.199}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{14}}}
+}
+\HLAStableID{m4.p081.t01.c017}
+\HLATableCellText{502.261}{454.661}{17.904}{9.000}{10.080}{l}{%
+  \resizebox{9.000bp}{!}{\mbox{\textbf{15}}}
+}
+\HLAStableID{m4.p081.t01.c018}
+\HLATableCellText{98.460}{466.466}{46.240}{9.960}{11.155}{l}{%
+  \resizebox{39.935bp}{!}{\mbox{HLAoctet}}
+}
+\HLAStableID{m4.p081.t01.c019}
+\HLATableCellText{154.647}{466.466}{15.253}{9.960}{11.155}{l}{%
+  \resizebox{4.980bp}{!}{\mbox{0}}
+}
+\HLAStableID{m4.p081.t01.c020}
+\HLATableCellText{179.847}{466.466}{15.253}{9.960}{11.155}{l}{%
+  \resizebox{4.980bp}{!}{\mbox{0}}
+}
+\HLAStableID{m4.p081.t01.c021}
+\HLATableCellText{205.047}{466.466}{15.253}{9.960}{11.155}{l}{%
+  \resizebox{4.980bp}{!}{\mbox{0}}
+}
+\HLAStableID{m4.p081.t01.c022}
+\HLATableCellText{242.667}{466.466}{74.833}{9.960}{11.155}{l}{%
+  \resizebox{52.180bp}{!}{\mbox{HLAboolean}}
+}
+\HLAStableID{m4.p081.t01.c023}
+\HLATableCellText{387.727}{466.466}{132.438}{9.960}{11.155}{l}{%
+  \resizebox{61.695bp}{!}{\mbox{HLAfloat64BE}}
+}
+\end{HLAClauseSemanticPage}

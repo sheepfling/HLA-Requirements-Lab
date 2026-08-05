@@ -1,0 +1,166 @@
+\HLASourcePage{108}{107}
+\HLAAnchor{clause:6}
+\pdfbookmark[0]{6. Object management}{bookmark:clause:6}
+\HLAServiceBookmark{6.1}{1}{Overview}
+\HLAServiceBookmark{6.1.1}{2}{Object instance discovery}
+\HLAServiceBookmark{6.1.2}{2}{Scope}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.120}{432.000}{\sffamily\bfseries\raggedright}{12.00}{14.00}{%
+    6. Object management%
+  }
+  \HLAServiceHeadingAt{97.403}{%
+    6.1 Overview%
+  }
+  \HLAFixedBlock{90.000}{122.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This group of HLA services shall deal with the registration, modification, and deletion of object instances%
+  }
+  \HLAFixedBlock{90.000}{134.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and the sending and receipt of interactions.%
+  }
+  \HLAServiceComponentHeadingAt{156.646}{%
+    6.1.1 Object instance discovery%
+  }
+  \HLAFixedBlock{90.000}{180.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance discovery is a prime concept in this service group. Object instance \emph{O} shall have a candidate%
+  }
+  \HLAFixedBlock{90.001}{192.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovery class at joined federate \emph{F} if joined federate \emph{F} is subscribed to either the registered class of \emph{O} or to%
+  }
+  \HLAFixedBlock{90.001}{204.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a superclass of the registered class of \emph{O}. (A joined federate \emph{F} may be subscribed either by the DM%
+  }
+  \HLAFixedBlock{90.001}{216.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscription service \emph{Subscribe Object Class Attributes} or by the DDM subscription service\emph{ Subscribe Object}%
+  }
+  \HLAFixedBlock{90.001}{228.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Class Attributes With Regions}.) If an object instance has a candidate discovery class at a joined federate, the%
+  }
+  \HLAFixedBlock{90.001}{240.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    candidate discovery class of the object instance at that joined federate shall be the object instance’s%
+  }
+  \HLAFixedBlock{90.001}{252.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    registered class if subscribed to by the joined federate. Otherwise, the candidate discovery class of the object%
+  }
+  \HLAFixedBlock{90.001}{264.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance shall be the closest superclass of the object instances’s registered class to which the joined federate%
+  }
+  \HLAFixedBlock{90.001}{276.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    is subscribed.%
+  }
+  \HLAFixedBlock{90.001}{300.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate discovers an object instance via the \emph{Discover Object Instance \textdagger{}} service. This service shall%
+  }
+  \HLAFixedBlock{90.001}{312.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be invoked at a joined federate \emph{F} for object instance \emph{O} when%
+  }
+  \HLAFixedBlock{100.021}{327.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{327.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{O }is not known at\emph{ F, }and%
+  }
+  \HLAFixedBlock{100.021}{342.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.946}{342.782}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There is an instance attribute \emph{i} of \emph{O }that has a corresponding class attribute \emph{i', }and%
+  }
+  \HLAFixedBlock{100.020}{357.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.980}{357.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{i }is owned by\emph{ }either another joined federate (not \emph{F}) or the RTI, and%
+  }
+  \HLAFixedBlock{100.020}{372.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.962}{372.782}{400.038}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Either%
+  }
+  \HLAFixedBlock{121.980}{387.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.019}{387.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{i'} is a subscribed attribute of\emph{ O}’s candidate discovery class, or%
+  }
+  \HLAFixedBlock{121.980}{402.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.019}{402.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{i'} is a subscribed attribute of\emph{ O}’s candidate discovery class with regions and the update region%
+  }
+  \HLAFixedBlock{142.019}{414.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    set of \emph{i} by the owning joined federate overlaps the subscription region set of \emph{i'} at \emph{O}’s candidate%
+  }
+  \HLAFixedBlock{142.019}{426.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovery class at the subscribing joined federate%
+  }
+  \HLAFixedBlock{89.999}{448.800}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the \emph{Discover Object Instance \textdagger{}} service is invoked, the class that is an argument to this service%
+  }
+  \HLAFixedBlock{89.998}{460.800}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall be called the discovered class of the object instance. At the moment of discovery, the%
+  }
+  \HLAFixedBlock{89.997}{472.800}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovered class shall be the same as the candidate discovery class. Subsequent to discovery, the discovered%
+  }
+  \HLAFixedBlock{89.997}{484.800}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class cannot change. The candidate discovery class may change. As long as an object instance remains%
+  }
+  \HLAFixedBlock{89.997}{496.800}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known, however, its candidate discovery class is not of interest.%
+  }
+  \HLAFixedBlock{89.997}{518.819}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a joined federate either uses the \emph{Register Object Instance} service to register an object instance or%
+  }
+  \HLAFixedBlock{90.000}{528.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    receives an invocation of the \emph{Discover Object Instance \textdagger{} }to discover an object instance, that object instance%
+  }
+  \HLAFixedBlock{89.999}{538.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    becomes known to the joined federate, and the object instance has a known class at that joined federate. If a%
+  }
+  \HLAFixedBlock{89.999}{548.825}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate knows about an object instance as a result of having registered it, that object instance’s%
+  }
+  \HLAFixedBlock{89.999}{558.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class is its registered class. If the joined federate knows about the object instance as a result of having%
+  }
+  \HLAFixedBlock{89.999}{568.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovered it, the object instance’s known class is its discovered class.%
+  }
+  \HLAServiceComponentHeadingAt{590.685}{%
+    6.1.2 Scope%
+  }
+  \HLAFixedBlock{89.999}{614.824}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the \emph{Discover Object Instance \textdagger{}} service is invoked, there shall be an instance attribute that is part of the%
+  }
+  \HLAFixedBlock{89.999}{626.824}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    newly discovered object instance that immediately comes into scope at the discovering joined federate, both%
+  }
+  \HLAFixedBlock{89.999}{638.824}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    when DDM is used and when it is not used. An instance attribute of an object instance shall be in scope for%
+  }
+  \HLAFixedBlock{89.998}{650.823}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate \emph{F} if%
+  }
+  \HLAFixedBlock{100.019}{665.823}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{665.823}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is known to the joined federate%
+  }
+  \HLAFixedBlock{100.019}{680.823}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{680.823}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The instance attribute is owned by another joined federate or by the RTI, and%
+  }
+  \HLAFixedBlock{100.019}{695.823}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{695.823}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Either:%
+  }
+\end{hlafixedpage}
+\clearpage

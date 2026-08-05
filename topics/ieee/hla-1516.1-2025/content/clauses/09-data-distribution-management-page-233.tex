@@ -1,0 +1,151 @@
+\HLASourcePage{234}{233}
+\HLAServiceBookmark{9.7.6}{2}{Reference state charts}
+\HLAServiceBookmark{9.8}{1}{Subscribe Object Class Attributes With Regions service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{81.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.954}{81.785}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{105.646}{%
+    \textbf{9.7.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{129.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{129.785}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None.%
+  }
+  \HLAServiceHeadingAt{159.383}{%
+    \textbf{9.8 }\textbf{\emph{Subscribe Object Class Attributes With Regions}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{184.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Subscribe Object Class Attributes With Regions} service shall specify an object class for which the RTI%
+  }
+  \HLAFixedBlock{90.000}{196.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall begin notifying the joined federate of discovery of instantiated object instances when at least one of%
+  }
+  \HLAFixedBlock{90.000}{208.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that object instance’s instance attributes is in scope. This service and subsequent related RTI operations shall%
+  }
+  \HLAFixedBlock{90.000}{220.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    behave analogously to the \emph{Subscribe Object Class Attributes} service as described in 5.8 and its subsequent%
+  }
+  \HLAFixedBlock{89.999}{232.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    related RTI operations. This service shall provide additional functionality in that the overlap of the relevant%
+  }
+  \HLAFixedBlock{89.999}{244.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscription and update region sets affects the subsequent RTI operations, as described in 9.1.5.%
+  }
+  \HLAFixedBlock{89.999}{268.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This service shall add the specified regions to the set of subscriptions of the specified class attributes. No%
+  }
+  \HLAFixedBlock{89.999}{280.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    changes shall be made to the subscription set if the specified regions are already in the set of subscriptions of%
+  }
+  \HLAFixedBlock{89.999}{292.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specified class attributes.%
+  }
+  \HLAFixedBlock{89.999}{316.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocations of the \emph{Subscribe Object Class Attributes With Regions }service shall have no affect on any object%
+  }
+  \HLAFixedBlock{90.000}{328.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class or class attribute subscriptions that were established via the \emph{Subscribe Object Class Attributes} service.%
+  }
+  \HLAFixedBlock{90.000}{340.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Subscriptions that are established via the \emph{Subscribe Object Class Attributes With Regions }service shall not%
+  }
+  \HLAFixedBlock{89.999}{352.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be affected by invocations of either the \emph{Subscribe Object Class} \emph{Attributes} service or the \emph{Unsubscribe Object}%
+  }
+  \HLAFixedBlock{89.999}{364.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Class Attributes} service.%
+  }
+  \HLAFixedBlock{89.999}{388.802}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the region set paired with a class attribute is empty, no subscriptions shall be added for that class attribute,%
+  }
+  \HLAFixedBlock{89.998}{400.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not even the default region. Use of an empty set is not equivalent to invocation of the \emph{Subscribe Object Class}%
+  }
+  \HLAFixedBlock{89.998}{412.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attributes} service.%
+  }
+  \HLAFixedBlock{89.998}{436.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional passive subscription indicator indicates that this is a passive subscription, then the following%
+  }
+  \HLAFixedBlock{89.998}{448.802}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    apply:%
+  }
+  \HLAFixedBlock{100.018}{460.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{460.801}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The invocation of this service shall not cause the \emph{Start Registration For Object Class \textdagger{}} service or the%
+  }
+  \HLAFixedBlock{121.978}{472.801}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Turn Updates On For Object Instance \textdagger{}} service to be invoked at any other joined federate, and%
+  }
+  \HLAFixedBlock{100.018}{484.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.978}{484.801}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a specified region was used in a previous subscription that was active rather than passive, this%
+  }
+  \HLAFixedBlock{121.978}{496.801}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall change the previous subscription to passive. Invocation of this service may cause%
+  }
+  \HLAFixedBlock{121.978}{508.801}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Stop Registration for Object Class \textdagger{}} service or the \emph{Turn Updates Off For Object Instance \textdagger{}}%
+  }
+  \HLAFixedBlock{121.978}{520.800}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service to be invoked at one or more other joined federates.%
+  }
+  \HLAFixedBlock{89.998}{544.800}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional passive subscription indicator is not present or indicates that this is an active subscription, the%
+  }
+  \HLAFixedBlock{89.998}{556.800}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation of this service may cause the \emph{Start Registration For Object Class \textdagger{}} service or the \emph{Turn Updates}%
+  }
+  \HLAFixedBlock{89.998}{568.800}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{On For Object Instance \textdagger{}} service to be invoked at one or more other joined federates.%
+  }
+  \HLAFixedBlock{89.998}{592.799}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The use of the optional passive subscription indicator shall act on the triple basis, which is as follows:%
+  }
+  \HLAFixedBlock{100.018}{604.799}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{604.799}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each subscribed attribute of a class with region is subscribed either actively or passively (but not%
+  }
+  \HLAFixedBlock{121.977}{616.799}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    both actively and passively) at that given object class and with that particular region. Two different%
+  }
+  \HLAFixedBlock{121.977}{628.799}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class attributes that are subscribed with regions at the same object class and with the same region%
+  }
+  \HLAFixedBlock{121.977}{640.798}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    may be subscribed differently from each other (one actively and one passively), and a class attribute%
+  }
+  \HLAFixedBlock{121.978}{652.798}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is subscribed with regions at a given object class but with more than one region may be%
+  }
+  \HLAFixedBlock{121.978}{664.798}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribed differently (either actively or passively) with each region. In other words, the active/%
+  }
+  \HLAFixedBlock{121.978}{676.798}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    passive characteristic is a property of a subscription to a class attribute at a given object class with a%
+  }
+  \HLAFixedBlock{121.979}{688.798}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    given region. %
+  }
+\end{hlafixedpage}
+\clearpage

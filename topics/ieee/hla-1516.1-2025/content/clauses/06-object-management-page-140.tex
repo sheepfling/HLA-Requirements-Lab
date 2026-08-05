@@ -1,0 +1,191 @@
+\HLASourcePage{141}{140}
+\HLAServiceBookmark{6.25.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.25.3}{2}{Preconditions}
+\HLAServiceBookmark{6.25.4}{2}{Postconditions}
+\HLAServiceBookmark{6.25.5}{2}{Exceptions}
+\HLAServiceBookmark{6.25.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.26}{1}{Confirm Attribute Transportation Type Change † service}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.25.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    6.25.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{141.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{156.784}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{171.784}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{186.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{186.784}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance with the specified designator exists.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{201.784}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.020}{216.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.955}{216.783}{400.045}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified class attributes are available attributes of the known class of the specified object%
+  }
+  \HLAFixedBlock{121.980}{228.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance designator.%
+  }
+  \HLAFixedBlock{100.020}{243.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.938}{243.783}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified instance attributes are not in the process of changing transportation type.%
+  }
+  \HLAFixedBlock{100.020}{258.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.939}{258.783}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate owns the instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{273.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.982}{273.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The transportation type is valid (see 6.1.11).%
+  }
+  \HLAFixedBlock{100.020}{288.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.984}{288.782}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{303.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.982}{303.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{327.642}{%
+    6.25.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{351.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{351.781}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI has been informed of the request to change the transportation type for the specified instance%
+  }
+  \HLAFixedBlock{121.980}{363.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attributes.%
+  }
+  \HLAServiceComponentHeadingAt{387.641}{%
+    6.25.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{411.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{411.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    One or more instance attributes are already in the process of changing transportation type.%
+  }
+  \HLAFixedBlock{100.020}{426.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.938}{426.780}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate does not own the specified instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{441.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.972}{441.780}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attribute is not available at the known class of the object instance.%
+  }
+  \HLAFixedBlock{100.020}{456.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{456.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.020}{471.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.966}{471.779}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid transportation type.%
+  }
+  \HLAFixedBlock{100.020}{486.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{486.779}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{501.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{501.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{516.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{516.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{531.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.982}{531.778}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{546.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.954}{546.778}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{570.638}{%
+    6.25.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{594.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{594.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{624.383}{%
+    6.26 \emph{Confirm Attribute Transportation Type Change \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{649.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Confirm Attribute Transportation Type Change \textdagger{} }service shall be used to provide information on what%
+  }
+  \HLAFixedBlock{90.000}{661.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    transportation type was achieved for the specified object instance and attributes. This service shall be%
+  }
+  \HLAFixedBlock{90.000}{673.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked by the RTI at a joined federate in response to a \emph{Request Attribute Transportation Type Change}%
+  }
+  \HLAFixedBlock{90.000}{685.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation by the same joined federate. %
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,292 @@
+\HLASourcePage{355}{354}
+\HLAServiceBookmark{12.3}{1}{Logical time, timestamps, and lookahead}
+\HLAServiceBookmark{12.4}{1}{Standardized time types}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Handles that are sent as part of MOM attribute value updates or as parameter values of MOM interactions%
+  }
+  \HLAFixedBlock{90.000}{81.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    are sent encoded and may be reconstituted in the manner described for each API.%
+  }
+  \HLAFixedBlock{90.000}{111.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.3 Logical time, timestamps, and lookahead}%
+  }
+  \HLAFixedBlock{90.000}{136.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In order to support customized implementations of logical time, timestamps, and lookahead, the C++ and%
+  }
+  \HLAFixedBlock{90.000}{148.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Java %
+  }
+  \HLAFixedBlock{118.627}{148.806}{485.373}{\rmfamily\raggedright}{9.96}{11.16}{%
+    APIs %
+  }
+  \HLAFixedBlock{152.542}{148.806}{451.458}{\rmfamily\raggedright}{9.96}{11.16}{%
+    define %
+  }
+  \HLAFixedBlock{191.513}{148.806}{412.487}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{209.932}{148.806}{394.068}{\rmfamily\raggedright}{9.96}{11.16}{%
+    group %
+  }
+  \HLAFixedBlock{247.234}{148.806}{356.766}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of %
+  }
+  \HLAFixedBlock{269.484}{148.806}{334.516}{\rmfamily\raggedright}{9.96}{11.16}{%
+    closely %
+  }
+  \HLAFixedBlock{311.775}{148.806}{292.225}{\rmfamily\raggedright}{9.96}{11.16}{%
+    related %
+  }
+  \HLAFixedBlock{352.926}{148.806}{251.074}{\rmfamily\raggedright}{9.96}{11.16}{%
+    abstract %
+  }
+  \HLAFixedBlock{397.961}{148.806}{206.039}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interfaces: %
+  }
+  \HLAFixedBlock{453.540}{149.393}{150.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{519.480}{148.806}{84.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.000}{161.393}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{203.940}{160.805}{400.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{226.801}{161.393}{377.199}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{334.740}{160.805}{269.260}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . These abstract interfaces have been designed%
+  }
+  \HLAFixedBlock{90.000}{172.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to be implemented by the federate developer for use by an RTI implementation. This clause defines the%
+  }
+  \HLAFixedBlock{90.000}{184.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    general characteristics of the abstract interfaces, and each API annex presents API-specific details.%
+  }
+  \HLAFixedBlock{90.000}{208.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.060}{209.392}{495.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime }%
+  }
+  \HLAFixedBlock{180.001}{208.805}{423.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    abstract interface is used to represent logical time and timestamp values.%
+  }
+  \HLAFixedBlock{90.001}{232.804}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{107.941}{233.392}{496.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{221.941}{232.804}{382.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+     abstract interface is similar to the %
+  }
+  \HLAFixedBlock{359.401}{233.392}{244.599}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{425.401}{232.804}{178.599}{\rmfamily\raggedright}{9.96}{11.16}{%
+     abstract interface, but it%
+  }
+  \HLAFixedBlock{90.001}{244.804}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    is used to represent logical time intervals.%
+  }
+  \HLAFixedBlock{90.001}{269.391}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{155.941}{268.804}{448.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{179.821}{269.391}{424.179}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{293.762}{268.804}{310.238}{\rmfamily\raggedright}{9.96}{11.16}{%
+     abstract interfaces shall provide methods to obtain a%
+  }
+  \HLAFixedBlock{90.002}{280.804}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    string representation suitable for printing. The set of abstract interfaces for %
+  }
+  \HLAFixedBlock{453.543}{281.391}{150.457}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{519.483}{280.804}{84.517}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.003}{293.391}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{203.943}{292.803}{400.057}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{225.843}{293.391}{378.157}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{333.784}{292.803}{270.216}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall also support some way to %
+  }
+  \HLAFixedBlock{100.024}{316.803}{503.976}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.984}{316.803}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Encode an instance of %
+  }
+  \HLAFixedBlock{220.924}{317.391}{383.076}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{286.864}{316.803}{317.136}{\rmfamily\raggedright}{9.96}{11.16}{%
+     or %
+  }
+  \HLAFixedBlock{304.445}{317.391}{299.555}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{418.385}{316.803}{185.615}{\rmfamily\raggedright}{9.96}{11.16}{%
+     into a compact, opaque%
+  }
+  \HLAFixedBlock{121.986}{328.803}{482.014}{\rmfamily\raggedright}{9.96}{11.16}{%
+    representation suitable for network transmission into the provided variable array at the specified%
+  }
+  \HLAFixedBlock{121.986}{340.803}{482.014}{\rmfamily\raggedright}{9.96}{11.16}{%
+    offset %
+  }
+  \HLAFixedBlock{100.026}{352.802}{503.974}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.986}{352.802}{482.014}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Create a %
+  }
+  \HLAFixedBlock{160.566}{353.390}{443.434}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{226.566}{352.802}{377.434}{\rmfamily\raggedright}{9.96}{11.16}{%
+     or %
+  }
+  \HLAFixedBlock{242.886}{353.390}{361.114}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{356.886}{352.802}{247.114}{\rmfamily\raggedright}{9.96}{11.16}{%
+     from the network representation in the%
+  }
+  \HLAFixedBlock{121.987}{364.802}{482.013}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provided variable array at the indicated offset.%
+  }
+  \HLAFixedBlock{90.007}{388.802}{513.993}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.487}{389.389}{495.513}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{216.426}{388.802}{387.574}{\rmfamily\raggedright}{9.96}{11.16}{%
+     abstract interface shall have a method to create a %
+  }
+  \HLAFixedBlock{420.306}{389.389}{183.694}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{486.306}{388.802}{117.694}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance%
+  }
+  \HLAFixedBlock{90.006}{400.802}{513.994}{\rmfamily\raggedright}{9.96}{11.16}{%
+    whose value is the user-defined initial value and a method to create a %
+  }
+  \HLAFixedBlock{368.525}{401.389}{235.475}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{434.525}{400.802}{169.475}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance whose value%
+  }
+  \HLAFixedBlock{90.005}{412.801}{513.995}{\rmfamily\raggedright}{9.96}{11.16}{%
+    is the user-defined final value. The %
+  }
+  \HLAFixedBlock{240.245}{413.389}{363.755}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{348.184}{412.801}{255.816}{\rmfamily\raggedright}{9.96}{11.16}{%
+     abstract interface shall have a method to%
+  }
+  \HLAFixedBlock{90.004}{424.801}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    create a %
+  }
+  \HLAFixedBlock{133.864}{425.389}{470.136}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{247.804}{424.801}{356.196}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance whose value is zero and a method to create a%
+  }
+  \HLAFixedBlock{90.004}{437.389}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{203.944}{436.801}{400.056}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance whose value is the epsilon value.%
+  }
+  \HLAFixedBlock{90.004}{460.801}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To allow the users to get the %
+  }
+  \HLAFixedBlock{219.124}{461.388}{384.876}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{327.064}{460.801}{276.936}{\rmfamily\raggedright}{9.96}{11.16}{%
+     from the RTI, the C++ and Java APIs add a%
+  }
+  \HLAFixedBlock{90.004}{472.801}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    getTimeFactory() method to the RTI ambassador interface. Each API returns a value appropriate for the%
+  }
+  \HLAFixedBlock{90.004}{484.800}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    language.%
+  }
+  \HLAFixedBlock{90.004}{508.800}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Implementers of the C++ and Java APIs shall provide, as part of their implementation, two implementations%
+  }
+  \HLAFixedBlock{90.004}{520.800}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of the logical time abstract interfaces. One logical time abstract interface, the %
+  }
+  \HLAFixedBlock{402.064}{521.387}{201.936}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time}%
+  }
+  \HLAFixedBlock{498.003}{520.800}{105.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , shall%
+  }
+  \HLAFixedBlock{90.003}{532.800}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    be based on the %
+  }
+  \HLAFixedBlock{159.123}{533.387}{444.877}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64BE}%
+  }
+  \HLAFixedBlock{243.063}{532.800}{360.937}{\rmfamily\raggedright}{9.96}{11.16}{%
+     type and the other, the %
+  }
+  \HLAFixedBlock{343.863}{533.387}{260.137}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{427.803}{532.800}{176.197}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , shall be based on the%
+  }
+  \HLAFixedBlock{90.003}{545.387}{513.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64BE}%
+  }
+  \HLAFixedBlock{161.943}{544.799}{442.057}{\rmfamily\raggedright}{9.96}{11.16}{%
+     type.%
+  }
+  \HLAFixedBlock{90.000}{574.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.4 Standardized time types}%
+  }
+  \HLAFixedBlock{90.000}{599.826}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI shall support the standardized time representation shown in Table 21.%
+  }
+  \HLAFixedBlock{90.000}{623.825}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    When a federate execution is created, the time representation used is specified using the symbolic name%
+  }
+  \HLAFixedBlock{90.000}{635.825}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    above. All time representations shall provide methods through which a time value can be increased and%
+  }
+  \HLAFixedBlock{90.000}{647.825}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    decreased by epsilon while guaranteeing that the increased value differs from the original value. The epsilon%
+  }
+  \HLAFixedBlock{89.999}{659.825}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    value for HLAinteger64Time shall equal 1.%
+  }
+\end{hlafixedpage}
+\clearpage

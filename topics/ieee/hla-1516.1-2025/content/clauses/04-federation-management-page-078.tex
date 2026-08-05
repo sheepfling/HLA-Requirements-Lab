@@ -1,0 +1,156 @@
+\HLASourcePage{79}{78}
+\HLAServiceBookmark{4.33.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.33.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.33.3}{2}{Preconditions}
+\HLAServiceBookmark{4.33.4}{2}{Postconditions}
+\HLAServiceBookmark{4.33.5}{2}{Exceptions}
+\HLAServiceBookmark{4.33.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.34}{1}{Query Federation Restore Status service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The service takes no arguments and affects the current restore. This service may be invoked only while the%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate is in the Federate Restore in Progress state. Upon return of the service invocation, a request to abort%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the current restore has successfully been made.%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall abort the current restore by invoking the \emph{Federation Restored \textdagger{}} service on all federates that%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    are in the Federate Restore in Progress state, regardless of each individual federate’s restore substate. Joined%
+  }
+  \HLAFixedBlock{89.999}{141.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates not in the Federation Restore in Progress state may not receive the \emph{Federation Restore Begun \textdagger{}}%
+  }
+  \HLAFixedBlock{90.000}{153.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    callback for this federation restore. The restore-success indicator for the \emph{Federation Restored \textdagger{}} service shall%
+  }
+  \HLAFixedBlock{89.999}{165.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    indicate failure (federation restore aborted) if not all federates have successfully invoked the \emph{Federate}%
+  }
+  \HLAFixedBlock{89.999}{177.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Restore Complete} service with a restore-success indicator indicating success. Since a federate remains in the%
+  }
+  \HLAFixedBlock{89.998}{189.784}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate Restore in Progress state after it successfully invokes the \emph{Federate Restore Complete} service and%
+  }
+  \HLAFixedBlock{89.997}{201.784}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    before the \emph{Federation Restored \textdagger{}} service is invoked on it by the RTI, it is possible that all other federates%
+  }
+  \HLAFixedBlock{89.997}{213.783}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    may have also already invoked the \emph{Federate Restore Complete} service with a success indicator indicating%
+  }
+  \HLAFixedBlock{89.997}{225.783}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    success. In this case, it is possible that the \emph{Federation Restored \textdagger{}} service is invoked at each federate with a%
+  }
+  \HLAFixedBlock{89.997}{237.783}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    success indicator indicating success after invocation of the \emph{Abort Federation Restore} service.%
+  }
+  \HLAServiceComponentHeadingAt{261.643}{%
+    4.33.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.016}{285.782}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{285.782}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{309.642}{%
+    4.33.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.016}{333.781}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{333.781}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{357.642}{%
+    4.33.3 Preconditions%
+  }
+  \HLAFixedBlock{100.016}{381.781}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{381.781}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.016}{393.781}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.935}{393.781}{400.065}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.016}{405.780}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.966}{405.780}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.016}{417.780}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.976}{417.780}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is in the Federate Restore in Progress state.%
+  }
+  \HLAServiceComponentHeadingAt{441.640}{%
+    4.33.4 Postconditions%
+  }
+  \HLAFixedBlock{100.016}{465.779}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{465.779}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An abort federation restore has been requested.%
+  }
+  \HLAServiceComponentHeadingAt{489.640}{%
+    4.33.5 Exceptions%
+  }
+  \HLAFixedBlock{100.016}{513.779}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{513.779}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAFixedBlock{100.016}{525.778}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.976}{525.778}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.016}{537.778}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.961}{537.778}{400.039}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.016}{549.778}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.942}{549.778}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{573.638}{%
+    4.33.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.016}{597.777}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{597.777}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{627.383}{%
+    4.34 \emph{Query Federation Restore Status} service%
+  }
+  \HLAFixedBlock{90.000}{652.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Query Federation Restore Status} service shall be used to request the status of a federation restore. The%
+  }
+  \HLAFixedBlock{90.000}{664.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI shall provide the federation restore status via a \emph{Federation Restore Status Response \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.001}{676.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation. No save label argument is needed because at most one federation restore can be in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

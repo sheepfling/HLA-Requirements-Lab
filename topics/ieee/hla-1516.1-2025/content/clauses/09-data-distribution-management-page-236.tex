@@ -1,0 +1,189 @@
+\HLASourcePage{237}{236}
+\HLAServiceBookmark{9.9.4}{2}{Postconditions}
+\HLAServiceBookmark{9.9.5}{2}{Exceptions}
+\HLAServiceBookmark{9.9.6}{2}{Reference state charts}
+\HLAServiceBookmark{9.10}{1}{Subscribe Interaction Class With Regions service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.979}{69.786}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attributes are available at the specified object class.%
+  }
+  \HLAFixedBlock{100.020}{81.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.958}{81.785}{400.042}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The regions exist.%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.938}{93.785}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The regions were created by the joined federate using the \emph{Create Region} service.%
+  }
+  \HLAFixedBlock{100.021}{105.785}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.981}{105.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All supplied region designators are designators of region specifications. If a region designator%
+  }
+  \HLAFixedBlock{121.981}{117.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified is not a designator of a region specification, the “Invalid region” exception shall be%
+  }
+  \HLAFixedBlock{121.981}{129.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    generated.%
+  }
+  \HLAFixedBlock{100.021}{141.785}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.983}{141.785}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{153.784}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.983}{153.784}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{177.645}{%
+    \textbf{9.9.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.021}{201.784}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{201.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is not subscribed to the specified class attributes with the specified regions.%
+  }
+  \HLAFixedBlock{100.021}{213.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.945}{213.783}{400.055}{\rmfamily\raggedright}{9.96}{12.00}{%
+    May cause an implicit out-of-scope situation for affected instance attributes at invoking joined%
+  }
+  \HLAFixedBlock{121.981}{225.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+  \HLAServiceComponentHeadingAt{249.643}{%
+    \textbf{9.9.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.021}{273.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{273.782}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The region was not created by the invoking joined federate using the \emph{Create Region} service.%
+  }
+  \HLAFixedBlock{100.022}{285.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.982}{285.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid region.%
+  }
+  \HLAFixedBlock{100.022}{297.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.980}{297.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attribute is not available at the specified object class.%
+  }
+  \HLAFixedBlock{100.022}{309.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{309.782}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.022}{321.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{321.782}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.022}{333.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.955}{333.782}{400.045}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.022}{345.781}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.982}{345.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.022}{357.781}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.982}{357.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.022}{369.781}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.956}{369.781}{400.044}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{393.641}{%
+    \textbf{9.9.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.022}{417.780}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{417.780}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 11, Class attribute (i, j).%
+  }
+  \HLAFixedBlock{100.022}{429.780}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.982}{429.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 12, Class attribute (i, HLAprivilegeToDeleteObject).%
+  }
+  \HLAServiceHeadingAt{459.383}{%
+    \textbf{9.10 }\textbf{\emph{Subscribe Interaction Class With Regions}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{484.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Subscribe Interaction Class With Regions} service shall specify the class of interactions that shall be%
+  }
+  \HLAFixedBlock{90.000}{496.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivered to the joined federate, taking the region into account. This service and subsequent related RTI%
+  }
+  \HLAFixedBlock{90.000}{508.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    operations shall behave analogously to the \emph{Subscribe Interaction Class }service as described in 5.10. This%
+  }
+  \HLAFixedBlock{90.000}{520.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service shall provide additional functionality in that the overlap of the region set used for subscription of the%
+  }
+  \HLAFixedBlock{90.000}{532.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction and the region set used for sending the interaction affects the subsequent RTI operations, as%
+  }
+  \HLAFixedBlock{90.000}{544.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    described in 9.1.5.%
+  }
+  \HLAFixedBlock{90.000}{568.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This service shall add the specified regions to the set of regions associated with the specified interaction%
+  }
+  \HLAFixedBlock{90.000}{580.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class subscription. No changes shall be made to the subscription set if the specified regions are already in the%
+  }
+  \HLAFixedBlock{90.000}{592.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    set of subscriptions of the specified interaction class.%
+  }
+  \HLAFixedBlock{90.000}{616.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocations of the \emph{Subscribe Interaction Class With Regions }service shall have no affect on any interaction%
+  }
+  \HLAFixedBlock{90.000}{628.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class subscriptions that were established via the \emph{Subscribe Interaction Class} service. Subscriptions that are%
+  }
+  \HLAFixedBlock{90.000}{640.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    established via the \emph{Subscribe Interaction Class With Regions }service shall not be affected by invocations of%
+  }
+  \HLAFixedBlock{90.001}{652.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    either the \emph{Subscribe Interaction Class} service or the \emph{Unsubscribe Interaction Class} service.%
+  }
+  \HLAFixedBlock{90.000}{676.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the region set provided is empty, no subscription to the interaction class shall be made, not even the%
+  }
+  \HLAFixedBlock{90.000}{688.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    default region. Use of an empty set is not equivalent to invocation of the \emph{Subscribe Interaction Class} service.%
+  }
+\end{hlafixedpage}
+\clearpage

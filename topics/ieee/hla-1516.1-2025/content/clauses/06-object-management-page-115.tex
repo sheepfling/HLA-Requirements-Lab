@@ -1,0 +1,180 @@
+\HLASourcePage{116}{115}
+\HLAServiceBookmark{6.4.4}{2}{Postconditions}
+\HLAServiceBookmark{6.4.5}{2}{Exceptions}
+\HLAServiceBookmark{6.4.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.5}{1}{Reserve Multiple Object Instance Names service}
+\HLAServiceBookmark{6.5.1}{2}{Supplied arguments}
+\HLAServiceBookmark{6.5.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.5.3}{2}{Preconditions}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The supplied name is currently reserved by the joined federate, having previously been the subject%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of a successful invocation of either the \emph{Object Instance Name Reserved \textdagger{} }service or the \emph{Multiple}%
+  }
+  \HLAFixedBlock{121.979}{93.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Object Instance Names Reserved \textdagger{}} service.%
+  }
+  \HLAFixedBlock{100.019}{108.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{108.785}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{123.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{123.785}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{147.645}{%
+    6.4.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{171.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.967}{171.784}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The supplied name is no longer reserved by the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{195.644}{%
+    6.4.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{219.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{219.783}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance name is not currently reserved.%
+  }
+  \HLAFixedBlock{100.019}{234.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{234.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{249.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.974}{249.783}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.019}{264.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{264.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{279.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.964}{279.782}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{294.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.960}{294.782}{400.040}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{318.642}{%
+    6.4.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{342.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{342.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{372.383}{%
+    6.5 \emph{Reserve Multiple Object Instance Names} service%
+  }
+  \HLAFixedBlock{90.000}{397.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Reserve Multiple Object Instance Names} service indicates that the joined federate is attempting to%
+  }
+  \HLAFixedBlock{90.000}{409.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    reserve the exclusive right to register object instances with the supplied names (subject to the restriction that%
+  }
+  \HLAFixedBlock{90.001}{421.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only one object instance at a time shall exist with a particular name). The name set cannot be empty. The%
+  }
+  \HLAFixedBlock{90.001}{433.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    name values in the supplied name set argument shall not begin with “HLA.” Any one illegal name shall%
+  }
+  \HLAFixedBlock{90.001}{445.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    abort the reservation of all names in the set. The RTI shall provide the result of the reservation attempt via%
+  }
+  \HLAFixedBlock{90.001}{457.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Multiple Object Instance Name Reserved \textdagger{}} service. The \emph{Object Instance Name Reserved \textdagger{}} service shall%
+  }
+  \HLAFixedBlock{90.001}{469.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not be used to provide the result for any single name.%
+  }
+  \HLAServiceComponentHeadingAt{493.665}{%
+    6.5.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{517.804}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{517.804}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Name Set%
+  }
+  \HLAServiceComponentHeadingAt{541.664}{%
+    6.5.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{565.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{565.803}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{589.663}{%
+    6.5.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{613.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{613.802}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.021}{628.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{628.802}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{643.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{643.802}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{658.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{658.801}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The name set argument is not empty.%
+  }
+  \HLAFixedBlock{100.021}{673.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.966}{673.801}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each name value in the name set argument does not begin with “HLA.”%
+  }
+  \HLAFixedBlock{100.021}{688.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.947}{688.801}{400.053}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{703.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.959}{703.801}{400.041}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,53 @@
+\HLASourcePage{39}{38}
+\HLAAnchor{clause:4}
+\pdfbookmark[0]{4. Federation management}{bookmark:clause:4}
+\HLAAnchor{clause:4.1}
+\pdfbookmark[1]{4.1 Overview}{bookmark:clause:4.1}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90}{69.12}{300}{\sffamily\bfseries\raggedright}{12}{14}{%
+    4. Federation management%
+  }
+
+  \HLAFixedBlock{90}{101.36}{180}{\sffamily\bfseries\raggedright}{10.98}{13}{%
+    4.1 Overview%
+  }
+
+  \HLAFixedBlock{90}{126.79}{432}{\rmfamily}{9.96}{12}{%
+    Federation management refers to the creation, dynamic control, modification, and deletion of a federation\linebreak
+    execution.%
+  }
+
+  \HLAFixedBlock{90}{162.79}{432}{\rmfamily}{9.96}{12}{%
+    Before any interaction can take place between a federate and an RTI, such as creating a federation execution\linebreak
+    or joining, the unjoined federate shall perform a \emph{Connect} to the RTI. When a federate has resigned and has\linebreak
+    no further intent to join or create federation executions, it shall perform a \emph{Disconnect}.%
+  }
+
+  \HLAFixedBlock{90}{210.78}{432}{\rmfamily}{9.96}{12}{%
+    The exact manner in which RTI-initiated services (callbacks) are invoked on a federate by the RTI is\linebreak
+    programming-language specific. However, the HLA defines two callback models that govern when\linebreak
+    callbacks may be invoked. The two callback models are: IMMEDIATE and EVOKED. In the IMMEDIATE\linebreak
+    model, the RTI shall invoke callbacks immediately when they are available, unless the callbacks have been\linebreak
+    disabled using the \emph{Disable Callbacks} service. In the EVOKED model, callbacks are only made when the\linebreak
+    federate calls the \emph{Evoke Callback/Evoke Multiple Callbacks} services, unless callbacks have been disabled\linebreak
+    using the \emph{Disable Callbacks} service. RTIs shall implement both callback models. The callback model is\linebreak
+    specified as an argument to the \emph{Connect} service.%
+  }
+
+  \HLAFixedBlock{90}{318.78}{432}{\rmfamily}{9.96}{12}{%
+    Figure 1 shows the overall state of a federation execution as certain basic federation management services\linebreak
+    are employed. The figure starts in the Federation Execution Does Not Exist state, representing that the RTI\linebreak
+    has been started up, but that no services have been invoked relative to the federation execution. After the\linebreak
+    federation execution is created, it is now in the No Joined Federates state. This state represents the clean, or\linebreak
+    freshly initialized, federation execution; no federates are joined, no object instances exist, and no messages\linebreak
+    are queued. From the point that the first federate joins this execution until the point that the last federate\linebreak
+    resigns from the execution, the federation execution is in the Supporting Joined Federates state. This state\linebreak
+    represents an operational federation execution in which the services documented in this specification are\linebreak
+    usable.%
+  }
+
+  \HLAFigureImageAt{125.28}{425.64}{361.44}{247.98}{assets/extracted/source-p039-xref13868.png}
+  \HLAFigureCaptionAt{1}{685.73}{Basic states of the federation execution}
+\end{hlafixedpage}
+\clearpage

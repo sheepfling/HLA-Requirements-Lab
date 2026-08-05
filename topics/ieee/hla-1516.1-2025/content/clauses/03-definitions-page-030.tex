@@ -1,0 +1,70 @@
+\HLASourcePage{31}{30}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLADefinitionAt{69.79}{%
+    \HLADefinitionAnchor{pair}\HLADefinitionTerm{pair}: A grouping of two related elements (a first component and a second component), the combination of\linebreak
+    which is treated as an entity. An example of a pair would be an instance attribute grouped with its current\linebreak
+    value.%
+  }
+
+  \HLADefinitionAt{117.78}{%
+    \HLADefinitionAnchor{parameter}\HLADefinitionTerm{parameter}: A named characteristic of an interaction.%
+  }
+
+  \HLADefinitionAt{141.78}{%
+    \HLADefinitionAnchor{passel}\HLADefinitionTerm{passel}: A group of attribute handle/value pairs from an \emph{Update Attribute Values} service invocation that are\linebreak
+    delivered together via a \emph{Reflect Attribute Values \textdagger{}} service invocation. All pairs within the passel have the\linebreak
+    same user-supplied tag, sent message order type, transportation type, receive message order type, timestamp\linebreak
+    (if present), and set of sent region designators (if present). A passel is a message.%
+  }
+
+  \HLADefinitionAt{201.78}{%
+    \HLADefinitionAnchor{passive-subscription}\HLADefinitionTerm{passive subscription}: A request to the runtime infrastructure (RTI) for the kinds of data (object classes and\linebreak
+    attributes as well as interactions) that the joined federate is currently interested in receiving. However, unlike\linebreak
+    an active subscription, this information is not used by the RTI to arrange for data to be delivered, nor is it\linebreak
+    used to tell publishing joined federates that another joined federate is subscribing to that data (by way of\linebreak
+    \emph{Start/Stop Registration}, \emph{Turn On/Off Updates}, or \emph{Turn On/Off Interactions} service invocations). This form of\linebreak
+    subscription is provided to support certain types of logger joined federates.%
+  }
+
+  \HLADefinitionAt{285.78}{%
+    \HLADefinitionAnchor{promoted}\HLADefinitionTerm{promoted}: Pertaining to an object instance, as known by a particular joined federate: having a discovered\linebreak
+    class that is a superclass of its registered class.%
+  }
+  \HLADefinitionNoteAt{90}{321.98}{NOTE---See 5.1.3.}
+
+  \HLADefinitionAt{343.81}{%
+    \HLADefinitionAnchor{publish}\HLADefinitionTerm{publish}: To announce to a federation the information a federate may provide to the federation.%
+  }
+
+  \HLADefinitionAt{367.81}{%
+    \HLADefinitionAnchor{published}\HLADefinitionTerm{published}:%
+  }
+
+  \HLAFixedAlphaList{100.02}{391.80}{421.98}{8}{%
+    \item Pertaining to an object class from the perspective of a given joined federate: having at least one\linebreak
+      available attribute of the object class that was an argument, along with the object class, to a \emph{Publish}\linebreak
+      \emph{Object Class Attributes} service invocation that was not subsequently unpublished via the \emph{Unpublish}\linebreak
+      \emph{Object Class Attributes} service.\par\vspace{9.4pt}{\fontsize{9pt}{12pt}\selectfont NOTE---See 5.1.2.}
+    \item Pertaining to an interaction class from the perspective of a given joined federate: being an argument\linebreak
+      to a \emph{Publish Interaction Class} service invocation that was not subsequently followed by an\linebreak
+      \emph{Unpublish Interaction Class} service invocation for that interaction class.\par\vspace{9.4pt}{\fontsize{9pt}{12pt}\selectfont NOTE---See 5.1.3.}
+  }
+
+  \HLADefinitionAt{537.79}{%
+    \HLADefinitionAnchor{published-attributes-of-an-object-class}\HLADefinitionTerm{published attributes of an object class}: The class attributes that have been arguments to \emph{Publish Object}\linebreak
+    \emph{Class Attributes} service invocations by a given joined federate for that object class that have not\linebreak
+    subsequently been unpublished (either individually or by unpublishing the whole object class), and possibly\linebreak
+    the \textbf{HLAprivilegeToDeleteObject} attribute for that object class.%
+  }
+  \HLADefinitionNoteAt{90}{597.98}{NOTE---See 5.1.2.}
+
+  \HLADefinitionAt{619.81}{%
+    \HLADefinitionAnchor{range}\HLADefinitionTerm{range}: A subset of a dimension, defined by an ordered pair of values, the first being the range lower bound\linebreak
+    and the second being the range upper bound. This pair of values defines a semi-open interval [range lower\linebreak
+    bound, range upper bound) (i.e., the range lower bound is the smallest member of the interval, and the range\linebreak
+    upper bound is just greater than any member of the interval).%
+  }
+  \HLADefinitionNoteAt{90}{680.00}{NOTE---See 9.1.1.}
+\end{hlafixedpage}
+\clearpage

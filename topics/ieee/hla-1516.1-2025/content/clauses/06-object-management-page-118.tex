@@ -1,0 +1,179 @@
+\HLASourcePage{119}{118}
+\HLAServiceBookmark{6.7.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.8}{1}{Register Object Instance service}
+\HLAServiceBookmark{6.8.1}{2}{Supplied arguments}
+\HLAServiceBookmark{6.8.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.8.3}{2}{Preconditions}
+\HLAServiceBookmark{6.8.4}{2}{Postconditions}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.7.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{119.363}{%
+    6.8 \emph{Register Object Instance} service%
+  }
+  \HLAFixedBlock{90.000}{144.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall create a federation execution-wide unique object instance handle and shall coadunate that%
+  }
+  \HLAFixedBlock{90.000}{155.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    handle with an instance of the supplied object class. All instance attributes of the object instance for which%
+  }
+  \HLAFixedBlock{90.000}{166.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the corresponding class attributes are currently published by the registering joined federate shall be set as%
+  }
+  \HLAFixedBlock{90.000}{177.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    owned by the registering joined federate.%
+  }
+  \HLAFixedBlock{90.000}{198.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance handle shall be uniform throughout the federation execution; i.e., with respect to a%
+  }
+  \HLAFixedBlock{90.000}{209.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    particular object instance, the handle provided to the joined federate that registers the object instance shall%
+  }
+  \HLAFixedBlock{90.000}{220.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be the same handle provided to all joined federates that discover the object instance. The phrase “the same%
+  }
+  \HLAFixedBlock{90.001}{231.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    handle” shall denote handle equality rather than handle identity. Two handles shall be considered to be the%
+  }
+  \HLAFixedBlock{90.001}{242.764}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    same if, according to the comparison operator in each of the APIs (for example, according to the “equals”%
+  }
+  \HLAFixedBlock{90.002}{253.804}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    method in the Java API), the handles would be determined to be equal. The handles shall also have equality%
+  }
+  \HLAFixedBlock{90.002}{264.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    between joined federates that are using different language APIs. The handles may be communicated%
+  }
+  \HLAFixedBlock{90.002}{275.764}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    between joined federates via instance attributes or interaction parameters.%
+  }
+  \HLAFixedBlock{90.002}{296.763}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional object instance name argument is supplied, that name shall have been successfully reserved%
+  }
+  \HLAFixedBlock{90.002}{307.803}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    by the registering federate as indicated by the \emph{Object Instance Name Reserved \textdagger{} }service or the \emph{Multiple}%
+  }
+  \HLAFixedBlock{90.002}{318.783}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Object Instance Names Reserved \textdagger{}} service and shall be coadunated with the object instance. If the optional%
+  }
+  \HLAFixedBlock{90.001}{329.763}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance name argument is not supplied, the RTI shall create a federation execution-wide unique%
+  }
+  \HLAFixedBlock{90.002}{340.803}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    name, and that name shall be coadunated with the object instance.%
+  }
+  \HLAServiceComponentHeadingAt{361.663}{%
+    6.8.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.022}{383.762}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.983}{383.762}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object class designator%
+  }
+  \HLAFixedBlock{100.022}{398.762}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.942}{398.762}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional object instance name%
+  }
+  \HLAServiceComponentHeadingAt{420.642}{%
+    6.8.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.022}{442.801}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.984}{442.801}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance handle%
+  }
+  \HLAServiceComponentHeadingAt{464.621}{%
+    6.8.3 Preconditions%
+  }
+  \HLAFixedBlock{100.022}{486.780}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{486.780}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.022}{501.780}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.941}{501.780}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.022}{516.780}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.972}{516.780}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.022}{531.779}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.940}{531.779}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object class is defined in the FDD.%
+  }
+  \HLAFixedBlock{100.022}{546.779}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.978}{546.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is publishing the object class.%
+  }
+  \HLAFixedBlock{100.022}{561.779}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.956}{561.779}{400.044}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional object instance name argument is supplied, that name is reserved and not already%
+  }
+  \HLAFixedBlock{121.983}{573.779}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    coadunated with another object instance.%
+  }
+  \HLAFixedBlock{100.023}{588.779}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.983}{588.779}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.023}{603.778}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.983}{603.778}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{625.658}{%
+    6.8.4 Postconditions%
+  }
+  \HLAFixedBlock{100.023}{647.817}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{647.817}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The returned object instance handle is coadunated with the object instance.%
+  }
+  \HLAFixedBlock{100.023}{662.817}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.983}{662.817}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate acquires ownership of the instance attributes that correspond to the currently%
+  }
+  \HLAFixedBlock{121.983}{674.817}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    published class attributes for the specified object class.%
+  }
+  \HLAFixedBlock{100.023}{689.817}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.982}{689.817}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional object instance name argument is supplied, that name is coadunated with the object%
+  }
+  \HLAFixedBlock{121.983}{701.817}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance.%
+  }
+\end{hlafixedpage}
+\clearpage

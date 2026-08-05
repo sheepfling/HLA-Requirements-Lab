@@ -1,0 +1,224 @@
+\HLASourcePage{430}{429}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{E.8.6 }%
+  }
+  \HLAFixedBlock{118.680}{69.383}{485.320}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Time Constrained Enabled}}%
+  }
+  \HLAFixedBlock{257.133}{69.383}{346.867}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ † service}%
+  }
+  \HLAFixedBlock{90.000}{94.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service description says that (if the joined federate is not time-regulating) “the RTI shall provide the%
+  }
+  \HLAFixedBlock{90.000}{106.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    joined federate with the smallest possible logical time that is greater than or equal to the logical time of the%
+  }
+  \HLAFixedBlock{89.999}{118.805}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    joined federate and for which all other constraints necessary to ensure TSO message delivery are satisfied.”%
+  }
+  \HLAFixedBlock{89.999}{130.805}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This description is overly complicated.%
+  }
+  \HLAFixedBlock{89.999}{154.805}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    When a joined federate invokes the %
+  }
+  \HLAFixedBlock{237.119}{154.805}{366.881}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Enable Time Constrained}%
+  }
+  \HLAFixedBlock{340.439}{154.805}{263.561}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service, there is no case in which the joined%
+  }
+  \HLAFixedBlock{89.999}{166.805}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate’s logical time needs to be advanced. The value of the current logical time argument of the %
+  }
+  \HLAFixedBlock{502.558}{166.805}{101.442}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Time}%
+  }
+  \HLAFixedBlock{89.998}{178.804}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Constrained Enabled † }%
+  }
+  \HLAFixedBlock{184.978}{178.804}{419.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service will always be the current logical time of the joined federate when it invoked%
+  }
+  \HLAFixedBlock{89.997}{190.804}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{104.697}{190.804}{499.303}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Enable Time Constrained}%
+  }
+  \HLAFixedBlock{206.877}{190.804}{397.123}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{89.997}{214.804}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    If the joined federate’s current logical time is less than or equal to its GALT when it invokes the %
+  }
+  \HLAFixedBlock{471.957}{214.804}{132.043}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Enable Time}%
+  }
+  \HLAFixedBlock{89.997}{226.804}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Constrained}%
+  }
+  \HLAFixedBlock{139.438}{226.804}{464.562}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service, then the %
+  }
+  \HLAFixedBlock{216.897}{226.804}{387.103}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Time Constrained Enabled †}%
+  }
+  \HLAFixedBlock{335.217}{226.804}{268.783}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service may be invoked immediately at the%
+  }
+  \HLAFixedBlock{89.997}{238.804}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    joined federate. If the joined federate’s current logical time is greater than its GALT when it invokes the%
+  }
+  \HLAFixedBlock{89.997}{250.803}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Enable Time Constrained}%
+  }
+  \HLAFixedBlock{192.597}{250.803}{411.403}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service, then the %
+  }
+  \HLAFixedBlock{263.577}{250.803}{340.423}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Time Constrained Enabled †}%
+  }
+  \HLAFixedBlock{378.657}{250.803}{225.343}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service cannot be invoked until the%
+  }
+  \HLAFixedBlock{89.997}{262.803}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    joined federate’s GALT advances beyond its logical time. In either case, however, when the %
+  }
+  \HLAFixedBlock{502.557}{262.803}{101.443}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Time}%
+  }
+  \HLAFixedBlock{89.997}{274.803}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Constrained Enabled †}%
+  }
+  \HLAFixedBlock{184.737}{274.803}{419.263}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service is invoked at the joined federate, the value of the current logical time%
+  }
+  \HLAFixedBlock{89.997}{286.803}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    argument of the %
+  }
+  \HLAFixedBlock{154.977}{286.803}{449.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Time Constrained Enabled †}%
+  }
+  \HLAFixedBlock{269.217}{286.803}{334.783}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service will be the value of the joined federate’s current logical%
+  }
+  \HLAFixedBlock{89.997}{298.803}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    time when the joined federate invoked the %
+  }
+  \HLAFixedBlock{260.698}{298.803}{343.302}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Enable Time Constrained}%
+  }
+  \HLAFixedBlock{362.877}{298.803}{241.123}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{90.000}{328.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{E.8.12 }%
+  }
+  \HLAFixedBlock{124.800}{328.403}{479.200}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Flush Queue Request}}%
+  }
+  \HLAFixedBlock{237.780}{328.403}{366.220}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{353.766}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.060}{353.766}{495.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Flush Queue Request}%
+  }
+  \HLAFixedBlock{193.500}{353.766}{410.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service introductory text says,%
+  }
+  \HLAFixedBlock{121.981}{377.765}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall advance the joined federate’s logical time to the smallest of the following:%
+  }
+  \HLAFixedBlock{132.000}{397.805}{472.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{154.020}{397.805}{449.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The specified logical time%
+  }
+  \HLAFixedBlock{132.000}{409.805}{472.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{154.020}{409.805}{449.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The joined federate’s GALT value%
+  }
+  \HLAFixedBlock{132.000}{421.804}{472.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{154.020}{421.804}{449.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The smallest timestamp of all TSO messages delivered by the RTI in response to this%
+  }
+  \HLAFixedBlock{154.020}{433.804}{449.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    invocation of the %
+  }
+  \HLAFixedBlock{224.220}{433.804}{379.780}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Flush Queue Request}%
+  }
+  \HLAFixedBlock{309.720}{433.804}{294.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service%
+  }
+  \HLAFixedBlock{90.000}{457.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The third item in the list above is a change from the 1.3 version to the HLA specification, and the purpose of%
+  }
+  \HLAFixedBlock{90.000}{469.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    adding it is to allow federates to generate new events with “small” timestamps in response to events it%
+  }
+  \HLAFixedBlock{90.000}{481.803}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    received as a result of the %
+  }
+  \HLAFixedBlock{194.340}{481.803}{409.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Flush Queue Request}%
+  }
+  \HLAFixedBlock{279.840}{481.803}{324.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . For example, consider the following scenario:%
+  }
+  \HLAFixedBlock{121.980}{505.803}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A federate makes a %
+  }
+  \HLAFixedBlock{200.820}{505.803}{403.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Flush Queue Request}%
+  }
+  \HLAFixedBlock{286.320}{505.803}{317.680}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service invocation to federation time 100.%
+  }
+  \HLAFixedBlock{121.980}{517.803}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate receives a message with timestamp 95.%
+  }
+  \HLAFixedBlock{121.980}{529.803}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate gets a grant to federation time T.%
+  }
+  \HLAFixedBlock{121.980}{553.802}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Without the third condition above, the federate could get a grant up to federation time 100 (i.e.,%
+  }
+  \HLAFixedBlock{121.980}{565.802}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    T=100). However, the federate may want to send a new event, e.g., %
+  }
+  \HLAFixedBlock{409.260}{565.802}{194.740}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Update Attribute Values}%
+  }
+  \HLAFixedBlock{507.840}{565.802}{96.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , in%
+  }
+  \HLAFixedBlock{121.980}{577.802}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    response to the event with timestamp 95. This new event might have, for example, a timestamp of%
+  }
+  \HLAFixedBlock{121.979}{589.802}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    96. This is a perfectly reasonable thing to do, but would cause an exception if the federate had%
+  }
+  \HLAFixedBlock{121.979}{601.802}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    already been advanced to federation time 100.%
+  }
+  \HLAFixedBlock{121.979}{625.801}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To address this situation, the third condition will ensure that the grant will only be to federation time%
+  }
+  \HLAFixedBlock{121.979}{637.801}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    95 (or less).%
+  }
+\end{hlafixedpage}
+\clearpage

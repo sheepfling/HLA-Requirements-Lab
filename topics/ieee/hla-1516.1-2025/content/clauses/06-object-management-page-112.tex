@@ -1,0 +1,145 @@
+\HLASourcePage{113}{112}
+\HLAServiceBookmark{6.1.12}{2}{Passelization}
+\HLAServiceBookmark{6.1.13}{2}{Sending updates with update rate reduction}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Similarly, a joined federate may request a change of the transportation type for interactions using the%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Request Interaction Transportation Type Change} service. When this operation has completed, the joined%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate shall receive an invocation of the \emph{Confirm Interaction Transportation Type Change \textdagger{}} service,%
+  }
+  \HLAFixedBlock{89.999}{105.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specifying the transportation type that was actually achieved, which may or may not have changed.%
+  }
+  \HLAFixedBlock{89.999}{129.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    In case the FDD specifies a transportation type that is not available, the RTI shall silently fallback to a%
+  }
+  \HLAFixedBlock{89.999}{141.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    corresponding transportation type. It is still possible for a joined federate to inspect the transportation type%
+  }
+  \HLAFixedBlock{89.999}{153.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    employed by using the \emph{Query Attribute Transportation Type} service, which will result in a \emph{Report Attribute}%
+  }
+  \HLAFixedBlock{90.000}{165.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Transportation Type \textdagger{}} service invocation. The corresponding services for interactions are \emph{Query Interaction}%
+  }
+  \HLAFixedBlock{89.999}{177.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Transportation Type} and \emph{Report Interaction Transportation Type \textdagger{}}.%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    6.1.12 Passelization%
+  }
+  \HLAFixedBlock{89.999}{225.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All of the instance attribute/value pairs in an \emph{Update Attribute Values} service invocation for instance%
+  }
+  \HLAFixedBlock{89.998}{237.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attributes that have identical transportation type, sent message order type, and set of sent region designators%
+  }
+  \HLAFixedBlock{89.998}{249.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (if present) shall be defined as one passel. The instance attributes that make up a passel shall be available for%
+  }
+  \HLAFixedBlock{89.999}{261.783}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivery in the same \emph{Reflect Attribute Values} service invocation. The delivery of the instance attributes that%
+  }
+  \HLAFixedBlock{90.000}{273.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    make up the passel shall depend on the subscriptions and subscription region specifications at the reflecting%
+  }
+  \HLAFixedBlock{90.000}{285.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate. Elements shall not change passels, passels shall not be divided, and passels shall not be%
+  }
+  \HLAFixedBlock{90.000}{297.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    combined with other passels. Since one \emph{Update Attribute Values} service invocation may result in the%
+  }
+  \HLAFixedBlock{89.999}{309.782}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    creation of multiple passels (where sent transportation type, sent message order type, and set of sent region%
+  }
+  \HLAFixedBlock{89.999}{321.782}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    designators are different), an \emph{Update Attribute Values} service invocation may result in multiple \emph{Reflect}%
+  }
+  \HLAFixedBlock{89.999}{333.782}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Values} service invocations in a reflecting joined federate. Instance attributes delivered via a \emph{Reflect}%
+  }
+  \HLAFixedBlock{89.998}{345.781}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Values} service invocation shall not contain elements from more than one \emph{Update Attribute Values}%
+  }
+  \HLAFixedBlock{89.998}{357.781}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation.%
+  }
+  \HLAServiceComponentHeadingAt{381.641}{%
+    6.1.13 Sending updates with update rate reduction%
+  }
+  \HLAFixedBlock{89.998}{405.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall not provide an update rate to a joined federate that exceeds the subscribed update rate. It shall%
+  }
+  \HLAFixedBlock{89.998}{417.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not, however, deliver any more updates than what is provided by the owning joined federate. In other words,%
+  }
+  \HLAFixedBlock{89.998}{429.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    any minimum update rate shall not be guaranteed. In case a joined federate has subscribed with an update%
+  }
+  \HLAFixedBlock{89.998}{441.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    rate other than the default update rate, the RTI shall handle this situation as follows:%
+  }
+  \HLAFixedBlock{100.018}{456.780}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{456.780}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For attributes with best-effort transportation, messages shall not be delivered to a joined federate%
+  }
+  \HLAFixedBlock{121.978}{468.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with an update rate higher than the subscribed update rate. Any messages in excess of this rate shall%
+  }
+  \HLAFixedBlock{121.977}{480.779}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be dropped. Given a maximum update rate of \emph{x} Hz and given that a message has been delivered at%
+  }
+  \HLAFixedBlock{121.977}{492.779}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    wall-clock time \emph{t}, no message shall be delivered before \emph{t} + (1 / \emph{x}).%
+  }
+  \HLAFixedBlock{100.016}{507.779}{421.984}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.976}{507.779}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For attributes with reliable transportation, no messages shall be dropped.%
+  }
+  \HLAFixedBlock{89.996}{531.778}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    In case the attribute relevancy advisory switch is enabled, the owning joined federate shall be notified of the%
+  }
+  \HLAFixedBlock{89.996}{543.778}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    maximum actively subscribed update rate as part of the \emph{Turn Updates On For Object Instance \textdagger{}} service%
+  }
+  \HLAFixedBlock{89.996}{555.778}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation. The \emph{Turn Updates On for Object Instance \textdagger{}} service invocation shall also be invoked at owning%
+  }
+  \HLAFixedBlock{89.996}{567.778}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates whenever the maximum actively subscribed update rate in the federation execution changes.%
+  }
+  \HLAFixedBlock{89.996}{579.778}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    In case any joined federate is actively subscribed using the default update rate, no update rate designator will%
+  }
+  \HLAFixedBlock{89.997}{591.777}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be provided as part of the \emph{Turn Updates On for Object Instance \textdagger{}} service invocation. In case the%
+  }
+  \HLAFixedBlock{89.996}{603.777}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    transportation type for an attribute is changed, the update rate reduction behavior for the new transportation%
+  }
+  \HLAFixedBlock{89.996}{615.777}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    type shall apply.%
+  }
+  \HLAFixedBlock{89.996}{639.777}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If operating in a synchronous callback model, a subscribing joined federate whose rate of invoking the%
+  }
+  \HLAFixedBlock{89.996}{651.776}{432.004}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Evoke Callback} service (\emph{Re}) and rate of updates by the publishing joined federate (\emph{Rp}) are higher than the%
+  }
+  \HLAFixedBlock{90.000}{663.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribed update rate (\emph{Rs}), then the RTI shall drop messages at a rate of \emph{Rp}--\emph{Rs}. If either \emph{Re} or \emph{Rp} is less%
+  }
+  \HLAFixedBlock{90.001}{675.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    than \emph{Rs}, there are no guarantees on the rate of messages received by the subscribing joined federate.%
+  }
+\end{hlafixedpage}
+\clearpage

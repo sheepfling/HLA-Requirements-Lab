@@ -1,0 +1,99 @@
+\HLASourcePage{222}{221}
+\HLAServiceBookmark{9.1.4}{2}{Calculating region overlaps}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Subsequently invoking the \emph{Unsubscribe Interaction Class With Regions} service for the same%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (interaction class, region) pair shall cause the region not to be used for subscription of that%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class. Invoking the \emph{Subscribe Interaction Class With Regions }service or the \emph{Unsubscribe}%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction Class With Regions} service with an empty set of regions shall make no changes to the set%
+  }
+  \HLAFixedBlock{121.980}{117.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of subscriptions with region of the interaction class.%
+  }
+  \HLAFixedBlock{121.980}{132.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Any region associated with an interaction class for subscription shall contain only dimensions that%
+  }
+  \HLAFixedBlock{121.980}{144.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    are a subset of the available dimensions of that interaction class. %
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The default region shall be used for subscription of that interaction class if and only if that interac-%
+  }
+  \HLAFixedBlock{121.980}{168.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    tion class has available dimensions, there is no other region realization used for subscription of that%
+  }
+  \HLAFixedBlock{121.980}{180.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class, and the joined federate is subscribed to that interaction class. Subsequently invok-%
+  }
+  \HLAFixedBlock{121.980}{192.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ing the \emph{Unsubscribe Interaction Class} service for the same interaction class shall cause the default%
+  }
+  \HLAFixedBlock{121.980}{204.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    region not to be used for subscription of that interaction class.%
+  }
+  \HLAFixedBlock{121.980}{216.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate shall use a region for subscription of an interaction class to establish requirements%
+  }
+  \HLAFixedBlock{121.980}{228.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    for receiving interactions of that class.%
+  }
+  \HLAFixedBlock{90.000}{252.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A set of region realizations used for update of instance attributes or for sending interactions shall be called%
+  }
+  \HLAFixedBlock{90.000}{264.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    an \textbf{update region set}.%
+  }
+  \HLAFixedBlock{90.000}{288.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A set of region realizations used for subscription of either class attributes or interaction classes shall be%
+  }
+  \HLAFixedBlock{89.999}{300.782}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    called a \textbf{subscription region set}.%
+  }
+  \HLAServiceComponentHeadingAt{324.642}{%
+    \textbf{9.1.4 Calculating region overlaps}%
+  }
+  \HLAFixedBlock{89.999}{348.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An update region set and a subscription region set shall overlap if and only if a region exists in each set so%
+  }
+  \HLAFixedBlock{89.999}{360.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that the two regions overlap. Two regions overlap if and only if all ranges of dimensions that are contained%
+  }
+  \HLAFixedBlock{89.999}{372.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in both regions overlap pairwise. If two regions do not have any dimensions in common, they shall not%
+  }
+  \HLAFixedBlock{89.999}{384.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    overlap. Two ranges in the same dimension A = [a{\fontsize{7.98pt}{9.48pt}\selectfont lower}, a{\fontsize{7.98pt}{9.48pt}\selectfont upper}) and B = [b{\fontsize{7.98pt}{9.48pt}\selectfont lower}, b{\fontsize{7.98pt}{9.48pt}\selectfont upper}) shall overlap if and%
+  }
+  \HLAFixedBlock{90.000}{396.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only if either a{\fontsize{7.98pt}{9.48pt}\selectfont lower} = b{\fontsize{7.98pt}{9.48pt}\selectfont lower }or (a{\fontsize{7.98pt}{9.48pt}\selectfont lower} < b{\fontsize{7.98pt}{9.48pt}\selectfont upper} and b{\fontsize{7.98pt}{9.48pt}\selectfont lower} < a{\fontsize{7.98pt}{9.48pt}\selectfont upper}) or the Allow Relaxed DDM switch is%
+  }
+  \HLAFixedBlock{90.000}{408.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    enabled and the RTI implementation makes the determination, based on implementation-specific criteria,%
+  }
+  \HLAFixedBlock{89.999}{420.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that the ranges are sufficiently close to warrant an expanded interpretation of one or both ranges; neither%
+  }
+  \HLAFixedBlock{89.999}{432.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    range may ever be reduced.%
+  }
+  \HLAFixedBlock{89.999}{456.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The normalization of federation data to [0, a particular dimension’s upper bound) for use with DDM%
+  }
+  \HLAFixedBlock{89.999}{468.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services shall be left to the federation. The effects of DDM services shall be independent of the time axis and%
+  }
+  \HLAFixedBlock{89.998}{480.784}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    HLA time management services.%
+  }
+  \HLAFixedBlock{89.998}{504.784}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 18 depicts a region with two dimensions.%
+  }
+\end{hlafixedpage}
+\clearpage

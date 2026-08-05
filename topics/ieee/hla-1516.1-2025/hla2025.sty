@@ -1,0 +1,490 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hla2025}[2026/07/30 IEEE 1516.1-2025 recreation styles v0.20.0]
+
+\newif\ifHLAUseSourceFonts
+\HLAUseSourceFontsfalse
+\DeclareOption{sourcefonts}{\HLAUseSourceFontstrue}
+\ProcessOptions\relax
+
+\RequirePackage{fontspec}
+\RequirePackage{geometry}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{ragged2e}
+\RequirePackage{microtype}
+\RequirePackage{eso-pic}
+\RequirePackage{etoolbox}
+\RequirePackage{needspace}
+\RequirePackage{setspace}
+\RequirePackage{hyperref}
+\RequirePackage{bookmark}
+\RequirePackage{pdflscape}
+\RequirePackage{rotating}
+\RequirePackage{caption}
+
+\defaultfontfeatures{Ligatures=TeX}
+\ifHLAUseSourceFonts
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \newfontfamily\HLACoverFont{Calibri}
+  \newfontfamily\HLAStandardsFont{Montserrat ExtraBold}
+  \newfontfamily\HLALicenseFont{Arial}
+\else
+  \IfFontExistsTF{Tinos}{
+    \setmainfont{Tinos}
+  }{
+    \setmainfont{TeX Gyre Termes}
+  }
+  \IfFontExistsTF{Arimo}{
+    \setsansfont{Arimo}
+  }{
+    \setsansfont{TeX Gyre Heros}
+  }
+  \IfFontExistsTF{Carlito}{
+    \newfontfamily\HLACoverFont{Carlito}
+  }{
+    \newfontfamily\HLACoverFont{TeX Gyre Heros}
+  }
+  \IfFontExistsTF{Noto Sans}{
+    \newfontfamily\HLAStandardsFont{Noto Sans}
+  }{
+    \newfontfamily\HLAStandardsFont{TeX Gyre Heros}
+  }
+  \IfFontExistsTF{Liberation Sans}{
+    \newfontfamily\HLALicenseFont{Liberation Sans}
+  }{
+    \newfontfamily\HLALicenseFont{TeX Gyre Heros}
+  }
+\fi
+
+\definecolor{hlaCyan}{RGB}{0,174,239}
+\definecolor{hlaLightCyan}{RGB}{78,197,216}
+\definecolor{hlaBlue}{RGB}{0,108,163}
+\definecolor{hlaGray}{RGB}{163,167,169}
+\definecolor{hlaBlack}{RGB}{35,31,32}
+
+\geometry{
+  letterpaper,
+  left=90pt,
+  right=90pt,
+  top=67.7pt,
+  bottom=76pt,
+  headheight=30pt,
+  headsep=13pt,
+  footskip=46.5pt
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{11.8pt plus 0.6pt minus 0.4pt}
+\setlength{\emergencystretch}{0.7em}
+\hyphenpenalty=10000
+\pretolerance=1000
+\tolerance=3000
+\microtypesetup{protrusion=false,expansion=false}
+\linespread{1.0}
+\AtBeginDocument{\fontsize{9.96pt}{12pt}\selectfont}
+
+\hypersetup{
+  colorlinks=false,
+  hidelinks,
+  pdfcreator={XeLaTeX},
+  pdfproducer={HLA 2025 LaTeX recreation project}
+}
+
+\newif\ifHLAIncludeSourceLicenseNotice
+\HLAIncludeSourceLicenseNoticetrue
+\newcommand{\HLASetSourceLicenseNotice}[1]{%
+  \csname HLAIncludeSourceLicenseNotice#1\endcsname
+}
+
+\newcommand{\HLASourceLicenseText}{%
+}
+
+\newcommand{\HLAHeaderText}{%
+  \sffamily\fontsize{7.98pt}{10pt}\selectfont
+  IEEE Std 1516.1-2025\\[-0.2pt]
+  IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---\\[-0.2pt]
+  Federate Interface Specification%
+}
+
+\newcommand{\HLAHeaderTextNoIEEE}{%
+  \sffamily\fontsize{7.98pt}{10pt}\selectfont
+  IEEE Std 1516.1-2025\\[-0.2pt]
+  Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---\\[-0.2pt]
+  Federate Interface Specification%
+}
+
+\newcommand{\HLAFooterText}{%
+  \begin{minipage}{\textwidth}
+    \centering
+    {\rmfamily\fontsize{9.96pt}{10pt}\selectfont\thepage}\\[-0.2pt]
+    {\sffamily\fontsize{7.98pt}{8.5pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}
+  \end{minipage}%
+}
+
+\fancypagestyle{hla-body}{%
+  \fancyhf{}
+  \fancyhead[C]{\parbox[c][30pt][c]{\textwidth}{\centering\HLAHeaderText}}
+  \fancyfoot[C]{\HLAFooterText}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{hla-body-no-ieee}{%
+  \fancyhf{}
+  \fancyhead[C]{\parbox[c][30pt][c]{\textwidth}{\centering\HLAHeaderTextNoIEEE}}
+  \fancyfoot[C]{\HLAFooterText}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{hla-opening}{%
+  \fancyhf{}
+  \fancyfoot[C]{\HLAFooterText}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{hla-front-numbered}{%
+  \fancyhf{}
+  \fancyfoot[C]{\HLAFooterText}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{hla-empty}{%
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{hla-body}
+
+\newcommand{\HLAFrontHeading}[1]{%
+  {\sffamily\bfseries\fontsize{13.98pt}{16pt}\selectfont #1\par}%
+}
+
+\newcommand{\HLAClause}[1]{%
+  \Needspace{3\baselineskip}%
+  {\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont #1\par}%
+}
+
+\newcommand{\HLASubclause}[1]{%
+  \Needspace{2.5\baselineskip}%
+  {\sffamily\bfseries\fontsize{10.98pt}{13pt}\selectfont #1\par}%
+}
+
+\newcommand{\HLASubsubclause}[1]{%
+  \Needspace{2.25\baselineskip}%
+  {\sffamily\bfseries\fontsize{9.96pt}{12pt}\selectfont #1\par}%
+}
+
+\newenvironment{hlaalphlist}{%
+  \begin{enumerate}[
+    label=\alph*),
+    leftmargin=32pt,
+    labelsep=14pt,
+    itemsep=6pt,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{enumerate}
+}
+
+\newenvironment{hladashlist}{%
+  \begin{itemize}[
+    label=---,
+    leftmargin=22pt,
+    labelsep=8pt,
+    itemsep=3.5pt,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{%
+  \end{itemize}
+}
+
+\newcommand{\HLACompactFootnote}[2]{%
+  {\fontsize{7.98pt}{9.4pt}\selectfont
+    \makebox[0pt][r]{\raisebox{2.0pt}{\fontsize{6.36pt}{7pt}\selectfont #1}\hspace{1.7pt}}#2\par}%
+}
+
+\newcommand{\HLATitleMark}{IEEE Std 1516.1\texttrademark-2025}
+\newcommand{\HLARevisionText}{(Revision of IEEE Std 1516.1-2010)}
+\newcommand{\HLADocumentTitle}{IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Federate Interface Specification}
+
+\newcommand{\HLACoverPattern}{%
+  \begin{scope}[shift={(current page.north west)},x=1pt,y=-1pt]
+    \fill[hlaLightCyan] (541.0,12.2) rectangle (559.6,37.1);
+    \fill[hlaLightCyan] (559.5,9.2) rectangle (578.2,12.3);
+    \draw[hlaGray,line width=3.071pt] (540.9,44.8)--(559.6,44.8);
+    \draw[hlaCyan,line width=6.2pt] (540.9,58.8)--(559.6,58.8);
+    \fill[hlaCyan] (541.0,12.3)--(578.2,12.3)--(578.2,55.7)--(559.6,55.7)--(559.6,46.4)--(541.0,46.4)--cycle;
+    \draw[hlaBlue,line width=3.103pt] (559.6,1.4)--(578.2,1.4);
+    \draw[hlaCyan,line width=3.1pt] (541.0,4.45)--(578.2,4.45);
+    \fill[hlaGray] (578.2,0.0) rectangle (596.8,2.95);
+    \fill[hlaGray] (559.6,6.05) rectangle (578.2,9.15);
+    \fill[hlaGray] (578.2,40.2) rectangle (596.8,43.3);
+    \fill[hlaBlue] (578.2,55.7) rectangle (596.9,77.4);
+    \fill[hlaCyan] (596.8,0.0) rectangle (612.0,24.7);
+    \fill[hlaBlue] (578.2,33.9) rectangle (596.9,40.1);
+    \draw[hlaBlue,line width=3.1pt] (578.2,32.4)--(612.0,32.4);
+    \fill[hlaBlue] (578.2,2.9) rectangle (596.9,30.8);
+    \fill[hlaGray] (596.8,33.95) rectangle (612.0,37.1);
+    \fill[hlaCyan] (596.8,37.05) rectangle (612.0,40.2);
+    \fill[hlaLightCyan] (596.8,43.25) rectangle (612.0,55.7);
+    \draw[hlaGray,line width=3.103pt] (578.2,82.05)--(596.8,82.05);
+    \fill[hlaCyan] (596.8,80.5) rectangle (612.0,96.0);
+    \draw[hlaCyan,line width=3.1pt] (578.2,78.95)--(612.0,78.95);
+    \fill[hlaLightCyan] (559.6,80.5) rectangle (578.2,89.85);
+    \draw[hlaGray,line width=3.103pt] (559.6,75.85)--(578.2,75.85);
+    \fill[hlaBlue] (541.0,6.0) rectangle (559.6,12.25);
+    \draw[hlaLightCyan,line width=3.103pt] (541.0,69.65)--(559.6,69.65);
+    \draw[hlaCyan,line width=3.102pt] (559.6,103.8)--(578.2,103.8);
+    \draw[hlaCyan,line width=7pt] (547.7,476.3)--(581.4,476.3);
+  \end{scope}%
+}
+
+\newcommand{\HLAAnchor}[1]{\hypertarget{#1}{}}
+\newcommand{\HLASourcePage}[2]{%
+  \thispdfpagelabel{#2}%
+  \HLAAnchor{source-pdf-page-#1}%
+  \gdef\HLACurrentSourcePDFPage{#1}%
+  \gdef\HLACurrentSourcePageLabel{#2}%
+}
+
+\DeclareCaptionLabelSeparator{emdash}{---}
+\captionsetup{font={sf,bf},labelfont={sf,bf},labelsep=emdash,justification=centering,singlelinecheck=false}
+
+
+% Fixed-position source-page helpers used for front matter whose source layout is
+% explicitly page-composed. Text remains native and searchable; no page image is
+% used as a background.
+\newenvironment{hlafixedpage}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={(current page.north west)},x=1pt,y=-1pt]
+}{%
+    \end{scope}
+  \end{tikzpicture}%
+  \mbox{}%
+}
+
+\newcommand{\HLAFixedBlock}[7]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      \justifying #4\fontsize{#5pt}{#6pt}\selectfont\setlength{\parindent}{0pt}#7\par
+    \end{minipage}%
+  };%
+}
+
+\newcommand{\HLAFixedImage}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \includegraphics[width=#3pt,height=#4pt]{#5}%
+  };%
+}
+
+\newcommand{\HLAFixedCenteredBlock}[7]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      #4\fontsize{#5pt}{#6pt}\selectfont\centering #7\par
+    \end{minipage}%
+  };%
+}
+
+% Raw portrait-page text line for source pages carrying a PDF /Rotate 90 entry.
+% The line is written bottom-to-top in page space and becomes left-to-right when
+% a conforming viewer applies the page rotation.
+\newcommand{\HLARotatedLine}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt,rotate=90] at (#1,#2) {%
+    {#3\fontsize{#4pt}{#4pt}\selectfont #5}%
+  };%
+}
+
+% Searchable but visually suppressed source text. Some IEEE figure captions
+% contain a second non-rendering text object in the source PDF; preserving it
+% keeps token-level extraction faithful without duplicating the visible caption.
+\newcommand{\HLAInvisibleFixedCenteredBlock}[7]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      #4\fontsize{#5pt}{#6pt}\selectfont\centering
+      \special{pdf:literal direct 3 Tr}#7\special{pdf:literal direct 0 Tr}\par
+    \end{minipage}%
+  };%
+}
+
+\newcommand{\HLATocLineAt}[7]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#2,#1) {%
+    {\rmfamily\fontsize{9.96pt}{12pt}\selectfont #3}%
+  };%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#4,#1) {%
+    {\rmfamily\fontsize{9.96pt}{12pt}\selectfont
+      \makebox[#6pt][l]{#5\leaders\hbox{.}\hfill}}%
+  };%
+  \node[anchor=north east,inner sep=0pt,outer sep=0pt] at (522,#1) {%
+    {\rmfamily\fontsize{9.96pt}{12pt}\selectfont #7}%
+  };%
+}
+
+\newcommand{\HLASupMark}[1]{\raisebox{2.0pt}{\fontsize{6.36pt}{7pt}\selectfont #1}}
+
+\newcommand{\HLATocHeadingAt}[1]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (90,#1) {%
+    {\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont Contents}%
+  };%
+}
+
+% Fixed-position semantic dash list for body pages. The minipage origin is
+% expressed in source-page coordinates while the contents remain a native
+% itemize structure.
+\newcommand{\HLAFixedDashList}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      \hfuzz=1.5pt%
+      \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+      \begin{itemize}[
+        label=---,
+        leftmargin=32pt,
+        labelwidth=10pt,
+        labelsep=12pt,
+        align=left,
+        itemsep=#4pt,
+        topsep=0pt,
+        parsep=0pt,
+        partopsep=0pt
+      ]
+        #5
+      \end{itemize}
+    \end{minipage}%
+  };%
+}
+
+% Clause 3 definition helpers. These retain semantic term boundaries while
+% allowing source-page line breaks and coordinates to remain explicit.
+\newcommand{\HLADefinitionAnchor}[1]{\HLAAnchor{definition:#1}}
+\newcommand{\HLADefinitionTerm}[1]{\textbf{#1}}
+\newcommand{\HLASeeAlso}[1]{\emph{See also}: \textbf{#1}}
+\newcommand{\HLADefinitionAt}[2]{%
+  \HLAFixedBlock{90}{#1}{432}{\rmfamily}{9.96}{12}{#2}%
+}
+\newcommand{\HLADefinitionNoteAt}[3]{%
+  \HLAFixedBlock{#1}{#2}{432}{\rmfamily\raggedright}{9}{12}{#3}%
+}
+\newcommand{\HLAFixedAlphaList}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      \hfuzz=1.5pt%
+      \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+      \begin{enumerate}[
+        label=\alph*),
+        leftmargin=22pt,
+        labelwidth=8pt,
+        labelsep=14pt,
+        align=left,
+        itemsep=#4pt,
+        topsep=0pt,
+        parsep=0pt,
+        partopsep=0pt
+      ]
+        #5
+      \end{enumerate}
+    \end{minipage}%
+  };%
+}
+
+% Fixed-position alphabetic list starting at an arbitrary source label. This is
+% useful where source notes interrupt a multi-sense definition between items.
+\newcommand{\HLAFixedAlphaListFrom}[6]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \begin{minipage}[t]{#3pt}%
+      \vspace{0pt}%
+      \setlength{\parindent}{0pt}%
+      \setlength{\parskip}{0pt}%
+      \hbadness=10000%
+      \hfuzz=1.5pt%
+      \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+      \begin{enumerate}[
+        label=\alph*),
+        start=#5,
+        leftmargin=22pt,
+        labelwidth=8pt,
+        labelsep=14pt,
+        align=left,
+        itemsep=#4pt,
+        topsep=0pt,
+        parsep=0pt,
+        partopsep=0pt
+      ]
+        #6
+      \end{enumerate}
+    \end{minipage}%
+  };%
+}
+
+% Clause 3.2 semantic two-column abbreviation rows. Each row retains a stable
+% anchor while matching the source's independently aligned columns.
+\newcommand{\HLAAbbreviationAnchor}[1]{\HLAAnchor{abbreviation:#1}}
+\newcommand{\HLAAbbreviationAt}[4]{%
+  \HLAFixedBlock{90}{#2}{50}{\rmfamily\raggedright}{9.96}{12}{\HLAAbbreviationAnchor{#1}#3}%
+  \HLAFixedBlock{140}{#2}{382}{\rmfamily\raggedright}{9.96}{12}{#4}%
+}
+
+% Provenance-tracked figure helpers for body pages. The extracted source asset
+% remains at the exact source-page rectangle while the caption stays native and
+% searchable. Figure anchors are independent of the raster asset.
+\newcommand{\HLAFigureAnchor}[1]{\HLAAnchor{figure:#1}}
+\newcommand{\HLAFigureImageAt}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \includegraphics[width=#3pt,height=#4pt]{#5}%
+  };%
+}
+\newcommand{\HLAFigureCaptionAt}[3]{%
+  \HLAFixedCenteredBlock{90}{#2}{432}{\sffamily\bfseries}{9.96}{12}{%
+    \HLAFigureAnchor{#1}Figure #1---#3%
+  }%
+}
+
+
+% Clause 4 service-description helpers. Service and component headings share
+% fixed source-page geometry while retaining stable clause anchors and outline
+% destinations. The body remains explicit fixed-position native text.
+\newcommand{\HLAServiceBookmark}[3]{%
+  \HLAAnchor{clause:#1}%
+  \pdfbookmark[#2]{#1 #3}{bookmark:clause:#1}%
+}
+\newcommand{\HLAServiceHeadingAt}[2]{%
+  \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{10.98}{12}{#2}%
+}
+\newcommand{\HLAServiceComponentHeadingAt}[2]{%
+  \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{9.96}{12}{#2}%
+}
+\newcommand{\HLAFixedRule}[4]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[black] ([xshift=#1pt,yshift=-#2pt]current page.north west) rectangle ++(#3pt,-#4pt);
+  \end{tikzpicture}%
+}

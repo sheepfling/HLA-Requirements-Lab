@@ -1,0 +1,207 @@
+\HLASourcePage{83}{82}
+\HLAServiceBookmark{5.1.2}{2}{Definitions and constraints for object classes and class attributes}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance’s known class shall be a necessary, but not necessarily a sufficient, condition for an%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute to be used in the set of attribute designators for such a service.%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    m)%
+  }
+  \HLAFixedBlock{121.950}{93.785}{400.050}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For any service that takes an object class and a directed interaction designator as arguments, only the%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available directed interactions of that object class may be used. %
+  }
+  \HLAFixedBlock{100.019}{117.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    n)%
+  }
+  \HLAFixedBlock{121.937}{117.785}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For any service that takes an object instance and a directed interaction as arguments, only the%
+  }
+  \HLAFixedBlock{121.979}{129.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available directed interactions of that object instance’s known class at the involved (invoking or%
+  }
+  \HLAFixedBlock{121.979}{141.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked) joined federate may be used.%
+  }
+  \HLAServiceComponentHeadingAt{165.645}{%
+    5.1.2 Definitions and constraints for object classes and class attributes%
+  }
+  \HLAFixedBlock{89.999}{189.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The following DM definitions and constraints shall pertain to object classes and class attributes as declared%
+  }
+  \HLAFixedBlock{89.999}{201.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in the class hierarchy of the FDD:%
+  }
+  \HLAFixedBlock{100.019}{213.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{213.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A class attribute may be used as an argument to \emph{Subscribe Object Class Attributes}, \emph{Unsubscribe}%
+  }
+  \HLAFixedBlock{121.979}{225.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Object Class Attributes, Publish Object Class Attributes}, and \emph{Unpublish Object Class Attributes}%
+  }
+  \HLAFixedBlock{121.979}{237.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocations for a particular object class if and only if the attribute is an available attribute of%
+  }
+  \HLAFixedBlock{121.979}{249.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that object class.%
+  }
+  \HLAFixedBlock{100.019}{261.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.935}{261.783}{400.065}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, the \textbf{subscribed attributes of an object class} shall be all of the%
+  }
+  \HLAFixedBlock{121.979}{273.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class attributes that have been arguments to \emph{Subscribe Object Class Attributes }service invocations by%
+  }
+  \HLAFixedBlock{121.980}{285.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that joined federate for that object class and that have not subsequently been unsubscribed, either%
+  }
+  \HLAFixedBlock{121.980}{297.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    individually or by unsubscribing the whole object class. \emph{Subscribe Object Class Attributes} and%
+  }
+  \HLAFixedBlock{121.980}{309.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Unsubscribe Object Class Attributes} service invocations for one object class shall have no effect on%
+  }
+  \HLAFixedBlock{121.979}{321.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the subscribed attributes of any other object class.%
+  }
+  \HLAFixedBlock{100.019}{333.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{333.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a class attribute is a subscribed attribute of an object class, the joined federate shall be subscribed%
+  }
+  \HLAFixedBlock{121.979}{345.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to that class attribute either actively or passively, but not both.%
+  }
+  \HLAFixedBlock{100.019}{357.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{357.781}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, the \textbf{explicitly published attributes of an object class} shall be%
+  }
+  \HLAFixedBlock{121.980}{369.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    all the class attributes that have been arguments to \emph{Publish Object Class Attributes} service%
+  }
+  \HLAFixedBlock{121.981}{381.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocations by that joined federate for that object class and that have not subsequently been%
+  }
+  \HLAFixedBlock{121.981}{393.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unpublished, either individually or by unpublishing the whole object class.%
+  }
+  \HLAFixedBlock{100.021}{405.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.979}{405.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When there are no explicitly published attributes of an object class for a given joined federate, the%
+  }
+  \HLAFixedBlock{121.981}{417.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    first \emph{Publish Object Class Attributes} service invocation that results in explicitly published attributes%
+  }
+  \HLAFixedBlock{121.981}{429.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    for that object class for that joined federate also results in \textbf{publication being established} for that%
+  }
+  \HLAFixedBlock{121.980}{441.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object class at that joined federate.%
+  }
+  \HLAFixedBlock{100.020}{453.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.964}{453.780}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{HLAprivilegeToDeleteObject} class attribute shall be implicitly published for a joined federate%
+  }
+  \HLAFixedBlock{121.980}{465.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    for an object class, if and only if%
+  }
+  \HLAFixedBlock{121.980}{480.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.018}{480.779}{379.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{HLAprivilegeToDeleteObject} class attribute for the object class is not, nor has been since%
+  }
+  \HLAFixedBlock{142.020}{492.779}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    publication of the object class was most recently established, explicitly published by the joined%
+  }
+  \HLAFixedBlock{142.019}{504.779}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+  \HLAFixedBlock{121.980}{519.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.017}{519.779}{379.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{HLAprivilegeToDeleteObject} class attribute for the object class has not been explicitly%
+  }
+  \HLAFixedBlock{142.020}{531.779}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unpublished by the joined federate since publication of the object class was most recently%
+  }
+  \HLAFixedBlock{142.020}{543.778}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    established.%
+  }
+  \HLAFixedBlock{121.981}{558.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    3)%
+  }
+  \HLAFixedBlock{142.025}{558.778}{379.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    At least one attribute of the object class is explicitly published by the joined federate.%
+  }
+  \HLAFixedBlock{100.021}{573.778}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.943}{573.778}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, the published attributes of an object class shall be the explicitly%
+  }
+  \HLAFixedBlock{121.981}{585.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    published and the implicitly published, if any, attributes of the object class for the joined federate.%
+  }
+  \HLAFixedBlock{121.981}{597.777}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Publish Object Class Attributes} and \emph{Unpublish Object Class Attributes} service invocations for one%
+  }
+  \HLAFixedBlock{121.981}{609.777}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object class shall have no effect on the published attributes of any other object class.%
+  }
+  \HLAFixedBlock{100.021}{621.777}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.940}{621.777}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, an object class shall be \textbf{subscribed}\emph{ }if and only if the joined%
+  }
+  \HLAFixedBlock{121.980}{633.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate is subscribed to at least one attribute of the object class.%
+  }
+  \HLAFixedBlock{100.019}{645.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.968}{645.785}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, an object class shall be \textbf{published}\emph{ }if and only if at least one%
+  }
+  \HLAFixedBlock{121.979}{657.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute of the object class is published by the joined federate.%
+  }
+  \HLAFixedBlock{100.019}{669.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.981}{669.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federates shall invoke the \emph{Register Object Instance} service only with a published object class%
+  }
+  \HLAFixedBlock{121.980}{681.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    as an argument.%
+  }
+  \HLAFixedBlock{100.020}{693.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.958}{693.785}{400.042}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{registered class} of an object instance shall be the object class that was an argument to the%
+  }
+  \HLAFixedBlock{121.981}{705.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Register Object Instance} service invocation for that object instance.%
+  }
+\end{hlafixedpage}
+\clearpage

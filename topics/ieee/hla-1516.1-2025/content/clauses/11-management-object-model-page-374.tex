@@ -1,0 +1,422 @@
+\HLASourcePage{375}{374}
+\HLAServiceBookmark{12.11.6.17}{3}{Constrained set of interaction parameter designator and value pairs}
+\HLAServiceBookmark{12.11.6.18}{3}{Message order type}
+\HLAServiceBookmark{12.11.6.19}{3}{Transportation type}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    programmer %
+  }
+  \HLAFixedBlock{154.944}{69.786}{449.056}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall %
+  }
+  \HLAFixedBlock{189.432}{69.786}{414.568}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain %
+  }
+  \HLAFixedBlock{230.100}{69.786}{373.900}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{250.140}{69.786}{353.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reference %
+  }
+  \HLAFixedBlock{302.934}{69.786}{301.066}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to %
+  }
+  \HLAFixedBlock{326.317}{69.786}{277.683}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{346.356}{69.786}{257.644}{\rmfamily\raggedright}{9.96}{11.16}{%
+    factory %
+  }
+  \HLAFixedBlock{390.282}{69.786}{213.718}{\rmfamily\raggedright}{9.96}{11.16}{%
+    instance %
+  }
+  \HLAFixedBlock{438.640}{69.786}{165.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    by %
+  }
+  \HLAFixedBlock{464.234}{69.786}{139.766}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{492.056}{69.786}{111.944}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method%
+  }
+  \HLAFixedBlock{90.000}{82.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{getAttributeHandleValueMapFactory()}%
+  }
+  \HLAFixedBlock{299.880}{81.785}{304.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+     on %
+  }
+  \HLAFixedBlock{314.880}{82.373}{289.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador}%
+  }
+  \HLAFixedBlock{392.820}{81.785}{211.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{105.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.17 Constrained set of interaction parameter designator and value pairs}%
+  }
+  \HLAFixedBlock{90.000}{129.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{111.120}{129.785}{492.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Interaction,}%
+  }
+  \HLAFixedBlock{188.640}{129.785}{415.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Receive Interaction †}%
+  }
+  \HLAFixedBlock{277.200}{129.785}{326.800}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{305.280}{129.785}{298.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Send Interaction With Regions}%
+  }
+  \HLAFixedBlock{436.441}{129.785}{167.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services require as%
+  }
+  \HLAFixedBlock{90.001}{141.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    arguments a constrained set of parameter designator and value pairs. Such sets are instances of%
+  }
+  \HLAFixedBlock{90.001}{154.372}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandleValueMap}%
+  }
+  \HLAFixedBlock{227.941}{153.784}{376.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This interface extends %
+  }
+  \HLAFixedBlock{322.981}{154.372}{281.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{java.util.Map}%
+  }
+  \HLAFixedBlock{400.921}{153.784}{203.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , part of the Java 2 Collections%
+  }
+  \HLAFixedBlock{90.001}{165.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    framework. The RTI implementer’s implementation of %
+  }
+  \HLAFixedBlock{309.541}{166.372}{294.459}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandleValueMap}%
+  }
+  \HLAFixedBlock{447.481}{165.784}{156.519}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall adhere to the%
+  }
+  \HLAFixedBlock{90.001}{177.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    following:%
+  }
+  \HLAFixedBlock{100.021}{201.784}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{201.784}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The keys are instances of %
+  }
+  \HLAFixedBlock{240.540}{202.371}{363.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandle}%
+  }
+  \HLAFixedBlock{330.480}{201.784}{273.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ; %
+  }
+  \HLAFixedBlock{338.760}{202.371}{265.240}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{IllegalArgumentException}%
+  }
+  \HLAFixedBlock{482.700}{201.784}{121.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be%
+  }
+  \HLAFixedBlock{121.980}{213.783}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    thrown for violations.%
+  }
+  \HLAFixedBlock{100.020}{225.783}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{225.783}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The values are instances of %
+  }
+  \HLAFixedBlock{245.640}{226.371}{358.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{byte[]}%
+  }
+  \HLAFixedBlock{281.640}{225.783}{322.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ; %
+  }
+  \HLAFixedBlock{289.501}{226.371}{314.499}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{IllegalArgumentException}%
+  }
+  \HLAFixedBlock{433.381}{225.783}{170.619}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be thrown for%
+  }
+  \HLAFixedBlock{121.981}{237.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    violations.%
+  }
+  \HLAFixedBlock{100.021}{249.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{249.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All %
+  }
+  \HLAFixedBlock{137.281}{250.371}{466.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{java.util.Map}%
+  }
+  \HLAFixedBlock{215.221}{249.783}{388.779}{\rmfamily\raggedright}{9.96}{11.16}{%
+     operations shall be implemented; none are optional.%
+  }
+  \HLAFixedBlock{100.021}{261.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{261.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The implementation shall not accept null mappings, i.e., a mapping to a %
+  }
+  \HLAFixedBlock{410.700}{262.370}{193.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{null}%
+  }
+  \HLAFixedBlock{434.700}{261.783}{169.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+     value.%
+  }
+  \HLAFixedBlock{90.000}{285.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The interface %
+  }
+  \HLAFixedBlock{147.780}{286.370}{456.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandleValueMapFactory}%
+  }
+  \HLAFixedBlock{327.720}{285.782}{276.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be implemented, and the implementation%
+  }
+  \HLAFixedBlock{90.000}{297.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class for %
+  }
+  \HLAFixedBlock{128.160}{298.370}{475.840}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ParameterHandleValueMap}%
+  }
+  \HLAFixedBlock{266.100}{297.782}{337.900}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be hidden from the federate programmer. The RTI shall%
+  }
+  \HLAFixedBlock{90.000}{309.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provide %
+  }
+  \HLAFixedBlock{132.261}{309.782}{471.739}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{156.198}{309.782}{447.802}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate %
+  }
+  \HLAFixedBlock{200.126}{309.782}{403.874}{\rmfamily\raggedright}{9.96}{11.16}{%
+    programmer %
+  }
+  \HLAFixedBlock{261.237}{309.782}{342.763}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{277.363}{309.782}{326.637}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reference %
+  }
+  \HLAFixedBlock{326.229}{309.782}{277.771}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to %
+  }
+  \HLAFixedBlock{345.708}{309.782}{258.292}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{361.845}{309.782}{242.155}{\rmfamily\raggedright}{9.96}{11.16}{%
+    factory %
+  }
+  \HLAFixedBlock{401.857}{309.782}{202.143}{\rmfamily\raggedright}{9.96}{11.16}{%
+    instance %
+  }
+  \HLAFixedBlock{446.375}{309.782}{157.625}{\rmfamily\raggedright}{9.96}{11.16}{%
+    by %
+  }
+  \HLAFixedBlock{468.125}{309.782}{135.875}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{492.041}{309.782}{111.959}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method%
+  }
+  \HLAFixedBlock{90.000}{322.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{getParameterHandleValueMapFactory()}%
+  }
+  \HLAFixedBlock{299.880}{321.782}{304.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+     on %
+  }
+  \HLAFixedBlock{314.880}{322.369}{289.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador}%
+  }
+  \HLAFixedBlock{392.820}{321.782}{211.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{345.642}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.18 Message order type}%
+  }
+  \HLAFixedBlock{90.000}{369.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Message order types are represented by an enumerated type. The following enumerations are provided:%
+  }
+  \HLAFixedBlock{90.000}{382.368}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RECEIVE}%
+  }
+  \HLAFixedBlock{133.920}{381.786}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{150.780}{382.373}{453.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TIMESTAMP}%
+  }
+  \HLAFixedBlock{204.721}{381.786}{399.279}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . These enumerations can be passed to the RTI or compared to an instance of an%
+  }
+  \HLAFixedBlock{90.001}{394.373}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{OrderType}%
+  }
+  \HLAFixedBlock{143.942}{393.785}{460.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+     object returned by the RTI.%
+  }
+  \HLAFixedBlock{90.001}{417.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.362}{418.373}{495.638}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{OrderType}%
+  }
+  \HLAFixedBlock{162.302}{417.785}{441.698}{\rmfamily\raggedright}{9.96}{11.16}{%
+     enumeration shares some aspects of the interface to handles (see 12.11.6.4); specifically,%
+  }
+  \HLAFixedBlock{90.001}{429.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the means to encode an order type, reconstitute an encoded order type, and produce a printable form of an%
+  }
+  \HLAFixedBlock{90.001}{441.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    order type are provided. Encoding order types and reconstitution of encoded order types work in the same%
+  }
+  \HLAFixedBlock{90.001}{453.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    way as for handles, with the exception that the %
+  }
+  \HLAFixedBlock{277.981}{454.372}{326.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{decode()}%
+  }
+  \HLAFixedBlock{327.960}{453.786}{276.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method is provided as a %
+  }
+  \HLAFixedBlock{425.280}{454.373}{178.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{static}%
+  }
+  \HLAFixedBlock{461.281}{453.786}{142.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+     member of the%
+  }
+  \HLAFixedBlock{90.001}{466.373}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{OrderType}%
+  }
+  \HLAFixedBlock{146.700}{465.786}{457.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    enumerated type rather than as a member of a corresponding factory. Producing a printable%
+  }
+  \HLAFixedBlock{90.000}{477.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    form works the same as for handles. The %
+  }
+  \HLAFixedBlock{264.840}{478.373}{339.160}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{toString()}%
+  }
+  \HLAFixedBlock{324.780}{477.785}{279.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method is used, and the string produced is not%
+  }
+  \HLAFixedBlock{90.000}{489.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    guaranteed to be the same as the name to which the order type corresponds (i.e., the name of the order type%
+  }
+  \HLAFixedBlock{90.000}{501.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as found in the FDD). If the user needs the name form of an order type, employ the %
+  }
+  \HLAFixedBlock{422.279}{501.785}{181.721}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Order Name}%
+  }
+  \HLAFixedBlock{488.819}{501.785}{115.181}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{89.999}{525.645}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.19 Transportation type}%
+  }
+  \HLAFixedBlock{89.999}{549.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Java API uses a handle, %
+  }
+  \HLAFixedBlock{208.439}{550.372}{395.561}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TransportationTypeHandle}%
+  }
+  \HLAFixedBlock{352.319}{549.784}{251.681}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , to represent all of the arguments of type%
+  }
+  \HLAFixedBlock{89.999}{562.372}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{TransportationType}%
+  }
+  \HLAFixedBlock{197.938}{561.784}{406.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+     in the API methods. To acquire a handle, use the %
+  }
+  \HLAFixedBlock{419.518}{561.784}{184.482}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Transportation Type}%
+  }
+  \HLAFixedBlock{89.999}{573.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Handle}%
+  }
+  \HLAFixedBlock{131.218}{573.784}{472.782}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service. All %
+  }
+  \HLAFixedBlock{195.765}{573.784}{408.235}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTIs %
+  }
+  \HLAFixedBlock{226.959}{573.784}{377.041}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall %
+  }
+  \HLAFixedBlock{257.590}{573.784}{346.410}{\rmfamily\raggedright}{9.96}{11.16}{%
+    support %
+  }
+  \HLAFixedBlock{299.355}{573.784}{304.645}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{323.407}{573.784}{280.593}{\rmfamily\raggedright}{9.96}{11.16}{%
+    transportation %
+  }
+  \HLAFixedBlock{390.815}{573.784}{213.185}{\rmfamily\raggedright}{9.96}{11.16}{%
+    types %
+  }
+  \HLAFixedBlock{423.778}{574.372}{180.222}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLA\_RELIABLE}%
+  }
+  \HLAFixedBlock{507.598}{573.784}{96.402}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{89.998}{586.371}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLA\_BEST\_EFFORT}%
+  }
+  \HLAFixedBlock{179.938}{585.784}{424.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{89.998}{609.783}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    It is possible that some implementations of the RTI will allow additional transportation types. In this case,%
+  }
+  \HLAFixedBlock{89.998}{621.783}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    those RTI implementations shall accept the new transportation type name in the FDD and the%
+  }
+  \HLAFixedBlock{89.998}{633.783}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall %
+  }
+  \HLAFixedBlock{100.018}{657.783}{503.982}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.977}{657.783}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Return a valid %
+  }
+  \HLAFixedBlock{181.138}{657.783}{422.862}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Transportation Type Handle}%
+  }
+  \HLAFixedBlock{294.238}{657.783}{309.762}{\rmfamily\raggedright}{9.96}{11.16}{%
+     for the %
+  }
+  \HLAFixedBlock{325.558}{657.783}{278.442}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Transportation Type Handle}%
+  }
+  \HLAFixedBlock{455.637}{657.783}{148.363}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{100.018}{669.782}{503.982}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.977}{669.782}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Return a valid %
+  }
+  \HLAFixedBlock{181.138}{669.782}{422.862}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Transportation Type Name}%
+  }
+  \HLAFixedBlock{288.118}{669.782}{315.882}{\rmfamily\raggedright}{9.96}{11.16}{%
+     for the %
+  }
+  \HLAFixedBlock{319.498}{669.782}{284.502}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Transportation Type Name}%
+  }
+  \HLAFixedBlock{443.398}{669.782}{160.602}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+\end{hlafixedpage}
+\clearpage

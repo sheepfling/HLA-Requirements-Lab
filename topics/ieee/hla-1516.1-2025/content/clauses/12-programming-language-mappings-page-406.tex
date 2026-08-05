@@ -1,0 +1,163 @@
+\HLASourcePage{407}{406}
+\HLAServiceBookmark{12.13.4.5.6}{4}{CTRL\_SESSION\_TERMINATED}
+\HLAServiceBookmark{12.13.4.5.7}{4}{CTRL\_RESUME\_REQUEST}
+\HLAServiceBookmark{12.13.4.5.8}{4}{CTRL\_RESUME\_STATUS}
+\HLAServiceBookmark{12.13.4.5.9}{4}{HLA\_CALL\_REQUEST}
+\HLAServiceBookmark{12.13.4.5.10}{4}{HLA\_CALL\_RESPONSE}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.6 CTRL\_SESSION\_TERMINATED}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the RTI.%
+  }
+  \HLAFixedBlock{90.000}{210.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.7 CTRL\_RESUME\_REQUEST}%
+  }
+  \HLAFixedBlock{90.000}{234.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the federate.%
+  }
+  \HLAFixedBlock{90.000}{403.666}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.8 CTRL\_RESUME\_STATUS}%
+  }
+  \HLAFixedBlock{90.000}{427.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the RTI.%
+  }
+  \HLAFixedBlock{90.000}{628.665}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.9 HLA\_CALL\_REQUEST}%
+  }
+  \HLAFixedBlock{90.000}{652.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the federate.%
+  }
+  \HLAFixedBlock{90.000}{676.664}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.10 HLA\_CALL\_RESPONSE}%
+  }
+  \HLAFixedBlock{90.000}{700.803}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the RTI.%
+  }
+  \HLAFixedBlock{166.860}{127.664}{437.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 40---CTRL \_SESSION\_TERMINATED message format}%
+  }
+  \HLAFixedBlock{124.500}{156.098}{479.500}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{174.474}{156.098}{429.526}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{274.504}{156.098}{329.496}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{124.500}{173.001}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{174.480}{173.001}{429.520}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{274.486}{173.001}{329.514}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{177.240}{268.666}{426.760}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 41---CTRL\_RESUME\_REQUEST message format}%
+  }
+  \HLAFixedBlock{124.500}{297.098}{479.500}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{174.474}{297.098}{429.526}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{274.504}{297.098}{329.496}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{124.500}{314.001}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{174.480}{314.001}{429.520}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{274.486}{314.001}{329.514}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{124.500}{332.001}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..27%
+  }
+  \HLAFixedBlock{174.480}{332.001}{429.520}{\rmfamily\raggedright}{9.00}{10.08}{%
+    LRR sequence number%
+  }
+  \HLAFixedBlock{274.571}{332.001}{329.429}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4-byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{274.500}{339.981}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Sequence number of last received RTI message%
+  }
+  \HLAFixedBlock{124.501}{357.981}{479.499}{\rmfamily\raggedright}{9.00}{10.08}{%
+    28..31%
+  }
+  \HLAFixedBlock{174.466}{357.981}{429.534}{\rmfamily\raggedright}{9.00}{10.08}{%
+    OAF sequence number%
+  }
+  \HLAFixedBlock{274.479}{357.981}{329.521}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4-byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{274.501}{365.962}{329.499}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Sequence number of oldest available Federate message%
+  }
+  \HLAFixedBlock{182.160}{461.626}{421.840}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 42---CTRL\_RESUME\_STATUS message format}%
+  }
+  \HLAFixedBlock{124.500}{490.118}{479.500}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{174.474}{490.118}{429.526}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{274.504}{490.118}{329.496}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{124.500}{506.961}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{174.480}{506.961}{429.520}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{274.486}{506.961}{329.514}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{124.500}{524.961}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..27%
+  }
+  \HLAFixedBlock{174.473}{524.961}{429.527}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Session status%
+  }
+  \HLAFixedBlock{274.491}{524.961}{329.509}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4 byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{274.500}{533.001}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    One of%
+  }
+  \HLAFixedBlock{274.500}{540.981}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0 = OK to resume%
+  }
+  \HLAFixedBlock{274.500}{548.961}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    1 = Failure: Invalid session%
+  }
+  \HLAFixedBlock{274.500}{557.001}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    2 = Failure: Not enough buffered messages%
+  }
+  \HLAFixedBlock{274.500}{564.981}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    99 = Failure: Other error%
+  }
+  \HLAFixedBlock{124.500}{582.981}{479.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    28..31%
+  }
+  \HLAFixedBlock{174.451}{582.981}{429.549}{\rmfamily\raggedright}{9.00}{10.08}{%
+    LRF sequence number%
+  }
+  \HLAFixedBlock{274.454}{582.981}{329.546}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4 byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{274.500}{590.962}{329.500}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Sequence number of last received Federate message%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,204 @@
+\HLASourcePage{82}{81}
+\HLAAnchor{clause:5}
+\pdfbookmark[0]{5. Declaration management (DM)}{bookmark:clause:5}
+\HLAServiceBookmark{5.1}{1}{Overview}
+\HLAServiceBookmark{5.1.1}{2}{Static properties of the FDD}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.120}{432.000}{\sffamily\bfseries\raggedright}{12.00}{14.00}{%
+    5. Declaration management (DM)%
+  }
+  \HLAServiceHeadingAt{101.363}{%
+    5.1 Overview%
+  }
+  \HLAFixedBlock{90.000}{126.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federates shall use DM services to declare their intention to generate information. A joined federate%
+  }
+  \HLAFixedBlock{90.000}{138.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall invoke appropriate DM services before it may register object instances, update instance attribute%
+  }
+  \HLAFixedBlock{90.000}{150.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    values, send interactions, and send directed interactions. Joined federates shall use DM services or DDM%
+  }
+  \HLAFixedBlock{90.000}{162.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services to declare their intention to receive information. (A joined federate may use DM services%
+  }
+  \HLAFixedBlock{90.000}{174.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    exclusively, DDM services exclusively, or both DM and DDM services to declare its intention to receive%
+  }
+  \HLAFixedBlock{90.000}{186.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    information. This clause describes how DM services work when they are used exclusively by a joined%
+  }
+  \HLAFixedBlock{89.999}{198.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate. See 9.1.5 for more information on using DDM services in lieu of or in conjunction with DM%
+  }
+  \HLAFixedBlock{89.999}{210.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services.) A joined federate shall invoke appropriate DM or DDM services before it may discover object%
+  }
+  \HLAFixedBlock{89.999}{222.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instances, reflect instance attribute values, and receive interactions. DM and DDM services, together with%
+  }
+  \HLAFixedBlock{89.999}{234.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object management services, ownership management services, and the object class and interaction class%
+  }
+  \HLAFixedBlock{89.999}{246.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    hierarchies defined in the FDD, shall determine the following:%
+  }
+  \HLAFixedBlock{100.019}{266.764}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{266.764}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object classes at which object instances may be registered%
+  }
+  \HLAFixedBlock{100.019}{281.763}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{281.763}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object classes at which object instances are discovered%
+  }
+  \HLAFixedBlock{100.019}{296.763}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{296.763}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Instance attributes that are available to be updated and reflected%
+  }
+  \HLAFixedBlock{100.019}{311.763}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{311.763}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interactions that may be sent%
+  }
+  \HLAFixedBlock{100.019}{326.763}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{326.763}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction classes at which interactions are received%
+  }
+  \HLAFixedBlock{100.019}{341.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{341.762}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Parameters that are available to be sent and received%
+  }
+  \HLAFixedBlock{100.019}{356.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.978}{356.762}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Class directed interactions that are available to be sent and received.%
+  }
+  \HLAFixedBlock{89.998}{380.762}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The effects of DM services shall be independent of the time position of any joined federate in the federation%
+  }
+  \HLAFixedBlock{89.998}{392.761}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    execution.%
+  }
+  \HLAServiceComponentHeadingAt{416.622}{%
+    5.1.1 Static properties of the FDD%
+  }
+  \HLAFixedBlock{89.998}{440.761}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The following static properties of the FDD shall establish vocabulary for subsequent DM discussion:%
+  }
+  \HLAFixedBlock{100.018}{452.760}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{452.760}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Every class shall have at most one immediate superclass. A class shall not be a superclass of a class%
+  }
+  \HLAFixedBlock{121.978}{464.760}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is its superclass.%
+  }
+  \HLAFixedBlock{100.018}{476.760}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.941}{476.760}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Every object class shall have an associated set of class attributes declared in the FDD.%
+  }
+  \HLAFixedBlock{100.017}{488.820}{421.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.985}{488.820}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An \textbf{inherited attribute} of an object class is a class attribute that was declared in a superclass.%
+  }
+  \HLAFixedBlock{100.017}{500.820}{421.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.955}{500.820}{400.045}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{available attributes} of an object class are the set of declared attributes of that object class in%
+  }
+  \HLAFixedBlock{121.977}{512.819}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    union with the set of inherited attributes of that object class.%
+  }
+  \HLAFixedBlock{100.017}{524.819}{421.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.983}{524.819}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Every object class shall have an associated set of class directed interactions declared in the FDD.%
+  }
+  \HLAFixedBlock{100.017}{536.819}{421.983}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.972}{536.819}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An \textbf{inherited directed interaction class} of an object class is a class directed interaction that was%
+  }
+  \HLAFixedBlock{121.978}{548.819}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    declared in a superclass.%
+  }
+  \HLAFixedBlock{100.018}{560.819}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.956}{560.819}{400.044}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{available directed interactions} of an object class are the set of declared directed interactions of%
+  }
+  \HLAFixedBlock{121.979}{572.818}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that object class in union with the set of inherited directed interactions of that object class.%
+  }
+  \HLAFixedBlock{100.019}{584.818}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.937}{584.818}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Every interaction class shall have an associated set of parameters declared in the FDD.%
+  }
+  \HLAFixedBlock{100.019}{596.818}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.971}{596.818}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An \textbf{inherited parameter} of an interaction class is a parameter that was declared in a superclass.%
+  }
+  \HLAFixedBlock{100.019}{608.818}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.964}{608.818}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{available parameters} of an interaction class are the set of declared parameters of that%
+  }
+  \HLAFixedBlock{121.980}{620.818}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class in union with the set of inherited parameters of that interaction class.%
+  }
+  \HLAFixedBlock{100.019}{632.817}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.938}{632.817}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For any service that takes an object class and a set of class attribute designators as arguments, only%
+  }
+  \HLAFixedBlock{121.979}{644.817}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the available attributes of that object class may be used in the set of attribute designators. Being an%
+  }
+  \HLAFixedBlock{121.979}{656.817}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available attribute of an object class shall be a necessary, but not necessarily a sufficient, condition%
+  }
+  \HLAFixedBlock{121.979}{668.817}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    for an attribute to be used in the set of attribute designators for such a service.%
+  }
+  \HLAFixedBlock{100.019}{680.817}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    l)%
+  }
+  \HLAFixedBlock{121.944}{680.817}{400.056}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For any service that takes an object instance and a set of attribute designators as arguments, only the%
+  }
+  \HLAFixedBlock{121.980}{692.816}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available attributes of that object instance’s known class at the involved (invoking or invoked)%
+  }
+  \HLAFixedBlock{121.980}{704.816}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate may be used in the set of attribute designators. Being an available attribute of the%
+  }
+\end{hlafixedpage}
+\clearpage

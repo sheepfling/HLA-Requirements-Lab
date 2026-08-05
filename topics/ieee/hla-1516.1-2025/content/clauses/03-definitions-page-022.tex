@@ -1,0 +1,99 @@
+\HLASourcePage{23}{22}
+\HLAAnchor{clause:3}
+\pdfbookmark[0]{3. Definitions, abbreviations and acronyms}{bookmark:clause:3}
+\HLAAnchor{clause:3.1}
+\pdfbookmark[1]{3.1 Definitions}{bookmark:clause:3.1}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90}{69.12}{330}{\sffamily\bfseries\raggedright}{12}{14}{%
+    3. Definitions, abbreviations and acronyms%
+  }
+
+  \HLAFixedBlock{90}{101.36}{180}{\sffamily\bfseries\raggedright}{10.98}{13}{%
+    3.1 Definitions%
+  }
+
+  \HLAFixedBlock{90}{126.79}{432}{\rmfamily}{9.96}{12}{%
+    For the purposes of this document, the following terms and definitions apply. \emph{The IEEE Standards}\linebreak
+    \emph{Dictionary Online} should be consulted for terms not defined in this clause.\HLASupMark{11}%
+  }
+
+  \HLADefinitionAt{162.79}{%
+    \HLADefinitionAnchor{accuracy}\HLADefinitionTerm{accuracy}: The measure of the maximum deviation of an attribute or a parameter value in the simulation or\linebreak
+    federation from reality or some other chosen standard or referent.%
+  }
+
+  \HLADefinitionAt{198.78}{%
+    \HLADefinitionAnchor{active-subscription}\HLADefinitionTerm{active subscription}: A request to the runtime infrastructure (RTI) for the kinds of data (class attributes as\linebreak
+    well as interactions) that the joined federate is currently interested in receiving. The RTI uses these data\linebreak
+    along with publication data received from other joined federates to support services, such as%
+  }
+
+  \HLAFixedAlphaList{100.02}{246.78}{421.98}{0}{%
+    \item \emph{Start/Stop Registration}
+    \item \emph{Turn On/Off Updates}
+    \item \emph{Turn On/Off Interactions}
+  }
+
+  \HLAFixedBlock{90}{294.78}{432}{\rmfamily}{9.96}{12}{%
+    The RTI also uses the subscription (and publication) data to determine how to route data to the joined\linebreak
+    federates that require that data.%
+  }
+
+  \HLADefinitionAt{330.78}{%
+    \HLADefinitionAnchor{attribute}\HLADefinitionTerm{attribute}: A named characteristic of an object class or object instance. \emph{See also}: \textbf{class attribute}; \textbf{instance}\linebreak
+    \textbf{attribute}.%
+  }
+
+  \HLADefinitionAt{366.78}{%
+    \HLADefinitionAnchor{attribute-ownership}\HLADefinitionTerm{attribute ownership}: The property of an instance attribute that gives a joined federate the capability to\linebreak
+    supply values for that instance attribute to its federation execution. \emph{See also}: \textbf{instance attribute}.%
+  }
+
+  \HLADefinitionAt{402.78}{%
+    \HLADefinitionAnchor{authorizer}\HLADefinitionTerm{authorizer}: An interface used to determine if a specific set of service invocations (\emph{Connect}, \emph{Create}\linebreak
+    \emph{Federation Execution}, \emph{Destroy Federation Execution}, and \emph{Join Federation Execution}) are allowed for the\linebreak
+    federate, given its credentials.%
+  }
+
+  \HLADefinitionAt{450.78}{%
+    \HLADefinitionAnchor{available-attributes}\HLADefinitionTerm{available attributes}: The set of declared attributes of an object class in union with the set of inherited\linebreak
+    attributes of that object class.%
+  }
+
+  \HLADefinitionAt{486.78}{%
+    \HLADefinitionAnchor{available-dimensions}\HLADefinitionTerm{available dimensions}:%
+  }
+
+  \HLAFixedAlphaList{100.02}{510.78}{421.98}{4}{%
+    \item Pertaining to an object class: the dimensions associated with that object class in union with the set of\linebreak
+      inherited dimensions in the federation object model (FOM).
+    \item Pertaining to an attribute: The available dimensions of an instance attribute are the available\linebreak
+      dimensions of the known class. When registering, subscribing, unsubscribing, requesting updates\linebreak
+      with regions or getting available dimensions, the available dimensions are the available dimensions\linebreak
+      of the object class specified in the service invocation.
+    \item Pertaining to an interaction class: the dimensions associated with that interaction class in union with\linebreak
+      the set of inherited dimensions the FOM. The available dimensions of a sent interaction are the\linebreak
+      available dimensions of the interaction class specified in the \emph{Send Interaction with Regions} service\linebreak
+      invocation.
+  }
+
+  \HLADefinitionNoteAt{122.22}{642.96}{NOTE---See 9.1.\HLASupMark{12}}
+  \HLADefinitionNoteAt{122.22}{660.98}{\emph{See also} \textbf{dimension}.}
+
+  \draw[line width=0.48pt] (90.78,681.90)--(127.26,681.90);
+
+  \HLAFixedBlock{90}{684.12}{6}{\rmfamily\raggedright}{6.36}{7}{11}
+  \HLAFixedBlock{96.36}{687.21}{425.64}{\rmfamily\raggedright}{7.98}{9.4}{%
+    \emph{The IEEE Standards Dictionary Online} is available at
+    \textcolor{blue}{\href{http://shop.ieee.org/}{http://shop.ieee.org/}}. An IEEE Account is required for access to the dictionary,\linebreak
+    \hspace*{-6.36pt}and one can be created at no charge on the dictionary sign-in page.%
+  }
+  \draw[blue,line width=0.36pt] (270.18,695.04)--(334.15,695.04);
+
+  \HLAFixedBlock{90}{704.10}{6}{\rmfamily\raggedright}{6.36}{7}{12}
+  \HLAFixedBlock{96.36}{707.25}{425.64}{\rmfamily\raggedright}{7.98}{9.4}{%
+    Notes in text, tables, and figures are given for information only and do not contain requirements needed to implement the standard.%
+  }
+\end{hlafixedpage}
+\clearpage

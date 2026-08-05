@@ -1,0 +1,183 @@
+\HLASourcePage{249}{248}
+\HLAServiceBookmark{10.6.3}{2}{Preconditions}
+\HLAServiceBookmark{10.6.4}{2}{Postconditions}
+\HLAServiceBookmark{10.6.5}{2}{Exceptions}
+\HLAServiceBookmark{10.6.6}{2}{Reference state charts}
+\HLAServiceBookmark{10.7}{1}{Get Object Instance Handle service}
+\HLAServiceBookmark{10.7.1}{2}{Supplied arguments}
+\HLAServiceBookmark{10.7.2}{2}{Returned arguments }
+\HLAServiceBookmark{10.7.3}{2}{Preconditions}
+\HLAServiceBookmark{10.7.4}{2}{Postconditions}
+\HLAServiceBookmark{10.7.5}{2}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{10.6.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{94.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{94.805}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{106.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{106.805}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{118.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{118.805}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{130.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.937}{130.805}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance with the specified handle exists.%
+  }
+  \HLAFixedBlock{100.020}{142.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{142.804}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified handle.%
+  }
+  \HLAServiceComponentHeadingAt{166.665}{%
+    \textbf{10.6.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{191.764}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{191.764}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has the known object class handle of the specified object instance.%
+  }
+  \HLAServiceComponentHeadingAt{216.645}{%
+    \textbf{10.6.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{241.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{241.804}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid object instance handle.%
+  }
+  \HLAFixedBlock{100.020}{253.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{253.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.020}{265.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{265.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{277.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{277.803}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{289.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.981}{289.803}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{314.623}{%
+    \textbf{10.6.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{339.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{339.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{369.383}{%
+    \textbf{10.7 }\textbf{\emph{Get Object Instance Handle}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{394.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Get Object Instance Handle} service shall return the handle of the object instance with the supplied%
+  }
+  \HLAFixedBlock{90.000}{406.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    name.%
+  }
+  \HLAServiceComponentHeadingAt{430.666}{%
+    \textbf{10.7.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.020}{454.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{454.805}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance name.%
+  }
+  \HLAServiceComponentHeadingAt{478.665}{%
+    \textbf{10.7.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{502.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{502.804}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance handle.%
+  }
+  \HLAServiceComponentHeadingAt{526.664}{%
+    \textbf{10.7.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{550.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{550.803}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{562.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{562.803}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{574.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{574.803}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{586.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{586.802}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance with the specified name exists.%
+  }
+  \HLAFixedBlock{100.020}{598.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{598.802}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified name.%
+  }
+  \HLAServiceComponentHeadingAt{622.662}{%
+    \textbf{10.7.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{646.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{646.802}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has the requested object instance handle.%
+  }
+  \HLAServiceComponentHeadingAt{670.662}{%
+    \textbf{10.7.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{694.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{694.801}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.020}{706.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{706.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+\end{hlafixedpage}
+\clearpage

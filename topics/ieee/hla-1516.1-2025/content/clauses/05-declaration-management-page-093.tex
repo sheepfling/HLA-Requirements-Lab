@@ -1,0 +1,165 @@
+\HLASourcePage{94}{93}
+\HLAServiceBookmark{5.4}{1}{Publish Interaction Class service}
+\HLAServiceBookmark{5.4.1}{2}{Supplied arguments}
+\HLAServiceBookmark{5.4.2}{2}{Returned arguments}
+\HLAServiceBookmark{5.4.3}{2}{Preconditions}
+\HLAServiceBookmark{5.4.4}{2}{Postconditions}
+\HLAServiceBookmark{5.4.5}{2}{Exceptions}
+\HLAServiceBookmark{5.4.6}{2}{Reference state charts}
+\HLAServiceBookmark{5.5}{1}{Unpublish Interaction Class service}
+\HLAServiceBookmark{5.5.1}{2}{Supplied arguments}
+\HLAServiceBookmark{5.5.2}{2}{Returned arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceHeadingAt{69.383}{%
+    5.4 \emph{Publish Interaction Class} service%
+  }
+  \HLAFixedBlock{90.000}{94.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Publish Interaction Class} service shall inform the RTI of the classes of interactions that the joined%
+  }
+  \HLAFixedBlock{90.001}{106.806}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate will send to the federation execution.%
+  }
+  \HLAServiceComponentHeadingAt{130.666}{%
+    5.4.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{154.805}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{154.805}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction class designator.%
+  }
+  \HLAServiceComponentHeadingAt{178.665}{%
+    5.4.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{202.804}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{202.804}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{226.664}{%
+    5.4.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{250.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{250.803}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.021}{262.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{262.803}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{274.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{274.803}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{286.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{286.803}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction class is specified in the FDD.%
+  }
+  \HLAFixedBlock{100.021}{298.803}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{298.803}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{310.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.950}{310.802}{400.050}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{334.663}{%
+    5.4.4 Postconditions%
+  }
+  \HLAFixedBlock{100.021}{358.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{358.802}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may now send interactions of the specified class.%
+  }
+  \HLAServiceComponentHeadingAt{382.662}{%
+    5.4.5 Exceptions%
+  }
+  \HLAFixedBlock{100.021}{406.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{406.801}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.021}{418.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{418.801}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.021}{430.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{430.801}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.021}{442.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{442.800}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.021}{454.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.966}{454.800}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.021}{466.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.962}{466.800}{400.038}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{490.660}{%
+    5.4.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.021}{514.799}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{514.799}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 13, Interaction class (m).%
+  }
+  \HLAServiceHeadingAt{544.403}{%
+    5.5 \emph{Unpublish Interaction Class} service%
+  }
+  \HLAFixedBlock{90.000}{569.826}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Unpublish Interaction Class} service shall inform the RTI that the joined federate will no longer send%
+  }
+  \HLAFixedBlock{90.000}{581.825}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interactions of the specified class.%
+  }
+  \HLAServiceComponentHeadingAt{605.686}{%
+    5.5.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{629.825}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{629.825}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction class designator.%
+  }
+  \HLAServiceComponentHeadingAt{653.685}{%
+    5.5.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{677.824}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{677.824}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+\end{hlafixedpage}
+\clearpage

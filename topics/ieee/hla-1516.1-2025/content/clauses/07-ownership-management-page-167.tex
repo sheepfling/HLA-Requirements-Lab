@@ -1,0 +1,185 @@
+\HLASourcePage{168}{167}
+\HLAServiceBookmark{7.12}{1}{Attribute Ownership Release Denied service}
+\HLAServiceBookmark{7.12.1}{2}{Supplied arguments}
+\HLAServiceBookmark{7.12.2}{2}{Returned arguments}
+\HLAServiceBookmark{7.12.3}{2}{Preconditions}
+\HLAServiceBookmark{7.12.4}{2}{Postconditions}
+\HLAServiceBookmark{7.12.5}{2}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceHeadingAt{69.383}{%
+    \textbf{7.12 }\textbf{\emph{Attribute Ownership Release Denied}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{94.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Attribute Ownership Release Denied} service shall notify the RTI that the joined federate is unwilling to%
+  }
+  \HLAFixedBlock{90.000}{106.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    divest itself of ownership of the specified instance attributes if another joined federate is attempting to%
+  }
+  \HLAFixedBlock{89.999}{118.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    acquire ownership of them. The joined federate may use this service to provide an answer to the question%
+  }
+  \HLAFixedBlock{89.998}{130.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    posed as a result of the invocation of \emph{Request Attribute Ownership Release \textdagger{}}, or it may use this service for%
+  }
+  \HLAFixedBlock{89.998}{142.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    any other reason. Invocation of this service for attributes that have no pending acquisition has no effect.%
+  }
+  \HLAFixedBlock{89.998}{154.805}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of the \emph{Attribute Ownership Release Denied} service shall cause the RTI to terminate any pending%
+  }
+  \HLAFixedBlock{89.999}{166.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    acquisitions and invoke \emph{Attribute Ownership Unavailable \textdagger{}} at the acquiring joined federates.%
+  }
+  \HLAServiceComponentHeadingAt{190.665}{%
+    \textbf{7.12.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.018}{214.804}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{214.804}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator.%
+  }
+  \HLAFixedBlock{100.018}{229.804}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.977}{229.804}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Set of attribute designators for which the joined federate is unwilling to divest ownership.%
+  }
+  \HLAFixedBlock{100.018}{244.803}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{244.803}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag.%
+  }
+  \HLAServiceComponentHeadingAt{268.664}{%
+    \textbf{7.12.2 Returned arguments}%
+  }
+  \HLAFixedBlock{100.018}{292.803}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{292.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{316.663}{%
+    \textbf{7.12.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.018}{340.802}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{340.802}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.018}{355.802}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.937}{355.802}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.018}{370.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.968}{370.801}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.018}{385.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.936}{385.801}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance with the specified designator exists.%
+  }
+  \HLAFixedBlock{100.018}{400.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.969}{400.801}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.018}{415.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.954}{415.801}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate owns the specified instance attributes.%
+  }
+  \HLAFixedBlock{100.018}{430.800}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.977}{430.800}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.018}{445.800}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.977}{445.800}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{469.660}{%
+    \textbf{7.12.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.018}{493.799}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{493.799}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    No change has occurred in instance attribute ownership.%
+  }
+  \HLAFixedBlock{100.018}{508.799}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.936}{508.799}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI has been informed of the set of instance attributes that the joined federate is not willing to%
+  }
+  \HLAFixedBlock{121.978}{520.799}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    divest.%
+  }
+  \HLAServiceComponentHeadingAt{544.659}{%
+    \textbf{7.12.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.018}{568.798}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{568.798}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate does not own the instance attribute.%
+  }
+  \HLAFixedBlock{100.018}{583.798}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.978}{583.798}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attribute is not available at the known class of the object instance.%
+  }
+  \HLAFixedBlock{100.018}{598.798}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.974}{598.798}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.018}{613.797}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.978}{613.797}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.018}{628.797}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{628.797}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.018}{643.797}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.941}{643.797}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.018}{658.797}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.978}{658.797}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.018}{673.796}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.944}{673.796}{400.056}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+\end{hlafixedpage}
+\clearpage

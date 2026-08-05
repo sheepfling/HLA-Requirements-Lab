@@ -1,0 +1,33 @@
+[project]
+name = "document-recreation"
+version = "0.1.0"
+description = "Reproducible recreations of technical and historical documents."
+requires-python = ">=3.11"
+dependencies = [
+    "PyMuPDF>=1.24",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.0",
+    "ruff>=0.12",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [
+    "topics/*/*/HLA_*/**",
+    "topics/*/*/hla-*/**",
+]
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"topics/_template/**/*.py" = ["T201"]
+
+[tool.pyright]
+include = ["scripts", "topics"]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"

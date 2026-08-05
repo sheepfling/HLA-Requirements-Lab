@@ -1,0 +1,203 @@
+\HLASourcePage{278}{277}
+\HLAServiceBookmark{10.47}{1}{Set Service Reporting Switch service}
+\HLAServiceBookmark{10.47.1}{2}{Supplied arguments}
+\HLAServiceBookmark{10.47.2}{2}{Returned arguments}
+\HLAServiceBookmark{10.47.3}{2}{Preconditions}
+\HLAServiceBookmark{10.47.4}{2}{Postconditions}
+\HLAServiceBookmark{10.47.5}{2}{Exceptions}
+\HLAServiceBookmark{10.47.6}{2}{Reference state charts}
+\HLAServiceBookmark{10.48}{1}{Get Exception Reporting Switch service}
+\HLAServiceBookmark{10.48.1}{2}{Supplied arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{10.47 }%
+  }
+  \HLAFixedBlock{120.540}{69.383}{483.460}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Set Service Reporting Switch}}%
+  }
+  \HLAFixedBlock{273.179}{69.383}{330.821}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{94.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{109.020}{94.806}{494.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Set Service Reporting Switch}%
+  }
+  \HLAFixedBlock{227.820}{94.806}{376.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service shall set the Service Reporting Switch value. The switch value%
+  }
+  \HLAFixedBlock{89.999}{106.806}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    argument shall be a boolean indicating that the RTI shall enable (TRUE) or disable (FALSE) the switch for%
+  }
+  \HLAFixedBlock{89.999}{118.805}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the joined federate. If the joined federate is subscribed to the HLAmanager.HLAfederate.HLAreport.HLA-%
+  }
+  \HLAFixedBlock{89.998}{130.805}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reportServiceInvocation interaction class it shall not be able to enable the Service Reporting Switch.%
+  }
+  \HLAFixedBlock{89.999}{154.665}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.019}{178.804}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{178.804}{482.024}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Switch value.%
+  }
+  \HLAFixedBlock{89.999}{202.665}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.019}{226.804}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{226.804}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+  \HLAFixedBlock{89.999}{250.664}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.019}{274.803}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{274.803}{482.026}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.019}{286.803}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.938}{286.803}{482.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.019}{298.803}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{298.803}{482.031}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.019}{310.802}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{310.802}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{322.802}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{322.802}{482.029}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate restore not in progress.%
+  }
+  \HLAFixedBlock{100.019}{334.802}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    f)%
+  }
+  \HLAFixedBlock{121.945}{334.802}{482.055}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate not subscribed to HLAmanager.HLAfederate.HLAreport.HLAreportServiceInvocation%
+  }
+  \HLAFixedBlock{121.979}{346.802}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interaction class%
+  }
+  \HLAFixedBlock{89.999}{370.662}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.019}{394.801}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{394.801}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Service Reporting Switch for the joined federate is set to the provided value.%
+  }
+  \HLAFixedBlock{89.999}{418.661}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.019}{442.800}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{442.800}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate %
+  }
+  \HLAFixedBlock{169.383}{442.800}{434.617}{\rmfamily\raggedright}{9.96}{11.16}{%
+    subscribed %
+  }
+  \HLAFixedBlock{225.191}{442.800}{378.809}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to %
+  }
+  \HLAFixedBlock{245.938}{442.800}{358.062}{\rmfamily\raggedright}{9.96}{11.16}{%
+    HLAmanager.HLAfederate.HLAreport.HLAreportServiceInvocation%
+  }
+  \HLAFixedBlock{121.979}{454.800}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interaction class%
+  }
+  \HLAFixedBlock{100.019}{466.800}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{466.800}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{478.800}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.975}{478.800}{482.025}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.019}{490.800}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{490.800}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{502.799}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e)%
+  }
+  \HLAFixedBlock{121.964}{502.799}{482.036}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{514.799}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    f)%
+  }
+  \HLAFixedBlock{121.960}{514.799}{482.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI internal error.%
+  }
+  \HLAFixedBlock{89.999}{538.659}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.47.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.019}{562.798}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{562.798}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+  \HLAFixedBlock{90.000}{592.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{10.48 }%
+  }
+  \HLAFixedBlock{120.540}{592.403}{483.460}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Get Exception Reporting Switch}}%
+  }
+  \HLAFixedBlock{287.820}{592.403}{316.180}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{632.046}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{107.640}{632.046}{496.360}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Exception Reporting Switch }%
+  }
+  \HLAFixedBlock{237.001}{632.046}{366.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service shall return the Exception Reporting Switch value for the joined %
+  }
+  \HLAFixedBlock{90.001}{645.126}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federate. The switch value return argument shall be a boolean indicating if the switch is enabled (TRUE) or %
+  }
+  \HLAFixedBlock{90.000}{658.146}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    disabled (FALSE).%
+  }
+  \HLAFixedBlock{90.000}{680.867}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.48.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.020}{705.006}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{705.006}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+\end{hlafixedpage}
+\clearpage

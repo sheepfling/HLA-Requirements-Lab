@@ -1,0 +1,168 @@
+\HLASourcePage{212}{211}
+\HLAServiceBookmark{8.22.4}{2}{Postconditions}
+\HLAServiceBookmark{8.22.5}{2}{Exceptions}
+\HLAServiceBookmark{8.22.6}{2}{Reference state charts}
+\HLAServiceBookmark{8.23}{1}{Request Retraction † service}
+\HLAServiceBookmark{8.23.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.23.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.23.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.22.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{93.785}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI is informed that the joined federate requests to retract the specified message.%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    \textbf{8.22.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{141.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The retraction designator is associated with a message that can no longer be retracted.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The message retraction designator is invalid.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{171.784}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not time-regulating.%
+  }
+  \HLAFixedBlock{100.020}{186.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{186.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.976}{201.784}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.020}{216.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.943}{216.783}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{231.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{231.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{246.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.946}{246.783}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{270.643}{%
+    \textbf{8.22.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{294.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{294.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{324.383}{%
+    \textbf{8.23 }\textbf{\emph{Request Retraction \textdagger{}}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{349.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the RTI receives a legal \emph{Retract} service invocation for a message that has already been delivered to a%
+  }
+  \HLAFixedBlock{89.999}{361.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate, the \emph{Request Retraction \textdagger{}} service shall be invoked on that joined federate. If the message in%
+  }
+  \HLAFixedBlock{89.999}{373.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    question is queued in the RTI and has not been delivered to the joined federate, the message shall be%
+  }
+  \HLAFixedBlock{89.999}{385.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    dequeued from the RTI and will never be delivered to the joined federate.%
+  }
+  \HLAFixedBlock{89.999}{409.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Time-constrained joined federates that do not use the \emph{Flush Queue Request} service are not subject to%
+  }
+  \HLAFixedBlock{89.999}{421.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation of the \emph{Request Retraction \textdagger{} }service on any received TSO message because they will never%
+  }
+  \HLAFixedBlock{89.999}{433.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    receive TSO messages that are eligible for retraction. Nonconstrained joined federates, however, shall be%
+  }
+  \HLAFixedBlock{89.998}{445.804}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    prepared to deal with invocations of this service because any message received that was sent as a TSO%
+  }
+  \HLAFixedBlock{89.998}{457.804}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message may be eligible for retraction.%
+  }
+  \HLAFixedBlock{89.998}{481.804}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Since the joined federate is required to save the message retraction designator in order to perform a%
+  }
+  \HLAFixedBlock{89.998}{493.803}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction, the RTI is not required to ensure the message was actually delivered to the federate. The RTI is%
+  }
+  \HLAFixedBlock{89.998}{505.803}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only required to ensure that a message is not delivered to a joined federate after a retraction for that message%
+  }
+  \HLAFixedBlock{89.998}{517.803}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    has been requested.%
+  }
+  \HLAServiceComponentHeadingAt{541.663}{%
+    \textbf{8.23.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.018}{565.802}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{565.802}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Message retraction designator%
+  }
+  \HLAServiceComponentHeadingAt{589.662}{%
+    \textbf{8.23.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.018}{613.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{613.801}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{637.662}{%
+    \textbf{8.23.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.018}{661.801}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{661.801}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.018}{675.781}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.978}{675.781}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.018}{689.820}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{689.820}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.018}{703.800}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.978}{703.800}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

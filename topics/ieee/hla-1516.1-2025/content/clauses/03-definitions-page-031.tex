@@ -1,0 +1,72 @@
+\HLASourcePage{32}{31}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLADefinitionAt{69.79}{%
+    \HLADefinitionAnchor{range-lower-bound}\HLADefinitionTerm{range lower bound}: The first component of the ordered pair of values that is part of a range.%
+  }
+  \HLADefinitionNoteAt{90}{93.98}{NOTE---See 9.1.}
+
+  \HLADefinitionAt{115.81}{%
+    \HLADefinitionAnchor{range-upper-bound}\HLADefinitionTerm{range upper bound}: The second component of the ordered pair of values that is part of a range.%
+  }
+  \HLADefinitionNoteAt{90}{139.94}{NOTE---See 9.1.}
+
+  \HLADefinitionAt{161.77}{%
+    \HLADefinitionAnchor{received-class}\HLADefinitionTerm{received class}: The class that was an interaction's candidate received class at the joined federate when that\linebreak
+    interaction was received at that joined federate via an invocation of the \emph{Receive Interaction \textdagger{}} or \emph{Receive}\linebreak
+    \emph{Directed Interaction \textdagger{}} service.%
+  }
+  \HLADefinitionNoteAt{90}{209.96}{NOTE---See 5.1.3.}
+
+  \HLADefinitionAt{231.79}{%
+    \HLADefinitionAnchor{received-parameters}\HLADefinitionTerm{received parameters}: The set of parameters received when the \emph{Receive Interaction \textdagger{}} or \emph{Receive Directed}\linebreak
+    \emph{Interaction \textdagger{}} service is invoked. These parameters consist of the subset of the sent parameters of an\linebreak
+    interaction that are available parameters of the interaction's received class.%
+  }
+  \HLADefinitionNoteAt{90}{279.98}{NOTE---See 5.1.3.}
+
+  \HLADefinitionAt{301.81}{%
+    \HLADefinitionAnchor{receive-order}\HLADefinitionTerm{receive order (RO)}: A characteristic of no ordering guarantee for messages. Messages that are received as\linebreak
+    RO messages will be received in an arbitrary order by the respective joined federate. A timestamp value will\linebreak
+    be provided with the message if one was specified when the message was sent, but that timestamp has no\linebreak
+    bearing on message receipt order.%
+  }
+
+  \HLADefinitionAt{361.80}{%
+    \HLADefinitionAnchor{reflect}\HLADefinitionTerm{reflect}: To receive new values for one or more instance attributes via invocation of the \emph{Reflect Attribute}\linebreak
+    \emph{Values \textdagger{}} service.%
+  }
+  \HLADefinitionNoteAt{90}{398.00}{NOTE---See 6.11.}
+
+  \HLADefinitionAt{419.77}{%
+    \HLADefinitionAnchor{reflected-instance-attribute}\HLADefinitionTerm{reflected instance attribute}: An instance attribute that is represented but not explicitly modeled in a joined\linebreak
+    federate. The reflecting joined federate accepts new values of the reflected instance attribute as they are\linebreak
+    produced by some other federation member and provided to it by the runtime infrastructure (RTI), via the\linebreak
+    \emph{Reflect Attribute Values \textdagger{}} service.%
+  }
+
+  \HLADefinitionAt{479.83}{%
+    \HLADefinitionAnchor{region}\HLADefinitionTerm{region}: A generic term that refers to either a region specification or a region realization. If not using data\linebreak
+    distribution management (DDM), region arguments may be ignored.%
+  }
+  \HLADefinitionNoteAt{90}{515.96}{NOTE---See 9.1.}
+
+  \HLADefinitionAt{537.79}{%
+    \HLADefinitionAnchor{region-realization}\HLADefinitionTerm{region realization}: A region specification (set of ranges) that is associated with an instance attribute for\linebreak
+    update, with a sent interaction, or with a class attribute or interaction class for subscription. Region\linebreak
+    realizations are created from region specifications via the \emph{Commit Region Modifications} (only when\linebreak
+    modifying a region specification from which region realizations are already derived), \emph{Register Object}\linebreak
+    \emph{Instance With Regions}, \emph{Associate Regions for Updates}, \emph{Subscribe Object Class Attributes With Regions},\linebreak
+    \emph{Subscribe Interaction Class With Regions}, \emph{Send Interaction With Regions}, or \emph{Request Attribute Value}\linebreak
+    \emph{Update With Regions} services.%
+  }
+  \HLADefinitionNoteAt{90}{633.98}{NOTE---See 9.1.1.}
+
+  \HLADefinitionAt{655.81}{%
+    \HLADefinitionAnchor{region-specification}\HLADefinitionTerm{region specification}: A set of ranges. Region specifications are created using the \emph{Create Region} service, and\linebreak
+    a runtime infrastructure (RTI) is notified of changes to a region specification using the \emph{Commit Region}\linebreak
+    \emph{Modifications} service.%
+  }
+  \HLADefinitionNoteAt{90}{703.81}{NOTE---See 9.1.1.}
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,165 @@
+\HLASourcePage{62}{61}
+\HLAServiceBookmark{4.14.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.14.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.14.3}{2}{Preconditions}
+\HLAServiceBookmark{4.14.4}{2}{Postconditions}
+\HLAServiceBookmark{4.14.5}{2}{Exceptions}
+\HLAServiceBookmark{4.14.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.15}{1}{Confirm Synchronization Point Registration service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    may provide the optional set of joined federate designators. Only those joined federates in the federation\linebreak%
+    execution, whose federate designators are members of the set, shall be informed of the label existence. For\linebreak%
+    the synchronization point to be successfully registered, all designated joined federates shall be federation\linebreak%
+    execution members. However, the service may be invoked with valid federate designators of federates no\linebreak%
+    longer joined to the federation execution (i.e., a designated federate may have resigned during or after the\linebreak%
+    service call was invoked but before the Confirm Synchronization Point Registration callback is invoked). In\linebreak%
+    this case, the registration shall fail. The user-supplied tag shall provide a vehicle for information to be\linebreak%
+    associated with the synchronization point and shall be announced along with the synchronization label. It is\linebreak%
+    possible for multiple synchronization points registered by the same or different joined federates to be\linebreak%
+    pending simultaneously.%
+  }
+  \HLAServiceComponentHeadingAt{191.624}{%
+    4.14.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{215.764}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{215.764}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Synchronization point label.%
+  }
+  \HLAFixedBlock{100.020}{227.763}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{227.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag.%
+  }
+  \HLAFixedBlock{100.020}{239.763}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{239.763}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional set of joined federate designators.%
+  }
+  \HLAServiceComponentHeadingAt{263.623}{%
+    4.14.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{287.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{287.762}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{311.623}{%
+    4.14.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{335.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{335.762}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{347.761}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{347.761}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{359.761}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{359.761}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{371.761}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{371.761}{400.020}{\rmfamily}{9.96}{12.00}{%
+    If an optional set of joined federate designators is supplied, those federate designators shall be valid.%
+  }
+  \HLAFixedBlock{100.020}{383.761}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.968}{383.761}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The supplied synchronization point label is not in use.%
+  }
+  \HLAFixedBlock{100.020}{395.761}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{395.761}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{407.760}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{407.760}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{431.621}{%
+    4.14.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{455.760}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{455.760}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The synchronization label is known to the RTI.%
+  }
+  \HLAServiceComponentHeadingAt{479.620}{%
+    4.14.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{503.820}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{503.820}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{515.819}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{515.819}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{527.819}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{527.819}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{539.819}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{539.819}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{551.819}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.981}{551.819}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{575.679}{%
+    4.14.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{599.818}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{599.818}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 7, Global synch label (L).%
+  }
+  \HLAFixedBlock{100.020}{611.818}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{611.818}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 9, Local synch label (s, L).%
+  }
+  \HLAServiceHeadingAt{641.423}{%
+    4.15\ \emph{Confirm Synchronization Point Registration \textdagger{}}\ service%
+  }
+  \HLAFixedBlock{90.000}{666.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The\ \emph{Confirm Synchronization Point Registration \textdagger{}}\ service shall indicate to the requesting joined federate the\linebreak%
+    status of a requested federation synchronization point registration. This service shall be invoked in response\linebreak%
+    to a\ \emph{Register Federation Synchronization Point}\ service invocation. A registration-success indicator\linebreak%
+    argument indicating success shall mean the label has been successfully registered.%
+  }
+\end{hlafixedpage}
+\clearpage

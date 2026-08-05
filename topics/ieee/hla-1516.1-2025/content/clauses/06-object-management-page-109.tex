@@ -1,0 +1,164 @@
+\HLASourcePage{110}{109}
+\HLAServiceBookmark{6.1.7}{2}{Interactions}
+\HLAServiceBookmark{6.1.8}{2}{Directed Interactions}
+\HLAServiceBookmark{6.1.9}{2}{Auto-Provide Switch}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.1.7 Interactions%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Interaction receipt is also an important concept in the object management service group. Interaction\emph{ I} shall%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    have a candidate received class at joined federate \textbf{\emph{F}} if joined federate \textbf{\emph{F}} is subscribed to either the sent class%
+  }
+  \HLAFixedBlock{90.001}{117.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of \emph{I} or to a superclass of the sent class of \emph{I}. (A joined federate \textbf{\emph{F}} may be subscribed to an interaction class%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    either by the DM subscription service \emph{Subscribe Interaction Class} or by the DDM subscription service%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Interaction Class With Regions}.) If an interaction has a candidate received class at a joined%
+  }
+  \HLAFixedBlock{90.000}{153.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate, the candidate received class of the interaction at that joined federate shall be the interaction’s sent%
+  }
+  \HLAFixedBlock{90.000}{165.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class if subscribed to by the joined federate. Otherwise, the candidate received class of the interaction shall%
+  }
+  \HLAFixedBlock{90.000}{177.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be the closest superclass of the interaction’s sent class to which the joined federate is subscribed.%
+  }
+  \HLAFixedBlock{90.000}{201.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate receives an interaction via the \emph{Receive Interaction \textdagger{}} service. This service may be invoked%
+  }
+  \HLAFixedBlock{90.000}{213.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at a joined federate \textbf{\emph{F}} when%
+  }
+  \HLAFixedBlock{100.021}{228.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{228.783}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Another joined federate (not \emph{F}) has invoked the \emph{Send Interaction} service to send interaction \emph{I}, and%
+  }
+  \HLAFixedBlock{100.021}{243.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{243.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{I} has a candidate received class at \emph{F, }and%
+  }
+  \HLAFixedBlock{100.020}{258.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{258.783}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Either:%
+  }
+  \HLAFixedBlock{121.980}{273.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.033}{273.782}{379.967}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This candidate received class is a subscribed interaction class, or%
+  }
+  \HLAFixedBlock{121.980}{288.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.036}{288.782}{379.964}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This candidate received class is a subscribed interaction class with regions, and the update%
+  }
+  \HLAFixedBlock{142.019}{300.782}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    region set of \emph{I }overlaps the subscription region set for \emph{I}’s candidate received class at the%
+  }
+  \HLAFixedBlock{142.019}{312.782}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribing joined federate.%
+  }
+  \HLAFixedBlock{89.999}{336.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the \emph{Receive Interaction \textdagger{}} service is invoked, the class that is an argument to this service invocation%
+  }
+  \HLAFixedBlock{89.999}{348.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall be called the received class of the interaction that is received as a result of this service invocation. At%
+  }
+  \HLAFixedBlock{89.999}{360.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the moment of receipt, the received class shall be the same as the candidate received class. %
+  }
+  \HLAServiceComponentHeadingAt{384.641}{%
+    6.1.8 Directed Interactions%
+  }
+  \HLAFixedBlock{89.999}{408.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The following applies to delivery of directed interactions: Directed Interaction I shall have a candidate%
+  }
+  \HLAFixedBlock{89.999}{420.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    received interaction class at joined federate F if joined federate F is subscribed to either the sent interaction%
+  }
+  \HLAFixedBlock{90.000}{432.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class of I or to a superclass of the sent class of I at the known object class of the targeted object instance. %
+  }
+  \HLAFixedBlock{90.001}{456.780}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate receives an interaction via the \emph{Receive Directed Interaction \textdagger{}} service. This service may be%
+  }
+  \HLAFixedBlock{90.001}{468.779}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked at a joined federate F when%
+  }
+  \HLAFixedBlock{100.021}{483.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{483.779}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Another joined federate (not F) has invoked the Send Directed Interaction service to send interaction%
+  }
+  \HLAFixedBlock{121.981}{495.779}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I, %
+  }
+  \HLAFixedBlock{100.021}{510.779}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.944}{510.779}{400.056}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I has a candidate received class at F and%
+  }
+  \HLAFixedBlock{100.021}{525.778}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{525.778}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Either:%
+  }
+  \HLAFixedBlock{121.981}{540.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.037}{540.778}{379.963}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The candidate received class is subscribed by ownership at the known object class and F owns%
+  }
+  \HLAFixedBlock{142.021}{552.778}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at least one attribute of the target object instance, or%
+  }
+  \HLAFixedBlock{121.982}{567.778}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.040}{567.778}{379.960}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The candidate received class is subscribed universally at the known object class and F and the%
+  }
+  \HLAFixedBlock{142.022}{579.777}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    target object instance is known to the federate%
+  }
+  \HLAFixedBlock{90.002}{603.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the \emph{Receive Directed Interaction \textdagger{}} service is invoked, the class that is an argument to this service%
+  }
+  \HLAFixedBlock{90.002}{615.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall be called the received class of the interaction that is received as a result of this service%
+  }
+  \HLAFixedBlock{90.000}{627.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation. At the moment of receipt, the received class shall be the same as the candidate received class.%
+  }
+  \HLAServiceComponentHeadingAt{651.646}{%
+    6.1.9 Auto-Provide Switch%
+  }
+  \HLAFixedBlock{90.000}{675.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution-wide Auto-Provide Switch indicates whether the RTI shall automatically solicit%
+  }
+  \HLAFixedBlock{90.000}{687.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute value updates from attribute-owning federates. The initial setting for this switch shall come from%
+  }
+  \HLAFixedBlock{90.000}{699.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the FDD supplied to the \emph{Create Federation Execution} service invocation for the federation execution. If no%
+  }
+\end{hlafixedpage}
+\clearpage

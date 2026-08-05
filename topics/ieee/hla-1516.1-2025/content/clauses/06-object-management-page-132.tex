@@ -1,0 +1,168 @@
+\HLASourcePage{133}{132}
+\HLAServiceBookmark{6.17.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.17.3}{2}{Preconditions}
+\HLAServiceBookmark{6.17.4}{2}{Postconditions}
+\HLAServiceBookmark{6.17.5}{2}{Exceptions}
+\HLAServiceBookmark{6.17.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.18}{1}{Local Delete Object Instance service}
+\HLAServiceBookmark{6.18.1}{2}{Supplied arguments}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.17.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    6.17.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{141.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{171.784}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.020}{186.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.937}{186.784}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The receiving joined federate did not send the corresponding \emph{Delete Object Instance} service.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.972}{201.784}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{216.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{216.783}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{240.643}{%
+    6.17.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{264.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{264.783}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been notified to remove the object instance.%
+  }
+  \HLAFixedBlock{100.020}{279.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{279.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If one of the following is true:%
+  }
+  \HLAFixedBlock{121.980}{294.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{143.999}{294.782}{378.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A timestamp is not provided or%
+  }
+  \HLAFixedBlock{121.980}{309.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{143.999}{309.782}{378.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The receive message order type was RO or%
+  }
+  \HLAFixedBlock{121.980}{324.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{143.999}{324.782}{378.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The message is NOT the result of a \emph{Flush Queue Request} service invocation,%
+  }
+  \HLAFixedBlock{121.980}{339.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    then the object instance is no longer known by the federate and no longer exists as far as the federate%
+  }
+  \HLAFixedBlock{121.980}{351.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    is concerned.%
+  }
+  \HLAFixedBlock{100.020}{366.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.973}{366.781}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a timestamp is provided, the receive message order type is TSO, and the message is the result of a%
+  }
+  \HLAFixedBlock{121.981}{378.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Flush Queue Request service invocation, then once the joined federate advances its time position to%
+  }
+  \HLAFixedBlock{121.981}{390.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    or past the specified time, the object instance shall no longer be known by the joined federate (and%
+  }
+  \HLAFixedBlock{121.981}{402.780}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    will no longer exist as far as the joined federate is concerned). If the joined federate successfully%
+  }
+  \HLAFixedBlock{121.982}{414.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    disables time-constrained then the object instance shall immediately become unknown by the joined%
+  }
+  \HLAFixedBlock{121.982}{426.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate (and will no longer exist as far as the joined federate is concerned).%
+  }
+  \HLAServiceComponentHeadingAt{450.640}{%
+    6.17.5 Exceptions%
+  }
+  \HLAFixedBlock{100.022}{474.779}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{474.779}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error%
+  }
+  \HLAServiceComponentHeadingAt{498.639}{%
+    6.17.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.022}{522.778}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.984}{522.778}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 10, Object class (i)%
+  }
+  \HLAServiceHeadingAt{552.383}{%
+    6.18 \emph{Local Delete Object Instance} service%
+  }
+  \HLAFixedBlock{90.000}{577.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Local Delete Object Instance} service shall inform the RTI that it shall treat the specified object instance%
+  }
+  \HLAFixedBlock{90.000}{589.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    as if the RTI had never notified the invoking joined federate to discover the object instance. The object%
+  }
+  \HLAFixedBlock{90.000}{601.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance shall not be removed from the federation execution. The joined federate shall not own any attributes%
+  }
+  \HLAFixedBlock{90.000}{613.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the specified object instance when invoking this service.%
+  }
+  \HLAFixedBlock{90.000}{637.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    After the termination of invocation of this service, the specified object instance may subsequently be%
+  }
+  \HLAFixedBlock{90.000}{649.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovered by the invoking joined federate, at a possibly different class from previously known.%
+  }
+  \HLAServiceComponentHeadingAt{673.665}{%
+    6.18.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{697.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{697.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+\end{hlafixedpage}
+\clearpage

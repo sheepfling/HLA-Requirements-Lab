@@ -1,0 +1,143 @@
+\HLASourcePage{126}{125}
+\HLAServiceBookmark{6.12.5}{2}{Exceptions}
+\HLAServiceBookmark{6.12.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.13}{1}{Receive Interaction † service}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.12.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{93.785}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The timestamp is invalid (if optional timestamp argument is supplied).%
+  }
+  \HLAFixedBlock{100.020}{108.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{108.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is not publishing the specified interaction class.%
+  }
+  \HLAFixedBlock{100.020}{123.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{123.785}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction parameter is not defined in FDD.%
+  }
+  \HLAFixedBlock{100.020}{138.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{138.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.020}{153.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{153.784}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{168.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.952}{168.784}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{183.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{183.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{198.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{198.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{213.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.954}{213.783}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{237.643}{%
+    6.12.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{261.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{261.783}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 13, Interaction class (m)%
+  }
+  \HLAServiceHeadingAt{291.383}{%
+    6.13 \emph{Receive Interaction \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{316.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Receive Interaction \textdagger{} }service shall provide the joined federate with a sent interaction.%
+  }
+  \HLAFixedBlock{90.000}{340.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The user-supplied tag argument supplied to the corresponding \emph{Send Interaction} or \emph{Send Interaction With}%
+  }
+  \HLAFixedBlock{90.000}{352.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions }service invocation shall be provided with all corresponding \emph{Receive Interaction \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{364.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocations.%
+  }
+  \HLAFixedBlock{90.000}{388.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The transportation type argument shall indicate the transportation type of the specified interaction, i.e., the%
+  }
+  \HLAFixedBlock{90.000}{400.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    transportation type of the published interaction at the joined federate that invoked the corresponding \emph{Send}%
+  }
+  \HLAFixedBlock{90.000}{412.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction} or \emph{Send Interaction With Regions }service.%
+  }
+  \HLAFixedBlock{90.000}{436.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A timestamp shall be provided if one was specified in the corresponding \emph{Send Interaction} or \emph{Send}%
+  }
+  \HLAFixedBlock{89.999}{448.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction With Regions }service invocation. The receive message order type shall indicate the type (either%
+  }
+  \HLAFixedBlock{90.000}{460.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RO or TSO) of the received message. The timestamp and receive message order type arguments shall be%
+  }
+  \HLAFixedBlock{90.000}{472.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    supplied together or not at all. The sent message order type shall indicate the type (either RO or TSO) of the%
+  }
+  \HLAFixedBlock{90.000}{484.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    sent message. %
+  }
+  \HLAFixedBlock{90.000}{508.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A retraction handle shall be provided if and only if the sent message order type is TSO.%
+  }
+  \HLAFixedBlock{90.000}{532.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the specified interaction has available dimensions and the Convey Region Designator Sets Switch for this%
+  }
+  \HLAFixedBlock{90.000}{544.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate is enabled, the Set of Sent Region Designators argument shall contain a copy of the update%
+  }
+  \HLAFixedBlock{90.000}{556.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    region realization (see 9.1.7), if any, that was supplied to the corresponding \emph{Send Interaction With Regions}%
+  }
+  \HLAFixedBlock{90.000}{568.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation by the sending joined federate.%
+  }
+  \HLAFixedBlock{90.000}{592.801}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The producing joined federate argument shall contain the designator for the sending joined federate%
+  }
+  \HLAFixedBlock{90.000}{616.801}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate invoking the \emph{Send Interaction} or \emph{Send Interaction With Regions }service shall not receive%
+  }
+  \HLAFixedBlock{90.000}{628.801}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the induced \emph{Receive Interaction \textdagger{} }service invocation, regardless of the subscription situation.%
+  }
+  \HLAFixedBlock{90.000}{652.800}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    At most, one induced \emph{Receive Interaction \textdagger{} }service invocation shall happen at a joined federate as a result of%
+  }
+  \HLAFixedBlock{90.001}{664.800}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the invocation of the \emph{Send Interaction} or \emph{Send Interaction With Regions} service at another joined federate.%
+  }
+\end{hlafixedpage}
+\clearpage

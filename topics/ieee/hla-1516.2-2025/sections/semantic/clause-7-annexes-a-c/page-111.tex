@@ -1,0 +1,80 @@
+% M6 semantic reconstruction of physical page 111 / printed page 110.
+\begin{HLAClauseSemanticPage}{110}
+\HLAStableID{m6.page.111}
+\HLAStableID{m6.p111.b01}
+\HLAClausePlacedBlock{142.020}{69.786}{380.069}{%
+  \HLAClauseParagraph{\resizebox{380.035bp}{!}{\mbox{enumerator is specified for more than one named alternative, either as a single enumerator or}}\newline{}\resizebox{380.069bp}{!}{\mbox{part of a range, the merge shall fail. In case a variant record data type with}}\newline{}\resizebox{380.008bp}{!}{\mbox{HLAextendableVariantRecord includes an alternative using HLAother, the merge shall also}}\newline{}\resizebox{15.811bp}{!}{\mbox{fail.}}}
+}
+\HLAStableID{m6.p111.b02}
+\HLAClausePlacedBlock{90.000}{141.120}{141.917}{%
+  \HLAAnnexSubclauseHeading{C.4 Merging dimensions}
+}
+\HLAStableID{m6.p111.b03}
+\HLAClausePlacedBlock{90.000}{167.766}{432.000}{%
+  \HLAClauseParagraph{\resizebox{431.954bp}{!}{\mbox{Dimensions from FOM modules (or SOM modules) to be merged shall be compared against the first module}}\newline{}\resizebox{431.945bp}{!}{\mbox{used in the initial creation of the FOM (or SOM). Dimensions with the same name shall not be merged. Any}}\newline{}\resizebox{431.924bp}{!}{\mbox{duplicates (equivalent and equivalent-like dimensions) already in the FOM (or SOM) are to be ignored. The}}\newline{}\resizebox{397.840bp}{!}{\mbox{following principles for checking duplicacy of dimensions shall be applied to support such activity:}}}
+}
+\HLAStableID{m6.p111.b04}
+\HLAClausePlacedBlock{121.980}{218.765}{402.120}{%
+  \HLAClauseLabeledItem{1)}{\resizebox{379.960bp}{!}{\mbox{The dimension name of FOM module (or SOM module) being inserted shall be compared to}}\newline{}\resizebox{296.053bp}{!}{\mbox{see if an equivalent dimension name already exists in the FOM (or SOM).}}}
+}
+\HLAStableID{m6.p111.b05}
+\HLAClausePlacedBlock{121.980}{245.764}{402.120}{%
+  \HLAClauseLabeledItem{2)}{\resizebox{379.979bp}{!}{\mbox{If duplicacy is found, it is necessary to determine if the dimension that was attempted to be}}\newline{}\resizebox{263.645bp}{!}{\mbox{added identically matched with the dimension that already exists.}}}
+}
+\HLAStableID{m6.p111.b06}
+\HLAClausePlacedBlock{121.981}{272.764}{402.119}{%
+  \HLAClauseLabeledItem{3)}{\resizebox{358.675bp}{!}{\mbox{If some but not all sub-elements of the dimension are equivalent then the merge shall fail.}}}
+}
+\HLAStableID{m6.p111.b07}
+\HLAClausePlacedBlock{121.981}{287.764}{402.119}{%
+  \HLAClauseLabeledItem{4)}{\resizebox{380.002bp}{!}{\mbox{Sub-elements that are compared for a dimension include: name, data type, upperBound,}}\newline{}\resizebox{132.526bp}{!}{\mbox{normalization, value, and notes.}}}
+}
+\HLAStableID{m6.p111.b08}
+\HLAClausePlacedBlock{121.981}{314.763}{402.119}{%
+  \HLAClauseLabeledItem{5)}{\resizebox{379.995bp}{!}{\mbox{Within the data types of a dimension, the candidate data type shall be compared to see if it}}\newline{}\resizebox{270.358bp}{!}{\mbox{already exists in the FOM (SOM). (See C.3 on Data type Merging.)}}}
+}
+\HLAStableID{m6.p111.b09}
+\HLAClausePlacedBlock{90.001}{350.763}{432.085}{%
+  \HLAClauseParagraph{\resizebox{432.085bp}{!}{\mbox{Any unique dimension names found in a FOM module (or SOM module) are candidates for being merged}}\newline{}\resizebox{363.953bp}{!}{\mbox{into the FOM (or SOM). The following principles shall be applied to support such activity:}}}
+}
+\HLAStableID{m6.p111.b10}
+\HLAClausePlacedBlock{100.021}{377.762}{424.079}{%
+  \HLAClauseDashItem{\resizebox{400.007bp}{!}{\mbox{Check to see if the new dimension does not introduce conflict with any dimension sub-elements}}\newline{}\resizebox{399.975bp}{!}{\mbox{(i.e., data types) that already exist in the FOM (or SOM). This is necessary to determine if the}}\newline{}\resizebox{267.562bp}{!}{\mbox{dimension can be inserted under that parent in the FOM (or SOM).}}}
+}
+\HLAStableID{m6.p111.b11}
+\HLAClausePlacedBlock{100.021}{416.762}{424.079}{%
+  \HLAClauseDashItem{\resizebox{400.089bp}{!}{\mbox{Within the data types of a dimension, the candidate data type already exists in the FOM (or SOM).}}\newline{}\resizebox{128.509bp}{!}{\mbox{(See C.3 on data type Merging.)}}}
+}
+\HLAStableID{m6.p111.b12}
+\HLAClausePlacedBlock{90.000}{464.160}{203.252}{%
+  \HLAAnnexSubclauseHeading{C.5 Merging synchronization points}
+}
+\HLAStableID{m6.p111.b13}
+\HLAClausePlacedBlock{90.000}{490.806}{432.017}{%
+  \HLAClauseParagraph{\resizebox{431.949bp}{!}{\mbox{Synchronization points from FOM modules (or SOM modules) to be merged shall be compared against the}}\newline{}\resizebox{432.017bp}{!}{\mbox{first module used in the initial creation of the FOM (or SOM). Synchronization points with the same label}}\newline{}\resizebox{81.030bp}{!}{\mbox{shall not be merged.}}}
+}
+\HLAStableID{m6.p111.b14}
+\HLAClausePlacedBlock{90.000}{538.805}{432.000}{%
+  \HLAClauseParagraph{\resizebox{431.945bp}{!}{\mbox{Any duplicates (equivalent and equivalent-like synchronizationPoints already in the FOM) are to be}}\newline{}\resizebox{298.392bp}{!}{\mbox{ignored. The following principles shall be applied to support such activity:}}}
+}
+\HLAStableID{m6.p111.b15}
+\HLAClausePlacedBlock{121.980}{565.804}{402.120}{%
+  \HLAClauseLabeledItem{1)}{\resizebox{379.989bp}{!}{\mbox{The synchronizationPoint label of FOM module being inserted shall\space{}be compared to see if an}}\newline{}\resizebox{301.415bp}{!}{\mbox{equivalent synchronizationPoint label already exists in the FOM (or SOM).}}}
+}
+\HLAStableID{m6.p111.b16}
+\HLAClausePlacedBlock{121.980}{592.804}{402.120}{%
+  \HLAClauseLabeledItem{2)}{\resizebox{380.027bp}{!}{\mbox{If duplicacy is found, it is necessary to determine if the synchronizationPoint that was}}\newline{}\resizebox{368.599bp}{!}{\mbox{attempted to be added identically matched with the synchronizationPoint that already exists.}}}
+}
+\HLAStableID{m6.p111.b17}
+\HLAClausePlacedBlock{121.979}{619.804}{402.121}{%
+  \HLAClauseLabeledItem{3)}{\resizebox{379.997bp}{!}{\mbox{If some but not all sub-elements of the synchronizationPoint are equivalent then the merge}}\newline{}\resizebox{37.153bp}{!}{\mbox{shall fail.}}}
+}
+\HLAStableID{m6.p111.b18}
+\HLAClausePlacedBlock{121.979}{646.803}{402.121}{%
+  \HLAClauseLabeledItem{4)}{\resizebox{379.981bp}{!}{\mbox{Sub-elements that are compared for a synchronizationPoint include: label, data type, capability,}}\newline{}\resizebox{87.417bp}{!}{\mbox{semantics, and notes.}}}
+}
+\HLAStableID{m6.p111.b19}
+\HLAClausePlacedBlock{121.979}{673.803}{402.121}{%
+  \HLAClauseLabeledItem{5)}{\resizebox{380.013bp}{!}{\mbox{Within the data types of a synchronizationPoint, the candidate data type shall be compared is to}}\newline{}\resizebox{302.245bp}{!}{\mbox{see if it already exists in the FOM (SOM). (See C.3 on Data type Merging.)}}}
+}
+\end{HLAClauseSemanticPage}

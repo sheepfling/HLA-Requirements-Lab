@@ -1,0 +1,142 @@
+\HLASourcePage{370}{369}
+\HLAServiceBookmark{12.11.5.36}{3}{Send Interaction With Regions service}
+\HLAServiceBookmark{12.11.6}{2}{Abstract data types}
+\HLAServiceBookmark{12.11.6.1}{3}{Names, labels, and strings}
+\HLAServiceBookmark{12.11.6.2}{3}{Boolean values}
+\HLAServiceBookmark{12.11.6.3}{3}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.36 }%
+  }
+  \HLAFixedBlock{139.440}{69.646}{464.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Send Interaction With Regions}}%
+  }
+  \HLAFixedBlock{284.341}{69.646}{319.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{93.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional argument representing the timestamp is implemented in the Java API as two%
+  }
+  \HLAFixedBlock{90.001}{106.373}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{sendInteractionWithRegions()}%
+  }
+  \HLAFixedBlock{257.881}{105.785}{346.119}{\rmfamily\raggedright}{9.96}{11.16}{%
+     methods: one that takes a %
+  }
+  \HLAFixedBlock{364.141}{106.373}{239.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{430.141}{105.785}{173.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as an argument for the%
+  }
+  \HLAFixedBlock{90.001}{117.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    timestamp, and one that does not. The version that takes a %
+  }
+  \HLAFixedBlock{383.821}{118.373}{220.179}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{449.761}{117.785}{154.239}{\rmfamily\raggedright}{9.96}{11.16}{%
+     also returns a%
+  }
+  \HLAFixedBlock{90.001}{130.372}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{MessageRetractionReturn}%
+  }
+  \HLAFixedBlock{227.941}{129.785}{376.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+     for the optional message retraction designator.%
+  }
+  \HLAFixedBlock{90.001}{153.645}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6 Abstract data types}%
+  }
+  \HLAFixedBlock{90.001}{177.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In subclause 1.4.4 in IEEE Std 1516.2-2025, general conventions used to describe the abstract data types%
+  }
+  \HLAFixedBlock{90.002}{189.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    used in Clause 4 through Clause 10 are presented. In 12.11.6.1 through 12.11.6.26, the abstract data types%
+  }
+  \HLAFixedBlock{90.002}{201.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    are further detailed by mapping an individual data type to its implementation in the Java API. Note that the%
+  }
+  \HLAFixedBlock{90.002}{213.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    data types from Clause 11 are explained in that clause and are not repeated here. Additionally, designators%
+  }
+  \HLAFixedBlock{90.002}{225.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    are a subject in their own right and are covered in 12.2.%
+  }
+  \HLAFixedBlock{90.002}{249.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Abstract data types are mapped to idiomatic Java types (if possible, to a type in the Java Platform APIs).%
+  }
+  \HLAFixedBlock{90.002}{261.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Java 5 is assumed. This is especially evident in the use of the Java Development Kit Collections framework.%
+  }
+  \HLAFixedBlock{90.002}{273.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All interfaces extend, and classes implement, %
+  }
+  \HLAFixedBlock{277.622}{274.370}{326.378}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{java.io.Serializable}%
+  }
+  \HLAFixedBlock{397.562}{273.783}{206.438}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The abstract data types make%
+  }
+  \HLAFixedBlock{90.002}{285.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    use of generics (typed collections) to achieve type safety in collections.%
+  }
+  \HLAFixedBlock{90.002}{309.642}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.1 Names, labels, and strings}%
+  }
+  \HLAFixedBlock{90.002}{333.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The names, labels, and strings described in Clause 4 through Clause 10 of this specification are mapped to%
+  }
+  \HLAFixedBlock{90.001}{346.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{java.lang.String}%
+  }
+  \HLAFixedBlock{185.941}{345.781}{418.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . %
+  }
+  \HLAFixedBlock{90.001}{369.642}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.2 Boolean values}%
+  }
+  \HLAFixedBlock{90.001}{393.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Java primitive type %
+  }
+  \HLAFixedBlock{187.141}{394.368}{416.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{boolean}%
+  }
+  \HLAFixedBlock{229.141}{393.781}{374.859}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is used to represent all boolean values.%
+  }
+  \HLAFixedBlock{90.001}{417.641}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.3 Exceptions}%
+  }
+  \HLAFixedBlock{90.001}{441.780}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All exceptions in the Java API inherit from a class named %
+  }
+  \HLAFixedBlock{379.081}{442.367}{224.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIexception}%
+  }
+  \HLAFixedBlock{451.080}{443.550}{152.920}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{, }%
+  }
+  \HLAFixedBlock{459.300}{441.786}{144.700}{\rmfamily\raggedright}{9.96}{11.16}{%
+    which extends%
+  }
+  \HLAFixedBlock{90.000}{454.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{java.lang.Exception}%
+  }
+  \HLAFixedBlock{203.941}{453.785}{400.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This hierarchy allows all exceptions in the Java API to be caught as a single%
+  }
+  \HLAFixedBlock{90.001}{465.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    base class. The base class shall define a method called “name” which returns the simple unqualified text of%
+  }
+  \HLAFixedBlock{90.001}{477.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the derived exception type name (e.g., L”AlreadyConnected”).%
+  }
+  \HLAFixedBlock{90.001}{501.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Table 25 shows the mapping between the Java implementation of HLA exceptions and the exceptions listed%
+  }
+  \HLAFixedBlock{90.001}{513.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in Sections 4.5.5 and 4.11.5.%
+  }
+\end{hlafixedpage}
+\clearpage

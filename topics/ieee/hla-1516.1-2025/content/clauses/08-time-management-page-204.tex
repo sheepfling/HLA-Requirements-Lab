@@ -1,0 +1,180 @@
+\HLASourcePage{205}{204}
+\HLAServiceBookmark{8.14.4}{2}{Postconditions}
+\HLAServiceBookmark{8.14.5}{2}{Exceptions}
+\HLAServiceBookmark{8.14.6}{2}{Reference state charts}
+\HLAServiceBookmark{8.15}{1}{Enable Asynchronous Delivery service}
+\HLAServiceBookmark{8.15.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.15.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.15.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate entered the Time Advancing state by invoking any of the services to advance%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time except for the \emph{Flush Queue Request }service.%
+  }
+  \HLAFixedBlock{100.019}{95.765}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{95.765}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{109.805}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{109.805}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{133.665}{%
+    \textbf{8.14.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.019}{157.804}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{157.804}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the joined federate has a change to its lookahead pending, its new actual lookahead shall be equal%
+  }
+  \HLAFixedBlock{121.980}{169.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to the maximum of its requested lookahead and its old actual lookahead less the amount of logical%
+  }
+  \HLAFixedBlock{121.980}{181.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time advanced (the joined federate’s old logical time less the supplied logical time). %
+  }
+  \HLAFixedBlock{100.020}{195.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{195.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may not send TSO messages with timestamps less than the supplied logical time%
+  }
+  \HLAFixedBlock{121.980}{207.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    plus its actual lookahead.%
+  }
+  \HLAFixedBlock{100.020}{221.763}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.968}{221.763}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If this service is invoked in response to a \emph{Time Advance Request} or \emph{Next Message Request} service%
+  }
+  \HLAFixedBlock{121.980}{233.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and the joined federate’s actual lookahead is zero, the joined federate may not send TSO messages%
+  }
+  \HLAFixedBlock{121.980}{245.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with timestamps less than or equal to the supplied logical time.%
+  }
+  \HLAFixedBlock{100.020}{259.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.978}{259.803}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If this service is invoked in response to a \emph{Time Advance Request} or \emph{Next Message Request} service,%
+  }
+  \HLAFixedBlock{121.980}{271.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    no additional TSO messages shall be delivered with timestamps less than or equal to the supplied%
+  }
+  \HLAFixedBlock{121.980}{283.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time.%
+  }
+  \HLAFixedBlock{100.020}{297.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.974}{297.782}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If this service is invoked in response to a \emph{Time Advance Request Available }or\emph{ Next Message Request}%
+  }
+  \HLAFixedBlock{121.979}{309.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Available} service, no additional TSO messages shall be delivered with timestamps less than the%
+  }
+  \HLAFixedBlock{121.979}{321.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    supplied logical time.%
+  }
+  \HLAServiceComponentHeadingAt{345.642}{%
+    \textbf{8.14.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.019}{369.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{369.781}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error%
+  }
+  \HLAServiceComponentHeadingAt{393.641}{%
+    \textbf{8.14.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.019}{417.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{417.780}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 17, Temporal state%
+  }
+  \HLAServiceHeadingAt{447.383}{%
+    \textbf{8.15 }\textbf{\emph{Enable Asynchronous Delivery}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{472.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocations of the \emph{Enable Asynchronous Delivery} service shall instruct the RTI to deliver received RO%
+  }
+  \HLAFixedBlock{90.000}{484.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages to the invoking joined federate when it is in either the Time Advancing state or Time Granted%
+  }
+  \HLAFixedBlock{90.000}{496.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    state.%
+  }
+  \HLAServiceComponentHeadingAt{520.665}{%
+    \textbf{8.15.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.020}{544.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{544.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{566.685}{%
+    \textbf{8.15.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{588.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{588.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{612.644}{%
+    \textbf{8.15.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{636.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{636.783}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{650.823}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{650.823}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{664.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{664.803}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{678.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{678.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is disabled at the joined federate.%
+  }
+  \HLAFixedBlock{100.020}{692.822}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.972}{692.822}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{706.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{706.802}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

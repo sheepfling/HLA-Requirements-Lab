@@ -1,0 +1,150 @@
+\HLASourcePage{109}{108}
+\HLAServiceBookmark{6.1.3}{2}{In-scope reflects}
+\HLAServiceBookmark{6.1.4}{2}{Out-of-scope reflects}
+\HLAServiceBookmark{6.1.5}{2}{Attribute relevance}
+\HLAServiceBookmark{6.1.6}{2}{Orphan object instances}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.035}{69.786}{379.965}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The instance attribute’s corresponding class attribute is a subscribed attribute of the known%
+  }
+  \HLAFixedBlock{142.021}{81.785}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class of the object instance, or%
+  }
+  \HLAFixedBlock{121.981}{96.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.036}{96.785}{379.964}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The instance attribute’s corresponding class attribute is a subscribed attribute of the known%
+  }
+  \HLAFixedBlock{142.021}{108.785}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class of the object instance with regions, and the update region set of the instance attribute%
+  }
+  \HLAFixedBlock{142.021}{120.785}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    overlaps the subscription region set of the instance attribute’s corresponding class attribute at%
+  }
+  \HLAFixedBlock{142.021}{132.785}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the known class of the instance attribute at the subscribing joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{156.645}{%
+    6.1.3 In-scope reflects%
+  }
+  \HLAFixedBlock{90.002}{180.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If an instance attribute is in scope for a given joined federate \textbf{\emph{F}}, exactly one other joined federate exists (\textbf{\emph{U}})%
+  }
+  \HLAFixedBlock{90.001}{192.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in the federation execution that is capable of invoking the \emph{Update Attribute Values} service for that instance%
+  }
+  \HLAFixedBlock{90.002}{204.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute so that if \textbf{\emph{U}} were to invoke the \emph{Update Attribute Values} service for that instance attribute, all of the%
+  }
+  \HLAFixedBlock{90.002}{216.783}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    preconditions for the invocation of the corresponding \emph{Reflect Attribute Values \textdagger{}} service at \textbf{\emph{F}} are satisfied.%
+  }
+  \HLAFixedBlock{90.002}{240.783}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Reflect Attribute Values \textdagger{}} service may be invoked at a joined federate for a given instance attribute%
+  }
+  \HLAFixedBlock{90.002}{252.783}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    when%
+  }
+  \HLAFixedBlock{100.022}{270.783}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{270.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The instance attribute is in scope.%
+  }
+  \HLAFixedBlock{100.022}{285.782}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.984}{285.782}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A corresponding \emph{Update Attribute Values} service for the instance attribute was invoked by another%
+  }
+  \HLAFixedBlock{121.982}{297.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+  \HLAServiceComponentHeadingAt{321.642}{%
+    6.1.4 Out-of-scope reflects%
+  }
+  \HLAFixedBlock{90.002}{345.781}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Reflect Attribute Values \textdagger{}} service may also be invoked at a joined federate for a given instance attribute%
+  }
+  \HLAFixedBlock{90.002}{357.781}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    when%
+  }
+  \HLAFixedBlock{100.022}{375.781}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{375.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The instance attribute is out of scope.%
+  }
+  \HLAFixedBlock{100.022}{390.781}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.982}{390.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A corresponding \emph{Update Attribute Values} service for the instance attribute was invoked by another%
+  }
+  \HLAFixedBlock{121.982}{402.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate when the instance attribute was in scope.%
+  }
+  \HLAServiceComponentHeadingAt{426.641}{%
+    6.1.5 Attribute relevance%
+  }
+  \HLAFixedBlock{90.001}{450.780}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate may also direct the RTI, via the \emph{Enable/Disable} \emph{Attribute Relevance Advisory Switch}%
+  }
+  \HLAFixedBlock{90.001}{462.779}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    services, to indicate that the joined federate does or does not want the RTI to use the \emph{Turn Updates On For}%
+  }
+  \HLAFixedBlock{90.001}{474.779}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Object Instance \textdagger{}} and \emph{Turn Updates Off For Object Instance \textdagger{}} services to inform the joined federate when%
+  }
+  \HLAFixedBlock{90.002}{486.779}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    updates to particular instance attributes are relevant to the other joined federates in the federation execution.%
+  }
+  \HLAFixedBlock{90.001}{498.779}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the \emph{Advisories Use Known Class switch }is disabled, the attribute relevance advisories are based on the%
+  }
+  \HLAFixedBlock{90.002}{510.779}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscriptions rather than the known class of the particular instance. This can mean that a federate gets a \emph{Turn}%
+  }
+  \HLAFixedBlock{90.002}{522.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Updates On For Object Instance \textdagger{}} even if updates to a particular instance attribute are not reflected by any%
+  }
+  \HLAFixedBlock{90.002}{534.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate.%
+  }
+  \HLAServiceComponentHeadingAt{558.638}{%
+    6.1.6 Orphan object instances%
+  }
+  \HLAFixedBlock{90.002}{582.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An orphan object instance can result from rare conditions where it is unknown by all joined federates and all%
+  }
+  \HLAFixedBlock{90.002}{594.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of its instance attributes have become unowned (e.g., because the last joined federate to know the object%
+  }
+  \HLAFixedBlock{90.002}{606.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance has resigned or invoked Local Delete Object Instance). Because an orphan object instance is not%
+  }
+  \HLAFixedBlock{90.002}{618.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known by any joined federate, its attribute instances cannot become owned by any means (i.e., acquiring%
+  }
+  \HLAFixedBlock{90.002}{630.777}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ownership of attributes requires the object instance is known, see preconditions for 7.4, 7.8, and 7.9).%
+  }
+  \HLAFixedBlock{90.002}{642.776}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Because all of its attribute instances are unowned, an orphan object instance cannot be discovered or known%
+  }
+  \HLAFixedBlock{90.002}{654.776}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    by any means (i.e., discovery requires that at least one instance attribute is owned by a federate or the RTI,%
+  }
+  \HLAFixedBlock{90.002}{666.776}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    see preconditions for 6.9). Consequently, orphan object instances are unreachable by any current or future%
+  }
+  \HLAFixedBlock{90.002}{678.776}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate and the RTI shall delete them.%
+  }
+\end{hlafixedpage}
+\clearpage

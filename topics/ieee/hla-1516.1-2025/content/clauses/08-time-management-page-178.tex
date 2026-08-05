@@ -1,0 +1,175 @@
+\HLASourcePage{179}{178}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedRule{90.780}{692.760}{0.240}{0.35}
+  \HLAFixedRule{90.780}{693.240}{0.240}{0.35}
+  \HLAFixedRule{90.780}{692.760}{0.35}{0.480}
+  \HLAFixedRule{91.020}{692.760}{0.35}{0.480}
+  \HLAFixedRule{91.020}{692.760}{36.240}{0.35}
+  \HLAFixedRule{91.020}{693.240}{36.240}{0.35}
+  \HLAFixedRule{91.020}{692.760}{0.35}{0.480}
+  \HLAFixedRule{127.260}{692.760}{0.35}{0.480}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate is permitted to advance its logical time only by requesting a time advancement from the%
+  }
+  \HLAFixedBlock{90.000}{80.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI (as indicated in 8.1.2). Its logical time shall not actually be advanced until the RTI responds with a \emph{Time}%
+  }
+  \HLAFixedBlock{90.000}{91.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Advance Grant \textdagger{} or Flush Queue Grant \textdagger{} }service invocation at that joined federate. The interval between%
+  }
+  \HLAFixedBlock{90.000}{102.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    these service invocations is defined to be the Time Advancing state; this state is shown in the state chart in%
+  }
+  \HLAFixedBlock{90.000}{113.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 17.%
+  }
+  \HLAFixedBlock{90.000}{134.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each service shall take a specific logical time \emph{t}{\fontsize{7.98pt}{9.48pt}\selectfont \emph{R}} (time requested) as an argument, shall request slightly%
+  }
+  \HLAFixedBlock{90.000}{145.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    different coordination from the RTI, and is further detailed in the service descriptions and summarized in%
+  }
+  \HLAFixedBlock{90.000}{156.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Table 1. The first column represents the form of time advancement that is requested. The second column%
+  }
+  \HLAFixedBlock{90.000}{167.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    describes what timestamps a joined federate cannot assign to messages it sends while in the Time Advancing%
+  }
+  \HLAFixedBlock{90.000}{178.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    state (i.e., after requesting an advance to \emph{t}{\fontsize{7.98pt}{9.48pt}\selectfont \emph{R}}, but before the advance is granted). The abbreviation \emph{ts} stands for%
+  }
+  \HLAFixedBlock{90.001}{189.786}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the timestamp of a message. For example, the entry for \emph{Time Advance Request} with zero lookahead reads%
+  }
+  \HLAFixedBlock{90.001}{200.765}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    “Can’t send \emph{ts} ≤ \emph{t}{\fontsize{7.98pt}{9.48pt}\selectfont \emph{R}}.” In other words, the joined federate shall not send any TSO messages that have a%
+  }
+  \HLAFixedBlock{90.000}{211.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamp less than or equal to the federation time requested by the joined federate. The third column%
+  }
+  \HLAFixedBlock{90.000}{222.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    summarizes what messages the RTI shall deliver to the advancing joined federate before granting the joined%
+  }
+  \HLAFixedBlock{90.000}{233.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate’s request for time advancement; only messages described in this column shall be delivered. The%
+  }
+  \HLAFixedBlock{90.000}{244.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    fourth column is similar to the second, but it shows what constraints apply when the joined federate is in the%
+  }
+  \HLAFixedBlock{90.000}{255.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Time Granted state (i.e., after an advance has been granted) and it has reached the Time Granted state by%
+  }
+  \HLAFixedBlock{90.000}{264.570}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    means of the specified form of time advancement.{\fontsize{7.98pt}{9.48pt}\selectfont 17} Constraints in the fourth column are expressed in terms%
+  }
+  \HLAFixedBlock{90.000}{277.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the logical time (\emph{LT}) of the joined federate. Lookahead in the second and fourth columns refers to the%
+  }
+  \HLAFixedBlock{90.001}{288.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate’s current value of lookahead when in the respective states except for the fourth column when%
+  }
+  \HLAFixedBlock{90.001}{299.765}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the federate has advanced by \emph{Flush Queue Request}, in which case lookahead is the optimistic lookahead%
+  }
+  \HLAFixedBlock{90.002}{310.805}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (OL). Since a joined federate’s lookahead can change while it is in the Time Granted state, the constraints%
+  }
+  \HLAFixedBlock{90.002}{321.785}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    expressed in this table change accordingly.%
+  }
+  \HLAFixedBlock{90.002}{342.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Time Advance Grant \textdagger{}} service shall be used to grant an advance for all forms of request to advance%
+  }
+  \HLAFixedBlock{90.001}{353.764}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time except for \emph{Flush Queue Request} which shall be granted by the \emph{Flush Queue Grant \textdagger{}} service.%
+  }
+  \HLAFixedBlock{90.001}{364.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Both the \emph{Time Advance Grant \textdagger{}} and the \emph{Flush Queue Grant \textdagger{}} service shall provide a logical time as an%
+  }
+  \HLAFixedBlock{90.002}{375.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    argument, and this logical time shall be the joined federate’s new time position. The \emph{Flush Queue Grant \textdagger{}}%
+  }
+  \HLAFixedBlock{90.002}{386.764}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service shall provide a supplemental optimistic logical time argument (OLT) that is the minimum of the%
+  }
+  \HLAFixedBlock{90.002}{397.803}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time supplied in the preceding \emph{Flush Queue Request} and the timestamps of any TSO messages%
+  }
+  \HLAFixedBlock{90.001}{408.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivered in response to that \emph{Flush Queue Request}. The optimistic logical time indicates the logical time that%
+  }
+  \HLAFixedBlock{90.001}{419.763}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the joined federate would have been granted if the RTI could have guaranteed that no other TSO messages%
+  }
+  \HLAFixedBlock{90.001}{430.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with a timestamp less than it would be received in the future. The guarantee that the RTI makes about%
+  }
+  \HLAFixedBlock{90.001}{441.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message delivery relative to the provided logical time shall depend on the type of request to advance time;%
+  }
+  \HLAFixedBlock{90.001}{452.763}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specific guarantees are provided in the service descriptions. Note that in some cases (i.e., when using%
+  }
+  \HLAFixedBlock{90.000}{463.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Next Message Request}, \emph{Next Message Request Available}, or \emph{Flush Queue Request} service), the RTI may%
+  }
+  \HLAFixedBlock{90.000}{474.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    advance a joined federate to a logical time that is less than the logical time that the joined federate requested%
+  }
+  \HLAFixedBlock{90.000}{485.822}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (\emph{t}{\fontsize{7.98pt}{9.48pt}\selectfont \emph{R}}). In other cases (i.e., when using \emph{Time Advance Request} and \emph{Time Advance Request Available} services),%
+  }
+  \HLAFixedBlock{90.001}{496.806}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the RTI shall advance a joined federate only to the logical time that was requested.%
+  }
+  \HLAFixedBlock{90.001}{517.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall grant an advance to logical time \emph{LT} only when it can confirm that all TSO messages with%
+  }
+  \HLAFixedBlock{90.001}{528.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamps less than \emph{LT} (or in some cases, less than or equal to \emph{LT}) have been delivered to the joined%
+  }
+  \HLAFixedBlock{90.003}{539.825}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate. This confirmation enables the joined federate to model the behavior of the entities it represents up%
+  }
+  \HLAFixedBlock{90.003}{550.805}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to \emph{LT} without concern for receiving new messages with timestamps less than \emph{LT}. Note that in some cases,%
+  }
+  \HLAFixedBlock{90.003}{561.785}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    providing this confirmation shall require the RTI to wait for a significant period of wall-clock time to elapse%
+  }
+  \HLAFixedBlock{90.003}{572.824}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    before it can grant a time advancement to a time-constrained joined federate. Even in the case of \emph{Flush}%
+  }
+  \HLAFixedBlock{90.002}{583.804}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Queue Request} that does not have to wait for other federates to advance, the requesting federate shall still%
+  }
+  \HLAFixedBlock{90.002}{594.784}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    wait to account for in transit messages. However, in the case of joined federates that are not time-constrained%
+  }
+  \HLAFixedBlock{90.002}{605.824}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (and, thus, cannot receive TSO messages), the guarantee is trivially true, and the advance can be granted%
+  }
+  \HLAFixedBlock{90.002}{616.804}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    almost immediately.%
+  }
+  \HLAFixedBlock{90.002}{637.803}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The advancement of logical time by time-regulating joined federates is important because it acts as their%
+  }
+  \HLAFixedBlock{90.002}{648.783}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    guarantee not to send any TSO messages with timestamps less than some specified federation time. In%
+  }
+  \HLAFixedBlock{90.002}{659.823}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    general, when time-regulating joined federates move their logical times forward, time-constrained joined%
+  }
+  \HLAFixedBlock{90.002}{670.803}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates can move forward as well.%
+  }
+  \HLAFixedBlock{90.000}{696.453}{432.000}{\rmfamily\raggedright}{6.36}{12.00}{%
+    17{\fontsize{7.98pt}{9.48pt}\selectfont When time-regulation becomes enabled at a joined federate, that joined federate is treated as if it had advanced its logical time via the}%
+  }
+  \HLAFixedBlock{90.000}{707.250}{432.000}{\rmfamily\raggedright}{7.98}{12.00}{%
+    \emph{Time Advance Request Available }service.%
+  }
+\end{hlafixedpage}
+\clearpage

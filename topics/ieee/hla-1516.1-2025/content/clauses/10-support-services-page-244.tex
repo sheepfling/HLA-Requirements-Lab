@@ -1,0 +1,165 @@
+\HLASourcePage{245}{244}
+\HLAServiceBookmark{10.1.3}{2}{Handle Normalization}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The enabling of an advisory switch directs that the RTI shall inform the joined federate, via the appropriate%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    advisory notifications, whenever the conditions covered by that advisory change. The disabling of an%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    advisory switch directs the RTI to cease informing the joined federate of changes in the conditions covered%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    by that advisory. When an advisory switch is disabled, all relevant notifications that would have been%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivered to the joined federate shall be lost, i.e., the RTI shall not save the relevant actions and send them to%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the joined federate when a switch is subsequently enabled.%
+  }
+  \HLAFixedBlock{90.000}{153.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There is, however, one case in which the RTI shall not inform a joined federate when specific conditions%
+  }
+  \HLAFixedBlock{90.000}{165.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    covered by an advisory change, even if that advisory switch is enabled. Specifically, even if the Attribute%
+  }
+  \HLAFixedBlock{90.000}{177.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Scope Advisory Switch is enabled, there are some actions a joined federate could take that would cause an%
+  }
+  \HLAFixedBlock{90.000}{189.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute to go out of scope with respect to that joined federate. Since these changes are a result of%
+  }
+  \HLAFixedBlock{90.000}{201.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the joined federate’s own action and the joined federate knows that the action will cause the instance%
+  }
+  \HLAFixedBlock{90.000}{213.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute to go out of scope, no out-of-scope advisory notification shall be given the joined federate. The%
+  }
+  \HLAFixedBlock{90.000}{225.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    actions that could cause an instance attribute to go out of scope for the acting joined federate are as follows:%
+  }
+  \HLAFixedBlock{100.020}{240.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{240.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate acquires ownership of the instance attribute.%
+  }
+  \HLAFixedBlock{100.020}{255.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{255.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate unsubscribes to the instance attribute’s corresponding class attribute, and it is%
+  }
+  \HLAFixedBlock{121.980}{267.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not subscribed to the instance attribute’s corresponding class attribute with region.%
+  }
+  \HLAFixedBlock{100.020}{282.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{282.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate unsubscribes with region to the instance attribute’s corresponding class attribute%
+  }
+  \HLAFixedBlock{121.980}{294.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    so that it is no longer subscribed to the class attribute (with or without region).%
+  }
+  \HLAFixedBlock{90.000}{318.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    These cases are referred to as implicit out-of-scope situations because no out-of-scope advisory notification%
+  }
+  \HLAFixedBlock{90.000}{330.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    is generated.%
+  }
+  \HLAFixedBlock{90.000}{354.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Note that if a joined federate unsubscribes with or without region to an instance attribute’s corresponding%
+  }
+  \HLAFixedBlock{90.000}{366.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class attribute, but is still subscribed to that class attribute with some other region, it may or may not have%
+  }
+  \HLAFixedBlock{90.000}{378.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    caused the instance attribute to go out of scope (assuming it was previously in scope). Since the joined%
+  }
+  \HLAFixedBlock{90.000}{390.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate does not know if its removal has caused overlap to be lost with the update region set, in this case the%
+  }
+  \HLAFixedBlock{90.000}{402.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate relies on the RTI to inform it of whether the instance attribute has gone out of scope. Only if%
+  }
+  \HLAFixedBlock{90.000}{414.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the joined federate completely removes all subscriptions (DM and DDM based subscriptions) can it know%
+  }
+  \HLAFixedBlock{90.000}{426.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with certainty that it is causing an implicit out-of-scope situation.%
+  }
+  \HLAFixedBlock{90.000}{450.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For purposes of determining whether the conditions covered by each advisory have changed, when the%
+  }
+  \HLAFixedBlock{90.000}{462.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    conditions required for sending each advisory become relevant at a given federate, the initial state of each%
+  }
+  \HLAFixedBlock{90.000}{474.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    advisory, as discerned by that federate, is as follows:%
+  }
+  \HLAFixedBlock{100.020}{486.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.967}{486.779}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Before a federate begins publishing an object class, the conditions covered by the Object Class%
+  }
+  \HLAFixedBlock{121.980}{498.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Relevance Advisory Switch are assumed to be such that the registration of new object instances of%
+  }
+  \HLAFixedBlock{121.980}{510.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specified object class is not advised. %
+  }
+  \HLAFixedBlock{100.020}{522.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{522.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Before a federate begins publishing an interaction class, the interaction class is in the Interactions%
+  }
+  \HLAFixedBlock{121.980}{534.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Turned Off state with respect to that federate (see Figure 13).%
+  }
+  \HLAFixedBlock{100.020}{546.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.981}{546.778}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Before a federate becomes the owner of an instance attribute, the instance attribute is in the Updates%
+  }
+  \HLAFixedBlock{121.980}{558.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Turned Off state with regard to that federate (see Figure 15).%
+  }
+  \HLAFixedBlock{100.020}{570.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.937}{570.778}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Before a federate knows about an object instance, all of the instance attributes of that object instance%
+  }
+  \HLAFixedBlock{121.980}{582.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    are in the Attributes Out-of-Scope state with regard to the federate (see Figure 15).%
+  }
+  \HLAServiceComponentHeadingAt{606.638}{%
+    \textbf{10.1.3 Handle Normalization}%
+  }
+  \HLAFixedBlock{89.999}{630.777}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Some types of RTI handles have a normalized value that can be used to construct a point range for the%
+  }
+  \HLAFixedBlock{89.999}{642.777}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    appropriate dimension of that handle type [e.g., Federate Handle and HLAFederate dimension (see Table 9)].%
+  }
+  \HLAFixedBlock{89.999}{654.776}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The normalized handle value like the handle itself is originated by the RTI, federation execution-wide%
+  }
+  \HLAFixedBlock{89.999}{666.776}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unique, and unpredictable. The normalized handle values shall have no guarantee of continuity (i.e. they are%
+  }
+  \HLAFixedBlock{89.999}{678.776}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    suitable only for a point range). The normalized handle values shall have no guarantee of uniqueness but%
+  }
+  \HLAFixedBlock{89.999}{690.776}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    given two equal handle instances, their normalized values shall also be equal.%
+  }
+\end{hlafixedpage}
+\clearpage

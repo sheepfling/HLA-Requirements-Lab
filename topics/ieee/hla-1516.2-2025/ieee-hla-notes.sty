@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee-hla-notes}[2026/07/31 v1.0.1 IEEE HLA recreation notes]
+
+\RequirePackage{xparse}
+
+\NewDocumentEnvironment{HLANote}{}{%
+  \par\begingroup\HLATimes\fontsize{8.7bp}{10.3bp}\selectfont
+  \textbf{NOTE—}\ignorespaces
+}{%
+  \par\endgroup
+}
+
+% Whole semantic note-like prose block used by fixed-page reconstruction.
+% The source sometimes begins ordinary explanatory paragraphs with "Note";
+% the text itself is preserved rather than automatically adding a NOTE label.
+\NewDocumentCommand{\HLANoteBlock}{+m}{#1\par}

@@ -1,0 +1,132 @@
+\HLASourcePage{52}{51}
+\HLAServiceBookmark{4.2}{1}{Connect service}
+\HLAServiceBookmark{4.2.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.2.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.2.3}{2}{Preconditions}
+\HLAServiceBookmark{4.2.4}{2}{Postconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceHeadingAt{69.383}{%
+    4.2 \emph{Connect} service%
+  }
+  \HLAFixedBlock{90.000}{94.806}{433.233}{\rmfamily}{9.96}{12.00}{%
+    The \emph{Connect} service shall be used to establish a connection between the unjoined federate and the RTI. No\linebreak%
+    interaction between the unjoined federate and the RTI may take place until a successful invocation of the\linebreak%
+    \emph{Connect} service has been performed.
+  }
+  \HLAFixedBlock{89.999}{142.805}{411.858}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The callback model argument indicates the desired callback model, either IMMEDIATE or EVOKED.
+  }
+  \HLAFixedBlock{89.999}{166.805}{433.214}{\rmfamily}{9.96}{12.00}{%
+    The configuration name designates a named configuration that shall be used. If no configuration name is\linebreak%
+    specified, or if no configuration with the specified name is found, the implementation’s default\linebreak%
+    configuration shall be used.
+  }
+  \HLAFixedBlock{89.999}{214.804}{433.245}{\rmfamily}{9.96}{12.00}{%
+    The RTI Address argument provides an implementation-dependent value that the RTI can use to locate other\linebreak%
+    parts of the RTI. If no RTI Address value is specified, the RTI shall use an address from the designated\linebreak%
+    configuration or the implementations default address.
+  }
+  \HLAFixedBlock{89.999}{262.803}{433.202}{\rmfamily}{9.96}{12.00}{%
+    The optional additional settings argument can be used to pass implementation-specific settings to the RTI.\linebreak%
+    The RTI is not required to use these settings. Failure to parse these settings shall not stop the RTI from\linebreak%
+    completing the connection.
+  }
+  \HLAFixedBlock{89.999}{310.802}{433.206}{\rmfamily}{9.96}{12.00}{%
+    If the RTI is configured to require authorization, the RTI shall require that valid credentials (type and data)\linebreak%
+    are provided.
+  }
+  \HLAFixedBlock{89.999}{346.802}{433.227}{\rmfamily}{9.96}{12.00}{%
+    The return value indicates if the RTI was able to parse and use the optional additional settings. The return\linebreak%
+    value consists of two parts, a return code and a message string. The possible values for the return code are:
+  }
+  \HLAFixedBlock{100.019}{373.801}{11.160}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---
+  }
+  \HLAFixedBlock{121.979}{373.801}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    IgnoredSettings
+  }
+  \HLAFixedBlock{100.019}{388.801}{11.160}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---
+  }
+  \HLAFixedBlock{121.979}{388.801}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    FailedToParseSettings
+  }
+  \HLAFixedBlock{100.019}{403.801}{11.160}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---
+  }
+  \HLAFixedBlock{121.979}{403.801}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    AppliedSettings
+  }
+  \HLAFixedBlock{89.999}{427.801}{433.161}{\rmfamily}{9.96}{12.00}{%
+    For each of these return codes, the message string may contain a human-readable message with more\linebreak%
+    information.
+  }
+  \HLAServiceComponentHeadingAt{463.661}{%
+    4.2.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.019}{487.800}{8.953}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.975}{487.800}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Callback model.
+  }
+  \HLAFixedBlock{100.019}{499.799}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.979}{499.799}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional configuration name.
+  }
+  \HLAFixedBlock{100.019}{511.799}{8.941}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)
+  }
+  \HLAFixedBlock{121.963}{511.799}{400.037}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional RTI address.
+  }
+  \HLAFixedBlock{100.019}{523.799}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)
+  }
+  \HLAFixedBlock{121.979}{523.799}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional additional settings.
+  }
+  \HLAFixedBlock{100.019}{535.799}{8.939}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)
+  }
+  \HLAFixedBlock{121.961}{535.799}{400.039}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional credentials
+  }
+  \HLAServiceComponentHeadingAt{559.659}{%
+    4.2.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.019}{583.798}{8.946}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.968}{583.798}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Status of parsing additional settings.
+  }
+  \HLAServiceComponentHeadingAt{607.658}{%
+    4.2.3 Preconditions%
+  }
+  \HLAFixedBlock{100.019}{631.797}{8.942}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.964}{631.797}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.
+  }
+  \HLAFixedBlock{100.019}{643.797}{9.512}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.934}{643.797}{400.066}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate has the authority to connect.
+  }
+  \HLAServiceComponentHeadingAt{667.657}{%
+    4.2.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{691.796}{8.952}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.974}{691.796}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The unjoined federate is connected to the RTI.
+  }
+\end{hlafixedpage}
+\clearpage

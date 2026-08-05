@@ -1,0 +1,168 @@
+\HLASourcePage{80}{79}
+\HLAServiceBookmark{4.34.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.34.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.34.3}{2}{Preconditions}
+\HLAServiceBookmark{4.34.4}{2}{Postconditions}
+\HLAServiceBookmark{4.34.5}{2}{Exceptions}
+\HLAServiceBookmark{4.34.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.35}{1}{Federation Restore Status Response † service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.34.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    4.34.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{141.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{165.645}{%
+    4.34.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{189.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{189.784}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{201.784}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{213.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{213.783}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{225.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{249.643}{%
+    4.34.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{273.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{273.782}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The request for a federation restore status has been received by the RTI.%
+  }
+  \HLAServiceComponentHeadingAt{297.643}{%
+    4.34.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{321.782}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{321.782}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{333.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{333.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{345.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.964}{345.781}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{357.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.945}{357.781}{400.055}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{381.641}{%
+    4.34.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{405.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{405.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{430.403}{%
+    4.35 \emph{Federation Restore Status Response \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{455.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Federation Restore Status Response \textdagger{}} service shall be used to provide the status of a federation restore.%
+  }
+  \HLAFixedBlock{90.001}{467.765}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This service shall be invoked by the RTI at a joined federate in response to a \emph{Query Federation Restore}%
+  }
+  \HLAFixedBlock{90.001}{479.825}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Status} service invocation by the same joined federate. This service shall supply a list of restore status%
+  }
+  \HLAFixedBlock{90.001}{491.825}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    descriptors. The list shall contain one descriptor for each joined federate participating in the restore. A%
+  }
+  \HLAFixedBlock{90.000}{503.825}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    restore status descriptor shall have the following information:%
+  }
+  \HLAFixedBlock{100.020}{524.824}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{524.824}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Pre-restore joined federate designator%
+  }
+  \HLAFixedBlock{100.020}{539.824}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{539.824}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Post-restore joined federate designator%
+  }
+  \HLAFixedBlock{100.020}{554.824}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{554.824}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Restore status%
+  }
+  \HLAFixedBlock{90.000}{578.823}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate shall use the pre-restore joined federate designators to identify joined federates until the%
+  }
+  \HLAFixedBlock{90.000}{590.823}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Initiate Federate Restore \textdagger{}} service has been successfully invoked and indicates restore successful at that%
+  }
+  \HLAFixedBlock{90.001}{602.823}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate. After that successful service invocation, that joined federate shall use the post-restore joined%
+  }
+  \HLAFixedBlock{90.001}{614.823}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate designators to identify joined federates.%
+  }
+  \HLAFixedBlock{90.001}{638.822}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A restore status descriptor with a federate status of “No federate restore in progress” shall have a null%
+  }
+  \HLAFixedBlock{90.001}{650.822}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    designator for the post-restore joined federate designator. The post-restore joined federate designator in this%
+  }
+  \HLAFixedBlock{90.001}{662.822}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    case has no meaning since the federate is not participating in a restore.%
+  }
+  \HLAFixedBlock{90.001}{686.822}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate restore status shall be one of the following values:%
+  }
+  \HLAFixedBlock{100.021}{707.821}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{707.821}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    No federate restore in progress%
+  }
+\end{hlafixedpage}
+\clearpage

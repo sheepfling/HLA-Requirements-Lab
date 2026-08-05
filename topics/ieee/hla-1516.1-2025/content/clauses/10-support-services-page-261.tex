@@ -1,0 +1,190 @@
+\HLASourcePage{262}{261}
+\HLAServiceBookmark{10.25}{1}{Get Dimension Upper Bound service}
+\HLAServiceBookmark{10.25.1}{2}{Supplied arguments}
+\HLAServiceBookmark{10.25.2}{2}{Returned arguments}
+\HLAServiceBookmark{10.25.3}{2}{Preconditions}
+\HLAServiceBookmark{10.25.4}{2}{Postconditions}
+\HLAServiceBookmark{10.25.5}{2}{Exceptions}
+\HLAServiceBookmark{10.25.6}{2}{Reference state charts}
+\HLAServiceBookmark{10.26}{1}{Get Dimension Handle Set service}
+\HLAServiceBookmark{10.26.1}{2}{Supplied arguments}
+\HLAServiceBookmark{10.26.2}{2}{Returned arguments}
+\HLAServiceBookmark{10.26.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{10.25 }%
+  }
+  \HLAFixedBlock{120.540}{69.383}{483.460}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Get Dimension Upper Bound}}%
+  }
+  \HLAFixedBlock{270.720}{69.383}{333.280}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{94.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{109.020}{94.806}{494.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Dimension Upper Bound}%
+  }
+  \HLAFixedBlock{228.780}{94.806}{375.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service shall return the positive integer that is the upper bound for the%
+  }
+  \HLAFixedBlock{90.000}{106.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    specified dimension, as specified in the FDD.%
+  }
+  \HLAFixedBlock{90.000}{130.666}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.020}{154.805}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{154.805}{482.032}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Dimension handle.%
+  }
+  \HLAFixedBlock{90.000}{178.665}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{202.804}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.964}{202.804}{482.036}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Dimension upper bound.%
+  }
+  \HLAFixedBlock{90.000}{226.664}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{250.803}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{250.803}{482.025}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{262.803}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{262.803}{482.061}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{274.803}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{274.803}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{286.803}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{286.803}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The specified dimension handle exists.%
+  }
+  \HLAFixedBlock{90.000}{310.663}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{334.802}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{334.802}{482.031}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The joined federate has the requested dimension upper bound.%
+  }
+  \HLAFixedBlock{90.000}{358.662}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{382.801}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{382.801}{482.032}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Invalid dimension handle.%
+  }
+  \HLAFixedBlock{100.020}{394.801}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{394.801}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{406.801}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.965}{406.801}{482.035}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{418.801}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.946}{418.801}{482.054}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI internal error.%
+  }
+  \HLAFixedBlock{90.000}{442.661}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.25.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{466.800}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{466.800}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+  \HLAFixedBlock{90.000}{496.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{10.26 }%
+  }
+  \HLAFixedBlock{120.540}{496.403}{483.460}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Get Dimension Handle Set}}%
+  }
+  \HLAFixedBlock{257.880}{496.403}{346.120}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{521.826}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{108.060}{521.826}{495.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Dimension Handle Set}%
+  }
+  \HLAFixedBlock{214.920}{521.826}{389.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service shall return the dimensions of the specified region.%
+  }
+  \HLAFixedBlock{90.000}{545.686}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.26.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.020}{569.825}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{569.825}{482.028}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Region handle.%
+  }
+  \HLAFixedBlock{90.000}{593.685}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.26.2 Returned arguments}%
+  }
+  \HLAFixedBlock{100.020}{617.824}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{617.824}{482.031}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A set of dimensions.%
+  }
+  \HLAFixedBlock{90.000}{641.684}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.26.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{665.823}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{665.823}{482.025}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{677.823}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.936}{677.823}{482.064}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federation execution exists. %
+  }
+  \HLAFixedBlock{100.020}{689.823}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{689.823}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{701.823}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.961}{701.823}{482.039}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The region exists.%
+  }
+\end{hlafixedpage}
+\clearpage

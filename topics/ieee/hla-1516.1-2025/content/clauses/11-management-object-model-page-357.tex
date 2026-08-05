@@ -1,0 +1,215 @@
+\HLASourcePage{358}{357}
+\HLAServiceBookmark{12.6}{1}{Predefined authorization service}
+\HLAServiceBookmark{12.7}{1}{Connect}
+\HLAServiceBookmark{12.8}{1}{Concurrency and reentrancy}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI uses an %
+  }
+  \HLAFixedBlock{166.080}{70.373}{437.920}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{268.020}{69.786}{335.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface to create an %
+  }
+  \HLAFixedBlock{367.020}{70.373}{236.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{427.020}{69.786}{176.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance of a specific%
+  }
+  \HLAFixedBlock{90.001}{81.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    authorization service. The implementation of an authorization service shall provide a concrete%
+  }
+  \HLAFixedBlock{90.000}{94.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{191.940}{93.785}{412.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class implementation derived from this interface. The %
+  }
+  \HLAFixedBlock{420.059}{94.373}{183.941}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{89.999}{105.785}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface shall provide methods to:%
+  }
+  \HLAFixedBlock{100.019}{129.785}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{129.785}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain the string name of the authorization service%
+  }
+  \HLAFixedBlock{100.019}{141.785}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{141.785}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain an instance of the %
+  }
+  \HLAFixedBlock{222.179}{142.372}{381.821}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{282.179}{141.785}{321.821}{\rmfamily\raggedright}{9.96}{11.16}{%
+     implementation for the authorization service%
+  }
+  \HLAFixedBlock{89.999}{165.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Whether an RTI performs authorization or not and the specific authorization service the RTI uses shall be%
+  }
+  \HLAFixedBlock{89.999}{177.784}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    configurable through the RTI’s RID. Only one authorization service shall be configured for a given RTI. If%
+  }
+  \HLAFixedBlock{90.000}{189.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the supplied credentials type is unrecognized by the authorization service, the authorization service shall act%
+  }
+  \HLAFixedBlock{90.000}{201.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as if the operation is unauthorized. If the RTI is not configured to perform authorization and a federate%
+  }
+  \HLAFixedBlock{90.000}{213.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    supplies credentials, the RTI shall act as if the operation is unauthorized.%
+  }
+  \HLAFixedBlock{380.040}{211.530}{223.960}{\rmfamily\raggedright}{7.98}{8.94}{%
+    19%
+  }
+  \HLAFixedBlock{90.000}{243.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.6 Predefined authorization service}%
+  }
+  \HLAFixedBlock{90.000}{268.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI shall provide an implementation for a predefined authorization service with the authorization%
+  }
+  \HLAFixedBlock{90.000}{280.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service name "HLAauthorizer". This authorization service shall, at a minimum, support the predefined%
+  }
+  \HLAFixedBlock{90.000}{292.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credential type "HLAplainTextPassword". The RTI shall provide an implementation for a class named%
+  }
+  \HLAFixedBlock{90.000}{305.393}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAplainTextPassword }%
+  }
+  \HLAFixedBlock{216.540}{304.805}{387.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    derived from the %
+  }
+  \HLAFixedBlock{286.500}{305.393}{317.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials }%
+  }
+  \HLAFixedBlock{359.100}{304.805}{244.900}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class. The %
+  }
+  \HLAFixedBlock{402.061}{305.393}{201.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAplainTextPassword}%
+  }
+  \HLAFixedBlock{90.001}{316.805}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class shall define a constructor that takes a plain text string and constructs an instance with credential type%
+  }
+  \HLAFixedBlock{90.000}{328.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    "HLAplainTextPassword" and credential data containing the string encoded as a HLAunicodeString.%
+  }
+  \HLAFixedBlock{90.000}{340.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Authorization of "HLAplainTextPassword" credentials shall use a global plain text password. When%
+  }
+  \HLAFixedBlock{90.000}{352.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    authorization is enabled and the federate supplies "HLAplainTextPassword" credentials, only those%
+  }
+  \HLAFixedBlock{90.000}{364.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credentials with a matching password shall be authorized. %
+  }
+  \HLAFixedBlock{90.000}{388.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The predefined "HLAauthorizer" authorization service implementation shall provide the following: %
+  }
+  \HLAFixedBlock{100.020}{412.803}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{412.803}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of the interface %
+  }
+  \HLAFixedBlock{285.780}{413.391}{318.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory }%
+  }
+  \HLAFixedBlock{403.740}{412.803}{200.260}{\rmfamily\raggedright}{9.96}{11.16}{%
+    that shall return the name%
+  }
+  \HLAFixedBlock{121.979}{424.803}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    "HLAauthorizer". This implementation shall create instances of the “HLAauthorizer”%
+  }
+  \HLAFixedBlock{121.978}{437.391}{482.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer }%
+  }
+  \HLAFixedBlock{187.978}{436.803}{416.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation below. %
+  }
+  \HLAFixedBlock{100.019}{448.803}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.978}{448.803}{482.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of the %
+  }
+  \HLAFixedBlock{248.219}{449.390}{355.781}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer }%
+  }
+  \HLAFixedBlock{326.579}{448.803}{277.421}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface that shall return the string name%
+  }
+  \HLAFixedBlock{121.978}{460.803}{482.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    “HLAauthorizer”. This implementation shall support the authorization of credentials of type%
+  }
+  \HLAFixedBlock{121.978}{472.802}{482.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    "HLAplainTextPassword." It may support other credential types.%
+  }
+  \HLAFixedBlock{90.000}{502.403}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.7 Connect}%
+  }
+  \HLAFixedBlock{90.000}{527.826}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    For all of the APIs, each %
+  }
+  \HLAFixedBlock{202.260}{528.413}{401.740}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador}%
+  }
+  \HLAFixedBlock{280.260}{527.826}{323.740}{\rmfamily\raggedright}{9.96}{11.16}{%
+    /%
+  }
+  \HLAFixedBlock{283.020}{528.413}{320.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{390.960}{527.826}{213.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+     pair may be part of only one%
+  }
+  \HLAFixedBlock{90.000}{539.825}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    connection to the RTI.%
+  }
+  \HLAFixedBlock{90.000}{569.423}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.8 Concurrency and reentrancy}%
+  }
+  \HLAFixedBlock{90.000}{594.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The following requirements apply to an RTI:%
+  }
+  \HLAFixedBlock{100.020}{618.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{618.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall not make concurrent RTI-initiated service invocations to the same%
+  }
+  \HLAFixedBlock{121.980}{631.373}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{229.919}{630.785}{374.081}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instance.%
+  }
+  \HLAFixedBlock{100.019}{642.785}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{642.785}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall support concurrent joined federate-initiated service invocations to the same%
+  }
+  \HLAFixedBlock{121.979}{654.785}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTIambassador instance. The service invocations shall be processed, in parallel or sequentially.%
+  }
+  \HLAFixedBlock{90.000}{696.453}{514.000}{\rmfamily\raggedright}{6.36}{7.12}{%
+    19%
+  }
+  \HLAFixedBlock{96.360}{698.250}{507.640}{\rmfamily\raggedright}{7.98}{8.94}{%
+    The assumption is that a federate supplying credentials does not want to create a connection, create/destroy a federation or join a%
+  }
+  \HLAFixedBlock{90.000}{707.250}{514.000}{\rmfamily\raggedright}{7.98}{8.94}{%
+    federation when the connection is not secure.%
+  }
+\end{hlafixedpage}
+\clearpage

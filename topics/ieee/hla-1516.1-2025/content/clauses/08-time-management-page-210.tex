@@ -1,0 +1,190 @@
+\HLASourcePage{211}{210}
+\HLAServiceBookmark{8.21.6}{2}{Reference state charts}
+\HLAServiceBookmark{8.22}{1}{Retract service}
+\HLAServiceBookmark{8.22.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.22.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.22.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.21.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceHeadingAt{119.363}{%
+    \textbf{8.22 }\textbf{\emph{Retract}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{144.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Retract} service shall be used by a joined federate to notify the federation execution that a message%
+  }
+  \HLAFixedBlock{90.000}{155.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    previously sent by the joined federate is to be retracted. The \emph{Update Attribute Values}, \emph{Send Interaction}, \emph{Send}%
+  }
+  \HLAFixedBlock{90.000}{166.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction with Regions}, and \emph{Delete Object Instance }services shall return a message retraction designator%
+  }
+  \HLAFixedBlock{90.000}{177.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is used to specify the message that is to be retracted. Retracting a message shall cause the invocation of%
+  }
+  \HLAFixedBlock{90.000}{188.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Request Retraction \textdagger{}} service in all joined federates that received the original message.%
+  }
+  \HLAFixedBlock{90.001}{211.806}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Retracting a \emph{Delete Object Instance} service message shall result in the reconstitution of the corresponding%
+  }
+  \HLAFixedBlock{90.001}{222.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance. This action shall cause the ownership reassumption of the attributes of the affected object%
+  }
+  \HLAFixedBlock{90.000}{233.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance by the joined federates that owned them when the \emph{Delete Object Instance} service was invoked.%
+  }
+  \HLAFixedBlock{90.000}{254.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A message may be retracted only if all of the following occur:%
+  }
+  \HLAFixedBlock{100.020}{269.765}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{269.765}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The retracting joined federate sent the message.%
+  }
+  \HLAFixedBlock{100.020}{284.765}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.942}{284.765}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The message had a sent order type of TSO (i.e., a message retraction designator was returned by the%
+  }
+  \HLAFixedBlock{121.980}{296.764}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI).%
+  }
+  \HLAFixedBlock{100.021}{311.764}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.978}{311.764}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is time-regulating, and either%
+  }
+  \HLAFixedBlock{121.980}{326.764}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.020}{326.764}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is in the Time Granted state and the message associated with the specified%
+  }
+  \HLAFixedBlock{142.020}{337.804}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction designator contained a timestamp that is larger than the joined federate’s current%
+  }
+  \HLAFixedBlock{142.020}{348.783}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time plus its actual lookahead, or%
+  }
+  \HLAFixedBlock{121.980}{362.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.023}{362.763}{379.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is in the Time Advancing state and the message associated with the%
+  }
+  \HLAFixedBlock{142.020}{373.803}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified retraction designator contained a timestamp that is larger than the logical time%
+  }
+  \HLAFixedBlock{142.020}{384.783}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified in the joined federate’s most recent advance request plus the joined federate’s actual%
+  }
+  \HLAFixedBlock{142.020}{395.763}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    lookahead.%
+  }
+  \HLAServiceComponentHeadingAt{416.623}{%
+    \textbf{8.22.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.020}{438.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{438.782}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Message retraction designator%
+  }
+  \HLAServiceComponentHeadingAt{460.662}{%
+    \textbf{8.22.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{482.821}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{482.821}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{504.641}{%
+    \textbf{8.22.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{526.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{526.800}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{539.820}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{539.820}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{552.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{552.780}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution. %
+  }
+  \HLAFixedBlock{100.020}{565.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{565.800}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is time-regulating.%
+  }
+  \HLAFixedBlock{100.020}{578.820}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.981}{578.820}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has issued \emph{Update Attribute Values}, \emph{Send Interaction}, \emph{Send Interaction with}%
+  }
+  \HLAFixedBlock{121.979}{589.799}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions}, or \emph{Delete Object Instance} service invocations previously and obtained the message%
+  }
+  \HLAFixedBlock{121.978}{600.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction designator.%
+  }
+  \HLAFixedBlock{100.019}{613.799}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{613.799}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the joined federate is in the Time Granted state, the message associated with the specified%
+  }
+  \HLAFixedBlock{121.978}{624.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction designator contained a timestamp that is larger than the joined federate’s current logical%
+  }
+  \HLAFixedBlock{121.978}{635.819}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time plus its actual lookahead.%
+  }
+  \HLAFixedBlock{100.019}{648.779}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.978}{648.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the joined federate is in the Time Advancing state, the message associated with the specified%
+  }
+  \HLAFixedBlock{121.978}{659.818}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction designator contained a timestamp that is larger than the logical time specified in the joined%
+  }
+  \HLAFixedBlock{121.978}{670.798}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate’s most recent advance request plus its actual lookahead.%
+  }
+  \HLAFixedBlock{100.019}{683.818}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.978}{683.818}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{696.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.980}{696.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,170 @@
+\HLASourcePage{191}{190}
+\HLAServiceBookmark{8.3.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.3.3}{2}{Preconditions}
+\HLAServiceBookmark{8.3.4}{2}{Postconditions}
+\HLAServiceBookmark{8.3.5}{2}{Exceptions}
+\HLAServiceBookmark{8.3.6}{2}{Reference state charts}
+\HLAServiceBookmark{8.4}{1}{Disable Time Regulation service}
+\HLAServiceBookmark{8.4.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.4.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.4.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.3.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    \textbf{8.3.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{141.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{171.784}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has a request to enable time-regulation pending.%
+  }
+  \HLAFixedBlock{100.020}{186.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{186.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.972}{201.784}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{225.644}{%
+    \textbf{8.3.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{249.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.963}{249.783}{400.037}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is notified that time-regulation is enabled (the request is no longer pending), and%
+  }
+  \HLAFixedBlock{121.981}{261.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the joined federate may now send TSO messages. The joined federate’s logical time shall be set to%
+  }
+  \HLAFixedBlock{121.981}{273.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the value specified as the argument to this service. The joined federate’s actual lookahead shall be%
+  }
+  \HLAFixedBlock{121.981}{285.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    set to that specified in the corresponding \emph{Enable Time Regulation} request.%
+  }
+  \HLAFixedBlock{100.021}{297.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{297.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the joined federate is time-constrained, no additional TSO messages shall be delivered with%
+  }
+  \HLAFixedBlock{121.981}{309.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamps less than the provided federation time.%
+  }
+  \HLAServiceComponentHeadingAt{333.642}{%
+    \textbf{8.3.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.021}{357.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{357.781}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{381.641}{%
+    \textbf{8.3.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.021}{405.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{405.780}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 17, Temporal state%
+  }
+  \HLAServiceHeadingAt{435.383}{%
+    \textbf{8.4 }\textbf{\emph{Disable Time Regulation}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{460.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of the \emph{Disable Time Regulation} service shall indicate that the joined federate is disabling%
+  }
+  \HLAFixedBlock{90.000}{472.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time regulation. Subsequent messages sent by the joined federate shall be sent automatically as RO%
+  }
+  \HLAFixedBlock{90.000}{484.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages.%
+  }
+  \HLAServiceComponentHeadingAt{508.665}{%
+    \textbf{8.4.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.020}{532.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{532.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{556.665}{%
+    \textbf{8.4.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{580.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{580.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{604.664}{%
+    \textbf{8.4.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{628.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{628.803}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{643.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{643.803}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{658.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{658.802}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{673.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{673.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Time-regulation is enabled at the joined federate.%
+  }
+  \HLAFixedBlock{100.020}{688.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.972}{688.802}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{703.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{703.802}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+\end{hlafixedpage}
+\clearpage

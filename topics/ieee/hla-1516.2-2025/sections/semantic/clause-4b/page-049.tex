@@ -1,0 +1,72 @@
+% M4 semantic reconstruction of physical page 49 / printed page 48.
+\begin{HLAClauseSemanticPage}{48}
+\HLAStableID{m4.page.049}
+\HLAStableID{m4.p049.b01}
+\HLAClausePlacedBlock{89.999}{69.786}{432.030}{%
+  \HLAClauseParagraph{\resizebox{432.029bp}{!}{\mbox{The fourth column (Update type) shall record the policy for updating an instance of the class attribute. The}}\newline{}\resizebox{222.611bp}{!}{\mbox{unique designations for this column shall be as follows:}}}
+}
+\HLAStableID{m4.p049.b02}
+\HLAClausePlacedBlock{100.019}{99.785}{421.981}{%
+  \HLAClauseDashItem{\resizebox{400.012bp}{!}{\mbox{\textit{Static}: The value of the attribute is static; the owner of the attribute (federate or RTI) updates it upon}}\newline{}\resizebox{129.883bp}{!}{\mbox{registration and when requested.}}}
+}
+\HLAStableID{m4.p049.b03}
+\HLAClausePlacedBlock{100.019}{126.785}{421.981}{%
+  \HLAClauseDashItem{\resizebox{398.609bp}{!}{\mbox{\textit{Periodic}: The owner of the attribute (federate or RTI) updates the attribute at regular time intervals\textit{.}}}}
+}
+\HLAStableID{m4.p049.b04}
+\HLAClausePlacedBlock{100.018}{141.784}{421.982}{%
+  \HLAClauseDashItem{\resizebox{400.014bp}{!}{\mbox{\textit{Conditional}: The owner of the attribute (federate or RTI) updates the attribute when unique}}\newline{}\resizebox{73.349bp}{!}{\mbox{conditions dictate.}}}
+}
+\HLAStableID{m4.p049.b05}
+\HLAClausePlacedBlock{100.019}{168.784}{421.981}{%
+  \HLAClauseDashItem{\resizebox{230.454bp}{!}{\mbox{\textit{NA}: The federate never provides a value for this attribute.}}}
+}
+\HLAStableID{m4.p049.b06}
+\HLAClausePlacedBlock{89.997}{192.784}{432.042}{%
+  \HLAClauseParagraph{\resizebox{431.979bp}{!}{\mbox{The fifth column (Update condition) shall expand and explain the policies for updating an instance of the}}\newline{}\resizebox{431.867bp}{!}{\mbox{class attribute. When the update type is\space{}\textit{periodic}, a rate of the number of updates per time unit shall be}}\newline{}\resizebox{431.993bp}{!}{\mbox{specified in the Update Condition column. Attributes with a\space{}\textit{conditional}\space{}update type shall have the}}\newline{}\resizebox{431.890bp}{!}{\mbox{conditions for update specified in the “Update condition” column. The “Update condition” column may also}}\newline{}\resizebox{432.040bp}{!}{\mbox{be used to specify initial conditions for instance attribute updates. If a federate is capable of varying the rate}}\newline{}\resizebox{431.926bp}{!}{\mbox{and circumstances of the update of an instance object attribute, this information shall also be recorded in this}}\newline{}\resizebox{431.991bp}{!}{\mbox{column or through the OMT notes feature. If the update type is\space{}\textit{Static}\space{}or\space{}\textit{NA}, “NA” shall be entered in this}}\newline{}\resizebox{32.482bp}{!}{\mbox{column.}}}
+}
+\HLAStableID{m4.p049.b07}
+\HLAClausePlacedBlock{89.997}{300.782}{432.003}{%
+  \HLAClauseParagraph{\resizebox{431.979bp}{!}{\mbox{The sixth column (Value Required) shall indicate whether a value is required for instances of this object}}\newline{}\resizebox{281.812bp}{!}{\mbox{class. The entry for this column shall take one of the following values:}}}
+}
+\HLAStableID{m4.p049.b08}
+\HLAClausePlacedBlock{89.997}{336.781}{432.003}{%
+  \HLAClauseParagraph{\resizebox{119.024bp}{!}{\mbox{In a FOM or a FOM module:}}}
+}
+\HLAStableID{m4.p049.b09}
+\HLAClausePlacedBlock{100.017}{351.781}{421.983}{%
+  \HLAClauseDashItem{\resizebox{400.005bp}{!}{\mbox{True: Any federate that registers an instance of this class shall either publish and provide a value for}}\newline{}\resizebox{371.376bp}{!}{\mbox{this attribute or allow another federate to take ownership of the attribute and provide a value.}}}
+}
+\HLAStableID{m4.p049.b10}
+\HLAClausePlacedBlock{100.017}{378.781}{422.030}{%
+  \HLAClauseDashItem{\resizebox{400.070bp}{!}{\mbox{False: Any federate that registers an instance of this class may choose whether to publish and}}\newline{}\resizebox{400.064bp}{!}{\mbox{provide a value for this attribute or not, or whether to allow another federate to take ownership of the}}\newline{}\resizebox{142.966bp}{!}{\mbox{attribute and provide a value or not.}}}
+}
+\HLAStableID{m4.p049.b11}
+\HLAClausePlacedBlock{89.997}{426.780}{432.003}{%
+  \HLAClauseParagraph{\resizebox{112.159bp}{!}{\mbox{In a SOM or SOM module:}}}
+}
+\HLAStableID{m4.p049.b12}
+\HLAClausePlacedBlock{100.017}{441.780}{422.041}{%
+  \HLAClauseDashItem{\resizebox{399.967bp}{!}{\mbox{True: In case the federate registers an instance of this class, the federate shall either publish this}}\newline{}\resizebox{400.081bp}{!}{\mbox{attribute and provide a value or allow another federate to take ownership of the attribute and provide}}\newline{}\resizebox{399.962bp}{!}{\mbox{a value. In case the federate subscribes to this attribute, this specifies that a value is expected from}}\newline{}\resizebox{174.317bp}{!}{\mbox{the attribute owner of an instance attribute.}}}
+}
+\HLAStableID{m4.p049.b13}
+\HLAClausePlacedBlock{100.016}{492.779}{422.037}{%
+  \HLAClauseDashItem{\resizebox{400.018bp}{!}{\mbox{False: In case the federate registers an instance of this class, the federate may choose whether to}}\newline{}\resizebox{399.944bp}{!}{\mbox{publish this attribute and provide a value or not, or whether to allow another federate to take}}\newline{}\resizebox{400.017bp}{!}{\mbox{ownership of the attribute and provide a value or not. In case the federate subscribes to this attribute,}}\newline{}\resizebox{400.078bp}{!}{\mbox{this specifies that a value is not necessarily expected from the attribute owner of an instance}}\newline{}\resizebox{38.316bp}{!}{\mbox{attribute.}}}
+}
+\HLAStableID{m4.p049.b14}
+\HLAClausePlacedBlock{89.996}{564.778}{432.034}{%
+  \HLAClauseParagraph{\resizebox{432.006bp}{!}{\mbox{In case this attribute is neither published or subscribed in a FOM, FOM module, SOM or SOM module, this}}\newline{}\resizebox{432.034bp}{!}{\mbox{column shall be set to False. To provide a value, in this context, means providing a value initially, on}}\newline{}\resizebox{251.678bp}{!}{\mbox{change, periodically or on request, or any combination thereof.}}}
+}
+\HLAStableID{m4.p049.b15}
+\HLAClausePlacedBlock{89.996}{612.777}{432.004}{%
+  \HLAClauseParagraph{\resizebox{431.996bp}{!}{\mbox{The seventh column (D/A) shall indicate whether ownership of an instance of the class attribute can be}}\newline{}\resizebox{86.015bp}{!}{\mbox{divested or acquired.}}\newline{}\resizebox{431.918bp}{!}{\mbox{In a FOM or FOM module, the ownership of an instance attribute may be designated as divest, acquire, both}}\newline{}\resizebox{296.414bp}{!}{\mbox{or neither. Descriptions of the designations for this column are as follows:}}}
+}
+\HLAStableID{m4.p049.b16}
+\HLAClausePlacedBlock{100.016}{668.816}{422.017}{%
+  \HLAClauseDashItem{\resizebox{400.058bp}{!}{\mbox{\textit{D (Divest)}: Some federate in the federation is capable of publishing the class attribute and can divest}}\newline{}\resizebox{360.032bp}{!}{\mbox{ownership of an instance of this attribute using the HLA ownership management services.}}}
+}
+\HLAStableID{m4.p049.b17}
+\HLAClausePlacedBlock{100.016}{695.815}{422.051}{%
+  \HLAClauseDashItem{\resizebox{400.092bp}{!}{\mbox{\textit{A (Acquire)}: Some federate in the federation is capable of publishing the class attribute and can}}\newline{}\resizebox{197.733bp}{!}{\mbox{acquire ownership of an instance of this attribute.}}}
+}
+\end{HLAClauseSemanticPage}

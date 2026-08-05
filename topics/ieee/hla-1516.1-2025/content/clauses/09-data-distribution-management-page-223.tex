@@ -1,0 +1,182 @@
+\HLASourcePage{224}{223}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the subscription effects that result from the DM service invocations and those that result from the DDM%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocations.%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For a joined federate that is using DDM services, the following expanded definitions and constraints shall%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    replace the correspondingly numbered DM definitions and constraints that appear in 5.1.2 and 5.1.3.%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Expanded definitions and constraints replace corresponding items in 5.1.2 as follows:%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{156.784}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A class attribute may be used as an argument to \emph{Subscribe Object Class Attributes}, \emph{Subscribe Object}%
+  }
+  \HLAFixedBlock{121.979}{168.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Class Attributes With Regions, Unsubscribe Object Class Attributes, Unsubscribe Object Class}%
+  }
+  \HLAFixedBlock{121.979}{180.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attributes With Regions, Publish Object Class Attributes}, and \emph{Unpublish Object Class Attributes}%
+  }
+  \HLAFixedBlock{121.979}{192.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocations for a particular object class if and only if the attribute is an available attribute of%
+  }
+  \HLAFixedBlock{121.979}{204.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that object class.%
+  }
+  \HLAFixedBlock{100.019}{219.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{219.783}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, the subscribed attributes of an object class shall be all of the%
+  }
+  \HLAFixedBlock{121.979}{231.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class attributes that have been arguments to \emph{Subscribe Object Class Attributes }service invocations by%
+  }
+  \HLAFixedBlock{121.980}{243.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that joined federate for that object class and that have not subsequently been unsubscribed, either%
+  }
+  \HLAFixedBlock{121.980}{255.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    individually or by unsubscribing the whole object class. \emph{Subscribe Object Class Attributes} and%
+  }
+  \HLAFixedBlock{121.980}{267.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Unsubscribe Object Class Attributes} service invocations for one object class shall have no effect on%
+  }
+  \HLAFixedBlock{121.979}{279.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the subscribed attributes of any other object class.%
+  }
+  \HLAFixedBlock{121.979}{294.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, the subscribed attributes of an object class with region shall be%
+  }
+  \HLAFixedBlock{121.979}{306.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the class attributes that have been arguments to \emph{Subscribe Object Class Attributes With Regions}%
+  }
+  \HLAFixedBlock{121.979}{318.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocations by that joined federate for that object class and any region, assuming the joined%
+  }
+  \HLAFixedBlock{121.979}{330.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate did not subsequently invoke the \emph{Unsubscribe Object Class Attributes With Regions} service%
+  }
+  \HLAFixedBlock{121.979}{342.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    for that (object class, region, class attribute) triple. %
+  }
+  \HLAFixedBlock{121.979}{357.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes With Regions} and \emph{Unsubscribe Object Class Attributes With}%
+  }
+  \HLAFixedBlock{121.979}{369.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions} service invocations for one (object class, region, class attribute) triple shall have no effect%
+  }
+  \HLAFixedBlock{121.978}{381.781}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    on the subscribed attributes of any other (object class, region, class attribute) triples.%
+  }
+  \HLAFixedBlock{121.978}{393.781}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes} and \emph{Unsubscribe Object Class Attributes} service invocations shall%
+  }
+  \HLAFixedBlock{121.979}{405.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    have no effect on any class attribute with region subscriptions that were established via the%
+  }
+  \HLAFixedBlock{121.979}{417.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes With Regions} service.%
+  }
+  \HLAFixedBlock{121.979}{429.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes With Regions} and \emph{Unsubscribe Object Class Attributes With}%
+  }
+  \HLAFixedBlock{121.979}{441.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions} service invocations shall have no effect on any class attribute subscriptions that were%
+  }
+  \HLAFixedBlock{121.978}{453.780}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    established via the \emph{Subscribe Object Class Attributes} service.%
+  }
+  \HLAFixedBlock{100.018}{468.779}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{468.779}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a class attribute is a subscribed attribute of an object class, the joined federate shall be subscribed%
+  }
+  \HLAFixedBlock{121.978}{480.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to that class attribute either actively or passively, but not both. If a class attribute is a subscribed%
+  }
+  \HLAFixedBlock{121.978}{492.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute of an object class with region, the joined federate shall be subscribed to that class attribute%
+  }
+  \HLAFixedBlock{121.978}{504.779}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at a given object class and region either actively or passively, but not both. %
+  }
+  \HLAFixedBlock{100.018}{519.779}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.938}{519.779}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    From a joined federate’s perspective, an object class shall be subscribed if and only if%
+  }
+  \HLAFixedBlock{121.979}{534.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.022}{534.778}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is subscribed to at least one attribute of the object class, or%
+  }
+  \HLAFixedBlock{121.979}{549.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.024}{549.778}{379.976}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is subscribed with region to at least one attribute of the object class.%
+  }
+  \HLAFixedBlock{100.019}{564.778}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.965}{564.778}{400.035}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federates may invoke the \emph{Register Object Instance} and the \emph{Register Object Instance With}%
+  }
+  \HLAFixedBlock{121.979}{576.778}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Regions }services only with a published object class as an argument.%
+  }
+  \HLAFixedBlock{100.020}{591.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.941}{591.786}{400.059}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The registered class of an object instance shall be the object class that was an argument to either the%
+  }
+  \HLAFixedBlock{121.980}{603.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Register Object Instance} or the \emph{Register Object Instance With Regions }service invocation for that%
+  }
+  \HLAFixedBlock{121.980}{615.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance.%
+  }
+  \HLAFixedBlock{100.020}{630.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    s)%
+  }
+  \HLAFixedBlock{121.970}{630.785}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An update to an instance attribute by the joined federate that owns that instance attribute may be%
+  }
+  \HLAFixedBlock{121.980}{642.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    reflected only by other joined federates that are either%
+  }
+  \HLAFixedBlock{121.980}{657.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.031}{657.785}{379.969}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Subscribed to the instance attribute’s corresponding class attribute at the known class of the%
+  }
+  \HLAFixedBlock{142.019}{669.784}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance that contains that instance attribute at the subscribing joined federate, or%
+  }
+  \HLAFixedBlock{121.980}{684.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.022}{684.784}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Using a subscription region set for the instance attribute’s corresponding class attribute at the%
+  }
+  \HLAFixedBlock{142.019}{696.784}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class of the object instance at the subscribing joined federate, and this set overlaps the%
+  }
+\end{hlafixedpage}
+\clearpage

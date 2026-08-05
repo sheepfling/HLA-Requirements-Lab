@@ -1,0 +1,232 @@
+\HLASourcePage{378}{377}
+\HLAServiceBookmark{12.11.6.24.4}{4}{Custom time types}
+\HLAServiceBookmark{12.11.6.25}{3}{Dimension upper bound and range lower and upper bounds}
+\HLAServiceBookmark{12.11.6.26}{3}{Wall-clock time}
+\HLAServiceBookmark{12.11.7}{2}{Memory ownership semantics}
+\HLAServiceBookmark{12.12}{1}{C++}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{70.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAinteger64TimeFactory }%
+  }
+  \HLAFixedBlock{317.974}{70.373}{286.026}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{logicalTimeFactory }%
+  }
+  \HLAFixedBlock{515.954}{70.373}{88.046}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{=}%
+  }
+  \HLAFixedBlock{126.000}{82.373}{478.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactoryFactory.getLogicalTimeFactory}%
+  }
+  \HLAFixedBlock{126.000}{94.373}{478.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{(HLAinteger64TimeFactory.class);}%
+  }
+  \HLAFixedBlock{90.001}{117.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate may also refer directly to the implementation provided by the RTI,%
+  }
+  \HLAFixedBlock{90.001}{142.372}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAinteger64TimeFactory }%
+  }
+  \HLAFixedBlock{281.975}{142.372}{322.025}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{logicalTimeFactory }%
+  }
+  \HLAFixedBlock{443.895}{142.372}{160.105}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{= }%
+  }
+  \HLAFixedBlock{503.952}{142.372}{100.048}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{new}%
+  }
+  \HLAFixedBlock{126.001}{154.372}{477.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{org.someorganization.-time.HLAinteger64TimeFactoryImpl();}%
+  }
+  \HLAFixedBlock{90.002}{177.784}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    or get a list of available LogicalTimeFactories.%
+  }
+  \HLAFixedBlock{90.002}{202.371}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Set<LogicalTimeFactory> }%
+  }
+  \HLAFixedBlock{311.976}{202.371}{292.024}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{logicalTimeFactories }%
+  }
+  \HLAFixedBlock{515.954}{202.371}{88.046}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{=}%
+  }
+  \HLAFixedBlock{126.002}{214.371}{477.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory-Factory.getLogicalTimeFactories();}%
+  }
+  \HLAFixedBlock{90.002}{237.644}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.24.4 Custom time types}%
+  }
+  \HLAFixedBlock{90.002}{261.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI implementation or a federation implementer may provide implementations of custom time types.%
+  }
+  \HLAFixedBlock{90.002}{273.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    These implementations shall be registered according to 12.11.6.24.1.%
+  }
+  \HLAFixedBlock{90.002}{297.643}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.25 Dimension upper bound and range lower and upper bounds}%
+  }
+  \HLAFixedBlock{90.002}{321.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Several DDM-related services allow bounds to be gotten and set. The %
+  }
+  \HLAFixedBlock{373.202}{321.782}{230.798}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Dimension Upper Bound}%
+  }
+  \HLAFixedBlock{490.922}{321.782}{113.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service%
+  }
+  \HLAFixedBlock{90.002}{333.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    gets the upper bound of a particular dimension. The %
+  }
+  \HLAFixedBlock{302.462}{333.782}{301.538}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Range Bounds}%
+  }
+  \HLAFixedBlock{378.182}{333.782}{225.818}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{398.401}{333.782}{205.599}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Set Range Bounds}%
+  }
+  \HLAFixedBlock{471.842}{333.782}{132.158}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services are%
+  }
+  \HLAFixedBlock{90.001}{345.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    used to get and set the bounds of a range of a region. All bounds are represented in the Java API using a%
+  }
+  \HLAFixedBlock{90.001}{358.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{long}%
+  }
+  \HLAFixedBlock{114.001}{357.781}{489.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+     integer. The %
+  }
+  \HLAFixedBlock{170.400}{357.781}{433.600}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Dimension Upper Bound}%
+  }
+  \HLAFixedBlock{291.240}{357.781}{312.760}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service, as it is getting a single bound value, returns a%
+  }
+  \HLAFixedBlock{90.000}{370.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{long}%
+  }
+  \HLAFixedBlock{114.000}{369.781}{490.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The %
+  }
+  \HLAFixedBlock{139.380}{369.781}{464.620}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Range Bounds}%
+  }
+  \HLAFixedBlock{216.960}{369.781}{387.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{238.980}{369.781}{365.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Set Range Bounds}%
+  }
+  \HLAFixedBlock{314.340}{369.781}{289.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+     services, as they are getting and setting a pair of%
+  }
+  \HLAFixedBlock{90.000}{381.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    values, actually return and take a %
+  }
+  \HLAFixedBlock{228.360}{382.368}{375.640}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RangeBounds}%
+  }
+  \HLAFixedBlock{294.301}{381.781}{309.699}{\rmfamily\raggedright}{9.96}{11.16}{%
+     object, which is composed of a pair of %
+  }
+  \HLAFixedBlock{458.460}{382.368}{145.540}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{long}%
+  }
+  \HLAFixedBlock{482.400}{381.781}{121.600}{\rmfamily\raggedright}{9.96}{11.16}{%
+    s, %
+  }
+  \HLAFixedBlock{492.001}{382.368}{111.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{lower}%
+  }
+  \HLAFixedBlock{90.001}{393.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{106.921}{394.368}{497.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{upper}%
+  }
+  \HLAFixedBlock{136.921}{393.781}{467.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.001}{417.641}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.6.26 Wall-clock time}%
+  }
+  \HLAFixedBlock{90.001}{441.780}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{111.001}{441.780}{492.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Evoke Callback }%
+  }
+  \HLAFixedBlock{182.520}{441.780}{421.480}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{202.381}{441.780}{401.619}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Evoke Multiple Callbacks }%
+  }
+  \HLAFixedBlock{317.101}{441.780}{286.899}{\rmfamily\raggedright}{9.96}{11.16}{%
+    services take arguments specifying durations of%
+  }
+  \HLAFixedBlock{90.001}{453.780}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    wall-clock time expressed in seconds. Wall-clock time is represented in the Java API using a %
+  }
+  \HLAFixedBlock{462.122}{454.367}{141.878}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{double}%
+  }
+  \HLAFixedBlock{498.061}{453.780}{105.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.001}{477.640}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.7 Memory ownership semantics}%
+  }
+  \HLAFixedBlock{90.001}{501.779}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The following are memory management conventions for parameters to methods on %
+  }
+  \HLAFixedBlock{426.841}{502.366}{177.159}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RTIambassador}%
+  }
+  \HLAFixedBlock{504.841}{501.779}{99.159}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and%
+  }
+  \HLAFixedBlock{90.001}{514.366}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{197.941}{513.779}{406.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.001}{537.778}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All Java parameters, including object references, are passed by value. Therefore, there is no need to specify%
+  }
+  \HLAFixedBlock{90.001}{549.778}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    further conventions for primitive types.%
+  }
+  \HLAFixedBlock{90.001}{573.778}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Unless otherwise noted, reference parameters adhere to the following convention:%
+  }
+  \HLAFixedBlock{100.021}{597.777}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{597.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The referenced object is created (or acquired) by the caller. The callee shall copy during the call%
+  }
+  \HLAFixedBlock{121.981}{609.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    anything it wishes to save beyond the completion of the call.%
+  }
+  \HLAFixedBlock{100.021}{621.777}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{621.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Unless otherwise noted, a reference returned from a method represents a new object created by the%
+  }
+  \HLAFixedBlock{121.981}{633.777}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    callee. The caller is free to modify the object whose reference is returned.%
+  }
+  \HLAFixedBlock{90.000}{663.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.12 C++}%
+  }
+  \HLAFixedBlock{90.000}{688.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The C++ API shall be based on C++14. The C++ API is intended to achieve several goals as follows:%
+  }
+\end{hlafixedpage}
+\clearpage

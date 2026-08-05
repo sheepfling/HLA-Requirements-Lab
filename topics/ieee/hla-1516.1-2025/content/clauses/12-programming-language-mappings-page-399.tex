@@ -1,0 +1,117 @@
+\HLASourcePage{400}{399}
+\HLAServiceBookmark{12.13.4.4}{3}{Fault Tolerance}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{69.786}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLA Service Exchange}%
+  }
+  \HLAFixedBlock{121.980}{81.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Messages, such as HLA Call Request/Response and HLA Callback Request/Response can then be %
+  }
+  \HLAFixedBlock{121.980}{93.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    exchanged between the federate and the RTI.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.980}{105.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Heartbeating}%
+  }
+  \HLAFixedBlock{121.980}{117.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Should the federate not need to send any messages for some time, the federate shall regularly send a %
+  }
+  \HLAFixedBlock{121.980}{129.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Heartbeat message to maintain the connection. The heartbeat interval is described in Table 32. The %
+  }
+  \HLAFixedBlock{121.980}{141.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI shall respond to this message by sending a Heartbeat Response message.%
+  }
+  \HLAFixedBlock{100.020}{153.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{153.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Fault Tolerance: Reconnecting}%
+  }
+  \HLAFixedBlock{121.980}{165.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    If a connection fault occurs (see 12.13.4.4), the federate may try to reconnect and resume a federate %
+  }
+  \HLAFixedBlock{121.980}{177.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    session by sending a Resume Request message. The RTI shall respond with a Resume Status %
+  }
+  \HLAFixedBlock{121.980}{189.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    message. Further details are provided in section 12.13.4.4.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e)%
+  }
+  \HLAFixedBlock{121.980}{201.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Session Termination}%
+  }
+  \HLAFixedBlock{121.980}{213.783}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    When a federate no longer wishes to be connected to the RTI, it shall initiate a termination sequence %
+  }
+  \HLAFixedBlock{121.979}{225.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    using the Terminate Session control message. Once the session has been finalized at the RTI, the %
+  }
+  \HLAFixedBlock{121.979}{237.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    session ID is no longer valid. The RTI shall respond with a Session Terminated control message and %
+  }
+  \HLAFixedBlock{121.979}{249.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    purge the session. The federate shall wait for this message and then close the transport layer %
+  }
+  \HLAFixedBlock{121.979}{261.783}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    connection.%
+  }
+  \HLAFixedBlock{89.999}{285.643}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.4 Fault Tolerance}%
+  }
+  \HLAFixedBlock{89.999}{309.782}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To support reconnection after a connection fault has occurred in the connection layer, the federate and the%
+  }
+  \HLAFixedBlock{89.999}{321.782}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI shall maintain a message history buffer from which lost messages can be resent. The following%
+  }
+  \HLAFixedBlock{89.999}{333.782}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    conditions are considered connection faults that may be recoverable:%
+  }
+  \HLAFixedBlock{100.019}{357.781}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{357.781}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The socket connection is broken%
+  }
+  \HLAFixedBlock{100.019}{369.781}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{369.781}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The FED\_TIMEOUT\_HEART or RTI\_TIMEOUT\_HEART was exceeded%
+  }
+  \HLAFixedBlock{89.998}{393.781}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    If the RTI or federate receives a bad message (see 12.13.4.7), the session shall enter a fatal state and cannot%
+  }
+  \HLAFixedBlock{89.998}{405.780}{514.002}{\rmfamily\raggedright}{9.96}{11.16}{%
+    be recovered. A federate may attempt recovery if the RTI detects the bad message and closes the socket, but%
+  }
+  \HLAFixedBlock{89.997}{417.780}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the recovery shall fail.%
+  }
+  \HLAFixedBlock{89.997}{441.780}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Figure 24 shows an overview of the states of a federate. A more detailed state diagram with additional%
+  }
+  \HLAFixedBlock{89.997}{453.780}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    exception handling is provided in section 12.13.4.7.%
+  }
+  \HLAFixedBlock{89.997}{685.139}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate starts by connecting to the RTI and initiating a new session. Once a valid session is available,%
+  }
+  \HLAFixedBlock{89.997}{697.139}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    HLA service calls and callbacks can be exchanged. Finally, the federate initiates the termination of the%
+  }
+  \HLAFixedBlock{173.400}{645.886}{430.600}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Figure 24---Federate Connection and Reconnection States}%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -10,7 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+**/dist/
 downloads/
 eggs/
 .eggs/
@@ -195,9 +195,9 @@ cython_debug/
 .abstra/
 
 # Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
+#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
+#   and can be added to the global gitignore or merged into this file. However, if you prefer,
 #   you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 # Temporary file for partial code execution
@@ -216,3 +216,79 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Local Python environments and dependency caches
+.venv*/
+.codex_pydeps/
+.pip-cache/
+.pre-commit-cache/
+
+# Python caches and test/type-checking output
+.mypy_cache/
+.pyright/
+.pytest_cache/
+.ruff_cache/
+.tmp/
+**/.tmp/
+tmp/
+**/tmp/
+.temp/
+temp/
+__pycache__/
+*.py[cod]
+.coverage
+htmlcov/
+
+# Generated document output and packaging artifacts
+**/output/
+build/
+**/build/
+dist/
+*.pdf
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.egg-info/
+pip-wheel-metadata/
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.out
+**/*.run.xml
+**/*.synctex.gz
+**/*.toc
+
+# IDE and editor metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local secrets, logs, and operating-system metadata
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+
+# Local-only analogue and comparison material
+.local/
+**/reference/
+**/references/
+**/comparison/
+**/comparisons/
+**/tracking/
+**/audit/
+**/audits/
+**/verification/
+**/.trash/
+.trash/

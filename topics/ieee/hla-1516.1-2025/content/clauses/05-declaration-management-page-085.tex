@@ -1,0 +1,180 @@
+\HLASourcePage{86}{85}
+\HLAServiceBookmark{5.1.5}{2}{Declaration management state charts}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.981}{69.786}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \textbf{sent class} of a directed interaction shall be the interaction class that was an argument to the%
+  }
+  \HLAFixedBlock{121.981}{81.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Send Directed Interaction} service invocation for that directed interaction.%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.953}{93.785}{400.047}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Every directed interaction shall have one federation-wide sent class.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.958}{105.785}{400.042}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Receive Directed Interaction \textdagger{}} service shall be invoked at a joined federate only with a%
+  }
+  \HLAFixedBlock{121.981}{117.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribed directed interaction class as an argument.%
+  }
+  \HLAFixedBlock{100.021}{129.785}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.959}{129.785}{400.041}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Receive Directed Interaction \textdagger{}} service shall be invoked at a joined federate only with a known%
+  }
+  \HLAFixedBlock{121.982}{141.785}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance as the target object instance argument. %
+  }
+  \HLAFixedBlock{100.022}{153.784}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.969}{153.784}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the \emph{Receive Directed Interaction \textdagger{}} service is invoked at a joined federate, the directed interaction%
+  }
+  \HLAFixedBlock{121.983}{165.784}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    received as a result of this service invocation shall have a \textbf{received class} at that joined federate. The%
+  }
+  \HLAFixedBlock{121.984}{177.784}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    received class of a directed interaction is the directed interaction class that is an argument to the%
+  }
+  \HLAFixedBlock{121.985}{189.784}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Receive Directed Interaction \textdagger{}} service invocation.%
+  }
+  \HLAFixedBlock{100.025}{201.784}{421.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.955}{201.784}{400.045}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A directed interaction shall have at most one received class in each joined federate. This received%
+  }
+  \HLAFixedBlock{121.985}{213.783}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class may vary from joined federate to joined federate.%
+  }
+  \HLAFixedBlock{100.025}{225.783}{421.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.985}{225.783}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Only the available parameters of an interaction class shall be used in a \emph{Send Directed Interaction}%
+  }
+  \HLAFixedBlock{121.985}{237.783}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation with that interaction class as argument.%
+  }
+  \HLAFixedBlock{100.025}{249.783}{421.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    l)%
+  }
+  \HLAFixedBlock{121.956}{249.783}{400.044}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The sent parameters of a directed interaction shall be the parameters that were arguments to the \emph{Send}%
+  }
+  \HLAFixedBlock{121.986}{261.783}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Directed Interaction} service invocation for that interaction.%
+  }
+  \HLAFixedBlock{100.025}{273.783}{421.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    m)%
+  }
+  \HLAFixedBlock{121.953}{273.783}{400.047}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The received parameters of a directed interaction shall be the parameters that were arguments to the%
+  }
+  \HLAFixedBlock{121.985}{285.782}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Receive Interaction \textdagger{}} service invocation for that interaction.%
+  }
+  \HLAFixedBlock{100.025}{297.782}{421.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    n)%
+  }
+  \HLAFixedBlock{121.945}{297.782}{400.055}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The received parameters of a directed interaction shall be the subset of the sent parameters that are%
+  }
+  \HLAFixedBlock{121.986}{309.782}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    available parameters for the directed interaction’s received class.%
+  }
+  \HLAFixedBlock{100.026}{321.782}{421.974}{\rmfamily\raggedright}{9.96}{12.00}{%
+    o)%
+  }
+  \HLAFixedBlock{121.942}{321.782}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The received parameters for a given directed interaction may vary from joined federate to joined%
+  }
+  \HLAFixedBlock{121.986}{333.782}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate, depending on the received class of the directed interaction.%
+  }
+  \HLAFixedBlock{90.006}{357.781}{431.994}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a directed interaction’s received class is a superclass of its sent class, the directed interaction shall be%
+  }
+  \HLAFixedBlock{90.007}{369.781}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    said to have been promoted from the sent class to the received class. Promotion is important for protecting%
+  }
+  \HLAFixedBlock{90.007}{381.781}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate application code from new subclasses added to the FDD. As the FDD is expanded to include new%
+  }
+  \HLAFixedBlock{90.007}{393.781}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object, interaction, and directed interaction classes that inherit from existing classes, promotion ensures that%
+  }
+  \HLAFixedBlock{90.007}{405.780}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    existing federate application code need not change to work with the expanded FDD.%
+  }
+  \HLAServiceComponentHeadingAt{429.641}{%
+    5.1.5 Declaration management state charts%
+  }
+  \HLAFixedBlock{90.007}{453.780}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The following figures depict formal representations of the state of an arbitrary object class, an arbitrary class%
+  }
+  \HLAFixedBlock{90.007}{465.779}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute, the \textbf{HLAprivilegeToDeleteObject} class attribute of an arbitrary object class, and an arbitrary%
+  }
+  \HLAFixedBlock{90.007}{477.779}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction class. %
+  }
+  \HLAFixedBlock{90.007}{501.779}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 10 depicts the state of an arbitrary object class, and it deals with object classes at two levels. First, it%
+  }
+  \HLAFixedBlock{90.007}{513.779}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    establishes that each class attribute of the object class has some state worth modeling. Second, it establishes%
+  }
+  \HLAFixedBlock{90.007}{525.779}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that there may be an arbitrary number of instances of each object class. Further, it defines what conditions%
+  }
+  \HLAFixedBlock{90.007}{537.778}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    allow an object instance to be known by a joined federate as an instance of that object class.%
+  }
+  \HLAFixedBlock{90.007}{561.778}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Conceptually, the state of an object class comprises the state of the class attributes of that object class and of%
+  }
+  \HLAFixedBlock{90.007}{573.778}{431.993}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the object instances of that object class. Furthermore, the state of an object instance comprises the state of%
+  }
+  \HLAFixedBlock{90.000}{585.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the instance attributes of that object instance. There is a correspondence between the instance attributes and%
+  }
+  \HLAFixedBlock{90.000}{597.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    their corresponding class attributes. This correspondence is modeled via the index to each attribute. A%
+  }
+  \HLAFixedBlock{89.999}{609.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    reference to an instance attribute (\emph{i, k, j}) and to a class attribute (\emph{i, j}) with the same\emph{ i}s and same \emph{j}s means that%
+  }
+  \HLAFixedBlock{89.999}{621.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the class attribute is that instance attribute’s corresponding class attribute at that joined federate. This%
+  }
+  \HLAFixedBlock{89.999}{633.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    correspondence is because having the same \emph{j}s means that they refer to the same attribute designator, and%
+  }
+  \HLAFixedBlock{89.999}{645.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    having the same \emph{i}s means that the joined federate’s known class for the object instance containing the%
+  }
+  \HLAFixedBlock{89.999}{657.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute is the same as the object class designator of the class attribute.%
+  }
+  \HLAFixedBlock{89.999}{681.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each object class shall have a fixed number of available class attributes as defined in the FDD. The number%
+  }
+  \HLAFixedBlock{89.999}{693.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of object instances of a given class, however, be arbitrary.%
+  }
+\end{hlafixedpage}
+\clearpage

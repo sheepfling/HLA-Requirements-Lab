@@ -1,0 +1,168 @@
+\HLASourcePage{151}{150}
+\HLAServiceBookmark{7.1.1}{2}{Ownership and publication}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{7.1.1 Ownership and publication}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The ownership of an instance attribute is closely related to whether that instance attribute’s corresponding%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    class attribute is published at the known class of the instance attribute. In other words, the ownership state%
+  }
+  \HLAFixedBlock{90.001}{117.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    machine in Figure 16, which operates in parallel with the publication state machine in Figure 11, also shares%
+  }
+  \HLAFixedBlock{90.001}{129.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interdependencies with the publication state machine. A joined federate shall be publishing a class attribute%
+  }
+  \HLAFixedBlock{90.001}{141.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at the known class of an object instance in order to own the corresponding instance attribute of that object%
+  }
+  \HLAFixedBlock{90.001}{153.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance. Therefore, the following are true:%
+  }
+  \HLAFixedBlock{100.021}{165.784}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.963}{165.784}{400.037}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate shall be publishing a class attribute at the known class of an object instance before%
+  }
+  \HLAFixedBlock{121.981}{177.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    it may become the owner of the corresponding instance attribute of that object instance. This%
+  }
+  \HLAFixedBlock{121.982}{189.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interdependency between ownership and publication is expressed in Figure 16 by the Not Able to%
+  }
+  \HLAFixedBlock{121.982}{201.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Acquire state, the [in “Unpublished (\emph{i}, \emph{j})”] and [in “Published (\emph{i}, \emph{j})”] transitions in the Unowned%
+  }
+  \HLAFixedBlock{121.981}{213.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (\emph{i}, \emph{k}, \emph{j}) state, and the conditional transition into the Owned (\emph{i}, \emph{k}, \emph{j}) and Unowned (\emph{i}, \emph{k}, \emph{j}) states from%
+  }
+  \HLAFixedBlock{121.982}{225.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the start state.%
+  }
+  \HLAFixedBlock{100.022}{237.783}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.982}{237.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the joined federate that owns an instance attribute stops publishing the corresponding class%
+  }
+  \HLAFixedBlock{121.982}{249.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute at the known class of the instance attribute, the instance attribute shall immediately become%
+  }
+  \HLAFixedBlock{121.981}{261.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unowned. This interdependency between ownership and publication is expressed in Figure 16 by the%
+  }
+  \HLAFixedBlock{121.981}{273.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    transition from the Owned (\emph{i}, \emph{k}, \emph{j}) state to the Unowned (\emph{i}, \emph{k}, \emph{j}) state that is labeled [in “Unpublished%
+  }
+  \HLAFixedBlock{121.982}{285.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (\emph{i}, \emph{j})”]. As depicted by the guard on the transition from the Published (\emph{i}, \emph{j}) state to the Unpublished%
+  }
+  \HLAFixedBlock{121.980}{297.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (\emph{i}, \emph{j}) state in the publication state machine shown in Figure 11, a joined federate shall not stop%
+  }
+  \HLAFixedBlock{121.979}{309.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    publication of a class attribute at a given class if there is an object instance that has that class as its%
+  }
+  \HLAFixedBlock{121.979}{321.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class and that has a corresponding instance attribute that is in either the Acquisition Pending%
+  }
+  \HLAFixedBlock{121.979}{333.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    or Willing to Acquire (\emph{i}, \emph{k}, \emph{j}) state at that joined federate. In other words, a joined federate shall not%
+  }
+  \HLAFixedBlock{121.979}{345.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    stop publishing a class attribute at a given class if there is an object instance that has that class as its%
+  }
+  \HLAFixedBlock{121.979}{357.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class and that has a corresponding instance attribute for which the joined federate has%
+  }
+  \HLAFixedBlock{121.979}{369.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked the following:%
+  }
+  \HLAFixedBlock{121.979}{384.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.020}{384.786}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Acquisition} service, but has not yet received an invocation of the \emph{Confirm}%
+  }
+  \HLAFixedBlock{142.021}{396.785}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Acquisition Cancellation \textdagger{}} service, the \emph{Attribute Ownership Unavailable}%
+  }
+  \HLAFixedBlock{144.480}{408.785}{377.520}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{\textdagger{} }service, or the \emph{Attribute Ownership Acquisition Notification \textdagger{}} service%
+  }
+  \HLAFixedBlock{121.979}{423.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.019}{423.785}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Acquisition If Available} service, but has not yet received an invocation of%
+  }
+  \HLAFixedBlock{142.019}{435.785}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Attribute Ownership Unavailable \textdagger{}} service, received an invocation of the \emph{Attribute}%
+  }
+  \HLAFixedBlock{142.020}{447.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Ownership Acquisition Notification \textdagger{}} service, or invoked the \emph{Attribute Ownership Acquisition}%
+  }
+  \HLAFixedBlock{142.020}{459.784}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{service} [after which condition 1) (above) applies].%
+  }
+  \HLAServiceComponentHeadingAt{483.645}{%
+    \textbf{7.1.2 Ownership transfer}%
+  }
+  \HLAFixedBlock{90.001}{507.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An instance attribute that is successfully divested shall become unowned by the divesting joined federate. If%
+  }
+  \HLAFixedBlock{90.001}{519.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    an instance attribute is unowned, its corresponding class attribute at the known class of the instance attribute%
+  }
+  \HLAFixedBlock{90.001}{531.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    may be either published or unpublished. If the class attribute is published at that class, the joined federate%
+  }
+  \HLAFixedBlock{90.001}{543.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall be eligible to acquire the corresponding instance attribute, and it may be offered ownership of that%
+  }
+  \HLAFixedBlock{90.001}{555.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute by the RTI via the \emph{Request Attribute Ownership Assumption \textdagger{}} service. There are five ways%
+  }
+  \HLAFixedBlock{90.001}{567.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    in which an owning joined federate may attempt to divest itself of an instance attribute and two ways in%
+  }
+  \HLAFixedBlock{90.001}{579.782}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    which a non-owning joined federate may attempt to acquire one.%
+  }
+  \HLAServiceComponentHeadingAt{603.643}{%
+    \textbf{7.1.2.1 Divestiture}%
+  }
+  \HLAFixedBlock{90.001}{627.782}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The five actions that a joined federate may take to cause an instance attribute that it owns to become%
+  }
+  \HLAFixedBlock{90.001}{639.781}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unowned are as follows:%
+  }
+  \HLAFixedBlock{100.021}{651.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{651.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may invoke the \emph{Unconditional Attribute Ownership Divestiture} service, in%
+  }
+  \HLAFixedBlock{121.980}{663.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    which case, the instance attribute shall immediately become unowned by that joined federate and, in%
+  }
+  \HLAFixedBlock{121.980}{675.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    fact, by all joined federates.%
+  }
+  \HLAFixedBlock{100.021}{687.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{687.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may invoke the \emph{Negotiated Attribute Ownership Divestiture} service, which%
+  }
+  \HLAFixedBlock{121.981}{699.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    notifies the RTI that the joined federate wishes to divest itself of the instance attribute, providing that%
+  }
+\end{hlafixedpage}
+\clearpage

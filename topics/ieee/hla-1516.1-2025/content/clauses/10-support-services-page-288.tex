@@ -1,0 +1,106 @@
+\HLASourcePage{289}{288}
+\HLAServiceBookmark{11.2.1}{2}{Extension of MOM object classes}
+\HLAServiceBookmark{11.3}{1}{MOM interaction classes}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{326.926}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{11.2.1 Extension of MOM object classes}%
+  }
+  \HLAFixedBlock{90.000}{351.065}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The MOM object classes may be extended by adding subclasses or class attributes. The RTI shall publish%
+  }
+  \HLAFixedBlock{90.000}{363.065}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    HLAmanager.HLAfederate%
+  }
+  \HLAFixedBlock{208.199}{363.065}{395.801}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and HLAmanager.HLAfederation%
+  }
+  \HLAFixedBlock{357.179}{363.065}{246.821}{\rmfamily\raggedright}{9.96}{11.16}{%
+    classes with predefined MOM class%
+  }
+  \HLAFixedBlock{89.999}{375.065}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    attributes, register an instance, and update the values of the predefined instance attributes. %
+  }
+  \HLAFixedBlock{89.999}{399.064}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall not subscribe to any object class. Valid methods for extending the MOM object classes shall%
+  }
+  \HLAFixedBlock{89.999}{411.064}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    be as follows:%
+  }
+  \HLAFixedBlock{100.019}{423.064}{503.981}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{423.064}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Subclasses may be added to any MOM object class. Here, the joined federate may publish the object%
+  }
+  \HLAFixedBlock{121.979}{435.064}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class and its attributes, register an instance of the new class, and update values of instance attributes%
+  }
+  \HLAFixedBlock{121.979}{447.064}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of the object instance according to the dictates of the federation execution. Note that the instance of%
+  }
+  \HLAFixedBlock{121.978}{459.064}{482.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the subclass shall be separate from the MOM object instance that is registered by the RTI. Therefore,%
+  }
+  \HLAFixedBlock{121.977}{471.063}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    instance attributes that are inherited by the extension subclass from the MOM predefined class shall%
+  }
+  \HLAFixedBlock{121.977}{483.063}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    not be updated by the RTI.%
+  }
+  \HLAFixedBlock{100.017}{495.063}{503.983}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.977}{495.063}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Attributes may be added to any MOM object class. Here, the joined federate may publish the object%
+  }
+  \HLAFixedBlock{121.977}{507.063}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class with the new class attributes, may subscribe to the object class and attributes in it, may%
+  }
+  \HLAFixedBlock{121.977}{519.063}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    discover and reflect updates to learn the object instance in question, and may update the values of%
+  }
+  \HLAFixedBlock{121.977}{531.062}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the new instance attributes (after acquiring ownership) using the discovered object instance%
+  }
+  \HLAFixedBlock{121.977}{543.062}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    designator. Note that the instance that the joined federate shall update with the new instance%
+  }
+  \HLAFixedBlock{121.977}{555.062}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    attributes shall be the same as the MOM object instance that is registered by the RTI. The RTI shall%
+  }
+  \HLAFixedBlock{121.977}{567.062}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    never acquire ownership of any new class attributes.%
+  }
+  \HLAFixedBlock{89.997}{591.061}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall not divest ownership of MOM instance attributes that are defined in this clause. The RTI shall%
+  }
+  \HLAFixedBlock{89.997}{603.061}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    respond to the invocation, by any federate, of the %
+  }
+  \HLAFixedBlock{297.897}{603.061}{306.103}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Request Attribute Value Update}%
+  }
+  \HLAFixedBlock{428.457}{603.061}{175.543}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service for any MOM%
+  }
+  \HLAFixedBlock{89.997}{615.061}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    object class or instance attribute that is defined in this clause by supplying values via the normal instance%
+  }
+  \HLAFixedBlock{89.997}{627.061}{514.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    attribute update mechanism.%
+  }
+  \HLAFixedBlock{90.000}{656.663}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{11.3 MOM interaction classes}%
+  }
+  \HLAFixedBlock{90.000}{682.086}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The high-level MOM interaction class structure is depicted in Figure 20. The MOM interaction classes shall%
+  }
+  \HLAFixedBlock{90.000}{694.085}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    be defined as follows:%
+  }
+  \HLAFixedBlock{205.620}{292.666}{398.380}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Figure 19—MOM object class structure}%
+  }
+\end{hlafixedpage}
+\clearpage

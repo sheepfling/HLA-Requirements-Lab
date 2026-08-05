@@ -1,0 +1,61 @@
+\HLASourcePage{18}{17}
+\thispagestyle{hla-body}
+The formal definition of the M\&S HLA comprises three main components: the HLA framework and rules
+specification (found in IEEE Std 1516\texttrademark-2025), the HLA federate interface specification (found in this
+document), and the HLA object model template (OMT) (found in IEEE Std 1516.2\texttrademark-2025). This standard,
+IEEE Std 1516.1-2025, provides a complete description of the essential elements of the second component
+of the HLA, the interface specification.\textsuperscript{\fontsize{7.98pt}{8pt}\selectfont 8}
+
+The HLA is an integrated architecture that has been developed to provide a common architecture for M\&S.
+The HLA requires that interfederate communications use a standard application programmer's interface
+(API). This specification defines the standard services and interfaces to be used by the federates in order to
+support efficient information exchange when participating in a distributed federation execution.
+Additionally, the capability for reuse of individual federates that adhere to these standard services and
+interfaces is increased.
+
+This document provides a specification for the HLA functional interfaces between federates and the runtime
+infrastructure (RTI). The RTI provides services to federates in a way that is analogous to how a distributed
+operating system provides services to applications. These interfaces are arranged into seven basic service
+groups, and an eighth group of support services, as follows:
+
+\begin{hlaalphlist}
+  \item Federation management
+  \item Declaration management (DM)
+  \item Object management
+  \item Ownership management
+  \item Time management
+  \item Data distribution management (DMM)
+  \item Support services
+\end{hlaalphlist}
+
+The eight service groups describe the interface between the federates and the RTI and between the federates
+and the software services provided by the RTI for use by HLA federates. The RTI requires a set of services
+from the federate that are referred to as ``RTI-initiated'' and are denoted with a \textdagger{} (printer's dagger) after the
+service name.
+
+\begingroup\setlength{\parskip}{0pt}
+\vspace{0.2pt}
+\HLAAnchor{clause:1.4.1}\pdfbookmark[2]{1.4.1 HLA federation object model (FOM) framework}{bookmark:clause:1.4.1}\HLASubsubclause{1.4.1 HLA federation object model (FOM) framework}
+\vspace{9.4pt}
+\endgroup
+
+A concise and rigorous description of the object model framework is essential to the specification of the
+interface between federates and the RTI and of the HLA services. The rules and terminology used to
+describe a FOM are described in IEEE Std 1516.2-2025. A simulation object model (SOM) describes salient
+characteristics of a federate to aid in its reuse and other activities focused on the details of its internal
+operation. As such, a SOM is not the concern of the RTI and its services. A FOM, on the other hand, deals
+with interfederate issues and is relevant to the use of the RTI. FOMs describe the set of object classes and
+interaction classes chosen for a planned federation along with the attributes of the object classes and
+parameters of the interaction classes.
+
+Every HLA object instance is an instance of an object class found in the FOM. Object classes are chosen by
+the object model designer to facilitate an appropriate organizational scheme. Each object class has a set of
+attributes associated with it. An attribute is a distinct, identifiable portion of the object's state. In this
+discussion, ``attribute designator'' refers to the attribute, and ``attribute value'' refers to its contents. From the
+federation perspective, the set of all attribute values for an object instance shall completely define the state
+of that instance. Federates may associate additional state information with an object instance that is not
+communicated between federates, but this action is outside the purview of the HLA FOM.
+
+\vspace{0.4pt}
+\HLACompactFootnote{8}{Information on references can be found in Clause 2.}
+\clearpage

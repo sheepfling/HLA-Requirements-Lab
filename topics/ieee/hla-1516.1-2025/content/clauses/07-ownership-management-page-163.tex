@@ -1,0 +1,181 @@
+\HLASourcePage{164}{163}
+\HLAServiceBookmark{7.8.4}{2}{Postconditions}
+\HLAServiceBookmark{7.8.5}{2}{Exceptions}
+\HLAServiceBookmark{7.8.6}{2}{Reference state charts}
+\HLAServiceBookmark{7.9}{1}{Attribute Ownership Acquisition If Available service}
+\HLAServiceBookmark{7.9.1}{2}{Supplied arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{7.8.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{93.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI has been informed of the joined federate’s request to acquire ownership of the specified%
+  }
+  \HLAFixedBlock{121.980}{104.765}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{118.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{118.805}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate shall not stop publishing the corresponding class attributes at the known class of%
+  }
+  \HLAFixedBlock{121.980}{129.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specified object instance until it has received a corresponding invocation of the \emph{Confirm}%
+  }
+  \HLAFixedBlock{121.979}{140.765}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Acquisition Cancellation \textdagger{}} service, the \emph{Attribute Ownership Unavailable \textdagger{}}%
+  }
+  \HLAFixedBlock{121.979}{151.804}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service, or the \emph{Attribute Ownership Acquisition Notification \textdagger{}} service.%
+  }
+  \HLAServiceComponentHeadingAt{174.645}{%
+    \textbf{7.8.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.018}{198.784}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{198.784}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is not publishing the class attribute at the known class of the object instance.%
+  }
+  \HLAFixedBlock{100.018}{213.783}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.978}{213.783}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is not publishing the object class.%
+  }
+  \HLAFixedBlock{100.018}{228.783}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{228.783}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate already owns the instance attribute.%
+  }
+  \HLAFixedBlock{100.018}{243.783}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.978}{243.783}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attribute is not available at the known class of the object instance.%
+  }
+  \HLAFixedBlock{100.018}{258.783}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.974}{258.783}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.018}{273.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.946}{273.782}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.018}{288.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.978}{288.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.018}{303.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.978}{303.782}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.018}{318.782}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.980}{318.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.018}{333.781}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.952}{333.781}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{357.642}{%
+    \textbf{7.8.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.018}{381.781}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{381.781}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 16, Establishing ownership of instance attribute (i, k, j)%
+  }
+  \HLAServiceHeadingAt{411.383}{%
+    \textbf{7.9 }\textbf{\emph{Attribute Ownership Acquisition If Available}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{436.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Attribute Ownership Acquisition If Available} service shall request the ownership of the specified%
+  }
+  \HLAFixedBlock{90.000}{447.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attributes of the specified object instance only if the instance attribute is unowned by all joined%
+  }
+  \HLAFixedBlock{90.000}{458.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates or it is in the process of being divested by its owner. If a specified instance attribute is owned by%
+  }
+  \HLAFixedBlock{90.000}{469.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    another joined federate, the RTI shall not invoke the \emph{Request Attribute Ownership Release \textdagger{}} service for that%
+  }
+  \HLAFixedBlock{90.001}{480.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute at the owning joined federate. For each of the specified instance attributes, the joined%
+  }
+  \HLAFixedBlock{90.001}{491.825}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate may receive only a corresponding \emph{Attribute Ownership Acquisition Notification \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.001}{502.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation or a corresponding \emph{Attribute Ownership Unavailable \textdagger{}} service invocation.%
+  }
+  \HLAFixedBlock{90.001}{525.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If a joined federate invokes the \emph{Attribute Ownership Acquisition If Available} service for an instance attribute%
+  }
+  \HLAFixedBlock{90.000}{536.824}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is already in the Willing to Acquire state, that instance attribute’s state shall remain unchanged.%
+  }
+  \HLAFixedBlock{90.000}{559.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    In other words, if a joined federate invokes the \emph{Attribute Ownership Acquisition If Available} service for an%
+  }
+  \HLAFixedBlock{90.000}{570.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute for which the joined federate is in the Willing to Acquire state, that instance attribute shall%
+  }
+  \HLAFixedBlock{89.999}{581.823}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    continue to be in the Willing to Acquire state. If there are additional instance attributes in the attribute set%
+  }
+  \HLAFixedBlock{89.999}{592.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that is an argument to the \emph{Attribute Ownership Acquisition If Available} service, the joined federate shall%
+  }
+  \HLAFixedBlock{90.000}{603.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    enter the Willing to Acquire state with respect to those instance attributes, assuming that they meet all of the%
+  }
+  \HLAFixedBlock{90.001}{614.823}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    preconditions of the \emph{Attribute Ownership Acquisition If Available} service and that the joined federate is not%
+  }
+  \HLAFixedBlock{90.001}{625.802}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    already in the Willing to Acquire state.%
+  }
+  \HLAServiceComponentHeadingAt{648.643}{%
+    \textbf{7.9.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.021}{672.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{672.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+  \HLAFixedBlock{100.021}{686.821}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{686.821}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Set of attribute designators%
+  }
+  \HLAFixedBlock{100.021}{700.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.974}{700.801}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag%
+  }
+\end{hlafixedpage}
+\clearpage

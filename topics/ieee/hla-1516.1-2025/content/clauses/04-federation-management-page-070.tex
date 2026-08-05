@@ -1,0 +1,160 @@
+\HLASourcePage{71}{70}
+\HLAServiceBookmark{4.23.3}{2}{Preconditions}
+\HLAServiceBookmark{4.23.4}{2}{Postconditions}
+\HLAServiceBookmark{4.23.5}{2}{Exceptions}
+\HLAServiceBookmark{4.23.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.24}{1}{Abort Federation Save service}
+\HLAServiceBookmark{4.24.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.24.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.24.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.23.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{93.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{117.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.972}{117.785}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{141.645}{%
+    4.23.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{165.784}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been informed of the success or failure of the federation save attempt.%
+  }
+  \HLAFixedBlock{100.020}{177.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{177.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may resume providing new information to the federation.%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    4.23.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{225.783}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{249.643}{%
+    4.23.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{273.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{273.782}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{303.383}{%
+    4.24 \emph{Abort Federation Save} service%
+  }
+  \HLAFixedBlock{90.000}{328.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Abort Federation Save} service requests the RTI to abort the federation save that is underway. %
+  }
+  \HLAFixedBlock{90.001}{352.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The service takes no arguments and affects the current save. This service may be invoked only while the%
+  }
+  \HLAFixedBlock{90.001}{364.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate is in the Federate Save in Progress state. Upon return of the service invocation, a request to abort the%
+  }
+  \HLAFixedBlock{90.001}{376.805}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    current save has successfully been made.%
+  }
+  \HLAFixedBlock{90.001}{400.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall abort the current save by invoking the \emph{Federation Saved \textdagger{} }service on all federates that are in%
+  }
+  \HLAFixedBlock{90.001}{412.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the Federate Save in Progress state, regardless of each individual federate’s save substate. Joined federates%
+  }
+  \HLAFixedBlock{90.001}{424.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    not in the Federation Save in Progress state may not receive the \emph{Initiate Federation Saved \textdagger{}} callback for this%
+  }
+  \HLAFixedBlock{90.001}{436.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation save. The save-success indicator for the \emph{Federation Saved \textdagger{}} service shall indicate failure%
+  }
+  \HLAFixedBlock{90.001}{448.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (federate save aborted) if not all federates have successfully invoked the \emph{Federate Save Complete} service%
+  }
+  \HLAFixedBlock{90.001}{460.804}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with a save-success indicator that indicated success. Since a federate remains in the Federate Save in%
+  }
+  \HLAFixedBlock{90.001}{472.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Progress state after it successfully invokes the \emph{Federate Save Complete} service and before the \emph{Federation}%
+  }
+  \HLAFixedBlock{90.001}{484.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Saved \textdagger{}} service is invoked on it by the RTI, it is possible that all other federates may have invoked the%
+  }
+  \HLAFixedBlock{90.001}{496.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Federate Save Complete} service with a save-success indicator of indicating success. In this case, it is%
+  }
+  \HLAFixedBlock{90.001}{508.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    possible that the \emph{Federation Saved \textdagger{} }service is invoked at each federate with a save-success indicator%
+  }
+  \HLAFixedBlock{90.001}{520.803}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    indicating success after a invocation of the \emph{Abort Federation Save} service.%
+  }
+  \HLAServiceComponentHeadingAt{544.663}{%
+    4.24.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{568.802}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{568.802}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{592.662}{%
+    4.24.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{616.801}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{616.801}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{640.661}{%
+    4.24.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{664.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{664.800}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.021}{676.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{676.800}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{688.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{688.800}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{700.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{700.800}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is in the Save in Progress state.%
+  }
+\end{hlafixedpage}
+\clearpage

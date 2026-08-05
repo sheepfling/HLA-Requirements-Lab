@@ -1,0 +1,106 @@
+\HLASourcePage{396}{395}
+\HLAServiceBookmark{12.13}{1}{HLA Federate Protocol}
+\HLAServiceBookmark{12.13.1}{2}{Overview}
+\HLAServiceBookmark{12.13.2}{2}{Layers}
+\HLAServiceBookmark{12.13.3}{2}{HLA Service Layer}
+\HLAServiceBookmark{12.13.3.1}{3}{Mapping of Calls and Callbacks to messages}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.13 HLA Federate Protocol}%
+  }
+  \HLAFixedBlock{90.000}{94.666}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.1 Overview}%
+  }
+  \HLAFixedBlock{90.000}{118.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Federate Protocol provides access to the RTI services using a point-to-point network connection based%
+  }
+  \HLAFixedBlock{90.000}{130.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    on TCP/IP [B7]. This section provides an overview of the different protocol layers as well as detailed%
+  }
+  \HLAFixedBlock{90.000}{142.805}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    specifications of each layer. %
+  }
+  \HLAFixedBlock{90.000}{166.665}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.2 Layers}%
+  }
+  \HLAFixedBlock{90.000}{190.804}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Federate Protocol communicates using three layers that build upon each other, as shown in Figure 21.%
+  }
+  \HLAFixedBlock{90.000}{425.765}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The layers have the following roles:%
+  }
+  \HLAFixedBlock{100.020}{449.764}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{449.764}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{IEEE 1516 HLA Services Layer}%
+  }
+  \HLAFixedBlock{256.979}{449.764}{347.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This layer provides the standard HLA service calls and callbacks,%
+  }
+  \HLAFixedBlock{121.980}{461.764}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    exchanged using the session layer.%
+  }
+  \HLAFixedBlock{100.020}{473.824}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{473.824}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Session Layer.}%
+  }
+  \HLAFixedBlock{183.360}{473.824}{420.640}{\rmfamily\raggedright}{9.96}{11.16}{%
+     This layer provides a well-defined session between the federate and RTI on top of%
+  }
+  \HLAFixedBlock{121.980}{485.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the transport layer. It supports session setup and teardown, calls initiated from the federate, and%
+  }
+  \HLAFixedBlock{121.980}{497.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    callbacks initiated from the RTI. It also provides fault tolerance by providing session resume in case%
+  }
+  \HLAFixedBlock{121.980}{509.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the transport layer has been interrupted and then reconnected.%
+  }
+  \HLAFixedBlock{100.020}{521.823}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{521.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Transport Layer}%
+  }
+  \HLAFixedBlock{194.880}{521.823}{409.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This layer provides connectivity between the federate and the RTI, enabling%
+  }
+  \HLAFixedBlock{121.980}{533.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    messages to be exchanged in both directions based on TCP/IP. If secure transportation is required,%
+  }
+  \HLAFixedBlock{121.980}{545.823}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    TLS 1.3 [B7] is used. %
+  }
+  \HLAFixedBlock{90.000}{569.683}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.3 HLA Service Layer}%
+  }
+  \HLAFixedBlock{90.000}{593.822}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This layer provides the HLA services including their supplied arguments, returned arguments, and%
+  }
+  \HLAFixedBlock{90.000}{605.822}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    exceptions, all binary encoded as specified in Annex D. %
+  }
+  \HLAFixedBlock{90.000}{629.682}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.3.1 Mapping of Calls and Callbacks to messages}%
+  }
+  \HLAFixedBlock{90.000}{653.821}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The HLA service calls are mapped as follows. For a given HLA Service, two messages are used:%
+  }
+  \HLAFixedBlock{100.020}{677.820}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{677.820}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A CallRequest message representing the call and its arguments, for example the%
+  }
+  \HLAFixedBlock{121.980}{689.820}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    CreateFederationExecutionRequest message. This message is sent from the federate to the RTI.%
+  }
+  \HLAFixedBlock{223.500}{391.066}{380.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Figure 21---HLA Federate Protocol layers}%
+  }
+\end{hlafixedpage}
+\clearpage

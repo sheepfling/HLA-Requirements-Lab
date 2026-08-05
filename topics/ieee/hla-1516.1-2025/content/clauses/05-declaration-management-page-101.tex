@@ -1,0 +1,156 @@
+\HLASourcePage{102}{101}
+\HLAServiceBookmark{5.11.4}{2}{Postconditions}
+\HLAServiceBookmark{5.11.5}{2}{Exceptions}
+\HLAServiceBookmark{5.11.6}{2}{Reference state charts}
+\HLAServiceBookmark{5.12}{1}{Subscribe Object Class Directed Interactions service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    5.11.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{93.785}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall not deliver interactions of the specified interaction class to the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    5.11.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{141.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{141.785}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The interaction class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.019}{153.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{153.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{165.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.975}{165.784}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.019}{177.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{177.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{189.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.964}{189.784}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{201.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.960}{201.784}{400.040}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{225.644}{%
+    5.11.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{249.783}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{249.783}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 13, Interaction class (m).%
+  }
+  \HLAServiceHeadingAt{279.383}{%
+    5.12 Subscribe Object Class Directed Interactions service%
+  }
+  \HLAFixedBlock{90.000}{304.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Subscribe Object Class Directed Interactions} specifies directed interactions for an object class for%
+  }
+  \HLAFixedBlock{90.000}{316.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    which the RTI shall notify the joined federate of sent directed interactions by invoking the \emph{Receive Directed}%
+  }
+  \HLAFixedBlock{90.000}{328.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction \textdagger{}} service at the joined federate. The set of class directed interactions provided shall be a subset%
+  }
+  \HLAFixedBlock{90.000}{340.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the available directed interactions of the specified object class.%
+  }
+  \HLAFixedBlock{90.000}{364.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Directed interaction classes are subscribed by ownership or universally:%
+  }
+  \HLAFixedBlock{100.020}{376.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.964}{376.805}{400.036}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional universal subscription indicator is not present or indicates subscription by ownership,%
+  }
+  \HLAFixedBlock{121.980}{388.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    directed interactions are only delivered for target object instances for which the joined federate owns%
+  }
+  \HLAFixedBlock{121.980}{400.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at least one attribute.%
+  }
+  \HLAFixedBlock{100.020}{412.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{412.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the optional universal subscription indicator indicates universal subscription, directed interactions%
+  }
+  \HLAFixedBlock{121.980}{424.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    are delivered for all object instances that are known to the joined federate.%
+  }
+  \HLAFixedBlock{89.999}{448.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The use of the optional universal subscription indicator shall act as follows:%
+  }
+  \HLAFixedBlock{89.999}{472.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each subscribed directed interaction class is subscribed either by ownership or universally (but not both) at a%
+  }
+  \HLAFixedBlock{89.999}{484.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    given object class; and two directed interaction classes that are subscribed at the same object class may be%
+  }
+  \HLAFixedBlock{89.999}{496.803}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    subscribed differently from each other: one by ownership and one universal. Each directed interaction class%
+  }
+  \HLAFixedBlock{89.999}{508.802}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified in a given invocation of the \emph{Subscribe Object Class Directed Interactions} service shall take on the%
+  }
+  \HLAFixedBlock{89.999}{520.802}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    effect of the optional by ownership/universal subscription indicator supplied (or not supplied) with that%
+  }
+  \HLAFixedBlock{89.999}{532.802}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service invocation. %
+  }
+  \HLAFixedBlock{89.999}{556.802}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invoking the Subscribe Object Class Directed Interactions service with an empty set of directed interaction%
+  }
+  \HLAFixedBlock{89.999}{568.801}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    classes shall not change the by ownership/universal subscription nature of any of the directed interactions%
+  }
+  \HLAFixedBlock{89.999}{580.801}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that are subscribed at the specified object class. Each use of the \emph{Subscribe Object Class Directed}%
+  }
+  \HLAFixedBlock{89.999}{592.801}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interactions} service shall add to the subscriptions specified to the RTI in any previous \emph{Subscribe Object}%
+  }
+  \HLAFixedBlock{89.999}{604.801}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Class Directed Interactions} service invocation for the same object class and may change the by ownership/%
+  }
+  \HLAFixedBlock{90.000}{616.801}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    universal nature of previous directed interaction subscriptions for that object class.%
+  }
+  \HLAFixedBlock{90.000}{640.800}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a directed interaction is received by a joined federate, the received class of the interaction shall be the%
+  }
+  \HLAFixedBlock{90.000}{652.800}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    directed interaction’s sent class, if subscribed. Otherwise, the received class is the closest superclass of the%
+  }
+  \HLAFixedBlock{90.000}{664.800}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    sent class that is subscribed when the directed interaction is received. Only the parameters from the directed%
+  }
+  \HLAFixedBlock{90.000}{676.800}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interaction’s received class and its superclasses will be received.%
+  }
+\end{hlafixedpage}
+\clearpage

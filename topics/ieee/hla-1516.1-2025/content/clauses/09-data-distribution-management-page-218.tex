@@ -1,0 +1,193 @@
+\HLASourcePage{219}{218}
+\HLAServiceBookmark{9.1.3}{2}{Using regions}
+\HLAServiceBookmark{9.1.3.1}{2}{Region relationships}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{9.1.3 Using regions}%
+  }
+  \HLAServiceComponentHeadingAt{93.646}{%
+    \textbf{9.1.3.1 Region relationships}%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The following relationships, established through DDM services, shall pertain to regions:%
+  }
+  \HLAFixedBlock{100.020}{132.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{132.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The only way that a region specification can be created is by a federate successfully invoking the%
+  }
+  \HLAFixedBlock{121.980}{144.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    following services, in order:%
+  }
+  \HLAFixedBlock{121.980}{159.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.024}{159.784}{379.976}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invoke the \emph{Create Region} service (see 9.2) to create a region with a specific set of dimensions.%
+  }
+  \HLAFixedBlock{121.981}{174.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.029}{174.784}{379.971}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For every dimension that was explicitly specified when that region was created, invoke the \emph{Set}%
+  }
+  \HLAFixedBlock{142.021}{186.784}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Range Bounds} service (see 10.32) to set the lower and upper bounds of the range of that%
+  }
+  \HLAFixedBlock{142.021}{198.784}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    dimension for that region.%
+  }
+  \HLAFixedBlock{121.982}{213.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    3)%
+  }
+  \HLAFixedBlock{142.021}{213.783}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invoke \emph{Commit Region Modifications} (see 9.3) to inform the RTI about the changes to the%
+  }
+  \HLAFixedBlock{142.022}{225.783}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ranges of the dimensions specified in the preceding series of Set Range Bounds service%
+  }
+  \HLAFixedBlock{142.022}{237.783}{379.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocations.%
+  }
+  \HLAFixedBlock{121.983}{252.783}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A region template is created when a federate invokes the \emph{Create Region} service. The region designa-%
+  }
+  \HLAFixedBlock{121.983}{264.783}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    tor argument that is returned as a result of the \emph{Create Region} service is a designator of a region tem-%
+  }
+  \HLAFixedBlock{121.984}{276.782}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    plate only. It is not the designator of a region specification because the range bounds have not yet%
+  }
+  \HLAFixedBlock{121.984}{288.782}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    been set for all of the dimensions of the region template followed by a successful invocation of the%
+  }
+  \HLAFixedBlock{121.984}{300.782}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Commit Region Modifications} service for this region. Only after the Set\emph{ Range Bounds} service has%
+  }
+  \HLAFixedBlock{121.985}{312.782}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    been successfully invoked for every dimension in the region, followed by a successful invocation of%
+  }
+  \HLAFixedBlock{121.985}{324.782}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the \emph{Commit Region Modifications} service, is that region designator the designator of a region speci-%
+  }
+  \HLAFixedBlock{121.984}{336.781}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    fication. %
+  }
+  \HLAFixedBlock{100.024}{348.781}{421.976}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.944}{348.781}{400.056}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a federate invokes the \emph{Register Object Instance With Region}, \emph{Associate Regions For Updates},%
+  }
+  \HLAFixedBlock{121.985}{360.781}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Subscribe Object Class Attributes With Regions}, \emph{Subscribe Interaction Class With Regions}, \emph{Send}%
+  }
+  \HLAFixedBlock{121.986}{372.781}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Interaction With Regions}, or \emph{Request Attribute Value Update With Regions} service with that region%
+  }
+  \HLAFixedBlock{121.986}{384.781}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specification designator as an argument, one or more region realizations are created. These region%
+  }
+  \HLAFixedBlock{121.986}{396.781}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    realizations, however, do not have designators.%
+  }
+  \HLAFixedBlock{100.026}{408.780}{421.974}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.984}{408.780}{400.016}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified dimensions of the region specification shall be the dimensions that are explicitly%
+  }
+  \HLAFixedBlock{121.987}{420.780}{400.013}{\rmfamily\raggedright}{9.96}{12.00}{%
+    provided when the \emph{Create Region} service is invoked to create that region specification. Invocation of%
+  }
+  \HLAFixedBlock{121.987}{432.780}{400.013}{\rmfamily\raggedright}{9.96}{12.00}{%
+    neither the \emph{Set Range Bounds} service nor the \emph{Commit Region Modifications} service for a particular%
+  }
+  \HLAFixedBlock{121.987}{444.780}{400.013}{\rmfamily\raggedright}{9.96}{12.00}{%
+    region has any effect on what the specified dimensions of that region specification are.%
+  }
+  \HLAFixedBlock{100.027}{456.780}{421.973}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.987}{456.780}{400.013}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The unspecified dimensions of a region realization shall be the available dimensions of the class%
+  }
+  \HLAFixedBlock{121.986}{468.779}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute, instance attribute, interaction class, or sent interaction with which the region realization is%
+  }
+  \HLAFixedBlock{121.986}{480.779}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    associated less the specified dimensions of the region specification from which the region%
+  }
+  \HLAFixedBlock{121.986}{492.779}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    realization is \textbf{derived}.%
+  }
+  \HLAFixedBlock{100.026}{504.779}{421.974}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.986}{504.779}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Commit Region Modifications} service can only either%
+  }
+  \HLAFixedBlock{121.986}{519.779}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.031}{519.779}{379.969}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Create a region specification from a region template, or %
+  }
+  \HLAFixedBlock{121.986}{534.778}{400.014}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.034}{534.778}{379.966}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Modify the range bounds of an existing region specification and thereby also modify the range%
+  }
+  \HLAFixedBlock{142.026}{546.778}{379.974}{\rmfamily\raggedright}{9.96}{12.00}{%
+    bounds of all existing region realizations that are derived from that region specification.%
+  }
+  \HLAFixedBlock{100.026}{561.778}{421.974}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.960}{561.778}{400.040}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a region realization is created by associating a region specification with an instance attribute,%
+  }
+  \HLAFixedBlock{121.985}{573.778}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a class attribute, an interaction class, or a sent interaction, additions may be made to the region%
+  }
+  \HLAFixedBlock{121.985}{585.778}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    realization by the RTI to account for default dimension values indicated in the FDD as follows:%
+  }
+  \HLAFixedBlock{121.985}{600.777}{400.015}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.030}{600.777}{379.970}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All specified dimensions of the region specification shall be included in the region realization,%
+  }
+  \HLAFixedBlock{142.025}{612.777}{379.975}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and the range associated with each specified dimension in the region realization shall be the%
+  }
+  \HLAFixedBlock{142.020}{624.786}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    range found in the region specification for the same dimension.%
+  }
+  \HLAFixedBlock{121.980}{639.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.033}{639.785}{379.967}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For each unspecified dimension of the region realization, if the FDD indicates a default range%
+  }
+  \HLAFixedBlock{142.020}{651.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    other than the excluded indicator, this default range shall be added to the region realization.%
+  }
+  \HLAFixedBlock{121.980}{666.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    3)%
+  }
+  \HLAFixedBlock{142.033}{666.785}{379.967}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When a federate modifies a region specification from which region realizations have been%
+  }
+  \HLAFixedBlock{142.020}{678.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    derived, the RTI shall fill in unspecified dimensions in the region realizations in this same%
+  }
+  \HLAFixedBlock{142.020}{690.785}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    manner.%
+  }
+\end{hlafixedpage}
+\clearpage

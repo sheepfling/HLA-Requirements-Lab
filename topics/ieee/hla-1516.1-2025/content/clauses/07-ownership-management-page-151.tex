@@ -1,0 +1,166 @@
+\HLASourcePage{152}{151}
+\HLAServiceBookmark{7.1.2}{2}{Ownership transfer mechanisms}
+\HLAServiceBookmark{7.1.2.1}{3}{Divestiture}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the RTI can locate a joined federate that is willing to own the instance attribute. If any joined%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates are in the process of trying to acquire the instance attribute, these joined federates are%
+  }
+  \HLAFixedBlock{121.980}{93.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    willing to own the instance attribute. The RTI can try to identify other joined federates that are%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    willing to own the instance attribute by invoking the \emph{Request Attribute Ownership Assumption \textdagger{}}%
+  }
+  \HLAFixedBlock{121.980}{117.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service at all joined federates that are not in the process of trying to acquire the instance attribute, but%
+  }
+  \HLAFixedBlock{121.981}{129.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that are publishing the instance attribute’s corresponding class attribute at the publishing joined%
+  }
+  \HLAFixedBlock{121.981}{141.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate’s known class of the instance attribute. If the RTI is able to locate a joined federate that is%
+  }
+  \HLAFixedBlock{121.981}{153.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    willing to acquire the instance attribute, the RTI shall notify the divesting joined federate by%
+  }
+  \HLAFixedBlock{121.981}{165.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoking the \emph{Request Divestiture Confirmation \textdagger{}} service. The divesting joined federate may then%
+  }
+  \HLAFixedBlock{121.980}{177.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    complete the negotiated divestiture using the \emph{Confirm Divestiture} service, which causes ownership%
+  }
+  \HLAFixedBlock{121.980}{189.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    of the instance attribute to be lost.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.980}{201.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may invoke the \emph{Attribute Ownership Divestiture If Wanted} service, which%
+  }
+  \HLAFixedBlock{121.980}{213.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    notifies the RTI that the joined federate wishes to divest itself of ownership of the instance attribute,%
+  }
+  \HLAFixedBlock{121.980}{225.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    providing that another joined federate is attempting to acquire ownership of it. This service%
+  }
+  \HLAFixedBlock{121.980}{237.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation has a return argument that the RTI shall use to indicate the set of instance attributes for%
+  }
+  \HLAFixedBlock{121.980}{249.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    which the joined federate has divested ownership. If an instance attribute is not in the returned%
+  }
+  \HLAFixedBlock{121.980}{261.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute set, it was not divested, and the request to divest this instance attribute shall be%
+  }
+  \HLAFixedBlock{121.980}{273.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    concluded. If the \emph{Attribute Ownership Divestiture If Wanted} service returns with the designated%
+  }
+  \HLAFixedBlock{121.981}{285.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute among the set of released instance attributes, the instance attribute shall be%
+  }
+  \HLAFixedBlock{121.982}{297.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unowned by the invoking joined federate. [In Figure 16, the transition from the owned to the%
+  }
+  \HLAFixedBlock{121.982}{309.782}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unowned state via an \emph{Attribute Ownership Divestiture If Wanted }service invocation is labeled%
+  }
+  \HLAFixedBlock{121.983}{321.782}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    “\emph{Attribute Ownership Divestiture If Wanted} (ret: divested).” This is a convenience notation%
+  }
+  \HLAFixedBlock{121.983}{333.782}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    indicating that the instance attribute in question is a member of the returned instance attribute set.]%
+  }
+  \HLAFixedBlock{100.023}{345.781}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.983}{345.781}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may stop publishing the instance attribute’s corresponding class attribute at the%
+  }
+  \HLAFixedBlock{121.983}{357.781}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class of the instance attribute; this step shall result in the instance attribute immediately%
+  }
+  \HLAFixedBlock{121.983}{369.781}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    becoming unowned by that joined federate and, in fact, by all joined federates.%
+  }
+  \HLAFixedBlock{100.023}{381.781}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.982}{381.781}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may resign from the federation execution. When a joined federate successfully%
+  }
+  \HLAFixedBlock{121.983}{393.781}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    resigns from the federation execution with the Unconditionally Divest Attributes option, all of the%
+  }
+  \HLAFixedBlock{121.983}{405.780}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attributes that are owned by that joined federate shall become unowned by that joined%
+  }
+  \HLAFixedBlock{121.983}{417.780}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate and, in fact, by all joined federates. This transition is not depicted in Figure 16 because it%
+  }
+  \HLAFixedBlock{121.983}{429.780}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    occurs at a joined federate, rather than at an instance attribute, level of operation.%
+  }
+  \HLAFixedBlock{90.002}{453.780}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Of the five ways a joined federate may divest itself of an instance attribute, only the \emph{Negotiated Attribute}%
+  }
+  \HLAFixedBlock{90.003}{465.780}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Ownership Divestiture} service may be canceled. A \emph{Negotiated Attribute Ownership Divestiture} service%
+  }
+  \HLAFixedBlock{90.003}{477.779}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation shall remain pending until either the instance attribute becomes unowned or the divesting joined%
+  }
+  \HLAFixedBlock{90.003}{489.779}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate cancels the divestiture request by invoking the \emph{Cancel Negotiated Attribute Ownership Divestiture}%
+  }
+  \HLAFixedBlock{90.003}{501.779}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service. Cancellation of the divestiture shall be guaranteed to be successful.%
+  }
+  \HLAFixedBlock{90.003}{525.779}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Of the five ways a joined federate may divest itself of an instance attribute, three ways (invocation of the%
+  }
+  \HLAFixedBlock{90.002}{537.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Unconditional Attribute Ownership Divestiture} service, a request to stop publication of the instance%
+  }
+  \HLAFixedBlock{90.002}{549.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute’s corresponding class attribute at the known class of the instance attribute, and invocation of the%
+  }
+  \HLAFixedBlock{90.002}{561.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Resign Federation Execution} service) shall result in the instance attribute becoming unowned by all joined%
+  }
+  \HLAFixedBlock{90.002}{573.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates. When either the \emph{Negotiated Attribute Ownership Divestiture} or the \emph{Attribute Ownership}%
+  }
+  \HLAFixedBlock{90.002}{585.778}{431.998}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Divestiture If Wanted} service is used, the RTI shall guarantee that immediately after the owning joined%
+  }
+  \HLAFixedBlock{90.000}{597.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate loses ownership of the instance attribute, another joined federate shall be granted ownership of it.%
+  }
+  \HLAFixedBlock{90.000}{609.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For purposes of determining an instance attribute’s scope, the instance attribute shall be considered to be%
+  }
+  \HLAFixedBlock{90.000}{621.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    continuously owned during its transfer of ownership from the divesting joined federate to the acquiring%
+  }
+  \HLAFixedBlock{90.000}{633.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate via either the \emph{Negotiated Attribute Ownership Divestiture} or the\emph{ Attribute Ownership}%
+  }
+  \HLAFixedBlock{90.001}{645.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Divestiture If Wanted} service.%
+  }
+  \HLAFixedBlock{90.001}{669.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When the value of an instance attribute is being updated by a joined federate using TSO messages and that%
+  }
+  \HLAFixedBlock{90.001}{681.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate is initiating a negotiated divestiture of that instance attribute, the divesting and receiving%
+  }
+  \HLAFixedBlock{90.001}{693.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates should be aware of potential causality or reflection anomalies. %
+  }
+\end{hlafixedpage}
+\clearpage

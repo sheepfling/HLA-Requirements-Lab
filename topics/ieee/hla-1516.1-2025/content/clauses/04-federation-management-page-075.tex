@@ -1,0 +1,150 @@
+\HLASourcePage{76}{75}
+\HLAServiceBookmark{4.29.4}{2}{Postconditions}
+\HLAServiceBookmark{4.29.5}{2}{Exceptions}
+\HLAServiceBookmark{4.29.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.30}{1}{Initiate Federate Restore † service}
+\HLAServiceBookmark{4.30.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.30.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.30.3}{2}{Preconditions}
+\HLAServiceBookmark{4.30.4}{2}{Postconditions}
+\HLAServiceBookmark{4.30.5}{2}{Exceptions}
+\HLAServiceBookmark{4.30.6}{2}{Reference state charts}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.29.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{93.785}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been instructed to stop providing new information to the federation.%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    4.29.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{141.785}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{165.645}{%
+    4.29.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{189.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{189.784}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{219.383}{%
+    4.30 \emph{Initiate Federate Restore \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{244.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Initiate Federate Restore \textdagger{}} service shall instruct the joined federate to return to a previously saved state.%
+  }
+  \HLAFixedBlock{90.000}{256.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate shall select the appropriate restoration state information based on the name of the current%
+  }
+  \HLAFixedBlock{90.000}{268.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation execution, the supplied federation save label, the supplied joined federate designator, and the%
+  }
+  \HLAFixedBlock{90.000}{280.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    supplied federate name. As a result of this service invocation, a joined federate’s designator and name could%
+  }
+  \HLAFixedBlock{90.000}{292.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    change from the value supplied by the \emph{Join Federation Execution} service.%
+  }
+  \HLAServiceComponentHeadingAt{316.665}{%
+    4.30.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{340.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{340.804}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation save label.%
+  }
+  \HLAFixedBlock{100.020}{352.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.982}{352.804}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federate designator.%
+  }
+  \HLAFixedBlock{100.020}{364.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{364.804}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate name.%
+  }
+  \HLAServiceComponentHeadingAt{388.664}{%
+    4.30.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{412.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{412.803}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{436.663}{%
+    4.30.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{460.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{460.802}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{472.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{472.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{484.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{484.802}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has a save with the specified label.%
+  }
+  \HLAFixedBlock{100.020}{496.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{496.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{520.662}{%
+    4.30.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{544.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{544.801}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been informed to begin restoring state. %
+  }
+  \HLAFixedBlock{100.020}{556.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{556.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate’s designator and name may be changed.%
+  }
+  \HLAServiceComponentHeadingAt{580.661}{%
+    4.30.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{604.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{604.800}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{628.660}{%
+    4.30.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{652.799}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{652.799}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+\end{hlafixedpage}
+\clearpage

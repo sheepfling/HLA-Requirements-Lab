@@ -1,0 +1,412 @@
+\HLASourcePage{360}{359}
+\HLAServiceBookmark{12.11.1}{2}{Designators}
+\HLAServiceBookmark{12.11.2}{2}{Dynamic link compatibility}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The entire Java API is included in the package %
+  }
+  \HLAFixedBlock{295.200}{70.373}{308.800}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{391.140}{69.786}{212.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and subpackages. Because the%
+  }
+  \HLAFixedBlock{90.000}{81.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    specified interfaces and classes constitute the API, the entire package %
+  }
+  \HLAFixedBlock{388.680}{82.373}{215.320}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{484.681}{81.785}{119.319}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be%
+  }
+  \HLAFixedBlock{90.001}{93.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    furnished without additions or deletions or change of package name as part of each implementation.%
+  }
+  \HLAFixedBlock{90.001}{105.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Implementers shall place their implementation classes in another package.%
+  }
+  \HLAFixedBlock{90.001}{129.645}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.1 Designators}%
+  }
+  \HLAFixedBlock{90.001}{153.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The Java interfaces that represent handles shall implement a %
+  }
+  \HLAFixedBlock{332.281}{154.372}{271.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hashCode()}%
+  }
+  \HLAFixedBlock{392.281}{153.784}{211.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that returns an %
+  }
+  \HLAFixedBlock{486.601}{154.372}{117.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{int}%
+  }
+  \HLAFixedBlock{504.601}{153.784}{99.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+     that%
+  }
+  \HLAFixedBlock{90.001}{165.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    is suitable for use as a hash value for use in storing handles in a hash table. The hash value may not be%
+  }
+  \HLAFixedBlock{90.001}{177.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    unique across two separate handle values but shall be equal given two separate instances of the same handle%
+  }
+  \HLAFixedBlock{90.001}{189.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    value. The following are the properties of the hash value where H1 and H2 are separate instances of hash%
+  }
+  \HLAFixedBlock{90.001}{201.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    values.%
+  }
+  \HLAFixedBlock{100.021}{225.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{225.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    H1 == H2 implies H1.hashCode() == H2.hashCode()%
+  }
+  \HLAFixedBlock{100.021}{237.783}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{237.783}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    H1 != H2 does not imply H1.hashCode() != H2.hashCode()%
+  }
+  \HLAFixedBlock{90.001}{261.643}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.2 Dynamic link compatibility}%
+  }
+  \HLAFixedBlock{90.001}{285.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Java dynamic link compatibility for this specification is provided through use of the Service Loader, as%
+  }
+  \HLAFixedBlock{90.001}{297.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    described in the javadoc for ServiceLoader, available at %
+  }
+  \HLAFixedBlock{318.601}{297.782}{285.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+    https://docs.oracle.com/en/java/javase/11/docs/api/%
+  }
+  \HLAFixedBlock{90.000}{309.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    java.base/java/util/ServiceLoader.html%
+  }
+  \HLAFixedBlock{243.780}{309.786}{360.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . Several classes and interfaces shall be included in the HLA service.%
+  }
+  \HLAFixedBlock{90.001}{333.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall provide the IEEE Std 1516.1-2025 Java API classes in the package %
+  }
+  \HLAFixedBlock{426.061}{334.373}{177.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{90.001}{345.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    with corresponding subpackages. Each RTI vendor shall provide their RTI implementation classes in an%
+  }
+  \HLAFixedBlock{90.001}{357.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation-specific package.%
+  }
+  \HLAFixedBlock{90.001}{381.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This %
+  }
+  \HLAFixedBlock{125.338}{381.784}{478.662}{\rmfamily\raggedright}{9.96}{11.16}{%
+    standard %
+  }
+  \HLAFixedBlock{176.799}{381.784}{427.201}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provides %
+  }
+  \HLAFixedBlock{228.844}{381.784}{375.156}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementations %
+  }
+  \HLAFixedBlock{313.196}{381.784}{290.804}{\rmfamily\raggedright}{9.96}{11.16}{%
+    for %
+  }
+  \HLAFixedBlock{342.450}{381.784}{261.550}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{372.261}{381.784}{231.739}{\rmfamily\raggedright}{9.96}{11.16}{%
+    classes %
+  }
+  \HLAFixedBlock{417.540}{382.372}{186.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactoryFactory}%
+  }
+  \HLAFixedBlock{519.480}{381.784}{84.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.000}{394.372}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{NullFederateAmbassador}%
+  }
+  \HLAFixedBlock{221.940}{393.784}{382.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{292.800}{394.372}{311.200}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{436.740}{393.784}{167.260}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{507.620}{393.784}{96.380}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{406.372}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactoryFactory}%
+  }
+  \HLAFixedBlock{239.939}{405.784}{364.061}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{429.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{118.978}{429.784}{485.022}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI %
+  }
+  \HLAFixedBlock{147.933}{429.784}{456.067}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall %
+  }
+  \HLAFixedBlock{180.272}{429.784}{423.728}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provide %
+  }
+  \HLAFixedBlock{224.258}{429.784}{379.742}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementations %
+  }
+  \HLAFixedBlock{304.356}{429.784}{299.644}{\rmfamily\raggedright}{9.96}{11.16}{%
+    for %
+  }
+  \HLAFixedBlock{329.376}{429.784}{274.624}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{355.047}{429.784}{248.953}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Encoding %
+  }
+  \HLAFixedBlock{406.823}{429.784}{197.177}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Helper %
+  }
+  \HLAFixedBlock{447.363}{429.784}{156.637}{\rmfamily\raggedright}{9.96}{11.16}{%
+    classes %
+  }
+  \HLAFixedBlock{488.546}{429.784}{115.454}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in %
+  }
+  \HLAFixedBlock{509.775}{429.784}{94.225}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the%
+  }
+  \HLAFixedBlock{90.000}{442.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.encoding}%
+  }
+  \HLAFixedBlock{239.939}{441.784}{364.061}{\rmfamily\raggedright}{9.96}{11.16}{%
+     package. The RTI shall also provide a class that implements the%
+  }
+  \HLAFixedBlock{90.000}{454.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{149.940}{453.783}{454.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface defined in the %
+  }
+  \HLAFixedBlock{259.500}{454.371}{344.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{355.500}{453.783}{248.500}{\rmfamily\raggedright}{9.96}{11.16}{%
+     package. This class shall reside in an%
+  }
+  \HLAFixedBlock{90.001}{465.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation-specific package outside of the %
+  }
+  \HLAFixedBlock{281.760}{466.371}{322.240}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{377.700}{465.783}{226.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+     hierarchy. The %
+  }
+  \HLAFixedBlock{440.101}{466.371}{163.899}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{500.101}{465.783}{103.899}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class%
+  }
+  \HLAFixedBlock{90.001}{477.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall be listed in a provider configuration file, i.e., a file named %
+  }
+  \HLAFixedBlock{349.441}{478.371}{254.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.RtiFactory}%
+  }
+  \HLAFixedBlock{511.320}{477.783}{92.680}{\rmfamily\raggedright}{9.96}{11.16}{%
+     in%
+  }
+  \HLAFixedBlock{90.001}{489.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{104.700}{490.370}{499.300}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{META-INF/services}%
+  }
+  \HLAFixedBlock{206.701}{489.783}{397.299}{\rmfamily\raggedright}{9.96}{11.16}{%
+     directory of the Java Archive (JAR) shall contain a line with the class name of%
+  }
+  \HLAFixedBlock{90.002}{501.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the implementing class, e.g., %
+  }
+  \HLAFixedBlock{206.581}{502.370}{397.419}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{com.mycompany.MyRtiFactoryImpl}%
+  }
+  \HLAFixedBlock{386.522}{501.783}{217.478}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.002}{525.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall also provide implementations of the standardized time classes %
+  }
+  \HLAFixedBlock{423.542}{526.370}{180.458}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAinteger64Time}%
+  }
+  \HLAFixedBlock{519.482}{525.782}{84.518}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ,%
+  }
+  \HLAFixedBlock{90.002}{538.370}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAinteger64Interval}%
+  }
+  \HLAFixedBlock{209.942}{537.782}{394.058}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{219.062}{538.370}{384.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAfloat64Time}%
+  }
+  \HLAFixedBlock{303.062}{537.782}{300.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{333.301}{538.370}{270.699}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAfloat64Interval}%
+  }
+  \HLAFixedBlock{441.241}{537.782}{162.759}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , along with their%
+  }
+  \HLAFixedBlock{90.001}{549.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    factory classes %
+  }
+  \HLAFixedBlock{153.961}{550.369}{450.039}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAinteger64TimeFactory}%
+  }
+  \HLAFixedBlock{291.901}{549.782}{312.099}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and %
+  }
+  \HLAFixedBlock{314.281}{550.369}{289.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAfloat64TimeFactory}%
+  }
+  \HLAFixedBlock{440.221}{549.782}{163.779}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The time factories%
+  }
+  \HLAFixedBlock{90.001}{561.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall %
+  }
+  \HLAFixedBlock{127.675}{561.782}{476.325}{\rmfamily\raggedright}{9.96}{11.16}{%
+    be %
+  }
+  \HLAFixedBlock{155.997}{561.782}{448.003}{\rmfamily\raggedright}{9.96}{11.16}{%
+    listed %
+  }
+  \HLAFixedBlock{196.439}{561.782}{407.561}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in %
+  }
+  \HLAFixedBlock{223.081}{561.782}{380.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{246.348}{561.782}{357.652}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provider %
+  }
+  \HLAFixedBlock{299.035}{561.782}{304.965}{\rmfamily\raggedright}{9.96}{11.16}{%
+    configuration %
+  }
+  \HLAFixedBlock{371.729}{561.782}{232.271}{\rmfamily\raggedright}{9.96}{11.16}{%
+    file, %
+  }
+  \HLAFixedBlock{406.420}{561.782}{197.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+    i.e., %
+  }
+  \HLAFixedBlock{439.941}{561.782}{164.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{463.208}{561.782}{140.792}{\rmfamily\raggedright}{9.96}{11.16}{%
+    file %
+  }
+  \HLAFixedBlock{495.341}{561.782}{108.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    named%
+  }
+  \HLAFixedBlock{90.001}{574.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{299.881}{573.781}{304.119}{\rmfamily\raggedright}{9.96}{11.16}{%
+     in the %
+  }
+  \HLAFixedBlock{329.880}{574.369}{274.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{META-INF/services}%
+  }
+  \HLAFixedBlock{431.820}{573.781}{172.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+     directory of the JAR.%
+  }
+  \HLAFixedBlock{90.000}{585.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The file shall contain a line with the class name of each implementing class, e.g.,%
+  }
+  \HLAFixedBlock{90.000}{598.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{com.mycompany.HLAinteger64TimeFactoryImpl}%
+  }
+  \HLAFixedBlock{507.600}{597.781}{96.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{610.368}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{com.mycompany.HLAfloat64TimeFactoryImpl}%
+  }
+  \HLAFixedBlock{323.879}{609.781}{280.121}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{633.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI shall also provide implementations of the predefined authorization service class %
+  }
+  \HLAFixedBlock{444.060}{634.368}{159.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAauthorizer}%
+  }
+  \HLAFixedBlock{90.000}{645.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    along with its factory class %
+  }
+  \HLAFixedBlock{210.240}{646.368}{393.760}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAauthorizerFactory}%
+  }
+  \HLAFixedBlock{330.180}{645.780}{273.820}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The authorizer factories shall be listed in a%
+  }
+  \HLAFixedBlock{90.000}{657.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provider %
+  }
+  \HLAFixedBlock{150.636}{657.780}{453.364}{\rmfamily\raggedright}{9.96}{11.16}{%
+    configuration %
+  }
+  \HLAFixedBlock{231.245}{657.780}{372.755}{\rmfamily\raggedright}{9.96}{11.16}{%
+    file. %
+  }
+  \HLAFixedBlock{271.837}{657.780}{332.163}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{314.112}{657.780}{289.888}{\rmfamily\raggedright}{9.96}{11.16}{%
+    provider %
+  }
+  \HLAFixedBlock{374.715}{657.780}{229.285}{\rmfamily\raggedright}{9.96}{11.16}{%
+    configuration %
+  }
+  \HLAFixedBlock{455.319}{657.780}{148.681}{\rmfamily\raggedright}{9.96}{11.16}{%
+    file %
+  }
+  \HLAFixedBlock{495.367}{657.780}{108.633}{\rmfamily\raggedright}{9.96}{11.16}{%
+    named%
+  }
+  \HLAFixedBlock{90.000}{670.367}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.AuthorizerFactory}%
+  }
+  \HLAFixedBlock{293.880}{669.780}{310.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall be in the %
+  }
+  \HLAFixedBlock{355.499}{670.367}{248.501}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{META-INF/services}%
+  }
+  \HLAFixedBlock{457.439}{669.780}{146.561}{\rmfamily\raggedright}{9.96}{11.16}{%
+     directory of the%
+  }
+  \HLAFixedBlock{89.999}{681.780}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    JAR. The file shall contain a line with the class name of the implementing class, e.g.,%
+  }
+  \HLAFixedBlock{89.999}{694.367}{514.001}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{com.mycompany.HLAauthorizerFactoryImpl}%
+  }
+  \HLAFixedBlock{317.879}{693.779}{286.121}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+\end{hlafixedpage}
+\clearpage

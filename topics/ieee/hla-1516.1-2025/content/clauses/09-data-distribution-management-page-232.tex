@@ -1,0 +1,203 @@
+\HLASourcePage{233}{232}
+\HLAServiceBookmark{9.7}{1}{Unassociate Regions For Updates service}
+\HLAServiceBookmark{9.7.1}{2}{Supplied arguments }
+\HLAServiceBookmark{9.7.2}{2}{Returned arguments }
+\HLAServiceBookmark{9.7.3}{2}{Preconditions}
+\HLAServiceBookmark{9.7.4}{2}{Postconditions}
+\HLAServiceBookmark{9.7.5}{2}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceHeadingAt{69.383}{%
+    \textbf{9.7 }\textbf{\emph{Unassociate Regions For Updates}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{94.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Unassociate Regions For Updates }service shall remove the association between the regions and the%
+  }
+  \HLAFixedBlock{89.999}{106.806}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified instance attributes. If one or more of the specified regions are in the set of associations, then these%
+  }
+  \HLAFixedBlock{89.999}{118.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    regions shall be unassociated from the specified instance attributes; if any of the specified regions are not in%
+  }
+  \HLAFixedBlock{89.999}{130.805}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the set of associations of the specified instance attributes, they shall be ignored.%
+  }
+  \HLAFixedBlock{90.000}{154.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each of the instance attributes that are unassociated by the invocation of this service shall be associated with%
+  }
+  \HLAFixedBlock{90.000}{166.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the default region if and only if they are not associated with any other update region.%
+  }
+  \HLAFixedBlock{90.000}{190.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the region set paired with an instance attribute is empty, no associations shall be removed for that instance%
+  }
+  \HLAFixedBlock{90.000}{202.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute.%
+  }
+  \HLAServiceComponentHeadingAt{226.664}{%
+    \textbf{9.7.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.020}{250.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{250.803}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator.%
+  }
+  \HLAFixedBlock{100.020}{262.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{262.803}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Collection of attribute designator set and region designator set pairs.%
+  }
+  \HLAServiceComponentHeadingAt{286.663}{%
+    \textbf{9.7.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{310.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{310.802}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None.%
+  }
+  \HLAServiceComponentHeadingAt{334.663}{%
+    \textbf{9.7.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{358.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{358.802}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{370.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{370.801}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{382.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{382.801}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{394.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.938}{394.801}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance with the specified designator exists.%
+  }
+  \HLAFixedBlock{100.020}{406.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{406.801}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.020}{418.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.943}{418.801}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The corresponding class attributes are available at the known class of the object instance at the%
+  }
+  \HLAFixedBlock{121.980}{430.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoking federate.%
+  }
+  \HLAFixedBlock{100.020}{442.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.960}{442.800}{400.040}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The regions exist.%
+  }
+  \HLAFixedBlock{100.020}{454.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{454.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The regions were created by the invoking joined federate using the \emph{Create Region} service.%
+  }
+  \HLAFixedBlock{100.021}{466.800}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.983}{466.800}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All supplied region designators are designators of region specifications. If a region designator%
+  }
+  \HLAFixedBlock{121.981}{478.800}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified is not a designator of a region specification, the “Invalid region” exception shall be%
+  }
+  \HLAFixedBlock{121.981}{490.800}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    generated.%
+  }
+  \HLAFixedBlock{100.021}{502.799}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.983}{502.799}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{514.799}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)%
+  }
+  \HLAFixedBlock{121.981}{514.799}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{538.659}{%
+    \textbf{9.7.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.021}{562.798}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{562.798}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The regions are no longer associated with the specified instance attributes.%
+  }
+  \HLAFixedBlock{100.021}{574.798}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{574.798}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All affected instance attributes that no longer have regions associated with them shall now be%
+  }
+  \HLAFixedBlock{121.981}{586.798}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    associated with the default region.%
+  }
+  \HLAServiceComponentHeadingAt{610.658}{%
+    \textbf{9.7.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{634.797}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{634.797}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The region was not created by the joined federate using the \emph{Create Region} service.%
+  }
+  \HLAFixedBlock{100.019}{646.797}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{646.797}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid region.%
+  }
+  \HLAFixedBlock{100.019}{658.797}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.979}{658.797}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The class attribute is not available.%
+  }
+  \HLAFixedBlock{100.019}{670.797}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{670.797}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.019}{682.797}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.970}{682.797}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{694.796}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.952}{694.796}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.019}{706.796}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.979}{706.796}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+\end{hlafixedpage}
+\clearpage

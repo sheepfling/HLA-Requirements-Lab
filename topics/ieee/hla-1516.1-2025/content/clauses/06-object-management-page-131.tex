@@ -1,0 +1,162 @@
+\HLASourcePage{132}{131}
+\HLAServiceBookmark{6.16.5}{2}{Exceptions}
+\HLAServiceBookmark{6.16.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.17}{1}{Remove Object Instance † service}
+\HLAServiceBookmark{6.17.1}{2}{Supplied arguments}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.16.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.966}{93.785}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The timestamp is invalid (if optional timestamp argument is supplied).%
+  }
+  \HLAFixedBlock{100.020}{108.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{108.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate does not own the delete privilege.%
+  }
+  \HLAFixedBlock{100.020}{123.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{123.785}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance is not known.%
+  }
+  \HLAFixedBlock{100.020}{138.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{138.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{153.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.975}{153.784}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{168.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.943}{168.784}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{183.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{183.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{198.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.946}{198.784}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{222.644}{%
+    6.16.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{246.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{246.783}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 10, Object class (i)%
+  }
+  \HLAServiceHeadingAt{276.383}{%
+    6.17 \emph{Remove Object Instance \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{301.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Remove Object Instance \textdagger{} }service shall inform the joined federate that an object instance has been%
+  }
+  \HLAFixedBlock{90.000}{313.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    deleted from the federation execution.%
+  }
+  \HLAFixedBlock{90.000}{337.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The user-supplied tag argument supplied to the corresponding \emph{Delete Object Instance} service invocation%
+  }
+  \HLAFixedBlock{90.000}{349.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall be provided with all corresponding \emph{Remove Object Instance \textdagger{}} service invocations.%
+  }
+  \HLAFixedBlock{90.000}{373.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A timestamp shall be provided if one was specified in the corresponding \emph{Delete Object Instance} service%
+  }
+  \HLAFixedBlock{89.999}{385.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation. The receive message order type shall indicate the type (either RO or TSO) of the received%
+  }
+  \HLAFixedBlock{89.999}{397.804}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message. The timestamp and receive message order type arguments shall be supplied together or not at all.%
+  }
+  \HLAFixedBlock{90.000}{409.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The sent message order type shall indicate the type (either RO or TSO) of the sent message. %
+  }
+  \HLAFixedBlock{90.000}{433.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A retraction handle shall be provided if the delete message had a sent order type of TSO. Otherwise, no%
+  }
+  \HLAFixedBlock{90.000}{445.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retraction handle shall be provided.%
+  }
+  \HLAFixedBlock{90.000}{469.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The producing joined federate argument shall contain the designator for the joined federate that registered%
+  }
+  \HLAFixedBlock{90.000}{481.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the object instance. This producing joined federate may not own instance attributes that caused the%
+  }
+  \HLAFixedBlock{90.000}{493.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovery, and, in fact, it may even no longer be joined to the federation execution.%
+  }
+  \HLAFixedBlock{90.000}{517.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate invoking the \emph{Delete Object Instance }service shall not receive the induced \emph{Remove Object}%
+  }
+  \HLAFixedBlock{90.000}{529.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Instance \textdagger{} }service invocation.%
+  }
+  \HLAServiceComponentHeadingAt{553.662}{%
+    6.17.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{577.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{577.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+  \HLAFixedBlock{100.020}{592.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{592.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag%
+  }
+  \HLAFixedBlock{100.020}{607.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.975}{607.801}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Sent message order type%
+  }
+  \HLAFixedBlock{100.020}{622.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{622.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Producing joined federate designator%
+  }
+  \HLAFixedBlock{100.020}{637.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.966}{637.800}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional timestamp%
+  }
+  \HLAFixedBlock{100.020}{652.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.952}{652.800}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional receive message order type%
+  }
+  \HLAFixedBlock{100.020}{667.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{667.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional message retraction designator%
+  }
+\end{hlafixedpage}
+\clearpage

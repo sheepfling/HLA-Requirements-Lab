@@ -1,0 +1,138 @@
+\HLASourcePage{66}{65}
+\HLAServiceBookmark{4.18.3}{2}{Preconditions}
+\HLAServiceBookmark{4.18.4}{2}{Postconditions}
+\HLAServiceBookmark{4.18.5}{2}{Exceptions}
+\HLAServiceBookmark{4.18.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.19}{1}{Request Federation Save service}
+\HLAAnchor{footnote:16}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.18.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{93.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{117.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.969}{117.785}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The synchronization point has been registered.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{129.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The synchronization point has been announced at this federate.%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.969}{141.785}{400.031}{\rmfamily}{9.96}{12.00}{%
+    All joined federates in the synchronization set have invoked the\ \emph{Synchronization Point Achieved}\linebreak%
+    service using the specified label.%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{165.784}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{177.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{177.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    4.18.4 Postconditions%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{225.783}{400.031}{\rmfamily}{9.96}{12.00}{%
+    The joined federate is informed that all joined federates in the synchronization set, including it if\linebreak%
+    appropriate, have invoked the\ \emph{Synchronization Point Achieved}\ service using the specified label.%
+  }
+  \HLAServiceComponentHeadingAt{261.643}{%
+    4.18.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{285.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{285.782}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{309.642}{%
+    4.18.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{333.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{333.781}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 7, Global synch label (L).%
+  }
+  \HLAFixedBlock{100.020}{345.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{345.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 9, Local synch label (s, L).%
+  }
+  \HLAServiceHeadingAt{375.383}{%
+    4.19\ \emph{Request Federation Save}\ service%
+  }
+  \HLAFixedBlock{90.000}{400.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The\ \emph{Request Federation Save}\ service shall specify that a federation save should take place.%
+  }
+  \HLAFixedBlock{90.000}{424.805}{432.000}{\rmfamily}{9.96}{12.00}{%
+    If the optional timestamp argument is not present, the RTI shall instruct all federation execution members to\linebreak%
+    save state as soon as possible after the invocation of the\ \emph{Request Federation Save}\ service.\ %
+  }
+  \HLAFixedBlock{89.999}{460.805}{432.001}{\rmfamily}{9.96}{12.00}{%
+    An optional timestamp argument may be supplied only if the joined federate is time-regulating or if the\linebreak%
+    Greatest Available Logical Time (GALT) is defined for the joined federate. Supplied timestamp arguments\linebreak%
+    shall be larger than the time position of all time-constrained joined federates in the federation execution. For\linebreak%
+    time-regulating joined federates, this is ensured by using only timestamps that are valid for the joined\linebreak%
+    federate to send in a TSO message (see 8.1 for more information on valid TSO message timestamps). For\linebreak%
+    nonregulating joined federates at which GALT is defined, this can be ensured by only using timestamps that\linebreak%
+    are greater than the joined federate’s GALT value.%
+  }
+  \HLAFixedBlock{89.999}{556.803}{432.001}{\rmfamily}{9.96}{12.00}{%
+    If a valid optional timestamp argument is present, the RTI shall instruct each time-constrained joined\linebreak%
+    federate to save state (via the\ \emph{Initiate Federate Save \textdagger{}}\ service) as soon as the joined federate has received all\linebreak%
+    messages that it will receive as TSO messages that have timestamps less than or equal to the timestamp of%
+  }
+  \HLAFixedBlock{89.999}{590.550}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the scheduled save\HLASupMark{16}\ and either%
+  }
+  \HLAFixedBlock{100.020}{607.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{607.805}{400.020}{\rmfamily}{9.96}{12.00}{%
+    The joined federate is in the Time Advancing state as a result of invocation of a\ \emph{Time Advance}\linebreak%
+    \emph{Request Available},\ \emph{Next Message Request Available}, or\ \emph{Flush Queue Request}\ service and the\linebreak%
+    timestamp of the next grant is greater than the timestamp of the scheduled save, or%
+  }
+  \HLAFixedBlock{100.019}{646.805}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{646.805}{400.021}{\rmfamily}{9.96}{12.00}{%
+    The joined federate is in the Time Advancing state as a result of invocation of either a\ \emph{Time Advance}\linebreak%
+    \emph{Request}\ or\ \emph{Next Message Request}\ service and the timestamp of the next grant is greater than or equal\linebreak%
+    to the timestamp of the scheduled save%
+  }
+  \HLAFixedBlock{90.000}{707.250}{432.000}{\rmfamily\raggedright}{7.98}{9.40}{%
+    \HLASupMark{16}In other words, the federate’s GALT will always be greater than the timestamp of the scheduled save.%
+  }
+  \draw[line width=0.48pt] (90.78,701.76)--(127.26,701.76);
+\end{hlafixedpage}
+\clearpage

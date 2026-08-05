@@ -1,0 +1,173 @@
+\HLASourcePage{259}{258}
+\HLAServiceBookmark{10.20.5}{2}{Exceptions}
+\HLAServiceBookmark{10.20.6}{2}{Reference state charts}
+\HLAServiceBookmark{10.21}{1}{Get Available Dimensions For Object Class service}
+\HLAServiceBookmark{10.21.1}{2}{Supplied arguments}
+\HLAServiceBookmark{10.21.2}{2}{Returned arguments}
+\HLAServiceBookmark{10.21.3}{2}{Preconditions}
+\HLAServiceBookmark{10.21.4}{2}{Postconditions}
+\HLAServiceBookmark{10.21.5}{2}{Exceptions}
+\HLAServiceBookmark{10.21.6}{2}{Reference state charts}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.20.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{93.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.965}{93.785}{482.035}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Invalid transportation type handle.%
+  }
+  \HLAFixedBlock{100.020}{105.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{105.785}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{117.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.965}{117.785}{482.035}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.946}{129.785}{482.054}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI internal error.%
+  }
+  \HLAFixedBlock{90.000}{153.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.20.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{177.784}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{177.784}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+  \HLAFixedBlock{90.000}{207.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{10.21 }%
+  }
+  \HLAFixedBlock{120.540}{207.383}{483.460}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{\emph{Get Available Dimensions For Object Class }}%
+  }
+  \HLAFixedBlock{348.900}{207.383}{255.100}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{service}%
+  }
+  \HLAFixedBlock{90.000}{232.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{107.880}{232.806}{496.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Get Available Dimensions For Class }%
+  }
+  \HLAFixedBlock{256.921}{232.806}{347.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service shall return the available dimensions of the supplied object%
+  }
+  \HLAFixedBlock{90.001}{244.805}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class. If the supplied class does not have available dimensions, an empty set shall be returned.%
+  }
+  \HLAFixedBlock{90.001}{268.666}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.021}{292.805}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.983}{292.805}{482.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Object class handle.%
+  }
+  \HLAFixedBlock{90.001}{316.665}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.021}{340.804}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{340.804}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    A set of dimension handles.%
+  }
+  \HLAFixedBlock{90.001}{364.664}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.021}{389.763}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{389.763}{482.024}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.021}{401.763}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.940}{401.763}{482.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{413.763}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{413.763}{482.029}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{425.763}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.940}{425.763}{482.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The specified object class handle exists.%
+  }
+  \HLAFixedBlock{90.001}{450.643}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.021}{475.802}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.971}{475.802}{482.029}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The joined federate has the dimension handle set.%
+  }
+  \HLAFixedBlock{90.001}{500.682}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.021}{525.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{525.781}{482.023}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The object class attribute is not an available attribute of the object class.%
+  }
+  \HLAFixedBlock{100.021}{537.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{537.781}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Invalid class attribute handle.%
+  }
+  \HLAFixedBlock{100.021}{549.781}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    c)%
+  }
+  \HLAFixedBlock{121.965}{549.781}{482.035}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Invalid object class handle.%
+  }
+  \HLAFixedBlock{100.021}{561.780}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{561.780}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.021}{573.780}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e)%
+  }
+  \HLAFixedBlock{121.966}{573.780}{482.034}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.021}{585.780}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    f)%
+  }
+  \HLAFixedBlock{121.962}{585.780}{482.038}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI internal error.%
+  }
+  \HLAFixedBlock{90.001}{610.660}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{10.21.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.021}{635.819}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{635.819}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    None%
+  }
+\end{hlafixedpage}
+\clearpage

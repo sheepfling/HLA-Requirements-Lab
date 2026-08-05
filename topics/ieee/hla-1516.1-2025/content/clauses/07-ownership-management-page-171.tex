@@ -1,0 +1,173 @@
+\HLASourcePage{172}{171}
+\HLAServiceBookmark{7.15.6}{2}{Reference state charts}
+\HLAServiceBookmark{7.16}{1}{Confirm Attribute Ownership Acquisition Cancellation † service}
+\HLAServiceBookmark{7.16.1}{2}{Supplied arguments}
+\HLAServiceBookmark{7.16.2}{2}{Returned arguments}
+\HLAServiceBookmark{7.16.3}{2}{Preconditions}
+\HLAServiceBookmark{7.16.4}{2}{Postconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.952}{69.786}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{83.765}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{83.765}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{97.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{97.805}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{111.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.954}{111.785}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{135.645}{%
+    \textbf{7.15.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{159.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{159.784}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 16, Establishing ownership of instance attribute (i, k, j)%
+  }
+  \HLAServiceHeadingAt{189.383}{%
+    \textbf{7.16 }\textbf{\emph{Confirm Attribute Ownership Acquisition Cancellation \textdagger{}}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{214.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Confirm Attribute Ownership Acquisition Cancellation \textdagger{}} service shall inform the joined federate that%
+  }
+  \HLAFixedBlock{90.000}{226.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the specified instance attributes are no longer candidates for ownership acquisition.%
+  }
+  \HLAFixedBlock{90.000}{250.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For each \emph{Cancel Attribute Ownership Acquisition} service call, a federate shall be notified by, at most, a%
+  }
+  \HLAFixedBlock{90.000}{262.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    single \emph{Confirm Attribute Ownership Acquisition Cancellation \textdagger{}} service invocation, containing all qualifying%
+  }
+  \HLAFixedBlock{90.000}{274.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attributes for the federate.%
+  }
+  \HLAServiceComponentHeadingAt{298.665}{%
+    \textbf{7.16.1 Supplied arguments}%
+  }
+  \HLAFixedBlock{100.020}{322.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{322.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance designator%
+  }
+  \HLAFixedBlock{100.020}{337.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{337.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Set of attribute designators%
+  }
+  \HLAServiceComponentHeadingAt{361.664}{%
+    \textbf{7.16.2 Returned arguments}%
+  }
+  \HLAFixedBlock{100.020}{385.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{385.803}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{409.663}{%
+    \textbf{7.16.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{433.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{433.802}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{448.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{448.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{463.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{463.802}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.020}{478.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.942}{478.801}{400.058}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate had attempted to cancel an ownership acquisition request for the specified%
+  }
+  \HLAFixedBlock{121.980}{490.801}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{505.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.977}{505.801}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate does not own the specified instance attributes.%
+  }
+  \HLAFixedBlock{100.020}{520.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{520.801}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{535.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{535.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{559.661}{%
+    \textbf{7.16.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{583.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{583.800}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate has been notified that the specified instance attributes are no longer candidates for%
+  }
+  \HLAFixedBlock{121.981}{595.799}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    acquisition by the joined federate.%
+  }
+  \HLAFixedBlock{100.021}{610.799}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{610.799}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may stop publishing the corresponding class attributes at the known class of the%
+  }
+  \HLAFixedBlock{121.982}{622.799}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified object instance if there are no corresponding instance attributes for which the joined%
+  }
+  \HLAFixedBlock{121.982}{634.799}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate has %
+  }
+  \HLAFixedBlock{121.982}{649.799}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.023}{649.799}{379.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invoked the \emph{Attribute Ownership Acquisition} service and has not yet received a corresponding%
+  }
+  \HLAFixedBlock{142.021}{661.798}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation of the \emph{Confirm Attribute Ownership Acquisition Cancellation \textdagger{} }service, the%
+  }
+  \HLAFixedBlock{142.021}{673.798}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Unavailable \textdagger{}} service, or the \emph{Attribute Ownership Acquisition}%
+  }
+  \HLAFixedBlock{142.021}{685.798}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Notification \textdagger{}} service, or %
+  }
+\end{hlafixedpage}
+\clearpage

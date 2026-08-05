@@ -1,0 +1,190 @@
+\HLASourcePage{408}{407}
+\HLAServiceBookmark{12.13.4.5.11}{4}{HLA\_CALLBACK\_REQUEST}
+\HLAServiceBookmark{12.13.4.5.12}{4}{HLA\_CALLBACK\_RESPONSE}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{91.440}{325.666}{512.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.11 HLA\_CALLBACK\_REQUEST}%
+  }
+  \HLAFixedBlock{91.440}{349.805}{512.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the RTI.%
+  }
+  \HLAFixedBlock{91.440}{492.646}{512.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.13.4.5.12 HLA\_CALLBACK\_RESPONSE }%
+  }
+  \HLAFixedBlock{91.440}{516.785}{512.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This message shall be sent by the federate.%
+  }
+  \HLAFixedBlock{189.780}{69.645}{414.220}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 43---HLA\_CALL\_REQUEST message format}%
+  }
+  \HLAFixedBlock{121.680}{98.078}{482.320}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{171.663}{98.078}{432.337}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{269.691}{98.078}{334.309}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{121.680}{114.981}{482.320}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{171.660}{114.981}{432.340}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{269.686}{114.981}{334.314}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{121.680}{132.981}{482.320}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..n%
+  }
+  \HLAFixedBlock{171.667}{132.981}{432.333}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Encoded service call%
+  }
+  \HLAFixedBlock{269.675}{132.981}{334.325}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLA service and arguments, encoded according to %
+  }
+  \HLAFixedBlock{453.720}{132.126}{150.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Annex D%
+  }
+  \HLAFixedBlock{186.180}{168.646}{417.820}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 44---HLA\_CALL\_RESPONSE message format}%
+  }
+  \HLAFixedBlock{125.940}{197.078}{478.060}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{175.925}{197.078}{428.075}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{275.935}{197.078}{328.065}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{125.940}{213.981}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{175.966}{213.981}{428.034}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{275.957}{213.981}{328.043}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{125.940}{231.981}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..27%
+  }
+  \HLAFixedBlock{175.887}{231.981}{428.113}{\rmfamily\raggedright}{9.00}{10.08}{%
+    In response to%
+  }
+  \HLAFixedBlock{275.908}{231.981}{328.092}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4 byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{275.939}{239.961}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Sequence number to which this message is a response%
+  }
+  \HLAFixedBlock{125.939}{257.961}{478.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    28..n%
+  }
+  \HLAFixedBlock{175.911}{257.961}{428.089}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Encoded service %
+  }
+  \HLAFixedBlock{175.919}{266.001}{428.081}{\rmfamily\raggedright}{9.00}{10.08}{%
+    response%
+  }
+  \HLAFixedBlock{275.939}{257.961}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLA service exception or return value, encoded according %
+  }
+  \HLAFixedBlock{275.939}{266.001}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    to %
+  }
+  \HLAFixedBlock{285.180}{265.146}{318.820}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Annex D%
+  }
+  \HLAFixedBlock{175.320}{383.626}{428.680}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 45---HLA\_CALLBACK\_REQUEST message format}%
+  }
+  \HLAFixedBlock{125.940}{412.118}{478.060}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{175.925}{412.118}{428.075}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{275.935}{412.118}{328.065}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{125.940}{428.961}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{175.966}{428.961}{428.034}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{275.957}{428.961}{328.043}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{125.940}{446.961}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..n%
+  }
+  \HLAFixedBlock{175.920}{446.961}{428.080}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Encoded service call-%
+  }
+  \HLAFixedBlock{175.920}{455.001}{428.080}{\rmfamily\raggedright}{9.00}{10.08}{%
+    back%
+  }
+  \HLAFixedBlock{275.939}{446.961}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLA service callback and arguments, encoded according to %
+  }
+  \HLAFixedBlock{275.940}{454.146}{328.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Annex D%
+  }
+  \HLAFixedBlock{171.720}{550.666}{432.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 46---HLA\_CALLBACK\_RESPONSE message format}%
+  }
+  \HLAFixedBlock{125.940}{579.098}{478.060}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Byte}%
+  }
+  \HLAFixedBlock{175.925}{579.098}{428.075}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Name}%
+  }
+  \HLAFixedBlock{275.935}{579.098}{328.065}{\rmfamily\raggedright}{7.98}{8.94}{%
+    \textbf{Description  }%
+  }
+  \HLAFixedBlock{125.940}{596.001}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0..23%
+  }
+  \HLAFixedBlock{175.966}{596.001}{428.034}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Header%
+  }
+  \HLAFixedBlock{275.957}{596.001}{328.043}{\rmfamily\raggedright}{9.00}{10.08}{%
+    See above%
+  }
+  \HLAFixedBlock{125.940}{614.001}{478.060}{\rmfamily\raggedright}{9.00}{10.08}{%
+    24..27%
+  }
+  \HLAFixedBlock{175.887}{614.001}{428.113}{\rmfamily\raggedright}{9.00}{10.08}{%
+    In response to%
+  }
+  \HLAFixedBlock{275.908}{614.001}{328.092}{\rmfamily\raggedright}{9.00}{10.08}{%
+    4 byte unsigned integer, big endian%
+  }
+  \HLAFixedBlock{275.939}{621.981}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Sequence number to which this message is a response%
+  }
+  \HLAFixedBlock{125.939}{639.981}{478.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    28..n%
+  }
+  \HLAFixedBlock{175.911}{639.981}{428.089}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Encoded service %
+  }
+  \HLAFixedBlock{175.919}{648.021}{428.081}{\rmfamily\raggedright}{9.00}{10.08}{%
+    response%
+  }
+  \HLAFixedBlock{275.939}{639.981}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLA service exception or return value, encoded according %
+  }
+  \HLAFixedBlock{275.939}{648.021}{328.061}{\rmfamily\raggedright}{9.00}{10.08}{%
+    to %
+  }
+  \HLAFixedBlock{285.180}{647.166}{318.820}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Annex D%
+  }
+\end{hlafixedpage}
+\clearpage

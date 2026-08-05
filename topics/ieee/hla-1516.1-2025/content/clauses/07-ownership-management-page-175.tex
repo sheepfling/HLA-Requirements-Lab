@@ -1,0 +1,150 @@
+\HLASourcePage{176}{175}
+\HLAAnchor{clause:8}
+\pdfbookmark[0]{8. Time management}{bookmark:clause:8}
+\HLAServiceBookmark{8.1}{1}{Overview}
+\HLAServiceBookmark{8.1.1}{2}{Logical Time}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.120}{432.000}{\sffamily\bfseries\raggedright}{12.00}{14.00}{%
+    \textbf{8. Time management}%
+  }
+  \HLAServiceHeadingAt{97.403}{%
+    \textbf{8.1 Overview}%
+  }
+  \HLAFixedBlock{90.000}{122.766}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The time management services and associated mechanisms provide a federation execution with the means to%
+  }
+  \HLAFixedBlock{90.000}{133.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    order the delivery of messages throughout the federation execution. Use of these mechanisms permits%
+  }
+  \HLAFixedBlock{90.000}{144.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages sent by different joined federates to be delivered in a consistent order to any joined federate in the%
+  }
+  \HLAFixedBlock{90.000}{155.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation execution that is to receive those messages. This ordering of messages is dependent on an%
+  }
+  \HLAFixedBlock{90.000}{166.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    underlying concept of logical time.%
+  }
+  \HLAFixedBlock{90.000}{187.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Logical time in the system being modeled shall be represented in the federation as points along the time axis%
+  }
+  \HLAFixedBlock{90.000}{198.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with an initial and final point. A logical time represents a single point on the time axis. A logical time%
+  }
+  \HLAFixedBlock{90.000}{209.764}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    interval represents the distance between two points on the time axis. A joined federate can associate both%
+  }
+  \HLAFixedBlock{90.000}{220.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    itself and some of its activities with logical times. A joined federate’s association with a logical time is%
+  }
+  \HLAFixedBlock{90.000}{231.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    referred to as the time position of the joined federate. An association of a joined federate’s activities with%
+  }
+  \HLAFixedBlock{90.000}{242.764}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical times is denoted by assigning timestamps to the messages representing those activities. Timestamps%
+  }
+  \HLAFixedBlock{90.000}{253.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and time position are both represented by the same logical time data type and, therefore, can be compared,%
+  }
+  \HLAFixedBlock{90.000}{264.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    but they are referenced using different terms in order to help clarify whether a given logical time value%
+  }
+  \HLAFixedBlock{90.000}{275.763}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    applies to a joined federate or to a joined federate’s activities. A logical time interval is a separate data type%
+  }
+  \HLAFixedBlock{90.000}{286.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    used by time-regulating federates to specify a lookahead and by the RTI to perform arithmetic operations%
+  }
+  \HLAFixedBlock{90.000}{297.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    with logical time values.%
+  }
+  \HLAFixedBlock{90.000}{318.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each joined federate may advance along the time axis during the course of the execution. Such joined%
+  }
+  \HLAFixedBlock{90.000}{329.762}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate time position advances may be constrained by the progress of other joined federates, or they may be%
+  }
+  \HLAFixedBlock{90.000}{340.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unconstrained.%
+  }
+  \HLAFixedBlock{90.000}{361.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Time management is concerned with the mechanisms for controlling the advancement of each joined%
+  }
+  \HLAFixedBlock{90.000}{372.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate along the time axis. In general, time position advances shall be coordinated with object%
+  }
+  \HLAFixedBlock{89.999}{383.762}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    management services so that information is delivered to joined federates in a causally correct and ordered%
+  }
+  \HLAFixedBlock{89.999}{394.801}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    fashion.%
+  }
+  \HLAFixedBlock{89.999}{417.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A joined federate that becomes time-regulating may associate some of its activities (e.g., updating instance%
+  }
+  \HLAFixedBlock{89.999}{429.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    attribute values and sending interactions) with logical times. It shall do so by assigning timestamps to the%
+  }
+  \HLAFixedBlock{89.999}{441.781}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages representing its activities; these timestamps correspond to the logical times with which the%
+  }
+  \HLAFixedBlock{89.999}{453.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    activities are associated. A joined federate that is time-constrained is interested in receiving the messages%
+  }
+  \HLAFixedBlock{89.999}{465.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    representing these activities (e.g., reflecting instance attribute values and receiving interactions) in a%
+  }
+  \HLAFixedBlock{89.999}{477.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation-wide timestamped order. Use of the time management services allows this type of coordination%
+  }
+  \HLAFixedBlock{89.999}{489.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    among time-regulating and time-constrained joined federates in an execution. The coordination is achieved%
+  }
+  \HLAFixedBlock{89.999}{501.780}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    by various constraints on joined federate activities described in this clause.%
+  }
+  \HLAFixedBlock{89.999}{525.779}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The activities of joined federates that are neither time-regulating nor time-constrained (the default state of all%
+  }
+  \HLAFixedBlock{89.999}{537.779}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates upon joining a federation execution) shall not be coordinated with other joined federates by%
+  }
+  \HLAFixedBlock{89.999}{549.779}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the RTI, and such joined federates need not make use of any of the time management services. Such joined%
+  }
+  \HLAFixedBlock{89.999}{561.779}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates may, however, optionally place timestamps on the messages representing their activities (e.g.,%
+  }
+  \HLAFixedBlock{89.998}{573.778}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    updating instance attribute values and sending interactions) to indicate when these actions occur during the%
+  }
+  \HLAFixedBlock{89.998}{585.778}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation execution. In this case, the RTI simply passes the specified timestamp, unchanged, to joined%
+  }
+  \HLAFixedBlock{89.998}{597.778}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate(s) receiving the message.%
+  }
+  \HLAServiceComponentHeadingAt{621.638}{%
+    \textbf{8.1.1 Logical Time}%
+  }
+  \HLAFixedBlock{89.998}{645.777}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The representation of logical time shall be specified to the RTI via the time representation abstract data type%
+  }
+  \HLAFixedBlock{89.998}{657.777}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    (TRADT) (see 4.7 of IEEE Std 1516.2-2025) and should be documented in the time representation table of%
+  }
+  \HLAFixedBlock{89.998}{669.777}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the federation execution’s FDD. Federation executions requiring multiple time representations within a%
+  }
+  \HLAFixedBlock{89.998}{681.777}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    single execution (e.g., logical time and wall-clock time values) shall realize this functionality explicitly%
+  }
+  \HLAFixedBlock{89.998}{693.776}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    within their TRADT definition, e.g., by using a “time type” field to differentiate between different types of%
+  }
+  \HLAFixedBlock{89.998}{705.776}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time values. An RTI shall support the standardized time representations shown in Table 21.%
+  }
+\end{hlafixedpage}
+\clearpage

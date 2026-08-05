@@ -1,0 +1,288 @@
+\HLASourcePage{362}{361}
+\HLAServiceBookmark{12.11.3}{2}{Authorization Service}
+\HLAServiceBookmark{12.11.3.1}{3}{Authorization Service Registration}
+\HLAServiceBookmark{12.11.3.2}{3}{Predefined authorization services}
+\HLAServiceBookmark{12.11.3.3}{3}{AuthorizerFactoryFactory}
+\HLAServiceBookmark{12.11.3.4}{3}{Custom Authorizer}
+\HLAServiceBookmark{12.11.4}{2}{Additional functionality}
+\HLAServiceBookmark{12.11.4.1}{3}{NullFederateAmbassador class}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Each vendor shall provide a class that implements the %
+  }
+  \HLAFixedBlock{307.380}{69.786}{296.620}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RtiFactory}%
+  }
+  \HLAFixedBlock{354.000}{69.786}{250.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface.%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition, this specification also supplies a %
+  }
+  \HLAFixedBlock{297.420}{94.373}{306.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{getEncoderFactory()}%
+  }
+  \HLAFixedBlock{411.360}{93.785}{192.640}{\rmfamily\raggedright}{9.96}{11.16}{%
+     method that returns the%
+  }
+  \HLAFixedBlock{90.000}{105.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    EncoderFactory that can be used by the encoding services described in 12.11.4.2.%
+  }
+  \HLAFixedBlock{90.000}{129.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.3 Authorization Service}%
+  }
+  \HLAFixedBlock{90.000}{153.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In the Java API, the abstract interfaces for the authorization service are defined as Java interfaces. %
+  }
+  \HLAFixedBlock{90.000}{177.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.3.1 Authorization Service Registration}%
+  }
+  \HLAFixedBlock{90.000}{201.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An authorization service shall register as a service by creating a file in the services subdirectory of the%
+  }
+  \HLAFixedBlock{90.000}{213.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    META-INF directory in the JAR file containing the authorization service implementation. The file shall be%
+  }
+  \HLAFixedBlock{90.000}{225.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    named %
+  }
+  \HLAFixedBlock{119.340}{226.371}{484.660}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025.auth.AuthorizerFactory}%
+  }
+  \HLAFixedBlock{353.220}{225.783}{250.780}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and contain a line specifying the name of%
+  }
+  \HLAFixedBlock{90.000}{237.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{126.570}{237.783}{477.430}{\rmfamily\raggedright}{9.96}{11.16}{%
+    class %
+  }
+  \HLAFixedBlock{170.309}{237.783}{433.691}{\rmfamily\raggedright}{9.96}{11.16}{%
+    that %
+  }
+  \HLAFixedBlock{209.661}{237.783}{394.339}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implements %
+  }
+  \HLAFixedBlock{280.574}{237.783}{323.426}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{317.040}{238.371}{286.960}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{443.280}{237.783}{160.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface, %
+  }
+  \HLAFixedBlock{505.050}{237.783}{98.950}{\rmfamily\raggedright}{9.96}{11.16}{%
+    e.g.,%
+  }
+  \HLAFixedBlock{90.000}{250.371}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{org.someorganization.auth.AuthorizerFactoryImpl}%
+  }
+  \HLAFixedBlock{371.820}{249.783}{232.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{273.643}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.3.2 Predefined authorization services}%
+  }
+  \HLAFixedBlock{90.000}{297.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI implementation shall provide an implementation of the predefined authorization service%
+  }
+  \HLAFixedBlock{90.000}{309.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    "HLAauthorizer", %
+  }
+  \HLAFixedBlock{175.278}{309.782}{428.722}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementing %
+  }
+  \HLAFixedBlock{244.380}{309.782}{359.620}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{270.173}{309.782}{333.827}{\rmfamily\raggedright}{9.96}{11.16}{%
+    classes %
+  }
+  \HLAFixedBlock{311.482}{309.782}{292.518}{\rmfamily\raggedright}{9.96}{11.16}{%
+    for %
+  }
+  \HLAFixedBlock{336.717}{309.782}{267.283}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{362.571}{309.782}{241.429}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interfaces %
+  }
+  \HLAFixedBlock{415.020}{310.370}{188.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer }%
+  }
+  \HLAFixedBlock{507.600}{309.782}{96.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{322.369}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{191.940}{321.782}{412.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The %
+  }
+  \HLAFixedBlock{215.760}{322.369}{388.240}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{getName() }%
+  }
+  \HLAFixedBlock{276.660}{321.782}{327.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    method of the %
+  }
+  \HLAFixedBlock{335.821}{322.369}{268.179}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer }%
+  }
+  \HLAFixedBlock{402.721}{321.782}{201.279}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and %
+  }
+  \HLAFixedBlock{420.061}{322.369}{183.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{90.001}{333.782}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementations shall return the symbolic name "HLAauthorizer". This predefined authorization service%
+  }
+  \HLAFixedBlock{90.001}{345.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall support the authorization of the %
+  }
+  \HLAFixedBlock{303.841}{346.369}{300.159}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAplainTextPassword }%
+  }
+  \HLAFixedBlock{429.541}{345.781}{174.459}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credentials as specified%
+  }
+  \HLAFixedBlock{90.001}{357.781}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in %
+  }
+  \HLAFixedBlock{109.860}{357.781}{494.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    section %
+  }
+  \HLAFixedBlock{150.166}{357.781}{453.834}{\rmfamily\raggedright}{9.96}{11.16}{%
+    12.6. %
+  }
+  \HLAFixedBlock{182.311}{357.781}{421.689}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{209.941}{358.369}{394.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials }%
+  }
+  \HLAFixedBlock{304.921}{357.781}{299.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    subclasses %
+  }
+  \HLAFixedBlock{358.621}{358.369}{245.379}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAplainTextPassword }%
+  }
+  \HLAFixedBlock{507.601}{357.781}{96.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.001}{370.369}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAnoCredentials }%
+  }
+  \HLAFixedBlock{192.901}{369.781}{411.099}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementations are provided within the Java API. The %
+  }
+  \HLAFixedBlock{420.061}{370.369}{183.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{90.000}{381.781}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation for the predefined authorization service shall be registered according to 12.11.6.24.1. %
+  }
+  \HLAFixedBlock{90.000}{405.641}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.3.3 AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{90.000}{429.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    To %
+  }
+  \HLAFixedBlock{116.341}{429.780}{487.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    acquire %
+  }
+  \HLAFixedBlock{161.697}{429.780}{442.303}{\rmfamily\raggedright}{9.96}{11.16}{%
+    an %
+  }
+  \HLAFixedBlock{187.080}{430.368}{416.920}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{304.920}{429.780}{299.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation, %
+  }
+  \HLAFixedBlock{386.078}{429.780}{217.922}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the %
+  }
+  \HLAFixedBlock{414.257}{429.780}{189.743}{\rmfamily\raggedright}{9.96}{11.16}{%
+    RTI %
+  }
+  \HLAFixedBlock{445.671}{429.780}{158.329}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall %
+  }
+  \HLAFixedBlock{480.517}{429.780}{123.483}{\rmfamily\raggedright}{9.96}{11.16}{%
+    use %
+  }
+  \HLAFixedBlock{509.801}{429.780}{94.199}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the%
+  }
+  \HLAFixedBlock{90.000}{442.367}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactoryFactory}%
+  }
+  \HLAFixedBlock{233.940}{441.780}{370.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class, provided with this standard, and supply the symbolic name as%
+  }
+  \HLAFixedBlock{90.000}{453.780}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shown below.%
+  }
+  \HLAFixedBlock{90.000}{478.512}{514.000}{\rmfamily\raggedright}{9.00}{10.08}{%
+    AuthorizerFactory authorizerFactory = %
+  }
+  \HLAFixedBlock{90.000}{487.512}{514.000}{\rmfamily\raggedright}{9.00}{10.08}{%
+    AuthorizerFactoryFactory.getAuthorizerFactory("HLAauthorizer");%
+  }
+  \HLAFixedBlock{90.000}{507.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.3.4 Custom Authorizer}%
+  }
+  \HLAFixedBlock{90.000}{531.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An RTI implementation or a federation implementer may provide implementations of custom authorizers.%
+  }
+  \HLAFixedBlock{90.000}{543.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    These implementations shall be registered according to 12.11.3.1.%
+  }
+  \HLAFixedBlock{90.000}{567.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.4 Additional functionality}%
+  }
+  \HLAFixedBlock{90.000}{591.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Implementations of the Java API shall add the following utility classes to the %
+  }
+  \HLAFixedBlock{426.060}{592.372}{177.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{hla.rti1516\_2025}%
+  }
+  \HLAFixedBlock{90.000}{603.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    package. %
+  }
+  \HLAFixedBlock{90.000}{627.644}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.4.1 }%
+  }
+  \HLAFixedBlock{133.920}{628.371}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{NullFederateAmbassador}%
+  }
+  \HLAFixedBlock{265.860}{627.644}{338.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ class}%
+  }
+  \HLAFixedBlock{90.000}{651.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The %
+  }
+  \HLAFixedBlock{114.300}{652.371}{489.700}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{NullFederateAmbassador}%
+  }
+  \HLAFixedBlock{246.241}{651.783}{357.759}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class provides empty implementations of all methods in%
+  }
+  \HLAFixedBlock{90.001}{664.371}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{FederateAmbassador}%
+  }
+  \HLAFixedBlock{197.941}{663.783}{406.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This delegation allows a derivation of the NullFederateAmbassador class to just%
+  }
+  \HLAFixedBlock{90.001}{675.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implement the simplest variants and still have those implementations capture the invocations of the more%
+  }
+  \HLAFixedBlock{90.001}{687.783}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    complex variants, albeit with the lesser parameter list.%
+  }
+\end{hlafixedpage}
+\clearpage

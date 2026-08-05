@@ -1,0 +1,185 @@
+\HLASourcePage{206}{205}
+\HLAServiceBookmark{8.15.4}{2}{Postconditions}
+\HLAServiceBookmark{8.15.5}{2}{Exceptions}
+\HLAServiceBookmark{8.15.6}{2}{Reference state charts}
+\HLAServiceBookmark{8.16}{1}{Disable Asynchronous Delivery service}
+\HLAServiceBookmark{8.16.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.16.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.16.3}{2}{Preconditions}
+\HLAServiceBookmark{8.16.4}{2}{Postconditions}
+\HLAServiceBookmark{8.16.5}{2}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.15.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{93.785}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is enabled at the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{117.645}{%
+    \textbf{8.15.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{141.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{141.785}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is already enabled.%
+  }
+  \HLAFixedBlock{100.020}{156.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{156.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{171.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{171.784}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.020}{186.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{186.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{201.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.965}{201.784}{400.035}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{216.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.961}{216.783}{400.039}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{240.643}{%
+    \textbf{8.15.6 Reference state charts}%
+  }
+  \HLAFixedBlock{100.020}{264.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{264.783}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 17, Temporal state%
+  }
+  \HLAServiceHeadingAt{294.383}{%
+    \textbf{8.16 }\textbf{\emph{Disable Asynchronous Delivery}}\textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{319.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocations of the \emph{Disable Asynchronous Delivery} service shall, for a time-constrained federate, instruct the%
+  }
+  \HLAFixedBlock{90.000}{331.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI to deliver RO messages to the invoking federate only when it is in the Time Advancing state.%
+  }
+  \HLAServiceComponentHeadingAt{355.666}{%
+    \textbf{8.16.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.020}{379.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{379.805}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{403.665}{%
+    \textbf{8.16.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.020}{427.804}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{427.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{451.664}{%
+    \textbf{8.16.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.020}{475.803}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{475.803}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{489.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{489.783}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{503.823}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{503.823}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{517.802}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{517.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is enabled at the joined federate.%
+  }
+  \HLAFixedBlock{100.020}{531.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.974}{531.782}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.020}{545.822}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{545.822}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{567.642}{%
+    \textbf{8.16.4 Postconditions}%
+  }
+  \HLAFixedBlock{100.020}{589.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{589.801}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is disabled at the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{613.661}{%
+    \textbf{8.16.5 Exceptions}%
+  }
+  \HLAFixedBlock{100.020}{637.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.974}{637.800}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Asynchronous delivery is already disabled.%
+  }
+  \HLAFixedBlock{100.020}{651.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{651.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{665.820}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{665.820}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress. %
+  }
+  \HLAFixedBlock{100.020}{679.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{679.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{693.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.965}{693.780}{400.035}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{707.819}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.961}{707.819}{400.039}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+\end{hlafixedpage}
+\clearpage

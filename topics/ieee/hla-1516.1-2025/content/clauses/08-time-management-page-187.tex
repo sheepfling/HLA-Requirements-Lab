@@ -1,0 +1,143 @@
+\HLASourcePage{188}{187}
+\HLAServiceBookmark{8.1.8}{2}{Delay Subscription Evaluation Switch}
+\HLAServiceBookmark{8.1.9}{2}{Warnings on partial use of time management}
+\HLAServiceBookmark{8.1.10}{2}{Mixing use of TSO and RO messages}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    \textbf{8.1.8 Delay Subscription Evaluation Switch}%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution-wide Delay Subscription Evaluation Switch indicates how the RTI shall filter a%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    TSO or RO message based on the receiving joined federate’s current subscriptions. The setting for this%
+  }
+  \HLAFixedBlock{90.000}{117.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    switch shall come from the FDD at federation execution creation time. If no value is specified for this%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    switch, then the RTI will provide default values based on the switches table defaults table in IEEE Std%
+  }
+  \HLAFixedBlock{90.000}{141.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1516.2-2025. This switch setting shall not be modifiable during a federation execution.%
+  }
+  \HLAFixedBlock{90.000}{165.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Whenever this switch is enabled, the RTI shall delay subscription evaluation of a message until the message%
+  }
+  \HLAFixedBlock{90.000}{177.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    is eligible for delivery to the joined federate.%
+  }
+  \HLAFixedBlock{90.000}{201.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Whenever this switch is disabled, the RTI may determine if a message is eligible for delivery to a joined%
+  }
+  \HLAFixedBlock{90.000}{213.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate based on the current subscriptions of that joined federate when the message is generated. If this%
+  }
+  \HLAFixedBlock{90.000}{225.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    immediate subscription evaluation indicates that the message is not eligible for delivery to the joined%
+  }
+  \HLAFixedBlock{90.000}{237.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate, then that message shall never be eligible for delivery to the joined federate regardless of any%
+  }
+  \HLAFixedBlock{90.000}{249.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    changes to subscriptions (by that joined federate) that occur subsequent to the message generation.%
+  }
+  \HLAFixedBlock{90.000}{273.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    In both cases, when a message is eligible for delivery to a joined federate, the RTI shall use the federate’s%
+  }
+  \HLAFixedBlock{90.000}{285.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    current subscriptions to determine if it will be actually be delivered to the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{309.642}{%
+    \textbf{8.1.9 Warnings on partial use of time management}%
+  }
+  \HLAFixedBlock{90.000}{333.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    When there are some joined federates in a federation execution that use time management services and other%
+  }
+  \HLAFixedBlock{90.000}{345.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federates that do not, there are some complications of which federation developers should be aware.%
+  }
+  \HLAFixedBlock{90.000}{357.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The complications stem from the fact that some joined federates are making use of TSO ordering of%
+  }
+  \HLAFixedBlock{90.000}{369.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages, while others are accepting RO ordering of these same messages. The two basic scenarios (which%
+  }
+  \HLAFixedBlock{90.000}{381.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    can, of course, occur independently or together in the same federation execution) are as follows:%
+  }
+  \HLAFixedBlock{100.020}{393.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{393.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A time-regulating joined federate sends TSO messages that are received by a nonconstrained joined%
+  }
+  \HLAFixedBlock{121.980}{405.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate in RO.%
+  }
+  \HLAFixedBlock{100.020}{417.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.937}{417.780}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A nonregulating joined federate sends RO messages to a joined federate that expects to receive%
+  }
+  \HLAFixedBlock{121.980}{429.780}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages in TSO.%
+  }
+  \HLAFixedBlock{90.000}{453.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The former tends to be more of a problem because, among other reasons, the time-regulating joined federate%
+  }
+  \HLAFixedBlock{90.000}{465.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    need not send its messages in TSO. They may (for example) be received by the nonconstrained joined%
+  }
+  \HLAFixedBlock{90.000}{477.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate in the same order as sent, which is not equivalent to the order in which the sender meant them to be%
+  }
+  \HLAFixedBlock{90.000}{489.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    received.%
+  }
+  \HLAFixedBlock{90.000}{513.779}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The latter is not as much of a problem because the nonregulating joined federate will send its messages in%
+  }
+  \HLAFixedBlock{90.000}{525.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the order it means for them to be received. The time-constrained joined federate will receive them in this%
+  }
+  \HLAFixedBlock{90.000}{537.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    order (barring factors like differing transportation types among the sent messages).%
+  }
+  \HLAFixedBlock{90.000}{561.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Another factor to consider is that joined federates do not need to be time-regulating with respect to all%
+  }
+  \HLAFixedBlock{90.000}{573.778}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages. A time-regulating joined federate can send some messages TSO and send other messages RO.%
+  }
+  \HLAFixedBlock{90.000}{585.777}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This situation can also lead to complications if the decision on order type is not carefully considered.%
+  }
+  \HLAServiceComponentHeadingAt{609.638}{%
+    \textbf{8.1.10 Mixing use of TSO and RO messages}%
+  }
+  \HLAFixedBlock{89.999}{633.777}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Some specific examples of odd results when mixing the use of TSO and RO messages are presented below:%
+  }
+  \HLAFixedBlock{100.020}{645.777}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{645.777}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A time-regulating joined federate invokes the \emph{Delete Object Instance} service and provides a%
+  }
+  \HLAFixedBlock{121.980}{657.776}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamp far in its future (much greater than its logical time). Subsequently, it sends several update%
+  }
+  \HLAFixedBlock{121.980}{669.776}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    messages, modeling attributes of the object instance in the interval prior to its deletion and providing%
+  }
+  \HLAFixedBlock{121.980}{681.776}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a timestamp to each update that is less than the timestamp of the deletion. Nonconstrained joined%
+  }
+  \HLAFixedBlock{121.979}{693.776}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates may receive these messages in the order in which they were sent. In other words, a%
+  }
+\end{hlafixedpage}
+\clearpage

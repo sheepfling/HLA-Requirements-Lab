@@ -1,0 +1,165 @@
+\HLASourcePage{153}{152}
+\HLAServiceBookmark{7.1.2.2}{3}{Acquisition}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Because the divestiture is not associated with a timestamp, the time position of the receiving joined federate%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at which ownership of the instance attribute is acquired may be earlier or later than that of the divesting%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate, giving either a gap or an overlap in the time intervals on the time axis for which the joined%
+  }
+  \HLAFixedBlock{90.000}{105.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates own the instance attribute.%
+  }
+  \HLAFixedBlock{90.000}{129.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Some issues to consider are as follows:%
+  }
+  \HLAFixedBlock{100.020}{149.764}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{149.764}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There may be points on the time axis at which neither joined federate owns the instance attribute.%
+  }
+  \HLAFixedBlock{121.981}{161.764}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This situation may result in an interval of timestamps for which no updates to the value of the%
+  }
+  \HLAFixedBlock{121.981}{173.764}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance attribute are provided, unless special steps are taken by one or both of the joined federates.%
+  }
+  \HLAFixedBlock{100.020}{185.764}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{185.764}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There may be points on the time axis at which both joined federates own the instance attribute. This%
+  }
+  \HLAFixedBlock{121.980}{197.764}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    situation may result in updates to the value of the instance attribute being produced by both joined%
+  }
+  \HLAFixedBlock{121.980}{209.764}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates that contain the same timestamp, unless special steps are taken by one or both of the joined%
+  }
+  \HLAFixedBlock{121.980}{221.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates.%
+  }
+  \HLAFixedBlock{100.020}{233.763}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.973}{233.763}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There may be TSO updates sent by the divesting joined federate that have not been delivered to%
+  }
+  \HLAFixedBlock{121.980}{245.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    other joined federates (i.e., they are queued in the RTI) when the divestiture occurs. Some of these%
+  }
+  \HLAFixedBlock{121.980}{257.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    outstanding TSO updates may be retractable by the divesting joined federate; others may not be%
+  }
+  \HLAFixedBlock{121.980}{269.763}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    retractable. See restrictions in 8.22 for details.%
+  }
+  \HLAFixedBlock{100.020}{281.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{281.762}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There may be additional information that the divesting joined federate needs to transfer along with%
+  }
+  \HLAFixedBlock{121.980}{293.762}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ownership of the instance attribute. %
+  }
+  \HLAServiceComponentHeadingAt{317.622}{%
+    \textbf{7.1.2.2 Acquisition}%
+  }
+  \HLAFixedBlock{90.000}{341.761}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI shall provide both of the following two ways for a joined federate that is publishing a class attribute%
+  }
+  \HLAFixedBlock{90.000}{353.761}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at a given class to acquire an analogous instance attribute of an object instance that has that class as the%
+  }
+  \HLAFixedBlock{90.000}{365.761}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    known class at the joined federate attempting to acquire the attribute:%
+  }
+  \HLAFixedBlock{100.020}{385.801}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{385.801}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may invoke the \emph{Attribute Ownership Acquisition} service, which shall inform the%
+  }
+  \HLAFixedBlock{121.981}{397.800}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI that it shall invoke the \emph{Request Attribute Ownership Release \textdagger{}} service at the joined federate that%
+  }
+  \HLAFixedBlock{121.980}{409.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    owns the designated instance attribute.%
+  }
+  \HLAFixedBlock{100.020}{421.800}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{421.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may invoke the \emph{Attribute Ownership Acquisition If Available} service, which%
+  }
+  \HLAFixedBlock{121.980}{433.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    shall inform the RTI that it wants to acquire the designated instance attribute only if it is already%
+  }
+  \HLAFixedBlock{121.980}{445.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    unowned by all joined federates or if it is in the process of being divested by its owner.%
+  }
+  \HLAFixedBlock{90.000}{469.799}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The first method of acquisition can be thought of as an intrusive acquisition because the RTI will notify the%
+  }
+  \HLAFixedBlock{89.999}{481.799}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate that owns the instance attribute that another joined federate wants to acquire it and request%
+  }
+  \HLAFixedBlock{89.999}{493.799}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that the owning joined federate release the instance attribute for acquisition by the requesting joined%
+  }
+  \HLAFixedBlock{90.000}{505.799}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate. The second method of acquisition can be thought of as a nonintrusive acquisition because the RTI%
+  }
+  \HLAFixedBlock{90.000}{517.799}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    will not notify the owning joined federate of the request to acquire the instance attribute. The \emph{Attribute}%
+  }
+  \HLAFixedBlock{90.000}{529.798}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Ownership Acquisition} service can also be thought of as taking precedence over the \emph{Attribute Ownership}%
+  }
+  \HLAFixedBlock{90.001}{541.798}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Acquisition If Available} service. A joined federate that has invoked the \emph{Attribute Ownership Acquisition}%
+  }
+  \HLAFixedBlock{90.001}{553.798}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service and is in the Acquisition Pending state shall not invoke the \emph{Attribute Ownership Acquisition If}%
+  }
+  \HLAFixedBlock{90.001}{565.798}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Available} service. If a joined federate that has invoked the \emph{Attribute Ownership Acquisition If Available}%
+  }
+  \HLAFixedBlock{90.001}{577.798}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service and is in the Willing to Acquire state invokes the \emph{Attribute Ownership Acquisition} service, that%
+  }
+  \HLAFixedBlock{90.001}{589.797}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate shall enter the Acquisition Pending state.%
+  }
+  \HLAFixedBlock{90.001}{613.797}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An \emph{Attribute Ownership Acquisition} service invocation may be explicitly canceled, but an \emph{Attribute}%
+  }
+  \HLAFixedBlock{90.001}{625.797}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Ownership Acquisition If Available }service invocation may not be explicitly canceled. When a joined%
+  }
+  \HLAFixedBlock{90.001}{637.797}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate invokes the \emph{Attribute Ownership Acquisition If Available }service, either the \emph{Attribute Ownership}%
+  }
+  \HLAFixedBlock{90.000}{649.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Acquisition Notification \textdagger{}} service or the \emph{Attribute Ownership Unavailable \textdagger{}} service shall be invoked at that%
+  }
+  \HLAFixedBlock{90.000}{661.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate in response. If the instance attribute is unowned by all joined federates (and no other joined%
+  }
+  \HLAFixedBlock{90.000}{673.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate is attempting to acquire it), the \emph{Attribute Ownership Acquisition Notification \textdagger{}} service shall be%
+  }
+  \HLAFixedBlock{90.000}{685.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked. If the joined federate is in the Not Divesting state with respect to the instance attribute, the%
+  }
+  \HLAFixedBlock{90.000}{697.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Attribute Ownership Unavailable \textdagger{}} service shall be invoked. Otherwise, either the \emph{Attribute Ownership}%
+  }
+\end{hlafixedpage}
+\clearpage

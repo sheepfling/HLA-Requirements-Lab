@@ -1,0 +1,188 @@
+\HLASourcePage{120}{119}
+\HLAServiceBookmark{6.8.5}{2}{Exceptions}
+\HLAServiceBookmark{6.8.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.9}{1}{Discover Object Instance † service}
+\HLAServiceBookmark{6.9.1}{2}{Supplied arguments}
+\HLAServiceBookmark{6.9.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.9.3}{2}{Preconditions}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    6.8.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{93.785}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance name is already coadunated with another object instance (if optional object%
+  }
+  \HLAFixedBlock{121.980}{105.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    instance name argument is supplied).%
+  }
+  \HLAFixedBlock{100.020}{120.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.938}{120.785}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object instance name was not reserved (if optional object instance name argument is supplied).%
+  }
+  \HLAFixedBlock{100.020}{135.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.976}{135.785}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is not publishing the specified object class.%
+  }
+  \HLAFixedBlock{100.020}{150.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.936}{150.784}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The object class is not defined in the FDD.%
+  }
+  \HLAFixedBlock{100.020}{165.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.971}{165.784}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.020}{180.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.952}{180.784}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.020}{195.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{195.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.020}{210.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.980}{210.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.954}{225.783}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{247.663}{%
+    6.8.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{269.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{269.762}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 10, Object class (i)%
+  }
+  \HLAFixedBlock{100.020}{284.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{284.762}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 15, Implications of ownership of instance attribute (i, k, j)%
+  }
+  \HLAFixedBlock{100.020}{299.762}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.968}{299.762}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 16, Establishing ownership of instance attribute (i, k, j)%
+  }
+  \HLAServiceHeadingAt{329.423}{%
+    6.9 \emph{Discover Object Instance \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{354.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Discover Object Instance \textdagger{}} service shall inform the joined federate to discover an object instance.%
+  }
+  \HLAFixedBlock{90.000}{366.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance discovery is described in 6.1. The object instance handle shall be unique to the federation%
+  }
+  \HLAFixedBlock{90.000}{378.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    execution and shall be uniform (see 6.8) throughout the federation execution.%
+  }
+  \HLAFixedBlock{90.000}{402.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The producing joined federate argument shall contain the designator for the joined federate that registered%
+  }
+  \HLAFixedBlock{90.000}{414.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the object instance. This producing joined federate may not own instance attributes that caused the%
+  }
+  \HLAFixedBlock{90.000}{426.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    discovery, and, in fact, it may be no longer joined to the federation execution.%
+  }
+  \HLAServiceComponentHeadingAt{450.645}{%
+    6.9.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{474.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{474.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance handle.%
+  }
+  \HLAFixedBlock{100.020}{486.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.943}{486.784}{400.057}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object class designator.%
+  }
+  \HLAFixedBlock{100.020}{498.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.981}{498.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Object instance name.%
+  }
+  \HLAFixedBlock{100.020}{510.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{510.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Producing joined federate designator.%
+  }
+  \HLAServiceComponentHeadingAt{534.643}{%
+    6.9.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{558.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{558.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{582.643}{%
+    6.9.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{606.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{606.782}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{621.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{621.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{636.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{636.781}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    An object instance with the specified designator exists.%
+  }
+  \HLAFixedBlock{100.020}{651.781}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.980}{651.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate is:%
+  }
+  \HLAFixedBlock{121.980}{666.781}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.034}{666.781}{379.966}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Subscribed to some class attribute at the specified object class, and the class attribute’s%
+  }
+  \HLAFixedBlock{142.020}{678.780}{379.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    analogous instance attribute that is part of the specified object instance is either owned by%
+  }
+  \HLAFixedBlock{142.021}{690.780}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    another joined federate or owned by the RTI, and/or %
+  }
+\end{hlafixedpage}
+\clearpage

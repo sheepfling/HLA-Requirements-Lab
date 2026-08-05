@@ -1,0 +1,87 @@
+\HLASourcePage{27}{26}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLADefinitionAt{69.79}{%
+    \HLADefinitionAnchor{federate-application}\HLADefinitionTerm{federate application}: An application that supports the High Level Architecture (HLA) interface to a\linebreak
+    runtime infrastructure (RTI) and that is capable of joining a federation execution. A federate application may\linebreak
+    join the same federation execution multiple times or may join multiple federation executions. However, each\linebreak
+    time a federate application joins a federation execution, it is creating a new joined federate. \emph{See also}: \textbf{joined}\linebreak
+    \textbf{federate}.%
+  }
+
+  \HLADefinitionAt{141.78}{%
+    \HLADefinitionAnchor{federation}\HLADefinitionTerm{federation}: A named set of federate applications and a common federation object model (FOM) that are\linebreak
+    used as a whole to achieve some specific objective.%
+  }
+
+  \HLADefinitionAt{177.78}{%
+    \HLADefinitionAnchor{federation-execution}\HLADefinitionTerm{federation execution}: The actual operation, over time, of a set of joined federates that are interconnected by\linebreak
+    a runtime infrastructure (RTI).%
+  }
+
+  \HLADefinitionAt{213.78}{%
+    \HLADefinitionAnchor{federation-objectives}\HLADefinitionTerm{federation objectives}: The statement of the problem that is to be addressed by the establishment and\linebreak
+    execution of a federation.%
+  }
+
+  \HLADefinitionAt{249.78}{%
+    \HLADefinitionAnchor{federation-object-model}\HLADefinitionTerm{federation object model (FOM)}: A specification defining the information exchanged at runtime to achieve\linebreak
+    a given set of federation objectives. This information includes object classes, object class attributes,\linebreak
+    interaction classes, interaction parameters, and other relevant information. The FOM is specified to the\linebreak
+    runtime infrastructure (RTI) using one or more FOM modules. The RTI assembles a FOM using these FOM\linebreak
+    modules and one Management Object Model (MOM) and Initialization Module (MIM), which is provided\linebreak
+    automatically by the RTI or, optionally, provided to the RTI when the federation execution is created.%
+  }
+
+  \HLADefinitionAt{333.78}{%
+    \HLADefinitionAnchor{federation-object-model-document-data}\HLADefinitionTerm{federation object model (FOM) Document Data (FDD)}: The data and information in a FOM that are used\linebreak
+    by the \emph{Create Federation Execution} service and successive \emph{Join Federation Execution} service invocations to\linebreak
+    configure the federation execution.%
+  }
+
+  \HLADefinitionAt{381.78}{%
+    \HLADefinitionAnchor{federation-object-model-module}\HLADefinitionTerm{federation object model (FOM) module}: A partial FOM (containing some or all object model template\linebreak
+    (OMT) tables) that specifies a modular component of a FOM. A FOM module may contain classes not\linebreak
+    inherent to it but upon which the FOM module depends, i.e., superclasses to the modular components. These\linebreak
+    superclasses will be included in the FOM module as either complete or scaffolding definitions.%
+  }
+
+  \HLADefinitionAt{441.78}{%
+    \HLADefinitionAnchor{federation-requirements}\HLADefinitionTerm{federation requirements}: A statement that identifies a federation characteristic, constraint, process, or\linebreak
+    product that is unambiguous and testable and that is necessary for a federation to be acceptable for its\linebreak
+    intended use.%
+  }
+
+  \HLADefinitionAt{489.78}{%
+    \HLADefinitionAnchor{federation-scenario}\HLADefinitionTerm{federation scenario}: A set of initial conditions and timeline of significant events used within a federation\linebreak
+    execution to achieve federation objectives.%
+  }
+
+  \HLADefinitionAt{525.78}{%
+    \HLADefinitionAnchor{final-time-value}\HLADefinitionTerm{final time value}: The point on the time axis for which no other points occurs after it.%
+  }
+
+  \HLADefinitionAt{549.78}{%
+    \HLADefinitionAnchor{handle}\HLADefinitionTerm{handle}: An identifier originated/created by the runtime infrastructure (RTI) that is unique to a federation\linebreak
+    execution.%
+  }
+
+  \HLADefinitionAt{585.78}{%
+    \HLADefinitionAnchor{inherited-attribute}\HLADefinitionTerm{inherited attribute}: A class attribute of an object class that was declared in a superclass of that object class\linebreak
+    in the object class hierarchy tree defined in the federation object model (FOM).%
+  }
+
+  \HLADefinitionAt{621.78}{%
+    \HLADefinitionAnchor{inherited-dimension}\HLADefinitionTerm{inherited dimension}:%
+  }
+
+  \HLAFixedAlphaList{100.02}{645.78}{421.98}{0}{%
+    \item Pertaining to an object class: a dimension of an object class that was declared in a superclass of that\linebreak
+      object class in the object class hierarchy tree defined in the federation object model (FOM) or\linebreak
+      simulation object model (SOM).
+    \item Pertaining to an interaction class: a dimension of an interaction class that was declared in a\linebreak
+      superclass of that interaction class in the interaction class hierarchy tree defined in the federation\linebreak
+      object model (FOM) or simulation object model (SOM).
+  }
+\end{hlafixedpage}
+\clearpage

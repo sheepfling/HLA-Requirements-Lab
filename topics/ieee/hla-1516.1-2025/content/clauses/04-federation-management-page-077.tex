@@ -1,0 +1,168 @@
+\HLASourcePage{78}{77}
+\HLAServiceBookmark{4.32.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.32.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.32.3}{2}{Preconditions}
+\HLAServiceBookmark{4.32.4}{2}{Postconditions}
+\HLAServiceBookmark{4.32.5}{2}{Exceptions}
+\HLAServiceBookmark{4.32.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.33}{1}{Abort Federation Restore service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If the restore-success indicator argument indicates failure, the optional failure reason argument shall be%
+  }
+  \HLAFixedBlock{90.000}{81.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    provided to identify the reason that the federation restore failed. Possible reasons for the failure of a%
+  }
+  \HLAFixedBlock{90.000}{93.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation restore are as follows:%
+  }
+  \HLAFixedBlock{100.020}{108.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{108.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI was unable to restore.%
+  }
+  \HLAFixedBlock{100.020}{123.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{123.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    One or more joined federates at which the \emph{Federation Restore Begun \textdagger{}} service was invoked have%
+  }
+  \HLAFixedBlock{121.981}{135.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoked the \emph{Federate Restore Complete} service with a restore-success indicator that indicated%
+  }
+  \HLAFixedBlock{121.982}{147.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    failure.%
+  }
+  \HLAFixedBlock{100.022}{162.784}{421.978}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{162.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    One or more joined federates at which the \emph{Federation Restore Begun \textdagger{}} service was invoked have%
+  }
+  \HLAFixedBlock{121.983}{174.784}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    resigned.%
+  }
+  \HLAFixedBlock{100.023}{189.784}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.983}{189.784}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI detected failure at one or more of the joined federates at which the \emph{Federation Restore}%
+  }
+  \HLAFixedBlock{121.983}{201.784}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Begun \textdagger{}} service was invoked.%
+  }
+  \HLAFixedBlock{100.023}{216.783}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.983}{216.783}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation restore aborted.%
+  }
+  \HLAFixedBlock{90.003}{240.783}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All joined federates that received an invocation of the \emph{Federation Restore Begun \textdagger{}} service shall receive an%
+  }
+  \HLAFixedBlock{90.003}{252.783}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation of the \emph{Federation Restored \textdagger{}} service. If a joined federate that received an invocation of the%
+  }
+  \HLAFixedBlock{90.003}{264.783}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Federation Restore Begun \textdagger{}} service resigns from the federation execution before the \emph{Federation Restored \textdagger{}}%
+  }
+  \HLAFixedBlock{90.003}{276.782}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    service for that restore is invoked, this resignation shall be considered a failure of the federation restoration,%
+  }
+  \HLAFixedBlock{90.003}{288.782}{431.997}{\rmfamily\raggedright}{9.96}{12.00}{%
+    and the \emph{Federation Restored \textdagger{}} service shall be invoked with a restore-success indicator of failure.%
+  }
+  \HLAServiceComponentHeadingAt{312.642}{%
+    4.32.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.023}{336.781}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{336.781}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation restore-success indicator.%
+  }
+  \HLAFixedBlock{100.023}{348.781}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.983}{348.781}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional failure reason.%
+  }
+  \HLAServiceComponentHeadingAt{372.641}{%
+    4.32.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.023}{396.780}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.983}{396.780}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{420.641}{%
+    4.32.3 Preconditions%
+  }
+  \HLAFixedBlock{100.023}{444.780}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.982}{444.780}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.023}{456.779}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.983}{456.779}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.023}{468.779}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.980}{468.779}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has a save with the specified label.%
+  }
+  \HLAFixedBlock{100.023}{480.779}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.983}{480.779}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{504.639}{%
+    4.32.4 Postconditions%
+  }
+  \HLAFixedBlock{100.023}{528.778}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{528.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has been informed regarding the success or failure of the restoration attempt.%
+  }
+  \HLAFixedBlock{100.023}{540.778}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.983}{540.778}{400.017}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate may resume providing new information to the federation.%
+  }
+  \HLAServiceComponentHeadingAt{564.638}{%
+    4.32.5 Exceptions%
+  }
+  \HLAFixedBlock{100.023}{588.777}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{588.777}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{612.638}{%
+    4.32.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.023}{636.777}{421.977}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.976}{636.777}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{666.383}{%
+    4.33 \emph{Abort Federation Restore} service%
+  }
+  \HLAFixedBlock{90.000}{691.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Abort Federation Restore} service requests the RTI to abort the federation restore that is underway. %
+  }
+\end{hlafixedpage}
+\clearpage

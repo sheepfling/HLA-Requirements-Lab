@@ -1,0 +1,158 @@
+\HLASourcePage{200}{199}
+\HLAServiceBookmark{8.11.1}{2}{Supplied arguments}
+\HLAServiceBookmark{8.11.2}{2}{Returned arguments}
+\HLAServiceBookmark{8.11.3}{2}{Preconditions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    After the joined federate receives a \emph{Time Advance Grant \textdagger{}} service invocation to logical time \emph{T}, it%
+  }
+  \HLAFixedBlock{121.980}{81.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    can send additional messages with timestamps equal to \emph{T} if the joined federate’s lookahead is zero. %
+  }
+  \HLAFixedBlock{89.999}{105.785}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate: %
+  }
+  \HLAFixedBlock{100.019}{120.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{120.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All messages queued in the RTI that the joined federate will receive as RO messages%
+  }
+  \HLAFixedBlock{100.019}{135.785}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{135.785}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The smallest timestamped message that will ever be received by the joined federate as a TSO%
+  }
+  \HLAFixedBlock{121.979}{147.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message with a timestamp less than or equal to the specified logical time, and any other messages%
+  }
+  \HLAFixedBlock{121.979}{159.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    queued in the RTI that the joined federate will receive as TSO messages and that have the same%
+  }
+  \HLAFixedBlock{121.979}{171.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    timestamp.%
+  }
+  \HLAFixedBlock{89.999}{195.784}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    After invoking the \emph{Next Message Request Available} service, the messages shall be passed to the joined%
+  }
+  \HLAFixedBlock{89.998}{207.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate when the RTI invokes the \emph{Receive Interaction \textdagger{},} \emph{Reflect Attribute Values \textdagger{},} and \emph{Remove Object}%
+  }
+  \HLAFixedBlock{89.998}{219.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Instance \textdagger{} }services. %
+  }
+  \HLAFixedBlock{89.998}{243.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    By invoking the \emph{Next Message Request Available} service with the specified logical time, the joined federate%
+  }
+  \HLAFixedBlock{89.998}{255.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    is guaranteeing that it will not generate a TSO message before the next \emph{Time Advance Grant \textdagger{}} service%
+  }
+  \HLAFixedBlock{89.998}{267.783}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invocation with a timestamp less than the specified logical time plus the actual lookahead the joined federate%
+  }
+  \HLAFixedBlock{89.998}{279.782}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    would have if it were granted to the specified logical time.%
+  }
+  \HLAFixedBlock{89.998}{303.782}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If it does not receive any TSO messages before the \emph{Time Advance Grant \textdagger{}} service invocation, the joined%
+  }
+  \HLAFixedBlock{89.998}{315.782}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp%
+  }
+  \HLAFixedBlock{89.998}{327.782}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    less than the specified logical time plus its actual lookahead.%
+  }
+  \HLAFixedBlock{89.998}{351.781}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If it does receive any TSO messages before the \emph{Time Advance Grant \textdagger{}} service invocation, the joined%
+  }
+  \HLAFixedBlock{89.998}{363.781}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp%
+  }
+  \HLAFixedBlock{89.998}{375.781}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    less than the logical time of the grant plus its actual lookahead.%
+  }
+  \HLAFixedBlock{89.998}{399.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    A \emph{Time Advance Grant \textdagger{}} service invocation shall complete this request and indicate to the joined federate%
+  }
+  \HLAFixedBlock{89.997}{411.780}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    that it has advanced its logical time to the timestamp of the TSO messages that are delivered, if any, or to the%
+  }
+  \HLAFixedBlock{89.997}{423.780}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    specified logical time if no TSO messages were delivered. Even if no TSO messages were delivered, it is%
+  }
+  \HLAFixedBlock{89.997}{435.780}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    still possible that TSO messages may be delivered in the future with timestamps equal to the logical time of%
+  }
+  \HLAFixedBlock{89.997}{447.780}{432.003}{\rmfamily\raggedright}{9.96}{12.00}{%
+    the grant. A \emph{Time Advance Grant \textdagger{}} service invocation shall also indicate that no TSO messages will be%
+  }
+  \HLAFixedBlock{89.998}{459.780}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivered to the joined federate in the future with timestamps less than the logical time of the grant. For%
+  }
+  \HLAFixedBlock{89.998}{471.779}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time-constrained joined federates, requests for which LITS or the specified logical time is less than or equal%
+  }
+  \HLAFixedBlock{89.998}{483.779}{432.002}{\rmfamily\raggedright}{9.96}{12.00}{%
+    to GALT can be granted without waiting for other joined federates to advance.%
+  }
+  \HLAServiceComponentHeadingAt{507.639}{%
+    \textbf{8.11.1 Supplied arguments }%
+  }
+  \HLAFixedBlock{100.018}{531.778}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{531.778}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Logical time%
+  }
+  \HLAServiceComponentHeadingAt{555.639}{%
+    \textbf{8.11.2 Returned arguments }%
+  }
+  \HLAFixedBlock{100.018}{579.778}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.978}{579.778}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{603.638}{%
+    \textbf{8.11.3 Preconditions}%
+  }
+  \HLAFixedBlock{100.018}{627.777}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{627.777}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.018}{641.816}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.937}{641.816}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.018}{655.796}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.968}{655.796}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.018}{669.776}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.978}{669.776}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified logical time is greater than or equal to the joined federate’s logical time.%
+  }
+  \HLAFixedBlock{100.018}{683.816}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.976}{683.816}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If time was last advanced by a \emph{Flush Queue Grant \textdagger{}}, the specified logical time is greater than or%
+  }
+  \HLAFixedBlock{121.978}{695.816}{400.022}{\rmfamily\raggedright}{9.96}{12.00}{%
+    equal to the optimistic logical time provided by the \emph{Flush Queue Grant \textdagger{}}.%
+  }
+\end{hlafixedpage}
+\clearpage

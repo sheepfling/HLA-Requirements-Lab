@@ -1,0 +1,301 @@
+\HLASourcePage{366}{365}
+\HLAServiceBookmark{12.11.5.3}{3}{Join Federation Execution service}
+\HLAServiceBookmark{12.11.5.4}{3}{Register Federation Synchronization Point service}
+\HLAServiceBookmark{12.11.5.5}{3}{Confirm Synchronization Point Registration † service}
+\HLAServiceBookmark{12.11.5.6}{3}{Synchronization Point Achieved service}
+\HLAServiceBookmark{12.11.5.7}{3}{Request Federation Save service}
+\HLAServiceBookmark{12.11.5.8}{3}{Initiate Federate Save † service}
+\HLAServiceBookmark{12.11.5.9}{3}{Federate Save Complete service}
+\HLAServiceBookmark{12.11.5.10}{3}{Federation Saved † service}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    execution name and list of federate member name and type pairs is passed as arguments to%
+  }
+  \HLAFixedBlock{90.000}{81.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{reportFederationExecutionMembers}%
+  }
+  \HLAFixedBlock{246.900}{81.785}{357.100}{\rmfamily\raggedright}{9.96}{11.16}{%
+    (). Only the federation execution name is passed as an argument to%
+  }
+  \HLAFixedBlock{90.000}{93.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{reportFederationExecutionDoesNotExist}%
+  }
+  \HLAFixedBlock{264.121}{93.785}{339.879}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ().%
+  }
+  \HLAFixedBlock{90.001}{117.645}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.3 }%
+  }
+  \HLAFixedBlock{133.921}{117.645}{470.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Join Federation Execution}}%
+  }
+  \HLAFixedBlock{258.841}{117.645}{345.159}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{141.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The set of FOM module designators argument is implemented as an array of strings where each item in the%
+  }
+  \HLAFixedBlock{90.001}{153.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    array is either a file path or a URI for a file containing one FOM module.%
+  }
+  \HLAFixedBlock{90.001}{177.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    In addition to the specified exceptions listed with the description of this service, the Java API may also%
+  }
+  \HLAFixedBlock{90.001}{189.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    throw a %
+  }
+  \HLAFixedBlock{123.241}{190.371}{480.759}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{CouldNotCreateLogicalTimeFactory}%
+  }
+  \HLAFixedBlock{315.121}{189.784}{288.879}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This exception indicates that the RTI was not able%
+  }
+  \HLAFixedBlock{90.001}{201.784}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to create an instance of the logical time factory class that was named in the %
+  }
+  \HLAFixedBlock{486.002}{202.371}{117.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{String}%
+  }
+  \HLAFixedBlock{90.002}{214.371}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{logicalTimeImplementationName}%
+  }
+  \HLAFixedBlock{263.882}{213.783}{340.118}{\rmfamily\raggedright}{9.96}{11.16}{%
+     argument to the %
+  }
+  \HLAFixedBlock{331.441}{213.783}{272.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Create Federation Execution}%
+  }
+  \HLAFixedBlock{447.662}{213.783}{156.338}{\rmfamily\raggedright}{9.96}{11.16}{%
+     service.%
+  }
+  \HLAFixedBlock{90.002}{237.644}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.4 }%
+  }
+  \HLAFixedBlock{133.922}{237.644}{470.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Register Federation Synchronization Point}}%
+  }
+  \HLAFixedBlock{336.062}{237.644}{267.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.002}{261.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional argument representing the set of joined federate designators is implemented in the Java API as%
+  }
+  \HLAFixedBlock{90.002}{273.783}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    two %
+  }
+  \HLAFixedBlock{109.563}{274.370}{494.437}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{registerFederationSynchronizationPoint()}%
+  }
+  \HLAFixedBlock{349.442}{273.783}{254.558}{\rmfamily\raggedright}{9.96}{11.16}{%
+     methods: one that takes a %
+  }
+  \HLAFixedBlock{468.062}{274.370}{135.938}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Federate-}%
+  }
+  \HLAFixedBlock{90.002}{286.370}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HandleSet}%
+  }
+  \HLAFixedBlock{143.943}{285.782}{460.057}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as an argument, and one that does not.%
+  }
+  \HLAFixedBlock{90.002}{309.642}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.5 }%
+  }
+  \HLAFixedBlock{133.922}{309.642}{470.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Confirm Synchronization Point Registration}}%
+  }
+  \HLAFixedBlock{341.540}{309.782}{262.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{ †}%
+  }
+  \HLAFixedBlock{349.082}{309.642}{254.918}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.002}{333.782}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The registration-success indicator is implemented in the Java API as two distinct methods:%
+  }
+  \HLAFixedBlock{90.002}{346.369}{513.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{synchronizationPointRegistrationSucceeded()}%
+  }
+  \HLAFixedBlock{364.740}{345.786}{239.260}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{396.060}{346.373}{207.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{synchronizationPoint-}%
+  }
+  \HLAFixedBlock{90.000}{358.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{RegistrationFailed()}%
+  }
+  \HLAFixedBlock{209.940}{357.785}{394.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . A Synchronization Point Failure Reason (discussed in 12.11.6.10), in the%
+  }
+  \HLAFixedBlock{90.000}{369.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    form %
+  }
+  \HLAFixedBlock{120.865}{369.785}{483.135}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of %
+  }
+  \HLAFixedBlock{140.665}{369.785}{463.335}{\rmfamily\raggedright}{9.96}{11.16}{%
+    a %
+  }
+  \HLAFixedBlock{156.540}{370.373}{447.460}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{SynchronizationPointFailureReason}%
+  }
+  \HLAFixedBlock{354.420}{369.785}{249.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{368.322}{369.785}{235.678}{\rmfamily\raggedright}{9.96}{11.16}{%
+    is %
+  }
+  \HLAFixedBlock{386.443}{369.785}{217.557}{\rmfamily\raggedright}{9.96}{11.16}{%
+    passed %
+  }
+  \HLAFixedBlock{424.528}{369.785}{179.472}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as %
+  }
+  \HLAFixedBlock{444.308}{369.785}{159.692}{\rmfamily\raggedright}{9.96}{11.16}{%
+    an %
+  }
+  \HLAFixedBlock{465.194}{369.785}{138.806}{\rmfamily\raggedright}{9.96}{11.16}{%
+    argument %
+  }
+  \HLAFixedBlock{514.189}{369.785}{89.811}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to%
+  }
+  \HLAFixedBlock{90.000}{382.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{synchronizationPointRegistrationFailed()}%
+  }
+  \HLAFixedBlock{329.880}{381.785}{274.120}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{405.645}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.6 }%
+  }
+  \HLAFixedBlock{133.920}{405.645}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Synchronization Point Achieved}}%
+  }
+  \HLAFixedBlock{286.260}{405.645}{317.740}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{429.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional %
+  }
+  \HLAFixedBlock{145.740}{429.784}{458.260}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{synchronization-success indicator}%
+  }
+  \HLAFixedBlock{282.900}{429.784}{321.100}{\rmfamily\raggedright}{9.96}{11.16}{%
+     parameter is implemented as two methods, one of which%
+  }
+  \HLAFixedBlock{90.000}{441.784}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    takes a boolean as an argument.%
+  }
+  \HLAFixedBlock{90.000}{465.644}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.7 }%
+  }
+  \HLAFixedBlock{133.920}{465.644}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Request Federation Save}}%
+  }
+  \HLAFixedBlock{253.320}{465.644}{350.680}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{489.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional timestamp argument is implemented as two methods, one of which takes a %
+  }
+  \HLAFixedBlock{445.080}{490.371}{158.920}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{511.080}{489.783}{92.920}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as%
+  }
+  \HLAFixedBlock{90.000}{501.783}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    an argument.%
+  }
+  \HLAFixedBlock{90.000}{525.643}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.8 }%
+  }
+  \HLAFixedBlock{133.920}{525.643}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Initiate Federate Save}}%
+  }
+  \HLAFixedBlock{236.660}{525.783}{367.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{ †}%
+  }
+  \HLAFixedBlock{244.140}{525.643}{359.860}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{549.782}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The optional timestamp argument is implemented as two methods, one of which takes a %
+  }
+  \HLAFixedBlock{445.560}{550.370}{158.440}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{513.660}{549.786}{90.340}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as%
+  }
+  \HLAFixedBlock{90.000}{561.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    an argument.%
+  }
+  \HLAFixedBlock{90.000}{585.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.9 }%
+  }
+  \HLAFixedBlock{133.920}{585.646}{470.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Federate Save Complete}}%
+  }
+  \HLAFixedBlock{249.960}{585.646}{354.040}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.000}{609.785}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service corresponds to two methods in the Java API: %
+  }
+  \HLAFixedBlock{369.720}{610.372}{234.280}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federateSaveComplete()}%
+  }
+  \HLAFixedBlock{507.600}{609.786}{96.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{622.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federateSaveNotComplete()}%
+  }
+  \HLAFixedBlock{239.940}{621.785}{364.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+  \HLAFixedBlock{90.000}{645.646}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.11.5.10 }%
+  }
+  \HLAFixedBlock{139.440}{645.646}{464.560}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{\emph{Federation Saved}}%
+  }
+  \HLAFixedBlock{222.749}{645.785}{381.251}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{ †}%
+  }
+  \HLAFixedBlock{230.281}{645.646}{373.719}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{ service}%
+  }
+  \HLAFixedBlock{90.001}{669.785}{513.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    This service corresponds to two methods in the Java API: %
+  }
+  \HLAFixedBlock{397.441}{670.372}{206.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationSaved()}%
+  }
+  \HLAFixedBlock{507.600}{669.786}{96.400}{\rmfamily\raggedright}{9.96}{11.16}{%
+    and%
+  }
+  \HLAFixedBlock{90.000}{682.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationNotSaved()}%
+  }
+  \HLAFixedBlock{209.940}{681.785}{394.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . A Save Failure Reason (discussed in 12.11.6.11), in the form of a%
+  }
+  \HLAFixedBlock{90.000}{694.373}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{SaveFailureReason}%
+  }
+  \HLAFixedBlock{191.940}{693.785}{412.060}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , is passed as an argument to %
+  }
+  \HLAFixedBlock{308.339}{694.373}{295.661}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{federationNotSaved()}%
+  }
+  \HLAFixedBlock{428.279}{693.785}{175.721}{\rmfamily\raggedright}{9.96}{11.16}{%
+    .%
+  }
+\end{hlafixedpage}
+\clearpage

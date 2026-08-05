@@ -1,0 +1,170 @@
+\HLASourcePage{124}{123}
+\HLAServiceBookmark{6.11.2}{2}{Returned arguments}
+\HLAServiceBookmark{6.11.3}{2}{Preconditions}
+\HLAServiceBookmark{6.11.4}{2}{Postconditions}
+\HLAServiceBookmark{6.11.5}{2}{Exceptions}
+\HLAServiceBookmark{6.11.6}{2}{Reference state charts}
+\HLAServiceBookmark{6.12}{1}{Send Interaction service}
+\thispagestyle{hla-body-no-ieee}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.946}{69.786}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Producing joined federate designator.%
+  }
+  \HLAFixedBlock{100.020}{84.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.980}{84.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional timestamp.%
+  }
+  \HLAFixedBlock{100.020}{99.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.936}{99.785}{400.064}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional receive message order type.%
+  }
+  \HLAFixedBlock{100.020}{114.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)%
+  }
+  \HLAFixedBlock{121.982}{114.785}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional message retraction designator.%
+  }
+  \HLAFixedBlock{100.020}{129.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)%
+  }
+  \HLAFixedBlock{121.982}{129.785}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Optional set of sent region designators.%
+  }
+  \HLAServiceComponentHeadingAt{153.645}{%
+    6.11.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.020}{177.784}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{177.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{201.644}{%
+    6.11.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{225.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.979}{225.783}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{240.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{240.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{255.783}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.971}{255.783}{400.029}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate knows about the object instance with the specified designator.%
+  }
+  \HLAFixedBlock{100.020}{270.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.940}{270.782}{400.060}{\rmfamily\raggedright}{9.96}{12.00}{%
+    For each attribute designator specified,%
+  }
+  \HLAFixedBlock{121.980}{285.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    1)%
+  }
+  \HLAFixedBlock{142.021}{285.782}{379.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    This joined federate is subscribed to the class attribute at the known class of the object instance%
+  }
+  \HLAFixedBlock{142.019}{297.782}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at this joined federate, and/or%
+  }
+  \HLAFixedBlock{121.980}{312.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    2)%
+  }
+  \HLAFixedBlock{142.019}{312.782}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate has a subscription region set for the class attribute at the known class of the%
+  }
+  \HLAFixedBlock{142.019}{324.782}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    object instance at the subscribing joined federate and this region set overlaps the update region%
+  }
+  \HLAFixedBlock{142.019}{336.781}{379.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    set of the instance attribute at the wall-clock time of update.%
+  }
+  \HLAFixedBlock{100.019}{351.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.968}{351.781}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The joined federate did not send the corresponding update.%
+  }
+  \HLAFixedBlock{100.019}{366.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.948}{366.781}{400.052}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{381.781}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.979}{381.781}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{405.641}{%
+    6.11.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{429.780}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{429.780}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The new instance attribute values have been supplied to the joined federate.%
+  }
+  \HLAServiceComponentHeadingAt{453.640}{%
+    6.11.5 Exceptions%
+  }
+  \HLAFixedBlock{100.018}{477.779}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{477.779}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error%
+  }
+  \HLAServiceComponentHeadingAt{501.639}{%
+    6.11.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.018}{525.778}{421.982}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.967}{525.778}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 15, Implications of ownership of instance attribute (i, k, j)%
+  }
+  \HLAServiceHeadingAt{555.383}{%
+    6.12 \emph{Send Interaction} service%
+  }
+  \HLAFixedBlock{90.000}{580.806}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Send Interaction} service shall send an interaction into the federation. Only parameters that are available%
+  }
+  \HLAFixedBlock{90.000}{592.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    at the specified interaction class may be sent in a given interaction, as defined in the FDD. A federate is not%
+  }
+  \HLAFixedBlock{90.000}{604.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    required to send all available parameters of the interaction class with the interaction.%
+  }
+  \HLAFixedBlock{90.000}{628.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    If preferred order type (see 8.1.3) of the interaction is TSO, the joined federate invoking this service is%
+  }
+  \HLAFixedBlock{90.000}{640.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time-regulating, and the timestamp argument is present, this service shall return a federation-unique%
+  }
+  \HLAFixedBlock{90.000}{652.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    message retraction designator. Otherwise, no message retraction designator shall be returned. A timestamp%
+  }
+  \HLAFixedBlock{90.000}{664.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    value should be provided if the preferred order type of the interaction is TSO and the joined federate%
+  }
+  \HLAFixedBlock{90.000}{676.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    invoking this service is time-regulating.%
+  }
+\end{hlafixedpage}
+\clearpage

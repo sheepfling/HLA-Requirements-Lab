@@ -1,0 +1,135 @@
+\HLASourcePage{64}{63}
+\HLAServiceBookmark{4.16.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.16.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.16.3}{2}{Preconditions}
+\HLAServiceBookmark{4.16.4}{2}{Postconditions}
+\HLAServiceBookmark{4.16.5}{2}{Exceptions}
+\HLAServiceBookmark{4.16.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.17}{1}{Synchronization Point Achieved service}
+\HLAServiceBookmark{4.17.1}{2}{Supplied arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily}{9.96}{12.00}{%
+    synchronization point label was registered, the RTI shall also invoke the\ \emph{Announce Synchronization Point \textdagger{}}\linebreak%
+    service at all federates that join the federation execution after the synchronization label was registered but\linebreak%
+    before the RTI has ascertained that all joined federates that were informed of the synchronization label\linebreak%
+    existence have invoked the\ \emph{Synchronization Point Achieved}\ service. These newly joining federates shall also\linebreak%
+    become part of the synchronization set for that point. Joined federates that resign from the federation\linebreak%
+    execution after the announcement of a synchronization point but before the federation synchronizes at that\linebreak%
+    point shall be removed from the synchronization set. The user-supplied tag supplied by the\ \emph{Announce}\linebreak%
+    \emph{Synchronization Point \textdagger{}}\ service shall be the tag that was supplied to the corresponding\ \emph{Register Federation}\linebreak%
+    \emph{Synchronization Point}\ service invocation.%
+  }
+  \HLAServiceComponentHeadingAt{189.644}{%
+    4.16.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.021}{213.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{213.783}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Synchronization point label.%
+  }
+  \HLAFixedBlock{100.021}{225.783}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{225.783}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    User-supplied tag.%
+  }
+  \HLAServiceComponentHeadingAt{249.643}{%
+    4.16.2 Returned arguments%
+  }
+  \HLAFixedBlock{100.021}{273.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.981}{273.782}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None%
+  }
+  \HLAServiceComponentHeadingAt{297.643}{%
+    4.16.3 Preconditions%
+  }
+  \HLAFixedBlock{100.021}{321.782}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.980}{321.782}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.021}{333.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.981}{333.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.021}{345.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{345.781}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The synchronization point has been registered.%
+  }
+  \HLAFixedBlock{100.021}{357.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.981}{357.781}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.021}{369.781}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.973}{369.781}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{393.641}{%
+    4.16.4 Postconditions%
+  }
+  \HLAFixedBlock{100.021}{417.780}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{417.780}{400.032}{\rmfamily}{9.96}{12.00}{%
+    The synchronization label is known to the joined federate and may be used in the\ \emph{Synchronization}\linebreak%
+    \emph{Point Achieved}\ and\ \emph{Federation Synchronized \textdagger{}}\ services.%
+  }
+  \HLAServiceComponentHeadingAt{453.640}{%
+    4.16.5 Exceptions%
+  }
+  \HLAFixedBlock{100.020}{477.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.977}{477.779}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate internal error.%
+  }
+  \HLAServiceComponentHeadingAt{501.639}{%
+    4.16.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{525.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.965}{525.778}{400.035}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 8, Awaiting synchronization (s, L).%
+  }
+  \HLAFixedBlock{100.020}{537.778}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.980}{537.778}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 9, Local synch label (s, L).%
+  }
+  \HLAServiceHeadingAt{567.383}{%
+    4.17\ \emph{Synchronization Point Achieved}\ service%
+  }
+  \HLAFixedBlock{90.000}{592.806}{432.000}{\rmfamily}{9.96}{12.00}{%
+    The\ \emph{Synchronization Point Achieved}\ service shall inform the RTI that the joined federate has reached the\linebreak%
+    specified synchronization point. Once all joined federates in the synchronization set for a given point have\linebreak%
+    invoked this service, the RTI shall not invoke the\ \emph{Announce Synchronization Point \textdagger{}}\ on any newly joining\linebreak%
+    federates. The optional synchronization-success indicator shall inform the RTI that the joined federate was\linebreak%
+    synchronized either successfully or unsuccessfully. The RTI shall consider the absence of the indicator as if\linebreak%
+    the joined federate synchronized successfully.%
+  }
+  \HLAServiceComponentHeadingAt{676.665}{%
+    4.17.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.019}{700.804}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.968}{700.804}{400.032}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Synchronization point label.%
+  }
+\end{hlafixedpage}
+\clearpage

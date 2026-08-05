@@ -1,0 +1,44 @@
+% M4 semantic reconstruction of physical page 58 / printed page 57.
+\begin{HLAClauseSemanticPage}{57}
+\HLAStableID{m4.page.058}
+\HLAStableID{m4.p058.b01}
+\HLAClausePlacedBlock{89.999}{69.786}{432.062}{%
+  \HLAClauseParagraph{\resizebox{431.997bp}{!}{\mbox{A logical time represents a single point on the HLA time axis. A logical time interval represents the distance}}\newline{}\resizebox{431.949bp}{!}{\mbox{between two points on the HLA time axis. During a federation execution, logical time may play two roles.}}\newline{}\resizebox{431.882bp}{!}{\mbox{Federates may associate themselves with points on the HLA time axis, and they may associate some of their}}\newline{}\resizebox{432.061bp}{!}{\mbox{activities, such as updating an instance attribute’s value or sending an interaction, with points on the HLA}}\newline{}\resizebox{431.991bp}{!}{\mbox{time axis. These points on the HLA time axis are referred to as time positions when associated with a}}\newline{}\resizebox{431.895bp}{!}{\mbox{federate and timestamps when associated with their activities. As a federation execution progresses,}}\newline{}\resizebox{431.979bp}{!}{\mbox{federates may advance their time positions along the HLA time axis. Logical time intervals are used to}}\newline{}\resizebox{416.913bp}{!}{\mbox{specify a federate’s lookahead and by the RTI to perform arithmetic operations with logical time values.}}}
+}
+\HLAStableID{m4.p058.b02}
+\HLAClausePlacedBlock{89.997}{175.804}{432.108}{%
+  \HLAClauseParagraph{\resizebox{432.005bp}{!}{\mbox{The specific strategy used to advance time in a simulation is driven by the simulation’s purpose. For}}\newline{}\resizebox{432.107bp}{!}{\mbox{example, faster-than-real time, event-stepped simulations are frequently used in analysis applications,}}\newline{}\resizebox{431.938bp}{!}{\mbox{whereas real time, time-stepped simulations are often used in training applications. The strategy chosen for}}\newline{}\resizebox{431.992bp}{!}{\mbox{advancing time is an important consideration in the design of a simulation, because it affects both simulation}}\newline{}\resizebox{432.005bp}{!}{\mbox{performance and the ability of a simulation to interoperate with other simulations in a federation. For this}}\newline{}\resizebox{432.077bp}{!}{\mbox{reason, it is important to document how a simulation supports the advancement of time in a federate’s SOM}}\newline{}\resizebox{112.076bp}{!}{\mbox{and relevant SOM modules.}}}
+}
+\HLAStableID{m4.p058.b03}
+\HLAClausePlacedBlock{89.997}{269.763}{432.058}{%
+  \HLAClauseParagraph{\resizebox{432.058bp}{!}{\mbox{IEEE Std 1516.1-2025 provides a variety of time management services to control the advancement of}}\newline{}\resizebox{431.988bp}{!}{\mbox{federates along the HLA time axis. These services allow multiple federates with differing internal time}}\newline{}\resizebox{431.948bp}{!}{\mbox{advancement strategies to interoperate in a meaningful way. For this reason, it is vital for all federation}}\newline{}\resizebox{432.051bp}{!}{\mbox{members to agree on how logical times and logical time intervals are represented across the federation, and}}\newline{}\resizebox{313.081bp}{!}{\mbox{document this agreement in the federation's FOM and relevant FOM modules.}}}
+}
+\HLAStableID{m4.p058.b04}
+\HLAClausePlacedBlock{89.997}{339.781}{432.026}{%
+  \HLAClauseParagraph{\resizebox{432.026bp}{!}{\mbox{During federation execution, logical times and logical time intervals are represented as instances of the time}}\newline{}\resizebox{431.987bp}{!}{\mbox{representation abstract data type (TRADT). This abstract data type is provided to the RTI when federation}}\newline{}\resizebox{432.001bp}{!}{\mbox{execution is created so that an RTI knows how to use the logical times and logical time intervals. This table}}\newline{}\resizebox{432.015bp}{!}{\mbox{allows the data type and semantics of the abstract data type for logical times and logical time intervals to be}}\newline{}\resizebox{253.087bp}{!}{\mbox{explained in FOMs, FOM modules, SOMs, and SOM modules.}}}
+}
+\HLAStableID{m4.p058.b05}
+\HLAClausePlacedBlock{89.998}{409.800}{432.070}{%
+  \HLAClauseParagraph{\resizebox{431.959bp}{!}{\mbox{It is also important to define the lookahead characteristics of both federates and federations. At the}}\newline{}\resizebox{432.021bp}{!}{\mbox{individual federate level, the specific means by which lookahead is supported may be a factor in assessing}}\newline{}\resizebox{431.910bp}{!}{\mbox{compatibility with other potential federates for a given federation application. For federations, it is important}}\newline{}\resizebox{432.070bp}{!}{\mbox{to document a common set of characteristics for how lookahead will be supported across the full federation.}}\newline{}\resizebox{431.923bp}{!}{\mbox{Thus, SOMs, SOM modules, FOMs and FOM modules all include representations of lookahead as well as}}\newline{}\resizebox{48.036bp}{!}{\mbox{timestamps.}}}
+}
+\HLAStableID{m4.p058.b06}
+\HLAClausePlacedBlock{89.998}{491.819}{432.003}{%
+  \HLAClauseParagraph{\resizebox{432.003bp}{!}{\mbox{An abstract data type for lookahead is supplied when a federation execution is created. The lookahead entry}}\newline{}\resizebox{431.800bp}{!}{\mbox{in this table allows the data type and semantics of this abstract data type to be documented in FOMs, SOMs,}}\newline{}\resizebox{140.464bp}{!}{\mbox{FOM modules, and SOM modules.}}}
+}
+\HLAStableID{m4.p058.b07}
+\HLAClausePlacedBlock{89.998}{537.778}{432.058}{%
+  \HLAClauseParagraph{\resizebox{431.937bp}{!}{\mbox{Semantic differences exist between the way time is represented for the purpose of depicting timestamps}}\newline{}\resizebox{432.014bp}{!}{\mbox{versus calculating lookahead. When depicting timestamps, time can be considered to be an absolute value on}}\newline{}\resizebox{432.058bp}{!}{\mbox{the HLA time axis, and thus, time comparisons can be drawn to determine if one timestamp is greater than}}\newline{}\resizebox{431.987bp}{!}{\mbox{another. Lookahead, in contrast, represents a duration of time, which can be added to timestamps but is}}\newline{}\resizebox{179.481bp}{!}{\mbox{generally not used for comparison purposes.}}}
+}
+\HLAStableID{m4.p058.b08}
+\HLAClausePlacedBlock{89.999}{607.797}{432.087}{%
+  \HLAClauseParagraph{\resizebox{431.974bp}{!}{\mbox{Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by the}}\newline{}\resizebox{432.016bp}{!}{\mbox{HLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs.}}\newline{}\resizebox{432.087bp}{!}{\mbox{Federations may choose to use these default data types, supply their own time representations, or not supply}}\newline{}\resizebox{139.208bp}{!}{\mbox{any time representation (e.g., NA).}}}
+}
+\HLAStableID{m4.p058.b09}
+\HLAClausePlacedBlock{89.999}{665.677}{84.959}{%
+  \HLAMinorClauseHeading{4.8.2 Table format}
+}
+\HLAStableID{m4.p058.b10}
+\HLAClausePlacedBlock{89.999}{687.776}{432.001}{%
+  \HLAClauseParagraph{\resizebox{360.554bp}{!}{\mbox{The template that shall be used for recording time representation is illustrated in Table 16.}}}
+}
+\end{HLAClauseSemanticPage}

@@ -1,0 +1,147 @@
+\HLASourcePage{178}{177}
+\HLAServiceBookmark{8.1.2}{2}{Advancing logical time}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{69.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T' = T + I => T < T'      T' = Tf + I => T' == Tf%
+  }
+  \HLAFixedBlock{90.000}{88.805}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T' = T -- I => T > T'      T' = Ti -- I => T' == Ti%
+  }
+  \HLAFixedBlock{90.000}{107.765}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T' = T + Iz => T' == T%
+  }
+  \HLAFixedBlock{90.000}{126.785}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T' = T -- Iz => T' == T%
+  }
+  \HLAFixedBlock{90.000}{145.804}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T1 != T2 => |T1 -- T2| >= Ie%
+  }
+  \HLAFixedBlock{90.000}{164.764}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T1 == T2 => T2 -- T1 == Iz %
+  }
+  \HLAFixedBlock{90.000}{183.784}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I' = I + Iz => I' == I%
+  }
+  \HLAFixedBlock{90.000}{202.803}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I' = I -- Iz => I' == I%
+  }
+  \HLAFixedBlock{90.000}{221.763}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I2 == I1 => I2 -- I1 == Iz%
+  }
+  \HLAFixedBlock{90.000}{240.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I2 < I1 => I2 -- I1 = Iz%
+  }
+  \HLAFixedBlock{90.000}{259.802}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I2 > I1 => I2 -- I1 >= Ie%
+  }
+  \HLAFixedBlock{90.000}{278.762}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    I != Iz => I >= Ie%
+  }
+  \HLAFixedBlock{90.000}{297.782}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    T > T' => T' < T%
+  }
+  \HLAFixedBlock{90.000}{316.801}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Ti < T < Tf%
+  }
+  \HLAServiceComponentHeadingAt{339.642}{%
+    \textbf{8.1.2 Advancing logical time}%
+  }
+  \HLAFixedBlock{90.000}{363.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Each joined federate, upon joining an execution, shall be assigned a logical time. A joined federate’s time%
+  }
+  \HLAFixedBlock{90.000}{375.781}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    position shall initially be set to the initial time on the time axis (the initial federation time of the TRADT).%
+  }
+  \HLAFixedBlock{90.000}{387.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The time position of a joined federate shall only advance; thus, a joined federate may request to advance%
+  }
+  \HLAFixedBlock{90.000}{399.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    only to a logical time that is greater than or equal to its current time position. In order for a joined federate to%
+  }
+  \HLAFixedBlock{90.000}{411.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    advance its time position, it shall request an advance explicitly. A joined federate shall request to advance its%
+  }
+  \HLAFixedBlock{90.000}{423.780}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    logical time only by invoking one of the following services:%
+  }
+  \HLAFixedBlock{100.020}{438.780}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{438.780}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Time Advance Request}%
+  }
+  \HLAFixedBlock{100.020}{453.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{453.779}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Time Advance Request Available}%
+  }
+  \HLAFixedBlock{100.020}{468.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{468.779}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Next Message Request}%
+  }
+  \HLAFixedBlock{100.020}{483.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{483.779}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Next Message Request Available}%
+  }
+  \HLAFixedBlock{100.020}{498.779}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{---}%
+  }
+  \HLAFixedBlock{121.979}{498.779}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Flush Queue Request}%
+  }
+  \HLAFixedBlock{90.000}{520.798}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The advance shall not occur until the RTI issues a grant via the \emph{Time Advance Grant \textdagger{}} or \emph{Flush Queue}%
+  }
+  \HLAFixedBlock{89.999}{531.778}{432.001}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Grant \textdagger{} }service. The interval between these service invocations is defined to be the Time Advancing state;%
+  }
+  \HLAFixedBlock{90.000}{542.818}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    this state is shown in the state chart in Figure 17. In general, at any instant during an execution, the time%
+  }
+  \HLAFixedBlock{90.000}{553.798}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    position of different joined federates may be at different logical times.%
+  }
+  \HLAFixedBlock{90.000}{574.797}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federates advancing via the \emph{Flush Queue Grant \textdagger{} }service in response to a \emph{Flush Request Grant} service shall%
+  }
+  \HLAFixedBlock{90.000}{585.777}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    be provided with a supplemental optimistic logical time in addition to a logical time. The optimistic logical%
+  }
+  \HLAFixedBlock{90.000}{596.817}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    time is the minimum of the time supplied in a \emph{Flush Queue Grant} and the timestamps of any TSO messages%
+  }
+  \HLAFixedBlock{90.000}{607.797}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    delivered in response to that \emph{Flush Queue Grant}. The consideration of delivered TSO messages does not%
+  }
+  \HLAFixedBlock{90.000}{618.777}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    exclude those specified in Request Retraction service calls. The optimistic logical time indicates a lower%
+  }
+  \HLAFixedBlock{90.000}{629.816}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    bound on the next logical time the federate could be advanced to if no TSO messages with a timestamp less%
+  }
+  \HLAFixedBlock{90.000}{640.796}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    than it are received in the future. Federates that have advanced as a result of the \emph{Flush Queue Grant \textdagger{} }service%
+  }
+  \HLAFixedBlock{90.000}{651.776}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    are further restricted by the optimistic logical time when making the next time advance. The federate may%
+  }
+  \HLAFixedBlock{90.000}{662.816}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    request to advance only to a logical time that is greater than or equal to its optimistic logical time.%
+  }
+  \HLAFixedBlock{90.000}{683.815}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Joined federates also may become time-regulating and/or time-constrained. The time positions of joined%
+  }
+  \HLAFixedBlock{90.000}{694.795}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates that are time-regulating shall be used to constrain the advancement of the time positions of joined%
+  }
+  \HLAFixedBlock{90.000}{705.775}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federates that are time-constrained.%
+  }
+\end{hlafixedpage}
+\clearpage

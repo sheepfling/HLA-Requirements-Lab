@@ -1,0 +1,385 @@
+\HLASourcePage{356}{355}
+\HLAServiceBookmark{12.4.1}{2}{HLAInteger64Time}
+\HLAServiceBookmark{12.4.2}{2}{HLAFloat64Time}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{90.000}{263.626}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.4.1 HLAInteger64Time}%
+  }
+  \HLAFixedBlock{90.000}{287.765}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The implementation of %
+  }
+  \HLAFixedBlock{184.080}{288.353}{419.920}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time}%
+  }
+  \HLAFixedBlock{280.081}{287.765}{323.919}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall provide the following:%
+  }
+  \HLAFixedBlock{100.021}{311.765}{503.979}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{311.765}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of the interface %
+  }
+  \HLAFixedBlock{292.501}{312.353}{311.499}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{358.441}{311.765}{245.559}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{398.341}{312.353}{205.659}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time}%
+  }
+  \HLAFixedBlock{494.280}{311.765}{109.720}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This%
+  }
+  \HLAFixedBlock{121.981}{323.765}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall use an %
+  }
+  \HLAFixedBlock{239.820}{324.352}{364.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64BE}%
+  }
+  \HLAFixedBlock{323.820}{323.765}{280.180}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as its underlying representation of time. It shall%
+  }
+  \HLAFixedBlock{121.980}{335.764}{482.020}{\rmfamily\raggedright}{9.96}{11.16}{%
+    use 0 as the value of  “initialTime” and the largest positive value defined for an %
+  }
+  \HLAFixedBlock{438.060}{336.352}{165.940}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64BE}%
+  }
+  \HLAFixedBlock{121.981}{347.764}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as its final time. Methods that are defined to return or accept a %
+  }
+  \HLAFixedBlock{392.041}{348.352}{211.959}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{458.041}{347.764}{145.959}{\rmfamily\raggedright}{9.96}{11.16}{%
+     reference shall%
+  }
+  \HLAFixedBlock{121.981}{359.764}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    actually return or expect a reference to %
+  }
+  \HLAFixedBlock{286.981}{360.352}{317.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time}%
+  }
+  \HLAFixedBlock{382.921}{359.764}{221.079}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . Methods defined as returning or%
+  }
+  \HLAFixedBlock{121.981}{371.764}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    accepting a %
+  }
+  \HLAFixedBlock{180.661}{372.352}{423.339}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{294.601}{371.764}{309.399}{\rmfamily\raggedright}{9.96}{11.16}{%
+     reference shall return or expect a reference to%
+  }
+  \HLAFixedBlock{121.982}{384.351}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64TimeInterval}%
+  }
+  \HLAFixedBlock{265.922}{383.764}{338.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+     (see below).%
+  }
+  \HLAFixedBlock{100.022}{395.764}{503.978}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{395.764}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{215.641}{396.351}{388.359}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{323.581}{395.764}{280.419}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{354.361}{396.351}{249.639}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64TimeFactory}%
+  }
+  \HLAFixedBlock{492.301}{395.764}{111.699}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . All of%
+  }
+  \HLAFixedBlock{121.982}{407.763}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    the methods of this implementation shall return references to %
+  }
+  \HLAFixedBlock{378.001}{408.351}{225.999}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time}%
+  }
+  \HLAFixedBlock{473.941}{407.763}{130.059}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , as defined%
+  }
+  \HLAFixedBlock{121.982}{419.763}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    above.%
+  }
+  \HLAFixedBlock{100.022}{431.763}{503.978}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{431.763}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{212.762}{432.351}{391.238}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{326.702}{431.763}{277.298}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{355.503}{432.351}{248.497}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64TimeInterval}%
+  }
+  \HLAFixedBlock{499.443}{431.763}{104.557}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This%
+  }
+  \HLAFixedBlock{121.983}{443.763}{482.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall use an %
+  }
+  \HLAFixedBlock{235.443}{444.350}{368.557}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64BE}%
+  }
+  \HLAFixedBlock{324.843}{443.763}{279.157}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as its underlying representation of a time interval.%
+  }
+  \HLAFixedBlock{121.982}{455.763}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Methods defined as returning or accepting a %
+  }
+  \HLAFixedBlock{306.423}{456.350}{297.577}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{420.363}{455.763}{183.637}{\rmfamily\raggedright}{9.96}{11.16}{%
+     reference shall return or%
+  }
+  \HLAFixedBlock{121.984}{467.762}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    expect a reference to %
+  }
+  \HLAFixedBlock{229.623}{468.350}{374.377}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64TimeInterval}%
+  }
+  \HLAFixedBlock{373.563}{467.762}{230.437}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The value of epsilon for the%
+  }
+  \HLAFixedBlock{121.984}{480.410}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64TimeInterval }%
+  }
+  \HLAFixedBlock{272.163}{479.822}{331.837}{\rmfamily\raggedright}{9.96}{11.16}{%
+    shall be represented by 1. When one of the time types is asked%
+  }
+  \HLAFixedBlock{121.984}{491.822}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to be incremented by epsilon, the implementation shall increment the value by the most appropriate%
+  }
+  \HLAFixedBlock{121.984}{503.822}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    value to create a value that can be differentiated.%
+  }
+  \HLAFixedBlock{100.024}{515.821}{503.976}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.984}{515.821}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{226.264}{516.409}{377.736}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeIntervalFactory}%
+  }
+  \HLAFixedBlock{382.203}{515.821}{221.797}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{420.063}{516.409}{183.937}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAInteger64Time-}%
+  }
+  \HLAFixedBlock{121.984}{528.409}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{IntervalFactory}%
+  }
+  \HLAFixedBlock{211.923}{527.821}{392.077}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . All of the methods of this implementation shall return references to%
+  }
+  \HLAFixedBlock{121.984}{539.821}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    HLA%
+  }
+  \HLAFixedBlock{142.564}{540.409}{461.436}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Integer64TimeInterval}%
+  }
+  \HLAFixedBlock{268.444}{539.821}{335.556}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as defined above.%
+  }
+  \HLAFixedBlock{90.004}{563.681}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{12.4.2 HLAFloat64Time}%
+  }
+  \HLAFixedBlock{90.004}{587.820}{513.996}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The implementation of %
+  }
+  \HLAFixedBlock{184.084}{588.408}{419.916}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{268.084}{587.820}{335.916}{\rmfamily\raggedright}{9.96}{11.16}{%
+     shall provide the following:%
+  }
+  \HLAFixedBlock{100.024}{611.820}{503.976}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.984}{611.820}{482.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of the interface %
+  }
+  \HLAFixedBlock{300.063}{612.408}{303.937}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{366.063}{611.820}{237.937}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{408.963}{612.408}{195.037}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{492.903}{611.820}{111.097}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This%
+  }
+  \HLAFixedBlock{121.983}{623.820}{482.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall use an %
+  }
+  \HLAFixedBlock{238.382}{624.407}{365.618}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64BE}%
+  }
+  \HLAFixedBlock{310.382}{623.820}{293.618}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as its underlying representation of time. It shall use%
+  }
+  \HLAFixedBlock{121.982}{635.820}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    0.0 as the value of “initialTime” and the largest finite positive value defined for an%
+  }
+  \HLAFixedBlock{121.982}{648.407}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64BE}%
+  }
+  \HLAFixedBlock{200.761}{647.819}{403.239}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as its final time. Methods that are defined to return or accept a %
+  }
+  \HLAFixedBlock{456.061}{648.407}{147.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTime}%
+  }
+  \HLAFixedBlock{121.981}{659.819}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    reference shall actually return or expect a reference to %
+  }
+  \HLAFixedBlock{351.061}{660.407}{252.939}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{435.000}{659.819}{169.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . Methods defined as%
+  }
+  \HLAFixedBlock{121.981}{671.819}{482.019}{\rmfamily\raggedright}{9.96}{11.16}{%
+    returning or accepting a %
+  }
+  \HLAFixedBlock{221.221}{672.407}{382.779}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{335.221}{671.819}{268.779}{\rmfamily\raggedright}{9.96}{11.16}{%
+     reference shall return or expect a reference to%
+  }
+  \HLAFixedBlock{121.982}{684.406}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeInterval}%
+  }
+  \HLAFixedBlock{253.922}{683.819}{350.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+     (see below).%
+  }
+  \HLAFixedBlock{100.022}{695.819}{503.978}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.982}{695.819}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{214.202}{696.406}{389.798}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeFactory}%
+  }
+  \HLAFixedBlock{322.143}{695.819}{281.857}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{351.963}{696.406}{252.037}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeFactory}%
+  }
+  \HLAFixedBlock{477.903}{695.819}{126.097}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . All of the%
+  }
+  \HLAFixedBlock{121.983}{707.818}{482.017}{\rmfamily\raggedright}{9.96}{11.16}{%
+    methods of this implementation shall return references to %
+  }
+  \HLAFixedBlock{352.984}{708.406}{251.016}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{436.920}{707.826}{167.080}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , as defined above.%
+  }
+  \HLAFixedBlock{223.860}{69.647}{380.140}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Table 21---Standardized time types}%
+  }
+  \HLAFixedBlock{170.040}{99.981}{433.960}{\rmfamily\raggedright}{9.00}{10.08}{%
+    \textbf{Property}%
+  }
+  \HLAFixedBlock{259.860}{99.981}{344.140}{\rmfamily\raggedright}{9.00}{10.08}{%
+    \textbf{64-bit integer time}%
+  }
+  \HLAFixedBlock{383.280}{99.981}{220.720}{\rmfamily\raggedright}{9.00}{10.08}{%
+    \textbf{64-bit float time}%
+  }
+  \HLAFixedBlock{139.200}{119.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Symbolic name%
+  }
+  \HLAFixedBlock{247.214}{119.961}{356.786}{\rmfamily\raggedright}{9.00}{10.08}{%
+    “HLAinteger64Time”%
+  }
+  \HLAFixedBlock{355.224}{119.961}{248.776}{\rmfamily\raggedright}{9.00}{10.08}{%
+    “HLAfloat64Time”%
+  }
+  \HLAFixedBlock{139.200}{137.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Representation%
+  }
+  \HLAFixedBlock{247.222}{137.961}{356.778}{\rmfamily\raggedright}{9.00}{10.08}{%
+    64-bit integer%
+  }
+  \HLAFixedBlock{355.220}{137.961}{248.780}{\rmfamily\raggedright}{9.00}{10.08}{%
+    64-bit float%
+  }
+  \HLAFixedBlock{139.200}{155.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Encoded format%
+  }
+  \HLAFixedBlock{247.200}{155.961}{356.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLAinteger64BE%
+  }
+  \HLAFixedBlock{355.185}{155.961}{248.815}{\rmfamily\raggedright}{9.00}{10.08}{%
+    HLAfloat64BE%
+  }
+  \HLAFixedBlock{139.200}{173.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Initial value%
+  }
+  \HLAFixedBlock{247.207}{173.961}{356.793}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0%
+  }
+  \HLAFixedBlock{355.207}{173.961}{248.793}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0.0%
+  }
+  \HLAFixedBlock{139.200}{191.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Final value%
+  }
+  \HLAFixedBlock{247.228}{191.961}{356.772}{\rmfamily\raggedright}{9.00}{10.08}{%
+    2%
+  }
+  \HLAFixedBlock{251.700}{189.965}{352.300}{\rmfamily\raggedright}{7.20}{8.06}{%
+    63%
+  }
+  \HLAFixedBlock{258.900}{191.961}{345.100}{\rmfamily\raggedright}{9.00}{10.08}{%
+     - 1%
+  }
+  \HLAFixedBlock{355.183}{191.961}{248.817}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0x1.FFFFFFFFFFFFFP+1023%
+  }
+  \HLAFixedBlock{139.200}{209.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Zero value%
+  }
+  \HLAFixedBlock{247.167}{209.961}{356.833}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0%
+  }
+  \HLAFixedBlock{355.167}{209.961}{248.833}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0.0%
+  }
+  \HLAFixedBlock{139.200}{227.961}{464.800}{\rmfamily\raggedright}{9.00}{10.08}{%
+    Epsilon value%
+  }
+  \HLAFixedBlock{247.214}{227.961}{356.786}{\rmfamily\raggedright}{9.00}{10.08}{%
+    1%
+  }
+  \HLAFixedBlock{355.214}{227.961}{248.786}{\rmfamily\raggedright}{9.00}{10.08}{%
+    0x0.0000000000001P-1022%
+  }
+\end{hlafixedpage}
+\clearpage

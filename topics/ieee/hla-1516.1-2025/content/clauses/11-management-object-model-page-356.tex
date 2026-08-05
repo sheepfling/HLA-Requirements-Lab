@@ -1,0 +1,399 @@
+\HLASourcePage{357}{356}
+\HLAServiceBookmark{12.5}{1}{Authorization}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{503.980}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.979}{69.786}{482.021}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{218.823}{70.373}{385.177}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{332.765}{69.786}{271.235}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{365.643}{70.373}{238.357}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeInterval}%
+  }
+  \HLAFixedBlock{497.583}{69.786}{106.417}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . This%
+  }
+  \HLAFixedBlock{121.982}{81.787}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation shall use a %
+  }
+  \HLAFixedBlock{237.179}{82.375}{366.821}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64BE}%
+  }
+  \HLAFixedBlock{309.120}{81.787}{294.880}{\rmfamily\raggedright}{9.96}{11.16}{%
+     as its underlying representation of a time interval.%
+  }
+  \HLAFixedBlock{121.982}{93.789}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    Methods defined as returning or accepting a %
+  }
+  \HLAFixedBlock{306.421}{94.377}{297.579}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeInterval}%
+  }
+  \HLAFixedBlock{420.363}{93.789}{183.637}{\rmfamily\raggedright}{9.96}{11.16}{%
+     reference shall return or%
+  }
+  \HLAFixedBlock{121.982}{105.791}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    expect a reference to %
+  }
+  \HLAFixedBlock{234.480}{106.379}{369.520}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeInterval}%
+  }
+  \HLAFixedBlock{366.420}{105.791}{237.580}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The value of epsilon for the%
+  }
+  \HLAFixedBlock{121.982}{118.381}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeInterval}%
+  }
+  \HLAFixedBlock{253.922}{117.793}{350.078}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is a constant; however, it may result in a larger change when used%
+  }
+  \HLAFixedBlock{121.982}{129.795}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    in an addition or subtraction operation. Since a floating point arithmetic operation may require%
+  }
+  \HLAFixedBlock{121.982}{141.797}{482.018}{\rmfamily\raggedright}{9.96}{11.16}{%
+    rounding, the result of adding or subtracting epsilon to a %
+  }
+  \HLAFixedBlock{347.705}{142.384}{256.295}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time}%
+  }
+  \HLAFixedBlock{431.648}{141.797}{172.352}{\rmfamily\raggedright}{9.96}{11.16}{%
+     value may round back%
+  }
+  \HLAFixedBlock{121.992}{153.798}{482.008}{\rmfamily\raggedright}{9.96}{11.16}{%
+    to the original value. To prevent this conflict with the statements given in 12.3, the implementation%
+  }
+  \HLAFixedBlock{121.992}{165.800}{482.008}{\rmfamily\raggedright}{9.96}{11.16}{%
+    of epsilon in an arithmetic operation shall act as the smallest value that guarantees a change in the%
+  }
+  \HLAFixedBlock{121.992}{177.802}{482.008}{\rmfamily\raggedright}{9.96}{11.16}{%
+    result. A side effect of this adjustment to epsilon during an arithmetic operation is that the operation%
+  }
+  \HLAFixedBlock{121.992}{189.804}{482.008}{\rmfamily\raggedright}{9.96}{11.16}{%
+    may not be reversible (e.g., given %
+  }
+  \HLAFixedBlock{258.314}{189.804}{345.686}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{T}%
+  }
+  \HLAFixedBlock{263.832}{189.804}{340.168}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ' = %
+  }
+  \HLAFixedBlock{276.310}{189.804}{327.690}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{T}%
+  }
+  \HLAFixedBlock{281.830}{189.804}{322.170}{\rmfamily\raggedright}{9.96}{11.16}{%
+     + %
+  }
+  \HLAFixedBlock{292.447}{189.804}{311.553}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Ie}%
+  }
+  \HLAFixedBlock{300.246}{189.804}{303.754}{\rmfamily\raggedright}{9.96}{11.16}{%
+     => %
+  }
+  \HLAFixedBlock{316.511}{189.804}{287.489}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{T}%
+  }
+  \HLAFixedBlock{322.088}{189.804}{281.912}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ' -- %
+  }
+  \HLAFixedBlock{333.846}{189.804}{270.154}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{T}%
+  }
+  \HLAFixedBlock{339.429}{189.804}{264.571}{\rmfamily\raggedright}{9.96}{11.16}{%
+     >= %
+  }
+  \HLAFixedBlock{355.693}{189.804}{248.307}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Ie}%
+  }
+  \HLAFixedBlock{363.432}{189.804}{240.568}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ).%
+  }
+  \HLAFixedBlock{100.030}{201.806}{503.970}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.990}{201.806}{482.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    An implementation of %
+  }
+  \HLAFixedBlock{233.475}{202.393}{370.525}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{LogicalTimeIntervalFactory}%
+  }
+  \HLAFixedBlock{389.418}{201.806}{214.582}{\rmfamily\raggedright}{9.96}{11.16}{%
+     called %
+  }
+  \HLAFixedBlock{432.077}{202.393}{171.923}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64Time-}%
+  }
+  \HLAFixedBlock{122.002}{214.395}{481.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Factory}%
+  }
+  \HLAFixedBlock{164.003}{213.808}{439.997}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . All of the methods of this implementation shall return references to%
+  }
+  \HLAFixedBlock{122.002}{226.397}{481.998}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{HLAFloat64TimeInterval}%
+  }
+  \HLAFixedBlock{256.462}{225.809}{347.538}{\rmfamily\raggedright}{9.96}{11.16}{%
+    as defined above.%
+  }
+  \HLAFixedBlock{90.000}{255.383}{514.000}{\rmfamily\raggedright}{10.98}{12.30}{%
+    \textbf{12.5 Authorization}%
+  }
+  \HLAFixedBlock{90.000}{280.806}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI uses a federate's credentials and an authorization service to verify if a service invocation is%
+  }
+  \HLAFixedBlock{90.000}{292.807}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    permitted (see 4.1.7). The credentials and authorization service are represented in the programming%
+  }
+  \HLAFixedBlock{90.000}{304.809}{514.000}{\rmfamily\raggedright}{9.96}{11.16}{%
+    language API by a %
+  }
+  \HLAFixedBlock{172.319}{305.397}{431.681}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{238.314}{304.809}{365.686}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class, an %
+  }
+  \HLAFixedBlock{282.118}{305.397}{321.882}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{342.118}{304.809}{261.882}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface, and an %
+  }
+  \HLAFixedBlock{420.055}{305.397}{183.945}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{AuthorizerFactory}%
+  }
+  \HLAFixedBlock{89.990}{316.811}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface. This clause defines the general characteristics of the abstract interfaces, and each API annex%
+  }
+  \HLAFixedBlock{89.990}{328.813}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    presents API-specific details.%
+  }
+  \HLAFixedBlock{89.990}{353.404}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{155.925}{352.816}{448.075}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is a concrete class that provides a simple envelope to contain the credentials type and the%
+  }
+  \HLAFixedBlock{89.990}{364.818}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credentials data. An instance of the %
+  }
+  \HLAFixedBlock{236.093}{365.406}{367.907}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{302.029}{364.818}{301.971}{\rmfamily\raggedright}{9.96}{11.16}{%
+     is provided to the RTI by the federate in the %
+  }
+  \HLAFixedBlock{488.689}{364.818}{115.311}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Connect}%
+  }
+  \HLAFixedBlock{89.990}{376.820}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    service invocation. %
+  }
+  \HLAFixedBlock{171.592}{377.408}{432.408}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{231.591}{376.820}{372.409}{\rmfamily\raggedright}{9.96}{11.16}{%
+     implementations may provide %
+  }
+  \HLAFixedBlock{363.173}{377.408}{240.827}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{429.108}{376.820}{174.892}{\rmfamily\raggedright}{9.96}{11.16}{%
+     subclasses with more%
+  }
+  \HLAFixedBlock{89.990}{388.822}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    sophisticated implementations and methods for constructing the %
+  }
+  \HLAFixedBlock{386.031}{389.409}{217.969}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{451.966}{388.822}{152.034}{\rmfamily\raggedright}{9.96}{11.16}{%
+     instances. The%
+  }
+  \HLAFixedBlock{89.990}{401.411}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{155.925}{400.824}{448.075}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class shall provide methods to: %
+  }
+  \HLAFixedBlock{100.010}{424.827}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{424.827}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain the string name of the credential type%
+  }
+  \HLAFixedBlock{100.010}{436.829}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{436.829}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain a byte array containing the credentials data.%
+  }
+  \HLAFixedBlock{89.990}{460.833}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    The RTI interacts with the authorization service through an %
+  }
+  \HLAFixedBlock{338.572}{461.420}{265.428}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{398.571}{460.833}{205.429}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface. The %
+  }
+  \HLAFixedBlock{462.046}{461.420}{141.954}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{89.990}{472.834}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    interface specifies methods to determine if a specific set of service invocations (%
+  }
+  \HLAFixedBlock{409.975}{472.834}{194.025}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Connect}%
+  }
+  \HLAFixedBlock{443.331}{472.834}{160.669}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{448.251}{472.834}{155.749}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Create}%
+  }
+  \HLAFixedBlock{477.593}{472.834}{126.407}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Federation}%
+  }
+  \HLAFixedBlock{89.990}{484.836}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Execution}%
+  }
+  \HLAFixedBlock{129.950}{484.836}{474.050}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , %
+  }
+  \HLAFixedBlock{136.613}{484.836}{467.387}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Destroy Federation Execution}%
+  }
+  \HLAFixedBlock{260.515}{484.836}{343.485}{\rmfamily\raggedright}{9.96}{11.16}{%
+    , and %
+  }
+  \HLAFixedBlock{285.714}{484.836}{318.286}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Join Federation Execution}%
+  }
+  \HLAFixedBlock{395.573}{484.836}{208.427}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) are allowed for the federate,%
+  }
+  \HLAFixedBlock{89.990}{496.838}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    given its credentials. An implementation of the %
+  }
+  \HLAFixedBlock{280.909}{497.426}{323.091}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{340.912}{496.838}{263.088}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface may support more than one type of%
+  }
+  \HLAFixedBlock{89.990}{509.428}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{155.925}{508.840}{448.075}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The RTI shall accept or reject the invocation of the specific RTI service calls based on the%
+  }
+  \HLAFixedBlock{89.990}{520.842}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    results of providing the %
+  }
+  \HLAFixedBlock{196.492}{521.429}{407.508}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Credentials}%
+  }
+  \HLAFixedBlock{262.487}{520.842}{341.513}{\rmfamily\raggedright}{9.96}{11.16}{%
+     and other associated parameters to the %
+  }
+  \HLAFixedBlock{439.128}{521.429}{164.872}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{499.067}{520.842}{104.933}{\rmfamily\raggedright}{9.96}{11.16}{%
+    . The%
+  }
+  \HLAFixedBlock{89.990}{532.843}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    implementation of an authorization service shall provide a concrete %
+  }
+  \HLAFixedBlock{372.476}{533.431}{231.524}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{432.415}{532.843}{171.585}{\rmfamily\raggedright}{9.96}{11.16}{%
+     class implementation%
+  }
+  \HLAFixedBlock{89.990}{544.845}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    derived from this interface. The %
+  }
+  \HLAFixedBlock{219.171}{545.433}{384.829}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \textbf{Authorizer}%
+  }
+  \HLAFixedBlock{279.111}{544.845}{324.889}{\rmfamily\raggedright}{9.96}{11.16}{%
+     interface shall provide methods to:%
+  }
+  \HLAFixedBlock{100.010}{568.849}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{568.849}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    obtain the string name of the authorization service%
+  }
+  \HLAFixedBlock{100.010}{580.851}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{580.851}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    authorize RTI operation (%
+  }
+  \HLAFixedBlock{223.257}{580.851}{380.743}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Connect}%
+  }
+  \HLAFixedBlock{256.551}{580.851}{347.449}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) given the federate's credentials%
+  }
+  \HLAFixedBlock{100.010}{592.852}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{592.852}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    authorize Federation operation (%
+  }
+  \HLAFixedBlock{256.491}{592.852}{347.509}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Create Federation Execution}%
+  }
+  \HLAFixedBlock{376.729}{592.852}{227.271}{\rmfamily\raggedright}{9.96}{11.16}{%
+     or %
+  }
+  \HLAFixedBlock{394.009}{592.852}{209.991}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Destroy Federation Execution}%
+  }
+  \HLAFixedBlock{518.688}{592.852}{85.312}{\rmfamily\raggedright}{9.96}{11.16}{%
+    )%
+  }
+  \HLAFixedBlock{121.972}{604.854}{482.028}{\rmfamily\raggedright}{9.96}{11.16}{%
+    given the federate's credentials and a federation name%
+  }
+  \HLAFixedBlock{100.010}{616.856}{503.990}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ---%
+  }
+  \HLAFixedBlock{121.970}{616.856}{482.030}{\rmfamily\raggedright}{9.96}{11.16}{%
+    authorize Federate operation (%
+  }
+  \HLAFixedBlock{252.647}{616.856}{351.353}{\rmfamily\raggedright}{9.96}{11.16}{%
+    \emph{Join Federation Execution}%
+  }
+  \HLAFixedBlock{366.231}{616.856}{237.769}{\rmfamily\raggedright}{9.96}{11.16}{%
+    ) given the federate's credentials, a%
+  }
+  \HLAFixedBlock{121.972}{628.858}{482.028}{\rmfamily\raggedright}{9.96}{11.16}{%
+    federation name, a federate type, and optionally a federate name.%
+  }
+  \HLAFixedBlock{89.990}{652.861}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    All Authorizer implementations shall support a predefined credential type, "HLAnoCredentials," that shall%
+  }
+  \HLAFixedBlock{89.990}{664.863}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    have an empty (zero-length) data value. A federate without credentials may invoke connect without%
+  }
+  \HLAFixedBlock{89.990}{676.865}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credentials or supply a credential with “HLAnoCredentials” type. In either case, the RTI shall pass a%
+  }
+  \HLAFixedBlock{89.990}{688.867}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    credential with “HLAnoCredentials” type to the Authorizer. The predefined Credentials class named%
+  }
+  \HLAFixedBlock{89.990}{700.869}{514.010}{\rmfamily\raggedright}{9.96}{11.16}{%
+    HLAnoCredentials shall be provided by the RTI implementation.%
+  }
+\end{hlafixedpage}
+\clearpage

@@ -1,0 +1,196 @@
+\HLASourcePage{55}{54}
+\HLAServiceBookmark{4.5.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.6}{1}{Destroy Federation Execution service}
+\HLAServiceBookmark{4.6.1}{2}{Supplied arguments}
+\HLAServiceBookmark{4.6.2}{2}{Returned arguments}
+\HLAServiceBookmark{4.6.3}{2}{Preconditions}
+\HLAServiceBookmark{4.6.4}{2}{Postconditions}
+\HLAServiceBookmark{4.6.5}{2}{Exceptions}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAFixedBlock{100.020}{69.786}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.980}{69.786}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    FOM module inconsistent with current FDD.
+  }
+  \HLAFixedBlock{100.020}{81.785}{8.946}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)
+  }
+  \HLAFixedBlock{121.969}{81.785}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid FOM module.
+  }
+  \HLAFixedBlock{100.020}{93.785}{9.529}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)
+  }
+  \HLAFixedBlock{121.952}{93.785}{400.048}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Error Reading FOM.
+  }
+  \HLAFixedBlock{100.020}{105.785}{8.944}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)
+  }
+  \HLAFixedBlock{121.967}{105.785}{400.033}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Could not locate FOM module indicated by supplied designator.
+  }
+  \HLAFixedBlock{100.020}{117.785}{7.852}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)
+  }
+  \HLAFixedBlock{121.956}{117.785}{400.044}{\rmfamily\raggedright}{9.96}{12.00}{%
+    MIM designator shall not be HLAstandardMIM. 
+  }
+  \HLAFixedBlock{100.020}{129.785}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)
+  }
+  \HLAFixedBlock{121.980}{129.785}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Invalid MIM.
+  }
+  \HLAFixedBlock{100.020}{141.785}{9.530}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)
+  }
+  \HLAFixedBlock{121.953}{141.785}{400.047}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Error Reading MIM.
+  }
+  \HLAFixedBlock{100.020}{153.784}{7.338}{\rmfamily\raggedright}{9.96}{12.00}{%
+    i)
+  }
+  \HLAFixedBlock{121.982}{153.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Could not locate MIM indicated by supplied designator.
+  }
+  \HLAFixedBlock{100.020}{165.784}{7.302}{\rmfamily\raggedright}{9.96}{12.00}{%
+    j)
+  }
+  \HLAFixedBlock{121.946}{165.784}{400.054}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The specified federation execution already exists.
+  }
+  \HLAFixedBlock{100.020}{177.784}{9.522}{\rmfamily\raggedright}{9.96}{12.00}{%
+    k)
+  }
+  \HLAFixedBlock{121.945}{177.784}{400.055}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Unauthorized
+  }
+  \HLAFixedBlock{100.020}{189.784}{7.338}{\rmfamily\raggedright}{9.96}{12.00}{%
+    l)
+  }
+  \HLAFixedBlock{121.982}{189.784}{400.018}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.
+  }
+  \HLAFixedBlock{100.020}{201.784}{12.290}{\rmfamily\raggedright}{9.96}{12.00}{%
+    m)
+  }
+  \HLAFixedBlock{121.954}{201.784}{400.046}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.
+  }
+  \HLAServiceComponentHeadingAt{225.644}{%
+    4.5.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.020}{249.783}{8.943}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.966}{249.783}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 1, Basic states of the federation execution.
+  }
+  \HLAFixedBlock{100.020}{261.783}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.980}{261.783}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 6, Federation execution and sync points.
+  }
+  \HLAServiceHeadingAt{291.383}{%
+    4.6 \emph{Destroy Federation Execution} service%
+  }
+  \HLAFixedBlock{90.000}{316.806}{433.227}{\rmfamily}{9.96}{12.00}{%
+    The \emph{Destroy Federation Execution} service shall remove a federation execution from the RTI set of\linebreak%
+    supported federation executions. All federation activity shall have stopped, and there shall be no joined\linebreak%
+    federates (all joined federates shall have resigned, either by explicit action or via MOM activity) before this\linebreak%
+    service is invoked. If the RTI is configured to require authorization, the RTI shall require that the credentials\linebreak%
+    provided in the Connect service invocation allows for destroying the named federation execution.
+  }
+  \HLAServiceComponentHeadingAt{388.665}{%
+    4.6.1 Supplied arguments %
+  }
+  \HLAFixedBlock{100.019}{412.804}{8.944}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.966}{412.804}{400.034}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation execution name.
+  }
+  \HLAServiceComponentHeadingAt{436.664}{%
+    4.6.2 Returned arguments %
+  }
+  \HLAFixedBlock{100.019}{460.803}{8.957}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.979}{460.803}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    None
+  }
+  \HLAServiceComponentHeadingAt{484.663}{%
+    4.6.3 Preconditions%
+  }
+  \HLAFixedBlock{100.019}{508.803}{8.952}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.974}{508.803}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.
+  }
+  \HLAFixedBlock{100.019}{520.802}{9.516}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.938}{520.802}{400.062}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.
+  }
+  \HLAFixedBlock{100.019}{532.802}{8.958}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)
+  }
+  \HLAFixedBlock{121.980}{532.802}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    There are no federates joined to this federation execution.
+  }
+  \HLAFixedBlock{100.019}{544.802}{9.537}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)
+  }
+  \HLAFixedBlock{121.959}{544.802}{400.041}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate has the authority to destroy the named federation.
+  }
+  \HLAServiceComponentHeadingAt{568.662}{%
+    4.6.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{592.801}{8.952}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.974}{592.801}{400.026}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution does not exist.
+  }
+  \HLAServiceComponentHeadingAt{616.661}{%
+    4.6.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{640.800}{8.954}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)
+  }
+  \HLAFixedBlock{121.976}{640.800}{400.024}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federates are joined to the federation execution.
+  }
+  \HLAFixedBlock{100.019}{652.800}{9.512}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)
+  }
+  \HLAFixedBlock{121.934}{652.800}{400.066}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution does not exist.
+  }
+  \HLAFixedBlock{100.019}{664.800}{8.958}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)
+  }
+  \HLAFixedBlock{121.980}{664.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Unauthorized
+  }
+  \HLAFixedBlock{100.019}{676.800}{9.556}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)
+  }
+  \HLAFixedBlock{121.979}{676.800}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.
+  }
+  \HLAFixedBlock{100.019}{688.800}{8.958}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)
+  }
+  \HLAFixedBlock{121.980}{688.800}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.
+  }
+\end{hlafixedpage}
+\clearpage

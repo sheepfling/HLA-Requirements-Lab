@@ -1,0 +1,188 @@
+\HLASourcePage{74}{73}
+\HLAServiceBookmark{4.27.3}{2}{Preconditions}
+\HLAServiceBookmark{4.27.4}{2}{Postconditions}
+\HLAServiceBookmark{4.27.5}{2}{Exceptions}
+\HLAServiceBookmark{4.27.6}{2}{Reference state charts}
+\HLAServiceBookmark{4.28}{1}{Confirm Federation Restoration Request † service}
+\HLAServiceBookmark{4.28.1}{2}{Supplied arguments}
+\thispagestyle{hla-body}
+\begin{hlafixedpage}
+  \HLAServiceComponentHeadingAt{69.646}{%
+    4.27.3 Preconditions%
+  }
+  \HLAFixedBlock{100.020}{93.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.975}{93.785}{400.025}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is connected to the RTI.%
+  }
+  \HLAFixedBlock{100.020}{104.765}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.939}{104.765}{400.061}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation execution exists.%
+  }
+  \HLAFixedBlock{100.020}{115.805}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.970}{115.805}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is joined to that federation execution.%
+  }
+  \HLAFixedBlock{100.020}{126.785}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.937}{126.785}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federation has a save with the specified label.%
+  }
+  \HLAFixedBlock{100.020}{137.765}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.979}{137.765}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The correct number of joined federates of the correct types that were joined to the federation%
+  }
+  \HLAFixedBlock{121.980}{148.804}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    execution when the save was accomplished exactly match the federates currently joined to the%
+  }
+  \HLAFixedBlock{121.980}{159.784}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation execution.%
+  }
+  \HLAFixedBlock{100.020}{170.764}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    f)%
+  }
+  \HLAFixedBlock{121.949}{170.764}{400.051}{\rmfamily\raggedright}{9.96}{12.00}{%
+    All previous \emph{Request Federation Restore }service invocations from the joined federate have been%
+  }
+  \HLAFixedBlock{121.979}{181.804}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    acknowledged with a corresponding \emph{Confirm Federation Restoration Request \textdagger{}} service.%
+  }
+  \HLAFixedBlock{100.019}{192.784}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    g)%
+  }
+  \HLAFixedBlock{121.979}{192.784}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save not in progress.%
+  }
+  \HLAFixedBlock{100.019}{203.764}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    h)%
+  }
+  \HLAFixedBlock{121.979}{203.764}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore not in progress.%
+  }
+  \HLAServiceComponentHeadingAt{227.624}{%
+    4.27.4 Postconditions%
+  }
+  \HLAFixedBlock{100.019}{251.763}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.969}{251.763}{400.031}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The RTI has been notified of the request to restore a former federation execution state.%
+  }
+  \HLAServiceComponentHeadingAt{275.623}{%
+    4.27.5 Exceptions%
+  }
+  \HLAFixedBlock{100.019}{299.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.970}{299.762}{400.030}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate save in progress.%
+  }
+  \HLAFixedBlock{100.019}{311.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.979}{311.762}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federate restore in progress.%
+  }
+  \HLAFixedBlock{100.019}{323.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    c)%
+  }
+  \HLAFixedBlock{121.977}{323.762}{400.023}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The federate is not a federation execution member.%
+  }
+  \HLAFixedBlock{100.019}{335.762}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    d)%
+  }
+  \HLAFixedBlock{121.979}{335.762}{400.021}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Not connected.%
+  }
+  \HLAFixedBlock{100.019}{347.761}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    e)%
+  }
+  \HLAFixedBlock{121.980}{347.761}{400.020}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI internal error.%
+  }
+  \HLAServiceComponentHeadingAt{371.622}{%
+    4.27.6 Reference state charts%
+  }
+  \HLAFixedBlock{100.019}{395.761}{421.981}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.972}{395.761}{400.028}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Figure 3, Lifetime of a federate.%
+  }
+  \HLAServiceHeadingAt{425.423}{%
+    4.28 \emph{Confirm Federation Restoration Request \textdagger{}} service%
+  }
+  \HLAFixedBlock{90.000}{450.786}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The \emph{Confirm Federation Restoration Request \textdagger{}} service shall indicate to the requesting joined federate the%
+  }
+  \HLAFixedBlock{90.001}{462.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    status of a requested federation restoration. This service shall be invoked in response to a \emph{Request}%
+  }
+  \HLAFixedBlock{90.001}{474.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    \emph{Federation Restore }service invocation. A positive request-success indicator informs the joined federate that%
+  }
+  \HLAFixedBlock{90.001}{486.785}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    RTI restoration state information has been located that corresponds to the following:%
+  }
+  \HLAFixedBlock{100.021}{501.785}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{501.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The indicated label.%
+  }
+  \HLAFixedBlock{100.021}{516.785}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{516.785}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation execution name and FDD of this federation execution.%
+  }
+  \HLAFixedBlock{100.021}{531.784}{421.979}{\rmfamily\raggedright}{9.96}{12.00}{%
+    ---%
+  }
+  \HLAFixedBlock{121.981}{531.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    The census of joined federates matches in number and type the census of joined federates present%
+  }
+  \HLAFixedBlock{121.981}{543.784}{400.019}{\rmfamily\raggedright}{9.96}{12.00}{%
+    when the save was taken.%
+  }
+  \HLAFixedBlock{90.001}{567.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Additionally, no other joined federate is currently attempting to restore the federation. Should more than one%
+  }
+  \HLAFixedBlock{90.001}{579.784}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    joined federate attempt to restore the federation at a given point, at most, one joined federate shall receive a%
+  }
+  \HLAFixedBlock{90.001}{591.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    positive indication through this service, and all others shall receive a negative indication. A federation%
+  }
+  \HLAFixedBlock{90.001}{603.783}{431.999}{\rmfamily\raggedright}{9.96}{12.00}{%
+    restoration attempt that ends with a negative request-success indicator shall have no other effect on the%
+  }
+  \HLAFixedBlock{90.000}{615.783}{432.000}{\rmfamily\raggedright}{9.96}{12.00}{%
+    federation execution.%
+  }
+  \HLAServiceComponentHeadingAt{639.643}{%
+    4.28.1 Supplied arguments%
+  }
+  \HLAFixedBlock{100.020}{663.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    a)%
+  }
+  \HLAFixedBlock{121.973}{663.782}{400.027}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Federation save label.%
+  }
+  \HLAFixedBlock{100.020}{675.782}{421.980}{\rmfamily\raggedright}{9.96}{12.00}{%
+    b)%
+  }
+  \HLAFixedBlock{121.937}{675.782}{400.063}{\rmfamily\raggedright}{9.96}{12.00}{%
+    Request-success indicator.%
+  }
+\end{hlafixedpage}
+\clearpage
