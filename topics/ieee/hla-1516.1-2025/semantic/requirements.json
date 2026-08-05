@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "req-federate-connect-before-rti-work",
+      "title": "Connect before working with an RTI",
+      "statement": "Before a federate can work with an RTI, such as to create a federation execution or join one, the federate shall perform a Connect to the RTI.",
+      "kind": "detailed",
+      "clause": "4.1.1",
+      "machine_statement": "Before a federate can work with an RTI, such as to create a federation execution or join one, the federate shall perform a Connect to the RTI.",
+      "transition_ids": ["federate.connect"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 18,
+        "end_line": 20
+      }
+    },
+    {
+      "id": "req-federate-connection-lost",
+      "title": "Connection Lost notification",
+      "statement": "The Connection Lost service notifies the federate that a fault has been detected and that it has been forced to the Not Connected state. If previously joined, it shall be now no longer joined to the federation execution.",
+      "kind": "detailed",
+      "clause": "4.1.1",
+      "machine_statement": "The Connection Lost service notifies the federate that a fault has been detected and that it has been forced to the Not Connected state. If previously joined, it shall be now no longer joined to the federation execution.",
+      "transition_ids": ["federate.connection-lost"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 31,
+        "end_line": 35
+      }
+    },
+    {
+      "id": "req-federate-disconnect-after-resign",
+      "title": "Disconnect after resignation",
+      "statement": "When a federate has resigned and has no further intent to join or create federation executions, it shall perform a Disconnect.",
+      "kind": "detailed",
+      "clause": "4.1.1",
+      "machine_statement": "When a federate has resigned and has no further intent to join or create federation executions, it shall perform a Disconnect.",
+      "transition_ids": ["federate.disconnect"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 54,
+        "end_line": 56
+      }
+    },
+    {
+      "id": "req-connect-service-establishes-connection",
+      "title": "Connect establishes the RTI connection",
+      "statement": "The Connect service shall be used to establish a connection between the unjoined federate and the RTI. No interaction between the unjoined federate and the RTI may take place until a successful invocation of the Connect service has been performed.",
+      "kind": "detailed",
+      "clause": "4.2",
+      "machine_statement": "The Connect service shall be used to establish a connection between the unjoined federate and the RTI. No interaction between the unjoined federate and the RTI may take place until a successful invocation of the Connect service has been performed.",
+      "transition_ids": ["federate.connect"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-051.tex",
+        "line": 12,
+        "end_line": 15
+      }
+    },
+    {
+      "id": "req-disconnect-service-terminates-connection",
+      "title": "Disconnect terminates the RTI connection",
+      "statement": "The Disconnect service shall be used to terminate the connection between a federate and the RTI.",
+      "kind": "detailed",
+      "clause": "4.3",
+      "machine_statement": "The Disconnect service shall be used to terminate the connection between a federate and the RTI.",
+      "transition_ids": ["federate.disconnect"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-052.tex",
+        "line": 56,
+        "end_line": 57
+      }
+    },
+    {
+      "id": "req-connection-lost-service-behavior",
+      "title": "Connection Lost enters the disconnected state",
+      "statement": "The Connection Lost service shall notify a previously joined federate that it has entered the Disconnected state as the result of a fault. Being disconnected, the federate is no longer joined to the federation execution. The RTI will attempt the invocation of this service on a best-effort basis; however, it may fail since the RTI or federate may be in a faulty or invalid state.",
+      "kind": "detailed",
+      "clause": "4.4",
+      "machine_statement": "The Connection Lost service shall notify a previously joined federate that it has entered the Disconnected state as the result of a fault. Being disconnected, the federate is no longer joined to the federation execution. The RTI will attempt the invocation of this service on a best-effort basis; however, it may fail since the RTI or federate may be in a faulty or invalid state.",
+      "transition_ids": ["federate.connection-lost"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-052.tex",
+        "line": 116,
+        "end_line": 120
+      }
+    },
+    {
+      "id": "req-federate-resigned-callback-behavior",
+      "title": "Federate Resigned reports involuntary resignation",
+      "statement": "The Federate Resigned service shall notify a previously joined federate that it has resigned from the federation. The RTI shall invoke this service when the federate was resigned by any action except for the federate itself invoking Resign Federation Execution. The federate shall remain connected to the RTI. If a federate also disconnects from the RTI, a Federate Resigned service is not required to be sent. A Connection Lost service implies that the federate has resigned as well.",
+      "kind": "detailed",
+      "clause": "4.13",
+      "machine_statement": "The Federate Resigned service shall notify a previously joined federate that it has resigned from the federation. The RTI shall invoke this service when the federate was resigned by any action except for the federate itself invoking Resign Federation Execution. The federate shall remain connected to the RTI. If a federate also disconnects from the RTI, a Federate Resigned service is not required to be sent. A Connection Lost service implies that the federate has resigned as well.",
+      "transition_ids": ["federate.resigned-by-rti"],
+      "extraction": "explicit",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-060.tex",
+        "line": 89,
+        "end_line": 93
+      }
+    }
+  ]
+}

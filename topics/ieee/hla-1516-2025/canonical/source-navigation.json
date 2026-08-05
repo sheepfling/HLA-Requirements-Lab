@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "document": "hla-1516-2025",
+  "outline": [
+    [0, "Annex A (informative) Rationale"],
+    [0, "Annex B (informative) Bibliography"]
+  ],
+  "notes": "Semantic root labels for the faithful source locations. Page destinations remain emitted by the LaTeX content macros."
+}

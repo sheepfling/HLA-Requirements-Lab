@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "object-instance-known",
+      "title": "Object Instance (i, k) Known",
+      "clause_id": "clause-6.1.10",
+      "source": {"path": "content/clauses/06-object-management-page-110.tex", "line": 6},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p111-xref13886.png", "page": 111, "xref": "13886", "caption": "Figure 14---Object instance (i, k) known"},
+      "states": [
+        {"id": "object-instance-known.initial-first", "label": "", "kind": "initial"},
+        {"id": "object-instance-known.establishing-first", "label": "Establishing Ownership of Instance Attribute\n(i, k, first class attribute of Object Class (i))"},
+        {"id": "object-instance-known.implications-first", "label": "Implications of Ownership of Instance Attribute\n(i, k, first class attribute of Object Class (i))"},
+        {"id": "object-instance-known.ellipsis", "label": "…", "kind": "ellipsis"},
+        {"id": "object-instance-known.initial-last", "label": "", "kind": "initial"},
+        {"id": "object-instance-known.establishing-last", "label": "Establishing Ownership of Instance Attribute\n(i, k, last class attribute of Object Class (i))"},
+        {"id": "object-instance-known.implications-last", "label": "Implications of Ownership of Instance Attribute\n(i, k, last class attribute of Object Class (i))"}
+      ],
+      "transitions": [
+        {"id": "object-instance-known.enter-first", "source_state": "object-instance-known.initial-first", "event": "", "target_state": "object-instance-known.establishing-first", "clause_id": "clause-6.1.10"},
+        {"id": "object-instance-known.enter-last", "source_state": "object-instance-known.initial-last", "event": "", "target_state": "object-instance-known.establishing-last", "clause_id": "clause-6.1.10"}
+      ],
+      "initial_state_ids": ["object-instance-known.initial-first", "object-instance-known.initial-last"],
+      "layout": {
+        "engine": "manual",
+        "direction": "top-to-bottom",
+        "containers": [
+          {"id": "object-instance-known.outer", "x": 0, "y": -1, "width": 13.5, "height": 12, "title": "Object Instance (i, k) Known"},
+          {"id": "object-instance-known.first-region", "x": 4, "y": 7, "width": 5.5, "height": 2.2, "title": "First class attribute", "title_visible": false},
+          {"id": "object-instance-known.last-region", "x": 4, "y": 0, "width": 5.5, "height": 2.2, "title": "Last class attribute", "title_visible": false}
+        ],
+        "rules": [
+          {"x1": 6.75, "y1": 7.0, "x2": 6.75, "y2": 9.2, "style": "dashed"},
+          {"x1": 6.75, "y1": 0.0, "x2": 6.75, "y2": 2.2, "style": "dashed"},
+          {"x1": 0.0, "y1": 6.0, "x2": 13.0, "y2": 6.0, "style": "dashed"},
+          {"x1": 0.0, "y1": 3.0, "x2": 13.0, "y2": 3.0, "style": "dashed"}
+        ],
+        "nodes": {
+          "object-instance-known.initial-first": {"x": 2.7, "y": 8.1},
+          "object-instance-known.establishing-first": {"x": 5.5, "y": 8.1},
+          "object-instance-known.implications-first": {"x": 8, "y": 8.1},
+          "object-instance-known.ellipsis": {"x": 6.75, "y": 4.8},
+          "object-instance-known.initial-last": {"x": 2.7, "y": 1.1},
+          "object-instance-known.establishing-last": {"x": 5.5, "y": 1.1},
+          "object-instance-known.implications-last": {"x": 8, "y": 1.1}
+        }
+      },
+      "notes": "The source draws first and last class-attribute rows inside a parameterized object-instance region, with an ellipsis standing for all intervening attributes. Figure 14 provides the overview; the detailed ownership implications are expanded in Figure 15."
+    },
+    {
+      "id": "ownership-implications",
+      "title": "Implications of Ownership of Instance Attribute (i, k, j)",
+      "clause_id": "clause-6.1.10",
+      "source": {"path": "content/clauses/06-object-management-page-111.tex", "line": 6},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p112-xref13887.png", "page": 112, "xref": "13887", "caption": "Figure 15---Implications of ownership of instance attribute (i, k, j)"},
+      "states": [
+        {"id": "ownership.initial", "label": "", "kind": "initial"},
+        {"id": "ownership.choice", "label": "C", "kind": "choice"},
+        {"id": "ownership.is-owned", "label": "Is Owned", "kind": "composite"},
+        {"id": "ownership.is-owned.history", "label": "H*", "kind": "history", "parent_id": "ownership.is-owned"},
+        {"id": "ownership.is-owned.choice", "label": "C", "kind": "choice", "parent_id": "ownership.is-owned"},
+        {"id": "ownership.is-owned.no-control-updates", "label": "No Control\nUpdates", "parent_id": "ownership.is-owned"},
+        {"id": "ownership.is-owned.control-updates", "label": "Control Updates\nIn Use", "kind": "composite", "parent_id": "ownership.is-owned"},
+        {"id": "ownership.is-owned.control.initial", "label": "", "kind": "initial", "parent_id": "ownership.is-owned.control-updates"},
+        {"id": "ownership.is-owned.control.unknown", "label": "Attribute\nRelevance\nUnknown", "parent_id": "ownership.is-owned.control-updates"},
+        {"id": "ownership.is-owned.control.on", "label": "Updates\nTurned On", "parent_id": "ownership.is-owned.control-updates"},
+        {"id": "ownership.is-owned.control.off", "label": "Updates\nTurned Off", "parent_id": "ownership.is-owned.control-updates"},
+        {"id": "ownership.is-not-owned", "label": "Is Not Owned", "kind": "composite"},
+        {"id": "ownership.is-not-owned.history", "label": "H*", "kind": "history", "parent_id": "ownership.is-not-owned"},
+        {"id": "ownership.is-not-owned.choice", "label": "C", "kind": "choice", "parent_id": "ownership.is-not-owned"},
+        {"id": "ownership.is-not-owned.no-scope-notification", "label": "No Scope\nNotification", "parent_id": "ownership.is-not-owned"},
+        {"id": "ownership.is-not-owned.scope-notification", "label": "Notification of Scope\nIn Use", "kind": "composite", "parent_id": "ownership.is-not-owned"},
+        {"id": "ownership.is-not-owned.scope.initial", "label": "", "kind": "initial", "parent_id": "ownership.is-not-owned.scope-notification"},
+        {"id": "ownership.is-not-owned.scope.unknown", "label": "Attribute\nScope\nUnknown", "parent_id": "ownership.is-not-owned.scope-notification"},
+        {"id": "ownership.is-not-owned.scope.in", "label": "Attribute\nIn-Scope", "parent_id": "ownership.is-not-owned.scope-notification"},
+        {"id": "ownership.is-not-owned.scope.out", "label": "Attribute\nOut-of-Scope", "parent_id": "ownership.is-not-owned.scope-notification"}
+      ],
+      "transitions": [
+        {"id": "ownership.enter-choice", "source_state": "ownership.initial", "event": "", "target_state": "ownership.choice", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.registered", "source_state": "ownership.choice", "event": "Register", "guard": "in \"Published (i, j)\"", "target_state": "ownership.is-owned.history", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.discovered", "source_state": "ownership.choice", "event": "Discover", "guard": "in \"Unpublished (i, j)\"", "target_state": "ownership.is-not-owned.history", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned-history-update", "source_state": "ownership.is-owned.history", "event": "Update Attr Values or Provide Update / Update Attr Values", "target_state": "ownership.is-owned.choice", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.not-owned-history-reflect", "source_state": "ownership.is-not-owned.history", "event": "Reflect Attribute Values†", "guard": "in \"Subscribed (i, j)\"", "target_state": "ownership.is-not-owned.choice", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned-disable-relevance", "source_state": "ownership.is-owned.choice", "event": "", "guard": "Attribute Relevance is disabled", "target_state": "ownership.is-owned.no-control-updates", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned-enable-relevance", "source_state": "ownership.is-owned.choice", "event": "", "guard": "Attribute Relevance is enabled", "target_state": "ownership.is-owned.control.initial", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned-no-control-enable", "source_state": "ownership.is-owned.no-control-updates", "event": "", "guard": "Attribute Relevance is enabled", "target_state": "ownership.is-owned.control.initial", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned-control-disable", "source_state": "ownership.is-owned.control-updates", "event": "", "guard": "Attribute Relevance is disabled", "target_state": "ownership.is-owned.no-control-updates", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.updates-enter", "source_state": "ownership.is-owned.control.initial", "event": "", "target_state": "ownership.is-owned.control.unknown", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.updates-on", "source_state": "ownership.is-owned.control.unknown", "event": "Turn Updates On for Object Instance †", "target_state": "ownership.is-owned.control.on", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.updates-off-from-unknown", "source_state": "ownership.is-owned.control.unknown", "event": "Turn Updates Off for Object Instance †", "target_state": "ownership.is-owned.control.off", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.updates-off", "source_state": "ownership.is-owned.control.on", "event": "Turn Updates Off for Object Instance †", "target_state": "ownership.is-owned.control.off", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.updates-on-again", "source_state": "ownership.is-owned.control.off", "event": "Turn Updates On for Object Instance †", "target_state": "ownership.is-owned.control.on", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.unowned", "source_state": "ownership.is-owned", "event": "", "guard": "in \"Unowned (i, k, j)\"", "target_state": "ownership.is-not-owned.choice", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.owned", "source_state": "ownership.is-not-owned", "event": "", "guard": "in \"Owned (i, k, j)\"", "target_state": "ownership.is-owned.choice", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.not-owned-disable-scope", "source_state": "ownership.is-not-owned.choice", "event": "", "guard": "Attribute Scope Advisory is disabled", "target_state": "ownership.is-not-owned.no-scope-notification", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.not-owned-enable-scope", "source_state": "ownership.is-not-owned.choice", "event": "", "guard": "Attribute Scope Advisory is enabled", "target_state": "ownership.is-not-owned.scope.initial", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.no-scope-enable", "source_state": "ownership.is-not-owned.no-scope-notification", "event": "", "guard": "Attribute Scope Advisory is enabled", "target_state": "ownership.is-not-owned.scope.initial", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-enter", "source_state": "ownership.is-not-owned.scope.initial", "event": "", "target_state": "ownership.is-not-owned.scope.unknown", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-in", "source_state": "ownership.is-not-owned.scope.unknown", "event": "Attribute In-Scope†", "target_state": "ownership.is-not-owned.scope.in", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-out", "source_state": "ownership.is-not-owned.scope.unknown", "event": "Attribute Out-of-Scope† or", "guard": "in \"Unsubscribed (i, j)\"", "target_state": "ownership.is-not-owned.scope.out", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-out-again", "source_state": "ownership.is-not-owned.scope.in", "event": "Attribute Out-of-Scope†", "guard": "in \"Unsubscribed (i, j)\"", "target_state": "ownership.is-not-owned.scope.out", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-in-again", "source_state": "ownership.is-not-owned.scope.out", "event": "Attribute In-Scope†", "target_state": "ownership.is-not-owned.scope.in", "clause_id": "clause-6.1.10"},
+        {"id": "ownership.scope-disable", "source_state": "ownership.is-not-owned.scope-notification", "event": "", "guard": "Attribute Scope Advisory is disabled", "target_state": "ownership.is-not-owned.no-scope-notification", "clause_id": "clause-6.1.10"}
+      ],
+      "initial_state_ids": ["ownership.initial"],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "edge_label_distance": 0.25,
+        "containers": [
+          {"id": "ownership.outer", "x": 0, "y": 0, "width": 24, "height": 15, "title": "Implications of Ownership of Instance Attribute (i, k, j)"},
+          {"id": "ownership.is-owned.container", "x": 1, "y": 0.7, "width": 10.3, "height": 13.2, "title": "Is Owned", "title_visible": false},
+          {"id": "ownership.is-not-owned.container", "x": 12.7, "y": 0.7, "width": 10.3, "height": 13.2, "title": "Is Not Owned", "title_visible": false},
+          {"id": "ownership.control.container", "x": 1.5, "y": 1, "width": 9.3, "height": 5.1, "title": "Control Updates In Use", "title_visible": false},
+          {"id": "ownership.scope.container", "x": 13, "y": 1, "width": 9.3, "height": 5.1, "title": "Notify of Scope In Use", "title_visible": false}
+        ],
+        "nodes": {
+          "ownership.initial": {"x": 12, "y": 13.4},
+          "ownership.choice": {"x": 12, "y": 12.5},
+          "ownership.is-owned.history": {"x": 2.8, "y": 11.5},
+          "ownership.is-owned.choice": {"x": 8.8, "y": 11},
+          "ownership.is-owned.no-control-updates": {"x": 2.8, "y": 9.1},
+          "ownership.is-owned.control.initial": {"x": 8.8, "y": 6.4},
+          "ownership.is-owned.control.unknown": {"x": 5.2, "y": 4.8},
+          "ownership.is-owned.control.on": {"x": 2.8, "y": 2.3},
+          "ownership.is-owned.control.off": {"x": 7.8, "y": 2.3},
+          "ownership.is-not-owned.history": {"x": 14.5, "y": 11.5},
+          "ownership.is-not-owned.choice": {"x": 20.5, "y": 11},
+          "ownership.is-not-owned.no-scope-notification": {"x": 14.5, "y": 9.1},
+          "ownership.is-not-owned.scope.initial": {"x": 20.5, "y": 6.4},
+          "ownership.is-not-owned.scope.unknown": {"x": 16.8, "y": 4.8},
+          "ownership.is-not-owned.scope.in": {"x": 14.5, "y": 2.3},
+          "ownership.is-not-owned.scope.out": {"x": 19.5, "y": 2.3}
+        },
+        "annotations": [
+          {"id": "ownership.is-owned-title", "x": 1.4, "y": 13.95, "width": 1.4, "text": "Is Owned"},
+          {"id": "ownership.is-not-owned-title", "x": 13.15, "y": 13.95, "width": 2.0, "text": "Is Not Owned"},
+          {"id": "ownership.control-title", "x": 1.8, "y": 5.75, "width": 2.4, "text": "Control Updates\nIn Use"},
+          {"id": "ownership.scope-title", "x": 13.3, "y": 5.75, "width": 2.4, "text": "Notify of Scope\nIn Use"}
+        ],
+        "transitions": {
+          "ownership.registered": {"label": "Register\n[in \"Published (i, j)\"]", "label_x": 8.4, "label_y": 13.2, "label_width": 2.0},
+          "ownership.discovered": {"label": "Discover†\n[in \"Unpublished (i, j)\"]", "label_x": 15.7, "label_y": 13.2, "label_width": 2.0},
+          "ownership.owned-history-update": {"label": "Update Attr Values\nor Provide Update† /\nUpdate Attr Values", "label_x": 5.1, "label_y": 12.15, "label_width": 2.3},
+          "ownership.not-owned-history-reflect": {"label": "Reflect Attribute Values†\n[in \"Subscribed (i, j)\"]", "label_x": 17.5, "label_y": 12.15, "label_width": 2.2},
+          "ownership.owned-disable-relevance": {"label": "[Attribute Relevance\nis disabled]", "label_x": 5.3, "label_y": 10.2, "label_width": 2.0},
+          "ownership.owned-enable-relevance": {"label": "[Attribute Relevance\nis enabled]", "label_x": 9.4, "label_y": 9.1, "label_width": 2.0},
+          "ownership.owned-no-control-enable": {"label": "[Attribute Relevance\nis enabled]", "label_x": 6.4, "label_y": 7.65, "label_width": 2.0},
+          "ownership.owned-control-disable": {"label": "[Attribute Relevance\nis disabled]", "label_x": 6.7, "label_y": 6.25, "label_width": 2.0},
+          "ownership.unowned": {"label": "[in \"Unowned (i, k, j)\"]", "label_x": 11.0, "label_y": 9.35, "label_width": 2.0},
+          "ownership.owned": {"label": "[in \"Owned (i, k, j)\"]", "label_x": 11.0, "label_y": 6.85, "label_width": 2.0},
+          "ownership.not-owned-disable-scope": {"label": "[Attribute Scope\nAdvisory is disabled]", "label_x": 17.0, "label_y": 10.2, "label_width": 2.1},
+          "ownership.not-owned-enable-scope": {"label": "[Attribute Scope\nAdvisory is enabled]", "label_x": 21.0, "label_y": 9.1, "label_width": 2.1},
+          "ownership.no-scope-enable": {"label": "[Attribute Scope\nAdvisory is enabled]", "label_x": 18.1, "label_y": 7.65, "label_width": 2.1},
+          "ownership.scope-disable": {"label": "[Attribute Scope\nAdvisory is disabled]", "label_x": 18.4, "label_y": 6.25, "label_width": 2.1},
+          "ownership.updates-on": {"label": "Turn Updates On for\nObject Instance †", "label_x": 3.4, "label_y": 3.85, "label_width": 2.0},
+          "ownership.updates-off-from-unknown": {"label": "Turn Updates Off for\nObject Instance †", "label_x": 7.0, "label_y": 3.85, "label_width": 2.0},
+          "ownership.updates-off": {"label": "Turn Updates Off for\nObject Instance †", "label_x": 5.3, "label_y": 2.85, "label_width": 2.2},
+          "ownership.updates-on-again": {"label": "Turn Updates On for\nObject Instance †", "label_x": 5.3, "label_y": 1.2, "label_width": 2.2},
+          "ownership.scope-in": {"label": "Attribute In-Scope†", "label_x": 15.1, "label_y": 3.85, "label_width": 2.0},
+          "ownership.scope-out": {"label": "Attribute Out-of-Scope† or\n[in \"Unsubscribed (i, j)\"]", "label_x": 19.0, "label_y": 3.85, "label_width": 2.3},
+          "ownership.scope-out-again": {"label": "Attribute Out-of-Scope†\n[in \"Unsubscribed (i, j)\"]", "label_x": 17.3, "label_y": 2.85, "label_width": 2.3},
+          "ownership.scope-in-again": {"label": "Attribute In-Scope†", "label_x": 17.3, "label_y": 1.2, "label_width": 2.0}
+        }
+      },
+      "notes": "Figure 15 expands the ownership implications for one instance attribute. Composite ownership regions, history pseudostates, choice pseudostates, control-update behavior, and scope-notification behavior are represented explicitly. The source uses cross-region transitions from the composite Is Owned/Is Not Owned regions; the renderer infers review-only anchors for composite endpoints from descendant layout positions."
+    }
+  ]
+}

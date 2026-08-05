@@ -19,8 +19,35 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: python -m pip install --upgrade pip ruff
-      - run: ruff check scripts topics/_template topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py
-      - run: ruff format --check scripts topics/_template topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e . ruff
+      - run: ruff check scripts tests topics/_template topics/ieee/hla-1516-2025/build.py topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py topics/ieee/hla-semantic-derivative-2025/build.py
+      - run: ruff format --check scripts tests topics/_template topics/ieee/hla-1516-2025/build.py topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py topics/ieee/hla-semantic-derivative-2025/build.py
       - run: python -m compileall -q scripts topics
+      - run: python -m unittest discover -s tests -v
       - run: python scripts/build.py list
+      - run: python scripts/semantic_metrics.py --json
+      - run: python scripts/semantic_dashboard.py --json
+      - run: python scripts/export_state_machine.py topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json --output .tmp/ci-state-machines --format both
+      - run: python scripts/review_state_machines.py --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/ci-reviews --artifacts .tmp/ci-review-artifacts --graphviz
+      - run: git diff --exit-code
+
+  document-release:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Provision XeLaTeX and visual-review tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-lmodern graphviz latexmk texlive-fonts-recommended texlive-latex-extra texlive-xetex
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e .
+      - run: python -m scripts.review_state_machines --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/release-reviews --artifacts .tmp/release-review-artifacts --graphviz
+      - run: python -m scripts.semantic_dashboard --json
+      - run: python -m scripts.release_check --build --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --json
+      - run: git diff --exit-code

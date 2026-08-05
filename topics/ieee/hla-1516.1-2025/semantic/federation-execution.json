@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "federation-execution",
+      "title": "Basic states of the federation execution",
+      "clause_id": "clause-4.1",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 50
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p039-xref13868.png",
+        "page": 39,
+        "xref": "13868",
+        "caption": "Basic states of the federation execution"
+      },
+      "initial_state_ids": [
+        "federation-execution.does-not-exist"
+      ],
+      "states": [
+        {
+          "id": "federation-execution.does-not-exist",
+          "label": "Federation Execution Does Not Exist",
+          "kind": "normal",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 40
+          }
+        },
+        {
+          "id": "federation-execution.exists",
+          "label": "Federation Execution Exists",
+          "kind": "composite",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 42
+          }
+        },
+        {
+          "id": "federation-execution.no-joined-federates",
+          "label": "No Joined Federates",
+          "parent_id": "federation-execution.exists",
+          "kind": "normal",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 42
+          }
+        },
+        {
+          "id": "federation-execution.supporting-joined-federates",
+          "label": "Supporting Joined Federates",
+          "parent_id": "federation-execution.exists",
+          "kind": "normal",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 45
+          }
+        }
+      ],
+      "transitions": [
+        {
+          "id": "federation-execution.create",
+          "source_state": "federation-execution.does-not-exist",
+          "event": "Create Federation Execution",
+          "target_state": "federation-execution.no-joined-federates",
+          "clause_id": "clause-4.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 40
+          }
+        },
+        {
+          "id": "federation-execution.destroy",
+          "source_state": "federation-execution.no-joined-federates",
+          "event": "Destroy Federation Execution",
+          "target_state": "federation-execution.does-not-exist",
+          "clause_id": "clause-4.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 40
+          }
+        },
+        {
+          "id": "federation-execution.first-join",
+          "source_state": "federation-execution.no-joined-federates",
+          "event": "The First Join Federation Execution",
+          "target_state": "federation-execution.supporting-joined-federates",
+          "clause_id": "clause-4.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 44
+          }
+        },
+        {
+          "id": "federation-execution.last-resign",
+          "source_state": "federation-execution.supporting-joined-federates",
+          "event": "The Last Resign Federation Execution",
+          "target_state": "federation-execution.no-joined-federates",
+          "clause_id": "clause-4.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 45
+          }
+        },
+        {
+          "id": "federation-execution.join-or-resign",
+          "source_state": "federation-execution.supporting-joined-federates",
+          "event": "Join Federation Execution or Resign Federation Execution",
+          "target_state": "federation-execution.supporting-joined-federates",
+          "clause_id": "clause-4.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-038.tex",
+            "line": 45
+          }
+        }
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "containers": [
+          {
+            "id": "federation-execution-frame",
+            "x": 0,
+            "y": 0,
+            "width": 11,
+            "height": 7,
+            "title": "Federation Execution",
+            "title_visible": false
+          },
+          {
+            "id": "federation-execution-exists-frame",
+            "x": 0.2,
+            "y": 0.3,
+            "width": 10.6,
+            "height": 3.6,
+            "title": "Federation Execution Exists",
+            "title_visible": false
+          }
+        ],
+        "rules": [
+          {"x1": 0, "y1": 6.55, "x2": 3.8, "y2": 6.55, "style": "solid"},
+          {"x1": 0.2, "y1": 3.55, "x2": 10.8, "y2": 3.55, "style": "solid"}
+        ],
+        "annotations": [
+          {"id": "federation-execution.title", "x": 2.0, "y": 6.75, "text": "Federation Execution", "width": 3.4, "align": "left"},
+          {"id": "federation-execution.exists-title", "x": 5.5, "y": 3.78, "text": "Federation Execution Exists", "width": 4.0, "align": "center"}
+        ],
+        "nodes": {
+          "federation-execution.does-not-exist": { "x": 5.5, "y": 5.7 },
+          "federation-execution.no-joined-federates": { "x": 2.2, "y": 1.9 },
+          "federation-execution.supporting-joined-federates": { "x": 8.2, "y": 1.9 }
+        },
+        "transitions": {
+          "federation-execution.create": {
+            "style": "bend-right",
+            "bend": 20,
+            "label": "Create Federation Execution",
+            "label_x": 6.8,
+            "label_y": 4.6,
+            "label_width": 2.6,
+            "label_align": "left"
+          },
+          "federation-execution.destroy": {
+            "style": "bend-left",
+            "bend": 25,
+            "label": "Destroy Federation Execution",
+            "label_x": 2.5,
+            "label_y": 4.6,
+            "label_width": 2.6,
+            "label_align": "left"
+          },
+          "federation-execution.first-join": {
+            "label": "The First Join Federation Execution",
+            "label_x": 5.2,
+            "label_y": 2.55,
+            "label_width": 3.2
+          },
+          "federation-execution.last-resign": {
+            "label": "The Last Resign Federation Execution",
+            "label_x": 5.2,
+            "label_y": 1.15,
+            "label_width": 3.2
+          },
+          "federation-execution.join-or-resign": {
+            "label": "Join Federation Execution\nor\nResign Federation Execution",
+            "label_x": 9.0,
+            "label_y": 0.8,
+            "label_width": 3.0
+          }
+        }
+      }
+    }
+  ]
+}

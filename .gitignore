@@ -244,6 +244,9 @@ build/
 **/build/
 dist/
 *.pdf
+*.dot
+*.mmd
+*.svg
 *.zip
 *.png
 *.jpg
@@ -292,3 +295,9 @@ Thumbs.db
 **/verification/
 **/.trash/
 .trash/
+
+# Generated diagram exports and visual-review packets
+reviews/
+**/reviews/
+review-artifacts/
+**/review-artifacts/

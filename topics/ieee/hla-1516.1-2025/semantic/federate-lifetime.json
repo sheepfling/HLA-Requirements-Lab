@@ -1,0 +1,505 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "federate-lifetime",
+      "title": "Federate lifetime",
+      "clause_id": "clause-4.1.1",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 16
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p041-xref13870.png",
+        "page": 41,
+        "xref": "13870",
+        "caption": "Lifetime of a Federate"
+      },
+      "initial_state_ids": [
+        "federate.not-connected",
+        "federate.joined.save-restore.active",
+        "federate.joined.normal-activity.permitted"
+      ],
+      "states": [
+        {
+          "id": "federate.not-connected",
+          "label": "Not Connected",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 16
+          }
+        },
+        {
+          "id": "federate.not-joined",
+          "label": "Not Joined",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 52
+          }
+        },
+        {
+          "id": "federate.joined",
+          "label": "Joined Federate",
+          "kind": "composite",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 25
+          }
+        },
+        {
+          "id": "federate.joined.save-restore",
+          "label": "Save/restore state",
+          "parent_id": "federate.joined",
+          "kind": "composite",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 61
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.active-federate",
+          "label": "Active Federate",
+          "parent_id": "federate.joined.save-restore",
+          "kind": "composite",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 89
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.active",
+          "label": "Active",
+          "parent_id": "federate.joined.save-restore.active-federate",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 79
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.restore-request-pending",
+          "label": "Restore Request Pending",
+          "parent_id": "federate.joined.save-restore.active-federate",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 194
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.history",
+          "label": "H",
+          "parent_id": "federate.joined.save-restore.active-federate",
+          "kind": "history",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 20
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.instructed-to-save",
+          "label": "Instructed to Save",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 65
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.saving",
+          "label": "Saving",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 34
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.waiting-for-federation-to-save",
+          "label": "Waiting for Federation to Save",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 34
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.prepared-to-restore",
+          "label": "Prepared to Restore",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-041.tex",
+            "line": 28
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.restoring",
+          "label": "Restoring",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 46
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.waiting-for-federation-to-restore",
+          "label": "Waiting for Federation to Restore",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 64
+          }
+        },
+        {
+          "id": "federate.joined.save-restore.waiting-for-restore-to-begin",
+          "label": "Waiting for Restore to Begin",
+          "parent_id": "federate.joined.save-restore",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-041.tex",
+            "line": 52
+          }
+        },
+        {
+          "id": "federate.joined.normal-activity",
+          "label": "Normal activity",
+          "parent_id": "federate.joined",
+          "kind": "composite",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 61
+          }
+        },
+        {
+          "id": "federate.joined.normal-activity.permitted",
+          "label": "Normal Activity Permitted",
+          "parent_id": "federate.joined.normal-activity",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 79
+          }
+        },
+        {
+          "id": "federate.joined.normal-activity.not-permitted",
+          "label": "Normal Activity Not Permitted",
+          "parent_id": "federate.joined.normal-activity",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 165
+          }
+        }
+      ],
+      "transitions": [
+        {
+          "id": "federate.connect",
+          "source_state": "federate.not-connected",
+          "event": "Connect",
+          "target_state": "federate.not-joined",
+          "initiator": "federate",
+          "action": "Establish a connection between the unjoined federate and the RTI.",
+          "precondition": "Not connected.",
+          "postcondition": "The unjoined federate is connected to the RTI.",
+          "clause_id": "clause-4.1.1",
+          "requirement_ids": [
+            "req-federate-connect-before-rti-work",
+            "req-connect-service-establishes-connection"
+          ],
+          "implementation_ids": ["rti.service.connect"],
+          "source": {
+            "path": "content/clauses/04-federation-management-page-051.tex",
+            "line": 13
+          }
+        },
+        {
+          "id": "federate.join",
+          "source_state": "federate.not-joined",
+          "event": "Join Federation Execution",
+          "target_state": "federate.joined",
+          "initiator": "federate",
+          "postcondition": "The federate is in the Joined Federate state.",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": ["rti.service.join-federation-execution"],
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 25
+          }
+        },
+        {
+          "id": "federate.resign",
+          "source_state": "federate.joined",
+          "event": "Resign Federation Execution",
+          "target_state": "federate.not-joined",
+          "initiator": "federate",
+          "action": "Leave the Joined Federate state.",
+          "clause_id": "clause-4.1.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 43
+          }
+        },
+        {
+          "id": "federate.connection-lost",
+          "source_state": "federate.joined",
+          "event": "Connection Lost",
+          "target_state": "federate.not-connected",
+          "initiator": "rti",
+          "guard": "An infrastructure problem is detected.",
+          "action": "Apply the Automatic Resign Directive as if the federate had resigned.",
+          "postcondition": "The federate is no longer joined to the federation execution.",
+          "clause_id": "clause-4.1.1",
+          "requirement_ids": [
+            "req-federate-connection-lost",
+            "req-connection-lost-service-behavior"
+          ],
+          "implementation_ids": ["rti.callback.connection-lost"],
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 31
+          }
+        },
+        {
+          "id": "federate.resigned-by-rti",
+          "source_state": "federate.joined",
+          "event": "Federate Resigned",
+          "target_state": "federate.not-joined",
+          "initiator": "rti",
+          "guard": "The federate is forced to leave the joined state for a reason other than invoking Resign Federation Execution.",
+          "postcondition": "The federate is notified that a fault was detected.",
+          "clause_id": "clause-4.1.1",
+          "requirement_ids": ["req-federate-resigned-callback-behavior"],
+          "implementation_ids": ["rti.callback.federate-resigned"],
+          "source": {
+            "path": "content/clauses/04-federation-management-page-040.tex",
+            "line": 49
+          }
+        },
+        {
+          "id": "federate.disconnect",
+          "source_state": "federate.not-joined",
+          "event": "Disconnect",
+          "target_state": "federate.not-connected",
+          "initiator": "federate",
+          "precondition": "The federate is not a member of a federation execution.",
+          "postcondition": "The federate is disconnected from the RTI.",
+          "clause_id": "clause-4.1.1",
+          "requirement_ids": [
+            "req-federate-disconnect-after-resign",
+            "req-disconnect-service-terminates-connection"
+          ],
+          "implementation_ids": ["rti.service.disconnect"],
+          "source": {
+            "path": "content/clauses/04-federation-management-page-052.tex",
+            "line": 57
+          }
+        },
+        {
+          "id": "federate.restore-begun",
+          "source_state": "federate.joined.save-restore.active",
+          "event": "Federation Restore Begun",
+          "target_state": "federate.joined.save-restore.prepared-to-restore",
+          "initiator": "rti",
+          "postcondition": "The joined federate enters the Prepared to Restore state.",
+          "clause_id": "clause-4.1.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-041.tex",
+            "line": 28
+          }
+        },
+        {
+          "id": "federate.initiate-save",
+          "source_state": "federate.joined.save-restore.active",
+          "event": "Initiate Federate Save",
+          "target_state": "federate.joined.save-restore.instructed-to-save",
+          "initiator": "rti",
+          "guard": "The joined federate is not constrained by time management or is in a position to receive a time advance grant.",
+          "postcondition": "The joined federate is instructed to begin saving its state.",
+          "clause_id": "clause-4.1.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-043.tex",
+            "line": 105
+          }
+        },
+        {
+          "id": "federate.save-begun",
+          "source_state": "federate.joined.save-restore.instructed-to-save",
+          "event": "Federate Save Begin",
+          "target_state": "federate.joined.save-restore.saving",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 65}
+        },
+        {
+          "id": "federate.save-complete",
+          "source_state": "federate.joined.save-restore.saving",
+          "event": "Federate Save Complete",
+          "target_state": "federate.joined.save-restore.waiting-for-federation-to-save",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 34}
+        },
+        {
+          "id": "federate.saved",
+          "source_state": "federate.joined.save-restore.waiting-for-federation-to-save",
+          "event": "Federation Saved †",
+          "target_state": "federate.joined.save-restore.history",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 89}
+        },
+        {
+          "id": "federate.request-save-history",
+          "source_state": "federate.joined.save-restore.active-federate",
+          "event": "Request Federation Save",
+          "target_state": "federate.joined.save-restore.history",
+          "initiator": "federate",
+          "action": "Return to the previously active substate of Active Federate.",
+          "clause_id": "clause-4.1.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 183
+          }
+        },
+        {
+          "id": "federate.request-restore",
+          "source_state": "federate.joined.save-restore.active",
+          "event": "Request Federation Restore",
+          "target_state": "federate.joined.save-restore.restore-request-pending",
+          "initiator": "federate",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+        },
+        {
+          "id": "federate.restore-confirm-failure",
+          "source_state": "federate.joined.save-restore.restore-request-pending",
+          "event": "Confirm Federation Restoration Request (failure)",
+          "target_state": "federate.joined.save-restore.active",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+        },
+        {
+          "id": "federate.restore-confirm-success",
+          "source_state": "federate.joined.save-restore.restore-request-pending",
+          "event": "Confirm Federation Restoration Request (success)",
+          "target_state": "federate.joined.save-restore.waiting-for-restore-to-begin",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+        },
+        {
+          "id": "federate.restore-start",
+          "source_state": "federate.joined.save-restore.prepared-to-restore",
+          "event": "Initiate Federate Restore †",
+          "target_state": "federate.joined.save-restore.restoring",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 46}
+        },
+        {
+          "id": "federate.restore-complete",
+          "source_state": "federate.joined.save-restore.restoring",
+          "event": "Federate Restore Complete †",
+          "target_state": "federate.joined.save-restore.waiting-for-federation-to-restore",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 64}
+        },
+        {
+          "id": "federate.restored",
+          "source_state": "federate.joined.save-restore.waiting-for-federation-to-restore",
+          "event": "Federation Restore Complete †",
+          "target_state": "federate.joined.save-restore.history",
+          "initiator": "rti",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 20}
+        },
+        {
+          "id": "federate.normal-activity-restricted",
+          "source_state": "federate.joined.normal-activity.permitted",
+          "event": "",
+          "target_state": "federate.joined.normal-activity.not-permitted",
+          "initiator": "automatic",
+          "guard": "The joined federate is in a save or restore state that does not permit normal activity.",
+          "postcondition": "Only save- or restore-related activity is permitted.",
+          "clause_id": "clause-4.1.1",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 177
+          }
+        },
+        {
+          "id": "federate.normal-activity-permitted",
+          "source_state": "federate.joined.normal-activity.not-permitted",
+          "event": "",
+          "guard": "in \"Active Federate\"",
+          "target_state": "federate.joined.normal-activity.permitted",
+          "initiator": "automatic",
+          "clause_id": "clause-4.1.1",
+          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 177}
+        }
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "edge_label_distance": 0.3,
+        "containers": [
+          {"id": "federate.outer", "x": -0.5, "y": -0.5, "width": 31.0, "height": 16.0, "title": "Federate lifetime"},
+          {"id": "federate.connected", "x": 4.0, "y": 12.0, "width": 8.0, "height": 3.2, "title": "Connected"},
+          {"id": "federate.joined", "x": 6.2, "y": 0.4, "width": 24.0, "height": 10.0, "title": "Joined Federate"},
+          {"id": "federate.active", "x": 7.2, "y": 5.5, "width": 7.0, "height": 4.4, "title": "Active Federate", "title_visible": false},
+          {"id": "federate.save", "x": 14.6, "y": 5.5, "width": 7.0, "height": 4.4, "title": "Federate Save in Progress", "title_visible": false},
+          {"id": "federate.restore", "x": 13.8, "y": 0.9, "width": 8.0, "height": 4.2, "title": "Federate Restore in Progress", "title_visible": false},
+          {"id": "federate.normal", "x": 23.0, "y": 5.5, "width": 5.5, "height": 4.4, "title": "Normal activity", "title_visible": false}
+        ],
+        "annotations": [
+          {"id": "federate.active-title", "x": 10.7, "y": 9.55, "text": "Active Federate", "width": 4.0, "align": "center"},
+          {"id": "federate.save-title", "x": 18.1, "y": 9.55, "text": "Federate Save in Progress", "width": 5.0, "align": "center"},
+          {"id": "federate.restore-title", "x": 17.8, "y": 4.75, "text": "Federate Restore in Progress", "width": 5.6, "align": "center"},
+          {"id": "federate.normal-title", "x": 25.75, "y": 9.55, "text": "Normal activity", "width": 3.8, "align": "center"}
+        ],
+        "nodes": {
+          "federate.not-connected": {"x": 2.0, "y": 13.1},
+          "federate.not-joined": {"x": 5.5, "y": 13.1},
+          "federate.joined": {"x": 9.2, "y": 10.7, "visible": false},
+          "federate.joined.save-restore": {"x": 15.5, "y": 6.8, "visible": false},
+          "federate.joined.save-restore.active-federate": {"x": 10.6, "y": 7.8, "visible": false},
+          "federate.joined.save-restore.active": {"x": 10.6, "y": 7.7},
+          "federate.joined.save-restore.restore-request-pending": {"x": 10.6, "y": 6.4},
+          "federate.joined.save-restore.history": {"x": 12.6, "y": 8.7},
+          "federate.joined.save-restore.instructed-to-save": {"x": 16.6, "y": 7.7},
+          "federate.joined.save-restore.saving": {"x": 18.0, "y": 6.7},
+          "federate.joined.save-restore.waiting-for-federation-to-save": {"x": 19.5, "y": 5.8},
+          "federate.joined.save-restore.prepared-to-restore": {"x": 19.7, "y": 2.1},
+          "federate.joined.save-restore.restoring": {"x": 16.4, "y": 2.1},
+          "federate.joined.save-restore.waiting-for-federation-to-restore": {"x": 14.3, "y": 3.2},
+          "federate.joined.save-restore.waiting-for-restore-to-begin": {"x": 19.8, "y": 4.0},
+          "federate.joined.normal-activity": {"x": 25.75, "y": 7.5, "visible": false},
+          "federate.joined.normal-activity.permitted": {"x": 25.75, "y": 7.7},
+          "federate.joined.normal-activity.not-permitted": {"x": 25.75, "y": 6.2}
+        },
+        "transitions": {
+          "federate.connect": {"label": "Connect", "label_x": 3.8, "label_y": 13.7, "label_width": 1.1},
+          "federate.join": {"label": "Join Federation\nExecution", "label_x": 7.2, "label_y": 11.65, "label_width": 1.7},
+          "federate.resign": {"label": "Resign Federation\nExecution", "label_x": 7.2, "label_y": 10.45, "label_width": 1.7},
+          "federate.connection-lost": {"style": "bend-left", "bend": 25, "label": "Connection Lost / service invocation or Not Connected exception from any federate-initiated service", "label_x": 8.8, "label_y": 1.0, "label_width": 6.8},
+          "federate.resigned-by-rti": {"style": "bend-left", "bend": 35, "label": "Federate Resigned", "label_x": 6.6, "label_y": 11.7, "label_width": 1.8},
+          "federate.disconnect": {"label": "Disconnect", "label_x": 3.8, "label_y": 12.2, "label_width": 1.2},
+          "federate.restore-begun": {"style": "bend-right", "bend": 20, "label": "Federation Restore Begun †", "label_x": 12.9, "label_y": 5.9, "label_width": 2.0},
+          "federate.initiate-save": {"label": "Initiate Federate Save †\n[in \"Not Constrained\" or\nin \"Time Advancing\"]", "label_x": 12.8, "label_y": 8.25, "label_width": 2.7},
+          "federate.save-begun": {"label": "Federate Save Begin", "label_x": 17.25, "label_y": 7.25, "label_width": 1.8},
+          "federate.save-complete": {"label": "Federate Save Complete", "label_x": 18.8, "label_y": 6.35, "label_width": 2.0},
+          "federate.saved": {"label": "Federation Saved †", "label_x": 20.3, "label_y": 5.25, "label_width": 1.7},
+          "federate.request-save-history": {"label": "Request Federation Save", "label_x": 11.5, "label_y": 9.35, "label_width": 1.9},
+          "federate.request-restore": {"label": "Request Federation\nRestore", "label_x": 8.2, "label_y": 7.1, "label_width": 1.6},
+          "federate.restore-confirm-failure": {"label": "Confirm Restoration\n(failure)", "label_x": 8.1, "label_y": 6.1, "label_width": 1.7},
+          "federate.restore-confirm-success": {"label": "Confirm Restoration\n(success)", "label_x": 12.2, "label_y": 5.35, "label_width": 1.8},
+          "federate.restore-start": {"label": "Initiate Federate Restore †", "label_x": 18.1, "label_y": 1.0, "label_width": 2.1},
+          "federate.restore-complete": {"label": "Federate Restore Complete †", "label_x": 16.2, "label_y": 2.85, "label_width": 2.1},
+          "federate.restored": {"label": "Federation Restore Complete †", "label_x": 12.3, "label_y": 3.9, "label_width": 2.2},
+          "federate.normal-activity-restricted": {"label": "Normal activity restricted", "label_x": 25.9, "label_y": 6.95, "label_width": 2.3},
+          "federate.normal-activity-permitted": {"label": "in \"Active Federate\"", "label_x": 24.2, "label_y": 5.05, "label_width": 2.2}
+        }
+      },
+      "notes": "Prose-derived federate lifetime model linked to the page-41 overview and page-42 joined-federate continuation image. The canonical record preserves top-level connection/resign semantics and representative save/restore/normal-activity substates; figure-only routing not yet expressed by the prose-derived transition list remains a review item."
+    }
+  ]
+}

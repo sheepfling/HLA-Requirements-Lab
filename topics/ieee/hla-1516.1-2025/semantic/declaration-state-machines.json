@@ -1,0 +1,340 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "object-class",
+      "title": "Object Class (i)",
+      "clause_id": "clause-5.1.5",
+      "source": {"path": "content/clauses/05-declaration-management-page-086.tex", "line": 5},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p087-xref13878.png", "page": 87, "xref": "13878", "caption": "Object Class (i)"},
+      "initial_state_ids": [
+        "object-class.attributes.first.initial",
+        "object-class.attributes.second.initial",
+        "object-class.attributes.last.initial",
+        "object-class.instance.1.initial",
+        "object-class.instance.k.initial"
+      ],
+      "states": [
+        {"id": "object-class.attributes.first.initial", "label": "", "kind": "initial"},
+        {"id": "object-class.attributes.first", "label": "Class Attribute (i, HLAprivilegeToDeleteObject)", "kind": "normal"},
+        {"id": "object-class.attributes.second.initial", "label": "", "kind": "initial"},
+        {"id": "object-class.attributes.second", "label": "Class Attribute (i, second available attribute for class)", "kind": "normal"},
+        {"id": "object-class.attributes.ellipsis", "label": "…", "kind": "ellipsis"},
+        {"id": "object-class.attributes.last.initial", "label": "", "kind": "initial"},
+        {"id": "object-class.attributes.last", "label": "Class Attribute (i, last available attribute for class)", "kind": "normal"},
+        {"id": "object-class.instance.1.initial", "label": "", "kind": "initial"},
+        {"id": "object-class.instance.1.unknown", "label": "Object Instance (i, 1)\nNot Known"},
+        {"id": "object-class.instance.1.known", "label": "Object Instance (i, 1)\nKnown"},
+        {"id": "object-class.instance.1.no-longer-known", "label": "Object Instance (i, 1)\nNo Longer Known"},
+        {"id": "object-class.instance.1.final", "label": "", "kind": "final"},
+        {"id": "object-class.instance.k.initial", "label": "", "kind": "initial"},
+        {"id": "object-class.instance.k.unknown", "label": "Object Instance (i, k)\nNot Known"},
+        {"id": "object-class.instance.k.known", "label": "Object Instance (i, k)\nKnown"},
+        {"id": "object-class.instance.k.no-longer-known", "label": "Object Instance (i, k)\nNo Longer Known"},
+        {"id": "object-class.instance.k.final", "label": "", "kind": "final"}
+      ],
+      "transitions": [
+        {"id": "object-class.attributes.first.enter", "source_state": "object-class.attributes.first.initial", "event": "", "target_state": "object-class.attributes.first", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.attributes.second.enter", "source_state": "object-class.attributes.second.initial", "event": "", "target_state": "object-class.attributes.second", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.attributes.last.enter", "source_state": "object-class.attributes.last.initial", "event": "", "target_state": "object-class.attributes.last", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-1.enter", "source_state": "object-class.instance.1.initial", "event": "", "target_state": "object-class.instance.1.unknown", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-1.register", "source_state": "object-class.instance.1.unknown", "event": "Register or Discover †", "target_state": "object-class.instance.1.known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-1.discover", "source_state": "object-class.instance.1.no-longer-known", "event": "Discover †", "target_state": "object-class.instance.1.known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-1.local-delete", "source_state": "object-class.instance.1.known", "event": "Local Delete", "target_state": "object-class.instance.1.no-longer-known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-1.remove", "source_state": "object-class.instance.1.known", "event": "Delete or Remove †", "target_state": "object-class.instance.1.final", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-k.enter", "source_state": "object-class.instance.k.initial", "event": "", "target_state": "object-class.instance.k.unknown", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-k.register", "source_state": "object-class.instance.k.unknown", "event": "Register or Discover †", "target_state": "object-class.instance.k.known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-k.discover", "source_state": "object-class.instance.k.no-longer-known", "event": "Discover †", "target_state": "object-class.instance.k.known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-k.local-delete", "source_state": "object-class.instance.k.known", "event": "Local Delete", "target_state": "object-class.instance.k.no-longer-known", "clause_id": "clause-5.1.5"},
+        {"id": "object-class.instance-k.remove", "source_state": "object-class.instance.k.known", "event": "Delete or Remove †", "target_state": "object-class.instance.k.final", "clause_id": "clause-5.1.5"}
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "top-to-bottom",
+        "state_font": "tiny",
+        "containers": [
+          {"id": "object-class.outer", "x": -0.8, "y": -7.2, "width": 10.5, "height": 16.2, "title": "Object Class (i)"},
+          {"id": "object-class.attributes", "x": -0.4, "y": 1.0, "width": 9.7, "height": 8.8, "title": "Class Attributes", "visible": false},
+          {"id": "object-class.instance-1", "x": -0.4, "y": -2.3, "width": 9.7, "height": 3.4, "title": "Object Instance (i, 1)", "visible": false},
+          {"id": "object-class.instance-k", "x": -0.4, "y": -6.5, "width": 9.7, "height": 3.4, "title": "Object Instance (i, k)", "visible": false}
+        ],
+        "rules": [
+          {"x1": -0.8, "y1": 7.7, "x2": 9.7, "y2": 7.7, "style": "solid"},
+          {"x1": -0.8, "y1": 5.5, "x2": 9.7, "y2": 5.5, "style": "dashed"},
+          {"x1": -0.8, "y1": 3.3, "x2": 9.7, "y2": 3.3, "style": "dashed"},
+          {"x1": -0.8, "y1": 0.3, "x2": 9.7, "y2": 0.3, "style": "dashed"},
+          {"x1": -0.8, "y1": -1.8, "x2": 9.7, "y2": -1.8, "style": "dashed"},
+          {"x1": -0.8, "y1": -3.0, "x2": 9.7, "y2": -3.0, "style": "dashed"},
+          {"x1": -0.8, "y1": -4.3, "x2": 9.7, "y2": -4.3, "style": "dashed"}
+        ],
+        "nodes": {
+          "object-class.attributes.first.initial": {"x": 0, "y": 7.0}, "object-class.attributes.first": {"x": 3.2, "y": 7.0},
+          "object-class.attributes.second.initial": {"x": 0, "y": 5.6}, "object-class.attributes.second": {"x": 3.2, "y": 5.6},
+          "object-class.attributes.ellipsis": {"x": 3.2, "y": 4.2},
+          "object-class.attributes.last.initial": {"x": 0, "y": 2.1}, "object-class.attributes.last": {"x": 3.2, "y": 2.1},
+          "object-class.instance.1.initial": {"x": 0, "y": -1.0}, "object-class.instance.1.unknown": {"x": 2.2, "y": -1.0}, "object-class.instance.1.known": {"x": 5.2, "y": -1.0}, "object-class.instance.1.no-longer-known": {"x": 3.7, "y": -2.0}, "object-class.instance.1.final": {"x": 8.0, "y": -1.0},
+          "object-class.instance.k.initial": {"x": 0, "y": -5.2}, "object-class.instance.k.unknown": {"x": 2.2, "y": -5.2}, "object-class.instance.k.known": {"x": 5.2, "y": -5.2}, "object-class.instance.k.no-longer-known": {"x": 3.7, "y": -6.2}, "object-class.instance.k.final": {"x": 8.0, "y": -5.2}
+        },
+        "transitions": {
+          "object-class.instance-1.register": {"label": "Register or Discover †", "label_x": 3.7, "label_y": -0.45, "label_width": 2.1},
+          "object-class.instance-1.discover": {"label": "Discover †", "label_x": 4.2, "label_y": -1.45, "label_width": 1.2},
+          "object-class.instance-1.local-delete": {"label": "Local Delete", "label_x": 6.45, "label_y": -1.45, "label_width": 1.2},
+          "object-class.instance-1.remove": {"label": "Delete or Remove †", "label_x": 6.8, "label_y": -0.45, "label_width": 2.0},
+          "object-class.instance-k.register": {"label": "Register or Discover †", "label_x": 3.7, "label_y": -4.65, "label_width": 2.1},
+          "object-class.instance-k.discover": {"label": "Discover †", "label_x": 4.2, "label_y": -5.65, "label_width": 1.2},
+          "object-class.instance-k.local-delete": {"label": "Local Delete", "label_x": 6.45, "label_y": -5.65, "label_width": 1.2},
+          "object-class.instance-k.remove": {"label": "Delete or Remove †", "label_x": 6.8, "label_y": -4.65, "label_width": 2.0}
+        }
+      },
+      "notes": "Class-attribute rows and object-instance branches are parameterized; only representative instances 1 and k are drawn in the source. Entry pseudostates and transitions are explicit so every source-visible entry arrow has a canonical representation."
+    },
+    {
+      "id": "class-attribute",
+      "title": "Class Attribute (i, j)",
+      "clause_id": "clause-5.1.5",
+      "source": {"path": "content/clauses/05-declaration-management-page-087.tex", "line": 6},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p088-xref13882.png", "page": 88, "xref": "13882", "caption": "Class attribute (i, j)"},
+      "initial_state_ids": ["class-attribute.publication.initial", "class-attribute.subscription.initial"],
+      "states": [
+        {"id": "class-attribute.publication.initial", "label": "", "kind": "initial"},
+        {"id": "class-attribute.publication", "label": "Publication", "kind": "composite"},
+        {"id": "class-attribute.publication.unpublished", "label": "Unpublished (i, j)"},
+        {"id": "class-attribute.publication.published", "label": "Published (i, j)"},
+        {"id": "class-attribute.publication.history", "label": "", "kind": "history"},
+        {"id": "class-attribute.subscription.initial", "label": "", "kind": "initial"},
+        {"id": "class-attribute.subscription", "label": "Subscription", "kind": "composite"},
+        {"id": "class-attribute.subscription.unsubscribed", "label": "Unsubscribed (i, j)"},
+        {"id": "class-attribute.subscription.subscribed", "label": "Subscribed (i, j)"},
+        {"id": "class-attribute.subscription.history", "label": "", "kind": "history"}
+      ],
+      "transitions": [
+        {"id": "class-attribute.publication.enter", "source_state": "class-attribute.publication.initial", "event": "", "target_state": "class-attribute.publication.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.publication.history-entry", "source_state": "class-attribute.publication", "event": "Publish (i, j) or Unpublish (i, j)", "target_state": "class-attribute.publication.history", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.publish", "source_state": "class-attribute.publication.unpublished", "event": "Publish (i, j)", "target_state": "class-attribute.publication.published", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.published-repeat", "source_state": "class-attribute.publication.published", "event": "Publish (i, j)", "target_state": "class-attribute.publication.published", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.unpublish", "source_state": "class-attribute.publication.published", "event": "Unpublish (i) or Unpublish (i, j)", "target_state": "class-attribute.publication.unpublished", "guard": "Not in any Trying to Cancel, Acquiring, or Willing to Acquire state", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.unpublished-repeat", "source_state": "class-attribute.publication.unpublished", "event": "Unpublish (i) or Unpublish (i, j)", "target_state": "class-attribute.publication.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.subscription.enter", "source_state": "class-attribute.subscription.initial", "event": "", "target_state": "class-attribute.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.subscription.history-entry", "source_state": "class-attribute.subscription", "event": "Subscribe (i, j) or Unsubscribe (i, j)", "target_state": "class-attribute.subscription.history", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.subscribe", "source_state": "class-attribute.subscription.unsubscribed", "event": "Subscribe (i, j)", "target_state": "class-attribute.subscription.subscribed", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.subscribed-repeat", "source_state": "class-attribute.subscription.subscribed", "event": "Subscribe (i, j)", "target_state": "class-attribute.subscription.subscribed", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.unsubscribe", "source_state": "class-attribute.subscription.subscribed", "event": "Unsubscribe (i) or Unsubscribe (i, j)", "target_state": "class-attribute.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "class-attribute.unsubscribed-repeat", "source_state": "class-attribute.subscription.unsubscribed", "event": "Unsubscribe (i) or Unsubscribe (i, j)", "target_state": "class-attribute.subscription.unsubscribed", "clause_id": "clause-5.1.5"}
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "containers": [
+          {"id": "class-attribute.outer", "x": -0.8, "y": -0.8, "width": 14.5, "height": 8.5, "title": "Class Attribute (i, j)\n[j != HLAprivilegeToDeleteObject]"},
+          {"id": "class-attribute.publication-frame", "x": -0.4, "y": -0.4, "width": 6.7, "height": 7.3, "title": "Publication"},
+          {"id": "class-attribute.subscription-frame", "x": 7.0, "y": -0.4, "width": 6.3, "height": 7.3, "title": "Subscription"}
+        ],
+        "nodes": {
+          "class-attribute.publication.initial": {"x": 0, "y": 2},
+          "class-attribute.publication": {"x": 1.1, "y": 6.0, "visible": false},
+          "class-attribute.publication.unpublished": {"x": 2.5, "y": 2},
+          "class-attribute.publication.published": {"x": 2.5, "y": 5},
+          "class-attribute.publication.history": {"x": 4.5, "y": 6},
+          "class-attribute.subscription.initial": {"x": 8, "y": 2},
+          "class-attribute.subscription": {"x": 9.0, "y": 6.0, "visible": false},
+          "class-attribute.subscription.unsubscribed": {"x": 10.5, "y": 2},
+          "class-attribute.subscription.subscribed": {"x": 10.5, "y": 5},
+          "class-attribute.subscription.history": {"x": 12.5, "y": 6}
+        },
+        "rules": [
+          {"x1": -0.8, "y1": 6.8, "x2": 13.7, "y2": 6.8, "style": "solid"},
+          {"x1": 6.8, "y1": -0.4, "x2": 6.8, "y2": 6.8, "style": "dashed"}
+        ],
+        "transitions": {
+          "class-attribute.publication.history-entry": {"label_side": "above", "label_pos": 0.45},
+          "class-attribute.subscription.history-entry": {"label_side": "above", "label_pos": 0.45}
+        }
+      },
+      "notes": "Publication and subscription regions are parallel composite state machines. The source-visible region frames, initial entry arrows, history-entry arrows, history pseudostates, leaf transitions, and repeat self-loops are represented; exact typography remains under review."
+    },
+    {
+      "id": "class-attribute-privilege-to-delete-object",
+      "title": "Class Attribute (i, HLAprivilegeToDeleteObject)",
+      "clause_id": "clause-5.1.5",
+      "source": {"path": "content/clauses/05-declaration-management-page-088.tex", "line": 6},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p089-xref13883.png", "page": 89, "xref": "13883", "caption": "Class attribute (i, HLAprivilegeToDeleteObject)"},
+      "initial_state_ids": ["privilege.implicit.initial", "privilege.subscription.initial"],
+      "states": [
+        {"id": "privilege.implicit.initial", "label": "", "kind": "initial"},
+        {"id": "privilege.implicit", "label": "Implicit publication", "kind": "composite"},
+        {"id": "privilege.implicit.unpublished", "label": "Unpublished (i, privToDeleteObject)"},
+        {"id": "privilege.implicit.published", "label": "Published (i, privToDeleteObject)"},
+        {"id": "privilege.implicit.history", "label": "H*", "kind": "history"},
+        {"id": "privilege.explicit", "label": "Explicit publication", "kind": "composite"},
+        {"id": "privilege.explicit.unpublished", "label": "Unpublished (i, pTDO)"},
+        {"id": "privilege.explicit.published", "label": "Published (i, pTDO)"},
+        {"id": "privilege.subscription.initial", "label": "", "kind": "initial"},
+        {"id": "privilege.subscription", "label": "Subscription", "kind": "composite"},
+        {"id": "privilege.subscription.unsubscribed", "label": "Unsubscribed (i, pTDO)"},
+        {"id": "privilege.subscription.subscribed", "label": "Subscribed (i, pTDO)"},
+        {"id": "privilege.subscription.history", "label": "H*", "kind": "history"}
+      ],
+      "transitions": [
+        {"id": "privilege.implicit-enter", "source_state": "privilege.implicit.initial", "event": "", "target_state": "privilege.implicit.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-history-entry", "source_state": "privilege.implicit", "event": "Publish (i, *) or Unpublish (i, *)", "target_state": "privilege.implicit.history", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-publish", "source_state": "privilege.implicit.unpublished", "event": "Publish (i, *)", "target_state": "privilege.implicit.published", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-unpublished-repeat", "source_state": "privilege.implicit.unpublished", "event": "Unpublish (i, *) or Unpublish (i)", "target_state": "privilege.implicit.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-unpublish", "source_state": "privilege.implicit.published", "event": "Unpublish (i, *)", "target_state": "privilege.implicit.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-published-repeat", "source_state": "privilege.implicit.published", "event": "Publish (i, *) or Unpublish (i, *)", "target_state": "privilege.implicit.published", "guard": "not last explicitly published attr", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.explicit-publish", "source_state": "privilege.explicit.unpublished", "event": "Publish (i, pTDO)", "target_state": "privilege.explicit.published", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.explicit-unpublished-repeat", "source_state": "privilege.explicit.unpublished", "event": "Publish (i, pTDO) or Unpublish (i, pTDO)", "target_state": "privilege.explicit.unpublished", "guard": "not last published attr", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.explicit-unpublish", "source_state": "privilege.explicit.published", "event": "Unpublish (i, pTDO)", "target_state": "privilege.explicit.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.explicit-published-repeat", "source_state": "privilege.explicit.published", "event": "Publish (i, *) or Unpublish (i, *)", "target_state": "privilege.explicit.published", "guard": "not last published attr", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.implicit-to-explicit", "source_state": "privilege.implicit.published", "event": "Publish (i, pTDO)", "target_state": "privilege.explicit.published", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.explicit-to-implicit", "source_state": "privilege.explicit.published", "event": "Unpublish (i, pTDO)", "target_state": "privilege.implicit.published", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.subscription-enter", "source_state": "privilege.subscription.initial", "event": "", "target_state": "privilege.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.subscription-history-entry", "source_state": "privilege.subscription", "event": "Subscribe (i, pTDO) or Unsubscribe (i, pTDO)", "target_state": "privilege.subscription.history", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.subscribe", "source_state": "privilege.subscription.unsubscribed", "event": "Subscribe (i, pTDO)", "target_state": "privilege.subscription.subscribed", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.subscribed-repeat", "source_state": "privilege.subscription.subscribed", "event": "Subscribe (i, pTDO)", "target_state": "privilege.subscription.subscribed", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.unsubscribe", "source_state": "privilege.subscription.subscribed", "event": "Unsubscribe (i) or Unsubscribe (i, pTDO)", "target_state": "privilege.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "privilege.unsubscribed-repeat", "source_state": "privilege.subscription.unsubscribed", "event": "Unsubscribe (i) or Unsubscribe (i, pTDO)", "target_state": "privilege.subscription.unsubscribed", "clause_id": "clause-5.1.5"}
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "containers": [
+          {"id": "privilege.outer", "x": -0.8, "y": -0.8, "width": 24.0, "height": 8.5, "title": "Class Attribute (i, HLAprivilegeToDeleteObject)"},
+          {"id": "privilege.implicit-frame", "x": -0.4, "y": -0.4, "width": 7.2, "height": 7.3, "title": "Implicit publication"},
+          {"id": "privilege.explicit-frame", "x": 6.9, "y": -0.4, "width": 7.2, "height": 7.3, "title": "Explicit publication"},
+          {"id": "privilege.subscription-frame", "x": 14.3, "y": -0.4, "width": 8.0, "height": 7.3, "title": "Subscription"}
+        ],
+        "nodes": {
+          "privilege.implicit.initial": {"x": 0, "y": 2},
+          "privilege.implicit": {"x": 1.2, "y": 6.0, "visible": false},
+          "privilege.implicit.unpublished": {"x": 3.2, "y": 2},
+          "privilege.implicit.published": {"x": 3.2, "y": 5},
+          "privilege.implicit.history": {"x": 5.8, "y": 6},
+          "privilege.explicit": {"x": 7.6, "y": 6.0, "visible": false},
+          "privilege.explicit.unpublished": {"x": 9.8, "y": 2},
+          "privilege.explicit.published": {"x": 9.8, "y": 5},
+          "privilege.subscription.initial": {"x": 15.0, "y": 2},
+          "privilege.subscription": {"x": 16.0, "y": 6.0, "visible": false},
+          "privilege.subscription.unsubscribed": {"x": 18.8, "y": 2},
+          "privilege.subscription.subscribed": {"x": 18.8, "y": 5},
+          "privilege.subscription.history": {"x": 22.0, "y": 6}
+        },
+        "rules": [
+          {"x1": -0.8, "y1": 6.8, "x2": 23.2, "y2": 6.8, "style": "solid"},
+          {"x1": 14.0, "y1": -0.4, "x2": 14.0, "y2": 6.8, "style": "dashed"}
+        ],
+        "transitions": {
+          "privilege.implicit-history-entry": {"label_side": "above", "label_pos": 0.5},
+          "privilege.implicit-unpublished-repeat": {"style": "loop", "label_side": "below", "label_pos": 0.5},
+          "privilege.implicit-published-repeat": {"style": "loop", "label_side": "above", "label_pos": 0.5},
+          "privilege.explicit-unpublished-repeat": {"style": "loop", "label_side": "below", "label_pos": 0.5},
+          "privilege.explicit-published-repeat": {"style": "loop", "label_side": "above", "label_pos": 0.5},
+          "privilege.implicit-to-explicit": {"style": "bend-right", "bend": 35, "label_side": "above", "label_pos": 0.5},
+          "privilege.explicit-to-implicit": {"style": "bend-left", "bend": 35, "label_side": "below", "label_pos": 0.5},
+          "privilege.subscription-history-entry": {"label_side": "above", "label_pos": 0.5},
+          "privilege.subscribed-repeat": {"style": "loop", "label": "Subscribe (i, pTDO) or\nUnsubscribe (i, pTDO)", "label_x": 21.1, "label_y": 5.35, "label_width": 2.0},
+          "privilege.unsubscribed-repeat": {"style": "loop", "label": "Unsubscribe (i) or\nUnsubscribe (i, pTDO)", "label_x": 21.1, "label_y": 1.85, "label_width": 2.1}
+        }
+      },
+      "notes": "The source distinguishes implicit publication from explicit pTDO publication. Composite region frames, initial entry arrows, both visible history-entry paths, cross-region transitions, and repeat self-loops are retained; exact long-label routing remains under visual review."
+    },
+    {
+      "id": "interaction-class",
+      "title": "Interaction Class (m)",
+      "clause_id": "clause-5.1.5",
+      "source": {"path": "content/clauses/05-declaration-management-page-089.tex", "line": 6},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p090-xref13884.png", "page": 90, "xref": "13884", "caption": "Interaction class (m)"},
+      "initial_state_ids": ["interaction.publication.initial", "interaction.subscription.initial"],
+      "states": [
+        {"id": "interaction.publication.initial", "label": "", "kind": "initial"},
+        {"id": "interaction.publication", "label": "Interaction Publication", "kind": "composite"},
+        {"id": "interaction.publication.unpublished", "label": "Unpublished (m)"},
+        {"id": "interaction.publication.published", "label": "Published (m)", "kind": "composite"},
+        {"id": "interaction.published.no-control-sends", "label": "No Control Sends", "parent_id": "interaction.publication.published"},
+        {"id": "interaction.published.control-sends", "label": "Control Sends in Use", "parent_id": "interaction.publication.published", "kind": "composite"},
+        {"id": "interaction.published.control.initial", "label": "", "parent_id": "interaction.published.control-sends", "kind": "initial"},
+        {"id": "interaction.relevance.unknown", "label": "Interaction Relevance Unknown", "parent_id": "interaction.published.control-sends"},
+        {"id": "interaction.interactions.on", "label": "Interactions Turned On", "parent_id": "interaction.published.control-sends"},
+        {"id": "interaction.interactions.off", "label": "Interactions Turned Off", "parent_id": "interaction.published.control-sends"},
+        {"id": "interaction.published.control.history", "label": "H*", "parent_id": "interaction.published.control-sends", "kind": "history"},
+        {"id": "interaction.subscription.initial", "label": "", "kind": "initial"},
+        {"id": "interaction.subscription", "label": "Interaction Subscription", "kind": "composite"},
+        {"id": "interaction.subscription.unsubscribed", "label": "Unsubscribed (m)"},
+        {"id": "interaction.subscription.subscribed", "label": "Subscribed (m)"}
+      ],
+      "transitions": [
+        {"id": "interaction.publication-enter", "source_state": "interaction.publication.initial", "event": "", "target_state": "interaction.publication.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.publish", "source_state": "interaction.publication.unpublished", "event": "Publish (m)", "target_state": "interaction.publication.published", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.published.control-entry-history", "source_state": "interaction.publication.published", "event": "", "target_state": "interaction.published.control.history", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.unpublished-repeat", "source_state": "interaction.publication.unpublished", "event": "Unpublish (m)", "target_state": "interaction.publication.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.unpublish", "source_state": "interaction.publication.published", "event": "Unpublish (m)", "target_state": "interaction.publication.unpublished", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.control-enabled", "source_state": "interaction.published.no-control-sends", "event": "", "target_state": "interaction.published.control-sends", "guard": "Interaction Relevance Advisory is enabled", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.control-disabled", "source_state": "interaction.published.control-sends", "event": "", "target_state": "interaction.published.no-control-sends", "guard": "Interaction Relevance Advisory is disabled", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.control-enter", "source_state": "interaction.published.control.initial", "event": "", "target_state": "interaction.relevance.unknown", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.send", "source_state": "interaction.published.control.history", "event": "Send Interaction", "target_state": "interaction.published.no-control-sends", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.turn-on", "source_state": "interaction.relevance.unknown", "event": "Turn Interactions On †", "target_state": "interaction.interactions.on", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.turn-off", "source_state": "interaction.interactions.on", "event": "Turn Interactions Off †", "target_state": "interaction.interactions.off", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.turn-on-again", "source_state": "interaction.interactions.off", "event": "Turn Interactions On †", "target_state": "interaction.interactions.on", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.subscription-enter", "source_state": "interaction.subscription.initial", "event": "", "target_state": "interaction.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.subscribe", "source_state": "interaction.subscription.unsubscribed", "event": "Subscribe (m)", "target_state": "interaction.subscription.subscribed", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.unsubscribed-repeat", "source_state": "interaction.subscription.unsubscribed", "event": "Unsubscribe (m)", "target_state": "interaction.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.unsubscribe", "source_state": "interaction.subscription.subscribed", "event": "Unsubscribe (m)", "target_state": "interaction.subscription.unsubscribed", "clause_id": "clause-5.1.5"},
+        {"id": "interaction.receive", "source_state": "interaction.subscription.subscribed", "event": "Receive Interaction†", "target_state": "interaction.subscription.subscribed", "clause_id": "clause-5.1.5"}
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "containers": [
+          {"id": "interaction.outer", "x": -0.8, "y": -3.0, "width": 16.5, "height": 10.5, "title": "Interaction Class (m)"},
+          {"id": "interaction.publication-frame", "x": -0.4, "y": -1.4, "width": 11.2, "height": 6.2, "title": "Interaction Publication", "title_visible": false},
+          {"id": "interaction.published-frame", "x": 0.4, "y": -1.0, "width": 10.4, "height": 5.2, "title": "Published (m)", "title_visible": false},
+          {"id": "interaction.control-frame", "x": 1.0, "y": -0.7, "width": 9.6, "height": 3.3, "title": "Control Sends in Use", "title_visible": false},
+          {"id": "interaction.subscription-frame", "x": 11.2, "y": -2.6, "width": 4.1, "height": 7.4, "title": "Interaction Subscription", "title_visible": false}
+        ],
+        "annotations": [
+          {"id": "interaction.publication-title", "x": 1.8, "y": 5.85, "text": "Interaction Publication", "width": 3.8, "align": "left"},
+          {"id": "interaction.published-title", "x": 1.2, "y": 4.35, "text": "Published (m)", "width": 2.5, "align": "left"},
+          {"id": "interaction.control-title", "x": 1.8, "y": 2.45, "text": "Control Sends in Use", "width": 3.2, "align": "left"},
+          {"id": "interaction.subscription-title", "x": 12.0, "y": 4.9, "text": "Interaction Subscription", "width": 3.4, "align": "left"}
+        ],
+        "nodes": {
+          "interaction.publication.initial": {"x": 0, "y": 5.2},
+          "interaction.publication": {"x": 0.8, "y": 5.0, "visible": false},
+          "interaction.publication.unpublished": {"x": 2.5, "y": 5.2},
+          "interaction.publication.published": {"x": 5.5, "y": 4, "visible": false},
+          "interaction.published.no-control-sends": {"x": 3.7, "y": 3.2},
+          "interaction.published.control.initial": {"x": 8, "y": 2},
+          "interaction.relevance.unknown": {"x": 8, "y": 1},
+          "interaction.interactions.on": {"x": 10.5, "y": 2},
+          "interaction.interactions.off": {"x": 10.5, "y": 0},
+          "interaction.published.control.history": {"x": 2.0, "y": 3.2},
+          "interaction.subscription.initial": {"x": 11.0, "y": -1.8},
+          "interaction.subscription": {"x": 11.8, "y": 3.8, "visible": false},
+          "interaction.subscription.unsubscribed": {"x": 13.5, "y": -1.8},
+          "interaction.subscription.subscribed": {"x": 13.5, "y": 2.0}
+        },
+        "rules": [
+          {"x1": -0.8, "y1": 6.5, "x2": 15.7, "y2": 6.5, "style": "solid"},
+          {"x1": 10.8, "y1": -2.6, "x2": 10.8, "y2": 6.5, "style": "dashed"}
+        ],
+        "transitions": {
+          "interaction.publish": {"label": "Publish (m)", "label_x": 4.4, "label_y": 4.65, "label_width": 1.3},
+          "interaction.published.control-entry-history": {"label_side": "left", "label_pos": 0.5},
+          "interaction.unpublished-repeat": {"style": "loop", "label": "Unpublish (m)", "label_x": 3.8, "label_y": 5.65, "label_width": 1.4},
+          "interaction.unpublish": {"label": "Unpublish (m)", "label_x": 4.6, "label_y": 4.0, "label_width": 1.3},
+          "interaction.control-enabled": {"label": "[Interaction Relevance\nAdvisory is enabled]", "label_x": 5.8, "label_y": 3.1, "label_width": 2.2},
+          "interaction.control-disabled": {"label": "[Interaction Relevance\nAdvisory is disabled]", "label_x": 5.8, "label_y": 2.35, "label_width": 2.2},
+          "interaction.turn-on": {"label": "Turn Interactions On †", "label_x": 9.1, "label_y": 1.55, "label_width": 1.7},
+          "interaction.turn-off": {"label": "Turn Interactions Off †", "label_x": 10.5, "label_y": 1.05, "label_width": 1.7},
+          "interaction.turn-on-again": {"label": "Turn Interactions On †", "label_x": 9.1, "label_y": 0.45, "label_width": 1.7},
+          "interaction.unsubscribed-repeat": {"style": "loop", "label": "Unsubscribe (m)", "label_x": 14.35, "label_y": -1.8, "label_width": 1.4},
+          "interaction.receive": {"style": "loop", "label": "Receive Interaction†", "label_x": 14.35, "label_y": 2.0, "label_width": 1.5}
+        }
+      },
+      "notes": "The published and control-sends regions are composite states. The source-visible outer/publication/control/subscription frames, control entry pseudostate, history/send element, receive-interaction self-loop, publication, subscription, relevance, and turn-control states are represented; label routing remains a visual refinement."
+    }
+  ]
+}

@@ -14,14 +14,29 @@ from scripts.document_builder import (  # noqa: E402, I001
     build as build_document,
     clean as clean_document,
 )
+from scripts.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE  # noqa: E402
+from scripts.semantic_generation import generate as generate_semantic  # noqa: E402
 
 ROOT = Path(__file__).parent
+
+
+def generate_blocks() -> object:
+    return generate_semantic(
+        ROOT,
+        ROOT / "output" / "semantic",
+        source=HLA_SOURCE,
+        dialect=HLA_LATEX_DIALECT,
+        table_family_ids=("omt-object-model-identification",),
+    )
+
+
 CONFIG = BuildConfig(
     root=ROOT,
     navigation_manifest=ROOT / "canonical" / "source-navigation.json",
     output_pdf=ROOT
     / "dist"
     / "ieee-std-1516.2-2025-object-model-template-specification-recreation.pdf",
+    semantic_generator=generate_blocks,
 )
 
 

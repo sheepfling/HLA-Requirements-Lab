@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://document-recreation.local/schemas/requirements.schema.json",
+  "title": "Authored semantic requirements",
+  "type": "object",
+  "required": ["schema_version", "requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "requirements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/requirement" }
+    }
+  },
+  "$defs": {
+    "source_ref": {
+      "type": "object",
+      "required": ["path", "line"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "line": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "required": ["id", "title", "statement", "kind", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string" },
+        "kind": { "enum": ["summary", "detailed"] },
+        "clause": { "type": ["string", "null"] },
+        "clause_id": { "type": ["string", "null"] },
+        "machine_statement": { "type": ["string", "null"] },
+        "transition_ids": { "type": "array", "items": { "type": "string" } },
+        "extraction": { "enum": ["explicit", "candidate"] },
+        "source": { "$ref": "#/$defs/source_ref" }
+      }
+    }
+  }
+}

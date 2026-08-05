@@ -1,0 +1,428 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "rti-connection-reconnection",
+      "title": "RTI Connection and Reconnection States",
+      "clause_id": "clause-12.13.4.4",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-400.tex", "line": 62},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p401-xref13914.png", "page": 401, "xref": "13914", "caption": "Figure 25---RTI Connection and Reconnection States"},
+      "states": [
+        {"id": "rti-connection.initial", "label": "", "kind": "initial"},
+        {"id": "rti-connection.waiting", "label": "Waiting for\nSession"},
+        {"id": "rti-connection.initiate", "label": "Initiate\nSession"},
+        {"id": "rti-connection.valid", "label": "Valid\nSession"},
+        {"id": "rti-connection.terminate", "label": "Terminate\nSession"},
+        {"id": "rti-connection.waiting-reconnect", "label": "Waiting for\nReconnect"},
+        {"id": "rti-connection.resending", "label": "Resending\nMessages"},
+        {"id": "rti-connection.final-terminate", "label": "", "kind": "final"},
+        {"id": "rti-connection.final-initiate", "label": "", "kind": "final"},
+        {"id": "rti-connection.final-reconnect", "label": "", "kind": "final"},
+        {"id": "rti-connection.final-resend", "label": "", "kind": "final"}
+      ],
+      "transitions": [
+        {"id": "rti-connection.start", "source_state": "rti-connection.initial", "event": "", "target_state": "rti-connection.waiting", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.new-session", "source_state": "rti-connection.waiting", "event": "New session request", "target_state": "rti-connection.initiate", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.success", "source_state": "rti-connection.initiate", "event": "Success", "target_state": "rti-connection.valid", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.fail", "source_state": "rti-connection.initiate", "event": "Fail", "target_state": "rti-connection.final-initiate", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.terminate-request", "source_state": "rti-connection.valid", "event": "Termination Request", "target_state": "rti-connection.terminate", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.terminated", "source_state": "rti-connection.terminate", "event": "", "target_state": "rti-connection.final-terminate", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.broken", "source_state": "rti-connection.valid", "event": "Broken socket / Timeout", "target_state": "rti-connection.waiting-reconnect", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.reconnect-success", "source_state": "rti-connection.waiting-reconnect", "event": "Success", "target_state": "rti-connection.resending", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.reconnect-timeout", "source_state": "rti-connection.waiting-reconnect", "event": "Timeout", "target_state": "rti-connection.final-reconnect", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.resend-success", "source_state": "rti-connection.resending", "event": "Success", "target_state": "rti-connection.valid", "clause_id": "clause-12.13.4.4"},
+        {"id": "rti-connection.resend-fail", "source_state": "rti-connection.resending", "event": "Fail", "target_state": "rti-connection.final-resend", "clause_id": "clause-12.13.4.4"}
+      ],
+      "initial_state_ids": ["rti-connection.initial"],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "edge_label_distance": 0.35,
+        "nodes": {
+          "rti-connection.initial": {"x": 0, "y": 1}, "rti-connection.waiting": {"x": 3.0, "y": 1}, "rti-connection.initiate": {"x": 6.5, "y": 1}, "rti-connection.valid": {"x": 10.0, "y": 1}, "rti-connection.terminate": {"x": 13.5, "y": 1}, "rti-connection.waiting-reconnect": {"x": 10.0, "y": -2}, "rti-connection.resending": {"x": 13.5, "y": -2}, "rti-connection.final-terminate": {"x": 16.5, "y": 1}, "rti-connection.final-initiate": {"x": 6.5, "y": -1}, "rti-connection.final-reconnect": {"x": 10.0, "y": -4}, "rti-connection.final-resend": {"x": 13.5, "y": -4}
+        },
+        "transitions": {
+          "rti-connection.new-session": {"style": "bend-left", "bend": 28, "label_side": "above", "label_pos": 0.5},
+          "rti-connection.success": {"style": "bend-left", "bend": 28, "label_side": "above", "label_pos": 0.5},
+          "rti-connection.terminate-request": {"style": "bend-left", "bend": 28, "label_side": "above", "label_pos": 0.5},
+          "rti-connection.broken": {"label_side": "right", "label_pos": 0.5},
+          "rti-connection.reconnect-success": {"style": "bend-left", "bend": 28, "label_side": "above", "label_pos": 0.5},
+          "rti-connection.resend-success": {"style": "bend-left", "bend": 28, "label_side": "above", "label_pos": 0.5}
+        }
+      },
+      "notes": "RTI-side counterpart to Figure 24. The overview has the same connection/reconnection phases but begins in Waiting for Session and uses the RTI session perspective."
+    },
+    {
+      "id": "federate-session-startup",
+      "title": "Federate Session Startup State Diagram",
+      "clause_id": "clause-12.13.4.7.1",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-409.tex", "line": 70},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p410-xref13922.png", "page": 410, "xref": "13922", "caption": "Figure 27---Federate Session Startup State Diagram"},
+      "states": [
+        {"id": "federate-startup.connector-1", "label": "1", "kind": "connector"},
+        {"id": "federate-startup.init-1", "label": "INIT-1\nNo TCP or TLS\nconnection"},
+        {"id": "federate-startup.init-2", "label": "INIT-2\nConnection but\nno session"},
+        {"id": "federate-startup.init-3", "label": "INIT-3\nWaiting for New\nSession Status"},
+        {"id": "federate-startup.main", "label": "MAIN\nSession Available\nSend/Receive HLA\nCalls/Callbacks"},
+        {"id": "federate-startup.heartbeat", "label": "HEARTBEAT\nSend Heartbeat"},
+        {"id": "federate-startup.connector-5-init1", "label": "5", "kind": "connector"},
+        {"id": "federate-startup.connector-5-init2", "label": "5", "kind": "connector"},
+        {"id": "federate-startup.connector-1-init3", "label": "1", "kind": "connector"},
+        {"id": "federate-startup.connector-5-init3", "label": "5", "kind": "connector"},
+        {"id": "federate-startup.connector-2-main", "label": "2", "kind": "connector"},
+        {"id": "federate-startup.connector-5-main", "label": "5", "kind": "connector"},
+        {"id": "federate-startup.connector-4-main", "label": "4", "kind": "connector"},
+        {"id": "federate-startup.connector-2-heartbeat", "label": "2", "kind": "connector"}
+      ],
+      "transitions": [
+        {"id": "federate-startup.enter", "source_state": "federate-startup.connector-1", "event": "", "target_state": "federate-startup.init-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.establish", "source_state": "federate-startup.init-1", "event": "Connection established", "target_state": "federate-startup.init-2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.cannot-establish", "source_state": "federate-startup.init-1", "event": "Cannot establish connection", "target_state": "federate-startup.connector-5-init1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.new-session", "source_state": "federate-startup.init-2", "event": "NEW_SESSION sent", "target_state": "federate-startup.init-3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.broken", "source_state": "federate-startup.init-2", "event": "Connection broken", "target_state": "federate-startup.init-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.bad-init2", "source_state": "federate-startup.init-2", "event": "Bad message", "target_state": "federate-startup.connector-5-init2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.wait-timeout", "source_state": "federate-startup.init-3", "event": "Wait timed out", "target_state": "federate-startup.init-2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.status", "source_state": "federate-startup.init-3", "event": "NEW_SESSION_STATUS Success received", "target_state": "federate-startup.main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.broken-init3", "source_state": "federate-startup.init-3", "event": "Connection broken", "target_state": "federate-startup.connector-1-init3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.failed", "source_state": "federate-startup.init-3", "event": "NEW_SESSION_STATUS Failed received or Bad message", "target_state": "federate-startup.connector-5-init3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.heartbeat", "source_state": "federate-startup.main", "event": "No message sent for FED_INT_HEART", "target_state": "federate-startup.heartbeat", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.heartbeat-sent", "source_state": "federate-startup.heartbeat", "event": "Heartbeat sent", "target_state": "federate-startup.main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.session-broken", "source_state": "federate-startup.main", "event": "Connection broken", "target_state": "federate-startup.connector-2-main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.bad-main", "source_state": "federate-startup.main", "event": "Bad message received", "target_state": "federate-startup.connector-5-main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.shutdown", "source_state": "federate-startup.main", "event": "Session termination requested", "target_state": "federate-startup.connector-4-main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.timeout-heart", "source_state": "federate-startup.main", "event": "No message received for FED_TIMEOUT_HEART", "target_state": "federate-startup.connector-4-main", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-startup.heartbeat-broken", "source_state": "federate-startup.heartbeat", "event": "Connection broken", "target_state": "federate-startup.connector-2-heartbeat", "clause_id": "clause-12.13.4.7.1"}
+      ],
+      "initial_state_ids": ["federate-startup.connector-1"],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "edge_label_distance": 0.35,
+        "annotations": [
+          {"id": "federate-startup.title", "x": 1.0, "y": 3.1, "text": "Session startup", "width": 2.3, "align": "left"}
+        ],
+        "nodes": {
+          "federate-startup.connector-1": {"x": 0, "y": 1}, "federate-startup.init-1": {"x": 3.0, "y": 1}, "federate-startup.connector-5-init1": {"x": 3.0, "y": -1}, "federate-startup.init-2": {"x": 6.5, "y": 1}, "federate-startup.connector-5-init2": {"x": 6.5, "y": -1}, "federate-startup.init-3": {"x": 10.0, "y": 1}, "federate-startup.connector-1-init3": {"x": 10.0, "y": -1}, "federate-startup.connector-5-init3": {"x": 11.5, "y": -1}, "federate-startup.main": {"x": 14.0, "y": 1}, "federate-startup.connector-2-main": {"x": 14.0, "y": -1}, "federate-startup.connector-5-main": {"x": 15.5, "y": -1}, "federate-startup.connector-4-main": {"x": 14.0, "y": -2.2}, "federate-startup.heartbeat": {"x": 18.0, "y": 1}, "federate-startup.connector-2-heartbeat": {"x": 18.0, "y": -1}
+        },
+        "transitions": {
+          "federate-startup.establish": {"label": "Connection established", "label_x": 4.75, "label_y": 2.25, "label_width": 1.8},
+          "federate-startup.cannot-establish": {"label": "Cannot establish connection", "label_x": 3.0, "label_y": 0.0, "label_width": 1.7},
+          "federate-startup.new-session": {"label": "NEW_SESSION sent", "label_x": 8.25, "label_y": 2.25, "label_width": 1.8},
+          "federate-startup.broken": {"label": "Connection broken", "label_x": 5.25, "label_y": 0.15, "label_width": 1.4},
+          "federate-startup.bad-init2": {"label": "Bad message", "label_x": 6.8, "label_y": -0.25, "label_width": 1.3},
+          "federate-startup.wait-timeout": {"label": "Wait timed out", "label_x": 8.35, "label_y": 0.2, "label_width": 1.25},
+          "federate-startup.status": {"label": "NEW_SESSION_STATUS\nSuccess received", "label_x": 12.0, "label_y": 2.25, "label_width": 2.2},
+          "federate-startup.broken-init3": {"label": "Connection broken", "label_x": 9.45, "label_y": 0.2, "label_width": 1.4},
+          "federate-startup.failed": {"label": "NEW_SESSION_STATUS\nFailed received or Bad message", "label_x": 11.35, "label_y": -0.3, "label_width": 2.1},
+          "federate-startup.heartbeat": {"label": "No message sent for\nFED_INT_HEART", "label_x": 16.0, "label_y": 2.25, "label_width": 2.0},
+          "federate-startup.heartbeat-sent": {"label": "Heartbeat sent", "label_x": 16.0, "label_y": 0.25, "label_width": 1.5},
+          "federate-startup.session-broken": {"label": "Connection broken", "label_x": 13.45, "label_y": 0.15, "label_width": 1.4},
+          "federate-startup.bad-main": {"label": "Bad message received", "label_x": 15.25, "label_y": -0.3, "label_width": 1.5},
+          "federate-startup.shutdown": {"label": "Session termination requested", "label_x": 14.0, "label_y": -1.6, "label_width": 2.2},
+          "federate-startup.timeout-heart": {"label": "No message received for\nFED_TIMEOUT_HEART", "label_x": 16.2, "label_y": -1.6, "label_width": 2.2},
+          "federate-startup.heartbeat-broken": {"label": "Connection broken", "label_x": 18.0, "label_y": 0.0, "label_width": 1.5}
+        }
+      },
+      "notes": "Numbered circles in the source are continuation/error connectors rather than UML final states; they are represented with connector pseudostates."
+    },
+    {
+      "id": "federate-resume",
+      "title": "Federate Resume State Diagram",
+      "clause_id": "clause-12.13.4.7.1",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-409.tex", "line": 73},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p410-xref13923.png", "page": 410, "xref": "13923", "caption": "Figure 28---Federate Resume State Diagram"},
+      "states": [
+        {"id": "federate-resume.connector-2", "label": "2", "kind": "connector"},
+        {"id": "federate-resume.resume-1", "label": "RESUME-1\nSession established but\nconnection lost"},
+        {"id": "federate-resume.resume-2", "label": "RESUME-2\nConnection OK\nTrying to resume"},
+        {"id": "federate-resume.resume-3", "label": "RESUME-3\nWaiting for session\nResume status"},
+        {"id": "federate-resume.resend", "label": "RESEND\nResending missing\nmessages from\nHistory buffer"},
+        {"id": "federate-resume.connector-3", "label": "3", "kind": "connector"},
+        {"id": "federate-resume.connector-5", "label": "5", "kind": "connector"},
+        {"id": "federate-resume.connector-5-bad-message", "label": "5", "kind": "connector"},
+        {"id": "federate-resume.connector-2-heartbeat", "label": "2", "kind": "connector"},
+        {"id": "federate-resume.connector-5-status-failure", "label": "5", "kind": "connector"},
+        {"id": "federate-resume.connector-2-resend", "label": "2", "kind": "connector"}
+      ],
+      "transitions": [
+        {"id": "federate-resume.enter", "source_state": "federate-resume.connector-2", "event": "", "target_state": "federate-resume.resume-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.resume-request", "source_state": "federate-resume.resume-1", "event": "RESUME_SESSION sent", "target_state": "federate-resume.resume-2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.broken", "source_state": "federate-resume.resume-2", "event": "Connection broken", "target_state": "federate-resume.resume-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.cannot-establish", "source_state": "federate-resume.resume-1", "event": "Cannot establish connection after FED_TIMEOUT_RECONNECT", "target_state": "federate-resume.connector-5", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.status", "source_state": "federate-resume.resume-2", "event": "RESUME_STATUS OK received", "target_state": "federate-resume.resume-3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.bad-message", "source_state": "federate-resume.resume-2", "event": "Bad message received", "target_state": "federate-resume.connector-5-bad-message", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.resend", "source_state": "federate-resume.resume-3", "event": "RESUME_STATUS received", "target_state": "federate-resume.resend", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.heartbeat-timeout", "source_state": "federate-resume.resume-3", "event": "No message received for FED_TIMEOUT_HEART", "target_state": "federate-resume.connector-2-heartbeat", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.status-failure", "source_state": "federate-resume.resume-3", "event": "RESUME_STATUS Failed received or Bad message", "target_state": "federate-resume.connector-5-status-failure", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.all-sent", "source_state": "federate-resume.resend", "event": "All messages resent", "target_state": "federate-resume.connector-3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-resume.resend-broken", "source_state": "federate-resume.resend", "event": "Connection broken", "target_state": "federate-resume.connector-2-resend", "clause_id": "clause-12.13.4.7.1"}
+      ],
+      "initial_state_ids": ["federate-resume.connector-2"],
+      "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "annotations": [
+        {"id": "federate-resume.title", "x": 0.7, "y": 3.0, "text": "Resume", "width": 1.2, "align": "left"}
+      ], "nodes": {
+        "federate-resume.connector-2": {"x": 0, "y": 1}, "federate-resume.resume-1": {"x": 2.3, "y": 1}, "federate-resume.resume-2": {"x": 5.5, "y": 1}, "federate-resume.resume-3": {"x": 8.7, "y": 1}, "federate-resume.resend": {"x": 12, "y": 1}, "federate-resume.connector-3": {"x": 15, "y": 1}, "federate-resume.connector-5": {"x": 2.3, "y": -1}, "federate-resume.connector-5-bad-message": {"x": 5.5, "y": -1}, "federate-resume.connector-2-heartbeat": {"x": 8.7, "y": -1}, "federate-resume.connector-5-status-failure": {"x": 8.7, "y": -2.0}, "federate-resume.connector-2-resend": {"x": 12, "y": -1.5}
+      }},
+      "notes": "The resume chart is a federate-side protocol state machine. Numbered connectors preserve continuation points used by the surrounding detailed diagrams."
+    },
+    {
+      "id": "federate-exception",
+      "title": "Federate Exception State Diagram",
+      "clause_id": "clause-12.13.4.7.1",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-410.tex", "line": 24},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p411-xref13928.png", "page": 411, "xref": "13928", "caption": "Figure 29---Federate Exception State Diagram"},
+      "states": [
+        {"id": "federate-exception.shutdown-connector", "label": "4", "kind": "connector"},
+        {"id": "federate-exception.shutdown-1", "label": "SHUTDOWN-1\nStart termination"},
+        {"id": "federate-exception.shutdown-2", "label": "SHUTDOWN-2\nWaiting for\ntermination confirmation"},
+        {"id": "federate-exception.shutdown-3", "label": "SHUTDOWN-3\nClose connection\nand clean up"},
+        {"id": "federate-exception.error-connector", "label": "5", "kind": "connector"},
+        {"id": "federate-exception.error-1", "label": "ERROR-1\nBest effort close of\nconnection and clean up"},
+        {"id": "federate-exception.error-2", "label": "ERROR-2\nReport\nerror/exception"},
+        {"id": "federate-exception.unresponsive-connector", "label": "6", "kind": "connector"},
+        {"id": "federate-exception.unresponsive", "label": "UNRESPONSIVE\nBest effort close of\nconnection"},
+        {"id": "federate-exception.final-shutdown", "label": "", "kind": "final"},
+        {"id": "federate-exception.final-error", "label": "", "kind": "final"}
+      ],
+      "transitions": [
+        {"id": "federate-exception.shutdown-enter", "source_state": "federate-exception.shutdown-connector", "event": "", "target_state": "federate-exception.shutdown-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.terminate", "source_state": "federate-exception.shutdown-1", "event": "TERMINATE_SESSION sent", "target_state": "federate-exception.shutdown-2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.terminated", "source_state": "federate-exception.shutdown-2", "event": "SESSION_TERMINATED received", "target_state": "federate-exception.shutdown-3", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.shutdown-final", "source_state": "federate-exception.shutdown-3", "event": "", "target_state": "federate-exception.final-shutdown", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.shutdown-error", "source_state": "federate-exception.shutdown-1", "event": "Connection broken or bad message", "target_state": "federate-exception.error-connector", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.shutdown-timeout", "source_state": "federate-exception.shutdown-2", "event": "Connection broken or bad message or Time out", "target_state": "federate-exception.error-connector", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.error-enter", "source_state": "federate-exception.error-connector", "event": "", "target_state": "federate-exception.error-1", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.error-report", "source_state": "federate-exception.error-1", "event": "Clean up done", "target_state": "federate-exception.error-2", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.error-final", "source_state": "federate-exception.error-2", "event": "", "target_state": "federate-exception.final-error", "clause_id": "clause-12.13.4.7.1"},
+        {"id": "federate-exception.unresponsive-enter", "source_state": "federate-exception.unresponsive-connector", "event": "", "target_state": "federate-exception.unresponsive", "clause_id": "clause-12.13.4.7.1"}
+      ],
+      "initial_state_ids": [],
+      "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "containers": [
+        {"id": "federate-exception.shutdown", "x": 0, "y": 4, "width": 13, "height": 4, "title": "Shutdown"},
+        {"id": "federate-exception.fatal", "x": 0, "y": 0, "width": 13, "height": 3, "title": "Fatal error"},
+        {"id": "federate-exception.unresponsive-container", "x": 14, "y": 0, "width": 5, "height": 3, "title": "Unresponsive RTI"}
+      ], "nodes": {
+        "federate-exception.shutdown-connector": {"x": 1, "y": 6}, "federate-exception.shutdown-1": {"x": 3.2, "y": 6}, "federate-exception.shutdown-2": {"x": 6.2, "y": 6}, "federate-exception.shutdown-3": {"x": 9.3, "y": 6}, "federate-exception.final-shutdown": {"x": 11.7, "y": 6}, "federate-exception.error-connector": {"x": 1, "y": 1.5}, "federate-exception.error-1": {"x": 3.6, "y": 1.5}, "federate-exception.error-2": {"x": 7, "y": 1.5}, "federate-exception.final-error": {"x": 10, "y": 1.5}, "federate-exception.unresponsive-connector": {"x": 15, "y": 1.5}, "federate-exception.unresponsive": {"x": 17.5, "y": 1.5}
+      }, "transitions": {"federate-exception.shutdown-timeout": {"style": "bend-left", "bend": 25, "label_side": "left"}}},
+      "notes": "The source groups shutdown, fatal-error, and unresponsive-RTI exception paths on one page. They are kept as one canonical machine because the numbered connectors define shared protocol continuation points."
+    },
+    {
+      "id": "rti-port-handling",
+      "title": "RTI Port Handling State Diagram",
+      "clause_id": "clause-12.13.4.7.2",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-410.tex", "line": 27},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p411-xref13927.png", "page": 411, "xref": "13927", "caption": "Figure 30---RTI Port Handling State Diagram"},
+      "states": [
+        {"id": "port.initial", "label": "", "kind": "initial"},
+        {"id": "port.setup", "label": "PORT-HANDLING-1\nSet up Listening\nPort"},
+        {"id": "port.listen", "label": "PORT-HANDLING-2\nListen for Incoming\nConnection"},
+        {"id": "port.purge", "label": "PURGE 1\nRemove expired\nsessions"},
+        {"id": "port.spawn", "label": "PORT-HANDLING-3\nSpawn Connection\nHandler"},
+        {"id": "port.shutdown", "label": "PORT-HANDLING-4\nShut down"},
+        {"id": "port.final", "label": "", "kind": "final"},
+        {"id": "handler.initial", "label": "", "kind": "initial"},
+        {"id": "handler.read", "label": "CON-HANDLING-1\nRead a message"},
+        {"id": "handler.new-session", "label": "1", "kind": "connector"},
+        {"id": "handler.resume", "label": "2", "kind": "connector"},
+        {"id": "handler.error", "label": "5", "kind": "connector"}
+      ],
+      "transitions": [
+        {"id": "port.setup-enter", "source_state": "port.initial", "event": "", "target_state": "port.setup", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.listen", "source_state": "port.setup", "event": "Port established", "target_state": "port.listen", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.expire", "source_state": "port.listen", "event": "Based on RTI_TIMEOUT_PURGE", "target_state": "port.purge", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.purge-done", "source_state": "port.purge", "event": "", "target_state": "port.listen", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.connection", "source_state": "port.listen", "event": "Connection Accepted", "target_state": "port.spawn", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.spawned", "source_state": "port.spawn", "event": "Connection Handler Spawned", "target_state": "port.listen", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.shutdown", "source_state": "port.listen", "event": "RTI shutdown requested", "target_state": "port.shutdown", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "port.stop", "source_state": "port.shutdown", "event": "", "target_state": "port.final", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "handler.enter", "source_state": "handler.initial", "event": "", "target_state": "handler.read", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "handler.new", "source_state": "handler.read", "event": "New Session", "target_state": "handler.new-session", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "handler.resume", "source_state": "handler.read", "event": "Resume Session", "target_state": "handler.resume", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "handler.bad", "source_state": "handler.read", "event": "Bad message received or Connection broken", "target_state": "handler.error", "clause_id": "clause-12.13.4.7.2"}
+      ],
+      "initial_state_ids": ["port.initial", "handler.initial"],
+      "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "containers": [
+        {"id": "port.container", "x": 0, "y": 3, "width": 12, "height": 5, "title": "Server Port-handling", "title_visible": false},
+        {"id": "handler.container", "x": 13, "y": 3, "width": 6, "height": 5, "title": "Connection Handler (One per Connection)", "title_visible": false}
+      ], "rules": [
+        {"x1": 0, "y1": 7.5, "x2": 2.8, "y2": 7.5, "style": "solid"},
+        {"x1": 13, "y1": 7.5, "x2": 16.5, "y2": 7.5, "style": "solid"}
+      ], "annotations": [
+        {"id": "port.title", "x": 1.9, "y": 7.7, "text": "Server Port-handling", "width": 2.8, "align": "left"},
+        {"id": "handler.title", "x": 16.0, "y": 7.7, "text": "Connection Handler (One per Connection)", "width": 5.4, "align": "center"}
+      ], "nodes": {
+        "port.initial": {"x": 0.8, "y": 5.2}, "port.setup": {"x": 2.5, "y": 5.2}, "port.listen": {"x": 5.2, "y": 5.2}, "port.purge": {"x": 5.2, "y": 7}, "port.spawn": {"x": 5.2, "y": 3.5}, "port.shutdown": {"x": 8.5, "y": 5.2}, "port.final": {"x": 10.8, "y": 5.2}, "handler.initial": {"x": 13.6, "y": 5.2}, "handler.read": {"x": 15.5, "y": 5.2}, "handler.new-session": {"x": 18, "y": 6.7}, "handler.resume": {"x": 18, "y": 5.2}, "handler.error": {"x": 18, "y": 3.7}
+       }, "transitions": {
+         "port.listen": {"label": "Port established", "label_x": 3.75, "label_y": 5.75, "label_width": 1.5},
+         "port.expire": {"label": "Based on RTI_TIMEOUT_PURGE", "label_x": 5.2, "label_y": 7.65, "label_width": 2.0},
+         "port.connection": {"label": "Connection Accepted", "label_x": 4.85, "label_y": 4.35, "label_width": 1.6},
+         "port.spawned": {"label": "Connection Handler Spawned", "label_x": 6.7, "label_y": 4.25, "label_width": 1.8},
+         "port.shutdown": {"label": "RTI shutdown requested", "label_x": 7.0, "label_y": 5.75, "label_width": 1.8},
+         "handler.new": {"label": "New Session", "label_x": 17.35, "label_y": 6.55, "label_width": 1.2},
+         "handler.resume": {"label": "Resume Session", "label_x": 17.35, "label_y": 5.85, "label_width": 1.4},
+         "handler.bad": {"label": "Bad message received or\nConnection broken", "label_x": 15.55, "label_y": 4.0, "label_width": 1.8}
+       }, "transitions": {
+         "federate-resume.resume-request": {"label": "RESUME_SESSION sent", "label_x": 3.9, "label_y": 2.55, "label_width": 1.8},
+         "federate-resume.broken": {"label": "Connection broken", "label_x": 3.9, "label_y": -0.35, "label_width": 1.5},
+         "federate-resume.cannot-establish": {"label": "Cannot establish connection after FED_TIMEOUT_RECONNECT", "label_x": 2.2, "label_y": -0.5, "label_width": 2.4},
+         "federate-resume.status": {"label": "RESUME_STATUS OK received", "label_x": 7.1, "label_y": 2.55, "label_width": 2.0},
+         "federate-resume.bad-message": {"label": "Bad message received", "label_x": 5.5, "label_y": -0.45, "label_width": 1.6},
+         "federate-resume.resend": {"label": "RESUME_STATUS received", "label_x": 10.4, "label_y": 2.55, "label_width": 1.8},
+         "federate-resume.heartbeat-timeout": {"label": "No message received for FED_TIMEOUT_HEART", "label_x": 8.7, "label_y": -0.55, "label_width": 2.2},
+         "federate-resume.status-failure": {"label": "RESUME_STATUS Failed received or Bad message", "label_x": 9.0, "label_y": -1.55, "label_width": 2.2},
+         "federate-resume.all-sent": {"label": "All messages resent", "label_x": 13.5, "label_y": 2.55, "label_width": 1.8},
+         "federate-resume.resend-broken": {"label": "Connection broken", "label_x": 12.0, "label_y": -0.9, "label_width": 1.5}
+       }},
+      "notes": "Figure 30 contains two related machines: the server listening-port lifecycle and the per-connection handler. They remain in one record to preserve the source-page relationship."
+    },
+    {
+      "id": "rti-session-startup",
+      "title": "RTI Startup State Diagram",
+      "clause_id": "clause-12.13.4.7.2",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-410.tex", "line": 30},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p411-xref13929.png", "page": 411, "xref": "13929", "caption": "Figure 31---RTI Startup State Diagram"},
+      "states": [
+        {"id": "rti-startup.connector-1", "label": "1", "kind": "connector"},
+        {"id": "rti-startup.init-1", "label": "INIT-1\nCheck protocol\nversion"},
+        {"id": "rti-startup.init-2", "label": "INIT-2\nCreate Server\nSession"},
+        {"id": "rti-startup.init-fail", "label": "INIT FAIL\nNEW_SESSION_STATUS\nFail"},
+        {"id": "rti-startup.main", "label": "MAIN\nSession Available\nSend/Receive HLA\nCalls/Callbacks/\nHeartbeats"},
+        {"id": "rti-startup.terminate", "label": "TERMINATE\nTerminate session\nand send\nSESSION_TERMINATED"},
+        {"id": "rti-startup.connector-6-init1", "label": "6", "kind": "connector"},
+        {"id": "rti-startup.connector-4-initfail", "label": "4", "kind": "connector"},
+        {"id": "rti-startup.connector-5-init2", "label": "5", "kind": "connector"},
+        {"id": "rti-startup.connector-5-main", "label": "5", "kind": "connector"},
+        {"id": "rti-startup.connector-6-main", "label": "6", "kind": "connector"},
+        {"id": "rti-startup.connector-7-main", "label": "7", "kind": "connector"},
+        {"id": "rti-startup.connector-5-terminate", "label": "5", "kind": "connector"}
+      ],
+      "transitions": [
+        {"id": "rti-startup.enter", "source_state": "rti-startup.connector-1", "event": "", "target_state": "rti-startup.init-1", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.correct", "source_state": "rti-startup.init-1", "event": "Correct version", "target_state": "rti-startup.init-2", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.incorrect", "source_state": "rti-startup.init-1", "event": "Incorrect protocol version", "target_state": "rti-startup.connector-6-init1", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.shutdown-init1", "source_state": "rti-startup.init-1", "event": "RTI shutdown requested", "target_state": "rti-startup.connector-6-init1", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.create", "source_state": "rti-startup.init-2", "event": "NEW_SESSION_STATUS sent", "target_state": "rti-startup.main", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.cannot-create", "source_state": "rti-startup.init-2", "event": "Cannot create session", "target_state": "rti-startup.init-fail", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.fail", "source_state": "rti-startup.init-fail", "event": "", "target_state": "rti-startup.connector-4-initfail", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.broken-init2", "source_state": "rti-startup.init-2", "event": "Connection broken", "target_state": "rti-startup.connector-5-init2", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.broken", "source_state": "rti-startup.main", "event": "Connection broken", "target_state": "rti-startup.connector-5-main", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.bad", "source_state": "rti-startup.main", "event": "Bad message received", "target_state": "rti-startup.connector-6-main", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.shutdown", "source_state": "rti-startup.main", "event": "RTI shutdown requested", "target_state": "rti-startup.connector-7-main", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.terminate", "source_state": "rti-startup.main", "event": "TERMINATE_SESSION received", "target_state": "rti-startup.terminate", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.terminate-broken", "source_state": "rti-startup.terminate", "event": "Connection broken", "target_state": "rti-startup.connector-5-terminate", "clause_id": "clause-12.13.4.7.2"},
+        {"id": "rti-startup.heartbeat", "source_state": "rti-startup.main", "event": "No message received for RTI_TIMEOUT_HEART", "target_state": "rti-startup.connector-7-main", "clause_id": "clause-12.13.4.7.2"}
+      ],
+      "initial_state_ids": ["rti-startup.connector-1"],
+      "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "annotations": [
+        {"id": "rti-startup.title", "x": 0.9, "y": 3.1, "text": "New Session", "width": 1.9, "align": "left"}
+      ], "nodes": {
+        "rti-startup.connector-1": {"x": 0, "y": 1}, "rti-startup.init-1": {"x": 2, "y": 1}, "rti-startup.connector-6-init1": {"x": 2, "y": -1.2}, "rti-startup.init-2": {"x": 5, "y": 1}, "rti-startup.init-fail": {"x": 5, "y": -1}, "rti-startup.connector-4-initfail": {"x": 5, "y": -2.2}, "rti-startup.connector-5-init2": {"x": 6.7, "y": -1.2}, "rti-startup.main": {"x": 8.5, "y": 1}, "rti-startup.connector-5-main": {"x": 8.0, "y": -1.2}, "rti-startup.connector-6-main": {"x": 9.3, "y": -1.2}, "rti-startup.connector-7-main": {"x": 10.6, "y": -1.2}, "rti-startup.terminate": {"x": 12, "y": 1}, "rti-startup.connector-5-terminate": {"x": 12, "y": -1.2}
+      }, "transitions": {
+        "rti-startup.correct": {"label": "Correct version", "label_x": 3.5, "label_y": 2.1, "label_width": 1.5},
+        "rti-startup.incorrect": {"label": "Incorrect protocol version", "label_x": 2.1, "label_y": -0.05, "label_width": 1.7},
+        "rti-startup.shutdown-init1": {"label": "RTI shutdown requested", "label_x": 0.8, "label_y": -0.75, "label_width": 1.7},
+        "rti-startup.create": {"label": "NEW_SESSION_STATUS sent", "label_x": 6.8, "label_y": 2.1, "label_width": 2.0},
+        "rti-startup.cannot-create": {"label": "Cannot create session", "label_x": 5.0, "label_y": 0.0, "label_width": 1.6},
+        "rti-startup.broken-init2": {"label": "Connection\nbroken", "label_x": 6.55, "label_y": -0.35, "label_width": 1.3},
+        "rti-startup.broken": {"label": "Connection\nbroken", "label_x": 7.8, "label_y": 0.15, "label_width": 1.3},
+        "rti-startup.bad": {"label": "Bad message\nreceived", "label_x": 9.25, "label_y": -0.25, "label_width": 1.35},
+        "rti-startup.shutdown": {"label": "RTI shutdown\nrequested", "label_x": 10.6, "label_y": 0.1, "label_width": 1.5},
+        "rti-startup.terminate": {"label": "TERMINATE_SESSION received", "label_x": 10.5, "label_y": 2.1, "label_width": 2.2},
+        "rti-startup.terminate-broken": {"label": "Connection broken", "label_x": 12.0, "label_y": 0.0, "label_width": 1.5},
+        "rti-startup.heartbeat": {"label": "No message received for\nRTI_TIMEOUT_HEART", "label_x": 11.2, "label_y": -1.4, "label_width": 2.2}
+      }},
+      "notes": "Figure 31 is the RTI-side counterpart to Figure 27. Numbered circles are continuation/error connectors, not terminal states."
+    },
+    {
+      "id": "rti-resume",
+      "title": "RTI Resume State Diagram",
+      "clause_id": "clause-12.13.4.7",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-411.tex", "line": 54},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p412-xref13933.png", "page": 412, "xref": "13933", "caption": "Figure 32---RTI Resume State Diagram"},
+      "states": [
+        {"id": "rti-resume.connector-2", "label": "2", "kind": "connector"},
+        {"id": "rti-resume.lookup", "label": "RESUME-1\nLookup Session"},
+        {"id": "rti-resume.assess", "label": "RESUME-2\nAssess if enough\nbuffered messages"},
+        {"id": "rti-resume.fail", "label": "RESUME-FAIL\nSend\nRESUME_STATUS Fail"},
+        {"id": "rti-resume.resend", "label": "RESEND\nResend missing\nmessages from\nHistory buffer"},
+        {"id": "rti-resume.connector-3", "label": "3", "kind": "connector"},
+        {"id": "rti-resume.connector-4", "label": "4", "kind": "connector"},
+        {"id": "rti-resume.connector-5", "label": "5", "kind": "connector"},
+        {"id": "rti-resume.connector-6", "label": "6", "kind": "connector"}
+      ],
+      "transitions": [
+        {"id": "rti-resume.enter", "source_state": "rti-resume.connector-2", "event": "", "target_state": "rti-resume.lookup", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.exists", "source_state": "rti-resume.lookup", "event": "Session exists", "target_state": "rti-resume.assess", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.not-found", "source_state": "rti-resume.lookup", "event": "Session not found", "target_state": "rti-resume.fail", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.enough", "source_state": "rti-resume.assess", "event": "RESUME_STATUS OK sent", "target_state": "rti-resume.resend", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.not-enough", "source_state": "rti-resume.assess", "event": "Not enough buffer", "target_state": "rti-resume.fail", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.fail-complete", "source_state": "rti-resume.fail", "event": "", "target_state": "rti-resume.connector-4", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.all-resent", "source_state": "rti-resume.resend", "event": "Messages resent", "target_state": "rti-resume.connector-3", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.broken", "source_state": "rti-resume.resend", "event": "Connection broken", "target_state": "rti-resume.connector-5", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-resume.shutdown", "source_state": "rti-resume.resend", "event": "RTI shutdown requested", "target_state": "rti-resume.connector-6", "clause_id": "clause-12.13.4.7"}
+      ],
+      "initial_state_ids": ["rti-resume.connector-2"],
+       "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "annotations": [
+         {"id": "rti-resume.title", "x": 0.9, "y": 3.0, "text": "Resume Session", "width": 2.0, "align": "left"}
+       ], "nodes": {
+        "rti-resume.connector-2": {"x": 0, "y": 1}, "rti-resume.lookup": {"x": 2.5, "y": 1}, "rti-resume.assess": {"x": 5.5, "y": 1}, "rti-resume.fail": {"x": 5.5, "y": -1}, "rti-resume.resend": {"x": 9, "y": 1}, "rti-resume.connector-3": {"x": 12, "y": 1}, "rti-resume.connector-4": {"x": 8, "y": -1}, "rti-resume.connector-5": {"x": 9, "y": -1.5}, "rti-resume.connector-6": {"x": 11, "y": -1.5}
+       }, "transitions": {
+         "rti-resume.exists": {"label": "Session exists", "label_x": 4.0, "label_y": 2.1, "label_width": 1.5},
+         "rti-resume.not-found": {"label": "Session not found", "label_x": 3.7, "label_y": 0.05, "label_width": 1.6},
+         "rti-resume.enough": {"label": "RESUME_STATUS OK sent", "label_x": 7.2, "label_y": 2.1, "label_width": 1.9},
+         "rti-resume.not-enough": {"label": "Not enough buffer", "label_x": 5.5, "label_y": 0.0, "label_width": 1.6},
+         "rti-resume.all-resent": {"label": "Messages resent", "label_x": 10.5, "label_y": 2.1, "label_width": 1.6},
+         "rti-resume.broken": {"label": "Connection broken", "label_x": 9.0, "label_y": -0.35, "label_width": 1.5},
+         "rti-resume.shutdown": {"label": "RTI shutdown requested", "label_x": 10.5, "label_y": -0.75, "label_width": 1.8}
+       }},
+      "notes": "RTI-side resume machine. Connector numbers are shared with the surrounding detailed session diagrams."
+    },
+    {
+      "id": "rti-exception-handling",
+      "title": "RTI Exception Handling State Diagram",
+      "clause_id": "clause-12.13.4.7",
+      "source": {"path": "content/clauses/12-programming-language-mappings-page-411.tex", "line": 57},
+      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p412-xref13932.png", "page": 412, "xref": "13932", "caption": "Figure 33---RTI Exception Handling State Diagram"},
+      "states": [
+        {"id": "rti-exception.shutdown-connector", "label": "4", "kind": "connector"},
+        {"id": "rti-exception.shutdown", "label": "SHUTDOWN-1\nClose connection\nDelete Session"},
+        {"id": "rti-exception.error-connector", "label": "5", "kind": "connector"},
+        {"id": "rti-exception.error-1", "label": "ERROR-1\nBest effort close of\nconnection"},
+        {"id": "rti-exception.error-2", "label": "ERROR-2\nReport\nerror/exception"},
+        {"id": "rti-exception.fatal-connector", "label": "6", "kind": "connector"},
+        {"id": "rti-exception.fatal-1", "label": "FATAL-1\nBest effort close of\nconnection and\nDelete Session"},
+        {"id": "rti-exception.fatal-2", "label": "FATAL-2\nReport\nerror/exception"},
+        {"id": "rti-exception.inactive-connector", "label": "7", "kind": "connector"},
+        {"id": "rti-exception.inactive", "label": "INACTIVE\nBest effort close of\nconnection"},
+        {"id": "rti-exception.final-1", "label": "", "kind": "final"},
+        {"id": "rti-exception.final-2", "label": "", "kind": "final"},
+        {"id": "rti-exception.final-3", "label": "", "kind": "final"}
+      ],
+      "transitions": [
+        {"id": "rti-exception.shutdown-enter", "source_state": "rti-exception.shutdown-connector", "event": "", "target_state": "rti-exception.shutdown", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.shutdown-close", "source_state": "rti-exception.shutdown", "event": "", "target_state": "rti-exception.final-1", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.error-enter", "source_state": "rti-exception.error-connector", "event": "", "target_state": "rti-exception.error-1", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.error-report", "source_state": "rti-exception.error-1", "event": "", "target_state": "rti-exception.error-2", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.error-final", "source_state": "rti-exception.error-2", "event": "", "target_state": "rti-exception.final-2", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.fatal-enter", "source_state": "rti-exception.fatal-connector", "event": "", "target_state": "rti-exception.fatal-1", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.fatal-report", "source_state": "rti-exception.fatal-1", "event": "", "target_state": "rti-exception.fatal-2", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.fatal-final", "source_state": "rti-exception.fatal-2", "event": "", "target_state": "rti-exception.final-3", "clause_id": "clause-12.13.4.7"},
+        {"id": "rti-exception.inactive-enter", "source_state": "rti-exception.inactive-connector", "event": "", "target_state": "rti-exception.inactive", "clause_id": "clause-12.13.4.7"}
+      ],
+      "initial_state_ids": [],
+      "layout": {"engine": "manual", "direction": "left-to-right", "state_font": "tiny", "edge_label_font": "tiny", "edge_label_distance": 0.35, "containers": [
+        {"id": "rti-exception.shutdown-container", "x": 0, "y": 4, "width": 5, "height": 3, "title": "Shutdown, session ended"},
+        {"id": "rti-exception.error-container", "x": 6, "y": 4, "width": 8.3, "height": 3, "title": "Connection error, session not ended"},
+        {"id": "rti-exception.fatal-container", "x": 0, "y": 0, "width": 8.1, "height": 3, "title": "Fatal error, session ended"},
+        {"id": "rti-exception.inactive-container", "x": 9, "y": 0, "width": 5.0, "height": 3, "title": "Inactive federate, session not ended"}
+      ], "nodes": {
+        "rti-exception.shutdown-connector": {"x": 0.8, "y": 5.5}, "rti-exception.shutdown": {"x": 2.5, "y": 5.5}, "rti-exception.final-1": {"x": 4.5, "y": 5.5}, "rti-exception.error-connector": {"x": 6.8, "y": 5.5}, "rti-exception.error-1": {"x": 8.5, "y": 5.5}, "rti-exception.error-2": {"x": 11.8, "y": 5.5}, "rti-exception.final-2": {"x": 13.4, "y": 5.5}, "rti-exception.fatal-connector": {"x": 0.8, "y": 1.5}, "rti-exception.fatal-1": {"x": 2.6, "y": 1.5}, "rti-exception.fatal-2": {"x": 5.7, "y": 1.5}, "rti-exception.final-3": {"x": 7.3, "y": 1.5}, "rti-exception.inactive-connector": {"x": 9.8, "y": 1.5}, "rti-exception.inactive": {"x": 12.0, "y": 1.5}
+      }},
+      "notes": "The RTI exception chart has four independent continuation regions. It is represented as one machine so the shared numbered entry points and terminal cleanup paths remain queryable together."
+    }
+  ]
+}

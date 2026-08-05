@@ -54,7 +54,7 @@
     4.3 \emph{Disconnect} service%
   }
   \HLAFixedBlock{90.000}{208.806}{390.802}{\rmfamily\raggedright}{9.96}{12.00}{%
-    The \emph{Disconnect} service shall be used to terminate the connection between a federate and the RTI.
+    \SemanticRequirementReqDisconnectServiceTerminatesConnectionStatement
   }
   \HLAFixedBlock{90.000}{232.805}{239.222}{\rmfamily\raggedright}{9.96}{12.00}{%
     The federate cannot be a member of a federation execution.
@@ -114,10 +114,7 @@
     4.4 \emph{Connection Lost \textdagger{}} service%
   }
   \HLAFixedBlock{90.000}{539.826}{433.307}{\rmfamily}{9.96}{12.00}{%
-    The \emph{Connection Lost \textdagger{}} service shall notify a previously joined federate that it has entered the Disconnected\linebreak%
-    state as the result of a fault. Being disconnected, the federate is no longer joined to the federation execution.\linebreak%
-    The RTI will attempt the invocation of this service on a best-effort basis; however, it may fail since the RTI\linebreak%
-    or federate may be in a faulty or invalid state.
+    \SemanticRequirementReqConnectionLostServiceBehaviorStatement
   }
   \HLAServiceComponentHeadingAt{599.685}{%
     4.4.1 Supplied arguments%

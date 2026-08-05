@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "implementations": [
+    {
+      "id": "rti.service.connect",
+      "interface_kind": "service",
+      "interface_name": "Connect",
+      "implementation": "rti.connect",
+      "status": "planned",
+      "clause_ids": ["clause-4.1.1"],
+      "requirement_ids": [
+        "req-federate-connect-before-rti-work",
+        "req-connect-service-establishes-connection"
+      ],
+      "transition_ids": ["federate.connect"],
+      "notes": "Replace the pending symbol with the RTI adapter entry point when implementation code is available."
+    },
+    {
+      "id": "rti.service.join-federation-execution",
+      "interface_kind": "service",
+      "interface_name": "Join Federation Execution",
+      "implementation": "rti.join_federation_execution",
+      "status": "planned",
+      "clause_ids": ["clause-4.1.1"],
+      "transition_ids": ["federate.join"]
+    },
+    {
+      "id": "rti.service.disconnect",
+      "interface_kind": "service",
+      "interface_name": "Disconnect",
+      "implementation": "rti.disconnect",
+      "status": "planned",
+      "clause_ids": ["clause-4.1.1"],
+      "requirement_ids": [
+        "req-federate-disconnect-after-resign",
+        "req-disconnect-service-terminates-connection"
+      ],
+      "transition_ids": ["federate.disconnect"]
+    },
+    {
+      "id": "rti.callback.connection-lost",
+      "interface_kind": "callback",
+      "interface_name": "Connection Lost",
+      "implementation": "federate.connection_lost",
+      "status": "planned",
+      "clause_ids": ["clause-4.1.1"],
+      "requirement_ids": [
+        "req-federate-connection-lost",
+        "req-connection-lost-service-behavior"
+      ],
+      "transition_ids": ["federate.connection-lost"]
+    },
+    {
+      "id": "rti.callback.federate-resigned",
+      "interface_kind": "callback",
+      "interface_name": "Federate Resigned",
+      "implementation": "federate.federate_resigned",
+      "status": "planned",
+      "clause_ids": ["clause-4.13"],
+      "requirement_ids": ["req-federate-resigned-callback-behavior"],
+      "transition_ids": ["federate.resigned-by-rti"],
+      "notes": "Replace the pending symbol with the federate callback entry point when implementation code is available."
+    }
+  ]
+}

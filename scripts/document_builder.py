@@ -5,6 +5,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -17,6 +18,7 @@ class BuildConfig:
     clean_before_build: bool = False
     navigation_manifest: Path | None = None
     output_pdf: Path | None = None
+    semantic_generator: Callable[[], object] | None = None
 
 
 def _run(command: list[str], *, cwd: Path) -> None:
@@ -27,6 +29,8 @@ def build(config: BuildConfig) -> Path:
     """Build the document and return its final PDF path."""
     if config.clean_before_build:
         _run(["latexmk", "-C", "main.tex"], cwd=config.root)
+    if config.semantic_generator is not None:
+        config.semantic_generator()
 
     _run(["latexmk", "-xelatex", "main.tex"], cwd=config.root)
     built_pdf = config.root / "build" / "main.pdf"

@@ -13,13 +13,13 @@
     \textbf{4.1.1 Federate lifetime}%
   }
   \HLAFixedBlock{90.000}{384.785}{432.000}{\rmfamily}{9.96}{12.00}{%
-    As shown in Figure 3, the initial state of any federate is “Not Connected.” Before a federate can work with\linebreak%
+    \SemanticContentBlockProseFederateLifetimeInitialStateText\linebreak%
   }
   \HLAFixedBlock{90.000}{396.785}{432.000}{\rmfamily}{9.96}{12.00}{%
-    an RTI, such as to create a federation execution or join one, the federate shall perform a \emph{Connect} to the RTI.\linebreak%
+    \SemanticRequirementReqFederateConnectBeforeRtiWorkStatement\linebreak%
   }
   \HLAFixedBlock{90.001}{408.785}{431.999}{\rmfamily}{9.96}{12.00}{%
-    The \emph{Connect} service allows the RTI to set up and initialize its communication infrastructure. After\linebreak%
+    \SemanticContentBlockProseConnectServiceInfrastructureText After\linebreak%
   }
   \HLAFixedBlock{90.001}{420.785}{431.999}{\rmfamily}{9.96}{12.00}{%
     successful invocation of the \emph{Join Federation Execution} service, a federate will be in the Joined Federate\linebreak%
@@ -58,7 +58,7 @@
     up its communication infrastructure. Figure 4 shows the federate’s lifetime in the Joined Federate state.%
   }
   \HLAFixedBlock{89.999}{576.784}{432.001}{\rmfamily}{9.96}{12.00}{%
-    As indicated by the dashed line in Figure 4, the Joined Federate state consists of two parallel state machines:\linebreak%
+    \SemanticContentBlockProseFederateLifetimeParallelMachinesText\linebreak%
   }
   \HLAFixedBlock{89.999}{588.783}{432.001}{\rmfamily}{9.96}{12.00}{%
     one having to do with whether the joined federate is in the process of saving or restoring the Joined Federate\linebreak%

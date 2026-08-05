@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "summary-rule-1",
+      "title": "Summary rule 1 — federation model",
+      "statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "coverage_kind": "document-wide",
+      "coverage_note": "This framework rule applies across federation conformance and is not owned by one state-machine transition.",
+      "extraction": "explicit",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 28
+      }
+    },
+    {
+      "id": "summary-rule-6",
+      "title": "Summary rule 6 — federate model",
+      "statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "coverage_kind": "document-wide",
+      "coverage_note": "This framework rule applies across federate conformance and is not owned by one state-machine transition.",
+      "extraction": "explicit",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 41
+      }
+    }
+  ]
+}

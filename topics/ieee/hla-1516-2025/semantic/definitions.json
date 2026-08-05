@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "definitions": [
+    {
+      "id": "def-accuracy",
+      "term": "accuracy",
+      "text": "The measure of the maximum deviation of an attribute or a parameter value in the simulation or federation from reality or some other chosen standard or referent.",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 5
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-available-directed-interactions",
+      "term": "available directed interactions",
+      "text": "The set of directed interaction classes of an object class in union with the set of inherited directed interactions of that object class.",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 16
+      },
+      "clause_id": "clause-3.1"
+    }
+  ]
+}

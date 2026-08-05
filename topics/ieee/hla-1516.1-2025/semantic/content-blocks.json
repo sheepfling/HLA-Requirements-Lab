@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "content_blocks": [
+    {
+      "id": "prose-federate-lifetime-initial-state",
+      "kind": "context",
+      "text": "As shown in Figure 3, the initial state of any federate is “Not Connected.”",
+      "clause_id": "clause-4.1.1",
+      "record_ids": ["federate-lifetime", "federate.not-connected"],
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 15,
+        "end_line": 15
+      }
+    },
+    {
+      "id": "prose-connect-service-infrastructure",
+      "kind": "behavior",
+      "text": "The Connect service allows the RTI to set up and initialize its communication infrastructure.",
+      "clause_id": "clause-4.1.1",
+      "record_ids": ["federate-lifetime", "federate.connect", "rti.service.connect"],
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 17,
+        "end_line": 17
+      }
+    },
+    {
+      "id": "prose-federate-lifetime-parallel-machines",
+      "kind": "context",
+      "text": "As indicated by the dashed line in Figure 4, the Joined Federate state consists of two parallel state machines:",
+      "clause_id": "clause-4.1.1",
+      "record_ids": ["federate-lifetime", "federate.joined"],
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 37,
+        "end_line": 37
+      }
+    }
+  ]
+}

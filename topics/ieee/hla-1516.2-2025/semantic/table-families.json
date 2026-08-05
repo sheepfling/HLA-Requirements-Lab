@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "table_families": [
+    {
+      "id": "omt-object-model-identification",
+      "title": "Object model identification table family",
+      "table_ids": ["m4.p037.t01", "m4.p038.t01"],
+      "clause_id": "clause-4.1",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-037.tex",
+        "line": 65
+      }
+    }
+  ]
+}

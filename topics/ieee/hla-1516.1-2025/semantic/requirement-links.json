@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "links": [
+    {
+      "id": "link-connect-requirement-to-transition",
+      "requirement_id": "req-federate-connect-before-rti-work",
+      "transition_id": "federate.connect",
+      "relation": "governs",
+      "notes": "Reviewed pilot link for the federate lifetime machine."
+    },
+    {
+      "id": "link-connection-lost-requirement-to-transition",
+      "requirement_id": "req-federate-connection-lost",
+      "transition_id": "federate.connection-lost",
+      "relation": "governs",
+      "notes": "Reviewed pilot link for the federate lifetime machine."
+    },
+    {
+      "id": "link-disconnect-requirement-to-transition",
+      "requirement_id": "req-federate-disconnect-after-resign",
+      "transition_id": "federate.disconnect",
+      "relation": "governs",
+      "notes": "Reviewed pilot link for the federate lifetime machine."
+    },
+    {
+      "id": "link-connect-service-requirement-to-transition",
+      "requirement_id": "req-connect-service-establishes-connection",
+      "transition_id": "federate.connect",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-051.tex",
+        "line": 12,
+        "end_line": 15
+      },
+      "notes": "Reviewed service-level requirement for the Connect transition."
+    },
+    {
+      "id": "link-disconnect-service-requirement-to-transition",
+      "requirement_id": "req-disconnect-service-terminates-connection",
+      "transition_id": "federate.disconnect",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-052.tex",
+        "line": 56,
+        "end_line": 57
+      },
+      "notes": "Reviewed service-level requirement for the Disconnect transition."
+    },
+    {
+      "id": "link-connection-lost-service-requirement-to-transition",
+      "requirement_id": "req-connection-lost-service-behavior",
+      "transition_id": "federate.connection-lost",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-052.tex",
+        "line": 116,
+        "end_line": 120
+      },
+      "notes": "Reviewed callback-level requirement for the Connection Lost transition."
+    },
+    {
+      "id": "link-federate-resigned-requirement-to-transition",
+      "requirement_id": "req-federate-resigned-callback-behavior",
+      "transition_id": "federate.resigned-by-rti",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-060.tex",
+        "line": 89,
+        "end_line": 93
+      },
+      "notes": "Reviewed callback-level requirement for involuntary resignation."
+    }
+  ]
+}
