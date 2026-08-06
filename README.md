@@ -31,6 +31,9 @@ topics/ieee/hla-1516-2025/
 ```
 
 Those projects expose thin document-level wrappers backed by the shared Python builder.
+The HLA-neutral portability fixture lives at
+`topics/fixture/non-hla-demo-2025/`; its family-local profile is the onboarding
+reference for future document families.
 
 ## Source-of-truth policy
 
@@ -76,6 +79,7 @@ python -m pip install -e .
 python -m scripts.build list
 python -m scripts.build build all
 python -m scripts.build build topics/siso/example-document
+python -m scripts.build build topics/fixture/non-hla-demo-2025
 python -m scripts.build clean
 ```
 
@@ -91,8 +95,10 @@ The semantic model extracts typed clauses, definitions, requirements, content
 blocks, references, notes, figures, examples, annexes, state machines, and HLA
 1516.2 table/cell records. Pydantic provides the strict loading, validation, JSON serialization,
 and round-trip deserialization contract. Explicit normative rules are marked
-`explicit`; source-shaped normative surfaces from the less-migrated documents
-are retained as reviewable `candidate` requirements. The 1516.2 table model
+`explicit`; all current IEEE 1516.1 and 1516.2 normative records are now
+authoritative and clause-owned. IEEE 1516.1 has 1,697 source-derived
+requirements; IEEE 1516.2 has 340 cross-cutting requirements and 83 reusable
+table-backed definitions. The 1516.2 table model
 keeps semantic cell text and source references separate from page geometry,
 classifies OMT table kinds, and exposes continued-table merging. Selected
 tables can be re-injected through the portable renderer in
@@ -103,13 +109,29 @@ module remains a compatibility facade for HLA output.
 The loader accepts any structural `LatexSourceProfile`, so a future document
 family can supply its own command vocabulary without adding HLA constants to
 the semantic model. `DocumentModel.ordered_clauses()` and
-`DocumentModel.root_clauses()` provide canonical navigation; state/event
-consumers can use `requirements_applicable_after()` and
-`transitions_missing_implementation_mapping()` for conformance work.
+`DocumentModel.root_clauses()` provide canonical navigation. Compliance
+consumers can use `query_requirements_applicable_after()` for typed
+state/event traceability, `compliance_query()` for a serializable report,
+`transitions_without_implementation_mapping()` for missing seams, and
+`transitions_without_concrete_implementation()` for mappings that remain
+planned or partial.
 
-Milestone 4 adds authored implementation mappings for RTI services, callbacks,
-and adapters. They live in each document's `semantic/implementations.json` and
-are validated against clause, requirement, and transition IDs. The same
+The shared generator compiles each validated model through
+`scripts/hierarchy_compiler.py`. Every build emits ignored `hierarchy.json` and
+`hierarchy-index.tex` inputs containing canonical clause parent/child order,
+direct record ownership, stable semantic destinations, and explicit record
+links. Page adapters receive qualified anchors from that same graph, and the
+derivative renders its clause tree from the compiled hierarchy. State and
+transition destinations are namespace-qualified when their source IDs overlap.
+
+The compliance layer adds authored implementation mappings for RTI services,
+callbacks, and adapters. They live in each document's
+`semantic/implementations.json` and are validated against clause, requirement,
+and transition IDs. Each mapping exposes a structured
+`ImplementationReference` while retaining the stable legacy symbol field.
+IEEE 1516.1 now has one planned seam for each of its 281 modeled transitions;
+the `planned` status deliberately does not claim concrete implementation code.
+The same
 queries are available from the stdout-only CLI:
 
 ```powershell
@@ -120,14 +142,20 @@ python -m scripts.compliance topics/ieee/hla-1516.1-2025 `
   --include-candidates
 python -m scripts.compliance topics/ieee/hla-1516.1-2025 `
   --machine federate-lifetime --json
+python -m scripts.compliance `
+  topics/ieee/hla-1516-2025 `
+  topics/ieee/hla-1516.1-2025 `
+  topics/ieee/hla-1516.2-2025 `
+  --document hla-1516.1-2025 `
+  --implementation-status planned `
+  --interface-kind service `
+  --json
 ```
 
-Reviewed requirement records and their transition relationships live in
+Authoritative requirement records and their transition relationships live in
 `semantic/requirements.json` and `semantic/requirement-links.json`. Requirement
-links and implementation links are bidirectional and validated at load time;
-unreviewed source-shaped candidates remain visible but are excluded from
-default coverage queries. A corpus-level report can include all three
-documents:
+links and implementation links are bidirectional and validated at load time.
+A corpus-level report can include all three documents:
 
 ```powershell
 python -m scripts.compliance `
@@ -204,12 +232,14 @@ Build it with:
 python topics/ieee/hla-semantic-derivative-2025/build.py build
 ```
 
-The full release smoke check covers the three faithful PDFs and the derivative:
+The full release smoke check covers the three faithful PDFs, the derivative,
+and the one-page non-HLA portability fixture:
 
 ```powershell
 python -m scripts.release_check `
   --manifest data/release/documents.json `
   --diagram-manifest data/state_machines/manifest.json `
+  --authority-manifest data/semantic/authority.json `
   --json
 ```
 
@@ -220,7 +250,7 @@ migration plan, inventory manifest, schema, and progress metrics are in
 
 The HLA semantic reconstruction backlog and its measurable source-shape targets
 are in [docs/HLA-SEMANTIC-ROADMAP.md](docs/HLA-SEMANTIC-ROADMAP.md). The
-concrete data-driven source-of-truth contract, current baseline, and M8-M13
+concrete data-driven source-of-truth contract, current baseline, and M8-M19
 deliverables are in
 [docs/DATA-DRIVEN-DELIVERABLES.md](docs/DATA-DRIVEN-DELIVERABLES.md). Capture a
 fresh, stdout-only baseline with:
@@ -250,9 +280,10 @@ Every document build regenerates `output/semantic/semantic-index.tex` and
 `output/semantic/semantic-manifest.tex` from the typed model before running
 LaTeX. The generated directory is ignored. Selected definitions and
 requirements also produce typed TeX data macros; migrated prose content blocks
-use the same contract so layout adapters consume semantic text while keeping
-page geometry in document-specific source. The 1516 definition pilot and the
-1516.1 federate-lifetime slice additionally consume generated visible semantic
+and the 1516 typed content-element records use the same contract so layout
+adapters consume semantic data while keeping page geometry in
+document-specific source. The 1516 definition pilot and the 1516.1
+federate-lifetime slice additionally consume generated visible semantic
 blocks.
 State-machine diagrams can be exported as source-only DOT and Mermaid files:
 

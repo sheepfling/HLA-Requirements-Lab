@@ -79,7 +79,7 @@ class Milestone4Tests(unittest.TestCase):
 
     def test_unmapped_transition_query_is_explicit(self) -> None:
         unmapped = self.lifecycle.transitions_missing_implementation_mapping("federate-lifetime")
-        self.assertIn("federate.resign", {item.id for item in unmapped})
+        self.assertEqual(unmapped, ())
         self.assertNotIn("federate.connect", {item.id for item in unmapped})
 
     def test_documents_without_state_machines_report_orphan_requirements(self) -> None:

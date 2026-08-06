@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "document_id": "hla-1516-2025",
+      "root": "topics/ieee/hla-1516-2025",
+      "surfaces": [
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": ["semantic/definitions.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": ["semantic/requirements.json"],
+          "selection": "explicit",
+          "generated_glob": "output/semantic/requirement-*-data.tex"
+        }
+      ]
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "root": "topics/ieee/hla-1516.1-2025",
+      "surfaces": [
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": ["semantic/requirements.json"],
+          "selection": "explicit",
+          "generated_glob": "output/semantic/requirement-*-data.tex"
+        },
+        {
+          "id": "requirement-reviews",
+          "kind": "requirement_reviews",
+          "source_paths": ["semantic/requirement-review.json"],
+          "selection": "all"
+        },
+        {
+          "id": "transition-coverage",
+          "kind": "transition_coverage",
+          "source_paths": ["semantic/transition-coverage.json"],
+          "selection": "all"
+        },
+        {
+          "id": "implementations",
+          "kind": "implementations",
+          "source_paths": ["semantic/implementations.json"],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-links",
+          "kind": "requirement_links",
+          "source_paths": ["semantic/requirement-links.json"],
+          "selection": "all"
+        }
+      ]
+    },
+    {
+      "document_id": "hla-1516.2-2025",
+      "root": "topics/ieee/hla-1516.2-2025",
+      "surfaces": [
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": ["semantic/definitions.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": ["semantic/requirements.json"],
+          "selection": "explicit",
+          "generated_glob": "output/semantic/requirement-*-data.tex"
+        },
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "requirement-reviews",
+          "kind": "requirement_reviews",
+          "source_paths": ["semantic/requirement-review.json"],
+          "selection": "all"
+        },
+        {
+          "id": "table-families",
+          "kind": "table_families",
+          "source_paths": ["semantic/table-families.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-family-*-data.tex"
+        }
+      ]
+    }
+  ]
+}

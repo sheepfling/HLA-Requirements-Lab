@@ -1,0 +1,2690 @@
+{
+  "schema_version": 1,
+  "transition_coverage": [
+    {
+      "transition_id": "sync.awaiting.announce",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-awaiting-announce"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 9,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.awaiting.skip",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-awaiting-skip"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 9,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.awaiting.complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-awaiting-complete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 9,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "connection.start",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-start"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.new-session",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-new-session"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.session-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-session-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.session-fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-session-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.termination-request",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-termination-request"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.terminated",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-terminated"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.reconnect-loop",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-reconnect-loop"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.reconnect-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-reconnect-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.reconnect-fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-reconnect-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.resend-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-resend-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "connection.resend-fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.connection-resend-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.attributes.first.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-attributes-first-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.attributes.second.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-attributes-second-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.attributes.last.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-attributes-last-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-1.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-1-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-1.register",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-1-register"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-1.discover",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-1-discover"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-1.local-delete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-1-local-delete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-1.remove",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-1-remove"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-k.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-k-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-k.register",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-k-register"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-k.discover",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-k-discover"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-k.local-delete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-k-local-delete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-class.instance-k.remove",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-class-instance-k-remove"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.publication.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-publication-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.publication.history-entry",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-publication-history-entry"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.publish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-publish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.published-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-published-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.unpublish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-unpublish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.unpublished-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-unpublished-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.subscription.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-subscription-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.subscription.history-entry",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-subscription-history-entry"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.subscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-subscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.subscribed-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-subscribed-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.unsubscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-unsubscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "class-attribute.unsubscribed-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.class-attribute-unsubscribed-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-history-entry",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-history-entry"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-publish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-publish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-unpublished-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-unpublished-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-unpublish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-unpublish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-published-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-published-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.explicit-publish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-explicit-publish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.explicit-unpublished-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-explicit-unpublished-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.explicit-unpublish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-explicit-unpublish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.explicit-published-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-explicit-published-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.implicit-to-explicit",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-implicit-to-explicit"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.explicit-to-implicit",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-explicit-to-implicit"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.subscription-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-subscription-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.subscription-history-entry",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-subscription-history-entry"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.subscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-subscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.subscribed-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-subscribed-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.unsubscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-unsubscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "privilege.unsubscribed-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.privilege-unsubscribed-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.publication-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-publication-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.publish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-publish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.published.control-entry-history",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-published-control-entry-history"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.unpublished-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-unpublished-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.unpublish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-unpublish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.control-enabled",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-control-enabled"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.control-disabled",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-control-disabled"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.control-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-control-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.send",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-send"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.turn-on",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-turn-on"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.turn-off",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-turn-off"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.turn-on-again",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-turn-on-again"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.subscription-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-subscription-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.subscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-subscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.unsubscribed-repeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-unsubscribed-repeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.unsubscribe",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-unsubscribe"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "interaction.receive",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.interaction-receive"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.start",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-start"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.new-session",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-new-session"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.terminate-request",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-terminate-request"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.terminated",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-terminated"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.reconnect-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-reconnect-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.reconnect-timeout",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-reconnect-timeout"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.resend-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-resend-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-connection.resend-fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-connection-resend-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.establish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-establish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.cannot-establish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-cannot-establish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.new-session",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-new-session"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.bad-init2",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-bad-init2"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.wait-timeout",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-wait-timeout"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.status",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-status"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.broken-init3",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-broken-init3"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.failed",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-failed"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.heartbeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-heartbeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.heartbeat-sent",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-heartbeat-sent"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.session-broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-session-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.bad-main",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-bad-main"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.shutdown",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-shutdown"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.timeout-heart",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-timeout-heart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-startup.heartbeat-broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-startup-heartbeat-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.resume-request",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-resume-request"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.cannot-establish",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-cannot-establish"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.status",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-status"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.bad-message",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-bad-message"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.resend",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-resend"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.heartbeat-timeout",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-heartbeat-timeout"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.status-failure",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-status-failure"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.all-sent",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-all-sent"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-resume.resend-broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resume-resend-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.shutdown-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-shutdown-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.terminate",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-terminate"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.terminated",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-terminated"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.shutdown-final",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-shutdown-final"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.shutdown-error",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-shutdown-error"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.shutdown-timeout",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-shutdown-timeout"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.error-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-error-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.error-report",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-error-report"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.error-final",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-error-final"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate-exception.unresponsive-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-exception-unresponsive-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.setup-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-setup-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.listen",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-listen"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.expire",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-expire"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.purge-done",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-purge-done"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.connection",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-connection"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.spawned",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-spawned"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.shutdown",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-shutdown"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "port.stop",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.port-stop"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "handler.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.handler-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "handler.new",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.handler-new"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "handler.resume",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.handler-resume"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "handler.bad",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.handler-bad"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.correct",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-correct"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.incorrect",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-incorrect"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.shutdown-init1",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-shutdown-init1"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.create",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-create"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.cannot-create",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-cannot-create"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.broken-init2",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-broken-init2"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.bad",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-bad"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.shutdown",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-shutdown"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.terminate",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-terminate"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.terminate-broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-terminate-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-startup.heartbeat",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-startup-heartbeat"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.exists",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-exists"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.not-found",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-not-found"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.enough",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-enough"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.not-enough",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-not-enough"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.fail-complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-fail-complete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.all-resent",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-all-resent"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.broken",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-broken"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-resume.shutdown",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-resume-shutdown"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.shutdown-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-shutdown-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.shutdown-close",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-shutdown-close"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.error-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-error-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.error-report",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-error-report"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.error-final",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-error-final"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.fatal-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-fatal-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.fatal-report",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-fatal-report"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.fatal-final",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-fatal-final"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "rti-exception.inactive-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.rti-exception-inactive-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federate.connect",
+      "status": "mapped",
+      "implementation_ids": [
+        "rti.service.connect"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-051.tex",
+        "line": 13,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.join",
+      "status": "mapped",
+      "implementation_ids": [
+        "rti.service.join-federation-execution"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 25,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.resign",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-resign"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 43,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.connection-lost",
+      "status": "mapped",
+      "implementation_ids": [
+        "rti.callback.connection-lost"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 31,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.resigned-by-rti",
+      "status": "mapped",
+      "implementation_ids": [
+        "rti.callback.federate-resigned"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-040.tex",
+        "line": 49,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.disconnect",
+      "status": "mapped",
+      "implementation_ids": [
+        "rti.service.disconnect"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-052.tex",
+        "line": 57,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restore-begun",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restore-begun"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-041.tex",
+        "line": 28,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.initiate-save",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-initiate-save"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-043.tex",
+        "line": 105,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.save-begun",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-save-begun"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 65,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.save-complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-save-complete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-044.tex",
+        "line": 34,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.saved",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-saved"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 89,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.request-save-history",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-request-save-history"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 183,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.request-restore",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-request-restore"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 194,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restore-confirm-failure",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restore-confirm-failure"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 194,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restore-confirm-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restore-confirm-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 194,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restore-start",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restore-start"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-044.tex",
+        "line": 46,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restore-complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restore-complete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-044.tex",
+        "line": 64,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.restored",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-restored"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 20,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.normal-activity-restricted",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-normal-activity-restricted"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 177,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federate.normal-activity-permitted",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federate-normal-activity-permitted"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-042.tex",
+        "line": 177,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "overview.create",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-create"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "overview.destroy",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-destroy"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "overview.federate-1.join",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-federate-1-join"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "overview.federate-1.resign",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-federate-1-resign"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "overview.federate-n.join",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-federate-n-join"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "overview.federate-n.resign",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.overview-federate-n-resign"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "federation-execution.create",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federation-execution-create"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 40,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federation-execution.destroy",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federation-execution-destroy"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 40,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federation-execution.first-join",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federation-execution-first-join"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 44,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federation-execution.last-resign",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federation-execution-last-resign"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 45,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "federation-execution.join-or-resign",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.federation-execution-join-or-resign"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-038.tex",
+        "line": 45,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.global.start",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-global-start"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.global.register",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-global-register"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.global.registration-fail",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-global-registration-fail"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.global.registration-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-global-registration-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.global.complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-global-complete"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.start",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-start"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.register",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-register"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.registration-result",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-registration-result"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.announce",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-announce"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.achieved",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-achieved"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "sync.local.synchronized",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.sync-local-synchronized"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-047.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "normal.enter-history",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-enter-history"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "normal.history-to-temporal",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-history-to-temporal"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "normal.object-first-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-object-first-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "normal.object-last-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-object-last-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "normal.interaction-first-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-interaction-first-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "normal.interaction-last-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.normal-interaction-last-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-instance-known.enter-first",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-instance-known-enter-first"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "object-instance-known.enter-last",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.object-instance-known-enter-last"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.enter-choice",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-enter-choice"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.registered",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-registered"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.discovered",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-discovered"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned-history-update",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned-history-update"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.not-owned-history-reflect",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-not-owned-history-reflect"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned-disable-relevance",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned-disable-relevance"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned-enable-relevance",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned-enable-relevance"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned-no-control-enable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned-no-control-enable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned-control-disable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned-control-disable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.updates-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-updates-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.updates-on",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-updates-on"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.updates-off-from-unknown",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-updates-off-from-unknown"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.updates-off",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-updates-off"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.updates-on-again",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-updates-on-again"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.unowned",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-unowned"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.owned",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-owned"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.not-owned-disable-scope",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-not-owned-disable-scope"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.not-owned-enable-scope",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-not-owned-enable-scope"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.no-scope-enable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-no-scope-enable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-in",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-in"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-out",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-out"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-out-again",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-out-again"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-in-again",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-in-again"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "ownership.scope-disable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.ownership-scope-disable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.enter-choice",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-enter-choice"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.register",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-register"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.discover",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-discover"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.release-request",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-release-request"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.release-denied",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-release-denied"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.negotiated-divestiture",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-negotiated-divestiture"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.cancel-divestiture",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-cancel-divestiture"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.confirm-divestiture-failure",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-confirm-divestiture-failure"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.confirm-divestiture-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-confirm-divestiture-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.unowned-to-able",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-unowned-to-able"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.published-to-not-able",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-published-to-not-able"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.unpublished-to-not-able",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-unpublished-to-not-able"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.able-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-able-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.try-acquire",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-try-acquire"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.cancel-acquisition",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-cancel-acquisition"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.confirm-cancel",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-confirm-cancel"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.acquire-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-acquire-success"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.willing",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-willing"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.not-willing",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-not-willing"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "establishing.unowned-to-owned",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-unowned-to-owned"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.enter-idle",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-enter-idle"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.advance",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-advance"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.advance-loop",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-advance-loop"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.grant",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-grant"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.enable-regulating",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-enable-regulating"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.enable-constrained",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-enable-constrained"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.regulating-to-both",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-regulating-to-both"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.constrained-to-both",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-constrained-to-both"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.both-to-idle",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-both-to-idle"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.regulating-enable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-regulating-enable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.regulating-disable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-regulating-disable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.regulating-enable-again",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-regulating-enable-again"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.constrained-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-constrained-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.constrained-disable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-constrained-disable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.constrained-enable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-constrained-enable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.async-enter",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-async-enter"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.async-disable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-async-disable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "temporal.async-enable",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.temporal-async-enable"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    }
+  ]
+}

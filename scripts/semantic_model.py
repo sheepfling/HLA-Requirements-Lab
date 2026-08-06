@@ -49,6 +49,8 @@ class Definition(SemanticRecord):
     id: str = Field(min_length=1)
     term: str = Field(min_length=1)
     text: str
+    layout_body: str | None = None
+    leading_gap: str | None = None
     source: SourceRef
     clause_id: str | None = None
 
@@ -74,6 +76,7 @@ class Requirement(SemanticRecord):
     )
     coverage_note: str = ""
     extraction: Literal["explicit", "candidate"] = "explicit"
+    semantic_group_id: str | None = None
     source: SourceRef
 
     @model_validator(mode="after")
@@ -89,6 +92,8 @@ class Requirement(SemanticRecord):
                 "machine_statement",
                 _machine_statement(self.statement),
             )
+        if not self.semantic_group_id:
+            object.__setattr__(self, "semantic_group_id", self.id)
         if self.extraction == "explicit":
             if self.coverage_kind == "transition" and not self.transition_ids:
                 raise ValueError(
@@ -131,11 +136,57 @@ class RequirementFile(SemanticRecord):
     requirements: tuple[Requirement, ...]
 
 
+class RequirementReview(SemanticRecord):
+    """A disposition for an extracted requirement candidate."""
+
+    requirement_id: str = Field(min_length=1)
+    status: Literal["deferred", "non-normative", "layout-only"]
+    reason: str = Field(min_length=1)
+    source: SourceRef
+
+    @property
+    def id(self) -> str:
+        """Expose the reviewed requirement as this record's stable identity."""
+        return self.requirement_id
+
+
+class RequirementReviewFile(SemanticRecord):
+    """Authored review dispositions for unpromoted requirement candidates."""
+
+    schema_version: int = Field(ge=1)
+    reviews: tuple[RequirementReview, ...]
+
+
 class RequirementLinkFile(SemanticRecord):
     """Authored requirement-to-transition relationships."""
 
     schema_version: int = Field(ge=1)
     links: tuple[RequirementLink, ...]
+
+
+class TransitionCoverage(SemanticRecord):
+    """Classify implementation coverage for every modeled transition."""
+
+    transition_id: str = Field(min_length=1)
+    status: Literal["mapped", "not-applicable", "deferred"]
+    implementation_ids: tuple[str, ...] = ()
+    reason: str = Field(min_length=1)
+    source: SourceRef | None = None
+
+    @model_validator(mode="after")
+    def validate_mapping_shape(self) -> TransitionCoverage:
+        if self.status == "mapped" and not self.implementation_ids:
+            raise ValueError("mapped transition coverage must name an implementation")
+        if self.status != "mapped" and self.implementation_ids:
+            raise ValueError("only mapped transition coverage may name implementations")
+        return self
+
+
+class TransitionCoverageFile(SemanticRecord):
+    """Authored transition coverage dispositions for compliance planning."""
+
+    schema_version: int = Field(ge=1)
+    transition_coverage: tuple[TransitionCoverage, ...]
 
 
 class ContentBlock(SemanticRecord):
@@ -146,7 +197,10 @@ class ContentBlock(SemanticRecord):
     text: str
     clause_id: str | None = None
     record_ids: tuple[str, ...] = ()
+    element_ids: tuple[str, ...] = ()
     source: SourceRef
+    sequence: int = Field(default=0, ge=0)
+    layout_body: str | None = None
 
 
 class ContentBlockFile(SemanticRecord):
@@ -154,6 +208,51 @@ class ContentBlockFile(SemanticRecord):
 
     schema_version: int = Field(ge=1)
     content_blocks: tuple[ContentBlock, ...]
+
+
+class ContentElement(SemanticRecord):
+    """A typed, clause-owned content unit extracted from a layout adapter.
+
+    ``ContentBlock`` remains the exact-page fidelity boundary.  This record is
+    the reusable semantic representation used by queries and future document
+    renderers; it must not inherit ownership from a page filename.
+    """
+
+    id: str = Field(min_length=1)
+    kind: Literal[
+        "paragraph",
+        "list",
+        "list-item",
+        "note",
+        "footnote",
+        "formula",
+        "cross-reference",
+    ]
+    text: str
+    clause_id: str | None = None
+    block_id: str = Field(min_length=1)
+    parent_id: str | None = None
+    record_ids: tuple[str, ...] = ()
+    source: SourceRef
+    sequence: int = Field(default=0, ge=0)
+
+
+class ContentElementFile(SemanticRecord):
+    """Authored typed content units extracted from source layout."""
+
+    schema_version: int = Field(ge=1)
+    content_elements: tuple[ContentElement, ...]
+
+
+class ImplementationReference(SemanticRecord):
+    """A structured, optionally source-addressable implementation target."""
+
+    symbol: str = Field(min_length=1)
+    language: str = Field(default="unspecified", min_length=1)
+    repository: str | None = None
+    path: str | None = None
+    line: int | None = Field(default=None, ge=1)
+    version: str | None = None
 
 
 class ImplementationMapping(SemanticRecord):
@@ -169,6 +268,18 @@ class ImplementationMapping(SemanticRecord):
     transition_ids: tuple[str, ...] = ()
     source: SourceRef | None = None
     notes: str = ""
+    implementation_ref: ImplementationReference | None = None
+
+    @model_validator(mode="after")
+    def normalize_implementation_ref(self) -> ImplementationMapping:
+        """Give legacy string-only mappings a stable structured target."""
+        if self.implementation_ref is None:
+            object.__setattr__(
+                self,
+                "implementation_ref",
+                ImplementationReference(symbol=self.implementation),
+            )
+        return self
 
 
 class ImplementationFile(SemanticRecord):
@@ -186,10 +297,64 @@ class ComplianceIssue(SemanticRecord):
         "unmapped-transition",
         "orphan-implementation",
         "unresolved-reference",
+        "non-concrete-implementation",
     ]
     severity: Literal["warning", "error"] = "warning"
     record_id: str = Field(min_length=1)
     message: str = Field(min_length=1)
+
+
+class RequirementApplicability(SemanticRecord):
+    """A typed explanation for why a requirement applies to a transition."""
+
+    document_id: str = Field(min_length=1)
+    machine_id: str = Field(min_length=1)
+    state_id: str = Field(min_length=1)
+    event: str
+    transition_id: str = Field(min_length=1)
+    target_state: str | None = None
+    clause_id: str | None = None
+    requirement_id: str = Field(min_length=1)
+    relation: Literal[
+        "transition",
+        "reviewed-link",
+        "implementation",
+        "clause-fallback",
+    ]
+
+
+class TransitionImplementationCoverage(SemanticRecord):
+    """Typed implementation status for one state-machine transition."""
+
+    document_id: str = Field(min_length=1)
+    machine_id: str = Field(min_length=1)
+    transition_id: str = Field(min_length=1)
+    source_state: str | None = None
+    target_state: str | None = None
+    event: str
+    mapping_ids: tuple[str, ...] = ()
+    status: Literal[
+        "unmapped",
+        "planned",
+        "partial",
+        "implemented",
+        "verified",
+        "mixed",
+    ]
+    concrete: bool
+
+
+class ComplianceQueryResult(SemanticRecord):
+    """Serializable result for the reusable compliance query surface."""
+
+    document_id: str = Field(min_length=1)
+    machine_id: str | None = None
+    state_id: str | None = None
+    event: str | None = None
+    applicable_requirements: tuple[RequirementApplicability, ...] = ()
+    transition_coverage: tuple[TransitionImplementationCoverage, ...] = ()
+    implementation_status_counts: dict[str, int] = Field(default_factory=dict)
+    issues: tuple[ComplianceIssue, ...] = ()
 
 
 class TableCell(SemanticRecord):
@@ -476,8 +641,11 @@ class DocumentModel(SemanticRecord):
     clauses: tuple[Clause, ...]
     definitions: tuple[Definition, ...]
     requirements: tuple[Requirement, ...]
+    requirement_reviews: tuple[RequirementReview, ...] = ()
     requirement_links: tuple[RequirementLink, ...] = ()
+    transition_coverage: tuple[TransitionCoverage, ...] = ()
     content_blocks: tuple[ContentBlock, ...] = ()
+    content_elements: tuple[ContentElement, ...] = ()
     state_machines: tuple[StateMachine, ...] = ()
     implementations: tuple[ImplementationMapping, ...] = ()
     tables: tuple[Table, ...] = ()
@@ -496,8 +664,10 @@ class DocumentModel(SemanticRecord):
             ("clause", self.clauses),
             ("definition", self.definitions),
             ("requirement", self.requirements),
+            ("requirement review", self.requirement_reviews),
             ("requirement link", self.requirement_links),
             ("content block", self.content_blocks),
+            ("content element", self.content_elements),
             ("state machine", self.state_machines),
             ("implementation", self.implementations),
             ("table", self.tables),
@@ -524,6 +694,20 @@ class DocumentModel(SemanticRecord):
         if len(transition_ids) != len(set(transition_ids)):
             raise ValueError("transition IDs must be unique across the document")
         requirement_ids = {item.id for item in self.requirements}
+        candidate_ids = {item.id for item in self.requirements if item.extraction == "candidate"}
+        review_ids = [item.requirement_id for item in self.requirement_reviews]
+        if len(review_ids) != len(set(review_ids)):
+            raise ValueError("requirement review IDs must be unique")
+        if not set(review_ids) <= candidate_ids:
+            invalid = sorted(set(review_ids) - candidate_ids)
+            raise ValueError(f"requirement reviews must target candidate requirements: {invalid}")
+        if self.requirement_reviews and set(review_ids) != candidate_ids:
+            missing = sorted(candidate_ids - set(review_ids))
+            extra = sorted(set(review_ids) - candidate_ids)
+            raise ValueError(
+                "requirement review must classify every candidate "
+                f"(missing={missing}, extra={extra})"
+            )
         implementation_ids = {item.id for item in self.implementations}
         all_transition_ids = set(transition_ids)
         transitions_by_id = {
@@ -531,6 +715,34 @@ class DocumentModel(SemanticRecord):
             for machine in self.state_machines
             for transition in machine.transitions
         }
+        coverage_ids = [item.transition_id for item in self.transition_coverage]
+        if len(coverage_ids) != len(set(coverage_ids)):
+            raise ValueError("transition coverage IDs must be unique")
+        if self.transition_coverage and set(coverage_ids) != all_transition_ids:
+            missing = sorted(all_transition_ids - set(coverage_ids))
+            extra = sorted(set(coverage_ids) - all_transition_ids)
+            raise ValueError(
+                "transition coverage must classify every modeled transition "
+                f"(missing={missing}, extra={extra})"
+            )
+        for coverage in self.transition_coverage:
+            if coverage.transition_id not in all_transition_ids:
+                raise ValueError(
+                    f"transition coverage references missing transition {coverage.transition_id}"
+                )
+            missing_implementations = set(coverage.implementation_ids) - implementation_ids
+            if missing_implementations:
+                raise ValueError(
+                    f"transition coverage {coverage.transition_id} references missing "
+                    f"implementations {sorted(missing_implementations)}"
+                )
+            if coverage.status == "mapped":
+                transition = transitions_by_id[coverage.transition_id]
+                if not set(coverage.implementation_ids) <= set(transition.implementation_ids):
+                    raise ValueError(
+                        f"mapped transition coverage {coverage.transition_id} is not "
+                        "reciprocal with the transition implementation IDs"
+                    )
         for clause in self.clauses:
             if clause.parent_id is not None and clause.parent_id not in clause_ids:
                 raise ValueError(f"clause {clause.id} references missing parent {clause.parent_id}")
@@ -565,12 +777,49 @@ class DocumentModel(SemanticRecord):
                 raise ValueError(
                     f"content block {block.id} references missing clause {block.clause_id}"
                 )
+            if not set(block.element_ids) <= {item.id for item in self.content_elements}:
+                missing = sorted(
+                    set(block.element_ids) - {item.id for item in self.content_elements}
+                )
+                raise ValueError(f"content block {block.id} references missing elements {missing}")
+        content_block_ids = {item.id for item in self.content_blocks}
+        content_element_ids = {item.id for item in self.content_elements}
+        for element in self.content_elements:
+            if element.block_id not in content_block_ids:
+                raise ValueError(
+                    f"content element {element.id} references missing block {element.block_id}"
+                )
+            if element.clause_id is not None and element.clause_id not in clause_ids:
+                raise ValueError(
+                    f"content element {element.id} references missing clause {element.clause_id}"
+                )
+            if element.parent_id is not None and element.parent_id not in content_element_ids:
+                raise ValueError(
+                    f"content element {element.id} references missing parent {element.parent_id}"
+                )
+            if element.kind == "list-item":
+                if element.parent_id is None:
+                    raise ValueError(f"list item {element.id} must name a parent list")
+                parent = next(
+                    item for item in self.content_elements if item.id == element.parent_id
+                )
+                if parent.kind != "list":
+                    raise ValueError(f"list item {element.id} parent must be a list")
+            elif element.parent_id is not None:
+                raise ValueError(f"only list items may name a content element parent: {element.id}")
         local_record_ids = self.semantic_record_ids()
         for block in self.content_blocks:
             missing_records = set(block.record_ids) - local_record_ids
             if missing_records:
                 raise ValueError(
                     f"content block {block.id} references missing records {sorted(missing_records)}"
+                )
+        for element in self.content_elements:
+            missing_records = set(element.record_ids) - local_record_ids
+            if missing_records:
+                raise ValueError(
+                    "content element "
+                    f"{element.id} references missing records {sorted(missing_records)}"
                 )
         table_ids = {table.id for table in self.tables}
         for family in self.table_families:
@@ -767,6 +1016,7 @@ class DocumentModel(SemanticRecord):
                 *self.ordered_clauses(),
                 *self.ordered_definitions(),
                 *self.ordered_requirements(),
+                *self.content_elements,
                 *self.ordered_annexes(),
             )
         )
@@ -781,6 +1031,7 @@ class DocumentModel(SemanticRecord):
                 *self.requirements,
                 *self.requirement_links,
                 *self.content_blocks,
+                *self.content_elements,
                 *self.state_machines,
                 *self.tables,
                 *self.table_families,
@@ -795,6 +1046,38 @@ class DocumentModel(SemanticRecord):
             item.id
             for machine in self.state_machines
             for item in (*machine.states, *machine.transitions)
+        )
+
+    def content_elements_for_clause(
+        self,
+        clause_id: str,
+        *,
+        kinds: tuple[str, ...] = (),
+    ) -> tuple[ContentElement, ...]:
+        """Return typed content owned directly by a clause."""
+        allowed = set(kinds)
+        return tuple(
+            item
+            for item in self.content_elements
+            if item.clause_id == clause_id and (not allowed or item.kind in allowed)
+        )
+
+    def search_content(
+        self,
+        text: str,
+        *,
+        clause_id: str | None = None,
+        kinds: tuple[str, ...] = (),
+    ) -> tuple[ContentElement, ...]:
+        """Find typed content elements by case-insensitive text search."""
+        wanted = text.casefold()
+        allowed = set(kinds)
+        return tuple(
+            item
+            for item in self.content_elements
+            if wanted in item.text.casefold()
+            and (clause_id is None or item.clause_id == clause_id)
+            and (not allowed or item.kind in allowed)
         )
 
     def requirements_for_clause(self, clause: str) -> tuple[Requirement, ...]:
@@ -858,6 +1141,92 @@ class DocumentModel(SemanticRecord):
             raise ValueError(f"unknown state machine {machine_id}")
         return machines
 
+    def query_requirements_applicable_after(
+        self,
+        state_id: str,
+        event: str,
+        machine_id: str | None = None,
+        *,
+        include_candidates: bool = False,
+    ) -> tuple[RequirementApplicability, ...]:
+        """Return typed requirement matches for a state/event query.
+
+        The result keeps the transition and relationship that made each
+        requirement applicable.  This is the machine-facing counterpart to
+        :meth:`requirements_applicable_after`, which remains as a compact
+        backward-compatible requirement-only helper.
+        """
+        machines = self._selected_machines(machine_id)
+        if not any(state_id in {state.id for state in machine.states} for machine in machines):
+            raise ValueError(f"unknown state {state_id}")
+        wanted_event = event.casefold().strip()
+        selected = tuple(
+            (machine, transition)
+            for machine in machines
+            for transition in machine.transitions
+            if transition.source_state == state_id
+            and transition.event.casefold().strip() == wanted_event
+        )
+        requirements = {item.id: item for item in self.requirements}
+        relation_priority = {
+            "transition": 0,
+            "reviewed-link": 1,
+            "implementation": 2,
+            "clause-fallback": 3,
+        }
+
+        def add_match(relations: dict[str, str], requirement_id: str, relation: str) -> None:
+            if requirement_id not in requirements:
+                return
+            previous = relations.get(requirement_id)
+            if previous is None or relation_priority[relation] < relation_priority[previous]:
+                relations[requirement_id] = relation
+
+        matches: list[tuple[StateMachine, Transition, dict[str, str]]] = []
+        for machine, transition in selected:
+            relations: dict[str, str] = {}
+
+            for requirement_id in transition.requirement_ids:
+                add_match(relations, requirement_id, "transition")
+            for link in self.requirement_links:
+                if link.transition_id == transition.id:
+                    add_match(relations, link.requirement_id, "reviewed-link")
+            for implementation in self.implementation_mappings_for_transition(transition.id):
+                for requirement_id in implementation.requirement_ids:
+                    add_match(relations, requirement_id, "implementation")
+            matches.append((machine, transition, relations))
+
+        has_direct_match = any(relations for _, _, relations in matches)
+        if not has_direct_match:
+            for index, (machine, transition, relations) in enumerate(matches):
+                if transition.clause_id is None:
+                    continue
+                for requirement in self.requirements:
+                    if requirement.clause_id == transition.clause_id:
+                        relations[requirement.id] = "clause-fallback"
+                matches[index] = (machine, transition, relations)
+
+        result: list[RequirementApplicability] = []
+        for machine, transition, relations in matches:
+            for requirement_id, relation in relations.items():
+                requirement = requirements[requirement_id]
+                if not include_candidates and requirement.extraction != "explicit":
+                    continue
+                result.append(
+                    RequirementApplicability(
+                        document_id=self.document_id,
+                        machine_id=machine.id,
+                        state_id=state_id,
+                        event=transition.event,
+                        transition_id=transition.id,
+                        target_state=transition.target_state,
+                        clause_id=transition.clause_id,
+                        requirement_id=requirement.id,
+                        relation=relation,
+                    )
+                )
+        return tuple(result)
+
     def requirements_applicable_after(
         self,
         state_id: str,
@@ -875,36 +1244,20 @@ class DocumentModel(SemanticRecord):
         extractions are excluded by default because they have not yet passed
         semantic review.
         """
-        transitions = self.transitions_for_state_event(state_id, event, machine_id)
         requirement_ids = {
-            requirement_id
-            for transition in transitions
-            for requirement_id in transition.requirement_ids
+            item.requirement_id
+            for item in self.query_requirements_applicable_after(
+                state_id,
+                event,
+                machine_id,
+                include_candidates=include_candidates,
+            )
         }
-        requirement_ids.update(
-            link.requirement_id
-            for transition in transitions
-            for link in self.requirement_links
-            if link.transition_id == transition.id
-        )
-        requirement_ids.update(
-            requirement_id
-            for transition in transitions
-            for implementation in self.implementation_mappings_for_transition(transition.id)
-            for requirement_id in implementation.requirement_ids
-        )
-        clause_ids = {
-            transition.clause_id for transition in transitions if transition.clause_id is not None
-        }
-        use_clause_fallback = not requirement_ids
         return tuple(
             requirement
             for requirement in self.requirements
             if (include_candidates or requirement.extraction == "explicit")
-            and (
-                requirement.id in requirement_ids
-                or (use_clause_fallback and requirement.clause_id in clause_ids)
-            )
+            and requirement.id in requirement_ids
         )
 
     def transitions_missing_implementation_mapping(
@@ -920,11 +1273,191 @@ class DocumentModel(SemanticRecord):
             and not self.implementation_mappings_for_transition(transition.id)
         )
 
+    def transitions_without_implementation_mapping(
+        self, machine_id: str | None = None
+    ) -> tuple[Transition, ...]:
+        """Preferred explicit-name alias for the unmapped-transition query."""
+        return self.transitions_missing_implementation_mapping(machine_id)
+
+    def transitions_without_concrete_implementation(
+        self, machine_id: str | None = None
+    ) -> tuple[Transition, ...]:
+        """Return transitions lacking an implemented or verified mapping."""
+        machines = self._selected_machines(machine_id)
+        return tuple(
+            transition
+            for machine in machines
+            for transition in machine.transitions
+            if not self.implementation_coverage_for_transition(transition.id, machine.id).concrete
+        )
+
+    def transitions_missing_coverage(self) -> tuple[Transition, ...]:
+        """Return modeled transitions without an explicit coverage disposition."""
+        covered = {item.transition_id for item in self.transition_coverage}
+        return tuple(
+            transition
+            for machine in self.state_machines
+            for transition in machine.transitions
+            if transition.id not in covered
+        )
+
+    def transition_coverage_counts(self) -> dict[str, int]:
+        """Return deterministic transition coverage disposition counts."""
+        counts = {"mapped": 0, "not-applicable": 0, "deferred": 0, "unclassified": 0}
+        for item in self.transition_coverage:
+            counts[item.status] += 1
+        counts["unclassified"] = len(self.transitions_missing_coverage())
+        return counts
+
+    def requirement_review_counts(self) -> dict[str, int]:
+        """Return candidate requirement review disposition counts."""
+        counts = {"deferred": 0, "non-normative": 0, "layout-only": 0, "unreviewed": 0}
+        for item in self.requirement_reviews:
+            counts[item.status] += 1
+        counts["unreviewed"] = sum(
+            requirement.extraction == "candidate"
+            and requirement.id not in {item.requirement_id for item in self.requirement_reviews}
+            for requirement in self.requirements
+        )
+        return counts
+
     def implementation_mappings_for_transition(
         self, transition_id: str
     ) -> tuple[ImplementationMapping, ...]:
         """Return implementation mappings attached to a transition."""
         return tuple(item for item in self.implementations if transition_id in item.transition_ids)
+
+    def implementation_mappings_for_requirement(
+        self, requirement_id: str
+    ) -> tuple[ImplementationMapping, ...]:
+        """Return implementation mappings attached to a requirement."""
+        if requirement_id not in {item.id for item in self.requirements}:
+            raise ValueError(f"unknown requirement {requirement_id}")
+        return tuple(
+            item for item in self.implementations if requirement_id in item.requirement_ids
+        )
+
+    def implementation_mappings_for_clause(
+        self, clause_id: str
+    ) -> tuple[ImplementationMapping, ...]:
+        """Return implementation mappings attached to a clause."""
+        if clause_id not in {item.id for item in self.clauses}:
+            raise ValueError(f"unknown clause {clause_id}")
+        return tuple(item for item in self.implementations if clause_id in item.clause_ids)
+
+    def implementation_mappings_for_interface(
+        self,
+        interface_kind: Literal["service", "callback", "adapter", "handler"] | None = None,
+        interface_name: str | None = None,
+    ) -> tuple[ImplementationMapping, ...]:
+        """Filter mappings by interface kind and/or human-facing name."""
+        wanted_name = interface_name.casefold().strip() if interface_name else None
+        return tuple(
+            item
+            for item in self.implementations
+            if (interface_kind is None or item.interface_kind == interface_kind)
+            and (wanted_name is None or item.interface_name.casefold().strip() == wanted_name)
+        )
+
+    def implementation_coverage_for_transition(
+        self,
+        transition_id: str,
+        machine_id: str | None = None,
+    ) -> TransitionImplementationCoverage:
+        """Return the effective mapping status for one transition."""
+        machines = self._selected_machines(machine_id)
+        selected = tuple(
+            (machine, transition)
+            for machine in machines
+            for transition in machine.transitions
+            if transition.id == transition_id
+        )
+        if not selected:
+            raise ValueError(f"unknown transition {transition_id}")
+        machine, transition = selected[0]
+        mappings = self.implementation_mappings_for_transition(transition.id)
+        statuses = tuple(sorted({item.status for item in mappings}))
+        status = "unmapped" if not statuses else statuses[0] if len(statuses) == 1 else "mixed"
+        return TransitionImplementationCoverage(
+            document_id=self.document_id,
+            machine_id=machine.id,
+            transition_id=transition.id,
+            source_state=transition.source_state,
+            target_state=transition.target_state,
+            event=transition.event,
+            mapping_ids=tuple(item.id for item in mappings),
+            status=status,
+            concrete=bool(mappings)
+            and all(item.status in {"implemented", "verified"} for item in mappings),
+        )
+
+    def implementation_status_counts(self, machine_id: str | None = None) -> dict[str, int]:
+        """Count effective mapping statuses across selected transitions."""
+        counts = {
+            "unmapped": 0,
+            "planned": 0,
+            "partial": 0,
+            "implemented": 0,
+            "verified": 0,
+            "mixed": 0,
+        }
+        machines = self._selected_machines(machine_id)
+        for machine in machines:
+            for transition in machine.transitions:
+                status = self.implementation_coverage_for_transition(
+                    transition.id, machine.id
+                ).status
+                counts[status] += 1
+        return counts
+
+    def compliance_query(
+        self,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
+    ) -> ComplianceQueryResult:
+        """Return a complete, serializable compliance query response."""
+        if (state_id is None) != (event is None):
+            raise ValueError("state_id and event must be supplied together")
+        applicable = (
+            self.query_requirements_applicable_after(
+                state_id,
+                event,
+                machine_id,
+                include_candidates=include_candidates,
+            )
+            if state_id is not None and event is not None
+            else ()
+        )
+        machines = self._selected_machines(machine_id)
+        coverage = tuple(
+            self.implementation_coverage_for_transition(transition.id, machine.id)
+            for machine in machines
+            for transition in machine.transitions
+            if state_id is None
+            or (
+                transition.source_state == state_id
+                and transition.event.casefold().strip() == event.casefold().strip()
+            )
+        )
+        issues = self.compliance_issues(
+            machine_id,
+            include_candidates=include_candidates,
+            require_concrete_implementation=require_concrete_implementation,
+        )
+        return ComplianceQueryResult(
+            document_id=self.document_id,
+            machine_id=machine_id,
+            state_id=state_id,
+            event=event,
+            applicable_requirements=applicable,
+            transition_coverage=coverage,
+            implementation_status_counts=self.implementation_status_counts(machine_id),
+            issues=issues,
+        )
 
     def orphan_requirements(
         self,
@@ -974,6 +1507,7 @@ class DocumentModel(SemanticRecord):
         machine_id: str | None = None,
         *,
         include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
     ) -> tuple[ComplianceIssue, ...]:
         """Report non-fatal compliance coverage gaps for a selected machine set."""
         machines = self._selected_machines(machine_id)
@@ -994,14 +1528,24 @@ class DocumentModel(SemanticRecord):
             )
         for machine in machines:
             for transition in machine.transitions:
-                if not transition.implementation_ids and not (
-                    self.implementation_mappings_for_transition(transition.id)
-                ):
+                coverage = self.implementation_coverage_for_transition(transition.id, machine.id)
+                if coverage.status == "unmapped":
                     issues.append(
                         ComplianceIssue(
                             code="unmapped-transition",
                             record_id=transition.id,
                             message=f"transition has no implementation mapping in {machine.id}",
+                        )
+                    )
+                elif require_concrete_implementation and not coverage.concrete:
+                    issues.append(
+                        ComplianceIssue(
+                            code="non-concrete-implementation",
+                            record_id=transition.id,
+                            message=(
+                                f"transition mapping is {coverage.status}, not implemented or "
+                                f"verified, in {machine.id}"
+                            ),
                         )
                     )
         for implementation in self.implementations:
@@ -1024,11 +1568,13 @@ class DocumentModel(SemanticRecord):
         machine_id: str | None = None,
         *,
         include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
     ) -> None:
         """Raise when selected compliance coverage contains any reported issue."""
         issues = self.compliance_issues(
             machine_id,
             include_candidates=include_candidates,
+            require_concrete_implementation=require_concrete_implementation,
         )
         if issues:
             raise ValueError("; ".join(f"{item.code}: {item.record_id}" for item in issues))
@@ -1160,6 +1706,35 @@ class ComplianceCorpus(SemanticRecord):
         if len(document_ids) != len(set(document_ids)):
             raise ValueError("document IDs must be unique in a compliance corpus")
         return self
+
+    def document(self, document_id: str) -> DocumentModel:
+        """Return one document by stable corpus ID."""
+        document = next(
+            (item for item in self.documents if item.document_id == document_id),
+            None,
+        )
+        if document is None:
+            raise ValueError(f"unknown document {document_id}")
+        return document
+
+    def compliance_query(
+        self,
+        document_id: str,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
+    ) -> ComplianceQueryResult:
+        """Run the generic compliance query against one corpus document."""
+        return self.document(document_id).compliance_query(
+            state_id,
+            event,
+            machine_id,
+            include_candidates=include_candidates,
+            require_concrete_implementation=require_concrete_implementation,
+        )
 
     def unresolved_reference_issues(self) -> tuple[ComplianceIssue, ...]:
         """Return unresolved external reference targets as typed issues."""
@@ -1724,6 +2299,7 @@ def _load_tables_from_file(
             title_by_table[table_id] = (label[0], label[4])
 
     tables: list[Table] = []
+    table_domain = getattr(source, "table_domain", "generic")
     for table_id in sorted(table_sources):
         caption_info = caption_by_table.get(table_id)
         title_info = title_by_table.get(table_id)
@@ -1761,8 +2337,8 @@ def _load_tables_from_file(
                     if _table_number(caption or title or "")
                     else table_id
                 ),
-                domain="omt" if _table_number(caption or title or "") else "generic",
-                omt_kind=_omt_kind(caption or title or ""),
+                domain=table_domain,
+                omt_kind=(_omt_kind(caption or title or "") if table_domain == "omt" else None),
             )
         )
     return tuple(tables)
@@ -1770,8 +2346,33 @@ def _load_tables_from_file(
 
 def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
     tables: list[Table] = []
+    authored_blocks = _load_authored_content_blocks(root)
+    authored_by_path = {
+        item.source.path: item for item in authored_blocks if item.layout_body is not None
+    }
+    adapter_paths = {
+        path
+        for path in authored_by_path
+        if (root / path).is_file()
+        and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
+    }
+    units: list[tuple[Path, str]] = []
     for path in _files(root):
-        text = path.read_text(encoding="utf-8")
+        relative = path.relative_to(root).as_posix()
+        if relative in adapter_paths:
+            continue
+        units.append((path, path.read_text(encoding="utf-8")))
+    units.extend(
+        (root / item.source.path, item.layout_body)
+        for item in authored_blocks
+        if item.layout_body is not None
+    )
+    seen_units: set[tuple[str, str]] = set()
+    for path, text in units:
+        unit_key = (path.relative_to(root).as_posix(), text)
+        if unit_key in seen_units:
+            continue
+        seen_units.add(unit_key)
         tables.extend(_load_tables_from_file(root, path, text, source))
     ordered = sorted(tables, key=lambda item: (item.source.path, item.source.line, item.id))
     previous_by_logical_id: dict[str, Table] = {}
@@ -2216,12 +2817,52 @@ def _load_requirement_candidates(root: Path, source: LatexSourceProfile) -> tupl
     records: list[Requirement] = []
     source_order = _source_order(root)
     heading_context = _heading_context_by_file(root, source)
+    authored_blocks = _load_authored_content_blocks(root)
+    authored_by_path = {
+        item.source.path: item for item in authored_blocks if item.layout_body is not None
+    }
+    adapter_paths = {
+        path
+        for path in authored_by_path
+        if (root / path).is_file()
+        and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
+    }
+    units: list[tuple[Path, str, tuple[tuple[int, str, str, SourceRef], ...]]] = []
     for path in _files(root):
         relative = path.relative_to(root).as_posix()
         if "frontmatter" in relative or "generated" in relative:
             continue
+        if relative in adapter_paths:
+            continue
         text = path.read_text(encoding="utf-8")
-        headings = heading_context[path]
+        units.append((path, text, heading_context[path]))
+    for block in authored_blocks:
+        if block.layout_body is None:
+            continue
+        if "frontmatter" in block.source.path or "generated" in block.source.path:
+            continue
+        virtual_path = root / block.source.path
+        local_headings = list(_hierarchy_headings(root, virtual_path, block.layout_body, source))
+        if block.clause_id is not None and not any(
+            item[1] == block.clause_id for item in local_headings
+        ):
+            local_headings.insert(
+                0,
+                (
+                    -1,
+                    block.clause_id,
+                    block.clause_id.removeprefix("clause-"),
+                    block.source,
+                ),
+            )
+        units.append((virtual_path, block.layout_body, tuple(local_headings)))
+    seen_units: set[tuple[str, str]] = set()
+    for path, text, headings in units:
+        relative = path.relative_to(root).as_posix()
+        unit_key = (path.relative_to(root).as_posix(), text)
+        if unit_key in seen_units:
+            continue
+        seen_units.add(unit_key)
         events: list[tuple[int, tuple[str, ...], int]] = []
         events.extend(_command_events(text, source.fixed_text_block, 7))
         events.extend(_command_events(text, source.clause_paragraph, 1))
@@ -2280,6 +2921,15 @@ def _load_authored_requirements(root: Path) -> tuple[Requirement, ...]:
     return payload.requirements
 
 
+def _load_authored_requirement_reviews(root: Path) -> tuple[RequirementReview, ...]:
+    """Load explicit dispositions for candidate requirement records."""
+    path = root / "semantic" / "requirement-review.json"
+    if not path.is_file():
+        return ()
+    payload = RequirementReviewFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    return payload.reviews
+
+
 def _load_authored_requirement_links(root: Path) -> tuple[RequirementLink, ...]:
     """Load explicit requirement-to-transition relationships."""
     path = root / "semantic" / "requirement-links.json"
@@ -2289,6 +2939,15 @@ def _load_authored_requirement_links(root: Path) -> tuple[RequirementLink, ...]:
     return payload.links
 
 
+def _load_authored_transition_coverage(root: Path) -> tuple[TransitionCoverage, ...]:
+    """Load explicit mapped, N/A, and deferred transition dispositions."""
+    path = root / "semantic" / "transition-coverage.json"
+    if not path.is_file():
+        return ()
+    payload = TransitionCoverageFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    return payload.transition_coverage
+
+
 def _load_authored_content_blocks(root: Path) -> tuple[ContentBlock, ...]:
     """Load prose blocks that have crossed into semantic source."""
     path = root / "semantic" / "content-blocks.json"
@@ -2296,6 +2955,15 @@ def _load_authored_content_blocks(root: Path) -> tuple[ContentBlock, ...]:
         return ()
     payload = ContentBlockFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.content_blocks
+
+
+def _load_authored_content_elements(root: Path) -> tuple[ContentElement, ...]:
+    """Load typed content units that sit beneath page fidelity adapters."""
+    path = root / "semantic" / "content-elements.json"
+    if not path.is_file():
+        return ()
+    payload = ContentElementFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    return payload.content_elements
 
 
 def _load_authored_table_families(root: Path) -> tuple[TableFamily, ...]:
@@ -2337,6 +3005,22 @@ def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
     source = SourceRef(path=path.relative_to(root).as_posix(), line=1)
     clauses: dict[str, Clause] = {}
     for entry in outline:
+        if isinstance(entry, dict):
+            identifier = str(entry.get("id", "")).strip()
+            if not identifier:
+                continue
+            try:
+                clauses[identifier] = Clause(
+                    id=identifier,
+                    number=str(entry["number"]),
+                    title=str(entry["title"]),
+                    parent_id=entry.get("parent_id"),
+                    level=int(entry["level"]),
+                    source=SourceRef.model_validate(entry.get("source", source.model_dump())),
+                )
+            except (KeyError, TypeError, ValueError):
+                continue
+            continue
         if not isinstance(entry, list) or len(entry) < 2:
             continue
         label = str(entry[1]).strip()
@@ -2368,8 +3052,11 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
     definitions: dict[str, Definition] = {}
     requirements: dict[str, Requirement] = {}
     state_machines = _load_state_machines(root)
+    requirement_reviews = _load_authored_requirement_reviews(root)
     requirement_links = _load_authored_requirement_links(root)
+    transition_coverage = _load_authored_transition_coverage(root)
     content_blocks = _load_authored_content_blocks(root)
+    content_elements = _load_authored_content_elements(root)
     table_families = _load_authored_table_families(root)
     source_order = _source_order(root)
     heading_context = _heading_context_by_file(root, source)
@@ -2436,12 +3123,18 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
 
         detailed_headings: list[tuple[int, int, str, str, SourceRef]] = []
         for offset, args, end_offset in _command_events(text, source.detailed_rule_heading, 2):
+            title = _latex_text(args[1], source)
+            # A layout adapter may delegate title text to a generated semantic
+            # macro. The authored JSON record is authoritative in that case;
+            # do not create an invalid empty candidate while scanning LaTeX.
+            if not title:
+                continue
             detailed_headings.append(
                 (
                     offset,
                     end_offset,
                     args[0],
-                    _latex_text(args[1], source),
+                    title,
                     _source(root, path, text, offset, end_offset),
                 )
             )
@@ -2449,10 +3142,16 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
         for offset, args, end_offset in _command_events(text, source.summary_rule, 2):
             prior_clause = [item for item in headings if item[0] < offset]
             clause = prior_clause[-1][1].removeprefix("clause-") if prior_clause else None
+            statement = _latex_text(args[1], source)
+            # Generated semantic macro references intentionally have no prose
+            # for the source scanner to expand. Authored records are loaded
+            # below and replace these source-shaped candidates.
+            if not statement:
+                continue
             item = Requirement(
                 id=args[0],
                 title=args[0].replace("-", " ").title(),
-                statement=_latex_text(args[1], source),
+                statement=statement,
                 kind="summary",
                 clause=clause,
                 machine_statement=_machine_statement(args[1], source),
@@ -2468,10 +3167,13 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
                 continue
             rule_offset, _, rule_id, title, _ = prior[-1]
             clause_match = re.match(r"([A-Za-z]?\d+(?:\.\d+)*)", title)
+            statement = _latex_text(args[0], source)
+            if not statement:
+                continue
             item = Requirement(
                 id=rule_id,
                 title=title,
-                statement=_latex_text(args[0], source),
+                statement=statement,
                 kind="detailed",
                 clause=clause_match.group(1) if clause_match else None,
                 machine_statement=_machine_statement(args[0], source),
@@ -2484,6 +3186,40 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
     # out of page-oriented LaTeX. They replace any legacy source duplicate.
     for item in _load_authored_definitions(root):
         definitions[item.id] = item
+
+    # Page fidelity bodies may now be behind thin adapters. Recover hierarchy
+    # from their authored layout bodies so clause identity does not disappear
+    # when physical page files stop carrying prose and headings.
+    for block in content_blocks:
+        if block.layout_body is None:
+            continue
+        virtual_path = root / block.source.path
+        local_headings = list(_hierarchy_headings(root, virtual_path, block.layout_body, source))
+        for offset, args, end_offset in _command_events(block.layout_body, source.pdf_bookmark, 2):
+            if not args[1].startswith("bookmark:clause:"):
+                continue
+            identifier = f"clause-{args[1].removeprefix('bookmark:clause:')}"
+            local_headings.append(
+                (
+                    offset,
+                    identifier,
+                    _latex_text(args[0], source),
+                    _source(root, virtual_path, block.layout_body, offset, end_offset),
+                )
+            )
+        for _, identifier, title, heading_source in sorted(local_headings):
+            number, parent_id, level = _clause_shape(identifier)
+            clauses.setdefault(
+                identifier,
+                Clause(
+                    id=identifier,
+                    number=number,
+                    title=title,
+                    parent_id=parent_id,
+                    level=level,
+                    source=heading_source,
+                ),
+            )
 
     implementations = _load_authored_implementations(root)
 
@@ -2587,8 +3323,11 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
                 key=lambda item: _source_key(item, source_order),
             )
         ),
+        requirement_reviews=requirement_reviews,
         requirement_links=requirement_links,
+        transition_coverage=transition_coverage,
         content_blocks=content_blocks,
+        content_elements=content_elements,
         state_machines=state_machines,
         implementations=implementations,
         tables=_load_tables(root, source),

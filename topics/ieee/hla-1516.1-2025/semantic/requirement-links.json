@@ -6,6 +6,7 @@
       "requirement_id": "req-federate-connect-before-rti-work",
       "transition_id": "federate.connect",
       "relation": "governs",
+      "source": null,
       "notes": "Reviewed pilot link for the federate lifetime machine."
     },
     {
@@ -13,6 +14,7 @@
       "requirement_id": "req-federate-connection-lost",
       "transition_id": "federate.connection-lost",
       "relation": "governs",
+      "source": null,
       "notes": "Reviewed pilot link for the federate lifetime machine."
     },
     {
@@ -20,6 +22,7 @@
       "requirement_id": "req-federate-disconnect-after-resign",
       "transition_id": "federate.disconnect",
       "relation": "governs",
+      "source": null,
       "notes": "Reviewed pilot link for the federate lifetime machine."
     },
     {
@@ -69,6 +72,306 @@
         "end_line": 93
       },
       "notes": "Reviewed callback-level requirement for involuntary resignation."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-05-declaration-management-page-085-l23-7.interaction-receive",
+      "requirement_id": "requirement-candidate-content-clauses-05-declaration-management-page-085-l23-7",
+      "transition_id": "interaction.receive",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/05-declaration-management-page-085.tex",
+        "line": 23,
+        "end_line": 25
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-05-declaration-management-page-085-l32-10.interaction-receive",
+      "requirement_id": "requirement-candidate-content-clauses-05-declaration-management-page-085-l32-10",
+      "transition_id": "interaction.receive",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/05-declaration-management-page-085.tex",
+        "line": 32,
+        "end_line": 34
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-05-declaration-management-page-085-l65-21.interaction-send",
+      "requirement_id": "requirement-candidate-content-clauses-05-declaration-management-page-085-l65-21",
+      "transition_id": "interaction.send",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/05-declaration-management-page-085.tex",
+        "line": 65,
+        "end_line": 67
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-05-declaration-management-page-085-l74-24.interaction-send",
+      "requirement_id": "requirement-candidate-content-clauses-05-declaration-management-page-085-l74-24",
+      "transition_id": "interaction.send",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/05-declaration-management-page-085.tex",
+        "line": 74,
+        "end_line": 76
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l16-4.ownership-owned-enable-relevance",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
+      "transition_id": "ownership.owned-enable-relevance",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 16,
+        "end_line": 18
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l16-4.ownership-owned-history-update",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
+      "transition_id": "ownership.owned-history-update",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 16,
+        "end_line": 18
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l16-4.ownership-owned-no-control-enable",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
+      "transition_id": "ownership.owned-no-control-enable",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 16,
+        "end_line": 18
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-scope-in",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.scope-in",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-scope-in-again",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.scope-in-again",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-scope-out",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.scope-out",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-scope-out-again",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.scope-out-again",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-updates-off",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.updates-off",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-updates-off-from-unknown",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.updates-off-from-unknown",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-updates-on",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.updates-on",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l34-10.ownership-updates-on-again",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
+      "transition_id": "ownership.updates-on-again",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 34,
+        "end_line": 36
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-no-scope-enable",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.no-scope-enable",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-not-owned-disable-scope",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.not-owned-disable-scope",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-not-owned-enable-scope",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.not-owned-enable-scope",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-scope-disable",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.scope-disable",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-scope-in",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.scope-in",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-scope-in-again",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.scope-in-again",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-scope-out",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.scope-out",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-06-object-management-page-110-l40-12.ownership-scope-out-again",
+      "requirement_id": "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
+      "transition_id": "ownership.scope-out-again",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/06-object-management-page-110.tex",
+        "line": 40,
+        "end_line": 42
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13.connection-new-session",
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13",
+      "transition_id": "connection.new-session",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-399.tex",
+        "line": 41,
+        "end_line": 43
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
+    },
+    {
+      "id": "link.requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13.rti-connection-new-session",
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13",
+      "transition_id": "rti-connection.new-session",
+      "relation": "governs",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-399.tex",
+        "line": 41,
+        "end_line": 43
+      },
+      "notes": "M16 deterministic same-clause event-term relationship."
     }
   ]
 }

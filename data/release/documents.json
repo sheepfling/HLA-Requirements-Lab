@@ -30,8 +30,16 @@
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 296,
+      "expected_pages": 1554,
       "kind": "derivative"
+    },
+    {
+      "id": "non-hla-demo-2025",
+      "root": "topics/fixture/non-hla-demo-2025",
+      "pdf": "dist/non-hla-demo-2025.pdf",
+      "log": "build/main.log",
+      "expected_pages": 1,
+      "kind": "fixture"
     }
   ]
 }

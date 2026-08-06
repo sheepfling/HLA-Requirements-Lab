@@ -2,18 +2,291 @@
   "schema_version": 1,
   "requirements": [
     {
+      "id": "detailed-rule-1",
+      "title": "5.1 Rule 1",
+      "statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "5.1",
+      "machine_statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-1; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-1",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 52,
+        "end_line": 55
+      }
+    },
+    {
+      "id": "detailed-rule-10",
+      "title": "6.5 Rule 10",
+      "statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with other members of a federation.",
+      "kind": "detailed",
+      "clause": "6.5",
+      "machine_statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with other members of a federation.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-10; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-10",
+      "source": {
+        "path": "sections/semantic/final-body/page-35.tex",
+        "line": 24,
+        "end_line": 27
+      }
+    },
+    {
+      "id": "detailed-rule-2",
+      "title": "5.2 Rule 2",
+      "statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the RTI.",
+      "kind": "detailed",
+      "clause": "5.2",
+      "machine_statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-2; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-2",
+      "source": {
+        "path": "sections/semantic/final-body/page-33.tex",
+        "line": 14,
+        "end_line": 17
+      }
+    },
+    {
+      "id": "detailed-rule-3",
+      "title": "5.3 Rule 3",
+      "statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "kind": "detailed",
+      "clause": "5.3",
+      "machine_statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-3; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-3",
+      "source": {
+        "path": "sections/semantic/final-body/page-33.tex",
+        "line": 27,
+        "end_line": 30
+      }
+    },
+    {
+      "id": "detailed-rule-4",
+      "title": "5.4 Rule 4",
+      "statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA interface specification.",
+      "kind": "detailed",
+      "clause": "5.4",
+      "machine_statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA interface specification.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-4; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-4",
+      "source": {
+        "path": "sections/semantic/final-body/page-33.tex",
+        "line": 54,
+        "end_line": 57
+      }
+    },
+    {
+      "id": "detailed-rule-5",
+      "title": "5.5 Rule 5",
+      "statement": "During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any given time.",
+      "kind": "detailed",
+      "clause": "5.5",
+      "machine_statement": "During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any given time.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-5; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-5",
+      "source": {
+        "path": "sections/semantic/final-body/page-34.tex",
+        "line": 11,
+        "end_line": 14
+      }
+    },
+    {
+      "id": "detailed-rule-6",
+      "title": "6.1 Rule 6",
+      "statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "6.1",
+      "machine_statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-6; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-6",
+      "source": {
+        "path": "sections/semantic/final-body/page-34.tex",
+        "line": 33,
+        "end_line": 36
+      }
+    },
+    {
+      "id": "detailed-rule-7",
+      "title": "6.2 Rule 7",
+      "statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions, as specified in their SOMs.",
+      "kind": "detailed",
+      "clause": "6.2",
+      "machine_statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-7; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-7",
+      "source": {
+        "path": "sections/semantic/final-body/page-34.tex",
+        "line": 46,
+        "end_line": 49
+      }
+    },
+    {
+      "id": "detailed-rule-8",
+      "title": "6.3 Rule 8",
+      "statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a federation execution, as specified in their SOMs.",
+      "kind": "detailed",
+      "clause": "6.3",
+      "machine_statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a federation execution, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-8; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-8",
+      "source": {
+        "path": "sections/semantic/final-body/page-34.tex",
+        "line": 60,
+        "end_line": 63
+      }
+    },
+    {
+      "id": "detailed-rule-9",
+      "title": "6.4 Rule 9",
+      "statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of instance attributes, as specified in their SOMs.",
+      "kind": "detailed",
+      "clause": "6.4",
+      "machine_statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of instance attributes, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-9; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-9",
+      "source": {
+        "path": "sections/semantic/final-body/page-35.tex",
+        "line": 10,
+        "end_line": 13
+      }
+    },
+    {
       "id": "summary-rule-1",
       "title": "Summary rule 1 — federation model",
       "statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
       "kind": "summary",
       "clause": "4",
       "machine_statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
       "coverage_kind": "document-wide",
-      "coverage_note": "This framework rule applies across federation conformance and is not owned by one state-machine transition.",
+      "coverage_note": "Framework rule semantic group framework-rule-1; this normative surface is document-wide and is not owned by a state-machine transition.",
       "extraction": "explicit",
+      "semantic_group_id": "framework-rule-1",
       "source": {
         "path": "sections/semantic/final-body/page-32.tex",
-        "line": 28
+        "line": 28,
+        "end_line": null
+      }
+    },
+    {
+      "id": "summary-rule-10",
+      "title": "Summary Rule 10",
+      "statement": "Federates shall be able to manage local time in a way that allows them to coordinate data exchange with other members of a federation.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federates shall be able to manage local time in a way that allows them to coordinate data exchange with other members of a federation.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-10; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-10",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 45,
+        "end_line": 45
+      }
+    },
+    {
+      "id": "summary-rule-2",
+      "title": "Summary Rule 2",
+      "statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the RTI.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-2; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-2",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 29,
+        "end_line": 29
+      }
+    },
+    {
+      "id": "summary-rule-3",
+      "title": "Summary Rule 3",
+      "statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-3; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-3",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 30,
+        "end_line": 30
+      }
+    },
+    {
+      "id": "summary-rule-4",
+      "title": "Summary Rule 4",
+      "statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA interface specification.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA interface specification.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-4; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-4",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 31,
+        "end_line": 31
+      }
+    },
+    {
+      "id": "summary-rule-5",
+      "title": "Summary Rule 5",
+      "statement": "During a federation execution, an instance attribute shall be owned by at most one joined federate at any given time.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "During a federation execution, an instance attribute shall be owned by at most one joined federate at any given time.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-5; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-5",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 32,
+        "end_line": 32
       }
     },
     {
@@ -23,12 +296,69 @@
       "kind": "summary",
       "clause": "4",
       "machine_statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
       "coverage_kind": "document-wide",
-      "coverage_note": "This framework rule applies across federate conformance and is not owned by one state-machine transition.",
+      "coverage_note": "Framework rule semantic group framework-rule-6; this normative surface is document-wide and is not owned by a state-machine transition.",
       "extraction": "explicit",
+      "semantic_group_id": "framework-rule-6",
       "source": {
         "path": "sections/semantic/final-body/page-32.tex",
-        "line": 41
+        "line": 41,
+        "end_line": null
+      }
+    },
+    {
+      "id": "summary-rule-7",
+      "title": "Summary Rule 7",
+      "statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions, as specified in their SOMs.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-7; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-7",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 42,
+        "end_line": 42
+      }
+    },
+    {
+      "id": "summary-rule-8",
+      "title": "Summary Rule 8",
+      "statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a federation execution, as specified in their SOMs.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a federation execution, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-8; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-8",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 43,
+        "end_line": 43
+      }
+    },
+    {
+      "id": "summary-rule-9",
+      "title": "Summary Rule 9",
+      "statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of instance attributes, as specified in their SOMs.",
+      "kind": "summary",
+      "clause": "4",
+      "machine_statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of instance attributes, as specified in their SOMs.",
+      "transition_ids": [],
+      "coverage_kind": "document-wide",
+      "coverage_note": "Framework rule semantic group framework-rule-9; this normative surface is document-wide and is not owned by a state-machine transition.",
+      "extraction": "explicit",
+      "semantic_group_id": "framework-rule-9",
+      "source": {
+        "path": "sections/semantic/final-body/page-32.tex",
+        "line": 44,
+        "end_line": 44
       }
     }
   ]

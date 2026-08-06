@@ -15,71 +15,297 @@
         "xref": "13872",
         "caption": "Normal Activity Permitted state"
       },
-      "initial_state_ids": ["normal.initial"],
+      "initial_state_ids": [
+        "normal.initial"
+      ],
       "states": [
-        {"id": "normal.initial", "label": "", "kind": "initial"},
-        {"id": "normal.history", "label": "H*", "kind": "history"},
-        {"id": "normal.temporal", "label": "Temporal State", "kind": "composite"},
-
-        {"id": "normal.temporal.object.first.initial", "label": "", "kind": "initial", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.object.first", "label": "Object Class\n(first object class in FDD)", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.object.ellipsis", "label": "…", "kind": "ellipsis", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.object.last.initial", "label": "", "kind": "initial", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.object.last", "label": "Object Class\n(last object class in FDD)", "parent_id": "normal.temporal"},
-
-        {"id": "normal.temporal.interaction.first.initial", "label": "", "kind": "initial", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.interaction.first", "label": "Interaction Class\n(first interaction class in FDD)", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.interaction.ellipsis", "label": "…", "kind": "ellipsis", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.interaction.last.initial", "label": "", "kind": "initial", "parent_id": "normal.temporal"},
-        {"id": "normal.temporal.interaction.last", "label": "Interaction Class\n(last interaction class in FDD)", "parent_id": "normal.temporal"}
+        {
+          "id": "normal.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "normal.history",
+          "label": "H*",
+          "kind": "history"
+        },
+        {
+          "id": "normal.temporal",
+          "label": "Temporal State",
+          "kind": "composite"
+        },
+        {
+          "id": "normal.temporal.object.first.initial",
+          "label": "",
+          "kind": "initial",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.object.first",
+          "label": "Object Class\n(first object class in FDD)",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.object.ellipsis",
+          "label": "…",
+          "kind": "ellipsis",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.object.last.initial",
+          "label": "",
+          "kind": "initial",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.object.last",
+          "label": "Object Class\n(last object class in FDD)",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.interaction.first.initial",
+          "label": "",
+          "kind": "initial",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.interaction.first",
+          "label": "Interaction Class\n(first interaction class in FDD)",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.interaction.ellipsis",
+          "label": "…",
+          "kind": "ellipsis",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.interaction.last.initial",
+          "label": "",
+          "kind": "initial",
+          "parent_id": "normal.temporal"
+        },
+        {
+          "id": "normal.temporal.interaction.last",
+          "label": "Interaction Class\n(last interaction class in FDD)",
+          "parent_id": "normal.temporal"
+        }
       ],
       "transitions": [
-        {"id": "normal.enter-history", "source_state": "normal.initial", "event": "", "target_state": "normal.history", "clause_id": "clause-4.1.1"},
-        {"id": "normal.history-to-temporal", "source_state": "normal.history", "event": "", "target_state": "normal.temporal", "clause_id": "clause-4.1.1"},
-        {"id": "normal.object-first-enter", "source_state": "normal.temporal.object.first.initial", "event": "", "target_state": "normal.temporal.object.first", "clause_id": "clause-4.1.1"},
-        {"id": "normal.object-last-enter", "source_state": "normal.temporal.object.last.initial", "event": "", "target_state": "normal.temporal.object.last", "clause_id": "clause-4.1.1"},
-        {"id": "normal.interaction-first-enter", "source_state": "normal.temporal.interaction.first.initial", "event": "", "target_state": "normal.temporal.interaction.first", "clause_id": "clause-4.1.1"},
-        {"id": "normal.interaction-last-enter", "source_state": "normal.temporal.interaction.last.initial", "event": "", "target_state": "normal.temporal.interaction.last", "clause_id": "clause-4.1.1"}
+        {
+          "id": "normal.enter-history",
+          "source_state": "normal.initial",
+          "event": "",
+          "target_state": "normal.history",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-enter-history"
+          ]
+        },
+        {
+          "id": "normal.history-to-temporal",
+          "source_state": "normal.history",
+          "event": "",
+          "target_state": "normal.temporal",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-history-to-temporal"
+          ]
+        },
+        {
+          "id": "normal.object-first-enter",
+          "source_state": "normal.temporal.object.first.initial",
+          "event": "",
+          "target_state": "normal.temporal.object.first",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-object-first-enter"
+          ]
+        },
+        {
+          "id": "normal.object-last-enter",
+          "source_state": "normal.temporal.object.last.initial",
+          "event": "",
+          "target_state": "normal.temporal.object.last",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-object-last-enter"
+          ]
+        },
+        {
+          "id": "normal.interaction-first-enter",
+          "source_state": "normal.temporal.interaction.first.initial",
+          "event": "",
+          "target_state": "normal.temporal.interaction.first",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-interaction-first-enter"
+          ]
+        },
+        {
+          "id": "normal.interaction-last-enter",
+          "source_state": "normal.temporal.interaction.last.initial",
+          "event": "",
+          "target_state": "normal.temporal.interaction.last",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.normal-interaction-last-enter"
+          ]
+        }
       ],
       "layout": {
         "engine": "manual",
         "direction": "top-to-bottom",
         "state_font": "tiny",
         "containers": [
-          {"id": "normal.outer", "x": -0.3, "y": -0.3, "width": 14.1, "height": 9.8, "title": "Normal Activity Permitted"},
-          {"id": "normal.temporal.container", "x": 3.2, "y": -0.05, "width": 9.8, "height": 7.65, "title": "Temporal State"}
+          {
+            "id": "normal.outer",
+            "x": -0.3,
+            "y": -0.3,
+            "width": 14.1,
+            "height": 9.8,
+            "title": "Normal Activity Permitted"
+          },
+          {
+            "id": "normal.temporal.container",
+            "x": 3.2,
+            "y": -0.05,
+            "width": 9.8,
+            "height": 7.65,
+            "title": "Temporal State"
+          }
         ],
         "nodes": {
-          "normal.initial": {"x": 1.0, "y": 7.1},
-          "normal.history": {"x": 1.6, "y": 6.0},
-          "normal.temporal": {"x": 3.2, "y": 6.0, "visible": false},
-          "normal.temporal.object.first.initial": {"x": 5.3, "y": 6.4},
-          "normal.temporal.object.first": {"x": 7.5, "y": 6.4},
-          "normal.temporal.object.ellipsis": {"x": 7.5, "y": 5.15},
-          "normal.temporal.object.last.initial": {"x": 5.3, "y": 3.95},
-          "normal.temporal.object.last": {"x": 7.5, "y": 3.95},
-          "normal.temporal.interaction.first.initial": {"x": 5.3, "y": 2.75},
-          "normal.temporal.interaction.first": {"x": 7.5, "y": 2.75},
-          "normal.temporal.interaction.ellipsis": {"x": 7.5, "y": 1.55},
-          "normal.temporal.interaction.last.initial": {"x": 5.3, "y": 0.35},
-          "normal.temporal.interaction.last": {"x": 7.5, "y": 0.35}
+          "normal.initial": {
+            "x": 1.0,
+            "y": 7.1
+          },
+          "normal.history": {
+            "x": 1.6,
+            "y": 6.0
+          },
+          "normal.temporal": {
+            "x": 3.2,
+            "y": 6.0,
+            "visible": false
+          },
+          "normal.temporal.object.first.initial": {
+            "x": 5.3,
+            "y": 6.4
+          },
+          "normal.temporal.object.first": {
+            "x": 7.5,
+            "y": 6.4
+          },
+          "normal.temporal.object.ellipsis": {
+            "x": 7.5,
+            "y": 5.15
+          },
+          "normal.temporal.object.last.initial": {
+            "x": 5.3,
+            "y": 3.95
+          },
+          "normal.temporal.object.last": {
+            "x": 7.5,
+            "y": 3.95
+          },
+          "normal.temporal.interaction.first.initial": {
+            "x": 5.3,
+            "y": 2.75
+          },
+          "normal.temporal.interaction.first": {
+            "x": 7.5,
+            "y": 2.75
+          },
+          "normal.temporal.interaction.ellipsis": {
+            "x": 7.5,
+            "y": 1.55
+          },
+          "normal.temporal.interaction.last.initial": {
+            "x": 5.3,
+            "y": 0.35
+          },
+          "normal.temporal.interaction.last": {
+            "x": 7.5,
+            "y": 0.35
+          }
         },
         "rules": [
-          {"x1": -0.3, "y1": 8.2, "x2": 13.8, "y2": 8.2, "style": "solid"},
-          {"x1": 3.2, "y1": 6.95, "x2": 13.0, "y2": 6.95, "style": "dashed"},
-          {"x1": 3.2, "y1": 5.75, "x2": 13.0, "y2": 5.75, "style": "dashed"},
-          {"x1": 3.2, "y1": 4.55, "x2": 13.0, "y2": 4.55, "style": "dashed"},
-          {"x1": 3.2, "y1": 3.35, "x2": 13.0, "y2": 3.35, "style": "dashed"},
-          {"x1": 3.2, "y1": 2.15, "x2": 13.0, "y2": 2.15, "style": "dashed"},
-          {"x1": 3.2, "y1": 0.95, "x2": 13.0, "y2": 0.95, "style": "dashed"}
+          {
+            "x1": -0.3,
+            "y1": 8.2,
+            "x2": 13.8,
+            "y2": 8.2,
+            "style": "solid"
+          },
+          {
+            "x1": 3.2,
+            "y1": 6.95,
+            "x2": 13.0,
+            "y2": 6.95,
+            "style": "dashed"
+          },
+          {
+            "x1": 3.2,
+            "y1": 5.75,
+            "x2": 13.0,
+            "y2": 5.75,
+            "style": "dashed"
+          },
+          {
+            "x1": 3.2,
+            "y1": 4.55,
+            "x2": 13.0,
+            "y2": 4.55,
+            "style": "dashed"
+          },
+          {
+            "x1": 3.2,
+            "y1": 3.35,
+            "x2": 13.0,
+            "y2": 3.35,
+            "style": "dashed"
+          },
+          {
+            "x1": 3.2,
+            "y1": 2.15,
+            "x2": 13.0,
+            "y2": 2.15,
+            "style": "dashed"
+          },
+          {
+            "x1": 3.2,
+            "y1": 0.95,
+            "x2": 13.0,
+            "y2": 0.95,
+            "style": "dashed"
+          }
         ],
         "transitions": {
-          "normal.enter-history": {"label_side": "left", "label_pos": 0.5},
-          "normal.history-to-temporal": {"label_side": "above", "label_pos": 0.5},
-          "normal.object-first-enter": {"label_side": "above", "label_pos": 0.5},
-          "normal.object-last-enter": {"label_side": "above", "label_pos": 0.5},
-          "normal.interaction-first-enter": {"label_side": "above", "label_pos": 0.5},
-          "normal.interaction-last-enter": {"label_side": "above", "label_pos": 0.5}
+          "normal.enter-history": {
+            "label_side": "left",
+            "label_pos": 0.5
+          },
+          "normal.history-to-temporal": {
+            "label_side": "above",
+            "label_pos": 0.5
+          },
+          "normal.object-first-enter": {
+            "label_side": "above",
+            "label_pos": 0.5
+          },
+          "normal.object-last-enter": {
+            "label_side": "above",
+            "label_pos": 0.5
+          },
+          "normal.interaction-first-enter": {
+            "label_side": "above",
+            "label_pos": 0.5
+          },
+          "normal.interaction-last-enter": {
+            "label_side": "above",
+            "label_pos": 0.5
+          }
         }
       },
       "notes": "Figure 5 is a parameterized expansion of the Normal Activity Permitted state. The history entry and temporal composite are explicit; first/last object-class and interaction-class states are representative FDD endpoints, and ellipsis states preserve omitted classes. Dashed separators are source-visible layout rules. The later class-specific state charts provide the detailed leaf semantics."

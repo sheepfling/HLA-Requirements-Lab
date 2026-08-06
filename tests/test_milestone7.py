@@ -21,9 +21,10 @@ class Milestone7Tests(unittest.TestCase):
         self.assertTrue(report["passed"], report["failures"])
         self.assertEqual(report["tracked_generated"], [])
         self.assertEqual(report["diagram_review"]["review_gaps"], [])
+        self.assertTrue(report["semantic_authority"]["passed"])
         self.assertEqual(
             {item["pages"] for item in report["projects"]},
-            {40, 124, 296, 338},
+            {1, 40, 124, 338, 1554},
         )
 
     def test_release_log_check_reports_fatal_latex_lines(self) -> None:

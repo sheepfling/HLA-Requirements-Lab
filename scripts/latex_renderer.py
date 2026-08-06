@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from scripts.semantic_model import (
         Clause,
         ContentBlock,
+        ContentElement,
         Definition,
         DocumentModel,
         Requirement,
@@ -45,17 +46,22 @@ def tex_escape(value: str) -> str:
         "&": r"\&",
         "%": r"\%",
         "#": r"\#",
+        "$": r"\$",
         "_": r"\_",
         "{": r"\{",
         "}": r"\}",
     }
-    return re.sub(r"[\&#%_{}]", lambda match: replacements[match.group()], value)
+    return re.sub(r"[\\&#%_${}]", lambda match: replacements[match.group()], value)
 
 
 def semantic_macro_name(prefix: str, record_id: str, suffix: str) -> str:
     """Return a portable TeX macro name for a semantic record field."""
     parts = [part for part in re.split(r"[^a-zA-Z0-9]+", record_id) if part]
     compact = "".join(part[:1].upper() + part[1:] for part in parts)
+    digit_names = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+    compact = "".join(
+        digit_names[int(character)] if character.isdigit() else character for character in compact
+    )
     return f"Semantic{prefix}{compact}{suffix}"
 
 
@@ -105,16 +111,64 @@ def render_requirement_data(requirement: Requirement) -> str:
 
 def render_content_block_data(block: ContentBlock) -> str:
     """Render source-owned prose as a layout-consumable TeX data macro."""
+    lines = [
+        "% Generated semantic data; layout adapters consume these macros.",
+        (
+            f"\\providecommand{{\\{semantic_macro_name('ContentBlock', block.id, 'ID')}}}"
+            f"{{{tex_escape(block.id)}}}"
+        ),
+    ]
+    if block.layout_body is None:
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('ContentBlock', block.id, 'Text')}}}"
+            f"{{{tex_escape(block.text)}}}"
+        )
+    return "\n".join(lines)
+
+
+def render_content_block(block: ContentBlock) -> str:
+    """Render the faithful body owned by a semantic content block."""
+    if block.layout_body is not None:
+        return block.layout_body
+    return f"% Generated semantic prose block.\n{tex_escape(block.text)}"
+
+
+def render_content_element_data(element: ContentElement) -> str:
+    """Render a typed content element as portable TeX metadata."""
     return "\n".join(
         (
-            "% Generated semantic data; layout adapters consume these macros.",
+            "% Generated typed content data; layout adapters may consume these macros.",
             (
-                f"\\providecommand{{\\{semantic_macro_name('ContentBlock', block.id, 'ID')}}}"
-                f"{{{tex_escape(block.id)}}}"
+                f"\\providecommand{{\\{semantic_macro_name('ContentElement', element.id, 'ID')}}}"
+                f"{{{tex_escape(element.id)}}}"
             ),
             (
-                f"\\providecommand{{\\{semantic_macro_name('ContentBlock', block.id, 'Text')}}}"
-                f"{{{tex_escape(block.text)}}}"
+                f"\\providecommand{{\\{semantic_macro_name('ContentElement', element.id, 'Kind')}}}"
+                f"{{{tex_escape(element.kind)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('ContentElement', element.id, 'Text')}}}"
+                f"{{{tex_escape(element.text)}}}"
+            ),
+            (
+                "\\providecommand{\\"
+                f"{semantic_macro_name('ContentElement', element.id, 'ClauseID')}}}"
+                f"{{{tex_escape(element.clause_id or '')}}}"
+            ),
+            (
+                "\\providecommand{\\"
+                f"{semantic_macro_name('ContentElement', element.id, 'BlockID')}}}"
+                f"{{{tex_escape(element.block_id)}}}"
+            ),
+            (
+                "\\providecommand{\\"
+                f"{semantic_macro_name('ContentElement', element.id, 'ParentID')}}}"
+                f"{{{tex_escape(element.parent_id or '')}}}"
+            ),
+            (
+                "\\providecommand{\\"
+                f"{semantic_macro_name('ContentElement', element.id, 'RecordIDs')}}}"
+                f"{{{tex_escape(','.join(element.record_ids))}}}"
             ),
         )
     )
@@ -144,6 +198,28 @@ def render_table_family_data(family: TableFamily, tables: Iterable[Table]) -> st
             f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'Caption')}}}"
             f"{{{tex_escape(caption)}}}"
         )
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'CellIDs')}}}"
+            f"{{{tex_escape(','.join(cell.id for cell in table.cells))}}}"
+        )
+        for cell in table.cells:
+            lines.extend(
+                (
+                    (
+                        f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'Text')}}}"
+                        f"{{{tex_escape(cell.text)}}}"
+                    ),
+                    (
+                        f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'Row')}}}"
+                        f"{{{'' if cell.row is None else cell.row}}}"
+                    ),
+                    (
+                        "\\providecommand{\\"
+                        f"{semantic_macro_name('TableCell', cell.id, 'Column')}}}"
+                        f"{{{'' if cell.column is None else cell.column}}}"
+                    ),
+                )
+            )
     return "\n".join(lines)
 
 
@@ -231,11 +307,17 @@ def render_definition(
     lines = []
     if document_id:
         lines.append(render_anchor(definition.id, dialect, document_id=document_id))
+    optional_gap = f"[{definition.leading_gap}]" if definition.leading_gap is not None else ""
+    body = (
+        definition.layout_body
+        if definition.layout_body is not None
+        else tex_escape(definition.text)
+    )
     lines.extend(
         (
             f"\\begin{{{dialect.definition_environment}}}"
-            f"{{{definition.id}}}{{{tex_escape(definition.term)}}}",
-            tex_escape(definition.text),
+            f"{optional_gap}{{{definition.id}}}{{{tex_escape(definition.term)}}}",
+            body,
             f"\\end{{{dialect.definition_environment}}}",
         )
     )

@@ -37,6 +37,7 @@ def _document_report(model: DocumentModel) -> dict[str, Any]:
     )
     issues = model.compliance_issues()
     candidate_issues = model.compliance_issues(include_candidates=True)
+    implementation_status = model.implementation_status_counts()
     return {
         "document": model.document_id,
         "requirements": {
@@ -49,6 +50,7 @@ def _document_report(model: DocumentModel) -> dict[str, Any]:
             "explicit_transition_requirements_with_reviewed_links": len(
                 reviewed_transition_requirements
             ),
+            "review_dispositions": model.requirement_review_counts(),
         },
         "requirement_links": len(model.requirement_links),
         "implementation_mappings": {
@@ -56,6 +58,19 @@ def _document_report(model: DocumentModel) -> dict[str, Any]:
             "by_status": dict(
                 sorted(Counter(item.status for item in model.implementations).items())
             ),
+            "by_interface_kind": dict(
+                sorted(Counter(item.interface_kind for item in model.implementations).items())
+            ),
+            "with_requirement_links": sum(
+                bool(item.requirement_ids) for item in model.implementations
+            ),
+            "with_source_reference": sum(
+                bool(item.implementation_ref and item.implementation_ref.path)
+                for item in model.implementations
+            ),
+            "effective_transition_status": implementation_status,
+            "concrete_transition_mappings": implementation_status["implemented"]
+            + implementation_status["verified"],
         },
         "state_machines": {
             "total": len(model.state_machines),
@@ -71,6 +86,7 @@ def _document_report(model: DocumentModel) -> dict[str, Any]:
             "transitions_with_postcondition": sum(
                 bool(item.postcondition.strip()) for item in transitions
             ),
+            "transition_coverage": model.transition_coverage_counts(),
         },
         "issues": {
             "reviewed": len(issues),
@@ -111,6 +127,9 @@ def build_dashboard(roots: tuple[Path, ...]) -> dict[str, Any]:
             "requirements": sum(item["requirements"]["total"] for item in documents),
             "explicit_requirements": sum(item["requirements"]["explicit"] for item in documents),
             "candidate_requirements": sum(item["requirements"]["candidate"] for item in documents),
+            "deferred_requirement_candidates": sum(
+                item["requirements"]["review_dispositions"]["deferred"] for item in documents
+            ),
             "requirement_links": sum(item["requirement_links"] for item in documents),
             "implementation_mappings": sum(
                 item["implementation_mappings"]["total"] for item in documents
@@ -121,6 +140,9 @@ def build_dashboard(roots: tuple[Path, ...]) -> dict[str, Any]:
             ),
             "transitions_unmapped": sum(
                 item["state_machines"]["transitions_unmapped"] for item in documents
+            ),
+            "transitions_without_coverage": sum(
+                item["state_machines"]["transition_coverage"]["unclassified"] for item in documents
             ),
             "unresolved_references": len(unresolved),
         },
@@ -133,7 +155,7 @@ def _default_roots() -> tuple[Path, ...]:
     return tuple(
         sorted(
             path.parent
-            for path in repo_root.glob("topics/*/*/build.py")
+            for path in repo_root.glob("topics/ieee/hla-1516*/build.py")
             if (path.parent / "semantic").is_dir()
         )
     )

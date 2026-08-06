@@ -16,18 +16,22 @@ from scripts.document_builder import (  # noqa: E402, I001
 )
 from scripts.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE  # noqa: E402
 from scripts.semantic_generation import generate as generate_semantic  # noqa: E402
+from scripts.semantic_model import load_document_model  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
 
 
 def generate_blocks() -> object:
+    model = load_document_model(ROOT, HLA_SOURCE)
     return generate_semantic(
         ROOT,
         ROOT / "output" / "semantic",
         source=HLA_SOURCE,
         dialect=HLA_LATEX_DIALECT,
-        definition_ids=("def-accuracy", "def-available-directed-interactions"),
-        requirement_ids=("summary-rule-1", "summary-rule-6"),
+        definition_ids=tuple(item.id for item in model.ordered_definitions()),
+        requirement_ids=tuple(item.id for item in model.ordered_requirements()),
+        content_block_ids=tuple(item.id for item in model.content_blocks),
+        content_element_ids=tuple(item.id for item in model.content_elements),
     )
 
 

@@ -122,6 +122,7 @@ def check_release(
     *,
     build: bool = False,
     diagram_manifest: Path | None = None,
+    authority_manifest: Path | None = None,
 ) -> dict[str, Any]:
     """Build when requested and return typed PDF/log/source-hygiene findings."""
     repo_root = repo_root.resolve()
@@ -129,6 +130,30 @@ def check_release(
     manifest = _load_manifest(manifest_path)
     if build:
         _run_build(repo_root)
+
+    if authority_manifest is None:
+        candidate = repo_root / "data" / "semantic" / "authority.json"
+        authority_manifest = candidate if candidate.is_file() else None
+    if authority_manifest is None:
+        authority_report: dict[str, Any] = {
+            "available": False,
+            "surfaces": [],
+            "failures": [],
+            "passed": True,
+        }
+    else:
+        from scripts.semantic_authority import validate_authority
+
+        authority_report = validate_authority(
+            tuple(sorted((repo_root / "topics" / "ieee").glob("hla-1516*/"))),
+            authority_manifest.resolve(),
+            check_generated=True,
+        )
+    from scripts.semantic_coverage import build_report as build_semantic_coverage
+
+    semantic_coverage = build_semantic_coverage(
+        tuple(sorted((repo_root / "topics" / "ieee").glob("hla-1516*/")))
+    )
 
     projects: list[dict[str, Any]] = []
     failures: list[str] = []
@@ -169,6 +194,8 @@ def check_release(
     tracked_generated = _tracked_generated(repo_root)
     if tracked_generated:
         failures.append("tracked generated outputs: " + ", ".join(tracked_generated))
+    failures.extend(f"semantic authority: {failure}" for failure in authority_report["failures"])
+    failures.extend(f"semantic coverage: {failure}" for failure in semantic_coverage["failures"])
     return {
         "manifest": manifest_path.relative_to(repo_root).as_posix(),
         "built": build,
@@ -176,6 +203,8 @@ def check_release(
         "diagram_review": _diagram_report(
             diagram_manifest.resolve() if diagram_manifest is not None else None
         ),
+        "semantic_authority": authority_report,
+        "semantic_coverage": semantic_coverage,
         "tracked_generated": tracked_generated,
         "failures": failures,
         "passed": not failures,
@@ -191,6 +220,12 @@ def main() -> int:
         help="Release project manifest",
     )
     parser.add_argument("--diagram-manifest", type=Path)
+    parser.add_argument(
+        "--authority-manifest",
+        type=Path,
+        default=Path("data/semantic/authority.json"),
+        help="Semantic authority manifest",
+    )
     parser.add_argument("--build", action="store_true", help="Build every manifest project first")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
@@ -200,6 +235,7 @@ def main() -> int:
         args.manifest,
         build=args.build,
         diagram_manifest=args.diagram_manifest,
+        authority_manifest=args.authority_manifest,
     )
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))

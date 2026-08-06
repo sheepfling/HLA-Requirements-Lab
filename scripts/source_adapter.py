@@ -8,7 +8,7 @@ without importing HLA constants into the model layer.
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Literal, Protocol
 
 
 class LatexSourceProfile(Protocol):
@@ -31,6 +31,7 @@ class LatexSourceProfile(Protocol):
     table_cell_text: str
     placed_block: str
     table_caption: str
+    table_domain: Literal["generic", "omt"]
     figure_image: str
     figure_caption: str
     figure_anchor: str

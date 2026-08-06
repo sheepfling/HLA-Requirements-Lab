@@ -5,9 +5,90 @@
       "id": "def-accuracy",
       "term": "accuracy",
       "text": "The measure of the maximum deviation of an attribute or a parameter value in the simulation or federation from reality or some other chosen standard or referent.",
+      "layout_body": null,
+      "leading_gap": null,
       "source": {
         "path": "semantic/definitions.json",
-        "line": 5
+        "line": 5,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-active-subscription",
+      "term": "active subscription",
+      "text": "A request to the runtime infrastructure (RTI) for the kinds of data (class attributes as well as interactions) that the joined federate is currently interested in receiving. The RTI uses these data along with publication data received from other joined federates to support services, such as: ; Start/Stop Registration ; Turn On/Off Updates ; Turn On/Off Interactions The RTI also uses the subscription (and publication) data to determine how to route data to the joined federates that require that data.",
+      "layout_body": "A request to the runtime infrastructure (RTI) for the kinds of data (class attributes as well as interactions) that the joined federate is currently interested in receiving. The RTI uses these data along with publication data received from other joined federates to support services, such as:\n\\begin{hladefinitionlist}\n\\item \\HLAService{Start/Stop Registration}\n\\item \\HLAService{Turn On/Off Updates}\n\\item \\HLAService{Turn On/Off Interactions}\n\\end{hladefinitionlist}\nThe RTI also uses the subscription (and publication) data to determine how to route data to the joined federates that require that data.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 18,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-attribute",
+      "term": "attribute",
+      "text": "A named characteristic of an object class or object instance. class attribute instance attribute.",
+      "layout_body": "A named characteristic of an object class or object instance. \\HLASeeAlso{\\HLATermReference{class attribute}\\HLASemicolon{} \\HLATermReference{instance attribute}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 31,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-attribute-ownership",
+      "term": "attribute ownership",
+      "text": "The property of an instance attribute that gives a joined federate the capability to supply values for that instance attribute to its federation execution. instance attribute.",
+      "layout_body": "The property of an instance attribute that gives a joined federate the capability to supply values for that instance attribute to its federation execution. \\HLASeeAlso{\\HLATermReference{instance attribute}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 44,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-authorizer",
+      "term": "authorizer",
+      "text": "An interface used to determine if a specific set of service invocations (Connect, Create Federation Execution, Destroy Federation Execution, and Join Federation Execution) are allowed for the federate, given its credentials.",
+      "layout_body": "An interface used to determine if a specific set of service invocations (\\HLAService{Connect}, \\HLAService{Create Federation Execution}, \\HLAService{Destroy Federation Execution}, and \\HLAService{Join Federation Execution}) are allowed for the federate, given its credentials.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 57,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-available-attributes",
+      "term": "available attributes",
+      "text": "The set of declared attributes of an object class in union with the set of inherited attributes of that object class.",
+      "layout_body": "The set of declared attributes of an object class in union with the set of inherited attributes of that object class.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 70,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-available-dimensions",
+      "term": "available dimensions",
+      "text": "; Pertaining to an object class: the dimensions associated with that object class in union with the set of inherited dimensions in the federation object model (FOM). ; Pertaining to an attribute: The available dimensions of an instance attribute are the available dimensions of the known class. When registering, subscribing, unsubscribing, requesting updates with regions, or getting available dimensions, the available dimensions are the available dimensions of the object class specified in the service invocation. ; Pertaining to an interaction class: the dimensions associated with that interaction class in union with the set of inherited dimensions in the FOM. The available dimensions of a sent interaction are the available dimensions of the interaction class specified in the Send Interaction With Regions service invocation.",
+      "layout_body": "\\begin{hladefinitionlist}\n\\item Pertaining to an object class: the dimensions associated with that object class in union with the set of inherited dimensions in the federation object model (FOM).\n\\item Pertaining to an attribute: The available dimensions of an instance attribute are the available dimensions of the known class. When registering, subscribing, unsubscribing, requesting updates with regions, or getting available dimensions, the available dimensions are the available dimensions of the object class specified in the service invocation.\n\\item Pertaining to an interaction class: the dimensions associated with that interaction class in union with the set of inherited dimensions in the FOM. The available dimensions of a sent interaction are the available dimensions of the interaction class specified in the \\HLAService{Send Interaction With Regions} service invocation.\n\\end{hladefinitionlist}\n\\HLADefinitionNote{See 9.1 in IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\par\\addvspace{9.96pt}See dimension.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 83,
+        "end_line": null
       },
       "clause_id": "clause-3.1"
     },
@@ -15,9 +96,2001 @@
       "id": "def-available-directed-interactions",
       "term": "available directed interactions",
       "text": "The set of directed interaction classes of an object class in union with the set of inherited directed interactions of that object class.",
+      "layout_body": null,
+      "leading_gap": null,
       "source": {
         "path": "semantic/definitions.json",
-        "line": 16
+        "line": 96,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-available-parameters",
+      "term": "available parameters",
+      "text": "The set of declared parameters of an interaction class in union with the set of inherited parameters of that interaction class.",
+      "layout_body": "The set of declared parameters of an interaction class in union with the set of inherited parameters of that interaction class.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 109,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-base-object-model-bom",
+      "term": "base object model (BOM)",
+      "text": "A piece-part of a conceptual model, simulation object model (SOM), or federation object model (FOM) that can be used as a building block in the development and/or extension of a simulation or federation.",
+      "layout_body": "A piece-part of a conceptual model, simulation object model (SOM), or federation object model (FOM) that can be used as a building block in the development and/or extension of a simulation or federation.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 122,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-best-effort",
+      "term": "best effort",
+      "text": "A transportation type that does not provide any guarantee regarding delivery (messages may be out of order, duplicated, or dropped).",
+      "layout_body": "A transportation type that does not provide any guarantee regarding delivery (messages may be out of order, duplicated, or dropped).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 135,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-candidate-discovery-class",
+      "term": "candidate discovery class",
+      "text": "The registered class of an object instance, if subscribed. If the registered class of an object instance is not subscribed, the closest superclass of the registered class of the object instance to which the joined federate is subscribed. Candidate discovery class pertains to object instances only.",
+      "layout_body": "The registered class of an object instance, if subscribed. If the registered class of an object instance is not subscribed, the closest superclass of the registered class of the object instance to which the joined federate is subscribed. Candidate discovery class pertains to object instances only.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 148,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-candidate-received-class",
+      "term": "candidate received class",
+      "text": "The sent class of an interaction, if subscribed. If the sent class of an interaction is not subscribed, the closest superclass of the sent class of the interaction to which the joined federate is subscribed. Candidate received class pertains to interactions and directed interactions only.",
+      "layout_body": "The sent class of an interaction, if subscribed. If the sent class of an interaction is not subscribed, the closest superclass of the sent class of the interaction to which the joined federate is subscribed. Candidate received class pertains to interactions and directed interactions only.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 161,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-class",
+      "term": "class",
+      "text": "A description of a group of items with similar properties, common behavior, common relationships, and common semantics.",
+      "layout_body": "A description of a group of items with similar properties, common behavior, common relationships, and common semantics.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 174,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-class-attribute",
+      "term": "class attribute",
+      "text": "A named characteristic of an object class denoted by a pair composed of an object class designator and an attribute designator.",
+      "layout_body": "A named characteristic of an object class denoted by a pair composed of an object class designator and an attribute designator.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 187,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-class-directed-interaction",
+      "term": "class directed interaction",
+      "text": "A named characteristic of an object class denoted by a pair composed of an object class designator and an interaction class designator. The characteristic is the capability to have interactions directed to instances of the object class or its subclasses.",
+      "layout_body": "A named characteristic of an object class denoted by a pair composed of an object class designator and an interaction class designator. The characteristic is the capability to have interactions directed to instances of the object class or its subclasses.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 200,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-class-hierarchy",
+      "term": "class hierarchy",
+      "text": "A specification of a class-subclass or ``is-a'' relationship between classes in a given domain.",
+      "layout_body": "A specification of a class-subclass or ``is-a'' relationship between classes in a given domain.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 213,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-coadunate",
+      "term": "coadunate",
+      "text": "To attach an object instance handle and an object instance name to an object instance. The object instance name can be provided specifically by the federate or implicitly by the runtime infrastructure (RTI).",
+      "layout_body": "To attach an object instance handle and an object instance name to an object instance. The object instance name can be provided specifically by the federate or implicitly by the runtime infrastructure (RTI).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 226,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-collection",
+      "term": "collection",
+      "text": "A group of elements in which an element may occur multiple times (this definition corresponds to the mathematical notion of a bag).",
+      "layout_body": "A group of elements in which an element may occur multiple times (this definition corresponds to the mathematical notion of a bag).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 239,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-collection-of-pairs",
+      "term": "collection of pairs",
+      "text": "A group of pairs in which multiple pairs may have the same first component and a given pair may occur multiple times.",
+      "layout_body": "A group of pairs in which multiple pairs may have the same first component and a given pair may occur multiple times.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 252,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-compliant-object-model",
+      "term": "compliant object model",
+      "text": "A High Level Architecture (HLA) federation object model (FOM) or simulation object model (SOM) that fully conforms with all of the rules and constraints specified in object model template (OMT).",
+      "layout_body": "A High Level Architecture (HLA) federation object model (FOM) or simulation object model (SOM) that fully conforms with all of the rules and constraints specified in object model template (OMT).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 265,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-constrained-set-of-pairs",
+      "term": "constrained set of pairs",
+      "text": "A group of pairs in which no two pairs have the same first component (this definition corresponds to the mathematical notion of a function). An example would be a group of instance attribute and value pairs each instance attribute may have at most one value associated with it.",
+      "layout_body": "A group of pairs in which no two pairs have the same first component (this definition corresponds to the mathematical notion of a function). An example would be a group of instance attribute and value pairs\\HLASemicolon{} each instance attribute may have at most one value associated with it.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 278,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-corresponding-class-attribute-of-an-instance-attribute",
+      "term": "corresponding class attribute of an instance attribute",
+      "text": "The class attribute that, from the perspective of a given joined federate, is the class attribute of the joined federate's known class for the object instance containing the instance attribute that has the same attribute designator as the instance attribute.",
+      "layout_body": "The class attribute that, from the perspective of a given joined federate, is the class attribute of the joined federate's known class for the object instance containing the instance attribute that has the same attribute designator as the instance attribute.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 291,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-corresponding-instance-attributes-of-a-class-attribute",
+      "term": "corresponding instance attributes of a class attribute",
+      "text": "The instance attributes that, from the perspective of a given joined federate, are: [32.04pt] ; Unowned instance attributes of object instances that have a known class at the joined federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute, or ; Instance attributes owned by the joined federate that belong to object instances that have a known class at the owning federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute.",
+      "layout_body": "The instance attributes that, from the perspective of a given joined federate, are:\n\\begin{hladefinitionlist}[32.04pt]\n\\item Unowned instance attributes of object instances that have a known class at the joined federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute, or\n\\item Instance attributes owned by the joined federate that belong to object instances that have a known class at the owning federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute.\n\\end{hladefinitionlist}",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 304,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-current-federation-object-model-fom",
+      "term": "current federation object model (FOM)",
+      "text": "The union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2-2025. When all FOM modules have been provided, the current FOM will be equal to the FOM and before this step has happened, the current FOM will be a true subset of the FOM.",
+      "layout_body": "The union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2\\HLAStandardMark-2025. When all FOM modules have been provided, the current FOM will be equal to the FOM\\HLASemicolon{} and before this step has happened, the current FOM will be a true subset of the FOM.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 317,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-current-federation-object-model-fom-document-data-fdd",
+      "term": "current federation object model (FOM) Document Data (FDD)",
+      "text": "The data and information used to configure the federation execution that is the union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2-2025. When all FOM modules have been provided, the current FDD will be equal to the FDD and before this step has happened, the current FDD will be a true subset of the FDD.",
+      "layout_body": "The data and information used to configure the federation execution that is the union of the FOM modules and one Management Object Model (MOM) and Initialization Module (MIM) that have been specified in the creation of the federation execution or by any federate that has joined the federation execution. The sum operation is carried out according to the rules as prescribed in IEEE Std 1516.2\\HLAStandardMark-2025. When all FOM modules have been provided, the current FDD will be equal to the FDD\\HLASemicolon{} and before this step has happened, the current FDD will be a true subset of the FDD.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 330,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-data-type",
+      "term": "data type",
+      "text": "A representation convention for a data element establishing its format, resolution, cardinality, and ordinality.",
+      "layout_body": "A representation convention for a data element establishing its format, resolution, cardinality, and ordinality.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 343,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-declared-attributes",
+      "term": "declared attributes",
+      "text": "The set of class attributes of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.",
+      "layout_body": "The set of class attributes of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 356,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-declared-directed-interaction",
+      "term": "declared directed interaction",
+      "text": "The set of class directed interactions of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.",
+      "layout_body": "The set of class directed interactions of a particular object class that are listed in the federation object model (FOM) as being associated with that object class in the object class hierarchy tree.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 369,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-declared-parameters",
+      "term": "declared parameters",
+      "text": "The set of parameters of a particular interaction class that are listed in the federation object model (FOM) as being associated with that interaction class in the interaction class hierarchy tree.",
+      "layout_body": "The set of parameters of a particular interaction class that are listed in the federation object model (FOM) as being associated with that interaction class in the interaction class hierarchy tree.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 382,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-default-range",
+      "term": "default range",
+      "text": "A range lower bound and a range upper bound, defined in the federation object model (FOM) Document Data (FDD) and specified in terms of [0, the dimension's upper bound), for a dimension.",
+      "layout_body": "A range lower bound and a range upper bound, defined in the federation object model (FOM) Document Data (FDD) and specified in terms of [0, the dimension's upper bound), for a dimension.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 395,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-default-region",
+      "term": "default region",
+      "text": "A multidimensional region provided by the runtime infrastructure (RTI) that is composed of one range for each dimension found in the federation object model (FOM) Document Data (FDD). The bounds of each of these ranges are (0, the range's dimension's upper bound). There is no way for a federate to refer to the default region.",
+      "layout_body": "A multidimensional region provided by the runtime infrastructure (RTI) that is composed of one range for each dimension found in the federation object model (FOM) Document Data (FDD). The bounds of each of these ranges are (0, the range's dimension's upper bound). There is no way for a federate to refer to the default region.\n\\HLADefinitionNote{See 9.1 in IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 408,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-delete",
+      "term": "delete",
+      "text": "To invoke the Delete Object Instance service to eliminate a particular object instance. remove.",
+      "layout_body": "To invoke the \\HLAService{Delete Object Instance} service to eliminate a particular object instance. \\HLASeeAlso{\\HLATermReference{remove}.}\n\\HLADefinitionNote{See 6.16 in IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 421,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-designator",
+      "term": "designator",
+      "text": "A generic view of arguments referenced in service descriptions. This view improves clarity in situations when arguments (mostly identifiers) to services have different views (implementations) due to a particular programming language or application programmer's interface (API).",
+      "layout_body": "A generic view of arguments referenced in service descriptions. This view improves clarity in situations when arguments (mostly identifiers) to services have different views (implementations) due to a particular programming language or application programmer's interface (API).",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 434,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-dimension",
+      "term": "dimension",
+      "text": "A named interval. The interval is defined by an ordered pair of values, the first being the dimension lower bound and the second being the dimension upper bound. A runtime infrastructure (RTI) provides a predefined interval, whose lower and upper bounds are fixed as (0, the dimension's upper bound) as specified in the federation object model (FOM) Document Data (FDD). This interval provides a single basis for communication of all dimension-related data with an RTI. All normalized intervals communicated to the RTI will be subsets of this interval.",
+      "layout_body": "A named interval. The interval is defined by an ordered pair of values, the first being the dimension lower bound and the second being the dimension upper bound. A runtime infrastructure (RTI) provides a predefined interval, whose lower and upper bounds are fixed as (0, the dimension's upper bound) as specified in the federation object model (FOM) Document Data (FDD). This interval provides a single basis for communication of all dimension-related data with an RTI. All normalized intervals communicated to the RTI will be subsets of this interval.\n\\HLADefinitionNote{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 447,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-directed-interaction",
+      "term": "directed interaction",
+      "text": "An explicit action taken by a federate directed to a specific object instance that may have some effect or impact on another federate within a federation execution that owns attributes of that object instance.",
+      "layout_body": "An explicit action taken by a federate directed to a specific object instance that may have some effect or impact on another federate within a federation execution that owns attributes of that object instance.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 460,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-directed-interaction-class",
+      "term": "directed interaction class",
+      "text": "An association between an interaction class and an object class where instances of the interaction class may be directed to be received by an interested federate that owns attribute instances of the object class.",
+      "layout_body": "An association between an interaction class and an object class where instances of the interaction class may be directed to be received by an interested federate that owns attribute instances of the object class.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 473,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-discover",
+      "term": "discover",
+      "text": "To receive an invocation of the Discover Object Instance service for a particular object instance.",
+      "layout_body": "To receive an invocation of the \\HLAService{Discover Object Instance} \\HLAPrintersDagger\\footnotemark[13] service for a particular object instance.\n\\HLADefinitionNote{See 6.9 of IEEE Std 1516.1-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 486,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-discovered-class",
+      "term": "discovered class",
+      "text": "The class that was an object instance's candidate discovery class at a joined federate when that object instance was discovered by that joined federate. candidate discovery class.",
+      "layout_body": "The class that was an object instance's candidate discovery class at a joined federate when that object instance was discovered by that joined federate. \\HLASeeAlso{\\HLATermReference{candidate discovery class}.}\n\\HLADefinitionNote{See 5.1.2 in IEEE Std 1516.1-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 499,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-dynamic-link-compatibility-dlc",
+      "term": "dynamic link compatibility (DLC)",
+      "text": "The ability to interchange the implementation of an API with another without having to recompile or relink the application software that uses the API.",
+      "layout_body": "The ability to interchange the implementation of an API with another without having to recompile or relink the application software that uses the API.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 512,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-epsilon-time-interval",
+      "term": "epsilon time interval",
+      "text": "The distance between any two consecutive logical times T1 and T2 (i.e., the set of logical times between T1 and T2 is empty). For some representations of local time (e.g., floating point), the distance may not be the same for all such instances of T1 and T2.",
+      "layout_body": "The distance between any two consecutive logical times T1 and T2 (i.e., the set of logical times between T1 and T2 is empty). For some representations of local time (e.g., floating point), the distance may not be the same for all such instances of T1 and T2.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 525,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-exception",
+      "term": "exception",
+      "text": "Notification of any irregularity that may occur during a service invocation.",
+      "layout_body": "Notification of any irregularity that may occur during a service invocation.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 538,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-fault",
+      "term": "fault",
+      "text": "An event that prevents the entire federation from executing in a High Level Architecture (HLA) compliant manner.",
+      "layout_body": "An event that prevents the entire federation from executing in a High Level Architecture (HLA) compliant manner.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 551,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federate",
+      "term": "federate",
+      "text": "An application that may be or is currently coupled with other software applications under a federation object model (FOM) Document Data (FDD) and a runtime infrastructure (RTI). federate application joined federate.",
+      "layout_body": "An application that may be or is currently coupled with other software applications under a federation object model (FOM) Document Data (FDD) and a runtime infrastructure (RTI). \\HLASeeAlso{\\HLATermReference{federate application}\\HLASemicolon{} \\HLATermReference{joined federate}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 564,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federate-application",
+      "term": "federate application",
+      "text": "An application that supports the High Level Architecture (HLA) interface to a runtime infrastructure (RTI) and that is capable of joining a federation execution. A federate application may join the same federation execution multiple times or may join multiple federation executions. However, each time a federate application joins a federation execution, it creates a new joined federate. joined federate.",
+      "layout_body": "An application that supports the High Level Architecture (HLA) interface to a runtime infrastructure (RTI) and that is capable of joining a federation execution. A federate application may join the same federation execution multiple times or may join multiple federation executions. However, each time a federate application joins a federation execution, it creates a new joined federate. \\HLASeeAlso{\\HLATermReference{joined federate}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 577,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation",
+      "term": "federation",
+      "text": "A named set of federate applications and a common federation object model (FOM) that are used as a whole to achieve some specific objective.",
+      "layout_body": "A named set of federate applications and a common federation object model (FOM) that are used as a whole to achieve some specific objective.",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 590,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-execution",
+      "term": "federation execution",
+      "text": "The actual operation, over time, of a set of joined federates that are interconnected by a runtime infrastructure (RTI).",
+      "layout_body": "The actual operation, over time, of a set of joined federates that are interconnected by a runtime infrastructure (RTI).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 603,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-object-model-fom",
+      "term": "federation object model (FOM)",
+      "text": "A specification defining the information exchanged at runtime to achieve a given set of federation objectives. This information includes object classes, object class attributes, interaction classes, interaction parameters, and other relevant information. The FOM is specified to the runtime infrastructure (RTI) using one or more FOM modules. The RTI assembles a FOM using these FOM modules and one Management Object Model (MOM) and Initialization Module (MIM), which is provided automatically by the RTI or, optionally, provided to the RTI when the federation execution is created.",
+      "layout_body": "A specification defining the information exchanged at runtime to achieve a given set of federation objectives. This information includes object classes, object class attributes, interaction classes, interaction parameters, and other relevant information. The FOM is specified to the runtime infrastructure (RTI) using one or more FOM modules. The RTI assembles a FOM using these FOM modules and one Management Object Model (MOM) and Initialization Module (MIM), which is provided automatically by the RTI or, optionally, provided to the RTI when the federation execution is created.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 616,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-object-model-fom-document-data-fdd",
+      "term": "federation object model (FOM) Document Data (FDD)",
+      "text": "The data and information in a FOM that are used by the Create Federation Execution service and successive Join Federation Execution service invocations to configure the federation execution.",
+      "layout_body": "The data and information in a FOM that are used by the \\HLAService{Create Federation Execution} service and successive \\HLAService{Join Federation Execution} service invocations to configure the federation execution.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 629,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-object-model-fom-module",
+      "term": "federation object model (FOM) module",
+      "text": "A partial FOM (containing some or all object model template (OMT) tables) that specifies a modular component of a FOM. A FOM module may contain classes not inherent to it but upon which the FOM module depends, i.e., superclasses to the modular components. These superclasses will be included in the FOM module as either complete or scaffolding definitions.",
+      "layout_body": "A partial FOM (containing some or all object model template (OMT) tables) that specifies a modular component of a FOM. A FOM module may contain classes not inherent to it but upon which the FOM module depends, i.e., superclasses to the modular components. These superclasses will be included in the FOM module as either complete or scaffolding definitions.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 642,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-objectives",
+      "term": "federation objectives",
+      "text": "The statement of the problem that is to be addressed by the establishment and execution of a federation.",
+      "layout_body": "The statement of the problem that is to be addressed by the establishment and execution of a federation.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 655,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-requirements",
+      "term": "federation requirements",
+      "text": "A statement that identifies a federation characteristic, constraint, process, or product that is unambiguous and testable and that is necessary for a federation to be acceptable for its intended use.",
+      "layout_body": "A statement that identifies a federation characteristic, constraint, process, or product that is unambiguous and testable and that is necessary for a federation to be acceptable for its intended use.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 668,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-federation-scenario",
+      "term": "federation scenario",
+      "text": "A set of initial conditions and timeline of significant events used within a federation execution to achieve federation objectives.",
+      "layout_body": "A set of initial conditions and timeline of significant events used within a federation execution to achieve federation objectives.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 681,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-final-time-value",
+      "term": "final time value",
+      "text": "The point on the time axis for which no other points occur after it.",
+      "layout_body": "The point on the time axis for which no other points occur after it.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 694,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-handle",
+      "term": "handle",
+      "text": "An identifier originated/created by the runtime infrastructure (RTI) that is unique to a federation execution.",
+      "layout_body": "An identifier originated/created by the runtime infrastructure (RTI) that is unique to a federation execution.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 707,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-in-scope",
+      "term": "in scope",
+      "text": "Of or pertaining to an instance attribute of an object instance for which all of the following apply: [28.60pt] ; The object instance is known to the joined federate. ; The instance attribute is owned by another joined federate. ; The instance attribute's corresponding class attribute is one of the following: ; A subscribed attribute of the known class of the object instance, or ; A subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute at the owning joined federate overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate. % 9pt10.8pt NOTE---See 6.1 of IEEE Std 1516.1-2025.",
+      "layout_body": "Of or pertaining to an instance attribute of an object instance for which all of the following apply:\n\\begin{hladefinitionlist}[28.60pt]\n\\item The object instance is known to the joined federate.\n\\item The instance attribute is owned by another joined federate.\n\\item The instance attribute's corresponding class attribute is one of the following:\n  \\begin{hladefinitionnumberlist}\n  \\item A subscribed attribute of the known class of the object instance, or\n  \\item A subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute at the owning joined federate overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate.\n  \\end{hladefinitionnumberlist}\n  \\par\\addvspace{9.96pt}%\n  \\hspace*{25.82pt}{\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 6.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\\par\n\\end{hladefinitionlist}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 720,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-inherited-attribute",
+      "term": "inherited attribute",
+      "text": "A class attribute of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM).",
+      "layout_body": "A class attribute of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 733,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-inherited-dimension",
+      "term": "inherited dimension",
+      "text": "[28.60pt] ; Pertaining to an object class: a dimension of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM) or simulation object model (SOM). ; Pertaining to an interaction class: a dimension of an interaction class that was declared in a superclass of that interaction class in the interaction class hierarchy tree defined in the federation object model (FOM) or simulation object model (SOM).",
+      "layout_body": "\\begin{hladefinitionlist}[28.60pt]\n\\item Pertaining to an object class: a dimension of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM) or simulation object model (SOM).\n\\item Pertaining to an interaction class: a dimension of an interaction class that was declared in a superclass of that interaction class in the interaction class hierarchy tree defined in the federation object model (FOM) or simulation object model (SOM).\n\\end{hladefinitionlist}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 746,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-inherited-directed-interaction-class",
+      "term": "inherited directed interaction class",
+      "text": "A directed interaction class of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM).",
+      "layout_body": "A directed interaction class of an object class that was declared in a superclass of that object class in the object class hierarchy tree defined in the federation object model (FOM).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 759,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-inherited-parameter",
+      "term": "inherited parameter",
+      "text": "An interaction parameter that was declared in a superclass of that interaction class in the interaction class hierarchy tree defined in the federation object model (FOM).",
+      "layout_body": "An interaction parameter that was declared in a superclass of that interaction class in the interaction class hierarchy tree defined in the federation object model (FOM).",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 772,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-initial-time-value",
+      "term": "initial time value",
+      "text": "The point on the time axis for which no other point occurs before it.",
+      "layout_body": "The point on the time axis for which no other point occurs before it.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 785,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-instance-attribute",
+      "term": "instance attribute",
+      "text": "A named characteristic of an object instance denoted by a pair composed of the object instance designator and the attribute designator.",
+      "layout_body": "A named characteristic of an object instance denoted by a pair composed of the object instance designator and the attribute designator.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 798,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-interaction",
+      "term": "interaction",
+      "text": "An explicit action taken by a federate that may have some effect or impact on another federate within a federation execution.",
+      "layout_body": "An explicit action taken by a federate that may have some effect or impact on another federate within a federation execution.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 811,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-interaction-class",
+      "term": "interaction class",
+      "text": "A template for a set of characteristics that is common to a group of interactions. These characteristics correspond to the parameters that individual federates may associate with interactions.",
+      "layout_body": "A template for a set of characteristics that is common to a group of interactions. These characteristics correspond to the parameters that individual federates may associate with interactions.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 824,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-interaction-parameters",
+      "term": "interaction parameters",
+      "text": "The information associated with an interaction that a federate potentially affected by the interaction may receive to calculate the effects of that interaction on its current state.",
+      "layout_body": "The information associated with an interaction that a federate potentially affected by the interaction may receive to calculate the effects of that interaction on its current state.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 837,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-joined-federate",
+      "term": "joined federate",
+      "text": "A member of a federation execution, actualized by a federate application invoking the Join Federation Execution service as prescribed in IEEE Std 1516.1-2025. federate application.",
+      "layout_body": "A member of a federation execution, actualized by a federate application invoking the \\HLAService{Join Federation Execution} service as prescribed in IEEE Std 1516.1\\HLAStandardMark-2025. \\HLASeeAlso{\\HLATermReference{federate application}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 850,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-known-class",
+      "term": "known class",
+      "text": "[28.60pt] ; An object instance's registered class if the joined federate knows about the object instance as a result of having registered it, or ; An object instance's discovered class if the joined federate knows about the object instance as a result of having discovered it.",
+      "layout_body": "\\begin{hladefinitionlist}[28.60pt]\n\\item An object instance's registered class if the joined federate knows about the object instance as a result of having registered it, or\n\\item An object instance's discovered class if the joined federate knows about the object instance as a result of having discovered it.\n\\end{hladefinitionlist}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 863,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-known-object-instance",
+      "term": "known object instance",
+      "text": "An object instance that a given joined federate has either registered or discovered and that the joined federate has not subsequently deleted (globally or locally) or been notified to remove. register discover delete local delete remove.",
+      "layout_body": "An object instance that a given joined federate has either registered or discovered and that the joined federate has not subsequently deleted (globally or locally) or been notified to remove. \\HLASeeAlso{\\HLATermReference{register}\\HLASemicolon{} \\HLATermReference{discover}\\HLASemicolon{} \\HLATermReference{delete}\\HLASemicolon{} \\HLATermReference{local delete}\\HLASemicolon{} \\HLATermReference{remove}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 876,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-last-known-time-position",
+      "term": "last known time position",
+      "text": "The last time position to which a lost joined federate was successfully granted, as seen from the remaining federation execution.",
+      "layout_body": "The last time position to which a lost joined federate was successfully granted, as seen from the remaining federation execution.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 889,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-local-delete",
+      "term": "local delete",
+      "text": "To invoke the Local Delete Object Instance service to inform the runtime infrastructure (RTI) that it is to treat the specified object instance as if the RTI had never notified the joined federate to discover the object instance (however, the object instance is not to be eliminated and may be rediscovered). delete.",
+      "layout_body": "To invoke the \\HLAService{Local Delete Object Instance} service to inform the runtime infrastructure (RTI) that it is to treat the specified object instance as if the RTI had never notified the joined federate to discover the object instance (however, the object instance is not to be eliminated and may be rediscovered). \\HLASeeAlso{\\HLATermReference{delete}.}\n\\HLADefinitionNote{See 6.18 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 902,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-logical-time",
+      "term": "logical time",
+      "text": "The representation of discrete points on the time axis. Logical time is used to represent a federate's time position and the timestamps of messages.",
+      "layout_body": "The representation of discrete points on the time axis. Logical time is used to represent a federate's time position and the timestamps of messages.",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 915,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-logical-time-interval",
+      "term": "logical time interval",
+      "text": "The representation of the distance between two points on the time axis. Logical time interval is used to represent a time-regulating federate's lookahead and by the RTI to perform arithmetic on logical time values.",
+      "layout_body": "The representation of the distance between two points on the time axis. Logical time interval is used to represent a time-regulating federate's lookahead and by the RTI to perform arithmetic on logical time values.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 928,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-lookahead",
+      "term": "lookahead",
+      "text": "A logical time interval provided by joined federates that become time-regulating. When added to the time-regulating joined federate's time position, the resulting timestamp is used to calculate the bound on the timestamps that the time-regulating joined federate can use to send timestamp order (TSO) messages.",
+      "layout_body": "A logical time interval provided by joined federates that become time-regulating. When added to the time-regulating joined federate's time position, the resulting timestamp is used to calculate the bound on the timestamps that the time-regulating joined federate can use to send timestamp order (TSO) messages.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 941,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-lost-joined-federate",
+      "term": "lost joined federate",
+      "text": "A previously joined federate that has been disconnected from the runtime infrastructure (RTI) as a result of a fault so that the joined federate can no longer continue in the federation execution in a High Level Architecture (HLA) compliant manner.",
+      "layout_body": "A previously joined federate that has been disconnected from the runtime infrastructure (RTI) as a result of a fault so that the joined federate can no longer continue in the federation execution in a High Level Architecture (HLA) compliant manner.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 954,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-management-object-model-mom",
+      "term": "Management Object Model (MOM)",
+      "text": "A group of predefined High Level Architecture (HLA) constructs (object and interaction classes) that provide the following: [32.04pt] ; Access to federation execution operating information ; Insight into the operations of joined federates and the runtime infrastructure (RTI) ; Control of the functioning of the RTI, the federation execution, and the individual joined federates",
+      "layout_body": "A group of predefined High Level Architecture (HLA) constructs (object and interaction classes) that provide the following:\n\\begin{hladefinitionlistroomy}[32.04pt]\n\\item Access to federation execution operating information\n\\item Insight into the operations of joined federates and the runtime infrastructure (RTI)\n\\item Control of the functioning of the RTI, the federation execution, and the individual joined federates\n\\end{hladefinitionlistroomy}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 967,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-management-object-model-mom-and-initialization-module-mim",
+      "term": "Management Object Model (MOM) and Initialization Module (MIM)",
+      "text": "A subset of the federation object model (FOM) that contains object model template (OMT) tables that describe the High Level Architecture (HLA) MOM. The MIM also contains additional predefined HLA constructs such as object and interaction roots, data types, transportation types, and dimensions. HLA specifies a standard MIM that is incorporated into all FOM Document Data (FDD) automatically by the runtime infrastructure (RTI). The standard MIM can be replaced with a user-supplied MIM containing the standard MIM plus extensions.",
+      "layout_body": "A subset of the federation object model (FOM) that contains object model template (OMT) tables that describe the High Level Architecture (HLA) MOM. The MIM also contains additional predefined HLA constructs such as object and interaction roots, data types, transportation types, and dimensions. HLA specifies a standard MIM that is incorporated into all FOM Document Data (FDD) automatically by the runtime infrastructure (RTI). The standard MIM can be replaced with a user-supplied MIM containing the standard MIM plus extensions.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 980,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-message",
+      "term": "message",
+      "text": "A change of object instance attribute value(s), an interaction, a directed interaction, or a deletion of an existing object instance, often associated with a particular point on the time axis, as denoted by the associated timestamp.",
+      "layout_body": "A change of object instance attribute value(s), an interaction, a directed interaction, or a deletion of an existing object instance, often associated with a particular point on the time axis, as denoted by the associated timestamp.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 993,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-null-designator",
+      "term": "null designator",
+      "text": "A designator reserved to indicate an empty value that is distinguishable from all other designators. A null designator is guaranteed to compare unequal to any other designator with a nonempty value.",
+      "layout_body": "A designator reserved to indicate an empty value that is distinguishable from all other designators. A null designator is guaranteed to compare unequal to any other designator with a nonempty value.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1006,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-object-class",
+      "term": "object class",
+      "text": "A fundamental element of a conceptual representation for a federate that reflects the real world at levels of abstraction and resolution appropriate for federate interoperability. An object class is a template for a set of characteristics that is common to a group of object instances. These characteristics correspond to the class attributes and class directed interactions that individual federates may publish and to which other federates may subscribe.",
+      "layout_body": "A fundamental element of a conceptual representation for a federate that reflects the real world at levels of abstraction and resolution appropriate for federate interoperability. An object class is a template for a set of characteristics that is common to a group of object instances. These characteristics correspond to the class attributes and class directed interactions that individual federates may publish and to which other federates may subscribe.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1019,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-object-instance",
+      "term": "object instance",
+      "text": "A unique instantiation of an object class that is independent of all other instances of that object class. At any point during a federation execution, the state of a High Level Architecture (HLA) object instance is defined as the collection of the values of all its instance attributes.",
+      "layout_body": "A unique instantiation of an object class that is independent of all other instances of that object class. At any point during a federation execution, the state of a High Level Architecture (HLA) object instance is defined as the collection of the values of all its instance attributes.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1032,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-object-model",
+      "term": "object model",
+      "text": "A system specification defined primarily by class characteristics and relationships. The High Level Architecture (HLA) idea of an object model is similar in many ways, but not identical, to the common idea of an object model in object-oriented literature.",
+      "layout_body": "A system specification defined primarily by class characteristics and relationships. The High Level Architecture (HLA) idea of an object model is similar in many ways, but not identical, to the common idea of an object model in object-oriented literature.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1045,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-object-model-framework",
+      "term": "object model framework",
+      "text": "The rules and terminology used to describe High Level Architecture (HLA) object models.",
+      "layout_body": "The rules and terminology used to describe High Level Architecture (HLA) object models.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1058,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-optimistic-logical-time-olt",
+      "term": "optimistic logical time (OLT)",
+      "text": "A supplementary logical time that facilitates optimistic time advancement. The optimistic logical time is provided, along with the update to the federate's logical time, in a Flush Queue Grant service call as a response to a Flush Queue Request service call. It is the minimum of the time supplied in the Flush Queue Request and the timestamps of any TSO messages delivered in response to that Flush Queue Request. The optimistic logical time indicates a lower bound on the next logical time the federate could be advanced to if no TSO messages with a timestamp less than it are received in the future.",
+      "layout_body": "A supplementary logical time that facilitates optimistic time advancement. The optimistic logical time is provided, along with the update to the federate's logical time, in a \\HLAService{Flush Queue Grant} \\HLAPrintersDagger{} service call as a response to a \\HLAService{Flush Queue Request} service call. It is the minimum of the time supplied in the \\HLAService{Flush Queue Request} and the timestamps of any TSO messages delivered in response to that \\HLAService{Flush Queue Request}. The optimistic logical time indicates a lower bound on the next logical time the federate could be advanced to if no TSO messages with a timestamp less than it are received in the future.",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1071,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-optimistic-lookahead-ol",
+      "term": "optimistic lookahead (OL)",
+      "text": "The lookahead the federate would have if actually granted to the optimistic logical time.",
+      "layout_body": "The lookahead the federate would have if actually granted to the optimistic logical time.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1084,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-order-type",
+      "term": "order type",
+      "text": "A runtime infrastructure (RTI) means of ordering messages originating from multiple joined federates that are delivered to a single joined federate. Different categories of service are defined with different characteristics regarding whether and how an RTI orders messages that are to be delivered to a joined federate.",
+      "layout_body": "A runtime infrastructure (RTI) means of ordering messages originating from multiple joined federates that are delivered to a single joined federate. Different categories of service are defined with different characteristics regarding whether and how an RTI orders messages that are to be delivered to a joined federate.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1097,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-out-of-scope",
+      "term": "out of scope",
+      "text": "Of or pertaining to an instance attribute of an object instance for which one or more of the following are not true: [32.04pt] ; The object instance is known to the joined federate. ; The instance attribute is owned by another joined federate. ; The instance attribute's corresponding class attribute is one of the following: [22.02pt] ; A subscribed attribute of the known class of the object instance, or ; A subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute at the owning joined federate overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate. % 9pt10.8pt NOTE---See 6.1 of IEEE Std 1516.1-2025.",
+      "layout_body": "Of or pertaining to an instance attribute of an object instance for which one or more of the following are not true:\n\\vspace*{2.13pt}\n\\begin{hladefinitionlist}[32.04pt]\n\\item The object instance is known to the joined federate.\n\\item The instance attribute is owned by another joined federate.\n\\item The instance attribute's corresponding class attribute is one of the following:\n  \\begin{hladefinitionnumberlist}[22.02pt]\n  \\item A subscribed attribute of the known class of the object instance, or\n  \\item A subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute at the owning joined federate overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate.\n  \\end{hladefinitionnumberlist}\n\\end{hladefinitionlist}\n\\par\\addvspace{12.49pt}%\n\\hspace*{49.68pt}{\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 6.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\\par",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1110,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-overlap",
+      "term": "overlap",
+      "text": "[32.40pt] ; Pertaining to region sets: given two region sets, to have a region in each set such that the two regions overlap. ; Pertaining to regions: given two regions, to have at least one dimension in common if and only if, for each dimension, the regions have in common, their respective ranges in the common dimension overlap. If two regions do not have any dimensions in common, the regions do not overlap. ; Pertaining to ranges: given two ranges (\\(A = [a_lower, a_upper)\\) and \\(B = [b_lower, b_upper)\\)), to overlap if and only if [22.02pt] ; Either \\(a_lower = b_lower\\) or (\\(a_lower < b_upper\\) and \\(b_lower < a_upper\\)) or ; The Allow Relaxed DDM switch is enabled and the RTI implementation makes the determination, based on implementation-specific criteria, that the ranges are sufficiently close to warrant an expanded interpretation of one or both ranges neither range may ever be reduced. % 9pt10.8pt NOTE---See 9.1 of IEEE Std 1516.1-2025.",
+      "layout_body": "\\vspace*{2.13pt}\n\\begin{hladefinitionlist}[32.40pt]\n\\item Pertaining to region sets: given two region sets, to have a region in each set such that the two regions overlap.\n\\item Pertaining to regions: given two regions, to have at least one dimension in common if and only if, for each dimension, the regions have in common, their respective ranges in the common dimension overlap. If two regions do not have any dimensions in common, the regions do not overlap.\n\\item Pertaining to ranges: given two ranges (\\(A = [a_{\\mathrm{lower}}, a_{\\mathrm{upper}})\\) and \\(B = [b_{\\mathrm{lower}}, b_{\\mathrm{upper}})\\)), to overlap if and only if\n  \\begin{hladefinitionnumberlist}[22.02pt]\n  \\item Either \\(a_{\\mathrm{lower}} = b_{\\mathrm{lower}}\\) or (\\(a_{\\mathrm{lower}} < b_{\\mathrm{upper}}\\) and \\(b_{\\mathrm{lower}} < a_{\\mathrm{upper}}\\)) or\n  \\item The Allow Relaxed DDM switch is enabled and the RTI implementation makes the determination, based on implementation-specific criteria, that the ranges are sufficiently close to warrant an expanded interpretation of one or both ranges\\HLASemicolon{} neither range may ever be reduced.\n  \\end{hladefinitionnumberlist}\n\\end{hladefinitionlist}\n\\par\\vspace*{-9.41pt}%\n\\hspace*{28.02pt}{\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\\par",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1123,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-owned",
+      "term": "owned",
+      "text": "Pertaining to the relationship between an instance attribute and a joined federate: when the joined federate has the unique right to update the instance attribute's value.",
+      "layout_body": "Pertaining to the relationship between an instance attribute and a joined federate: when the joined federate has the unique right to update the instance attribute's value.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1136,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-owned-instance-attribute",
+      "term": "owned instance attribute",
+      "text": "An instance attribute that is explicitly modeled by the owning joined federate. A joined federate that owns an instance attribute has the unique responsibility to provide values for that instance attribute to the federation, through the runtime infrastructure (RTI), as documented in the federation object model (FOM) Document Data (FDD).",
+      "layout_body": "An instance attribute that is explicitly modeled by the owning joined federate. A joined federate that owns an instance attribute has the unique responsibility to provide values for that instance attribute to the federation, through the runtime infrastructure (RTI), as documented in the federation object model (FOM) Document Data (FDD).",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1149,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-pair",
+      "term": "pair",
+      "text": "A grouping of two related elements (a first component and a second component), the combination of which is treated as an entity. An example of a pair would be an instance attribute grouped with its current value.",
+      "layout_body": "A grouping of two related elements (a first component and a second component), the combination of which is treated as an entity. An example of a pair would be an instance attribute grouped with its current value.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1162,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-parameter",
+      "term": "parameter",
+      "text": "A named characteristic of an interaction.",
+      "layout_body": "A named characteristic of an interaction.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1175,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-passel",
+      "term": "passel",
+      "text": "A group of attribute handle/value pairs from an Update Attribute Values service invocation that are delivered together via a Reflect Attribute Values service invocation. All pairs within the passel have the same user-supplied tag, sent message order type, transportation type, receive message order type, timestamp (if present), and set of sent region designators (if present). A passel is a message.",
+      "layout_body": "A group of attribute handle/value pairs from an \\HLAService{Update Attribute Values} service invocation that are delivered together via a \\HLAService{Reflect Attribute Values} \\HLAPrintersDagger{} service invocation. All pairs within the passel have the same user-supplied tag, sent message order type, transportation type, receive message order type, timestamp (if present), and set of sent region designators (if present). A passel is a message.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1188,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-passive-subscription",
+      "term": "passive subscription",
+      "text": "A request to the runtime infrastructure (RTI) for the kinds of data (object classes and attributes as well as interactions) that the joined federate is currently interested in receiving. However, unlike an active subscription, this information is not used by the RTI to arrange for data to be delivered, nor is it used to tell publishing joined federates that another joined federate is subscribing to that data (by way of Start/Stop Registration, Turn On/Off Updates, or Turn On/Off Interactions service invocations). This form of subscription is provided to support certain types of logger joined federates.",
+      "layout_body": "A request to the runtime infrastructure (RTI) for the kinds of data (object classes and attributes as well as interactions) that the joined federate is currently interested in receiving. However, unlike an active subscription, this information is not used by the RTI to arrange for data to be delivered, nor is it used to tell publishing joined federates that another joined federate is subscribing to that data (by way of \\HLAService{Start/Stop Registration}, \\HLAService{Turn On/Off Updates}, or \\HLAService{Turn On/Off Interactions} service invocations). This form of subscription is provided to support certain types of logger joined federates.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1201,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-promoted",
+      "term": "promoted",
+      "text": "Pertaining to an object instance, as known by a particular joined federate: having a discovered class that is a superclass of its registered class. % 9pt10.8pt NOTE---See 5.1.3 of IEEE Std 1516.1-2025. %",
+      "layout_body": "Pertaining to an object instance, as known by a particular joined federate: having a discovered class that is a superclass of its registered class.\n\\par\\addvspace{11.72pt}%\n{\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.\\par}%",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1214,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-publish",
+      "term": "publish",
+      "text": "To announce to a federation the information a federate may provide to the federation.",
+      "layout_body": "To announce to a federation the information a federate may provide to the federation.",
+      "leading_gap": "11.90pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1227,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-published",
+      "term": "published",
+      "text": "[36.00pt] ; Pertaining to an object class from the perspective of a given joined federate: having at least one available attribute of the object class that was an argument, along with the object class, to a Publish Object Class Attributes service invocation that was not subsequently unpublished via the Unpublish Object Class Attributes service. % 9pt10.8pt NOTE---See 5.1.2 of IEEE Std 1516.1-2025. % ; Pertaining to an interaction class from the perspective of a given joined federate: being an argument to a Publish Interaction Class service invocation that was not subsequently followed by an Unpublish Interaction Class service invocation for that interaction class. % 9pt10.8pt NOTE---See 5.1.3 of IEEE Std 1516.1-2025. %",
+      "layout_body": "\\begin{hladefinitionlistcompact}[36.00pt]\n\\item Pertaining to an object class from the perspective of a given joined federate: having at least one available attribute of the object class that was an argument, along with the object class, to a \\HLAService{Publish Object Class Attributes} service invocation that was not subsequently unpublished via the \\HLAService{Unpublish Object Class Attributes} service.\n  \\par\\addvspace{9.79pt}%\n  {\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 5.1.2 of IEEE Std 1516.1\\HLAStandardMark-2025.\\par}%\n\\item Pertaining to an interaction class from the perspective of a given joined federate: being an argument to a \\HLAService{Publish Interaction Class} service invocation that was not subsequently followed by an \\HLAService{Unpublish Interaction Class} service invocation for that interaction class.\n  \\par\\addvspace{11.77pt}%\n  {\\fontsize{9pt}{10.8pt}\\selectfont NOTE---See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.\\par}%\n\\end{hladefinitionlistcompact}",
+      "leading_gap": "12.01pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1240,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-published-attributes-of-an-object-class",
+      "term": "published attributes of an object class",
+      "text": "The class attributes that have been arguments to Publish Object Class Attributes service invocations by a given joined federate for that object class that have not subsequently been unpublished (either individually or by unpublishing the whole object class), and possibly the HLAprivilegeToDeleteObject attribute for that object class.",
+      "layout_body": "The class attributes that have been arguments to \\HLAService{Publish Object Class Attributes} service invocations by a given joined federate for that object class that have not subsequently been unpublished (either individually or by unpublishing the whole object class), and possibly the \\textbf{HLAprivilegeToDeleteObject} attribute for that object class.\n\\HLADefinitionNote{See 5.1.2 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": "11.90pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1253,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-range",
+      "term": "range",
+      "text": "A subset of a dimension, defined by an ordered pair of values, the first being the range lower bound and the second being the range upper bound. This pair of values defines a semi-open interval [range lower bound, range upper bound) (i.e., the range lower bound is the smallest member of the interval, and the range upper bound is just greater than any member of the interval).",
+      "layout_body": "A subset of a dimension, defined by an ordered pair of values, the first being the range lower bound and the second being the range upper bound. This pair of values defines a semi-open interval [range lower bound, range upper bound) (i.e., the range lower bound is the smallest member of the interval, and the range upper bound is just greater than any member of the interval).\n\\HLADefinitionNote{See 9.1.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1266,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-range-lower-bound",
+      "term": "range lower bound",
+      "text": "The first component of the ordered pair of values that is part of a range.",
+      "layout_body": "The first component of the ordered pair of values that is part of a range.\n\\HLADefinitionNote[11.58pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1279,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-range-upper-bound",
+      "term": "range upper bound",
+      "text": "The second component of the ordered pair of values that is part of a range.",
+      "layout_body": "The second component of the ordered pair of values that is part of a range.\n\\HLADefinitionNote[11.58pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1292,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-receive-order-ro",
+      "term": "receive order (RO)",
+      "text": "A characteristic of no ordering guarantee for messages. Messages that are received as RO messages will be received in an arbitrary order by the respective joined federate. A timestamp value will be provided with the message if one was specified when the message was sent, but that timestamp has no bearing on message receipt order.",
+      "layout_body": "A characteristic of no ordering guarantee for messages. Messages that are received as RO messages will be received in an arbitrary order by the respective joined federate. A timestamp value will be provided with the message if one was specified when the message was sent, but that timestamp has no bearing on message receipt order.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1305,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-received-class",
+      "term": "received class",
+      "text": "The class that was an interaction's candidate received class at the joined federate when that interaction was received at that joined federate via an invocation of the Receive Interaction or Receive Directed Interaction service.",
+      "layout_body": "The class that was an interaction's candidate received class at the joined federate when that interaction was received at that joined federate via an invocation of the \\HLAService{Receive Interaction} \\HLAPrintersDagger{} or \\HLAService{Receive Directed Interaction} \\HLAPrintersDagger{} service.\n\\HLADefinitionNote[11.58pt]{See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1318,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-received-parameters",
+      "term": "received parameters",
+      "text": "The set of parameters received when the Receive Interaction or Receive Directed Interaction service is invoked. These parameters consist of the subset of the sent parameters of an interaction that are available parameters of the interaction's received class.",
+      "layout_body": "The set of parameters received when the \\HLAService{Receive Interaction} \\HLAPrintersDagger{} or \\HLAService{Receive Directed Interaction} \\HLAPrintersDagger{} service is invoked. These parameters consist of the subset of the sent parameters of an interaction that are available parameters of the interaction's received class.\n\\HLADefinitionNote[11.58pt]{See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1331,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-reflect",
+      "term": "reflect",
+      "text": "To receive new values for one or more instance attributes via invocation of the Reflect Attribute Values service.",
+      "layout_body": "To receive new values for one or more instance attributes via invocation of the \\HLAService{Reflect Attribute Values} \\HLAPrintersDagger{} service.\n\\HLADefinitionNote[11.58pt]{See 6.11 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1344,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-reflected-instance-attribute",
+      "term": "reflected instance attribute",
+      "text": "An instance attribute that is represented but not explicitly modeled in a joined federate. The reflecting joined federate accepts new values of the reflected instance attribute as they are produced by some other federation member and provided to it by the runtime infrastructure (RTI), via the Reflect Attribute Values service.",
+      "layout_body": "An instance attribute that is represented but not explicitly modeled in a joined federate. The reflecting joined federate accepts new values of the reflected instance attribute as they are produced by some other federation member and provided to it by the runtime infrastructure (RTI), via the \\HLAService{Reflect Attribute Values} \\HLAPrintersDagger{} service.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1357,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-region",
+      "term": "region",
+      "text": "A generic term that refers to either a region specification or a region realization. If not using data distribution management (DDM), region arguments may be ignored.",
+      "layout_body": "A generic term that refers to either a region specification or a region realization. If not using data distribution management (DDM), region arguments may be ignored.\n\\HLADefinitionNote[11.58pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1370,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-region-realization",
+      "term": "region realization",
+      "text": "A region specification (set of ranges) that is associated with an instance attribute for update, with a sent interaction, or with a class attribute or interaction class for a subscription. Region realizations are created from region specifications via the Commit Region Modifications (only when modifying a region specification from which region realizations are already derived), Register Object Instance With Regions, Associate Regions for Updates, Subscribe Object Class Attributes With Regions, Subscribe Interaction Class With Regions, Send Interaction With Regions, or Request Attribute Value Update With Regions services.",
+      "layout_body": "A region specification (set of ranges) that is associated with an instance attribute for update, with a sent interaction, or with a class attribute or interaction class for a subscription. Region realizations are created from region specifications via the \\HLAService{Commit Region Modifications} (only when modifying a region specification from which region realizations are already derived), \\HLAService{Register Object Instance With Regions}, \\HLAService{Associate Regions for Updates}, \\HLAService{Subscribe Object Class Attributes With Regions}, \\HLAService{Subscribe Interaction Class With Regions}, \\HLAService{Send Interaction With Regions}, or \\HLAService{Request Attribute Value Update With Regions} services.\n\\HLADefinitionNote[11.58pt]{See 9.1.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1383,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-region-specification",
+      "term": "region specification",
+      "text": "A set of ranges. Region specifications are created using the Create Region service, and a runtime infrastructure (RTI) is notified of changes to a region specification using the Commit Region Modifications service.",
+      "layout_body": "A set of ranges. Region specifications are created using the \\HLAService{Create Region} service, and a runtime infrastructure (RTI) is notified of changes to a region specification using the \\HLAService{Commit Region Modifications} service.\n\\HLADefinitionNote[11.58pt]{See 9.1.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1396,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-region-template",
+      "term": "region template",
+      "text": "A region template is an incomplete region specification where one or more dimensions have not been assigned ranges.",
+      "layout_body": "A region template is an incomplete region specification where one or more dimensions have not been assigned ranges.",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1409,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-register",
+      "term": "register",
+      "text": "To invoke the Register Object Instance or the Register Object Instance With Regions service to create a unique object instance designator.",
+      "layout_body": "To invoke the \\HLAService{Register Object Instance} or the \\HLAService{Register Object Instance With Regions} service to create a unique object instance designator.\n\\HLADefinitionNote[11.58pt]{See 6.8 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1422,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-registered-class",
+      "term": "registered class",
+      "text": "The object class that was an argument to the Register Object Instance or the Register Object Instance With Regions service invocation that resulted in the creation of the object instance designator for a given object instance.",
+      "layout_body": "The object class that was an argument to the Register Object Instance or the Register Object Instance With Regions service invocation that resulted in the creation of the object instance designator for a given object instance.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1435,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-regular-interaction-class-description",
+      "term": "regular interaction class description",
+      "text": "A description of an interaction class that follows IEEE Std 1516.2-2025 and contains at a minimum the interaction class name and publish/subscribe indicator.",
+      "layout_body": "A description of an interaction class that follows\\linebreak IEEE Std 1516.2\\HLAStandardMark-2025 and contains at a minimum the interaction class name and publish/subscribe\\linebreak indicator.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1448,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-regular-object-class-description",
+      "term": "regular object class description",
+      "text": "A description of an object class that follows IEEE Std 1516.2-2025 and contains at a minimum the object class name and publish/subscribe indicator.",
+      "layout_body": "A description of an object class that follows IEEE Std 1516.2\\HLAStandardMark-2025 and contains at a minimum the object class name and publish/subscribe indicator.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1461,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-remove",
+      "term": "remove",
+      "text": "To receive an invocation of the Remove Object Instance service for a particular object instance.",
+      "layout_body": "To receive an invocation of the \\HLAService{Remove Object Instance} \\HLAPrintersDagger{} service for a particular object instance.\n\\HLADefinitionNote[11.58pt]{See 6.15 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1474,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-repeated-description",
+      "term": "repeated description",
+      "text": "A description of a construct (e.g., object class, interaction class, data type, dimension) in a federation object model (FOM) module with a name and additional properties that are identical to a description that is already available in the current FOM.",
+      "layout_body": "A description of a construct (e.g., object class, interaction class, data type, dimension) in a federation object model (FOM) module with a name and additional properties that are identical to a description that is already available in the current FOM.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1487,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-resolution",
+      "term": "resolution",
+      "text": "The smallest resolvable value separating attribute or parameter values that can be discriminated. Resolution may vary with magnitude for certain data types.",
+      "layout_body": "The smallest resolvable value separating attribute or parameter values that can be discriminated. Resolution may vary with magnitude for certain data types.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1500,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-retraction",
+      "term": "retraction",
+      "text": "An action performed by a federate to unschedule a previously scheduled message. Message retraction may be visible to the federate to whom the scheduled message was to be delivered. Retraction is widely used in classic event-oriented discrete event simulations to model behaviors such as preemption and interrupts.",
+      "layout_body": "An action performed by a federate to unschedule a previously scheduled message. Message retraction may be visible to the federate to whom the scheduled message was to be delivered. Retraction is widely used in classic event-oriented discrete event simulations to model behaviors such as preemption and interrupts.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1513,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-runtime-infrastructure-rti",
+      "term": "runtime infrastructure (RTI)",
+      "text": "The software that provides common interface services during a High Level Architecture (HLA) federation execution for synchronization and data exchange.",
+      "layout_body": "The software that provides common interface services during a High Level Architecture (HLA) federation execution for synchronization and data exchange.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1526,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-runtime-infrastructure-rti-initialization-data-rid",
+      "term": "runtime infrastructure (RTI) initialization data (RID)",
+      "text": "RTI vendor-specific information needed to run an RTI. If required, a RID is supplied when an RTI is initialized.",
+      "layout_body": "RTI vendor-specific information needed to run an RTI. If required, a RID is supplied when an RTI is initialized.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1539,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-scaffolding-interaction-class-description",
+      "term": "scaffolding interaction class description",
+      "text": "A description of an interaction class in a federation object model (FOM) module or simulation object model (SOM) module that follows IEEE Std 1516.2-2025. However, it will contain only the name. The name of the scaffolding interaction class description is identical to the name of a regular interaction class description provided by another FOM/SOM module. Scaffolding interaction class descriptions act as placeholders in order to represent the class hierarchy from the other FOM/SOM module(s) from which a new regular interaction class description can be specified.",
+      "layout_body": "A description of an interaction class in a federation object model (FOM) module or simulation object model (SOM) module that follows IEEE Std 1516.2\\HLAStandardMark-2025. However, it will contain only the name. The name of the scaffolding interaction class description is identical to the name of a regular interaction class description provided by another FOM/SOM module. Scaffolding interaction class descriptions act as placeholders in order to represent the class hierarchy from the other FOM/SOM module(s) from which a new regular interaction class description can be specified.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1552,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-scaffolding-object-class-description",
+      "term": "scaffolding object class description",
+      "text": "A description of an object class in a federation object model (FOM) module or simulation object model (SOM) module that follows IEEE Std 1516.2-2025. However, it will contain only the name. The name of the scaffolding object class description is identical to the name of a regular object class description provided by another FOM/SOM module. Scaffolding object class descriptions act as placeholders in order to represent the class hierarchy from the other FOM/SOM module(s) from which a new regular object class description can be specified.",
+      "layout_body": "A description of an object class in a federation object model (FOM) module or simulation object model (SOM) module that follows IEEE Std 1516.2\\HLAStandardMark-2025. However, it will contain only the name. The name of the scaffolding object class description is identical to the name of a regular object class description provided by another FOM/SOM module. Scaffolding object class descriptions act as placeholders in order to represent the class hierarchy from the other FOM/SOM module(s) from which a new regular object class description can be specified.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1565,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-sent-class",
+      "term": "sent class",
+      "text": "The interaction class that was an argument to the Send Interaction, Send Interaction With Regions, or Send Directed Interaction service invocation that initiated the sending of a given interaction.",
+      "layout_body": "The interaction class that was an argument to the \\HLAService{Send Interaction}, \\HLAService{Send Interaction With Regions}, or \\HLAService{Send Directed Interaction} service invocation that initiated the sending of a given interaction.\n\\HLADefinitionNote[11.58pt]{See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1578,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-sent-interaction",
+      "term": "sent interaction",
+      "text": "A specific interaction that is transmitted by a joined federate via the Send Interaction, Send Interaction With Regions, or Send Directed Interaction service and received by other joined federates in the federation execution via the Receive Interaction or Receive Directed Interaction service.",
+      "layout_body": "A specific interaction that is transmitted by a joined federate via the \\HLAService{Send Interaction}, \\HLAService{Send Interaction With Regions}, or \\HLAService{Send Directed Interaction} service and received by other joined federates in the federation execution via the \\HLAService{Receive Interaction} \\HLAPrintersDagger{} or \\HLAService{Receive Directed Interaction} \\HLAPrintersDagger{} service.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1591,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-sent-parameters",
+      "term": "sent parameters",
+      "text": "The parameters that were arguments to the Send Interaction, Send Interaction With Regions, or Send Directed Interaction service invocation for a given interaction.",
+      "layout_body": "The parameters that were arguments to the \\HLAService{Send Interaction}, \\HLAService{Send Interaction With Regions}, or \\HLAService{Send Directed Interaction} service invocation for a given interaction.\n\\HLADefinitionNote[11.58pt]{See 5.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1604,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-set",
+      "term": "set",
+      "text": "A group of elements in which each element occurs at most once (this definition corresponds to the mathematical notion of sets). An example of a set would be a group of class attributes, each of which belongs to the same object class.",
+      "layout_body": "A group of elements in which each element occurs at most once (this definition corresponds to the mathematical notion of sets). An example of a set would be a group of class attributes, each of which belongs to the same object class.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1617,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-simulation-object-model-som",
+      "term": "simulation object model (SOM)",
+      "text": "A specification of the types of information that an individual federate could provide to High Level Architecture (HLA) federations as well as the information that an individual federate can receive from other federates in HLA federations. The SOM is specified using one or more SOM modules. The standard format in which SOMs are expressed facilitates the determination of the suitability of federates for participation in a federation.",
+      "layout_body": "A specification of the types of information that an individual federate could provide to High Level Architecture (HLA) federations as well as the information that an individual federate can receive from other federates in HLA federations. The SOM is specified using one or more SOM modules. The standard format in which SOMs are expressed facilitates the determination of the suitability of federates for participation in a federation.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1630,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-simulation-object-model-som-module",
+      "term": "simulation object model (SOM) module",
+      "text": "A subset of the SOM that contains some or all object model template (OMT) tables. SOM modules and one optional Management Object Model (MOM) and Initialization Module (MIM) are used to specify the SOM of a federate. A SOM module contains complete or scaffolding definitions for all object classes and interaction classes that are superclasses of object classes and interaction classes in the same SOM module.",
+      "layout_body": "A subset of the SOM that contains some or all object model template (OMT) tables. SOM modules and one optional Management Object Model (MOM) and Initialization Module (MIM) are used to specify the SOM of a federate. A SOM module contains complete or scaffolding definitions for all object classes and interaction classes that are superclasses of object classes and interaction classes in the same SOM module.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1643,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-specified-dimensions",
+      "term": "specified dimensions",
+      "text": "The dimensions that are explicitly provided when the region specification is created or modified.",
+      "layout_body": "The dimensions that are explicitly provided when the region specification is created or modified.\n\\HLADefinitionNote[11.58pt]{See 9.1.2 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1656,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-stop-publishing",
+      "term": "stop publishing",
+      "text": "To take action that results in a class attribute that had been a published attribute of a class no longer being a published attribute of that class.",
+      "layout_body": "To take action that results in a class attribute that had been a published attribute of a class no longer being a published attribute of that class.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1669,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subclass",
+      "term": "subclass",
+      "text": "A class that adds additional detail to (specializes) another more generic class (superclass). A subclass, by inheriting the properties from its parent class (closest superclass), also inherits the properties of all superclasses of its parent as well.",
+      "layout_body": "A class that adds additional detail to (specializes) another more generic class (superclass). A subclass, by inheriting the properties from its parent class (closest superclass), also inherits the properties of all superclasses of its parent as well.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1682,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribe",
+      "term": "subscribe",
+      "text": "To announce to a federation the information a federate wants from the federation.",
+      "layout_body": "To announce to a federation the information a federate wants from the federation.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1695,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribed",
+      "term": "subscribed",
+      "text": "[36.00pt] ; FakeStretch=1.000Pertaining to an object class from the perspective of a given joined federate: having subscribed attributes of that class or subscribed attributes of that class with regions, for some region. subscribed attributes of an object class subscribed attributes of an object class with regions. ; Pertaining to an interaction class: being a subscribed interaction class or a subscribed interaction class with regions, for some region. subscribed interaction class subscribed interaction class with regions.",
+      "layout_body": "\\begin{hladefinitionlistroomy}[36.00pt]\n\\item {\\addfontfeatures{FakeStretch=1.000}Pertaining to an object class from the perspective of a given joined federate: having subscribed attributes of that class or subscribed attributes of that class with regions, for some region. \\HLASeeAlso{\\HLATermReference{subscribed attributes of an object class}\\HLASemicolon{} \\HLATermReference{subscribed attributes of an object class with regions}.}}\n\\item Pertaining to an interaction class: being a subscribed interaction class or a subscribed interaction class with regions, for some region. \\HLASeeAlso{\\HLATermReference{subscribed interaction class}\\HLASemicolon{} \\HLATermReference{subscribed interaction class with regions}.}\n\\end{hladefinitionlistroomy}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1708,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribed-attributes-of-an-object-class",
+      "term": "subscribed attributes of an object class",
+      "text": "The class attributes that have been arguments to Subscribe Object Class Attributes service invocations by a given joined federate for a given object class that have not subsequently been unsubscribed, either individually or by unsubscribing the whole object class.",
+      "layout_body": "The class attributes that have been arguments to \\HLAService{Subscribe Object Class Attributes} service invocations by a given joined federate for a given object class that have not subsequently been unsubscribed, either individually or by unsubscribing the whole object class.\n\\HLADefinitionNote[11.58pt]{See 5.1.2 and 5.8 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1721,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribed-attributes-of-an-object-class-with-regions",
+      "term": "subscribed attributes of an object class with regions",
+      "text": "The class attributes that have been arguments to Subscribe Object Class Attributes With Regions service invocations by a given joined federate for a given object class and a given region, assuming the joined federate did not subsequently invoke the Unsubscribe Object Class Attributes With Regions service for that object class and region.",
+      "layout_body": "The class attributes that have been arguments to \\HLAService{Subscribe Object Class Attributes With Regions} service invocations by a given joined federate for a given object class and a given region, assuming the joined federate did not subsequently invoke the \\HLAService{Unsubscribe Object Class Attributes With Regions} service for that object class and region.\n\\HLADefinitionNote[11.58pt]{See 9.8 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1734,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribed-interaction-class",
+      "term": "subscribed interaction class",
+      "text": "An interaction class that, from the perspective of a given joined federate, was an argument to a Subscribe Interaction Class or Subscribe Interaction Class With Regions service invocation that was not subsequently followed by an Unsubscribe Interaction Class or Unsubscribe Interaction Class With Regions service invocation for that interaction class.",
+      "layout_body": "An interaction class that, from the perspective of a given joined federate, was an argument to a \\HLAService{Subscribe Interaction Class} or \\HLAService{Subscribe Interaction Class With Regions} service invocation that was not subsequently followed by an \\HLAService{Unsubscribe Interaction Class} or \\HLAService{Unsubscribe Interaction Class With Regions} service invocation for that interaction class.\n\\HLADefinitionNote[11.58pt]{See 5.1.3 and 5.10 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1747,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscribed-interaction-class-with-regions",
+      "term": "subscribed interaction class with regions",
+      "text": "An interaction class and a region that, from the perspective of a given joined federate, were arguments to a Subscribe Interaction Class With Regions service invocation that was not subsequently followed by an Unsubscribe Interaction Class With Regions service invocation for that interaction class and that region.",
+      "layout_body": "An interaction class and a region that, from the perspective of a given joined federate, were arguments to a \\HLAService{Subscribe Interaction Class With Regions} service invocation that was not subsequently followed by an \\HLAService{Unsubscribe Interaction Class With Regions} service invocation for that interaction class and that region.\n\\HLADefinitionNote[11.58pt]{See 9.10 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1760,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-subscription-region-set",
+      "term": "subscription region set",
+      "text": "A set of regions used for subscription of a class attribute or used for subscription of an interaction class. used for subscription of a class attribute used for subscription of an interaction class.",
+      "layout_body": "A set of regions used for subscription of a class attribute or used for subscription of an interaction class. \\HLASeeAlso{\\HLATermReference{used for subscription of a class attribute}\\HLASemicolon{} \\HLATermReference{used for subscription of an interaction class}.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1773,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-superclass",
+      "term": "superclass",
+      "text": "A class that generalizes a set of properties that may be inherited by more refined (i.e., detailed) versions of the class. In High Level Architecture (HLA) applications, a class may have at most one immediate superclass (i.e., can inherit only from a single class at the next higher level of the class hierarchy).",
+      "layout_body": "A class that generalizes a set of properties that may be inherited by more refined (i.e., detailed) versions of the class. In High Level Architecture (HLA) applications, a class may have at most one immediate superclass (i.e., can inherit only from a single class at the next higher level of the class hierarchy).",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1786,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-synchronization-point",
+      "term": "synchronization point",
+      "text": "A logical point in the sequence of a federation execution that all joined federates forming a synchronization set for that point attempt to reach and by which, if they are successful, they synchronize their respective processing.",
+      "layout_body": "A logical point in the sequence of a federation execution that all joined federates forming a synchronization set for that point attempt to reach and by which, if they are successful, they synchronize their respective processing.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1799,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-target-object-instance",
+      "term": "target object instance",
+      "text": "An object instance for which a directed interaction is intended.",
+      "layout_body": "An object instance for which a directed interaction is intended.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1812,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-advancing-state",
+      "term": "time advancing state",
+      "text": "The interval between a joined federate's request to advance its time position and the corresponding grant by the runtime infrastructure (RTI). A joined federate may advance its time position only by requesting a time advancement from the RTI via one of the following services: ; Time Advance Request ; Time Advance Request Available ; Next Message Request ; Next Message Request Available ; Flush Queue Request The joined federate's time position will not actually be advanced until the RTI responds with a Time Advance Grant or Flush Queue Grant service invocation at that joined federate.",
+      "layout_body": "The interval between a joined federate's request to advance its time position and the corresponding grant by the runtime infrastructure (RTI). A joined federate may advance its time position only by requesting a time advancement from the RTI via one of the following services:\n\\begin{hladefinitionservicelist}\n\\item \\HLAService{Time Advance Request}\n\\item \\HLAService{Time Advance Request Available}\n\\item \\HLAService{Next Message Request}\n\\item \\HLAService{Next Message Request Available}\n\\item \\HLAService{Flush Queue Request}\n\\end{hladefinitionservicelist}\n\\par\\vspace*{5.02pt}\nThe joined federate's time position will not actually be advanced until the RTI responds with a \\HLAService{Time Advance Grant} \\HLAPrintersDagger{} or \\HLAService{Flush Queue Grant} \\HLAPrintersDagger{} service invocation at that joined federate.",
+      "leading_gap": "15.16pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1825,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-axis",
+      "term": "time axis",
+      "text": "A totally ordered sequence of discrete values in which each value typically represents an HLA instant of time in the physical system being modeled. For any two points, T1 and T2, on the time axis, if T1 < T2, T1 represents an instant of time that occurs before the instant represented by T2. The sequence begins with an initial value, for which no point is less, and ends with a final value, for which no point is greater.",
+      "layout_body": "A totally ordered sequence of discrete values in which each value typically represents an HLA\\linebreak\ninstant of time in the physical system being modeled. For any two points, T1 and T2, on the time axis, if T1\\linebreak\n< T2, T1 represents an instant of time that occurs before the instant represented by T2. The sequence begins\\linebreak\nwith an initial value, for which no point is less, and ends with a final value, for which no point is greater.",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1838,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-management",
+      "term": "time management",
+      "text": "A collection of High Level Architecture (HLA) services that support controlled message ordering and delivery to the cooperating joined federates within a federation execution in a way that is consistent with federation requirements.",
+      "layout_body": "A collection of High Level Architecture (HLA) services that support controlled message ordering and delivery to the cooperating joined federates within a federation execution in a way that is consistent with federation requirements.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1851,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-position",
+      "term": "time position",
+      "text": "A joined federate's association with a point on the time axis.",
+      "layout_body": "A joined federate's association with a point on the time axis.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1864,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-constrained-federate",
+      "term": "time-constrained federate",
+      "text": "A joined federate that may receive timestamp order (TSO) messages and whose time advances are constrained by other joined federates within a federation execution.",
+      "layout_body": "A joined federate that may receive timestamp order (TSO) messages and whose time advances are constrained by other joined federates within a federation execution.\n\\HLADefinitionNote[9.54pt]{See 8.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1877,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-time-regulating-federate",
+      "term": "time-regulating federate",
+      "text": "A joined federate that may send timestamp order (TSO) messages and that constrains the time advances of other joined federates within a federation execution.",
+      "layout_body": "A joined federate that may send timestamp order (TSO) messages and that constrains the time advances of other joined federates within a federation execution.\n\\HLADefinitionNote[11.58pt]{See 8.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1890,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-timestamp-of-message-or-save",
+      "term": "timestamp (of message or save)",
+      "text": "The association of a logical time with an activity of a federate (e.g., updating instance attribute values, sending interactions, and federation save).",
+      "layout_body": "The association of a logical time with an activity of a federate (e.g., updating instance attribute values, sending interactions, and federation save).",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1903,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-timestamp-order-tso",
+      "term": "timestamp order (TSO)",
+      "text": "An ordering of messages provided by a runtime infrastructure (RTI) for joined federates making use of time management services and messages containing timestamps. Messages having different timestamps are said to be delivered in TSO if for any two messages, M1 and M2 (timestamped with T1 and T2, respectively), that are delivered to a single joined federate where T1 < T2, then M1 is delivered before M2. Messages having the same timestamp will be delivered in an arbitrary order (i.e., no tie-breaking mechanism is provided by an RTI).",
+      "layout_body": "An ordering of messages provided by a runtime infrastructure (RTI) for joined federates making use of time management services and messages containing timestamps. Messages having different timestamps are said to be delivered in TSO if for any two messages, M1 and M2 (timestamped with T1 and T2, respectively), that are delivered to a single joined federate where T1 < T2, then M1 is delivered before M2. Messages having the same timestamp will be delivered in an arbitrary order (i.e., no tie-breaking mechanism is provided by an RTI).",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1916,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-token",
+      "term": "token",
+      "text": "An attribute without a value, which conveys the information of which federate, if any, owns the attribute.",
+      "layout_body": "An attribute without a value, which conveys the information of which federate, if any, owns the attribute.",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1929,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-transportation-type",
+      "term": "transportation type",
+      "text": "A runtime infrastructure (RTI) provided means of transmitting messages between joined federates. Different categories of service are defined with different characteristics such as reliability of delivery and message latency.",
+      "layout_body": "A runtime infrastructure (RTI) provided means of transmitting messages between joined federates. Different categories of service are defined with different characteristics such as reliability of delivery and message latency.",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1942,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-unspecified-dimensions",
+      "term": "unspecified dimensions",
+      "text": "The available dimensions of a class attribute, instance attribute, interaction class, or sent interaction less the specified dimensions of the region specification from which the region realization is derived.",
+      "layout_body": "The available dimensions of a class attribute, instance attribute, interaction class, or sent interaction less the specified dimensions of the region specification from which the region realization is derived.\n\\HLADefinitionNote[9.54pt]{See 9.1.3 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1955,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-update",
+      "term": "update",
+      "text": "To invoke the Update Attribute Values service for one or more instance attributes.",
+      "layout_body": "To invoke the \\HLAService{Update Attribute Values} service for one or more instance attributes.\n\\HLADefinitionNote[11.58pt]{See 6.10 of IEEE Std 1516.1\\HLAStandardMark-2025.}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1968,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-update-rate",
+      "term": "update rate",
+      "text": "The rate at which instance attribute values are provided, either by an owning joined federate to the runtime infrastructure (RTI) or by the RTI to a subscribing joined federate.",
+      "layout_body": "The rate at which instance attribute values are provided, either by an owning joined federate to the runtime infrastructure (RTI) or by the RTI to a subscribing joined federate.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1981,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-update-region-set",
+      "term": "update region set",
+      "text": "A set of regions used for sending interactions or used for updating instance attributes. used for sending used for update.",
+      "layout_body": "A set of regions used for sending interactions or used for updating instance attributes. \\HLASeeAlso{\\HLATermReference{used for sending}\\HLASemicolon{} \\HLATermReference{used for update}.}",
+      "leading_gap": "12.18pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 1994,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-used-for-sending",
+      "term": "used for sending",
+      "text": "; Pertaining to a region and the specified interaction class designator: being an argument in the Send Interaction With Regions service. ; Pertaining to the default region: when the specified interaction class designator is an argument in the Send Interaction service.",
+      "layout_body": "\\begin{hladefinitionlistdisplay}\n\\item Pertaining to a region and the specified interaction class designator: being an argument in the \\HLAService{Send Interaction With Regions} service.\n\\item Pertaining to the default region: when the specified interaction class designator is an argument in the \\HLAService{Send Interaction} service.\n\\HLADefinitionListNote[12.04pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\end{hladefinitionlistdisplay}",
+      "leading_gap": "0pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2007,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-used-for-subscription-of-a-class-attribute",
+      "term": "used for subscription of a class attribute",
+      "text": "; Pertaining to a region, an object class, and a class attribute: when the class attribute is a subscribed attribute of the object class with that region. See also: subscribed attributes of an object class with regions.",
+      "layout_body": "\\vspace*{1.05pt}\n\\begin{hladefinitionlistdisplay}\n\\item Pertaining to a region, an object class, and a class attribute: when the class attribute is a subscribed attribute of the object class with that region. See also: subscribed attributes of an object class with regions.\n\\HLADefinitionListNote[9.85pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\vspace*{3.84pt}\n\\item Pertaining to the default region: when the specified class attribute is a subscribed attribute of the specified class. See also: subscribed attributes of an object class with regions.\n\\HLADefinitionListNote[11.58pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\end{hladefinitionlistdisplay}",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2020,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-used-for-subscription-of-an-interaction-class",
+      "term": "used for subscription of an interaction class",
+      "text": "; Pertaining to a region and an interaction class: when the interaction class is a subscribed interaction class with regions. subscribed interaction class.",
+      "layout_body": "\\vspace*{-1.02pt}\n\\begin{hladefinitionlistdisplay}\n\\item Pertaining to a region and an interaction class: when the interaction class is a subscribed interaction class with regions. \\HLASeeAlso{\\HLATermReference{subscribed interaction class}.}\n\\HLADefinitionListNote[11.78pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\vspace*{5.88pt}\n\\item Pertaining to the default region: when the specified interaction class is a subscribed interaction class. \\HLASeeAlso{\\HLATermReference{subscribed interaction class}.}\n\\HLADefinitionListNote[11.84pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\end{hladefinitionlistdisplay}",
+      "leading_gap": "12.10pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2033,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-used-for-update",
+      "term": "used for update",
+      "text": "; Pertaining to a region that, along with the specified object instance and attribute designators, has been used as an argument in either the Register Object Instance With Regions service or the Associate Regions For Updates service: when the region has not subsequently been used along with the specified object instance designator as an argument in the Unassociate Regions For Updates service, nor has the joined federate subsequently lost ownership of the specified instance attribute(s).",
+      "layout_body": "\\vspace*{0.18pt}\n\\begin{hladefinitionlistdisplaytightbottom}\n\\item Pertaining to a region that, along with the specified object instance and attribute designators, has been used as an argument in either the \\HLAService{Register Object Instance With Regions} service or the \\HLAService{Associate Regions For Updates} service: when the region has not subsequently been used along with the specified object instance designator as an argument in the \\HLAService{Unassociate Regions For Updates} service, nor has the joined federate subsequently lost ownership of the specified instance attribute(s).\n\\HLADefinitionListNote[9.78pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\vspace*{3.90pt}\n\\item Pertaining to the default region: when the specified instance attribute(s) is not currently used for update with any other region.\n\\HLADefinitionListNote[7.80pt]{See 9.1 of IEEE Std 1516.1\\HLAStandardMark-2025.}\n\\end{hladefinitionlistdisplaytightbottom}",
+      "leading_gap": "12.10pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2046,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-valid-federate-designator",
+      "term": "valid federate designator",
+      "text": "A federate designator which, during the federation execution, was returned by the Join Federation Execution service to some joined federate. The federate does not have to remain a joined federate for its federate designator to remain a valid federate designator.",
+      "layout_body": "A federate designator which, during the federation execution, was returned by the \\HLAService{Join Federation Execution} service to some joined federate. The federate does not have to remain a joined federate for its federate designator to remain a valid federate designator.",
+      "leading_gap": null,
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2059,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-wall-clock-time",
+      "term": "wall-clock time",
+      "text": "Time as determined by a chronometer such as a wristwatch or a wall clock.",
+      "layout_body": "Time as determined by a chronometer such as a wristwatch or a wall clock.",
+      "leading_gap": "7.98pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2072,
+        "end_line": null
+      },
+      "clause_id": "clause-3.1"
+    },
+    {
+      "id": "def-zero-time-interval",
+      "term": "zero time interval",
+      "text": "The distance between two logical time values that are equal. This time interval, when added to a logical time T1, results in a logical time T2 == T1.",
+      "layout_body": "The distance between two logical time values that are equal. This time interval, when added to a logical time T1, results in a logical time T2 == T1.",
+      "leading_gap": "7.98pt",
+      "source": {
+        "path": "semantic/definitions.json",
+        "line": 2085,
+        "end_line": null
       },
       "clause_id": "clause-3.1"
     }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Literal
 
 try:
     from scripts.latex_renderer import LatexDialect
@@ -37,6 +38,7 @@ class HlaSourceCommands:
     table_cell_text: str = "HLATableCellText"
     placed_block: str = "HLAClausePlacedBlock"
     table_caption: str = "HLATableCaption"
+    table_domain: Literal["generic", "omt"] = "omt"
     figure_image: str = "HLAFigureImageAt"
     figure_caption: str = "HLAFigureCaptionAt"
     figure_anchor: str = "HLAFigureAnchor"

@@ -16,34 +16,143 @@
         "caption": "Awaiting synchronization (s, L)"
       },
       "states": [
-        {"id": "sync.awaiting.initial", "label": "", "kind": "initial", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}},
-        {"id": "sync.awaiting.waiting", "label": "Waiting for Federate to Synchronize", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}},
-        {"id": "sync.awaiting.final", "label": "", "kind": "final", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}}
+        {
+          "id": "sync.awaiting.initial",
+          "label": "",
+          "kind": "initial",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          }
+        },
+        {
+          "id": "sync.awaiting.waiting",
+          "label": "Waiting for Federate to Synchronize",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          }
+        },
+        {
+          "id": "sync.awaiting.final",
+          "label": "",
+          "kind": "final",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          }
+        }
       ],
       "transitions": [
-        {"id": "sync.awaiting.announce", "source_state": "sync.awaiting.initial", "event": "Announce Synchronization Point (Fₛ, L)", "target_state": "sync.awaiting.waiting", "guard": "Fₛ is in synch_set", "clause_id": "clause-4.1.3", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}},
-        {"id": "sync.awaiting.skip", "source_state": "sync.awaiting.initial", "event": "", "target_state": "sync.awaiting.final", "guard": "Fₛ is not in synch_set", "clause_id": "clause-4.1.3", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}},
-        {"id": "sync.awaiting.complete", "source_state": "sync.awaiting.waiting", "event": "Synchronization Point Achieved (Fₛ) or Resign Federation Execution (Fₛ)", "target_state": "sync.awaiting.final", "clause_id": "clause-4.1.3", "source": {"path": "content/clauses/04-federation-management-page-046.tex", "line": 9}}
+        {
+          "id": "sync.awaiting.announce",
+          "source_state": "sync.awaiting.initial",
+          "event": "Announce Synchronization Point (Fₛ, L)",
+          "target_state": "sync.awaiting.waiting",
+          "guard": "Fₛ is in synch_set",
+          "clause_id": "clause-4.1.3",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          },
+          "implementation_ids": [
+            "m16.transition.sync-awaiting-announce"
+          ]
+        },
+        {
+          "id": "sync.awaiting.skip",
+          "source_state": "sync.awaiting.initial",
+          "event": "",
+          "target_state": "sync.awaiting.final",
+          "guard": "Fₛ is not in synch_set",
+          "clause_id": "clause-4.1.3",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          },
+          "implementation_ids": [
+            "m16.transition.sync-awaiting-skip"
+          ]
+        },
+        {
+          "id": "sync.awaiting.complete",
+          "source_state": "sync.awaiting.waiting",
+          "event": "Synchronization Point Achieved (Fₛ) or Resign Federation Execution (Fₛ)",
+          "target_state": "sync.awaiting.final",
+          "clause_id": "clause-4.1.3",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-046.tex",
+            "line": 9
+          },
+          "implementation_ids": [
+            "m16.transition.sync-awaiting-complete"
+          ]
+        }
       ],
       "layout": {
         "engine": "manual",
         "direction": "left-to-right",
         "nodes": {
-          "sync.awaiting.initial": {"x": 0, "y": 1.1},
-          "sync.awaiting.waiting": {"x": 3, "y": 1.1},
-          "sync.awaiting.final": {"x": 6, "y": 1.1}
+          "sync.awaiting.initial": {
+            "x": 0,
+            "y": 1.1
+          },
+          "sync.awaiting.waiting": {
+            "x": 3,
+            "y": 1.1
+          },
+          "sync.awaiting.final": {
+            "x": 6,
+            "y": 1.1
+          }
         },
         "containers": [
-          {"id": "awaiting.frame", "x": -0.5, "y": -0.9, "width": 7.0, "height": 3.7, "title": "Awaiting Synchronization (s, L)", "title_visible": false}
+          {
+            "id": "awaiting.frame",
+            "x": -0.5,
+            "y": -0.9,
+            "width": 7.0,
+            "height": 3.7,
+            "title": "Awaiting Synchronization (s, L)",
+            "title_visible": false
+          }
         ],
         "annotations": [
-          {"id": "awaiting.title", "x": 1.0, "y": 2.45, "text": "Awaiting\nSynchronization (s, L)", "width": 2.2, "align": "left"},
-          {"id": "awaiting.guard", "x": 4.5, "y": 2.45, "text": "[Fₛ is not in synch_set]", "width": 2.7, "align": "center"}
+          {
+            "id": "awaiting.title",
+            "x": 1.0,
+            "y": 2.45,
+            "text": "Awaiting\nSynchronization (s, L)",
+            "width": 2.2,
+            "align": "left"
+          },
+          {
+            "id": "awaiting.guard",
+            "x": 4.5,
+            "y": 2.45,
+            "text": "[Fₛ is not in synch_set]",
+            "width": 2.7,
+            "align": "center"
+          }
         ],
         "transitions": {
-          "sync.awaiting.skip": {"style": "bend-left", "bend": 25, "label_visible": false},
-          "sync.awaiting.announce": {"label": "[Fₛ is in synch_set] /\nAnnounce Synchronization Point (Fₛ, L)", "label_x": 1.25, "label_y": -0.1, "label_width": 2.1},
-          "sync.awaiting.complete": {"label": "Synchronization Point Achieved (Fₛ)\nor Resign Federation Execution (Fₛ)", "label_x": 4.85, "label_y": -0.1, "label_width": 2.2}
+          "sync.awaiting.skip": {
+            "style": "bend-left",
+            "bend": 25,
+            "label_visible": false
+          },
+          "sync.awaiting.announce": {
+            "label": "[Fₛ is in synch_set] /\nAnnounce Synchronization Point (Fₛ, L)",
+            "label_x": 1.25,
+            "label_y": -0.1,
+            "label_width": 2.1
+          },
+          "sync.awaiting.complete": {
+            "label": "Synchronization Point Achieved (Fₛ)\nor Resign Federation Execution (Fₛ)",
+            "label_x": 4.85,
+            "label_y": -0.1,
+            "label_width": 2.2
+          }
         }
       }
     }

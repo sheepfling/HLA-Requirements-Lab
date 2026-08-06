@@ -7,9 +7,11 @@ from collections.abc import Iterable
 from pathlib import Path
 
 try:
+    from scripts.hierarchy_compiler import CompiledHierarchy, compile_hierarchy
     from scripts.latex_renderer import tex_escape
     from scripts.semantic_model import DocumentModel, ImplementationMapping, Requirement, Transition
 except ModuleNotFoundError:  # pragma: no cover - direct script execution
+    from hierarchy_compiler import CompiledHierarchy, compile_hierarchy
     from latex_renderer import tex_escape
     from semantic_model import DocumentModel, ImplementationMapping, Requirement, Transition
 
@@ -46,7 +48,12 @@ def _display_escape(value: str) -> str:
         (r"\}", "}"),
     ):
         value = value.replace(escaped, plain)
-    return tex_escape(value)
+    # The source state-machine notation uses a Unicode subscript ``s`` in
+    # symbols such as Fₛ.  Latin Modern does not contain that glyph, so keep
+    # the notation semantic while emitting a portable LaTeX text subscript.
+    return (
+        tex_escape(value).replace("ₛ", r"\textsubscript{s}").replace("∀", r"\ensuremath{\forall}")
+    )
 
 
 def _field(label: str, value: str) -> str:
@@ -73,13 +80,18 @@ def _heading(level: int, title: str) -> str:
     return f"\\{command}{{{_display_escape(title)}}}"
 
 
-def _render_clause_tree(model: DocumentModel, clause_id: str, document_id: str) -> list[str]:
-    clause = next(item for item in model.clauses if item.id == clause_id)
+def _render_clause_tree(
+    compiled: CompiledHierarchy,
+    clause_id: str,
+    document_id: str,
+) -> list[str]:
+    """Render clauses in the compiler's canonical parent/child order."""
+    clause = compiled.node(clause_id)
     lines = [_anchor(document_id, clause.id), _heading(min(clause.level + 1, 4), clause.title)]
     lines.append(f"{_field('Semantic ID', clause.id)}\\\\")
     lines.append(f"{_field('Source', '')}{_source_ref(clause.source)}")
-    for child in model.children_of(clause.id):
-        lines.extend(_render_clause_tree(model, child.id, document_id))
+    for child_id in clause.child_ids:
+        lines.extend(_render_clause_tree(compiled, child_id, document_id))
     return lines
 
 
@@ -103,10 +115,57 @@ def _render_definitions(model: DocumentModel) -> list[str]:
 
 
 def _render_concepts(model: DocumentModel) -> list[str]:
+    compiled = compile_hierarchy(model)
     lines = [_heading(1, f"Concepts and definitions — {model.document_id}")]
-    for clause in model.root_clauses():
-        lines.extend(_render_clause_tree(model, clause.id, model.document_id))
+    for clause_id in compiled.root_ids:
+        lines.extend(_render_clause_tree(compiled, clause_id, model.document_id))
     lines.extend(_render_definitions(model))
+    lines.extend(_render_tables(model))
+    return lines
+
+
+def _render_tables(model: DocumentModel) -> list[str]:
+    """Render logical table families and their source-owned cells."""
+    lines = [_heading(2, f"{model.document_id}: table families")]
+    if not model.table_families:
+        lines.append(r"\emph{No semantic table families are currently authored for this document.}")
+        return lines
+    tables = {table.id: table for table in model.tables}
+    for family in model.table_families:
+        lines.extend(
+            (
+                _anchor(model.document_id, family.id),
+                _heading(3, family.title),
+                f"{_field('Semantic ID', family.id)}\\\\",
+                f"{_field('Clause', '')}{_clause_link(model, family.clause_id)}\\\\",
+            )
+        )
+        for table_id in family.table_ids:
+            table = tables[table_id]
+            continuation = (
+                _link(model.document_id, table.continued_from)
+                if table.continued_from
+                else r"\emph{root fragment}"
+            )
+            lines.extend(
+                (
+                    _anchor(model.document_id, table.id),
+                    _heading(4, table.caption or table.title or table.id),
+                    f"{_field('Table', table.id)}\\\\",
+                    f"{_field('Logical ID', table.logical_id or table.id)}\\\\",
+                    f"{_field('Continued from', '')}{continuation}\\\\",
+                    f"{_field('Source', '')}{_source_ref(table.source)}",
+                )
+            )
+            lines.extend(
+                _itemize(
+                    f"\\texttt{{{_display_escape(cell.id)}}} "
+                    f"[{cell.row if cell.row is not None else 'unknown'}, "
+                    f"{cell.column if cell.column is not None else 'unknown'}]: "
+                    f"{_display_escape(cell.text)}"
+                    for cell in table.cells
+                )
+            )
     return lines
 
 
@@ -115,6 +174,7 @@ def _render_requirement(requirement: Requirement, model: DocumentModel) -> list[
         _anchor(model.document_id, requirement.id),
         _heading(3, requirement.title),
         f"{_field('Semantic ID', requirement.id)}\\\\",
+        f"{_field('Semantic group', requirement.semantic_group_id or requirement.id)}\\\\",
         f"{_display_escape(requirement.statement)}\\\\",
         f"{_field('Clause', '')}{_clause_link(model, requirement.clause_id)}\\\\",
         f"{_field('Coverage', requirement.coverage_kind)}\\\\",
@@ -163,11 +223,18 @@ def _transition_label(transition: Transition, model: DocumentModel) -> str:
 
 
 def _render_transition(transition: Transition, model: DocumentModel) -> list[str]:
+    coverage = next(
+        (item for item in model.transition_coverage if item.transition_id == transition.id),
+        None,
+    )
     lines = [
         _anchor(model.document_id, transition.id),
         f"\\textbf{{{tex_escape(transition.id)}}}: {_transition_label(transition, model)}\\\\",
         f"{_field('Initiator', transition.initiator)}\\\\",
+        f"{_field('Implementation coverage', coverage.status if coverage else 'unclassified')}\\\\",
     ]
+    if coverage:
+        lines.append(f"{_field('Coverage note', coverage.reason)}\\\\")
     for label, value in (
         ("Guard", transition.guard),
         ("Action", transition.action),
@@ -227,7 +294,7 @@ def _render_state_machines(model: DocumentModel) -> list[str]:
 def _requirement_implementations(
     model: DocumentModel, requirement_id: str
 ) -> tuple[ImplementationMapping, ...]:
-    return tuple(item for item in model.implementations if requirement_id in item.requirement_ids)
+    return model.implementation_mappings_for_requirement(requirement_id)
 
 
 def _render_traceability(model: DocumentModel) -> list[str]:
@@ -308,6 +375,11 @@ def generate_derivative(models: Iterable[DocumentModel], output: Path) -> Path:
         "documents": [model.model_dump(mode="json") for model in ordered_models],
     }
     _write(output / "semantic-model.json", json.dumps(payload, ensure_ascii=False, indent=2))
+    hierarchy_payload = {
+        "schema_version": 1,
+        "documents": [compile_hierarchy(model).model_dump(mode="json") for model in ordered_models],
+    }
+    _write(output / "hierarchy.json", json.dumps(hierarchy_payload, ensure_ascii=False, indent=2))
     derivative = output / "derivative.tex"
     _write(derivative, _render_corpus(ordered_models))
     return derivative

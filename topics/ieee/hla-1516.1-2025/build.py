@@ -16,30 +16,21 @@ from scripts.document_builder import (  # noqa: E402, I001
 )
 from scripts.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE  # noqa: E402
 from scripts.semantic_generation import generate as generate_semantic  # noqa: E402
+from scripts.semantic_model import load_document_model  # noqa: E402
 
 ROOT = Path(__file__).parent
 
 
 def generate_blocks() -> object:
+    model = load_document_model(ROOT, HLA_SOURCE)
     return generate_semantic(
         ROOT,
         ROOT / "output" / "semantic",
         source=HLA_SOURCE,
         dialect=HLA_LATEX_DIALECT,
-        requirement_ids=(
-            "req-federate-connect-before-rti-work",
-            "req-federate-connection-lost",
-            "req-federate-disconnect-after-resign",
-            "req-connect-service-establishes-connection",
-            "req-disconnect-service-terminates-connection",
-            "req-connection-lost-service-behavior",
-            "req-federate-resigned-callback-behavior",
-        ),
-        content_block_ids=(
-            "prose-federate-lifetime-initial-state",
-            "prose-connect-service-infrastructure",
-            "prose-federate-lifetime-parallel-machines",
-        ),
+        requirement_ids=tuple(item.id for item in model.requirements),
+        content_block_ids=(*(item.id for item in model.content_blocks),),
+        content_element_ids=tuple(item.id for item in model.content_elements),
     )
 
 

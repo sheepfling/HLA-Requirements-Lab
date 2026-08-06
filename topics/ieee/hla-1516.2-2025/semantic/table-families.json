@@ -4,11 +4,1050 @@
     {
       "id": "omt-object-model-identification",
       "title": "Object model identification table family",
-      "table_ids": ["m4.p037.t01", "m4.p038.t01"],
+      "table_ids": [
+        "m4.p037.t01",
+        "m4.p038.t01"
+      ],
       "clause_id": "clause-4.1",
       "source": {
         "path": "sections/semantic/clause-4a/page-037.tex",
-        "line": 65
+        "line": 65,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p081-t01",
+      "title": "OMT table family m4.p081.t01",
+      "table_ids": [
+        "m4.p081.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-081.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p082-t01",
+      "title": "OMT table family m4.p082.t01",
+      "table_ids": [
+        "m4.p082.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-082.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p082-t02",
+      "title": "OMT table family m4.p082.t02",
+      "table_ids": [
+        "m4.p082.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-082.tex",
+        "line": 21,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p083-t01",
+      "title": "OMT table family m4.p083.t01",
+      "table_ids": [
+        "m4.p083.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-083.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p084-t01",
+      "title": "OMT table family m4.p084.t01",
+      "table_ids": [
+        "m4.p084.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-084.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p084-t02",
+      "title": "OMT table family m4.p084.t02",
+      "table_ids": [
+        "m4.p084.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-084.tex",
+        "line": 29,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p085-t01",
+      "title": "OMT table family m4.p085.t01",
+      "table_ids": [
+        "m4.p085.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-085.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p085-t02",
+      "title": "OMT table family m4.p085.t02",
+      "table_ids": [
+        "m4.p085.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-085.tex",
+        "line": 30,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p086-t01",
+      "title": "OMT table family m4.p086.t01",
+      "table_ids": [
+        "m4.p086.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-086.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m4-p086-t02",
+      "title": "OMT table family m4.p086.t02",
+      "table_ids": [
+        "m4.p086.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-086.tex",
+        "line": 29,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p119-t01",
+      "title": "G.2.1 Object model identification table",
+      "table_ids": [
+        "m7.p119.t01"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-119.tex",
+        "line": 74,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p119-t02",
+      "title": "G.2.2 Object class structure table",
+      "table_ids": [
+        "m7.p119.t02"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-119.tex",
+        "line": 78,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p120-t01",
+      "title": "OMT table family m7.p120.t01",
+      "table_ids": [
+        "m7.p120.t01"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-120.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p120-t02",
+      "title": "G.2.4 Attribute table",
+      "table_ids": [
+        "m7.p120.t02"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-120.tex",
+        "line": 98,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p120-t03",
+      "title": "G.2.5 Directed interaction table",
+      "table_ids": [
+        "m7.p120.t03"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-120.tex",
+        "line": 106,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p120-t04",
+      "title": "G.2.6 Parameter table",
+      "table_ids": [
+        "m7.p120.t04"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-120.tex",
+        "line": 114,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p120-t05",
+      "title": "G.2.7 Dimension table",
+      "table_ids": [
+        "m7.p120.t05"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-120.tex",
+        "line": 122,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p121-t01",
+      "title": "G.2.8 Switches table",
+      "table_ids": [
+        "m7.p121.t01"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 76,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p121-t02",
+      "title": "G.2.9 Simple data type table",
+      "table_ids": [
+        "m7.p121.t02"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 84,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p121-t03",
+      "title": "G.2.10 Enumerated data type table",
+      "table_ids": [
+        "m7.p121.t03"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 92,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p121-t04",
+      "title": "G.2.11 Variant record data type table",
+      "table_ids": [
+        "m7.p121.t04"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 100,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p121-t05",
+      "title": "G.2.12 Lexicon",
+      "table_ids": [
+        "m7.p121.t05"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 108,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p122-t01",
+      "title": "OMT table family m7.p122.t01",
+      "table_ids": [
+        "m7.p122.t01"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p122-t02",
+      "title": "OMT table family m7.p122.t02",
+      "table_ids": [
+        "m7.p122.t02"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 13,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-m7-p122-t03",
+      "title": "OMT table family m7.p122.t03",
+      "table_ids": [
+        "m7.p122.t03"
+      ],
+      "clause_id": "clause-G",
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 22,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-1",
+      "title": "Table 1—OMT metadata descriptions",
+      "table_ids": [
+        "m4.p035.t01",
+        "m4.p036.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-035.tex",
+        "line": 71,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-10",
+      "title": "Table 10—Attribute table",
+      "table_ids": [
+        "m4.p048.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-048.tex",
+        "line": 112,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-11",
+      "title": "Table 11—Attribute table example",
+      "table_ids": [
+        "m4.p051.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-051.tex",
+        "line": 165,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-12",
+      "title": "Table 12—Parameter table",
+      "table_ids": [
+        "m4.p053.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-053.tex",
+        "line": 86,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-13",
+      "title": "Table 13—Parameter table example",
+      "table_ids": [
+        "m4.p054.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-054.tex",
+        "line": 68,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-14",
+      "title": "Table 14—Dimension table",
+      "table_ids": [
+        "m4.p055.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-055.tex",
+        "line": 72,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-15",
+      "title": "Table 15—Dimension table example",
+      "table_ids": [
+        "m4.p057.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-057.tex",
+        "line": 73,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-16",
+      "title": "Table 16—Time representation table",
+      "table_ids": [
+        "m4.p059.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-059.tex",
+        "line": 87,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-17",
+      "title": "Table 17—Time representation table example",
+      "table_ids": [
+        "m4.p059.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-059.tex",
+        "line": 127,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-18",
+      "title": "Table 18—User-supplied tag tables",
+      "table_ids": [
+        "m4.p060.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-060.tex",
+        "line": 112,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-19",
+      "title": "Table 19—Federate- and RTI-initiated services",
+      "table_ids": [
+        "m4.p060.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-060.tex",
+        "line": 108,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-20",
+      "title": "Table 20—User-supplied tag table example",
+      "table_ids": [
+        "m4.p061.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-061.tex",
+        "line": 93,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-21",
+      "title": "Table 21—Synchronization table",
+      "table_ids": [
+        "m4.p061.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-061.tex",
+        "line": 201,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-22",
+      "title": "Table 22—Synchronization table example",
+      "table_ids": [
+        "m4.p062.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-062.tex",
+        "line": 86,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-23",
+      "title": "Table 23—Transportation type table",
+      "table_ids": [
+        "m4.p063.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 78,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-24",
+      "title": "Table 24—Transportation type table example",
+      "table_ids": [
+        "m4.p063.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 130,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-25",
+      "title": "Table 25—Update Rate table",
+      "table_ids": [
+        "m4.p064.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-064.tex",
+        "line": 73,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-26",
+      "title": "Table 26—Update Rate table example",
+      "table_ids": [
+        "m4.p064.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-064.tex",
+        "line": 109,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-27",
+      "title": "Table 27—Switches table",
+      "table_ids": [
+        "m4.p065.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-065.tex",
+        "line": 62,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-28",
+      "title": "Table 28—Switches table example",
+      "table_ids": [
+        "m4.p068.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4b/page-068.tex",
+        "line": 75,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-29",
+      "title": "Table 29—Basic data representation table",
+      "table_ids": [
+        "m4.p069.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-069.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-30",
+      "title": "Table 30—Basic data representation table example",
+      "table_ids": [
+        "m4.p070.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-070.tex",
+        "line": 113,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-31",
+      "title": "Table 31—Simple data type table",
+      "table_ids": [
+        "m4.p071.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 88,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-32",
+      "title": "Table 32—Simple data type table example",
+      "table_ids": [
+        "m4.p072.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 131,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-33",
+      "title": "Table 33—Enumerated data type table",
+      "table_ids": [
+        "m4.p072.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 431,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-34",
+      "title": "Table 34—Enumerated data type table example",
+      "table_ids": [
+        "m4.p073.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 106,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-35",
+      "title": "Table 35—Array data type table",
+      "table_ids": [
+        "m4.p074.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-074.tex",
+        "line": 79,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-36",
+      "title": "Table 36—Array data type table example",
+      "table_ids": [
+        "m4.p075.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 95,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-37",
+      "title": "Table 37—Fixed record data type table",
+      "table_ids": [
+        "m4.p075.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 247,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-38",
+      "title": "Table 38—Fixed record data type table example",
+      "table_ids": [
+        "m4.p076.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-076.tex",
+        "line": 83,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-39",
+      "title": "Table 39—Variant record data type table",
+      "table_ids": [
+        "m4.p077.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-077.tex",
+        "line": 89,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-4",
+      "title": "Table 4—Object class structure table",
+      "table_ids": [
+        "m4.p041.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-041.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-40",
+      "title": "Table 40—Variant record data type table example",
+      "table_ids": [
+        "m4.p078.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-078.tex",
+        "line": 75,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-41",
+      "title": "Table 41—Reference data type table",
+      "table_ids": [
+        "m4.p079.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-079.tex",
+        "line": 80,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-42",
+      "title": "Table 42—Reference data type table examples",
+      "table_ids": [
+        "m4.p079.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-079.tex",
+        "line": 144,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-43",
+      "title": "Table 43—Octet boundary values of predefined basic data",
+      "table_ids": [
+        "m4.p080.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-080.tex",
+        "line": 84,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-44",
+      "title": "Table 44—Notes table",
+      "table_ids": [
+        "m4.p087.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 55,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-45",
+      "title": "Table 45—Notes table example",
+      "table_ids": [
+        "m4.p087.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-46",
+      "title": "Table 46—Object class definition table",
+      "table_ids": [
+        "m5.p088.t01"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-088.tex",
+        "line": 77,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-47",
+      "title": "Table 47—Object class definition table example",
+      "table_ids": [
+        "m5.p088.t02"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-088.tex",
+        "line": 113,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-48",
+      "title": "Table 48—Interaction class definition table",
+      "table_ids": [
+        "m5.p089.t01"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 72,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-49",
+      "title": "Table 49—Interaction class definition table example",
+      "table_ids": [
+        "m5.p089.t02"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 108,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-5",
+      "title": "Table 5—Object class structure table example",
+      "table_ids": [
+        "m4.p043.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-043.tex",
+        "line": 128,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-50",
+      "title": "Table 50—Attribute definition table",
+      "table_ids": [
+        "m5.p089.t03"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 152,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-51",
+      "title": "Table 51—Attribute definition table example",
+      "table_ids": [
+        "m5.p090.t01"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 84,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-52",
+      "title": "Table 52—Parameter definition table",
+      "table_ids": [
+        "m5.p090.t02"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 144,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-53",
+      "title": "Table 53—Parameter definition table example",
+      "table_ids": [
+        "m5.p090.t03"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 196,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-54",
+      "title": "Table 54—Interface specification services usage table",
+      "table_ids": [
+        "m5.p096.t01",
+        "m5.p097.t01",
+        "m5.p098.t01",
+        "m5.p099.t01",
+        "m5.p100.t01"
+      ],
+      "clause_id": "clause-5",
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-096.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-55",
+      "title": "Table 55—Interface specification services usage table example",
+      "table_ids": [
+        "m6.p101.t01"
+      ],
+      "clause_id": "clause-7",
+      "source": {
+        "path": "sections/semantic/clause-7-annexes-a-c/page-101.tex",
+        "line": 65,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-56",
+      "title": "Table 56—FOM and SOM module merge results",
+      "table_ids": [
+        "m6.p102.t01",
+        "m6.p103.t01",
+        "m6.p104.t01",
+        "m6.p105.t01"
+      ],
+      "clause_id": "clause-7",
+      "source": {
+        "path": "sections/semantic/clause-7-annexes-a-c/page-102.tex",
+        "line": 28,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-6",
+      "title": "Table 6—Interaction class structure table",
+      "table_ids": [
+        "m4.p044.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-044.tex",
+        "line": 77,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-7",
+      "title": "Table 7—Interaction class structure table example",
+      "table_ids": [
+        "m4.p046.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-046.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-8",
+      "title": "Table 8—Directed interaction table",
+      "table_ids": [
+        "m4.p046.t02"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-046.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "id": "omt-table-9",
+      "title": "Table 9—Directed interaction table",
+      "table_ids": [
+        "m4.p047.t01"
+      ],
+      "clause_id": "clause-4",
+      "source": {
+        "path": "sections/semantic/clause-4a/page-047.tex",
+        "line": 46,
+        "end_line": null
       }
     }
   ]

@@ -57,7 +57,8 @@ def apply(input_pdf: Path, manifest_path: Path, output_pdf: Path) -> None:
         expected_pages = int(payload["page_count"])
         if document.page_count != expected_pages:
             raise ValueError(
-                f"Page-count mismatch: PDF has {document.page_count}, manifest expects {expected_pages}"
+                "Page-count mismatch: "
+                f"PDF has {document.page_count}, manifest expects {expected_pages}"
             )
         delete_existing_links(document)
         document.set_toc(payload["outline"])

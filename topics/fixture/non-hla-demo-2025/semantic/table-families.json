@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "table_families": [
+    {
+      "id": "demo-table-family",
+      "title": "Widget mapping",
+      "table_ids": ["demo.t1"],
+      "clause_id": "clause-1.1",
+      "source": {
+        "path": "source/semantic.tex",
+        "line": 13
+      }
+    }
+  ]
+}

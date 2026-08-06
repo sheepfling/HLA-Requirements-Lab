@@ -5,64 +5,306 @@
       "id": "federate-connection-reconnection",
       "title": "Federate Connection and Reconnection States",
       "clause_id": "clause-12.13.4.4",
-      "source": {"path": "content/clauses/12-programming-language-mappings-page-399.tex", "line": 114},
-      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p400-xref13912.png", "page": 400, "xref": "13912", "caption": "Figure 24---Federate Connection and Reconnection States"},
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-399.tex",
+        "line": 114
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p400-xref13912.png",
+        "page": 400,
+        "xref": "13912",
+        "caption": "Figure 24---Federate Connection and Reconnection States"
+      },
       "states": [
-        {"id": "connection.initial", "label": "", "kind": "initial"},
-        {"id": "connection.no-session", "label": "No\nSession"},
-        {"id": "connection.initiate-session", "label": "Initiate\nSession"},
-        {"id": "connection.valid-session", "label": "Valid\nSession"},
-        {"id": "connection.terminate-session", "label": "Terminate\nSession"},
-        {"id": "connection.trying-reconnect", "label": "Trying to\nReconnect"},
-        {"id": "connection.resending-messages", "label": "Resending\nMessages"},
-        {"id": "connection.final-terminated", "label": "", "kind": "final"},
-        {"id": "connection.final-initiate-fail", "label": "", "kind": "final"},
-        {"id": "connection.final-reconnect-fail", "label": "", "kind": "final"},
-        {"id": "connection.final-resend-fail", "label": "", "kind": "final"}
+        {
+          "id": "connection.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "connection.no-session",
+          "label": "No\nSession"
+        },
+        {
+          "id": "connection.initiate-session",
+          "label": "Initiate\nSession"
+        },
+        {
+          "id": "connection.valid-session",
+          "label": "Valid\nSession"
+        },
+        {
+          "id": "connection.terminate-session",
+          "label": "Terminate\nSession"
+        },
+        {
+          "id": "connection.trying-reconnect",
+          "label": "Trying to\nReconnect"
+        },
+        {
+          "id": "connection.resending-messages",
+          "label": "Resending\nMessages"
+        },
+        {
+          "id": "connection.final-terminated",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "connection.final-initiate-fail",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "connection.final-reconnect-fail",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "connection.final-resend-fail",
+          "label": "",
+          "kind": "final"
+        }
       ],
       "transitions": [
-        {"id": "connection.start", "source_state": "connection.initial", "event": "", "target_state": "connection.no-session", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.new-session", "source_state": "connection.no-session", "event": "New session request", "target_state": "connection.initiate-session", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.session-success", "source_state": "connection.initiate-session", "event": "Success", "target_state": "connection.valid-session", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.session-fail", "source_state": "connection.initiate-session", "event": "Fail", "target_state": "connection.final-initiate-fail", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.termination-request", "source_state": "connection.valid-session", "event": "Termination Request", "target_state": "connection.terminate-session", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.terminated", "source_state": "connection.terminate-session", "event": "", "target_state": "connection.final-terminated", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.broken", "source_state": "connection.valid-session", "event": "Broken socket / Unresponsive / Timeout", "target_state": "connection.trying-reconnect", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.reconnect-loop", "source_state": "connection.trying-reconnect", "event": "", "target_state": "connection.trying-reconnect", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.reconnect-success", "source_state": "connection.trying-reconnect", "event": "Success", "target_state": "connection.resending-messages", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.reconnect-fail", "source_state": "connection.trying-reconnect", "event": "Timeout or Fail", "target_state": "connection.final-reconnect-fail", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.resend-success", "source_state": "connection.resending-messages", "event": "Success", "target_state": "connection.valid-session", "clause_id": "clause-12.13.4.4"},
-        {"id": "connection.resend-fail", "source_state": "connection.resending-messages", "event": "Fail", "target_state": "connection.final-resend-fail", "clause_id": "clause-12.13.4.4"}
+        {
+          "id": "connection.start",
+          "source_state": "connection.initial",
+          "event": "",
+          "target_state": "connection.no-session",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-start"
+          ]
+        },
+        {
+          "id": "connection.new-session",
+          "source_state": "connection.no-session",
+          "event": "New session request",
+          "target_state": "connection.initiate-session",
+          "clause_id": "clause-12.13.4.4",
+          "requirement_ids": [
+            "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13",
+            "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13"
+          ],
+          "implementation_ids": [
+            "m16.transition.connection-new-session"
+          ]
+        },
+        {
+          "id": "connection.session-success",
+          "source_state": "connection.initiate-session",
+          "event": "Success",
+          "target_state": "connection.valid-session",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-session-success"
+          ]
+        },
+        {
+          "id": "connection.session-fail",
+          "source_state": "connection.initiate-session",
+          "event": "Fail",
+          "target_state": "connection.final-initiate-fail",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-session-fail"
+          ]
+        },
+        {
+          "id": "connection.termination-request",
+          "source_state": "connection.valid-session",
+          "event": "Termination Request",
+          "target_state": "connection.terminate-session",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-termination-request"
+          ]
+        },
+        {
+          "id": "connection.terminated",
+          "source_state": "connection.terminate-session",
+          "event": "",
+          "target_state": "connection.final-terminated",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-terminated"
+          ]
+        },
+        {
+          "id": "connection.broken",
+          "source_state": "connection.valid-session",
+          "event": "Broken socket / Unresponsive / Timeout",
+          "target_state": "connection.trying-reconnect",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-broken"
+          ]
+        },
+        {
+          "id": "connection.reconnect-loop",
+          "source_state": "connection.trying-reconnect",
+          "event": "",
+          "target_state": "connection.trying-reconnect",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-reconnect-loop"
+          ]
+        },
+        {
+          "id": "connection.reconnect-success",
+          "source_state": "connection.trying-reconnect",
+          "event": "Success",
+          "target_state": "connection.resending-messages",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-reconnect-success"
+          ]
+        },
+        {
+          "id": "connection.reconnect-fail",
+          "source_state": "connection.trying-reconnect",
+          "event": "Timeout or Fail",
+          "target_state": "connection.final-reconnect-fail",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-reconnect-fail"
+          ]
+        },
+        {
+          "id": "connection.resend-success",
+          "source_state": "connection.resending-messages",
+          "event": "Success",
+          "target_state": "connection.valid-session",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-resend-success"
+          ]
+        },
+        {
+          "id": "connection.resend-fail",
+          "source_state": "connection.resending-messages",
+          "event": "Fail",
+          "target_state": "connection.final-resend-fail",
+          "clause_id": "clause-12.13.4.4",
+          "implementation_ids": [
+            "m16.transition.connection-resend-fail"
+          ]
+        }
       ],
-      "initial_state_ids": ["connection.initial"],
+      "initial_state_ids": [
+        "connection.initial"
+      ],
       "layout": {
         "engine": "manual",
         "direction": "left-to-right",
         "edge_label_font": "tiny",
         "nodes": {
-          "connection.initial": {"x": 0, "y": 2},
-          "connection.no-session": {"x": 2.5, "y": 2},
-          "connection.initiate-session": {"x": 5.8, "y": 2},
-          "connection.valid-session": {"x": 9.1, "y": 2},
-          "connection.terminate-session": {"x": 12.4, "y": 2},
-          "connection.trying-reconnect": {"x": 9.1, "y": -1.2},
-          "connection.resending-messages": {"x": 12.4, "y": -1.2},
-          "connection.final-terminated": {"x": 15.5, "y": 2},
-          "connection.final-initiate-fail": {"x": 5.8, "y": 0},
-          "connection.final-reconnect-fail": {"x": 9.1, "y": -3.2},
-          "connection.final-resend-fail": {"x": 12.4, "y": -3.2}
+          "connection.initial": {
+            "x": 0,
+            "y": 2
+          },
+          "connection.no-session": {
+            "x": 2.5,
+            "y": 2
+          },
+          "connection.initiate-session": {
+            "x": 5.8,
+            "y": 2
+          },
+          "connection.valid-session": {
+            "x": 9.1,
+            "y": 2
+          },
+          "connection.terminate-session": {
+            "x": 12.4,
+            "y": 2
+          },
+          "connection.trying-reconnect": {
+            "x": 9.1,
+            "y": -1.2
+          },
+          "connection.resending-messages": {
+            "x": 12.4,
+            "y": -1.2
+          },
+          "connection.final-terminated": {
+            "x": 15.5,
+            "y": 2
+          },
+          "connection.final-initiate-fail": {
+            "x": 5.8,
+            "y": 0
+          },
+          "connection.final-reconnect-fail": {
+            "x": 9.1,
+            "y": -3.2
+          },
+          "connection.final-resend-fail": {
+            "x": 12.4,
+            "y": -3.2
+          }
         },
         "transitions": {
-          "connection.new-session": {"label": "New session request", "label_x": 4.15, "label_y": 2.85, "label_width": 2.0},
-          "connection.session-success": {"label": "Success", "label_x": 7.45, "label_y": 2.85, "label_width": 1.0},
-          "connection.session-fail": {"label": "Fail", "label_x": 5.8, "label_y": 0.65, "label_width": 0.9},
-          "connection.termination-request": {"label": "Termination Request", "label_x": 10.75, "label_y": 2.85, "label_width": 1.8},
-          "connection.broken": {"label": "Broken socket /\nUnresponsive / Timeout", "label_x": 9.0, "label_y": 0.15, "label_width": 2.2},
-          "connection.reconnect-loop": {"style": "loop", "loop_direction": "left", "label_visible": false},
-          "connection.reconnect-success": {"label": "Success", "label_x": 10.75, "label_y": -0.25, "label_width": 1.0},
-          "connection.reconnect-fail": {"label": "Timeout or Fail", "label_x": 9.1, "label_y": -2.2, "label_width": 1.5},
-          "connection.resend-success": {"label": "Success", "label_x": 10.8, "label_y": 0.45, "label_width": 1.0},
-          "connection.resend-fail": {"label": "Fail", "label_x": 12.4, "label_y": -2.2, "label_width": 0.9}
+          "connection.new-session": {
+            "label": "New session request",
+            "label_x": 4.15,
+            "label_y": 2.85,
+            "label_width": 2.0
+          },
+          "connection.session-success": {
+            "label": "Success",
+            "label_x": 7.45,
+            "label_y": 2.85,
+            "label_width": 1.0
+          },
+          "connection.session-fail": {
+            "label": "Fail",
+            "label_x": 5.8,
+            "label_y": 0.65,
+            "label_width": 0.9
+          },
+          "connection.termination-request": {
+            "label": "Termination Request",
+            "label_x": 10.75,
+            "label_y": 2.85,
+            "label_width": 1.8
+          },
+          "connection.broken": {
+            "label": "Broken socket /\nUnresponsive / Timeout",
+            "label_x": 9.0,
+            "label_y": 0.15,
+            "label_width": 2.2
+          },
+          "connection.reconnect-loop": {
+            "style": "loop",
+            "loop_direction": "left",
+            "label_visible": false
+          },
+          "connection.reconnect-success": {
+            "label": "Success",
+            "label_x": 10.75,
+            "label_y": -0.25,
+            "label_width": 1.0
+          },
+          "connection.reconnect-fail": {
+            "label": "Timeout or Fail",
+            "label_x": 9.1,
+            "label_y": -2.2,
+            "label_width": 1.5
+          },
+          "connection.resend-success": {
+            "label": "Success",
+            "label_x": 10.8,
+            "label_y": 0.45,
+            "label_width": 1.0
+          },
+          "connection.resend-fail": {
+            "label": "Fail",
+            "label_x": 12.4,
+            "label_y": -2.2,
+            "label_width": 0.9
+          }
         }
       },
       "notes": "Figure 24 is an overview state machine for the HLA federate protocol session. The source distinguishes normal setup/termination from broken-socket recovery, retransmission, and terminal failure paths; all visible states and branches are represented in this first pass."

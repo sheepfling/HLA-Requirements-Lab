@@ -28,6 +28,7 @@ jobs:
       - run: python scripts/build.py list
       - run: python scripts/semantic_metrics.py --json
       - run: python scripts/semantic_dashboard.py --json
+      - run: python scripts/semantic_coverage.py --check --json
       - run: python scripts/export_state_machine.py topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json --output .tmp/ci-state-machines --format both
       - run: python scripts/review_state_machines.py --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/ci-reviews --artifacts .tmp/ci-review-artifacts --graphviz
       - run: git diff --exit-code
@@ -49,5 +50,5 @@ jobs:
       - run: python -m pip install -e .
       - run: python -m scripts.review_state_machines --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/release-reviews --artifacts .tmp/release-review-artifacts --graphviz
       - run: python -m scripts.semantic_dashboard --json
-      - run: python -m scripts.release_check --build --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --json
+      - run: python -m scripts.release_check --build --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --authority-manifest data/semantic/authority.json --json
       - run: git diff --exit-code

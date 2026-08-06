@@ -1,0 +1,16 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+% This file owns layout only. Semantic prose is generated from source/semantic.tex.
+\newcommand{\DemoClauseHeading}[2]{\section*{#2}}
+\newcommand{\DemoSubclauseHeading}[2]{\subsection*{#2}}
+\newenvironment{demodefinition}[2]{\par\medskip\noindent\textbf{#2}: }{\par\medskip}
+\newcommand{\DemoDetailedRuleHeading}[2]{\subsubsection*{#2}\label{#1}}
+\newcommand{\DemoNormativeRuleStatement}[1]{\par\noindent\textbf{Requirement:} #1\par}
+
+\begin{document}
+\input{output/semantic/semantic-manifest}
+\input{output/semantic/definition-definition-widget}
+\input{output/semantic/requirement-requirement-widget-ready}
+\end{document}

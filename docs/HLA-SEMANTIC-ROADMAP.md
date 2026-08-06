@@ -308,7 +308,7 @@ vertical slices or the reusable build-integration boundary delivered by M5.
 ### 8. Post-M7 source-of-truth work
 
 The remaining content migration, semantic coverage, authority-switch, and
-non-HLA reuse work is now specified as M8-M13 in
+non-HLA reuse work is now specified as M8-M17 in
 [`DATA-DRIVEN-DELIVERABLES.md`](DATA-DRIVEN-DELIVERABLES.md). M6 generated the
 first derivative and M7 completed the full PDF/CI release checks; the next
 work is to increase semantic coverage rather than add another parallel

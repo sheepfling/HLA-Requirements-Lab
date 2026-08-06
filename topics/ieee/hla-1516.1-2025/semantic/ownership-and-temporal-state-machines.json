@@ -5,113 +5,626 @@
       "id": "establishing-ownership",
       "title": "Establishing Ownership of Instance Attribute (i, k, j)",
       "clause_id": "clause-7.1.2",
-      "source": {"path": "content/clauses/07-ownership-management-page-149.tex", "line": 6},
-      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p150-xref13892.png", "page": 150, "xref": "13892", "caption": "Figure 16---Establishing ownership of instance attribute (i, k, j)"},
+      "source": {
+        "path": "content/clauses/07-ownership-management-page-149.tex",
+        "line": 6
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p150-xref13892.png",
+        "page": 150,
+        "xref": "13892",
+        "caption": "Figure 16---Establishing ownership of instance attribute (i, k, j)"
+      },
       "states": [
-        {"id": "establishing.initial", "label": "", "kind": "initial"},
-        {"id": "establishing.choice", "label": "C", "kind": "choice"},
-        {"id": "establishing.owned", "label": "Owned (i, k, j)", "kind": "composite"},
-        {"id": "establishing.owned.not-divesting", "label": "Not Divesting", "parent_id": "establishing.owned"},
-        {"id": "establishing.owned.waiting", "label": "Waiting for a New\nOwner to be Found", "parent_id": "establishing.owned"},
-        {"id": "establishing.owned.completing", "label": "Completing Divestiture", "parent_id": "establishing.owned"},
-        {"id": "establishing.owned.history", "label": "H", "kind": "history", "parent_id": "establishing.owned"},
-        {"id": "establishing.unowned", "label": "Unowned (i, k, j)", "kind": "composite"},
-        {"id": "establishing.unowned.choice", "label": "C", "kind": "choice", "parent_id": "establishing.unowned"},
-        {"id": "establishing.unowned.not-able", "label": "Not Able\nto Acquire", "parent_id": "establishing.unowned"},
-        {"id": "establishing.unowned.able", "label": "Able to Acquire", "kind": "composite", "parent_id": "establishing.unowned"},
-        {"id": "establishing.unowned.able.initial", "label": "", "kind": "initial", "parent_id": "establishing.unowned.able"},
-        {"id": "establishing.unowned.able.pending", "label": "Acquisition Pending", "parent_id": "establishing.unowned.able"},
-        {"id": "establishing.unowned.able.intrusive", "label": "Intrusive Acquisition", "kind": "composite", "parent_id": "establishing.unowned.able"},
-        {"id": "establishing.unowned.able.trying-cancel", "label": "Trying to\nCancel Acquisition\n(i, k, j)", "parent_id": "establishing.unowned.able.intrusive"},
-        {"id": "establishing.unowned.able.confirm-cancel", "label": "Confirm Attribute\nOwnership Acquisition\nCancellation", "parent_id": "establishing.unowned.able.intrusive"},
-        {"id": "establishing.unowned.able.not-acquiring", "label": "Not\nAcquiring", "parent_id": "establishing.unowned.able.intrusive"},
-        {"id": "establishing.unowned.able.acquiring", "label": "Acquiring\n(i, k, j)", "parent_id": "establishing.unowned.able.intrusive"},
-        {"id": "establishing.unowned.able.history-intrusive", "label": "H", "kind": "history", "parent_id": "establishing.unowned.able.intrusive"},
-        {"id": "establishing.unowned.able.non-intrusive", "label": "Non-intrusive Acquisition", "kind": "composite", "parent_id": "establishing.unowned.able"},
-        {"id": "establishing.unowned.able.willing", "label": "Willing to\nAcquire (i, k, j)", "parent_id": "establishing.unowned.able.non-intrusive"},
-        {"id": "establishing.unowned.able.not-trying", "label": "Not Trying\nto Acquire", "parent_id": "establishing.unowned.able.non-intrusive"},
-        {"id": "establishing.unowned.able.history-non-intrusive", "label": "H", "kind": "history", "parent_id": "establishing.unowned.able.non-intrusive"}
+        {
+          "id": "establishing.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "establishing.choice",
+          "label": "C",
+          "kind": "choice"
+        },
+        {
+          "id": "establishing.owned",
+          "label": "Owned (i, k, j)",
+          "kind": "composite"
+        },
+        {
+          "id": "establishing.owned.not-divesting",
+          "label": "Not Divesting",
+          "parent_id": "establishing.owned"
+        },
+        {
+          "id": "establishing.owned.waiting",
+          "label": "Waiting for a New\nOwner to be Found",
+          "parent_id": "establishing.owned"
+        },
+        {
+          "id": "establishing.owned.completing",
+          "label": "Completing Divestiture",
+          "parent_id": "establishing.owned"
+        },
+        {
+          "id": "establishing.owned.history",
+          "label": "H",
+          "kind": "history",
+          "parent_id": "establishing.owned"
+        },
+        {
+          "id": "establishing.unowned",
+          "label": "Unowned (i, k, j)",
+          "kind": "composite"
+        },
+        {
+          "id": "establishing.unowned.choice",
+          "label": "C",
+          "kind": "choice",
+          "parent_id": "establishing.unowned"
+        },
+        {
+          "id": "establishing.unowned.not-able",
+          "label": "Not Able\nto Acquire",
+          "parent_id": "establishing.unowned"
+        },
+        {
+          "id": "establishing.unowned.able",
+          "label": "Able to Acquire",
+          "kind": "composite",
+          "parent_id": "establishing.unowned"
+        },
+        {
+          "id": "establishing.unowned.able.initial",
+          "label": "",
+          "kind": "initial",
+          "parent_id": "establishing.unowned.able"
+        },
+        {
+          "id": "establishing.unowned.able.pending",
+          "label": "Acquisition Pending",
+          "parent_id": "establishing.unowned.able"
+        },
+        {
+          "id": "establishing.unowned.able.intrusive",
+          "label": "Intrusive Acquisition",
+          "kind": "composite",
+          "parent_id": "establishing.unowned.able"
+        },
+        {
+          "id": "establishing.unowned.able.trying-cancel",
+          "label": "Trying to\nCancel Acquisition\n(i, k, j)",
+          "parent_id": "establishing.unowned.able.intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.confirm-cancel",
+          "label": "Confirm Attribute\nOwnership Acquisition\nCancellation",
+          "parent_id": "establishing.unowned.able.intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.not-acquiring",
+          "label": "Not\nAcquiring",
+          "parent_id": "establishing.unowned.able.intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.acquiring",
+          "label": "Acquiring\n(i, k, j)",
+          "parent_id": "establishing.unowned.able.intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.history-intrusive",
+          "label": "H",
+          "kind": "history",
+          "parent_id": "establishing.unowned.able.intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.non-intrusive",
+          "label": "Non-intrusive Acquisition",
+          "kind": "composite",
+          "parent_id": "establishing.unowned.able"
+        },
+        {
+          "id": "establishing.unowned.able.willing",
+          "label": "Willing to\nAcquire (i, k, j)",
+          "parent_id": "establishing.unowned.able.non-intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.not-trying",
+          "label": "Not Trying\nto Acquire",
+          "parent_id": "establishing.unowned.able.non-intrusive"
+        },
+        {
+          "id": "establishing.unowned.able.history-non-intrusive",
+          "label": "H",
+          "kind": "history",
+          "parent_id": "establishing.unowned.able.non-intrusive"
+        }
       ],
       "transitions": [
-        {"id": "establishing.enter-choice", "source_state": "establishing.initial", "event": "", "target_state": "establishing.choice", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.register", "source_state": "establishing.choice", "event": "Register", "guard": "in \"Published (i, j)\"", "target_state": "establishing.owned.not-divesting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.discover", "source_state": "establishing.choice", "event": "Discover", "guard": "in \"Unpublished (i, j)\"", "target_state": "establishing.unowned.not-able", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.release-request", "source_state": "establishing.owned.not-divesting", "event": "Request Attribute Ownership Release †", "target_state": "establishing.owned.not-divesting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.release-denied", "source_state": "establishing.owned.not-divesting", "event": "Attribute Ownership Release Denied", "target_state": "establishing.owned.not-divesting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.negotiated-divestiture", "source_state": "establishing.owned.not-divesting", "event": "Negotiated Attribute Ownership Divestiture", "target_state": "establishing.owned.waiting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.cancel-divestiture", "source_state": "establishing.owned.waiting", "event": "Cancel Negotiated Attribute Ownership Divestiture", "target_state": "establishing.owned.completing", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.confirm-divestiture-failure", "source_state": "establishing.owned.completing", "event": "Confirm Divestiture", "guard": "failure: no Acquisition Pending, or Federate Willing To Acquire exception", "target_state": "establishing.owned.waiting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.confirm-divestiture-success", "source_state": "establishing.owned.completing", "event": "Confirm Divestiture", "guard": "success", "target_state": "establishing.unowned.choice", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.unowned-to-able", "source_state": "establishing.unowned.not-able", "event": "Attribute Ownership Acquisition Notification †", "target_state": "establishing.unowned.able.initial", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.published-to-not-able", "source_state": "establishing.unowned.not-able", "event": "", "guard": "in \"Published (i, j)\"", "target_state": "establishing.unowned.able.initial", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.unpublished-to-not-able", "source_state": "establishing.unowned.not-able", "event": "", "guard": "in \"Unpublished (i, j)\"", "target_state": "establishing.unowned.not-able", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.able-enter", "source_state": "establishing.unowned.able.initial", "event": "", "target_state": "establishing.unowned.able.pending", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.try-acquire", "source_state": "establishing.unowned.able.pending", "event": "Request Attribute Ownership Acquisition †", "target_state": "establishing.unowned.able.acquiring", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.cancel-acquisition", "source_state": "establishing.unowned.able.acquiring", "event": "Cancel Attribute Ownership Acquisition", "target_state": "establishing.unowned.able.trying-cancel", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.confirm-cancel", "source_state": "establishing.unowned.able.trying-cancel", "event": "Confirm Attribute Ownership Acquisition Cancellation", "target_state": "establishing.unowned.able.not-acquiring", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.acquire-success", "source_state": "establishing.unowned.able.acquiring", "event": "Attribute Ownership Acquisition Notification †", "target_state": "establishing.owned.not-divesting", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.willing", "source_state": "establishing.unowned.able.not-trying", "event": "Attribute Ownership Assumption †", "target_state": "establishing.unowned.able.willing", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.not-willing", "source_state": "establishing.unowned.able.willing", "event": "Attribute Ownership Unavailable †", "target_state": "establishing.unowned.able.not-trying", "clause_id": "clause-7.1.2"},
-        {"id": "establishing.unowned-to-owned", "source_state": "establishing.unowned", "event": "Attribute Ownership Acquisition Notification †", "target_state": "establishing.owned.not-divesting", "clause_id": "clause-7.1.2"}
+        {
+          "id": "establishing.enter-choice",
+          "source_state": "establishing.initial",
+          "event": "",
+          "target_state": "establishing.choice",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-enter-choice"
+          ]
+        },
+        {
+          "id": "establishing.register",
+          "source_state": "establishing.choice",
+          "event": "Register",
+          "guard": "in \"Published (i, j)\"",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-register"
+          ]
+        },
+        {
+          "id": "establishing.discover",
+          "source_state": "establishing.choice",
+          "event": "Discover",
+          "guard": "in \"Unpublished (i, j)\"",
+          "target_state": "establishing.unowned.not-able",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-discover"
+          ]
+        },
+        {
+          "id": "establishing.release-request",
+          "source_state": "establishing.owned.not-divesting",
+          "event": "Request Attribute Ownership Release †",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-release-request"
+          ]
+        },
+        {
+          "id": "establishing.release-denied",
+          "source_state": "establishing.owned.not-divesting",
+          "event": "Attribute Ownership Release Denied",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-release-denied"
+          ]
+        },
+        {
+          "id": "establishing.negotiated-divestiture",
+          "source_state": "establishing.owned.not-divesting",
+          "event": "Negotiated Attribute Ownership Divestiture",
+          "target_state": "establishing.owned.waiting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-negotiated-divestiture"
+          ]
+        },
+        {
+          "id": "establishing.cancel-divestiture",
+          "source_state": "establishing.owned.waiting",
+          "event": "Cancel Negotiated Attribute Ownership Divestiture",
+          "target_state": "establishing.owned.completing",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-cancel-divestiture"
+          ]
+        },
+        {
+          "id": "establishing.confirm-divestiture-failure",
+          "source_state": "establishing.owned.completing",
+          "event": "Confirm Divestiture",
+          "guard": "failure: no Acquisition Pending, or Federate Willing To Acquire exception",
+          "target_state": "establishing.owned.waiting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-confirm-divestiture-failure"
+          ]
+        },
+        {
+          "id": "establishing.confirm-divestiture-success",
+          "source_state": "establishing.owned.completing",
+          "event": "Confirm Divestiture",
+          "guard": "success",
+          "target_state": "establishing.unowned.choice",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-confirm-divestiture-success"
+          ]
+        },
+        {
+          "id": "establishing.unowned-to-able",
+          "source_state": "establishing.unowned.not-able",
+          "event": "Attribute Ownership Acquisition Notification †",
+          "target_state": "establishing.unowned.able.initial",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-unowned-to-able"
+          ]
+        },
+        {
+          "id": "establishing.published-to-not-able",
+          "source_state": "establishing.unowned.not-able",
+          "event": "",
+          "guard": "in \"Published (i, j)\"",
+          "target_state": "establishing.unowned.able.initial",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-published-to-not-able"
+          ]
+        },
+        {
+          "id": "establishing.unpublished-to-not-able",
+          "source_state": "establishing.unowned.not-able",
+          "event": "",
+          "guard": "in \"Unpublished (i, j)\"",
+          "target_state": "establishing.unowned.not-able",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-unpublished-to-not-able"
+          ]
+        },
+        {
+          "id": "establishing.able-enter",
+          "source_state": "establishing.unowned.able.initial",
+          "event": "",
+          "target_state": "establishing.unowned.able.pending",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-able-enter"
+          ]
+        },
+        {
+          "id": "establishing.try-acquire",
+          "source_state": "establishing.unowned.able.pending",
+          "event": "Request Attribute Ownership Acquisition †",
+          "target_state": "establishing.unowned.able.acquiring",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-try-acquire"
+          ]
+        },
+        {
+          "id": "establishing.cancel-acquisition",
+          "source_state": "establishing.unowned.able.acquiring",
+          "event": "Cancel Attribute Ownership Acquisition",
+          "target_state": "establishing.unowned.able.trying-cancel",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-cancel-acquisition"
+          ]
+        },
+        {
+          "id": "establishing.confirm-cancel",
+          "source_state": "establishing.unowned.able.trying-cancel",
+          "event": "Confirm Attribute Ownership Acquisition Cancellation",
+          "target_state": "establishing.unowned.able.not-acquiring",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-confirm-cancel"
+          ]
+        },
+        {
+          "id": "establishing.acquire-success",
+          "source_state": "establishing.unowned.able.acquiring",
+          "event": "Attribute Ownership Acquisition Notification †",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-acquire-success"
+          ]
+        },
+        {
+          "id": "establishing.willing",
+          "source_state": "establishing.unowned.able.not-trying",
+          "event": "Attribute Ownership Assumption †",
+          "target_state": "establishing.unowned.able.willing",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-willing"
+          ]
+        },
+        {
+          "id": "establishing.not-willing",
+          "source_state": "establishing.unowned.able.willing",
+          "event": "Attribute Ownership Unavailable †",
+          "target_state": "establishing.unowned.able.not-trying",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-not-willing"
+          ]
+        },
+        {
+          "id": "establishing.unowned-to-owned",
+          "source_state": "establishing.unowned",
+          "event": "Attribute Ownership Acquisition Notification †",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-unowned-to-owned"
+          ]
+        }
       ],
-      "initial_state_ids": ["establishing.initial"],
+      "initial_state_ids": [
+        "establishing.initial"
+      ],
       "layout": {
         "engine": "manual",
         "direction": "top-to-bottom",
         "state_font": "tiny",
         "edge_label_font": "tiny",
         "containers": [
-          {"id": "establishing.outer", "x": 0, "y": 0, "width": 28, "height": 18, "title": "Establishing Ownership of Instance Attribute (i, k, j)"},
-          {"id": "establishing.owned.container", "x": 4, "y": 11.5, "width": 20, "height": 5.5, "title": "Owned (i, k, j)", "title_visible": false},
-          {"id": "establishing.unowned.container", "x": 2.5, "y": 0.5, "width": 24, "height": 10, "title": "Unowned (i, k, j)", "title_visible": false},
-          {"id": "establishing.intrusive.container", "x": 11, "y": 1, "width": 8.5, "height": 8.2, "title": "Intrusive Acquisition", "title_visible": false},
-          {"id": "establishing.non-intrusive.container", "x": 19.8, "y": 1, "width": 6.5, "height": 8.2, "title": "Non-intrusive Acquisition", "title_visible": false}
+          {
+            "id": "establishing.outer",
+            "x": 0,
+            "y": 0,
+            "width": 28,
+            "height": 18,
+            "title": "Establishing Ownership of Instance Attribute (i, k, j)"
+          },
+          {
+            "id": "establishing.owned.container",
+            "x": 4,
+            "y": 11.5,
+            "width": 20,
+            "height": 5.5,
+            "title": "Owned (i, k, j)",
+            "title_visible": false
+          },
+          {
+            "id": "establishing.unowned.container",
+            "x": 2.5,
+            "y": 0.5,
+            "width": 24,
+            "height": 10,
+            "title": "Unowned (i, k, j)",
+            "title_visible": false
+          },
+          {
+            "id": "establishing.intrusive.container",
+            "x": 11,
+            "y": 1,
+            "width": 8.5,
+            "height": 8.2,
+            "title": "Intrusive Acquisition",
+            "title_visible": false
+          },
+          {
+            "id": "establishing.non-intrusive.container",
+            "x": 19.8,
+            "y": 1,
+            "width": 6.5,
+            "height": 8.2,
+            "title": "Non-intrusive Acquisition",
+            "title_visible": false
+          }
         ],
         "nodes": {
-          "establishing.initial": {"x": 1.2, "y": 7.4},
-          "establishing.choice": {"x": 3.5, "y": 7.4},
-          "establishing.owned.not-divesting": {"x": 7, "y": 14.5},
-          "establishing.owned.waiting": {"x": 14, "y": 14.5},
-          "establishing.owned.completing": {"x": 10.5, "y": 12.8},
-          "establishing.owned.history": {"x": 21.5, "y": 14.5},
-          "establishing.unowned.choice": {"x": 3.5, "y": 5.8},
-          "establishing.unowned.not-able": {"x": 7, "y": 7.4},
-          "establishing.unowned.able.initial": {"x": 10.2, "y": 9.0},
-          "establishing.unowned.able.pending": {"x": 15, "y": 9.0},
-          "establishing.unowned.able.trying-cancel": {"x": 12.6, "y": 6.7},
-          "establishing.unowned.able.confirm-cancel": {"x": 12.6, "y": 4.5},
-          "establishing.unowned.able.not-acquiring": {"x": 16.2, "y": 4.5},
-          "establishing.unowned.able.acquiring": {"x": 16.2, "y": 6.7},
-          "establishing.unowned.able.history-intrusive": {"x": 18.2, "y": 7.8},
-          "establishing.unowned.able.willing": {"x": 22.0, "y": 6.7},
-          "establishing.unowned.able.not-trying": {"x": 24.3, "y": 4.5},
-          "establishing.unowned.able.history-non-intrusive": {"x": 25.2, "y": 7.8}
+          "establishing.initial": {
+            "x": 1.2,
+            "y": 7.4
+          },
+          "establishing.choice": {
+            "x": 3.5,
+            "y": 7.4
+          },
+          "establishing.owned.not-divesting": {
+            "x": 7,
+            "y": 14.5
+          },
+          "establishing.owned.waiting": {
+            "x": 14,
+            "y": 14.5
+          },
+          "establishing.owned.completing": {
+            "x": 10.5,
+            "y": 12.8
+          },
+          "establishing.owned.history": {
+            "x": 21.5,
+            "y": 14.5
+          },
+          "establishing.unowned.choice": {
+            "x": 3.5,
+            "y": 5.8
+          },
+          "establishing.unowned.not-able": {
+            "x": 7,
+            "y": 7.4
+          },
+          "establishing.unowned.able.initial": {
+            "x": 10.2,
+            "y": 9.0
+          },
+          "establishing.unowned.able.pending": {
+            "x": 15,
+            "y": 9.0
+          },
+          "establishing.unowned.able.trying-cancel": {
+            "x": 12.6,
+            "y": 6.7
+          },
+          "establishing.unowned.able.confirm-cancel": {
+            "x": 12.6,
+            "y": 4.5
+          },
+          "establishing.unowned.able.not-acquiring": {
+            "x": 16.2,
+            "y": 4.5
+          },
+          "establishing.unowned.able.acquiring": {
+            "x": 16.2,
+            "y": 6.7
+          },
+          "establishing.unowned.able.history-intrusive": {
+            "x": 18.2,
+            "y": 7.8
+          },
+          "establishing.unowned.able.willing": {
+            "x": 22.0,
+            "y": 6.7
+          },
+          "establishing.unowned.able.not-trying": {
+            "x": 24.3,
+            "y": 4.5
+          },
+          "establishing.unowned.able.history-non-intrusive": {
+            "x": 25.2,
+            "y": 7.8
+          }
         },
         "annotations": [
-          {"id": "establishing.owned-title", "x": 4.35, "y": 16.35, "width": 2.4, "text": "Owned (i, k, j)"},
-          {"id": "establishing.unowned-title", "x": 2.8, "y": 9.65, "width": 2.8, "text": "Unowned (i, k, j)"},
-          {"id": "establishing.intrusive-title", "x": 11.45, "y": 8.55, "width": 3.0, "text": "Intrusive Acquisition"},
-          {"id": "establishing.non-intrusive-title", "x": 20.25, "y": 8.55, "width": 3.4, "text": "Non-intrusive Acquisition"}
+          {
+            "id": "establishing.owned-title",
+            "x": 4.35,
+            "y": 16.35,
+            "width": 2.4,
+            "text": "Owned (i, k, j)"
+          },
+          {
+            "id": "establishing.unowned-title",
+            "x": 2.8,
+            "y": 9.65,
+            "width": 2.8,
+            "text": "Unowned (i, k, j)"
+          },
+          {
+            "id": "establishing.intrusive-title",
+            "x": 11.45,
+            "y": 8.55,
+            "width": 3.0,
+            "text": "Intrusive Acquisition"
+          },
+          {
+            "id": "establishing.non-intrusive-title",
+            "x": 20.25,
+            "y": 8.55,
+            "width": 3.4,
+            "text": "Non-intrusive Acquisition"
+          }
         ],
         "transitions": {
-          "establishing.register": {"label": "Register\n[in \"Published (i, j)\"]", "label_x": 5.0, "label_y": 10.1, "label_width": 2.0},
-          "establishing.discover": {"label": "Discover†\n[in \"Unpublished (i, j)\"]", "label_x": 4.1, "label_y": 6.9, "label_width": 2.2},
-          "establishing.release-request": {"style": "loop", "loop_direction": "left", "label": "Request Attribute Ownership Release †", "label_x": 4.9, "label_y": 15.85, "label_width": 2.4},
-          "establishing.release-denied": {"style": "loop", "loop_direction": "right", "label": "Attribute Ownership Release Denied", "label_x": 8.1, "label_y": 13.7, "label_width": 2.4},
-          "establishing.negotiated-divestiture": {"label": "Negotiated Attribute\nOwnership Divestiture", "label_x": 11.2, "label_y": 15.85, "label_width": 2.6},
-          "establishing.cancel-divestiture": {"label": "Cancel Negotiated\nAttribute Ownership\nDivestiture", "label_x": 12.2, "label_y": 13.45, "label_width": 2.4},
-          "establishing.confirm-divestiture-failure": {"label": "Confirm Divestiture\n[failure: no Acquisition\nPending, or Federate Willing\nTo Acquire exception]", "label_x": 13.0, "label_y": 11.7, "label_width": 3.0},
-          "establishing.confirm-divestiture-success": {"label": "Confirm Divestiture\n[success]", "label_x": 7.0, "label_y": 11.0, "label_width": 2.0},
-          "establishing.unowned-to-able": {"style": "bend-right", "bend": 25, "label": "Attribute Ownership\nAcquisition Notification †", "label_x": 8.7, "label_y": 8.15, "label_width": 2.4},
-          "establishing.published-to-not-able": {"style": "bend-left", "bend": 25, "label": "[in \"Published (i, j)\"]", "label_x": 8.0, "label_y": 6.2, "label_width": 1.9},
-          "establishing.unpublished-to-not-able": {"style": "loop", "loop_direction": "left", "label": "[in \"Unpublished (i, j)\"]", "label_x": 5.2, "label_y": 5.35, "label_width": 2.0},
-          "establishing.try-acquire": {"label": "Request Attribute Ownership\nAcquisition †", "label_x": 15.0, "label_y": 8.0, "label_width": 2.4},
-          "establishing.cancel-acquisition": {"label": "Cancel Attribute Ownership\nAcquisition", "label_x": 14.2, "label_y": 6.2, "label_width": 2.3},
-          "establishing.confirm-cancel": {"label": "Confirm Attribute Ownership\nAcquisition Cancellation", "label_x": 14.2, "label_y": 5.25, "label_width": 2.8},
-          "establishing.acquire-success": {"label": "Attribute Ownership\nAcquisition Notification †", "label_x": 11.8, "label_y": 9.75, "label_width": 2.5},
-          "establishing.willing": {"label": "Attribute Ownership\nAssumption †", "label_x": 22.8, "label_y": 5.8, "label_width": 2.0},
-          "establishing.not-willing": {"label": "Attribute Ownership\nUnavailable †", "label_x": 22.8, "label_y": 7.0, "label_width": 2.0},
-          "establishing.unowned-to-owned": {"label": "Attribute Ownership\nAcquisition Notification †", "label_x": 8.7, "label_y": 10.35, "label_width": 2.5}
+          "establishing.register": {
+            "label": "Register\n[in \"Published (i, j)\"]",
+            "label_x": 5.0,
+            "label_y": 10.1,
+            "label_width": 2.0
+          },
+          "establishing.discover": {
+            "label": "Discover†\n[in \"Unpublished (i, j)\"]",
+            "label_x": 4.1,
+            "label_y": 6.9,
+            "label_width": 2.2
+          },
+          "establishing.release-request": {
+            "style": "loop",
+            "loop_direction": "left",
+            "label": "Request Attribute Ownership Release †",
+            "label_x": 4.9,
+            "label_y": 15.85,
+            "label_width": 2.4
+          },
+          "establishing.release-denied": {
+            "style": "loop",
+            "loop_direction": "right",
+            "label": "Attribute Ownership Release Denied",
+            "label_x": 8.1,
+            "label_y": 13.7,
+            "label_width": 2.4
+          },
+          "establishing.negotiated-divestiture": {
+            "label": "Negotiated Attribute\nOwnership Divestiture",
+            "label_x": 11.2,
+            "label_y": 15.85,
+            "label_width": 2.6
+          },
+          "establishing.cancel-divestiture": {
+            "label": "Cancel Negotiated\nAttribute Ownership\nDivestiture",
+            "label_x": 12.2,
+            "label_y": 13.45,
+            "label_width": 2.4
+          },
+          "establishing.confirm-divestiture-failure": {
+            "label": "Confirm Divestiture\n[failure: no Acquisition\nPending, or Federate Willing\nTo Acquire exception]",
+            "label_x": 13.0,
+            "label_y": 11.7,
+            "label_width": 3.0
+          },
+          "establishing.confirm-divestiture-success": {
+            "label": "Confirm Divestiture\n[success]",
+            "label_x": 7.0,
+            "label_y": 11.0,
+            "label_width": 2.0
+          },
+          "establishing.unowned-to-able": {
+            "style": "bend-right",
+            "bend": 25,
+            "label": "Attribute Ownership\nAcquisition Notification †",
+            "label_x": 8.7,
+            "label_y": 8.15,
+            "label_width": 2.4
+          },
+          "establishing.published-to-not-able": {
+            "style": "bend-left",
+            "bend": 25,
+            "label": "[in \"Published (i, j)\"]",
+            "label_x": 8.0,
+            "label_y": 6.2,
+            "label_width": 1.9
+          },
+          "establishing.unpublished-to-not-able": {
+            "style": "loop",
+            "loop_direction": "left",
+            "label": "[in \"Unpublished (i, j)\"]",
+            "label_x": 5.2,
+            "label_y": 5.35,
+            "label_width": 2.0
+          },
+          "establishing.try-acquire": {
+            "label": "Request Attribute Ownership\nAcquisition †",
+            "label_x": 15.0,
+            "label_y": 8.0,
+            "label_width": 2.4
+          },
+          "establishing.cancel-acquisition": {
+            "label": "Cancel Attribute Ownership\nAcquisition",
+            "label_x": 14.2,
+            "label_y": 6.2,
+            "label_width": 2.3
+          },
+          "establishing.confirm-cancel": {
+            "label": "Confirm Attribute Ownership\nAcquisition Cancellation",
+            "label_x": 14.2,
+            "label_y": 5.25,
+            "label_width": 2.8
+          },
+          "establishing.acquire-success": {
+            "label": "Attribute Ownership\nAcquisition Notification †",
+            "label_x": 11.8,
+            "label_y": 9.75,
+            "label_width": 2.5
+          },
+          "establishing.willing": {
+            "label": "Attribute Ownership\nAssumption †",
+            "label_x": 22.8,
+            "label_y": 5.8,
+            "label_width": 2.0
+          },
+          "establishing.not-willing": {
+            "label": "Attribute Ownership\nUnavailable †",
+            "label_x": 22.8,
+            "label_y": 7.0,
+            "label_width": 2.0
+          },
+          "establishing.unowned-to-owned": {
+            "label": "Attribute Ownership\nAcquisition Notification †",
+            "label_x": 8.7,
+            "label_y": 10.35,
+            "label_width": 2.5
+          }
         }
       },
       "notes": "Figure 16 is a complete ownership-transfer state chart with exclusive Owned and Unowned composite regions. This first semantic pass retains the visible ownership, divestiture, acquisition-pending, intrusive, and non-intrusive representative states. Some service-label routing is intentionally normalized while the dense cross-region geometry remains a visual-review item."
@@ -120,99 +633,508 @@
       "id": "temporal-state",
       "title": "Temporal State",
       "clause_id": "clause-8.1.7",
-      "source": {"path": "content/clauses/08-time-management-page-186.tex", "line": 6},
-      "provenance": {"image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p187-xref13895.png", "page": 187, "xref": "13895", "caption": "Figure 17---Temporal state"},
+      "source": {
+        "path": "content/clauses/08-time-management-page-186.tex",
+        "line": 6
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p187-xref13895.png",
+        "page": 187,
+        "xref": "13895",
+        "caption": "Figure 17---Temporal state"
+      },
       "states": [
-        {"id": "temporal.initial", "label": "", "kind": "initial"},
-        {"id": "temporal.time-granted", "label": "Time Granted", "kind": "composite"},
-        {"id": "temporal.time-granted.idle", "label": "Idle", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.time-granted.advancing", "label": "Time\nAdvancing", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.time-granted.becoming-regulating", "label": "Becoming\nRegulating", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.time-granted.becoming-constrained", "label": "Becoming\nConstrained", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.time-granted.becoming-both", "label": "Becoming\nRegulating and\nConstrained", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.time-granted.history", "label": "H", "kind": "history", "parent_id": "temporal.time-granted"},
-        {"id": "temporal.regulating.initial", "label": "", "kind": "initial"},
-        {"id": "temporal.regulating.regulating", "label": "Regulating"},
-        {"id": "temporal.regulating.not-regulating", "label": "Not\nRegulating"},
-        {"id": "temporal.constrained.initial", "label": "", "kind": "initial"},
-        {"id": "temporal.constrained.constrained", "label": "Constrained"},
-        {"id": "temporal.constrained.not-constrained", "label": "Not\nConstrained"},
-        {"id": "temporal.async.initial", "label": "", "kind": "initial"},
-        {"id": "temporal.async.enabled", "label": "Asynchronous\nDelivery\nEnabled"},
-        {"id": "temporal.async.disabled", "label": "Asynchronous\nDelivery\nDisabled"}
+        {
+          "id": "temporal.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "temporal.time-granted",
+          "label": "Time Granted",
+          "kind": "composite"
+        },
+        {
+          "id": "temporal.time-granted.idle",
+          "label": "Idle",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.time-granted.advancing",
+          "label": "Time\nAdvancing",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.time-granted.becoming-regulating",
+          "label": "Becoming\nRegulating",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.time-granted.becoming-constrained",
+          "label": "Becoming\nConstrained",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.time-granted.becoming-both",
+          "label": "Becoming\nRegulating and\nConstrained",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.time-granted.history",
+          "label": "H",
+          "kind": "history",
+          "parent_id": "temporal.time-granted"
+        },
+        {
+          "id": "temporal.regulating.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "temporal.regulating.regulating",
+          "label": "Regulating"
+        },
+        {
+          "id": "temporal.regulating.not-regulating",
+          "label": "Not\nRegulating"
+        },
+        {
+          "id": "temporal.constrained.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "temporal.constrained.constrained",
+          "label": "Constrained"
+        },
+        {
+          "id": "temporal.constrained.not-constrained",
+          "label": "Not\nConstrained"
+        },
+        {
+          "id": "temporal.async.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "temporal.async.enabled",
+          "label": "Asynchronous\nDelivery\nEnabled"
+        },
+        {
+          "id": "temporal.async.disabled",
+          "label": "Asynchronous\nDelivery\nDisabled"
+        }
       ],
       "transitions": [
-        {"id": "temporal.enter-idle", "source_state": "temporal.initial", "event": "", "target_state": "temporal.time-granted.idle", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.advance", "source_state": "temporal.time-granted.idle", "event": "Time Advance Request or Time Advance Request Available or Next Message Request or Next Message Request Available or Flush Request", "target_state": "temporal.time-granted.advancing", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.advance-loop", "source_state": "temporal.time-granted.advancing", "event": "Receive Message #1", "target_state": "temporal.time-granted.advancing", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.grant", "source_state": "temporal.time-granted.advancing", "event": "Time Advance Grant † or Flush Queue Grant †", "target_state": "temporal.time-granted.idle", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.enable-regulating", "source_state": "temporal.time-granted.idle", "event": "Enable Time Regulation †", "guard": "in \"Not Regulating\"", "target_state": "temporal.time-granted.becoming-regulating", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.enable-constrained", "source_state": "temporal.time-granted.idle", "event": "Enable Time Constrained †", "guard": "in \"Not Constrained\"", "target_state": "temporal.time-granted.becoming-constrained", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.regulating-to-both", "source_state": "temporal.time-granted.becoming-regulating", "event": "Enable Time Constrained †", "guard": "in \"Not Constrained\"", "target_state": "temporal.time-granted.becoming-both", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.constrained-to-both", "source_state": "temporal.time-granted.becoming-constrained", "event": "Enable Time Regulation †", "guard": "in \"Not Regulating\"", "target_state": "temporal.time-granted.becoming-both", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.both-to-idle", "source_state": "temporal.time-granted.becoming-both", "event": "Receive Message #2", "target_state": "temporal.time-granted.idle", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.regulating-enable", "source_state": "temporal.regulating.initial", "event": "", "target_state": "temporal.regulating.regulating", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.regulating-disable", "source_state": "temporal.regulating.regulating", "event": "Disable Time Regulation", "target_state": "temporal.regulating.not-regulating", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.regulating-enable-again", "source_state": "temporal.regulating.not-regulating", "event": "Enable Time Regulation †", "target_state": "temporal.regulating.regulating", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.constrained-enter", "source_state": "temporal.constrained.initial", "event": "", "target_state": "temporal.constrained.constrained", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.constrained-disable", "source_state": "temporal.constrained.constrained", "event": "Disable Time Constrained", "target_state": "temporal.constrained.not-constrained", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.constrained-enable", "source_state": "temporal.constrained.not-constrained", "event": "Enable Time Constrained †", "target_state": "temporal.constrained.constrained", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.async-enter", "source_state": "temporal.async.initial", "event": "", "target_state": "temporal.async.enabled", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.async-disable", "source_state": "temporal.async.enabled", "event": "Disable Asynchronously Delivery", "target_state": "temporal.async.disabled", "clause_id": "clause-8.1.7"},
-        {"id": "temporal.async-enable", "source_state": "temporal.async.disabled", "event": "Enable Asynchronous Delivery", "target_state": "temporal.async.enabled", "clause_id": "clause-8.1.7"}
+        {
+          "id": "temporal.enter-idle",
+          "source_state": "temporal.initial",
+          "event": "",
+          "target_state": "temporal.time-granted.idle",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-enter-idle"
+          ]
+        },
+        {
+          "id": "temporal.advance",
+          "source_state": "temporal.time-granted.idle",
+          "event": "Time Advance Request or Time Advance Request Available or Next Message Request or Next Message Request Available or Flush Request",
+          "target_state": "temporal.time-granted.advancing",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-advance"
+          ]
+        },
+        {
+          "id": "temporal.advance-loop",
+          "source_state": "temporal.time-granted.advancing",
+          "event": "Receive Message #1",
+          "target_state": "temporal.time-granted.advancing",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-advance-loop"
+          ]
+        },
+        {
+          "id": "temporal.grant",
+          "source_state": "temporal.time-granted.advancing",
+          "event": "Time Advance Grant † or Flush Queue Grant †",
+          "target_state": "temporal.time-granted.idle",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-grant"
+          ]
+        },
+        {
+          "id": "temporal.enable-regulating",
+          "source_state": "temporal.time-granted.idle",
+          "event": "Enable Time Regulation †",
+          "guard": "in \"Not Regulating\"",
+          "target_state": "temporal.time-granted.becoming-regulating",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-enable-regulating"
+          ]
+        },
+        {
+          "id": "temporal.enable-constrained",
+          "source_state": "temporal.time-granted.idle",
+          "event": "Enable Time Constrained †",
+          "guard": "in \"Not Constrained\"",
+          "target_state": "temporal.time-granted.becoming-constrained",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-enable-constrained"
+          ]
+        },
+        {
+          "id": "temporal.regulating-to-both",
+          "source_state": "temporal.time-granted.becoming-regulating",
+          "event": "Enable Time Constrained †",
+          "guard": "in \"Not Constrained\"",
+          "target_state": "temporal.time-granted.becoming-both",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-regulating-to-both"
+          ]
+        },
+        {
+          "id": "temporal.constrained-to-both",
+          "source_state": "temporal.time-granted.becoming-constrained",
+          "event": "Enable Time Regulation †",
+          "guard": "in \"Not Regulating\"",
+          "target_state": "temporal.time-granted.becoming-both",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-constrained-to-both"
+          ]
+        },
+        {
+          "id": "temporal.both-to-idle",
+          "source_state": "temporal.time-granted.becoming-both",
+          "event": "Receive Message #2",
+          "target_state": "temporal.time-granted.idle",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-both-to-idle"
+          ]
+        },
+        {
+          "id": "temporal.regulating-enable",
+          "source_state": "temporal.regulating.initial",
+          "event": "",
+          "target_state": "temporal.regulating.regulating",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-regulating-enable"
+          ]
+        },
+        {
+          "id": "temporal.regulating-disable",
+          "source_state": "temporal.regulating.regulating",
+          "event": "Disable Time Regulation",
+          "target_state": "temporal.regulating.not-regulating",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-regulating-disable"
+          ]
+        },
+        {
+          "id": "temporal.regulating-enable-again",
+          "source_state": "temporal.regulating.not-regulating",
+          "event": "Enable Time Regulation †",
+          "target_state": "temporal.regulating.regulating",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-regulating-enable-again"
+          ]
+        },
+        {
+          "id": "temporal.constrained-enter",
+          "source_state": "temporal.constrained.initial",
+          "event": "",
+          "target_state": "temporal.constrained.constrained",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-constrained-enter"
+          ]
+        },
+        {
+          "id": "temporal.constrained-disable",
+          "source_state": "temporal.constrained.constrained",
+          "event": "Disable Time Constrained",
+          "target_state": "temporal.constrained.not-constrained",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-constrained-disable"
+          ]
+        },
+        {
+          "id": "temporal.constrained-enable",
+          "source_state": "temporal.constrained.not-constrained",
+          "event": "Enable Time Constrained †",
+          "target_state": "temporal.constrained.constrained",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-constrained-enable"
+          ]
+        },
+        {
+          "id": "temporal.async-enter",
+          "source_state": "temporal.async.initial",
+          "event": "",
+          "target_state": "temporal.async.enabled",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-async-enter"
+          ]
+        },
+        {
+          "id": "temporal.async-disable",
+          "source_state": "temporal.async.enabled",
+          "event": "Disable Asynchronously Delivery",
+          "target_state": "temporal.async.disabled",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-async-disable"
+          ]
+        },
+        {
+          "id": "temporal.async-enable",
+          "source_state": "temporal.async.disabled",
+          "event": "Enable Asynchronous Delivery",
+          "target_state": "temporal.async.enabled",
+          "clause_id": "clause-8.1.7",
+          "implementation_ids": [
+            "m16.transition.temporal-async-enable"
+          ]
+        }
       ],
-      "initial_state_ids": ["temporal.initial", "temporal.regulating.initial", "temporal.constrained.initial", "temporal.async.initial"],
+      "initial_state_ids": [
+        "temporal.initial",
+        "temporal.regulating.initial",
+        "temporal.constrained.initial",
+        "temporal.async.initial"
+      ],
       "layout": {
         "engine": "manual",
         "direction": "left-to-right",
         "state_font": "tiny",
         "edge_label_font": "tiny",
         "containers": [
-          {"id": "temporal.outer", "x": 0, "y": 0, "width": 26, "height": 13, "title": "Temporal State"},
-          {"id": "temporal.time-granted.container", "x": 0.6, "y": 0.6, "width": 9.2, "height": 11.7, "title": "Time Granted"},
-          {"id": "temporal.regulating.container", "x": 10.2, "y": 7.8, "width": 7.6, "height": 3.5, "title": "Time Regulating Status"},
-          {"id": "temporal.constrained.container", "x": 10.2, "y": 4.1, "width": 7.6, "height": 3.5, "title": "Time Constrained Status"},
-          {"id": "temporal.async.container", "x": 10.2, "y": 0.4, "width": 7.6, "height": 3.5, "title": "Asynchronous Delivery Switch"}
+          {
+            "id": "temporal.outer",
+            "x": 0,
+            "y": 0,
+            "width": 26,
+            "height": 13,
+            "title": "Temporal State"
+          },
+          {
+            "id": "temporal.time-granted.container",
+            "x": 0.6,
+            "y": 0.6,
+            "width": 9.2,
+            "height": 11.7,
+            "title": "Time Granted"
+          },
+          {
+            "id": "temporal.regulating.container",
+            "x": 10.2,
+            "y": 7.8,
+            "width": 7.6,
+            "height": 3.5,
+            "title": "Time Regulating Status"
+          },
+          {
+            "id": "temporal.constrained.container",
+            "x": 10.2,
+            "y": 4.1,
+            "width": 7.6,
+            "height": 3.5,
+            "title": "Time Constrained Status"
+          },
+          {
+            "id": "temporal.async.container",
+            "x": 10.2,
+            "y": 0.4,
+            "width": 7.6,
+            "height": 3.5,
+            "title": "Asynchronous Delivery Switch"
+          }
         ],
         "nodes": {
-          "temporal.initial": {"x": 1.5, "y": 6.2},
-          "temporal.time-granted.idle": {"x": 4.2, "y": 6.2},
-          "temporal.time-granted.advancing": {"x": 4.2, "y": 9.4},
-          "temporal.time-granted.becoming-regulating": {"x": 2.5, "y": 2.7},
-          "temporal.time-granted.becoming-constrained": {"x": 6.4, "y": 2.7},
-          "temporal.time-granted.becoming-both": {"x": 4.2, "y": 1.2},
-          "temporal.time-granted.history": {"x": 7.6, "y": 1.2},
-          "temporal.regulating.initial": {"x": 11.2, "y": 10.1},
-          "temporal.regulating.regulating": {"x": 12.8, "y": 9},
-          "temporal.regulating.not-regulating": {"x": 16, "y": 9},
-          "temporal.constrained.initial": {"x": 11.2, "y": 6.4},
-          "temporal.constrained.constrained": {"x": 12.8, "y": 5.2},
-          "temporal.constrained.not-constrained": {"x": 16, "y": 5.2},
-          "temporal.async.initial": {"x": 11.2, "y": 2.7},
-          "temporal.async.enabled": {"x": 12.8, "y": 1.5},
-          "temporal.async.disabled": {"x": 16, "y": 1.5}
+          "temporal.initial": {
+            "x": 1.5,
+            "y": 6.2
+          },
+          "temporal.time-granted.idle": {
+            "x": 4.2,
+            "y": 6.2
+          },
+          "temporal.time-granted.advancing": {
+            "x": 4.2,
+            "y": 9.4
+          },
+          "temporal.time-granted.becoming-regulating": {
+            "x": 2.5,
+            "y": 2.7
+          },
+          "temporal.time-granted.becoming-constrained": {
+            "x": 6.4,
+            "y": 2.7
+          },
+          "temporal.time-granted.becoming-both": {
+            "x": 4.2,
+            "y": 1.2
+          },
+          "temporal.time-granted.history": {
+            "x": 7.6,
+            "y": 1.2
+          },
+          "temporal.regulating.initial": {
+            "x": 11.2,
+            "y": 10.1
+          },
+          "temporal.regulating.regulating": {
+            "x": 12.8,
+            "y": 9
+          },
+          "temporal.regulating.not-regulating": {
+            "x": 16,
+            "y": 9
+          },
+          "temporal.constrained.initial": {
+            "x": 11.2,
+            "y": 6.4
+          },
+          "temporal.constrained.constrained": {
+            "x": 12.8,
+            "y": 5.2
+          },
+          "temporal.constrained.not-constrained": {
+            "x": 16,
+            "y": 5.2
+          },
+          "temporal.async.initial": {
+            "x": 11.2,
+            "y": 2.7
+          },
+          "temporal.async.enabled": {
+            "x": 12.8,
+            "y": 1.5
+          },
+          "temporal.async.disabled": {
+            "x": 16,
+            "y": 1.5
+          }
         },
         "rules": [
-          {"x1": 18.4, "y1": 0.4, "x2": 18.4, "y2": 12.5, "style": "dashed"}
+          {
+            "x1": 18.4,
+            "y1": 0.4,
+            "x2": 18.4,
+            "y2": 12.5,
+            "style": "dashed"
+          }
         ],
         "annotations": [
-          {"id": "temporal.message-legend", "x": 21.8, "y": 8.0, "width": 6.0, "text": "Where the following transitions are expanded:\nSend Message == RO -> RO\nor TSO -> TSO [in Regulating]\nor TSO -> no_ts -> RO\nor TSO -> RO [not in Regulating]\nReceive Message #1 == RO <- RO\nor RO <- TSO [in Not Constrained]\nor TSO <- TSO [in Constrained]\nReceive Message #2 == RO <- RO [in Async Enabled and Not Constrained]\nor RO <- TSO [in Async Enabled]"}
+          {
+            "id": "temporal.message-legend",
+            "x": 21.8,
+            "y": 8.0,
+            "width": 6.0,
+            "text": "Where the following transitions are expanded:\nSend Message == RO -> RO\nor TSO -> TSO [in Regulating]\nor TSO -> no_ts -> RO\nor TSO -> RO [not in Regulating]\nReceive Message #1 == RO <- RO\nor RO <- TSO [in Not Constrained]\nor TSO <- TSO [in Constrained]\nReceive Message #2 == RO <- RO [in Async Enabled and Not Constrained]\nor RO <- TSO [in Async Enabled]"
+          }
         ],
         "transitions": {
-          "temporal.advance": {"label": "Time Advance Request or Time Advance Request Available or Next Message Request or Next Message Request Available or Flush Request", "label_x": 2.55, "label_y": 7.55, "label_width": 2.8},
-          "temporal.advance-loop": {"style": "loop", "loop_direction": "right", "label": "Receive Message #1", "label_x": 5.8, "label_y": 9.6, "label_width": 1.6},
-          "temporal.grant": {"label": "Time Advance Grant † or Flush Queue Grant †", "label_x": 5.0, "label_y": 7.55, "label_width": 2.2},
-          "temporal.enable-regulating": {"label": "Enable Time Regulation †\n[in \"Not Regulating\"]", "label_x": 2.25, "label_y": 4.85, "label_width": 2.0},
-          "temporal.enable-constrained": {"label": "Enable Time Constrained †\n[in \"Not Constrained\"]", "label_x": 6.0, "label_y": 4.85, "label_width": 2.0},
-          "temporal.regulating-to-both": {"label": "Enable Time Constrained †\n[in \"Not Constrained\"]", "label_x": 2.5, "label_y": 2.05, "label_width": 2.0},
-          "temporal.constrained-to-both": {"label": "Enable Time Regulation †\n[in \"Not Regulating\"]", "label_x": 5.9, "label_y": 2.05, "label_width": 2.0},
-          "temporal.both-to-idle": {"label": "Receive Message #2", "label_x": 4.2, "label_y": 3.0, "label_width": 1.6},
-          "temporal.regulating-disable": {"label": "Disable Time Regulation", "label_x": 14.4, "label_y": 10.2, "label_width": 1.8},
-          "temporal.regulating-enable-again": {"label": "Enable Time Regulation †", "label_x": 14.4, "label_y": 8.15, "label_width": 1.8},
-          "temporal.constrained-disable": {"label": "Disable Time Constrained", "label_x": 14.4, "label_y": 6.45, "label_width": 1.8},
-          "temporal.constrained-enable": {"label": "Enable Time Constrained †", "label_x": 14.4, "label_y": 4.45, "label_width": 1.8},
-          "temporal.async-disable": {"label": "Disable Asynchronously Delivery", "label_x": 14.4, "label_y": 2.75, "label_width": 1.9},
-          "temporal.async-enable": {"label": "Enable Asynchronous Delivery", "label_x": 14.4, "label_y": 0.75, "label_width": 1.9}
+          "temporal.advance": {
+            "label": "Time Advance Request or Time Advance Request Available or Next Message Request or Next Message Request Available or Flush Request",
+            "label_x": 2.55,
+            "label_y": 7.55,
+            "label_width": 2.8
+          },
+          "temporal.advance-loop": {
+            "style": "loop",
+            "loop_direction": "right",
+            "label": "Receive Message #1",
+            "label_x": 5.8,
+            "label_y": 9.6,
+            "label_width": 1.6
+          },
+          "temporal.grant": {
+            "label": "Time Advance Grant † or Flush Queue Grant †",
+            "label_x": 5.0,
+            "label_y": 7.55,
+            "label_width": 2.2
+          },
+          "temporal.enable-regulating": {
+            "label": "Enable Time Regulation †\n[in \"Not Regulating\"]",
+            "label_x": 2.25,
+            "label_y": 4.85,
+            "label_width": 2.0
+          },
+          "temporal.enable-constrained": {
+            "label": "Enable Time Constrained †\n[in \"Not Constrained\"]",
+            "label_x": 6.0,
+            "label_y": 4.85,
+            "label_width": 2.0
+          },
+          "temporal.regulating-to-both": {
+            "label": "Enable Time Constrained †\n[in \"Not Constrained\"]",
+            "label_x": 2.5,
+            "label_y": 2.05,
+            "label_width": 2.0
+          },
+          "temporal.constrained-to-both": {
+            "label": "Enable Time Regulation †\n[in \"Not Regulating\"]",
+            "label_x": 5.9,
+            "label_y": 2.05,
+            "label_width": 2.0
+          },
+          "temporal.both-to-idle": {
+            "label": "Receive Message #2",
+            "label_x": 4.2,
+            "label_y": 3.0,
+            "label_width": 1.6
+          },
+          "temporal.regulating-disable": {
+            "label": "Disable Time Regulation",
+            "label_x": 14.4,
+            "label_y": 10.2,
+            "label_width": 1.8
+          },
+          "temporal.regulating-enable-again": {
+            "label": "Enable Time Regulation †",
+            "label_x": 14.4,
+            "label_y": 8.15,
+            "label_width": 1.8
+          },
+          "temporal.constrained-disable": {
+            "label": "Disable Time Constrained",
+            "label_x": 14.4,
+            "label_y": 6.45,
+            "label_width": 1.8
+          },
+          "temporal.constrained-enable": {
+            "label": "Enable Time Constrained †",
+            "label_x": 14.4,
+            "label_y": 4.45,
+            "label_width": 1.8
+          },
+          "temporal.async-disable": {
+            "label": "Disable Asynchronously Delivery",
+            "label_x": 14.4,
+            "label_y": 2.75,
+            "label_width": 1.9
+          },
+          "temporal.async-enable": {
+            "label": "Enable Asynchronous Delivery",
+            "label_x": 14.4,
+            "label_y": 0.75,
+            "label_width": 1.9
+          }
         }
       },
       "notes": "Figure 17 contains one composite Time Granted state and three parallel state machines for regulating status, constrained status, and asynchronous delivery. The expanded right-hand message-transition legend is now encoded as a renderer annotation as well as the individual graph transition labels."

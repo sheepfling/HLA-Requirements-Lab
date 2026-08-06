@@ -40,16 +40,17 @@ class Milestone5Tests(unittest.TestCase):
     def test_semantic_dashboard_reports_reviewed_and_candidate_coverage(self) -> None:
         report = build_dashboard(DOCUMENT_ROOTS)
         self.assertEqual(report["totals"]["documents"], 3)
-        self.assertEqual(report["totals"]["explicit_requirements"], 9)
+        self.assertEqual(report["totals"]["explicit_requirements"], 2057)
         self.assertEqual(report["totals"]["unresolved_references"], 0)
         lifecycle = next(
             item for item in report["documents"] if item["document"] == "hla-1516.1-2025"
         )
-        self.assertEqual(lifecycle["requirements"]["explicit"], 7)
+        self.assertEqual(lifecycle["requirements"]["explicit"], 1697)
         self.assertEqual(
-            lifecycle["requirements"]["explicit_transition_requirements_with_reviewed_links"], 7
+            lifecycle["requirements"]["explicit_transition_requirements_with_reviewed_links"],
+            15,
         )
-        self.assertEqual(lifecycle["state_machines"]["transitions_unmapped"], 276)
+        self.assertEqual(lifecycle["state_machines"]["transitions_unmapped"], 0)
 
     def test_requirement_promotion_updates_reciprocal_source_records(self) -> None:
         source = SourceRef(path="source.tex", line=1)
@@ -190,7 +191,7 @@ class Milestone5Tests(unittest.TestCase):
             ).read_text(encoding="utf-8")
             manifest = (output / "semantic-manifest.tex").read_text(encoding="utf-8")
 
-        self.assertEqual(len(model.content_blocks), 3)
+        self.assertEqual(len(model.content_blocks), 439)
         self.assertIn(r"\SemanticContentBlockProseFederateLifetimeInitialStateText", data)
         self.assertIn("content-block-prose-federate-lifetime-initial-state-data.tex", manifest)
 
@@ -216,7 +217,7 @@ class Milestone5Tests(unittest.TestCase):
             {"summary-rule-1", "summary-rule-6"},
         )
         self.assertIn(r"\HLASummaryRule{summary-rule-1}", first)
-        self.assertIn(r"\SemanticRequirementSummaryRule1Statement", first_data)
+        self.assertIn(r"\SemanticRequirementSummaryRuleOneStatement", first_data)
         self.assertIn("requirement-summary-rule-6-data.tex", manifest)
 
     def test_generation_writes_omt_table_family_data(self) -> None:
@@ -234,9 +235,11 @@ class Milestone5Tests(unittest.TestCase):
             )
             manifest = (output / "semantic-manifest.tex").read_text(encoding="utf-8")
 
-        self.assertEqual(len(model.table_families), 1)
-        self.assertIn(r"\SemanticTableM4P037T01Caption", data)
-        self.assertIn(r"\SemanticTableM4P038T01Caption", data)
+        # The loaded model is authoritative for the full OMT surface; the
+        # explicit generator selection only limits emitted build inputs.
+        self.assertEqual(len(model.table_families), 80)
+        self.assertIn(r"\SemanticTableMFourPZeroThreeSevenTZeroOneCaption", data)
+        self.assertIn(r"\SemanticTableMFourPZeroThreeEightTZeroOneCaption", data)
         self.assertIn("table-family-omt-object-model-identification-data.tex", manifest)
 
     def test_every_main_loads_a_generated_semantic_entrypoint(self) -> None:
@@ -246,25 +249,46 @@ class Milestone5Tests(unittest.TestCase):
         lifecycle_page = (
             DOCUMENT_ROOTS[1] / "content" / "clauses" / "04-federation-management-page-040.tex"
         ).read_text(encoding="utf-8")
+        self.assertIn(r"\input{output/semantic/content-block-", lifecycle_page)
+        lifecycle_block = next(
+            item
+            for item in json.loads(
+                (DOCUMENT_ROOTS[1] / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
+            )["content_blocks"]
+            if item["id"] == "content-15161-page-040"
+        )
         self.assertIn(
             r"\SemanticRequirementReqFederateConnectBeforeRtiWorkStatement",
-            lifecycle_page,
+            lifecycle_block["layout_body"],
         )
         self.assertIn(
             r"\SemanticContentBlockProseFederateLifetimeInitialStateText",
-            lifecycle_page,
+            lifecycle_block["layout_body"],
         )
         framework_page = (
             DOCUMENT_ROOTS[0] / "sections" / "semantic" / "final-body" / "page-32.tex"
         ).read_text(encoding="utf-8")
-        self.assertIn(
-            r"\input{output/semantic/requirement-summary-rule-1}",
-            framework_page,
-        )
+        self.assertIn(r"\input{output/semantic/content-block-", framework_page)
+        content_blocks = json.loads(
+            (DOCUMENT_ROOTS[0] / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
+        )["content_blocks"]
+        framework_body = "\n".join(item["layout_body"] for item in content_blocks)
+        self.assertIn(r"\input{output/semantic/requirement-summary-rule-1}", framework_body)
         table_page = (
             DOCUMENT_ROOTS[2] / "sections" / "semantic" / "clause-4a" / "page-037.tex"
         ).read_text(encoding="utf-8")
-        self.assertIn(r"\SemanticTableM4P037T01Caption", table_page)
+        self.assertIn(r"\input{output/semantic/content-block-", table_page)
+        table_block = next(
+            item
+            for item in json.loads(
+                (DOCUMENT_ROOTS[2] / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
+            )["content_blocks"]
+            if item["source"]["path"].endswith("clause-4a/page-037.tex")
+        )
+        self.assertIn(
+            r"\SemanticTableMFourPZeroThreeSevenTZeroOneCaption",
+            table_block["layout_body"],
+        )
 
     def test_all_document_builders_invoke_semantic_generation(self) -> None:
         for root in DOCUMENT_ROOTS:

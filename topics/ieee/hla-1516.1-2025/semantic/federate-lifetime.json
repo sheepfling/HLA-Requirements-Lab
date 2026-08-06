@@ -201,7 +201,9 @@
             "req-federate-connect-before-rti-work",
             "req-connect-service-establishes-connection"
           ],
-          "implementation_ids": ["rti.service.connect"],
+          "implementation_ids": [
+            "rti.service.connect"
+          ],
           "source": {
             "path": "content/clauses/04-federation-management-page-051.tex",
             "line": 13
@@ -215,7 +217,9 @@
           "initiator": "federate",
           "postcondition": "The federate is in the Joined Federate state.",
           "clause_id": "clause-4.1.1",
-          "implementation_ids": ["rti.service.join-federation-execution"],
+          "implementation_ids": [
+            "rti.service.join-federation-execution"
+          ],
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
             "line": 25
@@ -232,7 +236,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
             "line": 43
-          }
+          },
+          "implementation_ids": [
+            "m16.transition.federate-resign"
+          ]
         },
         {
           "id": "federate.connection-lost",
@@ -248,7 +255,9 @@
             "req-federate-connection-lost",
             "req-connection-lost-service-behavior"
           ],
-          "implementation_ids": ["rti.callback.connection-lost"],
+          "implementation_ids": [
+            "rti.callback.connection-lost"
+          ],
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
             "line": 31
@@ -263,8 +272,12 @@
           "guard": "The federate is forced to leave the joined state for a reason other than invoking Resign Federation Execution.",
           "postcondition": "The federate is notified that a fault was detected.",
           "clause_id": "clause-4.1.1",
-          "requirement_ids": ["req-federate-resigned-callback-behavior"],
-          "implementation_ids": ["rti.callback.federate-resigned"],
+          "requirement_ids": [
+            "req-federate-resigned-callback-behavior"
+          ],
+          "implementation_ids": [
+            "rti.callback.federate-resigned"
+          ],
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
             "line": 49
@@ -283,7 +296,9 @@
             "req-federate-disconnect-after-resign",
             "req-disconnect-service-terminates-connection"
           ],
-          "implementation_ids": ["rti.service.disconnect"],
+          "implementation_ids": [
+            "rti.service.disconnect"
+          ],
           "source": {
             "path": "content/clauses/04-federation-management-page-052.tex",
             "line": 57
@@ -300,7 +315,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-041.tex",
             "line": 28
-          }
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restore-begun"
+          ]
         },
         {
           "id": "federate.initiate-save",
@@ -314,7 +332,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-043.tex",
             "line": 105
-          }
+          },
+          "implementation_ids": [
+            "m16.transition.federate-initiate-save"
+          ]
         },
         {
           "id": "federate.save-begun",
@@ -323,7 +344,13 @@
           "target_state": "federate.joined.save-restore.saving",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 65}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 65
+          },
+          "implementation_ids": [
+            "m16.transition.federate-save-begun"
+          ]
         },
         {
           "id": "federate.save-complete",
@@ -332,7 +359,13 @@
           "target_state": "federate.joined.save-restore.waiting-for-federation-to-save",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 34}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 34
+          },
+          "implementation_ids": [
+            "m16.transition.federate-save-complete"
+          ]
         },
         {
           "id": "federate.saved",
@@ -341,7 +374,13 @@
           "target_state": "federate.joined.save-restore.history",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 89}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 89
+          },
+          "implementation_ids": [
+            "m16.transition.federate-saved"
+          ]
         },
         {
           "id": "federate.request-save-history",
@@ -354,7 +393,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-042.tex",
             "line": 183
-          }
+          },
+          "implementation_ids": [
+            "m16.transition.federate-request-save-history"
+          ]
         },
         {
           "id": "federate.request-restore",
@@ -363,7 +405,13 @@
           "target_state": "federate.joined.save-restore.restore-request-pending",
           "initiator": "federate",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 194
+          },
+          "implementation_ids": [
+            "m16.transition.federate-request-restore"
+          ]
         },
         {
           "id": "federate.restore-confirm-failure",
@@ -372,7 +420,13 @@
           "target_state": "federate.joined.save-restore.active",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 194
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restore-confirm-failure"
+          ]
         },
         {
           "id": "federate.restore-confirm-success",
@@ -381,7 +435,13 @@
           "target_state": "federate.joined.save-restore.waiting-for-restore-to-begin",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 194}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 194
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restore-confirm-success"
+          ]
         },
         {
           "id": "federate.restore-start",
@@ -390,7 +450,13 @@
           "target_state": "federate.joined.save-restore.restoring",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 46}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 46
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restore-start"
+          ]
         },
         {
           "id": "federate.restore-complete",
@@ -399,7 +465,13 @@
           "target_state": "federate.joined.save-restore.waiting-for-federation-to-restore",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-044.tex", "line": 64}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 64
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restore-complete"
+          ]
         },
         {
           "id": "federate.restored",
@@ -408,7 +480,13 @@
           "target_state": "federate.joined.save-restore.history",
           "initiator": "rti",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 20}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 20
+          },
+          "implementation_ids": [
+            "m16.transition.federate-restored"
+          ]
         },
         {
           "id": "federate.normal-activity-restricted",
@@ -422,7 +500,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-042.tex",
             "line": 177
-          }
+          },
+          "implementation_ids": [
+            "m16.transition.federate-normal-activity-restricted"
+          ]
         },
         {
           "id": "federate.normal-activity-permitted",
@@ -432,7 +513,13 @@
           "target_state": "federate.joined.normal-activity.permitted",
           "initiator": "automatic",
           "clause_id": "clause-4.1.1",
-          "source": {"path": "content/clauses/04-federation-management-page-042.tex", "line": 177}
+          "source": {
+            "path": "content/clauses/04-federation-management-page-042.tex",
+            "line": 177
+          },
+          "implementation_ids": [
+            "m16.transition.federate-normal-activity-permitted"
+          ]
         }
       ],
       "layout": {
@@ -442,61 +529,306 @@
         "edge_label_font": "tiny",
         "edge_label_distance": 0.3,
         "containers": [
-          {"id": "federate.outer", "x": -0.5, "y": -0.5, "width": 31.0, "height": 16.0, "title": "Federate lifetime"},
-          {"id": "federate.connected", "x": 4.0, "y": 12.0, "width": 8.0, "height": 3.2, "title": "Connected"},
-          {"id": "federate.joined", "x": 6.2, "y": 0.4, "width": 24.0, "height": 10.0, "title": "Joined Federate"},
-          {"id": "federate.active", "x": 7.2, "y": 5.5, "width": 7.0, "height": 4.4, "title": "Active Federate", "title_visible": false},
-          {"id": "federate.save", "x": 14.6, "y": 5.5, "width": 7.0, "height": 4.4, "title": "Federate Save in Progress", "title_visible": false},
-          {"id": "federate.restore", "x": 13.8, "y": 0.9, "width": 8.0, "height": 4.2, "title": "Federate Restore in Progress", "title_visible": false},
-          {"id": "federate.normal", "x": 23.0, "y": 5.5, "width": 5.5, "height": 4.4, "title": "Normal activity", "title_visible": false}
+          {
+            "id": "federate.outer",
+            "x": -0.5,
+            "y": -0.5,
+            "width": 31.0,
+            "height": 16.0,
+            "title": "Federate lifetime"
+          },
+          {
+            "id": "federate.connected",
+            "x": 4.0,
+            "y": 12.0,
+            "width": 8.0,
+            "height": 3.2,
+            "title": "Connected"
+          },
+          {
+            "id": "federate.joined",
+            "x": 6.2,
+            "y": 0.4,
+            "width": 24.0,
+            "height": 10.0,
+            "title": "Joined Federate"
+          },
+          {
+            "id": "federate.active",
+            "x": 7.2,
+            "y": 5.5,
+            "width": 7.0,
+            "height": 4.4,
+            "title": "Active Federate",
+            "title_visible": false
+          },
+          {
+            "id": "federate.save",
+            "x": 14.6,
+            "y": 5.5,
+            "width": 7.0,
+            "height": 4.4,
+            "title": "Federate Save in Progress",
+            "title_visible": false
+          },
+          {
+            "id": "federate.restore",
+            "x": 13.8,
+            "y": 0.9,
+            "width": 8.0,
+            "height": 4.2,
+            "title": "Federate Restore in Progress",
+            "title_visible": false
+          },
+          {
+            "id": "federate.normal",
+            "x": 23.0,
+            "y": 5.5,
+            "width": 5.5,
+            "height": 4.4,
+            "title": "Normal activity",
+            "title_visible": false
+          }
         ],
         "annotations": [
-          {"id": "federate.active-title", "x": 10.7, "y": 9.55, "text": "Active Federate", "width": 4.0, "align": "center"},
-          {"id": "federate.save-title", "x": 18.1, "y": 9.55, "text": "Federate Save in Progress", "width": 5.0, "align": "center"},
-          {"id": "federate.restore-title", "x": 17.8, "y": 4.75, "text": "Federate Restore in Progress", "width": 5.6, "align": "center"},
-          {"id": "federate.normal-title", "x": 25.75, "y": 9.55, "text": "Normal activity", "width": 3.8, "align": "center"}
+          {
+            "id": "federate.active-title",
+            "x": 10.7,
+            "y": 9.55,
+            "text": "Active Federate",
+            "width": 4.0,
+            "align": "center"
+          },
+          {
+            "id": "federate.save-title",
+            "x": 18.1,
+            "y": 9.55,
+            "text": "Federate Save in Progress",
+            "width": 5.0,
+            "align": "center"
+          },
+          {
+            "id": "federate.restore-title",
+            "x": 17.8,
+            "y": 4.75,
+            "text": "Federate Restore in Progress",
+            "width": 5.6,
+            "align": "center"
+          },
+          {
+            "id": "federate.normal-title",
+            "x": 25.75,
+            "y": 9.55,
+            "text": "Normal activity",
+            "width": 3.8,
+            "align": "center"
+          }
         ],
         "nodes": {
-          "federate.not-connected": {"x": 2.0, "y": 13.1},
-          "federate.not-joined": {"x": 5.5, "y": 13.1},
-          "federate.joined": {"x": 9.2, "y": 10.7, "visible": false},
-          "federate.joined.save-restore": {"x": 15.5, "y": 6.8, "visible": false},
-          "federate.joined.save-restore.active-federate": {"x": 10.6, "y": 7.8, "visible": false},
-          "federate.joined.save-restore.active": {"x": 10.6, "y": 7.7},
-          "federate.joined.save-restore.restore-request-pending": {"x": 10.6, "y": 6.4},
-          "federate.joined.save-restore.history": {"x": 12.6, "y": 8.7},
-          "federate.joined.save-restore.instructed-to-save": {"x": 16.6, "y": 7.7},
-          "federate.joined.save-restore.saving": {"x": 18.0, "y": 6.7},
-          "federate.joined.save-restore.waiting-for-federation-to-save": {"x": 19.5, "y": 5.8},
-          "federate.joined.save-restore.prepared-to-restore": {"x": 19.7, "y": 2.1},
-          "federate.joined.save-restore.restoring": {"x": 16.4, "y": 2.1},
-          "federate.joined.save-restore.waiting-for-federation-to-restore": {"x": 14.3, "y": 3.2},
-          "federate.joined.save-restore.waiting-for-restore-to-begin": {"x": 19.8, "y": 4.0},
-          "federate.joined.normal-activity": {"x": 25.75, "y": 7.5, "visible": false},
-          "federate.joined.normal-activity.permitted": {"x": 25.75, "y": 7.7},
-          "federate.joined.normal-activity.not-permitted": {"x": 25.75, "y": 6.2}
+          "federate.not-connected": {
+            "x": 2.0,
+            "y": 13.1
+          },
+          "federate.not-joined": {
+            "x": 5.5,
+            "y": 13.1
+          },
+          "federate.joined": {
+            "x": 9.2,
+            "y": 10.7,
+            "visible": false
+          },
+          "federate.joined.save-restore": {
+            "x": 15.5,
+            "y": 6.8,
+            "visible": false
+          },
+          "federate.joined.save-restore.active-federate": {
+            "x": 10.6,
+            "y": 7.8,
+            "visible": false
+          },
+          "federate.joined.save-restore.active": {
+            "x": 10.6,
+            "y": 7.7
+          },
+          "federate.joined.save-restore.restore-request-pending": {
+            "x": 10.6,
+            "y": 6.4
+          },
+          "federate.joined.save-restore.history": {
+            "x": 12.6,
+            "y": 8.7
+          },
+          "federate.joined.save-restore.instructed-to-save": {
+            "x": 16.6,
+            "y": 7.7
+          },
+          "federate.joined.save-restore.saving": {
+            "x": 18.0,
+            "y": 6.7
+          },
+          "federate.joined.save-restore.waiting-for-federation-to-save": {
+            "x": 19.5,
+            "y": 5.8
+          },
+          "federate.joined.save-restore.prepared-to-restore": {
+            "x": 19.7,
+            "y": 2.1
+          },
+          "federate.joined.save-restore.restoring": {
+            "x": 16.4,
+            "y": 2.1
+          },
+          "federate.joined.save-restore.waiting-for-federation-to-restore": {
+            "x": 14.3,
+            "y": 3.2
+          },
+          "federate.joined.save-restore.waiting-for-restore-to-begin": {
+            "x": 19.8,
+            "y": 4.0
+          },
+          "federate.joined.normal-activity": {
+            "x": 25.75,
+            "y": 7.5,
+            "visible": false
+          },
+          "federate.joined.normal-activity.permitted": {
+            "x": 25.75,
+            "y": 7.7
+          },
+          "federate.joined.normal-activity.not-permitted": {
+            "x": 25.75,
+            "y": 6.2
+          }
         },
         "transitions": {
-          "federate.connect": {"label": "Connect", "label_x": 3.8, "label_y": 13.7, "label_width": 1.1},
-          "federate.join": {"label": "Join Federation\nExecution", "label_x": 7.2, "label_y": 11.65, "label_width": 1.7},
-          "federate.resign": {"label": "Resign Federation\nExecution", "label_x": 7.2, "label_y": 10.45, "label_width": 1.7},
-          "federate.connection-lost": {"style": "bend-left", "bend": 25, "label": "Connection Lost / service invocation or Not Connected exception from any federate-initiated service", "label_x": 8.8, "label_y": 1.0, "label_width": 6.8},
-          "federate.resigned-by-rti": {"style": "bend-left", "bend": 35, "label": "Federate Resigned", "label_x": 6.6, "label_y": 11.7, "label_width": 1.8},
-          "federate.disconnect": {"label": "Disconnect", "label_x": 3.8, "label_y": 12.2, "label_width": 1.2},
-          "federate.restore-begun": {"style": "bend-right", "bend": 20, "label": "Federation Restore Begun †", "label_x": 12.9, "label_y": 5.9, "label_width": 2.0},
-          "federate.initiate-save": {"label": "Initiate Federate Save †\n[in \"Not Constrained\" or\nin \"Time Advancing\"]", "label_x": 12.8, "label_y": 8.25, "label_width": 2.7},
-          "federate.save-begun": {"label": "Federate Save Begin", "label_x": 17.25, "label_y": 7.25, "label_width": 1.8},
-          "federate.save-complete": {"label": "Federate Save Complete", "label_x": 18.8, "label_y": 6.35, "label_width": 2.0},
-          "federate.saved": {"label": "Federation Saved †", "label_x": 20.3, "label_y": 5.25, "label_width": 1.7},
-          "federate.request-save-history": {"label": "Request Federation Save", "label_x": 11.5, "label_y": 9.35, "label_width": 1.9},
-          "federate.request-restore": {"label": "Request Federation\nRestore", "label_x": 8.2, "label_y": 7.1, "label_width": 1.6},
-          "federate.restore-confirm-failure": {"label": "Confirm Restoration\n(failure)", "label_x": 8.1, "label_y": 6.1, "label_width": 1.7},
-          "federate.restore-confirm-success": {"label": "Confirm Restoration\n(success)", "label_x": 12.2, "label_y": 5.35, "label_width": 1.8},
-          "federate.restore-start": {"label": "Initiate Federate Restore †", "label_x": 18.1, "label_y": 1.0, "label_width": 2.1},
-          "federate.restore-complete": {"label": "Federate Restore Complete †", "label_x": 16.2, "label_y": 2.85, "label_width": 2.1},
-          "federate.restored": {"label": "Federation Restore Complete †", "label_x": 12.3, "label_y": 3.9, "label_width": 2.2},
-          "federate.normal-activity-restricted": {"label": "Normal activity restricted", "label_x": 25.9, "label_y": 6.95, "label_width": 2.3},
-          "federate.normal-activity-permitted": {"label": "in \"Active Federate\"", "label_x": 24.2, "label_y": 5.05, "label_width": 2.2}
+          "federate.connect": {
+            "label": "Connect",
+            "label_x": 3.8,
+            "label_y": 13.7,
+            "label_width": 1.1
+          },
+          "federate.join": {
+            "label": "Join Federation\nExecution",
+            "label_x": 7.2,
+            "label_y": 11.65,
+            "label_width": 1.7
+          },
+          "federate.resign": {
+            "label": "Resign Federation\nExecution",
+            "label_x": 7.2,
+            "label_y": 10.45,
+            "label_width": 1.7
+          },
+          "federate.connection-lost": {
+            "style": "bend-left",
+            "bend": 25,
+            "label": "Connection Lost / service invocation or Not Connected exception from any federate-initiated service",
+            "label_x": 8.8,
+            "label_y": 1.0,
+            "label_width": 6.8
+          },
+          "federate.resigned-by-rti": {
+            "style": "bend-left",
+            "bend": 35,
+            "label": "Federate Resigned",
+            "label_x": 6.6,
+            "label_y": 11.7,
+            "label_width": 1.8
+          },
+          "federate.disconnect": {
+            "label": "Disconnect",
+            "label_x": 3.8,
+            "label_y": 12.2,
+            "label_width": 1.2
+          },
+          "federate.restore-begun": {
+            "style": "bend-right",
+            "bend": 20,
+            "label": "Federation Restore Begun †",
+            "label_x": 12.9,
+            "label_y": 5.9,
+            "label_width": 2.0
+          },
+          "federate.initiate-save": {
+            "label": "Initiate Federate Save †\n[in \"Not Constrained\" or\nin \"Time Advancing\"]",
+            "label_x": 12.8,
+            "label_y": 8.25,
+            "label_width": 2.7
+          },
+          "federate.save-begun": {
+            "label": "Federate Save Begin",
+            "label_x": 17.25,
+            "label_y": 7.25,
+            "label_width": 1.8
+          },
+          "federate.save-complete": {
+            "label": "Federate Save Complete",
+            "label_x": 18.8,
+            "label_y": 6.35,
+            "label_width": 2.0
+          },
+          "federate.saved": {
+            "label": "Federation Saved †",
+            "label_x": 20.3,
+            "label_y": 5.25,
+            "label_width": 1.7
+          },
+          "federate.request-save-history": {
+            "label": "Request Federation Save",
+            "label_x": 11.5,
+            "label_y": 9.35,
+            "label_width": 1.9
+          },
+          "federate.request-restore": {
+            "label": "Request Federation\nRestore",
+            "label_x": 8.2,
+            "label_y": 7.1,
+            "label_width": 1.6
+          },
+          "federate.restore-confirm-failure": {
+            "label": "Confirm Restoration\n(failure)",
+            "label_x": 8.1,
+            "label_y": 6.1,
+            "label_width": 1.7
+          },
+          "federate.restore-confirm-success": {
+            "label": "Confirm Restoration\n(success)",
+            "label_x": 12.2,
+            "label_y": 5.35,
+            "label_width": 1.8
+          },
+          "federate.restore-start": {
+            "label": "Initiate Federate Restore †",
+            "label_x": 18.1,
+            "label_y": 1.0,
+            "label_width": 2.1
+          },
+          "federate.restore-complete": {
+            "label": "Federate Restore Complete †",
+            "label_x": 16.2,
+            "label_y": 2.85,
+            "label_width": 2.1
+          },
+          "federate.restored": {
+            "label": "Federation Restore Complete †",
+            "label_x": 12.3,
+            "label_y": 3.9,
+            "label_width": 2.2
+          },
+          "federate.normal-activity-restricted": {
+            "label": "Normal activity restricted",
+            "label_x": 25.9,
+            "label_y": 6.95,
+            "label_width": 2.3
+          },
+          "federate.normal-activity-permitted": {
+            "label": "in \"Active Federate\"",
+            "label_x": 24.2,
+            "label_y": 5.05,
+            "label_width": 2.2
+          }
         }
       },
       "notes": "Prose-derived federate lifetime model linked to the page-41 overview and page-42 joined-federate continuation image. The canonical record preserves top-level connection/resign semantics and representative save/restore/normal-activity substates; figure-only routing not yet expressed by the prose-derived transition list remains a review item."

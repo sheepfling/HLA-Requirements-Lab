@@ -9,6 +9,7 @@ from pathlib import Path
 
 EXCLUDED_PARTS = {".trash", "build", "dist", "output"}
 PAGE_FRAGMENT_PATTERN = re.compile(r"(?:^|-)page-\d+\.tex$", re.IGNORECASE)
+CONTENT_BLOCK_INPUT_PATTERN = re.compile(r"\\input\{output/semantic/content-block-[^}]+\}")
 DATA_SUFFIXES = {".csv", ".json", ".jsonl", ".yaml", ".yml"}
 
 MARKERS = {
@@ -61,14 +62,25 @@ def measure_document(root: Path) -> dict[str, object]:
     page_fragments = tuple(
         path for path in tex_files if PAGE_FRAGMENT_PATTERN.search(path.name) is not None
     )
+    page_adapters = tuple(
+        path
+        for path in page_fragments
+        if CONTENT_BLOCK_INPUT_PATTERN.search(path.read_text(encoding="utf-8")) is not None
+    )
     data_files = tuple(path for suffix in DATA_SUFFIXES for path in _source_files(root, suffix))
     metrics: dict[str, object] = {
         "document": root.as_posix(),
         "tex_files": len(tex_files),
         "page_fragments": len(page_fragments),
         "page_fragment_ratio": round(len(page_fragments) / len(tex_files), 4) if tex_files else 0.0,
+        "content_block_page_adapters": len(page_adapters),
+        "content_block_page_coverage": round(len(page_adapters) / len(page_fragments), 4)
+        if page_fragments
+        else 0.0,
         "data_files": len(data_files),
         "content_blocks": _authored_record_count(root, "content_blocks"),
+        "content_elements": _authored_record_count(root, "content_elements"),
+        "content_element_block_coverage": _content_element_block_coverage(root),
         "table_families": _authored_record_count(root, "table_families"),
     }
     for name, pattern in MARKERS.items():
@@ -77,6 +89,22 @@ def measure_document(root: Path) -> dict[str, object]:
         metrics["fixed_coordinate_markers"] / max(metrics["stable_id_markers"], 1), 4
     )
     return metrics
+
+
+def _content_element_block_coverage(root: Path) -> float:
+    """Return the fraction of authored content blocks linked to elements."""
+    blocks_path = root / "semantic" / "content-blocks.json"
+    if not blocks_path.is_file():
+        return 0.0
+    try:
+        payload = json.loads(blocks_path.read_text(encoding="utf-8"))
+        blocks = payload.get("content_blocks", [])
+    except (OSError, json.JSONDecodeError):
+        return 0.0
+    if not blocks:
+        return 0.0
+    covered = sum(bool(item.get("element_ids")) for item in blocks if isinstance(item, dict))
+    return round(covered / len(blocks), 4)
 
 
 def discover_documents(repo_root: Path) -> tuple[Path, ...]:
@@ -116,6 +144,8 @@ def main() -> None:
         "requirement_markers",
         "data_files",
         "content_blocks",
+        "content_elements",
+        "content_element_block_coverage",
         "table_families",
     )
     print("\t".join(columns))
