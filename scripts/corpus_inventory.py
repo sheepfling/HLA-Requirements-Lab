@@ -221,6 +221,7 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
         )
     for kind, records in (
         ("reference", model.references),
+        ("cross-reference", model.cross_references),
         ("note", model.notes),
         ("figure", model.figures),
         ("example", model.examples),

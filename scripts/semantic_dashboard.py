@@ -88,6 +88,11 @@ def _document_report(model: DocumentModel) -> dict[str, Any]:
             ),
             "transition_coverage": model.transition_coverage_counts(),
         },
+        "sequence_diagrams": {
+            "total": len(model.sequence_diagrams),
+            "participants": sum(len(item.participants) for item in model.sequence_diagrams),
+            "messages": sum(len(item.messages) for item in model.sequence_diagrams),
+        },
         "issues": {
             "reviewed": len(issues),
             "reviewed_by_code": dict(sorted(Counter(item.code for item in issues).items())),

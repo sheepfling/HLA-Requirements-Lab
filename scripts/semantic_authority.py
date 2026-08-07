@@ -4,15 +4,28 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
 try:
+    from scripts.faithful_renderer import (
+        FaithfulLayoutProjection,
+        build_faithful_layout_projection,
+        load_faithful_layout_profile,
+        render_faithful_body,
+    )
     from scripts.hla_semantic import load_hla_corpus
     from scripts.semantic_model import DocumentModel
 except ModuleNotFoundError:  # pragma: no cover - direct script execution
+    from faithful_renderer import (
+        FaithfulLayoutProjection,
+        build_faithful_layout_projection,
+        load_faithful_layout_profile,
+        render_faithful_body,
+    )
     from hla_semantic import load_hla_corpus
     from semantic_model import DocumentModel
 
@@ -28,6 +41,11 @@ SurfaceKind = Literal[
     "implementations",
     "requirement_links",
     "table_families",
+    "references",
+    "cross_references",
+    "figures",
+    "notes",
+    "tables",
 ]
 
 
@@ -85,6 +103,16 @@ def _surface_records(model: DocumentModel, surface: AuthoritySurface) -> tuple[o
         records = model.implementations
     elif surface.kind == "requirement_links":
         records = model.requirement_links
+    elif surface.kind == "references":
+        records = model.references
+    elif surface.kind == "cross_references":
+        records = model.cross_references
+    elif surface.kind == "figures":
+        records = model.figures
+    elif surface.kind == "notes":
+        records = model.notes
+    elif surface.kind == "tables":
+        records = model.tables
     else:
         records = model.table_families
     if surface.selection == "explicit":
@@ -104,6 +132,91 @@ def _source_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
     return tuple(sorted(set(matches)))
 
 
+def _generated_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
+    """Find generated data inputs without confusing IDs ending in ``-data``.
+
+    A semantic ID such as ``federation-object-model-document-data`` produces
+    both ``...-data.tex`` (the visible record) and ``...-data-data.tex`` (the
+    machine-readable projection). The broad historical glob matches both, so
+    discard the visible sibling when its projection is present.
+    """
+    if not surface.generated_glob:
+        return ()
+    matches = tuple(sorted(root.glob(surface.generated_glob)))
+    return tuple(
+        path
+        for path in matches
+        if not (
+            path.name.endswith("-data.tex") and path.with_name(f"{path.stem}-data.tex").is_file()
+        )
+    )
+
+
+def _main_inputs(path: Path) -> tuple[str, ...]:
+    """Return normalized direct LaTeX inputs from a document entrypoint."""
+    if not path.is_file():
+        return ()
+    values = re.findall(r"\\input\s*\{([^}]+)\}", path.read_text(encoding="utf-8"))
+    return tuple(value.strip().replace("\\", "/").removesuffix(".tex") + ".tex" for value in values)
+
+
+def _validate_faithful_layout(
+    model: DocumentModel,
+    root: Path,
+    *,
+    check_generated: bool,
+) -> dict[str, object]:
+    """Verify that semantic blocks, not ``main.tex``, order faithful pages."""
+    profile_path = root / "semantic" / "faithful-layout.json"
+    projection = build_faithful_layout_projection(
+        model,
+        profile=load_faithful_layout_profile(profile_path) if profile_path.is_file() else None,
+    )
+    expected_sources = {entry.source_path for entry in projection.entries}
+    main_path = root / "main.tex"
+    main_inputs = _main_inputs(main_path)
+    direct_page_inputs = sorted(expected_sources.intersection(main_inputs))
+    failures: list[str] = []
+    if "output/semantic/faithful-body.tex" not in main_inputs:
+        failures.append("main.tex does not input output/semantic/faithful-body")
+    if direct_page_inputs:
+        failures.append(
+            "main.tex directly orders layout adapters: " + ", ".join(direct_page_inputs)
+        )
+    missing_adapters = [
+        entry.source_path
+        for entry in projection.entries
+        if not (root / entry.source_path).is_file()
+    ]
+    if missing_adapters:
+        failures.append("semantic layout adapters are missing: " + ", ".join(missing_adapters))
+
+    generated = root / "output" / "semantic"
+    if check_generated:
+        json_path = generated / "faithful-layout.json"
+        body_path = generated / "faithful-body.tex"
+        if not json_path.is_file() or not body_path.is_file():
+            failures.append("generated faithful layout projection is missing")
+        else:
+            actual = FaithfulLayoutProjection.model_validate_json(
+                json_path.read_text(encoding="utf-8")
+            )
+            if actual != projection:
+                failures.append(
+                    "generated faithful layout projection does not match semantic blocks"
+                )
+            if body_path.read_text(encoding="utf-8") != render_faithful_body(projection) + "\n":
+                failures.append("generated faithful body does not match semantic layout projection")
+    return {
+        "document": model.document_id,
+        "entries": len(projection.entries),
+        "main": str(main_path),
+        "direct_page_inputs": direct_page_inputs,
+        "failures": failures,
+        "passed": not failures,
+    }
+
+
 def validate_authority(
     roots: tuple[Path, ...], manifest_path: Path, *, check_generated: bool = False
 ) -> dict[str, object]:
@@ -112,6 +225,7 @@ def validate_authority(
     corpus = load_hla_corpus(roots)
     models = {model.document_id: model for model in corpus.documents}
     reports: list[dict[str, object]] = []
+    faithful_layouts: list[dict[str, object]] = []
     failures: list[str] = []
     unresolved_references = corpus.unresolved_reference_issues()
     failures.extend(
@@ -133,7 +247,7 @@ def validate_authority(
             records = _surface_records(model, surface)
             generated_matches: tuple[Path, ...] = ()
             if surface.generated_glob:
-                generated_matches = tuple(sorted(root.glob(surface.generated_glob)))
+                generated_matches = _generated_matches(root, surface)
                 if check_generated and len(generated_matches) != len(records):
                     failures.append(
                         f"{document.document_id}/{surface.id}: expected {len(records)} generated "
@@ -149,10 +263,21 @@ def validate_authority(
                     "generated_inputs": len(generated_matches),
                 }
             )
+        layout_report = _validate_faithful_layout(
+            model,
+            root,
+            check_generated=check_generated,
+        )
+        faithful_layouts.append(layout_report)
+        failures.extend(
+            f"{document.document_id}/faithful-layout: {failure}"
+            for failure in layout_report["failures"]
+        )
     return {
         "manifest": str(manifest_path),
         "check_generated": check_generated,
         "surfaces": reports,
+        "faithful_layouts": faithful_layouts,
         "unresolved_references": [issue.model_dump(mode="json") for issue in unresolved_references],
         "failures": failures,
         "passed": not failures,

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516-2025",
+  "segments": [
+    {
+      "id": "front-matter",
+      "start_sequence": 1,
+      "end_sequence": 10,
+      "before_latex": "\\HLAStartSemanticPages",
+      "after_latex": "\\HLAEndSemanticPages",
+      "insertions": [
+        {
+          "before_sequence": 10,
+          "latex": "\\HLAInstallContentsLinks"
+        }
+      ]
+    },
+    {
+      "id": "opening",
+      "start_sequence": 11,
+      "end_sequence": 14,
+      "before_latex": "\\HLAStartSemanticPages",
+      "after_latex": "\\HLAEndSemanticPages",
+      "insertions": [
+        {
+          "before_sequence": 12,
+          "latex": "\\HLAInstallPageThirteenLinks"
+        },
+        {
+          "before_sequence": 14,
+          "latex": "\\HLAInstallPageFifteenLinks"
+        }
+      ]
+    },
+    {
+      "id": "definitions",
+      "start_sequence": 15,
+      "end_sequence": 29,
+      "before_latex": "\\HLAStartSemanticPages",
+      "after_latex": "\\HLAEndSemanticPages"
+    },
+    {
+      "id": "final-body",
+      "start_sequence": 30,
+      "end_sequence": 38,
+      "before_latex": "\\HLAStartSemanticPages",
+      "after_latex": "\\HLAEndSemanticPages"
+    }
+  ]
+}

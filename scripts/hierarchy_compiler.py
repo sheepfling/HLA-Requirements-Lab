@@ -201,7 +201,7 @@ def _record_kind(surface: str, record: object) -> str:
 
 def _record_key(kind: str, record_id: str) -> str:
     """Namespace graph records whose source IDs overlap by record kind."""
-    if kind in {"state", "transition", "table-cell"}:
+    if kind in {"state-machine", "state", "transition", "table-cell"}:
         return f"{kind}:{record_id}"
     return record_id
 
@@ -309,7 +309,15 @@ def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[Hierarchy
         )
     for machine in model.state_machines:
         if machine.clause_id:
-            links.append(link(machine.id, model.document_id, machine.clause_id, "owned-by-clause"))
+            links.append(
+                link(
+                    machine.id,
+                    model.document_id,
+                    machine.clause_id,
+                    "owned-by-clause",
+                    source_kind="state-machine",
+                )
+            )
         for transition in machine.transitions:
             for requirement_id in transition.requirement_ids:
                 links.append(

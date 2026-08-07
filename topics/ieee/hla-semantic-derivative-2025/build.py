@@ -15,6 +15,8 @@ from scripts.document_builder import (  # noqa: E402, I001
     clean as clean_document,
 )
 from scripts.generate_derivative import generate_from_hla  # noqa: E402
+from scripts.corpus_graph import load_document_metadata  # noqa: E402
+from scripts.publication_contract import load_publication_profile  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
 SOURCE_ROOTS = tuple(
@@ -24,12 +26,22 @@ SOURCE_ROOTS = tuple(
 
 
 def generate_blocks() -> object:
-    return generate_from_hla(SOURCE_ROOTS, ROOT / "output" / "semantic")
+    profile = load_publication_profile(ROOT / "semantic" / "publication.json")
+    metadata = load_document_metadata(ROOT / "semantic" / "corpus.json")
+    return generate_from_hla(
+        SOURCE_ROOTS,
+        ROOT / "output" / "semantic",
+        profile=profile,
+        graph_metadata=metadata,
+    )
 
 
 CONFIG = BuildConfig(
     root=ROOT,
-    clean_before_build=True,
+    # latexmk -C is unsafe for this generated-only derivative: MiKTeX can
+    # interpret the source entrypoint as a clean target. The shared generator
+    # already rewrites derivative.tex and semantic JSON deterministically.
+    clean_before_build=False,
     output_pdf=ROOT / "dist" / "hla-semantic-derivative-2025.pdf",
     semantic_generator=generate_blocks,
 )

@@ -81,7 +81,22 @@ python -m scripts.build build all
 python -m scripts.build build topics/siso/example-document
 python -m scripts.build build topics/fixture/non-hla-demo-2025
 python -m scripts.build clean
+
+# Independent HLA publication destinations.
+python -m scripts.build publication list
+python -m scripts.build publication build hla-unofficial-faithful-reconstruction-2025
+python -m scripts.build publication build hla-hierarchy-reconstruction-2025
+python -m scripts.build publication build hla-rti-compliance-requirements-2025
 ```
+
+The HLA products are explicitly separated in
+[`data/publications.json`](data/publications.json): the unofficial faithful
+reconstructions, the hierarchy-first reconstruction, and the RTI compliance
+requirements publication. Each names only its own build roots, so it can be
+added, built, release-checked, or removed without coupling it to another
+publication's generated outputs. See
+[`docs/PUBLICATION-PRODUCTS.md`](docs/PUBLICATION-PRODUCTS.md) for the product
+boundaries and commands.
 
 Semantic records can be queried directly from source-first LaTeX:
 
@@ -202,6 +217,26 @@ cannot be resolved are returned as typed error issues by the corpus report.
 Coverage gaps such as orphan requirements and unmapped transitions remain
 queryable as typed findings while their backlog is visible.
 
+The M24 compliance-facing corpus adds `ComplianceCorpus.compliance_report()`
+and related typed queries for state/sequence implications, table/definition
+dependencies, missing implementation mappings, and planned-versus-concrete
+implementation evidence. Use `--corpus-report --json` with
+`scripts.compliance` to expose that projection without writing a report file.
+
+The compliance publication builder also emits ignored, normalized CSV
+projections under
+`topics/ieee/hla-rti-compliance-2025/output/compliance/csv/`: requirements,
+transitions, implementation mappings, and one-to-many requirement/transition
+mapping link tables. The JSON manifest remains canonical; use the standalone
+export option when working from an existing semantic model:
+
+```powershell
+python -m scripts.compliance_publication `
+  topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json `
+  topics/ieee/hla-rti-compliance-2025/semantic/publication.json `
+  --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
+```
+
 Milestone 3 now has an authoritative hierarchy generator in
 `scripts/generate_semantic_blocks.py`. It writes ignored LaTeX output from
 semantic IDs, including anchors/bookmarks and cross-document links. The first
@@ -219,9 +254,9 @@ M4 content slices are now complete: 1516 generates selected Clause 3 summary
 requirements, 1516.1 generates the Connect/Disconnect/Connection Lost/Federate
 Resigned service-family prose and mappings, and 1516.2 generates the typed
 Object model identification table family. The three source builds remain at
-40, 338, and 124 pages.
+40, 440, and 124 pages.
 
-The first programmatic derivative is at
+The hierarchy-first reconstruction is implemented at
 `topics/ieee/hla-semantic-derivative-2025/`. Its generated document has four
 views—concepts and hierarchy, reviewed normative requirements, state-machine
 logic, and traceability to clauses/services/callbacks/code—and its ignored
@@ -232,7 +267,18 @@ Build it with:
 python topics/ieee/hla-semantic-derivative-2025/build.py build
 ```
 
-The full release smoke check covers the three faithful PDFs, the derivative,
+The independent RTI compliance requirements publication is at
+`topics/ieee/hla-rti-compliance-2025/`. It produces a readable requirements
+catalogue, transition matrix, implementation-evidence registry, gap queue, and
+machine-readable Pydantic manifest from the same cross-document corpus. It
+deliberately distinguishes planned mapping seams from concrete and verified
+RTI implementation evidence. Build it with:
+
+```powershell
+python topics/ieee/hla-rti-compliance-2025/build.py build
+```
+
+The full release smoke check covers the three faithful PDFs, both derivatives,
 and the one-page non-HLA portability fixture:
 
 ```powershell
@@ -285,12 +331,42 @@ adapters consume semantic data while keeping page geometry in
 document-specific source. The 1516 definition pilot and the 1516.1
 federate-lifetime slice additionally consume generated visible semantic
 blocks.
+
+The faithful HLA recreations also consume one generated
+`output/semantic/faithful-body.tex` entrypoint. Semantic content-block records
+provide the active page order; each document's
+`semantic/faithful-layout.json` declares only layout-only wrappers, navigation
+insertions, and exceptional pages. Validate this boundary after a build with:
+
+```powershell
+python -m scripts.semantic_authority --check-generated --json
+```
 State-machine diagrams can be exported as source-only DOT and Mermaid files:
 
 ```powershell
 python -m scripts.export_state_machine `
   topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json `
   --output .tmp/state-machines --format both
+```
+
+Generic relationship, hierarchy, conceptual, and protocol-layer diagrams use
+the same source-only contract and can be exported as TikZ or Mermaid:
+
+```powershell
+python -m scripts.export_graph_diagram `
+  topics/ieee/hla-1516.1-2025/semantic/graph-diagrams.json `
+  --output .tmp/graph-diagrams --format both
+```
+
+The faithful 1516.1 figure-surface gate and RTI-oriented coverage report are:
+
+```powershell
+python scripts.diagram_surface_qa.py `
+  --surface-manifest data/semantic/diagram-surfaces.json `
+  --models topics/ieee/hla-1516.1-2025/semantic `
+  --generated topics/ieee/hla-1516.1-2025/output/semantic `
+  --expected-figures 33 --json
+python scripts.rti_diagram_check.py topics/ieee/hla-1516.1-2025 --json
 ```
 
 Visual review packets are likewise ignored and retain their generated TikZ,

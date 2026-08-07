@@ -44,9 +44,19 @@ def _load_manifest(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _run_build(repo_root: Path) -> None:
+def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
+    command = [sys.executable, "-m", "scripts.build", "build", "all"]
+    if publication_id is not None:
+        command = [
+            sys.executable,
+            "-m",
+            "scripts.build",
+            "publication",
+            "build",
+            publication_id,
+        ]
     subprocess.run(
-        [sys.executable, "-m", "scripts.build", "build", "all"],
+        command,
         cwd=repo_root,
         check=True,
     )
@@ -116,6 +126,42 @@ def _diagram_report(path: Path | None) -> dict[str, Any]:
     }
 
 
+def _selected_projects(
+    manifest: dict[str, Any],
+    manifest_path: Path,
+    *,
+    publication_id: str | None,
+    publication_registry_path: Path,
+) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
+    """Return all projects or the explicit membership of one publication."""
+    projects = list(manifest["projects"])
+    if publication_id is None:
+        return projects, None
+    try:
+        from scripts.publication_registry import (
+            load_publication_registry,
+            load_release_manifest,
+            publication_projects,
+        )
+    except ModuleNotFoundError:  # pragma: no cover - direct script execution
+        from publication_registry import (
+            load_publication_registry,
+            load_release_manifest,
+            publication_projects,
+        )
+
+    registry = load_publication_registry(publication_registry_path)
+    release_manifest = load_release_manifest(manifest_path)
+    publication = registry.publication(publication_id)
+    selected_ids = tuple(
+        item.id for item in publication_projects(registry, release_manifest, publication_id)
+    )
+    raw_by_id = {str(item["id"]): item for item in projects}
+    return [raw_by_id[identifier] for identifier in selected_ids], publication.model_dump(
+        mode="json"
+    )
+
+
 def check_release(
     repo_root: Path,
     manifest_path: Path,
@@ -123,13 +169,23 @@ def check_release(
     build: bool = False,
     diagram_manifest: Path | None = None,
     authority_manifest: Path | None = None,
+    publication_id: str | None = None,
+    publication_registry_path: Path | None = None,
 ) -> dict[str, Any]:
     """Build when requested and return typed PDF/log/source-hygiene findings."""
     repo_root = repo_root.resolve()
     manifest_path = manifest_path.resolve()
     manifest = _load_manifest(manifest_path)
+    if publication_registry_path is None:
+        publication_registry_path = repo_root / "data" / "publications.json"
+    selected_projects, publication = _selected_projects(
+        manifest,
+        manifest_path,
+        publication_id=publication_id,
+        publication_registry_path=publication_registry_path.resolve(),
+    )
     if build:
-        _run_build(repo_root)
+        _run_build(repo_root, publication_id)
 
     if authority_manifest is None:
         candidate = repo_root / "data" / "semantic" / "authority.json"
@@ -157,7 +213,7 @@ def check_release(
 
     projects: list[dict[str, Any]] = []
     failures: list[str] = []
-    for project in manifest["projects"]:
+    for project in selected_projects:
         root = repo_root / str(project["root"])
         pdf = root / str(project["pdf"])
         log = root / str(project["log"])
@@ -199,6 +255,7 @@ def check_release(
     return {
         "manifest": manifest_path.relative_to(repo_root).as_posix(),
         "built": build,
+        "publication": publication,
         "projects": projects,
         "diagram_review": _diagram_report(
             diagram_manifest.resolve() if diagram_manifest is not None else None
@@ -226,6 +283,13 @@ def main() -> int:
         default=Path("data/semantic/authority.json"),
         help="Semantic authority manifest",
     )
+    parser.add_argument("--publication", help="Check only one publication destination")
+    parser.add_argument(
+        "--publication-manifest",
+        type=Path,
+        default=Path("data/publications.json"),
+        help="Publication destination registry",
+    )
     parser.add_argument("--build", action="store_true", help="Build every manifest project first")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
@@ -236,6 +300,8 @@ def main() -> int:
         build=args.build,
         diagram_manifest=args.diagram_manifest,
         authority_manifest=args.authority_manifest,
+        publication_id=args.publication,
+        publication_registry_path=args.publication_manifest,
     )
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))

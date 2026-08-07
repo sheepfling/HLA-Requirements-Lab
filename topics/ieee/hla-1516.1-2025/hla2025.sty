@@ -463,6 +463,14 @@
     \includegraphics[width=#3pt,height=#4pt]{#5}%
   };%
 }
+% Generated diagram helper. The semantic build supplies a TikZ input file and
+% constrains it to the source figure rectangle without introducing a binary
+% analogue into the faithful build.
+\newcommand{\HLAEmbeddedTikZAt}[5]{%
+  \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+    \resizebox{#3pt}{#4pt}{#5}%
+  };%
+}
 \newcommand{\HLAFigureCaptionAt}[3]{%
   \HLAFixedCenteredBlock{90}{#2}{432}{\sffamily\bfseries}{9.96}{12}{%
     \HLAFigureAnchor{#1}Figure #1---#3%

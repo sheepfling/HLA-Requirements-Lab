@@ -43,6 +43,16 @@ def _run(command: list[str], cwd: Path, timeout: int, *, env: dict[str, str] | N
     )
 
 
+def _executable(path: str | Path) -> str:
+    """Prefer native executables when a Windows command shim was supplied."""
+    candidate = Path(path)
+    if candidate.suffix.casefold() == ".cmd":
+        native = candidate.with_suffix(".exe")
+        if native.is_file():
+            return str(native)
+    return str(candidate)
+
+
 def _review_record(
     machine: dict[str, Any],
     semantic_source: str,
@@ -173,7 +183,7 @@ def main() -> None:
     if args.compile:
         pdflatex = shutil.which("pdflatex") or shutil.which("pdflatex.exe")
         pdftoppm = (
-            str(args.pdftoppm)
+            _executable(args.pdftoppm)
             if args.pdftoppm
             else (shutil.which("pdftoppm.exe") or shutil.which("pdftoppm"))
         )

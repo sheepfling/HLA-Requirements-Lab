@@ -27,6 +27,7 @@ def _document_report(model: Any) -> dict[str, Any]:
         *model.tables,
         *model.table_families,
         *model.state_machines,
+        *model.sequence_diagrams,
         *model.implementations,
     )
     records_without_source = sum(
@@ -48,6 +49,10 @@ def _document_report(model: Any) -> dict[str, Any]:
         "transitions": {
             "total": sum(len(machine.transitions) for machine in model.state_machines),
             "coverage": transitions,
+        },
+        "sequence_diagrams": {
+            "total": len(model.sequence_diagrams),
+            "messages": sum(len(item.messages) for item in model.sequence_diagrams),
         },
         "content_blocks": len(model.content_blocks),
         "content_elements": len(model.content_elements),

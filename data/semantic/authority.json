@@ -32,6 +32,41 @@
           "source_paths": ["semantic/requirements.json"],
           "selection": "explicit",
           "generated_glob": "output/semantic/requirement-*-data.tex"
+        },
+        {
+          "id": "references",
+          "kind": "references",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/reference-*-data.tex"
+        },
+        {
+          "id": "cross-references",
+          "kind": "cross_references",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/cross-reference-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
+        },
+        {
+          "id": "table-families",
+          "kind": "table_families",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-family-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
         }
       ]
     },
@@ -39,6 +74,13 @@
       "document_id": "hla-1516.1-2025",
       "root": "topics/ieee/hla-1516.1-2025",
       "surfaces": [
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
         {
           "id": "content-blocks",
           "kind": "content_blocks",
@@ -83,6 +125,41 @@
           "kind": "requirement_links",
           "source_paths": ["semantic/requirement-links.json"],
           "selection": "all"
+        },
+        {
+          "id": "figures",
+          "kind": "figures",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/figure-*-data.tex"
+        },
+        {
+          "id": "cross-references",
+          "kind": "cross_references",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/cross-reference-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
+        },
+        {
+          "id": "table-families",
+          "kind": "table_families",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-family-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
         }
       ]
     },
@@ -130,6 +207,27 @@
           "source_paths": ["semantic/table-families.json"],
           "selection": "all",
           "generated_glob": "output/semantic/table-family-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
+        },
+        {
+          "id": "cross-references",
+          "kind": "cross_references",
+          "source_paths": ["semantic/content-elements.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/cross-reference-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": ["semantic/content-blocks.json"],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
         }
       ]
     }

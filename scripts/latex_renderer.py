@@ -12,8 +12,12 @@ if TYPE_CHECKING:
         Clause,
         ContentBlock,
         ContentElement,
+        CrossReference,
         Definition,
         DocumentModel,
+        Figure,
+        Note,
+        Reference,
         Requirement,
         Table,
         TableFamily,
@@ -126,6 +130,90 @@ def render_content_block_data(block: ContentBlock) -> str:
     return "\n".join(lines)
 
 
+def render_reference_data(reference: Reference) -> str:
+    """Render a bibliography/reference record as visible semantic data."""
+    return "\n".join(
+        (
+            "% Generated semantic reference data; layout adapters consume these macros.",
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Reference', reference.id, 'ID')}}}"
+                f"{{{tex_escape(reference.id)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Reference', reference.id, 'Label')}}}"
+                f"{{{tex_escape(reference.label)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Reference', reference.id, 'Text')}}}"
+                f"{{{tex_escape(reference.text)}}}"
+            ),
+        )
+    )
+
+
+def render_cross_reference_data(cross_reference: CrossReference) -> str:
+    """Render a resolved semantic link as portable TeX metadata."""
+
+    def command(field: str, value: str) -> str:
+        macro = semantic_macro_name("CrossReference", cross_reference.id, field)
+        return f"\\providecommand{{\\{macro}}}{{{tex_escape(value)}}}"
+
+    return "\n".join(
+        (
+            "% Generated semantic cross-reference data; layout adapters consume these macros.",
+            command("ID", cross_reference.id),
+            command("OwnerID", cross_reference.owner_id),
+            command("TargetDocumentID", cross_reference.target_document_id),
+            command("TargetRecordID", cross_reference.target_record_id),
+            command("Label", cross_reference.label),
+            command("Kind", cross_reference.kind),
+            command("Relation", cross_reference.relation),
+        )
+    )
+
+
+def render_figure_data(figure: Figure) -> str:
+    """Render a figure record without making its comparison image an input."""
+    return "\n".join(
+        (
+            "% Generated semantic figure data; layout adapters consume these macros.",
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Figure', figure.id, 'ID')}}}"
+                f"{{{tex_escape(figure.id)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Figure', figure.id, 'Number')}}}"
+                f"{{{tex_escape(figure.number)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Figure', figure.id, 'Caption')}}}"
+                f"{{{tex_escape(figure.caption)}}}"
+            ),
+        )
+    )
+
+
+def render_note_data(note: Note) -> str:
+    """Render a note or footnote record as semantic data."""
+    return "\n".join(
+        (
+            "% Generated semantic note data; layout adapters consume these macros.",
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Note', note.id, 'ID')}}}"
+                f"{{{tex_escape(note.id)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Note', note.id, 'Kind')}}}"
+                f"{{{tex_escape(note.kind)}}}"
+            ),
+            (
+                f"\\providecommand{{\\{semantic_macro_name('Note', note.id, 'Text')}}}"
+                f"{{{tex_escape(note.text)}}}"
+            ),
+        )
+    )
+
+
 def render_content_block(block: ContentBlock) -> str:
     """Render the faithful body owned by a semantic content block."""
     if block.layout_body is not None:
@@ -174,7 +262,12 @@ def render_content_element_data(element: ContentElement) -> str:
     )
 
 
-def render_table_family_data(family: TableFamily, tables: Iterable[Table]) -> str:
+def render_table_family_data(
+    family: TableFamily,
+    tables: Iterable[Table],
+    *,
+    include_cells: bool = True,
+) -> str:
     """Render table-family metadata and caption macros for layout adapters."""
     ordered_tables = tuple(tables)
     lines = [
@@ -199,27 +292,86 @@ def render_table_family_data(family: TableFamily, tables: Iterable[Table]) -> st
             f"{{{tex_escape(caption)}}}"
         )
         lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'FamilyID')}}}"
+            f"{{{tex_escape(family.id)}}}"
+        )
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'LogicalID')}}}"
+            f"{{{tex_escape(table.logical_id or table.id)}}}"
+        )
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'ContinuedFrom')}}}"
+            f"{{{tex_escape(table.continued_from or '')}}}"
+        )
+        lines.append(
             f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'CellIDs')}}}"
             f"{{{tex_escape(','.join(cell.id for cell in table.cells))}}}"
         )
-        for cell in table.cells:
-            lines.extend(
-                (
+        if include_cells:
+            for cell in table.cells:
+                text_macro = semantic_macro_name("TableCell", cell.id, "Text")
+                row_macro = semantic_macro_name("TableCell", cell.id, "Row")
+                lines.extend(
                     (
-                        f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'Text')}}}"
-                        f"{{{tex_escape(cell.text)}}}"
-                    ),
-                    (
-                        f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'Row')}}}"
-                        f"{{{'' if cell.row is None else cell.row}}}"
-                    ),
-                    (
-                        "\\providecommand{\\"
-                        f"{semantic_macro_name('TableCell', cell.id, 'Column')}}}"
-                        f"{{{'' if cell.column is None else cell.column}}}"
-                    ),
+                        (f"\\providecommand{{\\{text_macro}}}{{{tex_escape(cell.text)}}}"),
+                        (
+                            f"\\providecommand{{\\{row_macro}}}"
+                            f"{{{'' if cell.row is None else cell.row}}}"
+                        ),
+                        (
+                            "\\providecommand{\\"
+                            f"{semantic_macro_name('TableCell', cell.id, 'Column')}}}"
+                            f"{{{'' if cell.column is None else cell.column}}}"
+                        ),
+                        (
+                            "\\providecommand{\\"
+                            f"{semantic_macro_name('TableCell', cell.id, 'RecordIDs')}}}"
+                            f"{{{tex_escape(','.join(cell.record_ids))}}}"
+                        ),
+                    )
                 )
-            )
+    return "\n".join(lines)
+
+
+def render_table_data(table: Table) -> str:
+    """Render one typed table record for caption and cell consumers."""
+    caption = table.caption or table.title or table.id
+    lines = [
+        "% Generated semantic table data; layout adapters consume these macros.",
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'ID')}}}"
+            f"{{{tex_escape(table.id)}}}"
+        ),
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'Caption')}}}"
+            f"{{{tex_escape(caption)}}}"
+        ),
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'LogicalID')}}}"
+            f"{{{tex_escape(table.logical_id or table.id)}}}"
+        ),
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'FamilyID')}}}"
+            f"{{{tex_escape(table.family_id or '')}}}"
+        ),
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'ContinuedFrom')}}}"
+            f"{{{tex_escape(table.continued_from or '')}}}"
+        ),
+        (
+            f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'CellIDs')}}}"
+            f"{{{tex_escape(','.join(cell.id for cell in table.cells))}}}"
+        ),
+    ]
+    for cell in table.cells:
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'Text')}}}"
+            f"{{{tex_escape(cell.text)}}}"
+        )
+        lines.append(
+            f"\\providecommand{{\\{semantic_macro_name('TableCell', cell.id, 'RecordIDs')}}}"
+            f"{{{tex_escape(','.join(cell.record_ids))}}}"
+        )
     return "\n".join(lines)
 
 

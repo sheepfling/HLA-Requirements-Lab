@@ -1,0 +1,9 @@
+$pdf_mode = 5;
+$xelatex = 'xelatex -interaction=nonstopmode -halt-on-error -file-line-error %O %S';
+$xelatex = 'xelatex --enable-installer -interaction=nonstopmode -halt-on-error -file-line-error %O %S' if $^O eq 'MSWin32';
+$out_dir = 'build';
+$aux_dir = 'build';
+$max_repeat = 5;
+$ENV{'SOURCE_DATE_EPOCH'} = '1785456000' if !defined $ENV{'SOURCE_DATE_EPOCH'};
+$ENV{'FORCE_SOURCE_DATE'} = '1' if !defined $ENV{'FORCE_SOURCE_DATE'};
+$ENV{'TZ'} = 'UTC' if !defined $ENV{'TZ'};

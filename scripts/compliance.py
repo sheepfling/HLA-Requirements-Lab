@@ -53,6 +53,30 @@ def main() -> None:
         help="Include unreviewed candidate requirements in coverage queries",
     )
     parser.add_argument(
+        "--corpus-report",
+        action="store_true",
+        help="Include the M24 corpus projection: implications, dependencies, gaps, and evidence",
+    )
+    parser.add_argument(
+        "--dependency-record",
+        help="Limit the M24 dependency projection to one semantic record ID",
+    )
+    parser.add_argument(
+        "--implementation-evidence-status",
+        choices=("planned", "partial", "implemented", "verified"),
+        help="Limit M24 implementation evidence by mapping status",
+    )
+    parser.add_argument(
+        "--concrete-only",
+        action="store_true",
+        help="Limit M24 implementation evidence to implemented or verified mappings",
+    )
+    parser.add_argument(
+        "--omit-unlinked-implications",
+        action="store_true",
+        help="Hide sequence messages without a state-transition clause context",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Print machine-readable query results",
@@ -172,6 +196,32 @@ def main() -> None:
         if model is not None
         else mappings_by_document
     )
+    wants_corpus_report = bool(
+        args.corpus_report
+        or args.dependency_record
+        or args.implementation_evidence_status
+        or args.concrete_only
+        or args.omit_unlinked_implications
+    )
+    if wants_corpus_report:
+        report = corpus.compliance_report(
+            args.document,
+            args.state,
+            args.event,
+            args.machine,
+            include_candidates=args.include_candidates,
+            require_concrete_implementation=args.require_concrete_implementation,
+            dependency_record_id=args.dependency_record,
+            include_unlinked_implications=not args.omit_unlinked_implications,
+        )
+        if args.implementation_evidence_status or args.concrete_only:
+            evidence = corpus.implementation_evidence(
+                args.document,
+                status=args.implementation_evidence_status,
+                concrete=True if args.concrete_only else None,
+            )
+            report = report.model_copy(update={"implementation_evidence": evidence})
+        payload["compliance_corpus"] = report.model_dump(mode="json")
     if query_result is not None:
         payload["applicability"] = [
             item.model_dump(mode="json") for item in query_result.applicable_requirements
@@ -204,6 +254,15 @@ def main() -> None:
         f"{sum(len(items) for items in unmapped_by_document.values())}"
     )
     print(f"compliance issues: {len(issues)}")
+    if wants_corpus_report:
+        report = payload["compliance_corpus"]
+        print(
+            "M24 corpus projection: "
+            f"{len(report['state_sequence_implications'])} implications, "
+            f"{len(report['dependencies'])} dependencies, "
+            f"{len(report['missing_implementation_mappings'])} unmapped transitions, "
+            f"{len(report['implementation_evidence'])} implementation evidence records"
+        )
     for item in query:
         print(f"{item.id}: {item.statement}")
     for item in issues:

@@ -26,15 +26,20 @@ class LatexSourceProfile(Protocol):
     normative_rule_statement: str
     bibliography_entry: str
     footnote_text: str
+    additional_note_commands: tuple[str, ...]
     stable_id: str
     table_grid_cell: str
     table_cell_text: str
+    table_text_line: str
     placed_block: str
     table_caption: str
     table_domain: Literal["generic", "omt"]
     figure_image: str
     figure_caption: str
     figure_anchor: str
+    diagram_surface_document_id: str | None
+    diagram_surface_bindings: tuple[tuple[int, int, str], ...]
+    embedded_diagram_layout: tuple[tuple[int, float, float, float, float], ...]
     definition_at: str
     definition_anchor: str
     definition_term: str

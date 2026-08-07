@@ -24,7 +24,7 @@ class Milestone7Tests(unittest.TestCase):
         self.assertTrue(report["semantic_authority"]["passed"])
         self.assertEqual(
             {item["pages"] for item in report["projects"]},
-            {1, 40, 124, 338, 1554},
+            {1, 40, 124, 440, 637, 1241},
         )
 
     def test_release_log_check_reports_fatal_latex_lines(self) -> None:

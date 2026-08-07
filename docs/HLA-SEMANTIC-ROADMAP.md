@@ -199,7 +199,7 @@ adapters do not leak into the generic semantic schema.
 - [x] **1516.2:** migrate one typed OMT table family through the layout adapter;
   do not copy its coordinate vocabulary into the semantic schema.
 - [x] Keep each migration buildable and preserve the current page-count
-  smoke checks: 1516 = 40 pages, 1516.1 = 338 pages, 1516.2 = 124 pages.
+  smoke checks: 1516 = 40 pages, 1516.1 = 440 pages, 1516.2 = 124 pages.
 
 ### 5. Add state-machine and RTI conformance data
 
@@ -296,7 +296,7 @@ making HLA constants part of the model layer.
 - [x] Run the source-level CI contract, including the batch visual-review
   workflow and optional Graphviz path.
 
-The current build smoke contract remains 1516 = 40 pages, 1516.1 = 338
+The current build smoke contract remains 1516 = 40 pages, 1516.1 = 440
 pages, and 1516.2 = 124 pages. Generated files are intentionally written below
 ignored `output/`, `review-artifacts/`, and `.tmp/` paths; no audit output is a
 source artifact.
@@ -313,6 +313,95 @@ non-HLA reuse work is now specified as M8-M17 in
 first derivative and M7 completed the full PDF/CI release checks; the next
 work is to increase semantic coverage rather than add another parallel
 document pipeline.
+
+### M22 — Make prose fully semantic
+
+**Status: complete for the faithful visible-surface contract.**
+
+The semantic compiler now emits visible normative statements, definitions,
+references, figure captions, table captions, and explicit notes/footnotes from
+validated Pydantic records. Thin page adapters retain only their page input;
+the exact coordinate, typography, line-break, and exceptional-formatting
+payload remains an explicit fidelity boundary in the generated content block.
+The derivative renders the same semantic prose and surface records, making it
+an independent consumer of the model rather than a second hand-written text
+tree.
+
+The M22 regression contract checks surface counts and authority coverage,
+asserts page-adapter thinness, verifies generated semantic macros, and mutates
+reference, figure-caption, and table-caption source records to prove changes
+reach both faithful and derivative documents. Generated TeX/PDFs and review
+artifacts remain ignored and untracked.
+
+### M23 — Complete semantic tables and cross-references
+
+**Status: complete for all presently authored table and cross-reference surfaces.**
+
+Visible references are now resolved into typed records with stable owners,
+local targets, human labels, relation kinds, and source spans. Faithful builds
+emit the projections and the derivative renders hyperlinks to the same
+semantic destinations. Table records carry family IDs, globally addressable
+cells, and continuation-chain relationships. The loader recovers 1516.1's 161
+definitions and 92 faithful table fragments into 46 logical families; 1516.2
+retains 89 tables, 80 families, and 2,840 cells. 1516 has no physical table
+surface, and that explicit zero is covered by the authority manifest. Tranche
+tests validate all three documents, mutation propagation, family ownership,
+and invalid-target rejection.
+
+### M24 — Build the compliance-facing corpus
+
+**Status: complete for the current authored corpus.**
+
+The generic corpus layer now exposes qualified Pydantic records for
+requirements applicable after events, state/sequence implications,
+table/definition dependencies, unresolved cross-document references, missing
+implementation mappings, and planned-versus-concrete implementation evidence.
+`scripts.compliance --corpus-report --json` is the first consumer-facing
+serialization surface and remains stdout-only. All state transitions and
+sequence messages are classified; the 14 messages without direct state links
+are explicitly `unlinked`. Exact table labels provide definition dependencies
+for 81 1516.1 cells and 65 1516.2 cells. The current 281 RTI mappings remain
+explicitly planned and non-concrete because no implementation repository is in
+scope, which is an honest evidence result rather than an unresolved corpus
+surface.
+
+## Next phase: create the better structured document
+
+M8-M24 establish the data-driven corpus and its compliance-facing query
+surface. The remaining objective is publication: use that corpus to produce a
+hierarchy-first, reflowable document whose organization is intentional rather
+than inherited from page fragments. The detailed execution contract is in
+[`DATA-DRIVEN-DELIVERABLES.md`](DATA-DRIVEN-DELIVERABLES.md).
+
+The critical path is:
+
+- **M25:** define the canonical derivative outline, projection contracts,
+  navigation rules, and document style boundary (**complete**);
+- **M26:** compile reflowable prose, requirements, definitions, tables, figures,
+  references, and annexes from the hierarchy (**complete for the structured
+  derivative**);
+- **M27:** close remaining state/sequence, table, and operational semantic gaps
+  while explicitly retaining layout-only fidelity boundaries (**complete for
+  the current authored corpus**); and
+- **M28:** publish and visually accept the complete structured derivative
+  (**complete**).
+
+M29 adds cross-document semantic traversal and conflict analysis (**complete
+for the current 2025 corpus**). M30 connects the corpus to concrete RTI
+implementation evidence when that repository enters scope.
+
+### M31 — RTI compliance requirements publication
+
+**Status: complete for the current semantic corpus.**
+
+`topics/ieee/hla-rti-compliance-2025/` is the separate implementation-facing
+derivative. It is generated from a generic Pydantic publication contract and
+the HLA-owned profile, and it presents requirements, state/event rules,
+implementation seams, evidence status, gaps, and dependencies. Its JSON
+manifest and ignored graph companion are queryable by RTI tooling; its
+637-page PDF is a human review surface. Planned mappings are explicit planning
+evidence only—none are represented as concrete or verified RTI implementation
+evidence.
 
 ## Progress metrics and exit criteria
 
@@ -336,7 +425,7 @@ to explicit records belong to the document migration milestones.
 | Normative requirements with `clause_id` and machine text | 1516 complete | 100% across all three docs |
 | Duplicate definitions or normative rules | Inventory duplicates | 0 semantic duplicates |
 | State transitions with event/guard/action/target | Schema defined | 100% of modeled transitions |
-| Build reproducibility | Keep all three builds passing | 40 / 338 / 124 pages without source drift |
+| Build reproducibility | Keep all three builds passing | 40 / 440 / 124 pages without source drift |
 
 ## Working rules
 

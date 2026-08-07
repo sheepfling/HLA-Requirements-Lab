@@ -1,13 +1,13 @@
-# HLA semantic derivative
+# HLA hierarchy reconstruction
 
 This document is generated from the validated semantic models for IEEE HLA
-1516, 1516.1, and 1516.2. It is a programmatic derivative, not a replacement
-for the faithful recreations.
+1516, 1516.1, and 1516.2. It is a hierarchy-first, reflowable reconstruction,
+not a replacement for the unofficial faithful recreations.
 
 Build it from the repository root with:
 
 ```powershell
-python topics/ieee/hla-semantic-derivative-2025/build.py build
+python -m scripts.build publication build hla-hierarchy-reconstruction-2025
 ```
 
 `main.tex` contains only layout and document framing. The generated semantic

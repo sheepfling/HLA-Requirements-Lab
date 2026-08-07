@@ -35,6 +35,7 @@ The plan must preserve three distinct products:
 | Data-driven source-of-truth plan | M8–M17 complete | IEEE 1516.1 and 1516.2 prose, definitions, requirements, tables, and their faithful generated inputs are closed for the current HLA tranche. |
 | Hierarchy-driven document compiler | M18 complete | The shared generator emits a Pydantic hierarchy graph, owned-record index, stable anchors, relationship links, and derivative hierarchy from canonical clause order. |
 | Compliance/API query and mapping contract | M19 complete | Typed state/event applicability, corpus selection, mapping filters, structured implementation references, and planned-versus-concrete status are available without HLA imports in the generic model. |
+| Next-generation structured document | M25–M29 complete; M30 planned | The hierarchy-first publication, semantic coverage closure, visual acceptance, and qualified cross-document graph are complete for the current corpus; concrete RTI evidence remains conditional on implementation repository scope. |
 
 ## Non-negotiable quality gates
 
@@ -48,7 +49,7 @@ Every milestone and migration slice must satisfy these gates:
   explicit; page numbers and fragment filenames are not ownership keys.
 - Generated LaTeX is written below ignored output paths and is never edited by
   hand.
-- The three faithful builds remain reproducible at 40, 338, and 124 pages
+- The three faithful builds remain reproducible at 40, 440, and 124 pages
   unless a reviewed layout change intentionally changes a count.
 - Every migrated record has a source reference and a test or validation rule
   that protects its contract.
@@ -173,7 +174,7 @@ For each slice:
 
 Exit gate: satisfied. The selected slices have one semantic source record, no
 duplicate normative owner, generated visible output, stable navigation, and
-passing builds at 40, 338, and 124 pages. The source-shape metric did not
+passing builds at 40, 440, and 124 pages. The source-shape metric did not
 regress, and each slice added semantic relationships unavailable to the page
 fragments alone.
 
@@ -238,7 +239,7 @@ rendered as reviewed normative material.
 Exit gate: a clean build of the derivative document can be reproduced after
 deleting all generated output, and changing a semantic record updates every
 dependent view without hand-editing generated TeX. The current derivative
-build is 408 pages and is covered by semantic mutation tests.
+initial record-view build was 2591 pages and is covered by semantic mutation tests.
 
 ### M7 — Full build and visual release checks
 
@@ -262,7 +263,7 @@ three faithful documents plus the derivative, and runs the release checks.
 
 Exit gate: a clean CI checkout builds all three faithful documents and the
 derivative document, validates semantic coverage, and produces no tracked
-outputs. The local release check currently passes at 40, 338, 124, and 408
+outputs. The local release check currently passes at 40, 440, 124, and 1241
 pages respectively, with no fatal log findings or tracked generated outputs.
 
 ### M8 — Corpus inventory and migration contracts
@@ -386,7 +387,7 @@ RTI code symbols.
 The repeatable migration is `scripts/complete_15161_m16.py`. `build.py`
 generates all 1,697 requirement records, and the exit gate is the M16
 completion test, semantic coverage check, authority validation, release check,
-and faithful 338-page build. The earlier 1516-only typed content-decomposition
+and faithful 440-page build. The earlier 1516-only typed content-decomposition
 slice remains the infrastructure prerequisite for this closure.
 
 ### M17 — Complete 1516.2 prose, definitions, requirements, and table semantics
@@ -457,12 +458,109 @@ The 1516.1 mappings remain `planned`, but they are now complete semantic seams
 with structured targets and queryable maturity. The generic model remains
 HLA-neutral; only the CLI's HLA loader adapter is HLA-specific.
 
+### M20 — Complete data-driven diagram rendering and visual acceptance
+
+**Status: complete for the 1516.1 diagram tranche.**
+
+The state-machine renderer now consumes Pydantic records with deterministic
+scaling, explicit label lanes, and safe handling of optional layout fields.
+Sequence diagrams have the same typed semantic contract and export to both
+Mermaid and TikZ. Figures 22–33 are generated from semantic records in the
+faithful 1516.1 build; no extracted raster analogue is used as a tracked
+source input. The build now includes all source pages through 439 and emits a
+440-page PDF.
+
+The acceptance gate is `scripts/diagram_qa.py` together with compiled state
+machine review previews, rendered faithful-page inspection, semantic diagram
+tests, the release page-count check, and source-only Git hygiene. Page
+geometry remains an HLA-specific adapter; the semantic diagram model and
+render/export contracts remain reusable by other document families.
+
+### M21 — Migrate the remaining diagram surfaces
+
+**Status: complete for the faithful 1516.1 figure tranche.**
+
+All 33 numbered 1516.1 figures now have explicit ownership in
+`data/semantic/diagram-surfaces.json`. Figures 1–17 are bound to validated
+state-machine records, Figures 18–21 use the generic graph contract for the
+DDM region, MOM hierarchies, and protocol layers, and Figures 22–33 retain
+typed sequence/state records. The HLA profile contains only the published
+page rectangles and the small surface-to-record binding table; semantic
+records and exporters remain HLA-neutral.
+
+`scripts/export_graph_diagram.py` emits deterministic TikZ and Mermaid for
+non-state diagrams. `scripts/diagram_surface_qa.py` requires every numbered
+figure to be generated, explicitly classified, and embedded in the faithful
+content tree; it also fails on `HLAFigureImageAt` or `includegraphics` figure
+dependencies there. Ten extracted cover/tail assets are explicitly marked
+non-generatable because they are not document figures. `scripts/rti_diagram_check.py`
+provides a machine-readable RTI-oriented coverage report for state transitions,
+sequence messages, and graph edges, so unmapped operational surfaces remain
+visible as compliance work rather than disappearing into layout source.
+
+### M22 — Make prose fully semantic
+
+**Status: complete for the faithful visible-surface contract.**
+
+Promote visible normative statements, definitions, references, figure captions,
+table captions, and explicit notes/footnotes to Pydantic-backed generated
+inputs. The generic loader now recovers records from authored layout bodies
+behind thin page adapters, while the HLA profile owns only the command
+vocabulary and faithful coordinate bindings. The faithful generator emits
+record data macros and preserves coordinates, typography, and exceptional
+line-break wrappers as fidelity data. The derivative consumes the same records
+for its prose, definitions, references, figures, notes, and tables.
+
+M22 acceptance is `tests/test_milestone22.py`, authority validation with
+generated-input checks, all three faithful builds, derivative generation, and
+source-only Git hygiene. Mutation tests change reference, figure-caption, and
+table-caption source records at the source boundary and require the change in
+both products. This establishes the semantic prose path needed for later
+reflowable or RTI-compliance-oriented document generation.
+
+### M23 — Complete semantic tables and cross-references
+
+**Status: complete for all presently authored table and cross-reference surfaces.**
+
+The generic model now turns explicit and visible source references into
+resolved, linkable records and emits their owner, target, label, relation, and
+source through faithful TeX data. The derivative consumes those same records
+as hyperlinks. Table records carry family ownership and globally addressable
+cells, including continuation chains. M23 validation covers 161 recovered
+1516.1 definitions, 92 1516.1 table fragments grouped into 46 families, the
+complete 1516.2 table/family/cell inventory, and the explicit zero-table
+surface in 1516. Mutation coverage proves target-label and projection changes
+reach the generated products.
+
+### M24 — Build the compliance-facing corpus
+
+**Status: complete for the current authored corpus.**
+
+The generic `ComplianceCorpus` now exposes qualified queries for requirements
+after state/events, state-transition and message-sequence implications,
+table/definition dependency edges, missing transition mappings, unresolved
+cross-document targets, and implementation evidence. Evidence distinguishes
+`planned`/`partial` mappings from `implemented`/`verified` mappings and reports
+whether an implementation reference is source-backed. All 281 modeled
+1516.1 transitions are classified as direct state implications, while the 14
+sequence messages are explicitly classified as unlinked because no direct
+transition relationship is authored in the source. Exact table-label matching
+links 81 1516.1 cells and 65 1516.2 cells to definition records; other cells
+remain visible through table/family ownership. The stdout-only
+`scripts.compliance --corpus-report --json` surface serializes the same
+Pydantic report without creating tracked compliance artifacts.
+
+The 281 RTI mappings remain honestly `planned` and not source-backed; that is
+an explicit implementation-evidence result, not a missing corpus record.
+Concrete mappings can replace them when the RTI implementation repository
+enters scope without changing the query contract.
+
 ## Dependency and parallel-work map
 
 ```text
 M0 -> M1 -> M2 -> M4 -> M5 -> M6 -> M7
               \-> M3 -----/              \
-                                       -> M8 -> M9 -> M10 -> M11 -> M12 -> M13 -> M14 -> M15 -> M16 -> M17 -> M18 -> M19
+                                       -> M8 -> M9 -> M10 -> M11 -> M12 -> M13 -> M14 -> M15 -> M16 -> M17 -> M18 -> M19 -> M20 -> M21 -> M22 -> M23 -> M24
 ```
 
 M3 can proceed independently while M4 migrates prose and tables. M5 needs
@@ -504,3 +602,40 @@ review packets remain local and ignored.
 
 Every future task should identify its milestone, document, semantic surface,
 acceptance gate, and metric impact before implementation begins.
+
+The post-M24 structured-document program in
+[`DATA-DRIVEN-DELIVERABLES.md`](DATA-DRIVEN-DELIVERABLES.md):
+
+1. **M25 — Define the hierarchy-first publication contract.** Specify the
+   canonical outline, section roles, projection contracts, navigation rules,
+   and derivative style/profile boundary. **Complete.**
+2. **M26 — Build the reflowable hierarchy-first compiler.** Replace ordinary
+   derivative record dumps and page-shaped prose with generated sections,
+   cross-links, tables, definitions, requirements, figures, and annexes.
+   **Complete for the structured derivative; faithful pagination remains a
+   separate layout path.**
+3. **M27 — Close semantic surface gaps.** Finish confirmed state/sequence,
+   table, definition, and operational semantics, while explicitly classifying
+   anything that remains layout-only or deferred. **Complete for the current
+   authored corpus.**
+4. **M28 — Publish the structured derivative.** Produce and visually review a
+   complete document optimized for navigation and understanding rather than
+   original pagination. **Complete and visually accepted.**
+5. **M29 — Build the cross-document semantic graph.** Add qualified links,
+   shared-term relationships, dependency traversal, and duplicate/conflict
+   reporting across the three standards. **Complete for the 2025 corpus.**
+6. **M30 — Connect concrete RTI evidence.** Replace planned seams with
+   source-backed implementation mappings and executable conformance checks
+   once the RTI implementation repository is in scope.
+7. **M31 — Publish RTI compliance requirements.** Generate a separate
+   hierarchy-driven requirements/evidence publication from the complete corpus,
+   preserving the distinction between planned seams and concrete verification.
+   **Complete for the current semantic corpus.**
+8. **M32 — Generate faithful layout entrypoints.** Move faithful page ordering
+   into typed content-block projections and source-controlled layout-only
+   profiles. **Complete for all three 2025 HLA recreations.**
+
+M25-M29, M31, and M32 are complete for the current 2025 corpus and together
+deliver the better structured and compliance-facing documents. M30 turns the
+semantic corpus into a verified RTI compliance instrument when implementation
+code is available.

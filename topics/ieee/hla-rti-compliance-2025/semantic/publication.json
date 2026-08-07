@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "publication_id": "hla-rti-compliance-requirements-2025",
+  "title": "HLA RTI Compliance Requirements",
+  "subtitle": "Generated requirements, operational rules, and evidence readiness for the 2025 HLA corpus",
+  "document_ids": [
+    "hla-1516-2025",
+    "hla-1516.1-2025",
+    "hla-1516.2-2025"
+  ],
+  "scope_statement": "This engineering publication organizes the semantic records recovered from IEEE HLA 1516-2025, 1516.1-2025, and 1516.2-2025 into an RTI compliance contract. It is generated from the source-owned Pydantic corpus and is intended for requirements tracing, implementation planning, and conformance-test design. It is not a replacement for the faithful recreations or the published standards.",
+  "evidence_boundary": "A planned mapping is an implementation seam, not code evidence. This publication never treats planned or partial mappings as proof of conformance. An RTI can be claimed compliant only after implementation symbols, source locations, tests, and verification results are connected to these records."
+}

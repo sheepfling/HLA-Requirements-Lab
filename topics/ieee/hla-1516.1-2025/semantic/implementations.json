@@ -14,7 +14,10 @@
       "transition_ids": [
         "class-attribute.publication.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 5
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -30,7 +33,10 @@
       "transition_ids": [
         "class-attribute.publication.history-entry"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 21
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -46,7 +52,10 @@
       "transition_ids": [
         "class-attribute.publish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 37
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -62,7 +71,10 @@
       "transition_ids": [
         "class-attribute.published-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 53
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -78,7 +90,10 @@
       "transition_ids": [
         "class-attribute.subscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 69
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -94,7 +109,10 @@
       "transition_ids": [
         "class-attribute.subscribed-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 85
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -110,7 +128,10 @@
       "transition_ids": [
         "class-attribute.subscription.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 101
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -126,7 +147,10 @@
       "transition_ids": [
         "class-attribute.subscription.history-entry"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 117
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -142,7 +166,10 @@
       "transition_ids": [
         "class-attribute.unpublish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 133
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -158,7 +185,10 @@
       "transition_ids": [
         "class-attribute.unpublished-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 149
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -174,7 +204,10 @@
       "transition_ids": [
         "class-attribute.unsubscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 165
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -190,7 +223,10 @@
       "transition_ids": [
         "class-attribute.unsubscribed-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 181
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -206,7 +242,10 @@
       "transition_ids": [
         "connection.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 197
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -224,7 +263,10 @@
       "transition_ids": [
         "connection.new-session"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 213
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -240,7 +282,10 @@
       "transition_ids": [
         "connection.reconnect-fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 231
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -256,7 +301,10 @@
       "transition_ids": [
         "connection.reconnect-loop"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 247
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -272,7 +320,10 @@
       "transition_ids": [
         "connection.reconnect-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 263
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -288,7 +339,10 @@
       "transition_ids": [
         "connection.resend-fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 279
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -304,7 +358,10 @@
       "transition_ids": [
         "connection.resend-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 295
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -320,7 +377,10 @@
       "transition_ids": [
         "connection.session-fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 311
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -336,7 +396,10 @@
       "transition_ids": [
         "connection.session-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 327
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -352,7 +415,10 @@
       "transition_ids": [
         "connection.start"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 343
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -368,7 +434,10 @@
       "transition_ids": [
         "connection.terminated"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 359
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -384,7 +453,10 @@
       "transition_ids": [
         "connection.termination-request"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 375
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -400,7 +472,10 @@
       "transition_ids": [
         "establishing.able-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 391
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -416,7 +491,10 @@
       "transition_ids": [
         "establishing.acquire-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 407
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -432,7 +510,10 @@
       "transition_ids": [
         "establishing.cancel-acquisition"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 423
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -448,7 +529,10 @@
       "transition_ids": [
         "establishing.cancel-divestiture"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 439
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -464,7 +548,10 @@
       "transition_ids": [
         "establishing.confirm-cancel"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 455
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -480,7 +567,10 @@
       "transition_ids": [
         "establishing.confirm-divestiture-failure"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 471
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -496,7 +586,10 @@
       "transition_ids": [
         "establishing.confirm-divestiture-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 487
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -512,7 +605,10 @@
       "transition_ids": [
         "establishing.discover"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 503
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -528,7 +624,10 @@
       "transition_ids": [
         "establishing.enter-choice"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 519
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -544,7 +643,10 @@
       "transition_ids": [
         "establishing.negotiated-divestiture"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 535
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -560,7 +662,10 @@
       "transition_ids": [
         "establishing.not-willing"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 551
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -576,7 +681,10 @@
       "transition_ids": [
         "establishing.published-to-not-able"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 567
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -592,7 +700,10 @@
       "transition_ids": [
         "establishing.register"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 583
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -608,7 +719,10 @@
       "transition_ids": [
         "establishing.release-denied"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 599
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -624,7 +738,10 @@
       "transition_ids": [
         "establishing.release-request"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 615
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -640,7 +757,10 @@
       "transition_ids": [
         "establishing.try-acquire"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 631
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -656,7 +776,10 @@
       "transition_ids": [
         "establishing.unowned-to-able"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 647
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -672,7 +795,10 @@
       "transition_ids": [
         "establishing.unowned-to-owned"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 663
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -688,7 +814,10 @@
       "transition_ids": [
         "establishing.unpublished-to-not-able"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 679
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -704,7 +833,10 @@
       "transition_ids": [
         "establishing.willing"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 695
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -720,7 +852,10 @@
       "transition_ids": [
         "federate-exception.error-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 711
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -736,7 +871,10 @@
       "transition_ids": [
         "federate-exception.error-final"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 727
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -752,7 +890,10 @@
       "transition_ids": [
         "federate-exception.error-report"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 743
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -768,7 +909,10 @@
       "transition_ids": [
         "federate-exception.shutdown-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 759
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -784,7 +928,10 @@
       "transition_ids": [
         "federate-exception.shutdown-error"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 775
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -800,7 +947,10 @@
       "transition_ids": [
         "federate-exception.shutdown-final"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 791
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -816,7 +966,10 @@
       "transition_ids": [
         "federate-exception.shutdown-timeout"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 807
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -832,7 +985,10 @@
       "transition_ids": [
         "federate-exception.terminate"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 823
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -848,7 +1004,10 @@
       "transition_ids": [
         "federate-exception.terminated"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 839
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -864,7 +1023,10 @@
       "transition_ids": [
         "federate-exception.unresponsive-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 855
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -880,7 +1042,10 @@
       "transition_ids": [
         "federate-resume.all-sent"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 871
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -896,7 +1061,10 @@
       "transition_ids": [
         "federate-resume.bad-message"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 887
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -912,7 +1080,10 @@
       "transition_ids": [
         "federate-resume.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 903
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -928,7 +1099,10 @@
       "transition_ids": [
         "federate-resume.cannot-establish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 919
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -944,7 +1118,10 @@
       "transition_ids": [
         "federate-resume.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 935
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -960,7 +1137,10 @@
       "transition_ids": [
         "federate-resume.heartbeat-timeout"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 951
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -976,7 +1156,10 @@
       "transition_ids": [
         "federate-resume.resend"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 967
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -992,7 +1175,10 @@
       "transition_ids": [
         "federate-resume.resend-broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 983
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1008,7 +1194,10 @@
       "transition_ids": [
         "federate-resume.resume-request"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 999
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1024,7 +1213,10 @@
       "transition_ids": [
         "federate-resume.status"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1015
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1040,7 +1232,10 @@
       "transition_ids": [
         "federate-resume.status-failure"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1031
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1056,7 +1251,10 @@
       "transition_ids": [
         "federate-startup.bad-init2"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1047
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1072,7 +1270,10 @@
       "transition_ids": [
         "federate-startup.bad-main"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1063
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1088,7 +1289,10 @@
       "transition_ids": [
         "federate-startup.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1079
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1104,7 +1308,10 @@
       "transition_ids": [
         "federate-startup.broken-init3"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1095
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1120,7 +1327,10 @@
       "transition_ids": [
         "federate-startup.cannot-establish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1111
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1136,7 +1346,10 @@
       "transition_ids": [
         "federate-startup.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1127
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1152,7 +1365,10 @@
       "transition_ids": [
         "federate-startup.establish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1143
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1168,7 +1384,10 @@
       "transition_ids": [
         "federate-startup.failed"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1159
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1184,7 +1403,10 @@
       "transition_ids": [
         "federate-startup.heartbeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1175
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1200,7 +1422,10 @@
       "transition_ids": [
         "federate-startup.heartbeat-broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1191
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1216,7 +1441,10 @@
       "transition_ids": [
         "federate-startup.heartbeat-sent"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1207
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1232,7 +1460,10 @@
       "transition_ids": [
         "federate-startup.new-session"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1223
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1248,7 +1479,10 @@
       "transition_ids": [
         "federate-startup.session-broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1239
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1264,7 +1498,10 @@
       "transition_ids": [
         "federate-startup.shutdown"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1255
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1280,7 +1517,10 @@
       "transition_ids": [
         "federate-startup.status"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1271
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1296,7 +1536,10 @@
       "transition_ids": [
         "federate-startup.timeout-heart"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1287
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1312,7 +1555,10 @@
       "transition_ids": [
         "federate-startup.wait-timeout"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1303
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1331,7 +1577,10 @@
       "transition_ids": [
         "federate.connect"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1319
+      },
       "notes": "Replace the pending symbol with the RTI adapter entry point when implementation code is available."
     },
     {
@@ -1350,7 +1599,10 @@
       "transition_ids": [
         "federate.connection-lost"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1338
+      },
       "notes": ""
     },
     {
@@ -1369,7 +1621,10 @@
       "transition_ids": [
         "federate.disconnect"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1357
+      },
       "notes": ""
     },
     {
@@ -1405,7 +1660,10 @@
       "transition_ids": [
         "federate.join"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1396
+      },
       "notes": ""
     },
     {
@@ -1524,7 +1782,10 @@
       "transition_ids": [
         "federate.resigned-by-rti"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1512
+      },
       "notes": "Replace the pending symbol with the federate callback entry point when implementation code is available."
     },
     {
@@ -1820,7 +2081,10 @@
       "transition_ids": [
         "handler.bad"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1811
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1836,7 +2100,10 @@
       "transition_ids": [
         "handler.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1827
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1852,7 +2119,10 @@
       "transition_ids": [
         "handler.new"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1843
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1868,7 +2138,10 @@
       "transition_ids": [
         "handler.resume"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1859
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1884,7 +2157,10 @@
       "transition_ids": [
         "interaction.control-disabled"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1875
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1900,7 +2176,10 @@
       "transition_ids": [
         "interaction.control-enabled"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1891
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1916,7 +2195,10 @@
       "transition_ids": [
         "interaction.control-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1907
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1932,7 +2214,10 @@
       "transition_ids": [
         "interaction.publication-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1923
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1948,7 +2233,10 @@
       "transition_ids": [
         "interaction.publish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1939
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1964,7 +2252,10 @@
       "transition_ids": [
         "interaction.published.control-entry-history"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1955
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -1983,7 +2274,10 @@
       "transition_ids": [
         "interaction.receive"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1971
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2002,7 +2296,10 @@
       "transition_ids": [
         "interaction.send"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 1990
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2018,7 +2315,10 @@
       "transition_ids": [
         "interaction.subscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2009
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2034,7 +2334,10 @@
       "transition_ids": [
         "interaction.subscription-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2025
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2050,7 +2353,10 @@
       "transition_ids": [
         "interaction.turn-off"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2041
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2066,7 +2372,10 @@
       "transition_ids": [
         "interaction.turn-on"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2057
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2082,7 +2391,10 @@
       "transition_ids": [
         "interaction.turn-on-again"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2073
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2098,7 +2410,10 @@
       "transition_ids": [
         "interaction.unpublish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2089
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2114,7 +2429,10 @@
       "transition_ids": [
         "interaction.unpublished-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2105
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2130,7 +2448,10 @@
       "transition_ids": [
         "interaction.unsubscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2121
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2146,7 +2467,10 @@
       "transition_ids": [
         "interaction.unsubscribed-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2137
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2162,7 +2486,10 @@
       "transition_ids": [
         "normal.enter-history"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2153
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2178,7 +2505,10 @@
       "transition_ids": [
         "normal.history-to-temporal"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2169
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2194,7 +2524,10 @@
       "transition_ids": [
         "normal.interaction-first-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2185
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2210,7 +2543,10 @@
       "transition_ids": [
         "normal.interaction-last-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2201
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2226,7 +2562,10 @@
       "transition_ids": [
         "normal.object-first-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2217
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2242,7 +2581,10 @@
       "transition_ids": [
         "normal.object-last-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2233
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2258,7 +2600,10 @@
       "transition_ids": [
         "object-class.attributes.first.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2249
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2274,7 +2619,10 @@
       "transition_ids": [
         "object-class.attributes.last.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2265
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2290,7 +2638,10 @@
       "transition_ids": [
         "object-class.attributes.second.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2281
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2306,7 +2657,10 @@
       "transition_ids": [
         "object-class.instance-1.discover"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2297
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2322,7 +2676,10 @@
       "transition_ids": [
         "object-class.instance-1.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2313
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2338,7 +2695,10 @@
       "transition_ids": [
         "object-class.instance-1.local-delete"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2329
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2354,7 +2714,10 @@
       "transition_ids": [
         "object-class.instance-1.register"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2345
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2370,7 +2733,10 @@
       "transition_ids": [
         "object-class.instance-1.remove"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2361
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2386,7 +2752,10 @@
       "transition_ids": [
         "object-class.instance-k.discover"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2377
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2402,7 +2771,10 @@
       "transition_ids": [
         "object-class.instance-k.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2393
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2418,7 +2790,10 @@
       "transition_ids": [
         "object-class.instance-k.local-delete"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2409
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2434,7 +2809,10 @@
       "transition_ids": [
         "object-class.instance-k.register"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2425
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2450,7 +2828,10 @@
       "transition_ids": [
         "object-class.instance-k.remove"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2441
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2466,7 +2847,10 @@
       "transition_ids": [
         "object-instance-known.enter-first"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2457
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2482,7 +2866,10 @@
       "transition_ids": [
         "object-instance-known.enter-last"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2473
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2498,7 +2885,10 @@
       "transition_ids": [
         "overview.create"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2489
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2514,7 +2904,10 @@
       "transition_ids": [
         "overview.destroy"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2505
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2530,7 +2923,10 @@
       "transition_ids": [
         "overview.federate-1.join"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2521
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2546,7 +2942,10 @@
       "transition_ids": [
         "overview.federate-1.resign"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2537
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2562,7 +2961,10 @@
       "transition_ids": [
         "overview.federate-n.join"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2553
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2578,7 +2980,10 @@
       "transition_ids": [
         "overview.federate-n.resign"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2569
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2594,7 +2999,10 @@
       "transition_ids": [
         "ownership.discovered"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2585
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2610,7 +3018,10 @@
       "transition_ids": [
         "ownership.enter-choice"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2601
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2628,7 +3039,10 @@
       "transition_ids": [
         "ownership.no-scope-enable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2617
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2646,7 +3060,10 @@
       "transition_ids": [
         "ownership.not-owned-disable-scope"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2635
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2664,7 +3081,10 @@
       "transition_ids": [
         "ownership.not-owned-enable-scope"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2653
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2680,7 +3100,10 @@
       "transition_ids": [
         "ownership.not-owned-history-reflect"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2671
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2696,7 +3119,10 @@
       "transition_ids": [
         "ownership.owned"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2687
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2712,7 +3138,10 @@
       "transition_ids": [
         "ownership.owned-control-disable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2703
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2728,7 +3157,10 @@
       "transition_ids": [
         "ownership.owned-disable-relevance"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2719
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2746,7 +3178,10 @@
       "transition_ids": [
         "ownership.owned-enable-relevance"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2735
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2764,7 +3199,10 @@
       "transition_ids": [
         "ownership.owned-history-update"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2753
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2782,7 +3220,10 @@
       "transition_ids": [
         "ownership.owned-no-control-enable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2771
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2798,7 +3239,10 @@
       "transition_ids": [
         "ownership.registered"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2789
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2816,7 +3260,10 @@
       "transition_ids": [
         "ownership.scope-disable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2805
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2832,7 +3279,10 @@
       "transition_ids": [
         "ownership.scope-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2823
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2851,7 +3301,10 @@
       "transition_ids": [
         "ownership.scope-in"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2839
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2870,7 +3323,10 @@
       "transition_ids": [
         "ownership.scope-in-again"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2858
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2889,7 +3345,10 @@
       "transition_ids": [
         "ownership.scope-out"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2877
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2908,7 +3367,10 @@
       "transition_ids": [
         "ownership.scope-out-again"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2896
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2924,7 +3386,10 @@
       "transition_ids": [
         "ownership.unowned"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2915
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2940,7 +3405,10 @@
       "transition_ids": [
         "ownership.updates-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2931
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2958,7 +3426,10 @@
       "transition_ids": [
         "ownership.updates-off"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2947
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2976,7 +3447,10 @@
       "transition_ids": [
         "ownership.updates-off-from-unknown"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2965
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -2994,7 +3468,10 @@
       "transition_ids": [
         "ownership.updates-on"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 2983
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3012,7 +3489,10 @@
       "transition_ids": [
         "ownership.updates-on-again"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3001
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3028,7 +3508,10 @@
       "transition_ids": [
         "port.connection"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3019
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3044,7 +3527,10 @@
       "transition_ids": [
         "port.expire"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3035
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3060,7 +3546,10 @@
       "transition_ids": [
         "port.listen"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3051
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3076,7 +3565,10 @@
       "transition_ids": [
         "port.purge-done"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3067
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3092,7 +3584,10 @@
       "transition_ids": [
         "port.setup-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3083
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3108,7 +3603,10 @@
       "transition_ids": [
         "port.shutdown"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3099
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3124,7 +3622,10 @@
       "transition_ids": [
         "port.spawned"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3115
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3140,7 +3641,10 @@
       "transition_ids": [
         "port.stop"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3131
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3156,7 +3660,10 @@
       "transition_ids": [
         "privilege.explicit-publish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3147
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3172,7 +3679,10 @@
       "transition_ids": [
         "privilege.explicit-published-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3163
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3188,7 +3698,10 @@
       "transition_ids": [
         "privilege.explicit-to-implicit"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3179
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3204,7 +3717,10 @@
       "transition_ids": [
         "privilege.explicit-unpublish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3195
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3220,7 +3736,10 @@
       "transition_ids": [
         "privilege.explicit-unpublished-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3211
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3236,7 +3755,10 @@
       "transition_ids": [
         "privilege.implicit-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3227
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3252,7 +3774,10 @@
       "transition_ids": [
         "privilege.implicit-history-entry"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3243
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3268,7 +3793,10 @@
       "transition_ids": [
         "privilege.implicit-publish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3259
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3284,7 +3812,10 @@
       "transition_ids": [
         "privilege.implicit-published-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3275
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3300,7 +3831,10 @@
       "transition_ids": [
         "privilege.implicit-to-explicit"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3291
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3316,7 +3850,10 @@
       "transition_ids": [
         "privilege.implicit-unpublish"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3307
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3332,7 +3869,10 @@
       "transition_ids": [
         "privilege.implicit-unpublished-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3323
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3348,7 +3888,10 @@
       "transition_ids": [
         "privilege.subscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3339
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3364,7 +3907,10 @@
       "transition_ids": [
         "privilege.subscribed-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3355
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3380,7 +3926,10 @@
       "transition_ids": [
         "privilege.subscription-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3371
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3396,7 +3945,10 @@
       "transition_ids": [
         "privilege.subscription-history-entry"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3387
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3412,7 +3964,10 @@
       "transition_ids": [
         "privilege.unsubscribe"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3403
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3428,7 +3983,10 @@
       "transition_ids": [
         "privilege.unsubscribed-repeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3419
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3444,7 +4002,10 @@
       "transition_ids": [
         "rti-connection.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3435
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3460,7 +4021,10 @@
       "transition_ids": [
         "rti-connection.fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3451
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3478,7 +4042,10 @@
       "transition_ids": [
         "rti-connection.new-session"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3467
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3494,7 +4061,10 @@
       "transition_ids": [
         "rti-connection.reconnect-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3485
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3510,7 +4080,10 @@
       "transition_ids": [
         "rti-connection.reconnect-timeout"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3501
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3526,7 +4099,10 @@
       "transition_ids": [
         "rti-connection.resend-fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3517
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3542,7 +4118,10 @@
       "transition_ids": [
         "rti-connection.resend-success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3533
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3558,7 +4137,10 @@
       "transition_ids": [
         "rti-connection.start"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3549
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3574,7 +4156,10 @@
       "transition_ids": [
         "rti-connection.success"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3565
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3590,7 +4175,10 @@
       "transition_ids": [
         "rti-connection.terminate-request"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3581
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3606,7 +4194,10 @@
       "transition_ids": [
         "rti-connection.terminated"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3597
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3622,7 +4213,10 @@
       "transition_ids": [
         "rti-exception.error-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3613
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3638,7 +4232,10 @@
       "transition_ids": [
         "rti-exception.error-final"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3629
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3654,7 +4251,10 @@
       "transition_ids": [
         "rti-exception.error-report"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3645
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3670,7 +4270,10 @@
       "transition_ids": [
         "rti-exception.fatal-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3661
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3686,7 +4289,10 @@
       "transition_ids": [
         "rti-exception.fatal-final"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3677
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3702,7 +4308,10 @@
       "transition_ids": [
         "rti-exception.fatal-report"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3693
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3718,7 +4327,10 @@
       "transition_ids": [
         "rti-exception.inactive-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3709
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3734,7 +4346,10 @@
       "transition_ids": [
         "rti-exception.shutdown-close"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3725
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3750,7 +4365,10 @@
       "transition_ids": [
         "rti-exception.shutdown-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3741
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3766,7 +4384,10 @@
       "transition_ids": [
         "rti-resume.all-resent"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3757
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3782,7 +4403,10 @@
       "transition_ids": [
         "rti-resume.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3773
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3798,7 +4422,10 @@
       "transition_ids": [
         "rti-resume.enough"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3789
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3814,7 +4441,10 @@
       "transition_ids": [
         "rti-resume.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3805
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3830,7 +4460,10 @@
       "transition_ids": [
         "rti-resume.exists"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3821
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3846,7 +4479,10 @@
       "transition_ids": [
         "rti-resume.fail-complete"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3837
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3862,7 +4498,10 @@
       "transition_ids": [
         "rti-resume.not-enough"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3853
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3878,7 +4517,10 @@
       "transition_ids": [
         "rti-resume.not-found"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3869
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3894,7 +4536,10 @@
       "transition_ids": [
         "rti-resume.shutdown"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3885
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3910,7 +4555,10 @@
       "transition_ids": [
         "rti-startup.bad"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3901
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3926,7 +4574,10 @@
       "transition_ids": [
         "rti-startup.broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3917
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3942,7 +4593,10 @@
       "transition_ids": [
         "rti-startup.broken-init2"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3933
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3958,7 +4612,10 @@
       "transition_ids": [
         "rti-startup.cannot-create"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3949
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3974,7 +4631,10 @@
       "transition_ids": [
         "rti-startup.correct"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3965
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -3990,7 +4650,10 @@
       "transition_ids": [
         "rti-startup.create"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3981
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4006,7 +4669,10 @@
       "transition_ids": [
         "rti-startup.enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 3997
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4022,7 +4688,10 @@
       "transition_ids": [
         "rti-startup.fail"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4013
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4038,7 +4707,10 @@
       "transition_ids": [
         "rti-startup.heartbeat"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4029
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4054,7 +4726,10 @@
       "transition_ids": [
         "rti-startup.incorrect"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4045
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4070,7 +4745,10 @@
       "transition_ids": [
         "rti-startup.shutdown"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4061
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4086,7 +4764,10 @@
       "transition_ids": [
         "rti-startup.shutdown-init1"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4077
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4102,7 +4783,10 @@
       "transition_ids": [
         "rti-startup.terminate"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4093
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4118,7 +4802,10 @@
       "transition_ids": [
         "rti-startup.terminate-broken"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4109
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4414,7 +5101,10 @@
       "transition_ids": [
         "temporal.advance"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4405
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4430,7 +5120,10 @@
       "transition_ids": [
         "temporal.advance-loop"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4421
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4446,7 +5139,10 @@
       "transition_ids": [
         "temporal.async-disable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4437
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4462,7 +5158,10 @@
       "transition_ids": [
         "temporal.async-enable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4453
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4478,7 +5177,10 @@
       "transition_ids": [
         "temporal.async-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4469
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4494,7 +5196,10 @@
       "transition_ids": [
         "temporal.both-to-idle"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4485
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4510,7 +5215,10 @@
       "transition_ids": [
         "temporal.constrained-disable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4501
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4526,7 +5234,10 @@
       "transition_ids": [
         "temporal.constrained-enable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4517
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4542,7 +5253,10 @@
       "transition_ids": [
         "temporal.constrained-enter"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4533
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4558,7 +5272,10 @@
       "transition_ids": [
         "temporal.constrained-to-both"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4549
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4574,7 +5291,10 @@
       "transition_ids": [
         "temporal.enable-constrained"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4565
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4590,7 +5310,10 @@
       "transition_ids": [
         "temporal.enable-regulating"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4581
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4606,7 +5329,10 @@
       "transition_ids": [
         "temporal.enter-idle"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4597
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4622,7 +5348,10 @@
       "transition_ids": [
         "temporal.grant"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4613
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4638,7 +5367,10 @@
       "transition_ids": [
         "temporal.regulating-disable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4629
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4654,7 +5386,10 @@
       "transition_ids": [
         "temporal.regulating-enable"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4645
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4670,7 +5405,10 @@
       "transition_ids": [
         "temporal.regulating-enable-again"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4661
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     },
     {
@@ -4686,7 +5424,10 @@
       "transition_ids": [
         "temporal.regulating-to-both"
       ],
-      "source": null,
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4677
+      },
       "notes": "M16 closure mapping: planned integration seam for the modeled transition; replace with a concrete RTI/federate symbol when available."
     }
   ]

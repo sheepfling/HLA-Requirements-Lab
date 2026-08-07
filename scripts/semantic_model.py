@@ -357,6 +357,87 @@ class ComplianceQueryResult(SemanticRecord):
     issues: tuple[ComplianceIssue, ...] = ()
 
 
+class ComplianceDependency(SemanticRecord):
+    """A qualified dependency edge between corpus semantic records."""
+
+    id: str = Field(min_length=1)
+    source_document_id: str = Field(min_length=1)
+    source_record_id: str = Field(min_length=1)
+    source_kind: str = Field(min_length=1)
+    target_document_id: str = Field(min_length=1)
+    target_record_id: str = Field(min_length=1)
+    target_kind: str = Field(min_length=1)
+    relation: Literal[
+        "owned-by",
+        "contains",
+        "member-of",
+        "references",
+        "mentions",
+        "continues",
+        "governs",
+        "implements",
+        "annotates",
+    ]
+    source: SourceRef | None = None
+
+
+class OperationalImplication(SemanticRecord):
+    """A queryable state-transition or message-sequence implication."""
+
+    document_id: str = Field(min_length=1)
+    kind: Literal["state-transition", "sequence-message"]
+    record_id: str = Field(min_length=1)
+    parent_id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    clause_id: str | None = None
+    requirement_ids: tuple[str, ...] = ()
+    implementation_ids: tuple[str, ...] = ()
+    source_state: str | None = None
+    event: str | None = None
+    target_state: str | None = None
+    sequence_diagram_id: str | None = None
+    message_order: int | None = Field(default=None, ge=1)
+    response_to: str | None = None
+    related_transition_ids: tuple[str, ...] = ()
+    related_sequence_diagram_ids: tuple[str, ...] = ()
+    relation: Literal["direct", "clause-context", "unlinked"]
+    source: SourceRef | None = None
+
+
+class ImplementationEvidence(SemanticRecord):
+    """A corpus-qualified implementation mapping with maturity evidence."""
+
+    document_id: str = Field(min_length=1)
+    mapping_id: str = Field(min_length=1)
+    interface_kind: Literal["service", "callback", "adapter", "handler"]
+    interface_name: str = Field(min_length=1)
+    implementation: str = Field(min_length=1)
+    status: Literal["planned", "partial", "implemented", "verified"]
+    concrete: bool
+    source_backed: bool
+    clause_ids: tuple[str, ...] = ()
+    requirement_ids: tuple[str, ...] = ()
+    transition_ids: tuple[str, ...] = ()
+    implementation_ref: ImplementationReference | None = None
+    source: SourceRef | None = None
+
+
+class ComplianceCorpusReport(SemanticRecord):
+    """Serializable M24 corpus report for compliance consumers."""
+
+    document_ids: tuple[str, ...]
+    applicable_requirements: tuple[RequirementApplicability, ...] = ()
+    state_sequence_implications: tuple[OperationalImplication, ...] = ()
+    dependencies: tuple[ComplianceDependency, ...] = ()
+    missing_implementation_mappings: tuple[TransitionImplementationCoverage, ...] = ()
+    implementation_evidence: tuple[ImplementationEvidence, ...] = ()
+    unresolved_references: tuple[ComplianceIssue, ...] = ()
+    issues: tuple[ComplianceIssue, ...] = ()
+    implementation_status_counts: dict[str, dict[str, int]] = Field(default_factory=dict)
+    operational_implication_counts: dict[str, int] = Field(default_factory=dict)
+    table_definition_coverage: dict[str, dict[str, int]] = Field(default_factory=dict)
+
+
 class TableCell(SemanticRecord):
     """A semantic table cell with source provenance and logical placement."""
 
@@ -365,6 +446,7 @@ class TableCell(SemanticRecord):
     text: str
     row: int | None = Field(default=None, ge=0)
     column: int | None = Field(default=None, ge=0)
+    record_ids: tuple[str, ...] = ()
     source: SourceRef
 
 
@@ -382,6 +464,7 @@ class Table(SemanticRecord):
     domain: Literal["generic", "omt"] = "generic"
     omt_kind: str | None = None
     continued_from: str | None = None
+    family_id: str | None = None
 
     @model_validator(mode="after")
     def validate_cells(self) -> Table:
@@ -429,6 +512,45 @@ class Reference(SemanticRecord):
     clause_id: str | None = None
     targets: tuple[ReferenceTarget, ...] = ()
     source: SourceRef
+
+
+class CrossReference(SemanticRecord):
+    """A typed, linkable relationship from one local record to another."""
+
+    id: str = Field(min_length=1)
+    owner_id: str = Field(min_length=1)
+    target_document_id: str = Field(min_length=1)
+    target_record_id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    kind: Literal[
+        "clause",
+        "definition",
+        "requirement",
+        "content",
+        "table",
+        "table-family",
+        "reference",
+        "note",
+        "figure",
+        "example",
+        "annex",
+        "state-machine",
+        "state",
+        "transition",
+        "sequence-diagram",
+        "graph-diagram",
+        "implementation",
+        "unknown",
+    ] = "unknown"
+    relation: Literal["references", "mentions", "continues"] = "references"
+    source: SourceRef
+
+
+class CrossReferenceFile(SemanticRecord):
+    """Authored cross-reference records with resolved semantic targets."""
+
+    schema_version: int = Field(ge=1)
+    cross_references: tuple[CrossReference, ...]
 
 
 class ReferenceFile(SemanticRecord):
@@ -636,6 +758,206 @@ class StateMachineFile(SemanticRecord):
     state_machines: tuple[StateMachine, ...]
 
 
+class SequenceParticipant(SemanticRecord):
+    """A lifeline in a reusable message-sequence diagram."""
+
+    id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    role: str = ""
+
+
+class SequenceMessage(SemanticRecord):
+    """An ordered message with explicit direction and optional response correlation."""
+
+    id: str = Field(min_length=1)
+    order: int = Field(ge=1)
+    source_participant: str = Field(min_length=1)
+    target_participant: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    kind: Literal["message", "request", "response", "control", "note"] = "message"
+    response_to: str | None = None
+    clause_id: str | None = None
+    requirement_ids: tuple[str, ...] = ()
+    source: SourceRef | None = None
+
+
+class SequenceDiagram(SemanticRecord):
+    """A document-independent sequence diagram owned by semantic source."""
+
+    id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    participants: tuple[SequenceParticipant, ...]
+    messages: tuple[SequenceMessage, ...]
+    clause_id: str | None = None
+    source: SourceRef | None = None
+    provenance: DiagramProvenance | None = None
+    notes: str | None = None
+
+    @model_validator(mode="after")
+    def validate_sequence(self) -> SequenceDiagram:
+        participant_ids = [item.id for item in self.participants]
+        if len(participant_ids) != len(set(participant_ids)):
+            raise ValueError("sequence participant IDs must be unique")
+        message_ids = [item.id for item in self.messages]
+        if len(message_ids) != len(set(message_ids)):
+            raise ValueError("sequence message IDs must be unique")
+        orders = [item.order for item in self.messages]
+        if len(orders) != len(set(orders)):
+            raise ValueError("sequence message order values must be unique")
+        participant_id_set = set(participant_ids)
+        message_id_set = set(message_ids)
+        for message in self.messages:
+            if message.source_participant not in participant_id_set:
+                raise ValueError(
+                    f"sequence message {message.id} references unknown source participant "
+                    f"{message.source_participant}"
+                )
+            if message.target_participant not in participant_id_set:
+                raise ValueError(
+                    f"sequence message {message.id} references unknown target participant "
+                    f"{message.target_participant}"
+                )
+            if message.response_to is not None and message.response_to not in message_id_set:
+                raise ValueError(
+                    f"sequence message {message.id} references unknown response "
+                    f"{message.response_to}"
+                )
+        return self
+
+
+class SequenceDiagramFile(SemanticRecord):
+    """Authored sequence diagrams kept out of page-layout source."""
+
+    schema_version: int = Field(ge=1)
+    sequence_diagrams: tuple[SequenceDiagram, ...]
+
+
+class GraphPoint(SemanticRecord):
+    """A point in a diagram's document-independent coordinate system."""
+
+    x: float
+    y: float
+
+
+class GraphNode(SemanticRecord):
+    """A positioned node used by generic relationship and architecture diagrams."""
+
+    id: str = Field(min_length=1)
+    label: str = Field(min_length=1)
+    x: float
+    y: float
+    width: float = Field(gt=0)
+    height: float = Field(gt=0)
+    style: Literal["box", "frame", "lifeline", "ellipse", "point", "invisible"] = "box"
+    parent_id: str | None = None
+    visible: bool = True
+
+
+class GraphEdge(SemanticRecord):
+    """A directed, undirected, dotted, or dimension relationship between nodes."""
+
+    id: str = Field(min_length=1)
+    source: str | None = None
+    target: str | None = None
+    label: str = ""
+    style: Literal["solid", "dotted", "dashed", "dimension"] = "solid"
+    direction: Literal["none", "forward", "reverse", "both"] = "forward"
+    points: tuple[GraphPoint, ...] = ()
+    clause_id: str | None = None
+    requirement_ids: tuple[str, ...] = ()
+    implementation_ids: tuple[str, ...] = ()
+    source_ref: SourceRef | None = None
+
+
+class GraphAnnotation(SemanticRecord):
+    """Free-standing text or measurement label positioned by semantic data."""
+
+    id: str = Field(min_length=1)
+    x: float
+    y: float
+    text: str = Field(min_length=1)
+    width: float | None = Field(default=None, gt=0)
+    align: Literal["left", "center", "right"] = "center"
+    rotate: float = 0.0
+
+
+class GraphDiagram(SemanticRecord):
+    """A reusable non-state diagram with explicit nodes, edges, and annotations."""
+
+    id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    kind: Literal["relationship", "conceptual", "hierarchy", "architecture"]
+    nodes: tuple[GraphNode, ...] = ()
+    edges: tuple[GraphEdge, ...] = ()
+    annotations: tuple[GraphAnnotation, ...] = ()
+    clause_id: str | None = None
+    source: SourceRef | None = None
+    provenance: DiagramProvenance | None = None
+    notes: str | None = None
+
+    @model_validator(mode="after")
+    def validate_graph(self) -> GraphDiagram:
+        node_ids = [item.id for item in self.nodes]
+        edge_ids = [item.id for item in self.edges]
+        annotation_ids = [item.id for item in self.annotations]
+        if len(node_ids) != len(set(node_ids)):
+            raise ValueError("graph node IDs must be unique")
+        if len(edge_ids) != len(set(edge_ids)):
+            raise ValueError("graph edge IDs must be unique")
+        if len(annotation_ids) != len(set(annotation_ids)):
+            raise ValueError("graph annotation IDs must be unique")
+        node_id_set = set(node_ids)
+        for node in self.nodes:
+            if node.parent_id is not None and node.parent_id not in node_id_set:
+                raise ValueError(f"graph node {node.id} references missing parent {node.parent_id}")
+        for edge in self.edges:
+            if edge.source is not None and edge.source not in node_id_set:
+                raise ValueError(f"graph edge {edge.id} references missing source {edge.source}")
+            if edge.target is not None and edge.target not in node_id_set:
+                raise ValueError(f"graph edge {edge.id} references missing target {edge.target}")
+            if not edge.points and (edge.source is None or edge.target is None):
+                raise ValueError(
+                    f"graph edge {edge.id} needs source/target nodes or explicit points"
+                )
+        return self
+
+
+class GraphDiagramFile(SemanticRecord):
+    """Authored generic diagrams kept out of hand-written page layout."""
+
+    schema_version: int = Field(ge=1)
+    graph_diagrams: tuple[GraphDiagram, ...]
+
+
+class DiagramSurface(SemanticRecord):
+    """Inventory classification for every source figure or extracted asset."""
+
+    id: str = Field(min_length=1)
+    document_id: str = Field(min_length=1)
+    page: int = Field(ge=1)
+    figure_number: int | None = Field(default=None, ge=1)
+    status: Literal["generated", "non-generatable"]
+    record_id: str | None = None
+    record_kind: Literal["state_machine", "sequence_diagram", "graph_diagram", "asset"]
+    source_image: str | None = None
+    reason: str = ""
+
+    @model_validator(mode="after")
+    def validate_surface(self) -> DiagramSurface:
+        if self.status == "generated" and (self.figure_number is None or self.record_id is None):
+            raise ValueError("generated diagram surfaces require figure_number and record_id")
+        if self.status == "non-generatable" and not self.reason.strip():
+            raise ValueError("non-generatable surfaces require a reason")
+        return self
+
+
+class DiagramSurfaceFile(SemanticRecord):
+    """Source-controlled contract for complete figure-surface classification."""
+
+    schema_version: int = Field(ge=1)
+    surfaces: tuple[DiagramSurface, ...]
+
+
 class DocumentModel(SemanticRecord):
     document_id: str = ""
     clauses: tuple[Clause, ...]
@@ -647,16 +969,19 @@ class DocumentModel(SemanticRecord):
     content_blocks: tuple[ContentBlock, ...] = ()
     content_elements: tuple[ContentElement, ...] = ()
     state_machines: tuple[StateMachine, ...] = ()
+    sequence_diagrams: tuple[SequenceDiagram, ...] = ()
+    graph_diagrams: tuple[GraphDiagram, ...] = ()
     implementations: tuple[ImplementationMapping, ...] = ()
     tables: tuple[Table, ...] = ()
     table_families: tuple[TableFamily, ...] = ()
     references: tuple[Reference, ...] = ()
+    cross_references: tuple[CrossReference, ...] = ()
     notes: tuple[Note, ...] = ()
     figures: tuple[Figure, ...] = ()
     examples: tuple[Example, ...] = ()
     annexes: tuple[Annex, ...] = ()
     clause_order: tuple[str, ...] = ()
-    schema_version: int = Field(default=5, ge=4)
+    schema_version: int = Field(default=6, ge=4)
 
     @model_validator(mode="after")
     def validate_record_ids(self) -> DocumentModel:
@@ -669,10 +994,13 @@ class DocumentModel(SemanticRecord):
             ("content block", self.content_blocks),
             ("content element", self.content_elements),
             ("state machine", self.state_machines),
+            ("sequence diagram", self.sequence_diagrams),
+            ("graph diagram", self.graph_diagrams),
             ("implementation", self.implementations),
             ("table", self.tables),
             ("table family", self.table_families),
             ("reference", self.references),
+            ("cross-reference", self.cross_references),
             ("note", self.notes),
             ("figure", self.figures),
             ("example", self.examples),
@@ -822,6 +1150,10 @@ class DocumentModel(SemanticRecord):
                     f"{element.id} references missing records {sorted(missing_records)}"
                 )
         table_ids = {table.id for table in self.tables}
+        table_cell_ids = [cell.id for table in self.tables for cell in table.cells]
+        if len(table_cell_ids) != len(set(table_cell_ids)):
+            raise ValueError("table cell IDs must be unique across the document")
+        family_by_table: dict[str, str] = {}
         for family in self.table_families:
             if family.clause_id is not None and family.clause_id not in clause_ids:
                 raise ValueError(
@@ -832,6 +1164,20 @@ class DocumentModel(SemanticRecord):
                 raise ValueError(
                     f"table family {family.id} references missing tables {sorted(missing_tables)}"
                 )
+            for table_id in family.table_ids:
+                prior = family_by_table.get(table_id)
+                if prior is not None and prior != family.id:
+                    raise ValueError(
+                        f"table {table_id} belongs to multiple families: {prior}, {family.id}"
+                    )
+                family_by_table[table_id] = family.id
+        for table in self.tables:
+            expected_family = family_by_table.get(table.id)
+            if table.family_id is not None and table.family_id != expected_family:
+                raise ValueError(
+                    f"table {table.id} family link {table.family_id} does not match "
+                    f"family membership {expected_family}"
+                )
         for reference in self.references:
             for target in reference.targets:
                 if (
@@ -841,6 +1187,20 @@ class DocumentModel(SemanticRecord):
                     raise ValueError(
                         f"reference {reference.id} targets missing local record {target.record_id}"
                     )
+        for cross_reference in self.cross_references:
+            if cross_reference.owner_id not in local_record_ids:
+                raise ValueError(
+                    f"cross-reference {cross_reference.id} references missing owner "
+                    f"{cross_reference.owner_id}"
+                )
+            if (
+                cross_reference.target_document_id == self.document_id
+                and cross_reference.target_record_id not in local_record_ids
+            ):
+                raise ValueError(
+                    f"cross-reference {cross_reference.id} targets missing local record "
+                    f"{cross_reference.target_record_id}"
+                )
         for machine in self.state_machines:
             if machine.clause_id is not None and machine.clause_id not in clause_ids:
                 raise ValueError(
@@ -882,6 +1242,45 @@ class DocumentModel(SemanticRecord):
                             f"transition {transition.id} and implementation "
                             f"{implementation_id} must link bidirectionally"
                         )
+        for diagram in self.sequence_diagrams:
+            if diagram.clause_id is not None and diagram.clause_id not in clause_ids:
+                raise ValueError(
+                    f"sequence diagram {diagram.id} references missing clause {diagram.clause_id}"
+                )
+            for message in diagram.messages:
+                if message.clause_id is not None and message.clause_id not in clause_ids:
+                    raise ValueError(
+                        f"sequence message {message.id} references missing clause "
+                        f"{message.clause_id}"
+                    )
+                missing_requirements = set(message.requirement_ids) - requirement_ids
+                if missing_requirements:
+                    raise ValueError(
+                        f"sequence message {message.id} references missing requirements "
+                        f"{sorted(missing_requirements)}"
+                    )
+        for diagram in self.graph_diagrams:
+            if diagram.clause_id is not None and diagram.clause_id not in clause_ids:
+                raise ValueError(
+                    f"graph diagram {diagram.id} references missing clause {diagram.clause_id}"
+                )
+            for edge in diagram.edges:
+                if edge.clause_id is not None and edge.clause_id not in clause_ids:
+                    raise ValueError(
+                        f"graph edge {edge.id} references missing clause {edge.clause_id}"
+                    )
+                missing_requirements = set(edge.requirement_ids) - requirement_ids
+                if missing_requirements:
+                    raise ValueError(
+                        f"graph edge {edge.id} references missing requirements "
+                        f"{sorted(missing_requirements)}"
+                    )
+                missing_implementations = set(edge.implementation_ids) - implementation_ids
+                if missing_implementations:
+                    raise ValueError(
+                        f"graph edge {edge.id} references missing implementations "
+                        f"{sorted(missing_implementations)}"
+                    )
         for link in self.requirement_links:
             if link.requirement_id not in requirement_ids:
                 raise ValueError(
@@ -1023,30 +1422,261 @@ class DocumentModel(SemanticRecord):
 
     def semantic_record_ids(self) -> frozenset[str]:
         """Return every locally addressable semantic record ID."""
-        return frozenset(
-            item.id
-            for item in (
-                *self.clauses,
-                *self.definitions,
-                *self.requirements,
-                *self.requirement_links,
-                *self.content_blocks,
-                *self.content_elements,
-                *self.state_machines,
-                *self.tables,
-                *self.table_families,
-                *self.references,
-                *self.notes,
-                *self.figures,
-                *self.examples,
-                *self.annexes,
-                *self.implementations,
+        return (
+            frozenset(
+                item.id
+                for item in (
+                    *self.clauses,
+                    *self.definitions,
+                    *self.requirements,
+                    *self.requirement_links,
+                    *self.content_blocks,
+                    *self.content_elements,
+                    *self.state_machines,
+                    *self.sequence_diagrams,
+                    *self.graph_diagrams,
+                    *self.tables,
+                    *self.table_families,
+                    *self.references,
+                    *self.cross_references,
+                    *self.notes,
+                    *self.figures,
+                    *self.examples,
+                    *self.annexes,
+                    *self.implementations,
+                )
             )
-        ) | frozenset(
-            item.id
-            for machine in self.state_machines
-            for item in (*machine.states, *machine.transitions)
+            | frozenset(
+                item.id
+                for machine in self.state_machines
+                for item in (*machine.states, *machine.transitions)
+            )
+            | frozenset(
+                item.id
+                for diagram in self.sequence_diagrams
+                for item in (*diagram.participants, *diagram.messages)
+            )
+            | frozenset(
+                item.id
+                for diagram in self.graph_diagrams
+                for item in (*diagram.nodes, *diagram.edges, *diagram.annotations)
+            )
+            | frozenset(cell.id for table in self.tables for cell in table.cells)
         )
+
+    def semantic_dependencies(
+        self,
+        record_id: str | None = None,
+    ) -> tuple[ComplianceDependency, ...]:
+        """Return qualified ownership, reference, and implementation edges."""
+        kinds: dict[str, str] = {}
+
+        def register(identifier: str, kind: str) -> None:
+            kinds.setdefault(identifier, kind)
+
+        for record in self.clauses:
+            register(record.id, "clause")
+        for record in self.definitions:
+            register(record.id, "definition")
+        for record in self.requirements:
+            register(record.id, "requirement")
+        for record in self.requirement_links:
+            register(record.id, "requirement-link")
+        for record in self.content_blocks:
+            register(record.id, "content-block")
+        for record in self.content_elements:
+            register(record.id, "content-element")
+        for record in self.state_machines:
+            register(record.id, "state-machine")
+            for state in record.states:
+                register(state.id, "state")
+            for transition in record.transitions:
+                register(transition.id, "transition")
+        for record in self.sequence_diagrams:
+            register(record.id, "sequence-diagram")
+            for message in record.messages:
+                register(message.id, "sequence-message")
+        for record in self.graph_diagrams:
+            register(record.id, "graph-diagram")
+            for edge in record.edges:
+                register(edge.id, "graph-edge")
+        for record in self.implementations:
+            register(record.id, "implementation")
+        for record in self.tables:
+            register(record.id, "table")
+            for cell in record.cells:
+                register(cell.id, "table-cell")
+        for record in self.table_families:
+            register(record.id, "table-family")
+        for record in self.references:
+            register(record.id, "reference")
+        for record in self.cross_references:
+            register(record.id, "cross-reference")
+        for record in self.notes:
+            register(record.id, "note")
+        for record in self.figures:
+            register(record.id, "figure")
+        for record in self.examples:
+            register(record.id, "example")
+        for record in self.annexes:
+            register(record.id, "annex")
+
+        edges: dict[str, ComplianceDependency] = {}
+
+        def add(
+            source_id: str,
+            target_id: str | None,
+            relation: Literal[
+                "owned-by",
+                "contains",
+                "member-of",
+                "references",
+                "mentions",
+                "continues",
+                "governs",
+                "implements",
+                "annotates",
+            ],
+            source: SourceRef | None,
+            *,
+            source_kind: str | None = None,
+            target_kind: str | None = None,
+            target_document_id: str | None = None,
+        ) -> None:
+            if target_id is None or target_id == "":
+                return
+            source_kind_value = source_kind or kinds.get(source_id, "unknown")
+            target_kind_value = target_kind or kinds.get(target_id, "unknown")
+            target_document = target_document_id or self.document_id
+            identifier = f"{self.document_id}:{source_id}->{target_document}:{target_id}:{relation}"
+            if record_id is not None and record_id not in {source_id, target_id}:
+                return
+            edges.setdefault(
+                identifier,
+                ComplianceDependency(
+                    id=identifier,
+                    source_document_id=self.document_id,
+                    source_record_id=source_id,
+                    source_kind=source_kind_value,
+                    target_document_id=target_document,
+                    target_record_id=target_id,
+                    target_kind=target_kind_value,
+                    relation=relation,
+                    source=source,
+                ),
+            )
+
+        for clause in self.clauses:
+            add(clause.id, clause.parent_id, "owned-by", clause.source)
+        for definition in self.definitions:
+            add(definition.id, definition.clause_id, "owned-by", definition.source)
+        for requirement in self.requirements:
+            add(requirement.id, requirement.clause_id, "owned-by", requirement.source)
+            for transition_id in requirement.transition_ids:
+                add(requirement.id, transition_id, "governs", requirement.source)
+        for link in self.requirement_links:
+            add(link.id, link.requirement_id, "references", link.source)
+            add(link.id, link.transition_id, "references", link.source)
+        for block in self.content_blocks:
+            add(block.id, block.clause_id, "owned-by", block.source)
+            for element_id in block.element_ids:
+                add(block.id, element_id, "contains", block.source)
+            for related_id in block.record_ids:
+                add(block.id, related_id, "mentions", block.source)
+        for element in self.content_elements:
+            add(element.id, element.block_id, "member-of", element.source)
+            add(element.id, element.clause_id, "owned-by", element.source)
+            for related_id in element.record_ids:
+                add(element.id, related_id, "mentions", element.source)
+        for machine in self.state_machines:
+            add(machine.id, machine.clause_id, "owned-by", machine.source)
+            for transition in machine.transitions:
+                add(transition.id, machine.id, "member-of", transition.source)
+                add(transition.id, transition.clause_id, "owned-by", transition.source)
+                for requirement_id in transition.requirement_ids:
+                    add(transition.id, requirement_id, "governs", transition.source)
+                for implementation_id in transition.implementation_ids:
+                    add(transition.id, implementation_id, "implements", transition.source)
+        for diagram in self.sequence_diagrams:
+            add(diagram.id, diagram.clause_id, "owned-by", diagram.source)
+            for message in diagram.messages:
+                add(message.id, diagram.id, "member-of", message.source or diagram.source)
+                add(message.id, message.clause_id or diagram.clause_id, "owned-by", message.source)
+                for requirement_id in message.requirement_ids:
+                    add(message.id, requirement_id, "governs", message.source)
+        for diagram in self.graph_diagrams:
+            add(diagram.id, diagram.clause_id, "owned-by", diagram.source)
+            for edge in diagram.edges:
+                add(edge.id, diagram.id, "member-of", edge.source_ref)
+                add(edge.id, edge.clause_id, "owned-by", edge.source_ref)
+                for requirement_id in edge.requirement_ids:
+                    add(edge.id, requirement_id, "governs", edge.source_ref)
+                for implementation_id in edge.implementation_ids:
+                    add(edge.id, implementation_id, "implements", edge.source_ref)
+        for implementation in self.implementations:
+            for clause_id in implementation.clause_ids:
+                add(implementation.id, clause_id, "implements", implementation.source)
+            for requirement_id in implementation.requirement_ids:
+                add(implementation.id, requirement_id, "implements", implementation.source)
+            for transition_id in implementation.transition_ids:
+                add(implementation.id, transition_id, "implements", implementation.source)
+        for family in self.table_families:
+            add(family.id, family.clause_id, "owned-by", family.source)
+            for table_id in family.table_ids:
+                add(family.id, table_id, "contains", family.source)
+        for table in self.tables:
+            if table.family_id:
+                add(table.id, table.family_id, "member-of", table.source)
+            for cell in table.cells:
+                add(cell.id, table.id, "member-of", cell.source)
+                for related_id in cell.record_ids:
+                    add(cell.id, related_id, "annotates", cell.source)
+        for reference in self.references:
+            add(reference.id, reference.clause_id, "owned-by", reference.source)
+            for target in reference.targets:
+                add(
+                    reference.id,
+                    target.record_id,
+                    "references",
+                    reference.source,
+                    target_kind=kinds.get(target.record_id, "external"),
+                    target_document_id=target.document_id,
+                )
+        for cross_reference in self.cross_references:
+            add(
+                cross_reference.owner_id,
+                cross_reference.target_record_id,
+                cross_reference.relation,
+                cross_reference.source,
+                target_kind=cross_reference.kind,
+                target_document_id=cross_reference.target_document_id,
+            )
+        for note in self.notes:
+            add(note.id, note.owner_id, "owned-by", note.source)
+        for figure in self.figures:
+            add(figure.id, figure.clause_id, "owned-by", figure.source)
+        for example in self.examples:
+            add(example.id, example.clause_id, "owned-by", example.source)
+        return tuple(sorted(edges.values(), key=lambda item: item.id))
+
+    def table_definition_dependency_counts(self) -> dict[str, int]:
+        """Summarize table-cell ownership and exact definition-term links."""
+        definition_ids = {item.id for item in self.definitions}
+        cells = tuple(cell for table in self.tables for cell in table.cells)
+        linked_cells = tuple(
+            cell
+            for cell in cells
+            if any(record_id in definition_ids for record_id in cell.record_ids)
+        )
+        return {
+            "tables": len(self.tables),
+            "table_families": len(self.table_families),
+            "cells": len(cells),
+            "cells_with_definition_links": len(linked_cells),
+            "definition_links": sum(
+                record_id in definition_ids for cell in cells for record_id in cell.record_ids
+            ),
+        }
 
     def content_elements_for_clause(
         self,
@@ -1410,6 +2040,168 @@ class DocumentModel(SemanticRecord):
                 counts[status] += 1
         return counts
 
+    def implementation_evidence(
+        self,
+        *,
+        status: Literal["planned", "partial", "implemented", "verified"] | None = None,
+        concrete: bool | None = None,
+    ) -> tuple[ImplementationEvidence, ...]:
+        """Return implementation mappings with explicit maturity evidence."""
+        evidence = tuple(
+            ImplementationEvidence(
+                document_id=self.document_id,
+                mapping_id=item.id,
+                interface_kind=item.interface_kind,
+                interface_name=item.interface_name,
+                implementation=item.implementation,
+                status=item.status,
+                concrete=item.status in {"implemented", "verified"},
+                source_backed=bool(
+                    item.implementation_ref
+                    and (
+                        item.implementation_ref.repository
+                        or item.implementation_ref.path
+                        or item.implementation_ref.line
+                    )
+                ),
+                clause_ids=item.clause_ids,
+                requirement_ids=item.requirement_ids,
+                transition_ids=item.transition_ids,
+                implementation_ref=item.implementation_ref,
+                source=item.source,
+            )
+            for item in self.implementations
+            if status is None or item.status == status
+            if concrete is None or (item.status in {"implemented", "verified"}) == concrete
+        )
+        return tuple(sorted(evidence, key=lambda item: item.mapping_id))
+
+    def state_sequence_implications(
+        self,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        sequence_diagram_id: str | None = None,
+        include_unlinked: bool = True,
+    ) -> tuple[OperationalImplication, ...]:
+        """Project state transitions and sequence messages into one query surface.
+
+        Sequence diagrams currently carry clause ownership but not invented
+        transition links.  When a state/event filter is supplied, messages in
+        the same clause are returned as ``clause-context`` implications; all
+        other messages remain visible as ``unlinked`` when requested.
+        """
+        if (state_id is None) != (event is None):
+            raise ValueError("state_id and event must be supplied together")
+        machines = self._selected_machines(machine_id)
+        transitions = tuple(
+            (machine, transition)
+            for machine in machines
+            for transition in machine.transitions
+            if state_id is None
+            or (
+                transition.source_state == state_id
+                and transition.event.casefold().strip() == event.casefold().strip()
+            )
+        )
+        if state_id is not None and not any(
+            state_id in {state.id for state in machine.states} for machine in machines
+        ):
+            raise ValueError(f"unknown state {state_id}")
+        diagrams = tuple(
+            diagram
+            for diagram in self.sequence_diagrams
+            if sequence_diagram_id is None or diagram.id == sequence_diagram_id
+        )
+        if sequence_diagram_id is not None and not diagrams:
+            raise ValueError(f"unknown sequence diagram {sequence_diagram_id}")
+        by_clause: dict[str, tuple[SequenceDiagram, ...]] = {}
+        for diagram in diagrams:
+            if diagram.clause_id is not None:
+                by_clause.setdefault(diagram.clause_id, ())
+                by_clause[diagram.clause_id] += (diagram,)
+        result: list[OperationalImplication] = []
+        for machine, transition in transitions:
+            related_diagrams = by_clause.get(transition.clause_id or "", ())
+            result.append(
+                OperationalImplication(
+                    document_id=self.document_id,
+                    kind="state-transition",
+                    record_id=transition.id,
+                    parent_id=machine.id,
+                    label=transition.event or transition.id,
+                    clause_id=transition.clause_id,
+                    requirement_ids=transition.requirement_ids,
+                    implementation_ids=transition.implementation_ids,
+                    source_state=transition.source_state,
+                    event=transition.event,
+                    target_state=transition.target_state,
+                    related_sequence_diagram_ids=tuple(diagram.id for diagram in related_diagrams),
+                    relation="direct",
+                    source=transition.source,
+                )
+            )
+        for diagram in diagrams:
+            related_transitions = tuple(
+                transition
+                for _, transition in transitions
+                if diagram.clause_id is not None and transition.clause_id == diagram.clause_id
+            )
+            relation = "clause-context" if related_transitions else "unlinked"
+            if not include_unlinked and not related_transitions:
+                continue
+            mapping_ids = tuple(
+                item.id
+                for item in self.implementations
+                if (diagram.clause_id and diagram.clause_id in item.clause_ids)
+                or any(
+                    requirement_id in item.requirement_ids
+                    for message in diagram.messages
+                    for requirement_id in message.requirement_ids
+                )
+            )
+            for message in sorted(diagram.messages, key=lambda item: item.order):
+                result.append(
+                    OperationalImplication(
+                        document_id=self.document_id,
+                        kind="sequence-message",
+                        record_id=message.id,
+                        parent_id=diagram.id,
+                        label=message.label,
+                        clause_id=message.clause_id or diagram.clause_id,
+                        requirement_ids=message.requirement_ids,
+                        implementation_ids=mapping_ids,
+                        sequence_diagram_id=diagram.id,
+                        message_order=message.order,
+                        response_to=message.response_to,
+                        related_transition_ids=tuple(
+                            transition.id for transition in related_transitions
+                        ),
+                        relation=relation,
+                        source=message.source or diagram.source,
+                    )
+                )
+        return tuple(result)
+
+    def operational_implications(
+        self,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        sequence_diagram_id: str | None = None,
+        include_unlinked: bool = True,
+    ) -> tuple[OperationalImplication, ...]:
+        """Backward-compatible descriptive alias for state/sequence queries."""
+        return self.state_sequence_implications(
+            state_id,
+            event,
+            machine_id,
+            sequence_diagram_id=sequence_diagram_id,
+            include_unlinked=include_unlinked,
+        )
+
     def compliance_query(
         self,
         state_id: str | None = None,
@@ -1655,6 +2447,7 @@ class DocumentModel(SemanticRecord):
                     text=cell.text,
                     row=cell.row,
                     column=cell.column,
+                    record_ids=cell.record_ids,
                     source=cell.source,
                 )
                 for fragment in fragments
@@ -1672,6 +2465,7 @@ class DocumentModel(SemanticRecord):
                     source=first.source,
                     domain=first.domain,
                     omt_kind=first.omt_kind,
+                    family_id=first.family_id,
                 )
             )
         return tuple(merged)
@@ -1717,6 +2511,10 @@ class ComplianceCorpus(SemanticRecord):
             raise ValueError(f"unknown document {document_id}")
         return document
 
+    def _selected_documents(self, document_id: str | None = None) -> tuple[DocumentModel, ...]:
+        """Return either the requested document or the complete corpus."""
+        return (self.document(document_id),) if document_id is not None else self.documents
+
     def compliance_query(
         self,
         document_id: str,
@@ -1735,6 +2533,251 @@ class ComplianceCorpus(SemanticRecord):
             include_candidates=include_candidates,
             require_concrete_implementation=require_concrete_implementation,
         )
+
+    def requirements_applicable_after(
+        self,
+        state_id: str,
+        event: str,
+        document_id: str | None = None,
+        machine_id: str | None = None,
+        *,
+        include_candidates: bool = False,
+    ) -> tuple[RequirementApplicability, ...]:
+        """Query state/event requirements across one or every corpus document."""
+        result: list[RequirementApplicability] = []
+        for document in self._selected_documents(document_id):
+            if not document.state_machines:
+                if document_id is not None:
+                    raise ValueError(f"document {document.document_id} has no state machines")
+                continue
+            result.extend(
+                document.query_requirements_applicable_after(
+                    state_id,
+                    event,
+                    machine_id,
+                    include_candidates=include_candidates,
+                )
+            )
+        return tuple(result)
+
+    def state_sequence_implications(
+        self,
+        document_id: str | None = None,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        sequence_diagram_id: str | None = None,
+        include_unlinked: bool = True,
+    ) -> tuple[OperationalImplication, ...]:
+        """Query state and sequence implications with document-qualified results."""
+        result: list[OperationalImplication] = []
+        for document in self._selected_documents(document_id):
+            if state_id is not None and not document.state_machines:
+                if document_id is not None:
+                    raise ValueError(f"document {document.document_id} has no state machines")
+                continue
+            result.extend(
+                document.state_sequence_implications(
+                    state_id,
+                    event,
+                    machine_id,
+                    sequence_diagram_id=sequence_diagram_id,
+                    include_unlinked=include_unlinked,
+                )
+            )
+        return tuple(result)
+
+    def semantic_dependencies(
+        self,
+        document_id: str | None = None,
+        record_id: str | None = None,
+    ) -> tuple[ComplianceDependency, ...]:
+        """Return qualified dependency edges across the selected documents."""
+        edges = [
+            edge
+            for document in self._selected_documents(document_id)
+            for edge in document.semantic_dependencies(record_id)
+        ]
+        return tuple(sorted({edge.id: edge for edge in edges}.values(), key=lambda item: item.id))
+
+    def dependencies_for_record(
+        self,
+        record_id: str,
+        document_id: str | None = None,
+    ) -> tuple[ComplianceDependency, ...]:
+        """Return dependency edges touching a record, qualified by document."""
+        return self.semantic_dependencies(document_id, record_id)
+
+    def table_definition_dependencies(
+        self,
+        document_id: str | None = None,
+    ) -> tuple[ComplianceDependency, ...]:
+        """Return table/family/cell and definition dependency edges."""
+        interesting = {"table", "table-family", "table-cell", "definition"}
+        return tuple(
+            edge
+            for edge in self.semantic_dependencies(document_id)
+            if edge.source_kind in interesting or edge.target_kind in interesting
+        )
+
+    def transitions_without_implementation_mappings(
+        self,
+        document_id: str | None = None,
+        machine_id: str | None = None,
+    ) -> tuple[TransitionImplementationCoverage, ...]:
+        """Return qualified coverage records for transitions with no mapping."""
+        result: list[TransitionImplementationCoverage] = []
+        for document in self._selected_documents(document_id):
+            selected_machine = machine_id if document_id is not None else None
+            for transition in document.transitions_without_implementation_mapping(selected_machine):
+                result.append(
+                    document.implementation_coverage_for_transition(
+                        transition.id,
+                        selected_machine,
+                    )
+                )
+        return tuple(result)
+
+    def transitions_without_concrete_implementations(
+        self,
+        document_id: str | None = None,
+        machine_id: str | None = None,
+    ) -> tuple[TransitionImplementationCoverage, ...]:
+        """Return qualified coverage records lacking implemented/verified evidence."""
+        result: list[TransitionImplementationCoverage] = []
+        for document in self._selected_documents(document_id):
+            selected_machine = machine_id if document_id is not None else None
+            for transition in document.transitions_without_concrete_implementation(
+                selected_machine
+            ):
+                result.append(
+                    document.implementation_coverage_for_transition(
+                        transition.id,
+                        selected_machine,
+                    )
+                )
+        return tuple(result)
+
+    def implementation_evidence(
+        self,
+        document_id: str | None = None,
+        *,
+        status: Literal["planned", "partial", "implemented", "verified"] | None = None,
+        concrete: bool | None = None,
+    ) -> tuple[ImplementationEvidence, ...]:
+        """Return corpus-qualified planned, partial, implemented, or verified mappings."""
+        evidence = tuple(
+            item
+            for document in self._selected_documents(document_id)
+            for item in document.implementation_evidence(status=status, concrete=concrete)
+        )
+        return tuple(sorted(evidence, key=lambda item: (item.document_id, item.mapping_id)))
+
+    def compliance_report(
+        self,
+        document_id: str | None = None,
+        state_id: str | None = None,
+        event: str | None = None,
+        machine_id: str | None = None,
+        *,
+        include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
+        dependency_record_id: str | None = None,
+        include_unlinked_implications: bool = True,
+    ) -> ComplianceCorpusReport:
+        """Build the complete serializable M24 compliance-facing corpus report."""
+        if (state_id is None) != (event is None):
+            raise ValueError("state_id and event must be supplied together")
+        selected = self._selected_documents(document_id)
+        applicable = (
+            self.requirements_applicable_after(
+                state_id,
+                event,
+                document_id,
+                machine_id,
+                include_candidates=include_candidates,
+            )
+            if state_id is not None and event is not None
+            else ()
+        )
+        implications = self.state_sequence_implications(
+            document_id,
+            state_id,
+            event,
+            machine_id,
+            include_unlinked=include_unlinked_implications,
+        )
+        issues = self.compliance_issues(
+            machine_id if document_id is not None else None,
+            include_candidates=include_candidates,
+            require_concrete_implementation=require_concrete_implementation,
+        )
+        status_counts = {
+            document.document_id: document.implementation_status_counts(
+                machine_id if document_id is not None else None
+            )
+            for document in selected
+        }
+        implication_counts = {
+            relation: sum(item.relation == relation for item in implications)
+            for relation in ("direct", "clause-context", "unlinked")
+        }
+        table_definition_coverage = {
+            document.document_id: document.table_definition_dependency_counts()
+            for document in selected
+        }
+        return ComplianceCorpusReport(
+            document_ids=tuple(document.document_id for document in selected),
+            applicable_requirements=applicable,
+            state_sequence_implications=implications,
+            dependencies=self.semantic_dependencies(document_id, dependency_record_id),
+            missing_implementation_mappings=self.transitions_without_implementation_mappings(
+                document_id,
+                machine_id,
+            ),
+            implementation_evidence=self.implementation_evidence(document_id),
+            unresolved_references=self.unresolved_reference_issues(),
+            issues=issues,
+            implementation_status_counts=status_counts,
+            operational_implication_counts=implication_counts,
+            table_definition_coverage=table_definition_coverage,
+        )
+
+    def assert_compliance_surfaces_classified(self, document_id: str | None = None) -> None:
+        """Raise unless operational surfaces are represented or explicitly unlinked."""
+        selected = self._selected_documents(document_id)
+        report = self.compliance_report(document_id)
+        expected_messages = {
+            message.id
+            for document in selected
+            for diagram in document.sequence_diagrams
+            for message in diagram.messages
+        }
+        actual_messages = {
+            item.record_id
+            for item in report.state_sequence_implications
+            if item.kind == "sequence-message"
+        }
+        if actual_messages != expected_messages:
+            missing = sorted(expected_messages - actual_messages)
+            extra = sorted(actual_messages - expected_messages)
+            raise ValueError(
+                f"sequence-message classification is incomplete (missing={missing}, extra={extra})"
+            )
+        for document in selected:
+            expected_cells = sum(len(table.cells) for table in document.tables)
+            observed = report.table_definition_coverage[document.document_id]["cells"]
+            if observed != expected_cells:
+                raise ValueError(
+                    f"table-cell classification is incomplete for {document.document_id}: "
+                    f"expected {expected_cells}, observed {observed}"
+                )
+        if report.unresolved_references:
+            raise ValueError(
+                "unresolved corpus references: "
+                + ", ".join(item.record_id for item in report.unresolved_references)
+            )
 
     def unresolved_reference_issues(self) -> tuple[ComplianceIssue, ...]:
         """Return unresolved external reference targets as typed issues."""
@@ -1772,6 +2815,37 @@ class ComplianceCorpus(SemanticRecord):
                                 ),
                             )
                         )
+            for cross_reference in document.cross_references:
+                target_document = documents.get(cross_reference.target_document_id)
+                qualified = (
+                    f"{document.document_id}:{cross_reference.owner_id}->"
+                    f"{cross_reference.target_document_id}:{cross_reference.target_record_id}"
+                )
+                if target_document is None:
+                    issues.append(
+                        ComplianceIssue(
+                            code="unresolved-reference",
+                            severity="error",
+                            record_id=qualified,
+                            message=(
+                                f"cross-reference target document does not exist: "
+                                f"{cross_reference.target_document_id}"
+                            ),
+                        )
+                    )
+                elif cross_reference.target_record_id not in target_document.semantic_record_ids():
+                    issues.append(
+                        ComplianceIssue(
+                            code="unresolved-reference",
+                            severity="error",
+                            record_id=qualified,
+                            message=(
+                                f"cross-reference target record does not exist in "
+                                f"{cross_reference.target_document_id}: "
+                                f"{cross_reference.target_record_id}"
+                            ),
+                        )
+                    )
         return tuple(issues)
 
     def compliance_issues(
@@ -1779,16 +2853,23 @@ class ComplianceCorpus(SemanticRecord):
         machine_id: str | None = None,
         *,
         include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
     ) -> tuple[ComplianceIssue, ...]:
         """Return document coverage findings plus cross-document failures."""
-        issues = [
-            issue
-            for document in self.documents
-            for issue in document.compliance_issues(
-                machine_id,
-                include_candidates=include_candidates,
+        issues = []
+        for document in self.documents:
+            selected_machine = (
+                machine_id
+                if machine_id in {machine.id for machine in document.state_machines}
+                else None
             )
-        ]
+            issues.extend(
+                document.compliance_issues(
+                    selected_machine,
+                    include_candidates=include_candidates,
+                    require_concrete_implementation=require_concrete_implementation,
+                )
+            )
         issues.extend(self.unresolved_reference_issues())
         return tuple(issues)
 
@@ -1797,11 +2878,13 @@ class ComplianceCorpus(SemanticRecord):
         machine_id: str | None = None,
         *,
         include_candidates: bool = False,
+        require_concrete_implementation: bool = False,
     ) -> None:
         """Raise when any document or cross-document compliance issue exists."""
         issues = self.compliance_issues(
             machine_id,
             include_candidates=include_candidates,
+            require_concrete_implementation=require_concrete_implementation,
         )
         if issues:
             raise ValueError("; ".join(f"{item.code}: {item.record_id}" for item in issues))
@@ -2147,6 +3230,150 @@ def _table_text(value: str) -> str:
     return value.strip()
 
 
+@dataclass(frozen=True)
+class _TableLayoutText:
+    """A visible text primitive recovered from a faithful table layout."""
+
+    offset: int
+    text: str
+    first: float
+    second: float
+    source: SourceRef
+
+
+def _table_heading(value: str, source: LatexSourceProfile) -> tuple[str, str] | None:
+    """Return a normalized table number/title from a visible layout primitive."""
+    normalized = _table_text(value).replace("%", "").strip()
+    match = re.search(
+        r"\bTable\s+(?P<number>\d+)\s*(?:---|—|-)\s*(?P<title>.+)$",
+        normalized,
+        re.IGNORECASE,
+    )
+    if not match:
+        return None
+    return match.group("number"), normalized
+
+
+def _cluster_index(value: float, values: list[float], tolerance: float) -> int:
+    """Assign a coordinate to a stable ordered cluster."""
+    centers: list[float] = []
+    for candidate in sorted(values):
+        if not centers or abs(candidate - centers[-1]) > tolerance:
+            centers.append(candidate)
+        else:
+            centers[-1] = (centers[-1] + candidate) / 2
+    return min(range(len(centers)), key=lambda index: abs(centers[index] - value))
+
+
+def _load_layout_tables_from_file(
+    root: Path,
+    path: Path,
+    text: str,
+    source: LatexSourceProfile,
+) -> tuple[Table, ...]:
+    """Recover tables that were faithfully drawn without semantic cell macros.
+
+    Older HLA faithful pages use ``HLAFixedBlock`` for portrait tables and
+    ``HLARotatedLine`` for landscape tables. Their coordinates remain layout
+    data; the title, visible cell text, logical number, and source provenance
+    become the reusable semantic projection.
+    """
+    primitives: list[tuple[int, str, tuple[str, ...]]] = []
+    primitives.extend(
+        (offset, "fixed", args)
+        for offset, args, _end in _command_events(text, source.fixed_text_block, 7)
+    )
+    rotated_name = getattr(source, "table_text_line", "")
+    if rotated_name:
+        primitives.extend(
+            (offset, "rotated", args)
+            for offset, args, _end in _command_events(text, rotated_name, 5)
+        )
+    primitives.sort(key=lambda item: item[0])
+    headings: list[tuple[int, str, str, str, SourceRef]] = []
+    for offset, kind, args in primitives:
+        value = args[-1]
+        heading = _table_heading(value, source)
+        if heading is None:
+            continue
+        number, title = heading
+        headings.append((offset, kind, number, title, _source(root, path, text, offset)))
+    if not headings:
+        return ()
+
+    tables: list[Table] = []
+    for heading_index, (offset, kind, number, title, heading_source) in enumerate(headings):
+        next_offset = (
+            headings[heading_index + 1][0] if heading_index + 1 < len(headings) else len(text)
+        )
+        candidates: list[_TableLayoutText] = []
+        for primitive_offset, primitive_kind, args in primitives:
+            if primitive_kind != kind or not offset < primitive_offset < next_offset:
+                continue
+            value = _table_text(args[-1])
+            if not value or _table_heading(value, source) is not None:
+                continue
+            if kind == "fixed":
+                try:
+                    font_size = float(args[4])
+                except ValueError:
+                    continue
+                # Normal body prose uses 9.96pt. Table cells and headers are
+                # 9pt or smaller; this keeps surrounding paragraph blocks out.
+                if font_size > 9.2:
+                    continue
+                first, second = float(args[0]), float(args[1])
+            else:
+                first, second = float(args[0]), float(args[1])
+            candidates.append(
+                _TableLayoutText(
+                    offset=primitive_offset,
+                    text=value,
+                    first=first,
+                    second=second,
+                    source=_source(root, path, text, primitive_offset),
+                )
+            )
+        if not candidates:
+            continue
+        first_tolerance, second_tolerance = (4.0, 22.0) if kind == "fixed" else (3.0, 4.0)
+        rows = [item.first for item in candidates]
+        columns = [item.second for item in candidates]
+        page_match = re.search(r"page-(\d+)", path.stem.casefold())
+        page_label = page_match.group(1) if page_match else str(heading_source.line)
+        table_id = f"table-{number}-p{page_label}"
+        existing_ids = {item.id for item in tables}
+        if table_id in existing_ids:
+            table_id = f"{table_id}-f{heading_index + 1}"
+        cells = tuple(
+            TableCell(
+                id=f"{table_id}.c{ordinal:04d}",
+                table_id=table_id,
+                text=item.text,
+                row=_cluster_index(item.first, rows, first_tolerance),
+                column=_cluster_index(item.second, columns, second_tolerance),
+                source=item.source,
+            )
+            for ordinal, item in enumerate(candidates, 1)
+        )
+        domain = "omt" if _omt_kind(title) else "generic"
+        tables.append(
+            Table(
+                id=table_id,
+                title=title,
+                caption=title,
+                number=number,
+                continuation=False,
+                cells=cells,
+                source=heading_source,
+                logical_id=f"table-{number}",
+                domain=domain,
+                omt_kind=_omt_kind(title),
+            )
+        )
+    return tuple(tables)
+
+
 def _table_position(
     candidate: _TableCellCandidate, grid: tuple[_TableGridCell, ...]
 ) -> tuple[int | None, int | None]:
@@ -2341,11 +3568,20 @@ def _load_tables_from_file(
                 omt_kind=(_omt_kind(caption or title or "") if table_domain == "omt" else None),
             )
         )
-    return tuple(tables)
+    if tables:
+        return tuple(tables)
+    return _load_layout_tables_from_file(root, path, text, source)
 
 
-def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
-    tables: list[Table] = []
+def _authored_layout_units(
+    root: Path,
+) -> tuple[tuple[Path, str], ...]:
+    """Return reachable source plus semantic layout bodies exactly once.
+
+    Page adapters are intentionally empty of visible prose.  Their Pydantic
+    ``ContentBlock`` records retain the fidelity layout body, so semantic
+    surface loaders must inspect that body rather than the adapter itself.
+    """
     authored_blocks = _load_authored_content_blocks(root)
     authored_by_path = {
         item.source.path: item for item in authored_blocks if item.layout_body is not None
@@ -2368,28 +3604,121 @@ def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
         if item.layout_body is not None
     )
     seen_units: set[tuple[str, str]] = set()
+    result: list[tuple[Path, str]] = []
     for path, text in units:
         unit_key = (path.relative_to(root).as_posix(), text)
         if unit_key in seen_units:
             continue
         seen_units.add(unit_key)
+        result.append((path, text))
+    return tuple(result)
+
+
+def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
+    tables: list[Table] = []
+    for path, text in _authored_layout_units(root):
         tables.extend(_load_tables_from_file(root, path, text, source))
     ordered = sorted(tables, key=lambda item: (item.source.path, item.source.line, item.id))
     previous_by_logical_id: dict[str, Table] = {}
     normalized: list[Table] = []
     for table in ordered:
         previous = previous_by_logical_id.get(table.logical_id or table.id)
+        continued = table.continuation or previous is not None
         normalized.append(
             table.model_copy(
                 update={
+                    "continuation": continued,
                     "continued_from": previous.id
-                    if table.continuation and previous is not None
-                    else table.continued_from
+                    if continued and previous is not None
+                    else table.continued_from,
                 }
             )
         )
         previous_by_logical_id[table.logical_id or table.id] = normalized[-1]
     return tuple(normalized)
+
+
+def _derive_table_families(
+    document_id: str,
+    tables: Iterable[Table],
+    authored_families: Iterable[TableFamily],
+    content_blocks: Iterable[ContentBlock],
+) -> tuple[TableFamily, ...]:
+    """Complete table-family projections for layout-only table surfaces."""
+    families = list(authored_families)
+    assigned = {table_id for family in families for table_id in family.table_ids}
+    grouped: dict[str, list[Table]] = {}
+    for table in tables:
+        if table.id in assigned:
+            continue
+        grouped.setdefault(table.logical_id or table.id, []).append(table)
+    block_clause_by_path = {
+        block.source.path.replace("\\", "/"): block.clause_id
+        for block in content_blocks
+        if block.clause_id is not None
+    }
+    used_ids = {family.id for family in families}
+    for logical_id, fragments in sorted(grouped.items()):
+        slug = re.sub(r"[^a-z0-9]+", "-", logical_id.casefold()).strip("-")
+        family_id = f"table-family-{slug}"
+        if family_id in used_ids:
+            family_id = f"{family_id}-{document_id}"
+        used_ids.add(family_id)
+        first = fragments[0]
+        source_path = first.source.path.replace("\\", "/")
+        families.append(
+            TableFamily(
+                id=family_id,
+                title=first.title or first.caption or logical_id,
+                table_ids=tuple(item.id for item in fragments),
+                clause_id=block_clause_by_path.get(source_path),
+                source=first.source,
+            )
+        )
+    return tuple(
+        sorted(
+            families,
+            key=lambda item: (item.source.path, item.source.line, item.id),
+        )
+    )
+
+
+def _table_definition_key(value: str) -> str:
+    """Normalize a table label for exact definition-term matching."""
+    value = re.sub(r"\\[a-zA-Z]+(?:\{[^{}]*\})?", " ", value)
+    return re.sub(r"[^a-z0-9]+", "", value.casefold())
+
+
+def _link_table_cells_to_definitions(
+    tables: Iterable[Table],
+    definitions: Iterable[Definition],
+) -> tuple[Table, ...]:
+    """Attach only exact, source-visible definition-term matches to cells.
+
+    This deliberately avoids substring matching: a cell containing prose
+    about a federate should not acquire a dependency merely because
+    ``federate`` is a defined term.  Exact normalized labels are the
+    source-supported dependency boundary; unresolved cells remain queryable
+    through their table/family ownership edges.
+    """
+    candidates: dict[str, list[str]] = {}
+    for definition in definitions:
+        key = _table_definition_key(definition.term)
+        if len(key) < 6:
+            continue
+        candidates.setdefault(key, []).append(definition.id)
+    unique_terms = {key: values[0] for key, values in candidates.items() if len(values) == 1}
+    linked: list[Table] = []
+    for table in tables:
+        cells: list[TableCell] = []
+        for cell in table.cells:
+            definition_id = unique_terms.get(_table_definition_key(cell.text))
+            record_ids = list(cell.record_ids)
+            if definition_id is not None and definition_id not in record_ids:
+                record_ids.append(definition_id)
+            cells.append(cell.model_copy(update={"record_ids": tuple(record_ids)}))
+        linked.append(table.model_copy(update={"cells": tuple(cells)}))
+    return tuple(linked)
 
 
 def _record_id(prefix: str, root: Path, path: Path, text: str, offset: int, ordinal: int) -> str:
@@ -2580,9 +3909,13 @@ def _load_references(root: Path, source: LatexSourceProfile) -> tuple[Reference,
     records: list[Reference] = []
     source_order = _source_order(root)
     heading_context = _heading_context_by_file(root, source)
-    for path in _files(root):
-        text = path.read_text(encoding="utf-8")
-        headings = heading_context[path]
+    for path, text in _authored_layout_units(root):
+        headings = tuple(
+            sorted(
+                (*heading_context.get(path, ()), *_hierarchy_headings(root, path, text, source)),
+                key=lambda item: item[0],
+            )
+        )
         for _ordinal, (offset, args, end_offset) in enumerate(
             _command_events(text, source.bibliography_entry, 3), start=1
         ):
@@ -2603,8 +3936,7 @@ def _load_notes(root: Path, source: LatexSourceProfile) -> tuple[Note, ...]:
     records: list[Note] = []
     source_order = _source_order(root)
     heading_context = _heading_context_by_file(root, source)
-    for path in _files(root):
-        text = path.read_text(encoding="utf-8")
+    for path, text in _authored_layout_units(root):
         events: list[tuple[int, str, tuple[str, ...], int]] = []
         events.extend(
             (offset, "informative", args, end_offset)
@@ -2623,7 +3955,17 @@ def _load_notes(root: Path, source: LatexSourceProfile) -> tuple[Note, ...]:
             (offset, "footnote", args, end_offset)
             for offset, args, end_offset in _command_events(text, source.footnote_text, 1)
         )
-        headings = heading_context[path]
+        for name in getattr(source, "additional_note_commands", ()):
+            events.extend(
+                (offset, "footnote", args, end_offset)
+                for offset, args, end_offset in _command_events(text, name, 2)
+            )
+        headings = tuple(
+            sorted(
+                (*heading_context.get(path, ()), *_hierarchy_headings(root, path, text, source)),
+                key=lambda item: item[0],
+            )
+        )
         for ordinal, (offset, kind, args, end_offset) in enumerate(sorted(events), start=1):
             payload = args[-1]
             records.append(
@@ -2642,12 +3984,16 @@ def _load_figures(root: Path, source: LatexSourceProfile) -> tuple[Figure, ...]:
     records: list[Figure] = []
     source_order = _source_order(root)
     heading_context = _heading_context_by_file(root, source)
-    for path in _files(root):
-        text = path.read_text(encoding="utf-8")
+    for path, text in _authored_layout_units(root):
         images = _command_events(text, source.figure_image, 5)
         captions = _command_events(text, source.figure_caption, 3)
         anchors = _command_events(text, source.figure_anchor, 1)
-        headings = heading_context[path]
+        headings = tuple(
+            sorted(
+                (*heading_context.get(path, ()), *_hierarchy_headings(root, path, text, source)),
+                key=lambda item: item[0],
+            )
+        )
         for index, (offset, image_args, end_offset) in enumerate(images):
             number = str(index + 1)
             prior_anchors = [item for item in anchors if item[0] <= offset]
@@ -2903,6 +4249,36 @@ def _load_state_machines(root: Path) -> tuple[StateMachine, ...]:
     return tuple(machines)
 
 
+def _load_sequence_diagrams(root: Path) -> tuple[SequenceDiagram, ...]:
+    """Load authored sequence diagrams from the semantic source directory."""
+    semantic_root = root / "semantic"
+    if not semantic_root.exists():
+        return ()
+    diagrams: list[SequenceDiagram] = []
+    for path in sorted(semantic_root.glob("*.json")):
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict) or "sequence_diagrams" not in raw:
+            continue
+        payload = SequenceDiagramFile.model_validate(raw)
+        diagrams.extend(payload.sequence_diagrams)
+    return tuple(diagrams)
+
+
+def _load_graph_diagrams(root: Path) -> tuple[GraphDiagram, ...]:
+    """Load authored generic graph diagrams from the semantic source directory."""
+    semantic_root = root / "semantic"
+    if not semantic_root.exists():
+        return ()
+    diagrams: list[GraphDiagram] = []
+    for path in sorted(semantic_root.glob("*.json")):
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict) or "graph_diagrams" not in raw:
+            continue
+        payload = GraphDiagramFile.model_validate(raw)
+        diagrams.extend(payload.graph_diagrams)
+    return tuple(diagrams)
+
+
 def _load_authored_definitions(root: Path) -> tuple[Definition, ...]:
     """Load definitions that have already migrated to semantic source."""
     path = root / "semantic" / "definitions.json"
@@ -2995,6 +4371,214 @@ def _load_authored_references(root: Path) -> tuple[Reference, ...]:
     return payload.references
 
 
+def _load_authored_cross_references(root: Path) -> tuple[CrossReference, ...]:
+    """Load explicitly authored cross-reference records when present."""
+    path = root / "semantic" / "cross-references.json"
+    if not path.is_file():
+        return ()
+    payload = CrossReferenceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    return payload.cross_references
+
+
+def _cross_reference_catalog(
+    *,
+    clauses: Iterable[Clause],
+    definitions: Iterable[Definition],
+    requirements: Iterable[Requirement],
+    content_blocks: Iterable[ContentBlock],
+    content_elements: Iterable[ContentElement],
+    tables: Iterable[Table],
+    table_families: Iterable[TableFamily],
+    references: Iterable[Reference],
+    notes: Iterable[Note],
+    figures: Iterable[Figure],
+    examples: Iterable[Example],
+    annexes: Iterable[Annex],
+    state_machines: Iterable[StateMachine],
+    sequence_diagrams: Iterable[SequenceDiagram],
+    graph_diagrams: Iterable[GraphDiagram],
+    implementations: Iterable[ImplementationMapping],
+) -> dict[str, tuple[str, str]]:
+    """Build the local target label catalog used by typed cross-references."""
+    catalog: dict[str, tuple[str, str]] = {}
+
+    def add(record_id: str, kind: str, label: str) -> None:
+        catalog.setdefault(record_id, (kind, label.strip() or record_id))
+
+    for item in clauses:
+        add(item.id, "clause", f"{item.number}. {item.title}")
+    for item in definitions:
+        add(item.id, "definition", item.term)
+    for item in requirements:
+        add(item.id, "requirement", item.title)
+    for item in content_blocks:
+        add(item.id, "content", item.text)
+    for item in content_elements:
+        add(item.id, "content", item.text)
+    for item in tables:
+        add(item.id, "table", item.caption or item.title or item.id)
+        for cell in item.cells:
+            add(cell.id, "content", cell.text)
+    for item in table_families:
+        add(item.id, "table-family", item.title)
+    for item in references:
+        add(item.id, "reference", f"{item.label} {item.text}".strip())
+    for item in notes:
+        add(item.id, "note", item.text)
+    for item in figures:
+        add(item.id, "figure", f"Figure {item.number} — {item.caption}".rstrip(" —"))
+    for item in examples:
+        add(item.id, "example", item.title)
+    for item in annexes:
+        add(item.id, "annex", item.title)
+    for item in state_machines:
+        add(item.id, "state-machine", item.title)
+        for state in item.states:
+            add(state.id, "state", state.label or state.id)
+        for transition in item.transitions:
+            add(transition.id, "transition", transition.event or transition.id)
+    for item in sequence_diagrams:
+        add(item.id, "sequence-diagram", item.id)
+    for item in graph_diagrams:
+        add(item.id, "graph-diagram", item.id)
+    for item in implementations:
+        add(item.id, "implementation", item.interface_name)
+    return catalog
+
+
+def _derive_cross_references(
+    document_id: str,
+    content_elements: tuple[ContentElement, ...],
+    catalog: dict[str, tuple[str, str]],
+    *,
+    clauses: Iterable[Clause] = (),
+    definitions: Iterable[Definition] = (),
+    tables: Iterable[Table] = (),
+    table_families: Iterable[TableFamily] = (),
+    figures: Iterable[Figure] = (),
+) -> tuple[tuple[ContentElement, ...], tuple[CrossReference, ...]]:
+    """Turn explicit and visible source references into typed relationships."""
+    clause_records = tuple(clauses)
+    definition_records = tuple(definitions)
+    table_records = tuple(tables)
+    family_records = tuple(table_families)
+    figure_records = tuple(figures)
+    aliases: dict[tuple[str, str], tuple[str, str, str]] = {}
+    for item in clause_records:
+        aliases.setdefault(("clause", item.number), (item.id, "clause", item.title))
+    for item in definition_records:
+        aliases.setdefault(("definition", item.term.casefold()), (item.id, "definition", item.term))
+    for item in figure_records:
+        aliases.setdefault(("figure", item.number), (item.id, "figure", f"Figure {item.number}"))
+    family_by_table = {
+        table_id: family for family in family_records for table_id in family.table_ids
+    }
+    for item in sorted(
+        table_records,
+        key=lambda value: (value.source.path, value.source.line, value.id),
+    ):
+        if item.number is None:
+            continue
+        family = family_by_table.get(item.id)
+        target = family or item
+        kind = "table-family" if family is not None else "table"
+        label = family.title if family is not None else item.caption or item.title or item.id
+        aliases.setdefault(("table", item.number), (target.id, kind, label))
+
+    def visible_targets(text: str) -> tuple[tuple[str, str, str], ...]:
+        found: list[tuple[str, str, str]] = []
+        for match in re.finditer(
+            r"\b(?:see|shown\s+in|specified\s+in|described\s+in|summarized\s+in|defined\s+in)"
+            r"\s+(?:Clause\s+)?(\d+(?:\.\d+)*)",
+            text,
+            re.IGNORECASE,
+        ):
+            target = aliases.get(("clause", match.group(1)))
+            if target is not None:
+                found.append(target)
+        for match in re.finditer(r"\bTable\s+(\d+)\b", text, re.IGNORECASE):
+            target = aliases.get(("table", match.group(1)))
+            if target is not None:
+                found.append(target)
+        for match in re.finditer(r"\bFigure\s+(\d+)\b", text, re.IGNORECASE):
+            target = aliases.get(("figure", match.group(1)))
+            if target is not None:
+                found.append(target)
+        see_also = re.search(r"\bsee\s+also\s*:\s*(.+)$", text, re.IGNORECASE)
+        if see_also:
+            suffix = see_also.group(1)
+            for definition in definition_records:
+                if re.search(rf"\b{re.escape(definition.term)}\b", suffix, re.IGNORECASE):
+                    found.append((definition.id, "definition", definition.term))
+        deduplicated: list[tuple[str, str, str]] = []
+        seen: set[str] = set()
+        for target in found:
+            if target[0] not in seen:
+                seen.add(target[0])
+                deduplicated.append(target)
+        return tuple(deduplicated)
+
+    normalized: list[ContentElement] = []
+    cross_references: list[CrossReference] = []
+    surface_cross_references: list[CrossReference] = []
+    for element in content_elements:
+        text = element.text
+        explicit_targets: set[str] = set()
+        for ordinal, target_id in enumerate(element.record_ids, 1):
+            target = catalog.get(target_id)
+            if target is None:
+                continue
+            kind, label = target
+            explicit_targets.add(target_id)
+            if element.kind == "cross-reference" and text.startswith("Semantic record "):
+                text = label
+            cross_references.append(
+                CrossReference(
+                    id=f"xref-{element.id}-{ordinal:03d}",
+                    owner_id=element.id,
+                    target_document_id=document_id,
+                    target_record_id=target_id,
+                    label=label,
+                    kind=kind,
+                    source=element.source,
+                )
+            )
+        for target_id, kind, label in visible_targets(text):
+            if target_id in explicit_targets:
+                continue
+            target_slug = re.sub(r"[^a-z0-9]+", "-", target_id.casefold()).strip("-")
+            surface_cross_references.append(
+                CrossReference(
+                    id=f"xref-{element.id}-surface-{target_slug}",
+                    owner_id=element.id,
+                    target_document_id=document_id,
+                    target_record_id=target_id,
+                    label=label,
+                    kind=kind,
+                    source=element.source,
+                )
+            )
+        normalized.append(
+            element.model_copy(update={"text": text}) if text != element.text else element
+        )
+    cross_references.extend(surface_cross_references)
+    for definition in definition_records:
+        for target_id, kind, label in visible_targets(definition.text):
+            target_slug = re.sub(r"[^a-z0-9]+", "-", target_id.casefold()).strip("-")
+            cross_references.append(
+                CrossReference(
+                    id=f"xref-{definition.id}-surface-{target_slug}",
+                    owner_id=definition.id,
+                    target_document_id=document_id,
+                    target_record_id=target_id,
+                    label=label,
+                    kind=kind,
+                    source=definition.source,
+                )
+            )
+    return tuple(normalized), tuple(cross_references)
+
+
 def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
     """Load clause labels from an existing canonical navigation manifest."""
     path = root / "canonical" / "source-navigation.json"
@@ -3052,6 +4636,8 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
     definitions: dict[str, Definition] = {}
     requirements: dict[str, Requirement] = {}
     state_machines = _load_state_machines(root)
+    sequence_diagrams = _load_sequence_diagrams(root)
+    graph_diagrams = _load_graph_diagrams(root)
     requirement_reviews = _load_authored_requirement_reviews(root)
     requirement_links = _load_authored_requirement_links(root)
     transition_coverage = _load_authored_transition_coverage(root)
@@ -3207,6 +4793,40 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
                     _source(root, virtual_path, block.layout_body, offset, end_offset),
                 )
             )
+        if block.clause_id is not None and not any(
+            item[1] == block.clause_id for item in local_headings
+        ):
+            local_headings.insert(
+                0,
+                (
+                    -1,
+                    block.clause_id,
+                    block.clause_id.removeprefix("clause-"),
+                    block.source,
+                ),
+            )
+        for offset, args, end_offset in _command_events(block.layout_body, source.definition_at, 2):
+            anchor = _commands(args[1], source.definition_anchor, 1)
+            term = _commands(args[1], source.definition_term, 1)
+            if not anchor or not term:
+                continue
+            definition_id = anchor[0][1][0]
+            definitions.setdefault(
+                definition_id,
+                Definition(
+                    id=definition_id,
+                    term=_latex_text(term[0][1][0], source),
+                    text=_definition_text(args[1], source),
+                    clause_id=_nearest_heading(tuple(sorted(local_headings)), offset),
+                    source=_source(
+                        root,
+                        virtual_path,
+                        block.layout_body,
+                        offset,
+                        end_offset,
+                    ),
+                ),
+            )
         for _, identifier, title, heading_source in sorted(local_headings):
             number, parent_id, level = _clause_shape(identifier)
             clauses.setdefault(
@@ -3303,6 +4923,59 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
         if item.id not in {reference.id for reference in references}
     )
 
+    tables = list(_load_tables(root, source))
+    table_families = list(
+        _derive_table_families(
+            root.name,
+            tables,
+            table_families,
+            content_blocks,
+        )
+    )
+    family_by_table: dict[str, str] = {
+        table_id: family.id for family in table_families for table_id in family.table_ids
+    }
+    tables = [
+        table.model_copy(update={"family_id": family_by_table.get(table.id)}) for table in tables
+    ]
+    tables = list(_link_table_cells_to_definitions(tables, definitions.values()))
+    notes = _load_notes(root, source)
+    figures = _load_figures(root, source)
+    content_elements, derived_cross_references = _derive_cross_references(
+        root.name,
+        content_elements,
+        _cross_reference_catalog(
+            clauses=clauses.values(),
+            definitions=definitions.values(),
+            requirements=requirements.values(),
+            content_blocks=content_blocks,
+            content_elements=content_elements,
+            tables=tables,
+            table_families=table_families,
+            references=references,
+            notes=notes,
+            figures=figures,
+            examples=_load_examples(root, source),
+            annexes=annexes,
+            state_machines=state_machines,
+            sequence_diagrams=sequence_diagrams,
+            graph_diagrams=graph_diagrams,
+            implementations=implementations,
+        ),
+        clauses=clauses.values(),
+        definitions=definitions.values(),
+        tables=tables,
+        table_families=table_families,
+        figures=figures,
+    )
+    authored_cross_references = {item.id: item for item in _load_authored_cross_references(root)}
+    cross_references = list(derived_cross_references)
+    cross_references = [authored_cross_references.get(item.id, item) for item in cross_references]
+    cross_references.extend(
+        item
+        for item in authored_cross_references.values()
+        if item.id not in {cross_reference.id for cross_reference in cross_references}
+    )
     return DocumentModel(
         document_id=root.name,
         clauses=tuple(
@@ -3329,12 +5002,15 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
         content_blocks=content_blocks,
         content_elements=content_elements,
         state_machines=state_machines,
+        sequence_diagrams=sequence_diagrams,
+        graph_diagrams=graph_diagrams,
         implementations=implementations,
-        tables=_load_tables(root, source),
+        tables=tuple(tables),
         table_families=table_families,
         references=tuple(references),
-        notes=_load_notes(root, source),
-        figures=_load_figures(root, source),
+        cross_references=tuple(cross_references),
+        notes=notes,
+        figures=figures,
         examples=_load_examples(root, source),
         annexes=annexes,
     )

@@ -3,6 +3,7 @@
   "projects": [
     {
       "id": "hla-1516-2025",
+      "publication_id": "hla-unofficial-faithful-reconstruction-2025",
       "root": "topics/ieee/hla-1516-2025",
       "pdf": "dist/ieee-std-1516-2025-framework-and-rules-recreation.pdf",
       "log": "build/main.log",
@@ -11,14 +12,16 @@
     },
     {
       "id": "hla-1516.1-2025",
+      "publication_id": "hla-unofficial-faithful-reconstruction-2025",
       "root": "topics/ieee/hla-1516.1-2025",
       "pdf": "dist/ieee-std-1516.1-2025-federate-interface-specification-recreation.pdf",
       "log": "build/main.log",
-      "expected_pages": 338,
+      "expected_pages": 440,
       "kind": "faithful"
     },
     {
       "id": "hla-1516.2-2025",
+      "publication_id": "hla-unofficial-faithful-reconstruction-2025",
       "root": "topics/ieee/hla-1516.2-2025",
       "pdf": "dist/ieee-std-1516.2-2025-object-model-template-specification-recreation.pdf",
       "log": "build/main.log",
@@ -27,14 +30,25 @@
     },
     {
       "id": "hla-semantic-derivative-2025",
+      "publication_id": "hla-hierarchy-reconstruction-2025",
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 1554,
+      "expected_pages": 1241,
+      "kind": "derivative"
+    },
+    {
+      "id": "hla-rti-compliance-requirements-2025",
+      "publication_id": "hla-rti-compliance-requirements-2025",
+      "root": "topics/ieee/hla-rti-compliance-2025",
+      "pdf": "dist/hla-rti-compliance-requirements-2025.pdf",
+      "log": "build/main.log",
+      "expected_pages": 637,
       "kind": "derivative"
     },
     {
       "id": "non-hla-demo-2025",
+      "publication_id": "fixture-non-hla-demo-2025",
       "root": "topics/fixture/non-hla-demo-2025",
       "pdf": "dist/non-hla-demo-2025.pdf",
       "log": "build/main.log",

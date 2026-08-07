@@ -14,6 +14,7 @@ from scripts.document_builder import (  # noqa: E402, I001
     build as build_document,
     clean as clean_document,
 )
+from scripts.faithful_renderer import load_faithful_layout_profile  # noqa: E402
 from scripts.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE  # noqa: E402
 from scripts.semantic_generation import generate as generate_semantic  # noqa: E402
 from scripts.semantic_model import load_document_model  # noqa: E402
@@ -28,9 +29,16 @@ def generate_blocks() -> object:
         ROOT / "output" / "semantic",
         source=HLA_SOURCE,
         dialect=HLA_LATEX_DIALECT,
+        definition_ids=tuple(item.id for item in model.ordered_definitions()),
         requirement_ids=tuple(item.id for item in model.requirements),
         content_block_ids=(*(item.id for item in model.content_blocks),),
         content_element_ids=tuple(item.id for item in model.content_elements),
+        table_family_ids=None,
+        include_table_cells=False,
+        include_faithful_body=True,
+        faithful_layout_profile=load_faithful_layout_profile(
+            ROOT / "semantic" / "faithful-layout.json"
+        ),
     )
 
 
