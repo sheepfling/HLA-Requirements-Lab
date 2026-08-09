@@ -2,6 +2,8 @@
 __pycache__/
 *.py[codz]
 *$py.class
+.rumdl_cache/
+.uv-cache/
 
 # C extensions
 *.so
@@ -50,6 +52,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+inbox/
 
 # Translations
 *.mo
