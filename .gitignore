@@ -54,6 +54,9 @@ coverage.xml
 cover/
 inbox/
 
+# External compliance sidecar bundles and CI evidence
+.compliance/
+
 # Translations
 *.mo
 *.pot
