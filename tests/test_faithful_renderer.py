@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
+from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE, HLA_SOURCE_2010
 from hla_lab.core.semantic_model import ContentBlock, DocumentModel, SourceRef, load_document_model
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.faithful_renderer import (
@@ -134,6 +135,52 @@ class FaithfulRendererTests(unittest.TestCase):
         self.assertEqual(rendered.count(r"\HLAStartSemanticPages"), 4)
         self.assertEqual(rendered.count(r"\HLAEndSemanticPages"), 4)
         self.assertIn(r"\HLAInstallContentsLinks", rendered)
+
+    def test_release_faithful_products_use_the_trimmed_core_body_policy(self) -> None:
+        manifest = json.loads(
+            (ROOT / "data" / "release" / "documents.json").read_text(encoding="utf-8")
+        )
+        faithful = [item for item in manifest["projects"] if item["kind"] == "faithful"]
+        self.assertEqual(len(faithful), 6)
+        for item in faithful:
+            with self.subTest(document=item["id"]):
+                self.assertEqual(
+                    item["build"]["faithful_body_exclude_path_parts"],
+                    ["frontmatter", "front-matter"],
+                )
+                main = (ROOT / item["root"] / "main.tex").read_text(encoding="utf-8")
+                self.assertNotIn(r"\HLACoverPage", main)
+                self.assertNotIn(r"\HLABackCoverPage", main)
+                self.assertNotIn(r"\input{frontmatter/cover}", main)
+
+    def test_trimmed_projection_excludes_front_matter_adapters(self) -> None:
+        for name in (
+            "hla-1516-2010",
+            "hla-1516.2-2010",
+            "hla-1516.1-2010",
+            "hla-1516-2025",
+            "hla-1516.1-2025",
+            "hla-1516.2-2025",
+        ):
+            root = ROOT / "topics" / "ieee" / name
+            source = HLA_SOURCE_2010 if name == "hla-1516.1-2010" else HLA_SOURCE
+            model = load_document_model(root, source)
+            profile = load_faithful_layout_profile(root / "semantic" / "faithful-layout.json")
+            projection = build_faithful_layout_projection(
+                model,
+                profile=profile,
+                exclude_path_parts=("frontmatter", "front-matter"),
+            )
+            with self.subTest(document=name):
+                self.assertTrue(projection.entries)
+                self.assertTrue(
+                    all(
+                        not {"frontmatter", "front-matter"}.intersection(
+                            Path(entry.source_path).parts
+                        )
+                        for entry in projection.entries
+                    )
+                )
 
 
 if __name__ == "__main__":

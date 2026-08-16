@@ -241,6 +241,9 @@ temp/
 # Generated document output and packaging artifacts
 **/output/
 **/build/
+# The repository build orchestrators are source, not generated output.
+!hla_lab/build/
+!hla_lab/build/*.py
 # Generated page projections are derived from semantic source records.
 **/sections/generated/
 dist/

@@ -18,6 +18,7 @@ from hla_lab.generation.faithful_renderer import (
     render_faithful_body,
 )
 from hla_lab.paths import REPO_ROOT, DocumentResources, document_roots, resources
+from hla_lab.publication.publication_registry import load_release_manifest
 
 Selection = Literal["all", "explicit"]
 SurfaceKind = Literal[
@@ -201,6 +202,23 @@ def _main_inputs(path: Path) -> tuple[str, ...]:
     return tuple(value.strip().replace("\\", "/").removesuffix(".tex") + ".tex" for value in values)
 
 
+def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
+    """Read the faithful-body trim policy from the release manifest."""
+    manifest_path = resources(REPO_ROOT).release_manifest
+    if not manifest_path.is_file():
+        return ()
+    try:
+        relative_root = root.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        project = next(
+            item
+            for item in load_release_manifest(manifest_path).projects
+            if item.root.replace("\\", "/") == relative_root
+        )
+    except (ValueError, StopIteration):
+        return ()
+    return project.build.faithful_body_exclude_path_parts if project.build is not None else ()
+
+
 def _validate_faithful_layout(
     model: DocumentModel,
     root: Path,
@@ -213,6 +231,7 @@ def _validate_faithful_layout(
     projection = build_faithful_layout_projection(
         model,
         profile=load_faithful_layout_profile(profile_path) if profile_path.is_file() else None,
+        exclude_path_parts=_faithful_body_exclusions(root),
     )
     expected_sources = {entry.source_path for entry in projection.entries}
     main_path = document.main_tex

@@ -32,3 +32,10 @@ record, then add one publication record naming that project. To remove a
 destination, remove its publication record; its independent source tree may be
 retained or removed separately. Generated output remains ignored in either
 case.
+
+Faithful products intentionally start at the retained technical body. Covers,
+back covers, standards notices, participant lists, contents pages, and other
+source front matter are excluded by the data-driven
+`faithful_body_exclude_path_parts` setting in `data/release/documents.json`.
+The semantic corpus remains complete; this only trims the document view used by
+the lab's requirements and traceability workflows.

@@ -233,14 +233,16 @@
 }
 
 \NewDocumentCommand{\HLAPlacedImage}{m m m m m}{%
-    \par\noindent
-    \begin{tikzpicture}[
-        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-    ]
-    \node[anchor=north west,inner sep=0bp,outer sep=0bp]
-    at (#1,#2) {\includegraphics[width=#3bp,height=#4bp]{#5}};
-    \end{tikzpicture}%
-    \par\vspace{-\baselineskip}%
+    \IfFileExists{#5}{%
+        \par\noindent
+        \begin{tikzpicture}[
+            remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+        ]
+        \node[anchor=north west,inner sep=0bp,outer sep=0bp]
+        at (#1,#2) {\includegraphics[width=#3bp,height=#4bp]{#5}};
+        \end{tikzpicture}%
+        \par\vspace{-\baselineskip}%
+    }{}
 }
 
 \newcommand{\HLAClauseDashItem}[1]{%

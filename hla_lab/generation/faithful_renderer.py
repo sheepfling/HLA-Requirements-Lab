@@ -114,12 +114,20 @@ def build_faithful_layout_projection(
     *,
     content_block_ids: tuple[str, ...] | None = None,
     profile: FaithfulLayoutProfile | None = None,
+    exclude_path_parts: tuple[str, ...] = (),
 ) -> FaithfulLayoutProjection:
     """Group page adapters by semantic source and order them by block sequence."""
     selected_ids = set(content_block_ids) if content_block_ids is not None else None
+    excluded_parts = {part for part in exclude_path_parts if part}
+
+    def included(source_path: str) -> bool:
+        return not excluded_parts.intersection(PurePosixPath(source_path).parts)
+
     grouped: dict[str, list[ContentBlock]] = {}
     candidates = tuple(
-        block for block in model.content_blocks if selected_ids is None or block.id in selected_ids
+        block
+        for block in model.content_blocks
+        if (selected_ids is None or block.id in selected_ids) and included(block.source.path)
     )
     layout_blocks = tuple(block for block in candidates if block.layout_body is not None)
     # Small generic fixtures may not need an exact-page adapter. HLA's typed
@@ -159,6 +167,7 @@ def build_faithful_layout_projection(
                 after_latex=entry.after_latex,
             )
             for entry in profile.static_entries
+            if included(entry.source_path)
         )
         for entry in static_entries:
             _input_path(entry.source_path)
@@ -172,7 +181,7 @@ def build_faithful_layout_projection(
             ]
             entries.sort(key=lambda item: (item.sequence, item.layout_only, item.source_path))
             if not entries:
-                raise ValueError(f"faithful layout segment {segment.id} has no entries")
+                continue
             duplicates = used_sources.intersection(item.source_path for item in entries)
             if duplicates:
                 raise ValueError(

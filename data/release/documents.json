@@ -7,7 +7,7 @@
       "root": "topics/ieee/hla-1516-2010",
       "pdf": "dist/ieee-std-1516-2010-framework-and-rules-reconstruction.pdf",
       "log": "build/main.log",
-      "expected_pages": 38,
+      "expected_pages": 26,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -17,7 +17,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": true,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -26,7 +27,7 @@
       "root": "topics/ieee/hla-1516.2-2010",
       "pdf": "dist/ieee-std-1516.2-2010-object-model-template-specification-reconstruction.pdf",
       "log": "build/main.log",
-      "expected_pages": 116,
+      "expected_pages": 100,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -36,7 +37,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": true,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -45,7 +47,7 @@
       "root": "topics/ieee/hla-1516.1-2010",
       "pdf": "dist/ieee-std-1516.1-2010-federate-interface-specification-reconstruction.pdf",
       "log": "build/main.log",
-      "expected_pages": 375,
+      "expected_pages": 363,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -55,7 +57,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": true,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -64,7 +67,7 @@
       "root": "topics/ieee/hla-1516-2025",
       "pdf": "dist/ieee-std-1516-2025-framework-and-rules-recreation.pdf",
       "log": "build/main.log",
-      "expected_pages": 40,
+      "expected_pages": 28,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -77,7 +80,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": true,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -86,7 +90,7 @@
       "root": "topics/ieee/hla-1516.1-2025",
       "pdf": "dist/ieee-std-1516.1-2025-federate-interface-specification-recreation.pdf",
       "log": "build/main.log",
-      "expected_pages": 440,
+      "expected_pages": 424,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -98,7 +102,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": false,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -107,11 +112,10 @@
       "root": "topics/ieee/hla-1516.2-2025",
       "pdf": "dist/ieee-std-1516.2-2025-object-model-template-specification-recreation.pdf",
       "log": "build/main.log",
-      "expected_pages": 124,
+      "expected_pages": 111,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
-        "navigation_manifest": "canonical/source-navigation.json",
         "definition_selection": "all",
         "definition_order": "ordered",
         "requirement_selection": "all",
@@ -120,7 +124,8 @@
         "content_element_selection": "all",
         "table_family_selection": "all",
         "include_table_cells": true,
-        "include_faithful_body": true
+        "include_faithful_body": true,
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
       }
     },
     {
@@ -129,7 +134,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2010",
       "pdf": "dist/hla-semantic-derivative-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 873,
+      "expected_pages": 872,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -142,7 +147,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 1240,
+      "expected_pages": 1239,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -155,7 +160,7 @@
       "root": "topics/ieee/hla-rti-compliance-2025",
       "pdf": "dist/hla-rti-compliance-requirements-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 637,
+      "expected_pages": 636,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",
@@ -168,7 +173,7 @@
       "root": "topics/ieee/hla-rti-compliance-2010",
       "pdf": "dist/hla-rti-compliance-requirements-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 484,
+      "expected_pages": 483,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",

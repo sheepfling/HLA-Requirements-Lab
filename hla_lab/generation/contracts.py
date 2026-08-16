@@ -31,6 +31,7 @@ class GenerationRequest:
     include_table_cells: bool = True
     include_faithful_body: bool = False
     faithful_layout_profile: FaithfulLayoutProfile | None = None
+    faithful_body_exclude_path_parts: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

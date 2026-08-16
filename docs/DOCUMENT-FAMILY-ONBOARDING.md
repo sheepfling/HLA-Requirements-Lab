@@ -57,6 +57,11 @@ if __name__ == "__main__":
 Add the corresponding `build` object to
 `data/release/documents.json`; use `strategy: "faithful"` for a page-faithful
 document or the shared derivative/compliance strategies for generated products.
+For a requirements-focused faithful product, set
+`faithful_body_exclude_path_parts` to the source path components that hold
+covers and non-requirements front matter (the IEEE families use
+`["frontmatter", "front-matter"]`). This keeps the trim policy in data rather
+than in `main.tex` or a hand-maintained page list.
 
 `main.tex` should input the generated semantic manifest and generated record
 blocks. The manifest also loads the generated hierarchy index; the complete

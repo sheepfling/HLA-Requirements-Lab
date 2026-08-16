@@ -478,6 +478,7 @@ def generate(request: GenerationRequest) -> GenerationResult:
     include_table_cells = request.include_table_cells
     include_faithful_body = request.include_faithful_body
     faithful_layout_profile = request.faithful_layout_profile
+    faithful_body_exclude_path_parts = request.faithful_body_exclude_path_parts
     model = load_document_model(root, source)
     compiled_hierarchy = compile_hierarchy(model)
     output.mkdir(parents=True, exist_ok=True)
@@ -677,6 +678,7 @@ def generate(request: GenerationRequest) -> GenerationResult:
             model,
             content_block_ids=content_block_ids,
             profile=faithful_layout_profile,
+            exclude_path_parts=faithful_body_exclude_path_parts,
         )
         name = "faithful-layout.json"
         _write(output / name, faithful_layout.model_dump_json(indent=2))
