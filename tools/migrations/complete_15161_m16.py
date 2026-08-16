@@ -40,7 +40,7 @@ from hla_lab.core.semantic_model import (
 )
 from hla_lab.core.text import slugify
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
 
 ROOT = RESOURCES.document("hla-1516.1-2025").root
 
@@ -96,6 +96,7 @@ _STOP_TERMS = {
     "would",
 }
 
+
 def _terms(text: str) -> frozenset[str]:
     """Return conservative content terms for deterministic event matching."""
     return frozenset(
@@ -103,6 +104,7 @@ def _terms(text: str) -> frozenset[str]:
         for term in re.findall(r"[a-z][a-z0-9]{2,}", text.casefold())
         if term not in _STOP_TERMS
     )
+
 
 def _transition_matches(
     requirements: tuple[Requirement, ...], transition: object
@@ -137,12 +139,15 @@ def _transition_matches(
         return ()
     return tuple(requirement.id for requirement in winners)
 
+
 def _all_transitions(model: object) -> tuple[object, ...]:
     return tuple(
         transition for machine in model.state_machines for transition in machine.transitions
     )
 
+
 _write_json = write_json
+
 
 def _update_state_machine_sources(
     root: Path,
@@ -168,6 +173,7 @@ def _update_state_machine_sources(
                     changed = True
         if changed:
             _write_json(path, raw)
+
 
 def migrate(root: Path = ROOT) -> dict[str, int]:
     """Promote 1516.1 candidates and close its operational mappings."""
@@ -462,11 +468,13 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
         "deferred_requirements": final.requirement_review_counts()["deferred"],
     }
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
     print(json.dumps(migrate(args.root), indent=2))
+
 
 if __name__ == "__main__":
     main()

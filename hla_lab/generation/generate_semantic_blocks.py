@@ -9,6 +9,7 @@ from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
 from hla_lab.generation.contracts import GenerationRequest, GenerationResult
 from hla_lab.generation.semantic_generation import generate as _generate
 
+
 def generate(
     root: Path,
     output: Path,
@@ -30,6 +31,7 @@ def generate(
         )
     )
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path, help="HLA document source directory")
@@ -45,6 +47,7 @@ def main() -> None:
         requirement_ids=tuple(args.requirements),
         include_outline=args.outline,
     )
+
 
 if __name__ == "__main__":
     main()

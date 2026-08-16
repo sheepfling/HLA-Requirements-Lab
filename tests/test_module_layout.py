@@ -6,6 +6,7 @@ from pathlib import Path
 
 from tools.check_module_layout import check_paths
 
+
 def test_public_api_declarations_follow_imports() -> None:
     roots = tuple(Path(name) for name in ("hla_lab", "tools", "tests", "topics"))
 

@@ -29,6 +29,7 @@ __all__ = [
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
+
 @dataclass(frozen=True)
 class DocumentResources:
     """Repository-owned paths belonging to one document product."""
@@ -78,6 +79,7 @@ class DocumentResources:
 
     def output_semantic_file(self, name: str) -> Path:
         return self.output_semantic / name
+
 
 @dataclass(frozen=True)
 class RepositoryResources:
@@ -169,23 +171,28 @@ class RepositoryResources:
 
         return self.inbox.joinpath(*parts)
 
+
 def resources(root: Path = REPO_ROOT) -> RepositoryResources:
     """Return the path registry for ``root`` without requiring a process cwd."""
 
     return RepositoryResources(Path(root))
 
+
 RESOURCES = resources()
 IEEE_ROOT = RESOURCES.ieee_topics
 DOCUMENT_MANIFEST = RESOURCES.edition_lineage_manifest
+
 
 def _load_document_manifest() -> EditionLineageManifest:
     if not DOCUMENT_MANIFEST.is_file():
         raise FileNotFoundError(f"missing document manifest: {DOCUMENT_MANIFEST}")
     return load_edition_lineage(DOCUMENT_MANIFEST)
 
+
 DOCUMENT_CATALOG = _load_document_manifest()
 DOCUMENT_IDS = tuple(item.document_id for item in DOCUMENT_CATALOG.documents)
 _DOCUMENTS_BY_ID = {item.document_id: item for item in DOCUMENT_CATALOG.documents}
+
 
 def document_entry(document_id: str) -> EditionDocument:
     """Return the canonical manifest entry for one corpus document."""
@@ -195,6 +202,7 @@ def document_entry(document_id: str) -> EditionDocument:
     except KeyError as error:
         known = ", ".join(DOCUMENT_IDS)
         raise ValueError(f"unknown HLA document {document_id}; known: {known}") from error
+
 
 def document_entry_for_root(root_name: str) -> EditionDocument:
     """Resolve a document root, including isolated test/workspace suffixes."""
@@ -210,6 +218,7 @@ def document_entry_for_root(root_name: str) -> EditionDocument:
         if len(matches) == 1:
             return matches[0]
         raise
+
 
 def document_roots(
     repo_root: Path = REPO_ROOT,

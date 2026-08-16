@@ -20,17 +20,21 @@ from hla_lab.core.semantic_model import (
 )
 from hla_lab.core.text import normalize_whitespace, slugify
 from hla_lab.paths import RESOURCES
-from tools.migrations.migrate_remaining_content import _annex_clause_by_path, migrate as migrate_content
+from tools.migrations.migrate_remaining_content import _annex_clause_by_path
+from tools.migrations.migrate_remaining_content import migrate as migrate_content
 
 ROOT = RESOURCES.document("hla-1516.2-2025").root
 
 _write_json = write_json
 
+
 def _normalized(value: str) -> str:
     return normalize_whitespace(value).casefold()
 
+
 def _is_placeholder(value: str) -> bool:
     return _normalized(value) in {"", "na", "n/a", "<semantics>", "...", "…"}
+
 
 def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
     """Derive reusable definition records from every populated Semantics column."""
@@ -93,7 +97,7 @@ def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
                 cells_by_position[(row, column)].text.strip()
                 for column in identifier_columns
                 if (row, column) in cells_by_position
-                   and not _is_placeholder(cells_by_position[(row, column)].text)
+                and not _is_placeholder(cells_by_position[(row, column)].text)
             ]
             if not term_parts:
                 continue
@@ -108,6 +112,7 @@ def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
                 )
             )
     return tuple(definitions)
+
 
 def _promoted_requirements(model: object, annex_by_path: dict[str, str]) -> tuple[Requirement, ...]:
     candidates = _load_requirement_candidates(ROOT, HLA_SOURCE)
@@ -141,6 +146,7 @@ def _promoted_requirements(model: object, annex_by_path: dict[str, str]) -> tupl
         )
         records.append(Requirement.model_validate(payload))
     return tuple(records)
+
 
 def _attach_requirement_ownership() -> None:
     semantic = ROOT / "semantic"
@@ -186,6 +192,7 @@ def _attach_requirement_ownership() -> None:
         ).model_dump(mode="json"),
     )
 
+
 def _repair_intermediate_content() -> None:
     """Recover from an interrupted pre-M17 extraction before model loading."""
     path = ROOT / "semantic" / "content-elements.json"
@@ -199,6 +206,7 @@ def _repair_intermediate_content() -> None:
             changed = True
     if changed:
         _write_json(path, payload)
+
 
 def complete(root: Path = ROOT) -> dict[str, int]:
     global ROOT
@@ -249,6 +257,7 @@ def complete(root: Path = ROOT) -> dict[str, int]:
         "content_blocks": len(closed.content_blocks),
         "content_elements": len(closed.content_elements),
     }
+
 
 if __name__ == "__main__":
     print(complete())

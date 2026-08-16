@@ -28,10 +28,12 @@ DECLARATION_SUFFIXES = {
     "java": {".java"},
 }
 
+
 class ApiTraceabilityReportModel(BaseModel):
     """Immutable base for API traceability audit records."""
 
     model_config = ConfigDict(frozen=True)
+
 
 class ApiTraceabilityDocumentReport(ApiTraceabilityReportModel):
     """Audit result for one standard edition."""
@@ -48,6 +50,7 @@ class ApiTraceabilityDocumentReport(ApiTraceabilityReportModel):
     passed: bool
     complete: bool
 
+
 class ApiTraceabilityReport(ApiTraceabilityReportModel):
     """Corpus-wide requirement-to-API audit result."""
 
@@ -56,9 +59,11 @@ class ApiTraceabilityReport(ApiTraceabilityReportModel):
     passed: bool
     complete: bool
 
+
 def _declaration_suffix(source: SourceRef) -> str:
     """Return the suffix of a local path or an archive member path."""
     return Path(source.path.rsplit("#", 1)[-1]).suffix.casefold()
+
 
 def _source_is_valid(surface: ApiSurface) -> bool:
     """Check that a language surface points to a declaration-shaped source."""
@@ -68,6 +73,7 @@ def _source_is_valid(surface: ApiSurface) -> bool:
         surface.language,
         set(),
     )
+
 
 def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
     requirement_ids = {item.id for item in model.requirements}
@@ -139,9 +145,11 @@ def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
         complete=not failures and review_gap_count == 0,
     )
 
+
 def default_roots(repo_root: Path = REPO_ROOT) -> tuple[Path, ...]:
     """Return the two HLA 1516.1 edition roots covered by this audit."""
     return document_roots(repo_root, API_TRACEABILITY_DOCUMENT_IDS)
+
 
 def build_report(roots: tuple[Path, ...]) -> ApiTraceabilityReport:
     """Audit deterministic requirement-to-API manifests for the supplied roots."""
@@ -156,6 +164,7 @@ def build_report(roots: tuple[Path, ...]) -> ApiTraceabilityReport:
         passed=not failures,
         complete=not failures and all(item.complete for item in documents),
     )
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -197,6 +206,7 @@ def main() -> int:
             print(f"failure: {failure}")
     gate_passed = report.passed and (not args.require_complete or report.complete)
     return 0 if gate_passed or not args.check else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "data" / "publications.json"
 RELEASE_PATH = ROOT / "data" / "release" / "documents.json"
 
+
 class PublicationRegistryTests(unittest.TestCase):
     def test_hla_publications_have_explicit_and_disjoint_project_membership(self) -> None:
         registry = load_publication_registry(REGISTRY_PATH)
@@ -48,6 +49,7 @@ class PublicationRegistryTests(unittest.TestCase):
                     tuple(item.root for item in projects),
                 )
                 self.assertTrue(all((path / "build.py").is_file() for path in roots))
+
 
 if __name__ == "__main__":
     unittest.main()

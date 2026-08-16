@@ -13,6 +13,7 @@ from hla_lab.traceability.api_traceability import build_report
 ROOT = Path(__file__).resolve().parents[1]
 EDITION_ROOTS = tuple(ROOT / "topics" / "ieee" / f"hla-1516.1-{year}" for year in ("2010", "2025"))
 
+
 class ApiTraceabilityAuditTests(unittest.TestCase):
     def test_both_editions_pass_the_traceability_audit(self) -> None:
         report = build_report(EDITION_ROOTS)
@@ -70,6 +71,7 @@ class ApiTraceabilityAuditTests(unittest.TestCase):
             text=True,
         )
         self.assertEqual(strict.returncode, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -67,6 +67,7 @@ RequirementEvidenceStatus = Literal[
 _qualified_id = qualified_id
 _anchor = latex_anchor
 
+
 class CompliancePublicationProfile(SemanticRecord):
     """Source-controlled contract for a compliance-oriented derivative."""
 
@@ -105,6 +106,7 @@ class CompliancePublicationProfile(SemanticRecord):
             raise ValueError(f"compliance publication is missing required views: {missing}")
         return self
 
+
 class ComplianceDocumentSummary(SemanticRecord):
     """One selected corpus document's coverage and evidence totals."""
 
@@ -123,6 +125,7 @@ class ComplianceDocumentSummary(SemanticRecord):
     cross_document_edge_count: int = Field(ge=0)
     graph_finding_counts: dict[str, int] = Field(default_factory=dict)
 
+
 class RequirementComplianceItem(SemanticRecord):
     """A normative record annotated with its current implementation evidence."""
 
@@ -140,6 +143,7 @@ class RequirementComplianceItem(SemanticRecord):
     implementation_mapping_ids: tuple[str, ...] = ()
     evidence_status: RequirementEvidenceStatus
     concrete_mapping_count: int = Field(ge=0)
+
 
 class OperationalComplianceItem(SemanticRecord):
     """A state transition expressed as an implementable conformance rule."""
@@ -168,6 +172,7 @@ class OperationalComplianceItem(SemanticRecord):
     ]
     concrete: bool
 
+
 class ComplianceDependencySummary(SemanticRecord):
     """Human-scale dependency metrics while full edges remain queryable in JSON."""
 
@@ -177,6 +182,7 @@ class ComplianceDependencySummary(SemanticRecord):
     cross_document_edge_count: int = Field(ge=0)
     candidate_cross_document_edge_count: int = Field(ge=0)
     graph_finding_counts: dict[str, int] = Field(default_factory=dict)
+
 
 class CompliancePublicationSummary(SemanticRecord):
     """Corpus-wide headline counts for a compliance publication."""
@@ -192,6 +198,7 @@ class CompliancePublicationSummary(SemanticRecord):
     semantic_dependency_count: int = Field(ge=0)
     cross_document_edge_count: int = Field(ge=0)
     graph_finding_counts: dict[str, int] = Field(default_factory=dict)
+
 
 class CompliancePublicationManifest(SemanticRecord):
     """Pydantic-serializable source for the PDF and downstream RTI checks."""
@@ -223,9 +230,11 @@ class CompliancePublicationManifest(SemanticRecord):
         """Serialize the contract deterministically through Pydantic."""
         return self.model_dump_json(indent=indent)
 
+
 def load_compliance_publication_profile(path: Path) -> CompliancePublicationProfile:
     """Load and validate a source-controlled compliance publication profile."""
     return CompliancePublicationProfile.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def _display_text(value: str) -> str:
     """Normalize recovered TeX layout markers for a semantic publication.
@@ -235,18 +244,19 @@ def _display_text(value: str) -> str:
     a percent attached to a numeric value is meaningful and remains intact.
     """
     for escaped, plain in (
-            (r"\_", "_"),
-            (r"\&", "&"),
-            (r"\%", "%"),
-            (r"\#", "#"),
-            (r"\{", "{"),
-            (r"\}", "}"),
-            (r"\\", " "),
-            (r"\ ", " "),
+        (r"\_", "_"),
+        (r"\&", "&"),
+        (r"\%", "%"),
+        (r"\#", "#"),
+        (r"\{", "{"),
+        (r"\}", "}"),
+        (r"\\", " "),
+        (r"\ ", " "),
     ):
         value = value.replace(escaped, plain)
     value = re.sub(r"(?<!\d)(?<!\d\s)\s*%\s*", " ", value)
     return " ".join(value.split())
+
 
 def _evidence_status(statuses: Iterable[str]) -> RequirementEvidenceStatus:
     values = tuple(sorted(set(statuses)))
@@ -256,12 +266,14 @@ def _evidence_status(statuses: Iterable[str]) -> RequirementEvidenceStatus:
         return values[0]  # type: ignore[return-value]
     return "mixed"
 
+
 def _selected_corpus(
     corpus: ComplianceCorpus,
     profile: CompliancePublicationProfile,
 ) -> ComplianceCorpus:
     models = tuple(corpus.document(document_id) for document_id in profile.document_ids)
     return ComplianceCorpus(documents=models)
+
 
 def _mapping_index(
     models: Iterable[DocumentModel],
@@ -275,6 +287,7 @@ def _mapping_index(
             for transition_id in mapping.transition_ids:
                 index[f"transition:{model.document_id}:{transition_id}"].append(mapping)
     return {key: tuple(sorted(value, key=lambda item: item.id)) for key, value in index.items()}
+
 
 def _requirements(
     models: Iterable[DocumentModel],
@@ -291,8 +304,8 @@ def _requirements(
                         mapping
                         for transition_id in requirement.transition_ids
                         for mapping in mapping_index.get(
-                        f"transition:{model.document_id}:{transition_id}", ()
-                    )
+                            f"transition:{model.document_id}:{transition_id}", ()
+                        )
                     ),
                 )
             }
@@ -320,6 +333,7 @@ def _requirements(
                 )
             )
     return tuple(sorted(result, key=lambda item: (item.document_id, item.requirement_id)))
+
 
 def _operations(models: Iterable[DocumentModel]) -> tuple[OperationalComplianceItem, ...]:
     result: list[OperationalComplianceItem] = []
@@ -350,6 +364,7 @@ def _operations(models: Iterable[DocumentModel]) -> tuple[OperationalComplianceI
     return tuple(
         sorted(result, key=lambda item: (item.document_id, item.machine_id, item.transition_id))
     )
+
 
 def _document_summary(
     model: DocumentModel,
@@ -383,6 +398,7 @@ def _document_summary(
         graph_finding_counts=dict(sorted(Counter(item.kind for item in graph_findings).items())),
     )
 
+
 def _dependency_summaries(
     selected: ComplianceCorpus,
     graph: CorpusSemanticGraph | None,
@@ -407,6 +423,7 @@ def _dependency_summaries(
         )
     return tuple(result)
 
+
 def build_compliance_manifest(
     corpus: ComplianceCorpus,
     profile: CompliancePublicationProfile,
@@ -424,9 +441,9 @@ def build_compliance_manifest(
             {
                 (item.code, item.record_id): item
                 for item in (
-                *selected.compliance_issues(require_concrete_implementation=True),
-                *selected.unresolved_reference_issues(),
-            )
+                    *selected.compliance_issues(require_concrete_implementation=True),
+                    *selected.unresolved_reference_issues(),
+                )
             }.values(),
             key=lambda item: (item.code, item.record_id),
         )
@@ -464,6 +481,7 @@ def build_compliance_manifest(
         dependencies=dependencies,
     )
 
+
 def _text(value: str) -> str:
     """Escape semantic source text while preserving source-style punctuation."""
     return (
@@ -478,6 +496,7 @@ def _text(value: str) -> str:
         .replace("∅", r"\ensuremath{\emptyset}")
     )
 
+
 def _identifier(value: str) -> str:
     """Render a stable ID with deliberate line-break opportunities."""
     return (
@@ -487,9 +506,11 @@ def _identifier(value: str) -> str:
         .replace(r"\_", r"\_\allowbreak{}")
     )
 
+
 def _heading(level: int, value: str) -> str:
     command = {1: "section", 2: "subsection", 3: "subsubsection"}.get(level, "paragraph")
     return f"\\{command}*{{{_text(value)}}}"
+
 
 def _clause_label(model: DocumentModel, clause_id: str | None) -> str:
     if clause_id is None:
@@ -500,11 +521,13 @@ def _clause_label(model: DocumentModel, clause_id: str | None) -> str:
     title = clause.title.removeprefix(f"{clause.number}. ").removeprefix(f"{clause.number} ")
     return f"{clause.number} {title}".strip()
 
+
 def _requirement_title(value: str) -> str:
     """Keep extracted source-location titles out of the reading flow."""
     if value.casefold().startswith("normative ") and " at " in value:
         return "Source-derived normative statement"
     return value
+
 
 def _requirement_lines(
     manifest: CompliancePublicationManifest,
@@ -567,6 +590,7 @@ def _requirement_lines(
                 )
     return lines
 
+
 def _operations_lines(manifest: CompliancePublicationManifest) -> list[str]:
     lines = [_heading(1, "State and service compliance matrix")]
     if not manifest.operations:
@@ -606,6 +630,7 @@ def _operations_lines(manifest: CompliancePublicationManifest) -> list[str]:
             )
     return lines
 
+
 def _evidence_lines(manifest: CompliancePublicationManifest) -> list[str]:
     lines = [_heading(1, "Implementation evidence registry")]
     if not manifest.implementation_evidence:
@@ -630,6 +655,7 @@ def _evidence_lines(manifest: CompliancePublicationManifest) -> list[str]:
     lines.append("\\end{itemize}")
     return lines
 
+
 def _gap_lines(manifest: CompliancePublicationManifest) -> list[str]:
     lines = [_heading(1, "Evidence gaps and review boundary")]
     lines.append(_text(manifest.profile.evidence_boundary))
@@ -643,6 +669,7 @@ def _gap_lines(manifest: CompliancePublicationManifest) -> list[str]:
         )
     lines.append("\\end{itemize}")
     return lines
+
 
 def _dependency_lines(manifest: CompliancePublicationManifest) -> list[str]:
     lines = [_heading(1, "Definitions, table dependencies, and corpus review")]
@@ -676,6 +703,7 @@ def _dependency_lines(manifest: CompliancePublicationManifest) -> list[str]:
         )
     return lines
 
+
 def _csv_source_fields(source: SemanticRecord | None) -> dict[str, str]:
     """Flatten optional provenance into stable spreadsheet columns."""
     if source is None:
@@ -685,6 +713,7 @@ def _csv_source_fields(source: SemanticRecord | None) -> dict[str, str]:
         "source_line": str(getattr(source, "line", "")),
         "source_end_line": str(getattr(source, "end_line", "") or ""),
     }
+
 
 def _write_csv(
     path: Path, fieldnames: tuple[str, ...], rows: Iterable[Mapping[str, JsonValue]]
@@ -701,6 +730,7 @@ def _write_csv(
                 }
             )
     return path
+
 
 def write_compliance_csv_exports(
     manifest: CompliancePublicationManifest,
@@ -907,6 +937,7 @@ def write_compliance_csv_exports(
         transition_links_path,
     )
 
+
 def render_compliance_document(
     manifest: CompliancePublicationManifest,
     models: Iterable[DocumentModel],
@@ -959,6 +990,7 @@ def render_compliance_document(
     )
     return "\n\n".join(item for item in lines if item) + "\n"
 
+
 def write_compliance_publication(
     corpus: ComplianceCorpus,
     profile: CompliancePublicationProfile,
@@ -979,6 +1011,7 @@ def write_compliance_publication(
         render_compliance_document(manifest, corpus.documents), encoding="utf-8"
     )
     return manifest
+
 
 def main() -> None:
     """Validate and print a generated compliance manifest for command-line consumers."""
@@ -1003,6 +1036,7 @@ def main() -> None:
         write_compliance_csv_exports(manifest, args.csv_output)
     else:
         print(manifest.to_json())
+
 
 if __name__ == "__main__":
     main()

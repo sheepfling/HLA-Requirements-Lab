@@ -24,6 +24,7 @@ from hla_lab.publication.publication_contract import PublicationProfile
 
 __all__ = ["render_reflowable_document"]
 
+
 def _text(value: str) -> str:
     """Escape semantic text while accepting source-style escaped punctuation."""
     # The legacy 2010 handoff's plain-text extractor can collapse ``\\leq``
@@ -31,13 +32,13 @@ def _text(value: str) -> str:
     # accidental empty math span in the reflowed publication.
     value = value.replace("$$", r"\\leq ")
     for escaped, plain in (
-            (r"\$", "$"),
-            (r"\_", "_"),
-            (r"\&", "&"),
-            (r"\%", "%"),
-            (r"\#", "#"),
-            (r"\{", "{"),
-            (r"\}", "}"),
+        (r"\$", "$"),
+        (r"\_", "_"),
+        (r"\&", "&"),
+        (r"\%", "%"),
+        (r"\#", "#"),
+        (r"\{", "{"),
+        (r"\}", "}"),
     ):
         value = value.replace(escaped, plain)
     # Reflowed 2010 prose still contains page-layout fragments and equations
@@ -46,7 +47,9 @@ def _text(value: str) -> str:
     rendered = tex_escape(value.replace("$", "").replace("^", r"\textasciicircum{}"))
     return rendered.replace("ₛ", r"\textsubscript{s}").replace("∀", r"\ensuremath{\forall}")
 
+
 _anchor = latex_anchor
+
 
 def _link(document_id: str, record_id: str, label: str | None = None) -> str:
     return (
@@ -54,10 +57,12 @@ def _link(document_id: str, record_id: str, label: str | None = None) -> str:
         f"{{{_text(label or record_id)}}}"
     )
 
+
 def _heading(level: int, title: str, *, numbered: bool = False) -> str:
     command = {1: "section", 2: "subsection", 3: "subsubsection"}.get(level, "paragraph")
     suffix = "" if numbered else "*"
     return f"\\{command}{suffix}{{{_text(title)}}}"
+
 
 def _clause_title(number: str, title: str) -> str:
     """Avoid repeating a clause number recovered inside its title text."""
@@ -65,16 +70,17 @@ def _clause_title(number: str, title: str) -> str:
     normalized = title.strip()
     for prefix in prefixes:
         if normalized.startswith(prefix):
-            normalized = normalized[len(prefix):]
+            normalized = normalized[len(prefix) :]
             break
     return f"{number} {normalized}".strip()
+
 
 def _clean_content_text(value: str) -> str:
     """Remove layout-adapter residue before rendering reusable prose."""
     text = value
     body_marker = re.search(r"\bhla-body(?:-[\w-]+)?\b", text)
     if body_marker:
-        text = text[body_marker.end():]
+        text = text[body_marker.end() :]
     text = re.sub(r"\bhlafixedpage\b", " ", text)
     text = re.sub(r"\b(?:bookmark|clause):[^\s]+", " ", text)
     text = re.sub(
@@ -91,8 +97,9 @@ def _clean_content_text(value: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     duplicate_prefix = re.match(r"^(\d+(?:\.\d+)+)\s+\1\s+", text)
     if duplicate_prefix:
-        text = text[duplicate_prefix.end(1) + 1:]
+        text = text[duplicate_prefix.end(1) + 1 :]
     return text
+
 
 def _is_clause_heading(model: DocumentModel, text: str) -> bool:
     """Avoid repeating page-local clause headings in the operations view."""
@@ -105,6 +112,7 @@ def _is_clause_heading(model: DocumentModel, text: str) -> bool:
         }
         for clause in model.clauses
     )
+
 
 def _content_segments(model: DocumentModel, value: str) -> tuple[tuple[str, str], ...]:
     """Split page-spanning prose at known semantic clause-heading markers."""
@@ -127,12 +135,13 @@ def _content_segments(model: DocumentModel, value: str) -> tuple[tuple[str, str]
     cursor = 0
     for match in pattern.finditer(text):
         if match.start() > cursor:
-            segments.append(("text", text[cursor: match.start()].strip()))
+            segments.append(("text", text[cursor : match.start()].strip()))
         segments.append(("heading", match.group(0).strip()))
         cursor = match.end()
     if cursor < len(text):
         segments.append(("text", text[cursor:].strip()))
     return tuple((kind, value) for kind, value in segments if value)
+
 
 def _document_title(profile: PublicationProfile, model: DocumentModel) -> str:
     try:
@@ -140,7 +149,9 @@ def _document_title(profile: PublicationProfile, model: DocumentModel) -> str:
     except StopIteration:
         return model.document_id
 
+
 T = TypeVar("T")
+
 
 def _clause_groups(
     items: Iterable[T], *, clause_getter: Callable[[T], str | None]
@@ -150,6 +161,7 @@ def _clause_groups(
         clause_id = clause_getter(item)
         groups[clause_id].append(item)
     return groups
+
 
 def _render_clause_tree(
     model: DocumentModel,
@@ -171,6 +183,7 @@ def _render_clause_tree(
     for child in model.children_of(clause.id):
         lines.extend(_render_clause_tree(model, child.id, render_body, base_level=base_level))
     return lines
+
 
 def _render_concepts(model: DocumentModel, profile: PublicationProfile) -> list[str]:
     definitions = _clause_groups(model.definitions, clause_getter=lambda item: item.clause_id)
@@ -203,6 +216,7 @@ def _render_concepts(model: DocumentModel, profile: PublicationProfile) -> list[
         lines.append(_heading(2, "Unassigned definitions"))
         lines.extend(body(None))
     return lines
+
 
 def _render_content_element(
     model: DocumentModel,
@@ -249,6 +263,7 @@ def _render_content_element(
         return lines
     return [*lines, text]
 
+
 def _render_operations(model: DocumentModel, profile: PublicationProfile) -> list[str]:
     elements = {item.id: item for item in model.content_elements}
     children: dict[str, tuple[ContentElement, ...]] = {}
@@ -294,6 +309,7 @@ def _render_operations(model: DocumentModel, profile: PublicationProfile) -> lis
         lines.append(r"\emph{No typed operational prose is currently authored.}")
     return lines
 
+
 def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> list[str]:
     grouped = _clause_groups(model.requirements, clause_getter=lambda item: item.clause_id)
 
@@ -326,6 +342,7 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         lines.append(_heading(2, "Unassigned requirements"))
         lines.extend(body(None))
     return lines
+
 
 def _render_state_logic(model: DocumentModel, profile: PublicationProfile) -> list[str]:
     lines = [
@@ -378,6 +395,7 @@ def _render_state_logic(model: DocumentModel, profile: PublicationProfile) -> li
             )
     return lines
 
+
 def _render_tables(model: DocumentModel, profile: PublicationProfile) -> list[str]:
     lines = [
         _heading(
@@ -417,6 +435,7 @@ def _render_tables(model: DocumentModel, profile: PublicationProfile) -> list[st
             )
             lines.append("\\end{itemize}")
     return lines
+
 
 def _render_traceability(
     model: DocumentModel,
@@ -558,6 +577,7 @@ def _render_traceability(
         )
         lines.append("\\end{itemize}")
     return lines
+
 
 def render_reflowable_document(
     models: Iterable[DocumentModel],

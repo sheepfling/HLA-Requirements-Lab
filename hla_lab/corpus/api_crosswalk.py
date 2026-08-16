@@ -36,6 +36,7 @@ __all__ = [
 
 BindingKind = Literal["native", "protocol", "language-adapter", "transport"]
 
+
 @dataclass(frozen=True)
 class ApiTarget:
     """A binding or projection target supplied by a standards profile."""
@@ -47,10 +48,12 @@ class ApiTarget:
     owner_by_interface: Mapping[str, str] = field(default_factory=dict)
     projection: bool = False
 
+
 def _terms(value: str) -> tuple[str, ...]:
     expanded = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", " ", value)
     expanded = re.sub(r"[^A-Za-z0-9]+", " ", expanded.casefold())
     return tuple(item for item in expanded.split() if item)
+
 
 def _surface_aliases(surface: ApiSurface) -> tuple[tuple[str, ...], ...]:
     terms = _terms(surface.name)
@@ -58,6 +61,7 @@ def _surface_aliases(surface: ApiSurface) -> tuple[tuple[str, ...], ...]:
     if terms and terms[-1] in {"request", "response"}:
         aliases.append(terms[:-1])
     return tuple(alias for alias in aliases if alias)
+
 
 def _mapping_terms(model: DocumentModel, mapping: ImplementationMapping) -> tuple[str, ...]:
     values = [mapping.interface_name]
@@ -72,10 +76,12 @@ def _mapping_terms(model: DocumentModel, mapping: ImplementationMapping) -> tupl
             values.extend((transition.event, transition.action))
     return _terms(" ".join(value for value in values if value))
 
+
 def _contains_term_sequence(needle: tuple[str, ...], haystack: tuple[str, ...]) -> bool:
     """Return whether token sequence ``needle`` occurs at a token boundary."""
     width = len(needle)
-    return any(haystack[index: index + width] == needle for index in range(len(haystack)))
+    return any(haystack[index : index + width] == needle for index in range(len(haystack)))
+
 
 _DECLARATION_MENTION_TAILS = {
     "callback",
@@ -102,6 +108,7 @@ _SEMANTIC_SURFACE_HINTS: dict[str, tuple[tuple[str, ...], ...]] = {
     "unpublishObjectClassAttributes": (("unpublished", "class", "attributes"),),
 }
 
+
 def _surface_is_named_as_declaration(
     surface: ApiSurface,
     statement_terms: tuple[str, ...],
@@ -110,7 +117,7 @@ def _surface_is_named_as_declaration(
     for alias in _surface_aliases(surface):
         width = len(alias)
         for index in range(len(statement_terms) - width + 1):
-            if statement_terms[index: index + width] != alias:
+            if statement_terms[index : index + width] != alias:
                 continue
             end = index + width
             if end < len(statement_terms) and statement_terms[end] in _DECLARATION_MENTION_TAILS:
@@ -119,6 +126,7 @@ def _surface_is_named_as_declaration(
         if _contains_term_sequence(hint, statement_terms) or set(hint) <= set(statement_terms):
             return True
     return False
+
 
 def _requirement_surface_candidates(
     model: DocumentModel,
@@ -140,6 +148,7 @@ def _requirement_surface_candidates(
         and surface.binding_kind == "native"
         and _surface_is_named_as_declaration(surface, statement_terms)
     )
+
 
 def _surface_candidates(
     model: DocumentModel,
@@ -178,6 +187,7 @@ def _surface_candidates(
         return ()
     highest = max(item[2] for item in matches)
     return tuple((surface, strategy) for surface, strategy, score in matches if score == highest)
+
 
 def _crosswalk(
     model: DocumentModel,
@@ -223,6 +233,7 @@ def _crosswalk(
         notes=notes,
     )
 
+
 def build_api_crosswalk(
     model: DocumentModel,
     targets: tuple[ApiTarget, ...],
@@ -235,6 +246,7 @@ def build_api_crosswalk(
     ]
     return tuple(sorted(rows, key=lambda item: item.id))
 
+
 def write_api_crosswalk(output: Path, rows: tuple[ApiCrosswalk, ...]) -> None:
     """Write a Pydantic-validated source manifest."""
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -243,6 +255,7 @@ def write_api_crosswalk(output: Path, rows: tuple[ApiCrosswalk, ...]) -> None:
         json.dumps(payload.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+
 
 def _binding_relationship(
     mapping: ImplementationMapping,
@@ -255,6 +268,7 @@ def _binding_relationship(
     if mapping.transition_ids:
         return "transition-backed"
     return "direct"
+
 
 def build_requirement_api_bindings(
     model: DocumentModel,
@@ -425,7 +439,7 @@ def build_requirement_api_bindings(
                             "overloads in the reviewed service family are in scope."
                             if requirement.api_surface_resolution == "all-overloads"
                             else "Requirement names a standard service or callback mapped to "
-                                 "one source declaration."
+                            "one source declaration."
                         ),
                         source=source,
                     )
@@ -459,6 +473,7 @@ def build_requirement_api_bindings(
                     source=source,
                 )
     return tuple(sorted(bindings.values(), key=lambda item: item.id))
+
 
 def write_requirement_api_bindings(
     output: Path,

@@ -10,6 +10,7 @@ from hla_lab.publication.release_check import check_release
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+
 class ReleaseCheckIntegrationTests(unittest.TestCase):
     def test_release_manifest_passes_against_current_builds(self) -> None:
         manifest_path = REPO_ROOT / "data" / "release" / "documents.json"
@@ -30,6 +31,7 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
                 for item in json.loads(manifest_path.read_text(encoding="utf-8"))["projects"]
             },
         )
+
 
 if __name__ == "__main__":
     unittest.main()

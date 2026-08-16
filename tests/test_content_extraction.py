@@ -18,6 +18,7 @@ from hla_lab.traceability.semantic_authority import load_authority
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 
+
 class ContentExtractionTests(unittest.TestCase):
     def test_1516_content_is_typed_and_clause_owned(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
@@ -90,6 +91,7 @@ class ContentExtractionTests(unittest.TestCase):
             self.assertIn(
                 "content-extraction mutation sentinel", generated.read_text(encoding="utf-8")
             )
+
 
 if __name__ == "__main__":
     unittest.main()

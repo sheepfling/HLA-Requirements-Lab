@@ -27,6 +27,7 @@ DOCUMENT_ROOTS = tuple(
     )
 )
 
+
 class ComplianceContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -176,6 +177,7 @@ class ComplianceContractTests(unittest.TestCase):
         payload = json.loads(result.stdout)
         self.assertEqual(payload["compliance_corpus"]["document_ids"], ["hla-1516.1-2025"])
         self.assertEqual(len(payload["compliance_corpus"]["implementation_evidence"]), 281)
+
 
 if __name__ == "__main__":
     unittest.main()

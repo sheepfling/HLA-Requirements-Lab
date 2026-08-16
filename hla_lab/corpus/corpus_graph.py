@@ -74,6 +74,7 @@ DocumentRelationship = Literal[
     "unknown",
 ]
 
+
 class CorpusDocumentDescriptor(SemanticRecord):
     """Edition and relationship metadata for a graph document node."""
 
@@ -83,6 +84,7 @@ class CorpusDocumentDescriptor(SemanticRecord):
     relationship: DocumentRelationship = "unknown"
     related_document_ids: tuple[str, ...] = ()
     source: SourceRef | None = None
+
 
 class CorpusGraphNode(SemanticRecord):
     """A qualified semantic record addressable from a corpus graph."""
@@ -94,6 +96,7 @@ class CorpusGraphNode(SemanticRecord):
     label: str = Field(min_length=1)
     external: bool = False
     source: SourceRef | None = None
+
 
 class CorpusGraphEdge(SemanticRecord):
     """A typed graph edge with evidence level and optional source provenance."""
@@ -107,6 +110,7 @@ class CorpusGraphEdge(SemanticRecord):
     note: str = ""
     source: SourceRef | None = None
 
+
 class CorpusGraphFinding(SemanticRecord):
     """A review finding derived from multiple corpus records."""
 
@@ -119,11 +123,13 @@ class CorpusGraphFinding(SemanticRecord):
     message: str = Field(min_length=1)
     source: SourceRef | None = None
 
+
 class CorpusDocumentMetadataFile(SemanticRecord):
     """Source-controlled metadata for a corpus's editions and relationships."""
 
     schema_version: int = Field(ge=1)
     documents: tuple[CorpusDocumentDescriptor, ...]
+
 
 class CorpusSemanticGraph(SemanticRecord):
     """Serializable graph projection for cross-document semantic queries."""
@@ -257,8 +263,10 @@ class CorpusSemanticGraph(SemanticRecord):
         """Serialize the graph with Pydantic's JSON encoder."""
         return self.model_dump_json(indent=indent)
 
+
 def _normalized_text(value: str) -> str:
     return " ".join(re.findall(r"[\w]+", value.casefold()))
+
 
 def _similarity(left: str, right: str) -> float:
     """Return token-set Jaccard similarity for review-only comparisons."""
@@ -267,6 +275,7 @@ def _similarity(left: str, right: str) -> float:
         frozenset(_normalized_text(right).split()),
     )
 
+
 def _token_similarity(left_tokens: frozenset[str], right_tokens: frozenset[str]) -> float:
     """Return Jaccard similarity when normalized token sets are already available."""
     if not left_tokens and not right_tokens:
@@ -274,6 +283,7 @@ def _token_similarity(left_tokens: frozenset[str], right_tokens: frozenset[str])
     if not left_tokens or not right_tokens:
         return 0.0
     return len(left_tokens & right_tokens) / len(left_tokens | right_tokens)
+
 
 def _near_duplicate_pairs(
     records: Sequence[tuple[str, str, SourceRef, str, str, frozenset[str]]],
@@ -321,6 +331,7 @@ def _near_duplicate_pairs(
         for left_index, right_index in sorted(candidate_indices)
     )
 
+
 def _record_labels(model: DocumentModel) -> dict[str, tuple[str, str, SourceRef | None]]:
     """Collect useful labels without making the graph depend on HLA names."""
     labels: dict[str, tuple[str, str, SourceRef | None]] = {}
@@ -342,6 +353,7 @@ def _record_labels(model: DocumentModel) -> dict[str, tuple[str, str, SourceRef 
         labels[record.id] = ("annex", record.title, record.source)
     return labels
 
+
 def _edge_evidence(dependency: ComplianceDependency) -> GraphEvidence:
     if dependency.relation in {
         "references",
@@ -353,6 +365,7 @@ def _edge_evidence(dependency: ComplianceDependency) -> GraphEvidence:
     }:
         return "explicit"
     return "derived"
+
 
 def _document_descriptors(
     corpus: ComplianceCorpus,
@@ -369,6 +382,7 @@ def _document_descriptors(
             )
         )
     return tuple(result)
+
 
 def build_corpus_graph(
     corpus: ComplianceCorpus,
@@ -431,7 +445,7 @@ def build_corpus_graph(
                 target_details[1] if target_details else dependency.target_record_id,
                 target_details[2] if target_details else None,
                 external=dependency.target_document_id
-                         not in {item.document_id for item in corpus.documents},
+                not in {item.document_id for item in corpus.documents},
             )
             edges.setdefault(
                 f"dependency:{dependency.id}",
@@ -621,14 +635,17 @@ def build_corpus_graph(
         findings=tuple(sorted(findings.values(), key=lambda item: item.id)),
     )
 
+
 def load_corpus_graph(path: Path) -> CorpusSemanticGraph:
     """Load a graph emitted by this module and validate it with Pydantic."""
     return CorpusSemanticGraph.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def load_document_metadata(path: Path) -> dict[str, CorpusDocumentDescriptor]:
     """Load source-controlled descriptors keyed by stable document ID."""
     payload = CorpusDocumentMetadataFile.model_validate_json(path.read_text(encoding="utf-8"))
     return {item.document_id: item for item in payload.documents}
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -648,6 +665,7 @@ def main() -> None:
         args.output.write_text(payload + "\n", encoding="utf-8")
     else:
         print(payload)
+
 
 if __name__ == "__main__":
     main()

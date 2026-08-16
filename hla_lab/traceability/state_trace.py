@@ -10,6 +10,7 @@ from hla_lab.core.semantic_model import SemanticRecord, StateMachine, StateTrace
 
 __all__ = ["TraceReplayResult", "TraceReplayStep", "replay_trace"]
 
+
 class TraceReplayStep(SemanticRecord):
     """The observed result of replaying one trace step."""
 
@@ -19,6 +20,7 @@ class TraceReplayStep(SemanticRecord):
     state_before: str | None = None
     state_after: str | None = None
     reason: str = ""
+
 
 class TraceReplayResult(SemanticRecord):
     """A serializable state-trace replay result."""
@@ -30,8 +32,10 @@ class TraceReplayResult(SemanticRecord):
     steps: tuple[TraceReplayStep, ...] = ()
     errors: tuple[str, ...] = ()
 
+
 def _event_key(value: str) -> str:
     return " ".join(value.casefold().split())
+
 
 def _blocked(trace: StateTrace, reason: str) -> TraceReplayResult:
     return TraceReplayResult(
@@ -40,6 +44,7 @@ def _blocked(trace: StateTrace, reason: str) -> TraceReplayResult:
         status="blocked",
         errors=(reason,),
     )
+
 
 def _step_result(
     step: TraceStep,
@@ -58,6 +63,7 @@ def _step_result(
         state_after=state_after,
         reason=reason,
     )
+
 
 def replay_trace(machine: StateMachine, trace: StateTrace) -> TraceReplayResult:
     """Replay ``trace`` and verify source, transition, event, and target contracts.

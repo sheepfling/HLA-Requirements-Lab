@@ -24,6 +24,7 @@ from hla_lab.traceability.junit_adapter import parse_junit_results, response_fro
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 def _bundle() -> CorpusBundle:
     surface = BundleSurface(
         id="api.cpp.connect",
@@ -65,6 +66,7 @@ def _bundle() -> CorpusBundle:
             ),
         ),
     )
+
 
 def _java_bundle() -> CorpusBundle:
     surface = BundleSurface(
@@ -108,6 +110,7 @@ def _java_bundle() -> CorpusBundle:
         ),
     )
 
+
 def _two_binding_bundle() -> CorpusBundle:
     bundle = _bundle()
     document = bundle.documents[0]
@@ -149,6 +152,7 @@ def _two_binding_bundle() -> CorpusBundle:
     )
     return bundle.model_copy(update={"documents": (expanded_document,)})
 
+
 def _catalog(*, selector: str = "example.rti.ConnectIT#connect") -> ComplianceTestCatalog:
     return ComplianceTestCatalog.model_validate(
         {
@@ -173,6 +177,7 @@ def _catalog(*, selector: str = "example.rti.ConnectIT#connect") -> ComplianceTe
         }
     )
 
+
 def _write_result(
     path: Path,
     body: str = "",
@@ -184,6 +189,7 @@ def _write_result(
         f'<testsuite><testcase classname="{classname}" name="{name}">{body}</testcase></testsuite>',
         encoding="utf-8",
     )
+
 
 class JunitAdapterTests(unittest.TestCase):
     def test_junit_result_creates_unreviewed_implemented_binding(self) -> None:
@@ -557,6 +563,7 @@ class JunitAdapterTests(unittest.TestCase):
         self.assertTrue(json.loads(completed.stdout)["passed"])
         self.assertEqual(manifest["bindings"][0]["status"], "implemented")
         self.assertEqual(manifest["evidence"][0]["review_status"], "unreviewed")
+
 
 if __name__ == "__main__":
     unittest.main()

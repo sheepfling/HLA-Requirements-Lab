@@ -15,6 +15,7 @@ from hla_lab.core.semantic_model import StateMachine
 from hla_lab.diagrams.export_state_machine import render_dot, render_mermaid
 from hla_lab.diagrams.render_state_machine import _machine, _text, render
 
+
 def _wrapper(machine_tex: str, title: str) -> str:
     return f"""\\documentclass[tikz,border=8pt]{{standalone}}
 \\usepackage{{fontspec}}
@@ -25,6 +26,7 @@ def _wrapper(machine_tex: str, title: str) -> str:
 {machine_tex}
 \\end{{document}}
 """
+
 
 def _run(
     command: Sequence[str],
@@ -43,6 +45,7 @@ def _run(
         env=env,
     )
 
+
 def _executable(path: str | Path) -> str:
     """Prefer native executables when a Windows command shim was supplied."""
     candidate = Path(path)
@@ -51,6 +54,7 @@ def _executable(path: str | Path) -> str:
         if native.is_file():
             return str(native)
     return str(candidate)
+
 
 def _review_record(
     machine: Mapping[str, Any],
@@ -90,6 +94,7 @@ def _review_record(
 semantic/layout choices here.
 """
 
+
 def _merge_review_record(generated: str, previous: str) -> str:
     """Refresh generated provenance/compile fields without erasing review decisions."""
     if "## Review status\n" not in previous or "## Findings\n" not in previous:
@@ -115,6 +120,7 @@ def _merge_review_record(generated: str, previous: str) -> str:
         + previous_findings.rstrip()
         + "\n"
     )
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -241,6 +247,7 @@ def main() -> None:
     print(f"artifacts: {args.artifacts}")
     print(f"compiled: {'yes' if compiled else 'no'}")
     print(f"review record: {args.review_record}")
+
 
 if __name__ == "__main__":
     main()

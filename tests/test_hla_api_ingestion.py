@@ -12,8 +12,23 @@ from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.corpus.ingest_hla_api import ingest_2010, ingest_2025
 
 ROOT = Path(__file__).resolve().parents[1]
+INBOX = ROOT / "inbox"
+HAS_2010_ARCHIVES = all(
+    (INBOX / "1516.1-2010_downloads" / name).is_file()
+    for name in (
+        "IEEE1516-2010_C++_API.zip",
+        "IEEE1516-2010_Java_API.zip",
+        "hla1516e.wsdl",
+    )
+)
+HAS_2025_ARCHIVE = (INBOX / "1516.1-2025_downloads" / "1516-2025_API_XML_2025_08_14.zip").is_file()
+
 
 class HlaApiIngestionTests(unittest.TestCase):
+    @unittest.skipUnless(
+        HAS_2010_ARCHIVES,
+        "requires the optional IEEE 1516-2010 API archives under inbox/",
+    )
     def test_2010_ingestion_contains_native_and_wsdl_surfaces(self) -> None:
         records = ingest_2010(ROOT)
         self.assertGreater(len(records), 500)
@@ -37,6 +52,10 @@ class HlaApiIngestionTests(unittest.TestCase):
         )
         self.assertTrue(all(item.binding_kind in {"native", "protocol"} for item in records))
 
+    @unittest.skipUnless(
+        HAS_2025_ARCHIVE,
+        "requires the optional IEEE 1516-2025 API archive under inbox/",
+    )
     def test_2025_ingestion_contains_native_and_fedpro_surfaces(self) -> None:
         records = ingest_2025(ROOT)
         self.assertGreater(len(records), 900)
@@ -57,8 +76,8 @@ class HlaApiIngestionTests(unittest.TestCase):
 
     def test_loaded_editions_keep_semantic_seams_and_exact_bindings(self) -> None:
         for document_id, expected_semantic in (
-                ("hla-1516.1-2010", 212),
-                ("hla-1516.1-2025", 281),
+            ("hla-1516.1-2010", 212),
+            ("hla-1516.1-2025", 281),
         ):
             model = load_hla_document_model(ROOT / "topics" / "ieee" / document_id)
             self.assertEqual(
@@ -69,6 +88,7 @@ class HlaApiIngestionTests(unittest.TestCase):
                 sum(item.binding_kind != "semantic" for item in model.api_surfaces),
                 500,
             )
+
 
 if __name__ == "__main__":
     unittest.main()

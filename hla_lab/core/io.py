@@ -9,11 +9,13 @@ from pydantic import BaseModel
 
 __all__ = ["write_json", "write_text"]
 
+
 def write_text(path: Path, content: str) -> None:
     """Create parent directories and write one normalized trailing newline."""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content.rstrip() + "\n", encoding="utf-8")
+
 
 def write_json(path: Path, value: object) -> None:
     """Write a JSON-compatible value, including Pydantic model values."""

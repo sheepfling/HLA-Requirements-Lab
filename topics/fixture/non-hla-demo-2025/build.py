@@ -6,11 +6,15 @@ import argparse
 from pathlib import Path
 
 from fixture_profile import DEMO_LATEX_DIALECT, DEMO_SOURCE
-from hla_lab.adapters.document_builder import BuildConfig, build as build_document, clean as clean_document
+
+from hla_lab.adapters.document_builder import BuildConfig
+from hla_lab.adapters.document_builder import build as build_document
+from hla_lab.adapters.document_builder import clean as clean_document
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate as generate_semantic
 
 ROOT = Path(__file__).resolve().parent
+
 
 def generate_blocks() -> object:
     """Generate fixture inputs from its source vocabulary and semantic model."""
@@ -27,12 +31,14 @@ def generate_blocks() -> object:
         )
     )
 
+
 CONFIG = BuildConfig(
     root=ROOT,
     clean_before_build=True,
     output_pdf=ROOT / "dist" / "non-hla-demo-2025.pdf",
     semantic_generator=generate_blocks,
 )
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -42,6 +48,7 @@ def main() -> None:
         print(build_document(CONFIG))
     else:
         clean_document(ROOT)
+
 
 if __name__ == "__main__":
     main()

@@ -32,8 +32,10 @@ from hla_lab.publication.compliance_publication import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 def _source(line: int) -> SourceRef:
     return SourceRef(path="fixture.tex", line=line)
+
 
 def _corpus() -> ComplianceCorpus:
     clause = Clause(
@@ -108,6 +110,7 @@ def _corpus() -> ComplianceCorpus:
         )
     )
 
+
 def _profile() -> CompliancePublicationProfile:
     return CompliancePublicationProfile(
         schema_version=1,
@@ -118,9 +121,11 @@ def _profile() -> CompliancePublicationProfile:
         evidence_boundary="Planned mappings are not concrete implementation evidence.",
     )
 
+
 def _csv_rows(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as stream:
         return list(csv.DictReader(stream))
+
 
 class CompliancePublicationTests(unittest.TestCase):
     def test_manifest_is_typed_and_connects_requirements_to_operational_evidence(self) -> None:
@@ -226,6 +231,7 @@ class CompliancePublicationTests(unittest.TestCase):
             profile.document_ids,
             ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025"),
         )
+
 
 if __name__ == "__main__":
     unittest.main()

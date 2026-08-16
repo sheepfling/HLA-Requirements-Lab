@@ -18,6 +18,7 @@ from hla_lab.generation.semantic_generation import generate
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:
     return ContentBlock(
         id=identifier,
@@ -26,6 +27,7 @@ def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:
         sequence=sequence,
         source=SourceRef(path=source_path, line=sequence + 1),
     )
+
 
 class FaithfulRendererTests(unittest.TestCase):
     def test_projection_groups_adapter_paths_and_uses_semantic_sequence(self) -> None:
@@ -132,6 +134,7 @@ class FaithfulRendererTests(unittest.TestCase):
         self.assertEqual(rendered.count(r"\HLAStartSemanticPages"), 4)
         self.assertEqual(rendered.count(r"\HLAEndSemanticPages"), 4)
         self.assertIn(r"\HLAInstallContentsLinks", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

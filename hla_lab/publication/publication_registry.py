@@ -29,6 +29,7 @@ BuildStrategy = Literal["faithful", "semantic-derivative", "compliance", "fixtur
 Selection = Literal["all", "none"]
 Ordering = Literal["source", "ordered"]
 
+
 class BuildSettings(BaseModel):
     """Data-only settings consumed by the shared document builder."""
 
@@ -49,6 +50,7 @@ class BuildSettings(BaseModel):
     include_outline: bool = False
     graph_metadata: str | None = None
 
+
 class ReleaseProject(BaseModel):
     """One independently buildable document product in the release manifest."""
 
@@ -62,6 +64,7 @@ class ReleaseProject(BaseModel):
     expected_pages: int | None = Field(default=None, ge=1)
     kind: str = Field(min_length=1)
     build: BuildSettings | None = None
+
 
 class ReleaseManifest(BaseModel):
     """Release-check inputs referenced by the publication registry."""
@@ -87,6 +90,7 @@ class ReleaseManifest(BaseModel):
             known = ", ".join(item.id for item in self.projects)
             raise ValueError(f"unknown release project {identifier}; known: {known}") from error
 
+
 class Publication(BaseModel):
     """A human-facing document destination with isolated build membership."""
 
@@ -104,6 +108,7 @@ class Publication(BaseModel):
         if len(self.project_ids) != len(set(self.project_ids)):
             raise ValueError(f"publication {self.id} has duplicate project IDs")
         return self
+
 
 class PublicationRegistry(BaseModel):
     """Source-controlled collection of optional, independently built products."""
@@ -129,13 +134,16 @@ class PublicationRegistry(BaseModel):
                 f"unknown publication {identifier}; known publications: {known}"
             ) from error
 
+
 def load_release_manifest(path: Path) -> ReleaseManifest:
     """Load the source-controlled release-project inventory."""
     return ReleaseManifest.model_validate_json(path.read_text(encoding="utf-8"))
 
+
 def load_publication_registry(path: Path) -> PublicationRegistry:
     """Load the source-controlled publication destination registry."""
     return PublicationRegistry.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def publication_projects(
     registry: PublicationRegistry,

@@ -10,6 +10,7 @@ from types import MappingProxyType
 from hla_lab.diagrams.render_state_machine import render
 from hla_lab.diagrams.state_machine_metrics import validate_model
 
+
 class InputProtocolTests(unittest.TestCase):
     def test_state_machine_renderer_accepts_a_read_only_mapping(self) -> None:
         machine = MappingProxyType(
@@ -32,6 +33,7 @@ class InputProtocolTests(unittest.TestCase):
             errors = validate_model(Path(temporary) / "model.json", model)
 
         self.assertEqual(errors, [])
+
 
 if __name__ == "__main__":
     unittest.main()

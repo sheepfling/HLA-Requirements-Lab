@@ -12,6 +12,7 @@ from hla_lab.traceability.semantic_authority import load_authority
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
+
 class ContentClosureTests(unittest.TestCase):
     def test_all_15161_requirement_candidates_are_authoritative(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
@@ -84,6 +85,7 @@ class ContentClosureTests(unittest.TestCase):
         )
         surface_ids = {item.id for item in document.surfaces}
         self.assertTrue({"requirements", "requirement-links", "implementations"} <= surface_ids)
+
 
 if __name__ == "__main__":
     unittest.main()

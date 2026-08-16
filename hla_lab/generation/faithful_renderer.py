@@ -28,6 +28,7 @@ __all__ = [
     "render_faithful_body",
 ]
 
+
 class FaithfulLayoutEntry(SemanticRecord):
     """One source-controlled layout adapter selected by semantic block order."""
 
@@ -39,11 +40,13 @@ class FaithfulLayoutEntry(SemanticRecord):
     before_latex: str = ""
     after_latex: str = ""
 
+
 class FaithfulLayoutInsertion(SemanticRecord):
     """A layout-only command inserted before one semantic page sequence."""
 
     before_sequence: int = Field(ge=0)
     latex: str = Field(min_length=1)
+
 
 class FaithfulLayoutSegment(SemanticRecord):
     """A contiguous semantic page range with optional layout wrappers."""
@@ -61,6 +64,7 @@ class FaithfulLayoutSegment(SemanticRecord):
             raise ValueError("faithful layout segment end must not precede start")
         return self
 
+
 class FaithfulLayoutStaticEntry(SemanticRecord):
     """An intentional layout-only page that has no semantic content block."""
 
@@ -70,6 +74,7 @@ class FaithfulLayoutStaticEntry(SemanticRecord):
     before_latex: str = ""
     after_latex: str = ""
 
+
 class FaithfulLayoutProfile(SemanticRecord):
     """Source-controlled pagination boundaries independent of semantic prose."""
 
@@ -78,6 +83,7 @@ class FaithfulLayoutProfile(SemanticRecord):
     segments: tuple[FaithfulLayoutSegment, ...] = ()
     static_entries: tuple[FaithfulLayoutStaticEntry, ...] = ()
 
+
 class FaithfulLayoutProjection(SemanticRecord):
     """A generated body include stream and its semantic provenance."""
 
@@ -85,19 +91,23 @@ class FaithfulLayoutProjection(SemanticRecord):
     document_id: str = Field(min_length=1)
     entries: tuple[FaithfulLayoutEntry, ...]
 
+
 def _input_path(source_path: str) -> str:
     path = PurePosixPath(source_path)
     if path.is_absolute() or ".." in path.parts or path.suffix != ".tex":
         raise ValueError(f"faithful layout source must be a relative .tex path: {source_path}")
     return path.with_suffix("").as_posix()
 
+
 def load_faithful_layout_profile(path: PathLike[str] | str) -> FaithfulLayoutProfile:
     """Load a typed layout-boundary profile without treating it as prose."""
     location = Path(path)
     return FaithfulLayoutProfile.model_validate_json(location.read_text(encoding="utf-8"))
 
+
 def _append_latex(existing: str, addition: str) -> str:
     return "\n".join(value for value in (existing, addition) if value)
+
 
 def build_faithful_layout_projection(
     model: DocumentModel,
@@ -209,6 +219,7 @@ def build_faithful_layout_projection(
         document_id=model.document_id,
         entries=entries,
     )
+
 
 def render_faithful_body(projection: FaithfulLayoutProjection) -> str:
     """Render a deterministic LaTeX include stream for faithful layout adapters."""

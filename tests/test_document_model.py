@@ -33,6 +33,7 @@ DOCUMENT_ROOTS = tuple(
 )
 SOURCE = SourceRef(path="test", line=1)
 
+
 class DocumentModelTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -183,6 +184,7 @@ class DocumentModelTests(unittest.TestCase):
         issues = corpus.unresolved_reference_issues()
         self.assertEqual(len(issues), 1)
         self.assertEqual(issues[0].code, "unresolved-reference")
+
 
 if __name__ == "__main__":
     unittest.main()

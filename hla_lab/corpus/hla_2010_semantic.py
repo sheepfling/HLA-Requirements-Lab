@@ -36,6 +36,7 @@ from hla_lab.core.semantic_model import (
 from hla_lab.core.text import slugify
 from hla_lab.paths import DocumentResources
 
+
 @dataclass(frozen=True)
 class Heading:
     offset: int
@@ -44,12 +45,14 @@ class Heading:
     title: str
     line: int
 
+
 _INCLUDE = re.compile(r"\\(?:input|include)\s*\{([^{}]+)\}")
 _COMMAND = re.compile(r"\\(?P<name>[A-Za-z@]+)")
 _HEADING = re.compile(
     r"\\(?P<command>clause|subclause|subsubclause|annexsection|annexsubsection|"
     r"section|subsection|subsubsection|paragraph|annexsubhead)\*?\s*\{"
 )
+
 
 def _arguments(text: str, offset: int, count: int) -> tuple[str, ...] | None:
     command = _COMMAND.match(text, offset)
@@ -65,6 +68,7 @@ def _arguments(text: str, offset: int, count: int) -> tuple[str, ...] | None:
         values.append(body)
     return tuple(values)
 
+
 def _plain(value: str) -> str:
     value = re.sub(r"(?m)^\s*%.*$", "", value)
     value = re.sub(r"\\(?:begin|end)\{[^{}]*\}", " ", value)
@@ -78,12 +82,14 @@ def _plain(value: str) -> str:
         value = re.sub(r"\\[A-Za-z@]+(?:\*?\[[^]]*\])?", " ", value)
         return re.sub(r"\s+", " ", value.replace("{", "").replace("}", "")).strip()
 
+
 def _source(root: Path, path: Path, text: str, offset: int, end: int | None = None) -> SourceRef:
     return SourceRef(
         path=path.relative_to(root).as_posix(),
         line=line_number(text, offset),
         end_line=line_number(text, end) if end is not None else None,
     )
+
 
 def _direct_inputs(root: Path) -> tuple[Path, ...]:
     main = DocumentResources(root).main_tex
@@ -97,6 +103,7 @@ def _direct_inputs(root: Path) -> tuple[Path, ...]:
             paths.append(candidate)
     return tuple(paths)
 
+
 def _surface_inputs(root: Path) -> tuple[Path, ...]:
     """Return authored TeX surfaces, including files nested below main.tex."""
     excluded = {"output", "build", "dist", ".trash"}
@@ -106,11 +113,12 @@ def _surface_inputs(root: Path) -> tuple[Path, ...]:
                 path
                 for path in root.rglob("*.tex")
                 if not any(part in excluded for part in path.relative_to(root).parts)
-                   and path.name != "main.tex"
+                and path.name != "main.tex"
             ),
             key=lambda path: path.relative_to(root).as_posix(),
         )
     )
+
 
 def _expand_local_inputs(root: Path, path: Path, text: str, stack: tuple[Path, ...] = ()) -> str:
     """Inline local input files while retaining native TikZ macro references.
@@ -135,6 +143,7 @@ def _expand_local_inputs(root: Path, path: Path, text: str, stack: tuple[Path, .
 
     return _INCLUDE.sub(replace, text)
 
+
 def _root_number(path: Path) -> str | None:
     value = "/".join(path.as_posix().casefold().split("/")[-2:])
     if "annex" in value:
@@ -142,6 +151,7 @@ def _root_number(path: Path) -> str | None:
         return match.group(1).upper() if match else None
     match = re.search(r"(?:clause|^|[/_-])0*(\d+)(?:[/_.-]|$)", value)
     return match.group(1) if match else None
+
 
 def _explicit_heading(command: str, value: str) -> tuple[str, str] | None:
     value = _plain(value)
@@ -155,6 +165,7 @@ def _explicit_heading(command: str, value: str) -> tuple[str, str] | None:
     ):
         return match.group("number"), match.group("title").strip()
     return None
+
 
 def _headings(root: Path, path: Path, text: str) -> tuple[Heading, ...]:
     root_number = _root_number(path)
@@ -208,6 +219,7 @@ def _headings(root: Path, path: Path, text: str) -> tuple[Heading, ...]:
         )
     return tuple(records)
 
+
 def _clause_records(root: Path, files: tuple[Path, ...]) -> tuple[Clause, ...]:
     records: dict[str, Clause] = {}
     for path in files:
@@ -228,11 +240,13 @@ def _clause_records(root: Path, files: tuple[Path, ...]) -> tuple[Clause, ...]:
             records.setdefault(record.id, record)
     return tuple(records.values())
 
+
 def _clause_for(path: Path, headings: tuple[Heading, ...]) -> str | None:
     if headings:
         return f"clause-{headings[-1].number}"
     root_number = _root_number(path)
     return f"clause-{root_number}" if root_number else None
+
 
 def _paragraphs(
     root: Path, path: Path, text: str, block_id: str, clause_id: str | None
@@ -251,6 +265,7 @@ def _paragraphs(
             sequence=1,
         ),
     )
+
 
 def _content(
     root: Path, files: tuple[Path, ...]
@@ -277,6 +292,7 @@ def _content(
         )
     return tuple(blocks), tuple(elements)
 
+
 def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
     records: list[Definition] = []
     seen: set[str] = set()
@@ -296,7 +312,7 @@ def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
                     body = values[1]
                 else:
                     line_end = text.find("\n", match.end())
-                    body = text[match.end(): line_end if line_end >= 0 else len(text)]
+                    body = text[match.end() : line_end if line_end >= 0 else len(text)]
                 normalized = (term, _plain(body))
                 if normalized in seen_values:
                     continue
@@ -324,7 +340,7 @@ def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
             if not term:
                 continue
             end_marker = text.find(r"\end{definition}", body_start)
-            body = text[body_start: end_marker if end_marker >= 0 else len(text)]
+            body = text[body_start : end_marker if end_marker >= 0 else len(text)]
             normalized = (term, _plain(body))
             if normalized in seen_values:
                 continue
@@ -344,6 +360,7 @@ def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
                 )
             )
     return tuple(records)
+
 
 def _requirements(root: Path, files: tuple[Path, ...]) -> tuple[Requirement, ...]:
     records: list[Requirement] = []
@@ -381,6 +398,7 @@ def _requirements(root: Path, files: tuple[Path, ...]) -> tuple[Requirement, ...
             )
     return tuple(records)
 
+
 def _figures(root: Path, files: tuple[Path, ...]) -> tuple[Figure, ...]:
     records: list[Figure] = []
     seen: set[str] = set()
@@ -404,6 +422,7 @@ def _figures(root: Path, files: tuple[Path, ...]) -> tuple[Figure, ...]:
             )
     return tuple(records)
 
+
 def _notes(root: Path, files: tuple[Path, ...]) -> tuple[Note, ...]:
     records: list[Note] = []
     for path in files:
@@ -425,6 +444,7 @@ def _notes(root: Path, files: tuple[Path, ...]) -> tuple[Note, ...]:
             )
     return tuple(records)
 
+
 def _tables(root: Path, files: tuple[Path, ...]) -> tuple[Table, ...]:
     records: list[Table] = []
     for path in files:
@@ -433,10 +453,10 @@ def _tables(root: Path, files: tuple[Path, ...]) -> tuple[Table, ...]:
             re.finditer(r"\\begin\{(?:tabular|longtable|hlatable|momtabletypeset)", text), start=1
         ):
             end_marker = re.search(
-                r"\\end\{(?:tabular|longtable|hlatable|momtabletypeset)\}", text[match.end():]
+                r"\\end\{(?:tabular|longtable|hlatable|momtabletypeset)\}", text[match.end() :]
             )
             end = match.end() + end_marker.end() if end_marker else len(text)
-            body = text[match.end(): end]
+            body = text[match.end() : end]
             table_id = f"table-{slugify(path.relative_to(root).as_posix())}-{ordinal}"
             cells: list[TableCell] = []
             rows = re.split(r"\\\\", body)
@@ -469,7 +489,9 @@ def _tables(root: Path, files: tuple[Path, ...]) -> tuple[Table, ...]:
             )
     return tuple(records)
 
+
 _write = write_json
+
 
 def import_root(root: Path) -> dict[str, int]:
     files = _direct_inputs(root)
@@ -540,6 +562,7 @@ def import_root(root: Path) -> dict[str, int]:
         "tables": len(tables),
     }
 
+
 def promote_adapters(root: Path) -> int:
     """Replace direct hand-written inputs with generated semantic adapters."""
     files = _direct_inputs(root)
@@ -559,6 +582,7 @@ def promote_adapters(root: Path) -> int:
         count += 1
     return count
 
+
 def repair_adapters(root: Path) -> dict[str, int]:
     """Rehydrate semantic layout bodies, re-import with corrected provenance, and re-adapt."""
     path = DocumentResources(root).semantic_file("content-blocks.json")
@@ -572,6 +596,7 @@ def repair_adapters(root: Path) -> dict[str, int]:
     summary = import_root(root)
     summary["adapters"] = promote_adapters(root)
     return summary
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -602,6 +627,7 @@ def main() -> None:
         if args.promote_adapters and not args.repair_adapters:
             summary["adapters"] = promote_adapters(root)
         print(root, json.dumps(summary, sort_keys=True))
+
 
 if __name__ == "__main__":
     main()

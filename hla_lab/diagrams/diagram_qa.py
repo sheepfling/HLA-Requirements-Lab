@@ -11,6 +11,7 @@ from typing import Any
 from hla_lab.core.semantic_model import StateMachineFile
 from hla_lab.diagrams.render_state_machine import _layout_nodes, render
 
+
 def _canonical_machines(models_dir: Path) -> tuple[tuple[Path, dict[str, Any]], ...]:
     machines: list[tuple[Path, dict[str, Any]]] = []
     for path in sorted(models_dir.glob("*.json")):
@@ -20,6 +21,7 @@ def _canonical_machines(models_dir: Path) -> tuple[tuple[Path, dict[str, Any]], 
         StateMachineFile.model_validate(payload)
         machines.extend((path, item) for item in payload["state_machines"])
     return tuple(machines)
+
 
 def validate_renderable(models_dir: Path) -> list[str]:
     """Validate that every modeled state transition has a rendered endpoint."""
@@ -31,7 +33,7 @@ def validate_renderable(models_dir: Path) -> list[str]:
             transition["id"]
             for transition in machine["transitions"]
             if transition.get("source_state") not in nodes
-               or transition.get("target_state") not in nodes
+            or transition.get("target_state") not in nodes
         ]
         if missing_endpoints:
             failures.append(
@@ -65,6 +67,7 @@ def validate_renderable(models_dir: Path) -> list[str]:
             )
     return failures
 
+
 def validate_artifacts(
     models_dir: Path,
     artifacts_dir: Path,
@@ -93,6 +96,7 @@ def validate_artifacts(
                 failures.append(f"{machine['id']}: LaTeX error reported in {log}")
     return failures
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", type=Path, required=True)
@@ -113,6 +117,7 @@ def main() -> int:
         for failure in failures:
             print(f"failure: {failure}")
     return 0 if not failures else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

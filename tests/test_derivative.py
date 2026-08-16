@@ -18,6 +18,7 @@ DOCUMENT_ROOTS = tuple(
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
 )
 
+
 class DerivativeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -88,6 +89,7 @@ class DerivativeTests(unittest.TestCase):
         )
         self.assertIsNotNone(project.build)
         self.assertEqual(project.build.strategy, "semantic-derivative")
+
 
 if __name__ == "__main__":
     unittest.main()

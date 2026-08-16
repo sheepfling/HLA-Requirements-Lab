@@ -26,10 +26,12 @@ _SLUG_RE = re.compile(r"[^a-z0-9]+")
 _FILENAME_RE = re.compile(r"[^a-zA-Z0-9._-]+")
 _TEX_SPECIAL_RE = re.compile(r"[\\&#%_${}]")
 
+
 def normalize_whitespace(value: object) -> str:
     """Return text with line endings and runs of whitespace normalized."""
 
     return " ".join(str(value).replace("\r", "").split())
+
 
 def slugify(
     value: object,
@@ -41,6 +43,7 @@ def slugify(
 
     slug = _SLUG_RE.sub(separator, str(value).casefold()).strip(separator)
     return slug or fallback
+
 
 def safe_identifier(
     value: object,
@@ -59,6 +62,7 @@ def safe_identifier(
         safe = f"n_{safe}"
     return f"{prefix}_{safe}" if prefix else safe
 
+
 def safe_filename(value: object, *, max_length: int = 120) -> str:
     """Create a bounded filesystem component while retaining uniqueness."""
 
@@ -68,6 +72,7 @@ def safe_filename(value: object, *, max_length: int = 120) -> str:
         return safe
     digest = hashlib.sha1(original.encode("utf-8")).hexdigest()[:12]
     return f"{safe[: max_length - 13].rstrip('-')}-{digest}"
+
 
 def tex_escape(value: object) -> str:
     """Escape plain text for insertion into ordinary LaTeX text."""
@@ -84,10 +89,12 @@ def tex_escape(value: object) -> str:
     }
     return _TEX_SPECIAL_RE.sub(lambda match: replacements[match.group()], str(value))
 
+
 def mermaid_text(value: object) -> str:
     """Quote-safe one-line text for Mermaid labels."""
 
     return str(value).replace("\\", "\\\\").replace('"', "'").replace("\n", " ")
+
 
 def dot_quote(value: object) -> str:
     """Return a Graphviz double-quoted string literal."""
@@ -95,6 +102,7 @@ def dot_quote(value: object) -> str:
     escaped = str(value).replace("\\", "\\\\").replace('"', '\\"')
     escaped = escaped.replace(chr(10), "\\n")
     return f'"{escaped}"'
+
 
 def format_number(value: float | int, *, precision: int = 3) -> str:
     """Render a diagram coordinate without binary-float noise."""

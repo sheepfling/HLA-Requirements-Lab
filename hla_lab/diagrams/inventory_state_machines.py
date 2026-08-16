@@ -15,8 +15,10 @@ from hla_lab.diagrams.review_policy import review_defaults
 IMAGE_PATTERN = re.compile(r"source-p(?P<page>\d+)-xref(?P<xref>\d+)\.(?P<ext>png|jpg|jpeg)$", re.I)
 DEFAULT_DOCUMENT = "1516.1"
 
+
 def _document_slug(document: str) -> str:
     return slugify(document, fallback="", separator="_")
+
 
 def _mapping_entries(
     existing: Mapping[str, JsonValue] | None, key: str
@@ -25,6 +27,7 @@ def _mapping_entries(
     if not isinstance(value, list):
         return ()
     return tuple(item for item in value if isinstance(item, Mapping))
+
 
 def build_inventory(
     sources: Sequence[tuple[str, Path]],
@@ -75,11 +78,11 @@ def build_inventory(
                 prior = prior_entries.get(entry["diagram_id"])
                 if isinstance(prior, Mapping):
                     for field in (
-                            "diagram_type",
-                            "status",
-                            "model",
-                            "confidence",
-                            "notes",
+                        "diagram_type",
+                        "status",
+                        "model",
+                        "confidence",
+                        "notes",
                     ):
                         if field in prior:
                             entry[field] = prior[field]
@@ -112,6 +115,7 @@ def build_inventory(
         "document_scopes": scopes,
         "diagrams": diagrams,
     }
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -148,6 +152,7 @@ def main() -> None:
         args.manifest.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
+
 
 if __name__ == "__main__":
     main()

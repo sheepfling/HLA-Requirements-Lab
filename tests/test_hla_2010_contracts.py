@@ -16,6 +16,7 @@ ROOTS = (
     ROOT / "topics" / "ieee" / "hla-1516.2-2010",
 )
 
+
 class Hla2010ContractTests(unittest.TestCase):
     def test_15161_note_ids_are_unique_across_source_views(self) -> None:
         model = load_document_model(ROOTS[1], HLA_SOURCE_2010)
@@ -58,6 +59,7 @@ class Hla2010ContractTests(unittest.TestCase):
         self.assertNotIn("figures/native/figure-", body)
         self.assertEqual(body.count("output/semantic/state-machine-"), 16)
         self.assertEqual(body.count("output/semantic/graph-diagram-"), 4)
+
 
 if __name__ == "__main__":
     unittest.main()

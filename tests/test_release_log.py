@@ -8,6 +8,7 @@ from pathlib import Path
 
 from hla_lab.publication.release_check import _log_errors
 
+
 class ReleaseLogTests(unittest.TestCase):
     def test_release_log_check_reports_fatal_latex_lines(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -27,6 +28,7 @@ class ReleaseLogTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertEqual(_log_errors(path), [])
+
 
 if __name__ == "__main__":
     unittest.main()

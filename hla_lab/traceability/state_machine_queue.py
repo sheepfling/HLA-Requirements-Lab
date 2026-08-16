@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
@@ -27,6 +28,7 @@ def main() -> None:
             f"page={item.get('page')} type={item.get('diagram_type')} "
             f"source={item.get('source_image')}"
         )
+
 
 if __name__ == "__main__":
     main()

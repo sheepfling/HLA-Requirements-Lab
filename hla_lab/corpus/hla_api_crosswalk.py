@@ -14,6 +14,7 @@ HLA_OWNER_BY_INTERFACE = {
     "adapter": "FedProDataTypes",
 }
 
+
 def hla_api_targets(edition: str) -> tuple[ApiTarget, ...]:
     """Return the binding/projection targets for one HLA API edition."""
     targets = [
@@ -66,6 +67,7 @@ def hla_api_targets(edition: str) -> tuple[ApiTarget, ...]:
         )
     return tuple(targets)
 
+
 def generate(root: Path, edition: str, output: Path) -> int:
     """Load an HLA document and write its crosswalk manifest."""
     model = load_hla_document_model(root)
@@ -74,6 +76,7 @@ def generate(root: Path, edition: str, output: Path) -> int:
     print(f"wrote {len(rows)} API crosswalks to {output}")
     return len(rows)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--edition", choices=("2010", "2025"), required=True)
@@ -81,6 +84,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     generate(args.root, args.edition, args.output)
+
 
 if __name__ == "__main__":
     main()

@@ -21,9 +21,11 @@ __all__ = ["HLA_API_OWNERS", "build_hla_surface_contract"]
 
 HLA_API_OWNERS = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))["api_owners"]
 
+
 def _source_for(mapping: ImplementationMapping) -> SourceRef:
     source = getattr(mapping, "source", None)
     return source or SourceRef(path="semantic/implementations.json", line=1)
+
 
 def _surface_ids_for_transitions(
     transition_ids: tuple[str, ...],
@@ -39,6 +41,7 @@ def _surface_ids_for_transitions(
         )
     )
 
+
 def _mapping_ids_for_surfaces(
     surface_ids: tuple[str, ...],
     surfaces_by_id: Mapping[str, ApiSurface],
@@ -52,6 +55,7 @@ def _mapping_ids_for_surfaces(
             }
         )
     )
+
 
 def build_hla_surface_contract(model: DocumentModel) -> DocumentModel:
     """Attach complete HLA API, verification, and trace planning surfaces.

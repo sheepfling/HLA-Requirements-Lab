@@ -20,9 +20,11 @@ from hla_lab.traceability.compliance_contract import (
     ImplementationManifest,
 )
 
+
 def load_bundle(path: Path) -> CorpusBundle:
     """Load a portable corpus bundle."""
     return CorpusBundle.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def build_adapter_request(bundle: CorpusBundle, request_id: str) -> AdapterRequest:
     """Project only the binding information an external adapter needs."""
@@ -65,6 +67,7 @@ def build_adapter_request(bundle: CorpusBundle, request_id: str) -> AdapterReque
         documents=tuple(documents),
     )
 
+
 def manifest_from_response(
     request: AdapterRequest,
     response: AdapterResponse,
@@ -90,6 +93,7 @@ def manifest_from_response(
         evidence=response.evidence,
     )
 
+
 def run_adapter(command: Sequence[str], request: AdapterRequest) -> AdapterResponse:
     """Send one JSON request to an external executable and parse its stdout."""
     if not command:
@@ -109,7 +113,9 @@ def run_adapter(command: Sequence[str], request: AdapterRequest) -> AdapterRespo
     except ValueError as error:
         raise ValueError("adapter stdout was not a valid AdapterResponse JSON document") from error
 
+
 _write_json = write_json
+
 
 def _print_result(result: ComplianceResult, as_json: bool) -> None:
     if as_json:
@@ -130,6 +136,7 @@ def _print_result(result: ComplianceResult, as_json: bool) -> None:
     print(f"fully verified: {result.coverage.fully_verified}")
     for finding in result.findings:
         print(f"{finding.severity}: {finding.code}: {finding.record_id} — {finding.message}")
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -198,6 +205,7 @@ def main() -> int:
     result = verify(bundle, manifest)
     _print_result(result, args.json)
     return 0 if result.passed else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

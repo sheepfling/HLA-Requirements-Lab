@@ -20,8 +20,10 @@ from hla_lab.corpus.corpus_graph import (
     load_document_metadata,
 )
 
+
 def _source(path: str, line: int) -> SourceRef:
     return SourceRef(path=path, line=line)
+
 
 def _document(document_id: str, definition_id: str, *, cross_reference: bool) -> DocumentModel:
     clause = Clause(
@@ -61,6 +63,7 @@ def _document(document_id: str, definition_id: str, *, cross_reference: bool) ->
         requirements=(),
         cross_references=references,
     )
+
 
 class CorpusGraphTests(unittest.TestCase):
     def test_graph_keeps_explicit_links_separate_from_shared_term_candidates(self) -> None:
@@ -133,6 +136,7 @@ class CorpusGraphTests(unittest.TestCase):
             len(restored.edges_for("doc-a", relation="shared-definition-term")),
             1,
         )
+
 
 if __name__ == "__main__":
     unittest.main()

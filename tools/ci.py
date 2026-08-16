@@ -22,8 +22,10 @@ STATE_MACHINE_MANIFEST = RESOURCES.state_machine_manifest
 AUTHORITY_MANIFEST = RESOURCES.authority_manifest
 RELEASE_MANIFEST = RESOURCES.release_manifest
 
+
 def _python(python: str, *arguments: object) -> tuple[str, ...]:
     return (python, *(str(argument) for argument in arguments))
+
 
 def _tool(name: str) -> str:
     """Find a console tool in PATH or beside the active Python executable."""
@@ -35,6 +37,7 @@ def _tool(name: str) -> str:
         if sibling.is_file():
             return str(sibling)
     return name
+
 
 def quality_commands(
     python: str = sys.executable,
@@ -156,6 +159,7 @@ def quality_commands(
         commands += (("git", "diff", "--exit-code"),)
     return commands
 
+
 def release_commands(python: str = sys.executable) -> tuple[tuple[str, ...], ...]:
     """Return the ordered document-release commands."""
     return (
@@ -227,6 +231,7 @@ def release_commands(python: str = sys.executable) -> tuple[tuple[str, ...], ...
         ("git", "diff", "--exit-code"),
     )
 
+
 def ci_commands(
     job: str = "quality",
     python: str = sys.executable,
@@ -246,6 +251,7 @@ def ci_commands(
         return quality_commands(python) + release_commands(python)
     raise ValueError(f"unknown CI job: {job}")
 
+
 def run_command(command: Sequence[str]) -> int:
     """Run one CI command from the repository root and return its exit code."""
     environment = os.environ.copy()
@@ -259,6 +265,7 @@ def run_command(command: Sequence[str]) -> int:
         print(f"CI command could not start: {shlex.join(command)}: {error}", file=sys.stderr)
         return 1
     return completed.returncode
+
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run CI checks in order, stopping at the first failure."""
@@ -296,6 +303,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if return_code:
             return return_code
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

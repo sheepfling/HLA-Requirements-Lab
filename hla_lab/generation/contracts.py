@@ -13,6 +13,7 @@ from hla_lab.generation.faithful_renderer import (
     FaithfulLayoutProjection,
 )
 
+
 @dataclass(frozen=True)
 class GenerationRequest:
     """All inputs that control one deterministic semantic generation run."""
@@ -30,6 +31,7 @@ class GenerationRequest:
     include_table_cells: bool = True
     include_faithful_body: bool = False
     faithful_layout_profile: FaithfulLayoutProfile | None = None
+
 
 @dataclass(frozen=True)
 class GenerationResult:

@@ -10,6 +10,7 @@ from typing import TypedDict
 
 from hla_lab.core.semantic_model import DiagramSurfaceFile
 
+
 class DiagramQaReport(TypedDict):
     passed: bool
     failures: list[str]
@@ -17,6 +18,7 @@ class DiagramQaReport(TypedDict):
     embedded_diagram_count: int
     non_generatable_asset_count: int
     generated_record_ids: list[str]
+
 
 def _semantic_record_ids(models_dir: Path) -> set[str]:
     record_ids: set[str] = set()
@@ -29,6 +31,7 @@ def _semantic_record_ids(models_dir: Path) -> set[str]:
                 if isinstance(record, dict) and isinstance(record.get("id"), str):
                     record_ids.add(record["id"])
     return record_ids
+
 
 def validate(
     surface_manifest: Path,
@@ -87,6 +90,7 @@ def validate(
         "generated_record_ids": sorted(item.record_id for item in generated if item.record_id),
     }
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--surface-manifest", type=Path, required=True)
@@ -108,6 +112,7 @@ def main() -> int:
         for failure in report["failures"]:
             print(f"failure: {failure}")
     return 0 if report["passed"] else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

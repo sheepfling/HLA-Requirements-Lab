@@ -20,6 +20,7 @@ from hla_lab.traceability.state_trace import replay_trace
 ROOT = Path(__file__).resolve().parents[1]
 HLA_ROOT = ROOT / "topics" / "ieee"
 
+
 class StateTraceReplayTests(unittest.TestCase):
     def setUp(self) -> None:
         self.machine = StateMachine(
@@ -95,6 +96,7 @@ class StateTraceReplayTests(unittest.TestCase):
         self.assertEqual(result.status, "failed")
         self.assertIn("not defined", result.errors[0])
 
+
 class HlaSurfaceReadinessTests(unittest.TestCase):
     def test_surface_records_round_trip_through_pydantic(self) -> None:
         model = load_hla_document_model(HLA_ROOT / "hla-1516.1-2025")
@@ -166,6 +168,7 @@ class HlaSurfaceReadinessTests(unittest.TestCase):
             self.assertEqual(lifecycle.api_surfaces_without_parameters, ())
             self.assertGreater(lifecycle.planned_mapping_count, 0)
             self.assertEqual(lifecycle.concrete_mapping_count, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

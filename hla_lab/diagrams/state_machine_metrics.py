@@ -13,11 +13,13 @@ from typing import Any
 STATUSES = ("unmodeled", "classified", "draft", "needs_review", "validated", "rendered", "accepted")
 MODEL_STATUSES = {"draft", "needs_review", "validated", "rendered", "accepted"}
 
+
 def _load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise ValueError("top-level JSON value must be an object")
     return value
+
 
 def validate_model(path: Path, model: Mapping[str, Any]) -> list[str]:
     errors: list[str] = []
@@ -61,6 +63,7 @@ def validate_model(path: Path, model: Mapping[str, Any]) -> list[str]:
                     )
     return errors
 
+
 def _review_metrics(reviews_dir: Path, artifacts_dir: Path) -> list[str]:
     records = sorted(reviews_dir.glob("*.md")) if reviews_dir.exists() else []
     records = [path for path in records if path.name != "README.md"]
@@ -77,6 +80,7 @@ def _review_metrics(reviews_dir: Path, artifacts_dir: Path) -> list[str]:
         f"preview PNGs: {previews}",
         f"accepted reviews: {accepted}",
     ]
+
 
 def report(
     manifest_path: Path,
@@ -156,6 +160,7 @@ def report(
         lines.extend(f"ERROR: {error}" for error in errors)
     return "\n".join(lines), 1 if errors else 0
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
@@ -168,6 +173,7 @@ def main() -> None:
     output, exit_code = report(args.manifest, args.models, args.reviews, args.artifacts)
     print(output)
     sys.exit(exit_code)
+
 
 if __name__ == "__main__":
     main()

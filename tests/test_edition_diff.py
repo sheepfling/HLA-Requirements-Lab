@@ -22,6 +22,7 @@ from hla_lab.corpus.edition_lineage import (
 )
 from hla_lab.corpus.hla_edition_diff import build_report
 
+
 def _requirement(identifier: str, transition_id: str) -> Requirement:
     return Requirement(
         id=identifier,
@@ -32,6 +33,7 @@ def _requirement(identifier: str, transition_id: str) -> Requirement:
         transition_ids=(transition_id,),
         source=SourceRef(path="source.tex", line=1),
     )
+
 
 def _document(
     identifier: str,
@@ -78,6 +80,7 @@ def _document(
             ),
         ),
     )
+
 
 class EditionDifferentialTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -254,6 +257,7 @@ class EditionDifferentialTests(unittest.TestCase):
         row = next(row for row in report["rows"] if row["record_id"] == "new-transition")
         self.assertEqual(row["status"], "target-machine-added")
         self.assertEqual(row["derived_from_state_machine"], "new-machine")
+
 
 if __name__ == "__main__":
     unittest.main()

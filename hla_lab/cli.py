@@ -12,10 +12,13 @@ from dataclasses import dataclass
 
 from hla_lab.traceability.semantic_coverage import build_report
 from hla_lab.traceability.spec_readiness import assess_corpus
+
 from .paths import DOCUMENT_IDS, REPO_ROOT, RESOURCES, document_roots
+
 
 def _document_ids(value: Sequence[str] | None) -> tuple[str, ...]:
     return tuple(value or DOCUMENT_IDS)
+
 
 @dataclass(frozen=True)
 class CheckCommand:
@@ -26,11 +29,13 @@ class CheckCommand:
     require_api_contract: bool = False
     require_concrete: bool = False
 
+
 @dataclass(frozen=True)
 class DocumentsCommand:
     """Validated options for the ``documents`` command."""
 
     document_ids: tuple[str, ...]
+
 
 @dataclass(frozen=True)
 class TestCommand:
@@ -39,11 +44,14 @@ class TestCommand:
     parallel: bool = False
     pytest_args: tuple[str, ...] = ()
 
+
 DEFAULT_TEST_WORKERS = "4"
+
 
 def _test_workers() -> str:
     """Return a bounded default while allowing explicit CI tuning."""
     return os.environ.get("HLA_LAB_TEST_WORKERS", DEFAULT_TEST_WORKERS)
+
 
 def _check(command: CheckCommand) -> int:
     roots = document_roots(REPO_ROOT, command.document_ids)
@@ -88,12 +96,14 @@ def _check(command: CheckCommand) -> int:
         return 1
     return 0
 
+
 def _documents(command: DocumentsCommand) -> int:
     for document_id in command.document_ids:
         path = RESOURCES.document(document_id).root
         status = "available" if path.is_dir() else "missing"
         print(f"{document_id}\t{status}\t{path.relative_to(REPO_ROOT)}")
     return 0
+
 
 def _test(command: TestCommand) -> int:
     parallel_root = RESOURCES.temporary / "pytest-parallel"
@@ -112,6 +122,7 @@ def _test(command: TestCommand) -> int:
     pytest_command = [sys.executable, "-m", "pytest", *parallel, "tests", *command.pytest_args]
     return subprocess.run(pytest_command, cwd=REPO_ROOT, check=False).returncode
 
+
 def _delegate(module: str, arguments: Sequence[str]) -> int:
     """Run an owning module behind the stable user-facing command."""
     return subprocess.run(
@@ -119,6 +130,7 @@ def _delegate(module: str, arguments: Sequence[str]) -> int:
         cwd=REPO_ROOT,
         check=False,
     ).returncode
+
 
 def _add_check_arguments(command: argparse.ArgumentParser) -> None:
     command.add_argument("--document", action="append", choices=DOCUMENT_IDS)
@@ -133,6 +145,7 @@ def _add_check_arguments(command: argparse.ArgumentParser) -> None:
         action="store_true",
         help="fail unless implementation mappings have concrete evidence",
     )
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -195,6 +208,7 @@ def build_parser() -> argparse.ArgumentParser:
     test.add_argument("pytest_args", nargs=argparse.REMAINDER)
     return parser
 
+
 def main(argv: Sequence[str] | None = None) -> int:
     values = list(argv) if argv is not None else sys.argv[1:]
     if values[:1] == ["test"]:
@@ -231,6 +245,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         arguments = ("quality", "--fix") if args.fix else ("quality",)
         return _delegate("tools.ci", arguments)
     return _test(TestCommand(parallel=args.parallel, pytest_args=tuple(args.pytest_args)))
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

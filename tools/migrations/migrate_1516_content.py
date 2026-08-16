@@ -16,13 +16,14 @@ from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import _latex_text, load_document_model
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
 
 PAGE_PATTERN = re.compile(r"page-(?P<number>\d+)\.tex$")
 CLAUSE_PATTERNS = (
     re.compile(r"\\HLAContentMarker\{(?P<id>clause-[^}]+)\}"),
     re.compile(r"\\HLA(?:Sub)?clauseHeading(?:\[[^]]*\])?\{(?P<id>clause-[^}]+)\}"),
 )
+
 
 def _page_files(root: Path) -> tuple[Path, ...]:
     pages: list[tuple[int, Path]] = []
@@ -32,11 +33,13 @@ def _page_files(root: Path) -> tuple[Path, ...]:
             pages.append((int(match.group("number")), path))
     return tuple(path for _, path in sorted(pages, key=lambda item: (item[0], item[1].as_posix())))
 
+
 def _clause_ids(text: str) -> tuple[str, ...]:
     values: list[str] = []
     for pattern in CLAUSE_PATTERNS:
         values.extend(match.group("id") for match in pattern.finditer(text))
     return tuple(dict.fromkeys(values))
+
 
 def _semantic_text(text: str) -> str:
     without_inputs = re.sub(r"(?m)^\s*\\input\{output/semantic/[^}]+\}\s*$", "", text)
@@ -46,6 +49,7 @@ def _semantic_text(text: str) -> str:
         without_inputs,
     )
     return re.sub(r"\s+", " ", _latex_text(without_layout_markers, HLA_SOURCE)).strip()
+
 
 def migrate(root: Path) -> tuple[Path, Path]:
     """Write authored content blocks, canonical navigation, and page adapters."""
@@ -117,6 +121,7 @@ def migrate(root: Path) -> tuple[Path, Path]:
     )
     return semantic_path, navigation_path
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=RESOURCES.document("hla-1516-2025").root)
@@ -124,6 +129,7 @@ def main() -> None:
     semantic_path, navigation_path = migrate(args.root)
     print(semantic_path)
     print(navigation_path)
+
 
 if __name__ == "__main__":
     main()

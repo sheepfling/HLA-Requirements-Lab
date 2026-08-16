@@ -20,6 +20,7 @@ ROOTS = {
     "hla-1516.2-2025": REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025",
 }
 
+
 class ContentOwnershipTests(unittest.TestCase):
     def test_both_documents_have_typed_page_ownership(self) -> None:
         expected_pages = {"hla-1516.1-2025": 436, "hla-1516.2-2025": 122}
@@ -137,6 +138,7 @@ class ContentOwnershipTests(unittest.TestCase):
                     f"content-ownership mutation sentinel {root.name}",
                     generated.read_text(encoding="utf-8"),
                 )
+
 
 if __name__ == "__main__":
     unittest.main()

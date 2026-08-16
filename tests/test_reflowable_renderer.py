@@ -16,6 +16,7 @@ from hla_lab.publication.publication_contract import default_publication_profile
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_ROOT = ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 
+
 def _fixture_profile() -> object:
     path = FIXTURE_ROOT / "fixture_profile.py"
     spec = importlib.util.spec_from_file_location("m26_fixture_profile", path)
@@ -25,6 +26,7 @@ def _fixture_profile() -> object:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
 
 class ReflowableRendererTests(unittest.TestCase):
     def test_reflowable_view_uses_canonical_clause_order(self) -> None:
@@ -97,6 +99,7 @@ class ReflowableRendererTests(unittest.TestCase):
         self.assertNotIn("90.000", rendered)
         self.assertNotIn("hla-body", rendered)
         self.assertNotIn("hlafixedpage", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

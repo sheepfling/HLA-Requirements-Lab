@@ -42,11 +42,13 @@ GENERATED_SUFFIXES = {
 }
 GENERATED_PARTS = {"build", "dist", "output", ".tmp", "reviews", "review-artifacts"}
 
+
 def _load_manifest(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict) or not isinstance(payload.get("projects"), list):
         raise ValueError(f"invalid release manifest: {path}")
     return payload
+
 
 def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
     command = [sys.executable, "-m", "hla_lab.build.build", "build", "all"]
@@ -65,6 +67,7 @@ def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
         check=True,
     )
 
+
 def _log_errors(path: Path) -> list[str]:
     if not path.is_file():
         return [f"missing log: {path.as_posix()}"]
@@ -75,6 +78,7 @@ def _log_errors(path: Path) -> list[str]:
         for index, line in enumerate(lines, start=1)
         if any(pattern.search(line) for pattern in ERROR_PATTERNS)
     ]
+
 
 def _tracked_generated(repo_root: Path) -> list[str]:
     result = subprocess.run(
@@ -94,6 +98,7 @@ def _tracked_generated(repo_root: Path) -> list[str]:
         )
     )
 
+
 def _ignored(repo_root: Path, relative_path: str) -> bool:
     result = subprocess.run(
         ["git", "check-ignore", "--no-index", "--quiet", "--", relative_path],
@@ -101,6 +106,7 @@ def _ignored(repo_root: Path, relative_path: str) -> bool:
         check=False,
     )
     return result.returncode == 0
+
 
 def _diagram_report(path: Path | None) -> dict[str, Any]:
     if path is None:
@@ -124,6 +130,7 @@ def _diagram_report(path: Path | None) -> dict[str, Any]:
         "statuses": dict(sorted(statuses.items())),
         "review_gaps": sorted(gaps),
     }
+
 
 def _selected_projects(
     manifest: Mapping[str, Any],
@@ -152,6 +159,7 @@ def _selected_projects(
     return [raw_by_id[identifier] for identifier in selected_ids], publication.model_dump(
         mode="json"
     )
+
 
 def check_release(
     repo_root: Path,
@@ -265,6 +273,7 @@ def check_release(
         "passed": not failures,
     }
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -311,6 +320,7 @@ def main() -> int:
         for failure in report["failures"]:
             print(f"failure: {failure}")
     return 0 if report["passed"] else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

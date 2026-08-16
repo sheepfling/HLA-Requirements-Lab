@@ -43,6 +43,7 @@ RowStatus = Literal[
     "target-machine-added",
 ]
 
+
 class _JsonEncoder(json.JSONEncoder):
     """Keep the CLI independent of a dataframe or export dependency."""
 
@@ -50,6 +51,7 @@ class _JsonEncoder(json.JSONEncoder):
         if hasattr(value, "model_dump"):
             return value.model_dump(mode="json")  # type: ignore[no-any-return]
         return super().default(value)
+
 
 def _document_id(manifest: EditionLineageManifest, standard_id: str, edition: str) -> str:
     matches = tuple(
@@ -64,11 +66,13 @@ def _document_id(manifest: EditionLineageManifest, standard_id: str, edition: st
         )
     return matches[0].document_id
 
+
 def _source_fields(record: Requirement | StateMachine | Transition) -> dict[str, JsonValue]:
     source = getattr(record, "source", None)
     if source is None:
         return {"source_path": None, "source_line": None}
     return {"source_path": source.path, "source_line": source.line}
+
 
 def _requirement_row(
     record: Requirement, *, side: RowStatus, relation: EditionRelation | None = None
@@ -86,6 +90,7 @@ def _requirement_row(
     }
     row.update(_source_fields(record))
     return row
+
 
 def _state_machine_row(
     record: StateMachine,
@@ -116,6 +121,7 @@ def _state_machine_row(
     row.update(_source_fields(record))
     return row
 
+
 def _transition_row(
     machine: StateMachine,
     record: Transition,
@@ -139,6 +145,7 @@ def _transition_row(
     row.update(_source_fields(record))
     return row
 
+
 def _record_index(
     model: DocumentModel, kind: RecordKind
 ) -> dict[str, Requirement | StateMachine | tuple[StateMachine, Transition]]:
@@ -151,6 +158,7 @@ def _record_index(
         for machine in model.state_machines
         for transition in machine.transitions
     }
+
 
 def _rows(
     comparison: EditionComparison,
@@ -281,6 +289,7 @@ def _rows(
             rows.append(row)
     return rows
 
+
 def build_report(
     *,
     manifest: EditionLineageManifest,
@@ -345,6 +354,7 @@ def build_report(
         },
     )
 
+
 def _print_csv(report: Mapping[str, JsonValue]) -> None:
     rows = report["rows"]
     if not rows:
@@ -360,6 +370,7 @@ def _print_csv(report: Mapping[str, JsonValue]) -> None:
     writer = csv.DictWriter(sys.stdout, fieldnames=tuple(flattened[0]), extrasaction="ignore")
     writer.writeheader()
     writer.writerows(flattened)
+
 
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
@@ -404,6 +415,7 @@ def main() -> int:
         print(json.dumps(report["lineage_relation_counts"], sort_keys=True))
         print(report["interpretation"])
     return 0
+
 
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())

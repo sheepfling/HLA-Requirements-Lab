@@ -40,6 +40,7 @@ RecordKind = Literal[
 LineageRelationKind = Literal["unchanged", "revised", "split", "merged", "added", "removed"]
 ReviewStatus = Literal["draft", "reviewed", "verified"]
 
+
 class LineageRecord(BaseModel):
     """One version-specific semantic record participating in a lineage relation."""
 
@@ -48,6 +49,7 @@ class LineageRecord(BaseModel):
     document_id: str = Field(min_length=1)
     record_id: str = Field(min_length=1)
     kind: RecordKind
+
 
 class EditionDocument(BaseModel):
     """Identity of one edition kept in a lineage manifest."""
@@ -65,6 +67,7 @@ class EditionDocument(BaseModel):
     root: str | None = None
     profile_id: str | None = None
     migration: str | None = None
+
 
 class EditionRelation(BaseModel):
     """A reviewed semantic correspondence between two particular editions."""
@@ -86,8 +89,8 @@ class EditionRelation(BaseModel):
         if self.baseline_document_id == self.target_document_id:
             raise ValueError("edition relations must connect two different documents")
         for side, document_id, records in (
-                ("baseline", self.baseline_document_id, self.baseline_records),
-                ("target", self.target_document_id, self.target_records),
+            ("baseline", self.baseline_document_id, self.baseline_records),
+            ("target", self.target_document_id, self.target_records),
         ):
             identifiers = [(item.document_id, item.record_id, item.kind) for item in records]
             if len(identifiers) != len(set(identifiers)):
@@ -117,6 +120,7 @@ class EditionRelation(BaseModel):
     def record_kind(self) -> RecordKind:
         return next(iter((*self.baseline_records, *self.target_records))).kind
 
+
 class EditionComparison(BaseModel):
     """Serializable side-by-side comparison for a selected pair of editions."""
 
@@ -129,6 +133,7 @@ class EditionComparison(BaseModel):
     relation_counts: dict[str, int]
     unmapped_baseline_record_ids: tuple[str, ...] = ()
     unmapped_target_record_ids: tuple[str, ...] = ()
+
 
 class EditionLineageManifest(BaseModel):
     """Source-controlled, reviewable lineage records for a document family."""
@@ -261,9 +266,9 @@ class EditionLineageManifest(BaseModel):
             if (
                 document_ids is not None
                 and {
-                relation.baseline_document_id,
-                relation.target_document_id,
-            }
+                    relation.baseline_document_id,
+                    relation.target_document_id,
+                }
                 - required_documents
             ):
                 continue
@@ -276,6 +281,7 @@ class EditionLineageManifest(BaseModel):
                         f"{record.document_id}:{record.record_id}"
                     )
         return self
+
 
 def _corpus_record_ids(
     corpus: ComplianceCorpus,
@@ -295,9 +301,11 @@ def _corpus_record_ids(
     }[record_kind]
     return {item.id for item in getattr(document, attribute)}
 
+
 def load_edition_lineage(path: Path) -> EditionLineageManifest:
     """Load and validate a source-controlled edition-lineage manifest."""
     return EditionLineageManifest.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Query reviewed cross-edition semantic lineage.")
@@ -327,6 +335,7 @@ def main() -> int:
         for relation in comparison.relations:
             print(f"{relation.stable_id}\t{relation.relation}\t{relation.review_status}")
     return 0
+
 
 if __name__ == "__main__":  # pragma: no cover - CLI entry point
     raise SystemExit(main())

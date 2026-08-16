@@ -17,7 +17,7 @@ from hla_lab.generation.faithful_renderer import (
     load_faithful_layout_profile,
     render_faithful_body,
 )
-from hla_lab.paths import DocumentResources, REPO_ROOT, document_roots, resources
+from hla_lab.paths import REPO_ROOT, DocumentResources, document_roots, resources
 
 Selection = Literal["all", "explicit"]
 SurfaceKind = Literal[
@@ -41,6 +41,7 @@ SurfaceKind = Literal[
     "requirement_api_bindings",
 ]
 
+
 class AuthoritySurfaceReport(BaseModel):
     """Validation counts for one declared semantic surface."""
 
@@ -53,6 +54,7 @@ class AuthoritySurfaceReport(BaseModel):
     source_files: int
     generated_inputs: int
 
+
 class FaithfulLayoutReport(BaseModel):
     """Validation result for one document's faithful layout projection."""
 
@@ -64,6 +66,7 @@ class FaithfulLayoutReport(BaseModel):
     direct_page_inputs: tuple[str, ...]
     failures: tuple[str, ...]
     passed: bool
+
 
 class AuthorityValidationReport(BaseModel):
     """Complete typed result of semantic authority validation."""
@@ -78,6 +81,7 @@ class AuthorityValidationReport(BaseModel):
     failures: tuple[str, ...]
     passed: bool
 
+
 class AuthoritySurface(BaseModel):
     """One semantic surface and its optional faithful generated consumer."""
 
@@ -89,6 +93,7 @@ class AuthoritySurface(BaseModel):
     selection: Selection
     generated_glob: str | None = None
 
+
 class AuthorityDocument(BaseModel):
     """Authority declarations for one document root."""
 
@@ -98,6 +103,7 @@ class AuthorityDocument(BaseModel):
     root: str
     surfaces: tuple[AuthoritySurface, ...] = Field(min_length=1)
 
+
 class AuthorityManifest(BaseModel):
     """Versioned source-of-truth declaration for migrated surfaces."""
 
@@ -106,9 +112,11 @@ class AuthorityManifest(BaseModel):
     schema_version: int
     documents: tuple[AuthorityDocument, ...] = Field(min_length=1)
 
+
 def load_authority(path: Path) -> AuthorityManifest:
     """Load and validate a source-controlled authority manifest."""
     return AuthorityManifest.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def _surface_records(model: DocumentModel, surface: AuthoritySurface) -> tuple[SemanticRecord, ...]:
     records: tuple[SemanticRecord, ...]
@@ -154,6 +162,7 @@ def _surface_records(model: DocumentModel, surface: AuthoritySurface) -> tuple[S
         )
     return records
 
+
 def _source_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
     matches: list[Path] = []
     for pattern in surface.source_paths:
@@ -162,6 +171,7 @@ def _source_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
         else:
             matches.append(root / pattern)
     return tuple(sorted(set(matches)))
+
 
 def _generated_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
     """Find generated data inputs without confusing IDs ending in ``-data``.
@@ -182,12 +192,14 @@ def _generated_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...
         )
     )
 
+
 def _main_inputs(path: Path) -> tuple[str, ...]:
     """Return normalized direct LaTeX inputs from a document entrypoint."""
     if not path.is_file():
         return ()
     values = re.findall(r"\\input\s*\{([^}]+)\}", path.read_text(encoding="utf-8"))
     return tuple(value.strip().replace("\\", "/").removesuffix(".tex") + ".tex" for value in values)
+
 
 def _validate_faithful_layout(
     model: DocumentModel,
@@ -245,6 +257,7 @@ def _validate_faithful_layout(
         failures=tuple(failures),
         passed=not failures,
     )
+
 
 def validate_authority(
     roots: tuple[Path, ...], manifest_path: Path, *, check_generated: bool = False
@@ -312,6 +325,7 @@ def validate_authority(
         passed=not failures,
     )
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=resources(REPO_ROOT).authority_manifest)
@@ -325,6 +339,7 @@ def main() -> None:
     print(rendered)
     if report.failures:
         raise SystemExit(1)
+
 
 if __name__ == "__main__":
     main()

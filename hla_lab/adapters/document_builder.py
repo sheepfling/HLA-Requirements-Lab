@@ -11,6 +11,7 @@ from pathlib import Path
 
 from hla_lab.paths import DocumentResources
 
+
 @dataclass(frozen=True)
 class BuildConfig:
     """Document-specific settings for the common builder."""
@@ -21,8 +22,10 @@ class BuildConfig:
     output_pdf: Path | None = None
     semantic_generator: Callable[[], object] | None = None
 
+
 def _run(command: Sequence[str], *, cwd: Path) -> None:
     subprocess.run(command, cwd=cwd, check=True)
+
 
 def build(config: BuildConfig) -> Path:
     """Build the document and return its final PDF path."""
@@ -57,6 +60,7 @@ def build(config: BuildConfig) -> Path:
         cwd=config.root,
     )
     return config.output_pdf
+
 
 def clean(root: Path) -> None:
     """Remove generated document output directories."""

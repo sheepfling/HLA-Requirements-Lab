@@ -51,10 +51,17 @@ from hla_lab.generation.hierarchy_compiler import (
 )
 
 _write = write_text
+_GENERATED_FILENAME_LENGTH = 96
+
+
+def _generated_filename(value: object) -> str:
+    return safe_filename(value, max_length=_GENERATED_FILENAME_LENGTH)
+
 
 def _figure_number(caption: str) -> int | None:
     match = re.search(r"\bFigure\s+(\d+)\b", caption)
     return int(match.group(1)) if match else None
+
 
 def _embed_diagram(
     body: str,
@@ -153,6 +160,7 @@ def _embed_diagram(
         return "\n".join(lines)
     return body
 
+
 def _wrapped_macro(name: str, values: tuple[str, ...]) -> list[str]:
     """Render a long comma-separated macro without oversized TeX input lines."""
     if not values:
@@ -174,6 +182,7 @@ def _wrapped_macro(name: str, values: tuple[str, ...]) -> list[str]:
         "}",
     ]
 
+
 def _argument_spans(text: str, start: int, count: int) -> tuple[tuple[int, int], ...]:
     """Return balanced-brace argument spans for a LaTeX command."""
     command = re.match(r"\\[A-Za-z@]+", text[start:])
@@ -193,6 +202,7 @@ def _argument_spans(text: str, start: int, count: int) -> tuple[tuple[int, int],
         cursor = span[1] + 1
     return tuple(spans)
 
+
 def _replace_command_arguments(
     body: str,
     events: Sequence[tuple[int, tuple[str, ...], int]],
@@ -211,6 +221,7 @@ def _replace_command_arguments(
     for left, right, value in sorted(changes, reverse=True):
         body = body[:left] + value + body[right:]
     return body
+
 
 def _semanticize_visible_surfaces(
     body: str,
@@ -303,8 +314,8 @@ def _semanticize_visible_surfaces(
         if table.number is not None:
             tables_by_number.setdefault(table.number, []).append(table)
     for command_name, argument_count in (
-            (source.fixed_text_block, 7),
-            (getattr(source, "table_text_line", ""), 5),
+        (source.fixed_text_block, 7),
+        (getattr(source, "table_text_line", ""), 5),
     ):
         if not command_name:
             continue
@@ -371,6 +382,7 @@ def _semanticize_visible_surfaces(
         body = _replace_command_arguments(body, normative_events, tuple(normative_replacements))
     return body
 
+
 def _semantic_content_body(block: ContentBlock, model: DocumentModel) -> str | None:
     """Render a layout-free prose block from its typed content elements."""
     if block.layout_body is not None:
@@ -380,9 +392,10 @@ def _semantic_content_body(block: ContentBlock, model: DocumentModel) -> str | N
         f"\\{semantic_macro_name('ContentElement', element.id, 'Text')}"
         for element_id in block.element_ids
         if (element := elements.get(element_id)) is not None
-           and element.kind in {"paragraph", "note", "footnote", "list-item"}
+        and element.kind in {"paragraph", "note", "footnote", "list-item"}
     ]
     return "\n\n".join(values) if values else None
+
 
 def render_build_manifest(
     model: DocumentModel,
@@ -418,6 +431,7 @@ def render_build_manifest(
     )
     return "\n".join(lines)
 
+
 def _render_semantic_index(model: DocumentModel) -> str:
     """Render model-wide IDs so every build consumes semantic source data."""
     values = {
@@ -447,6 +461,7 @@ def _render_semantic_index(model: DocumentModel) -> str:
         )
         lines.append("}")
     return "\n".join(lines)
+
 
 def generate(request: GenerationRequest) -> GenerationResult:
     """Generate selected semantic blocks and return typed build outputs."""
@@ -483,26 +498,26 @@ def generate(request: GenerationRequest) -> GenerationResult:
     semantic_inputs: list[str] = [index_name]
 
     for item in model.references:
-        name = f"reference-{safe_filename(item.id)}-data.tex"
+        name = f"reference-{_generated_filename(item.id)}-data.tex"
         _write(output / name, render_reference_data(item))
         generated_files.append(name)
         semantic_inputs.append(name)
     for item in model.cross_references:
-        name = f"cross-reference-{safe_filename(item.id)}-data.tex"
+        name = f"cross-reference-{_generated_filename(item.id)}-data.tex"
         _write(output / name, render_cross_reference_data(item))
         generated_files.append(name)
     for item in model.figures:
-        name = f"figure-{safe_filename(item.id)}-data.tex"
+        name = f"figure-{_generated_filename(item.id)}-data.tex"
         _write(output / name, render_figure_data(item))
         generated_files.append(name)
         semantic_inputs.append(name)
     for item in model.notes:
-        name = f"note-{safe_filename(item.id)}-data.tex"
+        name = f"note-{_generated_filename(item.id)}-data.tex"
         _write(output / name, render_note_data(item))
         generated_files.append(name)
         semantic_inputs.append(name)
     for item in model.tables:
-        name = f"table-record-{safe_filename(item.id)}-data.tex"
+        name = f"table-record-{_generated_filename(item.id)}-data.tex"
         _write(output / name, render_table_data(item))
         generated_files.append(name)
         semantic_inputs.append(name)
@@ -518,17 +533,17 @@ def generate(request: GenerationRequest) -> GenerationResult:
     if getattr(source, "diagram_surface_document_id", model.document_id) != model.document_id:
         diagram_bindings = ()
     for machine in model.state_machines:
-        name = f"state-machine-{safe_filename(machine.id)}.tex"
+        name = f"state-machine-{_generated_filename(machine.id)}.tex"
         _write(output / name, render_state_machine(machine.model_dump(mode="json")))
         generated_files.append(name)
         diagram_inputs[machine.id] = name
     for diagram in model.sequence_diagrams:
-        name = f"sequence-diagram-{safe_filename(diagram.id)}.tex"
+        name = f"sequence-diagram-{_generated_filename(diagram.id)}.tex"
         _write(output / name, render_sequence_tikz(diagram))
         generated_files.append(name)
         diagram_inputs[diagram.id] = name
     for diagram in model.graph_diagrams:
-        name = f"graph-diagram-{safe_filename(diagram.id)}.tex"
+        name = f"graph-diagram-{_generated_filename(diagram.id)}.tex"
         _write(output / name, render_graph_tikz(diagram))
         generated_files.append(name)
         diagram_inputs[diagram.id] = name
@@ -544,7 +559,7 @@ def generate(request: GenerationRequest) -> GenerationResult:
     for identifier in definition_ids:
         if identifier not in definitions:
             raise ValueError(f"unknown definition ID: {identifier}")
-        name = f"definition-{safe_filename(identifier)}.tex"
+        name = f"definition-{_generated_filename(identifier)}.tex"
         _write(
             output / name,
             render_definition(
@@ -554,14 +569,14 @@ def generate(request: GenerationRequest) -> GenerationResult:
             ),
         )
         generated_files.append(name)
-        data_name = f"definition-{safe_filename(identifier)}-data.tex"
+        data_name = f"definition-{_generated_filename(identifier)}-data.tex"
         _write(output / data_name, render_definition_data(definitions[identifier]))
         generated_files.append(data_name)
         semantic_inputs.append(data_name)
     for identifier in requirement_ids:
         if identifier not in requirements:
             raise ValueError(f"unknown requirement ID: {identifier}")
-        name = f"requirement-{safe_filename(identifier)}.tex"
+        name = f"requirement-{_generated_filename(identifier)}.tex"
         _write(
             output / name,
             render_requirement(
@@ -571,14 +586,14 @@ def generate(request: GenerationRequest) -> GenerationResult:
             ),
         )
         generated_files.append(name)
-        data_name = f"requirement-{safe_filename(identifier)}-data.tex"
+        data_name = f"requirement-{_generated_filename(identifier)}-data.tex"
         _write(output / data_name, render_requirement_data(requirements[identifier]))
         generated_files.append(data_name)
         semantic_inputs.append(data_name)
     for identifier in content_block_ids:
         if identifier not in content_blocks:
             raise ValueError(f"unknown content block ID: {identifier}")
-        name = f"content-block-{safe_filename(identifier)}.tex"
+        name = f"content-block-{_generated_filename(identifier)}.tex"
         block = content_blocks[identifier]
         body = block.layout_body or ""
         if block.layout_body is not None:
@@ -620,14 +635,14 @@ def generate(request: GenerationRequest) -> GenerationResult:
             ),
         )
         generated_files.append(name)
-        data_name = f"content-block-{safe_filename(identifier)}-data.tex"
+        data_name = f"content-block-{_generated_filename(identifier)}-data.tex"
         _write(output / data_name, render_content_block_data(content_blocks[identifier]))
         generated_files.append(data_name)
         semantic_inputs.append(data_name)
     for identifier in content_element_ids:
         if identifier not in content_elements:
             raise ValueError(f"unknown content element ID: {identifier}")
-        name = f"content-element-{safe_filename(identifier)}-data.tex"
+        name = f"content-element-{_generated_filename(identifier)}-data.tex"
         _write(output / name, render_content_element_data(content_elements[identifier]))
         generated_files.append(name)
         semantic_inputs.append(name)
@@ -639,7 +654,7 @@ def generate(request: GenerationRequest) -> GenerationResult:
             raise ValueError(f"unknown table family ID: {identifier}")
         family = table_families[identifier]
         family_tables = tuple(tables[table_id] for table_id in family.table_ids)
-        data_name = f"table-family-{safe_filename(identifier)}-data.tex"
+        data_name = f"table-family-{_generated_filename(identifier)}-data.tex"
         _write(
             output / data_name,
             render_table_family_data(

@@ -25,6 +25,7 @@ RequirementLinkRelation = Literal[
     "governs", "precondition", "postcondition", "enables", "prohibits"
 ]
 
+
 def _json_payload(path: Path, default: Mapping[str, JsonValue]) -> JsonObject:
     if not path.is_file():
         return dict(default)
@@ -32,6 +33,7 @@ def _json_payload(path: Path, default: Mapping[str, JsonValue]) -> JsonObject:
     if not isinstance(payload, dict):
         raise ValueError(f"semantic source must be a JSON object: {path}")
     return payload
+
 
 def _load_state_machine_payloads(
     root: Path,
@@ -44,13 +46,16 @@ def _load_state_machine_payloads(
         payloads.append((path, payload, StateMachineFile.model_validate(payload)))
     return tuple(payloads)
 
+
 _write_json = write_json
+
 
 def _load_hla_model(root: Path) -> DocumentModel:
     """Load the HLA profile at the CLI boundary; the promotion logic is generic."""
     from hla_lab.corpus.hla_semantic import load_hla_document_model
 
     return load_hla_document_model(root)
+
 
 def promote_requirement(
     root: Path,
@@ -215,6 +220,7 @@ def promote_requirement(
                     _write_json(path, payload)
     return promoted
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path, help="One document source directory")
@@ -266,6 +272,7 @@ def main() -> None:
             indent=2,
         )
     )
+
 
 if __name__ == "__main__":
     main()

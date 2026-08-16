@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__ = ["balanced_group", "balanced_span", "line_number", "try_balanced_group"]
 
+
 def balanced_group(
     text: str,
     opening: int,
@@ -38,8 +39,9 @@ def balanced_group(
         elif char == right:
             depth -= 1
             if depth == 0:
-                return text[opening + 1: index], index + 1
+                return text[opening + 1 : index], index + 1
     raise ValueError(f"Unclosed {left!r} group at offset {opening}")
+
 
 def try_balanced_group(
     text: str,
@@ -62,6 +64,7 @@ def try_balanced_group(
     except ValueError:
         return None
 
+
 def balanced_span(
     text: str,
     opening: int,
@@ -80,6 +83,7 @@ def balanced_span(
         return None
     _body, end = parsed
     return opening + 1, end - 1
+
 
 def line_number(text: str, offset: int) -> int:
     """Return the one-based source line containing an offset."""

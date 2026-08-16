@@ -29,6 +29,7 @@ DOCUMENT_ROOTS = tuple(
     )
 )
 
+
 class QueryContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -156,6 +157,7 @@ class QueryContractTests(unittest.TestCase):
             [item["id"] for item in payload["implementation_mappings"]],
             ["rti.service.connect"],
         )
+
 
 if __name__ == "__main__":
     unittest.main()

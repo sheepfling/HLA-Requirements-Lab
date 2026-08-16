@@ -10,6 +10,7 @@ from pathlib import Path
 
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -336,13 +337,16 @@ def main() -> None:
         payload["document"] = model.document_id
     else:
         payload["issues"] = [
-                                {
-                                    "document": document_id,
-                                    **issue.model_dump(mode="json"),
-                                }
-                                for document_id, items in document_issues.items()
-                                for issue in items
-                            ] + [item.model_dump(mode="json") for item in corpus.unresolved_reference_issues()]
+            {
+                "document": document_id,
+                **issue.model_dump(mode="json"),
+            }
+            for document_id, items in document_issues.items()
+            for issue in items
+        ]
+        payload["issues"].extend(
+            item.model_dump(mode="json") for item in corpus.unresolved_reference_issues()
+        )
     if args.json:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return
@@ -379,6 +383,7 @@ def main() -> None:
         print(f"{item.id}: {item.statement}")
     for item in issues:
         print(f"{item.code}: {item.record_id} — {item.message}")
+
 
 if __name__ == "__main__":
     main()

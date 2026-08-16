@@ -18,6 +18,7 @@ from hla_lab.generation.semantic_generation import generate
 REPO_ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_ROOT = REPO_ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 
+
 def _load_fixture_profile() -> object:
     path = FIXTURE_ROOT / "fixture_profile.py"
     spec = importlib.util.spec_from_file_location("m13_fixture_profile", path)
@@ -28,7 +29,9 @@ def _load_fixture_profile() -> object:
     spec.loader.exec_module(module)
     return module
 
+
 PROFILE = _load_fixture_profile()
+
 
 class PortabilityContractTests(unittest.TestCase):
     def test_non_hla_fixture_loads_and_supports_generic_queries(self) -> None:
@@ -111,10 +114,12 @@ class PortabilityContractTests(unittest.TestCase):
         self.assertEqual(result.stdout, "")
         self.assertIn(FIXTURE_ROOT.resolve(), _document_roots())
 
+
 def _document_roots() -> tuple[Path, ...]:
     from hla_lab.build.build import documents
 
     return tuple(path.resolve() for path in documents())
+
 
 if __name__ == "__main__":
     unittest.main()

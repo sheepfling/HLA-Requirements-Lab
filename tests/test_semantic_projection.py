@@ -23,12 +23,14 @@ ROOTS = {
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
 }
 
+
 def _copy_without_generated(source_root: Path, destination: Path) -> None:
     shutil.copytree(
         source_root,
         destination,
         ignore=shutil.ignore_patterns("output", "build", "dist", "review-artifacts"),
     )
+
 
 def _mutate_layout_block(root: Path, block_id: str, old: str, new: str) -> None:
     path = root / "semantic" / "content-blocks.json"
@@ -43,6 +45,7 @@ def _mutate_layout_block(root: Path, block_id: str, old: str, new: str) -> None:
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         return
     raise AssertionError(f"missing content block {block_id}")
+
 
 class SemanticProjectionTests(unittest.TestCase):
     def test_surface_records_are_recovered_behind_thin_page_adapters(self) -> None:
@@ -176,6 +179,7 @@ class SemanticProjectionTests(unittest.TestCase):
                     self.assertIn(sentinel, faithful_text + record_text)
                     self.assertIn(sentinel, derivative_text)
                     self.assertTrue(model.references or model.figures or model.tables)
+
 
 if __name__ == "__main__":
     unittest.main()

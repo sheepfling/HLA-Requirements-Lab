@@ -9,6 +9,7 @@ from pathlib import Path
 from hla_lab.core.semantic_model import SequenceDiagram, SequenceDiagramFile
 from hla_lab.core.text import format_number, mermaid_text, safe_identifier, tex_escape
 
+
 def render_mermaid(diagram: SequenceDiagram) -> str:
     """Render a sequence diagram using Mermaid's stable sequence syntax."""
     aliases = {
@@ -29,6 +30,7 @@ def render_mermaid(diagram: SequenceDiagram) -> str:
             f"{aliases[message.target_participant]}: {mermaid_text(message.label)}"
         )
     return "\n".join(lines) + "\n"
+
 
 def render_tikz(diagram: SequenceDiagram) -> str:
     """Render a sequence diagram as deterministic, dependency-light TikZ."""
@@ -76,9 +78,11 @@ def render_tikz(diagram: SequenceDiagram) -> str:
     lines.extend(["\\end{tikzpicture}", ""])
     return "\n".join(lines)
 
+
 def load_diagrams(path: Path) -> tuple[SequenceDiagram, ...]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     return SequenceDiagramFile.model_validate(payload).sequence_diagrams
+
 
 def export(
     model: Path,
@@ -108,6 +112,7 @@ def export(
             paths.append(path)
     return tuple(paths)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("model", type=Path, help="Canonical sequence-diagram JSON")
@@ -123,6 +128,7 @@ def main() -> None:
         formats=formats,
     ):
         print(path)
+
 
 if __name__ == "__main__":
     main()

@@ -20,6 +20,7 @@ __all__ = [
     "assess_document",
 ]
 
+
 class ReadinessFinding(SemanticRecord):
     """A deterministic readiness diagnostic."""
 
@@ -27,6 +28,7 @@ class ReadinessFinding(SemanticRecord):
     severity: str = Field(min_length=1)
     message: str = Field(min_length=1)
     record_ids: tuple[str, ...] = ()
+
 
 class DocumentReadiness(SemanticRecord):
     """Readiness counts and gaps for one specification document."""
@@ -55,6 +57,7 @@ class DocumentReadiness(SemanticRecord):
     api_contract_ready: bool
     implementation_ready: bool
 
+
 class SpecificationReadinessReport(SemanticRecord):
     """Corpus-level specification readiness result."""
 
@@ -65,6 +68,7 @@ class SpecificationReadinessReport(SemanticRecord):
     api_contract_ready: bool
     implementation_ready: bool
 
+
 def _finding(code: str, severity: str, message: str, *record_ids: str) -> ReadinessFinding:
     return ReadinessFinding(
         code=code,
@@ -73,6 +77,7 @@ def _finding(code: str, severity: str, message: str, *record_ids: str) -> Readin
         record_ids=tuple(record_ids),
     )
 
+
 def _parameters_are_unmodeled(surface: ApiSurface) -> bool:
     """Return whether an empty parameter tuple contradicts the surface signature."""
     if surface.parameters:
@@ -80,6 +85,7 @@ def _parameters_are_unmodeled(surface: ApiSurface) -> bool:
     if surface.language in {"fedpro", "wsdl"}:
         return False
     return "(" in surface.signature and re.search(r"\(\s*\)", surface.signature) is None
+
 
 def assess_document(model: DocumentModel) -> DocumentReadiness:
     """Assess completeness without treating planned mappings as evidence."""
@@ -218,6 +224,7 @@ def assess_document(model: DocumentModel) -> DocumentReadiness:
         implementation_ready=implementation_ready,
     )
 
+
 def assess_corpus(roots: tuple[Path, ...]) -> SpecificationReadinessReport:
     """Assess a corpus and preserve planned/concrete distinctions."""
 
@@ -238,8 +245,10 @@ def assess_corpus(roots: tuple[Path, ...]) -> SpecificationReadinessReport:
         implementation_ready=implementation_ready,
     )
 
+
 def _default_roots(root: Path) -> tuple[Path, ...]:
     return document_roots(root)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -276,6 +285,7 @@ def main() -> int:
     if args.require_concrete and not report.implementation_ready:
         return 1
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

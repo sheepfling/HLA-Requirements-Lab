@@ -29,7 +29,7 @@ from hla_lab.core.semantic_model import (
     StateMachineLayout,
     Transition,
 )
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
 
 ROOT = RESOURCES.document("hla-1516.1-2010").root
 STATE_FIGURES = (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)
@@ -186,12 +186,15 @@ LABEL_OVERRIDES = {
     17: {"S00": "Temporal State"},
 }
 
+
 def _source(path: Path, text: str, offset: int) -> SourceRef:
     return SourceRef(path=path.relative_to(ROOT).as_posix(), line=line_number(text, offset))
+
 
 def _title(text: str, figure: int) -> str:
     match = re.search(rf"^%\s*Figure\s+{figure}\s*-\s*(.+)$", text, re.MULTILINE)
     return match.group(1).strip() if match else f"Figure {figure}"
+
 
 def _marker_records(text: str, figure: int, kind: str) -> list[tuple[str, str, int]]:
     marker = re.compile(rf"F{figure:02d}-{kind}\d{{2}}")
@@ -210,10 +213,11 @@ def _marker_records(text: str, figure: int, kind: str) -> list[tuple[str, str, i
         end = min(next_marker, line_end)
         if end < 0:
             end = len(text)
-        fragment = text[match.end(): end]
+        fragment = text[match.end() : end]
         fragment = re.sub(r"^[\s:/,\-]+", "", fragment).strip()
         records.append((identifier, fragment, match.start()))
     return records
+
 
 def _clean_label(value: str, figure: int, identifier: str) -> str:
     suffix = identifier.removeprefix("S").removeprefix("P")
@@ -227,6 +231,7 @@ def _clean_label(value: str, figure: int, identifier: str) -> str:
     if value and value.lower() not in {"state", "states", "placeholder"}:
         return value
     return f"Figure {figure} state {suffix}"
+
 
 def _kind(identifier: str, label: str, marker_text: str) -> str:
     if identifier.startswith("P"):
@@ -243,6 +248,7 @@ def _kind(identifier: str, label: str, marker_text: str) -> str:
         return "composite"
     return "normal"
 
+
 def _resolve_token(token: str, states: dict[str, State], initial: tuple[str, ...]) -> str | None:
     token = token.strip().replace(" ", "")
     if re.fullmatch(r"[SP]\d{2}", token):
@@ -256,6 +262,7 @@ def _resolve_token(token: str, states: dict[str, State], initial: tuple[str, ...
     if "initial" in lowered:
         return initial[0] if initial else None
     return None
+
 
 def _transition_endpoints(
     description: str, states: dict[str, State], initial: tuple[str, ...]
@@ -274,6 +281,7 @@ def _transition_endpoints(
         )
     return (None, None)
 
+
 def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
     state_markers = _marker_records(text, figure, "[SP]")
     states: dict[str, State] = {}
@@ -285,7 +293,7 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
             id=state_id,
             label=""
             if identifier.startswith("P")
-               and _kind(identifier, label, marker_text) in {"initial", "final"}
+            and _kind(identifier, label, marker_text) in {"initial", "final"}
             else label,
             kind=_kind(identifier, label, marker_text),
             source=_source(path, text, offset),
@@ -336,6 +344,7 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
             "explicit when the native annotation does not identify both states."
         ),
     )
+
 
 def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
     title = _title(text, figure)
@@ -560,6 +569,7 @@ def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
         ),
     )
 
+
 def promote(root: Path) -> None:
     native = root / "figures" / "native"
     existing_state = DocumentResources(root).semantic_file("native-state-machines.json")
@@ -658,10 +668,12 @@ def promote(root: Path) -> None:
     )
     print(f"promoted {len(state_machines)} state machines and {len(graph_diagrams)} graph diagrams")
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path, default=ROOT, nargs="?")
     promote(parser.parse_args().root)
+
 
 if __name__ == "__main__":
     main()

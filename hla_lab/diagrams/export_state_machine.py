@@ -9,6 +9,7 @@ from pathlib import Path
 from hla_lab.core.semantic_model import StateMachine, StateMachineFile
 from hla_lab.core.text import dot_quote, safe_identifier
 
+
 def _event_label(event: str, guard: str, initiator: str) -> str:
     label = event.strip()
     if guard.strip():
@@ -16,6 +17,7 @@ def _event_label(event: str, guard: str, initiator: str) -> str:
     if initiator != "unknown":
         label += f"\\n({initiator})"
     return label
+
 
 def render_dot(machine: StateMachine) -> str:
     """Render a state machine as a deterministic Graphviz directed graph."""
@@ -37,10 +39,10 @@ def render_dot(machine: StateMachine) -> str:
             if state.kind == "final"
             else "circle"
             if state.kind
-               in {
-                   "initial",
-                   "history",
-               }
+            in {
+                "initial",
+                "history",
+            }
             else "box"
         )
         lines.append(f"  {aliases[state.id]} [label={dot_quote(label)}, shape={shape}];")
@@ -66,6 +68,7 @@ def render_dot(machine: StateMachine) -> str:
     lines.append("}")
     return "\n".join(lines) + "\n"
 
+
 def render_mermaid(machine: StateMachine) -> str:
     """Render a state machine as Mermaid stateDiagram-v2 syntax."""
     aliases = {state.id: safe_identifier(state.id, prefix="state") for state in machine.states}
@@ -87,10 +90,12 @@ def render_mermaid(machine: StateMachine) -> str:
         lines.append(f"  {source} --> {target}: {label.replace(chr(92) + 'n', ' / ')}")
     return "\n".join(lines) + "\n"
 
+
 def load_machines(path: Path) -> tuple[StateMachine, ...]:
     """Load and validate canonical state-machine records from JSON."""
     payload = json.loads(path.read_text(encoding="utf-8"))
     return StateMachineFile.model_validate(payload).state_machines
+
 
 def export(
     model: Path,
@@ -124,6 +129,7 @@ def export(
             paths.append(path)
     return tuple(paths)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("model", type=Path, help="Canonical state-machine JSON")
@@ -139,6 +145,7 @@ def main() -> None:
         formats=formats,
     ):
         print(path)
+
 
 if __name__ == "__main__":
     main()

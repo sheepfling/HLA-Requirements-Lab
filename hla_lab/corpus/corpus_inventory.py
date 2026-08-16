@@ -26,6 +26,7 @@ InventoryStatus = Literal[
     "layout-exception",
 ]
 
+
 class InventoryItem(BaseModel):
     """One classified semantic or layout surface in the corpus."""
 
@@ -39,6 +40,7 @@ class InventoryItem(BaseModel):
     owner_id: str | None = None
     notes: str = ""
 
+
 class MigrationQueueItem(BaseModel):
     """One unresolved inventory item requiring migration or review."""
 
@@ -50,6 +52,7 @@ class MigrationQueueItem(BaseModel):
     record_id: str = Field(min_length=1)
     status: InventoryStatus
     notes: str = ""
+
 
 class DocumentInventory(BaseModel):
     """Inventory and migration contract for one document root."""
@@ -64,6 +67,7 @@ class DocumentInventory(BaseModel):
     status_counts: dict[str, int]
     items: tuple[InventoryItem, ...]
 
+
 class CorpusInventory(BaseModel):
     """Deterministic, source-controlled corpus inventory."""
 
@@ -74,11 +78,13 @@ class CorpusInventory(BaseModel):
     totals: dict[str, int]
     migration_queue: tuple[MigrationQueueItem, ...]
 
+
 def _migration_for(document_id: str) -> Literal["M9", "M10", "M11"]:
     migration = document_entry(document_id).migration
     if migration not in {"M9", "M10", "M11"}:
         raise ValueError(f"document {document_id} has no valid migration assignment")
     return migration  # type: ignore[return-value]
+
 
 def _item(
     record_id: str,
@@ -98,6 +104,7 @@ def _item(
         owner_id=owner_id,
         notes=notes,
     )
+
 
 def _document_inventory(model: DocumentModel, expected_pages: int | None) -> DocumentInventory:
     migration = _migration_for(model.document_id)
@@ -226,12 +233,12 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
             )
         )
     for kind, records in (
-            ("reference", model.references),
-            ("cross-reference", model.cross_references),
-            ("note", model.notes),
-            ("figure", model.figures),
-            ("example", model.examples),
-            ("annex", model.annexes),
+        ("reference", model.references),
+        ("cross-reference", model.cross_references),
+        ("note", model.notes),
+        ("figure", model.figures),
+        ("example", model.examples),
+        ("annex", model.annexes),
     ):
         for record in records:
             owner = getattr(record, "owner_id", None) or getattr(record, "clause_id", None)
@@ -248,6 +255,7 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
         status_counts=status_counts,
         items=tuple(sorted(items, key=lambda item: (item.kind, item.record_id))),
     )
+
 
 def build_inventory(
     roots: tuple[Path, ...],
@@ -301,6 +309,7 @@ def build_inventory(
         ),
     )
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -325,6 +334,7 @@ def main() -> None:
         args.output.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
+
 
 if __name__ == "__main__":
     main()

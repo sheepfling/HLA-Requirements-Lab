@@ -13,6 +13,7 @@ from hla_lab.corpus.hla_semantic import load_hla_document_model
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 class ApiCrosswalkTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -87,6 +88,7 @@ class ApiCrosswalkTests(unittest.TestCase):
             self.assertEqual(row.status, "matched")
             self.assertEqual(len(row.selected_api_surface_ids), 1)
             self.assertTrue(all("disconnect" in item for item in row.candidate_api_surface_ids))
+
 
 if __name__ == "__main__":
     unittest.main()

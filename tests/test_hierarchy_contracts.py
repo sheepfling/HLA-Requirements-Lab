@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_ROOT = ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 HLA_15161_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
+
 def _fixture_profile() -> object:
     path = FIXTURE_ROOT / "fixture_profile.py"
     spec = importlib.util.spec_from_file_location("m18_fixture_profile", path)
@@ -30,7 +31,9 @@ def _fixture_profile() -> object:
     spec.loader.exec_module(module)
     return module
 
+
 PROFILE = _fixture_profile()
+
 
 class HierarchyContractTests(unittest.TestCase):
     def test_compiler_round_trips_a_complete_non_hla_hierarchy(self) -> None:
@@ -132,6 +135,7 @@ class HierarchyContractTests(unittest.TestCase):
         compiled = compile_hierarchy(model).model_dump(mode="json")
         self.assertEqual(payload["documents"][0], compiled)
         self.assertIn("definition-widget", derivative)
+
 
 if __name__ == "__main__":
     unittest.main()

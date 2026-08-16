@@ -14,6 +14,7 @@ from hla_lab.corpus.edition_lineage import (
     LineageRecord,
 )
 
+
 def requirement(identifier: str) -> Requirement:
     return Requirement(
         id=identifier,
@@ -26,6 +27,7 @@ def requirement(identifier: str) -> Requirement:
         source=SourceRef(path="fixture.tex", line=1),
     )
 
+
 def document(identifier: str, requirements: tuple[str, ...]) -> DocumentModel:
     return DocumentModel(
         document_id=identifier,
@@ -33,6 +35,7 @@ def document(identifier: str, requirements: tuple[str, ...]) -> DocumentModel:
         definitions=(),
         requirements=tuple(requirement(item) for item in requirements),
     )
+
 
 class EditionLineageTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -225,6 +228,7 @@ class EditionLineageTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "standard family"):
             EditionLineageManifest(documents=(*self.documents, other), relations=(relation,))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,7 +2,14 @@
 
 from pathlib import Path
 
-from hla_lab.paths import (DOCUMENT_MANIFEST, DocumentResources, RESOURCES, RepositoryResources, resources)
+from hla_lab.paths import (
+    DOCUMENT_MANIFEST,
+    RESOURCES,
+    DocumentResources,
+    RepositoryResources,
+    resources,
+)
+
 
 def test_default_registry_exposes_named_manifests() -> None:
     assert RESOURCES.root == Path(__file__).resolve().parents[1]
@@ -11,6 +18,7 @@ def test_default_registry_exposes_named_manifests() -> None:
     assert RESOURCES.authority_manifest.name == "authority.json"
     assert RESOURCES.source_profiles_manifest.name == "source-profiles.json"
     assert RESOURCES.state_machine_manifest.name == "manifest.json"
+
 
 def test_document_resources_keep_document_layout_together() -> None:
     document = RESOURCES.document("hla-1516.1-2025")
@@ -22,6 +30,7 @@ def test_document_resources_keep_document_layout_together() -> None:
         document.output / "semantic" / "manifest.tex"
     )
     assert document.main_tex == document.root / "main.tex"
+
 
 def test_registry_can_target_an_isolated_repository_root() -> None:
     isolated = resources(Path("C:/tmp/hla-lab-copy"))

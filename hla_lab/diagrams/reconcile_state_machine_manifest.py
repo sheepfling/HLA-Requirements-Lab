@@ -11,9 +11,11 @@ from typing import Any
 
 from hla_lab.diagrams.review_policy import review_defaults
 
+
 def _review_field(text: str, pattern: str) -> str | None:
     match = re.search(pattern, text, re.MULTILINE)
     return match.group(1) if match else None
+
 
 def _canonical_entries(models_dir: Path, reviews_dir: Path) -> dict[str, dict[str, str]]:
     entries: dict[str, dict[str, str]] = {}
@@ -52,6 +54,7 @@ def _canonical_entries(models_dir: Path, reviews_dir: Path) -> dict[str, dict[st
         }
     return entries
 
+
 def reconcile(
     manifest: MutableMapping[str, Any], models_dir: Path, reviews_dir: Path
 ) -> MutableMapping[str, Any]:
@@ -87,7 +90,7 @@ def reconcile(
                     "model": None,
                     "confidence": item.get("confidence") or 0.95,
                     "notes": item.get("notes")
-                             or "Classified as a non-state or irrelevant extracted asset.",
+                    or "Classified as a non-state or irrelevant extracted asset.",
                 }
             )
         item["review_priority"], item["review_reason"] = review_defaults(
@@ -106,6 +109,7 @@ def reconcile(
             )
     return manifest
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
@@ -120,6 +124,7 @@ def main() -> None:
         args.manifest.write_text(rendered, encoding="utf-8")
     else:
         print(rendered, end="")
+
 
 if __name__ == "__main__":
     main()

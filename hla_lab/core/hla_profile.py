@@ -22,6 +22,7 @@ __all__ = [
     "source_profile_for_document",
 ]
 
+
 @dataclass
 class HlaSourceCommands:
     """The HLA LaTeX vocabulary consumed by the source adapter."""
@@ -70,13 +71,16 @@ class HlaSourceCommands:
     text_note_commands: tuple[str, ...]
     layout_text_block_commands: tuple[tuple[str, int], ...]
 
+
 SOURCE_PROFILE_MANIFEST = RESOURCES.source_profiles_manifest
+
 
 def _strings(commands: Mapping[str, JsonValue], key: str) -> tuple[str, ...]:
     value = commands[key]
     if not isinstance(value, list):
         raise ValueError(f"source profile command field {key} must be an array")
     return tuple(str(item) for item in value)
+
 
 def _command_tuples(
     commands: Mapping[str, JsonValue], key: str, width: int
@@ -90,6 +94,7 @@ def _command_tuples(
             raise ValueError(f"source profile command field {key} has an invalid item")
         result.append(tuple(item))
     return tuple(result)
+
 
 def _base_commands(commands: Mapping[str, JsonValue]) -> HlaSourceCommands:
     table_heading_commands = tuple(
@@ -166,6 +171,7 @@ def _base_commands(commands: Mapping[str, JsonValue]) -> HlaSourceCommands:
         layout_text_block_commands=layout_text_block_commands,
     )
 
+
 def _load_source_profiles() -> dict[str, HlaSourceCommands]:
     """Load edition-specific faithful surface data from the source manifest."""
 
@@ -196,14 +202,17 @@ def _load_source_profiles() -> dict[str, HlaSourceCommands]:
         )
     return profiles
 
+
 def _load_latex_dialect() -> LatexDialect:
     payload = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))
     return LatexDialect(**payload["latex_dialect"])
+
 
 HLA_SOURCE_PROFILES = _load_source_profiles()
 HLA_SOURCE = HLA_SOURCE_PROFILES["hla-2025"]
 HLA_SOURCE_2010 = HLA_SOURCE_PROFILES["hla-2010"]
 HLA_LATEX_DIALECT = _load_latex_dialect()
+
 
 def source_profile_for_document(document_id: str) -> HlaSourceCommands:
     """Resolve the source profile declared by the canonical document registry."""

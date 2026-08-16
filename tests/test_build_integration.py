@@ -40,6 +40,7 @@ DOCUMENT_ROOTS = tuple(
     )
 )
 
+
 class BuildIntegrationTests(unittest.TestCase):
     def test_semantic_dashboard_reports_reviewed_and_candidate_coverage(self) -> None:
         report = build_dashboard(DOCUMENT_ROOTS)
@@ -336,9 +337,9 @@ class BuildIntegrationTests(unittest.TestCase):
 
     def test_generated_exports_and_reviews_are_ignored(self) -> None:
         for path in (
-                "output/semantic/semantic-manifest.tex",
-                "reviews/example.md",
-                "review-artifacts/example.dot",
+            "output/semantic/semantic-manifest.tex",
+            "reviews/example.md",
+            "review-artifacts/example.dot",
         ):
             result = subprocess.run(
                 ["git", "check-ignore", "--no-index", "--", path],
@@ -347,6 +348,7 @@ class BuildIntegrationTests(unittest.TestCase):
                 text=True,
             )
             self.assertEqual(result.returncode, 0, path)
+
 
 if __name__ == "__main__":
     unittest.main()

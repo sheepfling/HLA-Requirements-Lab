@@ -32,6 +32,7 @@ from hla_lab.traceability.compliance_contract import (
 _EvidenceStatus = Literal["planned", "passed", "failed", "blocked"]
 _BindingKey = tuple[str, str, str]
 
+
 @dataclass(frozen=True)
 class JunitCaseResult:
     """One test case observed in a JUnit-compatible XML artifact."""
@@ -39,14 +40,17 @@ class JunitCaseResult:
     status: _EvidenceStatus
     artifact: str
 
+
 def load_catalog(path: Path) -> ComplianceTestCatalog:
     """Load one strict RTI test catalog."""
     return ComplianceTestCatalog.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def _local_name(tag: object) -> str:
     if not isinstance(tag, str):
         return ""
     return tag.rsplit("}", maxsplit=1)[-1].lower()
+
 
 def _case_status(case: ElementTree.Element) -> _EvidenceStatus:
     """Normalize common JUnit and Catch2 outcome shapes."""
@@ -67,6 +71,7 @@ def _case_status(case: ElementTree.Element) -> _EvidenceStatus:
         return "blocked"
     return "passed"
 
+
 def _case_selectors(case: ElementTree.Element) -> tuple[str, ...]:
     name = case.attrib.get("name", "").strip()
     classname = case.attrib.get("classname", "").strip()
@@ -74,6 +79,7 @@ def _case_selectors(case: ElementTree.Element) -> tuple[str, ...]:
     if classname and name:
         selectors.extend((f"{classname}#{name}", f"{classname}.{name}"))
     return tuple(item for item in dict.fromkeys(selectors) if item)
+
 
 def parse_junit_results(paths: Iterable[Path]) -> dict[str, tuple[JunitCaseResult, ...]]:
     """Index JUnit-compatible case results by their stable result selectors."""
@@ -88,6 +94,7 @@ def parse_junit_results(paths: Iterable[Path]) -> dict[str, tuple[JunitCaseResul
                 results[selector].append(result)
     return {selector: tuple(items) for selector, items in results.items()}
 
+
 def _expected_bindings(request: AdapterRequest) -> dict[_BindingKey, AdapterExpectedBinding]:
     expected: dict[_BindingKey, AdapterExpectedBinding] = {}
     for document in request.documents:
@@ -98,8 +105,10 @@ def _expected_bindings(request: AdapterRequest) -> dict[_BindingKey, AdapterExpe
             expected[key] = binding
     return expected
 
+
 def _test_key(test: ComplianceTestCase) -> _BindingKey:
     return (test.document_id, test.implementation_mapping_id, test.target)
+
 
 def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -> None:
     expected = _expected_bindings(request)
@@ -136,6 +145,7 @@ def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -
                     f"catalog tests for {':'.join(key)} must use one implementation symbol"
                 )
 
+
 def _result_for(
     test: ComplianceTestCase,
     results: dict[str, tuple[JunitCaseResult, ...]],
@@ -148,6 +158,7 @@ def _result_for(
             f"across {artifacts}"
         )
     return matches[0] if matches else None
+
 
 def response_from_catalog(
     request: AdapterRequest,
@@ -228,6 +239,7 @@ def response_from_catalog(
         evidence=tuple(all_evidence),
     )
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", type=Path, required=True)
@@ -255,6 +267,7 @@ def main() -> int:
         return 2
     print(json.dumps(response.model_dump(mode="json"), ensure_ascii=False))
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

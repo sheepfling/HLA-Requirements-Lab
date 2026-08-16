@@ -32,26 +32,29 @@ _write = write_text
 
 _anchor = latex_anchor
 
+
 def _link(document_id: str, record_id: str, label: str | None = None) -> str:
     return (
         f"\\hyperlink{{{tex_escape(document_id)}:{tex_escape(record_id)}}}"
         f"{{{_display_escape(label or record_id)}}}"
     )
 
+
 def _source_line(path: str, line: int, end_line: int | None) -> str:
     span = str(line) if end_line is None or end_line == line else f"{line}--{end_line}"
     return f"\\texttt{{{tex_escape(path)}:{span}}}"
 
+
 def _display_escape(value: str) -> str:
     """Normalize source-style escaped punctuation before generic TeX escaping."""
     for escaped, plain in (
-            (r"\$", "$"),
-            (r"\_", "_"),
-            (r"\&", "&"),
-            (r"\%", "%"),
-            (r"\#", "#"),
-            (r"\{", "{"),
-            (r"\}", "}"),
+        (r"\$", "$"),
+        (r"\_", "_"),
+        (r"\&", "&"),
+        (r"\%", "%"),
+        (r"\#", "#"),
+        (r"\{", "{"),
+        (r"\}", "}"),
     ):
         value = value.replace(escaped, plain)
     # The source state-machine notation uses a Unicode subscript ``s`` in
@@ -61,14 +64,18 @@ def _display_escape(value: str) -> str:
         tex_escape(value).replace("ₛ", r"\textsubscript{s}").replace("∀", r"\ensuremath{\forall}")
     )
 
+
 def _field(label: str, value: str) -> str:
     return f"\\textbf{{{_display_escape(label)}:}} {_display_escape(value)}"
+
 
 def _clause_link(model: DocumentModel, clause_id: str | None) -> str:
     return _link(model.document_id, clause_id) if clause_id else r"\emph{Unassigned}"
 
+
 def _source_ref(source: SourceRef) -> str:
     return _source_line(source.path, source.line, source.end_line)
+
 
 def _itemize(items: Iterable[str], *, empty: str = "None recorded.") -> list[str]:
     values = tuple(items)
@@ -76,9 +83,11 @@ def _itemize(items: Iterable[str], *, empty: str = "None recorded.") -> list[str
         return [f"\\emph{{{tex_escape(empty)}}}"]
     return ["\\begin{itemize}", *(f"\\item {item}" for item in values), "\\end{itemize}"]
 
+
 def _heading(level: int, title: str) -> str:
     command = {1: "section", 2: "subsection", 3: "subsubsection"}.get(level, "paragraph")
     return f"\\{command}{{{_display_escape(title)}}}"
+
 
 def _render_publication_outline(
     profile: PublicationProfile,
@@ -127,6 +136,7 @@ def _render_publication_outline(
             lines.append(r"\emph{This projection is corpus-wide.}")
     return "\n\n".join(lines)
 
+
 def _render_clause_tree(
     compiled: CompiledHierarchy,
     clause_id: str,
@@ -140,6 +150,7 @@ def _render_clause_tree(
     for child_id in clause.child_ids:
         lines.extend(_render_clause_tree(compiled, child_id, document_id))
     return lines
+
 
 def _render_definitions(model: DocumentModel) -> list[str]:
     lines = [_heading(2, f"{model.document_id}: definitions")]
@@ -159,6 +170,7 @@ def _render_definitions(model: DocumentModel) -> list[str]:
         )
     return lines
 
+
 def _render_concepts(model: DocumentModel) -> list[str]:
     compiled = compile_hierarchy(model)
     lines = [_heading(1, f"Concepts and definitions — {model.document_id}")]
@@ -167,6 +179,7 @@ def _render_concepts(model: DocumentModel) -> list[str]:
     lines.extend(_render_definitions(model))
     lines.extend(_render_tables(model))
     return lines
+
 
 def _render_tables(model: DocumentModel) -> list[str]:
     """Render logical table families and their source-owned cells."""
@@ -218,6 +231,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
             )
     return lines
 
+
 def _render_references(model: DocumentModel) -> list[str]:
     """Render reference labels and bibliography text from typed records."""
     lines = [_heading(1, f"References — {model.document_id}")]
@@ -236,6 +250,7 @@ def _render_references(model: DocumentModel) -> list[str]:
             )
         )
     return lines
+
 
 def _render_cross_references(model: DocumentModel) -> list[str]:
     """Render resolved cross-reference edges grouped by semantic owner."""
@@ -266,6 +281,7 @@ def _render_cross_references(model: DocumentModel) -> list[str]:
         )
     return lines
 
+
 def _render_figures(model: DocumentModel) -> list[str]:
     """Render figure numbers and captions without embedding comparison images."""
     lines = [_heading(1, f"Figures — {model.document_id}")]
@@ -285,6 +301,7 @@ def _render_figures(model: DocumentModel) -> list[str]:
             )
         )
     return lines
+
 
 def _render_notes(model: DocumentModel) -> list[str]:
     """Render explicitly marked notes and footnotes from typed records."""
@@ -306,6 +323,7 @@ def _render_notes(model: DocumentModel) -> list[str]:
             )
         )
     return lines
+
 
 def _render_prose(model: DocumentModel) -> list[str]:
     """Render reusable prose elements in authored block order."""
@@ -359,6 +377,7 @@ def _render_prose(model: DocumentModel) -> list[str]:
         )
     return lines
 
+
 def _render_requirement(requirement: Requirement, model: DocumentModel) -> list[str]:
     lines = [
         _anchor(model.document_id, requirement.id),
@@ -380,6 +399,7 @@ def _render_requirement(requirement: Requirement, model: DocumentModel) -> list[
     lines.append(f"{_field('Source', '')}{_source_ref(requirement.source)}")
     return lines
 
+
 def _render_requirements(model: DocumentModel) -> list[str]:
     explicit = tuple(item for item in model.ordered_requirements() if item.extraction == "explicit")
     candidates = sum(item.extraction == "candidate" for item in model.requirements)
@@ -400,6 +420,7 @@ def _render_requirements(model: DocumentModel) -> list[str]:
         lines.extend(_render_requirement(requirement, model))
     return lines
 
+
 def _transition_label(transition: Transition, model: DocumentModel) -> str:
     source = (
         _link(model.document_id, transition.source_state) if transition.source_state else "initial"
@@ -408,6 +429,7 @@ def _transition_label(transition: Transition, model: DocumentModel) -> str:
         _link(model.document_id, transition.target_state) if transition.target_state else "final"
     )
     return f"{source} $\\xrightarrow{{\\text{{{_display_escape(transition.event)}}}}}$ {target}"
+
 
 def _render_transition(transition: Transition, model: DocumentModel) -> list[str]:
     coverage = next(
@@ -423,10 +445,10 @@ def _render_transition(transition: Transition, model: DocumentModel) -> list[str
     if coverage:
         lines.append(f"{_field('Coverage note', coverage.reason)}\\\\")
     for label, value in (
-            ("Guard", transition.guard),
-            ("Action", transition.action),
-            ("Precondition", transition.precondition),
-            ("Postcondition", transition.postcondition),
+        ("Guard", transition.guard),
+        ("Action", transition.action),
+        ("Precondition", transition.precondition),
+        ("Postcondition", transition.postcondition),
     ):
         if value.strip():
             lines.append(f"{_field(label, value)}\\\\")
@@ -445,6 +467,7 @@ def _render_transition(transition: Transition, model: DocumentModel) -> list[str
             + r"\\"
         )
     return lines
+
 
 def _render_state_machines(model: DocumentModel) -> list[str]:
     lines = [_heading(1, f"State machines and event logic — {model.document_id}")]
@@ -475,6 +498,7 @@ def _render_state_machines(model: DocumentModel) -> list[str]:
         for transition in machine.transitions:
             lines.extend(_render_transition(transition, model))
     return lines
+
 
 def _render_sequence_diagrams(model: DocumentModel) -> list[str]:
     lines = [_heading(1, f"Message-sequence diagrams — {model.document_id}")]
@@ -521,10 +545,12 @@ def _render_sequence_diagrams(model: DocumentModel) -> list[str]:
         )
     return lines
 
+
 def _requirement_implementations(
     model: DocumentModel, requirement_id: str
 ) -> tuple[ImplementationMapping, ...]:
     return model.implementation_mappings_for_requirement(requirement_id)
+
 
 def _render_traceability(model: DocumentModel) -> list[str]:
     explicit = tuple(item for item in model.ordered_requirements() if item.extraction == "explicit")
@@ -574,6 +600,7 @@ def _render_traceability(model: DocumentModel) -> list[str]:
         )
     return lines
 
+
 def _render_corpus(
     models: tuple[DocumentModel, ...],
     profile: PublicationProfile,
@@ -598,6 +625,7 @@ def _render_corpus(
         lines.extend(_render_sequence_diagrams(model))
         lines.extend(_render_traceability(model))
     return "\n\n".join(lines)
+
 
 def generate_derivative(
     models: Iterable[DocumentModel],
@@ -649,6 +677,7 @@ def generate_derivative(
     _write(derivative, _render_corpus(ordered_models, publication))
     return derivative
 
+
 def generate_from_hla(
     roots: Iterable[Path],
     output: Path,
@@ -664,6 +693,7 @@ def generate_from_hla(
         profile=profile,
         graph_metadata=graph_metadata,
     )
+
 
 if __name__ == "__main__":
     import argparse

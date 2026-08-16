@@ -11,6 +11,7 @@ from unittest.mock import patch
 from hla_lab.cli import _test_workers, build_parser, main
 from hla_lab.paths import DOCUMENT_IDS, document_roots
 
+
 class LabCliTests(unittest.TestCase):
     def test_empty_command_prints_workflow_help(self) -> None:
         output = io.StringIO()
@@ -53,6 +54,7 @@ class LabCliTests(unittest.TestCase):
             self.assertEqual(_test_workers(), "4")
         with patch.dict(os.environ, {"HLA_LAB_TEST_WORKERS": "2"}):
             self.assertEqual(_test_workers(), "2")
+
 
 if __name__ == "__main__":
     unittest.main()

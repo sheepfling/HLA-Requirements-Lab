@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 OUTPUT = ROOT / "output"
 
+
 def build() -> None:
     OUTPUT.mkdir(exist_ok=True)
     # Add Python preprocessing and LaTeX compilation here.
@@ -14,9 +15,11 @@ def build() -> None:
     # )
     print("Template document has no build steps yet.")
 
+
 def clean() -> None:
     if OUTPUT.exists():
         shutil.rmtree(OUTPUT)
+
 
 if __name__ == "__main__":
     import argparse

@@ -23,6 +23,7 @@ from hla_lab.core.semantic_model import (
 )
 from hla_lab.core.text import tex_escape
 
+
 @dataclass(frozen=True)
 class LatexDialect:
     """Commands and environments supplied by a document's LaTeX profile."""
@@ -40,6 +41,7 @@ class LatexDialect:
     cross_reference_command: str = "hyperlink"
     heading_embeds_anchor: bool = False
 
+
 def semantic_macro_name(prefix: str, record_id: str, suffix: str) -> str:
     """Return a portable TeX macro name for a semantic record field."""
     parts = [part for part in re.split(r"[^a-zA-Z0-9]+", record_id) if part]
@@ -49,6 +51,7 @@ def semantic_macro_name(prefix: str, record_id: str, suffix: str) -> str:
         digit_names[int(character)] if character.isdigit() else character for character in compact
     )
     return f"Semantic{prefix}{compact}{suffix}"
+
 
 def render_definition_data(definition: Definition) -> str:
     """Render a definition as layout-consumable TeX data macros."""
@@ -69,6 +72,7 @@ def render_definition_data(definition: Definition) -> str:
             ),
         )
     )
+
 
 def render_requirement_data(requirement: Requirement) -> str:
     """Render a requirement as layout-consumable TeX data macros."""
@@ -92,6 +96,7 @@ def render_requirement_data(requirement: Requirement) -> str:
         )
     )
 
+
 def render_content_block_data(block: ContentBlock) -> str:
     """Render source-owned prose as a layout-consumable TeX data macro."""
     lines = [
@@ -107,6 +112,7 @@ def render_content_block_data(block: ContentBlock) -> str:
             f"{{{tex_escape(block.text)}}}"
         )
     return "\n".join(lines)
+
 
 def render_reference_data(reference: Reference) -> str:
     """Render a bibliography/reference record as visible semantic data."""
@@ -128,6 +134,7 @@ def render_reference_data(reference: Reference) -> str:
         )
     )
 
+
 def render_cross_reference_data(cross_reference: CrossReference) -> str:
     """Render a resolved semantic link as portable TeX metadata."""
 
@@ -147,6 +154,7 @@ def render_cross_reference_data(cross_reference: CrossReference) -> str:
             command("Relation", cross_reference.relation),
         )
     )
+
 
 def render_figure_data(figure: Figure) -> str:
     """Render a figure record without making its comparison image an input."""
@@ -168,6 +176,7 @@ def render_figure_data(figure: Figure) -> str:
         )
     )
 
+
 def render_note_data(note: Note) -> str:
     """Render a note or footnote record as semantic data."""
     return "\n".join(
@@ -188,11 +197,13 @@ def render_note_data(note: Note) -> str:
         )
     )
 
+
 def render_content_block(block: ContentBlock) -> str:
     """Render the faithful body owned by a semantic content block."""
     if block.layout_body is not None:
         return block.layout_body
     return f"% Generated semantic prose block.\n{tex_escape(block.text)}"
+
 
 def render_content_element_data(element: ContentElement) -> str:
     """Render a typed content element as portable TeX metadata."""
@@ -233,6 +244,7 @@ def render_content_element_data(element: ContentElement) -> str:
             ),
         )
     )
+
 
 def render_table_family_data(
     family: TableFamily,
@@ -304,6 +316,7 @@ def render_table_family_data(
                 )
     return "\n".join(lines)
 
+
 def render_table_data(table: Table) -> str:
     """Render one typed table record for caption and cell consumers."""
     caption = table.caption or table.title or table.id
@@ -345,6 +358,7 @@ def render_table_data(table: Table) -> str:
         )
     return "\n".join(lines)
 
+
 def semantic_destination(record_id: str, document_id: str | None = None) -> str:
     """Return the stable PDF destination for a semantic record.
 
@@ -353,6 +367,7 @@ def semantic_destination(record_id: str, document_id: str | None = None) -> str:
     unqualified IDs remain available for standalone compatibility output.
     """
     return f"{document_id}:{record_id}" if document_id else record_id
+
 
 def render_anchor(
     record_id: str,
@@ -363,6 +378,7 @@ def render_anchor(
     """Render a zero-size anchor keyed by a semantic record ID."""
     destination = semantic_destination(record_id, document_id)
     return f"\\{dialect.anchor_command}{{{tex_escape(destination)}}}{{}}"
+
 
 def render_bookmark(
     label: str,
@@ -377,6 +393,7 @@ def render_bookmark(
         f"{{{tex_escape(label)}}}{{bookmark:{tex_escape(destination)}}}"
     )
 
+
 def render_cross_document_link(
     label: str,
     target_document: str,
@@ -388,6 +405,7 @@ def render_cross_document_link(
     return (
         f"\\{dialect.cross_reference_command}{{{tex_escape(destination)}}}{{{tex_escape(label)}}}"
     )
+
 
 def render_clause_heading(
     clause: Clause,
@@ -413,6 +431,7 @@ def render_clause_heading(
     )
     lines.append(f"\\{command}{{{clause.id}}}{{{tex_escape(clause.title)}}}")
     return "\n".join(lines)
+
 
 def render_definition(
     definition: Definition,
@@ -440,6 +459,7 @@ def render_definition(
     )
     return "\n".join(lines)
 
+
 def render_requirement(
     requirement: Requirement,
     dialect: LatexDialect,
@@ -463,6 +483,7 @@ def render_requirement(
         f"\\{dialect.normative_rule_statement_command}{{{tex_escape(requirement.statement)}}}"
     )
     return "\n".join(item for item in (prefix, heading, statement) if item)
+
 
 def render_table(
     table: Table,
@@ -507,11 +528,13 @@ def render_table(
     )
     return "\n".join(item for item in (prefix, "\n".join(lines)) if item)
 
+
 def render_transition_event(transition: Transition, suffix: str = "") -> str:
     """Render an event with an optional renderer-owned suffix."""
     if not transition.event:
         return ""
     return f"{tex_escape(transition.event)}{suffix}"
+
 
 def render_outline(
     model: DocumentModel,
@@ -525,6 +548,7 @@ def render_outline(
         _render_outline_node(model, item, dialect, document_id=document_id)
         for item in model.root_clauses()
     )
+
 
 def _render_outline_node(
     model: DocumentModel,
@@ -540,6 +564,7 @@ def _render_outline_node(
     for child in model.children_of(clause.id):
         lines.append(_render_outline_node(model, child, dialect, document_id=document_id))
     return "\n".join(lines)
+
 
 def render_records(
     model: DocumentModel,

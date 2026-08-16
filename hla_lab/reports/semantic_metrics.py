@@ -9,13 +9,14 @@ from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict
 
-from hla_lab.paths import DocumentResources, REPO_ROOT, resources
+from hla_lab.paths import REPO_ROOT, DocumentResources, resources
 from hla_lab.publication.publication_registry import load_release_manifest
 
 EXCLUDED_PARTS = {".trash", "build", "dist", "output"}
 PAGE_FRAGMENT_PATTERN = re.compile(r"(?:^|-)page-\d+\.tex$", re.IGNORECASE)
 CONTENT_BLOCK_INPUT_PATTERN = re.compile(r"\\input\{output/semantic/content-block-[^}]+\}")
 DATA_SUFFIXES = {".csv", ".json", ".jsonl", ".yaml", ".yml"}
+
 
 class SemanticMetrics(BaseModel):
     """Typed source-shape metrics for one document root."""
@@ -40,6 +41,7 @@ class SemanticMetrics(BaseModel):
     requirement_markers: int
     coordinate_share: float
 
+
 MARKERS = {
     "stable_id_markers": re.compile(r"\\HLAStableID\b"),
     "fixed_coordinate_markers": re.compile(
@@ -55,6 +57,7 @@ MARKERS = {
     ),
 }
 
+
 def _source_files(root: Path, suffix: str) -> tuple[Path, ...]:
     return tuple(
         path
@@ -62,8 +65,10 @@ def _source_files(root: Path, suffix: str) -> tuple[Path, ...]:
         if not EXCLUDED_PARTS.intersection(path.relative_to(root).parts)
     )
 
+
 def _marker_count(text: str, pattern: re.Pattern[str]) -> int:
     return len(pattern.findall(text))
+
 
 def _authored_record_count(root: Path, field: str) -> int:
     """Count text-based authored records without reading generated output."""
@@ -78,6 +83,7 @@ def _authored_record_count(root: Path, field: str) -> int:
         if isinstance(values, list):
             total += len(values)
     return total
+
 
 def measure_document(root: Path) -> SemanticMetrics:
     """Return source-shape metrics without writing an audit or report file."""
@@ -121,6 +127,7 @@ def measure_document(root: Path) -> SemanticMetrics:
         ),
     )
 
+
 def _content_element_block_coverage(root: Path) -> float:
     """Return the fraction of authored content blocks linked to elements."""
     blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
@@ -136,10 +143,12 @@ def _content_element_block_coverage(root: Path) -> float:
     covered = sum(bool(item.get("element_ids")) for item in blocks if isinstance(item, dict))
     return round(covered / len(blocks), 4)
 
+
 def discover_documents(repo_root: Path) -> tuple[Path, ...]:
     """Resolve all release-document roots from the source-controlled manifest."""
     manifest = load_release_manifest(resources(repo_root).release_manifest)
     return tuple(repo_root / project.root for project in manifest.projects)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -180,6 +189,7 @@ def main() -> None:
     print("\t".join(columns))
     for item in metrics:
         print("\t".join(str(item[column]) for column in columns))
+
 
 if __name__ == "__main__":
     main()

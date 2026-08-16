@@ -11,6 +11,7 @@ __all__ = ["check_paths", "main"]
 
 DEFAULT_ROOTS = ("hla_lab", "tools", "tests", "topics")
 
+
 def _is_all_assignment(node: ast.stmt) -> bool:
     if isinstance(node, ast.Assign):
         return any(
@@ -24,6 +25,7 @@ def _is_all_assignment(node: ast.stmt) -> bool:
         and node.target.id == "__all__"
     )
 
+
 def _is_module_docstring(node: ast.stmt, *, first: bool) -> bool:
     return (
         first
@@ -31,6 +33,7 @@ def _is_module_docstring(node: ast.stmt, *, first: bool) -> bool:
         and isinstance(node.value, ast.Constant)
         and isinstance(node.value.value, str)
     )
+
 
 def _check_file(path: Path) -> tuple[str, ...]:
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
@@ -57,6 +60,7 @@ def _check_file(path: Path) -> tuple[str, ...]:
         break
     return tuple(errors)
 
+
 def check_paths(paths: Iterable[Path]) -> tuple[str, ...]:
     """Return module-layout violations for Python files below ``paths``."""
 
@@ -67,6 +71,7 @@ def check_paths(paths: Iterable[Path]) -> tuple[str, ...]:
             if "__pycache__" not in path.parts:
                 errors.extend(_check_file(path))
     return tuple(errors)
+
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Check module layout and return a process exit code."""
@@ -79,6 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
     print(f"Module layout checks passed for {len(roots)} roots.")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -24,6 +24,7 @@ FRAMEWORK = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 OMT = REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025"
 SERVICES = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
+
 class CrossReferenceContractTests(unittest.TestCase):
     def test_cross_references_are_typed_and_resolved(self) -> None:
         model = load_document_model(FRAMEWORK, HLA_SOURCE)
@@ -227,6 +228,7 @@ class CrossReferenceContractTests(unittest.TestCase):
         payload["cross_references"] = [bad.model_dump(mode="json")]
         with self.assertRaises(ValueError):
             DocumentModel.model_validate(payload)
+
 
 if __name__ == "__main__":
     unittest.main()

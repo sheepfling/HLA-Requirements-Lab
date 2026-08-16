@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from typing import Literal, Protocol
 
+
 class LatexSourceProfile(Protocol):
     """Command vocabulary required by the source-first semantic loader."""
 

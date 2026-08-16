@@ -9,8 +9,9 @@ from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
 from tools.migrations.migrate_1516_elements import _extract_block
+
 
 def _page_files(root: Path) -> tuple[Path, ...]:
     if root.name == "hla-1516.1-2025":
@@ -27,9 +28,11 @@ def _page_files(root: Path) -> tuple[Path, ...]:
         )
     )
 
+
 def _page_number(path: Path) -> int:
     match = re.search(r"page-(\d+)", path.name)
     return int(match.group(1)) if match else 0
+
 
 def _default_clause(root: Path, path: Path, clause_ids: set[str]) -> str | None:
     relative = path.relative_to(root).as_posix()
@@ -45,13 +48,15 @@ def _default_clause(root: Path, path: Path, clause_ids: set[str]) -> str | None:
             return candidate
     return None
 
+
 def _kind(body: str) -> str:
     return (
         "normative"
         if re.search(r"\\(?:HLANormativeRuleStatement|HLARequirement)", body)
-           or re.search(r"\bshall\b", body, re.IGNORECASE)
+        or re.search(r"\bshall\b", body, re.IGNORECASE)
         else "context"
     )
+
 
 def _annex_clause_by_path(
     root: Path,
@@ -77,12 +82,14 @@ def _annex_clause_by_path(
             result[path] = current
     return result
 
+
 def _source(path: Path, root: Path, body: str) -> dict[str, object]:
     return {
         "path": path.relative_to(root).as_posix(),
         "line": 1,
         "end_line": max(1, body.count("\n") + 1),
     }
+
 
 def migrate(root: Path) -> tuple[int, int]:
     model = load_document_model(root, HLA_SOURCE)
@@ -185,6 +192,7 @@ def migrate(root: Path) -> tuple[int, int]:
     )
     return len(existing), len(elements)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("roots", nargs="*", type=Path)
@@ -194,6 +202,7 @@ def main() -> None:
     )
     for root in roots:
         migrate(root)
+
 
 if __name__ == "__main__":
     main()

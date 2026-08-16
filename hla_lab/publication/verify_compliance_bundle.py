@@ -15,9 +15,11 @@ from hla_lab.traceability.compliance_contract import (
     ImplementationManifest,
 )
 
+
 def _coverage_ratio(numerator: int, denominator: int) -> float:
     """Return a normalized coverage ratio; empty dimensions are vacuously complete."""
     return 1.0 if denominator == 0 else round(numerator / denominator, 4)
+
 
 def _finding(
     code: str,
@@ -31,6 +33,7 @@ def _finding(
         record_id=record_id,
         message=message,
     )
+
 
 def verify(
     bundle: CorpusBundle,
@@ -383,7 +386,7 @@ def verify(
     coverage = coverage.model_copy(
         update={
             "fully_verified": coverage.fully_verified
-                              and not any(item.severity == "error" for item in findings)
+            and not any(item.severity == "error" for item in findings)
         }
     )
 
@@ -400,11 +403,13 @@ def verify(
         findings=tuple(findings),
     )
 
+
 def verify_files(bundle_path: Path, manifest_path: Path) -> ComplianceResult:
     """Load and verify two portable JSON contracts."""
     bundle = CorpusBundle.model_validate_json(bundle_path.read_text(encoding="utf-8"))
     manifest = ImplementationManifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
     return verify(bundle, manifest)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -432,6 +437,7 @@ def main() -> int:
         for finding in result.findings:
             print(f"{finding.severity}: {finding.code}: {finding.record_id} — {finding.message}")
     return 0 if result.passed else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -23,6 +23,7 @@ HLA_PROFILE = (
     ROOT / "topics" / "ieee" / "hla-semantic-derivative-2025" / "semantic" / "publication.json"
 )
 
+
 def _load_fixture_source() -> object:
     import importlib.util
     import sys
@@ -34,6 +35,7 @@ def _load_fixture_source() -> object:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
 
 class PublicationContractTests(unittest.TestCase):
     def test_hla_profile_has_canonical_order_and_projection_contracts(self) -> None:
@@ -93,6 +95,7 @@ class PublicationContractTests(unittest.TestCase):
         self.assertIn("generic-semantic-publication:concepts", outline)
         self.assertIn("non-hla-demo-2025", outline)
         self.assertIn(r"\input{output/semantic/publication-outline}", derivative_text)
+
 
 if __name__ == "__main__":
     unittest.main()

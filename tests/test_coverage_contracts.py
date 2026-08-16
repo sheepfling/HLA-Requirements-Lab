@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 ROOTS = tuple(sorted((REPO_ROOT / "topics" / "ieee").glob("hla-1516*/")))
 
+
 class CoverageContractTests(unittest.TestCase):
     def test_candidate_and_transition_coverage_is_explicit(self) -> None:
         report = build_report(ROOTS)
@@ -74,6 +75,7 @@ class CoverageContractTests(unittest.TestCase):
         self.assertTrue(
             all("page-" in item["source"]["path"] for item in payload["content_blocks"])
         )
+
 
 if __name__ == "__main__":
     unittest.main()

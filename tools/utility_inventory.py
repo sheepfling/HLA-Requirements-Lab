@@ -15,16 +15,19 @@ from collections import defaultdict
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+
 @dataclass(frozen=True)
 class HelperDefinition:
     name: str
     path: str
     line: int
 
+
 @dataclass(frozen=True)
 class DuplicateHelper:
     name: str
     locations: tuple[str, ...]
+
 
 def _python_files(root: Path) -> tuple[Path, ...]:
     paths = [
@@ -35,6 +38,7 @@ def _python_files(root: Path) -> tuple[Path, ...]:
         if "__pycache__" not in path.parts
     ]
     return tuple(sorted(paths))
+
 
 def inventory(root: Path) -> tuple[tuple[HelperDefinition, ...], tuple[DuplicateHelper, ...]]:
     """Return helper definitions and exact duplicate implementation groups."""
@@ -64,6 +68,7 @@ def inventory(root: Path) -> tuple[tuple[HelperDefinition, ...], tuple[Duplicate
     ordered = tuple(sorted(definitions, key=lambda item: (item.name, item.path, item.line)))
     return ordered, duplicates
 
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
@@ -83,6 +88,7 @@ def main(argv: list[str] | None = None) -> int:
         for item in duplicates:
             print(f"- {item.name}: {', '.join(item.locations)}")
     return 1 if duplicates else 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -9,6 +9,7 @@ from pathlib import Path
 
 from hla_lab.core.io import write_json
 
+
 def _record_lines(path: Path) -> dict[str, int]:
     lines = path.read_text(encoding="utf-8").splitlines()
     result: dict[str, int] = {}
@@ -17,6 +18,7 @@ def _record_lines(path: Path) -> dict[str, int]:
         if match:
             result[match.group(1)] = line_number
     return result
+
 
 def migrate(path: Path, *, check: bool = False) -> int:
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -37,12 +39,14 @@ def migrate(path: Path, *, check: bool = False) -> int:
     print(f"{path}: attached provenance to {len(missing)} implementation records")
     return 0
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", type=Path)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     return migrate(args.path, check=args.check)
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

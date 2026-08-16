@@ -10,6 +10,7 @@ from pathlib import Path
 from hla_lab.core.semantic_model import GraphDiagram, GraphDiagramFile, GraphEdge, GraphNode
 from hla_lab.core.text import format_number, mermaid_text, safe_identifier, tex_escape
 
+
 def _arrow(edge: GraphEdge) -> str:
     return {
         "none": "",
@@ -17,6 +18,7 @@ def _arrow(edge: GraphEdge) -> str:
         "reverse": "<-",
         "both": "<->",
     }[edge.direction]
+
 
 def render_mermaid(diagram: GraphDiagram) -> str:
     """Render a graph as a portable Mermaid flowchart."""
@@ -40,6 +42,7 @@ def render_mermaid(diagram: GraphDiagram) -> str:
             connector = "<--->"
         lines.append(f"  {aliases[edge.source]} {connector}{label} {aliases[edge.target]}")
     return "\n".join(lines) + "\n"
+
 
 def _draw_edge(edge: GraphEdge, nodes: Mapping[str, GraphNode]) -> str:
     options = ["line width=0.55pt"]
@@ -90,6 +93,7 @@ def _draw_edge(edge: GraphEdge, nodes: Mapping[str, GraphNode]) -> str:
         if len(parts) > 1:
             path = f"{parts[0]} --{label} " + " -- ".join(parts[1:])
     return f"\\draw[{','.join(options)}] {path};"
+
 
 def render_tikz(diagram: GraphDiagram) -> str:
     """Render a graph as deterministic, dependency-light TikZ."""
@@ -150,9 +154,11 @@ def render_tikz(diagram: GraphDiagram) -> str:
     lines.extend(["\\end{tikzpicture}", ""])
     return "\n".join(lines)
 
+
 def load_diagrams(path: Path) -> tuple[GraphDiagram, ...]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     return GraphDiagramFile.model_validate(payload).graph_diagrams
+
 
 def export(
     model: Path,
@@ -182,6 +188,7 @@ def export(
             paths.append(path)
     return tuple(paths)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("model", type=Path, help="Canonical graph-diagram JSON")
@@ -192,6 +199,7 @@ def main() -> None:
     formats = ("tikz", "mermaid") if args.format == "both" else (args.format,)
     for path in export(args.model, args.output, diagram_ids=tuple(args.diagram), formats=formats):
         print(path)
+
 
 if __name__ == "__main__":
     main()

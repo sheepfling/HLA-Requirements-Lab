@@ -21,10 +21,12 @@ RequirementApplicabilityRelation = Literal[
     "transition", "reviewed-link", "implementation", "clause-fallback"
 ]
 
+
 class SemanticRecord(BaseModel):
     """Shared strict contract for semantic records."""
 
     model_config = ConfigDict(extra="forbid", frozen=True)
+
 
 ImplementationStatus = Literal["planned", "partial", "implemented", "verified"]
 TransitionCoverageStatus = Literal[
@@ -57,6 +59,7 @@ CrossReferenceKind = Literal[
     "unknown",
 ]
 
+
 class SourceRef(SemanticRecord):
     path: str = Field(min_length=1)
     line: int = Field(ge=1)
@@ -68,9 +71,11 @@ class SourceRef(SemanticRecord):
             raise ValueError("source end_line must not precede line")
         return self
 
+
 class SourceOrderedRecord(Protocol):
     source: SourceRef
     id: str
+
 
 class _DocumentResources(Protocol):
     @property
@@ -86,6 +91,7 @@ class _DocumentResources(Protocol):
 
     def semantic_file(self, name: str) -> Path: ...
 
+
 class Clause(SemanticRecord):
     id: str = Field(min_length=1)
     number: str = Field(min_length=1)
@@ -93,6 +99,7 @@ class Clause(SemanticRecord):
     parent_id: str | None
     level: int = Field(ge=1)
     source: SourceRef
+
 
 class Definition(SemanticRecord):
     id: str = Field(min_length=1)
@@ -103,11 +110,13 @@ class Definition(SemanticRecord):
     source: SourceRef
     clause_id: str | None = None
 
+
 class DefinitionFile(SemanticRecord):
     """Authored semantic definition records kept outside hand-written LaTeX."""
 
     schema_version: int = Field(ge=1)
     definitions: tuple[Definition, ...]
+
 
 class Requirement(SemanticRecord):
     id: str = Field(min_length=1)
@@ -159,10 +168,12 @@ class Requirement(SemanticRecord):
             raise ValueError("non-standard API surface decisions need an api_surface_note")
         return self
 
+
 class RequirementMatch(SemanticRecord):
     requirement: Requirement
     score: float = Field(ge=0.0, le=1.0)
     matched_terms: tuple[str, ...]
+
 
 class RequirementLink(SemanticRecord):
     """An explicit, reviewed relationship between a requirement and transition."""
@@ -180,6 +191,7 @@ class RequirementLink(SemanticRecord):
     source: SourceRef | None = None
     notes: str = ""
 
+
 class RequirementFile(SemanticRecord):
     """Authored requirement records promoted from source-shaped candidates."""
 
@@ -192,6 +204,7 @@ class RequirementFile(SemanticRecord):
         if len(ids) != len(set(ids)):
             raise ValueError("requirement IDs must be unique in a requirement file")
         return self
+
 
 class RequirementReview(SemanticRecord):
     """A disposition for an extracted requirement candidate."""
@@ -206,17 +219,20 @@ class RequirementReview(SemanticRecord):
         """Expose the reviewed requirement as this record's stable identity."""
         return self.requirement_id
 
+
 class RequirementReviewFile(SemanticRecord):
     """Authored review dispositions for unpromoted requirement candidates."""
 
     schema_version: int = Field(ge=1)
     reviews: tuple[RequirementReview, ...]
 
+
 class RequirementLinkFile(SemanticRecord):
     """Authored requirement-to-transition relationships."""
 
     schema_version: int = Field(ge=1)
     links: tuple[RequirementLink, ...]
+
 
 class TransitionCoverage(SemanticRecord):
     """Classify implementation coverage for every modeled transition."""
@@ -235,11 +251,13 @@ class TransitionCoverage(SemanticRecord):
             raise ValueError("only mapped transition coverage may name implementations")
         return self
 
+
 class TransitionCoverageFile(SemanticRecord):
     """Authored transition coverage dispositions for compliance planning."""
 
     schema_version: int = Field(ge=1)
     transition_coverage: tuple[TransitionCoverage, ...]
+
 
 class ContentBlock(SemanticRecord):
     """A source-owned prose block linked to semantic records and hierarchy."""
@@ -254,11 +272,13 @@ class ContentBlock(SemanticRecord):
     sequence: int = Field(default=0, ge=0)
     layout_body: str | None = None
 
+
 class ContentBlockFile(SemanticRecord):
     """Authored prose blocks migrated out of page-oriented LaTeX."""
 
     schema_version: int = Field(ge=1)
     content_blocks: tuple[ContentBlock, ...]
+
 
 class ContentElement(SemanticRecord):
     """A typed, clause-owned content unit extracted from a layout adapter.
@@ -286,11 +306,13 @@ class ContentElement(SemanticRecord):
     source: SourceRef
     sequence: int = Field(default=0, ge=0)
 
+
 class ContentElementFile(SemanticRecord):
     """Authored typed content units extracted from source layout."""
 
     schema_version: int = Field(ge=1)
     content_elements: tuple[ContentElement, ...]
+
 
 class ImplementationReference(SemanticRecord):
     """A structured, optionally source-addressable implementation target."""
@@ -301,6 +323,7 @@ class ImplementationReference(SemanticRecord):
     path: str | None = None
     line: int | None = Field(default=None, ge=1)
     version: str | None = None
+
 
 class ImplementationMapping(SemanticRecord):
     """Map a semantic interface surface to an implementation entry point."""
@@ -328,11 +351,13 @@ class ImplementationMapping(SemanticRecord):
             )
         return self
 
+
 class ImplementationFile(SemanticRecord):
     """Authored implementation mappings kept beside semantic document data."""
 
     schema_version: int = Field(ge=1)
     implementations: tuple[ImplementationMapping, ...]
+
 
 class ApiParameter(SemanticRecord):
     """A language-neutral parameter contract for an API surface."""
@@ -344,6 +369,7 @@ class ApiParameter(SemanticRecord):
     optional: bool = False
     description: str = ""
     source: SourceRef | None = None
+
 
 class ApiSurface(SemanticRecord):
     """A callable or event-facing specification surface.
@@ -372,11 +398,13 @@ class ApiSurface(SemanticRecord):
     source: SourceRef | None = None
     notes: str = ""
 
+
 class ApiSurfaceFile(SemanticRecord):
     """Authored API surface records, when a profile supplies them directly."""
 
     schema_version: int = Field(ge=1)
     api_surfaces: tuple[ApiSurface, ...]
+
 
 class ApiCrosswalk(SemanticRecord):
     """Crosswalk one semantic mapping to a binding or future projection."""
@@ -394,11 +422,13 @@ class ApiCrosswalk(SemanticRecord):
     source: SourceRef | None = None
     notes: str = ""
 
+
 class ApiCrosswalkFile(SemanticRecord):
     """Authored semantic-to-binding crosswalk records."""
 
     schema_version: int = Field(ge=1)
     api_crosswalks: tuple[ApiCrosswalk, ...]
+
 
 class RequirementApiBinding(SemanticRecord):
     """A reviewed requirement relationship to a language API surface."""
@@ -438,6 +468,7 @@ class RequirementApiBinding(SemanticRecord):
             raise ValueError("API requirement bindings need a selected or candidate surface")
         return self
 
+
 class RequirementApiBindingFile(SemanticRecord):
     """Authored requirement-to-API traceability records."""
 
@@ -450,6 +481,7 @@ class RequirementApiBindingFile(SemanticRecord):
         if len(ids) != len(set(ids)):
             raise ValueError("requirement API binding IDs must be unique")
         return self
+
 
 class VerificationTest(SemanticRecord):
     """A planned or observed verification record for semantic surfaces."""
@@ -467,11 +499,13 @@ class VerificationTest(SemanticRecord):
     source: SourceRef | None = None
     notes: str = ""
 
+
 class VerificationTestFile(SemanticRecord):
     """Authored verification plans and evidence references."""
 
     schema_version: int = Field(ge=1)
     verification_tests: tuple[VerificationTest, ...]
+
 
 class TraceStep(SemanticRecord):
     """One event/transition assertion in an executable state trace."""
@@ -484,6 +518,7 @@ class TraceStep(SemanticRecord):
     requirement_ids: tuple[str, ...] = ()
     api_surface_ids: tuple[str, ...] = ()
     notes: str = ""
+
 
 class StateTrace(SemanticRecord):
     """A replayable or planned path through a state machine."""
@@ -502,11 +537,13 @@ class StateTrace(SemanticRecord):
     source: SourceRef | None = None
     notes: str = ""
 
+
 class StateTraceFile(SemanticRecord):
     """Authored state-trace scenarios."""
 
     schema_version: int = Field(ge=1)
     state_traces: tuple[StateTrace, ...]
+
 
 class ComplianceIssue(SemanticRecord):
     """A non-fatal compliance coverage finding for query/report consumers."""
@@ -521,6 +558,7 @@ class ComplianceIssue(SemanticRecord):
     severity: Literal["warning", "error"] = "warning"
     record_id: str = Field(min_length=1)
     message: str = Field(min_length=1)
+
 
 class RequirementApplicability(SemanticRecord):
     """A typed explanation for why a requirement applies to a transition."""
@@ -540,6 +578,7 @@ class RequirementApplicability(SemanticRecord):
         "clause-fallback",
     ]
 
+
 class TransitionImplementationCoverage(SemanticRecord):
     """Typed implementation status for one state-machine transition."""
 
@@ -553,6 +592,7 @@ class TransitionImplementationCoverage(SemanticRecord):
     status: TransitionCoverageStatus
     concrete: bool
 
+
 class ComplianceQueryResult(SemanticRecord):
     """Serializable result for the reusable compliance query surface."""
 
@@ -564,6 +604,7 @@ class ComplianceQueryResult(SemanticRecord):
     transition_coverage: tuple[TransitionImplementationCoverage, ...] = ()
     implementation_status_counts: dict[str, int] = Field(default_factory=dict)
     issues: tuple[ComplianceIssue, ...] = ()
+
 
 class ComplianceDependency(SemanticRecord):
     """A qualified dependency edge between corpus semantic records."""
@@ -589,6 +630,7 @@ class ComplianceDependency(SemanticRecord):
     ]
     source: SourceRef | None = None
 
+
 class OperationalImplication(SemanticRecord):
     """A queryable state-transition or message-sequence implication."""
 
@@ -611,6 +653,7 @@ class OperationalImplication(SemanticRecord):
     relation: Literal["direct", "clause-context", "unlinked"]
     source: SourceRef | None = None
 
+
 class ImplementationEvidence(SemanticRecord):
     """A corpus-qualified implementation mapping with maturity evidence."""
 
@@ -628,6 +671,7 @@ class ImplementationEvidence(SemanticRecord):
     implementation_ref: ImplementationReference | None = None
     source: SourceRef | None = None
 
+
 class ComplianceCorpusReport(SemanticRecord):
     """Serializable M24 corpus report for compliance consumers."""
 
@@ -643,6 +687,7 @@ class ComplianceCorpusReport(SemanticRecord):
     operational_implication_counts: dict[str, int] = Field(default_factory=dict)
     table_definition_coverage: dict[str, dict[str, int]] = Field(default_factory=dict)
 
+
 class TableCell(SemanticRecord):
     """A semantic table cell with source provenance and logical placement."""
 
@@ -653,6 +698,7 @@ class TableCell(SemanticRecord):
     column: int | None = Field(default=None, ge=0)
     record_ids: tuple[str, ...] = ()
     source: SourceRef
+
 
 class Table(SemanticRecord):
     """A semantic table assembled from the source table primitives."""
@@ -681,11 +727,13 @@ class Table(SemanticRecord):
             object.__setattr__(self, "logical_id", self.id)
         return self
 
+
 class TableFile(SemanticRecord):
     """Authored table records promoted from a legacy or external source."""
 
     schema_version: int = Field(ge=1)
     tables: tuple[Table, ...]
+
 
 class TableFamily(SemanticRecord):
     """A named OMT table family grouped from typed table records."""
@@ -696,17 +744,20 @@ class TableFamily(SemanticRecord):
     clause_id: str | None = None
     source: SourceRef
 
+
 class TableFamilyFile(SemanticRecord):
     """Authored table-family groupings kept outside page layout source."""
 
     schema_version: int = Field(ge=1)
     table_families: tuple[TableFamily, ...]
 
+
 class ReferenceTarget(SemanticRecord):
     """A resolved target for a cross-document semantic reference."""
 
     document_id: str = Field(min_length=1)
     record_id: str = Field(min_length=1)
+
 
 class Reference(SemanticRecord):
     """A normative or bibliographic document reference."""
@@ -718,6 +769,7 @@ class Reference(SemanticRecord):
     clause_id: str | None = None
     targets: tuple[ReferenceTarget, ...] = ()
     source: SourceRef
+
 
 class CrossReference(SemanticRecord):
     """A typed, linkable relationship from one local record to another."""
@@ -731,11 +783,13 @@ class CrossReference(SemanticRecord):
     relation: Literal["references", "mentions", "continues"] = "references"
     source: SourceRef
 
+
 class CrossReferenceFile(SemanticRecord):
     """Authored cross-reference records with resolved semantic targets."""
 
     schema_version: int = Field(ge=1)
     cross_references: tuple[CrossReference, ...]
+
 
 class ReferenceFile(SemanticRecord):
     """Authored reference records with optional resolved targets."""
@@ -743,17 +797,20 @@ class ReferenceFile(SemanticRecord):
     schema_version: int = Field(ge=1)
     references: tuple[Reference, ...]
 
+
 class NoteFile(SemanticRecord):
     """Authored note records promoted from a legacy or external source."""
 
     schema_version: int = Field(ge=1)
     notes: tuple[Note, ...]
 
+
 class FigureFile(SemanticRecord):
     """Authored figure records promoted from a legacy or external source."""
 
     schema_version: int = Field(ge=1)
     figures: tuple[Figure, ...]
+
 
 class Note(SemanticRecord):
     """An explicitly marked note or footnote, kept separate from prose."""
@@ -763,6 +820,7 @@ class Note(SemanticRecord):
     kind: NoteKind
     owner_id: str | None = None
     source: SourceRef
+
 
 class Figure(SemanticRecord):
     """A figure reference without embedding its binary analogue."""
@@ -774,6 +832,7 @@ class Figure(SemanticRecord):
     clause_id: str | None = None
     source: SourceRef
 
+
 class Example(SemanticRecord):
     """A document-marked example heading and its semantic owner."""
 
@@ -783,6 +842,7 @@ class Example(SemanticRecord):
     clause_id: str | None = None
     source: SourceRef
 
+
 class Annex(SemanticRecord):
     """An annex boundary and status, independent of page layout."""
 
@@ -791,6 +851,7 @@ class Annex(SemanticRecord):
     title: str = Field(min_length=1)
     status: AnnexStatus = "unknown"
     source: SourceRef
+
 
 class State(SemanticRecord):
     """A named state in a document-defined state machine."""
@@ -806,6 +867,7 @@ class State(SemanticRecord):
         if not self.label and self.kind not in {"initial", "final", "history"}:
             raise ValueError("only initial/final/history pseudostates may have empty labels")
         return self
+
 
 class Transition(SemanticRecord):
     """A state-machine transition with explicit conformance-oriented fields."""
@@ -824,16 +886,19 @@ class Transition(SemanticRecord):
     implementation_ids: tuple[str, ...] = ()
     source: SourceRef | None = None
 
+
 class DiagramProvenance(SemanticRecord):
     image: str = Field(min_length=1)
     page: int = Field(ge=1)
     xref: str | None = None
     caption: str = ""
 
+
 class NodePosition(SemanticRecord):
     x: float
     y: float
     visible: bool = True
+
 
 class LayoutContainer(SemanticRecord):
     id: str = Field(min_length=1)
@@ -844,6 +909,7 @@ class LayoutContainer(SemanticRecord):
     title: str = Field(min_length=1)
     visible: bool = True
     title_visible: bool = True
+
 
 class TransitionLayout(SemanticRecord):
     """Manual geometry hints for a rendered transition label or edge."""
@@ -860,6 +926,7 @@ class TransitionLayout(SemanticRecord):
     label_align: Literal["left", "center", "right"] | None = None
     label_visible: bool = True
 
+
 class LayoutRule(SemanticRecord):
     """A manual guide line retained as layout data, not state semantics."""
 
@@ -868,6 +935,7 @@ class LayoutRule(SemanticRecord):
     x2: float
     y2: float
     style: str = "solid"
+
 
 class LayoutAnnotation(SemanticRecord):
     """A text label positioned by the diagram layout adapter."""
@@ -878,6 +946,7 @@ class LayoutAnnotation(SemanticRecord):
     text: str = Field(min_length=1)
     width: float | None = Field(default=None, gt=0)
     align: Literal["left", "center", "right"] = "left"
+
 
 class StateMachineLayout(SemanticRecord):
     engine: Literal["automatic", "manual"] = "automatic"
@@ -890,6 +959,7 @@ class StateMachineLayout(SemanticRecord):
     transitions: dict[str, TransitionLayout] = Field(default_factory=dict)
     rules: tuple[LayoutRule, ...] = ()
     annotations: tuple[LayoutAnnotation, ...] = ()
+
 
 class StateMachine(SemanticRecord):
     """A reusable state machine linked to the document hierarchy."""
@@ -934,9 +1004,11 @@ class StateMachine(SemanticRecord):
                     )
         return self
 
+
 class StateMachineFile(SemanticRecord):
     schema_version: int = Field(ge=2)
     state_machines: tuple[StateMachine, ...]
+
 
 class SequenceParticipant(SemanticRecord):
     """A lifeline in a reusable message-sequence diagram."""
@@ -944,6 +1016,7 @@ class SequenceParticipant(SemanticRecord):
     id: str = Field(min_length=1)
     label: str = Field(min_length=1)
     role: str = ""
+
 
 class SequenceMessage(SemanticRecord):
     """An ordered message with explicit direction and optional response correlation."""
@@ -958,6 +1031,7 @@ class SequenceMessage(SemanticRecord):
     clause_id: str | None = None
     requirement_ids: tuple[str, ...] = ()
     source: SourceRef | None = None
+
 
 class SequenceDiagram(SemanticRecord):
     """A document-independent sequence diagram owned by semantic source."""
@@ -1002,17 +1076,20 @@ class SequenceDiagram(SemanticRecord):
                 )
         return self
 
+
 class SequenceDiagramFile(SemanticRecord):
     """Authored sequence diagrams kept out of page-layout source."""
 
     schema_version: int = Field(ge=1)
     sequence_diagrams: tuple[SequenceDiagram, ...]
 
+
 class GraphPoint(SemanticRecord):
     """A point in a diagram's document-independent coordinate system."""
 
     x: float
     y: float
+
 
 class GraphNode(SemanticRecord):
     """A positioned node used by generic relationship and architecture diagrams."""
@@ -1026,6 +1103,7 @@ class GraphNode(SemanticRecord):
     style: Literal["box", "frame", "lifeline", "ellipse", "point", "invisible"] = "box"
     parent_id: str | None = None
     visible: bool = True
+
 
 class GraphEdge(SemanticRecord):
     """A directed, undirected, dotted, or dimension relationship between nodes."""
@@ -1042,6 +1120,7 @@ class GraphEdge(SemanticRecord):
     implementation_ids: tuple[str, ...] = ()
     source_ref: SourceRef | None = None
 
+
 class GraphAnnotation(SemanticRecord):
     """Free-standing text or measurement label positioned by semantic data."""
 
@@ -1052,6 +1131,7 @@ class GraphAnnotation(SemanticRecord):
     width: float | None = Field(default=None, gt=0)
     align: Literal["left", "center", "right"] = "center"
     rotate: float = 0.0
+
 
 class GraphDiagram(SemanticRecord):
     """A reusable non-state diagram with explicit nodes, edges, and annotations."""
@@ -1093,11 +1173,13 @@ class GraphDiagram(SemanticRecord):
                 )
         return self
 
+
 class GraphDiagramFile(SemanticRecord):
     """Authored generic diagrams kept out of hand-written page layout."""
 
     schema_version: int = Field(ge=1)
     graph_diagrams: tuple[GraphDiagram, ...]
+
 
 class DiagramSurface(SemanticRecord):
     """Inventory classification for every source figure or extracted asset."""
@@ -1120,11 +1202,13 @@ class DiagramSurface(SemanticRecord):
             raise ValueError("non-generatable surfaces require a reason")
         return self
 
+
 class DiagramSurfaceFile(SemanticRecord):
     """Source-controlled contract for complete figure-surface classification."""
 
     schema_version: int = Field(ge=1)
     surfaces: tuple[DiagramSurface, ...]
+
 
 class DocumentModel(SemanticRecord):
     document_id: str = ""
@@ -1160,31 +1244,31 @@ class DocumentModel(SemanticRecord):
     @model_validator(mode="after")
     def validate_record_ids(self) -> DocumentModel:
         for label, records in (
-                ("clause", self.clauses),
-                ("definition", self.definitions),
-                ("requirement", self.requirements),
-                ("requirement review", self.requirement_reviews),
-                ("requirement link", self.requirement_links),
-                ("content block", self.content_blocks),
-                ("content element", self.content_elements),
-                ("state machine", self.state_machines),
-                ("sequence diagram", self.sequence_diagrams),
-                ("graph diagram", self.graph_diagrams),
-                ("diagram surface", self.diagram_surfaces),
-                ("implementation", self.implementations),
-                ("API surface", self.api_surfaces),
-                ("API crosswalk", self.api_crosswalks),
-                ("requirement API binding", self.requirement_api_bindings),
-                ("verification test", self.verification_tests),
-                ("state trace", self.state_traces),
-                ("table", self.tables),
-                ("table family", self.table_families),
-                ("reference", self.references),
-                ("cross-reference", self.cross_references),
-                ("note", self.notes),
-                ("figure", self.figures),
-                ("example", self.examples),
-                ("annex", self.annexes),
+            ("clause", self.clauses),
+            ("definition", self.definitions),
+            ("requirement", self.requirements),
+            ("requirement review", self.requirement_reviews),
+            ("requirement link", self.requirement_links),
+            ("content block", self.content_blocks),
+            ("content element", self.content_elements),
+            ("state machine", self.state_machines),
+            ("sequence diagram", self.sequence_diagrams),
+            ("graph diagram", self.graph_diagrams),
+            ("diagram surface", self.diagram_surfaces),
+            ("implementation", self.implementations),
+            ("API surface", self.api_surfaces),
+            ("API crosswalk", self.api_crosswalks),
+            ("requirement API binding", self.requirement_api_bindings),
+            ("verification test", self.verification_tests),
+            ("state trace", self.state_traces),
+            ("table", self.tables),
+            ("table family", self.table_families),
+            ("reference", self.references),
+            ("cross-reference", self.cross_references),
+            ("note", self.notes),
+            ("figure", self.figures),
+            ("example", self.examples),
+            ("annex", self.annexes),
         ):
             ids = [item.id for item in records]
             if len(ids) != len(set(ids)):
@@ -1836,20 +1920,20 @@ class DocumentModel(SemanticRecord):
                 )
             )
             | frozenset(
-            item.id
-            for machine in self.state_machines
-            for item in (*machine.states, *machine.transitions)
-        )
+                item.id
+                for machine in self.state_machines
+                for item in (*machine.states, *machine.transitions)
+            )
             | frozenset(
-            item.id
-            for diagram in self.sequence_diagrams
-            for item in (*diagram.participants, *diagram.messages)
-        )
+                item.id
+                for diagram in self.sequence_diagrams
+                for item in (*diagram.participants, *diagram.messages)
+            )
             | frozenset(
-            item.id
-            for diagram in self.graph_diagrams
-            for item in (*diagram.nodes, *diagram.edges, *diagram.annotations)
-        )
+                item.id
+                for diagram in self.graph_diagrams
+                for item in (*diagram.nodes, *diagram.edges, *diagram.annotations)
+            )
             | frozenset(cell.id for table in self.tables for cell in table.cells)
         )
 
@@ -2552,7 +2636,7 @@ class DocumentModel(SemanticRecord):
             mapping_ids=tuple(item.id for item in mappings),
             status=status,
             concrete=bool(mappings)
-                     and all(item.status in {"implemented", "verified"} for item in mappings),
+            and all(item.status in {"implemented", "verified"} for item in mappings),
         )
 
     def implementation_status_counts(self, machine_id: str | None = None) -> dict[str, int]:
@@ -3026,6 +3110,7 @@ class DocumentModel(SemanticRecord):
         """Validate and load a serialized semantic model document."""
         return cls.model_validate_json(payload)
 
+
 class ComplianceCorpus(SemanticRecord):
     """A collection of documents used to resolve cross-document targets."""
 
@@ -3432,6 +3517,7 @@ class ComplianceCorpus(SemanticRecord):
         if issues:
             raise ValueError("; ".join(f"{item.code}: {item.record_id}" for item in issues))
 
+
 def _arguments(text: str, start: int, count: int) -> tuple[tuple[str, ...], int] | None:
     cursor = start
     while cursor < len(text) and text[cursor].isspace():
@@ -3448,8 +3534,10 @@ def _arguments(text: str, start: int, count: int) -> tuple[tuple[str, ...], int]
         values.append(value)
     return tuple(values), cursor
 
+
 def _commands(text: str, name: str, count: int) -> list[tuple[int, tuple[str, ...]]]:
     return [(offset, args) for offset, args, _ in _command_events(text, name, count)]
+
 
 def _command_events(text: str, name: str, count: int) -> list[tuple[int, tuple[str, ...], int]]:
     pattern = re.compile(rf"\\{re.escape(name)}\b")
@@ -3460,6 +3548,7 @@ def _command_events(text: str, name: str, count: int) -> list[tuple[int, tuple[s
             found.append((match.start(), parsed[0], parsed[1]))
     return found
 
+
 def _environments(text: str, name: str, count: int) -> list[tuple[int, tuple[str, ...], int]]:
     pattern = re.compile(rf"\\begin\{{{re.escape(name)}\}}")
     found: list[tuple[int, tuple[str, ...], int]] = []
@@ -3469,14 +3558,17 @@ def _environments(text: str, name: str, count: int) -> list[tuple[int, tuple[str
             found.append((match.start(), parsed[0], parsed[1]))
     return found
 
+
 def _tokens(text: str) -> set[str]:
     return set(re.findall(r"[a-z0-9]+", text.casefold()))
+
 
 def _machine_statement(text: str, source: LatexSourceProfile | None = None) -> str:
     """Normalize a normative statement for machine-facing consumers."""
     normalized = _latex_text(text, source)
     normalized = re.sub(r"\s+", " ", normalized).strip()
     return normalized
+
 
 def _source(
     root: Path,
@@ -3493,6 +3585,7 @@ def _source(
         ),
     )
 
+
 def _unwrap_commands(value: str, names: tuple[str, ...], count: int, body_index: int = 0) -> str:
     pattern = re.compile(rf"\\(?:{'|'.join(map(re.escape, names))})\b")
     replacements: list[tuple[int, int, str]] = []
@@ -3503,6 +3596,7 @@ def _unwrap_commands(value: str, names: tuple[str, ...], count: int, body_index:
     for start, end, replacement in reversed(replacements):
         value = value[:start] + replacement + value[end:]
     return value
+
 
 def _latex_text(value: str, source: LatexSourceProfile | None = None) -> str:
     value = re.sub(r"(?m)^\s*%.*$", "", value)
@@ -3543,6 +3637,7 @@ def _latex_text(value: str, source: LatexSourceProfile | None = None) -> str:
     value = re.sub(r"\s+", " ", value)
     return value.strip()
 
+
 def _definition_text(value: str, source: LatexSourceProfile | None = None) -> str:
     """Extract definition prose while excluding anchors and presentation notes."""
     if source is not None:
@@ -3565,12 +3660,15 @@ def _definition_text(value: str, source: LatexSourceProfile | None = None) -> st
         )
     return _latex_text(value, source).lstrip(": ")
 
+
 _INCLUDE_PATTERN = re.compile(r"\\(?:input|include)\s*\{([^{}]+)\}")
+
 
 def _document_resources(root: Path) -> _DocumentResources:
     from hla_lab.paths import DocumentResources
 
     return DocumentResources(root)
+
 
 def _files(root: Path) -> tuple[Path, ...]:
     """Return source files in document include order, with safe fallbacks.
@@ -3614,9 +3712,11 @@ def _files(root: Path) -> tuple[Path, ...]:
     )
     return tuple(ordered)
 
+
 def _source_order(root: Path) -> dict[str, int]:
     """Return source positions from the document include graph."""
     return {path.relative_to(root).as_posix(): index for index, path in enumerate(_files(root))}
+
 
 def _source_key(
     item: SourceOrderedRecord,
@@ -3633,11 +3733,13 @@ def _source_key(
     page_number = int(page.group(1)) if page else 0
     return page_number, item.source.line, item.id
 
+
 def _clause_shape(identifier: str) -> tuple[str, str | None, int]:
     number = identifier.removeprefix("clause-")
     parts = number.split(".")
     parent = ".".join(parts[:-1]) if len(parts) > 1 else None
     return number, f"clause-{parent}" if parent else None, len(parts)
+
 
 def _clause_sort_key(item: Clause) -> tuple[tuple[tuple[int, int | str], ...], int, str]:
     """Sort numeric clauses before annex-like identifiers, stably."""
@@ -3645,10 +3747,12 @@ def _clause_sort_key(item: Clause) -> tuple[tuple[tuple[int, int | str], ...], i
     number_key = tuple((0, int(part)) if part.isdigit() else (1, part.casefold()) for part in parts)
     return number_key, item.level, item.id
 
+
 def _source_ref(value: Mapping[str, JsonValue]) -> SourceRef | None:
     if not isinstance(value, Mapping):
         return None
     return SourceRef.model_validate(value)
+
 
 @dataclass(frozen=True)
 class _TableGridCell:
@@ -3656,6 +3760,7 @@ class _TableGridCell:
     y: float
     width: float
     height: float
+
 
 @dataclass(frozen=True)
 class _TableCellCandidate:
@@ -3668,9 +3773,11 @@ class _TableCellCandidate:
     height: float
     source: SourceRef
 
+
 def _table_number(caption: str) -> str | None:
     match = re.search(r"\bTable\s+(\d+)", caption, re.IGNORECASE)
     return match.group(1) if match else None
+
 
 def _omt_kind(caption: str) -> str | None:
     value = caption.casefold()
@@ -3701,6 +3808,7 @@ def _omt_kind(caption: str) -> str | None:
     )
     return next((kind for kind in kinds if kind in value), None)
 
+
 def _table_text(value: str) -> str:
     """Remove layout-only TeX wrappers while retaining cell text."""
     value = re.sub(r"(?m)^\s*%.*$", "", value)
@@ -3723,6 +3831,7 @@ def _table_text(value: str) -> str:
     value = re.sub(r"\s+", " ", value)
     return value.strip()
 
+
 @dataclass(frozen=True)
 class _TableLayoutText:
     """A visible text primitive recovered from a faithful table layout."""
@@ -3732,6 +3841,7 @@ class _TableLayoutText:
     first: float
     second: float
     source: SourceRef
+
 
 def _table_heading(value: str, source: LatexSourceProfile) -> tuple[str, str] | None:
     """Return a normalized table number/title from a visible layout primitive."""
@@ -3745,6 +3855,7 @@ def _table_heading(value: str, source: LatexSourceProfile) -> tuple[str, str] | 
         return None
     return match.group("number"), normalized
 
+
 def _cluster_index(value: float, values: Sequence[float], tolerance: float) -> int:
     """Assign a coordinate to a stable ordered cluster."""
     centers: list[float] = []
@@ -3754,6 +3865,7 @@ def _cluster_index(value: float, values: Sequence[float], tolerance: float) -> i
         else:
             centers[-1] = (centers[-1] + candidate) / 2
     return min(range(len(centers)), key=lambda index: abs(centers[index] - value))
+
 
 def _load_layout_tables_from_file(
     root: Path,
@@ -3863,6 +3975,7 @@ def _load_layout_tables_from_file(
         )
     return tuple(tables)
 
+
 def _table_position(
     candidate: _TableCellCandidate, grid: tuple[_TableGridCell, ...]
 ) -> tuple[int | None, int | None]:
@@ -3886,6 +3999,7 @@ def _table_position(
     rows = sorted({item.y for item in grid})
     return rows.index(target.y), columns.index(target.x)
 
+
 def _load_tables_from_file(
     root: Path,
     path: Path,
@@ -3895,9 +4009,9 @@ def _load_tables_from_file(
     """Extract semantic table captions/cells while ignoring layout geometry."""
     events: list[tuple[int, str, tuple[str, ...]]] = []
     for name, count, kind in (
-            (source.stable_id, 1, "stable"),
-            (source.table_grid_cell, 4, "grid"),
-            (source.table_cell_text, 7, "cell"),
+        (source.stable_id, 1, "stable"),
+        (source.table_grid_cell, 4, "grid"),
+        (source.table_cell_text, 7, "cell"),
     ):
         events.extend((offset, kind, args) for offset, args in _commands(text, name, count))
     events.sort(key=lambda item: item[0])
@@ -4013,8 +4127,8 @@ def _load_tables_from_file(
             label
             for label in labels
             if float(label[2]) <= top
-               and float(label[1]) <= right
-               and float(label[1]) + float(label[3]) >= left
+            and float(label[1]) <= right
+            and float(label[1]) + float(label[3]) >= left
         ]
         if preceding:
             label = max(preceding, key=lambda item: float(item[2]))
@@ -4067,6 +4181,7 @@ def _load_tables_from_file(
         return tuple(tables)
     return _load_layout_tables_from_file(root, path, text, source)
 
+
 def _authored_layout_units(
     root: Path,
 ) -> tuple[tuple[Path, str], ...]:
@@ -4084,7 +4199,7 @@ def _authored_layout_units(
         path
         for path in authored_by_path
         if (root / path).is_file()
-           and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
+        and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
     }
     units: list[tuple[Path, str]] = []
     for path in _files(root):
@@ -4106,6 +4221,7 @@ def _authored_layout_units(
         seen_units.add(unit_key)
         result.append((path, text))
     return tuple(result)
+
 
 def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
     tables: list[Table] = []
@@ -4129,6 +4245,7 @@ def _load_tables(root: Path, source: LatexSourceProfile) -> tuple[Table, ...]:
         )
         previous_by_logical_id[table.logical_id or table.id] = normalized[-1]
     return tuple(normalized)
+
 
 def _derive_table_families(
     document_id: str,
@@ -4174,10 +4291,12 @@ def _derive_table_families(
         )
     )
 
+
 def _table_definition_key(value: str) -> str:
     """Normalize a table label for exact definition-term matching."""
     value = re.sub(r"\\[a-zA-Z]+(?:\{[^{}]*\})?", " ", value)
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
+
 
 def _link_table_cells_to_definitions(
     tables: Iterable[Table],
@@ -4210,10 +4329,12 @@ def _link_table_cells_to_definitions(
         linked.append(table.model_copy(update={"cells": tuple(cells)}))
     return tuple(linked)
 
+
 def _record_id(prefix: str, root: Path, path: Path, text: str, offset: int, ordinal: int) -> str:
     relative = path.relative_to(root).with_suffix("").as_posix()
     slug = re.sub(r"[^a-z0-9]+", "-", relative.casefold()).strip("-")
     return f"{prefix}-{slug}-l{line_number(text, offset)}-{ordinal}"
+
 
 def _heading_parts(args: tuple[str, ...], source: LatexSourceProfile) -> tuple[str, str] | None:
     """Return a normalized clause ID and title from either heading shape."""
@@ -4238,6 +4359,7 @@ def _heading_parts(args: tuple[str, ...], source: LatexSourceProfile) -> tuple[s
     number = match.group("number")
     title = match.group("title").strip() or value
     return f"clause-{number}", title
+
 
 def _hierarchy_headings(
     root: Path,
@@ -4352,11 +4474,13 @@ def _hierarchy_headings(
 
     return tuple(events[offset] for offset in sorted(events))
 
+
 def _nearest_heading(
     headings: tuple[tuple[int, str, str, SourceRef], ...], offset: int
 ) -> str | None:
     prior = [item for item in headings if item[0] <= offset]
     return prior[-1][1] if prior else None
+
 
 def _heading_context_by_file(
     root: Path, source: LatexSourceProfile
@@ -4394,6 +4518,7 @@ def _heading_context_by_file(
             prior = local[-1]
     return context
 
+
 def _load_references(root: Path, source: LatexSourceProfile) -> tuple[Reference, ...]:
     records: list[Reference] = []
     source_order = _source_order(root)
@@ -4419,6 +4544,7 @@ def _load_references(root: Path, source: LatexSourceProfile) -> tuple[Reference,
                 )
             )
     return tuple(sorted(records, key=lambda item: _source_key(item, source_order)))
+
 
 def _load_notes(root: Path, source: LatexSourceProfile) -> tuple[Note, ...]:
     records: list[Note] = []
@@ -4477,6 +4603,7 @@ def _load_notes(root: Path, source: LatexSourceProfile) -> tuple[Note, ...]:
             records.append(note)
     return tuple(sorted(records, key=lambda item: _source_key(item, source_order)))
 
+
 def _load_figures(root: Path, source: LatexSourceProfile) -> tuple[Figure, ...]:
     records: list[Figure] = []
     source_order = _source_order(root)
@@ -4516,6 +4643,7 @@ def _load_figures(root: Path, source: LatexSourceProfile) -> tuple[Figure, ...]:
             )
     return tuple(sorted(records, key=lambda item: _source_key(item, source_order)))
 
+
 def _load_examples(root: Path, source: LatexSourceProfile) -> tuple[Example, ...]:
     records: list[Example] = []
     source_order = _source_order(root)
@@ -4538,6 +4666,7 @@ def _load_examples(root: Path, source: LatexSourceProfile) -> tuple[Example, ...
             )
     return tuple(sorted(records, key=lambda item: _source_key(item, source_order)))
 
+
 def _annex_status(value: str) -> AnnexStatus:
     normalized = value.casefold()
     if normalized == "normative":
@@ -4545,6 +4674,7 @@ def _annex_status(value: str) -> AnnexStatus:
     if normalized == "informative":
         return "informative"
     return "unknown"
+
 
 def _load_annexes(root: Path, source: LatexSourceProfile) -> tuple[Annex, ...]:
     records: dict[str, Annex] = {}
@@ -4662,6 +4792,7 @@ def _load_annexes(root: Path, source: LatexSourceProfile) -> tuple[Annex, ...]:
         )
     )
 
+
 def _load_requirement_candidates(root: Path, source: LatexSourceProfile) -> tuple[Requirement, ...]:
     """Extract reviewable normative candidates from non-semantic page sources."""
     records: list[Requirement] = []
@@ -4675,7 +4806,7 @@ def _load_requirement_candidates(root: Path, source: LatexSourceProfile) -> tupl
         path
         for path in authored_by_path
         if (root / path).is_file()
-           and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
+        and "\\input{output/semantic/content-block-" in (root / path).read_text(encoding="utf-8")
     }
     units: list[tuple[Path, str, tuple[tuple[int, str, str, SourceRef], ...]]] = []
     for path in _files(root):
@@ -4738,6 +4869,7 @@ def _load_requirement_candidates(root: Path, source: LatexSourceProfile) -> tupl
             )
     return tuple(sorted(records, key=lambda item: _source_key(item, source_order)))
 
+
 def _load_state_machines(root: Path) -> tuple[StateMachine, ...]:
     semantic_root = _document_resources(root).semantic
     if not semantic_root.exists():
@@ -4750,6 +4882,7 @@ def _load_state_machines(root: Path) -> tuple[StateMachine, ...]:
         payload = StateMachineFile.model_validate(raw)
         machines.extend(payload.state_machines)
     return tuple(machines)
+
 
 def _load_sequence_diagrams(root: Path) -> tuple[SequenceDiagram, ...]:
     """Load authored sequence diagrams from the semantic source directory."""
@@ -4765,6 +4898,7 @@ def _load_sequence_diagrams(root: Path) -> tuple[SequenceDiagram, ...]:
         diagrams.extend(payload.sequence_diagrams)
     return tuple(diagrams)
 
+
 def _load_graph_diagrams(root: Path) -> tuple[GraphDiagram, ...]:
     """Load authored generic graph diagrams from the semantic source directory."""
     semantic_root = _document_resources(root).semantic
@@ -4779,6 +4913,7 @@ def _load_graph_diagrams(root: Path) -> tuple[GraphDiagram, ...]:
         diagrams.extend(payload.graph_diagrams)
     return tuple(diagrams)
 
+
 def _load_diagram_surfaces(root: Path) -> tuple[DiagramSurface, ...]:
     """Load the explicit figure/artwork classification for this document."""
     path = _document_resources(root).semantic_file("diagram-surfaces.json")
@@ -4786,6 +4921,7 @@ def _load_diagram_surfaces(root: Path) -> tuple[DiagramSurface, ...]:
         return ()
     payload = DiagramSurfaceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.surfaces
+
 
 def _load_authored_definitions(root: Path) -> tuple[Definition, ...]:
     """Load definitions that have already migrated to semantic source."""
@@ -4795,6 +4931,7 @@ def _load_authored_definitions(root: Path) -> tuple[Definition, ...]:
     payload = DefinitionFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.definitions
 
+
 def _load_authored_requirements(root: Path) -> tuple[Requirement, ...]:
     """Load reviewed requirements promoted from source-shaped candidates."""
     path = _document_resources(root).semantic_file("requirements.json")
@@ -4802,6 +4939,7 @@ def _load_authored_requirements(root: Path) -> tuple[Requirement, ...]:
         return ()
     payload = RequirementFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.requirements
+
 
 def _load_authored_requirement_reviews(root: Path) -> tuple[RequirementReview, ...]:
     """Load explicit dispositions for candidate requirement records."""
@@ -4811,6 +4949,7 @@ def _load_authored_requirement_reviews(root: Path) -> tuple[RequirementReview, .
     payload = RequirementReviewFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.reviews
 
+
 def _load_authored_requirement_links(root: Path) -> tuple[RequirementLink, ...]:
     """Load explicit requirement-to-transition relationships."""
     path = _document_resources(root).semantic_file("requirement-links.json")
@@ -4818,6 +4957,7 @@ def _load_authored_requirement_links(root: Path) -> tuple[RequirementLink, ...]:
         return ()
     payload = RequirementLinkFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.links
+
 
 def _load_authored_transition_coverage(root: Path) -> tuple[TransitionCoverage, ...]:
     """Load explicit mapped, N/A, and deferred transition dispositions."""
@@ -4827,6 +4967,7 @@ def _load_authored_transition_coverage(root: Path) -> tuple[TransitionCoverage, 
     payload = TransitionCoverageFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.transition_coverage
 
+
 def _load_authored_content_blocks(root: Path) -> tuple[ContentBlock, ...]:
     """Load prose blocks that have crossed into semantic source."""
     path = _document_resources(root).semantic_file("content-blocks.json")
@@ -4834,6 +4975,7 @@ def _load_authored_content_blocks(root: Path) -> tuple[ContentBlock, ...]:
         return ()
     payload = ContentBlockFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.content_blocks
+
 
 def _load_authored_content_elements(root: Path) -> tuple[ContentElement, ...]:
     """Load typed content units that sit beneath page fidelity adapters."""
@@ -4843,6 +4985,7 @@ def _load_authored_content_elements(root: Path) -> tuple[ContentElement, ...]:
     payload = ContentElementFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.content_elements
 
+
 def _load_authored_table_families(root: Path) -> tuple[TableFamily, ...]:
     """Load named table families that group parsed semantic table records."""
     path = _document_resources(root).semantic_file("table-families.json")
@@ -4850,6 +4993,7 @@ def _load_authored_table_families(root: Path) -> tuple[TableFamily, ...]:
         return ()
     payload = TableFamilyFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.table_families
+
 
 def _load_authored_implementations(
     root: Path,
@@ -4861,6 +5005,7 @@ def _load_authored_implementations(
     payload = ImplementationFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.implementations
 
+
 def _load_authored_api_surfaces(root: Path) -> tuple[ApiSurface, ...]:
     """Load directly authored API contracts when a source provides them."""
     path = _document_resources(root).semantic_file("api-surfaces.json")
@@ -4869,6 +5014,7 @@ def _load_authored_api_surfaces(root: Path) -> tuple[ApiSurface, ...]:
     payload = ApiSurfaceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.api_surfaces
 
+
 def _load_authored_api_crosswalks(root: Path) -> tuple[ApiCrosswalk, ...]:
     """Load semantic-to-binding crosswalks when a profile supplies them."""
     path = _document_resources(root).semantic_file("api-crosswalk.json")
@@ -4876,6 +5022,7 @@ def _load_authored_api_crosswalks(root: Path) -> tuple[ApiCrosswalk, ...]:
         return ()
     payload = ApiCrosswalkFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.api_crosswalks
+
 
 def _load_authored_requirement_api_bindings(
     root: Path,
@@ -4887,6 +5034,7 @@ def _load_authored_requirement_api_bindings(
     payload = RequirementApiBindingFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.bindings
 
+
 def _load_authored_verification_tests(root: Path) -> tuple[VerificationTest, ...]:
     """Load verification plans/evidence records from semantic source."""
     path = _document_resources(root).semantic_file("verification-tests.json")
@@ -4894,6 +5042,7 @@ def _load_authored_verification_tests(root: Path) -> tuple[VerificationTest, ...
         return ()
     payload = VerificationTestFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.verification_tests
+
 
 def _load_authored_state_traces(root: Path) -> tuple[StateTrace, ...]:
     """Load authored state-machine trace scenarios from semantic source."""
@@ -4903,6 +5052,7 @@ def _load_authored_state_traces(root: Path) -> tuple[StateTrace, ...]:
     payload = StateTraceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.state_traces
 
+
 def _load_authored_references(root: Path) -> tuple[Reference, ...]:
     """Load references with resolved cross-document semantic targets."""
     path = _document_resources(root).semantic_file("references.json")
@@ -4910,6 +5060,7 @@ def _load_authored_references(root: Path) -> tuple[Reference, ...]:
         return ()
     payload = ReferenceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.references
+
 
 def _load_authored_cross_references(root: Path) -> tuple[CrossReference, ...]:
     """Load explicitly authored cross-reference records when present."""
@@ -4919,6 +5070,7 @@ def _load_authored_cross_references(root: Path) -> tuple[CrossReference, ...]:
     payload = CrossReferenceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.cross_references
 
+
 def _load_authored_tables(root: Path) -> tuple[Table, ...]:
     """Load tables promoted from a legacy source adapter."""
     path = _document_resources(root).semantic_file("tables.json")
@@ -4926,6 +5078,7 @@ def _load_authored_tables(root: Path) -> tuple[Table, ...]:
         return ()
     payload = TableFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.tables
+
 
 def _load_authored_notes(root: Path) -> tuple[Note, ...]:
     """Load notes promoted from a legacy source adapter."""
@@ -4935,6 +5088,7 @@ def _load_authored_notes(root: Path) -> tuple[Note, ...]:
     payload = NoteFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.notes
 
+
 def _load_authored_figures(root: Path) -> tuple[Figure, ...]:
     """Load figures promoted from a legacy source adapter."""
     path = _document_resources(root).semantic_file("figures.json")
@@ -4942,6 +5096,7 @@ def _load_authored_figures(root: Path) -> tuple[Figure, ...]:
         return ()
     payload = FigureFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
     return payload.figures
+
 
 def _cross_reference_catalog(
     *,
@@ -5019,6 +5174,7 @@ def _cross_reference_catalog(
     for item in state_traces:
         add(item.id, "state-trace", item.title)
     return catalog
+
 
 def _derive_cross_references(
     document_id: str,
@@ -5152,6 +5308,7 @@ def _derive_cross_references(
             )
     return tuple(normalized), tuple(cross_references)
 
+
 def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
     """Load clause labels from an existing canonical navigation manifest."""
     path = _document_resources(root).canonical_file("source-navigation.json")
@@ -5201,6 +5358,7 @@ def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
             source=source,
         )
     return tuple(clauses.values())
+
 
 def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel:
     """Load typed semantic records from a document source tree."""
@@ -5466,7 +5624,7 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
                     item.source
                     for item in (*clauses.values(), *requirements.values())
                     if getattr(item, "parent_id", None) == identifier
-                       or getattr(item, "clause_id", None) == identifier
+                    or getattr(item, "clause_id", None) == identifier
                 ),
                 SourceRef(path="inferred", line=1),
             )
@@ -5620,9 +5778,11 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
         annexes=annexes,
     )
 
+
 def load_corpus(roots: Iterable[Path], source: LatexSourceProfile) -> ComplianceCorpus:
     """Load multiple document roots for cross-document target resolution."""
     return ComplianceCorpus(documents=tuple(load_document_model(root, source) for root in roots))
+
 
 def main() -> None:
     from hla_lab.corpus.hla_semantic import load_hla_document_model
@@ -5660,6 +5820,7 @@ def main() -> None:
         # Keep the diagnostic CLI usable under legacy Windows code pages.
         display = f"{item.id}: {item.statement}"
         print(display.encode("ascii", "backslashreplace").decode("ascii"))
+
 
 if __name__ == "__main__":
     main()

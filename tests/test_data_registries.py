@@ -9,6 +9,7 @@ from hla_lab.core.hla_profile import HLA_SOURCE_PROFILES, source_profile_for_doc
 from hla_lab.paths import DOCUMENT_CATALOG, DOCUMENT_IDS, REPO_ROOT, document_roots
 from hla_lab.publication.publication_registry import load_release_manifest
 
+
 class DataRegistryTests(unittest.TestCase):
     def test_document_identity_and_source_profiles_are_manifest_driven(self) -> None:
         self.assertEqual(
@@ -38,6 +39,7 @@ class DataRegistryTests(unittest.TestCase):
                 self.assertTrue((root / "build.py").is_file())
                 if project.kind != "fixture":
                     self.assertIsNotNone(project.build)
+
 
 if __name__ == "__main__":
     unittest.main()

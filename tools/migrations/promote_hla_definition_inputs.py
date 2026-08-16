@@ -13,6 +13,7 @@ DEFINITION_PATTERN = re.compile(
     re.DOTALL,
 )
 
+
 def promote(root: Path) -> tuple[Path, ...]:
     """Rewrite definition environments while retaining page order and layout."""
     changed: list[Path] = []
@@ -33,6 +34,7 @@ def promote(root: Path) -> tuple[Path, ...]:
             path.write_text(rewritten, encoding="utf-8")
             changed.append(path)
     return tuple(changed)
+
 
 if __name__ == "__main__":
     import argparse

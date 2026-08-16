@@ -26,12 +26,14 @@ __all__ = [
     "write_contract_json",
 ]
 
+
 class PublicationDocument(SemanticRecord):
     """A source document represented in a generated publication."""
 
     id: str = Field(min_length=1)
     title: str = Field(min_length=1)
     short_title: str = Field(min_length=1)
+
 
 class ProjectionContract(SemanticRecord):
     """The semantic record families and output role of one publication view."""
@@ -53,6 +55,7 @@ class ProjectionContract(SemanticRecord):
         "custom",
     ] = "custom"
 
+
 class PublicationSection(SemanticRecord):
     """One ordered, addressable section in the publication outline."""
 
@@ -63,6 +66,7 @@ class PublicationSection(SemanticRecord):
     level: int = Field(ge=1, le=3, default=1)
     per_document: bool = True
     required: bool = True
+
 
 class PublicationProfile(SemanticRecord):
     """Canonical publication outline and projection contract."""
@@ -111,13 +115,16 @@ class PublicationProfile(SemanticRecord):
         """Return an outline section by stable ID."""
         return next(item for item in self.sections if item.id == section_id)
 
+
 def publication_destination(profile_id: str, section_id: str) -> str:
     """Return the stable destination for an outline section."""
     return f"{profile_id}:{section_id}"
 
+
 def load_publication_profile(path: Path) -> PublicationProfile:
     """Load and validate a source-controlled publication profile."""
     return PublicationProfile.model_validate_json(path.read_text(encoding="utf-8"))
+
 
 def default_publication_profile(document_ids: tuple[str, ...]) -> PublicationProfile:
     """Provide a neutral contract for generic consumers and test fixtures."""
@@ -205,6 +212,7 @@ def default_publication_profile(document_ids: tuple[str, ...]) -> PublicationPro
         projections=projections,
         sections=sections,
     )
+
 
 def write_contract_json(profile: PublicationProfile, path: Path) -> None:
     """Write a deterministic generated copy of a validated profile."""

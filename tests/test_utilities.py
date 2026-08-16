@@ -17,6 +17,7 @@ from hla_lab.core.text import (
 )
 from tools.utility_inventory import inventory
 
+
 class UtilityTests(unittest.TestCase):
     def test_text_helpers_cover_renderer_edge_cases(self) -> None:
         self.assertEqual(safe_identifier("1/ready", prefix="state"), "state_n_1_ready")
@@ -57,6 +58,7 @@ class UtilityTests(unittest.TestCase):
     def test_repository_helper_inventory_has_no_exact_duplicate_bodies(self) -> None:
         _definitions, duplicates = inventory(Path(__file__).resolve().parents[1])
         self.assertEqual(duplicates, ())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -11,7 +11,8 @@ from pathlib import Path
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.parsing import try_balanced_group
 from hla_lab.core.semantic_model import ContentElement, SourceRef, load_document_model
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
+
 
 @dataclass(frozen=True)
 class Event:
@@ -19,6 +20,7 @@ class Event:
     start: int
     end: int
     args: tuple[str, ...]
+
 
 @dataclass(frozen=True)
 class Spec:
@@ -28,6 +30,7 @@ class Spec:
     clause_id: str | None = None
     parent_id: str | None = None
     record_ids: tuple[str, ...] = ()
+
 
 LIST_ENVIRONMENTS = {
     "hlaoverviewservicelist",
@@ -45,6 +48,7 @@ HEADING_COMMANDS = {
     "HLAFrontMajorHeadingAdjusted",
     "HLAMinorClauseHeading",
 }
+
 
 def _events(text: str, names: set[str]) -> tuple[Event, ...]:
     pattern = re.compile(r"\\(?P<name>[A-Za-z@]+)")
@@ -77,13 +81,14 @@ def _events(text: str, names: set[str]) -> tuple[Event, ...]:
         result.append(Event(name, match.start(), cursor, tuple(args)))
     return tuple(result)
 
+
 def _environments(text: str) -> tuple[tuple[str, int, int, str], ...]:
     result: list[tuple[str, int, int, str]] = []
     for match in re.finditer(r"\\begin\{([^}]+)\}", text):
         name = match.group(1)
         if name not in LIST_ENVIRONMENTS:
             continue
-        end_match = re.search(rf"\\end\{{{re.escape(name)}\}}", text[match.end():])
+        end_match = re.search(rf"\\end\{{{re.escape(name)}\}}", text[match.end() :])
         if end_match is None:
             continue
         body_start = match.end()
@@ -92,6 +97,7 @@ def _environments(text: str) -> tuple[tuple[str, int, int, str], ...]:
             (name, match.start(), match.end() + end_match.end(), text[body_start:body_end])
         )
     return tuple(result)
+
 
 def _strip_commands(text: str) -> str:
     value = text
@@ -160,6 +166,7 @@ def _strip_commands(text: str) -> str:
     value = re.sub(r"\s+", " ", value)
     return value.strip(" {}\n\t")
 
+
 def _paragraphs(raw: str) -> tuple[str, ...]:
     values: list[str] = []
     for part in re.split(r"\n\s*\n", raw):
@@ -167,6 +174,7 @@ def _paragraphs(raw: str) -> tuple[str, ...]:
         if value and len(value) >= 12:
             values.append(value)
     return tuple(values)
+
 
 def _source_for(block: dict[str, object], body: str, offset: int) -> dict[str, object]:
     source = block["source"]
@@ -177,6 +185,7 @@ def _source_for(block: dict[str, object], body: str, offset: int) -> dict[str, o
         "line": line,
         "end_line": max(line, line + body[offset:].count("\n")),
     }
+
 
 def _clause_positions(body: str, clause_ids: set[str]) -> tuple[tuple[int, str], ...]:
     positions: list[tuple[int, str]] = []
@@ -193,6 +202,7 @@ def _clause_positions(body: str, clause_ids: set[str]) -> tuple[tuple[int, str],
             positions.append((event.start, identifier))
     return tuple(sorted(positions))
 
+
 def _clause_at(
     block_clause: str | None,
     positions: tuple[tuple[int, str], ...],
@@ -205,6 +215,7 @@ def _clause_at(
         current = clause_id
     return current
 
+
 def _record_ids_for_input(path: str, known_ids: set[str]) -> tuple[str, ...]:
     match = re.search(r"(?:definition|requirement)-(.+?)(?:\.tex)?$", path)
     if match is None:
@@ -214,6 +225,7 @@ def _record_ids_for_input(path: str, known_ids: set[str]) -> tuple[str, ...]:
         if identifier == value:
             return (identifier,)
     return ()
+
 
 def _extract_block(
     block: dict[str, object],
@@ -284,7 +296,7 @@ def _extract_block(
         elif item_events:
             boundaries = [event.start for event in item_events] + [len(env_body)]
             for index, event in enumerate(item_events):
-                part = env_body[event.end: boundaries[index + 1]]
+                part = env_body[event.end : boundaries[index + 1]]
                 value = _strip_commands(part)
                 if value:
                     specs.append(
@@ -431,7 +443,7 @@ def _extract_block(
         key=lambda item: item.start,
         reverse=True,
     ):
-        prose = prose[: event.start] + "\n\n" + prose[event.end:]
+        prose = prose[: event.start] + "\n\n" + prose[event.end :]
     # Once a semantic page has explicit positioned prose events, residual
     # wrapper geometry is layout noise rather than a second prose surface.
     generic_paragraphs = () if direct_prose_events else _paragraphs(prose)
@@ -514,6 +526,7 @@ def _extract_block(
     block["element_ids"] = [str(item["id"]) for item in output]
     return tuple(output)
 
+
 def migrate(root: Path) -> None:
     model = load_document_model(root, HLA_SOURCE)
     blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
@@ -545,6 +558,7 @@ def migrate(root: Path) -> None:
     kinds = sorted({str(item["kind"]) for item in elements})
     print(f"kinds: {', '.join(kinds)}")
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -552,6 +566,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     migrate(args.root)
+
 
 if __name__ == "__main__":
     main()

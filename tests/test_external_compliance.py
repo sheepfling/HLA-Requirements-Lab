@@ -32,6 +32,7 @@ from hla_lab.traceability.compliance_sidecar import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 def _bundle(*, crosswalk_status: str = "matched") -> CorpusBundle:
     surface = BundleSurface(
         id="api.cpp.connect",
@@ -89,6 +90,7 @@ def _bundle(*, crosswalk_status: str = "matched") -> CorpusBundle:
         ),
     )
 
+
 def _manifest(*, status: str = "verified", evidence: bool = True) -> ImplementationManifest:
     return ImplementationManifest(
         schema_version=1,
@@ -125,6 +127,7 @@ def _manifest(*, status: str = "verified", evidence: bool = True) -> Implementat
         if evidence
         else (),
     )
+
 
 class ExternalComplianceTests(unittest.TestCase):
     def test_verified_external_manifest_passes(self) -> None:
@@ -432,6 +435,7 @@ class ExternalComplianceTests(unittest.TestCase):
                 ).manifest_id,
                 "saved-adapter.saved-request",
             )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -17,6 +17,7 @@ from hla_lab.publication.export_compliance_bundle import _document
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENT_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
+
 class RequirementApiBindingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -133,7 +134,7 @@ class RequirementApiBindingTests(unittest.TestCase):
                 surface.id
                 for surface in edition_model.api_surfaces
                 if surface.name == "unsubscribeObjectClassAttributes"
-                   and surface.language in {"cpp", "java"}
+                and surface.language in {"cpp", "java"}
             },
         )
 
@@ -159,6 +160,7 @@ class RequirementApiBindingTests(unittest.TestCase):
         self.assertEqual({item.api_surface_id for item in rows}, expected)
         self.assertTrue(all(item.status == "matched" for item in rows))
         self.assertTrue(all(item.relationship == "callback" for item in rows))
+
 
 if __name__ == "__main__":
     unittest.main()

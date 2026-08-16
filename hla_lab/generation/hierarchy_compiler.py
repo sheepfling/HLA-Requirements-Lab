@@ -46,6 +46,7 @@ __all__ = [
     "semantic_destination",
 ]
 
+
 class HierarchyRecord(SemanticRecord):
     """One addressable record in the compiled document graph."""
 
@@ -56,6 +57,7 @@ class HierarchyRecord(SemanticRecord):
     parent_id: str | None = None
     sequence: int = Field(default=0, ge=0)
     source: SourceRef | None = None
+
 
 class HierarchyNode(SemanticRecord):
     """A clause node with canonical children and directly owned records."""
@@ -69,6 +71,7 @@ class HierarchyNode(SemanticRecord):
     record_ids: tuple[str, ...] = ()
     source: SourceRef
 
+
 class HierarchyAnchor(SemanticRecord):
     """A stable destination generated from a semantic record ID."""
 
@@ -76,6 +79,7 @@ class HierarchyAnchor(SemanticRecord):
     key: str = Field(min_length=1)
     destination: str = Field(min_length=1)
     kind: str = Field(min_length=1)
+
 
 class HierarchyLink(SemanticRecord):
     """An explicit relationship represented by the compiled document graph."""
@@ -86,6 +90,7 @@ class HierarchyLink(SemanticRecord):
     target_id: str = Field(min_length=1)
     target_key: str = Field(min_length=1)
     relation: str = Field(min_length=1)
+
 
 class CompiledHierarchy(SemanticRecord):
     """Complete hierarchy, ownership, navigation, and link output."""
@@ -106,6 +111,7 @@ class CompiledHierarchy(SemanticRecord):
     def to_json(self) -> str:
         """Serialize the compiler output with deterministic Pydantic JSON."""
         return self.model_dump_json(indent=2)
+
 
 _SURFACE_ORDER = (
     "clauses",
@@ -143,13 +149,16 @@ _SURFACE_KINDS = {
     "annexes": "annex",
 }
 
+
 def semantic_destination(document_id: str, record_id: str) -> str:
     """Return the cross-document destination contract for a record."""
     return f"{document_id}:{record_id}"
 
+
 def _source(record: SemanticRecord) -> SourceRef | None:
     value = getattr(record, "source", None)
     return value if isinstance(value, SourceRef) else None
+
 
 def _clause_owner(record: SemanticRecord) -> str | None:
     """Find a direct clause owner without using page or fragment filenames."""
@@ -157,6 +166,7 @@ def _clause_owner(record: SemanticRecord) -> str | None:
     if clause_id:
         return clause_id
     return getattr(record, "owner_id", None)
+
 
 def _surface_records(model: DocumentModel) -> tuple[tuple[str, SemanticRecord], ...]:
     values: list[tuple[str, SemanticRecord]] = []
@@ -169,6 +179,7 @@ def _surface_records(model: DocumentModel) -> tuple[tuple[str, SemanticRecord], 
             if isinstance(record, Table):
                 values.extend(("table-cell", cell) for cell in record.cells)
     return tuple(values)
+
 
 def _record_kind(surface: str, record: SemanticRecord) -> str:
     if isinstance(record, Clause):
@@ -185,11 +196,13 @@ def _record_kind(surface: str, record: SemanticRecord) -> str:
         return "table-cell"
     return surface
 
+
 def _record_key(kind: str, record_id: str) -> str:
     """Namespace graph records whose source IDs overlap by record kind."""
     if kind in {"state-machine", "state", "transition", "table-cell"}:
         return f"{kind}:{record_id}"
     return record_id
+
 
 def _key_for(compiled: CompiledHierarchy, record_id: str, *, kind: str | None = None) -> str:
     matches = [item for item in compiled.records if item.id == record_id]
@@ -198,6 +211,7 @@ def _key_for(compiled: CompiledHierarchy, record_id: str, *, kind: str | None = 
     if len(matches) != 1:
         raise ValueError(f"unable to resolve unique compiled record {kind or ''}:{record_id}")
     return matches[0].key
+
 
 def _record_owner(record: SemanticRecord, *, by_id: Mapping[str, SemanticRecord]) -> str | None:
     if isinstance(record, Clause):
@@ -214,6 +228,7 @@ def _record_owner(record: SemanticRecord, *, by_id: Mapping[str, SemanticRecord]
         return record.clause_id
     return _clause_owner(record)
 
+
 def _record_parent(record: SemanticRecord) -> str | None:
     if isinstance(record, Clause):
         return record.parent_id
@@ -224,6 +239,7 @@ def _record_parent(record: SemanticRecord) -> str | None:
     if isinstance(record, TableCell):
         return record.table_id
     return None
+
 
 def _sort_records(
     model: DocumentModel, records: Iterable[HierarchyRecord]
@@ -243,6 +259,7 @@ def _sort_records(
             ),
         )
     )
+
 
 def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[HierarchyLink, ...]:
     def link(
@@ -326,6 +343,7 @@ def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[Hierarchy
                 link(implementation.id, model.document_id, requirement_id, "implements-requirement")
             )
     return tuple(sorted(links, key=lambda item: (item.source_id, item.relation, item.target_id)))
+
 
 def compile_hierarchy(model: DocumentModel) -> CompiledHierarchy:
     """Compile every validated semantic surface into one canonical graph.
@@ -416,6 +434,7 @@ def compile_hierarchy(model: DocumentModel) -> CompiledHierarchy:
     object.__setattr__(compiled, "links", _links(model, compiled))
     return compiled
 
+
 def render_hierarchy_index(compiled: CompiledHierarchy) -> str:
     """Render model-wide hierarchy metadata and link helpers for LaTeX."""
 
@@ -441,14 +460,14 @@ def render_hierarchy_index(compiled: CompiledHierarchy) -> str:
 
     lines = ["% Generated hierarchy compiler output; edit semantic source instead."]
     for name, value in (
-            ("DocumentID", compiled.document_id),
-            ("SchemaVersion", str(compiled.schema_version)),
-            ("NodeCount", str(len(compiled.nodes))),
-            ("RecordCount", str(len(compiled.records))),
-            ("AnchorCount", str(len(compiled.anchors))),
-            ("LinkCount", str(len(compiled.links))),
-            ("RootIDs", ",".join(compiled.root_ids)),
-            ("ClauseIDs", ",".join(node.id for node in compiled.nodes)),
+        ("DocumentID", compiled.document_id),
+        ("SchemaVersion", str(compiled.schema_version)),
+        ("NodeCount", str(len(compiled.nodes))),
+        ("RecordCount", str(len(compiled.records))),
+        ("AnchorCount", str(len(compiled.anchors))),
+        ("LinkCount", str(len(compiled.links))),
+        ("RootIDs", ",".join(compiled.root_ids)),
+        ("ClauseIDs", ",".join(node.id for node in compiled.nodes)),
     ):
         lines.extend(macro(name, value))
     # These helpers are intentionally generic; a family profile only chooses
@@ -467,8 +486,10 @@ def render_hierarchy_index(compiled: CompiledHierarchy) -> str:
     )
     return "\n".join(lines)
 
+
 def _records_on_source_path(compiled: CompiledHierarchy, path: str) -> tuple[HierarchyRecord, ...]:
     return tuple(item for item in compiled.records if item.source and item.source.path == path)
+
 
 def render_block_bindings(
     model: DocumentModel,
@@ -531,6 +552,7 @@ def render_block_bindings(
             continue
         lines.append(render_anchor(anchor.key, dialect, document_id=model.document_id))
     return "\n".join(lines)
+
 
 def render_hierarchy_outline(model: DocumentModel, dialect: LatexDialect) -> str:
     """Render the complete visible hierarchy recursively from compiled nodes."""

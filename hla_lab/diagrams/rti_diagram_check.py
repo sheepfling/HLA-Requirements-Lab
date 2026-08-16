@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict
 
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 
+
 class RtiDiagramReport(BaseModel):
     """Typed diagram-to-transition coverage report."""
 
@@ -25,6 +26,7 @@ class RtiDiagramReport(BaseModel):
     graph_diagrams: int
     graph_edges: int
     unmapped_graph_edges: tuple[str, ...]
+
 
 def report(root: Path) -> RtiDiagramReport:
     model = load_hla_document_model(root)
@@ -65,6 +67,7 @@ def report(root: Path) -> RtiDiagramReport:
         unmapped_graph_edges=tuple(unmapped_edges),
     )
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path, help="HLA document source directory")
@@ -90,6 +93,7 @@ def main() -> int:
             )
         )
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

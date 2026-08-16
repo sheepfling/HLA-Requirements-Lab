@@ -9,8 +9,10 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+
 def _node_name(identifier: str) -> str:
     return "sm_" + re.sub(r"[^a-zA-Z0-9]+", "_", identifier).strip("_")
+
 
 def _text(value: object) -> str:
     replacements = {
@@ -39,6 +41,7 @@ def _text(value: object) -> str:
             escaped.append(replacements.get(character, character))
     return "".join(escaped)
 
+
 def _machine(payload: Mapping[str, Any], machine_id: str | None) -> Mapping[str, Any]:
     machines = payload.get("state_machines", [])
     if not isinstance(machines, list) or not machines:
@@ -52,6 +55,7 @@ def _machine(payload: Mapping[str, Any], machine_id: str | None) -> Mapping[str,
             return machine
     raise ValueError(f"machine not found: {machine_id}")
 
+
 def _transition_text(transition: Mapping[str, Any]) -> str:
     event = str(transition.get("event", "")).strip()
     guard = str(transition.get("guard", "")).strip()
@@ -60,6 +64,7 @@ def _transition_text(transition: Mapping[str, Any]) -> str:
     if guard:
         return f"[{guard}]"
     return event
+
 
 def _render_scale(
     machine: Mapping[str, Any],
@@ -102,6 +107,7 @@ def _render_scale(
     height = max(item[1] for item in points) - min(item[1] for item in points) + 3.0
     return round(min(1.0, 16.0 / width, 11.0 / height), 3)
 
+
 def _automatic_label_position(
     source: Mapping[str, Any],
     target: Mapping[str, Any],
@@ -122,6 +128,7 @@ def _automatic_label_position(
         x += 0.92
     return round(x, 3), round(y, 3)
 
+
 def _loop_label_position(source: Mapping[str, Any], side: str) -> tuple[float, float]:
     x = float(source["x"])
     y = float(source["y"])
@@ -134,6 +141,7 @@ def _loop_label_position(source: Mapping[str, Any], side: str) -> tuple[float, f
     else:
         x += 1.1
     return round(x, 3), round(y, 3)
+
 
 def _layout_nodes(
     machine: Mapping[str, Any], layout: Mapping[str, Any]
@@ -161,12 +169,13 @@ def _layout_nodes(
         if descendant_positions:
             nodes[str(state_id)] = {
                 "x": sum(float(position["x"]) for position in descendant_positions)
-                     / len(descendant_positions),
+                / len(descendant_positions),
                 "y": sum(float(position["y"]) for position in descendant_positions)
-                     / len(descendant_positions),
+                / len(descendant_positions),
                 "visible": False,
             }
     return nodes
+
 
 def render(machine: Mapping[str, Any]) -> str:
     layout = machine.get("layout", {})
@@ -331,6 +340,7 @@ def render(machine: Mapping[str, Any]) -> str:
     lines.extend(["\\end{tikzpicture}", ""])
     return "\n".join(lines)
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path, help="Canonical state-machine JSON")
@@ -340,6 +350,7 @@ def main() -> None:
     payload = json.loads(args.source.read_text(encoding="utf-8"))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(render(_machine(payload, args.machine)), encoding="utf-8")
+
 
 if __name__ == "__main__":
     main()

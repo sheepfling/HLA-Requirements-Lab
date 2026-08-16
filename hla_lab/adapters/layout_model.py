@@ -13,6 +13,7 @@ from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import SourceRef, _commands, _files, _latex_text, _source
 from hla_lab.core.source_adapter import LatexSourceProfile
 
+
 @dataclass(frozen=True)
 class LayoutBlock:
     """A layout primitive with its geometry kept separate from semantic text."""
@@ -27,6 +28,7 @@ class LayoutBlock:
     text: str
     source: SourceRef
 
+
 class LayoutInventory(BaseModel):
     """Typed aggregate counts for one document's layout model."""
 
@@ -37,6 +39,7 @@ class LayoutInventory(BaseModel):
     nonempty_text_blocks: int
     text_characters: int
     kinds: dict[str, int]
+
 
 def _block(
     root: Path,
@@ -66,6 +69,7 @@ def _block(
         _source(root, path, text, offset),
     )
 
+
 def load_layout_model(root: Path, source: LatexSourceProfile) -> tuple[LayoutBlock, ...]:
     """Load layout blocks without making their coordinates semantic records."""
     blocks: list[LayoutBlock] = []
@@ -75,6 +79,7 @@ def load_layout_model(root: Path, source: LatexSourceProfile) -> tuple[LayoutBlo
             for offset, args in _commands(text, command, argument_count):
                 blocks.append(_block(root, path, text, command, args, offset, source))
     return tuple(sorted(blocks, key=lambda item: (item.source.path, item.source.line)))
+
 
 def inventory(root: Path, source: LatexSourceProfile) -> LayoutInventory:
     """Return a compact in-memory inventory suitable for progress checks."""
@@ -90,6 +95,7 @@ def inventory(root: Path, source: LatexSourceProfile) -> LayoutInventory:
         },
     )
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path, help="Document source directory")
@@ -101,6 +107,7 @@ def main() -> None:
     else:
         for key, value in result.model_dump(mode="json").items():
             print(f"{key}: {value}")
+
 
 if __name__ == "__main__":
     main()

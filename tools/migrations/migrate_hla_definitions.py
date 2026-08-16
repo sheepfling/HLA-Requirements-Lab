@@ -17,6 +17,7 @@ DEFINITION_PATTERN = re.compile(
     re.DOTALL,
 )
 
+
 def _source_definitions(root: Path) -> dict[str, tuple[str | None, str]]:
     found: dict[str, tuple[str | None, str]] = {}
     for path in sorted((root / "sections" / "semantic" / "definitions").glob("page-*.tex")):
@@ -27,6 +28,7 @@ def _source_definitions(root: Path) -> dict[str, tuple[str | None, str]]:
                 raise ValueError(f"duplicate definition source: {identifier}")
             found[identifier] = (leading_gap, body.strip("\n"))
     return found
+
 
 def migrate(root: Path, output: Path) -> Path:
     """Write all parsed 1516 definitions as authored semantic source."""
@@ -80,6 +82,7 @@ def migrate(root: Path, output: Path) -> Path:
     output.parent.mkdir(parents=True, exist_ok=True)
     write_json(output, payload)
     return output
+
 
 if __name__ == "__main__":
     import argparse

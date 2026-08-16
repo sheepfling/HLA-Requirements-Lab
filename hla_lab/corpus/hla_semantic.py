@@ -25,10 +25,12 @@ __all__ = [
     "source_profile_for_document",
 ]
 
+
 def load_hla_document_model(root: Path) -> DocumentModel:
     """Load one HLA source tree through the generic semantic model."""
     source = source_profile_for_document(root.name)
     return build_hla_surface_contract(load_document_model(root, source))
+
 
 def load_hla_corpus(roots: Iterable[Path]) -> ComplianceCorpus:
     """Load HLA document roots through the generic corpus loader."""

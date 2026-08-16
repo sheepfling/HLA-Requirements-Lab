@@ -15,6 +15,7 @@ CORPUS_ROOTS = tuple(
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
 )
 
+
 class SemanticGraphTests(unittest.TestCase):
     def test_authored_implementation_seams_have_provenance_without_becoming_concrete(self) -> None:
         model = load_document_model(HLA_15161, HLA_SOURCE)
@@ -41,6 +42,7 @@ class SemanticGraphTests(unittest.TestCase):
         self.assertTrue(all(item.relation == "unlinked" for item in sequence_messages))
         self.assertTrue(all(not item.related_transition_ids for item in sequence_messages))
         self.assertTrue(all(item.source is not None for item in sequence_messages))
+
 
 if __name__ == "__main__":
     unittest.main()

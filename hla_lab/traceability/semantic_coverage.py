@@ -11,18 +11,22 @@ from hla_lab.core.semantic_model import DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.paths import REPO_ROOT, document_roots
 
+
 class CoverageReportModel(BaseModel):
     """Shared immutable base for semantic coverage report records."""
 
     model_config = ConfigDict(frozen=True)
 
+
 class RequirementCoverage(CoverageReportModel):
     candidates: int
     reviews: dict[str, int]
 
+
 class TransitionCoverage(CoverageReportModel):
     total: int
     coverage: dict[str, int]
+
 
 class CoverageDocumentReport(CoverageReportModel):
     document: str
@@ -35,10 +39,12 @@ class CoverageDocumentReport(CoverageReportModel):
     failures: tuple[str, ...]
     passed: bool
 
+
 class CoverageReport(CoverageReportModel):
     documents: tuple[CoverageDocumentReport, ...]
     failures: tuple[str, ...]
     passed: bool
+
 
 def _document_report(model: DocumentModel) -> CoverageDocumentReport:
     reviews = model.requirement_review_counts()
@@ -91,6 +97,7 @@ def _document_report(model: DocumentModel) -> CoverageDocumentReport:
         passed=not failures,
     )
 
+
 def build_report(roots: tuple[Path, ...]) -> CoverageReport:
     """Return a deterministic M14 coverage report without writing artifacts."""
     corpus = load_hla_corpus(roots)
@@ -103,6 +110,7 @@ def build_report(roots: tuple[Path, ...]) -> CoverageReport:
         failures=failures,
         passed=not failures,
     )
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -129,6 +137,7 @@ def main() -> int:
         for failure in report.failures:
             print(f"failure: {failure}")
     return 0 if report.passed or not args.check else 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -11,10 +11,12 @@ from pydantic import BaseModel, ConfigDict
 from hla_lab.core.semantic_model import ComplianceIssue, DocumentModel
 from hla_lab.paths import REPO_ROOT, document_roots
 
+
 class DashboardModel(BaseModel):
     """Shared immutable base for dashboard report records."""
 
     model_config = ConfigDict(frozen=True)
+
 
 class RequirementDashboard(DashboardModel):
     total: int
@@ -26,6 +28,7 @@ class RequirementDashboard(DashboardModel):
     explicit_transition_requirements_with_reviewed_links: int
     review_dispositions: dict[str, int]
 
+
 class ImplementationDashboard(DashboardModel):
     total: int
     by_status: dict[str, int]
@@ -34,6 +37,7 @@ class ImplementationDashboard(DashboardModel):
     with_source_reference: int
     effective_transition_status: dict[str, int]
     concrete_transition_mappings: int
+
 
 class StateMachineDashboard(DashboardModel):
     total: int
@@ -47,10 +51,12 @@ class StateMachineDashboard(DashboardModel):
     transitions_with_postcondition: int
     transition_coverage: dict[str, int]
 
+
 class SequenceDashboard(DashboardModel):
     total: int
     participants: int
     messages: int
+
 
 class IssueDashboard(DashboardModel):
     reviewed: int
@@ -58,11 +64,13 @@ class IssueDashboard(DashboardModel):
     including_candidates: int
     including_candidates_by_code: dict[str, int]
 
+
 class M5ContractDashboard(DashboardModel):
     explicit_requirements_have_clause_ownership: bool
     explicit_transition_requirements_have_reviewed_links: bool
     duplicate_ids_validated: bool
     state_targets_validated: bool
+
 
 class DocumentDashboard(DashboardModel):
     document: str
@@ -73,6 +81,7 @@ class DocumentDashboard(DashboardModel):
     sequence_diagrams: SequenceDashboard
     issues: IssueDashboard
     m5_contract: M5ContractDashboard
+
 
 class DashboardTotals(DashboardModel):
     documents: int
@@ -88,10 +97,12 @@ class DashboardTotals(DashboardModel):
     transitions_without_coverage: int
     unresolved_references: int
 
+
 class DashboardReport(DashboardModel):
     documents: tuple[DocumentDashboard, ...]
     totals: DashboardTotals
     unresolved_references: tuple[ComplianceIssue, ...]
+
 
 def _document_report(model: DocumentModel) -> DocumentDashboard:
     requirements = model.requirements
@@ -147,7 +158,7 @@ def _document_report(model: DocumentModel) -> DocumentDashboard:
             ),
             effective_transition_status=implementation_status,
             concrete_transition_mappings=implementation_status["implemented"]
-                                         + implementation_status["verified"],
+            + implementation_status["verified"],
         ),
         state_machines=StateMachineDashboard(
             total=len(model.state_machines),
@@ -185,11 +196,12 @@ def _document_report(model: DocumentModel) -> DocumentDashboard:
             explicit_transition_requirements_have_reviewed_links=len(
                 reviewed_transition_requirements
             )
-                                                                 == len(transition_requirements),
+            == len(transition_requirements),
             duplicate_ids_validated=True,
             state_targets_validated=True,
         ),
     )
+
 
 def build_dashboard(roots: tuple[Path, ...]) -> DashboardReport:
     """Load an HLA corpus at the CLI boundary and return source-only metrics."""
@@ -223,8 +235,10 @@ def build_dashboard(roots: tuple[Path, ...]) -> DashboardReport:
         unresolved_references=tuple(unresolved),
     )
 
+
 def _default_roots() -> tuple[Path, ...]:
     return document_roots(REPO_ROOT)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -251,6 +265,7 @@ def main() -> None:
         f"transitions: {totals.transitions_mapped} mapped / {totals.transitions_unmapped} unmapped"
     )
     print(f"unresolved references: {totals.unresolved_references}")
+
 
 if __name__ == "__main__":
     main()

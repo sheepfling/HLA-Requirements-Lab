@@ -7,6 +7,7 @@ from typing import Literal
 
 from hla_lab.adapters.latex_renderer import LatexDialect
 
+
 @dataclass(frozen=True)
 class DemoSourceCommands:
     """The source vocabulary supplied by this document family."""
@@ -49,6 +50,7 @@ class DemoSourceCommands:
     text_wrapper_commands: tuple[str, ...] = ("DemoTerm",)
     text_note_commands: tuple[str, ...] = ("DemoNote",)
     layout_text_block_commands: tuple[tuple[str, int], ...] = ()
+
 
 DEMO_SOURCE = DemoSourceCommands()
 

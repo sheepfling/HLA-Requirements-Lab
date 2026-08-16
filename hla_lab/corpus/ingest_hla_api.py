@@ -26,20 +26,25 @@ OWNER_BY_FILE = {
     "FederateAmbassador": ("FederateAmbassador", "callback"),
 }
 
+
 def _relative(path: Path) -> str:
     return path.resolve().relative_to(ROOT.resolve()).as_posix()
+
 
 def _source(path: str, line: int) -> SourceRef:
     return SourceRef(path=path, line=max(line, 1))
 
+
 def _normalize(value: str) -> str:
     return normalize_whitespace(value)
+
 
 def _stable_id(edition: str, binding: str, owner: str, name: str, signature: str) -> str:
     digest = hashlib.sha1(signature.encode("utf-8")).hexdigest()[:12]
     owner_slug = slugify(owner, fallback="owner")
     name_slug = slugify(name, fallback="name")
     return f"api.{edition}.{binding}.{owner_slug}.{name_slug}.{digest}"
+
 
 def _split_top_level(value: str) -> tuple[str, ...]:
     parts: list[str] = []
@@ -70,6 +75,7 @@ def _split_top_level(value: str) -> tuple[str, ...]:
         parts.append(tail)
     return tuple(parts)
 
+
 def _clause_id(comments: str) -> str | None:
     for line in reversed(comments.splitlines()):
         cleaned = re.sub(r"^[\s/*#-]+", "", line).strip()
@@ -77,6 +83,7 @@ def _clause_id(comments: str) -> str | None:
         if match:
             return f"clause-{match.group('number')}"
     return None
+
 
 def _throws(comments: str, declaration: str) -> tuple[str, ...]:
     values = re.findall(r"@throws\s+([A-Za-z_][\w.]*)", comments)
@@ -89,6 +96,7 @@ def _throws(comments: str, declaration: str) -> tuple[str, ...]:
         if item.strip()
     )
     return tuple(dict.fromkeys(values))
+
 
 def _parameter(value: str, *, language: str, ordinal: int, direction: str = "in") -> ApiParameter:
     raw = _normalize(value).rstrip(";")
@@ -113,6 +121,7 @@ def _parameter(value: str, *, language: str, ordinal: int, direction: str = "in"
         description=f"{language} declaration parameter",
     )
 
+
 def _parameters(value: str, *, language: str, direction: str = "in") -> tuple[ApiParameter, ...]:
     if not value.strip():
         return ()
@@ -120,6 +129,7 @@ def _parameters(value: str, *, language: str, direction: str = "in") -> tuple[Ap
         _parameter(item, language=language, ordinal=index, direction=direction)
         for index, item in enumerate(_split_top_level(value), start=1)
     )
+
 
 def _matching_paren(value: str, opening: int) -> int:
     depth = 0
@@ -131,6 +141,7 @@ def _matching_paren(value: str, opening: int) -> int:
             if depth == 0:
                 return index
     return -1
+
 
 def _cxx_declarations(
     text: str,
@@ -183,7 +194,7 @@ def _cxx_declarations(
                         owner=owner,
                         language="cpp",
                         signature=signature,
-                        parameters=_parameters(declaration[opening + 1: closing], language="cpp"),
+                        parameters=_parameters(declaration[opening + 1 : closing], language="cpp"),
                         result_type=_normalize(match.group("return")),
                         exception_types=_throws("\n".join(comments), declaration),
                         clause_ids=tuple(
@@ -196,6 +207,7 @@ def _cxx_declarations(
         comments = []
         index += 1
     return tuple(records)
+
 
 def _java_declarations(
     text: str,
@@ -246,7 +258,7 @@ def _java_declarations(
                         owner=owner,
                         language="java",
                         signature=signature,
-                        parameters=_parameters(declaration[opening + 1: closing], language="java"),
+                        parameters=_parameters(declaration[opening + 1 : closing], language="java"),
                         result_type=_normalize(match.group("return")),
                         exception_types=_throws("\n".join(comments), declaration),
                         clause_ids=tuple(
@@ -259,6 +271,7 @@ def _java_declarations(
         comments = []
         index += 1
     return tuple(records)
+
 
 def _proto_messages(
     text: str,
@@ -285,7 +298,7 @@ def _proto_messages(
                     break
         if closing < 0:
             continue
-        body = text[opening + 1: closing]
+        body = text[opening + 1 : closing]
         direction = "return" if name.endswith("Response") else "in"
         fields: list[ApiParameter] = []
         for field_index, field in enumerate(
@@ -328,6 +341,7 @@ def _proto_messages(
         )
     return tuple(records)
 
+
 def _wsdl_operations(path: Path, edition: str) -> tuple[ApiSurface, ...]:
     namespace = "http://schemas.xmlsoap.org/wsdl/"
     root = ET.parse(path).getroot()
@@ -353,9 +367,11 @@ def _wsdl_operations(path: Path, edition: str) -> tuple[ApiSurface, ...]:
             )
     return tuple(records)
 
+
 def _read_zip_entry(path: Path, entry: str) -> str:
     with ZipFile(path) as archive:
         return archive.read(entry).decode("utf-8", errors="replace")
+
 
 def _unique(records: tuple[ApiSurface, ...]) -> tuple[ApiSurface, ...]:
     """Keep one record for repeated source declarations with identical signatures."""
@@ -364,12 +380,14 @@ def _unique(records: tuple[ApiSurface, ...]) -> tuple[ApiSurface, ...]:
         unique.setdefault(record.id, record)
     return tuple(unique.values())
 
+
 def _find_entry(path: Path, suffix: str) -> str:
     with ZipFile(path) as archive:
         matches = [name for name in archive.namelist() if name.endswith(suffix)]
     if len(matches) != 1:
         raise ValueError(f"expected one {suffix} entry in {path}, found {matches}")
     return matches[0]
+
 
 def ingest_2010(root: Path) -> tuple[ApiSurface, ...]:
     inbox = resources(root).inbox
@@ -378,8 +396,8 @@ def ingest_2010(root: Path) -> tuple[ApiSurface, ...]:
     wsdl = inbox / "1516.1-2010_downloads" / "hla1516e.wsdl"
     records: list[ApiSurface] = []
     for archive, language, suffixes in (
-            (cpp, "cpp", ("RTI/RTIambassador.h", "RTI/FederateAmbassador.h")),
-            (java, "java", ("/RTIambassador.java", "/FederateAmbassador.java")),
+        (cpp, "cpp", ("RTI/RTIambassador.h", "RTI/FederateAmbassador.h")),
+        (java, "java", ("/RTIambassador.java", "/FederateAmbassador.java")),
     ):
         for suffix in suffixes:
             entry = _find_entry(archive, suffix)
@@ -400,19 +418,20 @@ def ingest_2010(root: Path) -> tuple[ApiSurface, ...]:
     records.extend(_wsdl_operations(wsdl, "2010"))
     return _unique(tuple(records))
 
+
 def ingest_2025(root: Path) -> tuple[ApiSurface, ...]:
     archive = resources(root).inbox_file(
         "1516.1-2025_downloads", "1516-2025_API_XML_2025_08_14.zip"
     )
     records: list[ApiSurface] = []
     for suffix in (
-            "/cpp/RTI/RTIambassador.h",
-            "/cpp/RTI/FederateAmbassador.h",
-            "/java/hla/rti1516_2025/RTIambassador.java",
-            "/java/hla/rti1516_2025/FederateAmbassador.java",
-            "/protobuf/RTIambassador.proto",
-            "/protobuf/FederateAmbassador.proto",
-            "/protobuf/datatypes.proto",
+        "/cpp/RTI/RTIambassador.h",
+        "/cpp/RTI/FederateAmbassador.h",
+        "/java/hla/rti1516_2025/RTIambassador.java",
+        "/java/hla/rti1516_2025/FederateAmbassador.java",
+        "/protobuf/RTIambassador.proto",
+        "/protobuf/FederateAmbassador.proto",
+        "/protobuf/datatypes.proto",
     ):
         entry = _find_entry(archive, suffix)
         text = _read_zip_entry(archive, entry)
@@ -460,10 +479,12 @@ def ingest_2025(root: Path) -> tuple[ApiSurface, ...]:
             )
     return _unique(tuple(records))
 
+
 def write_records(output: Path, records: tuple[ApiSurface, ...]) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     payload = ApiSurfaceFile(schema_version=1, api_surfaces=records).model_dump(mode="json")
     write_json(output, payload)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -474,6 +495,7 @@ def main() -> None:
     records = ingest_2010(args.root) if args.edition == "2010" else ingest_2025(args.root)
     write_records(args.output, records)
     print(f"wrote {len(records)} API surfaces to {args.output}")
+
 
 if __name__ == "__main__":
     main()

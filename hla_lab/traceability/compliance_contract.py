@@ -37,16 +37,19 @@ __all__ = [
     "ImplementationManifest",
 ]
 
+
 class ContractRecord(BaseModel):
     """Strict base for portable sidecar records."""
 
     model_config = ConfigDict(extra="forbid")
+
 
 class BundleRequirement(ContractRecord):
     id: str = Field(min_length=1)
     clause_id: str | None = None
     title: str = ""
     statement: str = ""
+
 
 class BundleTransition(ContractRecord):
     id: str = Field(min_length=1)
@@ -56,6 +59,7 @@ class BundleTransition(ContractRecord):
     target_state: str | None = None
     requirement_ids: tuple[str, ...] = ()
 
+
 class BundleMapping(ContractRecord):
     id: str = Field(min_length=1)
     interface_kind: str = Field(min_length=1)
@@ -63,12 +67,14 @@ class BundleMapping(ContractRecord):
     requirement_ids: tuple[str, ...] = ()
     transition_ids: tuple[str, ...] = ()
 
+
 class BundleParameter(ContractRecord):
     id: str = Field(min_length=1)
     name: str = Field(min_length=1)
     type: str = Field(min_length=1)
     direction: Literal["in", "out", "inout", "return"] = "in"
     optional: bool = False
+
 
 class BundleSource(ContractRecord):
     """Portable source location for a semantic or declaration record."""
@@ -83,6 +89,7 @@ class BundleSource(ContractRecord):
             raise ValueError("bundle source end_line must not precede line")
         return self
 
+
 class BundleSurface(ContractRecord):
     id: str = Field(min_length=1)
     name: str = Field(min_length=1)
@@ -96,6 +103,7 @@ class BundleSurface(ContractRecord):
     exception_types: tuple[str, ...] = ()
     source: BundleSource | None = None
 
+
 class BundleCrosswalk(ContractRecord):
     id: str = Field(min_length=1)
     implementation_mapping_id: str = Field(min_length=1)
@@ -106,6 +114,7 @@ class BundleCrosswalk(ContractRecord):
     status: Literal["matched", "ambiguous", "unmatched", "planned"]
     candidate_api_surface_ids: tuple[str, ...] = ()
     selected_api_surface_ids: tuple[str, ...] = ()
+
 
 class BundleRequirementApiBinding(ContractRecord):
     """Portable requirement-to-language-API traceability record."""
@@ -146,6 +155,7 @@ class BundleRequirementApiBinding(ContractRecord):
         ):
             raise ValueError("API requirement bindings need a selected or candidate surface")
         return self
+
 
 class BundleDocument(ContractRecord):
     document_id: str = Field(min_length=1)
@@ -253,6 +263,7 @@ class BundleDocument(ContractRecord):
                     )
         return self
 
+
 class CorpusBundle(ContractRecord):
     """Portable semantic slice consumed by an external implementation repo."""
 
@@ -267,6 +278,7 @@ class CorpusBundle(ContractRecord):
         if len(identifiers) != len(set(identifiers)):
             raise ValueError("corpus bundle document IDs must be unique")
         return self
+
 
 class EvidenceRecord(ContractRecord):
     """One externally produced build, test, trace, or review observation."""
@@ -291,6 +303,7 @@ class EvidenceRecord(ContractRecord):
         if self.review_status == "accepted" and not self.reviewed_at:
             raise ValueError("accepted evidence must include a review timestamp")
         return self
+
 
 class ComplianceTestCase(ContractRecord):
     """One RTI-owned behavioral test mapped to a portable corpus seam."""
@@ -318,6 +331,7 @@ class ComplianceTestCase(ContractRecord):
             raise ValueError("compliance test API surface IDs must be unique")
         return self
 
+
 class ComplianceTestCatalog(ContractRecord):
     """Validated RTI-owned catalog consumed by test-result adapters."""
 
@@ -330,6 +344,7 @@ class ComplianceTestCatalog(ContractRecord):
         if len(identifiers) != len(set(identifiers)):
             raise ValueError("compliance test catalog IDs must be unique")
         return self
+
 
 class ImplementationBinding(ContractRecord):
     """Implementation-owned mapping and evidence links."""
@@ -344,6 +359,7 @@ class ImplementationBinding(ContractRecord):
     api_surface_ids: tuple[str, ...] = ()
     evidence_ids: tuple[str, ...] = ()
     notes: str = ""
+
 
 class ImplementationManifest(ContractRecord):
     """Implementation-repository input accepted by the sidecar verifier."""
@@ -393,6 +409,7 @@ class ImplementationManifest(ContractRecord):
                 )
         return self
 
+
 class AdapterExpectedBinding(ContractRecord):
     """One binding target offered to an external RTI adapter."""
 
@@ -409,11 +426,13 @@ class AdapterExpectedBinding(ContractRecord):
     selected_api_surface_ids: tuple[str, ...] = ()
     api_surfaces: tuple[BundleSurface, ...] = ()
 
+
 class AdapterDocumentRequest(ContractRecord):
     """The portion of a bundle assigned to one adapter invocation."""
 
     document_id: str = Field(min_length=1)
     bindings: tuple[AdapterExpectedBinding, ...] = ()
+
 
 class AdapterRequest(ContractRecord):
     """JSON request sent to an RTI adapter over stdin."""
@@ -423,6 +442,7 @@ class AdapterRequest(ContractRecord):
     bundle_id: str = Field(min_length=1)
     corpus_revision: str = Field(min_length=1)
     documents: tuple[AdapterDocumentRequest, ...] = Field(min_length=1)
+
 
 class AdapterResponse(ContractRecord):
     """JSON response returned by an RTI adapter over stdout."""
@@ -443,6 +463,7 @@ class AdapterResponse(ContractRecord):
             )
         return self
 
+
 class ComplianceFinding(ContractRecord):
     """Portable verifier diagnostic."""
 
@@ -450,6 +471,7 @@ class ComplianceFinding(ContractRecord):
     severity: Literal["error", "warning", "info"]
     record_id: str = Field(min_length=1)
     message: str = Field(min_length=1)
+
 
 class ComplianceCoverage(ContractRecord):
     """Requirement, transition, API, and binding testing coverage summary."""
@@ -477,6 +499,7 @@ class ComplianceCoverage(ContractRecord):
     unverified_api_surface_ids: tuple[str, ...] = ()
     unaccepted_evidence_ids: tuple[str, ...] = ()
     non_real_evidence_ids: tuple[str, ...] = ()
+
 
 class ComplianceResult(ContractRecord):
     """CI-friendly sidecar result."""

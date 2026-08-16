@@ -22,6 +22,7 @@ from hla_lab.traceability.compliance_contract import (
     CorpusBundle,
 )
 
+
 def edition_roots(corpus_root: Path, edition: str) -> tuple[Path, ...]:
     """Resolve one or both HLA edition tranches from a corpus checkout."""
     years = ("2010", "2025") if edition == "all" else (edition,)
@@ -31,6 +32,7 @@ def edition_roots(corpus_root: Path, edition: str) -> tuple[Path, ...]:
         for year in years
         for suffix in ("1516", "1516.1", "1516.2")
     )
+
 
 def _document(model: DocumentModel) -> BundleDocument:
     transitions = tuple(
@@ -134,6 +136,7 @@ def _document(model: DocumentModel) -> BundleDocument:
         ),
     )
 
+
 def export_bundle(
     roots: tuple[Path, ...],
     *,
@@ -156,6 +159,7 @@ def export_bundle(
     )
     return bundle
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus-root", type=Path, required=True)
@@ -171,6 +175,7 @@ def main() -> None:
         output=args.output,
     )
     print(f"wrote {len(bundle.documents)} documents to {args.output}")
+
 
 if __name__ == "__main__":
     main()

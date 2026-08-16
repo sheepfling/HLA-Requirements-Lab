@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__ = ["review_defaults"]
 
+
 def review_defaults(diagram_type: str, status: str) -> tuple[str, str]:
     """Return the default severity and explanation for a diagram review row."""
 

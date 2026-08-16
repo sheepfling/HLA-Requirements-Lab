@@ -13,6 +13,7 @@ from typing import Any
 
 from hla_lab.paths import REPO_ROOT
 
+
 def _review_index(reviews_dir: Path) -> dict[str, Path]:
     index: dict[str, Path] = {}
     for path in sorted(reviews_dir.glob("*.md")):
@@ -22,12 +23,14 @@ def _review_index(reviews_dir: Path) -> dict[str, Path]:
             index[match.group(1)] = path
     return index
 
+
 def _artifact_from_record(record: Path) -> str | None:
     if not record.exists():
         return None
     text = record.read_text(encoding="utf-8")
     match = re.search(r"^- Generated TikZ: `([^`]+)/machine\.tex`$", text, re.MULTILINE)
     return match.group(1) if match else None
+
 
 def _source_image(
     machine: Mapping[str, Any],
@@ -47,6 +50,7 @@ def _source_image(
         if diagram.get("model") == model_rel and diagram.get("source_image"):
             return str(diagram["source_image"])
     raise ValueError(f"no source image found for {machine.get('id')}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -110,6 +114,7 @@ def main() -> None:
             command.extend(["--pdftoppm", str(args.pdftoppm.resolve())])
         subprocess.run(command, cwd=repo_root, check=True)
         print(f"[{index}/{len(entries)}] {machine_id}")
+
 
 if __name__ == "__main__":
     main()

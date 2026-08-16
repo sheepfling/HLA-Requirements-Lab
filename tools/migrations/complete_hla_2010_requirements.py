@@ -27,7 +27,7 @@ from hla_lab.core.semantic_model import (
     load_document_model,
 )
 from hla_lab.core.text import slugify
-from hla_lab.paths import DocumentResources, RESOURCES
+from hla_lab.paths import RESOURCES, DocumentResources
 
 ROOTS = (
     RESOURCES.document("hla-1516-2010").root,
@@ -87,6 +87,7 @@ STOP_TERMS = {
     "would",
 }
 
+
 def _terms(value: str) -> frozenset[str]:
     return frozenset(
         term
@@ -94,7 +95,9 @@ def _terms(value: str) -> frozenset[str]:
         if term not in STOP_TERMS
     )
 
+
 _write = write_json
+
 
 def _figure_clause(machine_id: str) -> str | None:
     match = re.search(r"figure-(\d+)$", machine_id)
@@ -115,12 +118,14 @@ def _figure_clause(machine_id: str) -> str | None:
         return "clause-9"
     return "clause-11"
 
+
 def _same_clause(requirement_clause: str | None, transition_clause: str | None) -> bool:
     if not requirement_clause or not transition_clause:
         return False
     return requirement_clause == transition_clause or requirement_clause.startswith(
         f"{transition_clause}."
     )
+
 
 def _matches(requirements: tuple[object, ...], transition: object) -> tuple[str, ...]:
     clause_id = getattr(transition, "clause_id", None)
@@ -144,6 +149,7 @@ def _matches(requirements: tuple[object, ...], transition: object) -> tuple[str,
     best = max(score for score, _ in scored)
     winners = [requirement for score, requirement in scored if score == best]
     return tuple(requirement.id for requirement in winners) if len(winners) <= 3 else ()
+
 
 def _update_machines(
     root: Path, updates: dict[str, tuple[str, tuple[str, ...], tuple[str, ...]]]
@@ -175,6 +181,7 @@ def _update_machines(
         if changed:
             _write(path, raw)
 
+
 def _promote(root: Path) -> dict[str, int]:
     profile = HLA_SOURCE_2010 if root.name == "hla-1516.1-2010" else HLA_SOURCE
     model = load_document_model(root, profile)
@@ -201,7 +208,7 @@ def _promote(root: Path) -> dict[str, int]:
             requirement = next(item for item in candidates if item.id == requirement_id)
             links_by_pair[(requirement_id, transition.id)] = RequirementLink(
                 id=f"m2010.link.{slugify(requirement_id, fallback='transition')}."
-                   f"{slugify(transition.id, fallback='transition')}",
+                f"{slugify(transition.id, fallback='transition')}",
                 requirement_id=requirement_id,
                 transition_id=transition.id,
                 relation="governs",
@@ -331,12 +338,14 @@ def _promote(root: Path) -> dict[str, int]:
         "planned_implementations": len(implementations),
     }
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("roots", nargs="*", type=Path, default=ROOTS)
     args = parser.parse_args()
     for root in args.roots:
         print(root, _promote(root))
+
 
 if __name__ == "__main__":
     main()

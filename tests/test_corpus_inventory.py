@@ -18,6 +18,7 @@ ROOTS = tuple(
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
 )
 
+
 class CorpusInventoryTests(unittest.TestCase):
     def test_inventory_is_source_controlled_and_complete(self) -> None:
         path = REPO_ROOT / "data" / "semantic" / "inventory.json"
@@ -49,8 +50,8 @@ class CorpusInventoryTests(unittest.TestCase):
         content_blocks = json.loads(
             (ROOTS[0] / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
         )["content_blocks"]
-        for path in (
-                *sorted((ROOTS[0] / "sections" / "semantic" / "final-body").glob("page-3[2-8].tex")),
+        for path in sorted(
+            (ROOTS[0] / "sections" / "semantic" / "final-body").glob("page-3[2-8].tex")
         ):
             relative = path.relative_to(ROOTS[0]).as_posix()
             text = next(
@@ -82,6 +83,7 @@ class CorpusInventoryTests(unittest.TestCase):
         self.assertTrue(
             all(table.continued_from is None or table.logical_id for table in model.tables)
         )
+
 
 if __name__ == "__main__":
     unittest.main()
