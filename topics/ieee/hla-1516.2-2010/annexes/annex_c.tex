@@ -1,0 +1,217 @@
+% Annex C uses source-metric Tinos/Arimo faces at the standard 10/12 body geometry.
+% match the source Annex C vertical spacing without perturbing the other annexes.
+\newcommand{\annexcbodyfont}{\fontfamily{Tinos-TLF}\fontsize{10}{12}\selectfont}
+\newcommand{\annexchead}[3]{%
+    \par\noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{14}{16}\selectfont Annex #1\par}%
+    \vspace{2.5pt}%
+    \noindent{\fontfamily{Arimo-TLF}\fontsize{12}{14}\selectfont (#2)\par}%
+    \vspace{5.5pt}%
+    \noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{14}{16}\selectfont #3\par}%
+    \vspace{2.1pt}%
+}
+\newcommand{\annexcsubhead}[2]{%
+    \par\vspace{10pt}\noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{12}{14}\selectfont #1 #2\par}\vspace{1pt}%
+}
+\newcommand{\annexcstdnote}[1]{%
+    \par\noindent{\fontfamily{Tinos-TLF}\fontsize{9}{10.5}\selectfont NOTE---#1}\par
+}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 101 / standard p. 89.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexchead{C}{normative}{FOM module/SOM module merging principles}
+During the process of merging either FOM modules or SOM modules, as described in Clause 7, the resulting FOM or SOM may exist in an incomplete state. For federations, this state is defined by the FOM modules that have been provided thus far, and is referred to as the Current FOM. For federates, this state simply corresponds to the current developmental status of the SOM. All references to ``FOM'' or ``SOM'' in this clause can refer to either the current state of the object model or the finished state depending on the context.
+
+When developing a FOM (or SOM), the first FOM module (or SOM module) selected provides the basis for the desired object model. Therefore, all the elements of the first FOM module (or SOM module) shall be incorporated into the FOM under development. The method for merging subsequent FOM modules (or SOM modules) should be performed using a top-down approach beginning with the object classes and interaction classes beginning at their root nodes. This is to confirm that all candidate object classes (and their attributes), interaction classes (and their parameters) and associated datatypes, dimensions, transportation, and notes that may be referenced by an object class or interaction class are properly considered for integration and are properly aligned when merged within the FOM (or SOM). A top-down approach requires that nodes representing a FOM module be walked down from the root node to the leaf nodes.
+
+Following the parsing of object classes, interaction classes and their associated attributes, parameters,\linebreak datatypes, dimensions, transportations, and notes, additional items that shall be considered for merging include the parsing of any defined synchronizations, updateRates, and remaining notes, which need to be compared and considered for integration into the FOM (or SOM).
+
+\vspace{2pt}\annexcsubhead{C.1}{Merging metadata}
+Each FOM module (or SOM module) used in the merging process shall be referenced in the resulting FOM's (or SOM's) object model identification table.Such references allow it to be known what FOM modules (or SOM modules) have been used in the construction of a FOM (or SOM), allowing their metadata to be\linebreak further explored.Thus, for each module used in the creation of the FOM (or SOM), the value of the\linebreak Reference Type field shall be ``Composed\_From,'' and the value of the Reference Identification field shall contain the names of all FOM modules or SOM modules whose merger has resulted in the current object model.
+
+With the exception of identifying such module references, all object model identification table sub-elements shall be left blank during the merge process. For all other object model identification table fields, it is the responsibility of the FOM/SOM developer to complete the required metadata elements. This information shall be completed at the conclusion of the merging process in order for the resulting FOM or SOM to be a compliant object model.
+
+\vspace{1.7pt}\annexcsubhead{C.2}{Merging classes}
+The classes (Object Classes/Interaction Classes) from FOM modules (or SOM modules) to be merged shall be compared against the current FOM (or SOM). Classes with the same name and ancestry (parent classes), whether or not they have different attributes/parameters, shall not be merged.
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 102 / standard p. 90.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+Any duplicates (equivalent and equivalent-like classes) already in the FOM (or SOM) are to be ignored. The following principles for checking for duplicacy of classes shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item The class name of the FOM module (or SOM module) being inserted (including its ancestry) shall be compared to see if an equivalent class name (and ancestry) already exists in the FOM (or SOM).
+\item If duplicacy is found, it is necessary to determine if the class that was to be added identically matched with the class that already exists.
+\item Therefore, every sub-element of the class in the new module shall be compared to see if there is an identical sub-element in the class that already exists in the FOM (or SOM).
+\item If some, but not all, sub-elements are equivalent then a warning shall be provided back to the user. This allows him/her to know that the class they desired to be inserted already exists but is not equivalent, and, therefore, cannot be inserted.
+\item Comparison of sub-elements for an object class include: name, sharing (i.e., publish/subscribe capabilities), semantics, attributes, and notes. Children object classes are not compared. Within the attributes, what shall be compared include name, datatype, updateType, updateCondition, ownership, sharing, dimensions, transportation, order, semantics, and notes.
+\item Sub-elements that are compared for an interaction class include: name, sharing, dimensions, transportation, order, semantics, parameters, and notes. Children interaction classes are not compared. Within the parameters, what shall be compared include name, datatype, semantics, and notes.
+\item Within the datatypes of an attribute or parameter, the candidate datatype shall be compared to see if it already exists in the FOM (see C.3 on Datatype Merging.)
+\end{enumerate}
+
+Any unique class names found in a FOM module (or SOM module) are considered candidates for being merged into the FOM (or SOM). The following principles shall be applied to support such activity:
+
+\begin{itemize}[leftmargin=30pt,labelsep=9pt,itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item Check to see if an identical ancestry defined for the candidate class already exists in FOM (or SOM). This is necessary to determine compatibility of a candidate class, and to determine if any candidate class parents need to be also merged.
+\begin{enumerate}[label=\alph*),leftmargin=24pt,labelsep=14pt,itemsep=0pt,topsep=0pt,partopsep=0pt,parsep=0pt]
+\item If the parent lineage is found within the FOM (or SOM) and the new class and its subclass(es)\linebreak do not introduce conflict with existing FOM (or SOM) elements (i.e., datatypes,\linebreak synchronization points), then, under the equivalent parent in the FOM (or SOM), the class can be inserted.
+\annexcstdnote{Any subclasses associated to a candidate class shall also be identified as candidate classes. If a subclass has an equivalent class name as a class that exists within the FOM it may still be merged so long as the ancestry lineage is still unique.}
+\item If no parent lineage is found within the FOM (or SOM) and the new class and its subclass(es)\linebreak do not introduce conflict with existing FOM (or SOM) elements (i.e., datatypes,\linebreak synchronization points), then the class and its parent classes can be merged into the FOM (or SOM).
+\end{enumerate}
+\item Within the datatypes of an attribute or parameter, the candidate datatype shall be compared to see if it already exists in the FOM (or SOM). (See C.3.)
+\end{itemize}
+
+\vspace{15pt}\annexcsubhead{C.3}{Merging datatypes}
+Datatypes from FOM modules (or SOM modules) to be merged shall be compared against the first module used in the initial creation of the FOM (or SOM). Datatypes with the same name shall not be merged.
+
+If the datatype does not exist in the FOM (or SOM), then the datatype from the FOM module (or SOM module) shall be identified as a candidate datatype to be inserted into the FOM (or SOM). Also, this includes the potential insertion of any other datatypes within the FOM module (or SOM module) that are used by the
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 103 / standard p. 91.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+candidate datatype. Such insertion of these candidate datatypes shall only occur if the item (attributes, parameters, dimensions, synchronizationPoints) under consideration is inserted.
+
+However, if the datatype does already exist in the FOM (or SOM), then the candidate datatype and all its sub-elements need to be compared for equivalency. Any duplicates (equivalent and equivalent-like datatypes) already in the FOM (or SOM) are to be ignored. The following principles for checking duplicacy of datatypes shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=3.2pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item The candidate datatype name of a FOM module being inserted shall be compared to see if an equivalent datatype name already exists in the FOM (or SOM).
+\item If duplicacy is found, it is necessary to determine if the datatype of the item (attribute, parameter, dimension, synchronizationPoint) that was attempted to be added identically matched with the datatype in the FOM (or SOM) that already exists.
+\item If some but not all sub-elements of the datatype of the item (attribute, parameter, dimension, synchronizationPoint) that was attempted to be added are equivalent then a warning shall be provided back to the user. This allows him/her to know that the datatype or item (attribute, parameter, dimension, synchronizationPoint) they desired to be inserted already exists but is not equivalent, and, therefore, cannot be inserted. More specifically, that the item uses an inconsistent datatype and could not be added,
+\item Any unique datatype names found in a FOM module (or SOM module) are candidates for being merged into the FOM (or SOM).
+\end{enumerate}
+
+\vspace{5.2pt}\annexcsubhead{C.4}{Merging dimensions}
+Dimensions from FOM modules (or SOM modules) to be merged shall be compared against the first module used in the initial creation of the FOM (or SOM). Dimensions with the same name shall not be merged. Any duplicates (equivalent and equivalent-like dimensions) already in the FOM (or SOM) are to be ignored. The following principles for checking duplicacy of dimensions shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item The dimension name of FOM module (or SOM module) being inserted shall be compared to see if an equivalent dimension name already exists in the FOM (or SOM).
+\item If duplicacy is found, it is necessary to determine if the dimension that was attempted to be added identically matched with the dimension that already exists.
+\item If some but not all sub-elements of the dimension are equivalent then a warning shall be provided back to the user. This allows him/her to know that the dimension they desired to be inserted already exists but is not equivalent, and, therefore, cannot be inserted.
+\item Sub-elements that are compared for a dimension include: name, datatype, upperBound, normalization, value, and notes.
+\item Within the datatypes of a dimension, the candidate datatype shall be compared to see if it already exists in the FOM (SOM). (See C.3 on Datatype Merging.)
+\end{enumerate}
+
+\vspace{5pt}Any unique dimension names found in a FOM module (or SOM module) are candidates for being merged into the FOM (or SOM). The following principles shall be applied to support such activity:
+
+\begin{itemize}[leftmargin=54pt,labelsep=12pt,itemsep=0pt,topsep=0.1pt,partopsep=0pt,parsep=0pt]
+\item Check to see if the new dimension does not introduce conflict with any dimension sub-elements (i.e., datatypes) that already exist in the FOM (or SOM). This is necessary to determine if the dimension can be inserted under that parent in the FOM (or SOM).
+\item Within the datatypes of a dimension, the candidate datatype already exists in the FOM (or SOM). (See C.3 on datatype Merging.)
+\end{itemize}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 104 / standard p. 92.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexcsubhead{C.5}{Merging synchronization points}
+Synchronization points from FOM modules (or SOM modules) to be merged shall be compared against the first module used in the initial creation of the FOM (or SOM). Synchronization points with the same label shall not be merged.
+
+Any duplicates (equivalent and equivalent-like synchronizationPoints already in the FOM) are to be ignored. The following principles shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item The synchronizationPoint label of FOM module being inserted shall be compared to see if an equivalent synchronizationPoint label already exists in the FOM (or SOM).
+\item If duplicacy is found, it is necessary to determine if the synchronizationPoint that was attempted to be added identically matched with the synchronizationPoint that already exists.
+\item If some but not all sub-elements of the synchronizationPoint are equivalent then a warning\linebreak shall be provided back to the user. This allows him/her to know that the synchronizationPoint they desired to be inserted already exists but is not equivalent, and, therefore, cannot be\linebreak inserted.
+\item Sub-elements that are compared for a synchronizationPoint include: label, datatype, capability, semantics, and notes.
+\item Within the datatypes of a synchronizationPoint, the candidate datatype shall be compared is to see if it already exists in the FOM (SOM). (See C.3 on Datatype Merging.)
+\end{enumerate}
+
+Any unique synchronizationPoint labels found in a FOM module (or SOM module) are candidates for being merged into the FOM (or SOM). The following principles shall be applied to support such activity:
+
+\begin{itemize}[leftmargin=54pt,labelsep=12pt,itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item Check to see if an identical ancestry defined for the candidate synchronizationPoint already\linebreak exists in FOM (or SOM). This is necessary to determine compatibility of a candidate synchronizationPoint, and to determine if any candidate synchronizationPoint parents need to be also merged.
+\item If the parent lineage is found within the FOM (or SOM) and the new synchronizationPoint and its sub elements do not introduce conflict with existing FOM (or SOM) elements, then, under the equivalent parent in the FOM (or SOM), the synchronizationPoint can be inserted.
+\item If no parent lineage is found within the FOM (or SOM) and the new synchronizationPoint and its sub-elements do not introduce conflict with existing FOM (or SOM) elements, then the synchronizationPoint and its parent can be merged into the FOM (or SOM).
+\item Within the datatypes of a synchronizationPoint, the candidate datatype shall be compared is to see if it already exists in the FOM (or SOM). (See C.3 on Datatype Merging.)
+\end{itemize}
+
+\vspace{11.6pt}\annexcsubhead{C.6}{Merging transportation types}
+Transportation types from FOM modules (or SOM modules) to be merged shall be compared against the first module used in the initial creation of the FOM (or SOM). Transportation types with the same name shall not be merged.
+
+Any duplicates (equivalent and equivalent-like transportation types) already in the FOM (or SOM) are to be ignored. The following principles for checking duplicacy of transportation types shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=0.4pt,partopsep=0pt,parsep=0pt]
+\item The transportation type name of FOM module being inserted shall be compared to see if an equivalent to a transportation type name already exists in the FOM (or SOM).
+\item If duplicacy is found, it is useful to determine if the transportation type that was attempted to be added identically matched with the transportation type that already exists.
+\end{enumerate}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 105 / standard p. 93.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\begin{enumerate}[start=3,leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=0pt,partopsep=0pt,parsep=0pt]
+\item If some but not all sub-elements of the transportation type are equivalent then a warning shall be provided back to the user. This allows him/her to know that the transportation type they desired to be inserted already exists but is not equivalent, and, therefore, cannot be inserted.
+\item Sub-elements that are compared for transportation type include: name, semantics, and notes.
+\end{enumerate}
+
+Any unique transportation type names are candidates for being merged into the FOM (or SOM).
+
+\begin{itemize}[leftmargin=54pt,labelsep=12pt,itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item Check to see if an identical ancestry defined for the candidate transportation type already exists in FOM (i.e., candidate transportation type parents exist).
+\item If the new transportation type does not introduce conflict with existing FOM transportation\linebreak type sub-elements, then the transportation type can be inserted under that parent in merged FOM (or SOM).
+\end{itemize}
+
+\vspace{5.5pt}\annexcsubhead{C.7}{Merging update rates}
+Update rates from FOM modules (or SOM modules) to be merged shall be compared against the first module that was used in the initial creation of the FOM (or SOM). Update rates with the same name shall not be merged.
+
+Any duplicates (equivalent and equivalent-like updateRates) already in the FOM (or SOM) are to be\linebreak ignored. The following principles for checking duplicacy of update rates shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item The update rate name of FOM module (or SOM module) being inserted shall be compared to see if an equivalent update rate name already exists in the FOM (or SOM).
+\item If duplicacy is found, it is necessary to determine if the update rate that was attempted to be added identically matched with the update rate that already exists.
+\item If some but not all sub-elements of the update rate are equivalent then a warning shall be provided back to the user. This allows him/her to know that the update rate they desired to be inserted already exists but is not equivalent, and, therefore, cannot be inserted.
+\item Sub-elements that are compared for a update rate include: name, rate, semantics and notes.
+\end{enumerate}
+
+Any unique update rate names found in a FOM module (or SOM module) are candidates for being merged into the FOM (or SOM). The following principles shall be applied to support such activity:
+
+\begin{itemize}[leftmargin=54pt,labelsep=12pt,itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item Check to see if an identical ancestry defined for the candidate update rate already exists in FOM (or SOM). (i.e., candidate updateRate parents exist).
+\item If the new update rate does not introduce conflict update rate sub-elements contained within\linebreak the existing FOM (or SOM), then the update rate can be inserted under that parent in merged FOM (or SOM).
+\end{itemize}
+
+\vspace{10.25pt}\annexcsubhead{C.8}{Merging notes}
+Notes from FOM modules (or SOM modules) shall be parsed, and merged if they are referenced by any other table elements. The following principles for checking for duplicacy of notes shall be applied to support such activity:
+
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=3pt,topsep=0.2pt,partopsep=0pt,parsep=0pt]
+\item Sub-elements that shall be compared for a Note include: label, semantics and notes.
+\item Notes being selected for merge shall be reassigned unique IDs (labels) with in the Notes table. Additionally, any FOM module (or SOM module) element that references a note whose label has changed shall be updated prior to being merged within the FOM (or SOM).
+\end{enumerate}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 106 / standard p. 94.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexcbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexcsubhead{C.9}{Merging service usage tables}
+Service usage tables in FOM modules (or SOM modules) to be merged shall be compared against the service usage table in the current FOM/SOM if it exists. In case it exists a new value for the Usage column for each named row shall be calculated as a logical ``or'' of the Usage values of the FOM/SOM to be merged and the current FOM/SOM for the corresponding named rows. In case a service usage table does not exist in the current FOM/SOM, the service usage table of the FOM/SOM to be merged shall be inserted into the current FOM.
+\endgroup
+
+\let\annexchead\relax
+\let\annexcsubhead\relax
+\let\annexcstdnote\relax
+\let\annexcbodyfont\relax

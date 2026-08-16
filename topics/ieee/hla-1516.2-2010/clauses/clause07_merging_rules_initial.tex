@@ -1,0 +1,13 @@
+\section{FOM module/SOM module merging rules}
+In the interest of reuse and efficiency, FOM modules and SOM modules may be combined to formulate FOMs and SOMs for federations and federates, respectively. In the case where such modules are to be merged in the creation of a FOM or SOM, the rules provided in this clause are intended to assist both the user and facilitate common tool functionality for the development of HLA object models.
+
+The following rules shall apply when constructing FOMs or SOMs from FOM modules or SOM modules:
+\begin{itemize}[leftmargin=32pt,labelsep=12pt,itemsep=1.5pt,topsep=2pt]
+\item All descriptions of object classes, interaction classes, attributes, parameters, dimensions, synchronization points, transportation types, update rates, datatypes, notes and FOM/SOM lexicon shall be merged.
+\item During the merge process, the FOM/SOM shall contain the references column where the ``Composed from'' field shall contain references to contributing FOM/SOM modules. All object model identification table sub-elements shall be left blank to be filled-in by the FOM/SOM developer after the merge process.
+\item The tables for time representation, switches, and user defined tags shall be provided in at least one FOM or SOM. The tables shall be identical to the corresponding tables in the FOM/SOM modules.
+\item The resulting FOM/SOM shall contain a service usage table if at least one of the contributing modules includes such a table. The value in the Usage column for each specific service shall be ``Yes'' if at least one contributing module has the value ``Yes'' in the Usage column for the same service. Otherwise, it shall be ``No.''
+\item The FOM shall contain a MIM, containing predefined constructs as described in the standard. A MIM that is extended by the user may be specified; otherwise the MIM as defined in the HLA standard shall be used. A SOM may also contain a MIM.
+\end{itemize}
+
+The principles used to combine FOM modules or SOM modules, described in Annex C, are intended to produce the results identified in Table 50. If the set of FOM modules or SOM modules, when combined, do not produce such results, then the FOM or SOM being assembled shall not be considered a compliant object model.

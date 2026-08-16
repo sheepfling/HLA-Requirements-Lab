@@ -6,8 +6,16 @@
       "title": "Federate and RTI message sequence numbers",
       "clause_id": "clause-12.13.4.2",
       "participants": [
-        { "id": "federate", "label": "Federate", "role": "message sender" },
-        { "id": "rti", "label": "RTI", "role": "message sender" }
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "message sender"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "message sender"
+        }
       ],
       "messages": [
         {
@@ -59,8 +67,16 @@
       "title": "Response messages",
       "clause_id": "clause-12.13.4.2",
       "participants": [
-        { "id": "federate", "label": "Federate", "role": "message sender" },
-        { "id": "rti", "label": "RTI", "role": "message sender" }
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "message sender"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "message sender"
+        }
       ],
       "messages": [
         {
@@ -122,8 +138,16 @@
       "title": "Successful reconnection",
       "clause_id": "clause-12.13.4.3",
       "participants": [
-        { "id": "federate", "label": "Federate", "role": "session endpoint" },
-        { "id": "rti", "label": "RTI", "role": "session endpoint" }
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "session endpoint"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "session endpoint"
+        }
       ],
       "messages": [
         {

@@ -6,7 +6,10 @@
       "title": "Overall view of federate-to-RTI relationship",
       "kind": "relationship",
       "clause_id": "clause-4.1",
-      "source": { "path": "content/clauses/04-federation-management-page-039.tex", "line": 1 },
+      "source": {
+        "path": "content/clauses/04-federation-management-page-039.tex",
+        "line": 1
+      },
       "provenance": {
         "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p040-xref13869.png",
         "page": 40,
@@ -14,22 +17,208 @@
         "caption": "Figure 2---Overall view of federate-to-RTI relationship"
       },
       "nodes": [
-        { "id": "federate", "label": "Federate", "x": 1.0, "y": 9.5, "width": 2.0, "height": 0.7, "style": "lifeline" },
-        { "id": "rti", "label": "RTI", "x": 9.0, "y": 9.5, "width": 2.0, "height": 0.7, "style": "lifeline" }
+        {
+          "id": "federate",
+          "label": "Federate",
+          "x": 1.0,
+          "y": 9.5,
+          "width": 2.0,
+          "height": 0.7,
+          "style": "lifeline"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "x": 9.0,
+          "y": 9.5,
+          "width": 2.0,
+          "height": 0.7,
+          "style": "lifeline"
+        }
       ],
       "edges": [
-        { "id": "figure-2-federate-lifeline", "label": "", "style": "dashed", "direction": "none", "points": [{ "x": 1.0, "y": 8.9 }, { "x": 1.0, "y": 0.2 }] },
-        { "id": "figure-2-rti-lifeline", "label": "", "style": "dashed", "direction": "none", "points": [{ "x": 9.0, "y": 8.9 }, { "x": 9.0, "y": 0.2 }] },
-        { "id": "figure-2-connect", "label": "Connect to RTI, Join Federation Execution", "direction": "forward", "points": [{ "x": 1.0, "y": 8.2 }, { "x": 9.0, "y": 8.2 }] },
-        { "id": "figure-2-requirements", "label": "Establish Initial Data Requirements", "direction": "both", "points": [{ "x": 1.0, "y": 7.1 }, { "x": 9.0, "y": 7.1 }] },
-        { "id": "figure-2-normal", "label": "Normal Federate Execution", "direction": "both", "points": [{ "x": 1.0, "y": 6.0 }, { "x": 9.0, "y": 6.0 }] },
-        { "id": "figure-2-time", "label": "Time Advance Request/Grant", "direction": "both", "points": [{ "x": 1.0, "y": 5.1 }, { "x": 9.0, "y": 5.1 }] },
-        { "id": "figure-2-object", "label": "Register/Discover Object Instances", "direction": "both", "points": [{ "x": 1.0, "y": 4.3 }, { "x": 9.0, "y": 4.3 }] },
-        { "id": "figure-2-update", "label": "Update/Reflect Attribute Values", "direction": "both", "points": [{ "x": 1.0, "y": 3.5 }, { "x": 9.0, "y": 3.5 }] },
-        { "id": "figure-2-interaction", "label": "Send/Receive Interactions", "direction": "both", "points": [{ "x": 1.0, "y": 2.7 }, { "x": 9.0, "y": 2.7 }] },
-        { "id": "figure-2-not-normal", "label": "Not Normal Federate Execution", "direction": "both", "points": [{ "x": 1.0, "y": 1.8 }, { "x": 9.0, "y": 1.8 }] },
-        { "id": "figure-2-save", "label": "Save/Restore Federation Execution", "direction": "both", "points": [{ "x": 1.0, "y": 1.1 }, { "x": 9.0, "y": 1.1 }] },
-        { "id": "figure-2-resign", "label": "Resign Federation Execution, Disconnect from RTI", "direction": "forward", "points": [{ "x": 1.0, "y": 0.4 }, { "x": 9.0, "y": 0.4 }] }
+        {
+          "id": "figure-2-federate-lifeline",
+          "label": "",
+          "style": "dashed",
+          "direction": "none",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 8.9
+            },
+            {
+              "x": 1.0,
+              "y": 0.2
+            }
+          ]
+        },
+        {
+          "id": "figure-2-rti-lifeline",
+          "label": "",
+          "style": "dashed",
+          "direction": "none",
+          "points": [
+            {
+              "x": 9.0,
+              "y": 8.9
+            },
+            {
+              "x": 9.0,
+              "y": 0.2
+            }
+          ]
+        },
+        {
+          "id": "figure-2-connect",
+          "label": "Connect to RTI, Join Federation Execution",
+          "direction": "forward",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 8.2
+            },
+            {
+              "x": 9.0,
+              "y": 8.2
+            }
+          ]
+        },
+        {
+          "id": "figure-2-requirements",
+          "label": "Establish Initial Data Requirements",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 7.1
+            },
+            {
+              "x": 9.0,
+              "y": 7.1
+            }
+          ]
+        },
+        {
+          "id": "figure-2-normal",
+          "label": "Normal Federate Execution",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 6.0
+            },
+            {
+              "x": 9.0,
+              "y": 6.0
+            }
+          ]
+        },
+        {
+          "id": "figure-2-time",
+          "label": "Time Advance Request/Grant",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 5.1
+            },
+            {
+              "x": 9.0,
+              "y": 5.1
+            }
+          ]
+        },
+        {
+          "id": "figure-2-object",
+          "label": "Register/Discover Object Instances",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 4.3
+            },
+            {
+              "x": 9.0,
+              "y": 4.3
+            }
+          ]
+        },
+        {
+          "id": "figure-2-update",
+          "label": "Update/Reflect Attribute Values",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 3.5
+            },
+            {
+              "x": 9.0,
+              "y": 3.5
+            }
+          ]
+        },
+        {
+          "id": "figure-2-interaction",
+          "label": "Send/Receive Interactions",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 2.7
+            },
+            {
+              "x": 9.0,
+              "y": 2.7
+            }
+          ]
+        },
+        {
+          "id": "figure-2-not-normal",
+          "label": "Not Normal Federate Execution",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 1.8
+            },
+            {
+              "x": 9.0,
+              "y": 1.8
+            }
+          ]
+        },
+        {
+          "id": "figure-2-save",
+          "label": "Save/Restore Federation Execution",
+          "direction": "both",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 1.1
+            },
+            {
+              "x": 9.0,
+              "y": 1.1
+            }
+          ]
+        },
+        {
+          "id": "figure-2-resign",
+          "label": "Resign Federation Execution, Disconnect from RTI",
+          "direction": "forward",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 0.4
+            },
+            {
+              "x": 9.0,
+              "y": 0.4
+            }
+          ]
+        }
       ]
     },
     {
@@ -37,7 +226,10 @@
       "title": "Region of two dimensions",
       "kind": "conceptual",
       "clause_id": "clause-9.1.5",
-      "source": { "path": "content/clauses/09-data-distribution-management-page-222.tex", "line": 1 },
+      "source": {
+        "path": "content/clauses/09-data-distribution-management-page-222.tex",
+        "line": 1
+      },
       "provenance": {
         "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p223-xref13896.png",
         "page": 223,
@@ -45,18 +237,106 @@
         "caption": "Figure 18---Region of two dimensions"
       },
       "nodes": [
-        { "id": "region-frame", "label": "Region", "x": 5.0, "y": 4.0, "width": 7.5, "height": 3.7, "style": "frame" },
-        { "id": "region-range", "label": " ", "x": 5.0, "y": 4.0, "width": 4.1, "height": 2.0, "style": "frame" }
+        {
+          "id": "region-frame",
+          "label": "Region",
+          "x": 5.0,
+          "y": 4.0,
+          "width": 7.5,
+          "height": 3.7,
+          "style": "frame"
+        },
+        {
+          "id": "region-range",
+          "label": " ",
+          "x": 5.0,
+          "y": 4.0,
+          "width": 4.1,
+          "height": 2.0,
+          "style": "frame"
+        }
       ],
       "edges": [
-        { "id": "figure-18-dimension-horizontal", "label": "Dimension", "style": "dimension", "direction": "none", "points": [{ "x": 1.25, "y": 1.9 }, { "x": 8.75, "y": 1.9 }] },
-        { "id": "figure-18-dimension-vertical", "label": "Dimension", "style": "dimension", "direction": "none", "points": [{ "x": 9.3, "y": 2.15 }, { "x": 9.3, "y": 5.85 }] },
-        { "id": "figure-18-lower-bound", "label": "", "style": "solid", "direction": "none", "points": [{ "x": 2.95, "y": 3.0 }, { "x": 3.75, "y": 3.0 }] },
-        { "id": "figure-18-upper-bound", "label": "", "style": "solid", "direction": "none", "points": [{ "x": 6.25, "y": 5.0 }, { "x": 7.05, "y": 5.0 }] }
+        {
+          "id": "figure-18-dimension-horizontal",
+          "label": "Dimension",
+          "style": "dimension",
+          "direction": "none",
+          "points": [
+            {
+              "x": 1.25,
+              "y": 1.9
+            },
+            {
+              "x": 8.75,
+              "y": 1.9
+            }
+          ]
+        },
+        {
+          "id": "figure-18-dimension-vertical",
+          "label": "Dimension",
+          "style": "dimension",
+          "direction": "none",
+          "points": [
+            {
+              "x": 9.3,
+              "y": 2.15
+            },
+            {
+              "x": 9.3,
+              "y": 5.85
+            }
+          ]
+        },
+        {
+          "id": "figure-18-lower-bound",
+          "label": "",
+          "style": "solid",
+          "direction": "none",
+          "points": [
+            {
+              "x": 2.95,
+              "y": 3.0
+            },
+            {
+              "x": 3.75,
+              "y": 3.0
+            }
+          ]
+        },
+        {
+          "id": "figure-18-upper-bound",
+          "label": "",
+          "style": "solid",
+          "direction": "none",
+          "points": [
+            {
+              "x": 6.25,
+              "y": 5.0
+            },
+            {
+              "x": 7.05,
+              "y": 5.0
+            }
+          ]
+        }
       ],
       "annotations": [
-        { "id": "figure-18-lower-label", "x": 2.1, "y": 2.65, "text": "Range Lower Bound", "width": 2.0 },
-        { "id": "figure-18-upper-label", "x": 7.8, "y": 5.35, "text": "Range Upper Bound", "width": 2.0 }
+        {
+          "id": "figure-18-lower-label",
+          "x": 2.1,
+          "y": 2.65,
+          "text": "Range Lower Bound",
+          "width": 2.0
+        },
+        {
+          "id": "figure-18-upper-label",
+          "x": 7.8,
+          "y": 5.35,
+          "text": "Range Upper Bound",
+          "width": 2.0
+        }
       ]
     },
     {
@@ -64,7 +344,10 @@
       "title": "MOM object class structure",
       "kind": "hierarchy",
       "clause_id": "clause-11.2.1",
-      "source": { "path": "content/clauses/11-management-object-model-page-288.tex", "line": 1 },
+      "source": {
+        "path": "content/clauses/11-management-object-model-page-288.tex",
+        "line": 1
+      },
       "provenance": {
         "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p289-xref13897.png",
         "page": 289,
@@ -72,19 +355,100 @@
         "caption": "Figure 19---MOM object class structure"
       },
       "nodes": [
-        { "id": "mom-manager", "label": "HLAmanager", "x": 5.0, "y": 4.3, "width": 2.4, "height": 0.7, "style": "box" },
-        { "id": "mom-federate", "label": "HLAfederate", "x": 2.0, "y": 2.9, "width": 2.4, "height": 0.7, "style": "box", "parent_id": "mom-manager" },
-        { "id": "mom-federation", "label": "HLAfederation", "x": 5.0, "y": 2.9, "width": 2.4, "height": 0.7, "style": "box", "parent_id": "mom-manager" },
-        { "id": "mom-extension", "label": "(extensions)", "x": 8.0, "y": 2.9, "width": 2.4, "height": 0.7, "style": "box", "parent_id": "mom-manager" },
-        { "id": "mom-federate-extension", "label": "(extensions)", "x": 2.0, "y": 1.4, "width": 2.4, "height": 0.7, "style": "box", "parent_id": "mom-federate" },
-        { "id": "mom-federation-extension", "label": "(extensions)", "x": 5.0, "y": 1.4, "width": 2.4, "height": 0.7, "style": "box", "parent_id": "mom-federation" }
+        {
+          "id": "mom-manager",
+          "label": "HLAmanager",
+          "x": 5.0,
+          "y": 4.3,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box"
+        },
+        {
+          "id": "mom-federate",
+          "label": "HLAfederate",
+          "x": 2.0,
+          "y": 2.9,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box",
+          "parent_id": "mom-manager"
+        },
+        {
+          "id": "mom-federation",
+          "label": "HLAfederation",
+          "x": 5.0,
+          "y": 2.9,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box",
+          "parent_id": "mom-manager"
+        },
+        {
+          "id": "mom-extension",
+          "label": "(extensions)",
+          "x": 8.0,
+          "y": 2.9,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box",
+          "parent_id": "mom-manager"
+        },
+        {
+          "id": "mom-federate-extension",
+          "label": "(extensions)",
+          "x": 2.0,
+          "y": 1.4,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box",
+          "parent_id": "mom-federate"
+        },
+        {
+          "id": "mom-federation-extension",
+          "label": "(extensions)",
+          "x": 5.0,
+          "y": 1.4,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box",
+          "parent_id": "mom-federation"
+        }
       ],
       "edges": [
-        { "id": "figure-19-manager-federate", "source": "mom-manager", "target": "mom-federate", "direction": "none" },
-        { "id": "figure-19-manager-federation", "source": "mom-manager", "target": "mom-federation", "direction": "none" },
-        { "id": "figure-19-manager-extension", "source": "mom-manager", "target": "mom-extension", "style": "dotted", "direction": "none" },
-        { "id": "figure-19-federate-extension", "source": "mom-federate", "target": "mom-federate-extension", "style": "dotted", "direction": "none" },
-        { "id": "figure-19-federation-extension", "source": "mom-federation", "target": "mom-federation-extension", "style": "dotted", "direction": "none" }
+        {
+          "id": "figure-19-manager-federate",
+          "source": "mom-manager",
+          "target": "mom-federate",
+          "direction": "none"
+        },
+        {
+          "id": "figure-19-manager-federation",
+          "source": "mom-manager",
+          "target": "mom-federation",
+          "direction": "none"
+        },
+        {
+          "id": "figure-19-manager-extension",
+          "source": "mom-manager",
+          "target": "mom-extension",
+          "style": "dotted",
+          "direction": "none"
+        },
+        {
+          "id": "figure-19-federate-extension",
+          "source": "mom-federate",
+          "target": "mom-federate-extension",
+          "style": "dotted",
+          "direction": "none"
+        },
+        {
+          "id": "figure-19-federation-extension",
+          "source": "mom-federation",
+          "target": "mom-federation-extension",
+          "style": "dotted",
+          "direction": "none"
+        }
       ]
     },
     {
@@ -92,7 +456,10 @@
       "title": "MOM interaction class structure",
       "kind": "hierarchy",
       "clause_id": "clause-11.3",
-      "source": { "path": "content/clauses/11-management-object-model-page-289.tex", "line": 1 },
+      "source": {
+        "path": "content/clauses/11-management-object-model-page-289.tex",
+        "line": 1
+      },
       "provenance": {
         "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p290-xref13898.png",
         "page": 290,
@@ -100,29 +467,168 @@
         "caption": "Figure 20---MOM interaction class structure"
       },
       "nodes": [
-        { "id": "interaction-manager", "label": "HLAmanager", "x": 6.0, "y": 6.8, "width": 2.4, "height": 0.7, "style": "box" },
-        { "id": "interaction-federate", "label": "HLAfederate", "x": 3.0, "y": 5.3, "width": 2.4, "height": 0.7, "style": "box" },
-        { "id": "interaction-federation", "label": "HLAfederation", "x": 9.0, "y": 5.3, "width": 2.4, "height": 0.7, "style": "box" },
-        { "id": "interaction-extension", "label": "(extensions)", "x": 6.0, "y": 5.3, "width": 2.4, "height": 0.7, "style": "box" },
-        { "id": "federate-adjust", "label": "HLAadjust", "x": 1.0, "y": 3.8, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federate-request", "label": "HLArequest", "x": 3.5, "y": 3.8, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federate-report", "label": "HLAreport", "x": 6.0, "y": 3.8, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federate-service", "label": "HLAservice", "x": 8.5, "y": 3.8, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federation-adjust", "label": "HLAadjust", "x": 8.0, "y": 2.3, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federation-request", "label": "HLArequest", "x": 10.5, "y": 2.3, "width": 2.0, "height": 0.65, "style": "box" },
-        { "id": "federation-report", "label": "HLAreport", "x": 13.0, "y": 2.3, "width": 2.0, "height": 0.65, "style": "box" }
+        {
+          "id": "interaction-manager",
+          "label": "HLAmanager",
+          "x": 6.0,
+          "y": 6.8,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box"
+        },
+        {
+          "id": "interaction-federate",
+          "label": "HLAfederate",
+          "x": 3.0,
+          "y": 5.3,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box"
+        },
+        {
+          "id": "interaction-federation",
+          "label": "HLAfederation",
+          "x": 9.0,
+          "y": 5.3,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box"
+        },
+        {
+          "id": "interaction-extension",
+          "label": "(extensions)",
+          "x": 6.0,
+          "y": 5.3,
+          "width": 2.4,
+          "height": 0.7,
+          "style": "box"
+        },
+        {
+          "id": "federate-adjust",
+          "label": "HLAadjust",
+          "x": 1.0,
+          "y": 3.8,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federate-request",
+          "label": "HLArequest",
+          "x": 3.5,
+          "y": 3.8,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federate-report",
+          "label": "HLAreport",
+          "x": 6.0,
+          "y": 3.8,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federate-service",
+          "label": "HLAservice",
+          "x": 8.5,
+          "y": 3.8,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federation-adjust",
+          "label": "HLAadjust",
+          "x": 8.0,
+          "y": 2.3,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federation-request",
+          "label": "HLArequest",
+          "x": 10.5,
+          "y": 2.3,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        },
+        {
+          "id": "federation-report",
+          "label": "HLAreport",
+          "x": 13.0,
+          "y": 2.3,
+          "width": 2.0,
+          "height": 0.65,
+          "style": "box"
+        }
       ],
       "edges": [
-        { "id": "figure-20-manager-federate", "source": "interaction-manager", "target": "interaction-federate", "direction": "none" },
-        { "id": "figure-20-manager-federation", "source": "interaction-manager", "target": "interaction-federation", "direction": "none" },
-        { "id": "figure-20-manager-extension", "source": "interaction-manager", "target": "interaction-extension", "style": "dotted", "direction": "none" },
-        { "id": "figure-20-federate-adjust", "source": "interaction-federate", "target": "federate-adjust", "direction": "none" },
-        { "id": "figure-20-federate-request", "source": "interaction-federate", "target": "federate-request", "direction": "none" },
-        { "id": "figure-20-federate-report", "source": "interaction-federate", "target": "federate-report", "direction": "none" },
-        { "id": "figure-20-federate-service", "source": "interaction-federate", "target": "federate-service", "direction": "none" },
-        { "id": "figure-20-federation-adjust", "source": "interaction-federation", "target": "federation-adjust", "direction": "none" },
-        { "id": "figure-20-federation-request", "source": "interaction-federation", "target": "federation-request", "direction": "none" },
-        { "id": "figure-20-federation-report", "source": "interaction-federation", "target": "federation-report", "direction": "none" }
+        {
+          "id": "figure-20-manager-federate",
+          "source": "interaction-manager",
+          "target": "interaction-federate",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-manager-federation",
+          "source": "interaction-manager",
+          "target": "interaction-federation",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-manager-extension",
+          "source": "interaction-manager",
+          "target": "interaction-extension",
+          "style": "dotted",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federate-adjust",
+          "source": "interaction-federate",
+          "target": "federate-adjust",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federate-request",
+          "source": "interaction-federate",
+          "target": "federate-request",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federate-report",
+          "source": "interaction-federate",
+          "target": "federate-report",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federate-service",
+          "source": "interaction-federate",
+          "target": "federate-service",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federation-adjust",
+          "source": "interaction-federation",
+          "target": "federation-adjust",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federation-request",
+          "source": "interaction-federation",
+          "target": "federation-request",
+          "direction": "none"
+        },
+        {
+          "id": "figure-20-federation-report",
+          "source": "interaction-federation",
+          "target": "federation-report",
+          "direction": "none"
+        }
       ]
     },
     {
@@ -130,7 +636,10 @@
       "title": "HLA Federate Protocol layers",
       "kind": "architecture",
       "clause_id": "clause-12.13.2",
-      "source": { "path": "content/clauses/12-programming-language-mappings-page-395.tex", "line": 1 },
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-395.tex",
+        "line": 1
+      },
       "provenance": {
         "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p396-xref13906.png",
         "page": 396,
@@ -138,13 +647,47 @@
         "caption": "Figure 21---HLA Federate Protocol layers"
       },
       "nodes": [
-        { "id": "protocol-service", "label": "IEEE 1516 HLA Services\nProtocol Encoded", "x": 5.0, "y": 5.2, "width": 6.3, "height": 1.1, "style": "frame" },
-        { "id": "protocol-session", "label": "Session Layer\nClient-server, Call/Callback, Fault Tolerant", "x": 5.0, "y": 3.6, "width": 6.3, "height": 1.1, "style": "frame" },
-        { "id": "protocol-transport", "label": "Transportation Layer\nTCP or TLS 1.3", "x": 5.0, "y": 2.0, "width": 6.3, "height": 1.1, "style": "frame" }
+        {
+          "id": "protocol-service",
+          "label": "IEEE 1516 HLA Services\nProtocol Encoded",
+          "x": 5.0,
+          "y": 5.2,
+          "width": 6.3,
+          "height": 1.1,
+          "style": "frame"
+        },
+        {
+          "id": "protocol-session",
+          "label": "Session Layer\nClient-server, Call/Callback, Fault Tolerant",
+          "x": 5.0,
+          "y": 3.6,
+          "width": 6.3,
+          "height": 1.1,
+          "style": "frame"
+        },
+        {
+          "id": "protocol-transport",
+          "label": "Transportation Layer\nTCP or TLS 1.3",
+          "x": 5.0,
+          "y": 2.0,
+          "width": 6.3,
+          "height": 1.1,
+          "style": "frame"
+        }
       ],
       "edges": [
-        { "id": "figure-21-service-session", "source": "protocol-service", "target": "protocol-session", "direction": "none" },
-        { "id": "figure-21-session-transport", "source": "protocol-session", "target": "protocol-transport", "direction": "none" }
+        {
+          "id": "figure-21-service-session",
+          "source": "protocol-service",
+          "target": "protocol-session",
+          "direction": "none"
+        },
+        {
+          "id": "figure-21-session-transport",
+          "source": "protocol-session",
+          "target": "protocol-transport",
+          "direction": "none"
+        }
       ]
     }
   ]

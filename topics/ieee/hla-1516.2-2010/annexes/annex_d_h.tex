@@ -1,0 +1,129 @@
+% ---------------------------------------------------------------------------
+% Source PDF p. 107 / standard p. 95.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexhead{D}{normative}{OMT data interchange format}
+The HLA OMT data interchange format (DIF) is a standard data exchange format used to store and transfer FOMs, SOMs, and HLA object model components (e.g., the HLA object modeling aspects of BOMs, as well as FOM modules, SOM modules, and MIMs) between object modeling tools and to initialize the HLA RTI. The DIF is built on a common metamodel that represents the information needed to represent and manage object models created using the HLA OMT standard.
+
+\annexsubhead{D.1}{Notation of the DIF}
+In order to ensure that the definition of the DIF is unambiguous, it has been formally defined in terms of XML, a formal notation used to describe document specifications. The standard for XML notation is described in REC-XML-20060816.
+
+\annexsubhead{D.2}{OMT DIF XML Schema declaration}
+\vspace{14pt}
+XML calls for using an XML Schema or a Document Type Declaration (DTD) to specify the valid syntax, structure, and format for documents. The XML Schema that describes the OMT DIF is included in the paragraphs that follow.
+
+The XML specification defines two levels of correctness for XML documents: ``well-formed'' and ``valid.'' A well-formed XML document is one that follows the syntax constraints of XML; for example, all element opening and closing tags are appropriately nested. A valid XML file is one that is well formed and complies with an XML Schema. That is, a valid XML document shall contain all elements and attributes defined in the XML Schema and only those elements and attributes. To support the exchange of object models among heterogeneous tools, all OMT DIF-compliant files shall be valid, and thus, well formed.
+
+Because it is often necessary to exchange incomplete OMT documents using the OMT DIF (for federations under development, for example), many completeness and consistency constraints are not included in the OMT DIF XML Schema. Therefore, much of the individual information is specified as optional in the XML Schema. However, when complete, an OMT document, in addition to being a valid XML document, shall be consistent and complete with respect to the body of this document. In the OMT XML Schema, note labels and note references shall be prefixed with an underscore to ensure that the labeling conforms to the NCName datatype convention. Also, several instances exist in which the tabular representation differs from the XML representation, as follows:
+\begin{itemize}[leftmargin=30pt,labelsep=9pt,itemsep=1.4pt,topsep=2pt]
+\item In the tabular representation of object models, object class and interaction class inheritance are represented by columns in the which the parent of a class was represented to its left and children to its right. In the XML depiction of object models, inheritance is represented by membership, in which children of a parent class are depicted as class elements contained within the parent class element.
+\item In the tabular representation, multiple entries in a field are represented by comma-separated lists. In XML, elements are separated by spaces. This situation exists in notes and attributes' available dimensions.
+\end{itemize}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 108 / standard p. 96.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{9.8pt plus 0.8pt minus 0.8pt}
+\begin{itemize}[leftmargin=32pt,labelsep=12pt,itemsep=1.4pt,topsep=0pt]
+\item The formatting of notes in XML is different from that presented in the tabular representation in the body of this specification. In the tabular representation, a pointer to a note is indicated by an identifier enclosed in brackets in which the opening bracket is preceded with an asterisk. In XML, every XML attribute has a corresponding note attribute. This attribute shall receive the note pointers for the corresponding value attribute; the text of the note shall be recorded in the notes element.
+\end{itemize}
+
+The following file shall include the OMT DIF XML Schema. This file accompanies this specification.
+
+\url{http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 109 / standard p. 97.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexhead{E}{normative}{OMT conformance XML Schema}
+The OMT Conformance XML Schema is more restrictive than the OMT DIF XML Schema. It enables automated conformance testing of OMT documents by using XML validation. Most but not all conformance tests, as defined in Clause 6, are expressed in the XML Schema.
+
+Conformance tests not expressed in the OMT Conformance XML Schema are as follows:
+\begin{enumerate}[leftmargin=52pt,labelsep=12pt,label=\arabic*),itemsep=0pt,topsep=-2pt,partopsep=0pt,parsep=0pt]
+\item Attribute names shall not duplicate (overload) the names of attributes of this class or any higher-level superclass.
+\item Parameter names shall not duplicate (overload) the names of parameters of this class or any higher-level superclass
+\end{enumerate}
+
+\annexsubhead{E.1}{OMT conformance XML Schema declaration}
+The following file shall include the OMT DIF XML Schema. This file accompanies this specification.
+
+\url{http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-OMT-2010.xsd}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 110 / standard p. 98.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexhead{F}{informative}{OMT DIF SOM example}
+The HLA OMT DIF is described in Annex D. It describes the format and content of an object model in XML terms. The following is an object model document that encodes the samples describing the Restaurant SOM that are presented in this specification using the DIF. In XML terms, the document is well formed and valid according to the HLA OMT XML Schema specified in Annex D.
+
+\vspace{14pt}
+The following file shall include the Restaurant SOM module example. This file accompanies this\linebreak specification.
+
+\url{http://standards.ieee.org/downloads/1516/1516.2-2010/RestaurantSOMmodule.xml}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 111 / standard p. 99.
+% ---------------------------------------------------------------------------
+\newpage
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexhead{G}{informative}{OMT DIF FOM example}
+The HLA OMT DIF is described in Annex D. It describes the format and content of an object model in XML terms. The following is an object model document that encodes a FOM module using the DIF. In XML\linebreak terms, the document is well formed and valid according to the HLA OMT XML Schema specified in\linebreak Annex D.
+
+The following file shall include the Restaurant FOM example. This file accompanies this specification.
+
+\vspace{-4pt}\url{http://standards.ieee.org/downloads/1516/1516.2-2010/RestaurantFOMmodule.xml}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 112 / standard p. 100.
+% ---------------------------------------------------------------------------
+\fancypagestyle{bibliographylast}{%
+    \fancyhf{}%
+    \fancyhead[L]{\sffamily\fontsize{8.67}{9.2}\selectfont \stdnumber}%
+    \fancyfoot[L]{\fontsize{10}{11}\selectfont\thepage}%
+    \fancyfoot[R]{\sffamily\fontsize{8.67}{9.2}\selectfont\stdcopyright}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+\newpage
+\thispagestyle{bibliographylast}
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+\annexhead{H}{informative}{Bibliography}
+[B1] IEEE Std 1516\texttrademark-2010, IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules.
+
+[B2] IEEE Std 1516.3\texttrademark-2003, IEEE Recommended Practice for High Level Architecture (HLA) Federation Development and Execution Process (FEDEP).
+
+[B3] IEEE Std 1516.4\texttrademark-2007, IEEE Recommended Practice for Verification, Validation, and Accreditation of a Federation---An Overlay to the High Level Architecture Federation Development and Execution\linebreak Process.
+
+[B4] IETF RFC 2781, ``UTF-16, an encoding of ISO 10646,'' February 2000.
+
+[B5] Naur, P. et al., ``Report on the Algorithmic Language ALGOL 60,'' in \textit{Communications of the ACM}, vol. 6, no. 1, pp. 1--17, Jan. 1963.
+
+[B6] SISO-STD-003-2006, Base Object Model (BOM) Template Specification, Simulation Interoperability Standards Organization (SISO), March 2006.
+\endgroup
+
+\let\annexhead\relax
+\let\annexbodyfont\relax
+\let\annexsubhead\relax
+\let\bibliographylast\relax

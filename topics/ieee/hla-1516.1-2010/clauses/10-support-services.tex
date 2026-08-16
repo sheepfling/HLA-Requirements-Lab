@@ -1,0 +1,1814 @@
+% Faithful initial reconstruction of Clause 10 from source PDF pages 227--260
+% (standard pages 213--246). Source-page boundaries are intentionally preserved.
+
+\clearpage
+
+% --- Standard page 213 / source PDF page 227 ---
+\begin{compactstdpage}
+
+    \section{Support services}
+
+    \subsection{Overview}
+
+    This clause describes miscellaneous services utilized by joined federates for performing such actions as the following:
+
+    \stdliteraldashitem{Performing name-to-handle and handle-to-name transformations}
+    \stdliteraldashitem{Setting advisory switches}
+    \stdliteraldashitem{Manipulating regions}
+    \stdliteraldashitem{Getting update rates values.}
+
+    \subsubsection{Names}
+
+    All class name arguments shall be completely specified, including all superclass names, with the exception of the HLA root classes. The inclusion of HLAobjectRoot or HLAinteractionRoot shall be optional.
+
+    Each name in an FDD (object classes, interactions, attributes, parameters, dimensions, transportation types, order types) shall have a unique, and unpredictable, federation execution-wide handle.
+
+    All names shall be case sensitive.
+
+    \subsubsection{Advisory switches}
+
+    The settings of the following advisory switches may be modified by services in Clause 10:
+
+    \stdliteraldashitem{Object Class Relevance Advisory Switch}
+    \stdliteraldashitem{Attribute Relevance Advisory Switch}
+    \stdliteraldashitem{Attribute Scope Advisory Switch}
+    \stdliteraldashitem{Interaction Relevance Advisory Switch}
+    The federation-wide initial setting of each advisory switch shall be as indicated in the FDD supplied to the Create Federation Execution service invocation for the federation execution. Subsequent invocation of the advisory switch services in this clause shall affect a switch setting for the invoking federate only.
+
+    The enabling of an advisory switch directs that the RTI shall inform the joined federate, via the appropriate advisory notifications, whenever the conditions covered by that advisory change. The disabling of an advisory switch directs the RTI to cease informing the joined federate of changes in the conditions covered by that advisory. When an advisory switch is disabled, all relevant notifications that would have been delivered to the joined federate shall be lost, i.e., the RTI shall not save the relevant actions and send them to the joined federate when a switch is subsequently enabled.
+
+    There is, however, one case in which the RTI shall not inform a joined federate when specific conditions covered by an advisory change, even if that advisory switch is enabled. Specifically, even if the Attribute Scope Advisory Switch is enabled, there are some actions a joined federate could take that would cause an instance attribute to go out of scope with respect to that joined federate. Since these changes are a result of the joined federate's own action and the joined federate knows that the action will cause the instance attribute to go out of scope, no out-of-scope advisory notification shall be given the joined federate. The actions that could cause an instance attribute to go out of scope for the acting joined federate are as follows:
+
+    \stdliteraldashitem{The joined federate acquires ownership of the instance attribute.}
+    \stdliteraldashitem{The joined federate unsubscribes to the instance attribute's corresponding class attribute, and it is not subscribed to the instance attribute's corresponding class attribute with region.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 214 / source PDF page 228 ---
+\begin{compactstdpage}
+
+    \stdliteraldashitem{The joined federate unsubscribes with region to the instance attribute's corresponding class attribute so that it is no longer subscribed to the class attribute (with or without region).}
+    These cases are referred to as implicit out-of-scope situations because no out-of-scope advisory notification is generated.
+
+    Note that if a joined federate unsubscribes with or without region to an instance attribute's corresponding class attribute, but is still subscribed to that class attribute with some other region, it may or may not have caused the instance attribute to go out of scope (assuming it was previously in scope). Since the joined federate does not know if its removal has caused overlap to be lost with the update region set, it must in this case rely on the RTI to inform it of whether the instance attribute has gone out of scope. Only if the joined federate completely removes all subscriptions (DM and DDM based subscriptions) can it know with certainty that it is causing an implicit out-of-scope situation.
+
+    For purposes of determining whether the conditions covered by each advisory have changed, when the conditions required for sending each advisory become relevant at a given federate, the initial state of each advisory, as discerned by that federate, is as follows:
+
+    \stdliteralitem{a)}{Before a federate begins publishing an object class, the conditions covered by the Object Class Relevance Advisory Switch are assumed to be such that the registration of new object instances of the specified object class is not advised.}
+    \stdliteralitem{b)}{Before a federate begins publishing an interaction class, the interaction class is in the Interactions Turned Off state with respect to that federate (see Figure 13).}
+    \stdliteralitem{c)}{Before a federate becomes the owner of an instance attribute, the instance attribute is in the Updates Turned Off state with regard to that federate (see Figure 15).}
+    \stdliteralitem{d)}{Before a federate knows about an object instance, all of the instance attributes of that object instance are in the Attributes Out-of-Scope state with regard to the federate (see Figure 15).}
+
+    \subsection{Get Automatic Resign Directive service}
+
+    The Get Automatic Resign Directive service shall return the current Automatic Resign Directive for the federation execution.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Automatic resign directive.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+
+    \subsubsection{Post conditions}
+
+    \stdliteralitem{a)}{The federate has the Automatic Resign Directive.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 215 / source PDF page 229 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The federate is not a federation execution member.}
+    \stdliteralitem{b)}{Not connected.}
+    \stdliteralitem{c)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Set Automatic Resign Directive service}
+
+    The Set Automatic Resign Directive service shall set the Automatic Resign Directive for the federation execution.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Automatic resign directive.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+
+    \subsubsection{Post conditions}
+
+    \stdliteralitem{a)}{The Automatic Resign Directive for the federation execution is set to the specified value.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid resign action.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Federate Handle service}
+
+    The Get Federate Handle service shall return the handle of the joined federate with the supplied name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Federate name.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 216 / source PDF page 230 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Federate handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The federate with the supplied name exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested federate handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The supplied federate name is not understood.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Federate Name service}
+
+    The Get Federate Name service shall return the name of the federate with the supplied handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Federate handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Federate name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The federate with the specified handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested federate name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid federate handle.}
+    \stdliteralitem{b)}{The supplied federate handle is not understood.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 217 / source PDF page 231 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Object Class Handle service}
+
+    The Get Object Class Handle service shall return the object class handle associated with the supplied object class name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object class name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified object class is defined in the FDD.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested object class handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The object class is not defined in the FDD.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Object Class Name service}
+
+    The Get Object Class Name service shall return the object class name associated with the supplied object class handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 218 / source PDF page 232 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Object class name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to the federation execution.}
+    \stdliteralitem{d)}{The specified object class handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested object class name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid object class handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Known Object Class Handle service}
+
+    The Get Known Object Class Handle service shall return the known object class of the supplied object instance.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object instance handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified handle exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified handle.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the known object class handle of the specified object instance.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 219 / source PDF page 233 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid object instance handle.}
+    \stdliteralitem{b)}{The object instance is not known.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Object Instance Handle service}
+
+    The Get Object Instance Handle service shall return the handle of the object instance with the supplied name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object instance name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Object instance handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The object instance with the specified name exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified name.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested object instance handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The object instance is not known.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 220 / source PDF page 234 ---
+\begin{compactstdpage}
+
+    \subsection{Get Object Instance Name service}
+
+    The Get Object Instance Name service shall return the name of the object instance with the supplied handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object instance handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Object instance name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The object instance with the specified handle exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified handle.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested object instance name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid object instance handle.}
+    \stdliteralitem{b)}{The object instance is not known.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Attribute Handle service}
+
+    The Get Attribute Handle service shall return the class attribute handle associated with the supplied class attribute name and object class.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+    \stdliteralitem{b)}{Class attribute name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Class attribute handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 221 / source PDF page 235 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified object class handle exists.}
+    \stdliteralitem{e)}{The specified class attribute is an available attribute of the specified object class.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested class attribute handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The object class attribute is not an available attribute of the object class.}
+    \stdliteralitem{b)}{Invalid object class handle.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Attribute Name service}
+
+    The Get Attribute Name service shall return the class attribute name associated with the supplied class attribute handle and object class.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+    \stdliteralitem{b)}{Class attribute handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Class attribute name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified object class handle exists.}
+    \stdliteralitem{e)}{The specified class attribute handle exists.}
+    \stdliteralitem{f)}{The specified class attribute is an available attribute of the specified object class.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested class attribute name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The object class attribute is not an available attribute of the object class.}
+    \stdliteralitem{b)}{Invalid class attribute handle.}
+    \stdliteralitem{c)}{Invalid object class handle.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 222 / source PDF page 236 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Update Rate Value service}
+
+    The Get Update Rate Value service shall return the maximum update rate value for the specified update rate.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Update rate name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Maximum update rate value.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The update rate name exists in the FDD.}
+
+    \subsubsection{Post conditions}
+
+    \stdliteralitem{a)}{The joined federate has the maximum update rate value.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid update rate name.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Update Rate Value For Attribute service}
+
+    The Get Update Rate Value For Attribute service shall return the maximum update rate value for the specified attribute of the specified object instance.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object instance handle.}
+    \stdliteralitem{b)}{Attribute handle.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 223 / source PDF page 237 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Maximum update rate value.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The object instance exists.}
+    \stdliteralitem{e)}{The attribute handle is valid for the object instance.}
+
+    \subsubsection{Post conditions}
+
+    \stdliteralitem{a)}{The joined federate has the maximum update rate value for the object instance attribute.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid object instance handle.}
+    \stdliteralitem{b)}{The object instance is not known.}
+    \stdliteralitem{c)}{Invalid attribute handle.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Interaction Class Handle service}
+
+    The Get Interaction Class Handle service shall return the interaction class handle associated with the supplied interaction class name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Interaction class handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified interaction class is defined in the FDD.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested interaction class handle.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 224 / source PDF page 238 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The interaction class is not defined in the FDD.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Interaction Class Name service}
+
+    The Get Interaction Class Name service shall return the interaction class name associated with the supplied interaction class handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Interaction class name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified interaction class handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested interaction class name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid interaction class handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 225 / source PDF page 239 ---
+\begin{compactstdpage}
+
+    \subsection{Get Parameter Handle service}
+
+    The Get Parameter Handle service shall return the interaction parameter handle associated with the supplied parameter name and interaction class.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class handle.}
+    \stdliteralitem{b)}{Parameter name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Parameter handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified interaction class handle exists.}
+    \stdliteralitem{e)}{The specified parameter is an available parameter of the specified interaction class.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested parameter handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The parameter is not an available parameter of the interaction class.}
+    \stdliteralitem{b)}{Invalid interaction class handle.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Parameter Name service}
+
+    The Get Parameter Name service shall return the interaction parameter name associated with the supplied parameter handle and interaction class.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class handle.}
+    \stdliteralitem{b)}{Parameter handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Parameter name.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 226 / source PDF page 240 ---
+\begin{compactstdpage}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified interaction class handle exists.}
+    \stdliteralitem{e)}{The specified parameter handle exists.}
+    \stdliteralitem{f)}{The specified parameter is an available parameter of the specified interaction class.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested parameter name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The parameter is not an available parameter of the interaction class.}
+    \stdliteralitem{b)}{Invalid parameter handle.}
+    \stdliteralitem{c)}{Invalid interaction class handle.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Order Type service}
+
+    The Get Order Type service shall return the order type associated with the supplied order name, as defined in 8.1.8.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Order name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Order type.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The order name is valid (see 8.1.11).}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested order type.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid order name.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 227 / source PDF page 241 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Order Name service}
+
+    The Get Order Name service shall return the order name, as defined in 8.1.11, associated with the supplied order type.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Order type.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Order name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The order type is valid (8.1.11).}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested order name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid order type.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Transportation Type Handle service}
+
+    The Get Transportation Type Handle service shall return the transportation type handle associated with the supplied transportation name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Transportation type name.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 228 / source PDF page 242 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Transportation type handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified transportation type is defined in the FDD.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested transportation type handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The transportation type is not defined in the FDD.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Transportation Type Name service}
+
+    The Get Transportation Type Name service shall return the transportation type name associated with the supplied transportation type handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Transportation type handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Transportation type name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified transportation type handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested transportation type name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid transportation type handle.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 229 / source PDF page 243 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Available Dimensions For Class Attribute service}
+
+    The Get Available Dimensions For Class Attribute service shall return the available dimensions of the supplied class attribute and object class. If the supplied class attribute does not have available dimensions, an empty set shall be returned.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object class handle.}
+    \stdliteralitem{b)}{Class attribute handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{A set of dimension handles.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified object class handle exists.}
+    \stdliteralitem{e)}{The specified class attribute handle exists.}
+    \stdliteralitem{f)}{The specified class attribute is an available attribute of the specified object class.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the dimension handle set.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The object class attribute is not an available attribute of the object class.}
+    \stdliteralitem{b)}{Invalid class attribute handle.}
+    \stdliteralitem{c)}{Invalid object class handle.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 230 / source PDF page 244 ---
+\begin{compactstdpage}
+
+    \subsection{Get Available Dimensions For Interaction Class service}
+
+    The Get Available Dimensions For Interaction Class service shall return the available dimensions of the supplied interaction class. If the supplied interaction class does not have available dimensions, an empty set shall be returned.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{A set of dimension handles.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified interaction class handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested dimension handle set.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid interaction class handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Dimension Handle service}
+
+    The Get Dimension Handle service shall return the dimension handle associated with the supplied dimension name.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Dimension name.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Dimension handle.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 231 / source PDF page 245 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified dimension is defined in the FDD.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested dimension handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The dimension is not defined in the FDD.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Dimension Name service}
+
+    The Get Dimension Name service shall return the dimension name associated with the supplied dimension handle.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Dimension handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Dimension name.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{b)}{The federate is connected to the RTI.}
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The specified dimension handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested dimension name.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid dimension handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 232 / source PDF page 246 ---
+\begin{compactstdpage}
+
+    \subsection{Get Dimension Upper Bound service}
+
+    The Get Dimension Upper Bound service shall return the positive integer that is the upper bound for the specified dimension, as specified in the FDD.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Dimension handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Dimension upper bound.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified dimension handle exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested dimension upper bound.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid dimension handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Dimension Handle Set service}
+
+    The Get Dimension Handle Set service shall return the dimensions of the specified region.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Region handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{A set of dimensions.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The region exists.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 233 / source PDF page 247 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{The region was either created by the invoking joined federate using the Create Region service or conveyed to the invoking joined federate in a Set of Sent Region Designators argument. If the region designator specified is not the designator of a region that was either created by the invoking federate or conveyed to it in a Set of Sent Region Designators argument, the ``Invalid region'' exception shall be generated.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the dimensions of the region.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid region handle.}
+    \stdliteralitem{b)}{Invalid region.}
+    \stdliteralitem{c)}{Federate save in progress.}
+    \stdliteralitem{d)}{Federate restore in progress.}
+    \stdliteralitem{e)}{The federate is not a federation execution member.}
+    \stdliteralitem{f)}{Not connected.}
+    \stdliteralitem{g)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Get Range Bounds service}
+
+    The Get Range Bounds service shall return the current lower and upper bounds of the range for the specified dimension in the specified region.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Region handle.}
+    \stdliteralitem{b)}{Dimension handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Range lower bound.}
+    \stdliteralitem{b)}{Range upper bound.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The region exists.}
+    \stdliteralitem{e)}{The region contains the specified dimension.}
+    \stdliteralitem{f)}{Either the region was created by the invoking joined federate using the Create Region service, or it was conveyed to the invoking joined federate in a Set of Sent Region Designators argument. If the region designator specified is not the designator of a region that was either created by the invoking federate or conveyed to it in a Set of Sent Region Designators argument, the ``Invalid region'' exception shall be generated.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 234 / source PDF page 248 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{g)}{All supplied region designators are designators either of region specifications or of region realization copies. If a region designator specified is not a designator of a region specification or of a region realization copy, the ``Invalid region'' exception shall be generated.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has the requested range bounds.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The region does not contain the specified dimension.}
+    \stdliteralitem{b)}{Invalid region handle.}
+    \stdliteralitem{c)}{Invalid region.}
+    \stdliteralitem{d)}{Invalid dimension handle.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Set Range Bounds service}
+
+    The Set Range Bounds service shall set the current lower and upper bounds of the range for the specified dimension in the specified region.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Region handle.}
+    \stdliteralitem{b)}{Dimension handle.}
+    \stdliteralitem{c)}{Range lower bound.}
+    \stdliteralitem{d)}{Range upper bound.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The region exists.}
+    \stdliteralitem{e)}{The region was created by the joined federate using the Create Region service.}
+    \stdliteralitem{f)}{The region contains the specified dimension.}
+    \stdliteralitem{g)}{The range lower bound is greater than or equal to zero.}
+    \stdliteralitem{h)}{The range upper bound is less than or equal to the specified dimension's upper bound.}
+    \stdliteralitem{i)}{The range lower bound is less than the range upper bound.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 235 / source PDF page 249 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{j)}{Federate save not in progress.}
+    \stdliteralitem{k)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The specified range is set to the specified values.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid range bound.}
+    \stdliteralitem{b)}{Invalid region handle.}
+    \stdliteralitem{c)}{The region does not contain the specified dimension.}
+    \stdliteralitem{d)}{The region was not created by the joined federate using the Create Region service.}
+    \stdliteralitem{e)}{Invalid region.}
+    \stdliteralitem{f)}{Invalid dimension handle.}
+    \stdliteralitem{g)}{Federate save in progress.}
+    \stdliteralitem{h)}{Federate restore in progress.}
+    \stdliteralitem{i)}{The federate is not a federation execution member.}
+    \stdliteralitem{j)}{Not connected.}
+    \stdliteralitem{k)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Normalize Federate Handle service}
+
+    The Normalize Federate Handle service shall return a normalized value of the provided federate handle that can be used in constructing a region with the dimension HLAfederate.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Federate handle.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Normalized value.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The invoking federate is joined to that federation execution.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The normalized value corresponds to the provided federate handle.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid federate handle.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 236 / source PDF page 250 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Normalize Service Group service}
+
+    The Normalize Service Group service shall return a normalized value of the provided service group indicator that can be used in constructing a region with the dimension HLAserviceGroup.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Service group indicator.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Normalized value.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The invoking federate is joined to that federation execution.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The normalized value corresponds to the provided service group indicator.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid service group.}
+    \stdliteralitem{b)}{The federate is not a federation execution member.}
+    \stdliteralitem{c)}{Not connected.}
+    \stdliteralitem{d)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Enable Object Class Relevance Advisory Switch service}
+
+    The Enable Object Class Relevance Advisory Switch service shall set the Object Class Relevance Advisory Switch on.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 237 / source PDF page 251 ---
+\begin{compactstdpage}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Object Class Relevance Advisory Switch is off.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The class relevance advisory switch is turned on.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Object Class Relevance Advisory Switch is on.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Disable Object Class Relevance Advisory Switch service}
+
+    The Disable Object Class Relevance Advisory Switch service shall set the Object Class Relevance Advisory Switch off.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Object Class Relevance Advisory Switch is on.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The class relevance advisory switch is turned off.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 238 / source PDF page 252 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Object Class Relevance Advisory Switch is off.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Enable Attribute Relevance Advisory Switch service}
+
+    The Enable Attribute Relevance Advisory Switch service shall set the Attribute Relevance Advisory Switch on.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Attribute Relevance Advisory Switch is off.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Attribute Relevance Advisory Switch is turned on.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Attribute Relevance Advisory Switch is on.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 15.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 239 / source PDF page 253 ---
+\begin{compactstdpage}
+
+    \subsection{Disable Attribute Relevance Advisory Switch service}
+
+    The Disable Attribute Relevance Advisory Switch service shall set the Attribute Relevance Advisory Switch off.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Attribute Relevance Advisory Switch is on.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Attribute Relevance Advisory Switch is turned off.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Attribute Relevance Advisory Switch is off.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Enable Attribute Scope Advisory Switch service}
+
+    The Enable Attribute Scope Advisory Switch service shall set the Attribute Scope Advisory Switch on.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 240 / source PDF page 254 ---
+\begin{compactstdpage}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Attribute Scope Advisory Switch is off.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Attribute Scope Advisory Switch is turned on.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Attribute Scope Advisory Switch is on.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Disable Attribute Scope Advisory Switch service}
+
+    The Disable Attribute Scope Advisory Switch service shall set the Attribute Scope Advisory Switch off.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Attribute Scope Advisory Switch is on.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Attribute Scope Advisory Switch is turned off.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 241 / source PDF page 255 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Attribute Scope Advisory Switch is off.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Enable Interaction Relevance Advisory Switch service}
+
+    The Enable Interaction Relevance Advisory Switch service shall set the Interaction Relevance Advisory Switch on.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Interaction Relevance Advisory Switch is off.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Interaction Relevance Advisory Switch is turned on.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Interaction Relevance Advisory Switch is on.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 13.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 242 / source PDF page 256 ---
+\begin{compactstdpage}
+
+    \subsection{Disable Interaction Relevance Advisory Switch service}
+
+    The Disable Interaction Relevance Advisory Switch service shall set the Interaction Relevance Advisory Switch off.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The Interaction Relevance Advisory Switch is on.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The Interaction Relevance Advisory Switch is turned off.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The Interaction Relevance Advisory Switch is off.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 13.}
+
+    \subsection{Evoke Callback service}
+
+    The Evoke Callback service instructs the RTI that the invoking federate is prepared to receive a single federate callback. If there are no pending callbacks to be delivered to the federate, this service invocation shall wait for the duration indicated by the supplied argument. The supplied argument shall have a precision of at least 1 ms. This service shall result in either the timeout expiring or a single callback to be invoked on the federate. The pending callback indicator argument shall be a boolean value: TRUE shall indicate that pending callbacks exist, and FALSE shall indicate that no pending callbacks exist. This service has no effect in the IMMEDIATE callback model.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Minimum amount of wall-clock time the service will wait for a callback.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 243 / source PDF page 257 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Pending callback indicator.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI is provided the opportunity to invoke callbacks on the federate.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The federate is not a federation execution member.}
+    \stdliteralitem{b)}{Not connected.}
+    \stdliteralitem{c)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Evoke Multiple Callbacks service}
+
+    The Evoke Multiple Callbacks service instructs the RTI that the invoking federate is prepared to receive multiple federate callbacks. The service shall continue to process available callbacks until the minimum specified wall-clock time. At that wall-clock time, if there are no additional callbacks to be delivered to the federate, the service shall complete. If, after the minimum specified wall-clock time, there continue to be callbacks, the RTI shall continue to deliver those callbacks until the maximum specified wall-clock time is exceeded. Both supplied wall-clock time arguments shall have a precision of at least 1 ms. The pending callback indicator argument shall be a boolean value: TRUE shall indicate that pending callbacks exist, and FALSE shall indicate that no pending callbacks exist. This service has no effect in the IMMEDIATE callback model.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Minimum amount of wall-clock time.}
+    \stdliteralitem{b)}{Maximum amount of wall-clock time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{Pending callback indicator.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI is provided the opportunity to invoke callbacks on the federate.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 244 / source PDF page 258 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The federate is not a federation execution member.}
+    \stdliteralitem{b)}{Not connected.}
+    \stdliteralitem{c)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Enable Callbacks service}
+
+    In the EVOKED callback model, the Enable Callbacks service instructs the RTI to deliver any available callbacks processed through the Evoke Callback and Evoke Multiple Callbacks services. In the IMMEDIATE callback model, the Enable Callbacks service instructs the RTI to deliver any available callbacks processed immediately when they are available. The default state for a federate is that callbacks are enabled.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{Federate save not in progress.}
+    \stdliteralitem{d)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI shall process any pending callbacks on the federate when either the Evoke Callback or Evoke Multiple Callbacks service is invoked.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate save in progress.}
+    \stdliteralitem{b)}{Federate restore in progress.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 245 / source PDF page 259 ---
+\begin{compactstdpage}
+
+    \subsection{Disable Callbacks service}
+
+    The Disable Callbacks service instructs the RTI to defer the delivery of any available callbacks. This service can be used to implement a guard mechanism to control when callbacks are delivered to the federate.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{Federate save not in progress.}
+    \stdliteralitem{d)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI shall not process any pending callbacks on the federate for any existing or subsequent Evoke Callback or Evoke Multiple Callbacks invocations until the Enable Callback service is invoked.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate save in progress.}
+    \stdliteralitem{b)}{Federate restore in progress.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 246 / source PDF page 260 ---
+\thispagestyle{body}
+\null

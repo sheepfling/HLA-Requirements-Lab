@@ -1,0 +1,205 @@
+% Figure 13 - Interaction class (m)
+% Independently revalidated against source physical page 86 / standard page 72.
+% Natural coordinates follow the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure13/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f13 stroke/.style={draw=black,line width=.90pt},
+    f13 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
+    f13 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
+    f13 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
+    f13 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.8}{13.6}\selectfont,align=center,inner sep=0pt},
+    f13 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{15.0}{16.0}\selectfont,align=center,inner sep=0pt},
+    f13 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.5}{13.3}\selectfont,align=center,inner sep=0pt},
+    f13 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.4}{12.2}\selectfont,align=center,inner sep=0pt}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % F13-S00 outer Interaction Class composite.
+    \draw[f13 stroke]
+    (177,40) -- (785,40)
+    .. controls (827,40) and (860,73) .. (860,113)
+    -- (860,598)
+    .. controls (860,640) and (827,672) .. (786,672)
+    -- (175,672)
+    .. controls (134,672) and (102,640) .. (102,598)
+    -- (102,113)
+    .. controls (102,73) and (135,40) .. (177,40)
+    -- cycle;
+    \draw[f13 stroke] (102,112) -- (860,112);
+    \node[f13 title] at (480,78) {Interaction Class $(m)$};
+
+    % Orthogonal publication/subscription regions and source tabs.
+    \draw[f13 partition] (634,112) -- (634,672);
+    \draw[f13 stroke] (102,112) -- (242,112) -- (242,147) -- (102,147);
+    \node[f13 tab] at (172,130) {Interaction Publication};
+    \draw[f13 stroke] (634,112) -- (771,112) -- (771,147) -- (634,147);
+    \node[f13 tab] at (702.5,130) {Interaction Subscription};
+
+    % ------------------------------------------------------------------
+    % Publication region.
+    % ------------------------------------------------------------------
+    % F13-S01 Unpublished (m).
+    \draw[f13 stroke,rounded corners=8pt] (492,144) rectangle (581,198);
+    \node[f13 text] at (536.5,171) {Unpublished\\$(m)$};
+
+    % Publication initial pseudo-state and F13-E01.
+    \fill (430,141) circle[radius=7pt];
+    % F13-E01 publication initial -> Unpublished.
+    \draw[f13 transition] (437,145) -- (489,169);
+
+    % F13-E02 Unpublished self-loop: Unpublish (m).
+    \draw[f13 transition] (581,154)
+    .. controls (603,132) and (619,139) .. (606,161)
+    .. controls (600,170) and (592,168) .. (584,166);
+    \node[f13 small,anchor=south] at (590,129) {Unpublish $(m)$};
+
+    % F13-S02 Published (m) composite.
+    \draw[f13 stroke]
+    (190,268) -- (570,268)
+    .. controls (595,268) and (613,288) .. (613,313)
+    -- (613,613)
+    .. controls (613,639) and (592,660) .. (566,660)
+    -- (187,660)
+    .. controls (161,660) and (141,639) .. (141,613)
+    -- (141,315)
+    .. controls (141,289) and (162,268) .. (190,268)
+    -- cycle;
+    \draw[f13 stroke] (141,297) -- (249,297) -- (249,268);
+    \node[f13 tab] at (195,283) {Published $(m)$};
+
+    % F13-E03 Unpublished -> Published boundary: Publish (m).
+    \draw[f13 transition] (553,198) -- (553,264);
+    \node[f13 small] at (552,236) {Publish $(m)$};
+
+    % F13-E04 Published boundary -> Unpublished: Unpublish (m).
+    \draw[f13 transition] (426,268) -- (518,201);
+    \node[f13 small,anchor=south] at (474,239) {Unpublish $(m)$};
+
+    % F13-E05 Published boundary self-loop: Publish (m).
+    \draw[f13 transition] (594,269)
+    .. controls (613,249) and (626,258) .. (620,279)
+    .. controls (617,290) and (611,292) .. (606,289);
+    \node[f13 small,anchor=south] at (604,251) {Publish $(m)$};
+
+    % Deep-history H* and F13-E06 Send Interaction transition.
+    \draw[f13 stroke] (179,329) circle[radius=17pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{20}{20}\selectfont,inner sep=0pt] at (179,329) {H*};
+    % F13-E06 Published boundary -> deep history.
+    \draw[f13 transition] (141,387)
+    .. controls (160,387) and (177,371) .. (179,349);
+    \node[f13 small] at (178,377) {Send\\Interaction};
+
+    % Publication-relevance conditional entry.
+    \fill (576,290) circle[radius=7pt];
+    \draw[f13 stroke] (530,355) circle[radius=14pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{17}{17}\selectfont,inner sep=0pt] at (530,355) {C};
+    % F13-E07 Published internal initial -> C.
+    \draw[f13 transition] (571,297) -- (538,344);
+
+    % F13-S03 No Control Sends.
+    \draw[f13 stroke,rounded corners=8pt] (256,336) rectangle (345,390);
+    \node[f13 text] at (300.5,363) {No Control\\Sends};
+
+    % F13-E08 C -> No Control Sends when advisory disabled.
+    \draw[f13 transition] (516,350) -- (349,350);
+    \node[f13 tiny,anchor=south] at (433,345) {[Interaction Relevance\\Advisory is disabled]};
+
+    % F13-E09 C -> Control Sends In Use when advisory enabled.
+    \draw[f13 transition] (530,369) -- (530,442);
+    \node[f13 tiny,anchor=west] at (540,404) {[Interaction\\Relevance\\Advisory is\\enabled]};
+
+    % F13-S04 Control Sends In Use composite.
+    \draw[f13 stroke]
+    (202,446) -- (566,446)
+    .. controls (582,446) and (594,459) .. (594,475)
+    -- (594,616)
+    .. controls (594,632) and (581,645) .. (565,645)
+    -- (203,645)
+    .. controls (187,645) and (174,632) .. (174,616)
+    -- (174,475)
+    .. controls (174,459) and (186,446) .. (202,446)
+    -- cycle;
+    \draw[f13 stroke] (174,481) -- (337,481) -- (337,446);
+    \node[f13 tab] at (255.5,464) {Control Sends\\In Use};
+
+    % F13-E10 No Control Sends -> Control Sends boundary.
+    \draw[f13 transition] (294,390) -- (294,442);
+    \node[f13 tiny,anchor=east] at (286,418) {[Interaction Relevance\\Advisory is enabled]};
+
+    % F13-E11 Control Sends boundary -> No Control Sends.
+    \draw[f13 transition] (470,446) -- (349,370);
+    \node[f13 tiny] at (420,411) {[Interaction Relevance\\Advisory is disabled]};
+
+    % F13-S05 Interaction Relevance Unknown.
+    \draw[f13 stroke,rounded corners=8pt] (336,474) rectangle (425,528);
+    \node[f13 text] at (380.5,501) {Interaction\\Relevance\\Unknown};
+
+    % Control-sends initial and F13-E12.
+    \fill (445,460) circle[radius=7pt];
+    \draw[f13 transition] (439,466) -- (423,482);
+
+    % F13-S06/S07 Interactions Turned On/Off.
+    \draw[f13 stroke,rounded corners=8pt] (199,578) rectangle (288,632);
+    \node[f13 text] at (243.5,605) {Interactions\\Turned On};
+    \draw[f13 stroke,rounded corners=8pt] (466,576) rectangle (555,630);
+    \node[f13 text] at (510.5,603) {Interactions\\Turned Off};
+
+    % F13-E13 Unknown -> Turned On.
+    \draw[f13 transition] (337,506) -- (199,578);
+    \node[f13 small] at (270,524) {Turn\\Interactions\\On\textdagger};
+
+    % F13-E14 Unknown -> Turned Off.
+    \draw[f13 transition] (425,506) -- (466,578);
+    \node[f13 small] at (489,524) {Turn\\Interactions\\Off\textdagger};
+
+    % F13-E15 Turned On -> Turned Off.
+    \draw[f13 transition] (288,588) -- (462,588);
+    \node[f13 small,anchor=south] at (376,582) {Turn Interactions Off\textdagger};
+
+    % F13-E16 Turned Off -> Turned On.
+    \draw[f13 transition] (466,615) -- (292,615);
+    \node[f13 small,anchor=north] at (377,622) {Turn Interactions On\textdagger};
+
+    % ------------------------------------------------------------------
+    % Subscription region.
+    % ------------------------------------------------------------------
+    % F13-S08 Subscribed (m).
+    \draw[f13 stroke,rounded corners=8pt] (693,203) rectangle (812,260);
+    \node[f13 text] at (752.5,231.5) {Subscribed $(m)$};
+
+    % F13-S09 Unsubscribed (m).
+    \draw[f13 stroke,rounded corners=8pt] (693,447) rectangle (812,504);
+    \node[f13 text] at (752.5,475.5) {Unsubscribed $(m)$};
+
+    % F13-E17 Subscribed self-loop: Subscribe (m).
+    \draw[f13 transition] (713,203)
+    .. controls (684,181) and (670,207) .. (693,221);
+    \node[f13 small,anchor=south] at (684,178) {Subscribe $(m)$};
+
+    % F13-E18 Subscribed self-loop: Receive Interaction dagger.
+    \draw[f13 transition] (812,217)
+    .. controls (841,193) and (850,225) .. (815,231);
+    \node[f13 small] at (820,174) {Receive\\Interaction\textdagger};
+
+    % F13-E19 Unsubscribed -> Subscribed: Subscribe (m).
+    \draw[f13 transition] (731,447) -- (731,264);
+    \node[f13 small] at (689,345) {Subscribe$(m)$};
+
+    % F13-E20 Subscribed -> Unsubscribed: Unsubscribe (m).
+    \draw[f13 transition] (771,260) -- (771,443);
+    \node[f13 small] at (817,345) {Unsubscribe $(m)$};
+
+    % F13-E21 Unsubscribed self-loop: Unsubscribe (m).
+    \draw[f13 transition] (812,466)
+    .. controls (842,443) and (852,474) .. (815,480);
+    \node[f13 small] at (812,418) {Unsubscribe $(m)$};
+
+    % Subscription initial pseudo-state and F13-E22.
+    \fill (833,586) circle[radius=7pt];
+    % F13-E22 subscription initial -> Unsubscribed.
+    \draw[f13 transition] (829,579) -- (803,507);
+\end{tikzpicture}

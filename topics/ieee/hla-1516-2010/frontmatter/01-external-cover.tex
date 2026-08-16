@@ -1,0 +1,66 @@
+% Source PDF page 1: external IEEE cover.
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay,x=1bp,y=1bp]
+    \coordinate (SW) at (current page.south west);
+
+    % Vertical cover rule and horizontal separator.
+    \fill[ieeecoverline] ($(SW)+(125.676,70.711)$) rectangle ++(3.008,647.785);
+    \fill[ieeecoverrule] ($(SW)+(144.574,497.215)$) rectangle ++(431.426,2.996);
+
+    % IEEE emblem + wordmark rendered from source-controlled TikZ.
+    \node[anchor=south west,inner sep=0pt] at ($(SW)+(144,681)$) {\IEEEWordmark};
+
+    % Main standard title. Source baselines: 166.7073, 195.5073, 224.3073,
+    % and 253.1073 pt from the top edge.
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(144.580,625.293)$)
+        {{\coverTitleFont IEEE Standard for}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(144.580,596.493)$)
+        {{\coverTitleFont Modeling and Simulation (M\&S)}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(144.580,567.693)$)
+        {{\coverTitleFont High Level Architecture (HLA)---}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(144.580,538.893)$)
+        {{\coverTitleFont Framework and Rules}};
+
+    % Sponsoring society and committee.
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(149.580,437.063)$)
+        {{\coverSocietyFont IEEE Computer Society}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(149.580,403.463)$)
+        {{\coverSponsorFont Sponsored by the}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(149.580,389.063)$)
+        {{\coverSponsorFont Simulation Interoperability Standards Organization/}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(149.580,374.663)$)
+        {{\coverSponsorFont Standards Activities Committee (SISO/SAC)}};
+
+    % Large rotated standard number and trademark notation.
+    \node[anchor=base west,inner sep=0pt,rotate=90,text=ieeecovergray] at ($(SW)+(126.316,146.325)$)
+        {{\coverNumberFont 1516}};
+    \node[anchor=base west,inner sep=0pt,rotate=90,text=ieeecovergray] at ($(SW)+(82.316,346.539)$)
+        {{\coverTrademarkFont TM}};
+
+    % Publisher/address/date block.
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(151.580,124.488)$)
+        {{\coverPublisherFont IEEE}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(151.580,114.888)$)
+        {{\coverPublisherFont 3 Park Avenue}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(151.580,105.288)$)
+        {{\coverPublisherFont New York, NY 10016-5997, USA}};
+    \node[anchor=base west,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(151.580,86.088)$)
+        {{\coverPublisherFont 18 August 2010}};
+
+    % Standard/revision block at lower right.
+    \node[anchor=base east,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(553.495,122.816)$)
+        {{\coverStdFont IEEE Std 1516\textsuperscript{TM}-2010}};
+    \node[anchor=base east,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(553.494,112.016)$)
+        {{\coverRevisionFont (Revision of}};
+    \node[anchor=base east,inner sep=0pt,text=ieeecoverblack] at ($(SW)+(553.494,101.216)$)
+        {{\coverRevisionFont IEEE Std 1516-2000)}};
+
+    % Copy-specific licensed-use footer retained because it appears on the
+    % supplied reference PDF.
+    \ifShowLicenseFooter
+    \node[anchor=base west,inner sep=0pt,text=black] at ($(SW)+(58.540,6.975)$)
+        {{\licensefont\licensefootertext}};
+    \fi
+\end{tikzpicture}
+\null
+\newpage

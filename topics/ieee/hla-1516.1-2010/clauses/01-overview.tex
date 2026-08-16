@@ -1,0 +1,157 @@
+\thispagestyle{firstbody}
+\vspace*{2.30in}
+{\sffamily\bfseries\fontsize{18}{21}\selectfont
+IEEE Standard for\\
+Modeling and Simulation (M\&S)\\
+High Level Architecture (HLA)---\\
+Federate Interface Specification\par}
+
+\vspace{0.28in}
+{\bfseries\itshape IMPORTANT NOTICE: This standard is not intended to ensure safety, security, health, or environmental protection. Implementers of the standard are responsible for determining appropriate safety, security, environmental, and health practices or regulatory requirements.\par}
+
+{\bfseries\itshape This IEEE document is made available for use subject to important notices and legal disclaimers. These notices and disclaimers appear in all publications containing this document and may be found under the heading ``Important Notice'' or ``Important Notices and Disclaimers Concerning IEEE Documents.''\par}
+
+
+\section{Overview}
+
+\subsection{Scope}
+
+This document defines the interface between federates (simulations, supporting utilities, or interfaces to live systems) and the underlying software services that support interfederate communication in a distributed simulation domain.
+
+\subsection{Purpose}
+
+The High Level Architecture (HLA) has been developed to provide a common architecture for distributed modeling and simulation (M\&S). To facilitate interfederate communications, HLA federates interact with an underlying software infrastructure. This specification defines the standard services and interfaces to be used by the federates to support efficient information exchange when participating in a distributed federation execution. (A federation execution occurs when sets of federates are brought together to support an objective.)
+
+\clearpage
+
+\subsection{Introduction}
+
+This document is being developed to define the HLA interface specification. The HLA requires a language-independent specification (LIS) and multiple language bindings to support intersimulation communication in a distributed simulation domain.
+
+The formal definition of the M\&S HLA comprises three main components: the HLA framework and rules specification (found in IEEE Std 1516\texttrademark-2010\footnote{Information on references can be found in Clause 2.}), the HLA federate interface specification (found in this document), and the HLA object model template (OMT) (found in IEEE Std 1516.2\texttrademark-2010). This standard, IEEE Std 1516.1-2010, provides a complete description of the essential elements of the second component of the HLA, the interface specification.
+
+The HLA is an integrated architecture that has been developed to provide a common architecture for M\&S. The HLA requires that interfederate communications use a standard application programmer's interface (API). This specification defines the standard services and interfaces to be used by the federates in order to support efficient information exchange when participating in a distributed federation execution. Additionally, the capability for reuse of individual federates that adhere to these standard services and interfaces is increased.
+
+This document provides a specification for the HLA functional interfaces between federates and the runtime infrastructure (RTI). The RTI provides services to federates in a way that is analogous to how a distributed operating system provides services to applications. These interfaces are arranged into seven basic service groups, and an eighth group of support services, as follows:
+
+\begin{stdalphalist}
+    \item Federation management
+    \item Declaration management (DM)
+    \item Object management
+    \item Ownership management
+    \item Time management
+    \item Data distribution management (DMM)
+    \item Support services
+\end{stdalphalist}
+
+The eight service groups describe the interface between the federates and the RTI and between the federates and the software services provided by the RTI for use by HLA federates. The RTI requires a set of services from the federate that are referred to as ``RTI-initiated'' and are denoted with a \rtiinitiated\ (printer's dagger) after the service name.
+
+\subsection{Background}
+
+\subsubsection{HLA federation object model (FOM) framework}
+
+A concise and rigorous description of the object model framework is essential to the specification of the interface between federates and the RTI and of the HLA services. The rules and terminology used to describe a FOM are described in IEEE Std 1516.2-2010. A simulation object model (SOM) describes salient characteristics of a federate to aid in its reuse and other activities focused on the details of its internal operation. As such, a SOM is not the concern of the RTI and its services. A FOM, on the other hand, deals with interfederate issues and is relevant to the use of the RTI. FOMs describe the set of object classes and interaction classes chosen for a planned federation along with the attributes of the object classes and parameters of the interaction classes.
+
+\clearpage
+Every HLA object instance is an instance of an object class found in the FOM. Object classes are chosen by the object model designer to facilitate an appropriate organizational scheme. Each object class has a set of attributes associated with it. An attribute is a distinct, identifiable portion of the object state. In this discussion, ``attribute designator'' refers to the attribute, and ``attribute value'' refers to its contents. From the federation perspective, the set of all attribute values for an object instance shall completely define the state of that instance. Federates may associate additional state information with an object instance that is not communicated between federates, but this action is outside the purview of the HLA FOM.
+
+Federates use the state of the object instances as one of the primary means of communication. At any point during a federation execution, at most one federate shall be responsible for modeling a given object instance attribute. That federate provides instance attribute values to the other federates in the federation execution via HLA services. The federate providing the instance attribute values is said to be updating that instance attribute. Federates receiving those values are said to be reflecting that instance attribute.
+
+The privilege to update a value for an instance attribute shall be uniquely held by a single joined federate at any given point during a federation execution. A joined federate that has the privilege to update values for an instance attribute is said to own that instance attribute. The RTI provides services that allow joined federates to exchange ownership of object instance attributes.
+
+Each object instance shall have a designator. The value of an object instance designator shall be unique for each federation execution. Object instance designators shall be dynamically generated by the RTI.
+
+The FOM framework also allows for interaction classes for each object model. The types of interactions possible and their parameters are specified within the FOM.
+
+A federation is the combination of a particular FOM, a particular set of federates, and the HLA services. A federation is designed for a specific purpose using a commonly understood FOM and a set of federates that may associate their individual semantics with that object model. A federation execution is an instance of the Create Federation Execution service invocation and entails executing the federation with a specific FOM and RTI and using various execution details.
+
+\subsubsection{Relationship of HLA and object-oriented (OO) concepts}
+
+Although the HLA OMT is the standardized documentation structure for HLA object models, FOMs, FOM modules, SOMs, and SOM modules do not completely correspond to common definitions of object models in OO analysis and design (OOAD) techniques. In the OOAD literature, an object model is described as an abstraction of a system developed for the purpose of fully understanding the system. To achieve this understanding, most OO techniques recommend defining several views of the system. For HLA object models, the intended scope of the system description is much narrower and focuses specifically on requirements and capabilities for federate information exchange. For SOMs and SOM modules, the intent is to describe the public interface of the federate in terms of an identified set of supported HLA object classes and interaction classes. A more complete description of how a federate is designed and functions internally (for example, a traditional OO object model) should be provided via documentation resources other than the SOM. For FOMs and FOM modules, the intent is to describe information exchange that happens during a federation execution.
+
+Differences between HLA and OOAD principles and concepts also appear at the individual object level. In the OOAD literature, objects are defined as software encapsulations of data and operations (methods). In the HLA, objects are defined entirely by the identifying characteristics (attributes), values of which are exchanged between federates during a federation execution. Any OO-related behaviors and operations that affect the values of HLA object attributes are kept resident in the federates. Although HLA class structures are driven by subscription requirements and FOM growth concerns, class structures in OO systems are typically driven by efficiency and maintainability concerns.
+
+\clearpage
+As discussed above, HLA object classes are described by the attributes that are defined for them. These are, in OO parlance, data members of the class. These attributes, which are abstract properties of HLA object classes, are referred to as class attributes. HLA object instances are spawned via an HLA service using an HLA object class as a template. Each attribute contained by an HLA object instance is called an instance attribute.
+
+OO objects interact via message passing, in which one OO object invokes an operation provided by another OO object. HLA objects do not directly interact. It is the federates that interact, via HLA services, by updating instance attribute values or sending interactions. Also, responsibility for updating the instance attributes associated with an HLA object instance can be distributed among different federates in a federation (effectively distributing responsibility for maintaining the HLA object instance's state across the federation), whereas OO objects encapsulate state locally and associate update responsibilities with operations that are closely tied to the object's implementation in an OO programming language.
+
+In addition to the stated semantic variations in shared terminology, other differences may also exist. Precise definitions of all HLA terms can be found in Clause 3.
+
+\subsubsection{General nomenclature and conventions}
+
+There are various entities (e.g., object classes, attributes, interaction classes, parameters, dimensions, regions, federates, object instances) referenced in this document that may have the following different ``views'':
+
+\begin{stddashlist}
+    \item \textbf{Name:} textual or for communication between federates.
+    \item \textbf{Handle:} capable of being manipulated by a computer or for communication between a federate and the RTI. A handle is originated by the RTI, federation execution-wide unique, and unpredictable. The handle for a class attribute that is inherited shall be the same as the handle that is assigned to the class attribute in the object class in which it is declared. The handle for a parameter that is inherited shall be the same as the handle that is assigned to the parameter in the interaction class in which it is declared.
+\end{stddashlist}
+
+The following types of names shall be case-sensitive:
+
+\begin{stddashlist}
+    \item Federation execution
+    \item Federate
+    \item Object class
+    \item Attribute
+    \item Object instance
+    \item Interaction class
+    \item Parameter
+    \item Order
+    \item Transportation type
+    \item Dimension
+\end{stddashlist}
+
+The arguments to the services described in this document will use different views of the entities depending on a particular RTI implementation. For clarity, the first 11 clauses of this document refer to only a generic view, known as a ``designator,'' when referring to these entities, and the API annexes refer to the actual implementation-specific arguments. Clause 12 ties the two concepts together.
+
+Some of the arguments to the services described in this document are in the form of a group that represents some association. These groupings can take several forms (depending on the requirements of the respective service), each of which is described below. The groupings may be implemented slightly differently in each API, but all implementations shall support the same semantics. These groupings are pairs, sets, collections, constrained sets of pairs, and collections of pairs. Collections are sets that permit duplication of elements. They are used in cases in which duplication is unlikely and not really an error. As such, using a collection rather than a set retains the same effects, but without the expensive checks to eliminate duplicates that using a set would require. In these cases, it is preferred not to penalize the majority of users with the less efficient set just to catch errors that are anticipated to be infrequent.
+
+\clearpage
+The following data are needed for the implementation of a running RTI and federation executions:
+
+\begin{stddashlist}
+    \item \textbf{FOM Document Data (FDD):} FOM information (e.g., class, attribute, parameter names) used by the RTI at runtime. Each federation execution needs FDD. FDD is provided to the RTI starting with the Management Object Model (MOM) and Initialization Module (MIM) and FOM modules specified in the Create Federation Execution service invocation. FDD will also be provided by the MIM that is automatically provided by the RTI or optionally provided in the Create Federation Execution service invocation. Additional FDD may be provided as joining federates specify additional FOM modules.
+\end{stddashlist}
+
+The following data may be needed for the implementation of a running RTI and federation executions:
+
+\begin{stddashlist}
+    \item \textbf{RTI initialization data (RID):} RTI vendor-specific information needed to run an RTI. If required, RID are supplied when an RTI is initialized.
+\end{stddashlist}
+
+For all joined federate-initiated services in this specification (except 4.2, 4.5, 4.6, and 4.9), an implied supplied argument is a joined federate's conjointment with a federation execution. For all RTI-initiated services, an implied supplied argument is also a joined federate's connection to a federation execution. The manner in which these arguments are actually provided to the services is dependent on the RTI implementation and the particular API programming language; therefore, it is not shown in the service descriptions. Also, for the RTI-initiated services, some implicit preconditions are not stated explicitly because the RTI is assumed to be well behaved. For many RTI-initiated services, the ``Federate is joined'' precondition presumes the ``Federate is connected'' precondition.
+
+As mentioned earlier, all RTI-initiated services are denoted with a \rtiinitiated\ (printer's dagger) after the service name.
+
+\subsubsection{Organization of this document}
+
+The seven HLA service groups are specified in Clause 4 through Clause 10. Each service is described using several components:
+
+\begin{stddashlist}
+    \item \textbf{Name and description:} service name and narrative describing the functionality of the service.
+    \item \textbf{Supplied arguments:} arguments supplied to the service.
+    \item \textbf{Returned arguments:} arguments returned by the service.
+    \item \textbf{Preconditions:} conditions that shall exist for the service to execute correctly.
+    \item \textbf{Postconditions:} conditions that shall exist once the service has executed correctly.
+    \item \textbf{Exceptions:} notifications of any irregularity that may occur during service invocation. Wherever possible (excepting situations like RTI internal error), exceptions are side-effect free. Exceptions are listed in order of increasing precedence. That is, if the conditions for more than one exception are met simultaneous, the RTI shall throw whichever of those exceptions comes later in the exception list.
+    \item \textbf{Reference state charts:} reference to state chart(s) that are germane to the service.
+\end{stddashlist}
+
+After the clauses describing each of the service groups are a clause describing the MOM and then a clause that ties the service narratives with the APIs.
+
+\clearpage
+Annex A through Annex D contain HLA APIs for the following languages:
+
+\begin{stddashlist}
+    \item Java
+    \item C++
+    \item Web Services Definition Language (WSDL)
+\end{stddashlist}
+
+Annex E contains additional rationale for elements in the main body of this standard.
+
+Annex F contains the FDD XML Schema.
+
+Annex G contains the MIM.
+
+Annex H and Annex I contain a bibliography and list of figures, respectively.

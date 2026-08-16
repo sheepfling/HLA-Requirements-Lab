@@ -12,93 +12,93 @@
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
 \newcommand{\HLAContentsEntry}[4]{%
-  \noindent\hspace*{#1}%
-  \ifblank{#2}{%
-    \parbox[t]{\dimexpr\linewidth-#1-23bp\relax}{#3\nobreak\dotfill}%
-  }{%
-    \makebox[30bp][l]{#2}%
-    \parbox[t]{\dimexpr\linewidth-#1-30bp-23bp\relax}{#3\nobreak\dotfill}%
-  }%
-  \makebox[23bp][r]{#4}\par%
+    \noindent\hspace*{#1}%
+    \ifblank{#2}{%
+        \parbox[t]{\dimexpr\linewidth-#1-23bp\relax}{#3\nobreak\dotfill}%
+    }{%
+        \makebox[30bp][l]{#2}%
+        \parbox[t]{\dimexpr\linewidth-#1-30bp-23bp\relax}{#3\nobreak\dotfill}%
+    }%
+    \makebox[23bp][r]{#4}\par%
 }
 
 \newcommand{\HLAPeopleThreeColumns}[3]{%
-  \noindent
-  \begin{tabularx}{\linewidth}{@{}Y@{\hspace{12bp}}Y@{\hspace{12bp}}Y@{}}
-  #1 & #2 & #3
-  \end{tabularx}%
+    \noindent
+    \begin{tabularx}{\linewidth}{@{}Y@{\hspace{12bp}}Y@{\hspace{12bp}}Y@{}}
+    #1 & #2 & #3
+    \end{tabularx}%
 }
 
 % M4 OMT table family. Tables are logical row/cell structures, even when a
 % complete table is positioned to preserve the source page geometry.
 \NewDocumentEnvironment{HLAOMTTable}{m}{%
-  \begingroup
-  \HLAArial\fontsize{7.2bp}{8.3bp}\selectfont
-  \setlength{\tabcolsep}{2.4bp}%
-  \renewcommand{\arraystretch}{1.12}%
-  \begin{tabular}{#1}\hline
+    \begingroup
+    \HLAArial\fontsize{7.2bp}{8.3bp}\selectfont
+    \setlength{\tabcolsep}{2.4bp}%
+    \renewcommand{\arraystretch}{1.12}%
+    \begin{tabular}{#1}\hline
 }{%
-  \end{tabular}%
-  \endgroup
+    \end{tabular}%
+    \endgroup
 }
 
 % Cell-level fixed-page table grammar. Geometry is retained at table-cell
 % granularity; content remains semantic text rather than word-positioned spans.
 \NewDocumentCommand{\HLATableGridCell}{m m m m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \draw[line width=0.34bp] (#1,#2) rectangle ++(#3,#4);
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \NewDocumentCommand{\HLATableGridOuter}{m m m m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \draw[line width=0.92bp] (#1,#2) rectangle ++(#3,#4);
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \NewDocumentCommand{\HLATableHeavyHorizontalRule}{m m m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \draw[line width=0.82bp] (#1,#2) -- ++(#3,0);
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \NewDocumentCommand{\HLATableCellText}{m m m m m m +m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \node[anchor=north west,inner sep=0bp,outer sep=0bp,text width=#3bp]
-      at (#1,#2) {%
+    at (#1,#2) {%
         \begin{minipage}[t]{#3bp}%
-          \setlength{\parindent}{0pt}%
-          \setlength{\parskip}{0pt}%
-          \hyphenpenalty=10000%
-          \exhyphenpenalty=10000%
-          \pretolerance=10000%
-          \tolerance=10000%
-          \HLATimes\fontsize{#4bp}{#5bp}\selectfont%
-          \ifstrequal{#6}{c}{\centering}{%
-            \ifstrequal{#6}{r}{\RaggedLeft}{\RaggedRight}%
-          }%
-          #7%
+            \setlength{\parindent}{0pt}%
+            \setlength{\parskip}{0pt}%
+            \hyphenpenalty=10000%
+            \exhyphenpenalty=10000%
+            \pretolerance=10000%
+            \tolerance=10000%
+            \HLATimes\fontsize{#4bp}{#5bp}\selectfont%
+            \ifstrequal{#6}{c}{\centering}{%
+                \ifstrequal{#6}{r}{\RaggedLeft}{\RaggedRight}%
+            }%
+            #7%
         \end{minipage}%
-      };
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    };
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \newcommand{\HLATableCaption}[1]{%
-  {\HLAArial\fontsize{8.5bp}{10bp}\selectfont\bfseries #1\par}%
+        {\HLAArial\fontsize{8.5bp}{10bp}\selectfont\bfseries #1\par}%
 }

@@ -1,0 +1,227 @@
+% Source PDF pages 13--16; standard pages 1--4.
+% Fidelity pass 05: source-calibrated title-page anchors, exact source line
+% membership where Tinos differs from embedded Times New Roman, source emphasis,
+% service-group list geometry, and page-local paragraph rhythm.
+
+% -----------------------------------------------------------------------------
+% Source PDF page 13 / printed page 1
+% -----------------------------------------------------------------------------
+\vspace*{1.777in}
+{\sffamily\bfseries\fontsize{24pt}{26pt}\selectfont
+IEEE Standard for\\
+Modeling and Simulation (M\&S)\\
+High Level Architecture (HLA)---\\
+Framework and Rules\par}
+
+\vspace{41pt}
+{\bfseries\itshape
+IMPORTANT NOTICE: This standard is not intended to ensure safety, security, health, or\\
+environmental protection. Implementers of the standard are responsible for determining appropriate\\
+safety, security, environmental, and health practices or regulatory requirements.\par}
+
+\vspace{6.1pt}
+{\bfseries\itshape
+This IEEE document is made available for use subject to important notices and legal disclaimers. These\\
+notices and disclaimers appear in all publications containing this document and may be found under the\\
+heading ``Important Notice'' or ``Important Notices and Disclaimers Concerning IEEE Documents.''\\
+They can also be obtained on request from IEEE or viewed at
+\href{http://standards.ieee.org/IPR/disclaimers.html}{\textcolor{blue}{\underline{http://standards.ieee.org/IPR/}}}\\
+\href{http://standards.ieee.org/IPR/disclaimers.html}{\textcolor{blue}{\underline{disclaimers.html}}}.\par}
+
+\vspace{6.7pt}
+\clause{1. Overview}
+\vspace{-3.1pt}
+\subclause{1.1 Scope}
+This document provides an overview of the High Level Architecture (HLA), defines a family of related\\
+HLA documents, and defines the principles of HLA in terms of responsibilities that federates (simulations,\\
+supporting utilities, or interfaces to live systems) and federations (sets of federates working together) must\\
+uphold.
+
+\vspace{4.2pt}
+\subclause{1.2 Purpose}
+This document describes the general principles defining the HLA and delineates the set of rules that apply to\\
+HLA federations and federates. Each rule is then described, and the rationale for its inclusion is provided.
+
+\vspace{6pt}
+Many different classes of simulations exist. Each class has changing application characteristics and needs to\\
+be flexibly supported to allow for interoperability and reuse across classes and to limit the need to maintain\\
+multiple interoperability approaches. The HLA is a common integrated architecture, which has been
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% Source PDF page 14 / printed page 2
+% -----------------------------------------------------------------------------
+developed to provide a flexible approach for addressing these interoperability and reuse needs. The related\\
+standards need to be considered as a set of products because changes in one are likely to have an impact on\\
+the others.
+
+\vspace{3.2pt}
+\subclause{1.3 High Level Architecture (HLA)}
+The HLA is a technical architecture developed to facilitate the reuse and interoperation of simulation\\
+systems and assets (e.g., federation managers, data collectors, passive viewers, real world ("live") systems,\\
+and other utilities). It was developed in response to the clear recognition of the value of modeling and\\
+simulation (M\&S) in supporting a wide variety of applications as well as the need to manage M\&S assets as\\
+cost effective tools. The selected definition of an architecture as intended in HLA---``major functional\\
+elements, interfaces, and design rules, pertaining as feasible to all simulation applications, and providing a\\
+common framework within which specific system architectures can be defined''---is one that is commonly\\
+accepted and is consistent with the definition of architecture for computer simulations provided by the IEEE.
+
+\subsubclause{1.3.1 Components of the HLA standard}
+\vspace{1.1pt}
+The HLA provides a general framework within which developers can structure and describe their simulation\\
+systems and/or assets and interoperate with other simulation systems and assets. The HLA consists of three\\
+main components. The first is the HLA Framework and Rules Specification (i.e., this standard), which\\
+provides a set of ten rules, five applying to \textit{federates} (see 3.1) and five applying to \textit{federations} (see 3.1), that\\
+together ensure the proper interaction of federates in a federation and define the responsibilities of federates\\
+and federations. The second component is the HLA object model template (OMT) Specification (found in\\
+IEEE Std 1516.1\texttrademark-2010).\footnote{Information on references can be found in Clause 2.} It provides a specification for describing \textit{object models} (see 3.1) that define the\\
+information produced or required by a simulation application and for reconciling definitions among\\
+simulations to produce a common data model for mutual interoperation. The third component is a\\
+specification of services that allow simulations to connect to one another, exchange data, and coordinate\\
+activities during a distributed runtime execution. This component is the HLA federate interface specification\\
+(found in IEEE Std 1516.2\texttrademark-2010), which describes the capabilities and principles of operation of an\\
+underlying software infrastructure, called the \textit{runtime infrastructure (RTI)}, that will be required for runtime\\
+operation.
+
+\subsubclause{1.3.2 Terminology}
+Some terminology is necessary to give an overview of the HLA framework. A federate application is an\\
+application that supports the HLA interface to a RTI and that is capable of joining a federation execution.\\
+Note that, in addition to a simulation, a federate application may represent an interface to a live system or a\\
+support utility such as an event logger or performance monitor. A federate application may be coupled with\\
+other software applications and a RTI. A joined federate is a member of a federation execution, actualized by\\
+a federate application invoking the \hlaService{Join Federation Execution} service. A federation is a named set of\\
+federate applications and a common federation object model (FOM) that are used as a whole to achieve\\
+some specific objective. A federation execution is the actual operation, over time, of a set of joined federates\\
+that are interconnected by a RTI.
+
+\vspace{8.2pt}
+\hlaNote{Formal definitions for each of these terms can be found in the definitions clause of all three HLA\\
+specifications.\footnote{Notes in text, tables, and figures are given for information only and do not contain requirements needed to implement the standard.}}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% Source PDF page 15 / printed page 3
+% -----------------------------------------------------------------------------
+\subsubclause{1.3.3 Object models}
+\vspace{0.8pt}
+There are three types of object models in the HLA framework. First is a simulation object model (SOM).\\
+The SOM is a specification of the types of information that an individual federate application could provide\\
+to HLA federations as well as the information that an individual joined federate can receive from other\\
+joined federates in HLA federation executions. The SOM may be viewed as a federate application's native\\
+expression of its capabilities and data interfaces. The SOM facilitates simulation reuse and provides a\\
+starting point for combining the simulation with other participating simulations for a common purpose.\\
+Second is a federation object model (FOM). The FOM is a specification defining the information exchanged\\
+at runtime to achieve a given set of federation objectives. This information includes object classes, object\\
+class attributes, interaction classes, interaction parameters, Management Object Model (MOM) contents,\\
+and other relevant information. Third is the MOM, which is a group of predefined constructs that provide\\
+support for monitoring and controlling a federation execution. FOMs can be developed from scratch by\\
+using relevant elements of the SOMs of the federate applications that will make up the federation or by using\\
+existing FOMs or reference FOMs and any combination of these approaches. If existing SOMs or FOMs are\\
+used, it is important to understand that there may be parts of these SOMs/FOMs that may not be relevant to\\
+other federate applications in the federation and thus will not be incorporated in the FOM. For example, a\\
+ship simulation may model boiler pressure, but if a federation needs only to know ship location, boiler\\
+pressure may optionally be dropped from the FOM. Also, it may be necessary to reconcile differing units\\
+and differing representations among simulations. The OMT provides a standard structure and a set of\\
+representational conventions for specifying both SOMs and FOMs.
+
+\subsubclause{1.3.4 Service groups}
+\vspace{1.8pt}
+The federate interface specification defines the functional interface between federates and the RTI. The RTI\\
+provides services to joined federates in a way that is analogous to how a distributed operating system\\
+provides services to applications. The services are arranged into seven basic groups:
+
+\vspace{4.1pt}
+\begin{hlalist}
+    \item Federation Management. These services allow for the coordination of federation-wide activities\\
+    throughout the life of a federation execution. Such services include federation execution creation\\
+    and destruction, federate application joining and resigning, federation synchronization points, and\\
+    save and restore operations.
+    \item Declaration Management. These services allow joined federates to specify the types of data they will\\
+    supply to, or receive from, the federation execution. This process is done via a set of publication and\\
+    subscription services along with some related services.
+    \item Object Management. These services support the life-cycle activities of the objects and interactions\\
+    used by the joined federates of a federation execution. These services provide for registering and\\
+    discovering object instances, updating and reflecting the instance attributes associated with these\\
+    object instances, deleting or removing object instances as well as sending and receiving interactions\\
+    and other related services. (Note: Formal definitions for each of these terms can be found in the\\
+    definitions clause of all three HLA specifications.)
+    \item Ownership Management. These services are used to establish a specific joined federate's privilege to\\
+    provide values for an object instance attribute as well as to facilitate dynamic transfer of this\\
+    privilege (ownership) to other joined federates during a federation execution.
+    \item Time Management. These services allow joined federates to operate with a logical concept of time\\
+    and to jointly maintain a distributed virtual clock. These services support discrete event simulations\\
+    and assurance of causal ordering among events.
+    \item Data Distribution Management. These services allow joined federates to further specify the\\
+    distribution conditions (beyond those provided via Declaration Management services) for the\\
+    specific data they send or ask to receive during a federation execution. The RTI uses this information\\
+    to route data from producers to consumers in a more tailored manner.
+    \item Support Services. This group includes miscellaneous services utilized by joined federates for\\
+    performing such actions as name-to-handle and handle-to-name transformations, the setting of\\
+    advisory switches, region manipulations, and RTI startup and shutdown.
+\end{hlalist}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% Source PDF page 16 / printed page 4
+% -----------------------------------------------------------------------------
+The federate interface specification includes programming language-independent definitions of the syntax\\
+and semantics of all the services in the interface. It also provides language bindings for Java, C++, and Web\\
+Services Definition Language (WSDL).
+
+\subsubclause{1.3.5 Rules}
+The HLA rules complete the framework. They require the use of the OMT and Federate Interface\\
+specifications as well as sound development principles and practices to ensure the proper operation of a\\
+federation execution.
+
+\subsubclause{1.3.6 Implementation independence}
+The HLA allows distributed simulation systems to be developed and executed for a range of purposes in a\\
+standardized manner. The HLA does not prescribe a specific implementation, nor does it mandate the use of\\
+any particular programming language or software. Over time, as technology advances become available,\\
+new and different implementations will be possible within the framework of the HLA.
+
+\vspace{3.4pt}
+\subclause{1.4 Relationship of HLA and object-oriented (OO) concepts}
+\vspace{1.3pt}
+Although the HLA OMT is the standardized documentation structure for HLA object models, FOMs and\\
+SOMs do not completely correspond to common definitions of object models in OO analysis and design\\
+(OOAD) techniques. In the OOAD literature, an object model is described as an abstraction of a system\\
+developed for the purpose of fully understanding the system. To achieve this understanding, most OO\\
+techniques recommend defining several views of the system. For HLA object models, the intended scope of\\
+the system description is much narrower and focuses specifically on requirements and capabilities for\\
+federate information exchange. For SOMs, the intent is to describe the public interface of the federate in\\
+terms of an identified set of supported HLA object classes and interaction classes. A more complete\\
+description of how a federate is designed and functions internally (for example, a traditional OO object\\
+model) should be provided via documentation resources other than the SOM. For FOMs, the intent is to\\
+describe information exchange that happens during a federation execution.
+
+\vspace{6pt}
+Differences between HLA and OOAD principles and concepts also appear at the individual object level. In\\
+the OOAD literature, objects are defined as software encapsulations of data and operations (methods). In the\\
+HLA, objects are defined entirely by the identifying characteristics (attributes), values of which are\\
+exchanged between federates during a federation execution. Any OO-related behaviors and operations that\\
+affect the values of HLA object attributes are kept resident in the federates. Although HLA class structures\\
+are driven by subscription requirements and FOM growth concerns, class structures in OO systems are\\
+typically driven by efficiency and maintainability concerns.
+
+\vspace{6pt}
+As discussed above, HLA object classes are described by the attributes that are defined for them. These\\
+attributes are, in OO parlance, data members of the class. The attributes, which are abstract properties of\\
+HLA object classes, are referred to as \textit{class attributes}. HLA object instances are spawned via an HLA\\
+service using an HLA object class as a template. Each attribute contained by an HLA object instance is\\
+called an \textit{instance attribute}.
+
+\vspace{6pt}
+OO objects interact via message passing, in which one OO object invokes an operation provided by another\\
+OO object. HLA objects do not directly interact. It is the federates that interact, via HLA services, by\\
+updating instance attribute values or sending interactions. Also, responsibility for updating the instance\\
+attributes associated with an HLA object instance can be distributed among different federates in a\\
+federation (effectively distributing responsibility for maintaining the HLA object instance's state across the\\
+federation), whereas OO objects encapsulate state locally and associate update responsibilities with\\
+operations that are closely tied to the object's implementation in an OO programming language.
+
+\newpage
+
+In addition to the stated semantic variations in shared terminology, other differences may also exist. Precise definitions of all HLA terms can be found in Clause 3.

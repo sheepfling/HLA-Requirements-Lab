@@ -3,34 +3,70 @@
   "$id": "https://document-recreation.local/schemas/requirement_links.schema.json",
   "title": "Authored requirement-to-transition links",
   "type": "object",
-  "required": ["schema_version", "links"],
+  "required": [
+    "schema_version",
+    "links"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schema_version": { "type": "integer", "minimum": 1 },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
     "links": {
       "type": "array",
-      "items": { "$ref": "#/$defs/link" }
+      "items": {
+        "$ref": "#/$defs/link"
+      }
     }
   },
   "$defs": {
     "source_ref": {
       "type": "object",
-      "required": ["path", "line"],
+      "required": [
+        "path",
+        "line"
+      ],
       "additionalProperties": false,
       "properties": {
-        "path": { "type": "string", "minLength": 1 },
-        "line": { "type": "integer", "minimum": 1 },
-        "end_line": { "type": ["integer", "null"], "minimum": 1 }
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
       }
     },
     "link": {
       "type": "object",
-      "required": ["id", "requirement_id", "transition_id"],
+      "required": [
+        "id",
+        "requirement_id",
+        "transition_id"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "requirement_id": { "type": "string", "minLength": 1 },
-        "transition_id": { "type": "string", "minLength": 1 },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirement_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transition_id": {
+          "type": "string",
+          "minLength": 1
+        },
         "relation": {
           "enum": [
             "governs",
@@ -40,8 +76,12 @@
             "prohibits"
           ]
         },
-        "source": { "$ref": "#/$defs/source_ref" },
-        "notes": { "type": "string" }
+        "source": {
+          "$ref": "#/$defs/source_ref"
+        },
+        "notes": {
+          "type": "string"
+        }
       }
     }
   }

@@ -12,14 +12,18 @@
       "title": "IEEE HLA 1516.1-2025 — HLA Interface Specification",
       "edition": "2025",
       "relationship": "extends",
-      "related_document_ids": ["hla-1516-2025"]
+      "related_document_ids": [
+        "hla-1516-2025"
+      ]
     },
     {
       "document_id": "hla-1516.2-2025",
       "title": "IEEE HLA 1516.2-2025 — Object Model Template",
       "edition": "2025",
       "relationship": "companion",
-      "related_document_ids": ["hla-1516-2025"]
+      "related_document_ids": [
+        "hla-1516-2025"
+      ]
     }
   ]
 }

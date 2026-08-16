@@ -6,17 +6,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.faithful_renderer import (
+from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
+from hla_lab.core.semantic_model import ContentBlock, DocumentModel, SourceRef, load_document_model
+from hla_lab.generation.contracts import GenerationRequest
+from hla_lab.generation.faithful_renderer import (
     build_faithful_layout_projection,
     load_faithful_layout_profile,
     render_faithful_body,
 )
-from scripts.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
-from scripts.semantic_generation import generate
-from scripts.semantic_model import ContentBlock, DocumentModel, SourceRef, load_document_model
+from hla_lab.generation.semantic_generation import generate
 
 ROOT = Path(__file__).resolve().parents[1]
-
 
 def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:
     return ContentBlock(
@@ -26,7 +26,6 @@ def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:
         sequence=sequence,
         source=SourceRef(path=source_path, line=sequence + 1),
     )
-
 
 class FaithfulRendererTests(unittest.TestCase):
     def test_projection_groups_adapter_paths_and_uses_semantic_sequence(self) -> None:
@@ -87,15 +86,17 @@ class FaithfulRendererTests(unittest.TestCase):
         with self.subTest(document=root.name), tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "semantic"
             generated = generate(
-                root,
-                output,
-                source=HLA_SOURCE,
-                dialect=HLA_LATEX_DIALECT,
-                content_block_ids=tuple(item.id for item in model.content_blocks),
-                include_faithful_body=True,
-                faithful_layout_profile=profile,
+                GenerationRequest(
+                    root=root,
+                    output=output,
+                    source=HLA_SOURCE,
+                    dialect=HLA_LATEX_DIALECT,
+                    content_block_ids=tuple(item.id for item in model.content_blocks),
+                    include_faithful_body=True,
+                    faithful_layout_profile=profile,
+                )
             )
-            projection = build_faithful_layout_projection(generated, profile=profile)
+            projection = build_faithful_layout_projection(generated.model, profile=profile)
             self.assertEqual(
                 (output / "faithful-layout.json").read_text(encoding="utf-8"),
                 projection.model_dump_json(indent=2) + "\n",
@@ -131,7 +132,6 @@ class FaithfulRendererTests(unittest.TestCase):
         self.assertEqual(rendered.count(r"\HLAStartSemanticPages"), 4)
         self.assertEqual(rendered.count(r"\HLAEndSemanticPages"), 4)
         self.assertIn(r"\HLAInstallContentsLinks", rendered)
-
 
 if __name__ == "__main__":
     unittest.main()

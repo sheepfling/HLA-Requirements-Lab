@@ -1,0 +1,71 @@
+% Figure 1 - Basic states of the federation execution
+% Independently revalidated against source physical page 39 / standard page 25.
+% Edge IDs correspond to audit/figure01/edges.csv.
+\begin{tikzpicture}[hla diagram,x=1cm,y=1cm]
+    \path[use as bounding box] (0,0) rectangle (14.35,10.05);
+
+    % F01-S00: outer Federation Execution composite state.
+    \draw[line width=.48pt,rounded corners=13pt] (0.28,0.40) rectangle (14.08,9.70);
+    \draw[line width=.48pt] (0.49,9.25) -- (4.84,9.25);
+    \draw[line width=.48pt] (4.84,9.25) -- (4.84,9.70);
+    \node[font=\sffamily\bfseries\fontsize{11.0}{11.8}\selectfont,anchor=west]
+    at (0.98,9.49) {Federation Execution};
+
+    % F01-P01 and F01-S01: outer initial state and the does-not-exist state.
+    \fill (4.53,9.03) circle[radius=3.15pt];
+    \node[hla state,minimum width=3.08cm,minimum height=1.36cm,inner xsep=4pt,
+        font=\sffamily\bfseries\fontsize{10.3}{11.0}\selectfont] (none) at (6.82,8.22)
+        {Federation\\Execution Does\\Not Exist};
+    % F01-E01: outer initial -> Does Not Exist.
+    \draw[hla transition,line width=.72pt] (4.66,8.96) -- (none.north west);
+
+    % F01-S02: nested Federation Execution Exists composite.
+    \draw[line width=.48pt,rounded corners=12pt] (0.46,1.70) rectangle (13.70,6.52);
+    \draw[line width=.48pt] (0.46,5.74) -- (13.70,5.74);
+    \node[font=\sffamily\bfseries\fontsize{11.0}{11.8}\selectfont]
+    at (7.08,6.15) {Federation Execution Exists};
+
+    % F01-S03 and F01-S04: the two operational simple states.
+    \node[hla state,minimum width=3.08cm,minimum height=1.38cm,inner xsep=4pt,
+        font=\sffamily\bfseries\fontsize{10.3}{11.0}\selectfont] (noj) at (2.94,4.54)
+        {No Joined\\Federates};
+    \node[hla state,minimum width=3.08cm,minimum height=1.36cm,inner xsep=4pt,
+        font=\sffamily\bfseries\fontsize{10.3}{11.0}\selectfont] (support) at (10.58,4.49)
+        {Supporting\\Joined\\Federates};
+
+    % F01-E02: Does Not Exist -> nested composite boundary; create.
+    \draw[hla transition,line width=.72pt] (none.south) -- (6.82,6.59);
+    \node[font=\sffamily\fontsize{8.45}{9.2}\selectfont,anchor=west,align=left]
+    at (7.58,7.10) {Create\\Federation Execution};
+
+    % F01-E03: No Joined Federates -> Does Not Exist; destroy.
+    \draw[hla transition,line width=.72pt] ([xshift=.22cm]noj.north) -- (none.south west);
+    \node[font=\sffamily\fontsize{8.45}{9.2}\selectfont,anchor=west,align=left]
+    at (2.25,7.35) {Destroy\\Federation Execution};
+
+    % F01-P02: nested initial pseudo-state.
+    % F01-E04: nested initial -> No Joined Federates.
+    \fill (0.62,5.49) circle[radius=3.15pt];
+    \draw[hla transition,line width=.72pt] (0.75,5.42) -- (noj.north west);
+
+    % F01-E05: first join, rightward.
+    \draw[hla transition,line width=.72pt] ([yshift=.23cm]noj.east) -- ([yshift=.23cm]support.west);
+    \node[font=\sffamily\fontsize{8.45}{9.2}\selectfont,anchor=south,align=center]
+    at (6.76,4.91) {The First Join\\Federation Execution};
+
+    % F01-E06: last resign, leftward.
+    \draw[hla transition,line width=.72pt] ([yshift=-.23cm]support.west) -- ([yshift=-.23cm]noj.east);
+    \node[font=\sffamily\fontsize{8.45}{9.2}\selectfont,anchor=north,align=center]
+    at (6.76,4.00) {The Last Resign\\Federation Execution};
+
+    % F01-E07: supporting-state clockwise self-loop.
+    \draw[hla transition,line width=.72pt]
+    ([xshift=.25cm]support.south)
+    .. controls (10.82,3.00) and (12.62,2.72) .. (12.78,3.72)
+    .. controls (12.88,4.44) and (12.50,4.73) .. (support.east);
+    \node[font=\sffamily\fontsize{8.35}{9.1}\selectfont,align=center]
+    at (10.94,2.18) {Join Federation Execution\\or\\Resign Federation Execution};
+
+    \node[font=\sffamily\bfseries\fontsize{11.8}{12.7}\selectfont]
+    at (7.16,1.14) {Figure 1---Basic states of the federation execution};
+\end{tikzpicture}

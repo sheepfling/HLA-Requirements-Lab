@@ -1,0 +1,369 @@
+% Faithful reconstruction: source PDF pp. 3-12.
+% Audit r06: source-metric front-matter geometry and typography.
+\newgeometry{top=0.95in,bottom=0.87in,left=1.25in,right=1.25in,headheight=14pt,headsep=0.20in,footskip=0.43in}
+\setlength{\parskip}{0pt}
+\urlstyle{same}
+\newcommand{\fmserif}{\fontfamily{Tinos-TLF}\fontsize{10}{12.4}\selectfont}
+\newcommand{\fmsmall}{\fontfamily{Tinos-TLF}\fontsize{9}{10.8}\selectfont}
+\newcommand{\fmsans}{\fontfamily{Arimo-TLF}\selectfont}
+
+% PDF p. 3 - title page.
+\thispagestyle{empty}
+\begin{flushright}
+    {\fmsans\bfseries\fontsize{11}{13}\selectfont IEEE Std 1516.2\texttrademark-2010}\par
+    {\fmsans\fontsize{9}{13}\selectfont (Revision of\par IEEE Std 1516.2-2000)}
+\end{flushright}
+\vspace{1.56in}
+
+{\fmsans\bfseries\fontsize{22}{26}\selectfont
+IEEE Standard for\par
+Modeling and Simulation (M\&S)\par
+High Level Architecture (HLA)---\par
+Object Model Template (OMT)\par
+Specification\par}
+
+\vspace{0.92in}
+{\fmsans\fontsize{10}{12}\selectfont Sponsor\par}
+\vspace{6pt}
+{\fmsans\bfseries\fontsize{12}{13}\selectfont
+Stimulation Interoperability Standards Organization/\par
+Standards Activity Committee (SISO/SAC)\par
+of the\par
+IEEE Computer Society\par}
+
+\vspace{20pt}
+{\fmsans\fontsize{10}{12}\selectfont Approved 25 March 2010\par}
+\vspace{8pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont IEEE-SA Standards Board\par}
+\vfill
+\newpage
+
+% PDF p. 4 - abstract / permissions / publication data.
+\thispagestyle{empty}
+\vspace*{25pt}
+{\fmsans\fontsize{10}{12}\selectfont
+\textbf{Abstract:} The High Level Architecture (HLA)---Object Model Template (OMT) specification defines
+the format and syntax (but not content) of HLA object models. Simulations are abstractions of the real
+world, and no one simulation can solve all of the functional needs for the modeling and simulation
+community. It is anticipated that advances in technology will allow for new and different modeling and
+simulation (M\&S) implementations within the framework of the HLA. The standards contained in this
+architecture are interrelated and need to be considered as a product set, as a change in one is likely to have
+an impact on the others. As such, the HLA is an integrated approach that has been developed to provide a
+common architecture for simulation.\par
+\vspace{0pt}
+\textbf{Keywords:} architecture, class attribute, data distribution management, federate, federation,
+    federation execution, federation object model, framework, High Level Architecture, instance attribute,
+    instance attribute ownership, interaction class, joined federate, object class, object model template, rules,
+    runtime infrastructure, simulation object model, time-constrained, time-regulating\par
+
+\vspace{70pt}
+\textbf{Schema:} The IEEE hereby grants a general, royalty-free license to copy, distribute, display, and make
+derivative works from this material, for all purposes, provided that any use of the material contains the
+following attribution: ``Reprinted with permission from IEEE Std 1516.2\texttrademark-2010.''
+Should a reader require additional information, contact the Manager, Standards Intellectual Property,
+    IEEE Standards Association (stds-ipr@ieee.org).\par
+
+\vspace{16pt}
+\textbf{Documentation:} The IEEE hereby grants a general, royalty-free license to copy, distribute,
+    display, and make derivative works from this material, for noncommercial purposes, provided that any use
+of the material contains the following attribution: ``Reprinted with permission from IEEE Std
+1516.2\texttrademark-2010.'' The material may not be used for a commercial purpose without express written
+permission from the IEEE. Should a reader require additional information, contact the Manager, Standards
+Intellectual Property, IEEE Standards Association (stds-ipr@ieee.org).\par
+}
+
+\vfill
+{\fmsans\fontsize{8}{9}\selectfont
+\rule{1.52in}{0.35pt}\par\vspace{9pt}
+The Institute of Electrical and Electronics Engineers, Inc.\par
+3 Park Avenue, New York, NY 10016-5997, USA\par
+\vspace{7pt}
+Copyright \textcopyright\ 2010 by the Institute of Electrical and Electronics Engineers, Inc.\par
+All rights reserved. Published 18 August 2010. Printed in the United States of America.\par
+\vspace{7pt}
+IEEE is a registered trademark in the U.S. Patent \& Trademark Office, owned by The Institute of Electrical and Electronics\par
+Engineers, Incorporated.\par
+\vspace{7pt}
+    \begin{tabular}{@{}l@{\hspace{16pt}}l@{\hspace{16pt}}l@{}}
+        PDF:   & ISBN 978-0-7381-6249-2 & STD96060   \\
+        Print: & ISBN 978-0-7381-6250-8 & STDPD96060
+    \end{tabular}\par
+\vspace{7pt}
+{\itshape\fontsize{6.8}{8}\selectfont IEEE prohibits discrimination, harassment and bullying. For more information, visit \url{http://www.ieee.org/web/aboutus/whatis/policies/p9-26.html}.\par}
+\vspace{5pt}
+{\itshape\fontsize{6.8}{8}\selectfont No part of this publication may be reproduced in any form, in an electronic retrieval system or otherwise, without the prior written permission\par of the publisher.\par}
+}\vspace*{18pt}
+\newpage
+
+% PDF p. 5 - general IEEE notice.
+\thispagestyle{empty}
+{\fontfamily{Tinos-TLF}\fontsize{8.7}{11.2}\selectfont
+\textbf{IEEE Standards} documents are developed within the IEEE Societies and the Standards Coordinating Committees of the IEEE Standards Association (IEEE-SA) Standards Board. The IEEE develops its standards through a consensus development process, approved by the American National Standards Institute, which brings together volunteers representing varied viewpoints and interests to achieve the final product. Volunteers are not necessarily members of the Institute and serve without compensation. While the IEEE administers the process and establishes rules to promote fairness in the consensus development process, the IEEE does not independently evaluate, test, or verify the accuracy of any of the information or the soundness of any judgments contained in its standards.\par
+\vspace{11.5pt}
+Use of an IEEE Standard is wholly voluntary. The IEEE disclaims liability for any personal injury, property or other damage, of any nature whatsoever, whether special, indirect, consequential, or compensatory, directly or indirectly resulting from the publication, use of, or reliance upon this, or any other IEEE Standard document.\par
+\vspace{11.5pt}
+The IEEE does not warrant or represent the accuracy or content of the material contained herein, and expressly disclaims any express or implied warranty, including any implied warranty of merchantability or fitness for a specific purpose, or that the use of the material contained herein is free from patent infringement. IEEE Standards documents are supplied ``AS IS.''\par
+\vspace{11.5pt}
+The existence of an IEEE Standard does not imply that there are no other ways to produce, test, measure, purchase, market, or provide other goods and services related to the scope of the IEEE Standard. Furthermore, the viewpoint expressed at the time a standard is approved and issued is subject to change brought about through developments in the state of the art and comments received from users of the standard. Every IEEE Standard is subjected to review at least every five years for revision or reaffirmation, or every ten years for stabilization. When a document is more than five years old and has not been reaffirmed, or more than ten years old and has not been stabilized, it is reasonable to conclude that its contents, although still of some value, do not wholly reflect the present state of the art. Users are cautioned to check to determine that they have the latest edition of any IEEE Standard.\par
+\vspace{11.5pt}
+In publishing and making this document available, the IEEE is not suggesting or rendering professional or other services for, or on behalf of, any person or entity. Nor is the IEEE undertaking to perform any duty owed by any other person or entity to another. Any person utilizing this, and any other IEEE Standards document, should rely upon the advice of a competent professional in determining the exercise of reasonable care in any given circumstances.\par
+\vspace{11.5pt}
+\textbf{Interpretations:} Occasionally questions may arise regarding the meaning of portions of standards as they relate to specific applications. When the need for interpretations is brought to the attention of IEEE, the Institute will initiate action to prepare appropriate responses. Since IEEE Standards represent a consensus of concerned interests, it is important to ensure that any interpretation has also received the concurrence of a balance of interests.For this reason, IEEE and the members of its societies and Standards Coordinating Committees are not able to provide an instant response to interpretation requests except in those cases where the matter has previously received formal consideration. A statement, written or oral, that is not processed in accordance with the IEEE-SA Standards Board Operations Manual shall not be considered the official position of IEEE or any of its committees and shall not be considered to be, nor be relied upon as, a formal interpretation of the IEEE.At lectures, symposia, seminars, or educational courses, an individual presenting information on IEEE standards shall make it clear that his or her views should be considered the personal views of that individual rather than the formal position, explanation, or interpretation of the IEEE. Comments for revision of IEEE Standards are welcome from any interested party, regardless of membership affiliation with IEEE. Suggestions for changes in documents should be in the form of a proposed change of text, together with appropriate supporting comments. Recommendations to change the status of a stabilized standard should include a rationale as to why a revision or withdrawal is required.\par
+\vspace{11.5pt}
+Comments and recommendations on standards, and requests for interpretations should be addressed to:\par
+\vspace{8pt}
+{\centering Secretary, IEEE-SA Standards Board\par 445 Hoes Lane\par Piscataway, NJ 08854\par USA\par}
+\vspace{9pt}
+Authorization to photocopy portions of any individual standard for internal or personal use is granted by the Institute of Electrical and Electronics Engineers, Inc., provided that the appropriate fee is paid to Copyright Clearance Center. To arrange for payment of licensing fee, please contact Copyright Clearance Center, Customer Service, 222 Rosewood Drive, Danvers, MA 01923 USA; +1 978 750 8400. Permission to photocopy portions of any individual standard for educational classroom use can also be obtained through the Copyright Clearance Center.\par
+}
+\newpage
+
+% PDF pp. 6-7 - introduction / notices.
+\pagenumbering{roman}
+\setcounter{page}{4}
+\frontheaders
+{\fmsans\bfseries\fontsize{14}{16}\selectfont Introduction\par}
+\vspace{30pt}
+{\setlength{\fboxsep}{2.5pt}\setlength{\fboxrule}{0.48pt}%
+\noindent\fbox{\parbox[t][24.52pt][t]{427.66pt}{\fontfamily{Tinos-TLF}\itshape\fontsize{9}{10.5}\selectfont
+This introduction is not part of IEEE Std 1516.2-2010, IEEE Standard for Modeling and Simulation (M\&S) High Level\\
+Architecture (HLA)---Object Model Template (OMT) Specification.}}\par}
+\vspace{2.5pt}
+{\fmserif
+This document has been developed to record an international standard for the HLA. It serves as one of three related standards for the HLA. It defines the format and syntax for recording information in HLA object models.\par
+\vspace{12pt}
+This new version of the IEEE 1516 High Level Architecture has been produced during 2004--2007 by the\\
+``HLA Evolved Product Development Group'' of the Simulation Interoperability Standards Organization\\
+(SISO). It incorporates a number of updates based on practical application of earlier versions of the standard.\\
+The purpose of the new version is to better support development, deployment, and net-centricity of\\
+distributed simulations. Major new additions include support for Web Services communication, modular\\
+information models (FOMs and SOMs), improved XML features (XML Scemas as well as extensibility),\\
+improved fault tolerance support, support for update rate reduction and dynamic link compatibility between\\
+different implementations.\par
+\vspace{12pt}
+{\fmsans\bfseries\fontsize{12}{14}\selectfont Notice to users\par}
+\vspace{19pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Laws and regulations\par}
+\vspace{12.5pt}
+Users of these documents should consult all applicable laws and regulations. Compliance with the provisions of this standard does not imply compliance to any applicable regulatory requirements. Implementers of the standard are responsible for observing or referring to the applicable regulatory requirements. IEEE does not, by the publication of its standards, intend to urge action that is not in compliance with applicable laws, and these documents may not be construed as doing so.\par
+\vspace{17pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Copyrights\par}
+\vspace{12.5pt}
+This document is copyrighted by the IEEE. It is made available for a wide variety of both public and private uses. These include both use, by reference, in laws and regulations, and use in private self-regulation, standardization, and the promotion of engineering practices and methods. By making this document available for use and adoption by public authorities and private users, the IEEE does not waive any rights in copyright to this document.\par
+\vspace{17pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Updating of IEEE documents\par}
+\vspace{12.5pt}
+Users of IEEE standards should be aware that these documents may be superseded at any time by the issuance of new editions or may be amended from time to time through the issuance of amendments, corrigenda, or errata. An official IEEE document at any point in time consists of the current edition of the document together with any amendments, corrigenda, or errata then in effect. In order to determine whether a given document is the current edition and whether it has been amended through the issuance of amendments, corrigenda, or errata, visit the IEEE Standards Association website at \url{http://ieeexplore.ieee.org/xpl/standards.jsp}, or contact the IEEE at the address listed previously.\par
+\vspace{11pt}
+For more information about the IEEE Standards Association or the IEEE standards development process, visit the IEEE-SA website at \url{http://standards.ieee.org}.\par
+}
+\newpage
+
+{\fmserif
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Errata\par}
+\vspace{13pt}
+Errata, if any, for this and all other standards can be accessed at the following URL: http://\\
+standards.ieee.org/reading/ieee/updates/errata/index.html. Users are encouraged to check this URL for\\
+errata periodically.\par
+\vspace{18pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Interpretations\par}
+\vspace{13pt}
+Current interpretations can be accessed at the following URL: \url{http://standards.ieee.org/reading/ieee/interp/index.html}.\par
+\vspace{18pt}
+{\fmsans\bfseries\fontsize{11}{13}\selectfont Patents\par}
+\vspace{13pt}
+Attention is called to the possibility that implementation of this amendment may require use of subject matter covered by patent rights. By publication of this amendment, no position is taken with respect to the existence or validity of any patent rights in connection therewith. The IEEE is not responsible for identifying Essential Patent Claims for which a license may be required, for conducting inquiries into the legal validity or scope of Patents Claims or determining whether any licensing terms or conditions provided in connection with submission of a Letter of Assurance, if any, or in any licensing agreements are reasonable or non-discriminatory. Users of this amendment are expressly advised that determination of the validity of any patent rights, and the risk of infringement of such rights, is entirely their own responsibility. Further information may be obtained from the IEEE Standards Association.\par
+}
+\newpage
+
+% PDF p. 8 - participants.
+{\fmsans\bfseries\fontsize{12}{14}\selectfont Participants\par}
+\vspace{15pt}
+{\fmserif At the time this standard was submitted to the IEEE-SA for approval, the HLA Evolved Working Group had the following membership:\par}
+{\centering\fmserif
+\textbf{Roy Scrudder,} \textit{Chair}\par
+\textbf{Randy Saunders,} \textit{Vice Chair}\par
+\textbf{Björn Möller,} \textit{Vice Chair}\par
+\textbf{Katherine L. Morse,} \textit{Secretary}\par}
+\vspace{20pt}
+{\fontfamily{Tinos-TLF}\fontsize{9}{10.9}\selectfont
+\renewcommand{\arraystretch}{1.067}
+\hspace*{2.2pt}\begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{132pt}@{\hspace{23pt}}>{\RaggedRight\arraybackslash}p{129pt}@{\hspace{23pt}}>{\RaggedRight\arraybackslash}p{123pt}@{}}
+                   Martin Adelantado & Ralph Gibson            & Rob Minson           \\
+                   Bill Andrews      & Edward Gordon           & Mike Montgomery      \\
+                   Fredrik Antelius  & Len Granowetter         & Neil Morris          \\
+                   Joanne Atherton   & Jean-Baptiste Guillerit & William Oates        \\
+                   Trevor Bakker     & Paul Gustavson          & Gunnar Ohlund        \\
+                   Shelby Barrett    & Per Gustavsson          & Mike Papay           \\
+                   Tolga Basturk     & Steve Hall              & Treavor Pearce       \\
+                   William Beavin    & Fawzi Hassaine          & Mikel Petty          \\
+                   Emmet Beeker      & Mark Hazen              & Tim Pokorny          \\
+                   Alan Berry        & William Helfinstine     & Edward Powell        \\
+                   Mark Biwer        & Amy Henninger           & Laurent Prignac      \\
+                   David Bodoh       & Frank Hill              & Guillaume Radde      \\
+                   Jake Borah        & Jim Hollenbach          & Peter Ross           \\
+                   Steve Boswell     & Torbjörn Hultén         & Chris Rouget         \\
+                   Derrick Briscoe   & Jean-Louis Igarza       & Joseph Sardella      \\
+                   Dominique Canazzi & Mark S. Johnson         & Geoff Sauerborn      \\
+                   Andy Ceranowicz   & Stephen Jones           & John Schloman        \\
+                   Tram Chase        & Stephen Jones           & Kevin Seavey         \\
+                   Scott Clarke      & Gunnar Karlsson         & Graham Shanks        \\
+                   David Coppler     & Mikael Karlsson         & Petr Shlyaev         \\
+                   Anthony Cramp     & Rosemarie Keener        & John Shockley        \\
+                   Dannie Cutts      & James Kogler            & Pierre Siron         \\
+                   Timothy Daigle    & Jonathan Labin          & Keith Snively        \\
+                   Bradford Dillman  & Jennifer Lewis          & Susan Solick         \\
+                   Steven Dix        & Mike Lightner           & Joseph Steel         \\
+                   Hoang Doan        & Reed Little             & Steffen Strassburger \\
+                   Uwe Dobrindt      & Laurie Litwin           & Marcy Stutzman       \\
+                   David Drake       & Staffan Löf             & Jerry Szulinski      \\
+                   David Edmondson   & Björn Löfstrand         & Martin Tapp          \\
+                   Craig Eidman      & Paul Lowe               & Gary Thomas          \\
+                   Gary Eiserman     & Franklin Lue            & Andreas Tolk         \\
+                   Gary England      & Bob Lutz                & Cam Tran             \\
+                   Jason Esteve      & Farid Mamaghani         & Ben Watrous          \\
+                   James Evans       & Lee Marden              & Marc Williams        \\
+                   Robert Farraher   & Kim Marshall            & Annette Wilson       \\
+                   John Fay          & Regis Mauget            & Douglas Wood         \\
+                   Reginald Ford     & James McCall            & Roger Wuerfel        \\
+                   Masakazu Furuichi & Michael McGarity        & Troy Yee             \\
+                   Michael Gagliano  & Sandy McPherson         & William Zimmerman    \\
+\end{tabular}\par}
+\newpage
+
+% PDF p. 9 - drafting group and balloting committee.
+{\fmserif The working group acknowledges the following Drafting Group members who provided significant contributions to the preparation of this standard:\par}
+\vspace{12pt}
+{\centering\fmserif\textbf{Robert Lutz,} \textit{OMT Drafting Group Editor}\par}
+\vspace{6pt}
+{\fontfamily{Tinos-TLF}\fontsize{9}{10.9}\selectfont\centering
+    \begin{tabular}{@{}>{\Centering\arraybackslash}p{132pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{129pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{123pt}@{}}
+        Jake Borah     & Björn Löfstrand & Roy Scrudder  \\
+        Paul Gustavson & Katherine Morse & Graham Shanks \\
+        Mike Lightner  & Chris Rouget    & Chris Turrell \\
+        Reed Little    & John Schloman   &               \\
+    \end{tabular}\par}
+\vspace{19pt}
+{\fmserif The following members of the individual balloting committee voted on this standard. Balloters may have voted for approval, disapproval, or abstention:\par}
+\vspace{6pt}
+{\fontfamily{Tinos-TLF}\fontsize{9}{10.0}\selectfont\centering
+\renewcommand{\arraystretch}{1.04}
+    \begin{tabular}{@{}>{\Centering\arraybackslash}p{132pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{129pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{123pt}@{}}
+        Ali Al Awazi        & Mark Jaeger       & Jose Puthenkulam \\
+        Bakul Banerjee      & Mikael Karlsson   & Robert Robinson  \\
+        Steven Bezner       & Mark Knight       & Michael Rush     \\
+        Jake Borah          & James E. Kogler   & Peter Ryan       \\
+        Juan Carreon        & Jonathan Labin    & Randall Safier   \\
+        Bertram Chase       & Susan Land        & Randy Saunders   \\
+        Keith Chow          & Reed Little       & Bartien Sayogo   \\
+        Tommy Cooper        & Björn Löfstrand   & John Schloman    \\
+        Paul Croll          & William Lumpkins  & Roy Scrudder     \\
+        Dannie Cutts        & G. Luri           & Keith Snively    \\
+        Uwe Dobrindt        & Robert Lutz       & Susan Solick     \\
+        Sourav Dutta        & Edward McCall     & Joseph Stanco    \\
+        Andre Fournier      & James McCall      & Thomas Starai    \\
+        Masakazu Furuichi   & Gary Michel       & Gerald Stueve    \\
+        Len Granowetter     & William Milam     & Marcy Stutzman   \\
+        Randall Groves      & Björn Möller      & Thomas Tullia    \\
+        Paul Gustavson      & Katherine Morse   & Cam Van Tran     \\
+        M. Hashmi           & Thomas Mullins    & Annette Wilson   \\
+        William Helfinstine & Michael S. Newman & Douglas Wood     \\
+        Rutger A. Heunks    & Miroslav Pavlovic & Paul Work        \\
+        Frank Hill          & Trevor Pearce     & Roger Wuerfel    \\
+        Werner Hoelzl       & Ulrich Pohl       & Oren Yuen        \\
+        James Ivers         & Jonathan Prescott & Janusz Zalewski  \\
+    \end{tabular}\par}
+\newpage
+
+% PDF p. 10 - IEEE-SA Standards Board.
+{\fmserif When the IEEE-SA Standards Board approved this standard on 25 March 2010, it had the following membership:\par}
+\vspace{5pt}
+{\centering\fmserif
+\textbf{Robert M. Grow,} \textit{Chair}\par
+\textbf{Richard H. Hulett,} \textit{Vice Chair}\par
+\textbf{Steve M. Mills,} \textit{Past Chair}\par
+\textbf{Judith Gorman,} \textit{Secretary}\par}
+\vspace{8pt}
+{\fontfamily{Tinos-TLF}\fontsize{9}{10.9}\selectfont\centering
+    \begin{tabular}{@{}>{\Centering\arraybackslash}p{132pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{129pt}@{\hspace{23pt}}>{\Centering\arraybackslash}p{123pt}@{}}
+        Karen Bartleson  & Young Kyun Kim        & Ronald C. Petersen \\
+        Victor Berman    & Joseph L. Koepfinger* & Thomas Prevost     \\
+        Ted Burse        & John Kulick           & Jon Walter Rosdahl \\
+        Clint Chaplin    & David J. Law          & Sam Sciacca        \\
+        Andy Drozd       & Hung Ling             & Mike Seavey        \\
+        Alexander Gelman & Oleg Logvinov         & Curtis Siller      \\
+        Jim Hughes       & Ted Olsen             & Don Wright         \\
+    \end{tabular}\par}
+\vspace{22pt}
+{\fmsmall\textit{*Member Emeritus}\par}
+\vspace{12pt}
+{\fmserif Also included are the following nonvoting IEEE-SA Standards Board liaisons:\par}
+\vspace{21pt}
+{\centering\fmsmall
+Satish K. Aggarwal, NRC Representative\par
+Richard DeBlasio, DOE Representative\par
+Michael Janezic, NIST Representative\par}
+\vspace{28pt}
+{\centering\fmsmall
+\textbf{Lisa Perry}\par
+IEEE Standards Program Manager, Document Development\par
+\vspace{9pt}
+\textbf{Michael D. Kipness}\par
+IEEE Standards Program Manager, Technical Program Development\par}
+\newpage
+
+% PDF pp. 11-12 - contents.
+{\fmsans\bfseries\fontsize{12}{14}\selectfont Contents\par}
+\vspace{16pt}
+\begingroup
+\fontfamily{Tinos-TLF}\fontsize{10}{12}\selectfont
+\setlength{\parskip}{0pt}
+\newcommand{\ctop}[3]{\noindent\makebox[30pt][l]{#1}#2\dotfill#3\par}
+\newcommand{\csub}[3]{\noindent\hspace*{30pt}\makebox[24pt][l]{#1}#2\dotfill#3\par}
+\newcommand{\cann}[3]{\noindent\makebox[45pt][l]{#1}#2\dotfill#3\par}
+\ctop{1.}{Overview}{1}\vspace{13.5pt}
+\csub{1.1}{Scope}{1}
+\csub{1.2}{Purpose}{1}
+\csub{1.3}{Background}{2}
+\vspace{13.5pt}\ctop{2.}{Normative references}{4}
+\vspace{13.5pt}\ctop{3.}{Definitions, acronyms, and abbreviations}{4}\vspace{13.5pt}
+\csub{3.1}{Definitions}{4}
+\csub{3.2}{Acronyms and abbreviations}{18}
+\csub{3.3}{Conventions}{19}
+\vspace{13.5pt}\ctop{4.}{HLA OMT components}{20}\vspace{13.5pt}
+\csub{4.1}{Object model identification table}{21}
+\csub{4.2}{Object class structure table}{27}
+\csub{4.3}{Interaction class structure table}{31}
+\csub{4.4}{Attribute table}{34}
+\csub{4.5}{Parameter table}{38}
+\csub{4.6}{Dimension table}{41}
+\csub{4.7}{Time representation table}{43}
+\csub{4.8}{User-supplied tag table}{45}
+\csub{4.9}{Synchronization table}{47}
+\csub{4.10}{Transportation type table}{48}
+\csub{4.11}{Update rate table}{49}
+\csub{4.12}{Switches table}{50}
+\csub{4.13}{Datatype tables}{53}
+\csub{4.14}{Notes table}{69}
+\vspace{13.5pt}\ctop{5.}{FOM/SOM lexicon}{70}\vspace{13.5pt}
+\csub{5.1}{Purpose/background}{70}
+\csub{5.2}{Object class definition table}{70}
+\csub{5.3}{Interaction class definition table}{71}
+\csub{5.4}{Attribute definition table}{71}
+\csub{5.5}{Parameter definition table}{72}
+\vspace{13.5pt}\ctop{6.}{Conformance}{73}\vspace{13.5pt}
+\csub{6.1}{Conformance labels}{73}
+\csub{6.2}{Conformance verification}{74}
+\csub{6.3}{Interface specification services usage table}{78}
+\vspace{13.5pt}\ctop{7.}{FOM module/SOM module merging rules}{83}
+\vspace{13.5pt}\cann{Annex A}{(informative) Table entry notation}{86}
+\vspace{13.5pt}\cann{Annex B}{(normative) Common normalization functions}{87}
+\newpage
+\cann{Annex C}{(normative) FOM module/SOM module merging principles}{89}
+\vspace{12pt}\cann{Annex D}{(normative) OMT data interchange format}{95}
+\vspace{12pt}\cann{Annex E}{(normative) OMT conformance XML Schema}{97}
+\vspace{12pt}\cann{Annex F}{(informative) OMT DIF SOM example}{98}
+\vspace{12pt}\cann{Annex G}{(informative) OMT DIF FOM example}{99}
+\vspace{12pt}\cann{Annex H}{(informative) Bibliography}{100}
+\endgroup
+\clearpage

@@ -1,0 +1,12 @@
+% Source PDF page 2: intentionally blank external-cover verso with only the
+% copy-specific licensed-use footer.
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay,x=1pt,y=1pt]
+    \coordinate (SW) at (current page.south west);
+    \ifShowLicenseFooter
+    \node[anchor=base west,inner sep=0pt,text=black] at ($(SW)+(58.760,7.000)$)
+        {{\licensefont\licensefootertext}};
+    \fi
+\end{tikzpicture}
+\null
+\newpage

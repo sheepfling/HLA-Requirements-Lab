@@ -1,0 +1,889 @@
+% Faithful initial reconstruction of Clause 5 from source PDF pages 79--100
+% (standard pages 65--86). Source-page boundaries are intentionally preserved.
+
+% --- Standard page 65 / source PDF page 79 ---
+\begin{compactstdpage}
+    \section{Declaration management (DM)}
+
+    \subsection{Overview}
+
+    Joined federates shall use DM services to declare their intention to generate information. A joined federate shall invoke appropriate DM services before it may register object instances, update instance attribute values, and send interactions. Joined federates shall use DM services or DDM services to declare their intention to receive information. (A joined federate may use DM services exclusively, DDM services exclusively, or both DM and DDM services to declare its intention to receive information. This clause describes how DM services work when they are used exclusively by a joined federate. See 9.1.5 for more information on using DDM services in lieu of or in conjunction with DM services.) A joined federate shall invoke appropriate DM or DDM services before it may discover object instances, reflect instance attribute values, and receive interactions. DM and DDM services, together with object management services, ownership management services, and the object class and interaction class hierarchies defined in the FDD, shall determine the following:
+
+    \begin{stddashlist}
+        \item Object classes at which object instances may be registered
+        \item Object classes at which object instances are discovered
+        \item Instance attributes that are available to be updated and reflected
+        \item Interactions that may be sent
+        \item Interaction classes at which interactions are received
+        \item Parameters that are available to be sent and received
+    \end{stddashlist}
+
+    The effects of DM services shall be independent of the logical time of any joined federate in the federation execution.
+
+    \subsubsection{Static properties of the FDD}
+
+    The following static properties of the FDD shall establish vocabulary for subsequent DM discussion:
+
+    \begin{stdalphalist}
+        \item Every class shall have at most one immediate superclass. A class shall not be a superclass of a class that is its superclass.
+        \item Every object class shall have an associated set of class attributes declared in the FDD.
+        \item An inherited attribute of an object class is a class attribute that was declared in a superclass.
+        \item The available attributes of an object class are the set of declared attributes of that object class in union with the set of inherited attributes of that object class.
+        \item Every interaction class shall have an associated set of parameters declared in the FDD.
+        \item An inherited parameter of an interaction class is a parameter that was declared in a superclass.
+        \item The available parameters of an interaction class are the set of declared parameters of that interaction class in union with the set of inherited parameters of that interaction class.
+        \item For any service that takes an object class and a set of class attribute designators as arguments, only the available attributes of that object class may be used in the set of attribute designators. Being an available attribute of an object class shall be a necessary, but not necessarily a sufficient, condition for an attribute to be used in the set of attribute designators for such a service.
+        \item For any service that takes an object instance and a set of attribute designators as arguments, only the available attributes of that object instance's known class at the involved (invoking or invoked) joined federate may be used in the set of attribute designators. Being an available attribute of the object instance's known class shall be a necessary, but not necessarily a sufficient, condition for an attribute to be used in the set of attribute designators for such a service.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 66 / source PDF page 80 ---
+\begin{compactstdpage}
+    \subsubsection{Definitions and constraints for object classes and class attributes}
+
+    The following DM definitions and constraints shall pertain to object classes and class attributes as declared in the class hierarchy of the FDD:
+
+    \begin{stdalphalist}
+        \item A class attribute may be used as an argument to Subscribe Object Class Attributes, Unsubscribe Object Class Attributes, Publish Object Class Attributes, and Unpublish Object Class Attributes service invocations for a particular object class if and only if the attribute is an available attribute of that object class.
+        \item From a joined federate's perspective, the subscribed attributes of an object class shall be all of the class attributes that have been arguments to Subscribe Object Class Attributes service invocations by that joined federate for that object class and that have not subsequently been unsubscribed, either individually or by unsubscribing the whole object class. Subscribe Object Class Attributes and Unsubscribe Object Class Attributes service invocations for one object class shall have no effect on the subscribed attributes of any other object class.
+        \item If a class attribute is a subscribed attribute of an object class, the joined federate shall be subscribed to that class attribute either actively or passively, but not both.
+        \item From a joined federate's perspective, the explicitly published attributes of an object class shall be all the class attributes that have been arguments to Publish Object Class Attributes service invocations by that joined federate for that object class and that have not subsequently been unpublished, either individually or by unpublishing the whole object class.
+        \item When there are no explicitly published attributes of an object class for a given joined federate, the first Publish Object Class Attributes service invocation that results in explicitly published attributes for that object class for that joined federate also results in publication being established for that object class at that joined federate.
+        \item The HLAprivilegeToDeleteObject class attribute shall be implicitly published for a joined federate for an object class, if and only if
+        \begin{stdnumlist}
+            \item The HLAprivilegeToDeleteObject class attribute for the object class is not, nor has been since publication of the object class was most recently established, explicitly published by the joined federate.
+            \item The HLAprivilegeToDeleteObject class attribute for the object class has not been explicitly unpublished by the joined federate since publication of the object class was most recently established.
+            \item At least one attribute of the object class is explicitly published by the joined federate.
+        \end{stdnumlist}
+        \item From a joined federate's perspective, the published attributes of an object class shall be the explicitly published and the implicitly published, if any, attributes of the object class for the joined federate. Publish Object Class Attributes and Unpublish Object Class Attributes service invocations for one object class shall have no effect on the published attributes of any other object class.
+        \item From a joined federate's perspective, an object class shall be subscribed if and only if the joined federate is subscribed to at least one attribute of the object class.
+        \item From a joined federate's perspective, an object class shall be published if and only if at least one attribute of the object class is published by the joined federate.
+        \item Joined federates shall invoke the Register Object Instance service only with a published object class as an argument.
+        \item The registered class of an object instance shall be the object class that was an argument to the Register Object Instance service invocation for that object instance.
+        \item Every object instance shall have one federation-wide registered class that cannot change.
+        \item If the Discover Object Instance \rtiinitiated{} service is invoked at a joined federate, the object instance discovered as a result of this service invocation shall have a discovered class at that joined federate. The discovered class of the object instance shall be a supplied argument to the Discover Object Instance \rtiinitiated{} service invocation.
+        \item An object instance shall have at most one discovered class in each joined federate. This discovered class may vary from joined federate to joined federate. Once an object instance is discovered, its discovered class shall not change. If a joined federate invokes the Local Delete Object Instance
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 67 / source PDF page 81 ---
+\begin{compactstdpage}
+    service for a given object instance, that object instance may be newly discovered, at a possibly different object class from previously known.
+
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt,start=15]
+\item If a joined federate has registered or discovered an object instance and it has not subsequently
+\begin{stdnumlist}
+    \item Invoked the Local Delete Object Instance service for that object instance,
+    \item Invoked the Delete Object Instance service for that object instance, or
+    \item Received an invocation of the Remove Object Instance \rtiinitiated{} service for that object instance,
+\end{stdnumlist}
+
+then the object instance shall be known to that joined federate and that object instance has a known class at that joined federate. The known class of that object instance at that joined federate shall be the object instance's registered class if the joined federate knows about the object instance as a result of having registered it. The known class of that object instance at that joined federate shall be the object instance's discovered class if the joined federate knows about the object instance as a result of having discovered it.
+\item From a joined federate's perspective, the corresponding class attribute of an instance attribute is the class attribute of the joined federate's known class for the object instance containing the instance attribute that has the same attribute designator as the instance attribute.
+\item From a joined federate's perspective, the corresponding instance attributes of a class attribute are
+\begin{stdnumlist}
+    \item All unowned instance attributes of object instances that have a known class at the joined federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute, and
+    \item All instance attributes owned by the joined federate that belong to object instances that have a known class at the owning federate equal to the object class of the class attribute and that have the same attribute designator as the class attribute.
+\end{stdnumlist}
+\item A joined federate shall own and update only an instance attribute for which it is publishing the corresponding class attribute.
+\item An update to an instance attribute by the joined federate that owns that instance attribute shall be reflected only by other joined federates that are subscribed to the instance attribute's corresponding (from each subscriber's perspective) class attribute.
+    \end{enumerate}
+
+    \subsubsection{Definitions and constraints for interaction classes and parameters}
+
+    The following DM definitions and constraints shall pertain to interaction classes and parameters as declared in the interaction class hierarchy of the FDD:
+
+    \begin{stdalphalist}
+        \item From a joined federate's perspective, an interaction class shall be subscribed if and only if it was an argument to a Subscribe Interaction Class service invocation by that joined federate that was not subsequently followed by an Unsubscribe Interaction Class service invocation for that interaction class.
+        \item If an interaction class is subscribed, the joined federate shall be subscribed to that interaction class either actively or passively, but not both.
+        \item From a joined federate's perspective, an interaction class shall be published if and only if it was an argument to a Publish Interaction Class service invocation by that joined federate that was not subsequently followed by an Unpublish Interaction Class service invocation for that interaction class.
+        \item Joined federates may invoke the Send Interaction service only with a published interaction class as an argument.
+        \item The sent class of an interaction shall be the interaction class that was an argument to the Send Interaction service invocation for that interaction.
+        \item Every interaction shall have one federation-wide sent class.
+        \item The Receive Interaction \rtiinitiated{} service shall be invoked at a joined federate only with a subscribed interaction class as an argument.
+        \item If the Receive Interaction \rtiinitiated{} service is invoked at a joined federate, the interaction received as a result of this service invocation shall have a received class at that joined federate. The received class
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 68 / source PDF page 82 ---
+\begin{compactstdpage}
+    of an interaction is the interaction class that is an argument to the Receive Interaction \rtiinitiated{} service invocation.
+
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt,start=9]
+\item An interaction shall have at most one received class in each joined federate. This received class may vary from joined federate to joined federate.
+\item Only the available parameters of an interaction class shall be used in a Send Interaction service invocation with that interaction class as argument.
+\item The sent parameters of an interaction shall be the parameters that were arguments to the Send Interaction service invocation for that interaction.
+\item The received parameters of an interaction shall be the parameters that were arguments to the Receive Interaction \rtiinitiated{} service invocation for that interaction.
+\item The received parameters of an interaction shall be the subset of the sent parameters that are available parameters for the interaction's received class.
+\item The received parameters for a given interaction may vary from joined federate to joined federate, depending on the received class of the interaction.
+    \end{enumerate}
+
+    When an object instance's discovered class is a superclass of its registered class, the object instance shall be said to have been promoted from the registered class to the discovered class. Similarly, when an interaction's received class is a superclass of its sent class, the interaction shall be said to have been promoted from the sent class to the received class. Promotion is important for protecting federate application code from new subclasses added to the FDD. As the FDD is expanded to include new object and interaction classes that inherit from existing classes, promotion ensures that existing federate application code need not change to work with the expanded FDD.
+
+    \subsubsection{Declaration management state charts}
+
+    The following figures depict formal representations of the state of an arbitrary object class, an arbitrary class attribute, the HLAprivilegeToDeleteObject class attribute of an arbitrary object class, and an arbitrary interaction class.
+
+    Figure 10 depicts the state of an arbitrary object class, and it deals with object classes at two levels. First, it establishes that each class attribute of the object class has some state worth modeling. Second, it establishes that there may be an arbitrary number of instances of each object class. Further, it defines what conditions allow an object instance to be known by a joined federate as an instance of that object class.
+
+    Conceptually, the state of an object class comprises the state of the class attributes of that object class and of the object instances of that object class. Furthermore, the state of an object instance comprises the state of the instance attributes of that object instance. There is a correspondence between the instance attributes and their corresponding class attributes. This correspondence is modeled via the index to each attribute. A reference to an instance attribute $(i,k,j)$ and to a class attribute $(i,j)$ with the same $i$s and same $j$s means that the class attribute is that instance attribute's corresponding class attribute at that joined federate. This correspondence is because having the same $j$s means that they refer to the same attribute designator, and having the same $i$s means that the joined federate's known class for the object instance containing the instance attribute is the same as the object class designator of the class attribute.
+
+    Each object class shall have a fixed number of available class attributes as defined in the FDD. The number of object instances of a given class, however, be arbitrary.
+
+    An object instance of an object class shall become known by the registering joined federate when the object instance is registered. It may become known by other joined federates in the federation execution. If it becomes known by other joined federates in the federation execution, it shall become known by them as a result of being discovered.
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 69 / source PDF page 83 ---
+\vspace*{-14pt}\stdnativefigure[.92\textwidth]{figures/native/figure-10.tex}
+
+Figure 11 depicts the state of an arbitrary class attribute (that is not the HLAprivilegeToDeleteObject class attribute of an object class) and shows the properties that may be controlled by a joined federate at the class attribute level. Specifically, a joined federate may publish or subscribe to class attributes. Although the Publish Object Class Attributes and Subscribe Object Class Attributes service invocations can take sets of class attributes as an argument, Figure 11 depicts only a single class attribute. Therefore, for example, Publish $(i,j)$ shall mean that attribute $j$ of object class $i$ was an element of the set used as an argument to the Publish Object Class Attributes service.
+
+The HLAprivilegeToDeleteObject class attribute of an arbitrary object class is treated slightly differently from other class attributes, and it is depicted in Figure 12. Unlike other class attributes, HLAprivilegeToDeleteObject, in addition to explicit publish/unpublish actions, may be implicitly published and unpublished for a given object class at a given federate if other circumstances are met (as shown in the state chart and described in 5.1.2). For purposes of subscription, the HLAprivilegeToDeleteObject class attribute of an arbitrary object class is treated no differently from any other class attribute.
+
+\clearpage
+
+% --- Standard page 70 / source PDF page 84 ---
+% Figure 11 is placed in the exact source image rectangle (source PDF coordinates).
+\begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at
+    ([xshift=92.50557pt,yshift=-73.71474pt]current page.north west)
+        {\rotatebox{90}{\resizebox{600.20231pt}{425.12825pt}{\input{figures/native/figure-11.tex}}}};
+    \node[anchor=center,inner sep=0pt,
+        font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+    at ([xshift=290.74238pt,yshift=-687.85379pt]current page.north west)
+        {\scalebox{.995}[1.116]{Figure 11---Class attribute (\textit{i}, \textit{j})}};
+\end{tikzpicture}
+\mbox{}\vfill
+
+\clearpage
+
+% --- Standard page 71 / source PDF page 85 ---
+% Figure 12 is placed in the exact source image rectangle (source PDF coordinates).
+\begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at
+    ([xshift=95.27593pt,yshift=-76.48564pt]current page.north west)
+        {\rotatebox{90}{\resizebox{596.40823pt}{423.32152pt}{\input{figures/native/figure-12.tex}}}};
+    \node[anchor=center,inner sep=0pt,
+        font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+    at ([xshift=294.23929pt,yshift=-689.54482pt]current page.north west)
+        {\scalebox{.995}[1.116]{Figure 12---Class attribute (\textit{i}, HLAprivilegeToDeleteObject)}};
+\end{tikzpicture}
+\mbox{}\vfill
+
+\clearpage
+
+% --- Standard page 72 / source PDF page 86 ---
+Figure 13 depicts the state of an arbitrary interaction class and shows the properties relating to interaction classes that may be controlled by a joined federate. Specifically, a joined federate may publish or subscribe to interaction classes.
+
+The joined federate may also direct the RTI via the Enable/Disable Interaction Relevance Advisory Switch services to indicate that the joined federate does or does not want the RTI to use the Turn Interactions On \rtiinitiated{} and Turn Interactions Off \rtiinitiated{} services to inform the joined federate when interactions of a given class are relevant to the other joined federates in the federation execution.
+
+\begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at
+    ([xshift=94.55320pt,yshift=-143.69676pt]current page.north west)
+        {\rotatebox{90}{\resizebox{574.30563pt}{424.22491pt}{\input{figures/native/figure-13.tex}}}};
+    \node[anchor=center,inner sep=0pt,
+        font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+    at ([xshift=295.08293pt,yshift=-689.11830pt]current page.north west)
+        {\scalebox{1.004}[1.181]{Figure 13---Interaction class (\textit{m})}};
+\end{tikzpicture}
+\mbox{}\vfill
+
+\clearpage
+
+% --- Standard page 73 / source PDF page 87 ---
+\begin{compactstdpage}
+    \subsubsection{Interaction with DDM services}
+
+    A joined federate may use DM services, and it may also use DDM services. Joined federates that use DM services exclusively may be joined to the same federation execution as joined federates that use DM services exclusively, joined federates that use DDM services exclusively, and joined federates that use both DM services and DDM services. Clause 5 describes how DM services work when they are used in the absence of the use of DDM services by a joined federate, from the perspective of that joined federate, regardless of whether other joined federates in the federation are using DM services exclusively, DDM services exclusively, or both DM services and DDM services. When both DM services and DDM services are used by a single joined federate, some of the terms and services defined in this clause are extended. See 9.1.5 for an expanded interpretation of how selected DM services work when they are used in conjunction with DDM services by a joined federate, from the perspective of that joined federate.
+
+    \subsubsection{Subscribing with update rate reduction}
+
+    A federate may, optionally, specify an update rate designator when subscribing to object class attributes. The update rate designator and a corresponding update rate shall be defined in the FDD of the federation execution. If an update rate designator is specified, the attributes shall be considered to be subscribed with the corresponding update rate. In case no update rate is specified, the attributes shall be considered to be subscribed with the default update rate; in other words, no update rate reduction shall take place.
+
+    \subsection{Publish Object Class Attributes service}
+
+    The information provided by the joined federate via the Publish Object Class Attributes service shall be used in multiple ways. First, it shall indicate an object class of which the joined federate may subsequently register object instances. Second, it shall indicate the class attributes of the object class for which the joined federate is capable of owning the corresponding instance attributes. Only the joined federate that owns an instance attribute shall provide values for that instance attribute to the federation. The joined federate may become the owner of an instance attribute and thereby be capable of updating its value in the following two ways:
+
+    \begin{stddashlist}
+        \item By registering an object instance of a published class. Upon registration of an object instance, the registering joined federate shall become the owner of all instance attributes of that object instance for which the joined federate is publishing the corresponding class attributes at the registered class of the object instance.
+        \item By using ownership management services to acquire instance attributes of object instances. The joined federate may acquire only the instance attributes for which the joined federate is publishing the corresponding class attributes at the known class of the specified object instance.
+    \end{stddashlist}
+
+    Each use of this service shall add to the publications specified to the RTI in previous service invocations for the same object class. Invoking this service with an empty set of class attributes shall be equivalent to adding no publications for the object class.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+        \item Set of attribute designators.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 74 / source PDF page 88 ---
+\begin{compactstdpage}
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The specified object class is defined in the FDD.
+        \item The specified class attributes are available attributes of the specified object class.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The specified class attributes shall now be published attributes of the specified object class for the joined federate.
+        \item If at least one attribute of the specified class is published by the joined federate, it may register object instances of the specified class.
+        \item If at least one attribute of the specified class is published by the joined federate, the HLAprivilegeToDeleteObject class attribute of the specified class may be implicitly published for the joined federate.
+        \item The joined federate may own instance attributes that correspond to the specified class attributes.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The specified class attributes are not available attributes of the specified object class.
+        \item The object class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 11.
+        \item Figure 12.
+    \end{stdalphalist}
+
+    \subsection{Unpublish Object Class Attributes service}
+
+    The Unpublish Object Class Attributes service can be used in multiple ways. First, it could be used to unpublish a whole object class and thereby inform the RTI that the joined federate shall no longer be capable of registering object instances of the specified object class. Second, it could be used to unpublish specific class attributes and thereby inform the RTI that the joined federate shall no longer be capable of owning instance attributes that correspond to the unpublished class attributes.
+
+    If the optional set of attributes designators argument is supplied, only those class attributes shall be unpublished for the joined federate. Otherwise, all published class attributes of the specified class shall be unpublished for the joined federate. Invoking this service with an empty set of class attributes shall be equivalent to removing no publications for the object class.
+
+    The joined federate shall lose ownership of all owned instance attributes whose corresponding class attributes are unpublished by the service invocation; in other words, the joined federate shall no longer be able to update such instance attributes.
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 75 / source PDF page 89 ---
+\begin{compactstdpage}
+    \subsubsection{Arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+        \item Optional set of attribute designators.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The object class is defined in the FDD.
+        \item If the optional set of attribute designators argument is supplied, the specified class attributes are available attributes of the specified object class.
+        \item For each class attribute, of the specified class, that is published by the joined federate and is to be unpublished by this service invocation, there are no joined federate-owned corresponding instance attributes that are unowned by this joined federate and for which the joined federate has taken one of the following actions:
+        \begin{stdnumlist}
+            \item Invoked the Attribute Ownership Acquisition service and has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or
+            \item Invoked the Attribute Ownership Acquisition If Available service and has not yet received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or
+            \item Invoked the Attribute Ownership Acquisition If Available service and has subsequently invoked the Attribute Ownership Acquisition service (after which action 1 applies).
+        \end{stdnumlist}
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item If the optional set of attribute designators argument is supplied, the specified attributes are not published by the joined federate for the specified object class.
+        \item If the optional set of attribute designators argument is supplied and there are no longer any attributes of the class that are explicitly published by the joined federate, the HLAprivilegeToDeleteObject class attribute of the specified object class may be implicitly unpublished for the joined federate.
+        \item If the optional set of attribute designators is not supplied, no class attributes of the object class are published by the joined federate.
+        \item If there are no class attributes of the specified class that are still published by the joined federate, it shall not be able to register object instances of the specified object class.
+        \item The joined federate shall no longer own any instance attributes whose corresponding class attributes are no longer published by the joined federate.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Cannot unpublish due to pending attempt to acquire instance attribute ownership.
+        \item The specified class attributes are not available attributes of the specified object class (if the optional set of attribute designators argument is supplied).
+        \item The object class is not defined in the FDD.
+        \item Federate save in progress.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 76 / source PDF page 90 ---
+\begin{compactstdpage}
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt,start=5]
+\item Federate restore in progress.
+\item The federate is not a federation execution member.
+\item Not connected.
+\item RTI internal error.
+    \end{enumerate}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 11.
+        \item Figure 12.
+    \end{stdalphalist}
+
+    \subsection{Publish Interaction Class service}
+
+    The Publish Interaction Class service shall inform the RTI of the classes of interactions that the joined federate will send to the federation execution.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The interaction class is specified in the FDD.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate may now send interactions of the specified class.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The interaction class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 77 / source PDF page 91 ---
+\begin{compactstdpage}
+    \subsection{Unpublish Interaction Class service}
+
+    The Unpublish Interaction Class service shall inform the RTI that the joined federate will no longer send interactions of the specified class.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The interaction class is specified in the FDD.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate may not send interactions of the specified interaction class.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The interaction class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+
+    \subsection{Subscribe Object Class Attributes service}
+
+    The Subscribe Object Class Attributes service shall specify an object class at which the RTI shall notify the joined federate of discovery of object instances. When subscribing to an object class, the joined federate shall also provide a set of class attributes. The values of only the instance attributes that correspond to the specified class attributes, for all object instances discovered as a result of this service invocation, shall be provided to the joined federate from the RTI (via the Reflect Attribute Values \rtiinitiated{} service). The set of class attributes provided shall be a subset of the available attributes of the specified object class.
+
+    A joined federate shall discover an object instance only as being of a class to which the joined federate is subscribed.
+
+    If a joined federate subscribes to multiple locations in an object class inheritance tree, each relevant object instance registration shall result in at most one object instance discovery by the subscribing joined federate.
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 78 / source PDF page 92 ---
+\begin{compactstdpage}
+    The discovered class shall be the registered class if subscribed by the discovering joined federate. Otherwise, the discovered class shall be the closest superclass of the registered class subscribed by the discovering joined federate.
+
+    Each use of this service shall add to the subscriptions specified to the RTI in any previous Subscribe Object Class Attributes service invocation for the same object class. Invoking this service with an empty set of class attributes shall be equivalent to adding no subscriptions for the specified object class.
+
+    The use of the optional passive subscription indicator shall act as follows:
+
+    Each subscribed class attribute is subscribed either actively or passively (but not both actively and passively) at a given object class; and two class attributes that are subscribed at the same object class may be subscribed differently from each other: one active and one passive. Each class attribute specified in a given invocation of the Subscribe Object Class Attributes service shall take on the effect of the optional passive/active subscription indicator supplied (or not supplied) with that service invocation. Invoking the Subscribe Object Class Attributes service with an empty set of class attributes shall not change the active/passive subscription nature of any of the attributes that are subscribed at the specified object class. Each use of the Subscribe Object Class Attributes service shall add to the subscriptions specified to the RTI in any previous Subscribe Object Class Attributes service invocation for the same object class and may change the active/passive nature of previous class attribute subscriptions for that object class.
+
+    If the optional passive subscription indicator argument indicates that this is a passive subscription:
+
+    \begin{stdalphalist}
+        \item The invocation of this service shall not cause the Start Registration For Object Class \rtiinitiated{} service to be invoked at any other joined federate, and
+        \item If this invocation replaces a previous subscription that was active rather than passive, invocation of this service may cause the Stop Registration For Object Class \rtiinitiated{} service to be invoked at one or more other joined federates, depending on the joined federate's publishing status.
+    \end{stdalphalist}
+
+    If the optional passive subscription indicator argument is not present or indicates that this is an active subscription, the invocation of this service may cause the Start Registration For Object Class service to be invoked at one or more other joined federates.
+
+    If the optional maximum update rate is specified, the attributes shall be considered to be subscribed with the corresponding update rate. If no update rate is specified, the attributes shall be considered to be subscribed with the default update rate; in other words, no update rate reduction shall take place.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+        \item Set of attribute designators.
+        \item Optional passive subscription indicator.
+        \item Optional update rate designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The specified object class is defined in the FDD.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 79 / source PDF page 93 ---
+\begin{compactstdpage}
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt,start=5]
+\item The specified class attributes are available attributes of the specified object class.
+\item Federate save not in progress.
+\item Federate restore not in progress.
+    \end{enumerate}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The RTI has been informed of the joined federate's requested subscription.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The specified class attributes are not available attributes of the specified object class.
+        \item The object class is not defined in the FDD.
+        \item Invalid update rate designator.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 11.\item Figure 12.
+    \end{stdalphalist}
+
+    \subsection{Unsubscribe Object Class Attributes service}
+
+    The Unsubscribe Object Class Attributes service can be used in multiple ways. First, it could be used to unsubscribe a whole class and thereby inform the RTI that it shall stop notifying the joined federate of object instance discovery at the specified object class. Second, it could be used to unsubscribe specific class attributes and thereby inform the RTI that the joined federate shall no longer receive values for any of the unsubscribed class attributes corresponding instance attributes.
+
+    If the optional set of attribute designators argument is supplied, only those class attributes shall be unsubscribed for the joined federate. Otherwise, all subscribed class attributes of the specified class shall be unsubscribed for the joined federate. Invoking this service with an empty set of class attributes shall be equivalent to removing no subscriptions for the object class.
+
+    All in-scope instance attributes whose corresponding class attributes are unsubscribed by the service invocation shall go out of scope. Refer to 9.1.1 for an expanded interpretation of this service when a joined federate is using DDM services in conjunction with DM services.
+
+    Invocation of this service, subject to other conditions, may cause an implicit out-of-scope situation for affected instance attributes, i.e., invoking joined federate shall NOT be notified via an invocation of the Attributes Out Of Scope \rtiinitiated{} service invocation when the instance attribute goes out of scope.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+        \item Optional set of attribute designators.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 80 / source PDF page 94 ---
+\begin{compactstdpage}
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The object class is defined in the FDD.
+        \item If the optional set of attribute designators argument is supplied, the specified class attributes are available attributes of the specified object class.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item If the optional set of attribute designators argument is supplied, the specified attributes are not subscribed by the joined federate.
+        \item If the optional set of attribute designators argument is not supplied, no class attributes of the object class are subscribed by the joined federate.
+        \item If no class attributes of the specified class are still subscribed by the joined federate, the joined federate shall receive no subsequent Discover Object Instance service invocations for the specified object class.
+        \item The joined federate shall receive no subsequent Reflect Attribute Values \rtiinitiated{} service invocations for any instance attributes whose corresponding class attributes are no longer subscribed by the joined federate.
+        \item May cause an implicit out-of-scope situation for affected instance attributes at invoking joined federate.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The specified class attributes are not available attributes of the specified object class (if the optional set of attribute designators argument is supplied).
+        \item The object class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 11.\item Figure 12.
+    \end{stdalphalist}
+
+    \subsection{Subscribe Interaction Class service}
+
+    The Subscribe Interaction Class service specifies an interaction class for which the RTI shall notify the joined federate of sent interactions by invoking the Receive Interaction \rtiinitiated{} service at the joined federate.
+
+    When an interaction is received by a joined federate, the received class of the interaction shall be the interaction's sent class, if subscribed. Otherwise, the received class is the closest superclass of the sent class that is subscribed when the interaction is received. Only the parameters from the interaction's received class and its superclasses will be received.
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 81 / source PDF page 95 ---
+\begin{compactstdpage}
+    If a joined federate subscribes to multiple locations in an interaction class inheritance tree, each relevant interaction sent shall result in at most one received interaction in the subscribing joined federate.
+
+    If the optional passive subscription indicator indicates that this is a passive subscription state:
+
+    \begin{stdalphalist}
+        \item The invocation of this service shall not cause the Turn Interactions On \rtiinitiated{} service to be invoked at any other joined federate, and
+        \item If this invocation replaces a previous subscription that was active rather than passive, invocation of this service may cause the Turn Interactions Off \rtiinitiated{} service to be invoked at one or more other joined federates, depending on the joined federate's publishing status.
+    \end{stdalphalist}
+
+    If the optional passive subscription indicator is not present or indicates that this is an active subscription, the invocation of this service may cause the Turn Interactions On \rtiinitiated{} service to be invoked at one or more other joined federates.
+
+    If a joined federate has the Service Reporting Switch Enabled, that joined federate shall not be able to subscribe to the HLAmanager.\allowbreak HLAfederate.\allowbreak HLAreport.\allowbreak HLAreportServiceInvocation interaction class.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.\item Optional passive subscription indicator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The interaction class is defined in the FDD.
+        \item If the specified interaction class designator is the MOM interaction class HLAmanager.\allowbreak HLAfederate.\allowbreak HLAreport.\allowbreak HLAreportServiceInvocation, the federate's service invocations are not being reported via MOM interactions.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The RTI has been informed of the joined federate's requested subscription.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Federate service invocations are being reported via MOM interactions.
+        \item The interaction class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 82 / source PDF page 96 ---
+\begin{compactstdpage}
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+
+    \subsection{Unsubscribe Interaction Class service}
+
+    The Unsubscribe Interaction Class service informs the RTI that it shall no longer notify the joined federate of sent interactions of the specified interaction class. See 9.1.5 for an expanded interpretation of this service when DDM is used.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The interaction class is defined in the FDD.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The RTI shall not deliver interactions of the specified interaction class to the joined federate.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item The interaction class is not defined in the FDD.
+        \item Federate save in progress.
+        \item Federate restore in progress.
+        \item The federate is not a federation execution member.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+
+    \subsection{Start Registration For Object Class \rtiinitiated{} service}
+
+    The Start Registration For Object Class \rtiinitiated{} service shall notify the joined federate that registration of new object instances of the specified object class is advised because at least one of the class attributes that the joined federate is publishing at this object class is actively subscribed to at the specified object class or at a superclass of the specified object class by at least one other joined federate in the federation execution. The joined federate should commence with registration of object instances of the specified class. Generation of the Start Registration For Object Class \rtiinitiated{} service advisory shall be controlled using the Enable/Disable
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 83 / source PDF page 97 ---
+\begin{compactstdpage}
+    Object Class Relevance Advisory Switch services. The Start Registration For Object Class \rtiinitiated{} service shall be invoked only when the Object Class Relevance Advisory Switch is enabled for the joined federate.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item At least one other joined federate in the federation execution is actively subscribed to at least one of the class attributes that the joined federate is publishing at the specified object class, and the object class at which the subscribing federate is actively subscribed to that attribute is the subscribing federate's candidate discovery class of an object instance registered at the specified object class.
+        \item The Object Class Relevance Advisory Switch is enabled for the joined federate.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate has been notified of the requirement to begin registering object instances of the specified object class.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Federate internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsection{Stop Registration For Object Class \rtiinitiated{} service}
+
+    The Stop Registration For Object Class \rtiinitiated{} service shall notify the joined federate that registration of new object instances of the specified object class is not advised because none of the class attributes that the joined federate is publishing at this object class is actively subscribed to at the specified object class or at a superclass of the specified object class by any other joined federate in the federation execution. The joined federate should stop registration of new object instances of the specified class. Generation of the Stop Registration For Object Class \rtiinitiated{} service advisory shall be controlled using the Enable/Disable Object Class Relevance Advisory Switch services. The Stop Registration For Object Class \rtiinitiated{} service shall be invoked only when the Object Class Relevance Advisory Switch is enabled for the joined federate.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Object class designator.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 84 / source PDF page 98 ---
+\begin{compactstdpage}
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The joined federate is publishing the object class.
+        \item None of the class attributes that the joined federate is publishing at the specified object class is actively subscribed to by any other joined federate in the federation execution at what would be the subscribing federate's candidate discovery class of an object instance registered at the specified object class.
+        \item The Object Class Relevance Advisory Switch is enabled for the joined federate.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate has been notified of the requirement to stop registration of object instances of the specified object class.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Federate internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsection{Turn Interactions On \rtiinitiated{} service}
+
+    The Turn Interactions On \rtiinitiated{} service shall notify the joined federate that the specified class of interactions is relevant because it or a superclass is actively subscribed to by at least one other joined federate in the federation execution. The joined federate should commence with the federation-agreed-upon scheme for sending interactions of the specified class. Generation of the Turn Interactions On \rtiinitiated{} service advisory shall be controlled using the Enable/Disable Interaction Relevance Advisory Switch services. The Turn Interactions On \rtiinitiated{} service shall be invoked only when the Interaction Relevance Advisory Switch is enabled for the joined federate.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The joined federate is publishing the interaction class.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 85 / source PDF page 99 ---
+\begin{compactstdpage}
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt,start=4]
+\item Some other joined federate is actively subscribed to the interaction class or to a superclass of the interaction class.
+\item The Interaction Relevance Advisory Switch is enabled for the joined federate.
+\item Federate save not in progress.
+\item Federate restore not in progress.
+    \end{enumerate}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate has been notified that some other joined federate in the federation execution is subscribed to the interaction class.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Federate internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+
+    \subsection{Turn Interactions Off \rtiinitiated{} service}
+
+    The Turn Interactions Off \rtiinitiated{} service shall indicate to the joined federate that the specified class of interactions is not relevant because it or a superclass is not actively subscribed to by any other joined federate in the federation execution. Generation of the Turn Interactions Off \rtiinitiated{} service advisory shall be controlled using the Enable/Disable Interaction Relevance Advisory Switch services. The Turn Interactions Off \rtiinitiated{} service shall be invoked only when the Interaction Relevance Advisory Switch is enabled for the joined federate.
+
+    \subsubsection{Supplied arguments}
+    \begin{stdalphalist}
+        \item Interaction class designator.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+    \begin{stdalphalist}
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item The joined federate is publishing the interaction class.
+        \item No other joined federate is actively subscribed to the interaction class or to a superclass of the interaction class.
+        \item The Interaction Relevance Advisory Switch is enabled for the joined federate.
+        \item Federate save not in progress.
+        \item Federate restore not in progress.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+    \begin{stdalphalist}
+        \item The joined federate has been notified that no other joined federate in the federation execution is subscribed to the interaction class.
+    \end{stdalphalist}
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 86 / source PDF page 100 ---
+\begin{compactstdpage}
+    \subsubsection{Exceptions}
+    \begin{stdalphalist}
+        \item Federate internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+    \begin{stdalphalist}
+        \item Figure 13.
+    \end{stdalphalist}
+\end{compactstdpage}

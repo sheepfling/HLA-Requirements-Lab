@@ -10,30 +10,30 @@
 \RequirePackage[normalem]{ulem}
 
 \newfontfamily\HLAArial{Arimo}[
-  Ligatures=NoCommon,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic
+    Ligatures=NoCommon,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
 ]
 \newfontfamily\HLATimes{Tinos}[
-  Ligatures=NoCommon,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic
+    Ligatures=NoCommon,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
 ]
 \newfontfamily\HLACalibri{Carlito}[
-  Ligatures=NoCommon,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic
+    Ligatures=NoCommon,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
 ]
 \newfontfamily\HLAMontserrat{Noto Sans}[
-  Ligatures=NoCommon,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold
+    Ligatures=NoCommon,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold
 ]
 \newfontfamily\HLASymbol{Noto Sans}[Ligatures=NoCommon]
 \newfontfamily\HLAFallback{Noto Serif}[Ligatures=NoCommon]
@@ -50,25 +50,25 @@
 
 % Coordinate-backed fidelity-oracle compatibility.
 \newcommand{\HLABeginPage}{%
-  \thispagestyle{empty}%
-  \null%
-  \begin{tikzpicture}[
-    remember picture,
-    overlay,
-    shift={(current page.north west)},
-    x=1bp,
-    y=-1bp
-  ]%
+    \thispagestyle{empty}%
+    \null%
+    \begin{tikzpicture}[
+        remember picture,
+        overlay,
+        shift={(current page.north west)},
+        x=1bp,
+        y=-1bp
+    ]%
 }
 
 \newcommand{\HLAEndPage}{%
-  \end{tikzpicture}%
-  \newpage%
+    \end{tikzpicture}%
+    \newpage%
 }
 
 \newcommand{\HLAUnofficialNotice}{%
-  \HLACalibri\fontsize{6.8bp}{7.8bp}\selectfont
-  Unofficial LaTeX recreation; not an IEEE publication.%
+    \HLACalibri\fontsize{6.8bp}{7.8bp}\selectfont
+    Unofficial LaTeX recreation; not an IEEE publication.%
 }
 
 % Stable identifiers remain explicit in semantic source and manifests. PDF
@@ -79,7 +79,7 @@
 \HLAStableAnchorsfalse
 \newcommand{\HLAEnableStableAnchors}{\HLAStableAnchorstrue}
 \newcommand{\HLAStableID}[1]{%
-  \ifHLAStableAnchors\hypertarget{#1}{}\fi
+    \ifHLAStableAnchors\hypertarget{#1}{}\fi
 }
 
 \newcommand{\HLABodyFont}{\HLATimes\fontsize{9.96bp}{12bp}\selectfont}
@@ -87,7 +87,7 @@
 \newcommand{\HLAFootnoteFont}{\HLATimes\fontsize{7.15bp}{8.3bp}\selectfont}
 \newcommand{\HLAContentsFont}{\HLATimes\fontsize{9.96bp}{12bp}\selectfont}
 \newcommand{\HLASup}[1]{%
-  \raisebox{0.72ex}{\HLATimes\fontsize{6bp}{6bp}\selectfont #1}%
+    \raisebox{0.72ex}{\HLATimes\fontsize{6bp}{6bp}\selectfont #1}%
 }
 
 
@@ -96,82 +96,84 @@
 % Modern math shapes after nested geometric scaling, which creates avoidable
 % font-substitution warnings in the dense data-representation tables.
 \NewDocumentCommand{\HLATextSup}{m}{%
-  \raisebox{0.62ex}{\scalebox{0.67}{#1}}%
+    \raisebox{0.62ex}{\scalebox{0.67}{#1}}%
 }
 \NewDocumentCommand{\HLATextSub}{m}{%
-  \raisebox{-0.24ex}{\scalebox{0.67}{#1}}%
+    \raisebox{-0.24ex}{\scalebox{0.67}{#1}}%
 }
 
 \newcommand{\HLAStandardFooter}[1]{%
-  % Emit page furniture before semantic body content so PDF extraction order
-  % remains consistent with the reference publication.
-  \noindent\smash{\makebox[0pt][l]{%
-    \begin{tikzpicture}[
-      remember picture,
-      overlay,
-      shift={(current page.north west)},
-      x=1bp,
-      y=-1bp
-    ]
-      \node[anchor=base,inner sep=0bp,outer sep=0bp]
+% Emit page furniture before semantic body content so PDF extraction order
+% remains consistent with the reference publication.
+    \noindent\smash{\makebox[0pt][l]{%
+        \begin{tikzpicture}[
+            remember picture,
+            overlay,
+            shift={(current page.north west)},
+            x=1bp,
+            y=-1bp
+        ]
+        \node[anchor=base,inner sep=0bp,outer sep=0bp]
         at (306,758.16)
-        {{\HLATimes\fontsize{9.96bp}{11.45bp}\selectfont #1}};
-      \node[anchor=base,inner sep=0bp,outer sep=0bp]
+            {{\HLATimes\fontsize{9.96bp}{11.45bp}\selectfont #1}};
+        \node[anchor=base,inner sep=0bp,outer sep=0bp]
         at (306,768.84)
-        {{\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont Copyright © 2025 IEEE. All rights reserved.}};
-    \end{tikzpicture}%
-  }}\par\vspace{-\baselineskip}%
+            {{\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont Copyright \textcopyright 2025 IEEE. All rights reserved.}};
+        \end{tikzpicture}%
+    }}\par\vspace{-\baselineskip}%
 }
 
 % Fixed-layout front matter occasionally contains independent semantic blocks
 % whose visual order differs from the PDF content-stream order. This helper
 % positions a whole block; individual words and lines remain ordinary TeX.
 \NewDocumentCommand{\HLAFrontPlacedBlock}{m m m +m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,
-    overlay,
-    shift={(current page.north west)},
-    x=1bp,
-    y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,
+        overlay,
+        shift={(current page.north west)},
+        x=1bp,
+        y=-1bp
+    ]
     \node[anchor=north west,inner sep=0bp,outer sep=0bp,text width=#3bp]
-      at (#1,#2) {\begin{minipage}[t]{#3bp}\setlength{\parindent}{0pt}#4\end{minipage}};
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    at (#1,#2) {\begin{minipage}[t]{#3bp}
+                    \setlength{\parindent}{0pt}#4
+    \end{minipage}};
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \NewDocumentEnvironment{HLASemanticPage}{O{}}{%
-  \thispagestyle{empty}%
-  \IfBlankF{#1}{\HLAStandardFooter{#1}}%
-  \HLABodyFont%
-  \justifying%
-  \setlength{\parindent}{0pt}%
-  \hyphenpenalty=10000%
-  \exhyphenpenalty=10000%
-  \pretolerance=10000%
-  \tolerance=10000%
-  \hbadness=10000%
-  \setlength{\emergencystretch}{1em}%
+    \thispagestyle{empty}%
+    \IfBlankF{#1}{\HLAStandardFooter{#1}}%
+    \HLABodyFont%
+    \justifying%
+    \setlength{\parindent}{0pt}%
+    \hyphenpenalty=10000%
+    \exhyphenpenalty=10000%
+    \pretolerance=10000%
+    \tolerance=10000%
+    \hbadness=10000%
+    \setlength{\emergencystretch}{1em}%
 }{%
-  \par\newpage%
+    \par\newpage%
 }
 
 \newcommand{\HLAFrontHeading}[1]{%
-  {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{13.98bp}{16.08bp}\selectfont\bfseries #1\par\endgroup}%
-  \vspace{12.3bp}%
+        {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{13.98bp}{16.08bp}\selectfont\bfseries #1\par\endgroup}%
+    \vspace{12.3bp}%
 }
 
 \newcommand{\HLAFrontSubheading}[1]{%
-  \vspace{3.7bp}%
-  {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{10.98bp}{12.63bp}\selectfont\bfseries #1\par\endgroup}%
-  \vspace{9.7bp}%
+    \vspace{3.7bp}%
+    {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{10.98bp}{12.63bp}\selectfont\bfseries #1\par\endgroup}%
+    \vspace{9.7bp}%
 }
 
 \newcommand{\HLAFrontMinorHeading}[1]{%
-  \vspace{2.2bp}%
-  {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{9.96bp}{11.45bp}\selectfont\bfseries #1\par\endgroup}%
-  \vspace{7.5bp}%
+    \vspace{2.2bp}%
+    {\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\HLAArial\fontsize{9.96bp}{11.45bp}\selectfont\bfseries #1\par\endgroup}%
+    \vspace{7.5bp}%
 }
 
 \newcommand{\HLAPara}[1]{#1\par\vspace{11.7bp}}
@@ -182,24 +184,26 @@
 % a complete logical block (heading, paragraph, definition, list, or footnote),
 % never a word-level facsimile fragment.
 \NewDocumentCommand{\HLAClausePlacedBlock}{m m m +m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \node[anchor=north west,inner sep=0bp,outer sep=0bp,text width=#3bp]
-      at (#1,#2) {\begin{minipage}[t]{#3bp}\setlength{\parindent}{0pt}#4\end{minipage}};
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    at (#1,#2) {\begin{minipage}[t]{#3bp}
+                    \setlength{\parindent}{0pt}#4
+    \end{minipage}};
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \NewDocumentCommand{\HLAClauseRule}{m m m m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \draw[line width=#4bp] (#1,#2) -- ++(#3,0);
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \newcommand{\HLAClauseHeading}[1]{{\HLAArial\fontsize{13.98bp}{16.08bp}\selectfont\bfseries\mbox{#1}\par}}
@@ -209,61 +213,61 @@
 \newcommand{\HLAClauseParagraph}[1]{#1\par}
 \newcommand{\HLAClauseFootnote}[1]{{\HLAFootnoteFont #1\par}}
 \newcommand{\HLAClauseRunningHeader}{%
-  \HLAClausePlacedBlock{158.6}{23.4}{295}{%
-    \centering\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont
-    \textbf{IEEE Std 1516.2-2025}\par
-    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)—\par
-    Object Model Template (OMT) Specification\par
-  }%
+    \HLAClausePlacedBlock{158.6}{23.4}{295}{%
+        \centering\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont
+        \textbf{IEEE Std 1516.2-2025}\par
+        IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)—\par
+        Object Model Template (OMT) Specification\par
+    }%
 }
 
 % Clause pages need the running header to precede the printed-page/copyright
 % furniture in PDF content-stream order. This preserves source extraction order
 % while leaving all furniture at its fixed visual coordinates.
 \NewDocumentEnvironment{HLAClauseSemanticPage}{m}{%
-  \begin{HLASemanticPage}%
-  \HLAClauseRunningHeader%
-  \HLAStandardFooter{#1}%
+    \begin{HLASemanticPage}%
+    \HLAClauseRunningHeader%
+    \HLAStandardFooter{#1}%
 }{%
-  \end{HLASemanticPage}%
+    \end{HLASemanticPage}%
 }
 
 \NewDocumentCommand{\HLAPlacedImage}{m m m m m}{%
-  \par\noindent
-  \begin{tikzpicture}[
-    remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
-  ]
+    \par\noindent
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
     \node[anchor=north west,inner sep=0bp,outer sep=0bp]
-      at (#1,#2) {\includegraphics[width=#3bp,height=#4bp]{#5}};
-  \end{tikzpicture}%
-  \par\vspace{-\baselineskip}%
+    at (#1,#2) {\includegraphics[width=#3bp,height=#4bp]{#5}};
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
 }
 
 \newcommand{\HLAClauseDashItem}[1]{%
-  \begingroup
-  \hfuzz=2.2pt%
-  \setlength{\parindent}{0pt}%
-  \hangindent=22bp%
-  \hangafter=1%
-  \makebox[22bp][l]{—}#1\par
-  \endgroup
+    \begingroup
+    \hfuzz=2.2pt%
+    \setlength{\parindent}{0pt}%
+    \hangindent=22bp%
+    \hangafter=1%
+    \makebox[22bp][l]{—}#1\par
+    \endgroup
 }
 
 \newcommand{\HLAClauseLabeledItem}[2]{%
-  \begingroup
-  \hfuzz=2.2pt%
-  \setlength{\parindent}{0pt}%
-  \hangindent=22bp%
-  \hangafter=1%
-  \makebox[22bp][l]{#1}#2\par
-  \endgroup
+    \begingroup
+    \hfuzz=2.2pt%
+    \setlength{\parindent}{0pt}%
+    \hangindent=22bp%
+    \hangafter=1%
+    \makebox[22bp][l]{#1}#2\par
+    \endgroup
 }
 
 % Abbreviation and acronym rows use a stable 50 bp label column. This
 % reproduces the source alignment while retaining ordinary extractable text.
 \NewDocumentCommand{\HLAAcronymRow}{m m}{%
-  \begingroup
-  \setlength{\parindent}{0pt}%
-  \makebox[50bp][l]{#1}#2\par
-  \endgroup
+    \begingroup
+    \setlength{\parindent}{0pt}%
+    \makebox[50bp][l]{#1}#2\par
+    \endgroup
 }

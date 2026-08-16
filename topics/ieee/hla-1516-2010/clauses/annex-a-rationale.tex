@@ -1,0 +1,183 @@
+% Annex A: source PDF pages 35--37 / printed pages 23--25.
+% Fidelity pass 04: page-local spacing and source-line membership are tuned
+% against the supplied IEEE PDF while retaining live, semantic LaTeX text.
+
+\newpage
+\begingroup
+\addtolength{\topskip}{1.4pt}
+% Source page 35 title stack.  The shared annex macros were intentionally kept
+% unchanged because Annex B already matches its source page exactly.
+\annexdesignation{A}
+\vspace{-6.9pt}
+\annexstatus{informative}
+\vspace{-7.4pt}
+\annextitle{Rationale}
+\vspace{-8.0pt}
+\annexsection{A.1 Federation rules}
+\vspace{-2.3pt}
+
+\annexsubsection{A.1.1 Rationale for Rule 1}
+
+\textit{Federations shall have an HLA FOM, documented in accordance with the HLA OMT.}
+
+\vspace{6.1pt}
+The HLA is domain-independent and can be used to support federations for a wide variety of uses. The\linebreak
+formalization of agreements for information exchange is an important element of the HLA. By formalizing\linebreak
+the development of these agreements and requiring that the results be documented in a common format, the\linebreak
+HLA provides the means for understanding the key elements of a federation and for assisting in the reuse of\linebreak
+the federation, in whole or in part. Such reuse is a goal of the HLA. In addition, the FOM provides the basis\linebreak
+for some of the data used to initialize the RTI for the federation.
+
+\vspace{4.5pt}
+\annexsubsection{A.1.2 Rationale for Rule 2}
+
+\textit{In a federation, all simulation-associated object instance representation shall be in the federates, not in the\linebreak
+RTI.}
+
+\vspace{6.1pt}
+One basic idea behind the HLA is to separate federate-specific functionality from general-purpose\linebreak
+supporting infrastructure. A necessary part of this feature is that the supporting infrastructure have no\linebreak
+information about the objects being simulated. If the opposite were allowed, and information about a given\linebreak
+application were stored in the supporting infrastructure, that infrastructure would by definition be tailored\linebreak
+for that specific application and no longer be general purpose. Federate functionality was separated from\linebreak
+federation support services for several reasons. First, the RTI services are intended to be the basic set of\linebreak
+broadly reusable capabilities needed to support federations across the widest range of users. These are\linebreak
+essentially coordination and management services supporting federation operations, time coordination, data\linebreak
+distribution, etc. Because they apply across a range of HLA applications, these services can be provided\linebreak
+most cost effectively as services to the applications rather than as components of the applications. Second,\linebreak
+separation of the RTI services has the added advantage of freeing the federates to focus on their primary\linebreak
+objective of representing object instances to meet the needs of a user or application domain. This approach\linebreak
+frees the developers of federates from investing time and resources in these basic common services.
+
+\vspace{4.6pt}
+\annexsubsection{A.1.3 Rationale for Rule 3}
+
+\textit{During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.}
+
+\vspace{6.1pt}
+The reason for providing common RTI services to federations is to provide in common the needed basic\linebreak
+functionality to permit coherency in data exchange among the joined federates. If a federation were to\linebreak
+exchange data representing state changes of shared object instances or interactions outside of the RTI service\linebreak
+suite, the coherency of the distributed application would be violated.
+
+\endgroup
+\newpage
+\begingroup
+\addtolength{\topskip}{-0.7pt}
+\annexsubsection{A.1.4 Rationale for Rule 4}
+
+\textit{During a federation execution, joined federates shall interact with the RTI in accordance with the HLA\linebreak
+interface specification.}
+
+\vspace{6.1pt}
+By requiring a standardized, common interface between federates and the RTI, along with a common\linebreak
+application programmer's interface (API), the HLA allows for independent development and\linebreak
+implementation of federate applications. Federate developers can work independently and develop\linebreak
+interfaces to the RTI without regard to RTI implementation, and RTI developments can proceed without\linebreak
+explicit consideration of federate development. The separation of the interfaces from the requirements for\linebreak
+federate data exchange allows for the reuse of a common interface specification across the broad spectrum\linebreak
+of distributed M\&S applications, with specific application needs tailored through the FOM mechanism.
+
+\vspace{4.5pt}
+\annexsubsection{A.1.5 Rationale for Rule 5}
+
+\textit{During a federation execution, an instance attribute shall be owned by at most one joined federate at any\linebreak
+given time.}
+
+\vspace{6.1pt}
+The HLA also provides the mechanism during federation execution to dynamically transfer ownership of an\linebreak
+instance attribute from one joined federate to another or for a joined federate to unconditionally divest its\linebreak
+ownership of an instance attribute. In this second case, the instance attribute becomes ``unowned'' by all\linebreak
+joined federates, hence the rule explicitly states that ``an instance attribute shall be owned by at most one\linebreak
+joined federate at any given time.'' Joined federates can request ownership of ``unowned'' instance attributes.\linebreak
+By defining ownership at the instance attribute level and providing the tools to hand off ownership during\linebreak
+federation execution, the HLA provides a flexible tool set for using various combinations of joined federates\linebreak
+to meet user needs.
+
+\vspace{10.8pt}
+\annexsection{A.2 Federate rules}
+
+\vspace{-2.4pt}
+\annexsubsection{A.2.1 Rationale for Rule 6}
+
+\textit{Federates shall have an HLA SOM, documented in accordance with the HLA OMT.}
+
+\vspace{6.1pt}
+A major goal of the HLA is to support interoperability and reuse of simulations. The HLA provides this\linebreak
+support by providing for reuse at the level of simulations (or, more generally, federates) and allowing access\linebreak
+to the representations in those simulations.
+
+\vspace{6.1pt}
+Lack of cost-effective access to information about the object representations available in federates inhibits\linebreak
+reuse. The requirement for a SOM addresses information access by requiring federates to document the\linebreak
+minimum essential, salient aspects of their capabilities to allow for easy identification of the federates'\linebreak
+potential application in new federations. Although the full set of information required by a potential user\linebreak
+will go well beyond the SOM contents, providing easy access to characterizations of simulation based on\linebreak
+reuse potential will enable users to decide more effectively whether to invest in further assessment of the\linebreak
+simulations to their applications. There are certain circumstances, such as dynamically configured passive\linebreak
+subscribers, where a federate's SOM is based on the current FOM.
+
+\endgroup
+\newpage
+\begingroup
+\addtolength{\topskip}{-1.05pt}
+\annexsubsection{A.2.2 Rationale for Rule 7}
+
+\textit{Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,\linebreak
+as specified in their SOMs.}
+
+\vspace{6.1pt}
+By designing federates from the outset with the ability to present internal objects/attributes/interactions as\linebreak
+public, the mechanisms for reuse of the federate will be in place from the start.
+
+\vspace{4.5pt}
+\annexsubsection{A.2.3 Rationale for Rule 8}
+
+\textit{Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a\linebreak
+federation execution, as specified in their SOMs.}
+
+\vspace{6.1pt}
+By building in the functionality to transfer and accept ownership of instance attributes, federates designed in\linebreak
+accordance with the HLA provide some of the basic structural tools to become federates in the widest\linebreak
+possible range of future federations. With this capability, it is possible to allow a federate designed for one\linebreak
+purpose to be coupled with one designed for another purpose to meet a new requirement.
+
+\vspace{4.5pt}
+\annexsubsection{A.2.4 Rationale for Rule 9}
+
+\textit{Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of\linebreak
+instance attributes, as specified in their SOMs.}
+
+\vspace{6.1pt}
+By designing and building in the capability to vary the conditions under which they can export instance\linebreak
+attributes, federates designed in accordance with the HLA provide some of the basic structural tools to\linebreak
+become federates in the widest possibly range of future federations.
+
+\vspace{4.5pt}
+\annexsubsection{A.2.5 Rationale for Rule 10}
+
+\textit{Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with\linebreak
+other members of a federation.}
+
+\vspace{6.1pt}
+The HLA time management structure is intended to support interoperability among federates that may rely\linebreak
+on different internal concepts of time. For example, some federates might operate without any explicit\linebreak
+notion of time or passage of time; other federates may need to run faster than real time; and some federates,\linebreak
+as is the case with some discrete event simulations, might rely upon a scrupulously coordinated causal order\linebreak
+of events throughout the federation.
+
+\vspace{6.1pt}
+The HLA provides a single, unifying approach to time management, in that it offers a ``toolbox'' of services\linebreak
+that support (not guarantee) federations in managing their event synchronization in a way that will meet both\linebreak
+the needs of the federation and the range of internal time management strategies of the member federates.
+
+\vspace{6.1pt}
+Different categories of federates typically use a subset of an RTI's services to implement their mechanisms.\linebreak
+Federates do not explicitly indicate to the RTI how time flow is being managed (e.g., time stepped, event\linebreak
+driven, external time synchronization, independent advance). Federates for which passage of time is implicit\linebreak
+may not need to use the services described in Clause 8 of IEEE Std 1516.1-2010. However, a federate must\linebreak
+ensure that its internal mechanisms permit coherent operation of the time management paradigm (or\linebreak
+paradigms) used in the federation. Some of the considerations that occur when a federation combines\linebreak
+multiple, differing time management paradigms are discussed in 8.1 of IEEE Std 1516.1-2010.
+
+\endgroup

@@ -1,0 +1,21 @@
+% Source PDF page 17; standard page 5. Opening of Clause 3 only in tranche 1.
+
+\clause{3. Definitions, acronyms, and abbreviations}
+\vspace{-9pt}\subclause{3.1 Definitions}\vspace{-9pt}
+For the purposes of this document, the following terms and definitions apply. The \textit{IEEE Standards Dictionary: Glossary of Terms \& Definitions} should be referenced for terms not defined in this clause.\footnote{The \textit{IEEE Standards Dictionary: Glossary of Terms \& Definitions} is available at \url{http://shop.ieee.org/}.}
+
+\defentry{accuracy}{The measure of the maximum deviation of an attribute or a parameter value in the simulation or federation from reality or some other chosen standard or referent.}
+
+\defentry{active subscription}{A request to the runtime infrastructure (RTI) for the kinds of data (class attributes as well as interactions) that the joined federate is currently interested in receiving. The RTI uses these data along with publication data received from other joined federates to support services, such as}
+\begin{hlalist}
+    \item \hlaService{Start/Stop Registration}
+    \item \hlaService{Turn On/Off Updates}
+    \item \hlaService{Turn On/Off Interactions}
+\end{hlalist}
+The RTI also uses the subscription (and publication) data to determine how to route data to the joined federates that require that data.
+
+\defentry{attribute}{A named characteristic of an object class or object instance. \hlaSeeAlso{\hlaTermRef{class attribute}; \hlaTermRef{instance attribute}.}}
+
+\defentry{attribute ownership}{The property of an instance attribute that gives a joined federate the capability to supply values for that instance attribute to its federation execution. \hlaSeeAlso{\hlaTermRef{instance attribute}.}}
+
+\defentry{available attributes}{The set of declared attributes of an object class in union with the set of inherited attributes of that object class.}

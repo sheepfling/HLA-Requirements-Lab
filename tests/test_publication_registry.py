@@ -5,8 +5,9 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from scripts.build import publication_targets
-from scripts.publication_registry import (
+from hla_lab.build.build import publication_targets
+
+from hla_lab.publication.publication_registry import (
     load_publication_registry,
     load_release_manifest,
     publication_projects,
@@ -16,13 +17,15 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "data" / "publications.json"
 RELEASE_PATH = ROOT / "data" / "release" / "documents.json"
 
-
 class PublicationRegistryTests(unittest.TestCase):
     def test_hla_publications_have_explicit_and_disjoint_project_membership(self) -> None:
         registry = load_publication_registry(REGISTRY_PATH)
         expected = {
+            "hla-unofficial-faithful-reconstruction-2010": "faithful-reconstruction",
             "hla-unofficial-faithful-reconstruction-2025": "faithful-reconstruction",
+            "hla-hierarchy-reconstruction-2010": "hierarchy-reconstruction",
             "hla-hierarchy-reconstruction-2025": "hierarchy-reconstruction",
+            "hla-rti-compliance-requirements-2010": "requirements-publication",
             "hla-rti-compliance-requirements-2025": "requirements-publication",
         }
         self.assertEqual({item.id: item.kind for item in registry.publications}, expected)
@@ -45,7 +48,6 @@ class PublicationRegistryTests(unittest.TestCase):
                     tuple(item.root for item in projects),
                 )
                 self.assertTrue(all((path / "build.py").is_file() for path in roots))
-
 
 if __name__ == "__main__":
     unittest.main()

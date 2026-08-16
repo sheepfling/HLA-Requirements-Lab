@@ -1,0 +1,177 @@
+\begin{tikzpicture}[
+    x=0.011625cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f4 stroke/.style={draw=black,line width=.32pt},
+    f4 transition/.style={draw=black,line width=.40pt,-{Stealth[length=3.0pt,width=2.8pt]}},
+    f4 partition/.style={draw=black,line width=.28pt,dash pattern=on 3.0pt off 2.5pt},
+    f4 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{4.45}{4.85}\selectfont,align=center,inner sep=0pt},
+    f4 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.90}{4.28}\selectfont,align=center,inner sep=.35pt,fill=white},
+    f4 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.55}{3.90}\selectfont,align=center,inner sep=.30pt,fill=white},
+    f4 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.95}{4.32}\selectfont,align=center,inner sep=0pt},
+    f4 title/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{7.35}{8.00}\selectfont,align=center,inner sep=0pt},
+    f4 caption/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{7.05}{7.72}\selectfont,align=center,inner sep=0pt}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % The source image is 960 x 720 pixels, but the printed PDF scales its
+    % horizontal and vertical axes differently. The coordinate system above
+    % follows those source pixels. This small shift reproduces the source page
+    % position after the figure is resized by \stdnativefigure.
+    \begin{scope}[xshift=-0.174375cm]
+
+        % F04-S00: Joined Federate outer composite and its two orthogonal regions.
+        \draw[f4 stroke]
+        (130,20) -- (806,20)
+        .. controls (852,20) and (888,55) .. (888,100)
+        -- (888,584)
+        .. controls (888,630) and (850,664) .. (803,664)
+        -- (133,664)
+        .. controls (85,664) and (47,628) .. (47,583)
+        -- (47,101)
+        .. controls (47,56) and (85,20) .. (130,20)
+        -- cycle;
+        \draw[f4 stroke] (48,74) -- (883,74);
+        \draw[f4 partition] (703,74) -- (703,664);
+        \node[f4 title] at (468,47) {Joined Federate};
+
+        % F04-S01: Active Federate composite.
+        \draw[f4 stroke,rounded corners=7pt] (186,167) rectangle (391,481);
+        \fill[white] (253,143) rectangle (342,168);
+        \draw[f4 stroke] (253,143) rectangle (342,168);
+        \node[f4 tab] at (297.5,156) {Active Federate};
+
+        % F04-S02: Active.
+        \draw[f4 stroke,rounded corners=1.6pt] (208,214) rectangle (304,270);
+        \node[f4 text] at (256,242) {Active};
+
+        % F04-S03: Restore Request Pending.
+        \draw[f4 stroke,rounded corners=1.6pt] (200,317) rectangle (296,373);
+        \node[f4 text] at (248,345) {Restore\\Request\\Pending};
+
+        % F04-S04: Waiting for Restore to Begin.
+        \draw[f4 stroke,rounded corners=1.6pt] (203,425) rectangle (276,473);
+        \node[f4 text] at (239.5,449) {Waiting for\\Restore\\to Begin};
+
+        % F04-S05: Federate Save in Progress composite.
+        \draw[f4 stroke,rounded corners=7pt] (512,175) rectangle (696,480);
+        \fill[white] (610,175) rectangle (696,207);
+        \draw[f4 stroke] (610,175) rectangle (696,207);
+        \node[f4 tab] at (653,191) {Federate Save\\in Progress};
+
+        % F04-S06: Instructed to Save.
+        \draw[f4 stroke,rounded corners=1.6pt] (545,225) rectangle (617,265);
+        \node[f4 text] at (581,245) {Instructed\\to Save};
+
+        % F04-S07: Saving.
+        \draw[f4 stroke,rounded corners=1.6pt] (615,343) rectangle (688,384);
+        \node[f4 text] at (651.5,363.5) {Saving};
+
+        % F04-S08: Waiting for Federation to Save.
+        \draw[f4 stroke,rounded corners=1.6pt] (528,416) rectangle (600,465);
+        \node[f4 text] at (564,440.5) {Waiting for\\Federation\\to Save};
+
+        % F04-S09: Federate Restore In Progress composite.
+        \draw[f4 stroke,rounded corners=7pt] (264,503) rectangle (648,656);
+        \fill[white] (551,503) rectangle (648,535);
+        \draw[f4 stroke] (551,503) rectangle (648,535);
+        \node[f4 tab] at (599.5,519) {Federate Restore\\In Progress};
+
+        % F04-S10: Waiting for Federation to Restore.
+        \draw[f4 stroke,rounded corners=1.6pt] (279,511) rectangle (352,560);
+        \node[f4 text] at (315.5,535.5) {Waiting for\\Federation\\to Restore};
+
+        % F04-S11: Restoring.
+        \draw[f4 stroke,rounded corners=1.6pt] (345,607) rectangle (417,648);
+        \node[f4 text] at (381,627.5) {Restoring};
+
+        % F04-S12: Prepared to Restore.
+        \draw[f4 stroke,rounded corners=1.6pt] (537,610) rectangle (609,650);
+        \node[f4 text] at (573,630) {Prepared\\to Restore};
+
+        % F04-S13 / F04-S14: Normal-activity region states.
+        \draw[f4 stroke,rounded corners=1.6pt] (729,249) rectangle (856,314);
+        \node[f4 text] at (792.5,281.5) {Normal Activity\\Permitted};
+        \draw[f4 stroke,rounded corners=1.6pt] (730,501) rectangle (858,565);
+        \node[f4 text] at (794,533) {Normal Activity\\Not Permitted};
+
+        % F04-P01: outer left-region initial state.
+        \fill (218,145) circle[radius=7.2];
+        % F04-E01:
+        \draw[f4 transition] (222,151) -- (232,167);
+
+        % F04-P02: Active Federate nested initial state.
+        \fill (198,190) circle[radius=6.3];
+        % F04-E02:
+        \draw[f4 transition] (202,195) -- (214,219);
+
+        % F04-P03: shallow history state.
+        \draw[f4 stroke] (377,201) circle[radius=12.5];
+        \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{7.65}{7.95}\selectfont,inner sep=0pt] at (377,201) {H};
+
+        % F04-E03: Request Federation Save, Active Federate boundary to H.
+        \draw[f4 transition] (260,168) .. controls (268,188) and (316,198) .. (364,201);
+        \node[f4 small] at (314,184) {Request\\Federation\\Save};
+
+        % F04-E04: Active to Restore Request Pending.
+        \draw[f4 transition] (217,270) -- (217,317);
+        \node[f4 tiny] at (190,292) {Request\\Federation\\Restore};
+
+        % F04-E05: failed restore request confirmation, back to Active.
+        \draw[f4 transition] (280,317) -- (280,270);
+        \node[f4 tiny] at (329,292) {Confirm Federation\\Restoration Request \textdagger{}\\(failure)};
+
+        % F04-E06: successful restore request confirmation.
+        \draw[f4 transition] (256,373) -- (256,425);
+        \node[f4 tiny] at (257,399) {Confirm Federation\\Restoration Request \textdagger{}\\(success)};
+
+        % F04-E07: Federation Saved callback, save composite to Active Federate boundary.
+        \draw[f4 transition] (512,223) -- (391,223);
+        \node[f4 small] at (451.5,214) {Federation Saved \textdagger{}};
+
+        % F04-E08: Initiate Federate Save callback and time-management guard.
+        \draw[f4 transition] (391,256) -- (545,256);
+        \node[f4 tiny,anchor=north] at (468,270) {Initiate Federate Save \textdagger{}\\{}[ in \textquotedbl Not Constrained\textquotedbl{} $\vee$\\ in \textquotedbl Time Advancing\textquotedbl{} ]};
+
+        % F04-E09: Federate Save Begun.
+        \draw[f4 transition] (602,265) -- (644,343);
+        \node[f4 small] at (631,304) {Federate Save\\Begun};
+
+        % F04-E10: Federate Save Complete.
+        \draw[f4 transition] (651,384) -- (600,423);
+        \node[f4 small] at (632,405) {Federate Save\\Complete};
+
+        % F04-E11: Federation Restore Begun callback.
+        \draw[f4 transition] (391,460) -- (581,610);
+        \node[f4 small] at (478,528) {Federation\\Restore Begun \textdagger{}};
+
+        % F04-E12: Initiate Federate Restore callback.
+        \draw[f4 transition] (537,632) -- (417,632);
+        \node[f4 small] at (477,617) {Initiate\\Federate Restore \textdagger{}};
+
+        % F04-E13: Federate Restore Complete.
+        \draw[f4 transition] (381,607) -- (348,560);
+        \node[f4 small] at (352,582) {Federate\\Restore Complete};
+
+        % F04-E14: Federation Restored callback, restore composite to Active Federate boundary.
+        \draw[f4 transition] (264,596) .. controls (236,595) and (229,548) .. (229,481);
+        \node[f4 small] at (205,544) {Federation\\Restored \textdagger{}};
+
+        % F04-P04: right-region initial state.
+        \fill (768,217) circle[radius=7.5];
+        % F04-E15:
+        \draw[f4 transition] (773,224) -- (785,249);
+
+        % F04-E16: in Active Federate -> Normal Activity Permitted.
+        \draw[f4 transition] (752,501) -- (752,314);
+        \node[f4 small] at (752,410) {[ in \textquotedbl Active\\Federate\textquotedbl{} ]};
+
+        % F04-E17: not in Active Federate -> Normal Activity Not Permitted.
+        \draw[f4 transition] (832,314) -- (832,501);
+        \node[f4 small] at (832,410) {[ not in \textquotedbl Active\\Federate\textquotedbl{} ]};
+
+    \end{scope}
+
+    \node[f4 caption] at (480,698) {Figure 4---Joined Federate state};
+\end{tikzpicture}

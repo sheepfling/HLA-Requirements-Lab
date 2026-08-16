@@ -1,0 +1,307 @@
+% Figure 16 - Establishing Ownership of Instance Attribute (i, k, j)
+% Independently revalidated against IEEE Std 1516.1-2010 source physical page 138 / standard page 124.
+% Natural coordinates follow the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure16/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f16 stroke/.style={draw=black,line width=.90pt},
+    f16 partition/.style={draw=black,line width=.85pt,dash pattern=on 4.0pt off 4.0pt},
+    f16 transition/.style={draw=black,line width=.95pt,-{Stealth[length=7.0pt,width=5.7pt]}},
+    f16 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.2}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.045},
+    f16 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.5}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.16},
+    f16 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.5}{12.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.24},
+    f16 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.4}{11.1}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.22},
+    f16 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.4}{10.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20},
+    f16 micro/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{8.4}{9.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % ------------------------------------------------------------------
+    % F16-S00 outer composite state and title band.
+    % ------------------------------------------------------------------
+    \draw[f16 stroke]
+    (128,44) -- (832,44)
+    .. controls (869,44) and (899,74) .. (899,111)
+    -- (899,608)
+    .. controls (899,645) and (869,675) .. (832,675)
+    -- (128,675)
+    .. controls (91,675) and (60,645) .. (60,608)
+    -- (60,111)
+    .. controls (60,74) and (91,44) .. (128,44)
+    -- cycle;
+    \draw[f16 stroke] (60,111) -- (899,111);
+    \node[f16 title] at (480,78) {Establishing Ownership of Instance Attribute (i, k, j)};
+
+    % ------------------------------------------------------------------
+    % Outer entry selection.
+    % ------------------------------------------------------------------
+    % F16-P01 outer initial.
+    \fill (88,307) circle[radius=8pt];
+    % F16-P02 outer conditional connector.
+    \draw[f16 stroke] (94,368) circle[radius=15pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (94,368) {C};
+    % F16-E01 outer initial -> outer C.
+    \draw[f16 transition] (88,315) -- (91,351);
+
+    % F16-E02 outer C -> Owned boundary.
+    \draw[f16 transition] (104,357) -- (144,231);
+    \node[f16 small,anchor=west,align=left] at (116,340)
+        {$[$ Register $\wedge$\\in \textquotedbl Published (i, j)\textquotedbl{} $]$};
+    % F16-E03 outer C -> Unowned boundary.
+    \draw[f16 transition] (103,379) -- (145,500);
+    \node[f16 small,anchor=west,align=left] at (116,401)
+        {$[$ Discover\textdagger{} $\vee$\\in \textquotedbl Unpublished (i, j)\textquotedbl{} $]$};
+
+    % ==================================================================
+    % F16-S01 Owned (i, k, j)
+    % ==================================================================
+    \draw[f16 stroke]
+    (187,144) -- (824,144)
+    .. controls (847,144) and (866,163) .. (866,186)
+    -- (866,286)
+    .. controls (866,309) and (847,327) .. (824,327)
+    -- (187,327)
+    .. controls (164,327) and (145,309) .. (145,286)
+    -- (145,186)
+    .. controls (145,163) and (164,144) .. (187,144)
+    -- cycle;
+    \draw[f16 stroke] (284,144) -- (284,123) -- (361,123) -- (361,144);
+    \node[f16 tab] at (322.5,134) {Owned (i, k, j)};
+
+    % F16-P03 owned initial -> Not Divesting.
+    \fill (226,178) circle[radius=8pt];
+    % F16-S02 Not Divesting.
+    \draw[f16 stroke,rounded corners=7pt] (271,175) rectangle (399,215);
+    \node[f16 text] at (335,195) {Not Divesting};
+    % F16-E04.
+    \draw[f16 transition] (234,181) -- (268,193);
+
+    % F16-S03 Waiting for a New Owner to be Found.
+    \draw[f16 stroke,rounded corners=7pt] (527,175) rectangle (655,215);
+    \node[f16 text] at (591,195) {Waiting for a New\\Owner to be Found};
+
+    % F16-S04 Completing Divestiture.
+    \draw[f16 stroke,rounded corners=7pt] (375,263) rectangle (503,303);
+    \node[f16 text] at (439,283) {Completing Divestiture};
+
+    % F16-P04 owned shallow history.
+    \draw[f16 stroke] (838,168) circle[radius=15pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (838,168) {H};
+
+    % F16-E05 Not Divesting self-loop: Request Attribute Ownership Release.
+    \draw[f16 transition] (286,214)
+    .. controls (252,236) and (246,202) .. (270,197);
+    \node[f16 small,anchor=east] at (249,246) {Request\\Attribute\\Ownership\\Release \textdagger};
+
+    % F16-E06 Not Divesting self-loop: Attribute Ownership Release Denied.
+    \draw[f16 transition] (291,175)
+    .. controls (266,149) and (311,141) .. (321,173);
+    \node[f16 small] at (341,151) {Attribute Ownership\\Release Denied};
+
+    % F16-E07 Not Divesting -> Waiting.
+    \draw[f16 transition] (399,190) -- (524,190);
+    \node[f16 small] at (464,168) {Negotiated\\Attribute\\Ownership\\Divestiture};
+
+    % F16-E08 Waiting -> Not Divesting.
+    \draw[f16 transition] (527,206) -- (402,206);
+    \node[f16 small] at (465,228) {Cancel Negotiated\\Attribute Ownership\\Divestiture};
+
+    % F16-E09 Waiting -> Completing.
+    \draw[f16 transition] (542,215) -- (487,260);
+    \node[f16 small,anchor=west] at (531,247) {Request\\Divestiture\\Confirmation \textdagger};
+
+    % F16-E10 Completing -> Not Divesting.
+    \draw[f16 transition] (396,263) -- (344,217);
+    \node[f16 small,anchor=east] at (367,254) {Cancel\\Negotiated\\Attribute\\Ownership\\Divestiture};
+
+    % F16-E11 Completing -> Waiting, failed confirmation.
+    \draw[f16 transition] (503,297)
+    .. controls (590,297) and (632,267) .. (648,218);
+    \node[f16 tiny,anchor=west] at (581,286)
+        {Confirm Divestiture\\(failure - No Acquisition\\Pending Or Federate Willing\\To Acquire exception)};
+
+    % F16-E12 Owned boundary -> shallow history (state preserving).
+    \draw[f16 transition] (792,144)
+    .. controls (793,165) and (806,168) .. (821,168);
+    \node[f16 small] at (755,159) {Attribute Ownership\\Divestiture If Wanted\\(ret: kept)};
+
+    % ==================================================================
+    % F16-S05 Unowned (i, k, j)
+    % ==================================================================
+    \draw[f16 stroke]
+    (187,416) -- (824,416)
+    .. controls (847,416) and (866,435) .. (866,458)
+    -- (866,621)
+    .. controls (866,644) and (847,663) .. (824,663)
+    -- (187,663)
+    .. controls (164,663) and (145,644) .. (145,621)
+    -- (145,458)
+    .. controls (145,435) and (164,416) .. (187,416)
+    -- cycle;
+    \draw[f16 stroke] (145,450) -- (225,450) -- (225,416);
+    \node[f16 tab] at (185,433) {Unowned\\(i, k, j)};
+
+    % F16-S06 Not Able to Acquire.
+    \draw[f16 stroke,rounded corners=9pt] (190,459) rectangle (270,562);
+    \node[f16 text] at (230,511) {Not Able\\to Acquire};
+
+    % F16-P05 unowned initial and F16-P06 conditional connector.
+    \fill (213,633) circle[radius=8pt];
+    \draw[f16 stroke] (275,614) circle[radius=15pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (275,614) {C};
+    % F16-E19 initial -> C.
+    \draw[f16 transition] (221,630) -- (258,619);
+    % F16-E20 C -> Not Able.
+    \draw[f16 transition] (267,601) -- (249,565);
+    \node[f16 small,anchor=east] at (245,588) {$[$ in \textquotedbl Unpublished (i, j)\textquotedbl{} $]$};
+
+    % ------------------------------------------------------------------
+    % F16-S07 Able to Acquire composite with orthogonal regions.
+    % ------------------------------------------------------------------
+    \draw[f16 stroke]
+    (435,437) -- (816,437)
+    .. controls (836,437) and (852,453) .. (852,473)
+    -- (852,621)
+    .. controls (852,641) and (836,656) .. (816,656)
+    -- (435,656)
+    .. controls (415,656) and (393,641) .. (393,621)
+    -- (393,473)
+    .. controls (393,453) and (415,437) .. (435,437)
+    -- cycle;
+    \draw[f16 stroke] (474,437) -- (474,416) -- (653,416) -- (653,437);
+    \node[f16 tab] at (563.5,427) {Able to Acquire};
+    \draw[f16 partition] (630,437) -- (630,656);
+
+    % Region title tabs.
+    \draw[f16 stroke] (393,460) -- (467,460) -- (467,437);
+    \node[f16 tab] at (430,449) {Intrusive Acq};
+    \draw[f16 stroke] (630,460) -- (734,460) -- (734,437);
+    \node[f16 tab] at (682,449) {Non-intrusive Acq};
+
+    % F16-E21 unowned C -> Able to Acquire.
+    \draw[f16 transition] (289,612) -- (391,581);
+    \node[f16 small,anchor=west] at (303,619) {$[$ in \textquotedbl Published (i, j)\textquotedbl{} $]$};
+    % F16-E22 Not Able -> Able.
+    \draw[f16 transition] (270,474) -- (391,500);
+    \node[f16 small] at (333,472) {$[$ in \textquotedbl Published (i, j)\textquotedbl{} $]$};
+    % F16-E23 Able -> Not Able.
+    \draw[f16 transition] (393,535) -- (272,517);
+    \node[f16 small] at (333,533) {$[$ in \textquotedbl Unpublished (i, j)\textquotedbl{} $]$};
+
+    % ------------------------------------------------------------------
+    % Intrusive acquisition region.
+    % ------------------------------------------------------------------
+    % F16-S08 Acquisition Pending composite.
+    \draw[f16 stroke]
+    (429,487) -- (600,487)
+    .. controls (614,487) and (626,499) .. (626,513)
+    -- (626,584)
+    .. controls (626,598) and (614,610) .. (600,610)
+    -- (429,610)
+    .. controls (415,610) and (404,598) .. (404,584)
+    -- (404,513)
+    .. controls (404,499) and (415,487) .. (429,487)
+    -- cycle;
+    \draw[f16 stroke] (482,487) -- (482,465) -- (585,465) -- (585,487);
+    \node[f16 tab] at (533.5,476) {Acquisition Pending};
+
+    % F16-S09 Trying to Cancel Acq.
+    \draw[f16 stroke,rounded corners=7pt] (413,495) rectangle (494,535);
+    \node[f16 text] at (453.5,515) {Trying to\\Cancel Acq\\(i, k, j)};
+    % F16-S10 Acquiring.
+    \draw[f16 stroke,rounded corners=7pt] (545,564) rectangle (621,603);
+    \node[f16 text] at (583,583.5) {Acquiring\\(i, k, j)};
+    % F16-P08 acquisition-pending shallow history.
+    \draw[f16 stroke] (592,508) circle[radius=15pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (592,508) {H};
+
+    % F16-S11 Not Acquiring.
+    \draw[f16 stroke,rounded corners=7pt] (456,619) rectangle (532,648);
+    \node[f16 text] at (494,633.5) {Not\\Acquiring};
+    % F16-P07 intrusive initial.
+    \fill (405,633) circle[radius=8pt];
+    % F16-E24 intrusive initial -> Not Acquiring.
+    \draw[f16 transition] (413,633) -- (453,633);
+
+    % F16-E25 Not Acquiring -> Acquiring.
+    \draw[f16 transition] (532,631) -- (544,600);
+    \node[f16 small,anchor=west] at (568,635) {Attribute\\Ownership\\Acquisition};
+    % F16-E26 Acquiring -> Trying to Cancel.
+    \draw[f16 transition] (545,570) -- (496,532);
+    \node[f16 small] at (529,548) {Cancel\\Attribute\\Ownership\\Acquisition};
+    % F16-E27 Trying to Cancel -> Not Acquiring.
+    \draw[f16 transition] (454,535) -- (482,616);
+    \node[f16 small,anchor=east] at (446,567) {Confirm\\Attribute\\Ownership\\Acquisition\\Cancellation\textdagger{}};
+    % F16-E28 Acquisition Pending boundary -> H (repeated acquisition request).
+    \draw[f16 transition] (543,487)
+    .. controls (544,505) and (560,508) .. (575,508);
+    \node[f16 small,anchor=east] at (548,523) {Attribute\\Ownership\\Acquisition};
+    % F16-E29 Acquisition Pending -> Not Acquiring on unavailable.
+    \draw[f16 transition] (494,610) -- (494,616);
+    \node[f16 small] at (503,602) {Attribute Ownership\\Unavailable\textdagger{}};
+
+    % ------------------------------------------------------------------
+    % Non-intrusive acquisition region.
+    % ------------------------------------------------------------------
+    % F16-S12 Willing to Acquire.
+    \draw[f16 stroke,rounded corners=7pt] (690,471) rectangle (773,511);
+    \node[f16 text] at (731.5,491) {Willing to\\Acquire (i, k, j)};
+    % F16-S13 Not Trying to Acquire.
+    \draw[f16 stroke,rounded corners=7pt] (690,559) rectangle (773,599);
+    \node[f16 text] at (731.5,579) {Not Trying\\to Acquire};
+    % F16-P09 non-intrusive initial.
+    \fill (833,596) circle[radius=8pt];
+    % F16-E30 initial -> Not Trying.
+    \draw[f16 transition] (825,594) -- (776,581);
+
+    % F16-E31 Not Trying -> Willing.
+    \draw[f16 transition] (720,559) -- (720,514);
+    \node[f16 small,anchor=west] at (744,535) {Attribute\\Ownership\\Acquisition\\If Available\\$[$not in\\\textquotedbl Acquisition\\Pending\textquotedbl{}$]$};
+    % F16-E32 Willing -> Not Trying.
+    \draw[f16 transition] (698,511) -- (698,556);
+    \node[f16 small,anchor=east] at (671,536) {Attribute\\Ownership\\Unavailable\textdagger{}\\or\\$[$ in \textquotedbl Acquisition\\Pending\textquotedbl{} $]$};
+    % F16-E33 Willing self-loop.
+    \draw[f16 transition] (773,490)
+    .. controls (804,490) and (808,460) .. (764,464);
+    \node[f16 small,anchor=west] at (785,461) {Attribute\\Ownership\\Acquisition\\If Available\\$[$not in\\\textquotedbl Acquisition\\Pending\textquotedbl{}$]$};
+
+    % F16-P10 non-intrusive shallow history.
+    \draw[f16 stroke] (826,635) circle[radius=15pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (826,635) {H};
+    % F16-E34 non-intrusive boundary -> H (state preserving callback).
+    \draw[f16 transition] (791,656)
+    .. controls (791,639) and (801,635) .. (809,635);
+    \node[f16 tiny,anchor=east] at (789,628)
+        {Request Attribute Ownership\\Assumption\textdagger{} $[$not in \textquotedbl Acquiring (i, k, j)\textquotedbl{}\\$\wedge$ not in \textquotedbl Willing to Acquire (i, k, j)\textquotedbl{}$]$};
+
+    % ==================================================================
+    % Cross-state ownership/divestiture/acquisition transitions.
+    % ==================================================================
+    % F16-E13 Owned -> Not Able when unpublished.
+    \draw[f16 transition] (246,327) -- (246,456);
+    \node[f16 small,anchor=west] at (256,365) {$[$ in \textquotedbl Unpublished (i, j)\textquotedbl{} $]$};
+
+    % F16-E14 Completing Divestiture -> Able to Acquire on success.
+    \draw[f16 transition] (408,303) -- (408,434);
+    \node[f16 small,anchor=west] at (414,356) {Confirm\\Divestiture\\(success)};
+
+    % F16-E15 Acquisition Pending -> Owned on notification.
+    \draw[f16 transition] (474,487) -- (474,330);
+    \node[f16 small,anchor=west] at (479,359) {Attribute\\Ownership\\Acquisition\\Notification\textdagger{}};
+
+    % F16-E16 Owned -> Able: unconditional divestiture.
+    \draw[f16 transition] (544,327) -- (544,434);
+    \node[f16 small,anchor=west] at (550,362) {Unconditional\\Attribute\\Ownership\\Divestiture};
+
+    % F16-E17 Owned -> Able: divestiture if wanted, actually divested.
+    \draw[f16 transition] (652,327) -- (652,434);
+    \node[f16 small,anchor=west] at (657,363) {Attribute\\Ownership\\Divestiture\\If Wanted\\(ret: divested)};
+
+    % F16-E18 Willing to Acquire -> Owned on notification.
+    \draw[f16 transition] (731,471)
+    .. controls (790,443) and (805,390) .. (805,330);
+    \node[f16 small,anchor=west] at (815,363) {Attribute\\Ownership\\Acquisition\\Notification\textdagger{}};
+\end{tikzpicture}

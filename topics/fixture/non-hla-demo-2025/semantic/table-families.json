@@ -4,7 +4,9 @@
     {
       "id": "demo-table-family",
       "title": "Widget mapping",
-      "table_ids": ["demo.t1"],
+      "table_ids": [
+        "demo.t1"
+      ],
       "clause_id": "clause-1.1",
       "source": {
         "path": "source/semantic.tex",

@@ -1,0 +1,574 @@
+{
+  "schema_version": 1,
+  "command_vocabulary": {
+    "clause_headings": [
+      "HLAClauseHeading",
+      "HLASubclauseHeading",
+      "HLAClause",
+      "HLASubclause",
+      "HLASubsubclause"
+    ],
+    "content_marker": "HLAContentMarker",
+    "fixed_text_block": "HLAFixedBlock",
+    "clause_paragraph": "HLAClauseParagraph",
+    "clause_labeled_item": "HLAClauseLabeledItem",
+    "pdf_bookmark": "pdfbookmark",
+    "definition_environment": "hladefinition",
+    "detailed_rule_heading": "HLADetailedRuleHeading",
+    "summary_rule": "HLASummaryRule",
+    "normative_rule_statement": "HLANormativeRuleStatement",
+    "bibliography_entry": "HLABibliographyEntry",
+    "footnote_text": "footnotetext",
+    "additional_note_commands": [
+      "HLACompactFootnote",
+      "HLAFootnote"
+    ],
+    "stable_id": "HLAStableID",
+    "table_grid_cell": "HLATableGridCell",
+    "table_cell_text": "HLATableCellText",
+    "table_text_line": "HLARotatedLine",
+    "placed_block": "HLAClausePlacedBlock",
+    "table_caption": "HLATableCaption",
+    "table_domain": "omt",
+    "figure_image": "HLAFigureImageAt",
+    "figure_caption": "HLAFigureCaptionAt",
+    "figure_anchor": "HLAFigureAnchor",
+    "definition_at": "HLADefinitionAt",
+    "definition_anchor": "HLADefinitionAnchor",
+    "definition_term": "HLADefinitionTerm",
+    "definition_note_at": "HLADefinitionNoteAt",
+    "note_block": "HLANoteBlock",
+    "definition_note_commands": [
+      "HLADefinitionNote",
+      "HLADefinitionListNote"
+    ],
+    "annex_heading": "HLAAnnexHeading",
+    "annex_status": "HLAAnnexStatus",
+    "annex_title": "HLAAnnexTitle",
+    "toc_line_at": "HLATocLineAt",
+    "annex_bookmark": "bookmark",
+    "table_heading_commands": [
+      [
+        "HLAAnnexSubclauseHeading",
+        1,
+        0
+      ],
+      [
+        "HLAAnnexFittedSubclauseHeading",
+        2,
+        1
+      ],
+      [
+        "HLAMinorClauseHeading",
+        1,
+        0
+      ],
+      [
+        "HLAServiceHeadingAt",
+        3,
+        2
+      ]
+    ],
+    "hierarchy_heading_commands": [
+      [
+        "HLAAnnexSubclauseHeading",
+        1,
+        0
+      ],
+      [
+        "HLAAnnexFittedSubclauseHeading",
+        2,
+        1
+      ],
+      [
+        "HLAMinorClauseHeading",
+        1,
+        0
+      ]
+    ],
+    "hierarchy_id_commands": [
+      [
+        "HLAServiceBookmark",
+        0,
+        2
+      ]
+    ],
+    "text_wrapper_commands": [
+      "HLAService",
+      "HLATermReference"
+    ],
+    "text_note_commands": [
+      "HLASeeAlso",
+      "HLADefinitionNote"
+    ],
+    "layout_text_block_commands": [
+      [
+        "HLAFixedBlock",
+        7
+      ],
+      [
+        "HLAFixedCenteredBlock",
+        7
+      ],
+      [
+        "HLAInvisibleFixedCenteredBlock",
+        7
+      ],
+      [
+        "HLAClausePlacedBlock",
+        4
+      ],
+      [
+        "HLAFrontPlacedBlock",
+        4
+      ]
+    ]
+  },
+  "latex_dialect": {
+    "clause_heading_command": "HLAClauseHeading",
+    "subclause_heading_command": "HLASubclauseHeading",
+    "definition_environment": "hladefinition",
+    "detailed_rule_heading_command": "HLADetailedRuleHeading",
+    "normative_rule_statement_command": "HLANormativeRuleStatement",
+    "summary_rule_command": "HLASummaryRule"
+  },
+  "api_owners": {
+    "service": "RTIambassador",
+    "callback": "FederateAmbassador",
+    "handler": "RTI internal handler",
+    "adapter": "integration adapter"
+  },
+  "profiles": [
+    {
+      "id": "hla-2025",
+      "diagram_surface_document_id": "hla-1516.1-2025",
+      "diagram_surface_bindings": [
+        {
+          "figure": 1,
+          "page_sequence": 38,
+          "record_id": "federation-execution"
+        },
+        {
+          "figure": 2,
+          "page_sequence": 39,
+          "record_id": "hla-1516.1.figure-2-federate-rti-relationship"
+        },
+        {
+          "figure": 3,
+          "page_sequence": 40,
+          "record_id": "federate-lifetime"
+        },
+        {
+          "figure": 4,
+          "page_sequence": 41,
+          "record_id": "federate-lifetime"
+        },
+        {
+          "figure": 5,
+          "page_sequence": 43,
+          "record_id": "normal-activity-permitted"
+        },
+        {
+          "figure": 6,
+          "page_sequence": 45,
+          "record_id": "federation-execution-sync-overview"
+        },
+        {
+          "figure": 7,
+          "page_sequence": 46,
+          "record_id": "global-synchronization-label"
+        },
+        {
+          "figure": 8,
+          "page_sequence": 46,
+          "record_id": "awaiting-synchronization"
+        },
+        {
+          "figure": 9,
+          "page_sequence": 47,
+          "record_id": "local-synchronization-label"
+        },
+        {
+          "figure": 10,
+          "page_sequence": 86,
+          "record_id": "object-class"
+        },
+        {
+          "figure": 11,
+          "page_sequence": 87,
+          "record_id": "class-attribute"
+        },
+        {
+          "figure": 12,
+          "page_sequence": 88,
+          "record_id": "class-attribute-privilege-to-delete-object"
+        },
+        {
+          "figure": 13,
+          "page_sequence": 89,
+          "record_id": "interaction-class"
+        },
+        {
+          "figure": 14,
+          "page_sequence": 110,
+          "record_id": "object-instance-known"
+        },
+        {
+          "figure": 15,
+          "page_sequence": 111,
+          "record_id": "ownership-implications"
+        },
+        {
+          "figure": 16,
+          "page_sequence": 149,
+          "record_id": "establishing-ownership"
+        },
+        {
+          "figure": 17,
+          "page_sequence": 186,
+          "record_id": "temporal-state"
+        }
+      ],
+      "embedded_diagram_layout": [
+        {
+          "figure": 1,
+          "x": 125.28,
+          "y": 425.64,
+          "width": 361.44,
+          "height": 247.98
+        },
+        {
+          "figure": 2,
+          "x": 138.66,
+          "y": 193.38,
+          "width": 334.68,
+          "height": 251.04
+        },
+        {
+          "figure": 3,
+          "x": 89.5,
+          "y": 71.0,
+          "width": 433.5,
+          "height": 281.0
+        },
+        {
+          "figure": 4,
+          "x": 77.52,
+          "y": 277.02,
+          "width": 453.48,
+          "height": 369.0
+        },
+        {
+          "figure": 5,
+          "x": 69.78,
+          "y": 207.24,
+          "width": 472.44,
+          "height": 397.62
+        },
+        {
+          "figure": 6,
+          "x": 92.82,
+          "y": 129.54,
+          "width": 448.74,
+          "height": 363.48
+        },
+        {
+          "figure": 7,
+          "x": 89.409,
+          "y": 81.423,
+          "width": 433.183,
+          "height": 317.035
+        },
+        {
+          "figure": 8,
+          "x": 89.28,
+          "y": 396.785,
+          "width": 433.44,
+          "height": 278.672
+        },
+        {
+          "figure": 9,
+          "x": 89.298,
+          "y": 81.119,
+          "width": 433.755,
+          "height": 373.141
+        },
+        {
+          "figure": 10,
+          "x": 100.92,
+          "y": 126.96,
+          "width": 403.08,
+          "height": 302.34
+        },
+        {
+          "figure": 11,
+          "x": 129.234,
+          "y": 140.364,
+          "width": 358.272,
+          "height": 477.432
+        },
+        {
+          "figure": 12,
+          "x": 125.4,
+          "y": 132.96,
+          "width": 379.98,
+          "height": 506.7
+        },
+        {
+          "figure": 13,
+          "x": 76.44,
+          "y": 180.84,
+          "width": 459.12,
+          "height": 336.84
+        },
+        {
+          "figure": 14,
+          "x": 118.259,
+          "y": 354.42,
+          "width": 375.482,
+          "height": 309.72
+        },
+        {
+          "figure": 15,
+          "x": 82.08,
+          "y": 103.02,
+          "width": 447.84,
+          "height": 335.88
+        },
+        {
+          "figure": 16,
+          "x": 84.24,
+          "y": 69.14,
+          "width": 463.32,
+          "height": 617.76
+        },
+        {
+          "figure": 17,
+          "x": 88.834,
+          "y": 134.718,
+          "width": 428.912,
+          "height": 523.007
+        },
+        {
+          "figure": 18,
+          "x": 120.0,
+          "y": 92.0,
+          "width": 400.0,
+          "height": 205.0
+        },
+        {
+          "figure": 19,
+          "x": 145.0,
+          "y": 92.0,
+          "width": 330.0,
+          "height": 180.0
+        },
+        {
+          "figure": 20,
+          "x": 100.0,
+          "y": 264.0,
+          "width": 495.0,
+          "height": 245.0
+        },
+        {
+          "figure": 21,
+          "x": 150.0,
+          "y": 220.0,
+          "width": 395.0,
+          "height": 155.0
+        },
+        {
+          "figure": 22,
+          "x": 120.0,
+          "y": 235.0,
+          "width": 400.0,
+          "height": 105.0
+        },
+        {
+          "figure": 23,
+          "x": 120.0,
+          "y": 440.0,
+          "width": 400.0,
+          "height": 105.0
+        },
+        {
+          "figure": 24,
+          "x": 120.0,
+          "y": 465.0,
+          "width": 410.0,
+          "height": 160.0
+        },
+        {
+          "figure": 25,
+          "x": 120.0,
+          "y": 185.0,
+          "width": 410.0,
+          "height": 160.0
+        },
+        {
+          "figure": 26,
+          "x": 120.0,
+          "y": 70.0,
+          "width": 410.0,
+          "height": 170.0
+        },
+        {
+          "figure": 27,
+          "x": 105.0,
+          "y": 325.0,
+          "width": 420.0,
+          "height": 115.0
+        },
+        {
+          "figure": 28,
+          "x": 105.0,
+          "y": 500.0,
+          "width": 420.0,
+          "height": 115.0
+        },
+        {
+          "figure": 29,
+          "x": 105.0,
+          "y": 90.0,
+          "width": 420.0,
+          "height": 125.0
+        },
+        {
+          "figure": 30,
+          "x": 105.0,
+          "y": 350.0,
+          "width": 420.0,
+          "height": 125.0
+        },
+        {
+          "figure": 31,
+          "x": 105.0,
+          "y": 555.0,
+          "width": 420.0,
+          "height": 120.0
+        },
+        {
+          "figure": 32,
+          "x": 105.0,
+          "y": 90.0,
+          "width": 420.0,
+          "height": 135.0
+        },
+        {
+          "figure": 33,
+          "x": 105.0,
+          "y": 340.0,
+          "width": 420.0,
+          "height": 135.0
+        }
+      ]
+    },
+    {
+      "id": "hla-2010",
+      "diagram_surface_document_id": "hla-1516.1-2010",
+      "diagram_surface_bindings": [
+        {
+          "figure": 1,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-01"
+        },
+        {
+          "figure": 2,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-02"
+        },
+        {
+          "figure": 3,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-03"
+        },
+        {
+          "figure": 4,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-04"
+        },
+        {
+          "figure": 5,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-05"
+        },
+        {
+          "figure": 6,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-06"
+        },
+        {
+          "figure": 7,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-07"
+        },
+        {
+          "figure": 8,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-08"
+        },
+        {
+          "figure": 9,
+          "page_sequence": 9,
+          "record_id": "hla-1516.1-2010:figure-09"
+        },
+        {
+          "figure": 10,
+          "page_sequence": 10,
+          "record_id": "hla-1516.1-2010:figure-10"
+        },
+        {
+          "figure": 11,
+          "page_sequence": 10,
+          "record_id": "hla-1516.1-2010:figure-11"
+        },
+        {
+          "figure": 12,
+          "page_sequence": 10,
+          "record_id": "hla-1516.1-2010:figure-12"
+        },
+        {
+          "figure": 13,
+          "page_sequence": 10,
+          "record_id": "hla-1516.1-2010:figure-13"
+        },
+        {
+          "figure": 14,
+          "page_sequence": 11,
+          "record_id": "hla-1516.1-2010:figure-14"
+        },
+        {
+          "figure": 15,
+          "page_sequence": 11,
+          "record_id": "hla-1516.1-2010:figure-15"
+        },
+        {
+          "figure": 16,
+          "page_sequence": 12,
+          "record_id": "hla-1516.1-2010:figure-16"
+        },
+        {
+          "figure": 17,
+          "page_sequence": 13,
+          "record_id": "hla-1516.1-2010:figure-17"
+        },
+        {
+          "figure": 18,
+          "page_sequence": 14,
+          "record_id": "hla-1516.1-2010:figure-18"
+        },
+        {
+          "figure": 19,
+          "page_sequence": 16,
+          "record_id": "hla-1516.1-2010:figure-19"
+        },
+        {
+          "figure": 20,
+          "page_sequence": 16,
+          "record_id": "hla-1516.1-2010:figure-20"
+        }
+      ],
+      "embedded_diagram_layout": []
+    }
+  ]
+}

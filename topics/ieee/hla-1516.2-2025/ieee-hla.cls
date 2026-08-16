@@ -4,12 +4,12 @@
 \LoadClass[10pt]{article}
 
 \RequirePackage[
-  paperwidth=612bp,
-  paperheight=792bp,
-  left=90bp,
-  right=90bp,
-  top=69bp,
-  bottom=48bp
+    paperwidth=612bp,
+    paperheight=792bp,
+    left=90bp,
+    right=90bp,
+    top=69bp,
+    bottom=48bp
 ]{geometry}
 \RequirePackage{fontspec}
 \RequirePackage{graphicx}

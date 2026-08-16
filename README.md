@@ -1,99 +1,150 @@
-# Document-Recreation
-# Document Recreation
+# HLA Requirements Lab
 
-A collection of reproducible recreations of historical and technical documents, including SISO PDFs, IEEE papers, and other whitepapers.
+Source-controlled extraction, validation, traceability, and publication of
+requirements from the IEEE HLA standards. LaTeX builds, and diagrams remain
+provenance adapters for the requirements corpus.
+
+The project scope and definition of done are explicit in
+[`docs/SCOPE.md`](docs/SCOPE.md); the dependency direction and product
+boundaries are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Repository layout
 
 ```text
-topics/
-  <topic>/
-    <document>/
-      build.py          # repository-standard document entry point
-      main.tex          # typical LaTeX entry point
-      src/              # Python or LaTeX source files
-      assets/           # figures, scans, and other inputs
-      output/           # generated artifacts; ignored by Git
-scripts/
-  build.py              # top-level build orchestrator
-  latex_renderer.py     # HLA-neutral semantic-to-LaTeX renderer
-  hla_profile.py        # HLA source macros and LaTeX dialect only
+hla_lab/                 # stable public CLI and domain orchestration
+topics/ieee/             # 2010/2025 HLA source corpus and adapters
+data/                    # authority, inventory, release, and lineage manifests
+schemas/                 # portable JSON contracts
+tools/                   # CI orchestration and one-time corpus migrations
+tests/                   # capability-oriented contract tests
+docs/                    # active architecture and product contracts
 ```
 
-Each document is intentionally self-contained. A document directory is considered buildable when it contains `build.py`. The top-level builder can build one document, one topic, or every document in the repository.
+The public workflow is exposed through `hla-lab`. Document-local build scripts
+remain publication adapters, and new reusable behavior lives under `hla_lab`.
+One-time corpus migrations live in `tools/migrations/` and are not active
+workflow entrypoints.
 
-The current IEEE ingestion lives at:
+The supported corpus currently includes:
 
 ```text
+topics/ieee/hla-1516-2010/
+topics/ieee/hla-1516.1-2010/
+topics/ieee/hla-1516.2-2010/
+topics/ieee/hla-1516-2025/
 topics/ieee/hla-1516.1-2025/
 topics/ieee/hla-1516.2-2025/
-topics/ieee/hla-1516-2025/
 ```
-
-Those projects expose thin document-level wrappers backed by the shared Python builder.
-The HLA-neutral portability fixture lives at
-`topics/fixture/non-hla-demo-2025/`; its family-local profile is the onboarding
-reference for future document families.
 
 ## Source-of-truth policy
 
-The repository should generally baseline the reconstruction source and provenance notes, not rendered or extracted binaries. PDFs, raster image files, archives, and build outputs are ignored by default. Use TikZ/LaTeX and Python to regenerate document visuals and rendered artifacts from committed text-based sources.
+The repository should generally baseline the reconstruction source and provenance notes, not rendered or extracted
+binaries. PDFs, raster image files, archives, and build outputs are ignored by default. Use TikZ/LaTeX and Python to
+regenerate document visuals and rendered artifacts from committed text-based sources.
 
-Binary files may remain in a local working tree when an upstream build or visual comparison needs them, but they should not be force-added to Git without an explicit reason.
+Binary files may remain in a local working tree when an upstream build or visual comparison needs them, but they should
+not be force-added to Git without an explicit reason.
 
 ## Analogue and comparison boundary
 
-An existing document, PDF, scan, rendered page, or extracted image may be used as an analogue while recreating a document. It is working reference material—not the recreation baseline. Keep that material outside the committed source tree or under an ignored `.local/`, `reference/`, or `comparison/` directory.
+An existing document, PDF, scan, rendered page, or extracted image may be used as an analogue while recreating a
+document. It is working reference material—not the recreation baseline. Keep that material outside the committed source
+tree or under an ignored `.local/`, `reference/`, or `comparison/` directory.
 
-The baseline should contain the independently authored reconstruction: LaTeX/TikZ source, Python generators and validators, text-based metadata, tests, and provenance notes. Comparison artifacts may inform implementation and verification, but they should not become the implementation itself.
+The baseline should contain the independently authored reconstruction: LaTeX/TikZ source, Python generators and
+validators, text-based metadata, tests, and provenance notes. Comparison artifacts may inform implementation and
+verification, but they should not become the implementation itself.
 
-## Long-term document strategy
+## Product definition
 
-The HLA documents are the starting corpus, not the final form of the project.
-The work proceeds in three deliberate stages:
+The lab has one primary product: a validated, queryable HLA requirements
+corpus. Its core outputs are source-owned semantic records, coverage and
+traceability reports, portable contracts, and evidence-ready projections.
 
-1. Recreate each original document faithfully enough to preserve its structure,
-   wording, layout, and visual behavior.
-2. Extract that reconstruction into validated semantic records for clauses,
-   requirements, definitions, references, tables, functional preconditions and
-   postconditions, and state-machine behavior.
-3. Use the semantic records to author a new, more programmatic document that
-   makes relationships, meanings, normative logic, and executable conformance
-   surfaces explicit rather than reproducing the original presentation alone.
+Faithful documents and diagrams remain useful when they protect provenance or
+make a semantic relationship reviewable, but page fidelity is no longer the
+project's definition of success. Planned implementation mappings are kept
+distinct from concrete or verified evidence.
 
-The recreated originals provide the fidelity reference and provenance trail.
-The semantic model becomes the reusable source for both conformance tooling and
-the next-generation document; the new document is therefore an intentional
-derivative, not a replacement baseline for the original recreation.
+See [SCOPE.md](docs/SCOPE.md) for the product boundary and
+[ARCHITECTURE.md](docs/ARCHITECTURE.md) for the dependency direction.
 
 ## Build commands
 
 From the repository root:
 
-The utilities under `scripts/` are a Python package. Prefer module invocation
-(`python -m scripts.<module>`) so imports work consistently from the repository
-root; `python -m scripts --help` lists the available command modules.
+Install the project and use the installed `hla-lab` entry point for normal
+workflows:
 
 ```powershell
 python -m pip install -e .
-python -m scripts.build list
-python -m scripts.build build all
-python -m scripts.build build topics/siso/example-document
-python -m scripts.build build topics/fixture/non-hla-demo-2025
-python -m scripts.build clean
+hla-lab status --require-api-contract
+hla-lab build
+hla-lab publish
+```
+
+For contributor tooling, `uv sync --dev` is an optional reproducible setup;
+prefix the same commands with `uv run` when using that environment.
+
+The stable command has defaults for the common workflows:
+
+```powershell
+hla-lab                  # show the workflow menu
+hla-lab docs             # list supported document roots
+hla-lab status           # check all documents
+hla-lab build            # build all document products
+hla-lab build topics/fixture/non-hla-demo-2025
+hla-lab publish          # list declared publications
+hla-lab publish hla-hierarchy-reconstruction-2025
+hla-lab clean            # clean all document products
+hla-lab test --parallel
+hla-lab quality          # run the ordered quality workflow
+hla-lab quality --fix
+```
+
+Specialized operations that need detailed selectors remain available through
+their owning `hla_lab` module, but are not required for the normal workflow.
+
+```powershell
+python -m hla_lab.build.build list
+python -m hla_lab.build.build build all
+python -m hla_lab.build.build build topics/siso/example-document
+python -m hla_lab.build.build build topics/fixture/non-hla-demo-2025
+python -m hla_lab.build.build clean
 
 # Independent HLA publication destinations.
-python -m scripts.build publication list
-python -m scripts.build publication build hla-unofficial-faithful-reconstruction-2025
-python -m scripts.build publication build hla-hierarchy-reconstruction-2025
-python -m scripts.build publication build hla-rti-compliance-requirements-2025
+python -m hla_lab.build.build publication list
+python -m hla_lab.build.build publication build hla-unofficial-faithful-reconstruction-2010
+python -m hla_lab.build.build publication build hla-unofficial-faithful-reconstruction-2025
+python -m hla_lab.build.build publication build hla-hierarchy-reconstruction-2025
+python -m hla_lab.build.build publication build hla-rti-compliance-requirements-2025
 ```
+
+For the complete development quality workflow, use the dev dependency group:
+
+```powershell
+uv sync --dev
+uv run rumdl fmt .
+uv run rumdl check .
+uv run mdrepo check .
+uv run pre-commit run --all-files
+uv run pytest tests
+```
+
+`hla-lab test --parallel` uses `pytest-xdist` workers for the capability suite;
+the default remains serial for easier debugging. Tests write temporary
+fixtures to isolated directories, so the parallel path is suitable for CI.
+
+The repository also includes `.editorconfig` and `.gitattributes` to keep editor
+output and Git’s stored text representation on UTF-8/LF with final newlines.
+Invoke `rumdl` through its CLI (`uv run rumdl` locally or `rumdl` in CI), not
+with `python -m rumdl`.
 
 The HLA products are explicitly separated in
 [`data/publications.json`](data/publications.json): the unofficial faithful
-reconstructions, the hierarchy-first reconstruction, and the RTI compliance
-requirements publication. Each names only its own build roots, so it can be
-added, built, release-checked, or removed without coupling it to another
+2010 and 2025 reconstructions, the hierarchy-first reconstruction, and the RTI
+compliance requirements publication. Each names only its own build roots, so it
+can be added, built, release-checked, or removed without coupling it to another
 publication's generated outputs. See
 [`docs/PUBLICATION-PRODUCTS.md`](docs/PUBLICATION-PRODUCTS.md) for the product
 boundaries and commands.
@@ -101,9 +152,9 @@ boundaries and commands.
 Semantic records can be queried directly from source-first LaTeX:
 
 ```powershell
-python -m scripts.semantic_model topics/ieee/hla-1516-2025
-python -m scripts.semantic_model topics/ieee/hla-1516.2-2025
-python -m scripts.semantic_model topics/ieee/hla-1516.2-2025 --json
+python -m hla_lab.core.semantic_model topics/ieee/hla-1516-2025
+python -m hla_lab.core.semantic_model topics/ieee/hla-1516.2-2025
+python -m hla_lab.core.semantic_model topics/ieee/hla-1516.2-2025 --json
 ```
 
 The semantic model extracts typed clauses, definitions, requirements, content
@@ -117,8 +168,8 @@ table-backed definitions. The 1516.2 table model
 keeps semantic cell text and source references separate from page geometry,
 classifies OMT table kinds, and exposes continued-table merging. Selected
 tables can be re-injected through the portable renderer in
-`scripts/latex_renderer.py`. HLA-specific command names and source macros are
-isolated in `scripts/hla_profile.py`; the existing `scripts/semantic_latex.py`
+`hla_lab/adapters/latex_renderer.py`. HLA-specific command names and source macros are
+isolated in `hla_lab/core/hla_profile.py`; the existing `hla_lab/generation/semantic_latex.py`
 module remains a compatibility facade for HLA output.
 
 The loader accepts any structural `LatexSourceProfile`, so a future document
@@ -132,7 +183,7 @@ state/event traceability, `compliance_query()` for a serializable report,
 planned or partial.
 
 The shared generator compiles each validated model through
-`scripts/hierarchy_compiler.py`. Every build emits ignored `hierarchy.json` and
+`hla_lab/generation/hierarchy_compiler.py`. Every build emits ignored `hierarchy.json` and
 `hierarchy-index.tex` inputs containing canonical clause parent/child order,
 direct record ownership, stable semantic destinations, and explicit record
 links. Page adapters receive qualified anchors from that same graph, and the
@@ -150,14 +201,14 @@ The same
 queries are available from the stdout-only CLI:
 
 ```powershell
-python -m scripts.compliance topics/ieee/hla-1516.1-2025 `
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
   --machine federate-lifetime `
   --state federate.not-connected `
   --event Connect `
   --include-candidates
-python -m scripts.compliance topics/ieee/hla-1516.1-2025 `
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
   --machine federate-lifetime --json
-python -m scripts.compliance `
+python -m hla_lab.traceability.compliance `
   topics/ieee/hla-1516-2025 `
   topics/ieee/hla-1516.1-2025 `
   topics/ieee/hla-1516.2-2025 `
@@ -167,13 +218,85 @@ python -m scripts.compliance `
   --json
 ```
 
+Before RTI code development, run the specification-surface readiness gate:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE='1'
+python -m hla_lab.traceability.spec_readiness --root .
+python -m hla_lab.traceability.spec_readiness --root . --json
+```
+
+The gate distinguishes a structurally complete semantic specification from a
+language-complete API contract and from concrete implementation evidence. The
+current corpus is specification-ready: each requirement and transition has a
+planned verification slot, each 1516.1 state-machine transition has a typed
+API surface, and each state machine has a replayable trace seed. Exact source
+declarations are now ingested into the 2010 and 2025 `1516.1` semantic trees:
+2010 C++/Java/WSDL and 2025 C++/Java/FedPro protobuf. The remaining gap is the
+implementation crosswalk from those exact bindings to every semantic mapping;
+requirement-to-declaration bindings now cover every 2010 and 2025 `1516.1`
+requirement. Python and transport/service projections and concrete test
+evidence remain separate implementation work. See
+[`docs/COMPLIANCE-SURFACE-CONTRACT.md`](docs/COMPLIANCE-SURFACE-CONTRACT.md).
+
+Regenerate the text-only API manifests from the local comparison archives with:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE='1'
+python -m hla_lab.corpus.ingest_hla_api --edition 2010 --root . `
+  --output topics/ieee/hla-1516.1-2010/semantic/api-surfaces.json
+python -m hla_lab.corpus.ingest_hla_api --edition 2025 --root . `
+  --output topics/ieee/hla-1516.1-2025/semantic/api-surfaces.json
+```
+
+The inbox archives remain comparison inputs; only the generated, provenance-
+annotated JSON is part of the semantic source tree.
+
+Crosswalk statuses can be queried without producing an audit file:
+
+```powershell
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
+  --api-target fedpro --api-gaps --json
+```
+
+Audit the complete requirement-to-Java/C++ declaration path for both editions:
+
+```powershell
+python -m hla_lab.traceability.api_traceability --check --require-complete --json
+```
+
+For use from an independent RTI repository, export a portable corpus bundle
+and verify an implementation-owned manifest through the external sidecar
+contract described in
+[`docs/EXTERNAL-COMPLIANCE-KIT.md`](docs/EXTERNAL-COMPLIANCE-KIT.md).
+An RTI can also provide a language-neutral adapter executable: the sidecar
+sends it a JSON request describing expected API seams and receives bindings and
+evidence back over JSON stdin/stdout, so the RTI need not import this project.
+For the standard Catch2 or JUnit 5 path, the supplied JUnit-results adapter
+reads the RTI's existing XML results and an RTI-owned test catalog; no custom
+adapter is required to create the initial raw compliance bundle.
+Use the RTI-owned test catalog to connect Catch2/CTest or JUnit 5/Maven/Gradle
+behavior tests to stable evidence IDs, implementation mappings, and exact API
+surfaces. The complete onboarding flow is documented in
+[`docs/RTI-TEST-INTEGRATION.md`](docs/RTI-TEST-INTEGRATION.md), with a portable
+catalog schema in
+[`schemas/compliance_test_catalog.schema.json`](schemas/compliance_test_catalog.schema.json)
+and an example in
+[`examples/compliance-test-catalog.json`](examples/compliance-test-catalog.json).
+The verifier's JSON `coverage` object provides requirement, transition, API,
+and binding testing totals, percentages, uncovered IDs, and a
+`fully_verified` result.
+Declared tests and raw adapter results never promote themselves: verified
+evidence requires a separate accepted review mark and a real execution mode;
+mocked or simulated tests remain visible but cannot satisfy full verification.
+
 Authoritative requirement records and their transition relationships live in
 `semantic/requirements.json` and `semantic/requirement-links.json`. Requirement
 links and implementation links are bidirectional and validated at load time.
 A corpus-level report can include all three documents:
 
 ```powershell
-python -m scripts.compliance `
+python -m hla_lab.traceability.compliance `
   topics/ieee/hla-1516-2025 `
   topics/ieee/hla-1516.1-2025 `
   topics/ieee/hla-1516.2-2025 `
@@ -186,7 +309,7 @@ default transition coverage requires a reciprocal transition link; use
 cross-cutting or document-wide:
 
 ```powershell
-python -m scripts.promote_requirement `
+python -m hla_lab.traceability.promote_requirement `
   topics/ieee/hla-1516.1-2025 `
   <candidate-id> `
   --transition <transition-id> `
@@ -197,7 +320,7 @@ The deterministic coverage dashboard is stdout-only and keeps candidates,
 reviewed records, mappings, and remaining gaps separate:
 
 ```powershell
-python -m scripts.semantic_dashboard --json
+python -m hla_lab.reports.semantic_dashboard --json
 ```
 
 `ReferenceTarget` records provide the cross-document target contract, and
@@ -205,11 +328,15 @@ python -m scripts.semantic_dashboard --json
 report remains stdout-only; no audit or verification output is part of the
 tracked source tree.
 
-Run the repeatable Milestone 4 contract checks with:
+Run the complete contract suite with pytest:
 
 ```powershell
-python -m unittest discover -s tests -v
+pytest tests
 ```
+
+The discovered suites are organized directly by durable capability in
+`tests/test_*.py`. They are not tied to historical delivery phases or command
+endpoints.
 
 Invalid state targets, local unresolved semantic references, duplicate IDs, and
 missing clause ownership fail model validation. Cross-document targets that
@@ -217,11 +344,11 @@ cannot be resolved are returned as typed error issues by the corpus report.
 Coverage gaps such as orphan requirements and unmapped transitions remain
 queryable as typed findings while their backlog is visible.
 
-The M24 compliance-facing corpus adds `ComplianceCorpus.compliance_report()`
+The compliance-facing corpus exposes `ComplianceCorpus.compliance_report()`
 and related typed queries for state/sequence implications, table/definition
 dependencies, missing implementation mappings, and planned-versus-concrete
 implementation evidence. Use `--corpus-report --json` with
-`scripts.compliance` to expose that projection without writing a report file.
+`hla_lab.traceability.compliance` to expose that projection without writing a report file.
 
 The compliance publication builder also emits ignored, normalized CSV
 projections under
@@ -231,14 +358,21 @@ mapping link tables. The JSON manifest remains canonical; use the standalone
 export option when working from an existing semantic model:
 
 ```powershell
-python -m scripts.compliance_publication `
+python -m hla_lab.publication.compliance_publication `
   topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json `
   topics/ieee/hla-rti-compliance-2025/semantic/publication.json `
   --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
 ```
 
-Milestone 3 now has an authoritative hierarchy generator in
-`scripts/generate_semantic_blocks.py`. It writes ignored LaTeX output from
+Cross-edition requirements traceability is source-controlled separately in
+`data/semantic/edition-lineage.json`. It supports reviewed `unchanged`,
+`revised`, `split`, `merged`, `added`, and `removed` relations between
+document-qualified semantic IDs, so the 2010 semantic corpus can later be
+compared with the 2025 corpus without matching on wording or clause number. See
+[`docs/EDITION-LINEAGE.md`](docs/EDITION-LINEAGE.md).
+
+The hierarchy generator is authoritative in
+`hla_lab/generation/generate_semantic_blocks.py`. It writes ignored LaTeX output from
 semantic IDs, including anchors/bookmarks and cross-document links. The first
 1516 definition migrations are `def-accuracy` and
 `def-available-directed-interactions`: their authored records live in
@@ -250,7 +384,7 @@ The 1516.1 tranche now includes a text-based federate-lifetime state-machine
 source under `topics/ieee/hla-1516.1-2025/semantic/`. Its JSON is semantic
 source, not a generated audit or a binary analogue.
 
-M4 content slices are now complete: 1516 generates selected Clause 3 summary
+The current content slices are complete: 1516 generates selected Clause 3 summary
 requirements, 1516.1 generates the Connect/Disconnect/Connection Lost/Federate
 Resigned service-family prose and mappings, and 1516.2 generates the typed
 Object model identification table family. The three source builds remain at
@@ -278,37 +412,27 @@ RTI implementation evidence. Build it with:
 python topics/ieee/hla-rti-compliance-2025/build.py build
 ```
 
-The full release smoke check covers the three faithful PDFs, both derivatives,
-and the one-page non-HLA portability fixture:
+The full release smoke check covers the five currently ingested faithful PDFs,
+both derivatives, and the one-page non-HLA portability fixture:
 
 ```powershell
-python -m scripts.release_check `
+python -m hla_lab.publication.release_check `
   --manifest data/release/documents.json `
   --diagram-manifest data/state_machines/manifest.json `
   --authority-manifest data/semantic/authority.json `
   --json
 ```
 
-The execution milestones, exit gates, dependencies, and immediate work order
-are in [docs/EXECUTION-PLAN.md](docs/EXECUTION-PLAN.md). The extracted-diagram
-migration plan, inventory manifest, schema, and progress metrics are in
-[docs/STATE-MACHINE-EXTRACTION-PLAN.md](docs/STATE-MACHINE-EXTRACTION-PLAN.md).
-
-The HLA semantic reconstruction backlog and its measurable source-shape targets
-are in [docs/HLA-SEMANTIC-ROADMAP.md](docs/HLA-SEMANTIC-ROADMAP.md). The
-concrete data-driven source-of-truth contract, current baseline, and M8-M19
-deliverables are in
-[docs/DATA-DRIVEN-DELIVERABLES.md](docs/DATA-DRIVEN-DELIVERABLES.md). Capture a
-fresh, stdout-only baseline with:
+Capture a fresh, stdout-only semantic baseline with:
 
 ```powershell
-python -m scripts.semantic_metrics
+python -m hla_lab.reports.semantic_metrics
 ```
 
 Coordinate-heavy source can be inspected separately from semantic records:
 
 ```powershell
-python -m scripts.layout_model topics/ieee/hla-1516.1-2025
+python -m hla_lab.adapters.layout_model topics/ieee/hla-1516.1-2025
 ```
 
 On Windows with MiKTeX, enable one-time automatic installation of missing LaTeX packages with:
@@ -320,7 +444,8 @@ initexmf --enable-installer
 The document `latexmkrc` files opt into this setting for Windows builds. MiKTeX also exposes the same
 setting in MiKTeX Console under the package installation preferences.
 
-Document build scripts should write generated files to their local `output/` directory and keep source inputs in the document directory (or its `src/` and `assets/` subdirectories).
+Document build scripts should write generated files to their local `output/` directory and keep source inputs in the
+document directory (or its `src/` and `assets/` subdirectories).
 
 Every document build regenerates `output/semantic/semantic-index.tex` and
 `output/semantic/semantic-manifest.tex` from the typed model before running
@@ -339,12 +464,13 @@ provide the active page order; each document's
 insertions, and exceptional pages. Validate this boundary after a build with:
 
 ```powershell
-python -m scripts.semantic_authority --check-generated --json
+python -m hla_lab.traceability.semantic_authority --check-generated --json
 ```
+
 State-machine diagrams can be exported as source-only DOT and Mermaid files:
 
 ```powershell
-python -m scripts.export_state_machine `
+python -m hla_lab.diagrams.export_state_machine `
   topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json `
   --output .tmp/state-machines --format both
 ```
@@ -353,7 +479,7 @@ Generic relationship, hierarchy, conceptual, and protocol-layer diagrams use
 the same source-only contract and can be exported as TikZ or Mermaid:
 
 ```powershell
-python -m scripts.export_graph_diagram `
+python -m hla_lab.diagrams.export_graph_diagram `
   topics/ieee/hla-1516.1-2025/semantic/graph-diagrams.json `
   --output .tmp/graph-diagrams --format both
 ```
@@ -361,12 +487,12 @@ python -m scripts.export_graph_diagram `
 The faithful 1516.1 figure-surface gate and RTI-oriented coverage report are:
 
 ```powershell
-python scripts.diagram_surface_qa.py `
+python -m hla_lab.diagrams.diagram_surface_qa `
   --surface-manifest data/semantic/diagram-surfaces.json `
   --models topics/ieee/hla-1516.1-2025/semantic `
   --generated topics/ieee/hla-1516.1-2025/output/semantic `
   --expected-figures 33 --json
-python scripts.rti_diagram_check.py topics/ieee/hla-1516.1-2025 --json
+python -m hla_lab.diagrams.rti_diagram_check topics/ieee/hla-1516.1-2025 --json
 ```
 
 Visual review packets are likewise ignored and retain their generated TikZ,
@@ -374,7 +500,7 @@ DOT, and Mermaid sources. Add `--graphviz` to render an SVG when Graphviz's
 `dot` executable is installed:
 
 ```powershell
-python -m scripts.review_state_machines `
+python -m hla_lab.diagrams.review_state_machines `
   --manifest data/state_machines/manifest.json `
   --models topics/ieee/hla-1516.1-2025/semantic `
   --reviews reviews --artifacts review-artifacts --graphviz

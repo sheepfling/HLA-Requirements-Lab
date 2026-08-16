@@ -1,0 +1,225 @@
+% Figure 17 - Temporal state
+% Independently revalidated against IEEE Std 1516.1-2010 source physical page 171 / standard page 157.
+% Natural coordinates follow the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure17/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f17 stroke/.style={draw=black,line width=.90pt},
+    f17 partition/.style={draw=black,line width=.80pt,dash pattern=on 4.0pt off 4.0pt},
+    f17 transition/.style={draw=black,line width=.95pt,-{Stealth[length=7.0pt,width=5.7pt]}},
+    f17 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.4}{24.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.03},
+    f17 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.1}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.6}{13.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=.99},
+    f17 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.0}{11.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.0}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 note/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.7}{11.5}\selectfont,align=left,anchor=north west,inner sep=0pt,xscale=1.00}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % ------------------------------------------------------------------
+    % F17-S00 Temporal State outer composite and orthogonal regions.
+    % ------------------------------------------------------------------
+    \draw[f17 stroke]
+    (128,44) -- (653,44)
+    .. controls (690,44) and (720,74) .. (720,111)
+    -- (720,608)
+    .. controls (720,645) and (690,675) .. (653,675)
+    -- (128,675)
+    .. controls (91,675) and (60,645) .. (60,608)
+    -- (60,111)
+    .. controls (60,74) and (91,44) .. (128,44)
+    -- cycle;
+    \draw[f17 stroke] (60,111) -- (720,111);
+    \node[f17 title] at (390,79) {Temporal State};
+
+    % Main orthogonal partition and the three status-region partitions.
+    \draw[f17 partition] (511,111) -- (511,675);
+    \draw[f17 partition] (511,309) -- (720,309);
+    \draw[f17 partition] (511,473) -- (720,473);
+
+    % ------------------------------------------------------------------
+    % Left region: Time Advancing and Time Granted.
+    % ------------------------------------------------------------------
+    \draw[f17 stroke,rounded corners=7pt] (240,160) rectangle (329,214);
+    \node[f17 text] at (284.5,187) {Time\\Advancing};
+
+    % F17-P01 deep history used by Send Message.
+    \draw[f17 stroke] (478,136) circle[radius=16pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (478,136) {H*};
+
+    % F17-E01 Temporal State boundary -> H*: Send Message.
+    \draw[f17 transition] (365,111)
+    .. controls (399,135) and (433,150) .. (461,140);
+    \node[f17 small] at (414,160) {Send Message};
+
+    % F17-E02 Time Advancing self-loop: Receive Message #1.
+    \draw[f17 transition] (329,176)
+    .. controls (354,150) and (357,198) .. (330,190);
+    \node[f17 small] at (294,143) {Receive\\Message \#1};
+
+    % Time Granted composite.
+    \draw[f17 stroke]
+    (128,286) -- (442,286)
+    .. controls (466,286) and (485,305) .. (485,329)
+    -- (485,615)
+    .. controls (485,639) and (466,658) .. (442,658)
+    -- (128,658)
+    .. controls (104,658) and (85,639) .. (85,615)
+    -- (85,329)
+    .. controls (85,305) and (104,286) .. (128,286)
+    -- cycle;
+    \draw[f17 stroke] (92,286) -- (92,309) -- (198,309) -- (198,286);
+    \node[f17 tab] at (145,298) {Time Granted};
+
+    \draw[f17 stroke,rounded corners=7pt] (240,308) rectangle (329,361);
+    \node[f17 text] at (284.5,334.5) {Idle};
+
+    \draw[f17 stroke,rounded corners=7pt] (110,445) rectangle (199,498);
+    \node[f17 text] at (154.5,471.5) {Becoming\\Regulating};
+
+    \draw[f17 stroke,rounded corners=7pt] (368,445) rectangle (457,498);
+    \node[f17 text] at (412.5,471.5) {Becoming\\Constrained};
+
+    \draw[f17 stroke,rounded corners=7pt] (241,584) rectangle (330,637);
+    \node[f17 text] at (285.5,610.5) {Becoming\\Regulating and\\Constrained};
+
+    % F17-P02 left-region initial -> Idle (F17-E05).
+    \fill (498,333) circle[radius=7.5pt];
+    \draw[f17 transition] (490,333) -- (332,333);
+
+    % Time-advance request/grant pair: F17-E03 / F17-E04.
+    \draw[f17 transition] (265,308) -- (265,217);
+    \node[f17 small,anchor=east,align=center] at (218,222)
+        {Time Advance Request\\or\\Time Advance Request Available\\or\\Next Message Request\\or\\Next Message Request Available\\or\\Flush Queue Request};
+    \draw[f17 transition] (302,214) -- (302,305);
+    \node[f17 small,anchor=west,align=center] at (312,256) {Time\\Advance Grant \textdagger};
+
+    % Idle <-> Becoming Regulating: F17-E07 / F17-E08.
+    \draw[f17 transition] (244,355) -- (174,443);
+    \node[f17 tiny,anchor=east] at (166,383) {Enable\\Time Regulation\\{[} in ``Not Regulating'' {]}};
+    \draw[f17 transition] (193,445) -- (265,363);
+    \node[f17 tiny] at (241,421) {Time\\Regulation\\Enabled\textdagger};
+
+    % Idle <-> Becoming Constrained: F17-E09 / F17-E10.
+    \draw[f17 transition] (326,355) -- (393,443);
+    \node[f17 tiny,anchor=west] at (409,383) {Enable\\Time Constrained\\{[} in ``Not Constrained'' {]}};
+    \draw[f17 transition] (375,445) -- (305,363);
+    \node[f17 tiny] at (337,421) {Time Constrained\\Enabled\textdagger};
+
+    % Becoming Regulating <-> Becoming Regulating and Constrained: F17-E11 / F17-E12.
+    \draw[f17 transition] (174,498) -- (263,582);
+    \node[f17 tiny,anchor=east] at (239,521) {Enable\\Time Constrained\\{[} in ``Not Constrained'' {]}};
+    \draw[f17 transition] (246,584) -- (168,501);
+    \node[f17 tiny,anchor=east] at (171,558) {Time Constrained\\Enabled\textdagger};
+
+    % Becoming Constrained <-> Becoming Regulating and Constrained: F17-E13 / F17-E14.
+    \draw[f17 transition] (393,498) -- (308,582);
+    \node[f17 tiny,anchor=west] at (343,521) {Enable\\Time Regulation\\{[} in ``Not Regulating'' {]}};
+    \draw[f17 transition] (326,584) -- (413,501);
+    \node[f17 tiny,anchor=west] at (414,558) {Time\\Regulation\\Enabled\textdagger};
+
+    % F17-P06 shallow history and F17-E06 Receive Message #2.
+    \draw[f17 stroke] (451,620) circle[radius=16pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (451,620) {H};
+    \draw[f17 transition] (360,658)
+    .. controls (388,634) and (414,617) .. (434,620);
+    \node[f17 small] at (399,620) {Receive\\Message \#2};
+
+    % ------------------------------------------------------------------
+    % Right region: Time Regulating Status.
+    % ------------------------------------------------------------------
+    \draw[f17 stroke] (511,111) -- (511,144) -- (644,144) -- (644,111);
+    \node[f17 tab] at (577.5,127.5) {Time Regulating Status};
+
+    \draw[f17 stroke,rounded corners=7pt] (519,207) rectangle (590,260);
+    \node[f17 text] at (554.5,233.5) {Regulating};
+    \draw[f17 stroke,rounded corners=7pt] (641,207) rectangle (712,260);
+    \node[f17 text] at (676.5,233.5) {Not\\Regulating};
+
+    % F17-P03 / F17-E15.
+    \fill (697,168) circle[radius=7.5pt];
+    \draw[f17 transition] (697,176) -- (697,204);
+    % F17-E16 / F17-E17.
+    \draw[f17 transition] (590,224) -- (638,224);
+    \node[f17 small] at (616,190) {Disable Time\\Regulation};
+    \draw[f17 transition] (641,243) -- (593,243);
+    \node[f17 small] at (615,275) {Time Regulation\\Enabled\textdagger};
+
+    % ------------------------------------------------------------------
+    % Right region: Time Constrained Status.
+    % ------------------------------------------------------------------
+    \draw[f17 stroke] (511,309) -- (511,342) -- (647,342) -- (647,309);
+    \node[f17 tab] at (579,325.5) {Time Constrained Status};
+
+    \draw[f17 stroke,rounded corners=7pt] (517,374) rectangle (588,427);
+    \node[f17 text] at (552.5,400.5) {Constrained};
+    \draw[f17 stroke,rounded corners=7pt] (639,374) rectangle (710,427);
+    \node[f17 text] at (674.5,400.5) {Not\\Constrained};
+
+    % F17-P04 / F17-E18.
+    \fill (697,331) circle[radius=7.5pt];
+    \draw[f17 transition] (697,339) -- (697,371);
+    % F17-E19 / F17-E20.
+    \draw[f17 transition] (588,391) -- (636,391);
+    \node[f17 small] at (614,356) {Disable Time\\Constrained};
+    \draw[f17 transition] (639,410) -- (591,410);
+    \node[f17 small] at (613,443) {Time Constrained\\Enabled\textdagger};
+
+    % ------------------------------------------------------------------
+    % Right region: Asynchronous Delivery Switch.
+    % ------------------------------------------------------------------
+    \draw[f17 stroke] (511,473) -- (511,506) -- (649,506) -- (649,473);
+    \node[f17 tab] at (580,489.5) {Asynchronous Delivery Switch};
+
+    \draw[f17 stroke,rounded corners=7pt] (518,550) rectangle (589,603);
+    \node[f17 small] at (553.5,576.5) {Asynchronous\\Delivery\\Enabled};
+    \draw[f17 stroke,rounded corners=7pt] (640,551) rectangle (711,604);
+    \node[f17 small] at (675.5,577.5) {Asynchronous\\Delivery\\Disabled};
+
+    % F17-P05 / F17-E21.
+    \fill (697,507) circle[radius=7.5pt];
+    \draw[f17 transition] (697,515) -- (697,548);
+    % F17-E22 / F17-E23.
+    \draw[f17 transition] (589,567) -- (637,567);
+    \node[f17 small] at (614,529) {Disable\\Asynchronously Delivery};
+    \draw[f17 transition] (640,586) -- (592,586);
+    \node[f17 small] at (614,625) {Enable\\Asynchronous Delivery};
+
+    % ------------------------------------------------------------------
+    % Source's expanded symbolic-transition definitions.
+    % ------------------------------------------------------------------
+    \node[f17 note] at (740,165) {Where the following transitions\\are expanded:};
+
+    \node[f17 note] at (740,205) {Send Message ==\\
+    \hspace*{15pt}RO $\rightarrow$ RO\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}TSO $\wedge$ ts $\rightarrow$ TSO\\
+    \hspace*{15pt}[ in ``Regulating'' ]\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}TSO $\wedge$ no\_ts $\rightarrow$ RO\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}TSO $\rightarrow$ RO\\
+    \hspace*{15pt}[ not in ``Regulating'' ]};
+
+    \node[f17 note] at (740,356) {Receive Message \#1 ==\\
+    \hspace*{15pt}RO $\leftarrow$ RO\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}RO $\leftarrow$ TSO\\
+    \hspace*{15pt}[ in ``Not Constrained'' ]\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}TSO $\leftarrow$ TSO\\
+    \hspace*{15pt}[ in ``Constrained'' ]};
+
+    % Source punctuation is intentionally preserved: this guard opens with `(`
+    % and closes with `]` in the printed raster figure.
+    \node[f17 note] at (740,486) {Receive Message \#2 ==\\
+    \hspace*{15pt}RO $\leftarrow$ RO\\
+    \hspace*{15pt}(in ``Asynch Enabled'' $\vee$\\
+    \hspace*{28pt}in ``Not Constrained'' ]\\
+    \hspace*{47pt}or\\
+    \hspace*{15pt}RO $\leftarrow$ TSO\\
+    \hspace*{15pt}[ in ``Not Constrained'' ]};
+\end{tikzpicture}

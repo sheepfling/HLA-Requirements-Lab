@@ -1,0 +1,58 @@
+% Figure 2 - Overall view of federate-to-RTI relationship
+% Independently revalidated against source physical page 40 / standard page 26.
+% Edge IDs correspond to audit/figure02/edges.csv.
+\begin{tikzpicture}[x=1cm,y=.957cm]
+    \path[use as bounding box] (0,0) rectangle (14.45,10.72);
+
+    % Participant headings.
+    \node[font=\sffamily\bfseries\fontsize{12.7}{13.5}\selectfont] at (2.30,10.12) {Federate};
+    \node[font=\sffamily\bfseries\fontsize{12.7}{13.5}\selectfont] at (11.80,10.12) {RTI};
+
+    % F02-E01: downward Federate axis.
+    \draw[-{Stealth[length=7.8pt,width=6.8pt]},line width=1.80pt]
+    (2.30,9.72) -- (2.30,0.98);
+    % F02-E02: downward RTI axis.
+    \draw[-{Stealth[length=7.8pt,width=6.8pt]},line width=1.80pt]
+    (11.80,9.72) -- (11.80,0.98);
+
+    % F02-E03: connect/join, Federate -> RTI.
+    \draw[-{Stealth[length=11.2pt,width=9.8pt]},line width=3.20pt]
+    (2.65,9.24) -- (11.40,9.24);
+    \node[font=\sffamily\fontsize{10.7}{11.4}\selectfont,anchor=south]
+    at (7.15,9.36) {Connect to RTI, Join Federation Execution};
+
+    % F02-E04: initial data requirements, bidirectional.
+    \draw[{Stealth[length=10.8pt,width=9.4pt]}-{Stealth[length=10.8pt,width=9.4pt]},line width=2.95pt]
+    (2.65,8.02) -- (11.40,8.02);
+    \node[font=\sffamily\fontsize{10.7}{11.4}\selectfont,anchor=south]
+    at (7.15,8.16) {Establish Initial Data Requirements};
+
+    % F02-E05: normal execution group, bidirectional.
+    \node[font=\sffamily\fontsize{9.55}{10.15}\selectfont,align=center,anchor=north]
+    at (7.15,7.34) {Normal Federate Execution\\
+    Time Advance Request/Grant\\
+    Register/Discover Object Instances\\
+    Update/Reflect Attribute Values\\
+    Send/Receive Interactions\\
+    Delete/Remove Object Instances};
+    \draw[{Stealth[length=10.8pt,width=9.4pt]}-{Stealth[length=10.8pt,width=9.4pt]},line width=2.95pt]
+    (2.95,4.95) -- (11.05,4.95);
+
+    % F02-E06: non-normal execution group, bidirectional.
+    \node[font=\sffamily\fontsize{9.55}{10.15}\selectfont,align=center,anchor=north]
+    at (7.15,4.25) {Not Normal Federate Execution\\
+    Save/Restore Federation Execution\\
+    Send certain MOM interactions\\
+    Resign Federation Execution};
+    \draw[{Stealth[length=10.8pt,width=9.4pt]}-{Stealth[length=10.8pt,width=9.4pt]},line width=2.95pt]
+    (2.94,2.63) -- (11.06,2.63);
+
+    % F02-E07: resign/disconnect, Federate -> RTI.
+    \draw[-{Stealth[length=11.2pt,width=9.8pt]},line width=3.20pt]
+    (2.78,1.28) -- (11.13,1.28);
+    \node[font=\sffamily\fontsize{10.55}{11.25}\selectfont,anchor=south]
+    at (7.15,1.42) {Resign Federation Execution, Disconnect from RTI};
+
+    \node[font=\sffamily\bfseries\fontsize{11.4}{12.2}\selectfont]
+    at (7.21,0.30) {Figure 2---Overall view of federate-to-RTI relationship};
+\end{tikzpicture}

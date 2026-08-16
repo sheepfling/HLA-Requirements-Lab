@@ -1,0 +1,1960 @@
+% Faithful initial reconstruction of Clause 6 from source PDF pages 101--136
+% (standard pages 87--122). Source-page boundaries are intentionally preserved.
+
+\clearpage
+
+% --- Standard page 87 / source PDF page 101 ---
+\begin{compactstdpage}
+
+    \section{Object management}
+
+    \subsection{Overview}
+
+
+    This group of HLA services shall deal with the registration, modification, and deletion of object instances and the sending and receipt of interactions.
+
+    \subsubsection{Object instance discovery}
+
+
+    Object instance discovery is a prime concept in this service group. Object instance O shall have a candidate discovery class at joined federate F if joined federate F is subscribed to either the registered class of O or to a superclass of the registered class of O. (A joined federate F may be subscribed either by the DM subscription service Subscribe Object Class Attributes or by the DDM subscription service Subscribe Object Class Attributes With Regions.) If an object instance has a candidate discovery class at a joined federate, the candidate discovery class of the object instance at that joined federate shall be the object instance's registered class if subscribed to by the joined federate. Otherwise, the candidate discovery class of the object instance shall be the closest superclass of the object instances's registered class to which the joined federate is subscribed.
+
+
+    A joined federate discovers an object instance via the Discover Object Instance \rtiinitiated{} service. This service shall be invoked at a joined federate F for object instance O when
+
+
+    \stdliteralitem{a)}{O is not known at F, and}
+    \stdliteralitem{b)}{There is an instance attribute i of O that has a corresponding class attribute i', and}
+    \stdliteralitem{c)}{i is owned by either another joined federate (not F) or the RTI, and}
+    \stdliteralitem{d)}{Either}
+    \stdliteralsubitem{1)}{i' is a subscribed attribute of O's candidate discovery class, or}
+    \stdliteralsubitem{2)}{i' is a subscribed attribute of O's candidate discovery class with regions and the update region set of i by the owning joined federate overlaps the subscription region set of i' at O's candidate discovery class at the subscribing joined federate}
+
+
+    When the Discover Object Instance \rtiinitiated{} service is invoked, the class that is an argument to this service invocation shall be called the discovered class of the object instance. At the moment of discovery, the discovered class shall be the same as the candidate discovery class. Subsequent to discovery, the discovered class cannot change. The candidate discovery class may change. As long as an object instance remains known, however, its candidate discovery class is not of interest.
+
+
+    When a joined federate either uses the Register Object Instance service to register an object instance or receives an invocation of the Discover Object Instance \rtiinitiated{} to discover an object instance, that object instance becomes known to the joined federate, and the object instance has a known class at that joined federate. If a joined federate knows about an object instance as a result of having registered it, that object instance's known class is its registered class. If the joined federate knows about the object instance as a result of having discovered it, the object instance's known class is its discovered class.
+
+    \subsubsection{Scope}
+
+
+    When the Discover Object Instance \rtiinitiated{} service is invoked, there shall be an instance attribute that is part of the newly discovered object instance that immediately comes into scope at the discovering joined federate, both when DDM is used and when it is not used. An instance attribute of an object instance shall be in scope for joined federate F if
+
+
+    \stdliteralitem{a)}{The object instance is known to the joined federate}
+    \stdliteralitem{b)}{The instance attribute is owned by another joined federate or by the RTI, and}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 88 / source PDF page 102 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{Either}
+    \stdliteralsubitem{1)}{The instance attribute's corresponding class attribute is a subscribed attribute of the known class of the object instance, or}
+    \stdliteralsubitem{2)}{The instance attribute's corresponding class attribute is a subscribed attribute of the known class of the object instance with regions, and the update region set of the instance attribute overlaps the subscription region set of the instance attribute's corresponding class attribute at the known class of the instance attribute at the subscribing joined federate.}
+
+    \subsubsection{In-scope reflects}
+
+
+    If an instance attribute is in scope for a given joined federate F, exactly one other joined federate exists (U) in the federation execution that is capable of invoking the Update Attribute Values service for that instance attribute so that if U were to invoke the Update Attribute Values service for that instance attribute, all of the preconditions for the invocation of the corresponding Reflect Attribute Values \rtiinitiated{} service at F are satisfied.
+
+
+    The Reflect Attribute Values \rtiinitiated{} service may be invoked at a joined federate for a given instance attribute when
+
+
+    \stdliteralitem{a)}{The instance attribute is in scope.}
+    \stdliteralitem{b)}{A corresponding Update Attribute Values service for the instance attribute was invoked by another federate.}
+
+    \subsubsection{Out-of-scope reflects}
+
+
+    The Reflect Attribute Values \rtiinitiated{} service may also be invoked at a joined federate for a given instance attribute when
+
+
+    \stdliteralitem{a)}{The instance attribute is out of scope.}
+    \stdliteralitem{b)}{A corresponding Update Attribute Values service for the instance attribute was invoked by another federate when the instance attribute was in scope.}
+
+    \subsubsection{Attribute relevance}
+
+
+    A joined federate may also direct the RTI, via the Enable/Disable Attribute Relevance Advisory Switch services, to indicate that the joined federate does or does not want the RTI to use the Turn Updates On For Object Instance \rtiinitiated{} and Turn Updates Off For Object Instance \rtiinitiated{} services to inform the joined federate when updates to particular instance attributes are relevant to the other joined federates in the federation execution.
+
+    \subsubsection{Orphan object instances}
+
+
+    Note that there are obscure cases under which an object instance shall become orphaned within a federation execution. Orphaned object instances are unknown by all joined federates and cannot be discovered by any means. An object instance shall become orphaned only if no joined federate knows the object instance (i.e., because the last joined federate to know the object instance has resigned or invoked Local Delete Object Instance). A consequence of no joined federate knowing the object instance is that no instance attributes of that object instance shall be owned. Because the definition of discovery requires that at least one instance attribute be owned, no joined federates can discover the object instance. Without a joined federate being able to discover the object instance, no joined federate can acquire ownership of an instance attribute via the ownership management services. Orphaned object instances shall be unreachable by joined federates and shall be dealt with appropriately by the RTI.
+
+    \subsubsection{Interactions}
+
+
+    Interaction receipt is also an important concept in the object management service group. Interaction I shall have a candidate received class at joined federate F if joined federate F is subscribed to either the sent class
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 89 / source PDF page 103 ---
+\begin{compactstdpage}
+
+    of I or to a superclass of the sent class of I. (A joined federate F may be subscribed to an interaction class either by the DM subscription service Subscribe Interaction Class or by the DDM subscription service Subscribe Interaction Class With Regions.) If an interaction has a candidate received class at a joined federate, the candidate received class of the interaction at that joined federate shall be the interaction's sent class if subscribed to by the joined federate. Otherwise, the candidate received class of the interaction shall be the closest superclass of the interaction's sent class to which the joined federate is subscribed.
+
+
+    A joined federate receives an interaction via the Receive Interaction \rtiinitiated{} service. This service may be invoked at a joined federate F when
+
+
+    \stdliteralitem{a)}{Another joined federate (not F) has invoked the Send Interaction service to send interaction I, and}
+    \stdliteralitem{b)}{I has a candidate received class at F, and}
+    \stdliteralitem{c)}{Either}
+    \stdliteralsubitem{1)}{This candidate received class is a subscribed interaction class, or}
+    \stdliteralsubitem{2)}{This candidate received class is a subscribed interaction class with regions, and the update region set of I overlaps the subscription region set for I's candidate received class at the subscribing joined federate.}
+
+
+    When the Receive Interaction \rtiinitiated{} service is invoked, the class that is an argument to this service invocation shall be called the received class of the interaction that is received as a result of this service invocation. At the moment of receipt, the received class shall be the same as the candidate received class.
+
+    \subsubsection{State charts}
+
+
+    Figure 14 depicts formal representations of the state of an arbitrary object instance.
+
+% Figure 14 is placed in the authoritative source image rectangle.
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,inner sep=0pt] at
+        ([xshift=77.81069pt,yshift=-366.34862pt]current page.north west)
+            {\resizebox{457.16797pt}{342.74047pt}{\input{figures/native/figure-14.tex}}};
+        \node[anchor=center,inner sep=0pt,
+            font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+        at ([xshift=297.06970pt,yshift=-701.76559pt]current page.north west)
+            {Figure 14---Object instance (\textit{i}, \textit{k}) known};
+    \end{tikzpicture}
+    \mbox{}\vfill
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 90 / source PDF page 104 ---
+\begin{compactstdpage}
+
+    Figure 15 depicts the implications of ownership of an arbitrary instance attribute.
+
+% Figure 15 is placed in the authoritative source image rectangle.
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,inner sep=0pt] at
+        ([xshift=88.64999bp,yshift=-81.16919bp]current page.north west)
+            {\resizebox{434.19693bp}{357.07080bp}{\input{figures/native/figure-15.tex}}};
+        \node[anchor=center,inner sep=0pt,
+            font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{9.96bp}{11.12bp}\selectfont]
+        at ([xshift=310.29277bp,yshift=-430.16388bp]current page.north west)
+            {\scalebox{1.077}[1.20]{Figure 15---Implications of ownership of instance attribute (\textit{i}, \textit{k}, \textit{j})}};
+    \end{tikzpicture}
+    \par\vspace*{386.6pt}
+
+    \subsubsection{Auto-Provide Switch}
+
+
+    The federation execution-wide Auto-Provide Switch indicates whether the RTI shall automatically solicit attribute value updates from attribute-owning federates. The initial setting for this switch shall come from the FDD supplied to the Create Federation Execution service invocation for the federation execution. This switch setting shall be modifiable during a federation execution via the HLAmanager.HLAfederation.HLAadjust.HLAsetSwitches MOM interaction.
+
+
+    Whenever this switch is enabled, the Provide Attribute Value Update \rtiinitiated{} service shall be invoked, at an instance attribute-owning federate, for every instance attribute in an execution, whenever it becomes in scope at another non-owning federate. If an instance attribute becomes in scope at multiple federates at the same wall-clock time, the Provide Attribute Value Update \rtiinitiated{} service may be invoked at the owning federate just once, rather than once for each federate at which the instance attribute became in scope.
+
+
+    When this switch changes to enabled during a federation execution, the Provide Attribute Value Update \rtiinitiated{} service shall be invoked at the appropriate owning federate for every in-scope instance attribute.
+
+
+    This switch relies on the definition of in-scope attributes, not on the setting of the Attribute Scope Advisory Switch. The Auto-Provide Switch shall function the same whether the Attribute Scope Advisory Switch is enabled or disabled.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 91 / source PDF page 105 ---
+\begin{compactstdpage}
+
+    \subsubsection{Transportation types}
+
+
+    The type of transportation that carries instance attribute values and interactions can be controlled using various HLA facilities. A transportation type shall be defined as either reliable (which means that delivery of one copy of the data is guaranteed) or best effort (which means that data may be lost in transport). The following transportation types shall always be supported by an RTI:
+
+
+    \stdliteralitem{a)}{HLAreliable: which is the default reliable transportation type}
+    \stdliteralitem{b)}{HLAbestEffort: which is the default best-effort transportation.}
+
+
+    Other transportation types may be supported by the RTI. If a transportation type is requested by a joined federate or in the FDD but not supported by the RTI or other infrastructure components, the RTI may instead fall back to a corresponding (reliable or best-effort) transportation type of its choosing. Ultimately the RTI shall fallback to the corresponding default transportation type (HLAreliable or HLAbestEffort).
+
+
+    A joined federate may request a change of the transportation type for attributes that it owns using the Request Attribute Transportation Type Change service. When this operation has completed, the federate shall receive an invocation of the Confirm Attribute Transportation Type Change \rtiinitiated{} service, specifying the transportation type that was actually achieved, which may or may not have changed.
+
+
+    Similarly, a joined federate may request a change of the transportation type for interactions using the Request Interaction Transportation Type Change service. When this operation has completed, the joined federate shall receive an invocation of the Confirm Interaction Transportation Type Change \rtiinitiated{} service, specifying the transportation type that was actually achieved, which may or may not have changed.
+
+
+    In case the FDD specifies a transportation type that is not available, the RTI shall silently fallback to a corresponding transportation type. It is still possible for a joined federate to inspect the transportation type employed by using the Query Attribute Transportation Type service, which will result in a Report Attribute Transportation Type \rtiinitiated{} service invocation. The corresponding services for interactions are Query Interaction Transportation Type and Report Interaction Transportation Type \rtiinitiated{}.
+
+    \subsubsection{Passelization}
+
+
+    All of the instance attribute/value pairs in an Update Attribute Values service invocation for instance attributes that have identical transportation type, sent message order type, and set of sent region designators (if present) shall be defined as one passel. The instance attributes that make up a passel shall be available for delivery in the same Reflect Attribute Values service invocation. The delivery of the instance attributes that make up the passel shall depend on the subscriptions and subscription region specifications at the reflecting joined federate. Elements shall not change passels, passels shall not be divided, and passels shall not be combined with other passels. Since one Update Attribute Values service invocation may result in the creation of multiple passels (where sent transportation type, sent message order type, and set of sent region designators are different), an Update Attribute Values service invocation may result in multiple Reflect Attribute Values service invocations in a reflecting joined federate. Instance attributes delivered via a Reflect Attribute Values service invocation shall not contain elements from more than one Update Attribute Values service invocation.
+
+    \subsubsection{Sending updates with update rate reduction}
+
+
+    The RTI shall not provide an update rate to a joined federate that exceeds the subscribed update rate. It shall not, however, deliver any more updates than what is provided by the owning joined federate. In other words, any minimum update rate shall not be guaranteed. In case a joined federate has subscribed with an update rate other than the default update rate, the RTI shall handle this situation as follows:
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 92 / source PDF page 106 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{a)}{for attributes with best-effort transportation, messages shall not be delivered to a joined federate with an update rate higher than the subscribed update rate. Any messages in excess of this rate shall be dropped. Given a maximum update rate of x Hz and given that a message has been delivered at wall-clock time t, no message shall be delivered before t + (1 / x).}
+    \stdliteralitem{b)}{for attributes with reliable transportation, no messages shall be dropped.}
+
+
+    In case the attribute relevancy advisory switch is enabled, the owning joined federate shall be notified of the maximum actively subscribed update rate as part of the Turn Updates On For Object Instance \rtiinitiated{} service invocation. The Turn Updates On for Object Instance \rtiinitiated{} service invocation shall also be invoked at owning joined federates whenever the maximum actively subscribed update rate in the federation execution changes. In case any joined federate is actively subscribed using the default update rate, no update rate designator will be provided as part of the Turn Updates On for Object Instance \rtiinitiated{} service invocation. In case the transportation type for an attribute is changed, the update rate reduction behavior for the new transportation type shall apply.
+
+
+    If operating in a synchronous callback model, a subscribing joined federate whose rate of invoking the Evoke Callback service (Re) and rate of updates by the publishing joined federate (Rp) are higher than the subscribed update rate (Rs), then the RTI shall drop messages at a rate of Rp--Rs. If either Re or Rp is less than Rs, there are no guarantees on the rate of messages received by the subscribing joined federate.
+
+    \subsection{Reserve Object Instance Name service}
+
+
+    The Reserve Object Instance Name service indicates that the joined federate is attempting to reserve the exclusive right to register object instances with the supplied name (subject to the restriction that only one object instance at a time shall exist with a particular name). The value of the supplied name argument shall not begin with ``HLA.'' The RTI shall provide the result of the reservation attempt via the Object Instance Name Reserved \rtiinitiated{} service.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Name.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The value of the name argument does not begin with ``HLA.''}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has the candidate name.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Illegal name.}
+    \stdliteralitem{b)}{Federate save in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 93 / source PDF page 107 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Object Instance Name Reserved \rtiinitiated{} service}
+
+
+    The Object Instance Name Reserved \rtiinitiated{} service notifies the joined federate whether the name provided in a previous invocation of Reserve Object Instance Name service has been reserved. A reservation-success indicator argument indicating success shall mean that the joined federate has obtained the unique right to register object instances with the supplied name. The reservation is retained until the joined federate either resigns or relinquishes the reservation by successfully invoking the Release Object Instance Name service. While a joined federate holds a reservation on a name, no other federate joined to the current federation execution shall receive a successful reservation for that name.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Name.}
+    \stdliteralitem{b)}{Reservation-success indicator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate had previously invoked the Reserve Object Instance Name service with the name.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{If the reservation-success indicator is true, the joined federate has been notified that it has obtained the unique right to register objects with the supplied name.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 94 / source PDF page 108 ---
+\begin{compactstdpage}
+
+    \subsection{Release Object Instance Name service}
+
+
+    The Release Object Instance Name service indicates that the joined federate is attempting to relinquish the unique right to register object instances with the supplied name. The supplied name shall be a name that is currently reserved by the joined federate, having previously been the subject of a successful invocation of the Object Instance Name Reserved \rtiinitiated{} service. Once an object instance name reservation is released, the name shall be available for any joined federate to reserve.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Name.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The supplied name is currently reserved by the joined federate, having previously been the subject of a successful invocation of either the Object Instance Name Reserved \rtiinitiated{} service or the Multiple Object Instance Names Reserved \rtiinitiated{} service.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The supplied name is no longer reserved by the joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The object instance name is not currently reserved.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Reserve Multiple Object Instance Names service}
+
+
+    The Reserve Multiple Object Instance Names service indicates that the joined federate is attempting to reserve the exclusive right to register object instances with the supplied names (subject to the restriction that only one object instance at a time shall exist with a particular name). The name set cannot be empty. The name values in the supplied name set argument shall not begin with ``HLA.'' Any one illegal name shall abort the reservation of all names in the set. The RTI shall provide the result of the reservation attempt via the Multiple Object Instance Name Reserved \rtiinitiated{} service. The Object Instance Name Reserved \rtiinitiated{} service shall not be used to provide the result for any single name.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 95 / source PDF page 109 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Name Set.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The name set argument is not empty.}
+    \stdliteralitem{e)}{Each name value in the name set argument does not begin with ``HLA.''}
+    \stdliteralitem{f)}{Save not in progress.}
+    \stdliteralitem{g)}{Restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has the candidate names.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The name set was empty.}
+    \stdliteralitem{b)}{Illegal name.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Save in progress.}
+    \stdliteralitem{e)}{Restore in progress.}
+    \stdliteralitem{f)}{Not connected.}
+    \stdliteralitem{g)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Multiple Object Instance Names Reserved \rtiinitiated{} service}
+
+
+    The Multiple Object Instance Names Reserved \rtiinitiated{} service notifies the joined federate whether the names provided in a previous invocation of Reserve Multiple Object Instance Names service have been reserved. If successful, this reservation shall mean that the joined federate has obtained the unique right to register object instances with the supplied names. The reservation is retained until the joined federate either resigns or relinquishes the reservation by successfully invoking the Release Object Instance Name or Release Multiple Object Instance Names service. While a joined federate holds a reservation on a name, no other federate joined to the current federation execution shall receive a successful reservation for that name. This service shall not be invoked as a result of the Reserve Object Instance Name service.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Set of names and corresponding reservation-success indicators.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 96 / source PDF page 110 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate had previously invoked the Reserve Multiple Object Instance Names service with those names.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{For each name, if its success indicator is true, the joined federate has been notified that it has obtained the unique right to register an object instance with that name.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Release Multiple Object Instance Names service}
+
+
+    The Release Multiple Object Instance Names service indicates that the joined federate is attempting to relinquish the unique right to register object instances with the supplied names. Each supplied name shall be a name that is currently reserved by the joined federate, having previously been the subject of a successful invocation of the Object Instance Name Reserved or Multiple Object Instance Name Reserved service. Once an object instance name reservation is released, the name shall be available for any joined federate to reserve. Any unreserved name shall abort the release of all names in the list.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Name set.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The supplied names are currently reserved by the joined federate, having previously been the subject of a successful invocation of a Object Instance Name Reserved or Multiple Object Instance Name Reserved service.}
+    \stdliteralitem{e)}{Save not in progress.}
+    \stdliteralitem{f)}{Restore not in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 97 / source PDF page 111 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The supplied names are no longer reserved by the joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{An object instance name is not currently reserved.}
+    \stdliteralitem{b)}{Save in progress.}
+    \stdliteralitem{c)}{Restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Register Object Instance service}
+
+
+    The RTI shall create a federation execution-wide unique object instance handle and shall coadunate that handle with an instance of the supplied object class. All instance attributes of the object instance for which the corresponding class attributes are currently published by the registering joined federate shall be set as owned by the registering joined federate.
+
+
+    An object instance handle shall be uniform throughout the federation execution; i.e., with respect to a particular object instance, the handle provided to the joined federate that registers the object instance shall be the same handle provided to all joined federates that discover the object instance. The phrase ``the same handle'' shall denote handle equality rather than handle identity. Two handles shall be considered to be the same if, according to the comparison operator in each of the APIs (for example, according to the ``equals'' method in the Java API), the handles would be determined to be equal. The handles shall also have equality between joined federates that are using different language APIs. The handles may be communicated between joined federates via instance attributes or interaction parameters.
+
+
+    If the optional object instance name argument is supplied, that name shall have been successfully reserved by the registering federate as indicated by the Object Instance Name Reserved \rtiinitiated{} service and shall be coadunated with the object instance. If the optional object instance name argument is not supplied, the RTI shall create a federation execution-wide unique name, and that name shall be coadunated with the object instance.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object class designator.}
+    \stdliteralitem{b)}{Optional object instance name.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Object instance handle.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The object class is defined in the FDD.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 98 / source PDF page 112 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{The joined federate is publishing the object class.}
+    \stdliteralitem{f)}{If the optional object instance name argument is supplied, that name is reserved and not already coadunated with another object instance.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The returned object instance handle is coadunated with the object instance.}
+    \stdliteralitem{b)}{The joined federate acquires ownership of the instance attributes that correspond to the currently published class attributes for the specified object class.}
+    \stdliteralitem{c)}{If the optional object instance name argument is supplied, that name is coadunated with the object instance.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The object instance name is already coadunated with another object instance (if optional object instance name argument is supplied).}
+    \stdliteralitem{b)}{The object instance name was not reserved (if optional object instance name argument is supplied).}
+    \stdliteralitem{c)}{The joined federate is not publishing the specified object class.}
+    \stdliteralitem{d)}{The object class is not defined in the FDD.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 10.}
+    \stdliteralitem{b)}{Figure 15.}
+    \stdliteralitem{c)}{Figure 16.}
+
+    \subsection{Discover Object Instance \rtiinitiated{} service}
+
+
+    The Discover Object Instance \rtiinitiated{} service shall inform the joined federate to discover an object instance. Object instance discovery is described in 6.1. The object instance handle shall be unique to the federation execution and shall be uniform (see 6.8) throughout the federation execution.
+
+
+    If the Convey Producing Federate Switch for this joined federate is enabled, the producing joined federate argument shall contain the designator for the joined federate that registered the object instance. This producing joined federate may not own instance attributes that caused the discovery, and, in fact, it may be no longer joined to the federation execution.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance handle.}
+    \stdliteralitem{b)}{Object class designator.}
+    \stdliteralitem{c)}{Object instance name.}
+    \stdliteralitem{d)}{Optional producing joined federate designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 99 / source PDF page 113 ---
+\begin{compactstdpage}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{An object instance with the specified designator exists.}
+    \stdliteralitem{d)}{The joined federate is:}
+    \stdliteralsubitem{1)}{Subscribed to some class attribute att at the specified object class, and the att's analogous instance attribute that is part of the specified object instance is either owned by another joined federate or owned by the RTI, and/or}
+    \stdliteralsubitem{2)}{Subscribed with regions to some class attribute att at the specified object class, and the subscription region set overlaps the update region set of att's analogous instance attribute that is part of the specified object instance by the joined federate that owns that instance attribute.}
+    \stdliteralitem{e)}{The joined federate does not know about the object instance with the specified designator.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The object instance is known to the joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 10.}
+    \stdliteralitem{b)}{Figure 15.}
+    \stdliteralitem{c)}{Figure 16.}
+
+    \subsection{Update Attribute Values service}
+
+
+    The Update Attribute Values service shall provide instance attribute values to the federation. The joined federate shall be able to update only owned instance attributes. The joined federate should supply instance attribute values using the federation-agreed-upon update policies. This service, coupled with the Reflect Attribute Values \rtiinitiated{} service, forms the primary data exchange mechanism supported by the RTI.
+
+
+    If preferred order type (see 8.1.1) of at least one instance attribute is TSO, the joined federate invoking this service is time-regulating, and the timestamp argument is present, this service shall return a federation-unique message retraction designator. Otherwise, no message retraction designator shall be returned. A timestamp value should be provided if the preferred order type of at least one instance attribute is TSO and the joined federate invoking this service is time-regulating.
+
+
+    The user-supplied tag argument shall be provided with all corresponding Reflect Attribute Value \rtiinitiated{} service invocations, even multiple ones at the same reflecting joined federate.
+
+
+    If, at any wall-clock time between the invocation of this service and what would be the invocation of the corresponding Reflect Attribute Values \rtiinitiated{} service for a given instance attribute that is supplied as an argument to this service, a potential joined federate is either
+
+
+    \stdliteralitem{a)}{Unsubscribed to that instance attribute's corresponding class attribute at the known class of the object instance at the potential reflecting joined federate, or}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 100 / source PDF page 114 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{Using a subscription region set for the instance attribute's corresponding class attribute at the known class of the object instance at the potential reflecting joined federate and this region set does not overlap the update region set of the instance attribute at the wall-clock time of update,}
+
+
+    then the RTI shall not invoke the corresponding Reflect Attribute Values \rtiinitiated{} service for that instance attribute at that joined federate.
+
+
+    If, at any wall-clock time between the invocation of this service and what would be the invocation of the corresponding Reflect Attribute Values \rtiinitiated{} service for a given instance attribute that is supplied as an argument to this service, a potential reflecting joined federate is either
+
+
+    \stdliteralitem{c)}{Subscribed to that instance attribute's corresponding class attribute at the known class of the object instance at the potential reflecting joined federate, or}
+    \stdliteralitem{d)}{Using a subscription region set for the instance attribute's corresponding class attribute at the known class of the object instance at the potential reflecting joined federate and this region set overlaps the update region set of the instance attribute at the wall-clock time of update,}
+
+
+    then the RTI shall invoke the corresponding Reflect Attribute Values \rtiinitiated{} service for the instance attribute at that joined federate, subject to the preconditions of the Reflect Attribute Values \rtiinitiated{} service and the rules of time management.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Constrained set of attribute designator and value pairs.}
+    \stdliteralitem{c)}{User-supplied tag.}
+    \stdliteralitem{d)}{Optional timestamp.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Optional message retraction designator.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate owns the instance attributes for which values are provided.}
+    \stdliteralitem{e)}{The attributes are defined in the FDD.}
+    \stdliteralitem{f)}{An object instance with the specified designator exists.}
+    \stdliteralitem{g)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{h)}{The timestamp value shall be in accordance with the constraints stated in Clause 8 (if optional timestamp argument is supplied).}
+    \stdliteralitem{i)}{If the optional timestamp argument is supplied to this service invocation, the invoking joined federate is time-regulating, and it has invoked the Delete Object Instance service for the specified object instance with a timestamp argument (while time-regulating), then the update's timestamp shall be less than or equal to the delete's timestamp.}
+    \stdliteralitem{j)}{Federate save not in progress.}
+    \stdliteralitem{k)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The new instance attribute values have been supplied to the RTI.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 101 / source PDF page 115 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The timestamp is invalid (if optional timestamp argument is supplied).}
+    \stdliteralitem{b)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{c)}{The specified class attributes are not available attributes of the instance object class.}
+    \stdliteralitem{d)}{The object instance is not known.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Reflect Attribute Values \rtiinitiated{} service}
+
+
+    The Reflect Attribute Values \rtiinitiated{} service shall provide the joined federate with new values for the specified instance attributes. This service, coupled with the Update Attribute Values service, forms the primary data exchange mechanism supported by the RTI.
+
+
+    The user-supplied tag argument supplied to the corresponding Update Attribute Values service invocation shall be provided with all corresponding Reflect Attribute Value \rtiinitiated{} service invocations, even multiple ones in the same reflecting joined federate.
+
+
+    The transportation type shall indicate the transportation type of the passel associated with this service invocation.
+
+
+    A timestamp shall be provided if one was specified in the corresponding Update Attribute Values service invocation. The receive message order type shall indicate the type (either RO or TSO) of the received message. The timestamp and receive message order type arguments shall be supplied together or not at all. The sent message order type shall indicate the type (either RO or TSO) of the sent message.
+
+
+    A retraction handle shall be provided if and only if the sent message order type is TSO.
+
+
+    If specified instance attributes have available dimensions and the Convey Region Designator Sets Switch for this joined federate is enabled, the Set of Sent Region Designators argument shall contain a copy of the update region realization (see 9.1.7), if any, that was used for update of the instance attributes at the joined federate, which invoked the corresponding Update Attribute Values service.
+
+
+    If the Convey Producing Federate Switch for this joined federate is enabled, the producing joined federate argument shall contain the designator for the joined federate that updated.
+
+
+    A joined federate invoking the Update Attribute Values service shall not receive the induced Reflect Attribute Values \rtiinitiated{} service invocation, regardless of the subscription situation.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Constrained set of attribute designator and value pairs.}
+    \stdliteralitem{c)}{User-supplied tag.}
+    \stdliteralitem{d)}{Sent message order type.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 102 / source PDF page 116 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{Transportation type.}
+    \stdliteralitem{f)}{Optional timestamp.}
+    \stdliteralitem{g)}{Optional receive message order type.}
+    \stdliteralitem{h)}{Optional message retraction designator.}
+    \stdliteralitem{i)}{Optional set of sent region designators.}
+    \stdliteralitem{j)}{Optional producing joined federate designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{For each attribute designator specified, either}
+    \stdliteralsubitem{1)}{This joined federate is subscribed to the class attribute at the known class of the object instance at this joined federate, or}
+    \stdliteralsubitem{2)}{The joined federate has a subscription region set for the class attribute at the known class of the object instance at the subscribing joined federate and this region set overlaps the update region set of the instance attribute at the wall-clock time of update.}
+    \stdliteralitem{e)}{The joined federate did not send the corresponding update.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The new instance attribute values have been supplied to the joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Send Interaction service}
+
+
+    The Send Interaction service shall send an interaction into the federation. Only parameters that are available at the specified interaction class may be sent in a given interaction, as defined in the FDD. A federate is not required to send all available parameters of the interaction class with the interaction.
+
+
+    If preferred order type (see 8.1.1) of the interaction is TSO, the joined federate invoking this service is time-regulating, and the timestamp argument is present, this service shall return a federation-unique message retraction designator. Otherwise, no message retraction designator shall be returned. A timestamp value should be provided if the preferred order type of the interaction is TSO and the joined federate invoking this service is time-regulating.
+
+
+    If, at any wall-clock time between the invocation of this service for a particular interaction class argument and what would be the invocation of the corresponding Receive Interaction \rtiinitiated{} service at a potential receiving
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 103 / source PDF page 117 ---
+\begin{compactstdpage}
+
+    joined federate, the potential receiving joined federate is unsubscribed to the specified interaction class, the RTI shall not invoke the corresponding Receive Interaction \rtiinitiated{} service at that joined federate.
+
+
+    If, at any wall-clock time between the invocation of this service for a particular interaction class and what would be the invocation of the corresponding Receive Interaction \rtiinitiated{} service at a potential receiving joined federate, the potential receiving joined federate is either
+
+
+    \stdliteralitem{a)}{Subscribed to the specified interaction class, or}
+    \stdliteralitem{b)}{Subscribed to the specified interaction class with regions,}
+
+
+    then the RTI shall invoke the corresponding Receive Interaction \rtiinitiated{} service at that joined federate, subject to the preconditions of the Receive Interaction \rtiinitiated{} service and the rules of time management.
+
+
+    A joined federate invoking the Send Interaction service shall not receive the induced Receive Interaction \rtiinitiated{} service invocation, regardless of the subscription/region situation.
+
+
+    The user-supplied tag argument shall be provided with all corresponding Receive Interaction \rtiinitiated{} service invocations.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Interaction class designator.}
+    \stdliteralitem{b)}{Constrained set of interaction parameter designator and value pairs.}
+    \stdliteralitem{c)}{User-supplied tag.}
+    \stdliteralitem{d)}{Optional timestamp.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Optional message retraction designator.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate is publishing the interaction class.}
+    \stdliteralitem{e)}{The interaction class is defined in the FDD.}
+    \stdliteralitem{f)}{The parameters are defined in the FDD.}
+    \stdliteralitem{g)}{The timestamp value shall be in accordance with the constraints stated in Clause 8 (if optional timestamp argument is supplied).}
+    \stdliteralitem{h)}{Federate save not in progress (Certain MOM interactions can be sent during a save. See 11.4.2).}
+    \stdliteralitem{i)}{Federate restore not in progress (Certain MOM interactions can be sent during a restore. See 11.4.2).}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has received the interaction.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The timestamp is invalid (if optional timestamp argument is supplied).}
+    \stdliteralitem{b)}{The joined federate is not publishing the specified interaction class.}
+    \stdliteralitem{c)}{The interaction parameter is not defined in FDD.}
+    \stdliteralitem{d)}{The interaction class is not defined in the FDD.}
+    \stdliteralitem{e)}{Federate save in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 104 / source PDF page 118 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 13.}
+
+    \subsection{Receive Interaction \rtiinitiated{} service}
+
+
+    The Receive Interaction \rtiinitiated{} service shall provide the joined federate with a sent interaction.
+
+
+    The user-supplied tag argument supplied to the corresponding Send Interaction or Send Interaction With Regions service invocation shall be provided with all corresponding Receive Interaction \rtiinitiated{} service invocations.
+
+
+    The transportation type argument shall indicate the transportation type of the specified interaction, i.e., the transportation type of the published interaction at the joined federate that invoked the corresponding Send Interaction or Send Interaction With Regions service.
+
+
+    A timestamp shall be provided if one was specified in the corresponding Send Interaction or Send Interaction With Regions service invocation. The receive message order type shall indicate the type (either RO or TSO) of the received message. The timestamp and receive message order type arguments shall be supplied together or not at all. The sent message order type shall indicate the type (either RO or TSO) of the sent message.
+
+
+    A retraction handle shall be provided if and only if the sent message order type is TSO.
+
+
+    If the specified interaction has available dimensions and the Convey Region Designator Sets Switch for this joined federate is enabled, the Set of Sent Region Designators argument shall contain a copy of the update region realization (see 9.1.7), if any, that was supplied to the corresponding Send Interaction With Regions service invocation by the sending joined federate.
+
+
+    If the Convey Producing Federate Switch for this joined federate is enabled, the producing joined federate argument shall contain the designator for the sending joined federate
+
+
+    A joined federate invoking the Send Interaction or Send Interaction With Regions service shall not receive the induced Receive Interaction \rtiinitiated{} service invocation, regardless of the subscription situation.
+
+
+    At most, one induced Receive Interaction \rtiinitiated{} service invocation shall happen at a joined federate as a result of the invocation of the Send Interaction or Send Interaction With Regions service at another joined federate.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Interaction class designator.}
+    \stdliteralitem{b)}{Constrained set of interaction parameter designator and value pairs.}
+    \stdliteralitem{c)}{User-supplied tag.}
+    \stdliteralitem{d)}{Sent message order type.}
+    \stdliteralitem{e)}{Transportation type.}
+    \stdliteralitem{f)}{Optional timestamp.}
+    \stdliteralitem{g)}{Optional receive message order type.}
+    \stdliteralitem{h)}{Optional message retraction designator.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 105 / source PDF page 119 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{i)}{Optional set of sent region designators.}
+    \stdliteralitem{j)}{Optional producing joined federate designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate}
+    \stdliteralsubitem{1)}{Is subscribed to the interaction class, and/or}
+    \stdliteralsubitem{2)}{Has a subscription region set for the interaction class and this region set overlaps the update region set that was used for sending the interaction.}
+    \stdliteralitem{d)}{The receiving joined federate did not send the corresponding interaction.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has received the interaction.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 13.}
+
+    \subsection{Delete Object Instance service}
+
+
+    The Delete Object Instance service shall inform the federation that an object instance with the specified designator, which has the HLAprivilegeToDeleteObject instance attribute that is owned by the joined federate, is to be removed from the federation execution. Once the object instance is removed from the federation execution, the designator shall not be reused and all joined federates that owned attributes of the object instance shall no longer own those attributes. The object instance name may be reused for subsequently registered objects. The RTI shall use the Remove Object Instance \rtiinitiated{} service to inform all other joined federates which know the object instance that the object instance has been deleted. The invoking joined federate shall own the HLAprivilegeToDeleteObject attribute of the specified object instance.
+
+
+    The preferred order type (see 8.1.1) of the sent message representing a Delete Object Instance service invocation shall be based on the preferred order type of the HLAprivilegeToDeleteObject attribute of the specified object instance. If preferred order type of the HLAprivilegeToDeleteObject attribute of the specified object instance is TSO, the joined federate invoking this service is time-regulating, and the timestamp argument is present, this service shall return a federation-unique message retraction designator. Otherwise, no message retraction designator shall be returned. A timestamp value should be provided if the preferred order type of the HLAprivilegeToDeleteObject attribute of the specified object instance is TSO and the joined federate invoking this service is time-regulating.
+
+
+    The user-supplied tag argument shall be provided with all corresponding Remove Object Instance \rtiinitiated{} service invocations.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 106 / source PDF page 120 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{User-supplied tag.}
+    \stdliteralitem{c)}{Optional timestamp.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Optional message retraction designator.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate has the privilege to delete the object instance (it owns the HLAprivilegeToDeleteObject instance attribute).}
+    \stdliteralitem{g)}{The timestamp value shall be in accordance with the constraints stated in Clause 8 (if optional timestamp argument is supplied).}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has received the Delete Object Instance service invocation.}
+    \stdliteralitem{b)}{If the sent message order type of the Delete Object Instance service invocation is RO,}
+    \stdliteralsubitem{1)}{The invoking joined federate may no longer update any previously owned attributes of the specified object instance and}
+    \stdliteralsubitem{2)}{The object instance is no longer known at the invoking joined federate, no longer exists as far as the joined federate is concerned, and shall no longer be discovered at any other joined federate.}
+    \stdliteralitem{c)}{If the sent message order type of the Delete Object Instance service invocation is TSO,}
+    \stdliteralsubitem{1)}{The invoking joined federate may no longer update any previously owned attributes of the specified object instance with sent message order type of TSO and a timestamp value greater than that specified in the Delete Object Instance service invocation}
+    \stdliteralsubitem{2)}{Once the joined federate advances its logical time to or past the specified time, the object instance shall no longer be known at the invoking joined federate (and will no longer exist as far as the joined federate is concerned). If the joined federate disables time-regulation, the object instance immediately becomes unknown to the joined federate and ceases to exist as far as the joined federate is concerned. The object instance may still be discovered by other joined federates until their logical times are greater or equal to the specified time of the deletion.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The timestamp is invalid (if optional timestamp argument is supplied).}
+    \stdliteralitem{b)}{The joined federate does not own the delete privilege.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 107 / source PDF page 121 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 10.}
+
+    \subsection{Remove Object Instance \rtiinitiated{} service}
+
+
+    The Remove Object Instance \rtiinitiated{} service shall inform the joined federate that an object instance has been deleted from the federation execution.
+
+
+    The user-supplied tag argument supplied to the corresponding Delete Object Instance service invocation shall be provided with all corresponding Remove Object Instance \rtiinitiated{} service invocations.
+
+
+    A timestamp shall be provided if one was specified in the corresponding Delete Object Instance service invocation. The receive message order type shall indicate the type (either RO or TSO) of the received message. The timestamp and receive message order type arguments shall be supplied together or not at all. The sent message order type shall indicate the type (either RO or TSO) of the sent message.
+
+
+    A retraction handle shall be provided if the delete message had a sent order type of TSO. Otherwise, no retraction handle shall be provided.
+
+
+    If the Convey Producing Federate Switch for this joined federate is enabled, the producing joined federate argument shall contain the designator for the joined federate that registered the object instance. This producing joined federate may not own instance attributes that caused the discovery, and, in fact, it may even no longer be joined to the federation execution.
+
+
+    A joined federate invoking the Delete Object Instance service shall not receive the induced Remove Object Instance \rtiinitiated{} service invocation.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{User-supplied tag.}
+    \stdliteralitem{c)}{Sent message order type.}
+    \stdliteralitem{d)}{Optional timestamp.}
+    \stdliteralitem{e)}{Optional receive message order type.}
+    \stdliteralitem{f)}{Optional message retraction designator.}
+    \stdliteralitem{g)}{Optional producing joined federate designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The receiving joined federate did not send the corresponding Delete Object Instance service.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 108 / source PDF page 122 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been notified to remove the object instance.}
+    \stdliteralitem{b)}{If one of the following is true:}
+    \stdliteraldashitem{A timestamp is not provided or}
+    \stdliteraldashitem{The receive message order type was RO or}
+    \stdliteraldashitem{The message is NOT the result of a Flush Queue Request service invocation, then the object instance is no longer known by the federate and no longer exists as far as the federate is concerned.}
+    \stdliteralitem{c)}{If a timestamp is provided, the receive message order type is TSO, and the message is the result of a Flush Queue Request service invocation, then once the joined federate advances it logical time to or past the specified time, the object instance shall no longer be known by the joined federate (and will no longer exist as far as the joined federate is concerned). If the joined federate successfully disables time-constrained then the object instance shall immediately become unknown by the joined federate (and will no longer exist as far as the joined federate is concerned).}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 10.}
+
+    \subsection{Local Delete Object Instance service}
+
+
+    The Local Delete Object Instance service shall inform the RTI that it shall treat the specified object instance as if the RTI had never notified the invoking joined federate to discover the object instance. The object instance shall not be removed from the federation execution. The joined federate shall not own any attributes of the specified object instance when invoking this service.
+
+
+    After the termination of invocation of this service, the specified object instance may subsequently be discovered by the invoking joined federate, at a possibly different class from previously known.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns no attributes of the specified object instance.}
+    \stdliteralitem{g)}{Instance attributes of the specified object instance do not exist if the joined federate has either}
+    \stdliteralsubitem{1)}{Invoked the Attribute Ownership Acquisition service, but has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 109 / source PDF page 123 ---
+\begin{compactstdpage}
+
+    Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or 2) Invoked the Attribute Ownership Acquisition If Available service, but has not yet received an invocation of the Attribute Ownership Unavailable \rtiinitiated{} service, received an invocation of the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or invoked the Attribute Ownership Acquisition service [after which condition 1) applies]. h) Federate save not in progress. i) Federate restore not in progress.
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The object instance does not exist with respect to the invoking joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Cannot local delete due to pending attempt to acquire instance attribute ownership.}
+    \stdliteralitem{b)}{The joined federate owns instance attributes.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 10.}
+
+    \subsection{Attributes In Scope \rtiinitiated{} service}
+
+
+    The Attributes In Scope \rtiinitiated{} service shall notify the joined federate that the specified attributes for the object instance are in scope for the joined federate. Generation of the Attributes In Scope \rtiinitiated{} service advisory can be controlled using the Enable/Disable Attribute Scope Advisory Switch services. The Attributes In Scope \rtiinitiated{} service shall be invoked only when the Attribute Scope Advisory Switch is enabled.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{For each attribute designator specified, the joined federate either}
+    \stdliteralsubitem{1)}{Is subscribed to the class attribute at the known class of the object instance at this joined federate, or}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 110 / source PDF page 124 ---
+\begin{compactstdpage}
+
+    \stdliteralsubitem{2)}{Has a subscription region set for the class attribute at the known class of the object instance at the subscribing joined federate.}
+    \stdliteralitem{e)}{The instance attributes have come into scope.}
+    \stdliteralitem{f)}{The Attribute Scope Advisory Switch is enabled.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been advised that the instance attributes are in scope.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Attributes Out Of Scope \rtiinitiated{} service}
+
+
+    The Attributes Out Of Scope \rtiinitiated{} service shall notify the joined federate that the specified attributes of the object instance are out of scope for the joined federate. Generation of the Attributes Out Of Scope \rtiinitiated{} service advisory can be controlled using the Enable/Disable Attribute Scope Advisory Switch services. The Attributes Out of Scope \rtiinitiated{} service shall be invoked only when the Attribute Scope Advisory Switch is enabled.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{For each attribute designator specified, the joined federate either}
+    \stdliteralsubitem{1)}{Is subscribed to the class attribute at the known class of the object instance at this joined federate, or}
+    \stdliteralsubitem{2)}{Has a subscription region set for the class attribute at the known class of the object instance at the subscribing joined federate.}
+    \stdliteralitem{e)}{The instance attributes are no longer in scope.}
+    \stdliteralitem{f)}{The Attribute Scope Advisory Switch is enabled.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 111 / source PDF page 125 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been advised that the instance attributes are out of scope.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Request Attribute Value Update service}
+
+
+    The Request Attribute Value Update service shall be used to stimulate the update of values of specified attributes. When this service is used, the RTI shall solicit the current values of the specified attributes from their owners using the Provide Attribute Value Update \rtiinitiated{} service. The RTI shall not invoke the Provide Attribute Value Update \rtiinitiated{} service for unowned instance attributes. When an object class is specified, the RTI shall solicit the values of the specified instance attributes for all object instances registered at that class and all subclasses of that class. When an object instance designator is specified, the RTI shall solicit the values of the specified instance attributes for the particular object instance. The timestamp of any resulting Reflect Attribute Values \rtiinitiated{} service invocations is determined by the updating joined federate.
+
+
+    If the federate invoking this service also owns some of the instance attributes whose values are being requested, it shall not have the Provide Attribute Value Update \rtiinitiated{} service invoked on it by the RTI. The request is taken as an implicit invocation of the provide service at the requesting federate for all qualified instance attributes that it owns.
+
+
+    The user-supplied tag argument shall be provided with all corresponding Provide Attribute Value Update \rtiinitiated{} service invocations.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator or object class designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified class attributes are available attributes of the known class of the specified object instance (when first argument is an object instance designator).}
+    \stdliteralitem{e)}{An object instance with the specified designator exists (when first argument is an object instance designator).}
+    \stdliteralitem{f)}{The joined federate knows about the object instance with the specified designator (when first argument is an object instance designator).}
+    \stdliteralitem{g)}{The specified object class is defined in the FDD (when first argument is an object class).}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 112 / source PDF page 126 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{h)}{The specified class attributes are available attributes of the specified object class (when first argument is an object class).}
+    \stdliteralitem{i)}{Federate save not in progress.}
+    \stdliteralitem{j)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The request for the updated attribute values has been received by the RTI.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{b)}{The object class is not defined in FDD (if an object class designator was specified).}
+    \stdliteralitem{c)}{The object instance is not known (if an object instance designator was specified).}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Provide Attribute Value Update \rtiinitiated{} service}
+
+
+    The Provide Attribute Value Update \rtiinitiated{} service requests the current values for attributes owned by the joined federate for a given object instance. The owning joined federate responds to the Provide Attribute Value Update \rtiinitiated{} service with an invocation of the Update Attribute Values service to provide the requested instance attribute values to the federation. The owning joined federate is not required to provide the values.
+
+
+    The user-supplied tag argument supplied to the corresponding Request Attribute Value Update service invocation shall be provided with all corresponding Provide Attribute Value Update \rtiinitiated{} service invocations.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 113 / source PDF page 127 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been notified to provide updates of the specified instance attribute values.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 14.}
+
+    \subsection{Turn Updates On For Object Instance \rtiinitiated{} service}
+
+
+    The Turn Updates On For Object Instance \rtiinitiated{} service shall indicate to the joined federate that the values of the specified attributes of the specified object instance are required somewhere in the federation execution. The update rate designator argument shall not be provided if there exists a subscription with the default, unspecified rate. If no such subscription exists, then the provided update rate designator argument shall be the update rate designator of the maximum subscribed rate.
+
+
+    The joined federate should commence with the federation-agreed-upon update scheme for the specified instance attributes. Generation of the Turn Updates On For Object Instance \rtiinitiated{} service advisory can be controlled using the Enable/Disable Attribute Relevance Advisory Switch services. The Turn Updates On For Object Instance \rtiinitiated{} service shall be invoked only when the Attribute Relevance Advisory Switch is enabled. The Turn Updates On for Object Instance \rtiinitiated{} service shall also be invoked at owning joined federates whenever the maximum actively subscribed update rate changes.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{Optional maximum update rate designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate owns the instance attributes.}
+    \stdliteralitem{d)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{e)}{For each attribute designator specified, there may be at least one joined federate in the federation execution for which the instance attribute is in scope via an active subscription.}
+    \stdliteralitem{f)}{The Attribute Relevance Advisory Switch is enabled.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been notified by the RTI of the requirement for updates of the specified attributes of the specified object instance.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 114 / source PDF page 128 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Turn Updates Off For Object Instance \rtiinitiated{} service}
+
+
+    The Turn Updates Off For Object Instance \rtiinitiated{} service shall indicate to the joined federate that the values of the specified attributes of the object instance are not required anywhere in the federation execution. Generation of the Turn Updates Off For Object Instance \rtiinitiated{} service advisory can be controlled using the Enable/Disable Attribute Relevance Advisory Switch services. The Turn Updates Off For Object Instance \rtiinitiated{} service shall be invoked only when the Attribute Relevance Advisory Switch is enabled.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{d)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{e)}{For each attribute designator specified, there is no other joined federate in the federation execution for which the instance attribute is in scope via an active subscription.}
+    \stdliteralitem{f)}{The Attribute Relevance Advisory Switch is enabled.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been notified by the RTI that updates of the specified attributes of the specified object instance are not required.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 14}
+
+    \subsection{.Request Attribute Transportation Type Change service}
+
+
+    The transportation type for each attribute of an object instance shall be initialized from the object class description in the FDD. A joined federate may choose to change the transportation type during execution.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 115 / source PDF page 129 ---
+\begin{compactstdpage}
+
+    Invoking the Request Attribute Transportation Type Change service shall attempt to change the transportation type for all future Update Attribute Values service invocations for the specified attributes of the specified object instance only for the invoking joined federate. The RTI shall provide the achieved transportation type via the Confirm Attribute Transportation Type Change \rtiinitiated{} service invocation. The change shall take effect with the RTI invocation of the responding Confirm Attribute Transportation Type Change \rtiinitiated{} service. If the invoking joined federate loses ownership of an instance attribute after changing its transportation type and later acquires ownership of that instance attribute again, the transportation type shall be as defined in the FDD.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{Transportation type.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The specified class attributes are available attributes of the known class of the specified object instance designator.}
+    \stdliteralitem{g)}{The specified instance attributes are not in the process of changing transportation type.}
+    \stdliteralitem{h)}{The joined federate owns the instance attributes.}
+    \stdliteralitem{i)}{The transportation type is valid (see 6.1.10).}
+    \stdliteralitem{j)}{Federate save not in progress.}
+    \stdliteralitem{k)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has been informed of the request to change the transportation type for the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{One or more instance attributes are already in the process of changing transportation type.}
+    \stdliteralitem{b)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{c)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{d)}{The object instance is not known.}
+    \stdliteralitem{e)}{Invalid transportation type.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 116 / source PDF page 130 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Confirm Attribute Transportation Type Change \rtiinitiated{} service}
+
+
+    The Confirm Attribute Transportation Type Change \rtiinitiated{} service shall be used to provide information on what transportation type was achieved for the specified object instance and attributes. This service shall be invoked by the RTI at a joined federate in response to a Request Attribute Transportation Type Change service invocation by the same joined federate.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attributes designator.}
+    \stdliteralitem{c)}{Transportation type that was achieved.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has previously invoked the Request Attribute Transportation Type Change service for the object instance and attributes.}
+    \stdliteralitem{d)}{The transportation type is changed for the specified instance attributes.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed about what transportation type has been achieved.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Query Attribute Transportation Type service}
+
+
+    The Query Attribute Transportation Type service may be used by a joined federate to query the current transportation type of a single attribute of an object instance. The invoking joined federate may or may not own the instance attribute. The RTI shall provide the transportation type information via a Report Attribute Transportation Type \rtiinitiated{} service invocation.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 117 / source PDF page 131 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{Attribute designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The specified class attribute is an available attribute of the known class of the specified object instance designator.}
+    \stdliteralitem{g)}{Save not in progress.}
+    \stdliteralitem{h)}{Restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{b)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{a)}{The object instance is not known.}
+    \stdliteralitem{b)}{Save in progress.}
+    \stdliteralitem{c)}{Restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Report Attribute Transportation Type \rtiinitiated{} service}
+
+
+    The Report Attribute Transportation Type \rtiinitiated{} service shall be used to provide the transportation type that is in use for the specified instance and instance attribute. If the instance attribute is unowned, the transportation type specified in the FDD shall be reported. This service shall be invoked by the RTI at a joined federate in response to a Query Attribute Transportation Type service invocation by the same joined federate.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Attribute designator.}
+    \stdliteralitem{c)}{Transportation type in use.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 118 / source PDF page 132 ---
+\begin{compactstdpage}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has previously invoked the Query Attribute Transportation Type service for the object instance and instance attribute.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed about what transportation type is in use.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Request Interaction Transportation Type Change service}
+
+
+    The transportation type for each interaction shall be initialized from the interaction class description in the FDD. A joined federate may choose to change the transportation type during execution. Invoking the Request Interaction Transportation Type Change service shall attempt to change the transportation type for all future Send Interaction and Send Interaction With Regions service invocations for the specified interaction class for the invoking joined federate only. The RTI shall provide the achieved transportation type via the Confirm Interaction Transportation Type Change \rtiinitiated{} service invocation. The change shall take effect with the RTI invocation of the responding Confirm Interaction Transportation Type Change \rtiinitiated{} service.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Interaction class designator.}
+    \stdliteralitem{b)}{Transportation type.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The interaction class is defined in the FDD.}
+    \stdliteralitem{e)}{The specified interaction class is not in the process of changing transportation type.}
+    \stdliteralitem{f)}{The joined federate is publishing the interaction class.}
+    \stdliteralitem{g)}{The transportation type is valid (see 6.1.10).}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 119 / source PDF page 133 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has been informed of the request to change the transportation type.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The interaction class is already in the process of changing transportation type.}
+    \stdliteralitem{b)}{The joined federate is not publishing the interaction class.}
+    \stdliteralitem{c)}{The interaction class is not defined in the FDD.}
+    \stdliteralitem{d)}{Invalid transportation type.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Confirm Interaction Transportation Type Change \rtiinitiated{} service}
+
+
+    The Confirm Interaction Transportation Type Change \rtiinitiated{} service shall be used to provide information on what transportation type was achieved for the specified interaction class. This service shall be invoked by the RTI at a joined federate in response to an Request Interaction Transportation Type Change service invocation by the same joined federate.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Interaction class designator.}
+    \stdliteralitem{b)}{Transportation type that was achieved.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has previously invoked the Request Interaction Transportation Type Change service for the interaction class.}
+    \stdliteralitem{d)}{The transportation type is changed for the specified interaction class.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed about what transportation type has been achieved.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 120 / source PDF page 134 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Query Interaction Transportation Type service}
+
+
+    The Query Interaction Transportation Type service may be used by a joined federate to query the current transportation type for an interaction for a specified joined federate. The RTI shall provide transportation type information via the Report Interaction Transportation Type \rtiinitiated{} service invocation.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Federate designator.}
+    \stdliteralitem{b)}{Interaction class designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The interaction class is defined in the FDD.}
+    \stdliteralitem{e)}{Save not in progress.}
+    \stdliteralitem{f)}{Restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The interaction class is not defined in the FDD.}
+    \stdliteralitem{b)}{Save in progress.}
+    \stdliteralitem{c)}{Restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Report Interaction Transportation Type \rtiinitiated{} service}
+
+
+    The Report Interaction Transportation Type \rtiinitiated{} service shall be used to provide the transportation type that is used by the specified joined federate for the specified interaction class. If the specified joined federate does not publish the specified interaction, the transportation type specified in the FDD shall be reported. This service shall be invoked by the RTI at a joined federate in response to a Query Interaction Transportation Type service invocation by the same joined federate.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 121 / source PDF page 135 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Federate designator.}
+    \stdliteralitem{b)}{Interaction class designator.}
+    \stdliteralitem{c)}{Transportation type in use.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has previously invoked the Query Interaction Transportation Type service for the interaction.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed about what transportation type is in use.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error,}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 122 / source PDF page 136 ---
+\begin{compactstdpage}
+    \mbox{}
+\end{compactstdpage}

@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ["3.11", "3.12", "3.13"]
+        os: [ ubuntu-latest, windows-latest ]
+        python-version: [ "3.11", "3.12", "3.13" ]
 
     steps:
       - uses: actions/checkout@v4
@@ -20,24 +20,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e . ruff
-      - run: ruff check scripts tests topics/_template topics/ieee/hla-1516-2025/build.py topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py topics/ieee/hla-semantic-derivative-2025/build.py topics/ieee/hla-rti-compliance-2025/build.py
-      - run: ruff format --check scripts tests topics/_template topics/ieee/hla-1516-2025/build.py topics/ieee/hla-1516.1-2025/build.py topics/ieee/hla-1516.2-2025/build.py topics/ieee/hla-semantic-derivative-2025/build.py topics/ieee/hla-rti-compliance-2025/build.py
-      - run: python -m compileall -q scripts topics
-      - run: python -m unittest discover -s tests -v
-      - run: python scripts/build.py list
-      - run: python scripts/semantic_metrics.py --json
-      - run: python scripts/semantic_dashboard.py --json
-      - run: python scripts/semantic_coverage.py --check --json
-      - run: python scripts/export_state_machine.py topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json --output .tmp/ci-state-machines --format both
-      - run: python scripts/export_sequence_diagram.py topics/ieee/hla-1516.1-2025/semantic/sequence-diagrams.json --output .tmp/ci-sequence-diagrams --format both
-      - run: python scripts/export_graph_diagram.py topics/ieee/hla-1516.1-2025/semantic/graph-diagrams.json --output .tmp/ci-graph-diagrams --format both
-      - run: python -c "import sys; from pathlib import Path; sys.path.insert(0, 'topics/ieee/hla-1516.1-2025'); import build; build.generate_blocks()"
-      - run: python scripts/review_state_machines.py --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/ci-reviews --artifacts .tmp/ci-review-artifacts --graphviz
-      - run: python scripts/diagram_qa.py --models topics/ieee/hla-1516.1-2025/semantic --artifacts .tmp/ci-review-artifacts --json
-      - run: python scripts/diagram_surface_qa.py --surface-manifest data/semantic/diagram-surfaces.json --models topics/ieee/hla-1516.1-2025/semantic --generated topics/ieee/hla-1516.1-2025/output/semantic --expected-figures 33 --json
-      - run: python scripts/rti_diagram_check.py topics/ieee/hla-1516.1-2025 --json
-      - run: git diff --exit-code
+      - name: Install development dependencies
+        run: python -m pip install -e . ruff pytest pytest-xdist "rumdl>=0.2.49,<0.3" "mdrepo>=0.0.1,<0.1"
+      - name: Run repository CI
+        run: python -m tools.ci quality
 
   document-release:
     runs-on: ubuntu-latest
@@ -53,11 +39,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y fonts-lmodern graphviz latexmk texlive-fonts-recommended texlive-latex-extra texlive-xetex
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e .
-      - run: python -m scripts.review_state_machines --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews .tmp/release-reviews --artifacts .tmp/release-review-artifacts --graphviz --compile
-      - run: python -m scripts.diagram_qa --models topics/ieee/hla-1516.1-2025/semantic --artifacts .tmp/release-review-artifacts --require-previews --json
-      - run: python scripts/diagram_surface_qa.py --surface-manifest data/semantic/diagram-surfaces.json --models topics/ieee/hla-1516.1-2025/semantic --generated topics/ieee/hla-1516.1-2025/output/semantic --expected-figures 33 --json
-      - run: python scripts/rti_diagram_check.py topics/ieee/hla-1516.1-2025 --json
-      - run: python -m scripts.semantic_dashboard --json
-      - run: python -m scripts.release_check --build --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --authority-manifest data/semantic/authority.json --json
-      - run: git diff --exit-code
+      - name: Install development dependencies
+        run: python -m pip install -e . pytest
+      - name: Run document-release CI
+        run: python -m tools.ci release

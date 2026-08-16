@@ -1,0 +1,129 @@
+% Figure 10 - Object class (i)
+% Independently revalidated against source physical page 83 / standard page 69.
+% Edge IDs correspond to audit/figure10/edges.csv.
+\begin{tikzpicture}[hla diagram,x=1cm,y=1cm]
+    % Natural proportions reproduce the source figure plus caption at page scale.
+    \path[use as bounding box] (0,0) rectangle (14.2,13.85);
+    \begin{scope}[xshift=.13cm]
+
+        % Outer object-class composite and title band.
+        \draw[line width=.42pt,rounded corners=13pt] (0.40,1.85) rectangle (13.80,13.40);
+        \draw[line width=.42pt] (0.40,12.49) -- (13.80,12.49);
+        \node[font=\sffamily\bfseries\fontsize{10.8}{11.5}\selectfont]
+        at (7.10,12.95) {Object Class ($i$)};
+
+        % Seven orthogonal regions, top to bottom:
+        % three representative class-attribute machines, an attribute ellipsis,
+        % the first object-instance machine, an instance ellipsis, and the kth machine.
+        \foreach \y in {10.83,9.60,9.04,7.63,4.95,4.39} {
+            \draw[hla partition] (0.40,\y) -- (13.80,\y);
+        }
+
+        % F10-P01 / F10-S01 - HLAprivilegeToDeleteObject class-attribute placeholder.
+        \fill (5.12,11.62) circle[radius=2.0pt];
+        \node[hla state,minimum width=3.36cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{7.05}{7.8}\selectfont] (attr-delete) at (7.60,11.62)
+            {\scalebox{.90}[1]{\shortstack{Class Attribute\\\((i,\,\textsf{HLAprivilegeToDeleteObject})\)}}};
+        % F10-E01: P01 -> S01; unlabeled.
+        \draw[hla transition] (5.23,11.62) -- (attr-delete.west);
+
+        % F10-P02 / F10-S02 - second representative class attribute.
+        \fill (5.12,10.23) circle[radius=2.0pt];
+        \node[hla state,minimum width=3.42cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{7.05}{7.8}\selectfont] (attr-second) at (7.60,10.23)
+            {\scalebox{.82}[1]{\shortstack{Class Attribute\\\((i,\,\textsf{second available attribute for class})\)}}};
+        % F10-E02: P02 -> S02; unlabeled.
+        \draw[hla transition] (5.23,10.23) -- (attr-second.west);
+
+        % Attribute-family ellipsis region.
+        \node[font=\sffamily\bfseries\fontsize{10.2}{10.2}\selectfont]
+        at (7.10,9.32) {$\bullet\ \bullet\ \bullet$};
+
+        % F10-P03 / F10-S03 - last representative class attribute.
+        \fill (5.12,8.37) circle[radius=2.0pt];
+        \node[hla state,minimum width=3.42cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{7.05}{7.8}\selectfont] (attr-last) at (7.60,8.37)
+            {\scalebox{.88}[1]{\shortstack{Class Attribute\\\((i,\,\textsf{last available attribute for class})\)}}};
+        % F10-E03: P03 -> S03; unlabeled.
+        \draw[hla transition] (5.23,8.37) -- (attr-last.west);
+
+        % First representative object-instance state machine.
+        % F10-P04 / F10-S04.
+        \fill (1.58,6.83) circle[radius=2.0pt];
+        \node[hla state,minimum width=2.40cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (unknown-one) at (3.67,6.83)
+            {\scalebox{.92}[1]{\shortstack{Object Instance \((i,\,1)\)\\Not Known}}};
+        % F10-S05.
+        \node[hla state,minimum width=2.40cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (known-one) at (9.78,6.83)
+            {\scalebox{.92}[1]{\shortstack{Object Instance \((i,\,1)\)\\Known}}};
+        % F10-S06.
+        \node[hla state,minimum width=2.44cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (gone-one) at (6.67,5.58)
+            {\scalebox{.90}[1]{\shortstack{Object Instance \((i,\,1)\)\\No Longer Known}}};
+        % F10-P05.
+        \draw (12.94,6.83) circle[radius=3.5pt];\fill (12.94,6.83) circle[radius=1.8pt];
+
+        % F10-E04: P04 -> S04; unlabeled.
+        \draw[hla transition] (1.69,6.83) -- (unknown-one.west);
+        % F10-E05: S04 -> S05; Register or Discover dagger.
+        \draw[hla transition] (unknown-one.east) -- (known-one.west);
+        \node[font=\sffamily\fontsize{6.65}{7.35}\selectfont,anchor=south]
+        at (6.73,6.96) {Register or Discover \textdagger};
+        % F10-E06: S05 -> P05; Delete or Remove dagger.
+        \draw[hla transition] (known-one.east) -- (12.72,6.83);
+        \node[font=\sffamily\fontsize{6.65}{7.35}\selectfont,anchor=south]
+        at (11.58,6.96) {Delete or Remove \textdagger};
+        % F10-E07: S05 -> S06; Local Delete.
+        \draw[hla transition] ([xshift=.30cm]known-one.south) -- (gone-one.east);
+        \node[font=\sffamily\fontsize{6.55}{7.25}\selectfont,anchor=west]
+        at (8.17,5.95) {Local Delete};
+        % F10-E08: S06 -> S05; Discover dagger.
+        \draw[hla transition] (gone-one.north west) -- ([yshift=-.07cm]known-one.west);
+        \node[font=\sffamily\fontsize{6.55}{7.25}\selectfont,anchor=south]
+        at (6.99,6.08) {Discover \textdagger};
+
+        % Object-instance-family ellipsis region.
+        \node[font=\sffamily\bfseries\fontsize{10.2}{10.2}\selectfont]
+        at (7.10,4.67) {$\bullet\ \bullet\ \bullet$};
+
+        % kth representative object-instance state machine.
+        % F10-P06 / F10-S07.
+        \fill (1.63,3.64) circle[radius=2.0pt];
+        \node[hla state,minimum width=2.40cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (unknown-k) at (3.77,3.64)
+            {\scalebox{.92}[1]{\shortstack{Object Instance \((i,\,k)\)\\Not Known}}};
+        % F10-S08.
+        \node[hla state,minimum width=2.40cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (known-k) at (9.88,3.64)
+            {\scalebox{.92}[1]{\shortstack{Object Instance \((i,\,k)\)\\Known}}};
+        % F10-S09.
+        \node[hla state,minimum width=2.44cm,minimum height=.78cm,inner xsep=3pt,
+            font=\sffamily\fontsize{6.95}{7.7}\selectfont] (gone-k) at (6.77,2.40)
+            {\scalebox{.90}[1]{\shortstack{Object Instance \((i,\,k)\)\\No Longer Known}}};
+        % F10-P07.
+        \draw (13.00,3.64) circle[radius=3.5pt];\fill (13.00,3.64) circle[radius=1.8pt];
+
+        % F10-E09: P06 -> S07; unlabeled.
+        \draw[hla transition] (1.74,3.64) -- (unknown-k.west);
+        % F10-E10: S07 -> S08; Register or Discover dagger.
+        \draw[hla transition] (unknown-k.east) -- (known-k.west);
+        \node[font=\sffamily\fontsize{6.65}{7.35}\selectfont,anchor=south]
+        at (6.83,3.77) {Register or Discover \textdagger};
+        % F10-E11: S08 -> P07; Delete or Remove dagger.
+        \draw[hla transition] (known-k.east) -- (12.78,3.64);
+        \node[font=\sffamily\fontsize{6.65}{7.35}\selectfont,anchor=south]
+        at (11.68,3.77) {Delete or Remove \textdagger};
+        % F10-E12: S08 -> S09; Local Delete.
+        \draw[hla transition] ([xshift=.30cm]known-k.south) -- (gone-k.east);
+        \node[font=\sffamily\fontsize{6.55}{7.25}\selectfont,anchor=west]
+        at (8.27,2.77) {Local Delete};
+        % F10-E13: S09 -> S08; Discover dagger.
+        \draw[hla transition] (gone-k.north west) -- ([yshift=-.07cm]known-k.west);
+        \node[font=\sffamily\fontsize{6.55}{7.25}\selectfont,anchor=south]
+        at (7.09,2.89) {Discover \textdagger};
+
+        \node[font=\sffamily\bfseries\fontsize{9.4}{10.3}\selectfont]
+        at (7.10,0.43) {Figure 10---Object class ($i$)};
+    \end{scope}
+\end{tikzpicture}

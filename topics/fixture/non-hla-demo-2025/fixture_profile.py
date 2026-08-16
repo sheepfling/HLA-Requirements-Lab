@@ -5,8 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-from scripts.latex_renderer import LatexDialect
-
+from hla_lab.adapters.latex_renderer import LatexDialect
 
 @dataclass(frozen=True)
 class DemoSourceCommands:
@@ -50,7 +49,6 @@ class DemoSourceCommands:
     text_wrapper_commands: tuple[str, ...] = ("DemoTerm",)
     text_note_commands: tuple[str, ...] = ("DemoNote",)
     layout_text_block_commands: tuple[tuple[str, int], ...] = ()
-
 
 DEMO_SOURCE = DemoSourceCommands()
 

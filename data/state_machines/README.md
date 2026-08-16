@@ -15,17 +15,17 @@ directory was silently treated as empty.
 Use the repository-level inventory and metrics commands from the root:
 
 ```powershell
-python -m scripts.inventory_state_machines `
+python -m hla_lab.diagrams.inventory_state_machines `
   --source hla-1516.1=topics/ieee/hla-1516.1-2025/assets/extracted `
   --source hla-1516.2=topics/ieee/hla-1516.2-2025/assets `
   --manifest data/state_machines/manifest.json --write
 
-python -m scripts.reconcile_state_machine_manifest `
+python -m hla_lab.diagrams.reconcile_state_machine_manifest `
   --manifest data/state_machines/manifest.json `
   --models topics/ieee/hla-1516.1-2025/semantic `
   --reviews reviews/state_machines --write
 
-python -m scripts.state_machine_metrics `
+python -m hla_lab.diagrams.state_machine_metrics `
   --manifest data/state_machines/manifest.json `
   --models topics/ieee/hla-1516.1-2025/semantic
 ```

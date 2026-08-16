@@ -1,0 +1,127 @@
+% Figure 11 - Class attribute (i, j)
+% Independently revalidated against source physical page 84 / standard page 70.
+% Natural coordinate system follows the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure11/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f11 stroke/.style={draw=black,line width=.90pt},
+    f11 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
+    f11 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
+    f11 title/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{22.5}{23.5}\selectfont,align=center,inner sep=0pt},
+    f11 subtitle/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.5}{11.3}\selectfont,align=center,inner sep=0pt},
+    f11 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.0}{10.8}\selectfont,align=center,inner sep=0pt},
+    f11 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.0}{11.9}\selectfont,align=center,inner sep=0pt},
+    f11 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.3}{10.2}\selectfont,align=center,inner sep=0pt},
+    f11 guard/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{8.4}{9.3}\selectfont,align=center,inner sep=0pt}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % F11-S00: Class Attribute (i,j) composite.
+    \draw[f11 stroke]
+    (135,44) -- (824,44)
+    .. controls (866,44) and (900,77) .. (900,113)
+    -- (900,607)
+    .. controls (900,646) and (866,676) .. (824,676)
+    -- (135,676)
+    .. controls (92,676) and (60,646) .. (60,607)
+    -- (60,113)
+    .. controls (60,78) and (92,44) .. (135,44)
+    -- cycle;
+    \draw[f11 stroke] (60,112) -- (900,112);
+    \node[f11 title] at (480,77) {Class Attribute $(i,j)$};
+    \node[f11 subtitle] at (480,101) {$[\,j\neq\mathrm{HLAprivilegeToDeleteObject}\,]$};
+
+    % Orthogonal publication/subscription regions.
+    \draw[f11 partition] (488,112) -- (488,676);
+    \draw[f11 stroke] (60,112) -- (170,112) -- (170,145) -- (60,145);
+    \node[f11 tab] at (115,129) {Publication};
+    \draw[f11 stroke] (488,112) -- (599,112) -- (599,145) -- (488,145);
+    \node[f11 tab] at (543.5,129) {Subscription};
+
+    % F11-P01 - publication shallow-history pseudo-state.
+    \draw[f11 stroke] (461,132) circle[radius=16pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (461,132) {H};
+    % F11-P02 - subscription shallow-history pseudo-state.
+    \draw[f11 stroke] (876,132) circle[radius=16pt];
+    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (876,132) {H};
+
+    % F11-E01: publication-region boundary -> history; empty-set publish/unpublish.
+    \draw[f11 transition] (393,112)
+    .. controls (395,127) and (425,135) .. (444,132);
+    \node[f11 small,anchor=south east] at (393,130) {Publish $(i,\{\})$\\or Unpublish $(i,\{\})$};
+
+    % F11-E07: subscription-region boundary -> history; empty-set subscribe/unsubscribe.
+    \draw[f11 transition] (786,112)
+    .. controls (789,127) and (831,137) .. (859,132);
+    \node[f11 small,anchor=south east] at (786,130) {Subscribe $(i,\{\})$\\or Unsubscribe $(i,\{\})$};
+
+    % Publication states.
+    % F11-S01 Published (i,j).
+    \draw[f11 stroke,rounded corners=8pt] (247,207) rectangle (354,319);
+    \node[f11 text] at (300.5,263) {Published\\$(i,j)$};
+    % F11-S02 Unpublished (i,j).
+    \draw[f11 stroke,rounded corners=8pt] (247,528) rectangle (353,642);
+    \node[f11 text] at (300,585) {Unpublished\\$(i,j)$};
+    % F11-P03 publication initial.
+    \fill (223,626) circle[radius=7pt];
+
+    % F11-E02: publication initial -> Unpublished.
+    \draw[f11 transition] (229,622) -- (247,604);
+
+    % F11-E03: Unpublished -> Published; Publish(i,j).
+    \draw[f11 transition] (317,528) -- (317,323);
+    \node[f11 small,anchor=west] at (326,382) {Publish $(i,j)$};
+
+    % F11-E04: Published -> Unpublished; guarded unpublish transition.
+    \draw[f11 transition] (258,319) -- (258,524);
+    \node[f11 guard,anchor=east] at (247,420)
+        {Unpublish $(i)$\\or\\Unpublish $(i,j)$\\[3pt]
+    $[$ not in any\\
+    ``Trying to Cancel Acq$(i,*,j)$'' $\wedge$\\
+    not in any ``Acquiring $(i,*,j)$'' $\wedge$\\
+    not in any ``Willing to Acquire $(i,*,j)$'' $]$};
+
+    % F11-E05: Published self-loop; Publish(i,j).
+    \draw[f11 transition] (337,207)
+    .. controls (357,184) and (372,204) .. (354,242);
+    \node[f11 small,anchor=west] at (365,231) {Publish $(i,j)$};
+
+    % F11-E06: Unpublished self-loop; Unpublish(i) or Unpublish(i,j).
+    \draw[f11 transition] (353,594)
+    .. controls (379,599) and (380,636) .. (318,642);
+    \node[f11 small,anchor=west] at (385,610) {Unpublish $(i)$\\or\\Unpublish $(i,j)$};
+
+    % Subscription states.
+    % F11-S03 Subscribed (i,j).
+    \draw[f11 stroke,rounded corners=8pt] (623,199) rectangle (730,318);
+    \node[f11 text] at (676.5,258.5) {Subscribed\\$(i,j)$};
+    % F11-S04 Unsubscribed (i,j).
+    \draw[f11 stroke,rounded corners=8pt] (623,518) rectangle (729,631);
+    \node[f11 text] at (676,574.5) {Unsubscribed\\$(i,j)$};
+    % F11-P04 subscription initial.
+    \fill (600,609) circle[radius=7pt];
+
+    % F11-E08: subscription initial -> Unsubscribed.
+    \draw[f11 transition] (606,605) -- (623,587);
+
+    % F11-E09: Unsubscribed -> Subscribed; Subscribe(i,j).
+    \draw[f11 transition] (630,518) -- (630,322);
+    \node[f11 small,anchor=east] at (621,390) {Subscribe $(i,j)$};
+
+    % F11-E10: Subscribed -> Unsubscribed; Unsubscribe transition.
+    \draw[f11 transition] (690,318) -- (690,514);
+    \node[f11 small,anchor=west] at (701,389) {Unsubscribe $(i)$\\or\\Unsubscribe $(i,j)$};
+
+    % F11-E11: Subscribed self-loop; Subscribe(i,j).
+    \draw[f11 transition] (712,199)
+    .. controls (735,177) and (749,203) .. (730,239);
+    \node[f11 small,anchor=west] at (752,217) {Subscribe $(i,j)$};
+
+    % F11-E12: Unsubscribed self-loop; Unsubscribe(i) or Unsubscribe(i,j).
+    \draw[f11 transition] (729,579)
+    .. controls (753,583) and (756,619) .. (694,631);
+    \node[f11 small,anchor=west] at (761,599) {Unsubscribe $(i)$\\or\\Unsubscribe $(i,j)$};
+\end{tikzpicture}

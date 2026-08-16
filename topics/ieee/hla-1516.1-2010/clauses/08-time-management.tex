@@ -1,0 +1,1560 @@
+% Faithful initial reconstruction of Clause 8 from source PDF pages 163--198
+% (standard pages 149--184). Source-page boundaries are intentionally preserved.
+
+\clearpage
+
+% --- Standard page 149 / source PDF page 163 ---
+\begin{compactstdpage}
+
+    \section{Time management}
+
+    \subsection{Overview}
+
+    The time management services and associated mechanisms provide a federation execution with the means to order the delivery of messages throughout the federation execution. Use of these mechanisms permits messages sent by different joined federates to be delivered in a consistent order to any joined federate in the federation execution that is to receive those messages.
+
+    Time in the system being modeled shall be represented in the federation as points along the HLA time axis. A joined federate can associate both itself and some of its activities with points on the HLA time axis. A joined federate's association with the HLA time axis is referred to as the logical time of the joined federate. An association of a joined federate's activities with the HLA time axis is denoted by assigning timestamps to the messages representing those activities. Timestamps and logical times are both represented by the same datatype and, therefore, can be compared, but they are referenced using different terms in order to help clarify whether a given federation time value applies to a joined federate or to a joined federate's activities.
+
+    Each joined federate may advance along the HLA time axis during the course of the execution. Such joined federate logical time advances may be constrained by the progress of other joined federates, or they may be unconstrained.
+
+    Time management is concerned with the mechanisms for controlling the advancement of each joined federate along the HLA time axis. In general, logical time advances shall be coordinated with object management services so that information is delivered to joined federates in a causally correct and ordered fashion.
+
+    A joined federate that becomes time-regulating may associate some of its activities (e.g., updating instance attribute values and sending interactions) with points on the HLA time axis. It shall do so by assigning timestamps to the messages representing its activities; these timestamps correspond to the points on the HLA time axis with which the activities are associated. A joined federate that is time-constrained is interested in receiving the messages representing these activities (e.g., reflecting instance attribute values and receiving interactions) in a federation-wide timestamped order. Use of the time management services allows this type of coordination among time-regulating and time-constrained joined federates in an execution. The coordination is achieved by various constraints on joined federate activities described in this clause.
+
+    The activities of joined federates that are neither time-regulating nor time-constrained (the default state of all joined federates upon joining a federation execution) shall not be coordinated with other joined federates by the RTI, and such joined federates need not make use of any of the time management services. Such joined federates may, however, optionally place timestamps on the messages representing their activities (e.g., updating instance attribute values and sending interactions) to indicate when these actions occur during the federation execution. In this case, the RTI simply passes the specified timestamp, unchanged, to joined federate(s) receiving the message.
+
+    The representation of logical times and timestamps shall be specified to the RTI via the time representation abstract datatype (TRADT) (see IEEE Std 1516.2-2010, clause 4.7) and should be documented in the time representation table of the federation execution's FDD. Federation executions requiring multiple time representations within a single execution (e.g., logical time and wall-clock time values) shall realize this functionality explicitly within their TRADT definition, e.g., by using a ``time type'' field to differentiate between different types of time values.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 150 / source PDF page 164 ---
+\begin{compactstdpage}
+
+    \subsubsection{Messages}
+
+    The manner in which HLA services are coordinated with the HLA time axis shall be through the concept of messages as follows:
+
+    \stdliteralitem{a)}{Invocation of the Update Attribute Values service, Send Interaction service, Send Interaction with Regions service, or Delete Object Instance service by a joined federate shall be called sending a message. (Invocation of the Update Attribute Values service may actually result in the sending of multiple messages as each passel resulting from the invocation shall be considered a separate message.)}
+    \stdliteralitem{b)}{Invocation of the Reflect Attribute Values \rtiinitiated{} service, Receive Interaction \rtiinitiated{} service, or Remove Object Instance \rtiinitiated{} service at a joined federate shall be called receiving a message.}
+
+    Messages sent by one joined federate typically result in one or more other joined federates receiving a corresponding message. The mapping from one sent message to one or more received messages shall follow the descriptions for Update Attribute Values service (see 6.10), Reflect Attribute Values \rtiinitiated{} service (see 6.11), Send Interaction service (see 6.12), Received Interaction \rtiinitiated{} service (see 6.13), Delete Object Instance service (see 6.14), Remove Object Instance \rtiinitiated{} service (see 6.15), and Send Interaction With Regions service (see 9.12). For example, a sent message representing an Update Attribute Values service invocation shall result only in received messages representing Reflect Attribute Values \rtiinitiated{} service invocations at the appropriate joined federates depending on the normal ownership/subscription properties.
+
+    \subsubsection{Message order type}
+
+    Each message, sent or received, shall be either a timestamp order (TSO) message or an receive order (RO) message (see 8.1.11). The order type of a message shall be determined by several factors:
+
+    \stdliteralitem{a)}{Preferred order type: The preferred order type of a message shall be the same as the preferred order type of the data contained in the message (instance attribute values or interactions). Each class attribute and interaction class shall be provided with a preferred order type in the FDD that indicates the order type (TSO or RO) that shall be used when sending messages carrying values for instances of these classes. In the case of sent messages representing a Delete Object Instance service invocation, the preferred order type of the message shall be based on the preferred order type of the HLAprivilegeToDeleteObject attribute of the specified object instance. Joined federates may use the Change Attribute Order Type service to change the preferred order type of instance attributes; the preferred order type of class attributes may not be changed during a federation execution. Joined federates may use the Change Interaction Order Type service to change the preferred order type of interaction classes.}
+    \stdliteralitem{b)}{Presence of a timestamp: Each of the services that corresponds to sending a message shall include a timestamp argument if the preferred order type of any instance attribute or interaction class specified in the message is TSO and the joined federate is time-regulating. This timestamp argument is always optional, but it is recommended in such cases as the occurrence of a preferred order type of TSO and a time-regulating joined federate indicate an intent for TSO messages to be sent.}
+    \stdliteralitem{c)}{Joined federate's time status: Whether a joined federate is time-regulating shall determine whether a joined federate can send TSO messages. Similarly, whether a joined federate is time-constrained shall determine whether the joined federate can receive TSO messages.}
+    \stdliteralitem{d)}{Sent message order type: The order type of a received message shall depend on the order type of the corresponding sent message.}
+
+    These factors shall be considered together when determining if a given message is sent or received as a TSO message or as an RO message.
+
+    The order type of a sent message shall be determined by the preferred order type of the message at the sending joined federate, regardless of whether that joined federate is time-regulating and whether a
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 151 / source PDF page 165 ---
+\begin{compactstdpage}
+
+    timestamp was supplied in the service invocation that sends the message. Table 1 illustrates how the order type of a sent message shall be determined.
+
+    \begin{center}
+        {\sffamily\bfseries\fontsize{8.5}{10}\selectfont Table 1---Order type of a sent message}\par\vspace{5pt}
+    {\fontsize{6.3}{7.3}\selectfont\setlength{\tabcolsep}{2.7pt}\renewcommand{\arraystretch}{1.13}%
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.16\linewidth}|>{\centering\arraybackslash}p{0.22\linewidth}|>{\centering\arraybackslash}p{0.16\linewidth}|>{\centering\arraybackslash}p{0.20\linewidth}|>{\centering\arraybackslash}p{0.17\linewidth}|}
+            \hline
+            \textbf{Preferred order type?} & \textbf{Is the sending joined federate time-regulating?} & \textbf{Was a timestamp supplied?} & \textbf{Order type of sent message} & \textbf{Message retraction designator returned} \\ \hline
+            RO                             & No                                                       & No                                 & RO                                  & No                                              \\ \hline
+            RO                             & No                                                       & Yes                                & RO                                  & No                                              \\ \hline
+            RO                             & Yes                                                      & No                                 & RO                                  & No                                              \\ \hline
+            RO                             & Yes                                                      & Yes                                & RO                                  & No                                              \\ \hline
+            TSO                            & No                                                       & No                                 & RO                                  & No                                              \\ \hline
+            TSO                            & No                                                       & Yes                                & RO                                  & No                                              \\ \hline
+            TSO                            & Yes                                                      & No                                 & RO                                  & No                                              \\ \hline
+            TSO                            & Yes                                                      & Yes                                & TSO                                 & Yes                                             \\ \hline
+        \end{tabular}}
+    \end{center}
+
+    Table 2 illustrates how the order type of a received message shall be determined. The order type of a received message shall be determined by whether that joined federate is time-constrained and by the order type of the corresponding sent message. As shown in these two tables, a message retraction designator is provided to both the sender and the receiver if the sent message order type is TSO, regardless of the order type of the received message.
+
+    \begin{center}
+        {\sffamily\bfseries\fontsize{8.5}{10}\selectfont Table 2---Order type of a received message}\par\vspace{5pt}
+    {\fontsize{6.3}{7.3}\selectfont\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.15}%
+        \begin{tabular}{|>{\centering\arraybackslash}p{0.20\linewidth}|>{\centering\arraybackslash}p{0.27\linewidth}|>{\centering\arraybackslash}p{0.23\linewidth}|>{\centering\arraybackslash}p{0.20\linewidth}|}
+            \hline
+            \textbf{Is the receiving joined federate time-constrained?} & \textbf{Order type of corresponding sent message?} & \textbf{Order type of received message?} & \textbf{Message retraction designator provided} \\ \hline
+            No                                                          & RO                                                 & RO                                       & No                                              \\ \hline
+            No                                                          & TSO                                                & RO                                       & Yes                                             \\ \hline
+            Yes                                                         & RO                                                 & RO                                       & No                                              \\ \hline
+            Yes                                                         & TSO                                                & TSO                                      & Yes                                             \\ \hline
+        \end{tabular}}
+    \end{center}
+
+    Because of the above rule defining the order type of a received message, the RTI shall sometimes convert a sent TSO message to a received RO message at some receiving joined federates. The need for such conversions shall be considered on a per-joined-federate basis. Thus, the received messages at different joined federates that correspond to the same sent message may be of different order types. Sent RO messages shall never be converted to received TSO messages.
+
+    Except when the Flush Queue Request service is used, messages that are received as TSO messages shall be received only by a given joined federate in TSO, regardless of the joined federates from which the messages originate and regardless of the sequence in which the messages were sent. Thus, two TSO messages with different timestamps shall always be received by each joined federate in the same order. Multiple TSO messages having the same timestamp may be received in an indeterminate order.
+
+    Messages that are received as RO messages shall be received in an arbitrary order. A timestamp shall be provided with the received message if one was specified when the message was sent.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 152 / source PDF page 166 ---
+\begin{compactstdpage}
+
+    \subsubsection{Logical time}
+
+    Each joined federate, upon joining an execution, shall be assigned a logical time. A joined federate's logical time shall initially be set to the initial time on the HLA time axis (the initial federation time of the TRADT). The logical time of a joined federate shall only advance; thus, a joined federate may request to advance only to a logical time that is greater than or equal to its current logical time. In order for a joined federate to advance its logical time, it shall request an advance explicitly. A joined federate shall request to advance its logical time only by invoking one of the following services:
+
+    \stdliteraldashitem{Time Advance Request}
+    \stdliteraldashitem{Time Advance Request Available}
+    \stdliteraldashitem{Next Message Request}
+    \stdliteraldashitem{Next Message Request Available}
+    \stdliteraldashitem{Flush Queue Request}
+
+    The advance shall not occur until the RTI issues a grant via the Time Advance Grant \rtiinitiated{} service. In general, at any instant during an execution, different joined federates may be at different logical times.
+
+    Joined federates also may become time-regulating and/or time-constrained. The logical times of joined federates that are time-regulating shall be used to constrain the advancement of the logical times of joined federates that are time-constrained.
+
+    \subsubsection{Time-regulating joined federates}
+
+    Only time-regulating joined federates may send TSO messages. A joined federate shall request to become time-regulating by invoking the Enable Time Regulation service. The RTI shall subsequently make the joined federate time-regulating by invoking the Time Regulation Enabled \rtiinitiated{} service at that joined federate. A joined federate shall cease to be time-regulating whenever it invokes the Disable Time Regulation service.
+
+    Each time-regulating joined federate shall provide a lookahead when becoming time-regulating. Lookahead shall be a nonnegative value that establishes the lowest value of timestamps that can be sent in TSO messages by the joined federate. Specifically, a time-regulating joined federate shall not send a TSO message that contains a timestamp less than its current logical time plus its current lookahead. Once established, changes to a joined federate's lookahead may be requested only by using the Modify Lookahead service.
+
+    A time-regulating joined federate with a lookahead of zero shall be subject to an additional restriction. If such a joined federate has advanced its logical time by use of Time Advance Request or Next Message Request service, it shall not send TSO messages that contain timestamps less than or equal to its logical time (plus its lookahead, which is zero), rather than the usual less-than restriction. Subsequent use of a time advancement service that moves the joined federate's logical time forward lifts this additional restriction (and imposes the restriction of the subsequent advancement service). For example, if a zero lookahead joined federate were to invoke Time Advance Request service (t1) and to follow this step with an invocation of Time Advance Request Available service (t1), that joined federate would still have the additional restriction. After the Time Advance Request Available service is granted, it still may not send any TSO messages with a timestamp less than or equal to t1 (the Time Advance Request restriction) because the second advance did not advance the joined federate's logical time.
+
+    A time-regulating joined federate need not send TSO messages in TSO, but all TSO messages that it sends shall be received by other joined federates in timestamped order (if they are received as TSO messages) except when the Flush Queue Request service is used.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 153 / source PDF page 167 ---
+\begin{compactstdpage}
+
+    \subsubsection{Time-constrained joined federates}
+
+    Only time-constrained joined federates can receive messages as TSO messages. A joined federate shall request to become time-constrained by invoking the Enable Time Constrained service. The RTI shall subsequently make the joined federate time-constrained by invoking the Time Constrained Enabled \rtiinitiated{} service at that joined federate. A joined federate shall cease to be time-constrained whenever it invokes the Disable Time Constrained service.
+
+    In order to ensure that a time-constrained joined federate shall never receive a TSO message with a timestamp less than its logical time, a bound is placed on each time-constrained joined federate that limits how far it can advance its logical time. The bound ensures that a time-constrained joined federate cannot advance its logical time past a point at which TSO messages could still be sent by another joined federate. If a time-constrained joined federate request to advance its logical time beyond its bound, the time advance shall not be granted until its bound has increased beyond the logical time to be granted.
+
+    This bound on advancement is expressed in terms of a value called the Greatest Available Logical Time (GALT). Each joined federate shall have a GALT that expresses the greatest logical time to which the RTI guarantees it can grant an advance without having to wait for other joined federates to advance. In the case of some time advance services (Time Advance Request and Next Message Request) the joined federate shall be granted only to logical times that are less than its GALT. In the case of other time advance services (Time Advance Request Available, Next Message Request Available, and Flush Queue Request), the joined federate shall be granted only to logical times that are less than or equal to its GALT.
+
+    A joined federate's GALT is calculated by the RTI and is based on factors such as the logical time, lookahead, and requests to advance the logical time of time-regulating joined federates. If there are no other time-regulating joined federates in the execution, however, the joined federate's GALT is undefined, indicating that the bound is such that the joined federate may advance to any point without having to wait for another joined federate to advance.
+
+    While GALT is used only by the RTI to bound the advancement of time-constrained joined federates, nonconstrained joined federates also have a GALT. For a nonconstrained joined federate, GALT expresses the bound that would apply to that joined federate if it were to become time-constrained.
+
+    Each joined federate shall have another value that builds on the idea of GALT called Least Incoming Timestamp (LITS). A joined federate's LITS shall express the smallest timestamp that the joined federate could (but not necessarily will) receive in the future in a TSO message. A joined federate's LITS is calculated by the RTI and is based on the joined federate's GALT and any queued TSO messages that may later be received by the joined federate. If the joined federate's GALT is undefined and there are no queued TSO messages that the joined federate could receive, the joined federate's LITS shall also be undefined.
+
+    LITS is more useful for time-constrained joined federates, but it applies to all joined federates7. LITS is useful for joined federates wishing to know the timestamp of the next TSO message that they may have to process.
+
+    \subsubsection{Advancing logical time}
+
+    A joined federate is permitted to advance its logical time only by requesting a time advancement from the RTI (as indicated in 8.1.3). Its logical time shall not actually be advanced until the RTI responds with a Time Advance Grant \rtiinitiated{} service invocation at that joined federate. The interval between these service invocations is defined to be the Time Advancing state; this state is shown in the state chart in Figure 17.
+
+    7 In the case of a nonconstrained joined federate, messages that may be received by that joined federate and that have a sent message order type of TSO may or may not be included in the calculation of the joined federate's LITS.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 154 / source PDF page 168 ---
+\begin{compactstdpage}
+
+    Each service shall take a specific logical time tR (time requested) as an argument, shall request slightly different coordination from the RTI, and is further detailed in the service descriptions and summarized in Table 3. The first column represents the form of time advancement that is requested. The second column describes what timestamps a joined federate cannot assign to messages it sends while in the Time Advancing state (i.e., after requesting an advance to tR, but before the advance is granted). The abbreviation ts stands for the timestamp of a message. For example, the entry for Time Advance Request with zero lookahead reads "Can't send ts $\leq$ tR." In other words, the joined federate shall not send any TSO messages that have a timestamp less than or equal to the federation time requested by the joined federate. The third column summarizes what messages the RTI shall guarantee to deliver to the advancing joined federate before granting the joined federate's request for time advancement; only messages described in this column shall be delivered. The fourth column is similar to the second, but it shows what constraints apply when the joined federate is in the Time Granted state (i.e., after an advance has been granted) and it has reached the Time Granted state by means of the specified form of time advancement.\footnotemark[8]
+    \footnotetext[8]{When time-regulation becomes enabled at a joined federate, that joined federate is treated as if it had advanced its logical time via the Time Advance Request Available service.}
+    Constraints in the fourth column are expressed in terms of the logical time (LT) of the joined federate. Lookahead in the second and fourth columns refers to the joined federate's current value of lookahead when in the respective states. Since a joined federate's lookahead can change while it is in the Time Granted state, the constraints expressed in this table change accordingly.
+
+    \begin{center}
+        {\sffamily\bfseries\fontsize{8.1}{9.3}\selectfont Table 3---Service descriptions}\par\vspace{3pt}
+    {\fontsize{5.8}{6.7}\selectfont\setlength{\tabcolsep}{1.6pt}\renewcommand{\arraystretch}{1.16}%
+        \begin{tabular}{|>{\raggedright\arraybackslash}p{0.15\linewidth}|>{\raggedright\arraybackslash}p{0.22\linewidth}|>{\raggedright\arraybackslash}p{0.36\linewidth}|>{\raggedright\arraybackslash}p{0.20\linewidth}|}
+            \hline
+            \centering\textbf{Time service}       & \centering\textbf{Constraint when in Time Advancing state (tR is the requested logical time; lookahead refers to the actual lookahead the federate would have if it were granted to tR)} & \centering\textbf{Messages delivered before advance is granted} & \centering\arraybackslash\textbf{Constraint when in the Time Granted state (LT is the logical time of the joined federate; lookahead refers to the actual lookahead of the federate while in the Time Granted state)} \\ \hline
+            Time Advance Request                  & Can't send ts $<$ tR + lookahead                                                                                                                                                         & All queued RO messages\par All TSO messages with ts $\leq$ tR & Can't send ts $<$ LT + lookahead \\ \hline
+            Time Advance Request (zero lookahead) & Can't send ts $\leq$ tR                                                                                                                                                                  & All queued RO messages\par All TSO messages with ts $\leq$ tR & Can't send ts $\leq$ LT \\ \hline
+            Time Advance Request Available        & Can't send ts $<$ tR + lookahead                                                                                                                                                         & All queued RO messages\par All TSO messages with ts $<$ tR\par All queued TSO messages with ts = tR & Can't send ts $<$ LT + lookahead \\ \hline
+            Next Message Request                  & Can't send ts $<$ tR + lookahead                                                                                                                                                         & All queued RO messages\par TSO message with the smallest timestamp that will ever be received in a TSO message and for which ts $\leq$ tR\par All other TSO messages with the same ts & Can't send ts $<$ LT + lookahead \\ \hline
+            Next Message Request (zero lookahead) & Can't send ts $\leq$ tR                                                                                                                                                                  & All queued RO messages\par TSO message with the smallest timestamp that will ever be received in a TSO message and for which ts $\leq$ tR\par All other TSO messages with the same ts & Can't send ts $\leq$ LT \\ \hline
+        \end{tabular}}
+    \end{center}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 155 / source PDF page 169 ---
+\begin{compactstdpage}
+
+    \begin{center}
+        {\sffamily\bfseries\fontsize{8.1}{9.3}\selectfont Table 3---Service descriptions (continued)}\par\vspace{3pt}
+    {\fontsize{5.8}{6.7}\selectfont\setlength{\tabcolsep}{1.6pt}\renewcommand{\arraystretch}{1.16}%
+        \begin{tabular}{|>{\raggedright\arraybackslash}p{0.15\linewidth}|>{\raggedright\arraybackslash}p{0.22\linewidth}|>{\raggedright\arraybackslash}p{0.36\linewidth}|>{\raggedright\arraybackslash}p{0.20\linewidth}|}
+            \hline
+            \centering\textbf{Time service} & \centering\textbf{Constraint when in Time Advancing state (tR is the requested logical time; lookahead refers to the actual lookahead the federate would have if it were granted to tR)} & \centering\textbf{Messages delivered before advance is granted} & \centering\arraybackslash\textbf{Constraint when in the Time Granted state (LT is the logical time of the joined federate; lookahead refers to the actual lookahead of the federate while in the Time Granted state)} \\ \hline
+            Next Message Request Available  & Can't send ts $<$ tR + lookahead                                                                                                                                                         & All queued RO messages\par TSO message with the smallest timestamp that will ever be received in a TSO message and for which ts $\leq$ tR\par All other queued TSO messages with the same ts & Can't send ts $<$ LT + lookahead \\ \hline
+            Flush Queue Request             & Can't send ts $<$ tR + lookahead                                                                                                                                                         & All queued RO messages\par All queued TSO messages & Can't send ts $<$ LT + lookahead \\ \hline
+        \end{tabular}}
+    \end{center}
+
+    The Time Advance Grant \rtiinitiated{} service shall be used to grant an advance regardless of which form of request was made to advance logical time. This service shall take a logical time as an argument, and this value shall be the joined federate's new logical time. The guarantee that the RTI makes about message delivery relative to the provided logical time shall depend on the type of request to advance time; the specific guarantees are provided in the service descriptions. Note that in some cases (i.e., when using Next Message Request, Next Message Request Available, or Flush Queue Request service), the RTI may advance a joined federate to a logical time that is less than the logical time that the joined federate requested (tR). In other cases (i.e., when using Time Advance Request and Time Advance Request Available services), the RTI shall advance a joined federate only to the logical time that was requested.
+
+    The RTI shall grant an advance to logical time LT only when it can guarantee that all TSO messages with timestamps less than LT (or in some cases, less than or equal to LT) have been delivered to the joined federate. This guarantee enables the joined federate to model the behavior of the entities it represents up to LT without concern for receiving new messages with timestamps less than LT. Note that in some cases, providing this guarantee shall require the RTI to wait for a significant period of wall-clock time to elapse before it can grant a time advancement to a time-constrained joined federate. However, in the case of joined federates that are not time-constrained (and, thus, cannot receive TSO messages), the guarantee is trivially true, and the advance can be granted almost immediately.
+
+    The advancement of logical time by time-regulating joined federates is important because it acts as their guarantee not to send any TSO messages with timestamps less than some specified federation time. In general, when time-regulating joined federates move their logical times forward, time-constrained joined federates can move forward as well.
+
+    Joined federates that are not time-regulating need not advance their logical time, but they may do so. Such advancements shall have no effect on other joined federates' time advancement unless the advancing joined federate subsequently becomes time-regulating (at which point the advancing joined federate may begin to have an effect on the advancement of time-constrained joined federates).
+
+    \subsubsection{Putting it all together}
+
+    The state chart shown in Figure 17 illustrates when a joined federate may become time-regulating and time-constrained, when time advances may be requested, how a joined federate enables or disables
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 156 / source PDF page 170 ---
+\begin{compactstdpage}
+
+    asynchronous message delivery, the effect these activities have on determining sent and received message order types, and when messages may be sent and received.
+
+    The transition labeled ``Send Message'' shall represent any service invocation that is called sending a message. As represented in the state chart, such a transition can occur in any state and shall result in the joined federate returning to whatever state it was in before the transition. The column to the right of the state chart elaborates on how the order type of the sent message is determined. Each part of the definition of ``Send Message'' shall be composed of a conversion rule (denoted as two terms separated by an arrow) and an optional boolean guard (denoted in square braces, just as in state charts). The term to the left of the arrow in each conversion rule represents the preferred order type of the message and whether a timestamp was provided by the invoking joined federate. The term to the right of the arrow represents the order type of the sent message. The guard represents under what circumstances the conversion rule applies. Therefore, each part of the definition reads as follows: if the preferred order type of the message is as indicated to the left of the arrow, the usage of a timestamp is as described to the left of the arrow, and the boolean guard (if present) is true, then the order type of the sent message is as indicated to the right of the arrow. The conversion rules provided in the state chart are the same as the results contained in Table 1 and Table 2.
+
+    The transitions labeled ``Receive Message \#1'' and ``Receive Message \#2'' read similarly with one exception: The conversion rules are slightly different. The term to the left of the arrow represents the order type of the received message. The term to the right of the arrow represents the order type of the corresponding sent message.
+
+    A joined federate may send messages while in any state in this diagram. If the joined federate is time-regulating and sending a TSO message, the timestamp of that message shall be constrained as described in 8.1.4 with one exception: When a joined federate is in the Time Advancing state, the timestamp of sent TSO messages is constrained by the joined federate's requested logical time (plus its lookahead) rather than by the joined federate's current logical time (plus its lookahead). If the joined federate is granted to a logical time that is less than its requested logical time (i.e., the request used the Next Message Request, Next Message Request Available, or Flush Queue Request service), the constraints shall ease upon leaving the Time Advancing state. The constraints on advancing and nonadvancing joined federates are summarized in Table 3.
+
+    When joined federates are eligible to receive messages is dependent on several factors. If the joined federate is not time-constrained, it may receive messages while in any state (although only RO messages may be received). If the joined federate is time-constrained, it shall normally receive messages only when in the Time Advancing state. However, joined federates may enable asynchronous message delivery (via the Enable Asynchronous Delivery service), which permits them to receive RO messages (but not TSO messages) when not in the Time Advancing state.
+
+    Which RO messages will be received when a joined federate is eligible to receive RO messages shall depend only on which messages have been sent that will be received as RO messages by that joined federate. In general, if a joined federate is eligible to receive RO messages, it may receive all RO messages that it has not yet received.
+
+    Which TSO messages will be received when a joined federate is eligible to receive TSO messages shall depend on which TSO messages have been sent that will be received as TSO messages, what timestamps the messages have, and what form of time advancement was requested. Precisely which TSO messages will be received shall be defined in each of the different time advancement services.
+
+    Because messages are not always eligible for delivery, the RTI shall internally queue pending messages for each joined federate. The RTI shall queue all messages that the joined federate will receive as TSO or RO messages. When messages are finally delivered to the joined federate, they shall be removed from the queue.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 157 / source PDF page 171 ---
+\begin{compactstdpage}
+
+% Figure 17 is placed in the exact source image rectangle (source PDF coordinates).
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,inner sep=0pt] at
+        ([xshift=93.29999bp,yshift=-74.27997bp]current page.north west)
+            {\rotatebox{90}{\resizebox{601.73999bp}{421.73999bp}{\input{figures/native/figure-17.tex}}}};
+        \node[anchor=center,inner sep=0pt,
+            font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+        at ([xshift=288.44426bp,yshift=-687.92487bp]current page.north west)
+            {Figure 17---Temporal state};
+    \end{tikzpicture}
+    \mbox{}\vfill
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 158 / source PDF page 172 ---
+\begin{compactstdpage}
+
+    \subsubsection{Delay Subscription Evaluation Switch}
+
+    The federation execution-wide Delay Subscription Evaluation Switch indicates how the RTI shall filter a TSO or RO message based on the receiving joined federate's current subscriptions. The setting for this switch shall come from the FDD at federation execution creation time. This switch setting shall not be modifiable during a federation execution.
+
+    Whenever this switch is enabled, the RTI shall delay subscription evaluation of a message until the message is eligible for delivery to the joined federate.
+
+    Whenever this switch is disabled, the RTI may determine if a message is eligible for delivery to a joined federate based on the current subscriptions of that joined federate when the message is generated. If this immediate subscription evaluation indicates that the message is not eligible for delivery to the joined federate, then that message shall never be eligible for delivery to the joined federate regardless of any changes to subscriptions (by that joined federate) that occur subsequent to the message generation.
+
+    In both cases, when a message is eligible for delivery to a joined federate, the RTI shall use the federate's current subscriptions to determine if it will be actually be delivered to the joined federate.
+
+    \subsubsection{Warnings on partial use of time management}
+
+    When there are some joined federates in a federation execution that use time management services and other joined federates that do not, there are some complications of which federation developers should be aware. The complications stem from the fact that some joined federates are making use of TSO ordering of messages, while others are accepting RO ordering of these same messages. The two basic scenarios (which can, of course, occur independently or together in the same federation execution) are as follows:
+
+    \stdliteralitem{a)}{A time-regulating joined federate sends TSO messages that are received by a nonconstrained joined federate in RO.}
+    \stdliteralitem{b)}{A nonregulating joined federate sends RO messages to a joined federate that expects to receive messages in TSO.}
+
+    The former tends to be more of a problem because, among other reasons, the time-regulating joined federate need not send its messages in TSO. They may (for example) be received by the nonconstrained joined federate in the same order as sent, which is not equivalent to the order in which the sender meant them to be received.
+
+    The latter is not as much of a problem because the nonregulating joined federate will send its messages in the order it means for them to be received. The time-constrained joined federate will receive them in this order (barring factors like differing transportation types among the sent messages).
+
+    Another factor to consider is that joined federates do not need to be time-regulating with respect to all messages. A time-regulating joined federate can send some messages TSO and send other messages RO. This situation can also lead to complications if the decision on order type is not carefully considered.
+
+    \subsubsection{Mixing use of TSO and RO messages}
+
+    Some specific examples of odd results when mixing the use of TSO and RO messages are presented below:
+
+    \stdliteralitem{a)}{A time-regulating joined federate invokes the Delete Object Instance service and provides a timestamp far in its future (much greater than its logical time). Subsequently, it sends several update messages, modeling attributes of the object instance in the interval prior to its deletion and providing a timestamp to each update that is less than the timestamp of the deletion. Nonconstrained joined federates may receive these messages in the order in which they were sent. In other words, a}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 159 / source PDF page 173 ---
+\begin{compactstdpage}
+
+    nonconstrained joined federate may receive the delete message and never receive any of the update
+    messages.
+    \stdliteralitem{b)}{A time-regulating joined federate invokes the Delete Object Instance service and provides a timestamp. This TSO message will be received as RO by any joined federates that are not time-constrained. This situation may result in nonconstrained joined federates receiving this message much sooner in wall-clock time than time-constrained joined federates if the timestamp provided with the delete was greater than the logical time of most time-constrained joined federates. Even more problematic is if the nonconstrained joined federate later decides to become time-constrained. If it becomes time-constrained at a federation time less than the timestamp of the delete, it may now discover the object instance for which it just received a delete message. However, any messages regarding this object instance may have been dequeued for this joined federate when it received the delete message, and subsequent behavior may not be what is expected.}
+    \stdliteralitem{c)}{A time-regulating joined federate that is sending both TSO and RO messages can in fact send both kinds of messages in a single Update Attribute Values service invocation. The message retraction designator that is returned on this service invocation, however, applies only to the resulting sent TSO messages, not to the whole service invocation. Consequently, any instance attribute values that resulted in sent RO messages shall not be retracted by invocations of the Retract service that include the returned message retraction designator.}
+
+    \subsubsection{Order types}
+
+    The following order types shall be the only ones supported by the RTI:
+
+    \stdliteralitem{a)}{TSO: (legal name shall be ``TimeStamp'')}
+    \stdliteralitem{b)}{RO: (legal name shall be ``Receive'')}
+
+    \subsection{Enable Time Regulation service}
+
+    The Enable Time Regulation service shall enable time-regulation for the joined federate invoking the service and thereby enable the joined federate to send TSO messages. The joined federate shall request that its lookahead be set to the specified value. The RTI shall indicate the logical time assigned to the joined federate through the Time Regulation Enabled \rtiinitiated{} service. The logical time provided when time-regulation is enabled shall be the smallest possible logical time that is greater than or equal to the joined federate's current logical time and for which all other constraints necessary to ensure TSO message delivery are satisfied. In other words, in general, the logical time that the joined federate will be given (plus the requested lookahead) will always be greater than or equal to the maximum logical time of all time-constrained joined federates (with the possibility of being of equal value depending on what form of time advancement was used by each time-constrained joined federate).
+
+    Upon the RTI's invocation of the corresponding Time Regulation Enabled \rtiinitiated{} service, the invoking joined federate may begin sending TSO messages that have a timestamp greater than or equal to the joined federate's logical time plus the joined federate's lookahead. Zero lookahead joined federates are not subject to additional restrictions when time-regulation is first enabled.
+
+    Because the invocation of this service may require the RTI to advance the invoking joined federate's logical time, this service has an additional meaning for time-constrained joined federates. Since the advancing logical time for a time-constrained joined federate is synonymous with a guarantee that all TSO messages with timestamps less than the new logical time have been delivered, the invocation of this service shall be considered an implicit Time Advance Request Available service invocation. The subsequent invocation of Time Regulation Enabled \rtiinitiated{} service shall be considered an implicit Time Advance Grant \rtiinitiated{} service invocation. Thus, if a time-constrained joined federate attempts to become time-regulating, it may receive RO and TSO messages between its invocation of the Enable Time Regulation service and the RTI's
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 160 / source PDF page 174 ---
+\begin{compactstdpage}
+
+    invocation of the Time Regulation Enabled \rtiinitiated{} service at the joined federate. This special case is not illustrated in the state chart in Figure 17.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Lookahead.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{e)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{f)}{Time-regulation is not enabled in the joined federate.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI is informed of the joined federate's request to enable time-regulation (the request is now pending).}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid lookahead.}
+    \stdliteralitem{b)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{c)}{Request for time-regulation pending.}
+    \stdliteralitem{d)}{Time-regulation is already enabled.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Time Regulation Enabled \rtiinitiated{} service}
+
+    Invocation of the Time Regulation Enabled \rtiinitiated{} service shall indicate that a prior request to enable time regulation has been honored. The value of this service's argument shall indicate that the logical time of the joined federate has been set to the specified value.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Current logical time of the joined federate.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 161 / source PDF page 175 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has a request to enable time-regulation pending.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate is notified that time-regulation is enabled (the request is no longer pending), and the joined federate may now send TSO messages. The joined federate's logical time shall be set to the value specified as the argument to this service. The joined federate's actual lookahead shall be set to that specified in the corresponding Enable Time Regulation request.}
+    \stdliteralitem{b)}{If the joined federate is time-constrained, no additional TSO messages shall be delivered with timestamps less than the provided federation time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Disable Time Regulation service}
+
+    Invocation of the Disable Time Regulation service shall indicate that the joined federate is disabling time regulation. Subsequent messages sent by the joined federate shall be sent automatically as RO messages.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Time-regulation is enabled at the joined federate.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 162 / source PDF page 176 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate is no longer time-regulating and may no longer send TSO messages.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Time-regulation was not enabled.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Enable Time Constrained service}
+
+    The Enable Time Constrained service shall request that the joined federate invoking the service become time-constrained. The RTI shall indicate that the joined federate is time-constrained by invoking the Time Constrained Enabled \rtiinitiated{} service.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{e)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{f)}{The joined federate is not already time-constrained.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI is informed of the joined federate's request to become time-constrained (the request is now pending).}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{b)}{Request for time-constrained pending.}
+    \stdliteralitem{c)}{Time-constrained is already enabled.}
+    \stdliteralitem{d)}{Federate save in progress.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 163 / source PDF page 177 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Time Constrained Enabled \rtiinitiated{} service}
+
+    Invocation of the Time Constrained Enabled \rtiinitiated{} service shall indicate that a prior request to become time-constrained has been honored. The value of this service's argument shall indicate the new logical time of the joined federate. If the joined federate is time-regulating, the argument shall equal the joined federate's current logical time. The RTI shall provide the joined federate with the smallest possible logical time that is greater than or equal to the logical time of the joined federate and for which all other constraints necessary to ensure TSO message delivery are satisfied. In other words, in general, the provided federation time must be less than or equal to the joined federate's GALT. If the joined federate's current logical time is greater than its GALT, then the joined federate shall not become time-constrained until the joined federate's GALT advances beyond its logical time. See 8.1.6 for more explanation on this point.
+
+    When a joined federate changes to be time-constrained, TSO messages stored in the RTI's internal queues that have timestamps greater than or equal to the joined federate's logical time shall be delivered in TSO. TSO messages delivered to the joined federate before it becomes time-constrained, possibly including messages with timestamps greater than or equal to the joined federate's current logical time, shall be delivered as RO messages.
+
+    Joined federates that are time-constrained may receive messages only when in the Time Advancing state unless asynchronous message delivery is enabled (by use of the Enable Asynchronous Delivery \rtiinitiated{} service). If asynchronous message delivery is enabled, the time-constrained joined federate may receive RO messages when not in the Time Advancing state, but TSO messages may still be received only when in the Time Advancing state.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Current logical time of the joined federate.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate has a request to enable time-constrained pending.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has been notified that it is time-constrained.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 164 / source PDF page 178 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{The joined federate has been notified that it may now receive TSO messages (the request is no longer pending), and its logical time advances are constrained so that the joined federate's logical time shall never exceed the GALT computed by the RTI for the joined federate. The joined federate's logical time shall be set to the value specified as the argument to this service.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Disable Time Constrained service}
+
+    Invocation of the Disable Time Constrained service shall indicate that the joined federate is no longer time-constrained. All enqueued and subsequent TSO messages shall be delivered to the joined federate as RO messages.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate is time-constrained.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate is no longer time-constrained and can no longer receive TSO messages.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Time-constrained is not enabled.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 165 / source PDF page 179 ---
+\begin{compactstdpage}
+
+    \subsection{Time Advance Request service}
+
+    The Time Advance Request service shall request an advance of the joined federate's logical time and release zero or more messages for delivery to the joined federate.
+
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate:
+
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as RO messages}
+    \stdliteraldashitem{All messages that the joined federate will receive as TSO messages that have timestamps less than or equal to the specified logical time}
+
+    After invoking the Time Advance Request service, the messages shall be passed to the joined federate when the RTI invokes the Receive Interaction \rtiinitiated{}, Reflect Attribute Values \rtiinitiated{}, and Remove Object Instance \rtiinitiated{} services.
+
+    By invoking the Time Advance Request service with the specified logical time, the joined federate is guaranteeing that it will not generate a TSO message at any point in the future with a timestamp less than or equal to the specified logical time, even if the joined federate's lookahead is zero. Further, the joined federate may not generate any TSO messages in the future with timestamps less than the specified logical time plus the actual lookahead the joined federate would have if it were granted to the specified logical time.
+
+    A Time Advance Grant \rtiinitiated{} service invocation shall complete this request and indicate to the joined federate that it has advanced to the specified logical time and that no additional TSO messages will be delivered to the joined federate in the future with timestamps less than or equal to the logical time of the grant. For time-constrained joined federates, requests for which the specified logical time is less than GALT can be granted without waiting for other joined federates to advance.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified logical time is greater than or equal to the joined federate's logical time.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{g)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate may not send any TSO messages with timestamps less than the specified logical time plus its actual lookahead.}
+    \stdliteralitem{b)}{If the joined federate's actual lookahead is zero, it may not send any TSO messages with timestamps less than or equal to the specified logical time.}
+    \stdliteralitem{c)}{The RTI is informed of the joined federate's request to advance its logical time.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 166 / source PDF page 180 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Logical time already passed.}
+    \stdliteralitem{b)}{The logical time is invalid.}
+    \stdliteralitem{c)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{d)}{Request for time-regulation pending.}
+    \stdliteralitem{e)}{Request for time-constrained pending.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Time Advance Request Available service}
+
+    The Time Advance Request Available service shall request an advance of the joined federate's logical time. It is similar to the Time Advance Request service to logical time T, except
+
+    \stdliteraldashitem{The RTI shall not guarantee delivery of all messages with timestamps equal to T when a Time Advance Grant \rtiinitiated{} service invocation to logical time T is issued}
+    \stdliteraldashitem{After the joined federate receives a Time Advance Grant \rtiinitiated{} service invocation to logical time T, it can send additional messages with timestamps equal to T if the joined federate's actual lookahead is zero}
+
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate:
+
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as RO messages}
+    \stdliteraldashitem{All messages that the joined federate will receive as TSO messages that have timestamps less than the specified logical time}
+    \stdliteraldashitem{Any messages queued in the RTI that the joined federate will receive as TSO messages that have timestamps equal to the specified logical time}
+
+    After invoking the Time Advance Request Available service, the messages shall be passed to the joined federate when the RTI invokes the Receive Interaction \rtiinitiated{}, Reflect Attribute Values \rtiinitiated{}, and Remove Object Instance \rtiinitiated{} services.
+
+    By invoking the Time Advance Request Available service with the specified logical time, the joined federate is guaranteeing that it will not generate a TSO message at any point in the future with a timestamp less than the specified logical time plus the actual lookahead the joined federate would have if it were granted to the specified logical time.
+
+    A Time Advance Grant \rtiinitiated{} service invocation shall complete this request and indicate to the joined federate that it has advanced to the specified logical time and no additional TSO messages shall be delivered to the joined federate in the future with timestamps less than the logical time of the grant. Additional messages with timestamps equal to the logical time of the grant can arrive in the future. For time-constrained joined federates, requests for which the specified logical time is less than or equal to GALT can be granted without waiting for other joined federates to advance.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 167 / source PDF page 181 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified logical time is greater than or equal to the joined federate's logical time.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{g)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate may not send any TSO messages with timestamps less than the specified logical time plus its actual lookahead.}
+    \stdliteralitem{b)}{The RTI is informed of the joined federate's request to advance logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Logical time has already passed.}
+    \stdliteralitem{b)}{The logical time is invalid.}
+    \stdliteralitem{c)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{d)}{Request for time-regulation pending.}
+    \stdliteralitem{e)}{Request for time-constrained pending.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Next Message Request service}
+
+    The Next Message Request service shall request the logical time of the joined federate to be advanced to the timestamp of the next TSO message that will be delivered to the joined federate, provided that message has a timestamp no greater than the logical time specified in the request.
+
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate:
+
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as RO messages}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 168 / source PDF page 182 ---
+\begin{compactstdpage}
+
+    \stdliteraldashitem{The smallest timestamped message that will ever be received by the joined federate as a TSO message with a timestamp less than or equal to the specified logical time, and all other messages containing the same timestamp that the joined federate will receive as TSO messages}
+
+    After invocation of the Next Message Request service, the messages shall be passed to the joined federate when the RTI invokes the Receive Interaction \rtiinitiated{}, Reflect Attribute Values \rtiinitiated{}, and Remove Object Instance \rtiinitiated{} services.
+
+    By invoking Next Message Request with the specified logical time, the joined federate is guaranteeing that it will not generate a TSO message before the next Time Advance Grant \rtiinitiated{} service invocation with a timestamp less than or equal to the specified logical time (or less than the specified logical time plus the actual lookahead the joined federate would have if it were granted to the specified logical time if its lookahead is not zero).
+
+    If it does not receive any TSO messages before the Time Advance Grant \rtiinitiated{} service invocation, the joined federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp less than or equal to the specified logical time (or less than the specified logical time plus its actual lookahead if its lookahead is not zero).
+
+    If it does receive any TSO messages before the Time Advance Grant \rtiinitiated{} service invocation, the joined federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp less than or equal to the logical time of the grant (or less than the logical time of the grant plus its actual lookahead if its lookahead is not zero).
+
+    A Time Advance Grant \rtiinitiated{} service invocation shall complete this request and indicate to the joined federate that it has advanced its logical time to the timestamp of the TSO messages that are delivered, if any, or to the specified logical time if no TSO messages were delivered. It shall also indicate that no TSO messages will be delivered to the joined federate in the future with timestamps less than or equal to the logical time of the grant. For time-constrained joined federates, requests for which either LITS or the specified logical time is less than GALT can be granted without waiting for other joined federates to advance.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified logical time is greater than or equal to the joined federate's logical time.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{g)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 169 / source PDF page 183 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate may not send any TSO messages with timestamps less than the specified logical time plus its actual lookahead.}
+    \stdliteralitem{b)}{If the joined federate's lookahead is zero, it may not send any TSO messages with timestamps less than or equal to the specified logical time.}
+    \stdliteralitem{c)}{The RTI is informed of the joined federate's request to advance logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Logical time has already passed.}
+    \stdliteralitem{b)}{The logical time is invalid.}
+    \stdliteralitem{c)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{d)}{Request for time-regulation pending.}
+    \stdliteralitem{e)}{Request for time-constrained pending.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Next Message Request Available service}
+
+    The Next Message Request Available service shall request the logical time of the joined federate to be advanced to the timestamp of the next TSO message that will be delivered to the joined federate, provided that message has a timestamp no greater than the logical time specified in the request. It is similar to the Next Message Request service except
+
+    \stdliteraldashitem{The RTI shall not guarantee delivery of all messages with timestamps equal to T when a Time Advance Grant \rtiinitiated{} service invocation to logical time T is issued, and}
+    \stdliteraldashitem{After the joined federate receives a Time Advance Grant \rtiinitiated{} service invocation to logical time T, it can send additional messages with timestamps equal to T if the joined federate's lookahead is zero.}
+
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate:
+
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as RO messages}
+    \stdliteraldashitem{The smallest timestamped message that will ever be received by the joined federate as a TSO message with a timestamp less than or equal to the specified logical time, and any other messages queued in the RTI that the joined federate will receive as TSO messages and that have the same timestamp.}
+
+    After invoking the Next Message Request Available service, the messages shall be passed to the joined federate when the RTI invokes the Receive Interaction \rtiinitiated{}, Reflect Attribute Values \rtiinitiated{}, and Remove Object Instance \rtiinitiated{} services.
+
+    By invoking the Next Message Request Available service with the specified logical time, the joined federate is guaranteeing that it will not generate a TSO message before the next Time Advance Grant \rtiinitiated{} service invocation with a timestamp less than the specified logical time plus the actual lookahead the joined federate would have if it were granted to the specified logical time.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 170 / source PDF page 184 ---
+\begin{compactstdpage}
+
+    If it does not receive any TSO messages before the Time Advance Grant \rtiinitiated{} service invocation, the joined federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp less than the specified logical time plus its actual lookahead.
+
+    If it does receive any TSO messages before the Time Advance Grant \rtiinitiated{} service invocation, the joined federate shall guarantee that it will not generate a TSO message at any point in the future with a timestamp less than the logical time of the grant plus its actual lookahead.
+
+    A Time Advance Grant \rtiinitiated{} service invocation shall complete this request and indicate to the joined federate that it has advanced its logical time to the timestamp of the TSO messages that are delivered, if any, or to the specified logical time if no TSO messages were delivered. Even if no TSO messages were delivered, it is still possible that TSO messages may be delivered in the future with timestamps equal to the logical time of the grant. A Time Advance Grant \rtiinitiated{} service invocation shall also indicate that no TSO messages will be delivered to the joined federate in the future with timestamps less than the logical time of the grant. For time-constrained joined federates, requests for which LITS or the specified logical time is less than or equal to GALT can be granted without waiting for other joined federates to advance.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified logical time is greater than or equal to the joined federate's logical time.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{g)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate may not send TSO messages with timestamps less than the specified logical time plus its actual lookahead.}
+    \stdliteralitem{b)}{The RTI is informed of the joined federate's request to advance logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Logical time has already passed.}
+    \stdliteralitem{b)}{The logical time is invalid.}
+    \stdliteralitem{c)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{d)}{Request for time-regulation pending.}
+    \stdliteralitem{e)}{Request for time-constrained pending.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 171 / source PDF page 185 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Flush Queue Request service}
+
+    The Flush Queue Request service shall request that all messages queued in the RTI that the joined federate will receive as TSO messages be delivered now. The RTI shall deliver all such messages as soon as possible, despite the fact that it may not be able to guarantee that no future messages containing smaller timestamps could arrive. The RTI shall advance the joined federate's logical time to the smallest of the following:
+
+    \stdliteraldashitem{The specified logical time}
+    \stdliteraldashitem{The joined federate's GALT value}
+    \stdliteraldashitem{The smallest timestamp of all TSO messages delivered by the RTI in response to this invocation of the Flush Queue Request service}
+
+    Invocation of this service shall cause the following set of messages to be delivered to the joined federate:
+
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as RO messages}
+    \stdliteraldashitem{All messages queued in the RTI that the joined federate will receive as TSO messages}
+
+    After invoking the Flush Queue Request service, the messages shall be passed to the joined federate when the RTI invokes the Receive Interaction \rtiinitiated{}, Reflect Attribute Values \rtiinitiated{}, and Remove Object Instance \rtiinitiated{} services.
+
+    By invoking the Flush Queue Request service with the specified logical time, the joined federate is guaranteeing that it will not generate a TSO message before the next Time Advance Grant \rtiinitiated{} service invocation with a timestamp less than the specified logical time plus the actual lookahead the joined federate would have if it were granted to the specified logical time.
+
+    After the Time Advance Grant \rtiinitiated{} service invocation, the joined federate shall guarantee that it shall not generate a TSO message at any point in the future with a timestamp less than the logical time of the grant plus its actual lookahead.
+
+    A Time Advance Grant \rtiinitiated{} service invocation shall complete this request and indicate to the joined federate that it has advanced to the logical time of the grant and no additional TSO messages shall be delivered to the joined federate in the future with timestamps less than the logical time of the grant. A Flush Queue Request service can always be granted without waiting for other joined federates to advance.
+
+    Since the Flush Queue Request service results in the delivery of all queued TSO messages, not just those the RTI can guarantee are safe to deliver, there are two consequences the receiving joined federate must be prepared to handle. First, messages may later be received that have timestamps that are smaller than those of some messages received in response to the Flush Queue Request service invocation, and this sequencing violates timestamped ordering. Second, some messages delivered may still be eligible for retraction by their originators; therefore, the receiving joined federate must be capable of dealing with Request Retraction \rtiinitiated{} service invocations for these messages.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 172 / source PDF page 186 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The specified logical time is greater than or equal to the joined federate's logical time.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{The joined federate does not have a request to enable time-regulation pending.}
+    \stdliteralitem{g)}{The joined federate does not have a request to enable time-constrained pending.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate may not send any TSO messages with timestamps less than the specified logical time plus its actual lookahead.}
+    \stdliteralitem{b)}{The RTI is informed of the joined federate's request to advance logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Logical time has already passed.}
+    \stdliteralitem{b)}{The logical time is invalid.}
+    \stdliteralitem{c)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{d)}{Request for time-regulation pending.}
+    \stdliteralitem{e)}{Request for time-constrained pending.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Time Advance Grant \rtiinitiated{} service}
+
+    Invocation of the Time Advance Grant \rtiinitiated{} service shall indicate that a prior request to advance the joined federate's logical time has been honored. The argument of this service shall indicate that the logical time for the joined federate has been advanced to this value.
+
+    If the grant is issued in response to invocation of a Next Message Request or Time Advance Request service, the RTI shall guarantee that no additional TSO messages shall be delivered in the future with timestamps less than or equal to this value.
+
+    If the grant is in response to an invocation of a Time Advance Request Available, Next Message Request Available, or Flush Queue Request service, the RTI shall guarantee that no additional TSO messages shall be delivered in the future with timestamps less than the value of the grant.
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 173 / source PDF page 187 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Logical time.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate is in the Time Advancing state.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{If the joined federate has a change to its lookahead pending, its new actual lookahead shall be equal to the maximum of its requested lookahead and its old actual lookahead less the amount of logical time advanced (the joined federate's old logical time less the supplied logical time).}
+    \stdliteralitem{b)}{The joined federate may not send TSO messages with timestamps less than the supplied logical time plus its actual lookahead.}
+    \stdliteralitem{c)}{If this service is invoked in response to a Time Advance Request or Next Message Request service, the joined federate's actual lookahead is zero, and the joined federate may not send TSO messages with timestamps less than or equal to the supplied logical time.}
+    \stdliteralitem{d)}{If this service is invoked in response to a Time Advance Request or Next Message Request service, no additional TSO messages shall be delivered with timestamps less than or equal to the supplied logical time.}
+    \stdliteralitem{e)}{If this service is invoked in response to a Time Advance Request Available, Next Message Request Available, or Flush Queue Request service, no additional TSO messages shall be delivered with timestamps less than the supplied logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Enable Asynchronous Delivery service}
+
+    Invocations of the Enable Asynchronous Delivery service shall instruct the RTI to deliver received RO messages to the invoking joined federate when it is in either the Time Advancing state or Time Granted state.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 174 / source PDF page 188 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Asynchronous delivery is disabled at the joined federate.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{Asynchronous delivery is enabled at the joined federate.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Asynchronous delivery is already enabled.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17}
+
+    \subsection{Disable Asynchronous Delivery service}
+
+    Invocations of the Disable Asynchronous Delivery service shall, for a time-constrained federate, instruct the RTI to deliver RO messages to the invoking federate only when it is in the Time Advancing state.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Asynchronous delivery is enabled at the joined federate.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 175 / source PDF page 189 ---
+\begin{compactstdpage}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{Asynchronous delivery is disabled at the joined federate.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Asynchronous delivery is already disabled.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{Figure 17.}
+
+    \subsection{Query GALT service}
+
+    The Query GALT service shall request the invoking joined federate's current GALT. The first returned argument shall indicate whether GALT is defined for the joined federate. If the argument indicates that GALT is defined for the joined federate, then the optional returned argument shall be supplied to indicate the joined federate's current GALT.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{GALT definition indicator.}
+    \stdliteralitem{b)}{Optional current value of invoking joined federate's GALT.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate receives the current value of its GALT, if defined.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate save in progress.}
+    \stdliteralitem{b)}{Federate restore in progress.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 176 / source PDF page 190 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Query Logical Time service}
+
+    The Query Logical Time service shall request the current logical time of the invoking joined federate.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{b)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{The invoking joined federate's current logical time.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate receives the current value of its logical time.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate save in progress.}
+    \stdliteralitem{b)}{Federate restore in progress.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Query LITS service}
+
+    The Query LITS service shall request the invoking joined federate's current LITS. The first returned argument shall indicate whether LITS is defined for the joined federate. If the argument indicates that LITS is defined for the joined federate, then the optional returned argument shall be supplied to indicate the joined federate's current LITS.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 177 / source PDF page 191 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{LITS definition indicator.}
+    \stdliteralitem{b)}{Optional current value of invoking joined federate's LITS.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Federate save not in progress.}
+    \stdliteralitem{e)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate receives its LITS, if defined.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate save in progress.}
+    \stdliteralitem{b)}{Federate restore in progress.}
+    \stdliteralitem{c)}{The federate is not a federation execution member.}
+    \stdliteralitem{d)}{Not connected.}
+    \stdliteralitem{e)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Modify Lookahead service}
+
+    The Modify Lookahead service shall request a change to the joined federate's lookahead. A joined federate may not request a change to its lookahead while it is in the Time Advancing state. The specified lookahead shall be greater than or equal to zero. If the requested value is greater than or equal to the joined federate's actual lookahead, the change shall take effect immediately, and the requested lookahead shall become the actual lookahead. If the requested value is less than the joined federate's actual lookahead, the change shall take effect gradually as the joined federate advances its logical time, and the actual lookahead is initially unchanged. Specifically, the joined federate's actual lookahead shall decrease by T units whenever logical time advances T units until the requested lookahead is reached.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Requested lookahead.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 178 / source PDF page 192 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{d)}{Time-regulation is enabled in the joined federate.}
+    \stdliteralitem{e)}{The joined federate is not in the Time Advancing state.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{If the requested lookahead is greater than or equal to the joined federate's actual lookahead, the joined federate's actual lookahead shall be set to the requested value.}
+    \stdliteralitem{b)}{If the requested lookahead is less than the joined federate's actual lookahead, the RTI shall be informed of the joined federate's requested lookahead value.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Invalid lookahead.}
+    \stdliteralitem{b)}{Joined federate in Time Advancing state.}
+    \stdliteralitem{c)}{Time-regulation was not enabled.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Query Lookahead service}
+
+    The Query Lookahead service shall query the RTI for the joined federate's current actual lookahead. The current value of actual lookahead may differ temporarily from the requested lookahead given in the Modify Lookahead service if the joined federate is attempting to reduce its actual lookahead.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{The invoking joined federate's current actual lookahead.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{Time-regulation is enabled in the joined federate.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate receives the current value of its actual lookahead.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 179 / source PDF page 193 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Time-regulation was not enabled.}
+    \stdliteralitem{b)}{Federate save in progress.}
+    \stdliteralitem{c)}{Federate restore in progress.}
+    \stdliteralitem{d)}{The federate is not a federation execution member.}
+    \stdliteralitem{e)}{Not connected.}
+    \stdliteralitem{f)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Retract service}
+
+    The Retract service shall be used by a joined federate to notify the federation execution that a message previously sent by the joined federate is to be retracted. The Update Attribute Values, Send Interaction, Send Interaction with Regions, and Delete Object Instance services shall return a message retraction designator that is used to specify the message that is to be retracted. Retracting a message shall cause the invocation of the Request Retraction \rtiinitiated{} service in all joined federates that received the original message.
+
+    Retracting a Delete Object Instance service message shall result in the reconstitution of the corresponding object instance. This action shall cause the ownership reassumption of the attributes of the affected object instance by the joined federates that owned them when the Delete Object Instance service was invoked.
+
+    A message may be retracted only if all of the following occur:
+
+    \stdliteralitem{a)}{The retracting joined federate sent the message.}
+    \stdliteralitem{b)}{The message had a sent order type of TSO (i.e., a message retraction designator was returned by the RTI).}
+    \stdliteralitem{c)}{The joined federate is time-regulating, and either}
+    \stdliteralsubitem{1)}{The joined federate is in the Time Granted state and the message associated with the specified retraction designator contained a timestamp that is larger than the joined federate's current logical time plus its actual lookahead, or}
+    \stdliteralsubitem{2)}{The joined federate is in the Time Advancing state and the message associated with the specified retraction designator contained a timestamp that is larger than the logical time specified in the joined federate's most recent advance request plus the joined federate's actual lookahead.}
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Message retraction designator.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The joined federate is time-regulating.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 180 / source PDF page 194 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{The joined federate has issued Update Attribute Values, Send Interaction, Send Interaction with Regions, or Delete Object Instance service invocations previously and obtained the message retraction designator.}
+    \stdliteralitem{f)}{If the joined federate is in the Time Granted state, the message associated with the specified retraction designator contained a timestamp that is larger than the joined federate's current logical time plus its actual lookahead.}
+    \stdliteralitem{g)}{If the joined federate is in the Time Advancing state, the message associated with the specified retraction designator contained a timestamp that is larger than the logical time specified in the joined federate's most recent advance request plus its actual lookahead.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The RTI is informed that the joined federate requests to retract the specified message.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The retraction designator is associated with a message that can no longer be retracted.}
+    \stdliteralitem{b)}{The message retraction designator is invalid.}
+    \stdliteralitem{c)}{The federate is not time-regulating.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Request Retraction \rtiinitiated{} service}
+
+    If the RTI receives a legal Retract service invocation for a message that has already been delivered to a joined federate, the Request Retraction \rtiinitiated{} service shall be invoked on that joined federate. If the message in question is queued in the RTI and has not been delivered to the joined federate, the message shall be dequeued from the RTI and will never be delivered to the joined federate.
+
+    Time-constrained joined federates that do not use the Flush Queue Request service are not subject to invocation of the Request Retraction \rtiinitiated{} service on any received TSO message because they will never receive TSO messages that are eligible for retraction. Nonconstrained joined federates, however, must be prepared to deal with invocations of this service because any message received that was sent as a TSO message may be eligible for retraction.
+
+    Since the joined federate is required to save the message retraction designator in order to perform a retraction, the RTI is not required to ensure the message was actually delivered to the federate. The RTI is only required to ensure that a message is not delivered to a joined federate after a retraction for that message has been requested.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Message retraction designator.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 181 / source PDF page 195 ---
+\begin{compactstdpage}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{Federate save not in progress.}
+    \stdliteralitem{d)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The joined federate has been directed to retract the specified message.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Change Attribute Order Type service}
+
+    The preferred order type for each attribute of an object instance shall be initialized from the object class description in the FDD. A joined federate may choose to change the preferred order type during execution. Invoking the Change Attribute Order Type service shall change the order type for all future Update Attribute Values service invocations for the specified instance attributes. When the ownership of an instance attribute is changed, the preferred order type shall revert to that defined in the FDD.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{Order type.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The specified class attributes are available attributes of the object instance's known class.}
+    \stdliteralitem{g)}{The attributes are defined in the FDD.}
+    \stdliteralitem{h)}{The joined federate owns the instance attributes.}
+    \stdliteralitem{i)}{The order type is valid (see 8.1.11).}
+    \stdliteralitem{j)}{Federate save not in progress.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 182 / source PDF page 196 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{k)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The order type is changed for the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{b)}{The specified class attributes are not available attributes of the known object class.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Change Interaction Order Type service}
+
+    The preferred order type of each interaction shall be initialized from the interaction class description in the FDD. A joined federate may choose to change the preferred order type during execution. Invoking the Change Interaction Order Type service shall change the order type for all future Send Interaction and Send Interaction with Regions service invocations for the specified interaction class for the invoking joined federate only.
+
+    \subsubsection{Supplied arguments}
+
+    \stdliteralitem{a)}{Interaction class designator.}
+    \stdliteralitem{b)}{Order type.}
+
+    \subsubsection{Returned arguments}
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{The interaction class is defined in the FDD.}
+    \stdliteralitem{e)}{The joined federate is publishing the interaction class.}
+    \stdliteralitem{f)}{The order type is valid (see 8.1.11).}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+    \stdliteralitem{a)}{The preferred order type is changed for the specified interaction class.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 183 / source PDF page 197 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+    \stdliteralitem{a)}{The joined federate is not publishing the interaction class.}
+    \stdliteralitem{b)}{The interaction class is not defined in the FDD.}
+    \stdliteralitem{c)}{Federate save in progress.}
+    \stdliteralitem{d)}{Federate restore in progress.}
+    \stdliteralitem{e)}{The federate is not a federation execution member.}
+    \stdliteralitem{f)}{Not connected.}
+    \stdliteralitem{g)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+    \stdliteralitem{a)}{None.}
+
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 184 / source PDF page 198 ---
+\thispagestyle{body}
+\null

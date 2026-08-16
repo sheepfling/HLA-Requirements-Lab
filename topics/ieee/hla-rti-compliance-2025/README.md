@@ -6,7 +6,7 @@ corpus directly and emits a readable evidence contract, JSON manifest, graph,
 and normalized CSV projections under ignored `output/compliance/`.
 
 ```powershell
-python -m scripts.build publication build hla-rti-compliance-requirements-2025
+hla-lab publish hla-rti-compliance-requirements-2025
 ```
 
 Planned mappings are planning seams, not proof of RTI conformance. Concrete

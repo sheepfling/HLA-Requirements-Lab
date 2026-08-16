@@ -1,0 +1,6156 @@
+{
+  "schema_version": 1,
+  "implementations": [
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e01",
+      "interface_kind": "service",
+      "interface_name": "outer initial -> Does Not Exist",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 19,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e02",
+      "interface_kind": "service",
+      "interface_name": "Does Not Exist -> nested composite boundary; create",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 36,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e03",
+      "interface_kind": "service",
+      "interface_name": "No Joined Federates -> Does Not Exist; destroy",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-42e0b985bff4",
+        "req-6a8c0463fc94",
+        "req-5eed6caef333"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e04",
+      "interface_kind": "service",
+      "interface_name": "nested initial -> No Joined Federates",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 47,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e05",
+      "interface_kind": "service",
+      "interface_name": "first join, rightward",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 51,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e06",
+      "interface_kind": "service",
+      "interface_name": "last resign, leftward",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-42e0b985bff4",
+        "req-3878762a506a"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 56,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-01-e07",
+      "interface_kind": "callback",
+      "interface_name": "supporting-state clockwise self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-01-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-01.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 61,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-01-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e01",
+      "interface_kind": "service",
+      "interface_name": "outer initial -> Not Connected",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-26084b0add33"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 38,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e02",
+      "interface_kind": "service",
+      "interface_name": "Not Connected -> Connected composite boundary; Connect",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-26084b0add33"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 56,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e03",
+      "interface_kind": "service",
+      "interface_name": "Connected composite boundary -> Not Connected; Disconnect",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 61,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e04",
+      "interface_kind": "service",
+      "interface_name": "nested initial -> Not Joined",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-26084b0add33"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 97,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e05",
+      "interface_kind": "service",
+      "interface_name": "Not Joined -> Joined Federate; join",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 100,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e06",
+      "interface_kind": "service",
+      "interface_name": "Joined Federate -> Not Joined; resign",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 105,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-03-e07",
+      "interface_kind": "service",
+      "interface_name": "Connected composite boundary -> Not Connected; fault/exception route",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-03-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-26084b0add33",
+        "req-988b5834ce04",
+        "req-e67a5aa8e65c"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-03.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 110,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-03-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e01",
+      "interface_kind": "service",
+      "interface_name": "Transition E01",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 101,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e02",
+      "interface_kind": "service",
+      "interface_name": "Transition E02",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 106,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e03",
+      "interface_kind": "service",
+      "interface_name": "Request Federation Save, Active Federate boundary to H",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 113,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e04",
+      "interface_kind": "service",
+      "interface_name": "Active to Restore Request Pending",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 117,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e05",
+      "interface_kind": "service",
+      "interface_name": "failed restore request confirmation, back to Active",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 121,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e06",
+      "interface_kind": "service",
+      "interface_name": "successful restore request confirmation",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 125,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e07",
+      "interface_kind": "service",
+      "interface_name": "Federation Saved callback, save composite to Active Federate boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-6b8d1fd1bd38"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 129,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e08",
+      "interface_kind": "service",
+      "interface_name": "Initiate Federate Save callback and time-management guard",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-19bb20f5592b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 133,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e09",
+      "interface_kind": "service",
+      "interface_name": "Federate Save Begun",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-36f2aac54a5a",
+        "req-bd3d7eca9485"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 137,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e10",
+      "interface_kind": "service",
+      "interface_name": "Federate Save Complete",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-1350bbec9fa1",
+        "req-b9051bb4cc50",
+        "req-4e28c70017c6"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 141,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e11",
+      "interface_kind": "service",
+      "interface_name": "Federation Restore Begun callback",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-d2ef457d35a3"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 145,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e12",
+      "interface_kind": "service",
+      "interface_name": "Initiate Federate Restore callback",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 149,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e13",
+      "interface_kind": "service",
+      "interface_name": "Federate Restore Complete",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-4e28c70017c6",
+        "req-17147b632c5a",
+        "req-d2ef457d35a3"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 153,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e14",
+      "interface_kind": "service",
+      "interface_name": "Federation Restored callback, restore composite to Active Federate boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-d2ef457d35a3"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 157,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e15",
+      "interface_kind": "service",
+      "interface_name": "Transition E15",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 163,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e16",
+      "interface_kind": "service",
+      "interface_name": "in Active Federate -> Normal Activity Permitted",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-bd481130d017"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 166,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-04-e17",
+      "interface_kind": "service",
+      "interface_name": "not in Active Federate -> Normal Activity Not Permitted",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-04-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-bd481130d017"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-04.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 170,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-04-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e01",
+      "interface_kind": "service",
+      "interface_name": "outer initial state to deep history",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 65,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e02",
+      "interface_kind": "service",
+      "interface_name": "deep history to the orthogonal-decomposition boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 71,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e03",
+      "interface_kind": "service",
+      "interface_name": "first Object Class initial transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-42e0b985bff4",
+        "req-cfd6da896c5b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 75,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e04",
+      "interface_kind": "service",
+      "interface_name": "last Object Class initial transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-42e0b985bff4",
+        "req-cfd6da896c5b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 80,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e05",
+      "interface_kind": "service",
+      "interface_name": "first Interaction Class initial transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-cfd6da896c5b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 85,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-05-e06",
+      "interface_kind": "service",
+      "interface_name": "last Interaction Class initial transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-05-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-cfd6da896c5b",
+        "req-233195810cab",
+        "req-3878762a506a"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-05.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 90,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-05-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e01",
+      "interface_kind": "callback",
+      "interface_name": "Create Federation Execution, RTI initial to global-label frame",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-26084b0add33"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 103,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e02",
+      "interface_kind": "callback",
+      "interface_name": "Destroy Federation Execution, global-label frame to RTI final",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 110,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e03",
+      "interface_kind": "service",
+      "interface_name": "Join Federation Execution (F_1), initial to local-label frame",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 116,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e04",
+      "interface_kind": "service",
+      "interface_name": "Resign Federation Execution (F_1), frame to final",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 123,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e05",
+      "interface_kind": "service",
+      "interface_name": "Join Federation Execution (F_N), initial to local-label frame",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 129,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-06-e06",
+      "interface_kind": "service",
+      "interface_name": "Resign Federation Execution (F_N), frame to final",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-06-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-06.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 136,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-06-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-07-e01",
+      "interface_kind": "service",
+      "interface_name": "initial entry to Synch Point Not Registered",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-07-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-9704d8093af5"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-07.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 70,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-07-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-07-e02",
+      "interface_kind": "service",
+      "interface_name": "registration request, Not Registered -> Validating",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-07-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-ee57743ab872",
+        "req-e4166a1041d4"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-07.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 73,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-07-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-07-e03",
+      "interface_kind": "service",
+      "interface_name": "registration failure, Validating -> Not Registered",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-07-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-ee57743ab872",
+        "req-e4166a1041d4",
+        "req-40bc59492506"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-07.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 77,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-07-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-07-e04",
+      "interface_kind": "service",
+      "interface_name": "registration success, Validating -> repeated Awaiting family",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-07-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-07.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 81,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-07-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-07-e05",
+      "interface_kind": "service",
+      "interface_name": "all subordinate members are complete; return to unregistered",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-07-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-07.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 85,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-07-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-08-e01",
+      "interface_kind": "service",
+      "interface_name": "members of synch_set enter the waiting state and are announced",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-08-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-9704d8093af5",
+        "req-b143297a98cf",
+        "req-ee57743ab872"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-08.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-08-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-08-e02",
+      "interface_kind": "service",
+      "interface_name": "the federate finishes its individual synchronization (or resigns)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-08-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-9704d8093af5"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-08.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 58,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-08-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-08-e03",
+      "interface_kind": "service",
+      "interface_name": "federates outside synch_set bypass the waiting state",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-08-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-9704d8093af5"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-08.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 62,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-08-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e01",
+      "interface_kind": "service",
+      "interface_name": "initial transition into No Activity",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 54,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e02",
+      "interface_kind": "service",
+      "interface_name": "register synchronization point; No Activity -> Attempting",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 57,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e03",
+      "interface_kind": "service",
+      "interface_name": "confirmation returns Attempting -> No Activity",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 61,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e04",
+      "interface_kind": "service",
+      "interface_name": "announcement starts movement to the synchronization point",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [
+        "req-959bfe345492"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 65,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e05",
+      "interface_kind": "service",
+      "interface_name": "the joined federate reaches the point and waits for the rest",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 69,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-09-e06",
+      "interface_kind": "service",
+      "interface_name": "federation-wide synchronization returns the local label to idle",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-09-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-09.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 73,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-09-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e01",
+      "interface_kind": "service",
+      "interface_name": "P01 -> S01; unlabeled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 27,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e02",
+      "interface_kind": "service",
+      "interface_name": "P02 -> S02; unlabeled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 35,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e03",
+      "interface_kind": "service",
+      "interface_name": "P03 -> S03; unlabeled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 47,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e04",
+      "interface_kind": "service",
+      "interface_name": "P04 -> S04; unlabeled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 67,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e05",
+      "interface_kind": "service",
+      "interface_name": "S04 -> S05; Register or Discover dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-ad9a01f64404"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 69,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e06",
+      "interface_kind": "service",
+      "interface_name": "S05 -> P05; Delete or Remove dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 73,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e07",
+      "interface_kind": "service",
+      "interface_name": "S05 -> S06; Local Delete",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-f39daa299f9c"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 77,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e08",
+      "interface_kind": "service",
+      "interface_name": "S06 -> S05; Discover dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 81,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e09",
+      "interface_kind": "service",
+      "interface_name": "P06 -> S07; unlabeled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 107,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e10",
+      "interface_kind": "service",
+      "interface_name": "S07 -> S08; Register or Discover dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-ad9a01f64404"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 109,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e11",
+      "interface_kind": "service",
+      "interface_name": "S08 -> P07; Delete or Remove dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 113,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e12",
+      "interface_kind": "service",
+      "interface_name": "S08 -> S09; Local Delete",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-f39daa299f9c"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 117,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-10-e13",
+      "interface_kind": "service",
+      "interface_name": "S09 -> S08; Discover dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-10-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-10.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 121,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-10-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e01",
+      "interface_kind": "service",
+      "interface_name": "publication-region boundary -> history; empty-set publish/unpublish",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 51,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e07",
+      "interface_kind": "service",
+      "interface_name": "subscription-region boundary -> history; empty-set subscribe/unsubscribe",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-1efe59190faf"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 56,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e02",
+      "interface_kind": "service",
+      "interface_name": "publication initial -> Unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 71,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e03",
+      "interface_kind": "service",
+      "interface_name": "Unpublished -> Published; Publish(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 74,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e04",
+      "interface_kind": "service",
+      "interface_name": "Published -> Unpublished; guarded unpublish transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 78,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e05",
+      "interface_kind": "service",
+      "interface_name": "Published self-loop; Publish(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-683b3ee99da7",
+        "req-0f088f2482f2"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 87,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e06",
+      "interface_kind": "service",
+      "interface_name": "Unpublished self-loop; Unpublish(i) or Unpublish(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-871f49507cea"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 92,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e08",
+      "interface_kind": "service",
+      "interface_name": "subscription initial -> Unsubscribed",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 107,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e09",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed -> Subscribed; Subscribe(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 110,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e10",
+      "interface_kind": "service",
+      "interface_name": "Subscribed -> Unsubscribed; Unsubscribe transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 114,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e11",
+      "interface_kind": "service",
+      "interface_name": "Subscribed self-loop; Subscribe(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-36dbf8db2e44",
+        "req-1efe59190faf"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 118,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-11-e12",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed self-loop; Unsubscribe(i) or Unsubscribe(i,j)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-11-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-d5f319469e60"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-11.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 123,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-11-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e02",
+      "interface_kind": "service",
+      "interface_name": "publication boundary -> H*",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 46,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e01",
+      "interface_kind": "service",
+      "interface_name": "publication initial -> implicit composite boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 68,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e03",
+      "interface_kind": "service",
+      "interface_name": "implicit initial -> implicit Unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 79,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e04",
+      "interface_kind": "service",
+      "interface_name": "implicit Unpublished -> Published",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-a8f1396e2b51"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 82,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e05",
+      "interface_kind": "service",
+      "interface_name": "implicit Published -> Unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-a8f1396e2b51"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 86,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e06",
+      "interface_kind": "service",
+      "interface_name": "implicit Unpublished self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 91,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e07",
+      "interface_kind": "service",
+      "interface_name": "implicit Published self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 97,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e08",
+      "interface_kind": "service",
+      "interface_name": "explicit Unpublished -> Published",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-a8f1396e2b51"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 123,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e09",
+      "interface_kind": "service",
+      "interface_name": "explicit Published -> Unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-a8f1396e2b51"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 127,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e10",
+      "interface_kind": "service",
+      "interface_name": "explicit Unpublished self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 132,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e11",
+      "interface_kind": "service",
+      "interface_name": "explicit Published self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 138,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e12",
+      "interface_kind": "service",
+      "interface_name": "Explicit publication boundary -> Implicit publication boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 145,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e13",
+      "interface_kind": "service",
+      "interface_name": "explicit Unpublished -> Implicit publication boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 149,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e14",
+      "interface_kind": "service",
+      "interface_name": "implicit Published -> explicit Unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-a8f1396e2b51"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 153,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e15",
+      "interface_kind": "service",
+      "interface_name": "Implicit publication boundary -> explicit Published",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 159,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e16",
+      "interface_kind": "service",
+      "interface_name": "explicit Published -> Implicit publication boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 163,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e17",
+      "interface_kind": "service",
+      "interface_name": "subscription boundary -> history",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 171,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e18",
+      "interface_kind": "service",
+      "interface_name": "subscription initial -> Unsubscribed",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e18",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e18"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 184,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e18",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e19",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed -> Subscribed",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e19",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-19b425a9de77"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e19"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 187,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e19",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e20",
+      "interface_kind": "service",
+      "interface_name": "Subscribed -> Unsubscribed",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e20",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-19b425a9de77"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e20"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 191,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e20",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e21",
+      "interface_kind": "service",
+      "interface_name": "Subscribed self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e21",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e21"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 195,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e21",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-12-e22",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-12-e22",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-12.e22"
+      ],
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 200,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-12-e22",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e01",
+      "interface_kind": "service",
+      "interface_name": "Transition E01",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 49,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e02",
+      "interface_kind": "service",
+      "interface_name": "Unpublished self-loop: Unpublish (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-871f49507cea"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 54,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e03",
+      "interface_kind": "service",
+      "interface_name": "Unpublished -> Published boundary: Publish (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 74,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e04",
+      "interface_kind": "service",
+      "interface_name": "Published boundary -> Unpublished: Unpublish (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 78,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e05",
+      "interface_kind": "service",
+      "interface_name": "Published boundary self-loop: Publish (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-c437518477fe",
+        "req-683b3ee99da7",
+        "req-0f088f2482f2"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 82,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e06",
+      "interface_kind": "service",
+      "interface_name": "Send Interaction transition",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 88,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e07",
+      "interface_kind": "service",
+      "interface_name": "Published internal initial -> C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 100,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e08",
+      "interface_kind": "service",
+      "interface_name": "C -> No Control Sends when advisory disabled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 107,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e09",
+      "interface_kind": "service",
+      "interface_name": "C -> Control Sends In Use when advisory enabled",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 111,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e10",
+      "interface_kind": "service",
+      "interface_name": "No Control Sends -> Control Sends boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 129,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e11",
+      "interface_kind": "service",
+      "interface_name": "Control Sends boundary -> No Control Sends",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 133,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e12",
+      "interface_kind": "service",
+      "interface_name": "Transition E12",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 141,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e13",
+      "interface_kind": "service",
+      "interface_name": "Unknown -> Turned On",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 151,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e14",
+      "interface_kind": "service",
+      "interface_name": "Unknown -> Turned Off",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 155,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e15",
+      "interface_kind": "service",
+      "interface_name": "Turned On -> Turned Off",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 159,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e16",
+      "interface_kind": "service",
+      "interface_name": "Turned Off -> Turned On",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 163,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e17",
+      "interface_kind": "service",
+      "interface_name": "Subscribed self-loop: Subscribe (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-36dbf8db2e44",
+        "req-1efe59190faf"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 178,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e18",
+      "interface_kind": "service",
+      "interface_name": "Subscribed self-loop: Receive Interaction dagger",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e18",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-2f698415a1b7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e18"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 183,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e18",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e19",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed -> Subscribed: Subscribe (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e19",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e19"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 188,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e19",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e20",
+      "interface_kind": "service",
+      "interface_name": "Subscribed -> Unsubscribed: Unsubscribe (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e20",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e20"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 192,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e20",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e21",
+      "interface_kind": "service",
+      "interface_name": "Unsubscribed self-loop: Unsubscribe (m)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e21",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [
+        "req-da1ff268af52",
+        "req-d5f319469e60"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e21"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 196,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e21",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-13-e22",
+      "interface_kind": "service",
+      "interface_name": "Transition E22",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-13-e22",
+      "status": "planned",
+      "clause_ids": [
+        "clause-5"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-13.e22"
+      ],
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-13-e22",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-14-e01",
+      "interface_kind": "service",
+      "interface_name": "first-lane initial pseudo-state -> concurrent container",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-14-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-14.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-14.tex",
+        "line": 44,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-14-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-14-e02",
+      "interface_kind": "service",
+      "interface_name": "last-lane initial pseudo-state -> concurrent container",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-14-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-14.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-14.tex",
+        "line": 62,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-14-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e01",
+      "interface_kind": "service",
+      "interface_name": "outer initial -> outer C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 44,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e02",
+      "interface_kind": "service",
+      "interface_name": "outer C -> Is Owned boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 63,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e06",
+      "interface_kind": "service",
+      "interface_name": "owned boundary -> H*",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 72,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e07",
+      "interface_kind": "service",
+      "interface_name": "owned initial -> owned C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 81,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e08",
+      "interface_kind": "service",
+      "interface_name": "owned C -> No Control Updates",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 87,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e09",
+      "interface_kind": "service",
+      "interface_name": "owned C -> Control Updates In Use boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-c8d82df9fd47"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 105,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e10",
+      "interface_kind": "service",
+      "interface_name": "No Control Updates -> Control Updates In Use",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 108,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e11",
+      "interface_kind": "service",
+      "interface_name": "Control Updates In Use -> No Control Updates",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 111,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e12",
+      "interface_kind": "service",
+      "interface_name": "nested initial -> Attribute Relevance Unknown",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 118,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e13",
+      "interface_kind": "service",
+      "interface_name": "relevance unknown -> Updates Turned On",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-4035a87fed87",
+        "req-633db02bf878"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 127,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e14",
+      "interface_kind": "service",
+      "interface_name": "relevance unknown -> Updates Turned Off",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-633db02bf878"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 130,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e15",
+      "interface_kind": "service",
+      "interface_name": "Updates Turned On -> Updates Turned Off",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-633db02bf878"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 133,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e16",
+      "interface_kind": "service",
+      "interface_name": "Updates Turned Off -> Updates Turned On",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-633db02bf878"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 136,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e03",
+      "interface_kind": "service",
+      "interface_name": "outer C -> Is Not Owned boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 156,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e17",
+      "interface_kind": "service",
+      "interface_name": "not-owned boundary -> H*",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 165,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e18",
+      "interface_kind": "service",
+      "interface_name": "not-owned initial -> C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e18",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e18"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 174,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e18",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e19",
+      "interface_kind": "service",
+      "interface_name": "not-owned C -> No Scope Notification",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e19",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e19"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 180,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e19",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e20",
+      "interface_kind": "service",
+      "interface_name": "not-owned C -> Notify of Scope In Use boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e20",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-c8d82df9fd47",
+        "req-30edad7d3429",
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e20"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 198,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e20",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e21",
+      "interface_kind": "service",
+      "interface_name": "No Scope Notification -> Notify of Scope In Use",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e21",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-30edad7d3429",
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e21"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e21",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e22",
+      "interface_kind": "service",
+      "interface_name": "Notify of Scope In Use -> No Scope Notification",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e22",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-30edad7d3429",
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e22"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 204,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e22",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e23",
+      "interface_kind": "service",
+      "interface_name": "nested initial -> Attribute Scope Unknown",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e23",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e23"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 211,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e23",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e24",
+      "interface_kind": "service",
+      "interface_name": "scope unknown -> Attribute In-Scope",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e24",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e24"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 220,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e24",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e25",
+      "interface_kind": "service",
+      "interface_name": "scope unknown -> Attribute Out-of-Scope",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e25",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e25"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 223,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e25",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e26",
+      "interface_kind": "service",
+      "interface_name": "Attribute In-Scope -> Attribute Out-of-Scope",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e26",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e26"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 226,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e26",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e27",
+      "interface_kind": "service",
+      "interface_name": "Attribute Out-of-Scope -> Attribute In-Scope",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e27",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [
+        "req-ef4fb15bbeb7"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e27"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 229,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e27",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e04",
+      "interface_kind": "service",
+      "interface_name": "Is Owned -> Is Not Owned when attribute becomes unowned",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 233,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-15-e05",
+      "interface_kind": "service",
+      "interface_name": "Is Not Owned -> Is Owned when attribute becomes owned",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-15-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-6"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-15.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 236,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-15-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e01",
+      "interface_kind": "service",
+      "interface_name": "outer initial -> outer C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 46,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e02",
+      "interface_kind": "service",
+      "interface_name": "outer C -> Owned boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 49,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e03",
+      "interface_kind": "service",
+      "interface_name": "outer C -> Unowned boundary",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 53,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e04",
+      "interface_kind": "service",
+      "interface_name": "Transition E04",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 79,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e05",
+      "interface_kind": "service",
+      "interface_name": "Not Divesting self-loop: Request Attribute Ownership Release",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-b2e429348702"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 94,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e06",
+      "interface_kind": "service",
+      "interface_name": "Not Divesting self-loop: Attribute Ownership Release Denied",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-b2e429348702",
+        "req-bab8493d972a",
+        "req-97505399b0f0"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 99,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e07",
+      "interface_kind": "service",
+      "interface_name": "Not Divesting -> Waiting",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-b2e429348702"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 104,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e08",
+      "interface_kind": "service",
+      "interface_name": "Waiting -> Not Divesting",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-b2e429348702"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 108,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e09",
+      "interface_kind": "service",
+      "interface_name": "Waiting -> Completing",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-308c2967b99c"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 112,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e10",
+      "interface_kind": "service",
+      "interface_name": "Completing -> Not Divesting",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 116,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e11",
+      "interface_kind": "service",
+      "interface_name": "Completing -> Waiting, failed confirmation",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-308c2967b99c",
+        "req-b2e429348702"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 120,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e12",
+      "interface_kind": "service",
+      "interface_name": "Owned boundary -> shallow history (state preserving)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 126,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e19",
+      "interface_kind": "service",
+      "interface_name": "initial -> C",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e19",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e19"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 155,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e19",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e20",
+      "interface_kind": "service",
+      "interface_name": "C -> Not Able",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e20",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e20"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 157,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e20",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e21",
+      "interface_kind": "service",
+      "interface_name": "unowned C -> Able to Acquire",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e21",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-3d2e8fab2cfd"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e21"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 184,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e21",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e22",
+      "interface_kind": "service",
+      "interface_name": "Not Able -> Able",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e22",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e22"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 187,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e22",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e23",
+      "interface_kind": "service",
+      "interface_name": "Able -> Not Able",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e23",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e23"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 190,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e23",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e24",
+      "interface_kind": "service",
+      "interface_name": "intrusive initial -> Not Acquiring",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e24",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e24"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 226,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e24",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e25",
+      "interface_kind": "service",
+      "interface_name": "Not Acquiring -> Acquiring",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e25",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e25"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 229,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e25",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e26",
+      "interface_kind": "service",
+      "interface_name": "Acquiring -> Trying to Cancel",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e26",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-e8a6dbee55e9",
+        "req-01f9cfef7112"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e26"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 232,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e26",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e27",
+      "interface_kind": "service",
+      "interface_name": "Trying to Cancel -> Not Acquiring",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e27",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-e8a6dbee55e9",
+        "req-01f9cfef7112"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e27"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 235,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e27",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e28",
+      "interface_kind": "service",
+      "interface_name": "Acquisition Pending boundary -> H (repeated acquisition request)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e28",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e28"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 238,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e28",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e29",
+      "interface_kind": "service",
+      "interface_name": "Acquisition Pending -> Not Acquiring on unavailable",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e29",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-97505399b0f0"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e29"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 242,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e29",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e30",
+      "interface_kind": "service",
+      "interface_name": "initial -> Not Trying",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e30",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e30"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 257,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e30",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e31",
+      "interface_kind": "service",
+      "interface_name": "Not Trying -> Willing",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e31",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-58e186923e87"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e31"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 260,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e31",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e32",
+      "interface_kind": "service",
+      "interface_name": "Willing -> Not Trying",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e32",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-58e186923e87"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e32"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 263,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e32",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e33",
+      "interface_kind": "service",
+      "interface_name": "Willing self-loop",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e33",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e33"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 266,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e33",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e34",
+      "interface_kind": "service",
+      "interface_name": "non-intrusive boundary -> H (state preserving callback)",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e34",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e34"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 274,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e34",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e13",
+      "interface_kind": "service",
+      "interface_name": "Owned -> Not Able when unpublished",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-3d2e8fab2cfd"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 283,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e14",
+      "interface_kind": "service",
+      "interface_name": "Completing Divestiture -> Able to Acquire on success",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-58e186923e87",
+        "req-308c2967b99c"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 287,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e15",
+      "interface_kind": "service",
+      "interface_name": "Acquisition Pending -> Owned on notification",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 291,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e16",
+      "interface_kind": "service",
+      "interface_name": "Owned -> Able: unconditional divestiture",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-d516e29a1848",
+        "req-3d85a97a649b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 295,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e17",
+      "interface_kind": "service",
+      "interface_name": "Owned -> Able: divestiture if wanted, actually divested",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-5421cc4829a9",
+        "req-10364d92751b"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 299,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-16-e18",
+      "interface_kind": "service",
+      "interface_name": "Willing to Acquire -> Owned on notification",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-16-e18",
+      "status": "planned",
+      "clause_ids": [
+        "clause-7"
+      ],
+      "requirement_ids": [
+        "req-4718f44df6e8"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-16.e18"
+      ],
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 303,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-16-e18",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e01",
+      "interface_kind": "service",
+      "interface_name": "Temporal State boundary -> H*: Send Message",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e01",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e01"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 53,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e01",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e02",
+      "interface_kind": "service",
+      "interface_name": "Time Advancing self-loop: Receive Message #1",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e02",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [
+        "req-625332dd1f54"
+      ],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e02"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 58,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e02",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e05",
+      "interface_kind": "service",
+      "interface_name": ")",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e05",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e05"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 89,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e05",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e03",
+      "interface_kind": "service",
+      "interface_name": "Transition E03",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e03",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e03"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 93,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e03",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e04",
+      "interface_kind": "service",
+      "interface_name": "Transition E04",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e04",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e04"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 93,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e04",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e07",
+      "interface_kind": "service",
+      "interface_name": "Transition E07",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e07",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e07"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 100,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e07",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e08",
+      "interface_kind": "service",
+      "interface_name": "Transition E08",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e08",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e08"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 100,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e08",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e09",
+      "interface_kind": "service",
+      "interface_name": "Transition E09",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e09",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e09"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 106,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e09",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e10",
+      "interface_kind": "service",
+      "interface_name": "Transition E10",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e10",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e10"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 106,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e10",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e11",
+      "interface_kind": "service",
+      "interface_name": "Transition E11",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e11",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e11"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 112,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e11",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e12",
+      "interface_kind": "service",
+      "interface_name": "Transition E12",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e12",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e12"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 112,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e12",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e13",
+      "interface_kind": "service",
+      "interface_name": "Transition E13",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e13",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e13"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 118,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e13",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e14",
+      "interface_kind": "service",
+      "interface_name": "Transition E14",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e14",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e14"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 118,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e14",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e06",
+      "interface_kind": "service",
+      "interface_name": "Receive Message #2",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e06",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e06"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 124,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e06",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e15",
+      "interface_kind": "service",
+      "interface_name": "Transition E15",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e15",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e15"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 142,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e15",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e16",
+      "interface_kind": "service",
+      "interface_name": "Transition E16",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e16",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e16"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 145,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e16",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e17",
+      "interface_kind": "service",
+      "interface_name": "Transition E17",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e17",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e17"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 145,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e17",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e18",
+      "interface_kind": "service",
+      "interface_name": "Transition E18",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e18",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e18"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 162,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e18",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e19",
+      "interface_kind": "service",
+      "interface_name": "Transition E19",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e19",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e19"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 165,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e19",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e20",
+      "interface_kind": "service",
+      "interface_name": "Transition E20",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e20",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e20"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 165,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e20",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e21",
+      "interface_kind": "service",
+      "interface_name": "Transition E21",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e21",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e21"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 182,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e21",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e22",
+      "interface_kind": "service",
+      "interface_name": "Transition E22",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e22",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e22"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 185,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e22",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    },
+    {
+      "id": "m2010.transition.hla-1516-1-2010-figure-17-e23",
+      "interface_kind": "service",
+      "interface_name": "Transition E23",
+      "implementation": "planned.hla2010.hla-1516-1-2010-figure-17-e23",
+      "status": "planned",
+      "clause_ids": [
+        "clause-8"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "hla-1516.1-2010:figure-17.e23"
+      ],
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 185,
+        "end_line": null
+      },
+      "notes": "Planned RTI/federate integration seam; replace with concrete evidence when implemented.",
+      "implementation_ref": {
+        "symbol": "planned.hla2010.hla-1516-1-2010-figure-17-e23",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
+    }
+  ]
+}

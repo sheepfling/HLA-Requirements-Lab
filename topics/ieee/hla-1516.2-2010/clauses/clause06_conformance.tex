@@ -1,0 +1,464 @@
+\section{Conformance}
+The OMT tables provide a common representation of an object model. This clause defines the measures for assessment of object models and object model tools, based upon the normative clauses of this specification. The spectrum of OMT tools is broad, but conformance is a narrow measure of the object models accepted or produced by a tool. Other tool capabilities, from user interface visualization to code generation, are significant but not assessed by these conformance measures. Within the HLA community, verification capabilities conduct these assessments experimentally and publicly certify the results.
+
+\subsection{Conformance labels}
+Both object models and tools may be assessed for conformance to this standard. Only when certified results are publicly available shall the label ``HLA Conforming'' be used.
+
+\subsubsection{Object model conformance}
+An HLA conforming object model shall document all of the OMT components of an HLA object model, be it a FOM or relevant FOM modules for federations or a SOM or relevant SOM modules for federates. The HLA-required table content, commonly referred to as MOM data, shall be provided as specified in Clause 11 of IEEE Std 1516.1-2010, and shall be contained in a MIM. Each OMT table shall be provided, with empty content only as permitted in the table descriptions. All entries in a conforming object model shall comply with the conventions given in 3.3 of this standard.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 86 / standard p. 74.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsubsection{Object model tool conformance}
+An HLA conforming object model tool shall accept any conforming object model and operate on it. The only required operations shall be parsing the XML product form of the object model and, for tools with XML output, expressing the model in valid XML. Additional operations provided by the tool are selected by the developer. Operations with user input shall identify inputs that would cause the resulting object model to no longer be conforming. An example would be a user entered name that was not a valid XML name or did not comply with HLA naming conventions. The user shall have the option to produce a non-conforming object model, based on this input. Future acceptance of the non-conforming object model by conforming object model tools is desirable but not required.
+
+\subsubsection{XML product conformance}
+A conforming object model expressed in XML by a conforming object model tool shall be processed without validation exception by any fully conforming XML processor, as defined in REC-XML-20060816, Fourth Edition of XML Schema (www.w3.org), when validated against the OMT XML Schema defined in Annex E.
+
+\subsection{Conformance verification}
+Tests for conformance may cover any normative part of this standard, and conforming products are expected to comply with all ``shall'' statements. The following subclauses define the minimum requirements that shall be assessed in any conformance test. Invalid entries detected during conformance testing shall be explicitly identified.
+
+\subsubsection{Object model identification table}
+The following tests shall be assessed for the object model identification table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall conform to the name conventions of 3.3.
+\item The Modification Date shall conform to the format given in Table 1.
+\item The remaining fields in this table shall not be blank (although some values may be ``NA'').
+\end{enumerate}
+
+\subsubsection{Object class structure table}
+The following tests shall be assessed for the object class structure table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall conform to the name conventions of 3.3, all object classes shall be uniquely identifiable in an HLA object model when concatenated (via dot notation) with the names of higher-level superclasses.
+\item The \omtph{P/S} field for each Name shall contain P, S, PS, or N.
+\end{enumerate}
+
+\subsubsection{Interaction class structure table}
+The following tests shall be assessed for the interaction class structure table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall conform to the name conventions of 3.3, all interaction classes shall be uniquely identifiable in an HLA object model when concatenated (via dot notation) with the names of higher-level superclasses.
+\item The \omtph{P/S} field for each Name shall contain P, S, PS, or N.
+\end{enumerate}
+
+\subsubsection{Attribute table}
+The following tests shall be assessed for the attribute table:
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 87 / standard p. 75.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=0pt]
+\item The Object shall match an object class given in the object class structure table.
+\item The Attribute shall conform to the name conventions of 3.3, attribute names shall not duplicate (overload) the names of attributes of this class or any higher-level superclass.
+\item The Datatype shall match a datatype name given in the datatype table.
+\item The Update field shall contain Static, Periodic, Conditional, or NA.
+\item The \omtph{D/A} field shall contain D, A, DA, or N.
+\item The \omtph{P/S} field shall contain P, S, PS, or N.
+\item The Available Dimensions shall match a dimension name given in the dimension table or NA.
+\item The Transportation shall match an transportation name given in the transportation table.
+\item The Order field shall contain Receive or TimeStamp.
+\item The remaining fields in this table shall not be blank.
+\item The table shall contain, for the Object HLAobjectRoot, the Attribute HLAprivilegeToDeleteObject.
+\end{enumerate}
+
+\subsubsection{Parameter table}
+The following tests shall be assessed for the parameter table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Interaction shall match an interaction class given in the interaction class structure table.
+\item The Parameter shall conform to the name conventions of 3.3, parameter names shall not duplicate (overload) the names of parameters of this class or any higher-level superclass.
+\item The Datatype shall match a datatype name given in the datatype table.
+\item The Available Dimensions shall match a dimension name given in the dimension table or NA.
+\item The Transportation shall match an transportation name given in the transportation table.
+\item The Order field shall contain Receive or TimeStamp.
+\end{enumerate}
+
+\subsubsection{Dimension table}
+The Dimension table may not be present; if present the following tests shall be assessed for the dimension table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall conform to the name conventions of 3.3.
+\item The Datatype shall match a datatype name given in the datatype table.
+\item The Dimension Upper Bound shall be a positive integer.
+\item The Value When Unspecified shall match be a nonnegative integer subrange of [0, Dimension Upper Bound).
+\item The remaining fields in this table shall not be blank.
+\end{enumerate}
+
+\subsubsection{Time representation table}
+The following tests shall be assessed for the time representation table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item Representations of lookahead shall be drawn from non-negative datatypes.
+\item The Datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype, or defined to be NA.
+\end{enumerate}
+
+\subsubsection{User-supplied tag table}
+The following test shall be assessed for the user-supplied tag table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype, or defined to be NA.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 88 / standard p. 76.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsubsection{Synchronization table}
+The following tests shall be assessed for the synchronization table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item Synchronization labels shall adhere to the HLA naming conventions of 3.3.
+\item The Tag Datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype, or defined to be NA.
+\item The Capability field shall have a value of NA for FOMs and FOM modules.
+\item The Capability field shall contain one of the values Register, Achieve, RegisterAchieve, or NoSynch for SOMs and SOM modules.
+\end{enumerate}
+
+\subsubsection{Transportation type table}
+The following tests shall be assessed for the transportation type table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall adhere to the HLA naming conventions of 3.3.
+\item The Reliability field shall contain Reliable or Best Effort.
+\end{enumerate}
+
+\subsubsection{Update rate table}
+The following tests shall be assessed for the update rate table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item Update rate names shall adhere to the HLA naming conventions of 3.3.
+\item The Maximum Update Rate field shall specify the associated maximum update rate in Hz using a decimal number greater than zero.
+\end{enumerate}
+
+\subsubsection{Switches table}
+The following tests shall be assessed for the switches table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The value of the Automatic Resign Action switch shall be one of the following: UnconditionallyDivestAttributes, DeleteObjects, CancelPendingOwnershipAcquisitions, DeleteObjectsThenDivest, CancelThenDeleteThenDivest, NoAction.
+\item The Setting field shall contain NA for SOMs and SOM modules.
+\item The Setting field shall contain either Enabled or Disabled for FOMs and FOM modules.
+\end{enumerate}
+
+\subsubsection{Basic data representation table}
+The following tests shall be assessed for the basic data representation table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall adhere to the HLA naming conventions of 3.3.
+\item The Endian field shall contain Big or Little.
+\end{enumerate}
+
+\subsubsection{Simple datatype table}
+The following tests shall be assessed for the simple datatype table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall adhere to the HLA naming conventions of 3.3.
+\item The Representation field shall reference a row in the Basic Data Representation table.
+\end{enumerate}
+
+\subsubsection{Enumerated datatype table}
+The following tests shall be assessed for the enumerated datatype table:
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 89 / standard p. 77.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=0pt]
+\item The Name shall adhere to the HLA naming conventions of 3.3.
+\item The Representation field shall reference a row in the Basic Data Representation table that specifies discrete values.
+\item Enumerator names shall adhere to the HLA naming conventions of 3.3.
+\end{enumerate}
+
+\subsubsection{Array datatype table}
+The following tests shall be assessed for the array datatype table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Name shall adhere to the HLA naming conventions of 3.3.
+\item The Element Type field shall contain names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table).
+\item The Cardinality field shall contain either a single value, a comma-separated list of values, a range of values (surrounded by brackets and separated by two periods), or Dynamic.
+\item The Encoding field shall contain HLAfixedArray or HLAvariableArray if the predefined encodings are used.
+\end{enumerate}
+
+\subsubsection{Fixed record datatype table}
+The following tests shall be assessed for the fixed record datatype table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Record Name shall adhere to the HLA naming conventions of 3.3.
+\item Field Names shall adhere to the HLA naming conventions of 3.3.
+\item The Field Type field shall contain names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table).
+\item The Encoding field shall contain HLAfixedRecord if the predefined encoding is used.
+\end{enumerate}
+
+\subsubsection{Variable record datatype table}
+The following tests shall be assessed for the variant record datatype table:
+\begin{enumerate}[label=\arabic*),leftmargin=42pt,labelsep=8pt,itemsep=1.2pt,topsep=2pt]
+\item The Record Name shall adhere to the HLA naming conventions of 3.3.
+\item Discriminant names shall adhere to the HLA naming conventions of 3.3.
+\item The Discriminant Type field shall contain names from the enumerated datatype table.
+\item The Discriminant Enumerator field shall contain one or more enumerators or enumerator ranges separated by commas, or the special symbol HLAother.
+\item Enumerator ranges shall be specified by two enumerators, separated by two periods, and enclosed in square brackets.
+\item Values of HLAother in the Discriminant Enumerator field shall occur at most once for each record name.
+\item Alternative names shall adhere to the HLA naming conventions of 3.3.
+\item The Alternative Type field shall contain names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table).
+\item The Encoding field shall contain HLAvariantRecord if the predefined encoding is used.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 90 / standard p. 78.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsection{Interface specification services usage table}
+
+\subsubsection{Purpose/background}
+HLA supports federates with many different interface requirements.This table allows federate and federation developers to document the set of HLA Interface Specification services used by federates or federations. SOMs and FOMs may optionally include the Interface Services Usage Table as it is useful for both types of HLA object models.
+
+From the SOM perspective, this table is useful because the HLA federate compliance testing process requires the submission of a statement documenting which HLA Interface services a federate uses. This statement is first used in the Conformance Cross Check test to confirm that the federate's SOM is congruent with the set of HLA Interface services being used. Later, this statement is used to help determine the federate Compliance Test Sequence. The inclusion of this table in a SOM would support the HLA Compliance Testing requirement.
+
+From the FOM perspective, this table is useful because this table allows the HLA Interface Specification services used by federations and federates to be documented in FOMs and reused during federation preparations. During a federation execution, a federate may need to exercise only a subset of its capabilities. Federates may associate themselves with different federations, and federations may change federates from time to time. Federation developers and managers can use this table in two different ways. First, the table may be used as a tool to document a common set of services that will be supported across the full federation. As such, this table would be in a readily available, predefined form that would replace the current procedure of developing an ad hoc federation agreement to document HLA Interface service usage. The second way to use the table is as a mechanism to review the specific services a federate uses and then assess whether or not a federate is likely to be compatible with other federates that are already members of a specific federation. Both ways provide valuable assistance to federation developers and managers in the areas of reuse and interoperability during HLA Federation Development and Execution Process (FEDEP) activities.
+
+\subsubsection{Table format}
+The template that shall be used for service utilization is illustrated in Table 48. The second column (Service) shall provide the names of HLA services. The first column shall provide the HLA Interface Specification clause number associated with each service. The third column (Usage) shall identify the usage of that service within the federate or federation. Entries 4.5, 4.6, 4.9, and 4.10 shall be ``Yes'' for FOMs because these four services are the minimum required to form a valid federation. Entries 4.9 and 4.10 shall be ``Yes'' for SOMs because these two services are the minimum required to form a valid federate.
+
+\newcommand{\serviceusageheader}{%
+    \rule{0pt}{13.0pt}\bfseries IEEE Std 1516.1-2010 clause & \centering\arraybackslash\bfseries Service & \bfseries Usage \\
+    \hline}
+\newcommand{\serviceusagerow}[2]{#1 & #2 & \omtph{usage} \\\hline}
+\newcommand{\serviceusagetablesettings}{\fontsize{8.15}{9.35}\selectfont\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.46}}
+
+\omtcaption{Table 48---Interface specification services usage table}\vspace{-7pt}
+\begingroup\serviceusagetablesettings
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-20pt\relax}{|C{126pt}|Y|C{75pt}|}\hline\serviceusageheader
+    \serviceusagerow{4.2}{Connect}
+    \serviceusagerow{4.3}{Disconnect}
+    \serviceusagerow{4.4}{Connection Lost \textdagger{}}
+    \serviceusagerow{4.5}{Create Federation Execution}
+    \serviceusagerow{4.6}{Destroy Federation Execution}
+    \serviceusagerow{4.7}{List Federation Executions}
+    \serviceusagerow{4.8}{Report Federation Executions \textdagger{}}
+    \serviceusagerow{4.9}{Join Federation Execution}
+    \serviceusagerow{4.10}{Resign Federation Execution}
+    \serviceusagerow{4.11}{Register Federation Synchronization Point}
+\end{tabularx}}\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 91 / standard p. 79.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 48---Interface specification services usage table}\vspace{-7pt}
+\begingroup\serviceusagetablesettings
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-20pt\relax}{|C{126pt}|Y|C{75pt}|}\hline\serviceusageheader
+    \serviceusagerow{4.12}{Confirm Synchronization Point Registration \textdagger{}}
+    \serviceusagerow{4.13}{Announce Synchronization Point \textdagger{}}
+    \serviceusagerow{4.14}{Synchronization Point Achieved}
+    \serviceusagerow{4.15}{Federation Synchronized \textdagger{}}
+    \serviceusagerow{4.16}{Request Federation Save}
+    \serviceusagerow{4.17}{Initiate Federate Save \textdagger{}}
+    \serviceusagerow{4.18}{Federate Save Begun}
+    \serviceusagerow{4.19}{Federate Save Complete}
+    \serviceusagerow{4.20}{Federation Saved \textdagger{}}
+    \serviceusagerow{4.21}{Abort Federation Save}
+    \serviceusagerow{4.22}{Query Federation Save Status}
+    \serviceusagerow{4.23}{Federation Save Status Response \textdagger{}}
+    \serviceusagerow{4.24}{Request Federation Restore}
+    \serviceusagerow{4.25}{Confirm Federation Restoration Request \textdagger{}}
+    \serviceusagerow{4.26}{Federation Restore Begun \textdagger{}}
+    \serviceusagerow{4.27}{Initiate Federate Restore \textdagger{}}
+    \serviceusagerow{4.28}{Federate Restore Complete}
+    \serviceusagerow{4.29}{Federation Restored \textdagger{}}
+    \serviceusagerow{4.30}{Abort Federation Restore}
+    \serviceusagerow{4.31}{Query Federation Restore Status}
+    \serviceusagerow{4.32}{Federation Restore Status Response \textdagger{}}
+    \serviceusagerow{5.2}{Publish Object Class Attributes}
+    \serviceusagerow{5.3}{Unpublish Object Class Attributes}
+    \serviceusagerow{5.4}{Publish Interaction Class}
+    \serviceusagerow{5.5}{Unpublish Interaction Class}
+    \serviceusagerow{5.6}{Subscribe Object Class Attributes}
+    \serviceusagerow{5.7}{Unsubscribe Object Class Attributes}
+    \serviceusagerow{5.8}{Subscribe Interaction Class}
+    \serviceusagerow{5.9}{Unsubscribe Interaction Class}
+    \serviceusagerow{5.10}{Start Registration For Object Class \textdagger{}}
+    \serviceusagerow{5.11}{Stop Registration For Object Class \textdagger{}}
+    \serviceusagerow{5.12}{Turn Interactions On \textdagger{}}
+    \serviceusagerow{5.13}{Turn Interactions Off \textdagger{}}
+    \serviceusagerow{6.2}{Reserve Object Instance Name}
+    \serviceusagerow{6.3}{Object Instance Name Reserved \textdagger{}}
+    \serviceusagerow{6.4}{Release Object Instance Name}
+    \serviceusagerow{6.5}{Reserve Multiple Object Instance Names}
+    \serviceusagerow{6.6}{Multiple Object Instance Names Reserved \textdagger{}}
+    \serviceusagerow{6.7}{Release Multiple Object Instance Names}
+    \serviceusagerow{6.8}{Register Object Instance}
+    \serviceusagerow{6.9}{Discover Object instance \textdagger{}}
+    \serviceusagerow{6.10}{Update Attribute Values}
+    \serviceusagerow{6.11}{Reflect Attribute Values \textdagger{}}
+\end{tabularx}}\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 92 / standard p. 80.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 48---Interface specification services usage table}\vspace{-7pt}
+\begingroup\serviceusagetablesettings
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-20pt\relax}{|C{126pt}|Y|C{75pt}|}\hline\serviceusageheader
+    \serviceusagerow{6.12}{Send Interaction}
+    \serviceusagerow{6.13}{Receive Interaction \textdagger{}}
+    \serviceusagerow{6.14}{Delete Object Instance}
+    \serviceusagerow{6.15}{Remove Object Instance \textdagger{}}
+    \serviceusagerow{6.16}{Local Delete Object Instance}
+    \serviceusagerow{6.17}{Attributes In Scope \textdagger{}}
+    \serviceusagerow{6.18}{Attributes Out Of Scope \textdagger{}}
+    \serviceusagerow{6.19}{Request Attribute Value Update}
+    \serviceusagerow{6.20}{Provide Attribute Value Update \textdagger{}}
+    \serviceusagerow{6.21}{Turn Updates On For Object Instance \textdagger{}}
+    \serviceusagerow{6.22}{Turn Updates Off For Object Instance \textdagger{}}
+    \serviceusagerow{6.23}{Request Attribute Transportation Type Change}
+    \serviceusagerow{6.24}{Confirm Attribute Transportation Type Change \textdagger{}}
+    \serviceusagerow{6.25}{Query Attribute Transportation Type}
+    \serviceusagerow{6.26}{Report Attribute Transportation Type \textdagger{}}
+    \serviceusagerow{6.27}{Request Interaction Transportation Type Change}
+    \serviceusagerow{6.28}{Confirm Interaction Transportation Type Change \textdagger{}}
+    \serviceusagerow{6.29}{Query Interaction Transportation Type}
+    \serviceusagerow{6.30}{Report Interaction Transportation Type \textdagger{}}
+    \serviceusagerow{7.2}{Unconditional Attribute Ownership Divestiture}
+    \serviceusagerow{7.3}{Negotiated Attribute Ownership Divestiture}
+    \serviceusagerow{7.4}{Request Attribute Ownership Assumption \textdagger{}}
+    \serviceusagerow{7.5}{Request Divestiture Confirmation \textdagger{}}
+    \serviceusagerow{7.6}{Confirm Divestiture}
+    \serviceusagerow{7.7}{Attribute Ownership Acquisition Notification \textdagger{}}
+    \serviceusagerow{7.8}{Attribute Ownership Acquisition}
+    \serviceusagerow{7.9}{Attribute Ownership Acquisition If Available}
+    \serviceusagerow{7.10}{Attribute Ownership Unavailable \textdagger{}}
+    \serviceusagerow{7.11}{Request Attribute Ownership Release \textdagger{}}
+    \serviceusagerow{7.12}{Attribute Ownership Release Denied}
+    \serviceusagerow{7.13}{Attribute Ownership Divestiture If Wanted}
+    \serviceusagerow{7.14}{Cancel Negotiated Attribute Ownership Divestiture}
+    \serviceusagerow{7.15}{Cancel Attribute Ownership Acquisition}
+    \serviceusagerow{7.16}{Confirm Attribute Ownership Acquisition Cancel-}
+    \serviceusagerow{7.17}{Query Attribute Ownership}
+    \serviceusagerow{7.18}{Inform Attribute Ownership \textdagger{}}
+    \serviceusagerow{7.19}{Is Attribute Owned by Federate}
+    \serviceusagerow{8.2}{Enable Time Regulation}
+    \serviceusagerow{8.3}{Time Regulation Enabled \textdagger{}}
+    \serviceusagerow{8.4}{Disable Time Regulation}
+    \serviceusagerow{8.5}{Enable Time Constrained}
+    \serviceusagerow{8.6}{Time Constrained Enabled \textdagger{}}
+    \serviceusagerow{8.7}{Disable Time Constrained}
+\end{tabularx}}\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 93 / standard p. 81.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 48---Interface specification services usage table}\vspace{-7pt}
+\begingroup\serviceusagetablesettings
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-20pt\relax}{|C{126pt}|Y|C{75pt}|}\hline\serviceusageheader
+    \serviceusagerow{8.8}{Time Advance Request}
+    \serviceusagerow{8.9}{Time Advance Request Available}
+    \serviceusagerow{8.10}{Next Message Request}
+    \serviceusagerow{8.11}{Next Message Request Available}
+    \serviceusagerow{8.12}{Flush Queue Request}
+    \serviceusagerow{8.13}{Time Advance Grant \textdagger{}}
+    \serviceusagerow{8.14}{Enable Asynchronous Delivery}
+    \serviceusagerow{8.15}{Disable Asynchronous Delivery}
+    \serviceusagerow{8.16}{Query GALT}
+    \serviceusagerow{8.17}{Query Logical Time}
+    \serviceusagerow{8.18}{Query LITS}
+    \serviceusagerow{8.19}{Modify Lookahead}
+    \serviceusagerow{8.20}{Query Lookahead}
+    \serviceusagerow{8.21}{Retract}
+    \serviceusagerow{8.22}{Request Retraction \textdagger{}}
+    \serviceusagerow{8.23}{Change Attribute Order Type}
+    \serviceusagerow{8.24}{Change Interaction Order Type}
+    \serviceusagerow{9.2}{Create Region}
+    \serviceusagerow{9.3}{Commit Region Modifications}
+    \serviceusagerow{9.4}{Delete Region}
+    \serviceusagerow{9.5}{Register Object Instance With Regions}
+    \serviceusagerow{9.6}{Associate Regions For Updates}
+    \serviceusagerow{9.7}{Unassociate Regions For Updates}
+    \serviceusagerow{9.8}{Subscribe Object Class Attributes With Regions}
+    \serviceusagerow{9.9}{Unsubscribe Object Class Attributes With Regions}
+    \serviceusagerow{9.10}{Subscribe Interaction Class With Regions}
+    \serviceusagerow{9.11}{Unsubscribe Interaction Class With Regions}
+    \serviceusagerow{9.12}{Send Interaction With Regions}
+    \serviceusagerow{9.13}{Request Attribute Value Update With Regions}
+    \serviceusagerow{10.2}{Get Automatic Resign Directive}
+    \serviceusagerow{10.3}{Set Automatic Resign Directive}
+    \serviceusagerow{10.4}{Get Federate Handle}
+    \serviceusagerow{10.5}{Get Federate Name}
+    \serviceusagerow{10.6}{Get Object Class Handle}
+    \serviceusagerow{10.7}{Get Object Class Name}
+    \serviceusagerow{10.8}{Get Known Object Class Handle}
+    \serviceusagerow{10.9}{Get Object Instance Handle}
+    \serviceusagerow{10.10}{Get Object Instance Name}
+    \serviceusagerow{10.11}{Get Attribute Handle}
+    \serviceusagerow{10.12}{Get Attribute Name}
+    \serviceusagerow{10.13}{Get Update Rate Value}
+    \serviceusagerow{10.14}{Get Update Rate Value For Attribute}
+    \serviceusagerow{10.15}{Get Interaction Class Handle}
+\end{tabularx}}\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 94 / standard p. 82.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 48---Interface specification services usage table}\vspace{-7pt}
+\begingroup\serviceusagetablesettings
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-20pt\relax}{|C{126pt}|Y|C{75pt}|}\hline\serviceusageheader
+    \serviceusagerow{10.16}{Get Interaction Class Name}
+    \serviceusagerow{10.17}{Get Parameter Handle}
+    \serviceusagerow{10.18}{Get Parameter Name}
+    \serviceusagerow{10.19}{Get Order Type}
+    \serviceusagerow{10.20}{Get Order Name}
+    \serviceusagerow{10.21}{Get Transportation Type Handle}
+    \serviceusagerow{10.22}{Get Transportation Type Name}
+    \serviceusagerow{10.23}{Get Available Dimensions for Class Attribute}
+    \serviceusagerow{10.24}{Get Available Dimensions for Interaction Class}
+    \serviceusagerow{10.25}{Get Dimension Handle}
+    \serviceusagerow{10.26}{Get Dimension Name}
+    \serviceusagerow{10.27}{Get Dimension Upper Bound}
+    \serviceusagerow{10.28}{Get Dimension Handle Set}
+    \serviceusagerow{10.29}{Get Range Bounds}
+    \serviceusagerow{10.30}{Set Range Bounds}
+    \serviceusagerow{10.31}{Normalize Federate Handle}
+    \serviceusagerow{10.32}{Normalize Service Group}
+    \serviceusagerow{10.33}{Enable Object Class Relevance Advisory Switch}
+    \serviceusagerow{10.34}{Disable Object Class Relevance Advisory Switch}
+    \serviceusagerow{10.35}{Enable Attribute Relevance Advisory Switch}
+    \serviceusagerow{10.36}{Disable Attribute Relevance Advisory Switch}
+    \serviceusagerow{10.37}{Enable Attribute Scope Advisory Switch}
+    \serviceusagerow{10.38}{Disable Attribute Scope Advisory Switch}
+    \serviceusagerow{10.39}{Enable Interaction Relevance Advisory Switch}
+    \serviceusagerow{10.40}{Disable Interaction Relevance Advisory Switch}
+    \serviceusagerow{10.41}{Evoke Callback}
+    \serviceusagerow{10.42}{Evoke Multiple Callbacks}
+    \serviceusagerow{10.43}{Enable Callbacks}
+    \serviceusagerow{10.44}{Disable Callbacks}
+\end{tabularx}}\endgroup
+\vspace{4pt}
+
+\subsubsection{Inclusion criteria}
+This table is optional. All federations may document their use of HLA services via the Interface Specification Service Usage Table in a FOM and relevant FOM modules. All federates may document their use of HLA services via the Interface Specification Service Usage Table in a SOM and relevant SOM modules.
+
+\subsubsection{Example}
+Table 49 provides an example of how the OMT tables are used to describe the usage of HLA services. Included are an illustrative subset of the HLA services that shall be listed in the table.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 95 / standard p. 83.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 49---Interface specification services usage table example}\vspace{-7pt}
+\begingroup
+\fontsize{8.15}{9.35}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.46}
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth-18pt\relax}{|C{73pt}|Y|C{72pt}|}
+\hline
+\rule{0pt}{13pt}\bfseries Clause & \centering\arraybackslash\bfseries Service & \bfseries Usage \\
+\hline
+4.2 & Connect & Yes \\
+\hline
+4.3 & Disconnect & Yes \\
+\hline
+4.4 & Connection Lost \textdagger{} & Yes \\
+\hline
+4.5 & Create Federation Execution & No \\
+\hline
+4.6 & Destroy Federation Execution & No \\
+\hline
+\rule{0pt}{44pt}\shortstack{.\\[4pt].\\[4pt].} & \shortstack[l]{.\\[4pt].\\[4pt].} & \shortstack{.\\[4pt].\\[4pt].} \\
+\hline
+\end{tabularx}}
+\endgroup
+
+\let\serviceusageheader\relax
+\let\serviceusagerow\relax
+\let\serviceusagetablesettings\relax

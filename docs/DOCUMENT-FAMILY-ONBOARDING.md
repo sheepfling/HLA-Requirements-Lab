@@ -9,7 +9,7 @@ layers.
 Create a directory below `topics/<topic>/<document>/` with:
 
 ```text
-build.py              # thin wrapper around scripts.document_builder
+build.py              # thin wrapper around hla_lab.adapters.document_builder
 main.tex              # layout and generated-input entry point
 latexmkrc             # writes build products below build/
 source/               # source-shaped LaTeX or other family inputs
@@ -21,46 +21,42 @@ Generated `output/`, `build/`, and `dist/` contents are ignored. Semantic
 source files under `semantic/` are tracked when a record has been promoted
 out of source-shaped input.
 
+Do not add page projections under `sections/generated/`. Canonical page and
+requirement data belongs under `semantic/`; generated TeX belongs under the
+ignored `output/semantic/` directory. A small exceptional layout adapter, such
+as a hand-reviewed cover drawing, belongs with the authored `frontmatter/` or
+`figures/` source instead.
+
 ## Profile contract
 
 The family profile supplies a `LatexSourceProfile` implementation from
-`scripts/source_adapter.py`. It declares the names used by the family's
+`hla_lab/core/source_adapter.py`. It declares the names used by the family's
 source syntax: clause headings, definition environments, requirement markers,
 references, notes, figures, table cells, and optional layout wrappers. It also
 declares `table_domain` as `generic` or `omt`; a numbered table is not assumed
 to be HLA/OMT merely because it has a number.
 
 The profile separately supplies a `LatexDialect` from
-`scripts/latex_renderer.py`, mapping semantic records to the family's visible
+`hla_lab/adapters/latex_renderer.py`, mapping semantic records to the family's visible
 heading, definition, and requirement commands. Keep family constants in the
 profile module. Do not import the HLA profile from the semantic model,
 semantic generator, or neutral renderer.
 
 ## Build contract
 
-The document wrapper loads its local profile and calls the common generator
-before the common builder:
+The document's release-manifest entry declares its strategy, selections, and
+output path. The document-local wrapper only delegates to the shared runner:
 
 ```python
-def generate_blocks() -> object:
-    return generate(
-        ROOT,
-        ROOT / "output" / "semantic",
-        source=FAMILY_SOURCE,
-        dialect=FAMILY_DIALECT,
-        definition_ids=(...),
-        requirement_ids=(...),
-        include_outline=True,
-    )
+from hla_lab.build.topic import main
 
-
-CONFIG = BuildConfig(
-    root=ROOT,
-    clean_before_build=True,
-    output_pdf=ROOT / "dist" / "document.pdf",
-    semantic_generator=generate_blocks,
-)
+if __name__ == "__main__":
+    raise SystemExit(main(root=ROOT))
 ```
+
+Add the corresponding `build` object to
+`data/release/documents.json`; use `strategy: "faithful"` for a page-faithful
+document or the shared derivative/compliance strategies for generated products.
 
 `main.tex` should input the generated semantic manifest and generated record
 blocks. The manifest also loads the generated hierarchy index; the complete
@@ -83,8 +79,8 @@ Run it directly or through the top-level builder:
 
 ```powershell
 python topics/fixture/non-hla-demo-2025/build.py build
-python -m scripts.build build topics/fixture/non-hla-demo-2025
-python -m unittest tests.test_milestone13 -v
+hla-lab build topics/fixture/non-hla-demo-2025
+uv run pytest tests/test_portability_contracts.py -q
 ```
 
 Use this fixture as the onboarding template for a second document family;

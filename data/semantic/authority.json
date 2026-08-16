@@ -8,63 +8,81 @@
         {
           "id": "content-blocks",
           "kind": "content_blocks",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-block-*-data.tex"
         },
         {
           "id": "content-elements",
           "kind": "content_elements",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-element-*-data.tex"
         },
         {
           "id": "definitions",
           "kind": "definitions",
-          "source_paths": ["semantic/definitions.json"],
+          "source_paths": [
+            "semantic/definitions.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/definition-*-data.tex"
         },
         {
           "id": "requirements",
           "kind": "requirements",
-          "source_paths": ["semantic/requirements.json"],
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
           "selection": "explicit",
           "generated_glob": "output/semantic/requirement-*-data.tex"
         },
         {
           "id": "references",
           "kind": "references",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/reference-*-data.tex"
         },
         {
           "id": "cross-references",
           "kind": "cross_references",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/cross-reference-*-data.tex"
         },
         {
           "id": "tables",
           "kind": "tables",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-record-*-data.tex"
         },
         {
           "id": "table-families",
           "kind": "table_families",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-family-*-data.tex"
         },
         {
           "id": "notes",
           "kind": "notes",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/note-*-data.tex"
         }
@@ -77,87 +95,137 @@
         {
           "id": "definitions",
           "kind": "definitions",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/definition-*-data.tex"
         },
         {
           "id": "content-blocks",
           "kind": "content_blocks",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-block-*-data.tex"
         },
         {
           "id": "content-elements",
           "kind": "content_elements",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-element-*-data.tex"
         },
         {
           "id": "requirements",
           "kind": "requirements",
-          "source_paths": ["semantic/requirements.json"],
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
           "selection": "explicit",
           "generated_glob": "output/semantic/requirement-*-data.tex"
         },
         {
           "id": "requirement-reviews",
           "kind": "requirement_reviews",
-          "source_paths": ["semantic/requirement-review.json"],
+          "source_paths": [
+            "semantic/requirement-review.json"
+          ],
           "selection": "all"
         },
         {
           "id": "transition-coverage",
           "kind": "transition_coverage",
-          "source_paths": ["semantic/transition-coverage.json"],
+          "source_paths": [
+            "semantic/transition-coverage.json"
+          ],
           "selection": "all"
         },
         {
           "id": "implementations",
           "kind": "implementations",
-          "source_paths": ["semantic/implementations.json"],
+          "source_paths": [
+            "semantic/implementations.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "api-surfaces",
+          "kind": "api_surfaces",
+          "source_paths": [
+            "semantic/api-surfaces.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "api-crosswalk",
+          "kind": "api_crosswalks",
+          "source_paths": [
+            "semantic/api-crosswalk.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-api-bindings",
+          "kind": "requirement_api_bindings",
+          "source_paths": [
+            "semantic/api-requirement-bindings.json"
+          ],
           "selection": "all"
         },
         {
           "id": "requirement-links",
           "kind": "requirement_links",
-          "source_paths": ["semantic/requirement-links.json"],
+          "source_paths": [
+            "semantic/requirement-links.json"
+          ],
           "selection": "all"
         },
         {
           "id": "figures",
           "kind": "figures",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/figure-*-data.tex"
         },
         {
           "id": "cross-references",
           "kind": "cross_references",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/cross-reference-*-data.tex"
         },
         {
           "id": "tables",
           "kind": "tables",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-record-*-data.tex"
         },
         {
           "id": "table-families",
           "kind": "table_families",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-family-*-data.tex"
         },
         {
           "id": "notes",
           "kind": "notes",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/note-*-data.tex"
         }
@@ -170,64 +238,382 @@
         {
           "id": "definitions",
           "kind": "definitions",
-          "source_paths": ["semantic/definitions.json"],
+          "source_paths": [
+            "semantic/definitions.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/definition-*-data.tex"
         },
         {
           "id": "requirements",
           "kind": "requirements",
-          "source_paths": ["semantic/requirements.json"],
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
           "selection": "explicit",
           "generated_glob": "output/semantic/requirement-*-data.tex"
         },
         {
           "id": "content-blocks",
           "kind": "content_blocks",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-block-*-data.tex"
         },
         {
           "id": "content-elements",
           "kind": "content_elements",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/content-element-*-data.tex"
         },
         {
           "id": "requirement-reviews",
           "kind": "requirement_reviews",
-          "source_paths": ["semantic/requirement-review.json"],
+          "source_paths": [
+            "semantic/requirement-review.json"
+          ],
           "selection": "all"
         },
         {
           "id": "table-families",
           "kind": "table_families",
-          "source_paths": ["semantic/table-families.json"],
+          "source_paths": [
+            "semantic/table-families.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-family-*-data.tex"
         },
         {
           "id": "tables",
           "kind": "tables",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/table-record-*-data.tex"
         },
         {
           "id": "cross-references",
           "kind": "cross_references",
-          "source_paths": ["semantic/content-elements.json"],
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/cross-reference-*-data.tex"
         },
         {
           "id": "notes",
           "kind": "notes",
-          "source_paths": ["semantic/content-blocks.json"],
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
           "selection": "all",
           "generated_glob": "output/semantic/note-*-data.tex"
+        }
+      ]
+    },
+    {
+      "document_id": "hla-1516-2010",
+      "root": "topics/ieee/hla-1516-2010",
+      "surfaces": [
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": [
+            "semantic/definitions.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-reviews",
+          "kind": "requirement_reviews",
+          "source_paths": [
+            "semantic/requirement-review.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "diagram-surfaces",
+          "kind": "diagram_surfaces",
+          "source_paths": [
+            "semantic/diagram-surfaces.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "figures",
+          "kind": "figures",
+          "source_paths": [
+            "semantic/figures.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/figure-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": [
+            "semantic/notes.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": [
+            "semantic/tables.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
+        }
+      ]
+    },
+    {
+      "document_id": "hla-1516.1-2010",
+      "root": "topics/ieee/hla-1516.1-2010",
+      "surfaces": [
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": [
+            "semantic/definitions.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-reviews",
+          "kind": "requirement_reviews",
+          "source_paths": [
+            "semantic/requirement-review.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "transition-coverage",
+          "kind": "transition_coverage",
+          "source_paths": [
+            "semantic/transition-coverage.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "implementations",
+          "kind": "implementations",
+          "source_paths": [
+            "semantic/implementations.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "api-surfaces",
+          "kind": "api_surfaces",
+          "source_paths": [
+            "semantic/api-surfaces.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "api-crosswalk",
+          "kind": "api_crosswalks",
+          "source_paths": [
+            "semantic/api-crosswalk.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-api-bindings",
+          "kind": "requirement_api_bindings",
+          "source_paths": [
+            "semantic/api-requirement-bindings.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-links",
+          "kind": "requirement_links",
+          "source_paths": [
+            "semantic/requirement-links.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "diagram-surfaces",
+          "kind": "diagram_surfaces",
+          "source_paths": [
+            "semantic/diagram-surfaces.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "figures",
+          "kind": "figures",
+          "source_paths": [
+            "semantic/figures.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/figure-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": [
+            "semantic/notes.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": [
+            "semantic/tables.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
+        }
+      ]
+    },
+    {
+      "document_id": "hla-1516.2-2010",
+      "root": "topics/ieee/hla-1516.2-2010",
+      "surfaces": [
+        {
+          "id": "content-blocks",
+          "kind": "content_blocks",
+          "source_paths": [
+            "semantic/content-blocks.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-block-*-data.tex"
+        },
+        {
+          "id": "content-elements",
+          "kind": "content_elements",
+          "source_paths": [
+            "semantic/content-elements.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/content-element-*-data.tex"
+        },
+        {
+          "id": "definitions",
+          "kind": "definitions",
+          "source_paths": [
+            "semantic/definitions.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/definition-*-data.tex"
+        },
+        {
+          "id": "requirements",
+          "kind": "requirements",
+          "source_paths": [
+            "semantic/requirements.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "requirement-reviews",
+          "kind": "requirement_reviews",
+          "source_paths": [
+            "semantic/requirement-review.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "diagram-surfaces",
+          "kind": "diagram_surfaces",
+          "source_paths": [
+            "semantic/diagram-surfaces.json"
+          ],
+          "selection": "all"
+        },
+        {
+          "id": "figures",
+          "kind": "figures",
+          "source_paths": [
+            "semantic/figures.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/figure-*-data.tex"
+        },
+        {
+          "id": "notes",
+          "kind": "notes",
+          "source_paths": [
+            "semantic/notes.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/note-*-data.tex"
+        },
+        {
+          "id": "tables",
+          "kind": "tables",
+          "source_paths": [
+            "semantic/tables.json"
+          ],
+          "selection": "all",
+          "generated_glob": "output/semantic/table-record-*-data.tex"
         }
       ]
     }

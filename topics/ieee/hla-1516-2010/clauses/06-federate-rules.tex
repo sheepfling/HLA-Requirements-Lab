@@ -1,0 +1,67 @@
+% Clause 6: source PDF page 34 / printed page 22.
+% Fidelity pass 03: each rule statement is followed by an additional 3.3 pt
+% source gap.  This accumulation reproduces the page's vertical rule cadence.
+% The page is enlarged locally so the source's final 707.8 pt baseline fits
+% without moving the calibrated running footer.
+
+\newpage
+\enlargethispage{18pt}
+\clause{6. Federate rules}
+
+This clause describes the five rules that apply to HLA federates. Rationale for the inclusion of each rule is\linebreak
+located in Annex A.
+
+\subclause{6.1 Rule 6}
+
+\textit{Federates shall have an HLA SOM, documented in accordance with the HLA OMT.}
+\vspace{3.3pt}
+
+The HLA SOM shall include the object classes, class attributes, and interaction classes of the federate that\linebreak
+can be made public in a federation. The SOM is specified using one or more SOM modules and one optional\linebreak
+MIM. The HLA does not prescribe which data are included in the SOM; this task shall be the responsibility\linebreak
+of the federate developer. SOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010.
+
+\subclause{6.2 Rule 7}
+
+\textit{Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,\linebreak
+as specified in their SOMs.}
+\vspace{3.3pt}
+
+The HLA allows for joined federates to make internal object representations and interactions available for\linebreak
+external use as part of federation executions. These capabilities for external interaction shall be documented\linebreak
+in the SOM for the federate. If documented in the SOM, these federate capabilities shall include the\linebreak
+obligation to export updated values of instance attributes that are calculated internally in the federate and the\linebreak
+obligation to be able to exercise interactions represented externally (i.e., by other federates in a federation).
+
+\subclause{6.3 Rule 8}
+
+\textit{Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a\linebreak
+federation execution, as specified in their SOMs.}
+\vspace{3.3pt}
+
+The HLA allows ownership of instance attributes of an object instance to be transferred dynamically during\linebreak
+a federation execution. The instance attributes of a federate that can be either owned or reflected, and whose\linebreak
+ownership can be dynamically acquired or divested during execution, shall be documented in the SOM for\linebreak
+that federate.
+
+\subclause{6.4 Rule 9}
+
+\textit{Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of\linebreak
+instance attributes, as specified in their SOMs.}
+\vspace{3.3pt}
+
+The HLA permits federates to own (i.e., provides the privilege to produce updated values for) instance\linebreak
+attributes of object instances represented in the federate and to then make those values available to other\linebreak
+federates through the RTI. Different federations may specify different conditions under which instance\linebreak
+attributes will be updated [e.g., at some specified rate, or when the amount of change in value exceeds a\linebreak
+specified threshold (such as altitude changes of more than 1000 ft)]. The conditions applicable to the update\linebreak
+of specific instance attributes owned by a federate shall be documented in the SOM for that federate.
+
+\subclause{6.5 Rule 10}
+
+\textit{Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with\linebreak
+other members of a federation.}
+\vspace{3.3pt}
+
+Federation designers will identify their time management approach as part of their implementation design.\linebreak
+Federates shall adhere to the time management approach of the federation.

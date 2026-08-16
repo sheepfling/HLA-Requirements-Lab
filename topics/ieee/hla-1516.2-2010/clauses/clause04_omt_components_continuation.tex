@@ -1,0 +1,275 @@
+% Source PDF pp. 32-39 / standard pp. 20-27.
+% Continues Clause 4 from the line ending source PDF p. 31.
+\newpage
+\begin{itemize}[leftmargin=32pt,labelwidth=10pt,labelsep=12pt,itemsep=6pt,topsep=0pt]
+\item \textit{Object model identification table}: To associate important identifying information with the HLA object model
+\item \textit{Object class structure table}: To record the namespace of all federate or federation object classes and to describe their class-subclass relationships
+\item \textit{Interaction class structure table}: To record the namespace of all federate or federation interaction classes and to describe their class-subclass relationships
+\item \textit{Attribute table}: To specify features of object attributes in a federate or federation
+\item \textit{Parameter table}: To specify features of interaction parameters in a federate or federation
+\item \textit{Dimension table}: To specify dimensions for filtering instance attributes and interactions
+\item \textit{Time representation table}: To specify the representation of time values
+\item \textit{User-supplied tag table}: To specify the representation of tags used in HLA services
+\item \textit{Synchronization table}: To specify representation and datatypes used in HLA synchronization services
+\item \textit{Transportation type table}: To describe the transportation mechanisms used
+\item \textit{Update rate table}: To specify update rate information
+\item \textit{Switches table}: To specify initial settings for parameters used by the RTI
+\item \textit{Datatype tables}: To specify details of data representation in the object model
+\item \textit{Notes table}: To expand explanations of any OMT table item
+\item \textit{Interface specification services usage table}: To specify the HLA services used by a federate or in a federation
+\item \textit{FOM/SOM lexicon}: To define all of the objects, attributes, interactions, and parameters used in the HLA object model
+\end{itemize}
+
+All of the OMT components shall be completed when specifying an HLA object model for both federations and individual federates. However, certain tables may be empty or devoid of domain-specific content. For instance, although federations typically support interactions among their federates, some federates (such as a stealth viewer) might not be involved in interactions. In this situation, the interaction class structure table would contain only the single interaction class required by the HLA and the parameter table would be empty in that federate's SOM or supporting SOM module. It is also expected that federates commonly have objects with attributes of interest across the federation; in such cases, these objects and attributes shall be documented. However, a federate or an entire federation may exchange information solely via interactions; in which case, its object class structure table and attribute table would contain only HLA-required data. The specific rules for the applicability of each OMT table are provided in the table descriptions.
+
+The final HLA OMT component, the FOM/SOM lexicon, is essential to help users understand the semantics of the terms used in an HLA object model.
+
+The HLA MOM specifies a designated set of information elements that are associated with federation executions. Implementation of the MOM information elements as specified in IEEE Std 1516.1-2010 provides a mechanism for management of federation executions using existing HLA services. Inclusion of the MOM is required for all FOMs and is achieved by incorporating the MOM data using a MOM and MIM. In addition, federates that have an inherent capability to interact with or extend the MOM shall include the MOM in their SOM. Inclusion of the MOM means the inclusion of a MIM that contains all tables in Clause 11 of IEEE Std 1516.1-2010, along with any applicable MOM extensions.
+
+The last row in any OMT table is labeled ``Note.'' This allows the object model developer to associate one or more notes with the entire table. If no note is being provided for that table, a value of ``NA'' should be
+
+\newpage
+entered. Although the ``Note'' row is not explicitly identified or discussed in the table descriptions, it is shown in the table examples for illustration purposes. The notes feature is fully explained in 4.14.
+
+A FOM or SOM is specified using one or more FOM or SOM modules. For a FOM, a MIM is also required whereas for a SOM, inclusion of a MIM depends on federate capabilities with respect to the MOM. Any FOM, SOM, FOM module, or SOM module that fully conforms to all of the rules and constraints stated in this specification is a \textit{compliant object model}. A FOM or SOM module is compliant if it conforms to all rules and constraints for a compliant object model as well as all rules and constraints that apply to FOM or SOM modules. A MIM is compliant if it conforms to all rules and constraints of a compliant object model and contains at least the information provided in the standard MIM (see IEEE Std 1516.1-2010).
+
+The basics of each OMT component are presented in the following separate subclauses. The template format for each component is provided and described, and criteria are suggested to help guide decisions on when to include specific federate or federation features within each of these components for a specific HLA object model. Examples of the usage of each OMT component are also provided; these examples are for illustrative purposes only, and they are not meant to imply any additional requirements. Clause 7. specifies the rules and principles for merging FOM modules and SOM modules. Annex A specifies the notations used in describing OMT tables.
+
+\subsection{Object model identification table}
+
+\subsubsection{Purpose/background}
+A key design goal for all HLA object models is to facilitate reuse. HLA object models provide information that enables inferences to be drawn regarding the reuse potential of individual federates for new applications. Reuse can also occur at the level of the object model. An existing FOM or FOM module may provide a foundation for the development of new FOMs, or SOMs or SOM modules may be merged to form new FOMs. In either case, to expedite reuse, it is important to include a minimum but sufficient degree of descriptive information in the object model. For instance, when federation developers wish to pose detailed questions about how a federate or federation was constructed, point of contact (POC) information within an HLA object model is extremely important. The purpose of this table is to document certain key identifying information within the object model description.
+
+\subsubsection{Table format}
+The information that identifies HLA object models shall be provided in a simple two-column table. The first column (Category) specifies the categories of data that shall be provided in this table. The second column (Information) shall specify the required information. Entries shall be provided for all rows. ``NA'' shall be entered in any row for which no information is appropriate. Definitions of the categories, descriptions, and occurrences are shown in Table 1.
+
+\omtcaption{Table 1---OMT metadata descriptions}
+\begingroup
+\omttablefont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.44}
+\centering\begin{tabularx}{\textwidth}{|L{0.26\textwidth}|Y|C{0.12\textwidth}|}
+\hline
+\centering\bfseries Category & \centering\bfseries Description & \bfseries Occurs \\ \hline
+\textit{Name} & This field shall specify the name assigned to the object model. & 1 \\ \hline
+\textit{Type} & \textit{Type:} This field shall specify the type that the object model represents; valid values are as follows:\newline
+\omtdash\textit{FOM}: the object model describes a federation\newline
+\omtdash\textit{SOM}: the object model describes a federate & 1 \\ \hline
+\end{tabularx}
+\endgroup
+
+\newpage
+\omtcontinuedcaption{Table 1---OMT metadata descriptions}
+\begingroup
+\omttablefont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.44}
+\centering\begin{tabularx}{\textwidth}{|L{0.26\textwidth}|Y|C{0.12\textwidth}|}
+\hline
+\centering\bfseries Category & \centering\bfseries Description & \bfseries Occurs \\ \hline
+\textit{Version} & This field shall specify the version identification assigned to the object model. & 1 \\ \hline
+\textit{Modification date} & This field shall specify the latest date on which this version of the object model was created or modified. The modification date shall be specified in the format ``YYYY-MM-DD'' (e.g., 1999-04-15). & 1 \\ \hline
+\textit{Security classification} & This field shall specify the security classification of the object model. The following values may be used for this field, although other values are also valid:\newline
+\omtdash Unclassified\newline
+\omtdash Confidential\newline
+\omtdash Secret\newline
+\omtdash Top Secret & 1 \\ \hline
+\textit{Release restriction} & This field shall contain any restrictions on the release of the object model to specific organizations or individuals. & 0..many \\ \hline
+\textit{Purpose} & This field shall specify the purpose for which the object model was developed. & 0..1 \\ \hline
+\textit{Application domain} & This field shall specify the type or class of application to which the object model applies. The following values may be used for this field, although other values are also valid:\newline
+\omtdash Analysis\newline
+\omtdash Training\newline
+\omtdash Test and Evaluation\newline
+\omtdash Engineering\newline
+\omtdash Acquisition & 0..1 \\ \hline
+\textit{Description} & This field shall provide an account of the content of the object model. & 1 \\ \hline
+\textit{Use limitation} & This field shall identify any known constraints on the application of this object model. & 0..1 \\ \hline
+\textit{Use history} & This field shall identify any past applications of the object model. & 0..many \\ \hline
+\textit{Keyword} & The two subfields of this field shall collectively identify the keywords that are associated with the object model. & 0..many \\ \hline
+\omtsubfield{Taxonomy} & This field shall specify the source of the keyword vocabulary. & 0..1 \\ \hline
+\omtsubfield{Keyword value} & This field shall specify the word or concept that is addressed by the object model. & 1 \\ \hline
+\textit{POC} & The subfields of this field shall collectively identify the necessary point of contact (POC) information for this object model. & 1..many \\ \hline
+\end{tabularx}
+\endgroup
+
+\newpage
+\omtcontinuedcaption{Table 1---OMT metadata descriptions}
+\begingroup
+\omttablefont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.44}
+\centering\begin{tabularx}{\textwidth}{|L{0.26\textwidth}|Y|C{0.12\textwidth}|}
+\hline
+\centering\bfseries Category & \centering\bfseries Description & \bfseries Occurs \\ \hline
+\omtsubfield{POC type} & This subfield shall specify the role that the POC has with respect to the object model. The following values may be used for this field, although other values are also valid:\newline
+\omtdash Primary author\newline
+\omtdash Contributor\newline
+\omtdash Proponent\newline
+\omtdash Sponsor\newline
+\omtdash Release authority\newline
+\omtdash Technical POC & 1 \\ \hline
+\omtsubfield{POC name} & This subfield shall specify the name of the object model POC, including an honorific (e.g., Dr., Ms) or rank, first name, and last name where appropriate. & 0..1 \\ \hline
+\omtsubfield{POC organization} & This subfield shall specify the organization with which the POC is affiliated. & 0..1 \\ \hline
+\omtsubfield{POC telephone} & This subfield shall specify the telephone number for the POC, including the international telephone code for the POC's country. & 0..many \\ \hline
+\omtsubfield{POC e-mail} & This subfield shall specify the e-mail address of the POC. & 0..many \\ \hline
+\textit{References} & This field shall specify pointers to additional sources of information. If the object model is intended to represent a FOM module or SOM module, then this field shall characterize the module as ``standalone'' or as having a ``dependency'' upon another module. If the object model represents a composition of existing modules, then this field shall identify references to each FOM module or SOM module component. & 0..many \\ \hline
+\omtsubfield{Type} & This subfield shall specify the form of the reference material. For FOM or SOM modules, the following predefined values may be used for this field:\newline
+\omtdash Standalone\newline
+\omtdash Dependency\newline
+\omtdash Composed From\newline
+Otherwise, the general type of reference source should be indicated, such as ``Text Document,'' ``Spreadsheet,'' or ``Powerpoint File.'' & 1 \\ \hline
+\omtsubfield{Identification} & The following conditions shall be met:\newline
+\omtdash If the Reference Type subfield = ``Standalone,'' this subfield shall contain the value ``NA''.\newline
+\omtdash If the Reference Type subfield = ``Dependency,'' this subfield shall identify the name of all dependent FOM modules or SOM modules.\newline
+\omtdash If the Reference Type subfield = ``Composed From,'' this subfield shall identify the names of all FOM modules or SOM modules that have been merged to form the current object model.\newline
+If the Reference type subfield is not equal to any of the three predefined values, this subfield shall specify the location of the reference source [e.g., uniform resource identifier (URI), ISBN]. & 1 \\ \hline
+\textit{Other} & This field shall specify other data deemed relevant by the author of the object model. & 0..1 \\ \hline
+\end{tabularx}
+\endgroup
+
+\newpage
+\omtcontinuedcaption{Table 1---OMT metadata descriptions}
+\begingroup
+\omttablefont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.44}
+\centering\begin{tabularx}{\textwidth}{|L{0.26\textwidth}|Y|C{0.12\textwidth}|}
+\hline
+\centering\bfseries Category & \centering\bfseries Description & \bfseries Occurs \\ \hline
+\textit{Glyph} & This field holds the image that can be used to visually represent a FOM or SOM. & 0..1 \\ \hline
+\omtsubfield{Type} & This subfield holds the image type being represented. If the glyph is being referenced rather than provided, a value of ``URL'' shall be provided. & 1 \\ \hline
+\omtsubfield{Alt} & This subfield provides alternative text if the image represented in the \textit{Glyph} field cannot be displayed. If the Glyph Type subfield = ``URL,'' the URL address shall be provided in this subfield. & 0..1 \\ \hline
+\omtsubfield{Height} & This subfield shall represent the pixel height of the glyph image provided in the \textit{Glyph} field. & 0..1 \\ \hline
+\omtsubfield{Width} & This subfield shall represent the pixel width of the glyph image provided in the \textit{Glyph} field. & 0..1 \\ \hline
+\end{tabularx}
+\endgroup
+
+The concept of FOM modules and SOM modules is supported via the ``References'' field of this table. ``Dependent'' modules in this context are those that contain references to data in other module(s), such as object class definitions or datatype definitions. ``Standalone'' modules do not contain such references. Table 2 provides the structure to be used to describe the Table 1 metadata elements.
+
+\newpage
+\omtcaption{Table 2---Object model identification table}
+\begingroup
+\omttablesmallfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|L{0.329\textwidth}|L{0.329\textwidth}|}
+        \hline
+        \multicolumn{1}{|c|}{\bfseries Category} & \multicolumn{1}{c|}{\bfseries Information} \\ \hline
+        Name                                     & \omtph{name}                               \\ \hline
+        Type                                     & \omtph{type}                               \\ \hline
+        Version                                  & \omtph{version}                            \\ \hline
+        Modification Date                        & \omtph{date}                               \\ \hline
+        Security Classification                  & \omtph{security classification}            \\ \hline
+        Release Restriction                      & \omtopt{release restriction}               \\ \hline
+        Purpose                                  & \omtopt{purpose}                           \\ \hline
+        Application Domain                       & \omtopt{application domain}                \\ \hline
+        Description                              & \omtph{description}                        \\ \hline
+        Use Limitation                           & \omtopt{limitation}                        \\ \hline
+        Use History                              & \omtopt{history}                           \\ \hline
+        Keyword                                  &                                            \\ \hline
+        \hspace*{1.25em}Taxonomy                 & \omtopt{taxonomy}                          \\ \hline
+        \hspace*{1.25em}Keyword Value            & \omtopt{keyword value}                     \\ \hline
+        POC                                      &                                            \\ \hline
+        \hspace*{1.25em}POC Type                 & \omtph{poc type}                           \\ \hline
+        \hspace*{1.25em}POC Name                 & \omtopt{poc name}                          \\ \hline
+        \hspace*{1.25em}POC Organization         & \omtopt{poc organization}                  \\ \hline
+        \hspace*{1.25em}POC Telephone            & \omtph{poc telephone}                      \\ \hline
+        \hspace*{1.25em}POC E-mail               & \omtph{poc email}                          \\ \hline
+        References                               &                                            \\ \hline
+        \hspace*{1.25em}Type                     & \omtopt{ref type}                          \\ \hline
+        \hspace*{1.25em}Identification           & \omtopt{identification}                    \\ \hline
+        Other                                    & \omtph{other}                              \\ \hline
+        Glyph                                    & \omtopt{glyph}                             \\ \hline
+        \hspace*{1.25em}Type                     & \omtph{type}                               \\ \hline
+        \hspace*{1.25em}Alt                      & \omtopt{alt}                               \\ \hline
+        \hspace*{1.25em}Height                   & \omtopt{height}                            \\ \hline
+        \hspace*{1.25em}Width                    & \omtopt{width}                             \\ \hline
+    \end{tabular}%
+}
+\endgroup
+
+\newpage
+
+\subsubsection{Inclusion criteria}
+The categories of information specified in this table shall be included for all HLA FOMs, FOM modules, SOMs, and SOM modules.
+
+\subsubsection{Example}
+Table 3 shows a simple example of the object model identification table. In this example, the \textit{Purpose} entry is shorter (by design) than entries that would be found in this table for most practical applications. The subclauses that follow provide examples of each OMT table for the notional SOM identified in this table.
+
+\omtcaption{Table 3---Object model identification table example}
+\begingroup
+\omttablesmallfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|L{0.329\textwidth}|L{0.329\textwidth}|}
+        \hline
+        \multicolumn{1}{|c|}{\bfseries Category} & \multicolumn{1}{c|}{\bfseries Information}                                                                       \\ \hline
+        Name                                     & RestaurantExample                                                                                                \\ \hline
+        Type                                     & SOM                                                                                                              \\ \hline
+        Version                                  & 1.0 Alpha                                                                                                        \\ \hline
+        Modification Date                        & 1998-01-01                                                                                                       \\ \hline
+        Security Classification                  & Unclassified                                                                                                     \\ \hline
+        Release Restriction                      & NA                                                                                                               \\ \hline
+        Purpose                                  & To define an HLA object model for a restaurant federate                                                          \\ \hline
+        Application Domain                       & Restaurant operations                                                                                            \\ \hline
+        Description                              & This object model is intended to define the external HLA interface of the ``Joe's Place'' restaurant simulation. \\ \hline
+        Use Limitation                           & NA                                                                                                               \\ \hline
+        Use History                              & Federated Foods federation                                                                                       \\ \hline
+        Keyword                                  &                                                                                                                  \\ \hline
+        \hspace*{1.25em}Taxonomy                 & Food Service Industry Taxonomy                                                                                   \\ \hline
+        \hspace*{1.25em}Keyword                  & Restaurant, Menu, Waiter                                                                                         \\ \hline
+        POC                                      &                                                                                                                  \\ \hline
+        \hspace*{1.25em}POC Type                 & Sponsor                                                                                                          \\ \hline
+        \hspace*{1.25em}POC Name                 & Mr. Joseph Doe                                                                                                   \\ \hline
+        \hspace*{1.25em}POC Organization         & Joe's Place                                                                                                      \\ \hline
+        \hspace*{1.25em}POC Telephone            & 1-977-555-1234                                                                                                   \\ \hline
+        \hspace*{1.25em}POC Email                & doej@joesplace.com                                                                                               \\ \hline
+        References                               &                                                                                                                  \\ \hline
+        \hspace*{1.25em}Type                     & HTML document                                                                                                    \\ \hline
+        \hspace*{1.25em}Identification           & \nolinkurl{www.fedfoods.com/restsim.html}                                                                        \\ \hline
+        Other                                    & See Mobil International Restaurant Guide for more information                                                    \\ \hline
+        Glyph                                    & \hfill\restaurantglyph\hfill\mbox{}                                                                              \\ \hline
+    \end{tabular}%
+}
+\endgroup
+
+\newpage
+\omtcontinuedcaption{Table 3---Object model identification table example}
+\begingroup
+\omttablesmallfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|L{0.329\textwidth}|L{0.329\textwidth}|}
+        \hline
+        \multicolumn{1}{|c|}{\bfseries Category} & \multicolumn{1}{c|}{\bfseries Information} \\ \hline
+        \hspace*{1.25em}Type                     & GIF                                        \\ \hline
+        \hspace*{1.25em}Alt                      & Restaurant                                 \\ \hline
+        \hspace*{1.25em}Height                   & 32                                         \\ \hline
+        \hspace*{1.25em}Width                    & 32                                         \\ \hline
+        Note                                     & NA                                         \\ \hline
+    \end{tabular}%
+}
+\endgroup
+
+\subsection{Object class structure table}
+
+\subsubsection{Purpose/background}
+The object class structure of an HLA object model is defined by a set of relations among classes of objects from the simulation or federation domain. An HLA object class is a collection of objects with certain characteristics or attributes in common. Each of the individual objects that are realizations of a class is said to be an instance of that class.
+
+An HLA object class structure shall be defined by hierarchical relationships among classes of objects. Class relationships shall be represented by the inclusion of the associated class names in the appropriate columns of the object class structure table. Relationships among classes at nonadjacent levels of a class hierarchy can be derived through transitivity: if A is a superclass of B, and B is a superclass of C, A is also a superclass of C. Superclass and subclass play inverse roles in these relations: if A is a superclass of B, B is a subclass of A.
+
+Subclasses can be considered to be specializations, or refinements, of their superclasses. Subclasses shall always inherit the attributes of their superclasses, and they may possess additional attributes to provide the desired specialization. For instance, suppose a ``Circle'' class is defined as a subclass of a ``Figure'' class. Attributes defined for the Figure class are those that apply to all types of figures, such as ``Color'' or ``Line Thickness.'' The Circle subclass automatically inherits the attributes of the Figure class; however, an additional ``Radius'' attribute might also be defined that is only appropriate for this special type of figure.
+
+A class is a leaf of a class structure if it has no subclasses. The object class ``HLAobjectRoot'' shall be a superclass of all other object classes in a FOM, FOM module, SOM, or SOM module. The HLA object model shall support only single inheritance; in this mechanism, each class has at most one immediate superclass.
+
+HLA defines the following three types of object class attributes:
+\begin{itemize}[leftmargin=32pt,labelwidth=10pt,labelsep=12pt,itemsep=5pt,topsep=2pt]
+\item \textbf{declared attributes:} The set of class attributes of an object class that are associated with that object class in the object class hierarchy tree.
+\item \textbf{inherited attributes:} The set of class attributes of an object class that was declared in a superclass of that object class in the object class hierarchy tree.
+\item \textbf{available attributes:} The set of declared attributes of an object class in union with the set of inherited attributes of that object class.
+\end{itemize}
+
+Federates participating in a federation execution may subscribe to attributes of object classes at any level of the class hierarchy. Conditions and circumstances surrounding discovery and reflection of instance attributes are described in IEEE Std 1516.1-2010.

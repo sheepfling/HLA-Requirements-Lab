@@ -3,45 +3,111 @@
   "$id": "https://document-recreation.local/schemas/implementation_mapping.schema.json",
   "title": "Semantic implementation mapping file",
   "type": "object",
-  "required": ["schema_version", "implementations"],
+  "required": [
+    "schema_version",
+    "implementations"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schema_version": { "type": "integer", "minimum": 1 },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
     "implementations": {
       "type": "array",
-      "items": { "$ref": "#/$defs/implementation" }
+      "items": {
+        "$ref": "#/$defs/implementation"
+      }
     }
   },
   "$defs": {
     "source_ref": {
       "type": "object",
-      "required": ["path", "line"],
+      "required": [
+        "path",
+        "line"
+      ],
       "additionalProperties": false,
       "properties": {
-        "path": { "type": "string", "minLength": 1 },
-        "line": { "type": "integer", "minimum": 1 },
-        "end_line": { "type": ["integer", "null"], "minimum": 1 }
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
       }
     },
     "implementation": {
       "type": "object",
-      "required": ["id", "interface_kind", "interface_name", "implementation"],
+      "required": [
+        "id",
+        "interface_kind",
+        "interface_name",
+        "implementation"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
         "interface_kind": {
-          "enum": ["service", "callback", "adapter", "handler"]
+          "enum": [
+            "service",
+            "callback",
+            "adapter",
+            "handler"
+          ]
         },
-        "interface_name": { "type": "string", "minLength": 1 },
-        "implementation": { "type": "string", "minLength": 1 },
+        "interface_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation": {
+          "type": "string",
+          "minLength": 1
+        },
         "status": {
-          "enum": ["planned", "partial", "implemented", "verified"]
+          "enum": [
+            "planned",
+            "partial",
+            "implemented",
+            "verified"
+          ]
         },
-        "clause_ids": { "type": "array", "items": { "type": "string" } },
-        "requirement_ids": { "type": "array", "items": { "type": "string" } },
-        "transition_ids": { "type": "array", "items": { "type": "string" } },
-        "source": { "$ref": "#/$defs/source_ref" },
-        "notes": { "type": "string" }
+        "clause_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirement_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transition_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source": {
+          "$ref": "#/$defs/source_ref"
+        },
+        "notes": {
+          "type": "string"
+        }
       }
     }
   }

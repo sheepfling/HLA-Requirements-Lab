@@ -1,4 +1,4 @@
-"""M20/M21 diagram semantics, rendering, and source-only QA contracts."""
+"""diagram diagram semantics, rendering, and source-only QA contracts."""
 
 from __future__ import annotations
 
@@ -7,22 +7,21 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.diagram_qa import validate_renderable
-from scripts.export_graph_diagram import render_mermaid as render_graph_mermaid
-from scripts.export_graph_diagram import render_tikz as render_graph_tikz
-from scripts.export_sequence_diagram import render_mermaid, render_tikz
-from scripts.generate_derivative import generate_derivative
-from scripts.hla_profile import HLA_SOURCE
-from scripts.semantic_model import (
+from hla_lab.core.hla_profile import HLA_SOURCE
+from hla_lab.core.semantic_model import (
     DiagramSurfaceFile,
     GraphDiagramFile,
     SequenceDiagramFile,
     load_document_model,
 )
+from hla_lab.diagrams.diagram_qa import validate_renderable
+from hla_lab.diagrams.export_graph_diagram import render_mermaid as render_graph_mermaid, \
+    render_tikz as render_graph_tikz
+from hla_lab.diagrams.export_sequence_diagram import render_mermaid, render_tikz
+from hla_lab.generation.generate_derivative import generate_derivative
 
 ROOT = Path(__file__).resolve().parents[1]
 HLA_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
-
 
 class DiagramPipelineTests(unittest.TestCase):
     @classmethod
@@ -86,7 +85,6 @@ class DiagramPipelineTests(unittest.TestCase):
             text = derivative.read_text(encoding="utf-8")
         self.assertIn("Message-sequence diagrams", text)
         self.assertIn("hla-1516.1.figure-26-successful-reconnection", text)
-
 
 if __name__ == "__main__":
     unittest.main()

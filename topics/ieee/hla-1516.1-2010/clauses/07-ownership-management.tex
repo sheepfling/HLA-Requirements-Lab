@@ -1,0 +1,1254 @@
+% Faithful initial reconstruction of Clause 7 from source PDF pages 137--162
+% (standard pages 123--148). Source-page boundaries are intentionally preserved.
+
+\clearpage
+
+% --- Standard page 123 / source PDF page 137 ---
+\begin{compactstdpage}
+
+    \section{Ownership management}
+
+    \subsection{Overview}
+
+
+    Ownership management is used by joined federates and the RTI to transfer ownership of instance attributes among joined federates. The ability to transfer ownership of instance attributes among joined federates shall be required to support the cooperative modeling of a given object instance across a federation. Only the joined federate that owns an instance attribute shall
+
+
+    \stdliteraldashitem{Invoke the Update Attribute Values service to provide a new value for that instance attribute}
+    \stdliteraldashitem{Receive invocations of the Provide Attribute Value Update \rtiinitiated{} service for that instance attribute}
+    \stdliteraldashitem{Receive invocations of the Turn Updates On For Object Instance \rtiinitiated{} and Turn Updates Off For Object Instance \rtiinitiated{} services pertaining to that instance attribute}
+
+
+    Figure 16 depicts the ways that ownership of a single instance attribute may be established from the viewpoint of a given joined federate. This diagram is complete insofar as all transitions shown represent legal operations, and transitions that are not shown represent illegal operations. The RTI shall generate exceptions if illegal operations are invoked.
+
+
+    An instance attribute shall not be owned by more than one joined federate, and an instance attribute may be unowned by all joined federates. The RTI shall be responsible for attempting to find an owner for instance attributes that are left unowned as a result of a joined federate resignation or unconditional divestiture. The RID provided to an RTI may allow the federation to control how often or for how long an RTI will attempt to find an owner for unowned instance attributes. The RTI shall invoke the Request Attribute Ownership Assumption \rtiinitiated{} service once at each joined federate that is both eligible to own the instance attribute and eligible to receive a Request Attribute Ownership Assumption \rtiinitiated{} service invocation for that instance attribute until the instance attribute becomes owned. From a given joined federate's perspective, every instance attribute shall be either owned or unowned. Hence, within the state machine depicted in Figure 16, the owned and unowned states are exclusive.
+
+
+    Upon registration of an object instance, the registering joined federate shall own all instance attributes of that object instance for which the joined federate is publishing the corresponding class attributes at the registered class of the object instance. All other instance attributes of that object instance shall be unowned by all joined federates. Upon discovery of an object instance, the discovering joined federate shall not own any instance attributes of that object instance. If a joined federate does not own an instance attribute, it shall not own that instance attribute until it has received an Attribute Ownership Acquisition Notification \rtiinitiated{} service invocation for it.
+
+
+    Ownership of an instance attribute shall be transferred from one joined federate to another either by the owning joined federate requesting to divest itself of the instance attribute or by a non-owning joined federate requesting to acquire it. Regardless of whether an instance attribute changes ownership as a result of being divested by its owner or acquired by a non-owner, the instance attribute shall change ownership only as a result of explicit service invocations by the owning and acquiring joined federates. The RTI shall not take ownership away from, nor give it to, a joined federate without the joined federate's consent, except through the use of the following MOM interactions:
+
+
+    \stdliteraldashitem{HLAmanager.HLAfederate.HLAadjust.HLAmodifyAttributeState}
+    \stdliteraldashitem{HLAmanager.HLAfederate.HLAservice.HLAunpublishObjectClassAttributes}
+    \stdliteraldashitem{HLAmanager.HLAfederate.HLAservice.HLAunconditionalAttributeOwnershipDivestiture}
+    \stdliteraldashitem{HLAmanager.HLAfederate.HLAservice.HLAresignFederationExecution}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 124 / source PDF page 138 ---
+% Figure 16 is placed in the exact source image rectangle (source PDF coordinates).
+\begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at
+    ([xshift=83.94000bp,yshift=-86.27997bp]current page.north west)
+        {\rotatebox{90}{\resizebox{587.09998bp}{429.59998bp}{\input{figures/native/figure-16.tex}}}};
+    \node[anchor=center,inner sep=0pt,
+        font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{10.75}{11.95}\selectfont]
+    at ([xshift=293.43564bp,yshift=-688.40387bp]current page.north west)
+        {\scalebox{.995}[1.116]{Figure 16---Establishing ownership of instance attribute (\textit{i}, \textit{k}, \textit{j})}};
+\end{tikzpicture}
+\mbox{}\vfill
+
+\clearpage
+
+% --- Standard page 125 / source PDF page 139 ---
+\begin{compactstdpage}
+
+    \subsubsection{Ownership and publication}
+
+
+    The ownership of an instance attribute is closely related to whether that instance attribute's corresponding class attribute is published at the known class of the instance attribute. In other words, the ownership state machine in Figure 16, which operates in parallel with the publication state machine in Figure 11, also shares interdependencies with the publication state machine. A joined federate shall be publishing a class attribute at the known class of an object instance in order to own the corresponding instance attribute of that object instance. Therefore, the following are true:
+
+
+    \stdliteralitem{a)}{A joined federate shall be publishing a class attribute at the known class of an object instance before it may become the owner of the corresponding instance attribute of that object instance. This interdependency between ownership and publication is expressed in Figure 16 by the Not Able to Acquire state, the [in ``Unpublished (i, j)''] and [in ``Published (i, j)''] transitions in the Unowned (i, k, j) state, and the conditional transition into the Owned (i, k, j) and Unowned (i, k, j) states from the start state.}
+    \stdliteralitem{b)}{If the joined federate that owns an instance attribute stops publishing the corresponding class attribute at the known class of the instance attribute, the instance attribute shall immediately become unowned. This interdependency between ownership and publication is expressed in Figure 16 by the transition from the Owned (i, k, j) state to the Unowned (i, k, j) state that is labeled [in ``Unpublished (i, j)'']. As depicted by the guard on the transition from the Published (i, j) state to the Unpublished (i, j) state in the publication state machine shown in Figure 11, a joined federate shall not stop publication of a class attribute at a given class if there is an object instance that has that class as its known class and that has a corresponding instance attribute that is in either the Acquisition Pending or Willing to Acquire (i, k, j) state at that joined federate. In other words, a joined federate shall not stop publishing a class attribute at a given class if there is an object instance that has that class as its known class and that has a corresponding instance attribute for which the joined federate has invoked the following:}
+    \stdliteralsubitem{1)}{Attribute Ownership Acquisition service, but has not yet received an invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service}
+    \stdliteralsubitem{2)}{Attribute Ownership Acquisition If Available service, but has not yet received an invocation of the Attribute Ownership Unavailable \rtiinitiated{} service, received an invocation of the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or invoked the Attribute Ownership Acquisition service [after which condition 1) (above) applies].}
+
+    \subsubsection{Ownership transfer}
+
+
+    An instance attribute that is successfully divested shall become unowned by the divesting joined federate. If an instance attribute is unowned, its corresponding class attribute at the known class of the instance attribute may be either published or unpublished. If the class attribute is published at that class, the joined federate shall be eligible to acquire the corresponding instance attribute, and it may be offered ownership of that instance attribute by the RTI via the Request Attribute Ownership Assumption \rtiinitiated{} service. There are five ways in which an owning joined federate may attempt to divest itself of an instance attribute and two ways in which a non-owning joined federate may attempt to acquire one.
+
+    \paragraph{Divestiture}
+
+
+    The five actions that a joined federate may take to cause an instance attribute that it owns to become unowned are as follows:
+
+
+    \stdliteralitem{a)}{The joined federate may invoke the Unconditional Attribute Ownership Divestiture service, in which case, the instance attribute shall immediately become unowned by that joined federate and, in fact, by all joined federates.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 126 / source PDF page 140 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{b)}{The joined federate may invoke the Negotiated Attribute Ownership Divestiture service, which notifies the RTI that the joined federate wishes to divest itself of the instance attribute, providing that the RTI can locate a joined federate that is willing to own the instance attribute. If any joined federates are in the process of trying to acquire the instance attribute, these joined federates are willing to own the instance attribute. The RTI can try to identify other joined federates that are willing to own the instance attribute by invoking the Request Attribute Ownership Assumption \rtiinitiated{} service at all joined federates that are not in the process of trying to acquire the instance attribute, but that are publishing the instance attribute's corresponding class attribute at the publishing joined federate's known class of the instance attribute. If the RTI is able to locate a joined federate that is willing to acquire the instance attribute, the RTI shall notify the divesting joined federate by invoking the Request Divestiture Confirmation \rtiinitiated{} service. The divesting joined federate may then complete the negotiated divestiture using the Confirm Divestiture service, which causes ownership of the instance attribute to be lost.}
+    \stdliteralitem{c)}{The joined federate may invoke the Attribute Ownership Divestiture If Wanted service, which notifies the RTI that the joined federate wishes to divest itself of ownership of the instance attribute, providing that another joined federate is attempting to acquire ownership of it. This service invocation has a return argument that the RTI shall use to indicate the set of instance attributes for which the joined federate has divested ownership. If an instance attribute is not in the returned instance attribute set, it was not divested, and the request to divest this instance attribute shall be concluded. If the Attribute Ownership Divestiture If Wanted service returns with the designated instance attribute among the set of released instance attributes, the instance attribute shall be unowned by the invoking joined federate. [In Figure 16, the transition from the owned to the unowned state via an Attribute Ownership Divestiture If Wanted service invocation is labeled ``Attribute Ownership Divestiture If Wanted (ret: divested).'' This is a convenience notation indicating that the instance attribute in question is a member of the returned instance attribute set.]}
+    \stdliteralitem{d)}{The joined federate may stop publishing the instance attribute's corresponding class attribute at the known class of the instance attribute; this step shall result in the instance attribute immediately becoming unowned by that joined federate and, in fact, by all joined federates.}
+    \stdliteralitem{e)}{The joined federate may resign from the federation execution. When a joined federate successfully resigns from the federation execution with the Unconditionally Divest Attributes option, all of the instance attributes that are owned by that joined federate shall become unowned by that joined federate and, in fact, by all joined federates. This transition is not depicted in Figure 16 because it occurs at a joined federate, rather than at an instance attribute, level of operation.}
+
+
+    Of the five ways a joined federate may divest itself of an instance attribute, only the Negotiated Attribute Ownership Divestiture service may be canceled. A Negotiated Attribute Ownership Divestiture service invocation shall remain pending until either the instance attribute becomes unowned or the divesting joined federate cancels the divestiture request by invoking the Cancel Negotiated Attribute Ownership Divestiture service. Cancellation of the divestiture shall be guaranteed to be successful.
+
+
+    Of the five ways a joined federate may divest itself of an instance attribute, three ways (invocation of the Unconditional Attribute Ownership Divestiture service, a request to stop publication of the instance attribute's corresponding class attribute at the known class of the instance attribute, and invocation of the Resign Federation Execution service) shall result in the instance attribute becoming unowned by all joined federates. When either the Negotiated Attribute Ownership Divestiture or the Attribute Ownership Divestiture If Wanted service is used, the RTI shall guarantee that immediately after the owning joined federate loses ownership of the instance attribute, another joined federate shall be granted ownership of it. For purposes of determining an instance attribute's scope, the instance attribute shall be considered to be continuously owned during its transfer of ownership from the divesting joined federate to the acquiring joined federate via either the Negotiated Attribute Ownership Divestiture or the Attribute Ownership Divestiture If Wanted service.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 127 / source PDF page 141 ---
+\begin{compactstdpage}
+
+    When the value of an instance attribute is being updated by a joined federate using TSO messages and that joined federate is initiating a negotiated divestiture of that instance attribute, the divesting and receiving joined federates should be aware of potential causality or reflection anomalies.
+
+
+    Because the divestiture is not associated with a timestamp, the logical time of the receiving joined federate at which ownership of the instance attribute is acquired may be earlier or later than that of the divesting joined federate, giving either a gap or an overlap in the time intervals on the HLA time axis for which the joined federates own the instance attribute.
+
+
+    Some issues to consider are as follows:
+
+
+    \stdliteralitem{a)}{There may be points on the HLA time axis at which neither joined federate owns the instance attribute. This situation may result in an interval of timestamps for which no updates to the value of the instance attribute are provided, unless special steps are taken by one or both of the joined federates.}
+    \stdliteralitem{b)}{There may be points on the HLA time axis at which both joined federates own the instance attribute. This situation may result in updates to the value of the instance attribute being produced by both joined federates that contain the same timestamp, unless special steps are taken by one or both of the joined federates.}
+    \stdliteralitem{c)}{There may be TSO updates sent by the divesting joined federate that have not been delivered to other joined federates (i.e., they are queued in the RTI) when the divestiture occurs. Some of these outstanding TSO updates may be retractable by the divesting joined federate; others may not be retractable. See restrictions in 8.21 for details.}
+    \stdliteralitem{d)}{There may be additional information that the divesting joined federate needs to transfer along with ownership of the instance attribute.}
+
+    \paragraph{Acquisition}
+
+
+    The RTI shall provide both of the following two ways for a joined federate that is publishing a class attribute at a given class to acquire an analogous instance attribute of an object instance that has that class as the known class at the joined federate attempting to acquire the attribute:
+
+
+    \stdliteralitem{a)}{The joined federate may invoke the Attribute Ownership Acquisition service, which shall inform the RTI that it shall invoke the Request Attribute Ownership Release \rtiinitiated{} service at the joined federate that owns the designated instance attribute.}
+    \stdliteralitem{b)}{The joined federate may invoke the Attribute Ownership Acquisition If Available service, which shall inform the RTI that it wants to acquire the designated instance attribute only if it is already unowned by all joined federates or if it is in the process of being divested by its owner.}
+
+
+    The first method of acquisition can be thought of as an intrusive acquisition because the RTI will notify the joined federate that owns the instance attribute that another joined federate wants to acquire it and request that the owning joined federate release the instance attribute for acquisition by the requesting joined federate. The second method of acquisition can be thought of as a nonintrusive acquisition because the RTI will not notify the owning joined federate of the request to acquire the instance attribute. The Attribute Ownership Acquisition service can also be thought of as taking precedence over the Attribute Ownership Acquisition If Available service. A joined federate that has invoked the Attribute Ownership Acquisition service and is in the Acquisition Pending state shall not invoke the Attribute Ownership Acquisition If Available service. If a joined federate that has invoked the Attribute Ownership Acquisition If Available service and is in the Willing to Acquire state invokes the Attribute Ownership Acquisition service, that joined federate shall enter the Acquisition Pending state.
+
+
+    An Attribute Ownership Acquisition service invocation may be explicitly canceled, but an Attribute Ownership Acquisition If Available service invocation may not be explicitly canceled. When a joined federate invokes the Attribute Ownership Acquisition If Available service, either the Attribute Ownership
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 128 / source PDF page 142 ---
+\begin{compactstdpage}
+
+    Acquisition Notification \rtiinitiated{} service or the Attribute Ownership Unavailable \rtiinitiated{} service shall be invoked at that joined federate in response. If the instance attribute is unowned by all joined federates (and no other joined federate is attempting to acquire it), the Attribute Ownership Acquisition Notification \rtiinitiated{} service shall be invoked. If the joined federate is in the Not Divesting state with respect to the instance attribute, the Attribute Ownership Unavailable \rtiinitiated{} service shall be invoked. Otherwise, either the Attribute Ownership Acquisition Notification \rtiinitiated{} service or the Attribute Ownership Unavailable \rtiinitiated{} service may be invoked, depending on what service, if any, the owning joined federate invokes.
+
+
+    When a joined federate invokes the Attribute Ownership Acquisition service invocation, on the other hand, this request shall remain pending until the instance attribute is acquired (as indicated by an invocation of the Attribute Ownership Acquisition Notification \rtiinitiated{} service), acquisition of the instance attribute is denied (as indicated by an invocation of the Attribute Ownership Unavailable \rtiinitiated{} service), or the joined federate successfully cancels the acquisition request. A joined federate may attempt to cancel the acquisition request by invoking the Cancel Attribute Ownership Acquisition service. The Cancel Attribute Ownership Acquisition service is not guaranteed to be successful. If it is successful, the RTI shall indicate this success to the canceling joined federate by invoking the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service. If it fails, the RTI shall indicate this failure to the canceling joined federate by invoking the Attribute Ownership Acquisition Notification \rtiinitiated{} service, thereby granting ownership of the instance attribute to the joined federate.
+
+
+    An Attribute Ownership Acquisition service invocation shall override an Attribute Ownership Acquisition If Available service invocation. In other words, a joined federate that has invoked the Attribute Ownership Acquisition If Available service may, before it receives an invocation of either the Attribute Ownership Acquisition Notification \rtiinitiated{} service or the Attribute Ownership Unavailable \rtiinitiated{} service, invoke the Attribute Ownership Acquisition service. In this case, the Attribute Ownership Acquisition If Available service request shall be implicitly canceled, and the Attribute Ownership Acquisition service request shall remain pending until the instance attribute is acquired, acquisition of the instance attribute is denied, or the joined federate successfully cancels the acquisition request. A joined federate that has invoked the Attribute Ownership Acquisition service, but has not yet received an invocation of the Attribute Ownership Acquisition Notification \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, shall not invoke the Attribute Ownership Acquisition If Available service.
+
+    \subsubsection{Privilege to delete object}
+
+
+    All object classes shall have an available attribute called HLAprivilegeToDeleteObject. As with all other available attributes, a joined federate shall be publishing the HLAprivilegeToDeleteObject class attribute at the known class of an object instance in order to be eligible for ownership of a corresponding HLAprivilegeToDeleteObject instance attribute.
+
+
+    A HLAprivilegeToDeleteObject instance attribute shall be transferable among joined federates. All ownership management services for HLAprivilegeToDeleteObject instance attributes shall act the same as they are for all other instance attributes. The reason that a joined federate may want to own the HLAprivilegeToDeleteObject instance attribute, however, is different. Ownership of a typical instance attribute shall give a joined federate the privilege to provide new values for that instance attribute. Ownership of the HLAprivilegeToDeleteObject instance attribute of an object instance shall give the joined federate the additional right to delete that object instance from the federation execution.
+
+    \subsubsection{User-supplied tags}
+
+
+    Several of the ownership management services take a user-supplied tag as an argument. These arguments shall be provided as a mechanism for conducting information between joined federates that could be used to implement priority or other schemes. Although the content and use of these tags are outside of the scope of this specification, the RTI shall pass these user-supplied tags from joined federates that are trying to acquire
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 129 / source PDF page 143 ---
+\begin{compactstdpage}
+
+    an instance attribute to the joined federate that owns the instance attribute and from the joined federate that is trying to divest itself of an instance attribute to the joined federates that are able to acquire the instance attribute. In particular, the following apply:
+
+
+    \stdliteraldashitem{The user-supplied tag that is present in the Negotiated Attribute Ownership Divestiture service shall be present in any resulting Request Attribute Ownership Assumption \rtiinitiated{} service invocations.}
+    \stdliteraldashitem{The user-supplied tag that is present in the Confirm Divestiture service shall be present in any resulting Attribute Ownership Acquisition Notification \rtiinitiated{} service invocations.}
+    \stdliteraldashitem{The user-supplied tag that is present in the Attribute Ownership Acquisition service shall be present in any resulting Request Attribute Ownership Release \rtiinitiated{} service invocations.}
+
+
+    If an RTI-invoked service is not the result of a joined federate-invoked service, but the RTI-invoked service has a user-supplied tag as a mandatory argument, the user-supplied tag shall be present in the service invocation, but empty. For example, in the Java API, the tag shall be an empty (zero-length) array.
+
+
+    The preceding requirement applies not only to RTI-invoked services related to ownership management, but to all RTI-invoked services, such as MOM HLAmanager.HLAfederate.HLAreport interactions. All received interactions include mandatory user-supplied tag arguments; therefore, the user-supplied tag arguments in MOM HLAmanager.HLAfederate.HLAreport interactions shall be present, but empty.
+
+    \subsubsection{Sets of attribute designators}
+
+
+    Although many of the ownership management services take a set of instance attributes as an argument, the RTI treats ownership management operations on a per-instance-attribute basis. The fact that some ownership management service invocations take sets of instance attributes as an argument is a feature provided to joined federate designers for convenience. A single request with an instance attribute set as an argument can result in multiple responses pertaining to disjoint subsets of those instance attributes. For example, a single Negotiated Attribute Ownership Divestiture service invocation that has a set of instance attributes as an argument could result in multiple Request Divestiture Confirmation \rtiinitiated{} service invocations. If one instance attribute in the set of instance attributes provided as an argument to an ownership management service invocation violates the preconditions of the service, an exception shall be generated, and the entire service invocation shall fail. The RTI shall treat all joined federate requests to divest or acquire attributes separately. Responses to or requests of joined federates shall not contain information from separate joined federate requests.
+
+    \subsection{Unconditional Attribute Ownership Divestiture service}
+
+
+    The Unconditional Attribute Ownership Divestiture service shall notify the RTI that the joined federate no longer wants to own the specified instance attributes of the specified object instance. This service shall immediately relieve the divesting joined federate of the ownership and cause the instance attribute(s) to go (possibly temporarily) into the unowned state, without regard to the existence of an accepting joined federate.
+
+
+    For each instance attribute that becomes unowned as a result of invocation of this service, if no joined federates are in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI shall try to identify other joined federates that are willing to own the instance attribute. If any joined federate is in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI may try to identify other joined federates that are willing to own the instance attribute. The mechanism that the RTI shall use to try to identify other joined federates that are willing to own the instance attribute is invocation of the Request Attribute Ownership Assumption \rtiinitiated{} service at other joined federates (joined federates other than the divesting joined federate) that are both eligible to own the instance attribute and not in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute. As long as the instance attribute remains unowned, the RTI shall try to
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 130 / source PDF page 144 ---
+\begin{compactstdpage}
+
+    identify joined federates (other than the divesting joined federate) that are willing to own the instance attribute; but once the instance attribute becomes owned, the RTI shall not invoke the Request Attribute Ownership Assumption \rtiinitiated{} service at any additional joined federates.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions.}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate no longer owns the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate does not own the instance attribute.}
+    \stdliteralitem{b)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Negotiated Attribute Ownership Divestiture service}
+
+
+    The Negotiated Attribute Ownership Divestiture service shall notify the RTI that the joined federate no longer wants to own the specified instance attributes of the specified object instance. Ownership shall be transferred only if some joined federate(s) accept. When the RTI finds joined federates willing to accept ownership of any or all of the instance attributes, it shall inform the divesting joined federate using the Request Divestiture Confirmation \rtiinitiated{} service (supplying the appropriate instance attributes as arguments). The divesting joined federate may then complete the negotiated divestiture by invoking the Confirm Divestiture service to inform the RTI of which instance attributes it is divesting ownership. The invoking joined federate shall continue its update responsibility for the specified instance attributes until it divests ownership. The
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 131 / source PDF page 145 ---
+\begin{compactstdpage}
+
+    joined federate may receive one or more Request Divestiture Confirmation \rtiinitiated{} service invocations for each invocation of this service because different joined federates may wish to become the owner of different instance attributes.
+
+
+    A request to divest ownership shall remain pending until the request is completed (via the Request Divestiture Confirmation \rtiinitiated{} and Confirm Divestiture services), the requesting joined federate successfully cancels the request (via the Cancel Negotiated Attribute Ownership Divestiture service), or the joined federate divests itself of ownership by other means (e.g., the Attribute Ownership Divestiture If Wanted or Unpublish Object Class Attributes service). A second negotiated divestiture for an instance attribute already in the process of a negotiated divestiture shall result in an RTI-generated exception.
+
+
+    If no joined federates are in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI shall try to identify other joined federates that are willing to own the instance attribute. If any joined federate is in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI may try to identify other joined federates that are willing to own the instance attribute. The mechanism that the RTI shall use to try to identify other joined federates that are willing to own the instance attribute is invocation of the Request Attribute Ownership Assumption \rtiinitiated{} service at joined federates that are both eligible to own the instance attribute and not in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{The specified instance attributes are not in the negotiated divestiture process.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{No change has occurred in instance attribute ownership.}
+    \stdliteralitem{b)}{The RTI has been notified of the joined federate's request to divest ownership of the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The instance attribute is already in the negotiated divestiture process.}
+    \stdliteralitem{b)}{The joined federate does not own the instance attribute.}
+    \stdliteralitem{c)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{d)}{The object instance is not known.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 132 / source PDF page 146 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Request Attribute Ownership Assumption \rtiinitiated{} service}
+
+
+    The Request Attribute Ownership Assumption \rtiinitiated{} service shall inform the joined federate that the specified instance attributes are available for transfer of ownership to the joined federate. The RTI shall supply an object instance designator and set of attribute designators. The joined federate may return a subset of the supplied attribute designators for which it is willing to assume ownership via the Attribute Ownership Acquisition service or the Attribute Ownership Acquisition If Available service. In the case that the supplied instance attributes are unowned as a result of a joined federate invoking the Unconditional Attribute Ownership Divestiture service, the divesting joined federate shall not be asked to assume ownership.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate is publishing the corresponding class attributes at the known class of the specified object instance.}
+    \stdliteralitem{e)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{f)}{The joined federate is not in either the Acquiring state or the Willing to Acquire state for this instance attribute.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{Instance attribute ownership has not changed.}
+    \stdliteralitem{b)}{The joined federate has been informed of the set of instance attributes for which the RTI is requesting that the joined federate assume ownership.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 133 / source PDF page 147 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Request Divestiture Confirmation \rtiinitiated{} service}
+
+
+    The Request Divestiture Confirmation \rtiinitiated{} service shall notify the joined federate that new owners have been found for the specified instance attributes and that the negotiated divestiture of the specified instance attributes can now be completed at the joined federate's discretion. The joined federate can complete the negotiated divestiture of the specified instance attributes using the Confirm Divestiture service, divest ownership of the instance attributes by some other means (e.g., using the Unconditional Attribute Ownership Divestiture service), or cancel the negotiated divestiture using the Cancel Negotiated Attribute Ownership Divestiture service. Ownership of the specified instance attributes is not lost upon invocation of this service; ownership shall be divested only if the joined federate confirms its intent to divest the instance attributes or divests ownership by some other means.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{e)}{The joined federate has previously attempted to divest ownership of the specified instance attributes and has not subsequently canceled that request.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed that new owners have been found for the specified instance attributes and that ownership of the instance attributes shall be divested as soon as the joined federate confirms its intent to divest.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 134 / source PDF page 148 ---
+\begin{compactstdpage}
+
+    \subsection{Confirm Divestiture service}
+
+
+    The Confirm Divestiture service shall inform the RTI that the joined federate wants to complete negotiated divestiture for the specified instance attributes. After invocation of this service, the joined federate shall not own any of the specified instance attributes, and the RTI shall give ownership of the instance attributes to another joined federate.
+
+
+    If a joined federate invokes the Confirm Divestiture service and, as a result, an exception is thrown indicating that there is no joined federate that has an acquisition pending or that is willing to acquire the instance attribute, then that joined federate shall transition from the Completing Divestiture state with regard to that instance attribute into the Waiting for a New Owner to be Found state with regard to that instance attribute.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{The joined federate has been asked to confirm its request for a negotiated divestiture of the specified instance attributes.}
+    \stdliteralitem{h)}{There is at least one joined federate in the federation that is in either the Acquisition Pending state or the Willing to Acquire state with respect to the specified instance attribute.}
+    \stdliteralitem{i)}{Federate save not in progress.}
+    \stdliteralitem{j)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate no longer owns the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{There is no joined federate that has an acquisition pending or that is willing to acquire the instance attribute.}
+    \stdliteralitem{b)}{The joined federate had not previously been asked to confirm its request for negotiated divestiture of the instance attributes.}
+    \stdliteralitem{c)}{The joined federate does not own the instance attributes.}
+    \stdliteralitem{d)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{e)}{The object instance is not known.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 135 / source PDF page 149 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Attribute Ownership Acquisition Notification \rtiinitiated{} service}
+
+
+    The Attribute Ownership Acquisition Notification \rtiinitiated{} service shall notify the joined federate that it now owns the specified set of instance attributes. The joined federate may then begin updating those instance attribute values. The joined federate may receive multiple notifications for a single invocation of the Attribute Ownership Acquisition service because the joined federate may wish to become the owner of instance attributes owned by different joined federates.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate is publishing the corresponding class attributes at the known class of the specified object instance.}
+    \stdliteralitem{e)}{The joined federate has previously attempted to acquire ownership of the specified instance attributes.}
+    \stdliteralitem{f)}{Prior to the joined federate acquiring ownership, the specified instance attributes were not owned by any joined federate in the federation execution or were in the process of being divested by their owner.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been notified that it now owns the specified instance attributes.}
+    \stdliteralitem{b)}{The joined federate may stop publishing the corresponding class attributes at the known class of the specified object instance if there are no corresponding instance attributes for which the joined federate has invoked any of the following:}
+    \stdliteralsubitem{1)}{Attribute Ownership Acquisition service and has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+    \stdliteralsubitem{2)}{Attribute Ownership Acquisition If Available service and has not yet received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 136 / source PDF page 150 ---
+\begin{compactstdpage}
+
+    \stdliteralsubitem{3)}{Attribute Ownership Acquisition If Available service and has subsequently invoked the Attribute Ownership Acquisition service [after which condition 1) applies].}
+    \stdliteralitem{c)}{The affected instance attributes may have an implicit out-of-scope situation at the joined federate.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Attribute Ownership Acquisition service}
+
+
+    The Attribute Ownership Acquisition service shall request the ownership of the specified instance attributes of the specified object instance. If a specified instance attribute is owned by another joined federate and that owning joined federate is in the Not Divesting state with respect to the instance attribute, the RTI shall invoke the Request Attribute Ownership Release \rtiinitiated{} service for that instance attribute at the owning joined federate. If a specified instance attribute is owned by another joined federate and that owning joined federate is in the Waiting for a New Owner to be Found state with respect to the instance attribute, the RTI shall not invoke the Request Attribute Ownership Release \rtiinitiated{} service for that instance attribute at the owning joined federate, but it shall invoke the Request Divestiture Confirmation \rtiinitiated{} service for that instance attribute at the owning joined federate. The joined federate may receive one or more Attribute Ownership Acquisition Notification \rtiinitiated{} invocations for each invocation of this service.
+
+
+    A request to acquire ownership shall remain pending until the request is granted (via the Attribute Ownership Acquisition Notification \rtiinitiated{} service), the acquisition is denied (via the Attribute Ownership Unavailable \rtiinitiated{} service), or the requesting joined federate successfully cancels the request (via the Cancel Attribute Ownership Acquisition and Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} services).
+
+
+    If a joined federate invokes the Attribute Ownership Acquisition service for an instance attribute that is already in the Acquisition Pending state, that instance attribute's state shall remain unchanged.
+
+
+    In other words, if a joined federate invokes the Attribute Ownership Acquisition service for an instance attribute for which the joined federate is in the Acquiring state, the joined federate shall continue to be in the Acquiring state with respect to that instance attribute, and the joined federate that owns the instance attribute shall not receive a corresponding Request Attribute Ownership Release \rtiinitiated{} service invocation. If there are additional instance attributes in the attribute set that is an argument to the Attribute Ownership Acquisition service, the joined federate shall enter the Acquiring state with respect to those instance attributes, assuming that they meet all of the preconditions of the Attribute Ownership Acquisition service and that the joined federate is not already in the Acquiring state or the Trying to Cancel Acquisition state with respect to those instance attributes. The joined federate that owns those instance attributes shall receive a corresponding Request Attribute Ownership Release \rtiinitiated{} service invocation for those attributes, if appropriate.
+
+
+    Likewise, if a joined federate invokes the Attribute Ownership Acquisition service for an instance attribute for which the joined federate is in the Trying to Cancel Acquisition state, the joined federate shall continue to be in the Trying to Cancel Acquisition state with respect to that instance attribute, and the joined federate that owns the instance attribute shall not receive a corresponding Request Attribute Ownership Release \rtiinitiated{} service invocation. If there are additional instance attributes in the attribute set that is an argument to the Attribute Ownership Acquisition service, the joined federate shall enter the Acquiring state with respect to those instance attributes, assuming that they meet all of the preconditions of the Attribute Ownership Acquisition service and that the joined federate is not already in the Acquiring state or the Trying to Cancel Acquisition state with respect to those instance attributes. The joined federate that owns those instance
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 137 / source PDF page 151 ---
+\begin{compactstdpage}
+
+    attributes shall receive a corresponding Request Attribute Ownership Release \rtiinitiated{} service invocation for those attributes, if appropriate.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate is publishing the corresponding class attributes at the known class of the specified object instance.}
+    \stdliteralitem{g)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has been informed of the joined federate's request to acquire ownership of the specified instance attributes.}
+    \stdliteralitem{b)}{The joined federate shall not stop publishing the corresponding class attributes at the known class of the specified object instance until it has received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate is not publishing the class attribute at the known class of the object instance.}
+    \stdliteralitem{b)}{The joined federate is not publishing the object class.}
+    \stdliteralitem{c)}{The joined federate already owns the instance attribute.}
+    \stdliteralitem{d)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{e)}{The object instance is not known.}
+    \stdliteralitem{f)}{Federate save in progress.}
+    \stdliteralitem{g)}{Federate restore in progress.}
+    \stdliteralitem{h)}{The federate is not a federation execution member.}
+    \stdliteralitem{i)}{Not connected.}
+    \stdliteralitem{j)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 138 / source PDF page 152 ---
+\begin{compactstdpage}
+
+    \subsection{Attribute Ownership Acquisition If Available service}
+
+
+    The Attribute Ownership Acquisition If Available service shall request the ownership of the specified instance attributes of the specified object instance only if the instance attribute is unowned by all joined federates or it is in the process of being divested by its owner. If a specified instance attribute is owned by another joined federate, the RTI shall not invoke the Request Attribute Ownership Release \rtiinitiated{} service for that instance attribute at the owning joined federate. For each of the specified instance attributes, the joined federate may receive only a corresponding Attribute Ownership Acquisition Notification \rtiinitiated{} service invocation or a corresponding Attribute Ownership Unavailable \rtiinitiated{} service invocation.
+
+
+    If a joined federate invokes the Attribute Ownership Acquisition If Available service for an instance attribute that is already in the Willing to Acquire state, that instance attribute's state shall remain unchanged.
+
+
+    In other words, if a joined federate invokes the Attribute Ownership Acquisition If Available service for an instance attribute for which the joined federate is in the Willing to Acquire state, that instance attribute shall continue to be in the Willing to Acquire state. If there are additional instance attributes in the attribute set that is an argument to the Attribute Ownership Acquisition If Available service, the joined federate shall enter the Willing to Acquire state with respect to those instance attributes, assuming that they meet all of the preconditions of the Attribute Ownership Acquisition If Available service and that the joined federate is not already in the Willing to Acquire state.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate is publishing the corresponding class attributes at the known class of the specified object instance.}
+    \stdliteralitem{g)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{h)}{For each of the specified instance attributes, it is not the case that the joined federate has invoked the Attribute Ownership Acquisition service, but has not yet received an invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service.}
+    \stdliteralitem{i)}{Federate save not in progress.}
+    \stdliteralitem{j)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has been informed of the joined federate's request to acquire ownership of the specified instance attributes.}
+    \stdliteralitem{b)}{The joined federate shall not stop publishing the corresponding class attributes at the known class of the specified object instance until it has received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 139 / source PDF page 153 ---
+\begin{compactstdpage}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate is already acquiring the instance attribute.}
+    \stdliteralitem{b)}{The joined federate is not publishing the class attribute at the known class of the object instance.}
+    \stdliteralitem{c)}{The joined federate is not publishing the object class.}
+    \stdliteralitem{d)}{The joined federate already owns the instance attribute.}
+    \stdliteralitem{e)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{f)}{The object instance is not known.}
+    \stdliteralitem{g)}{Federate save in progress.}
+    \stdliteralitem{h)}{Federate restore in progress.}
+    \stdliteralitem{i)}{The federate is not a federation execution member.}
+    \stdliteralitem{j)}{Not connected.}
+    \stdliteralitem{k)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Attribute Ownership Unavailable \rtiinitiated{} service}
+
+
+    The Attribute Ownership Unavailable \rtiinitiated{} service shall inform the joined federate that the specified instance attributes were not available for ownership acquisition.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate had requested ownership acquisition for the specified instance attributes.}
+    \stdliteralitem{e)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed that the specified instance attributes were not available for ownership acquisition.}
+    \stdliteralitem{b)}{The joined federate may stop publishing the corresponding class attributes at the known class of the specified object instance if there are no corresponding instance attributes for which the joined federate has}
+    \stdliteralsubitem{1)}{Invoked the Attribute Ownership Acquisition service and has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 140 / source PDF page 154 ---
+\begin{compactstdpage}
+
+    \stdliteralsubitem{2)}{Invoked the Attribute Ownership Acquisition If Available service and has not yet received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+    \stdliteralsubitem{3)}{Invoked the Attribute Ownership Acquisition If Available service and has subsequently invoked the Attribute Ownership Acquisition service [after which condition 1) applies].}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Request Attribute Ownership Release \rtiinitiated{} service}
+
+
+    The Request Attribute Ownership Release \rtiinitiated{} service shall request that the joined federate release ownership of the specified instance attributes of the specified object instance. The Request Attribute Ownership Release \rtiinitiated{} service shall provide an object instance designator and set of attribute designators and shall be invoked only as the result of an Attribute Ownership Acquisition service invocation by some other joined federate. The joined federate may return the subset of the supplied instance attributes for which it is willing to release ownership via the Attribute Ownership Divestiture If Wanted service, the Unconditional Attribute Ownership Divestiture service, or the Negotiated Attribute Ownership Divestiture service. The joined federate may terminate the acquisition without releasing ownership by informing the RTI that it is unwilling to divest ownership via the Attribute Ownership Release Denied service.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+    \stdliteralitem{c)}{User-supplied tag.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{e)}{Federate save not in progress.}
+    \stdliteralitem{f)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed of the set of instance attributes for which the RTI is requesting the joined federate to release ownership.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 141 / source PDF page 155 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Attribute Ownership Release Denied service}
+
+
+    The Attribute Ownership Release Denied service shall notify the RTI that the joined federate is unwilling to divest itself of ownership of the specified instance attributes if another joined federate is attempting to acquire ownership of them. The joined federate may use this service to provide an answer to the question posed as a result of the invocation of Request Attribute Ownership Release \rtiinitiated{}, or it may use this service for any other reason. Invocation of this service for attributes that have no pending acquisition has no effect. Invocation of the Attribute Ownership Release Denied service shall cause the RTI to terminate any pending acquisitions and invoke Attribute Ownership Unavailable at the acquiring joined federates.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators for which the joined federate is unwilling to divest ownership.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{No change has occurred in instance attribute ownership.}
+    \stdliteralitem{b)}{The RTI has been informed of the set of instance attributes that the joined federate is not willing to divest.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate does not own the instance attribute.}
+    \stdliteralitem{b)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 142 / source PDF page 156 ---
+\begin{compactstdpage}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 15.}
+
+    \subsection{Attribute Ownership Divestiture If Wanted service}
+
+
+    The Attribute Ownership Divestiture If Wanted service shall notify the RTI that the joined federate is willing to divest itself of ownership of the specified instance attributes if another joined federate is attempting to acquire ownership of them. The joined federate may use this service to provide an answer to the question posed as a result of the invocation of Request Attribute Ownership Release \rtiinitiated{}, or it may use this service for any other reason. The returned argument shall indicate the instance attributes for which ownership was actually divested, and it shall be viewed as the conclusion of this attempted divestiture for all supplied instance attributes that are not in the returned argument. Any instance attributes in the returned argument shall be a subset of the instance attributes in the supplied argument.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators for which the joined federate is willing to divest ownership.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Set of attribute designators for which ownership has actually been divested.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{Ownership is divested for the instance attributes in the returned argument set.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate does not own the instance attribute.}
+    \stdliteralitem{b)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{c)}{The object instance is not known.}
+    \stdliteralitem{d)}{Federate save in progress.}
+    \stdliteralitem{e)}{Federate restore in progress.}
+    \stdliteralitem{f)}{The federate is not a federation execution member.}
+    \stdliteralitem{g)}{Not connected.}
+    \stdliteralitem{h)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 143 / source PDF page 157 ---
+\begin{compactstdpage}
+
+    \subsection{Cancel Negotiated Attribute Ownership Divestiture service}
+
+
+    The Cancel Negotiated Attribute Ownership Divestiture service shall notify the RTI that the joined federate no longer wants to divest ownership of the specified instance attributes.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate owns the specified instance attributes.}
+    \stdliteralitem{g)}{The specified instance attributes were candidates for divestiture.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The specified instance attributes are unavailable for divestiture.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The instance attribute was not a candidate for divestiture.}
+    \stdliteralitem{b)}{The joined federate does not own the instance attribute.}
+    \stdliteralitem{c)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{d)}{The object instance is not known.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+    \subsection{Cancel Attribute Ownership Acquisition service}
+
+
+    The Cancel Attribute Ownership Acquisition service shall notify the RTI that the joined federate no longer wants to acquire ownership of the specified instance attributes. This service shall always receive one of three replies from the RTI. The first form of reply, Confirm Attribute Ownership Acquisition Cancellation, shall indicate that the request to acquire ownership of the specified instance attributes has been successfully canceled. The second form of reply, Attribute Ownership Acquisition Notification \rtiinitiated{}, shall indicate that the
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 144 / source PDF page 158 ---
+\begin{compactstdpage}
+
+    request to acquire ownership of the specified instance attributes was not canceled before the joined federate acquired ownership of the instance attributes. The third form of reply, Attribute Ownership Unavailable \rtiinitiated{}, shall indicate that the request to acquire ownership of the specified instance attributes was not canceled before the joined federate was denied ownership of the instance attributes. The joined federate may receive multiple forms of reply in response to a single Cancel Attribute Ownership Acquisition service invocation since the cancellation may succeed for some of the supplied instance attributes and fail for others. This service shall be used only to cancel requests to acquire ownership of instance attributes that were made via the Attribute Ownership Acquisition service. Requests made via the Attribute Ownership Acquisition If Available service shall not be explicitly canceled. They may, however, be overridden by an invocation of the Attribute Ownership Acquisition service.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{g)}{The joined federate is attempting to acquire ownership of the specified instance attributes.}
+    \stdliteralitem{h)}{Federate save not in progress.}
+    \stdliteralitem{i)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The RTI has been notified that joined federate no longer wants to acquire ownership of the specified instance attributes.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The joined federate was not attempting to acquire ownership of the instance attribute.}
+    \stdliteralitem{b)}{The joined federate already owns the instance attribute.}
+    \stdliteralitem{c)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{d)}{The object instance is not known.}
+    \stdliteralitem{e)}{Federate save in progress.}
+    \stdliteralitem{f)}{Federate restore in progress.}
+    \stdliteralitem{g)}{The federate is not a federation execution member.}
+    \stdliteralitem{h)}{Not connected.}
+    \stdliteralitem{i)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 145 / source PDF page 159 ---
+\begin{compactstdpage}
+
+    \subsection{Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service}
+
+
+    The Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service shall inform the joined federate that the specified instance attributes are no longer candidates for ownership acquisition.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Set of attribute designators.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The joined federate had attempted to cancel an ownership acquisition request for the specified instance attributes.}
+    \stdliteralitem{e)}{The joined federate does not own the specified instance attributes.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The federate has been notified that the specified instance attributes are no longer candidates for acquisition by the joined federate.}
+    \stdliteralitem{b)}{The joined federate may stop publishing the corresponding class attributes at the known class of the specified object instance if there are no corresponding instance attributes for which the joined federate has}
+    \stdliteralsubitem{1)}{Invoked the Attribute Ownership Acquisition service and has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+    \stdliteralsubitem{2)}{Invoked the Attribute Ownership Acquisition If Available service and has not yet received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service, or}
+    \stdliteralsubitem{3)}{Invoked the Attribute Ownership Acquisition If Available service and has subsequently invoked the Attribute Ownership Acquisition service [after which condition 1) applies].}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{Figure 16.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 146 / source PDF page 160 ---
+\begin{compactstdpage}
+
+    \subsection{Query Attribute Ownership service}
+
+
+    The Query Attribute Ownership service shall be used to determine the owner of the specified instance attribute. The RTI shall provide the instance attribute owner information via the Inform Attribute Ownership \rtiinitiated{} service invocation.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Attribute designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The corresponding class attribute is an available attribute of the known class of the specified object instance.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The request for instance attribute ownership information has been received by the RTI.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{b)}{The object instance is not known.}
+    \stdliteralitem{c)}{Federate save in progress.}
+    \stdliteralitem{d)}{Federate restore in progress.}
+    \stdliteralitem{e)}{The federate is not a federation execution member.}
+    \stdliteralitem{f)}{Not connected.}
+    \stdliteralitem{g)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Inform Attribute Ownership \rtiinitiated{} service}
+
+
+    The Inform Attribute Ownership \rtiinitiated{} service shall be used to provide ownership information for the specified instance attribute. This service shall be invoked by the RTI in response to a Query Attribute Ownership service invocation by a joined federate. This service shall provide the joined federate with a designator of the instance attribute owner (if the instance attribute is owned) or an indication that the instance attribute is available for acquisition.
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 147 / source PDF page 161 ---
+\begin{compactstdpage}
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Attribute designator.}
+    \stdliteralitem{c)}{Ownership designator (i.e., joined federate, RTI, or unowned).}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federation execution exists.}
+    \stdliteralitem{b)}{The federate is joined to that federation execution.}
+    \stdliteralitem{c)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{d)}{The corresponding class attribute is an available attribute of the known class of the specified object instance.}
+    \stdliteralitem{e)}{The joined federate has previously invoked the Query Attribute Ownership service and has not yet received an Inform Attribute Ownership \rtiinitiated{} service invocation in response.}
+    \stdliteralitem{f)}{Federate save not in progress.}
+    \stdliteralitem{g)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has been informed of the instance attribute ownership.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{Federate internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+    \subsection{Is Attribute Owned By Federate service}
+
+
+    The Is Attribute Owned By Federate service shall be used to determine if the specified instance attribute of the specified object instance designator is owned by the invoking joined federate. The service shall return a boolean value indicating ownership status of the specified instance attribute.
+
+    \subsubsection{Supplied arguments}
+
+
+    \stdliteralitem{a)}{Object instance designator.}
+    \stdliteralitem{b)}{Attribute designator.}
+
+    \subsubsection{Returned arguments}
+
+
+    \stdliteralitem{a)}{Instance attribute ownership indicator.}
+
+    \subsubsection{Preconditions}
+
+
+    \stdliteralitem{a)}{The federate is connected to the RTI.}
+    \stdliteralitem{b)}{The federation execution exists.}
+
+\end{compactstdpage}
+
+\clearpage
+
+% --- Standard page 148 / source PDF page 162 ---
+\begin{compactstdpage}
+
+    \stdliteralitem{c)}{The federate is joined to that federation execution.}
+    \stdliteralitem{d)}{An object instance with the specified designator exists.}
+    \stdliteralitem{e)}{The joined federate knows about the object instance with the specified designator.}
+    \stdliteralitem{f)}{The corresponding class attribute is an available attribute of the known class of the specified object instance.}
+    \stdliteralitem{g)}{Federate save not in progress.}
+    \stdliteralitem{h)}{Federate restore not in progress.}
+
+    \subsubsection{Postconditions}
+
+
+    \stdliteralitem{a)}{The joined federate has the requested ownership information.}
+
+    \subsubsection{Exceptions}
+
+
+    \stdliteralitem{a)}{The class attribute is not available at the known class of the object instance.}
+    \stdliteralitem{b)}{The object instance is not known.}
+    \stdliteralitem{c)}{Federate save in progress.}
+    \stdliteralitem{d)}{Federate restore in progress.}
+    \stdliteralitem{e)}{The federate is not a federation execution member.}
+    \stdliteralitem{f)}{Not connected.}
+    \stdliteralitem{g)}{RTI internal error.}
+
+    \subsubsection{Reference state charts}
+
+
+    \stdliteralitem{a)}{None.}
+
+\end{compactstdpage}

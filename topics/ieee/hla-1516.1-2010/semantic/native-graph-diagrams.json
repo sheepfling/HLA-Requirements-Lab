@@ -1,0 +1,933 @@
+{
+  "schema_version": 1,
+  "graph_diagrams": [
+    {
+      "id": "hla-1516.1-2010:figure-02",
+      "title": "Overall view of federate-to-RTI relationship",
+      "kind": "architecture",
+      "nodes": [
+        {
+          "id": "federate",
+          "label": "Federate",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 2.6,
+          "height": 0.8,
+          "style": "lifeline",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "x": 7.0,
+          "y": 0.0,
+          "width": 2.6,
+          "height": 0.8,
+          "style": "lifeline",
+          "parent_id": null,
+          "visible": true
+        }
+      ],
+      "edges": [
+        {
+          "id": "figure-02-e01",
+          "source": "federate",
+          "target": "rti",
+          "label": "downward Federate axis",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 11,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e02",
+          "source": "federate",
+          "target": "rti",
+          "label": "downward RTI axis",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 14,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e03",
+          "source": "federate",
+          "target": "rti",
+          "label": "connect/join, Federate -> RTI",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 18,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e04",
+          "source": "federate",
+          "target": "rti",
+          "label": "initial data requirements, bidirectional",
+          "style": "solid",
+          "direction": "both",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 24,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e05",
+          "source": "federate",
+          "target": "rti",
+          "label": "normal execution group, bidirectional",
+          "style": "solid",
+          "direction": "both",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 30,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e06",
+          "source": "federate",
+          "target": "rti",
+          "label": "non-normal execution group, bidirectional",
+          "style": "solid",
+          "direction": "both",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 41,
+            "end_line": null
+          }
+        },
+        {
+          "id": "figure-02-e07",
+          "source": "federate",
+          "target": "rti",
+          "label": "resign/disconnect, Federate -> RTI",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": {
+            "path": "figures/native/figure-02.tex",
+            "line": 50,
+            "end_line": null
+          }
+        }
+      ],
+      "annotations": [
+        {
+          "id": "figure-02-caption",
+          "x": 0.0,
+          "y": -2.0,
+          "text": "Overall view of federate-to-RTI relationship",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        }
+      ],
+      "clause_id": null,
+      "source": {
+        "path": "figures/native/figure-02.tex",
+        "line": 1,
+        "end_line": null
+      },
+      "provenance": {
+        "image": "figures/native/figure-02.tex",
+        "page": 40,
+        "xref": null,
+        "caption": "Overall view of federate-to-RTI relationship"
+      },
+      "notes": "Semantic graph ownership is promoted from the annotated source fixture; native geometry remains a faithful layout adapter."
+    },
+    {
+      "id": "hla-1516.1-2010:figure-18",
+      "title": "Region of two dimensions",
+      "kind": "hierarchy",
+      "nodes": [
+        {
+          "id": "coordinate-space",
+          "label": "Multi-Dimensional Coordinate Space",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 12.0,
+          "height": 6.0,
+          "style": "frame",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "region",
+          "label": "Region",
+          "x": -2.2,
+          "y": 1.5,
+          "width": 2.4,
+          "height": 1.0,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        }
+      ],
+      "edges": [],
+      "annotations": [
+        {
+          "id": "upper-bound",
+          "x": 4.0,
+          "y": 1.0,
+          "text": "Range Upper Bound",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        },
+        {
+          "id": "lower-bound",
+          "x": 4.0,
+          "y": 3.0,
+          "text": "Range Lower Bound",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        },
+        {
+          "id": "horizontal-dimension",
+          "x": 0.0,
+          "y": 6.7,
+          "text": "Dimension",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        },
+        {
+          "id": "vertical-dimension",
+          "x": 6.5,
+          "y": 3.0,
+          "text": "Dimension",
+          "width": null,
+          "align": "center",
+          "rotate": 90.0
+        },
+        {
+          "id": "figure-18-caption",
+          "x": 0.0,
+          "y": -2.0,
+          "text": "Region of two dimensions",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        }
+      ],
+      "clause_id": null,
+      "source": {
+        "path": "figures/native/figure-18.tex",
+        "line": 1,
+        "end_line": null
+      },
+      "provenance": {
+        "image": "figures/native/figure-18.tex",
+        "page": 205,
+        "xref": null,
+        "caption": "Region of two dimensions"
+      },
+      "notes": "Semantic graph ownership is promoted from the annotated source fixture; native geometry remains a faithful layout adapter."
+    },
+    {
+      "id": "hla-1516.1-2010:figure-19",
+      "title": "MOM object class structure",
+      "kind": "hierarchy",
+      "nodes": [
+        {
+          "id": "hla-manager",
+          "label": "HLAmanager",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "hla-federate",
+          "label": "HLAfederate",
+          "x": -4.0,
+          "y": 3.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "hla-federation",
+          "label": "HLAfederation",
+          "x": 0.0,
+          "y": 3.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "manager-extension",
+          "label": "(extensions)",
+          "x": 4.0,
+          "y": 3.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federate-extension",
+          "label": "(extensions)",
+          "x": -4.0,
+          "y": 6.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-extension",
+          "label": "(extensions)",
+          "x": 0.0,
+          "y": 6.0,
+          "width": 4.0,
+          "height": 1.5,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        }
+      ],
+      "edges": [
+        {
+          "id": "figure-19-r01",
+          "source": "hla-manager",
+          "target": "hla-federate",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-19-r02",
+          "source": "hla-manager",
+          "target": "hla-federation",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-19-r03",
+          "source": "hla-manager",
+          "target": "manager-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-19-r04",
+          "source": "hla-federate",
+          "target": "federate-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-19-r05",
+          "source": "hla-federation",
+          "target": "federation-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        }
+      ],
+      "annotations": [
+        {
+          "id": "figure-19-caption",
+          "x": 0.0,
+          "y": -2.0,
+          "text": "MOM object class structure",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        }
+      ],
+      "clause_id": null,
+      "source": {
+        "path": "figures/native/figure-19.tex",
+        "line": 1,
+        "end_line": null
+      },
+      "provenance": {
+        "image": "figures/native/figure-19.tex",
+        "page": 262,
+        "xref": null,
+        "caption": "MOM object class structure"
+      },
+      "notes": "Semantic graph ownership is promoted from the annotated source fixture; native geometry remains a faithful layout adapter."
+    },
+    {
+      "id": "hla-1516.1-2010:figure-20",
+      "title": "MOM interaction class structure",
+      "kind": "hierarchy",
+      "nodes": [
+        {
+          "id": "manager",
+          "label": "HLAmanager",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation",
+          "label": "HLAfederation",
+          "x": -6.0,
+          "y": 2.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federate",
+          "label": "HLAfederate",
+          "x": 0.0,
+          "y": 2.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "manager-extension",
+          "label": "(extensions)",
+          "x": 6.0,
+          "y": 2.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federate-extension",
+          "label": "(extensions)",
+          "x": -8.0,
+          "y": 4.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "adjust",
+          "label": "HLAadjust",
+          "x": -4.0,
+          "y": 4.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "request",
+          "label": "HLArequest",
+          "x": -1.3,
+          "y": 4.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "report",
+          "label": "HLAreport",
+          "x": 1.3,
+          "y": 4.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "service",
+          "label": "HLAservice",
+          "x": 4.0,
+          "y": 4.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "adjust-extension",
+          "label": "(extensions)",
+          "x": -4.0,
+          "y": 6.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "request-extension",
+          "label": "(extensions)",
+          "x": -1.3,
+          "y": 6.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "report-extension",
+          "label": "(extensions)",
+          "x": 1.3,
+          "y": 6.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "service-extension",
+          "label": "(extensions)",
+          "x": 4.0,
+          "y": 6.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-adjust",
+          "label": "HLAadjust",
+          "x": -6.0,
+          "y": 8.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-request",
+          "label": "HLArequest",
+          "x": -3.0,
+          "y": 8.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-report",
+          "label": "HLAreport",
+          "x": 0.0,
+          "y": 8.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-extension",
+          "label": "(extensions)",
+          "x": -8.0,
+          "y": 8.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-adjust-extension",
+          "label": "(extensions)",
+          "x": -6.0,
+          "y": 10.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-request-extension",
+          "label": "(extensions)",
+          "x": -3.0,
+          "y": 10.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        },
+        {
+          "id": "federation-report-extension",
+          "label": "(extensions)",
+          "x": 0.0,
+          "y": 10.0,
+          "width": 2.4,
+          "height": 0.8,
+          "style": "box",
+          "parent_id": null,
+          "visible": true
+        }
+      ],
+      "edges": [
+        {
+          "id": "figure-20-r01",
+          "source": "manager",
+          "target": "federation",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r02",
+          "source": "manager",
+          "target": "federate",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r03",
+          "source": "manager",
+          "target": "manager-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r04",
+          "source": "federate",
+          "target": "adjust",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r05",
+          "source": "federate",
+          "target": "request",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r06",
+          "source": "federate",
+          "target": "report",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r07",
+          "source": "federate",
+          "target": "service",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r08",
+          "source": "federate",
+          "target": "federate-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r09",
+          "source": "adjust",
+          "target": "adjust-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r10",
+          "source": "request",
+          "target": "request-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r11",
+          "source": "report",
+          "target": "report-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r12",
+          "source": "service",
+          "target": "service-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r13",
+          "source": "federation",
+          "target": "federation-adjust",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r14",
+          "source": "federation",
+          "target": "federation-request",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r15",
+          "source": "federation",
+          "target": "federation-report",
+          "label": "predefined hierarchy",
+          "style": "solid",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r16",
+          "source": "federation",
+          "target": "federation-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r17",
+          "source": "federation-adjust",
+          "target": "federation-adjust-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r18",
+          "source": "federation-request",
+          "target": "federation-request-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        },
+        {
+          "id": "figure-20-r19",
+          "source": "federation-report",
+          "target": "federation-report-extension",
+          "label": "extension",
+          "style": "dotted",
+          "direction": "forward",
+          "points": [],
+          "clause_id": null,
+          "requirement_ids": [],
+          "implementation_ids": [],
+          "source_ref": null
+        }
+      ],
+      "annotations": [
+        {
+          "id": "figure-20-caption",
+          "x": 0.0,
+          "y": -2.0,
+          "text": "MOM interaction class structure",
+          "width": null,
+          "align": "center",
+          "rotate": 0.0
+        }
+      ],
+      "clause_id": null,
+      "source": {
+        "path": "figures/native/figure-20.tex",
+        "line": 1,
+        "end_line": null
+      },
+      "provenance": {
+        "image": "figures/native/figure-20.tex",
+        "page": 263,
+        "xref": null,
+        "caption": "MOM interaction class structure"
+      },
+      "notes": "Semantic graph ownership is promoted from the annotated source fixture; native geometry remains a faithful layout adapter."
+    }
+  ]
+}

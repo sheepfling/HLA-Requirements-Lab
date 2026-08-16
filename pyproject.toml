@@ -1,18 +1,47 @@
 [project]
-name = "document-recreation"
+name = "hla-requirements-lab"
 version = "0.1.0"
-description = "Reproducible recreations of technical and historical documents."
+description = "Source-controlled extraction, traceability, and verification of HLA requirements."
 requires-python = ">=3.11"
 dependencies = [
-    "PyMuPDF>=1.24",
+    "pymupdf>=1.24",
     "pydantic>=2.7",
 ]
 
+[project.scripts]
+hla-lab = "hla_lab.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["hla_lab*"]
+
 [dependency-groups]
 dev = [
+    "mdrepo>=0.0.1,<0.1",
     "pre-commit>=4.0",
+    "pytest>=9.0.3,<10",
+    "pytest-xdist>=3.6,<4",
+    "rumdl>=0.2.49,<0.3",
     "ruff>=0.12",
 ]
+
+[tool.rumdl]
+flavor = "gfm"
+disable = ["MD013"]
+extend-enable = ["MD060"]
+
+[tool.rumdl.MD060]
+style = "aligned"
+
+[tool.mdrepo]
+exclude = ["topics/**", "data/state_machines/**"]
+
+[tool.mdrepo.orphans]
+enabled = true
+roots = ["README.md", "docs/README.md", "tools/migrations/README.md"]
 
 [tool.ruff]
 line-length = 100
@@ -29,6 +58,12 @@ select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
 "topics/_template/**/*.py" = ["T201"]
 
 [tool.pyright]
-include = ["scripts", "topics"]
+include = ["hla_lab", "topics"]
 pythonVersion = "3.11"
 typeCheckingMode = "basic"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+norecursedirs = ["integration"]
+cache_dir = ".tmp/pytest_cache"

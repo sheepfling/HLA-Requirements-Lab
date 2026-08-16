@@ -1,0 +1,66 @@
+% Figure 14 - Object instance (i, k) known
+% Independently revalidated against IEEE Std 1516.1-2010 source physical page 103 / standard page 89.
+% Natural coordinates follow the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure14/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f14 stroke/.style={draw=black,line width=1.0pt},
+    f14 partition/.style={draw=black,line width=.90pt,dash pattern=on 5pt off 4pt},
+    f14 transition/.style={draw=black,line width=1.0pt,-{Stealth[length=8.0pt,width=6.5pt]}},
+    f14 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.0}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.10},
+    f14 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.6}{12.1}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.30}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % F14-S00 outer composite state: Object Instance (i, k) Known.
+    \draw[f14 stroke]
+    (135,44) -- (825,44)
+    .. controls (866,44) and (900,78) .. (900,119)
+    -- (900,601)
+    .. controls (900,642) and (866,676) .. (825,676)
+    -- (135,676)
+    .. controls (94,676) and (60,642) .. (60,601)
+    -- (60,119)
+    .. controls (60,78) and (94,44) .. (135,44)
+    -- cycle;
+
+    % Source title band and orthogonal-region separators.
+    \draw[f14 stroke] (61,111) -- (899,111);
+    \draw[f14 partition] (60,299) -- (900,299);
+    \draw[f14 partition] (60,487) -- (900,487);
+    \node[f14 title] at (479,79) {Object Instance (i, k) Known};
+
+    % First representative instance-attribute concurrent container.
+    \draw[f14 stroke,rounded corners=13pt] (312,166) rectangle (579,263);
+    \draw[f14 partition] (443,166) -- (443,263);
+    \node[f14 text] at (382,215.5)
+        {Establishing\\Ownership of\\Instance Attribute\\(i, k, first class attribute\\of \textquotedbl Object Class (i)\textquotedbl)};
+    \node[f14 text] at (513,215.5)
+        {Implications of\\Ownership of\\Instance Attribute\\(i, k, first class attribute\\of \textquotedbl Object Class (i)\textquotedbl)};
+
+    % F14-P01 and F14-E01: first-lane initial pseudo-state -> concurrent container.
+    \fill (272,214) circle[radius=6pt];
+    % F14-E01 initial -> first representative concurrent container (unlabeled).
+    \draw[f14 transition] (278,214) -- (308,214);
+
+    % Omitted middle instance-attribute family.
+    \fill (396,390) circle[radius=4.5pt];
+    \fill (423,390) circle[radius=4.5pt];
+    \fill (449,390) circle[radius=4.5pt];
+
+    % Last representative instance-attribute concurrent container.
+    \draw[f14 stroke,rounded corners=13pt] (312,537) rectangle (579,634);
+    \draw[f14 partition] (443,537) -- (443,634);
+    \node[f14 text] at (382,585.5)
+        {Establishing\\Ownership of\\Instance Attribute\\(i, k, last class attribute\\of \textquotedbl Object Class (i)\textquotedbl)};
+    \node[f14 text] at (513,585.5)
+        {Implications of\\Ownership of\\Instance Attribute\\(i, k, last class attribute\\of \textquotedbl Object Class (i)\textquotedbl)};
+
+    % F14-P02 and F14-E02: last-lane initial pseudo-state -> concurrent container.
+    \fill (272,585) circle[radius=6pt];
+    % F14-E02 initial -> last representative concurrent container (unlabeled).
+    \draw[f14 transition] (278,585) -- (308,585);
+\end{tikzpicture}

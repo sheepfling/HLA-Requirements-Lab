@@ -7,7 +7,6 @@ from typing import Any
 
 import fitz
 
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Apply a stored outline, page labels, and links to a generated PDF."
@@ -17,12 +16,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("output_pdf", type=Path)
     return parser.parse_args()
 
-
 def delete_existing_links(document: fitz.Document) -> None:
     for page in document:
         for link in list(page.get_links()):
             page.delete_link(link)
-
 
 def insert_link(document: fitz.Document, record: dict[str, Any]) -> None:
     page = document[int(record["source_page"])]
@@ -50,7 +47,6 @@ def insert_link(document: fitz.Document, record: dict[str, Any]) -> None:
         raise ValueError(f"Unsupported stored link type: {link_type}")
     page.insert_link(link)
 
-
 def apply(input_pdf: Path, manifest_path: Path, output_pdf: Path) -> None:
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     with fitz.open(input_pdf) as document:
@@ -68,7 +64,6 @@ def apply(input_pdf: Path, manifest_path: Path, output_pdf: Path) -> None:
         output_pdf.parent.mkdir(parents=True, exist_ok=True)
         document.save(output_pdf, garbage=4, deflate=True)
 
-
 def main() -> None:
     arguments = parse_args()
     apply(
@@ -77,7 +72,6 @@ def main() -> None:
         arguments.output_pdf.resolve(),
     )
     print(f"Wrote navigation-complete PDF to {arguments.output_pdf}")
-
 
 if __name__ == "__main__":
     main()

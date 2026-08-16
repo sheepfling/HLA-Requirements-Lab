@@ -7,9 +7,9 @@ not a replacement for the unofficial faithful recreations.
 Build it from the repository root with:
 
 ```powershell
-python -m scripts.build publication build hla-hierarchy-reconstruction-2025
+hla-lab publish hla-hierarchy-reconstruction-2025
 ```
 
 `main.tex` contains only layout and document framing. The generated semantic
 TeX and machine-readable `semantic-model.json` are written below ignored
-`output/semantic/` and come from `scripts/generate_derivative.py`.
+`output/semantic/` and come from `hla_lab/generation/generate_derivative.py`.

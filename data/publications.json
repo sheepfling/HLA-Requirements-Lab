@@ -2,6 +2,22 @@
   "schema_version": 1,
   "publications": [
     {
+      "id": "hla-unofficial-faithful-reconstruction-2010",
+      "kind": "faithful-reconstruction",
+      "title": "HLA 2010 unofficial faithful reconstruction",
+      "description": "The three 2010 faithful reconstructions, kept separate from the 2025 edition while their shared semantic corpus is migrated.",
+      "project_ids": [
+        "hla-1516-2010",
+        "hla-1516.2-2010",
+        "hla-1516.1-2010"
+      ],
+      "source_document_ids": [
+        "hla-1516-2010",
+        "hla-1516.2-2010",
+        "hla-1516.1-2010"
+      ]
+    },
+    {
       "id": "hla-unofficial-faithful-reconstruction-2025",
       "kind": "faithful-reconstruction",
       "title": "HLA 2025 unofficial faithful reconstruction",
@@ -32,6 +48,20 @@
       ]
     },
     {
+      "id": "hla-hierarchy-reconstruction-2010",
+      "kind": "hierarchy-reconstruction",
+      "title": "HLA 2010 hierarchy reconstruction",
+      "description": "A reflowable, hierarchy-first reconstruction generated from the shared 2010 semantic corpus rather than original page layout.",
+      "project_ids": [
+        "hla-semantic-derivative-2010"
+      ],
+      "source_document_ids": [
+        "hla-1516-2010",
+        "hla-1516.1-2010",
+        "hla-1516.2-2010"
+      ]
+    },
+    {
       "id": "hla-rti-compliance-requirements-2025",
       "kind": "requirements-publication",
       "title": "HLA RTI compliance requirements",
@@ -43,6 +73,20 @@
         "hla-1516-2025",
         "hla-1516.1-2025",
         "hla-1516.2-2025"
+      ]
+    },
+    {
+      "id": "hla-rti-compliance-requirements-2010",
+      "kind": "requirements-publication",
+      "title": "HLA 2010 RTI compliance requirements",
+      "description": "An implementation-facing requirements, state-transition, evidence, JSON, and CSV publication derived from the shared 2010 semantic corpus.",
+      "project_ids": [
+        "hla-rti-compliance-requirements-2010"
+      ],
+      "source_document_ids": [
+        "hla-1516-2010",
+        "hla-1516.1-2010",
+        "hla-1516.2-2010"
       ]
     }
   ]

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516.2-2010",
+  "segments": [
+    {
+      "id": "frontmatter",
+      "start_sequence": 0,
+      "end_sequence": 0,
+      "before_latex": "\\bodyfont",
+      "after_latex": "\\standardbodylayout\n\\pagenumbering{arabic}\n\\setcounter{page}{1}\n\\standardheaders"
+    },
+    {
+      "id": "body",
+      "start_sequence": 1,
+      "end_sequence": 18
+    }
+  ]
+}

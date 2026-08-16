@@ -30,16 +30,16 @@
 % cmap entry in some XeTeX builds.  Use a metric-compatible serif fallback
 % for prose semicolons so PDF text extraction preserves U+003B exactly.
 \IfFontExistsTF{Liberation Serif}{%
-  \newfontfamily\HLASemicolonFont{Liberation Serif}[Ligatures=NoCommon]%
+    \newfontfamily\HLASemicolonFont{Liberation Serif}[Ligatures=NoCommon]%
 }{%
-  \newfontfamily\HLASemicolonFont{Carlito}[Ligatures=NoCommon]%
+    \newfontfamily\HLASemicolonFont{Carlito}[Ligatures=NoCommon]%
 }
 \newcommand{\HLASemicolon}{{\HLASemicolonFont;}}
 
 % Zero-size page destinations support the contents links and cross-reference
 % overlays without perturbing the fixed or semantic page geometry.
 \newcommand{\HLAPhysicalPageMarker}[1]{%
-  \Hy@raisedlink{\hyper@anchorstart{hla-page-#1}\hyper@anchorend}%
+    \Hy@raisedlink{\hyper@anchorstart{hla-page-#1}\hyper@anchorend}%
 }
 \newcommand{\HLAContentMarker}[1]{}
 
@@ -51,17 +51,17 @@
 \definecolor{HLALightGray}{HTML}{F3F3F3}
 
 \hypersetup{
-  colorlinks=false,
-  pdfborder={0 0 0},
-  bookmarksopen=true,
-  bookmarksnumbered=true,
-  pdflang={en-US},
-  pdfdisplaydoctitle=true,
-  hypertexnames=false,
-  pdftitle={IEEE Std 1516-2025 Framework and Rules - Unofficial LaTeX Recreation},
-  pdfauthor={Simulation Interoperability Standards Organization/Standards Activities Committee (SISO/SAC) of the IEEE Computer Society; unofficial LaTeX recreation},
-  pdfsubject={The High Level Architecture (HLA) framework, components, and rules for interoperable distributed modeling and simulation. Unofficial noncommercial LaTeX recreation of IEEE Std 1516-2025.},
-  pdfkeywords={architecture, class attribute, federate, federation, federation execution, federation object model, framework, High Level Architecture, IEEE 1516, instance attribute, interaction class, joined federate, object class, object model template, rules, runtime infrastructure, simulation object model}
+    colorlinks=false,
+    pdfborder={0 0 0},
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    pdflang={en-US},
+    pdfdisplaydoctitle=true,
+    hypertexnames=false,
+    pdftitle={IEEE Std 1516-2025 Framework and Rules - Unofficial LaTeX Recreation},
+    pdfauthor={Simulation Interoperability Standards Organization/Standards Activities Committee (SISO/SAC) of the IEEE Computer Society; unofficial LaTeX recreation},
+    pdfsubject={The High Level Architecture (HLA) framework, components, and rules for interoperable distributed modeling and simulation. Unofficial noncommercial LaTeX recreation of IEEE Std 1516-2025.},
+    pdfkeywords={architecture, class attribute, federate, federation, federation execution, federation object model, framework, High Level Architecture, IEEE 1516, instance attribute, interaction class, joined federate, object class, object model template, rules, runtime infrastructure, simulation object model}
 }
 
 \AtBeginDocument{\fontsize{10.02pt}{11.52pt}\selectfont}
@@ -72,18 +72,18 @@
 \justifying
 
 \titleformat{\section}
-  {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont}
-  {\thesection.}{0.35em}{}
+{\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont}
+{\thesection.}{0.35em}{}
 \titlespacing*{\section}{0pt}{20pt plus 2pt minus 1pt}{12pt}
 
 \titleformat{\subsection}
-  {\sffamily\bfseries\fontsize{10.98pt}{13.2pt}\selectfont}
-  {\thesubsection}{0.42em}{}
+{\sffamily\bfseries\fontsize{10.98pt}{13.2pt}\selectfont}
+{\thesubsection}{0.42em}{}
 \titlespacing*{\subsection}{0pt}{12pt plus 2pt minus 1pt}{3pt}
 
 \titleformat{\subsubsection}
-  {\sffamily\bfseries\fontsize{10.02pt}{12pt}\selectfont}
-  {\thesubsubsection}{0.42em}{}
+{\sffamily\bfseries\fontsize{10.02pt}{12pt}\selectfont}
+{\thesubsubsection}{0.42em}{}
 \titlespacing*{\subsubsection}{0pt}{12pt plus 2pt minus 1pt}{3pt}
 
 \setcounter{secnumdepth}{3}
@@ -96,92 +96,92 @@
 \newcommand{\HLALicenseFooterText}{Authorized licensed use footer intentionally omitted from the clean recreation.}
 
 \newcommand{\HLAHeader}{%
-  \sffamily\fontsize{7.98pt}{9.18pt}\selectfont
-  IEEE Std 1516-2025\\[-0.3pt]
-  IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules%
+    \sffamily\fontsize{7.98pt}{9.18pt}\selectfont
+    IEEE Std 1516-2025\\[-0.3pt]
+    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules%
 }
 
 \newcommand{\HLAFooter}{%
-  \begin{minipage}{\textwidth}
+    \begin{minipage}{\textwidth}
     \centering
     \leavevmode\fontsize{10.02pt}{11pt}\selectfont\thepage\\[-1pt]
     \sffamily\fontsize{7.98pt}{9.2pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.%
     \ifbool{hla-license-footer}{\\[-0.2pt]\fontsize{7pt}{8pt}\selectfont\HLALicenseFooterText}{}%
-  \end{minipage}%
+    \end{minipage}%
 }
 
 \fancypagestyle{hla}{%
-  \fancyhf{}
-  \fancyhead[C]{\HLAHeader}
-  \fancyfoot[C]{\HLAFooter}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}
+    \fancyhf{}
+    \fancyhead[C]{\HLAHeader}
+    \fancyfoot[C]{\HLAFooter}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
 }
 
 \fancypagestyle{hlaopener}{%
-  \fancyhf{}
-  \fancyfoot[C]{\HLAFooter}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}
+    \fancyhf{}
+    \fancyfoot[C]{\HLAFooter}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
 }
 
 \pagestyle{hla}
 
 \renewcommand{\footnoterule}{%
-  \kern-3pt
-  \hrule width 2.38in height 0.4pt
-  \kern 2.6pt
+    \kern-3pt
+    \hrule width 2.38in height 0.4pt
+    \kern 2.6pt
 }
 \renewcommand{\footnotelayout}{\fontsize{7.98pt}{9.0pt}\selectfont\justifying}
 \setlength{\footnotesep}{2pt}
 
 \newcommand{\HLATitleBlock}{%
-  \thispagestyle{hlaopener}
-  \vspace*{0.64in}
-  {\sffamily\bfseries\fontsize{19.98pt}{23.0pt}\selectfont
+    \thispagestyle{hlaopener}
+    \vspace*{0.64in}
+    {\sffamily\bfseries\fontsize{19.98pt}{23.0pt}\selectfont
     IEEE Standard for Modeling and Simulation\\
     (M\&S) High Level Architecture (HLA)---\\
     Framework and Rules\par}
-  \vspace{0.51in}
+    \vspace{0.51in}
 }
 
 \newcommand{\HLABoxedIntro}[1]{%
-  \noindent\fcolorbox{black}{white}{%
-    \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
-      \fontsize{9pt}{10.3pt}\selectfont #1
-    \end{minipage}%
-  }%
+    \noindent\fcolorbox{black}{white}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+        \fontsize{9pt}{10.3pt}\selectfont #1
+        \end{minipage}%
+    }%
 }
 
 \newcommand{\HLANote}[1]{\par\noindent NOTE---#1\par}
 \newcommand{\RuleStatement}[1]{\par\noindent\textit{#1}\par}
 \newcommand{\HLAPlaceholder}[1]{%
-  \par\noindent
-  \fcolorbox{HLAGray}{HLALightGray}{%
-    \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
-      \sffamily\fontsize{8.5pt}{10pt}\selectfont\textbf{RECREATION TODO:} #1
-    \end{minipage}%
-  }\par
+    \par\noindent
+    \fcolorbox{HLAGray}{HLALightGray}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+        \sffamily\fontsize{8.5pt}{10pt}\selectfont\textbf{RECREATION TODO:} #1
+        \end{minipage}%
+    }\par
 }
 
 \newenvironment{hlarules}{%
-  \begin{enumerate}[label=\arabic{enumi}),leftmargin=0.75in,labelsep=0.18in,itemsep=4pt,topsep=4pt,parsep=0pt]
+    \begin{enumerate}[label=\arabic{enumi}),leftmargin=0.75in,labelsep=0.18in,itemsep=4pt,topsep=4pt,parsep=0pt]
 }{\end{enumerate}}
 
 \newenvironment{hlaalpha}{%
-  \begin{enumerate}[label=\alph{enumi}),leftmargin=0.42in,labelsep=0.12in,itemsep=4pt,topsep=4pt,parsep=0pt]
+    \begin{enumerate}[label=\alph{enumi}),leftmargin=0.42in,labelsep=0.12in,itemsep=4pt,topsep=4pt,parsep=0pt]
 }{\end{enumerate}}
 
 \newenvironment{hladefinitions}{%
-  \setlength{\parskip}{8.5pt plus 1pt minus 1pt}
+    \setlength{\parskip}{8.5pt plus 1pt minus 1pt}
 }{%
 }
 \newcommand{\hladef}[2]{\par\noindent\textbf{#1:} #2\par}
 
 \newenvironment{hlaacronyms}{%
-  \par\noindent\tabularx{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.88in}@{}X@{}}
+    \par\noindent\tabularx{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.88in}@{}X@{}}
 }{%
-  \endtabularx\par
+    \endtabularx\par
 }
 \newcommand{\hlaacro}[2]{#1 & #2\\[5.4pt]}
 
@@ -198,148 +198,148 @@
 \newcommand{\HLAPrintersDagger}{\textdagger}
 
 \NewDocumentEnvironment{hladefinition}{O{\HLASemanticDefinitionGap} m m}{%
-  \par\addvspace{#1}%
-  \HLAContentMarker{#2}%
-  \hypertarget{#2}{}%
-  \noindent\textbf{#3:}\hspace{0.28em}\ignorespaces
+    \par\addvspace{#1}%
+    \HLAContentMarker{#2}%
+    \hypertarget{#2}{}%
+    \noindent\textbf{#3:}\hspace{0.28em}\ignorespaces
 }{%
-  \par
+    \par
 }
 
 \newenvironment{hladefinitionlist}[1][38.16pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=12.96pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=12.96pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 % Nested numeric lists used inside glossary definitions (for example, "in scope").
 % The indentation tracks the two-level list geometry on source physical page 21.
 \newenvironment{hladefinitionnumberlist}[1][25.92pt]{%
-  \begin{enumerate}[
-    label=\arabic{enumii}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=12.0pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=5.94pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\arabic{enumii}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=12.0pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=5.94pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 
 % Compact, note-bearing alphabetic lists used by densely packed glossary
 % definitions such as "published" on source physical page 24.
 \newenvironment{hladefinitionlistroomy}[1][32.04pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=15.09pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=15.09pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 \newenvironment{hladefinitionlistcompact}[1][36.00pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=11.76pt,
-    parsep=0pt,
-    topsep=9.96pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=11.76pt,
+        parsep=0pt,
+        topsep=9.96pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 % Alphabetic lists aligned to the 18 pt / 36 pt glossary offsets used on
 % source physical pages 28 and 30. The compact top and item spacing also
 % matches service-list rhythms on those pages.
 \newenvironment{hladefinitionlistservices}[1][36.00pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=8.20pt,
-    labelsep=9.80pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=5.94pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=8.20pt,
+        labelsep=9.80pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=5.94pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 \newcommand{\HLADefinitionListNote}[2][9.0pt]{%
-  \par\addvspace{#1}%
-  {\fontsize{9pt}{10.8pt}\selectfont NOTE---#2\par}%
+    \par\addvspace{#1}%
+    {\fontsize{9pt}{10.8pt}\selectfont NOTE---#2\par}%
 }
 
 % Dense alphabetic lists that begin directly after a definition head. The
 % body column starts at 126 pt on the semantic glossary page geometry.
 \newenvironment{hladefinitionlistdisplay}[1][36.00pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=11.02pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=11.02pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 % Compact service lists that follow an introductory paragraph. This variant
 % preserves the smaller source gap before the first service on page 28.
 \newenvironment{hladefinitionservicelist}[1][36.00pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=6.04pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=6.04pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 
@@ -347,79 +347,79 @@
 % page-local pre-list offset preserves the first-item origin while shortening
 % the block before the following definition.
 \newenvironment{hladefinitionlistdisplaytightbottom}[1][36.00pt]{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=#1,
-    labelwidth=10.2pt,
-    labelsep=11.8pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.94pt,
-    parsep=0pt,
-    topsep=9.86pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=#1,
+        labelwidth=10.2pt,
+        labelsep=11.8pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.94pt,
+        parsep=0pt,
+        topsep=9.86pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 \newcommand{\HLADefinitionNote}[2][9.96pt]{%
-  \par\addvspace{#1}%
-  {\fontsize{9pt}{10.8pt}\selectfont NOTE---#2\par}%
+    \par\addvspace{#1}%
+    {\fontsize{9pt}{10.8pt}\selectfont NOTE---#2\par}%
 }
 
 \newcommand{\HLASemanticHeader}{%
-  \begin{tikzpicture}[remember picture,overlay]
+    \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-      at ([xshift=269.52pt,yshift=-43.50pt]current page.north west)
-      {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Std 1516-2025}};
+    at ([xshift=269.52pt,yshift=-43.50pt]current page.north west)
+        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Std 1516-2025}};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-      at ([xshift=119.28pt,yshift=-52.677pt]current page.north west)
-      {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules}};
-  \end{tikzpicture}%
+    at ([xshift=119.28pt,yshift=-52.677pt]current page.north west)
+        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules}};
+    \end{tikzpicture}%
 }
 
 \newcommand{\HLASemanticFooter}[2][standard]{%
-  \begin{tikzpicture}[remember picture,overlay]
+    \begin{tikzpicture}[remember picture,overlay]
     \ifstrequal{#1}{low}{%
-      \node[anchor=base west,inner sep=0pt,outer sep=0pt]
+        \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=301.063pt,yshift=-767.655pt]current page.north west)
-        {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
-      \node[anchor=base west,inner sep=0pt,outer sep=0pt]
+            {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
+        \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=229.463pt,yshift=-777.375pt]current page.north west)
-        {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
+            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
     }{%
-      \node[anchor=base west,inner sep=0pt,outer sep=0pt]
+        \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=300.96pt,yshift=-744.60pt]current page.north west)
-        {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
-      \node[anchor=base west,inner sep=0pt,outer sep=0pt]
+            {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
+        \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=229.20pt,yshift=-754.32pt]current page.north west)
-        {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
+            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
     }%
-  \end{tikzpicture}%
+    \end{tikzpicture}%
 }
 
 \newcommand{\HLAStartSemanticPages}{%
-  \clearpage
-  \begingroup
-  \newgeometry{left=90pt,right=90pt,top=57.18pt,bottom=74.40pt,headheight=0pt,headsep=0pt,footskip=0pt}%
-  \pagestyle{empty}%
-  \thispagestyle{empty}%
-  \setlength{\parindent}{0pt}%
-  \setlength{\parskip}{0pt}%
-  \setlength{\emergencystretch}{1.5em}%
-  \hyphenpenalty=10000\relax
-  \exhyphenpenalty=10000\relax
-  \pretolerance=10000\relax
-  \tolerance=2000\relax
-  \setlength{\skip\footins}{9.96pt plus 1pt minus 1pt}%
-  \setlength{\footnotemargin}{6pt}%
-  \renewcommand{\footnoterule}{%
-    \kern-3pt\hrule width 144pt height 0.4pt\kern 2.6pt%
-  }%
-  \renewcommand{\footnotelayout}{\HLAFacSerif\fontsize{7.98pt}{9.0pt}\selectfont\justifying}%
-  \microtypesetup{protrusion=false}%
-  \HLAFacSerif
+    \clearpage
+    \begingroup
+    \newgeometry{left=90pt,right=90pt,top=57.18pt,bottom=74.40pt,headheight=0pt,headsep=0pt,footskip=0pt}%
+    \pagestyle{empty}%
+    \thispagestyle{empty}%
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\emergencystretch}{1.5em}%
+    \hyphenpenalty=10000\relax
+    \exhyphenpenalty=10000\relax
+    \pretolerance=10000\relax
+    \tolerance=2000\relax
+    \setlength{\skip\footins}{9.96pt plus 1pt minus 1pt}%
+    \setlength{\footnotemargin}{6pt}%
+    \renewcommand{\footnoterule}{%
+        \kern-3pt\hrule width 144pt height 0.4pt\kern 2.6pt%
+    }%
+    \renewcommand{\footnotelayout}{\HLAFacSerif\fontsize{7.98pt}{9.0pt}\selectfont\justifying}%
+    \microtypesetup{protrusion=false}%
+    \HLAFacSerif
 }
 
 
@@ -427,34 +427,34 @@
 % header; physical pages 3--7 use the source's higher front-matter footer,
 % while physical pages 8--11 use the standard interior footer.
 \newcommand{\HLAFrontMatterFooterHigh}[1]{%
-  \begin{tikzpicture}[remember picture,overlay]
+    \begin{tikzpicture}[remember picture,overlay]
     % Preserve the source content-stream order: copyright line, then page number.
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-      at ([xshift=229.256pt,yshift=-745.077pt]current page.north west)
-      {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
+    at ([xshift=229.256pt,yshift=-745.077pt]current page.north west)
+        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-      at ([xshift=303.48pt,yshift=-737.76pt]current page.north west)
-      {{\HLAFacSerif\fontsize{10.02pt}{10.02pt}\selectfont #1}};
-  \end{tikzpicture}%
+    at ([xshift=303.48pt,yshift=-737.76pt]current page.north west)
+        {{\HLAFacSerif\fontsize{10.02pt}{10.02pt}\selectfont #1}};
+    \end{tikzpicture}%
 }
 
 \newcommand{\HLAStartFrontMatterUnnumberedPage}[1]{%
-  \HLAPhysicalPageMarker{#1}%
-  \thispagestyle{empty}%
+    \HLAPhysicalPageMarker{#1}%
+    \thispagestyle{empty}%
 }
 
 \newcommand{\HLAStartFrontMatterPage}[3][standard]{%
-  \HLAPhysicalPageMarker{#2}%
-  \thispagestyle{empty}%
-  \ifstrequal{#1}{high}{\HLAFrontMatterFooterHigh{#3}}{\HLASemanticFooter{#3}}%
+    \HLAPhysicalPageMarker{#2}%
+    \thispagestyle{empty}%
+    \ifstrequal{#1}{high}{\HLAFrontMatterFooterHigh{#3}}{\HLASemanticFooter{#3}}%
 }
 
 \newcommand{\HLAFrontMajorHeading}[1]{%
-  {\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1\par}%
+        {\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1\par}%
 }
 
 \newcommand{\HLAFrontHeading}[1]{%
-  {\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1\par}%
+        {\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1\par}%
 }
 
 % Preserve the ordinary semantic flow while applying a tightly scoped visual
@@ -462,93 +462,93 @@
 % source font. The invisible copy retains the original line box, so following
 % content remains page-aligned.
 \newcommand{\HLAFrontMajorHeadingAdjusted}[3]{%
-  \noindent
-  \makebox[0pt][l]{\raisebox{#2}[0pt][0pt]{\hspace*{#3}{\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1}}}%
-  \phantom{{\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1}}\par
+    \noindent
+    \makebox[0pt][l]{\raisebox{#2}[0pt][0pt]{\hspace*{#3}{\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1}}}%
+    \phantom{{\HLAFacSans\bfseries\fontsize{12pt}{14.0pt}\selectfont #1}}\par
 }
 
 \newcommand{\HLAFrontHeadingAdjusted}[3]{%
-  \noindent
-  \makebox[0pt][l]{\raisebox{#2}[0pt][0pt]{\hspace*{#3}{\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1}}}%
-  \phantom{{\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1}}\par
+    \noindent
+    \makebox[0pt][l]{\raisebox{#2}[0pt][0pt]{\hspace*{#3}{\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1}}}%
+    \phantom{{\HLAFacSans\bfseries\fontsize{10.98pt}{12.66pt}\selectfont #1}}\par
 }
 
 \newenvironment{HLAFrontNames}{%
-  \HLAFacSerif\fontsize{9pt}{10.32pt}\selectfont
-  \setlength{\parskip}{0pt}\setlength{\parindent}{0pt}%
-}{% 
+    \HLAFacSerif\fontsize{9pt}{10.32pt}\selectfont
+    \setlength{\parskip}{0pt}\setlength{\parindent}{0pt}%
+}{%
 }
 
 \newcommand{\HLAStartSemanticPage}[2]{%
-  \HLAPhysicalPageMarker{#1}%
-  \thispagestyle{empty}%
-  \HLASemanticHeader
-  \HLASemanticFooter{#2}%
+    \HLAPhysicalPageMarker{#1}%
+    \thispagestyle{empty}%
+    \HLASemanticHeader
+    \HLASemanticFooter{#2}%
 }
 
 % Semantic opening pages such as physical page 12 omit the running header but
 % retain the normal printed-page footer.
 \newcommand{\HLAStartSemanticOpenerPage}[2]{%
-  \HLAPhysicalPageMarker{#1}%
-  \thispagestyle{empty}%
-  \HLASemanticFooter{#2}%
+    \HLAPhysicalPageMarker{#1}%
+    \thispagestyle{empty}%
+    \HLASemanticFooter{#2}%
 }
 
 % Alphabetic service-group list used by Clause 1.4.4.  The body offset and
 % compact rhythm track the source's seven-item list while keeping the content
 % as a native breakable enumeration.
 \newenvironment{hlaoverviewservicelist}{%
-  \begin{enumerate}[
-    label=\alph{enumi}),
-    leftmargin=38.20pt,
-    labelwidth=10.20pt,
-    labelsep=11.80pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=6.11pt,
-    parsep=0pt,
-    topsep=13.10pt,
-    partopsep=0pt
-  ]%
+    \begin{enumerate}[
+        label=\alph{enumi}),
+        leftmargin=38.20pt,
+        labelwidth=10.20pt,
+        labelsep=11.80pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=6.11pt,
+        parsep=0pt,
+        topsep=13.10pt,
+        partopsep=0pt
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 \newcommand{\HLAStartSemanticPageLowFooter}[2]{%
-  \HLAPhysicalPageMarker{#1}%
-  \thispagestyle{empty}%
-  \HLASemanticHeader
-  \HLASemanticFooter[low]{#2}%
+    \HLAPhysicalPageMarker{#1}%
+    \thispagestyle{empty}%
+    \HLASemanticHeader
+    \HLASemanticFooter[low]{#2}%
 }
 
 \newcommand{\HLAEndSemanticPages}{%
-  \clearpage
-  \restoregeometry
-  \microtypesetup{protrusion=true}%
-  \pagestyle{hla}%
-  \endgroup
+    \clearpage
+    \restoregeometry
+    \microtypesetup{protrusion=true}%
+    \pagestyle{hla}%
+    \endgroup
 }
 
 \newcommand{\HLAAnnexHeading}[3]{%
-  \clearpage
-  \thispagestyle{hla}
-  {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont Annex #1\par}
-  \vspace{13pt}
-  {\sffamily\fontsize{12pt}{14.4pt}\selectfont (#2)\par}
-  \vspace{12pt}
-  {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont #3\par}
-  \vspace{25pt}
+    \clearpage
+    \thispagestyle{hla}
+    {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont Annex #1\par}
+    \vspace{13pt}
+    {\sffamily\fontsize{12pt}{14.4pt}\selectfont (#2)\par}
+    \vspace{12pt}
+    {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont #3\par}
+    \vspace{25pt}
 }
 
 \newcommand{\IEEEWordmark}{%
-  \begin{tikzpicture}[baseline=-0.5ex]
+    \begin{tikzpicture}[baseline=-0.5ex]
     \draw[line width=0.8pt] (0,0) -- (0.10,0.10) -- (0.20,0) -- (0.10,-0.10) -- cycle;
     \node[anchor=west,font=\sffamily\bfseries\fontsize{13pt}{13pt}\selectfont] at (0.27,0) {IEEE};
-  \end{tikzpicture}%
+    \end{tikzpicture}%
 }
 
 \newcommand{\HLABlockMotif}{%
-  \begin{tikzpicture}[remember picture,overlay]
+    \begin{tikzpicture}[remember picture,overlay]
     \fill[HLABlue] ([xshift=-78pt,yshift=-8pt]current page.north east) rectangle ([xshift=-54pt,yshift=-32pt]current page.north east);
     \fill[HLACyan] ([xshift=-54pt,yshift=-8pt]current page.north east) rectangle ([xshift=-30pt,yshift=-32pt]current page.north east);
     \fill[HLADark] ([xshift=-30pt,yshift=-8pt]current page.north east) rectangle ([xshift=-8pt,yshift=-57pt]current page.north east);
@@ -560,7 +560,7 @@
     \fill[HLABlue] ([xshift=-30pt,yshift=-82pt]current page.north east) rectangle ([xshift=-8pt,yshift=-112pt]current page.north east);
     \fill[HLALightBlue] ([xshift=-78pt,yshift=-103pt]current page.north east) rectangle ([xshift=-32pt,yshift=-110pt]current page.north east);
     \fill[HLACyan] ([xshift=-52pt,yshift=-117pt]current page.north east) rectangle ([xshift=-32pt,yshift=-122pt]current page.north east);
-  \end{tikzpicture}%
+    \end{tikzpicture}%
 }
 
 % Invisible PDF navigation annotations. These are emitted as absolute PDF
@@ -568,71 +568,71 @@
 % use overlay graphics and shipout-time hyperlink boxes are discarded by the
 % XeTeX/xdvipdfmx path. Rectangles are in PDF user space (bottom-left origin).
 \newcommand{\HLAPdfLinkObject}[6]{%
-  \special{pdf:obj @#1 << /Type /Annot /Subtype /Link /Rect [#2 #3 #4 #5] /Border [0 0 0] #6 >>}%
+    \special{pdf:obj @#1 << /Type /Annot /Subtype /Link /Rect [#2 #3 #4 #5] /Border [0 0 0] #6 >>}%
 }
 
 \newcommand{\HLAPdfAttachAnnotations}[1]{%
-  \special{pdf:put @thispage << /Annots [#1] >>}%
+    \special{pdf:put @thispage << /Annots [#1] >>}%
 }
 
 \newcommand{\HLAInstallContentsLinks}{%
-  \AddToHookNext{shipout/foreground}{%
-    \HLAPdfLinkObject{hlaannp1101}{84.314903}{658.315979}{523.085022}{674.403015}{/A << /S /GoTo /D (hla-page-12) >>}%
-    \HLAPdfLinkObject{hlaannp1102}{84.314903}{643.893982}{523.085022}{658.315979}{/A << /S /GoTo /D (hla-page-12) >>}%
-    \HLAPdfLinkObject{hlaannp1103}{82.650803}{634.463989}{521.976013}{644.448975}{/A << /S /GoTo /D (hla-page-12) >>}%
-    \HLAPdfLinkObject{hlaannp1104}{85.424301}{622.815002}{521.976013}{633.354980}{/A << /S /GoTo /D (hla-page-12) >>}%
-    \HLAPdfLinkObject{hlaannp1105}{86.533798}{613.385010}{523.640015}{622.815002}{/A << /S /GoTo /D (hla-page-13) >>}%
-    \HLAPdfLinkObject{hlaannp1106}{85.978996}{598.963013}{523.085022}{612.830994}{/A << /S /GoTo /D (hla-page-15) >>}%
-    \HLAPdfLinkObject{hlaannp1107}{84.869598}{570.119019}{523.640015}{598.963013}{/A << /S /GoTo /D (hla-page-15) >>}%
-    \HLAPdfLinkObject{hlaannp1108}{84.869598}{541.273987}{523.085022}{568.453979}{/A << /S /GoTo /D (hla-page-16) >>}%
-    \HLAPdfLinkObject{hlaannp1109}{86.533798}{527.406006}{521.976013}{540.718994}{/A << /S /GoTo /D (hla-page-31) >>}%
-    \HLAPdfLinkObject{hlaannp1110}{87.088501}{500.226013}{522.531006}{525.742004}{/A << /S /GoTo /D (hla-page-32) >>}%
-    \HLAPdfLinkObject{hlaannp1111}{87.088501}{482.475006}{522.531006}{498.562012}{/A << /S /GoTo /D (hla-page-32) >>}%
-    \HLAPdfLinkObject{hlaannp1112}{88.752602}{473.045013}{523.085022}{482.475006}{/A << /S /GoTo /D (hla-page-32) >>}%
-    \HLAPdfLinkObject{hlaannp1113}{89.307297}{460.286987}{523.085022}{471.936005}{/A << /S /GoTo /D (hla-page-33) >>}%
-    \HLAPdfLinkObject{hlaannp1114}{89.862000}{434.770996}{524.195007}{460.286987}{/A << /S /GoTo /D (hla-page-33) >>}%
-    \HLAPdfLinkObject{hlaannp1115}{90.416702}{422.566986}{524.195007}{434.770996}{/A << /S /GoTo /D (hla-page-34) >>}%
-    \HLAPdfLinkObject{hlaannp1116}{89.862000}{389.839996}{525.859009}{420.348999}{/A << /S /GoTo /D (hla-page-34) >>}%
-    \HLAPdfLinkObject{hlaannp1117}{92.080803}{369.316010}{524.195007}{389.285004}{/A << /S /GoTo /D (hla-page-34) >>}%
-    \HLAPdfLinkObject{hlaannp1118}{94.299599}{340.471008}{523.085022}{368.760986}{/A << /S /GoTo /D (hla-page-35) >>}%
-    \HLAPdfLinkObject{hlaannp1119}{91.526100}{309.407990}{524.750000}{340.471008}{/A << /S /GoTo /D (hla-page-36) >>}%
-    \HLAPdfLinkObject{hlaannp1120}{90.971397}{294.431000}{524.750000}{309.407990}{/A << /S /GoTo /D (hla-page-37) >>}%
-    \HLAPdfLinkObject{hlaannp1121}{92.080803}{268.915039}{524.195007}{292.766998}{/A << /S /GoTo /D (hla-page-39) >>}%
-    \HLAPdfAttachAnnotations{@hlaannp1101 @hlaannp1102 @hlaannp1103 @hlaannp1104 @hlaannp1105 @hlaannp1106 @hlaannp1107 @hlaannp1108 @hlaannp1109 @hlaannp1110 @hlaannp1111 @hlaannp1112 @hlaannp1113 @hlaannp1114 @hlaannp1115 @hlaannp1116 @hlaannp1117 @hlaannp1118 @hlaannp1119 @hlaannp1120 @hlaannp1121}%
-  }%
+    \AddToHookNext{shipout/foreground}{%
+        \HLAPdfLinkObject{hlaannp1101}{84.314903}{658.315979}{523.085022}{674.403015}{/A << /S /GoTo /D (hla-page-12) >>}%
+        \HLAPdfLinkObject{hlaannp1102}{84.314903}{643.893982}{523.085022}{658.315979}{/A << /S /GoTo /D (hla-page-12) >>}%
+        \HLAPdfLinkObject{hlaannp1103}{82.650803}{634.463989}{521.976013}{644.448975}{/A << /S /GoTo /D (hla-page-12) >>}%
+        \HLAPdfLinkObject{hlaannp1104}{85.424301}{622.815002}{521.976013}{633.354980}{/A << /S /GoTo /D (hla-page-12) >>}%
+        \HLAPdfLinkObject{hlaannp1105}{86.533798}{613.385010}{523.640015}{622.815002}{/A << /S /GoTo /D (hla-page-13) >>}%
+        \HLAPdfLinkObject{hlaannp1106}{85.978996}{598.963013}{523.085022}{612.830994}{/A << /S /GoTo /D (hla-page-15) >>}%
+        \HLAPdfLinkObject{hlaannp1107}{84.869598}{570.119019}{523.640015}{598.963013}{/A << /S /GoTo /D (hla-page-15) >>}%
+        \HLAPdfLinkObject{hlaannp1108}{84.869598}{541.273987}{523.085022}{568.453979}{/A << /S /GoTo /D (hla-page-16) >>}%
+        \HLAPdfLinkObject{hlaannp1109}{86.533798}{527.406006}{521.976013}{540.718994}{/A << /S /GoTo /D (hla-page-31) >>}%
+        \HLAPdfLinkObject{hlaannp1110}{87.088501}{500.226013}{522.531006}{525.742004}{/A << /S /GoTo /D (hla-page-32) >>}%
+        \HLAPdfLinkObject{hlaannp1111}{87.088501}{482.475006}{522.531006}{498.562012}{/A << /S /GoTo /D (hla-page-32) >>}%
+        \HLAPdfLinkObject{hlaannp1112}{88.752602}{473.045013}{523.085022}{482.475006}{/A << /S /GoTo /D (hla-page-32) >>}%
+        \HLAPdfLinkObject{hlaannp1113}{89.307297}{460.286987}{523.085022}{471.936005}{/A << /S /GoTo /D (hla-page-33) >>}%
+        \HLAPdfLinkObject{hlaannp1114}{89.862000}{434.770996}{524.195007}{460.286987}{/A << /S /GoTo /D (hla-page-33) >>}%
+        \HLAPdfLinkObject{hlaannp1115}{90.416702}{422.566986}{524.195007}{434.770996}{/A << /S /GoTo /D (hla-page-34) >>}%
+        \HLAPdfLinkObject{hlaannp1116}{89.862000}{389.839996}{525.859009}{420.348999}{/A << /S /GoTo /D (hla-page-34) >>}%
+        \HLAPdfLinkObject{hlaannp1117}{92.080803}{369.316010}{524.195007}{389.285004}{/A << /S /GoTo /D (hla-page-34) >>}%
+        \HLAPdfLinkObject{hlaannp1118}{94.299599}{340.471008}{523.085022}{368.760986}{/A << /S /GoTo /D (hla-page-35) >>}%
+        \HLAPdfLinkObject{hlaannp1119}{91.526100}{309.407990}{524.750000}{340.471008}{/A << /S /GoTo /D (hla-page-36) >>}%
+        \HLAPdfLinkObject{hlaannp1120}{90.971397}{294.431000}{524.750000}{309.407990}{/A << /S /GoTo /D (hla-page-37) >>}%
+        \HLAPdfLinkObject{hlaannp1121}{92.080803}{268.915039}{524.195007}{292.766998}{/A << /S /GoTo /D (hla-page-39) >>}%
+        \HLAPdfAttachAnnotations{@hlaannp1101 @hlaannp1102 @hlaannp1103 @hlaannp1104 @hlaannp1105 @hlaannp1106 @hlaannp1107 @hlaannp1108 @hlaannp1109 @hlaannp1110 @hlaannp1111 @hlaannp1112 @hlaannp1113 @hlaannp1114 @hlaannp1115 @hlaannp1116 @hlaannp1117 @hlaannp1118 @hlaannp1119 @hlaannp1120 @hlaannp1121}%
+    }%
 }
 
 \newcommand{\HLAInstallPageThirteenLinks}{%
-  \AddToHookNext{shipout/foreground}{%
-    \HLAPdfLinkObject{hlaannp1301}{231.272003}{91.201599}{258.326996}{102.111023}{/A << /S /GoTo /D (hla-page-15) >>}%
-    \HLAPdfAttachAnnotations{@hlaannp1301}%
-  }%
+    \AddToHookNext{shipout/foreground}{%
+        \HLAPdfLinkObject{hlaannp1301}{231.272003}{91.201599}{258.326996}{102.111023}{/A << /S /GoTo /D (hla-page-15) >>}%
+        \HLAPdfAttachAnnotations{@hlaannp1301}%
+    }%
 }
 
 \newcommand{\HLAInstallPageFifteenLinks}{%
-  \AddToHookNext{shipout/foreground}{%
-    \HLAPdfLinkObject{hlaannp1501}{241.360992}{81.232300}{271.324005}{89.555115}{/A << /S /GoTo /D (hla-page-15) >>}%
-    \HLAPdfAttachAnnotations{@hlaannp1501}%
-  }%
+    \AddToHookNext{shipout/foreground}{%
+        \HLAPdfLinkObject{hlaannp1501}{241.360992}{81.232300}{271.324005}{89.555115}{/A << /S /GoTo /D (hla-page-15) >>}%
+        \HLAPdfAttachAnnotations{@hlaannp1501}%
+    }%
 }
 
 \newcommand{\HLAInstallBackCoverLinks}{%
-  \AddToHookNext{shipout/foreground}{%
-    \HLAPdfLinkObject{hlaannp4001}{80.149902}{345.789001}{197.720993}{362.246002}{/A << /S /URI /URI (https://twitter.com/ieeesa) >>}%
-    \HLAPdfLinkObject{hlaannp4002}{80.149902}{328.782013}{216.442001}{345.789001}{/A << /S /URI /URI (https://www.facebook.com/ieeesa/) >>}%
-    \HLAPdfLinkObject{hlaannp4003}{80.149902}{311.825012}{248.141006}{328.782013}{/A << /S /URI /URI (https://www.linkedin.com/groups/1791118/) >>}%
-    \HLAPdfLinkObject{hlaannp4004}{80.149902}{294.817993}{182.979996}{311.825012}{/A << /S /URI /URI (https://beyondstandards.ieee.org/) >>}%
-    \HLAPdfLinkObject{hlaannp4005}{80.149902}{277.811035}{123.981003}{294.817993}{/A << /S /URI /URI (https://www.youtube.com/ieeesa) >>}%
-    \HLAPdfAttachAnnotations{@hlaannp4001 @hlaannp4002 @hlaannp4003 @hlaannp4004 @hlaannp4005}%
-  }%
+    \AddToHookNext{shipout/foreground}{%
+        \HLAPdfLinkObject{hlaannp4001}{80.149902}{345.789001}{197.720993}{362.246002}{/A << /S /URI /URI (https://twitter.com/ieeesa) >>}%
+        \HLAPdfLinkObject{hlaannp4002}{80.149902}{328.782013}{216.442001}{345.789001}{/A << /S /URI /URI (https://www.facebook.com/ieeesa/) >>}%
+        \HLAPdfLinkObject{hlaannp4003}{80.149902}{311.825012}{248.141006}{328.782013}{/A << /S /URI /URI (https://www.linkedin.com/groups/1791118/) >>}%
+        \HLAPdfLinkObject{hlaannp4004}{80.149902}{294.817993}{182.979996}{311.825012}{/A << /S /URI /URI (https://beyondstandards.ieee.org/) >>}%
+        \HLAPdfLinkObject{hlaannp4005}{80.149902}{277.811035}{123.981003}{294.817993}{/A << /S /URI /URI (https://www.youtube.com/ieeesa) >>}%
+        \HLAPdfAttachAnnotations{@hlaannp4001 @hlaannp4002 @hlaannp4003 @hlaannp4004 @hlaannp4005}%
+    }%
 }
 
 \newcommand{\HLACoverPage}{%
-  \HLAPhysicalPageMarker{1}%
-  \HLAContentMarker{cover}%
-  \thispagestyle{empty}
-  \HLABlockMotif
-  \begin{tikzpicture}[remember picture,overlay]
+    \HLAPhysicalPageMarker{1}%
+    \HLAContentMarker{cover}%
+    \thispagestyle{empty}
+    \HLABlockMotif
+    \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont IEEE SA};
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont STANDARDS};
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont ASSOCIATION};
@@ -652,22 +652,22 @@
     \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-643pt]current page.north west) {\HLACoverFont\fontsize{10.97pt}{13pt}\selectfont (Revision of IEEE Std 1516-2010)};
 
     \node[rotate=90,anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=580.32pt,yshift=-465.12pt]current page.north west)
-      {\scalebox{1.084}[1.224]{\sffamily\bfseries\fontsize{45.98pt}{45.98pt}\selectfont STANDARDS}};
+    at ([xshift=580.32pt,yshift=-465.12pt]current page.north west)
+        {\scalebox{1.084}[1.224]{\sffamily\bfseries\fontsize{45.98pt}{45.98pt}\selectfont STANDARDS}};
     \draw[HLACyan,line width=7pt]
-      ([xshift=547.74pt,yshift=-476.34pt]current page.north west) --
-      ([xshift=581.40pt,yshift=-476.34pt]current page.north west);
+    ([xshift=547.74pt,yshift=-476.34pt]current page.north west) --
+    ([xshift=581.40pt,yshift=-476.34pt]current page.north west);
 
     \node[anchor=south west,text=HLADark] at ([xshift=24pt,yshift=33pt]current page.south west) {\IEEEWordmark};
     \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial noncommercial LaTeX recreation.};
-  \end{tikzpicture}
-  \null\par
-  \clearpage
+    \end{tikzpicture}
+    \null\par
+    \clearpage
 }
 
 \newcommand{\HLAFormalTitlePage}{%
-  \thispagestyle{empty}
-  \begin{tikzpicture}[remember picture,overlay]
+    \thispagestyle{empty}
+    \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=north,text=HLADark] at ([yshift=-34pt]current page.north) {\sffamily\bfseries\fontsize{11pt}{13pt}\selectfont IEEE Std 1516\texttrademark--2025};
     \node[anchor=north,text=HLADark] at ([yshift=-50pt]current page.north) {\sffamily\fontsize{9.5pt}{11pt}\selectfont (Revision of IEEE Std 1516-2010)};
 
@@ -678,175 +678,175 @@
     \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-482pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont Approved 14 February 2025\\[9pt]\textbf{IEEE SA Standards Board}};
 
     \node[anchor=south,text=HLADark] at ([yshift=20pt]current page.south) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial recreation.};
-  \end{tikzpicture}
-  \null
-  \clearpage
+    \end{tikzpicture}
+    \null
+    \clearpage
 }
 
 
 \newcommand{\HLABackCoverPage}{%
-  \HLAPhysicalPageMarker{40}%
-  \HLAContentMarker{back-cover}%
-  \HLAInstallBackCoverLinks
-  \thispagestyle{empty}%
-  \HLABlockMotif
-  \begin{tikzpicture}[remember picture,overlay]
+    \HLAPhysicalPageMarker{40}%
+    \HLAContentMarker{back-cover}%
+    \HLAInstallBackCoverLinks
+    \thispagestyle{empty}%
+    \HLABlockMotif
+    \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont IEEE SA};
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont STANDARDS};
     \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont ASSOCIATION};
     \fill[HLACyan] ([xshift=18pt,yshift=-105pt]current page.north west) rectangle ([xshift=119pt,yshift=-113pt]current page.north west);
 
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60pt,yshift=-327.96pt]current page.north west)
-      {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont RAISING THE}};
+    at ([xshift=60pt,yshift=-327.96pt]current page.north west)
+        {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont RAISING THE}};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60pt,yshift=-356.4115pt]current page.north west)
-      {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont WORLD\textquoteright S}};
+    at ([xshift=60pt,yshift=-356.4115pt]current page.north west)
+        {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont WORLD\textquoteright S}};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60pt,yshift=-384.9591pt]current page.north west)
-      {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont STANDARDS}};
+    at ([xshift=60pt,yshift=-384.9591pt]current page.north west)
+        {\scalebox{1.102}[1]{\sffamily\bfseries\fontsize{32.04pt}{32.04pt}\selectfont STANDARDS}};
     \draw[HLACyan,line width=7.5pt]
-      ([xshift=60pt,yshift=-408.1054pt]current page.north west) --
-      ([xshift=272.6pt,yshift=-408.1054pt]current page.north west);
+    ([xshift=60pt,yshift=-408.1054pt]current page.north west) --
+    ([xshift=272.6pt,yshift=-408.1054pt]current page.north west);
 
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60.36pt,yshift=-426.48pt]current page.north west)
-      {\HLACoverFont\bfseries\fontsize{12pt}{12pt}\selectfont Connect with us on:};
+    at ([xshift=60.36pt,yshift=-426.48pt]current page.north west)
+        {\HLACoverFont\bfseries\fontsize{12pt}{12pt}\selectfont Connect with us on:};
 
     % Unofficial monochrome social-icon approximations; no source artwork is embedded.
     \fill[HLADark] ([xshift=67.2pt,yshift=-445.0pt]current page.north west) circle[radius=7.3pt];
     \node[anchor=center,inner sep=0pt,outer sep=0pt,text=white]
-      at ([xshift=67.2pt,yshift=-446.8pt]current page.north west) {\HLACoverFont\bfseries\fontsize{11pt}{11pt}\selectfont f};
+    at ([xshift=67.2pt,yshift=-446.8pt]current page.north west) {\HLACoverFont\bfseries\fontsize{11pt}{11pt}\selectfont f};
     \fill[HLADark,rounded corners=1.2pt]
-      ([xshift=59.9pt,yshift=-459.0pt]current page.north west) rectangle
-      ([xshift=74.5pt,yshift=-473.6pt]current page.north west);
+    ([xshift=59.9pt,yshift=-459.0pt]current page.north west) rectangle
+    ([xshift=74.5pt,yshift=-473.6pt]current page.north west);
     \node[anchor=center,inner sep=0pt,outer sep=0pt,text=white]
-      at ([xshift=67.2pt,yshift=-466.7pt]current page.north west) {\HLACoverFont\bfseries\fontsize{7.8pt}{7.8pt}\selectfont in};
+    at ([xshift=67.2pt,yshift=-466.7pt]current page.north west) {\HLACoverFont\bfseries\fontsize{7.8pt}{7.8pt}\selectfont in};
     \fill[HLADark,rounded corners=2.2pt]
-      ([xshift=59.9pt,yshift=-476.0pt]current page.north west) rectangle
-      ([xshift=74.5pt,yshift=-490.6pt]current page.north west);
+    ([xshift=59.9pt,yshift=-476.0pt]current page.north west) rectangle
+    ([xshift=74.5pt,yshift=-490.6pt]current page.north west);
     \node[anchor=center,inner sep=0pt,outer sep=0pt,text=white]
-      at ([xshift=67.2pt,yshift=-483.4pt]current page.north west) {\HLACoverFont\bfseries\fontsize{9pt}{9pt}\selectfont B};
+    at ([xshift=67.2pt,yshift=-483.4pt]current page.north west) {\HLACoverFont\bfseries\fontsize{9pt}{9pt}\selectfont B};
     \draw[HLADark,rounded corners=2.2pt,line width=1.4pt]
-      ([xshift=59.9pt,yshift=-493.0pt]current page.north west) rectangle
-      ([xshift=74.5pt,yshift=-507.6pt]current page.north west);
+    ([xshift=59.9pt,yshift=-493.0pt]current page.north west) rectangle
+    ([xshift=74.5pt,yshift=-507.6pt]current page.north west);
     \fill[HLADark]
-      ([xshift=65.2pt,yshift=-496.1pt]current page.north west) --
-      ([xshift=65.2pt,yshift=-504.5pt]current page.north west) --
-      ([xshift=71.4pt,yshift=-500.3pt]current page.north west) -- cycle;
+    ([xshift=65.2pt,yshift=-496.1pt]current page.north west) --
+    ([xshift=65.2pt,yshift=-504.5pt]current page.north west) --
+    ([xshift=71.4pt,yshift=-500.3pt]current page.north west) -- cycle;
 
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=82.44pt,yshift=-449.532pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{Facebook}: facebook.com/ieeesa};
+    at ([xshift=82.44pt,yshift=-449.532pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{Facebook}: facebook.com/ieeesa};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=82.44pt,yshift=-466.544pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{LinkedIn}: linkedin.com/groups/1791118};
+    at ([xshift=82.44pt,yshift=-466.544pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{LinkedIn}: linkedin.com/groups/1791118};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=82.43pt,yshift=-483.556pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{Beyond Standards blog}: beyondstandards.ieee.org};
+    at ([xshift=82.43pt,yshift=-483.556pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{Beyond Standards blog}: beyondstandards.ieee.org};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=82.43pt,yshift=-500.568pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{YouTube}: youtube.com/ieeesa};
+    at ([xshift=82.43pt,yshift=-500.568pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont \textbf{YouTube}: youtube.com/ieeesa};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60.36pt,yshift=-524.44pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont standards.ieee.org};
+    at ([xshift=60.36pt,yshift=-524.44pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont standards.ieee.org};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
-      at ([xshift=60.36pt,yshift=-536.4418pt]current page.north west)
-      {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont Phone: +1 732 981 0060};
+    at ([xshift=60.36pt,yshift=-536.4418pt]current page.north west)
+        {\HLACoverFont\fontsize{9.96pt}{9.96pt}\selectfont Phone: +1 732 981 0060};
 
 
     \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=33pt]current page.south west) {\IEEEWordmark};
     \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial noncommercial LaTeX recreation.};
-  \end{tikzpicture}%
-  \null\par
+    \end{tikzpicture}%
+    \null\par
 }
 
 
 % Native semantic primitives for Clause 3.2 through Annex B.
 % These keep content typed and addressable while preserving the source page map.
 \newcommand{\HLAClauseHeading}[3][12pt]{%
-  \HLAContentMarker{#2}%
-  \hypertarget{#2}{}%
-  \pdfbookmark[0]{#3}{bookmark:semantic:#2}%
-  {\HLAFacSans\bfseries\fontsize{#1}{14.4pt}\selectfont #3\par}%
+    \HLAContentMarker{#2}%
+    \hypertarget{#2}{}%
+    \pdfbookmark[0]{#3}{bookmark:semantic:#2}%
+    {\HLAFacSans\bfseries\fontsize{#1}{14.4pt}\selectfont #3\par}%
 }
 
 \newcommand{\HLASubclauseHeading}[3][10.98pt]{%
-  \HLAContentMarker{#2}%
-  \hypertarget{#2}{}%
-  \pdfbookmark[1]{#3}{bookmark:semantic:#2}%
-  {\HLAFacSans\bfseries\fontsize{#1}{13.18pt}\selectfont #3\par}%
+    \HLAContentMarker{#2}%
+    \hypertarget{#2}{}%
+    \pdfbookmark[1]{#3}{bookmark:semantic:#2}%
+    {\HLAFacSans\bfseries\fontsize{#1}{13.18pt}\selectfont #3\par}%
 }
 
 \newcommand{\HLAAcronymRow}[3]{%
-  \HLAContentMarker{#1}%
-  \hypertarget{#1}{}%
-  \noindent\makebox[72.004pt][l]{#2}#3\par%
+    \HLAContentMarker{#1}%
+    \hypertarget{#1}{}%
+    \noindent\makebox[72.004pt][l]{#2}#3\par%
 }
 
 \newenvironment{hlaacronymrows}{%
-  \par\begingroup
-  \fontsize{10.02pt}{17.569pt}\selectfont
-  \setlength{\parskip}{0pt}%
-  \setlength{\parindent}{0pt}%
+    \par\begingroup
+    \fontsize{10.02pt}{17.569pt}\selectfont
+    \setlength{\parskip}{0pt}%
+    \setlength{\parindent}{0pt}%
 }{%
-  \par\endgroup
+    \par\endgroup
 }
 
 \newenvironment{hlasummaryrules}{%
-  \begin{enumerate}[
-    label=\arabic{enumi}),
-    leftmargin=53.95pt,
-    labelwidth=21.80pt,
-    labelsep=10.35pt,
-    itemindent=0pt,
-    listparindent=0pt,
-    itemsep=5.965pt,
-    parsep=0pt,
-    topsep=0pt,
-    partopsep=0pt,
-    align=right
-  ]%
+    \begin{enumerate}[
+        label=\arabic{enumi}),
+        leftmargin=53.95pt,
+        labelwidth=21.80pt,
+        labelsep=10.35pt,
+        itemindent=0pt,
+        listparindent=0pt,
+        itemsep=5.965pt,
+        parsep=0pt,
+        topsep=0pt,
+        partopsep=0pt,
+        align=right
+    ]%
 }{%
-  \end{enumerate}%
+    \end{enumerate}%
 }
 
 \newcommand{\HLASummaryRule}[2]{%
-  \HLAContentMarker{#1}%
-  \hypertarget{#1}{}%
-  \item #2%
+    \HLAContentMarker{#1}%
+    \hypertarget{#1}{}%
+    \item #2%
 }
 
 \newcommand{\HLADetailedRuleHeading}[2]{%
-  \HLAContentMarker{#1}%
-  \hypertarget{#1}{}%
-  \pdfbookmark[1]{#2}{bookmark:semantic:#1}%
-  {\HLAFacSans\bfseries\fontsize{10.98pt}{13.18pt}\selectfont #2\par}%
+    \HLAContentMarker{#1}%
+    \hypertarget{#1}{}%
+    \pdfbookmark[1]{#2}{bookmark:semantic:#1}%
+    {\HLAFacSans\bfseries\fontsize{10.98pt}{13.18pt}\selectfont #2\par}%
 }
 
 \newcommand{\HLARationaleHeading}[2]{%
-  \HLAContentMarker{#1}%
-  \hypertarget{#1}{}%
-  {\HLAFacSans\bfseries\fontsize{10.02pt}{12.02pt}\selectfont #2\par}%
+    \HLAContentMarker{#1}%
+    \hypertarget{#1}{}%
+    {\HLAFacSans\bfseries\fontsize{10.02pt}{12.02pt}\selectfont #2\par}%
 }
 
 \newcommand{\HLANormativeRuleStatement}[1]{%
-  {\itshape #1\par}%
+        {\itshape #1\par}%
 }
 
 \newcommand{\HLABibliographyEntry}[3]{%
-  \HLAContentMarker{#1}%
-  \hypertarget{#1}{}%
-  \noindent #2\hspace{0.35em}#3\par%
+    \HLAContentMarker{#1}%
+    \hypertarget{#1}{}%
+    \noindent #2\hspace{0.35em}#3\par%
 }
 
 % The bibliography page uses smaller source footnotes than the glossary pages.
 \newcommand{\HLAUseBibliographyFootnotes}{%
-  \setlength{\skip\footins}{8pt}%
-  \setlength{\footnotemargin}{6.84pt}%
-  \setlength{\footnotesep}{2pt}%
-  \renewcommand{\footnoterule}{%
-    \kern-5.37pt\hrule width 144pt height 0.4pt\kern 4.77pt%
-  }%
-  \renewcommand{\footnotelayout}{\HLAFacSerif\fontsize{7.98pt}{9.0pt}\selectfont\justifying}%
+    \setlength{\skip\footins}{8pt}%
+    \setlength{\footnotemargin}{6.84pt}%
+    \setlength{\footnotesep}{2pt}%
+    \renewcommand{\footnoterule}{%
+        \kern-5.37pt\hrule width 144pt height 0.4pt\kern 4.77pt%
+    }%
+    \renewcommand{\footnotelayout}{\HLAFacSerif\fontsize{7.98pt}{9.0pt}\selectfont\justifying}%
 }

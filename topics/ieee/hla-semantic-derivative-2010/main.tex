@@ -1,0 +1,39 @@
+\documentclass[10pt]{article}
+
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{nosep,leftmargin=*}
+\setcounter{tocdepth}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{HLA 2010 semantic derivative}
+\rhead{Programmatic conformance view}
+\cfoot{\thepage}
+
+\begin{document}
+
+    \begin{titlepage}
+        \centering
+        \vspace*{25mm}
+        {\Huge\bfseries HLA 2010 Semantic Derivative\\[0.6em]}
+        {\Large Programmatic requirements, state logic, and traceability\\[2em]}
+        Generated from validated semantic records\\[1em]
+        \vfill
+        This document is a derivative semantic view of the IEEE HLA 1516-2010,
+        1516.1-2010, and 1516.2-2010 recreations. It is generated from source-owned
+        records and is not a replacement for the faithful recreations.
+    \end{titlepage}
+
+    \tableofcontents
+    \clearpage
+    \input{output/semantic/reflowable}
+
+\end{document}

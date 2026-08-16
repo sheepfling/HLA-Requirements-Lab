@@ -20,6 +20,7 @@ python -m pip install -e .
 From this directory:
 
 ```powershell
+python build.py generate
 python build.py build
 python build.py clean
 ```

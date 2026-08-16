@@ -27,7 +27,10 @@
       "id": "scope",
       "title": "Scope and corpus",
       "purpose": "Identify the three source standards and their semantic boundaries.",
-      "record_kinds": ["clause", "content-block"],
+      "record_kinds": [
+        "clause",
+        "content-block"
+      ],
       "output": "section",
       "per_document": false,
       "renderer": "scope"
@@ -36,7 +39,10 @@
       "id": "concepts",
       "title": "Concepts and terminology",
       "purpose": "Present reusable definitions and the hierarchy that owns them.",
-      "record_kinds": ["clause", "definition"],
+      "record_kinds": [
+        "clause",
+        "definition"
+      ],
       "output": "section",
       "per_document": true,
       "renderer": "concepts"
@@ -45,7 +51,10 @@
       "id": "normative",
       "title": "Normative requirements",
       "purpose": "Present reviewed requirements, coverage semantics, and clause relationships.",
-      "record_kinds": ["requirement", "requirement-link"],
+      "record_kinds": [
+        "requirement",
+        "requirement-link"
+      ],
       "output": "section",
       "per_document": true,
       "renderer": "normative"
@@ -54,7 +63,11 @@
       "id": "operations",
       "title": "Services and operational behavior",
       "purpose": "Present services, callbacks, implementations, and operational prose.",
-      "record_kinds": ["content-block", "content-element", "implementation"],
+      "record_kinds": [
+        "content-block",
+        "content-element",
+        "implementation"
+      ],
       "output": "section",
       "per_document": true,
       "renderer": "operations"
@@ -63,7 +76,11 @@
       "id": "state-logic",
       "title": "State machines and message sequences",
       "purpose": "Present states, events, transitions, guards, actions, and sequence messages.",
-      "record_kinds": ["state-machine", "state", "transition"],
+      "record_kinds": [
+        "state-machine",
+        "state",
+        "transition"
+      ],
       "output": "section",
       "per_document": true,
       "renderer": "state-logic"
@@ -72,7 +89,11 @@
       "id": "tables",
       "title": "Semantic tables",
       "purpose": "Present reusable table families, rows, columns, cells, and dependencies.",
-      "record_kinds": ["table-family", "table", "table-cell"],
+      "record_kinds": [
+        "table-family",
+        "table",
+        "table-cell"
+      ],
       "output": "table",
       "per_document": true,
       "renderer": "tables"

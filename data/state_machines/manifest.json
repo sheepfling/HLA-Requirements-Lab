@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "generated_by": "scripts/inventory_state_machines.py",
+  "generated_by": "hla_lab/diagrams/inventory_state_machines.py",
   "document_scopes": [
     {
       "document": "hla-1516.1",

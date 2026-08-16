@@ -18,5 +18,5 @@ python build.py build
 
 The PDF and LaTeX intermediates are ignored. The profile is intentionally
 small: a real document family can add its own command vocabulary and dialect
-without changing `scripts/semantic_model.py`, `scripts/semantic_generation.py`,
-or `scripts/latex_renderer.py`.
+without changing `hla_lab/core/semantic_model.py`, `hla_lab/generation/semantic_generation.py`,
+or `hla_lab/adapters/latex_renderer.py`.

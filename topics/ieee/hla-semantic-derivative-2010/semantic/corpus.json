@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "document_id": "hla-1516-2010",
+      "title": "IEEE HLA 1516-2010 — Framework and Rules",
+      "edition": "2010",
+      "relationship": "standalone"
+    },
+    {
+      "document_id": "hla-1516.1-2010",
+      "title": "IEEE HLA 1516.1-2010 — Federate Interface Specification",
+      "edition": "2010",
+      "relationship": "extends",
+      "related_document_ids": [
+        "hla-1516-2010"
+      ]
+    },
+    {
+      "document_id": "hla-1516.2-2010",
+      "title": "IEEE HLA 1516.2-2010 — Object Model Template",
+      "edition": "2010",
+      "relationship": "companion",
+      "related_document_ids": [
+        "hla-1516-2010"
+      ]
+    }
+  ]
+}

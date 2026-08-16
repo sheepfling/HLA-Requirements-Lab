@@ -1,0 +1,75 @@
+\begin{tikzpicture}[
+    x=0.01cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f8 stroke/.style={draw=black,line width=.29pt},
+    f8 transition/.style={draw=black,line width=.36pt,-{Stealth[length=2.25pt,width=2.05pt]}},
+    f8 title/.style={font=\rmfamily\fontsize{4.45}{4.90}\selectfont,align=center,inner sep=0pt},
+    f8 text/.style={font=\rmfamily\fontsize{4.55}{5.05}\selectfont,align=center,inner sep=0pt},
+    f8 small/.style={font=\rmfamily\fontsize{4.05}{4.65}\selectfont,align=center,inner sep=0pt},
+    f8 caption/.style={font=\fontfamily{phv}\fontseries{b}\fontshape{n}\selectfont\fontsize{5.78}{6.35}\selectfont,align=center,inner sep=0pt}
+]
+    % Source physical page 47 contains an embedded 848 x 460 one-bit Figure 8
+    % image, placed at x=115.620..522.660 pt and y=470.220..691.020 pt.
+    % The caption is separately typeset over the blank lower band of that image
+    % footprint.  Reusing the source-image coordinate system keeps the accepted
+    % native reconstruction tied to measurable source geometry.
+    \path[use as bounding box] (0,0) rectangle (848,460);
+
+    % Uniform source-geometry correction derived from the first matched 400-dpi
+    % page render.  The scale applies to the state-chart geometry/text only; the
+    % separately typeset caption is tuned independently below.
+    \begin{scope}[shift={(5.1,3.4)},shift={(424,230)},scale=1.014,shift={(-424,-230)}]
+
+        % F08-S00: outer composite state, Awaiting Synchronization (s,L).
+        \draw[f8 stroke]
+        (167,103) -- (663,103)
+        .. controls (681,103) and (695,117) .. (695,135)
+        -- (695,359)
+        .. controls (695,377) and (681,391) .. (663,391)
+        -- (167,391)
+        .. controls (149,391) and (135,377) .. (135,359)
+        -- (135,135)
+        .. controls (135,117) and (149,103) .. (167,103)
+        -- cycle;
+
+        % Source title tab shares the outer upper-left boundary.
+        \draw[f8 stroke] (135,151) -- (303,151) -- (303,103);
+        \node[f8 title] at (219.0,127.0) {Awaiting\\Synchronization $(s,L)$};
+
+        % F08-S01: Waiting for Federate to Synchronize.
+        \draw[f8 stroke,rounded corners=.060cm] (319,223) rectangle (471,287);
+        \node[f8 text] at (395,255.0) {Waiting for Federate\\to Synchronize};
+
+        % F08-P01: initial pseudo-state.
+        \fill (168,255) circle[radius=7.7];
+
+        % F08-P02: final pseudo-state.
+        \draw[f8 stroke] (640,255) circle[radius=15.7];
+        \fill (640,255) circle[radius=7.7];
+
+        % F08-E01: members of synch_set enter the waiting state and are announced.
+        \draw[f8 transition] (176,255) -- (318,255);
+        \node[f8 small] at (241.0,307.0) {[
+        $F_s$ in synch\_set ] /\\
+        Announce\\Synchronization\\Point \textdagger{} $(F_s,L)$};
+
+        % F08-E02: the federate finishes its individual synchronization (or resigns).
+        \draw[f8 transition] (472,255) -- (623,255);
+        \node[f8 small] at (565.5,330.0) {Synchronization\\Point Achieved $(F_s,L)$\\or\\Resign Federation\\Execution $(F_s)$};
+
+        % F08-E03: federates outside synch_set bypass the waiting state.
+        \draw[f8 transition]
+        (168,247)
+        .. controls (169,198) and (279,159) .. (400,159)
+        .. controls (520,159) and (625,200) .. (632,239);
+        \node[f8 small] at (414.0,142.5) {[ $F_s$ not in synch\_set ]};
+
+    \end{scope}
+
+    % The source caption is separately typeset within the lower blank band of
+    % the embedded image footprint.  Its source text bounding box center maps to
+    % approximately (410.9,414.5) in the 848 x 460 coordinate system.
+    \node[f8 caption] at (415.2,420.9) {\scalebox{1.102}[1.110]{Figure 8---Awaiting synchronization ($s,L$)}};
+\end{tikzpicture}

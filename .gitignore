@@ -229,25 +229,20 @@ __marimo__/
 .pre-commit-cache/
 
 # Python caches and test/type-checking output
-.mypy_cache/
 .pyright/
-.pytest_cache/
-.ruff_cache/
 .tmp/
 **/.tmp/
 tmp/
 **/tmp/
 .temp/
 temp/
-__pycache__/
 *.py[cod]
-.coverage
-htmlcov/
 
 # Generated document output and packaging artifacts
 **/output/
-build/
 **/build/
+# Generated page projections are derived from semantic source records.
+**/sections/generated/
 dist/
 *.pdf
 *.dot
@@ -261,7 +256,6 @@ dist/
 *.bmp
 *.tif
 *.tiff
-*.egg-info/
 pip-wheel-metadata/
 **/*.aux
 **/*.bbl
@@ -283,10 +277,8 @@ pip-wheel-metadata/
 *.swo
 
 # Local secrets, logs, and operating-system metadata
-.env
 .env.*
 !.env.example
-*.log
 .DS_Store
 Thumbs.db
 

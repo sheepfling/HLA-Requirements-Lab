@@ -1,0 +1,1050 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "req-aef9fc7cd5ab",
+      "title": "Normative statement clauses/01-overview.tex:37",
+      "statement": "supporting utilities, or interfaces to live systems) and federations (sets of federates working together) must\\\\",
+      "kind": "detailed",
+      "clause": "1",
+      "clause_id": "clause-1",
+      "machine_statement": "supporting utilities, or interfaces to live systems) and federations (sets of federates working together) must\\\\",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.1",
+      "source": {
+        "path": "clauses/01-overview.tex",
+        "line": 37,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-04334b71afc5",
+      "title": "Normative statement clauses/02-normative-references.tex:5",
+      "statement": "The following referenced documents are indispensable for the application of this document (i.e., they must be understood and used, so each referenced document is cited in text and its relationship to this document is explained). For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments or corrigenda) applies.",
+      "kind": "detailed",
+      "clause": "2",
+      "clause_id": "clause-2",
+      "machine_statement": "The following referenced documents are indispensable for the application of this document (i.e., they must be understood and used, so each referenced document is cited in text and its relationship to this document is explained). For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments or corrigenda) applies.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.2",
+      "source": {
+        "path": "clauses/02-normative-references.tex",
+        "line": 5,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-1d45d0b82b77",
+      "title": "Normative statement clauses/03-definitions-part-02.tex:154",
+      "statement": "lookaheadA nonnegative value that establishes a lower value on the timestamps that can be sent in timestamp order (TSO) messages by time-regulating joined federates. Once established, a joined federate's lookahead value may be changed only by using the Modify Lookahead service. Each time-regulating joined federate must provide a lookahead value when becoming time-regulating.",
+      "kind": "detailed",
+      "clause": "3",
+      "clause_id": "clause-3",
+      "machine_statement": "lookaheadA nonnegative value that establishes a lower value on the timestamps that can be sent in timestamp order (TSO) messages by time-regulating joined federates. Once established, a joined federate's lookahead value may be changed only by using the Modify Lookahead service. Each time-regulating joined federate must provide a lookahead value when becoming time-regulating.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.3",
+      "source": {
+        "path": "clauses/03-definitions-part-02.tex",
+        "line": 154,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-23708c71767f",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:12",
+      "statement": "; Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 12,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-2b0368a4b971",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:13",
+      "statement": "; In a federation, all simulation-associated object instance representation shall be in the",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; In a federation, all simulation-associated object instance representation shall be in the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 13,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-38af12c1c9a1",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:15",
+      "statement": "; During a federation execution, all exchange of FOM data among joined federates shall occur",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; During a federation execution, all exchange of FOM data among joined federates shall occur",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 15,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-4c8e8a00c964",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:17",
+      "statement": "; During a federation execution, joined federates shall interact with the RTI in accordance with",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; During a federation execution, joined federates shall interact with the RTI in accordance with",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 17,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-6e31787f0462",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:19",
+      "statement": "; During a federation execution, an instance attribute shall be owned by at most one joined",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; During a federation execution, an instance attribute shall be owned by at most one joined",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 19,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-8eedb1282958",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:27",
+      "statement": "; Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 27,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-bdf2b292e41e",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:28",
+      "statement": "; Federates shall be able to update and/or reflect any instance attributes and send and/or receive",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federates shall be able to update and/or reflect any instance attributes and send and/or receive",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 28,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-aea4e76e3124",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:30",
+      "statement": "; Federates shall be able to transfer and/or accept ownership of instance attributes dynamically",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federates shall be able to transfer and/or accept ownership of instance attributes dynamically",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 30,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-6878da484828",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:32",
+      "statement": "; Federates shall be able to vary the conditions (e.g., thresholds) under which they provide",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federates shall be able to vary the conditions (e.g., thresholds) under which they provide",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 32,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-65c137e14713",
+      "title": "Normative statement clauses/04-summary-hla-rules.tex:34",
+      "statement": "; Federates shall be able to manage local time in a way that will allow them to coordinate data",
+      "kind": "detailed",
+      "clause": "4",
+      "clause_id": "clause-4",
+      "machine_statement": "; Federates shall be able to manage local time in a way that will allow them to coordinate data",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.4",
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 34,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-6594194fd7f3",
+      "title": "Normative statement clauses/05-federation-rules.tex:21",
+      "statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 21,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-e1130d0888e7",
+      "title": "Normative statement clauses/05-federation-rules.tex:24",
+      "statement": "All data to be exchanged in accordance with the HLA shall be documented in a FOM. The FOM is specified",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "All data to be exchanged in accordance with the HLA shall be documented in a FOM. The FOM is specified",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 24,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-de98bde3e135",
+      "title": "Normative statement clauses/05-federation-rules.tex:25",
+      "statement": "using one or more FOM modules and one MOM and Initialization Module (MIM). A FOM shall document",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "using one or more FOM modules and one MOM and Initialization Module (MIM). A FOM shall document",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 25,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-42c29c706655",
+      "title": "Normative statement clauses/05-federation-rules.tex:30",
+      "statement": "FOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010 to support reuse of a FOM by",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "FOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010 to support reuse of a FOM by",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 30,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-e433342667fe",
+      "title": "Normative statement clauses/05-federation-rules.tex:35",
+      "statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 35,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-aa8eeaf68331",
+      "title": "Normative statement clauses/05-federation-rules.tex:39",
+      "statement": "In the HLA, the responsibility for maintaining the values of HLA object instance attributes shall take place",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "In the HLA, the responsibility for maintaining the values of HLA object instance attributes shall take place",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 39,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-8ed2c9e12ecd",
+      "title": "Normative statement clauses/05-federation-rules.tex:40",
+      "statement": "in the joined federate. In an HLA federation, all joined federate-associated instance attributes shall be owned",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "in the joined federate. In an HLA federation, all joined federate-associated instance attributes shall be owned",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 40,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-83db51084633",
+      "title": "Normative statement clauses/05-federation-rules.tex:50",
+      "statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 50,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-fdfad6104c04",
+      "title": "Normative statement clauses/05-federation-rules.tex:56",
+      "statement": "in a given federation execution shall be executed by the exchange of data via the RTI services. Based on the",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "in a given federation execution shall be executed by the exchange of data via the RTI services. Based on the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 56,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-20bd39b6a0b8",
+      "title": "Normative statement clauses/05-federation-rules.tex:57",
+      "statement": "FOM, joined federates shall identify to the RTI what information they will provide and require, along with",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "FOM, joined federates shall identify to the RTI what information they will provide and require, along with",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 57,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-0d62e306ec4e",
+      "title": "Normative statement clauses/05-federation-rules.tex:59",
+      "statement": "federate. The RTI shall then provide the coordination, synchronization, and data exchange among the joined",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "federate. The RTI shall then provide the coordination, synchronization, and data exchange among the joined",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 59,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-903b3f312de5",
+      "title": "Normative statement clauses/05-federation-rules.tex:64",
+      "statement": "correct way shall be the responsibility of the joined federates. The RTI shall ensure that the data are",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "correct way shall be the responsibility of the joined federates. The RTI shall ensure that the data are",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 64,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-2929c6a92cb4",
+      "title": "Normative statement clauses/05-federation-rules.tex:70",
+      "statement": "RTI services shall be used to ensure that the coordination needs of the distributed applications (federations)",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "RTI services shall be used to ensure that the coordination needs of the distributed applications (federations)",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 70,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-739f7f8e8cca",
+      "title": "Normative statement clauses/05-federation-rules.tex:75",
+      "statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 75,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-e477bb5875b8",
+      "title": "Normative statement clauses/05-federation-rules.tex:80",
+      "statement": "Joined federates shall use this standard interface to access RTI services (see IEEE Std 1516.1-2010). The",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "Joined federates shall use this standard interface to access RTI services (see IEEE Std 1516.1-2010). The",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 80,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-12ccd9aef38a",
+      "title": "Normative statement clauses/05-federation-rules.tex:81",
+      "statement": "specification shall define how federate applications interact with the infrastructure. However, because the",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "specification shall define how federate applications interact with the infrastructure. However, because the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-11cd9abff4aa",
+      "title": "Normative statement clauses/05-federation-rules.tex:88",
+      "statement": "During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any",
+      "kind": "detailed",
+      "clause": "5",
+      "clause_id": "clause-5",
+      "machine_statement": "During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.5",
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 88,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-ed4ed2c25c61",
+      "title": "Normative statement clauses/06-federate-rules.tex:16",
+      "statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 16,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-b22e570b6c43",
+      "title": "Normative statement clauses/06-federate-rules.tex:19",
+      "statement": "The HLA SOM shall include the object classes, class attributes, and interaction classes of the federate that",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "The HLA SOM shall include the object classes, class attributes, and interaction classes of the federate that",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 19,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-5823576094a1",
+      "title": "Normative statement clauses/06-federate-rules.tex:21",
+      "statement": "MIM. The HLA does not prescribe which data are included in the SOM; this task shall be the responsibility",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "MIM. The HLA does not prescribe which data are included in the SOM; this task shall be the responsibility",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 21,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-a95e6433e181",
+      "title": "Normative statement clauses/06-federate-rules.tex:22",
+      "statement": "of the federate developer. SOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010.",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "of the federate developer. SOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 22,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-4035ee8542f9",
+      "title": "Normative statement clauses/06-federate-rules.tex:26",
+      "statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 26,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-853b267669d4",
+      "title": "Normative statement clauses/06-federate-rules.tex:31",
+      "statement": "external use as part of federation executions. These capabilities for external interaction shall be documented",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "external use as part of federation executions. These capabilities for external interaction shall be documented",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 31,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-6b8d7a84dacf",
+      "title": "Normative statement clauses/06-federate-rules.tex:32",
+      "statement": "in the SOM for the federate. If documented in the SOM, these federate capabilities shall include the",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "in the SOM for the federate. If documented in the SOM, these federate capabilities shall include the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 32,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-9fba1182e87f",
+      "title": "Normative statement clauses/06-federate-rules.tex:38",
+      "statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 38,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-33d4fc0b72a0",
+      "title": "Normative statement clauses/06-federate-rules.tex:44",
+      "statement": "ownership can be dynamically acquired or divested during execution, shall be documented in the SOM for",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "ownership can be dynamically acquired or divested during execution, shall be documented in the SOM for",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 44,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-eca6a1586447",
+      "title": "Normative statement clauses/06-federate-rules.tex:49",
+      "statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 49,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-d3bfb6c2f177",
+      "title": "Normative statement clauses/06-federate-rules.tex:58",
+      "statement": "of specific instance attributes owned by a federate shall be documented in the SOM for that federate.",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "of specific instance attributes owned by a federate shall be documented in the SOM for that federate.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 58,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-c6862b736fe4",
+      "title": "Normative statement clauses/06-federate-rules.tex:62",
+      "statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 62,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-c65bc0100aeb",
+      "title": "Normative statement clauses/06-federate-rules.tex:67",
+      "statement": "Federates shall adhere to the time management approach of the federation.",
+      "kind": "detailed",
+      "clause": "6",
+      "clause_id": "clause-6",
+      "machine_statement": "Federates shall adhere to the time management approach of the federation.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.6",
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 67,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-80d0e2a5b0d0",
+      "title": "Normative statement clauses/annex-a-rationale.tex:21",
+      "statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federations shall have an HLA FOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 21,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-e861e1cd97a5",
+      "title": "Normative statement clauses/annex-a-rationale.tex:34",
+      "statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "In a federation, all simulation-associated object instance representation shall be in the federates, not in the",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 34,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-88840d83658f",
+      "title": "Normative statement clauses/annex-a-rationale.tex:55",
+      "statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 55,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-5d9f1eb195c7",
+      "title": "Normative statement clauses/annex-a-rationale.tex:69",
+      "statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "During a federation execution, joined federates shall interact with the RTI in accordance with the HLA",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 69,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-6952bdaa49dd",
+      "title": "Normative statement clauses/annex-a-rationale.tex:84",
+      "statement": "During a federation execution, an instance attribute shall be owned by at most one joined federate at any",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "During a federation execution, an instance attribute shall be owned by at most one joined federate at any",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 84,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-d3403f1d9db0",
+      "title": "Normative statement clauses/annex-a-rationale.tex:91",
+      "statement": "joined federates, hence the rule explicitly states that ``an instance attribute shall be owned by at most one",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "joined federates, hence the rule explicitly states that ``an instance attribute shall be owned by at most one",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-47030a416f43",
+      "title": "Normative statement clauses/annex-a-rationale.tex:103",
+      "statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federates shall have an HLA SOM, documented in accordance with the HLA OMT.",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 103,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-a5c74f2088d0",
+      "title": "Normative statement clauses/annex-a-rationale.tex:126",
+      "statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federates shall be able to update and/or reflect any instance attributes and send and/or receive interactions,",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 126,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-71c201f1256b",
+      "title": "Normative statement clauses/annex-a-rationale.tex:136",
+      "statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federates shall be able to transfer and/or accept ownership of instance attributes dynamically during a",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 136,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-0fbcd1ee2a99",
+      "title": "Normative statement clauses/annex-a-rationale.tex:148",
+      "statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federates shall be able to vary the conditions (e.g., thresholds) under which they provide updates of",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 148,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-f47a3978d3b8",
+      "title": "Normative statement clauses/annex-a-rationale.tex:159",
+      "statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "Federates shall be able to manage local time in a way that will allow them to coordinate data exchange with",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 159,
+        "end_line": null
+      }
+    },
+    {
+      "id": "req-661d1081151d",
+      "title": "Normative statement clauses/annex-a-rationale.tex:178",
+      "statement": "may not need to use the services described in Clause 8 of IEEE Std 1516.1-2010. However, a federate must",
+      "kind": "detailed",
+      "clause": "A.2.5",
+      "clause_id": "clause-A.2.5",
+      "machine_statement": "may not need to use the services described in Clause 8 of IEEE Std 1516.1-2010. However, a federate must",
+      "transition_ids": [],
+      "coverage_kind": "cross-cutting",
+      "coverage_note": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted.",
+      "extraction": "explicit",
+      "semantic_group_id": "m2010.clause.A.2.5",
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 178,
+        "end_line": null
+      }
+    }
+  ]
+}
