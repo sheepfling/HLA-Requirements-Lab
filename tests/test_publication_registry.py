@@ -6,7 +6,6 @@ import unittest
 from pathlib import Path
 
 from hla_lab.build.build import publication_targets
-
 from hla_lab.publication.publication_registry import (
     load_publication_registry,
     load_release_manifest,

@@ -10,9 +10,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from hla_lab.build.topic import main as topic_main
-
 from hla_lab.adapters.document_builder import BuildConfig
+from hla_lab.build.topic import main as topic_main
 from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
 from hla_lab.core.semantic_model import (
     Clause,
