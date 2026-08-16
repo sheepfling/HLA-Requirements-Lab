@@ -41,6 +41,7 @@ GENERATED_SUFFIXES = {
     ".xdv",
 }
 GENERATED_PARTS = {"build", "dist", "output", ".tmp", "reviews", "review-artifacts"}
+SOURCE_BUILD_PATH = ("hla_lab", "build")
 
 
 def _load_manifest(path: Path) -> dict[str, Any]:
@@ -93,7 +94,10 @@ def _tracked_generated(repo_root: Path) -> list[str]:
         for path in tracked
         if path
         and (
-            GENERATED_PARTS.intersection(Path(path).parts)
+            (
+                Path(path).parts[: len(SOURCE_BUILD_PATH)] != SOURCE_BUILD_PATH
+                and GENERATED_PARTS.intersection(Path(path).parts)
+            )
             or Path(path).suffix in GENERATED_SUFFIXES
         )
     )
