@@ -6,7 +6,7 @@ not a replacement for the unofficial faithful recreations.
 
 Build it from the repository root with:
 
-```powershell
+```console
 hla-lab publish hla-hierarchy-reconstruction-2025
 ```
 

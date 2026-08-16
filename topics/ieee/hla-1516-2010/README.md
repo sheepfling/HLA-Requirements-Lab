@@ -7,7 +7,7 @@ comparison material remain outside the tracked document root.
 
 Build it with:
 
-```powershell
+```console
 hla-lab publish hla-unofficial-faithful-reconstruction-2010
 ```
 

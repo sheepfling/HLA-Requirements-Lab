@@ -27,17 +27,9 @@ records to be consumed side-by-side without matching on human wording.
 Run these from a corpus checkout. `.compliance/` is ignored and is intended for
 local or CI artifacts only:
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE='1'
-python -m hla_lab.publication.export_compliance_bundle `
-  --corpus-root . `
-  --edition 2025 `
-  --revision <corpus-commit> `
-  --output .compliance/corpus-bundle.json
-python -m hla_lab.publication.verify_compliance_bundle `
-  --bundle .compliance/corpus-bundle.json `
-  --manifest ../my-rti/compliance/implementation-manifest.json `
-  --json
+```console
+python -m hla_lab.publication.export_compliance_bundle --corpus-root . --edition 2025 --revision <corpus-commit> --output .compliance/corpus-bundle.json
+python -m hla_lab.publication.verify_compliance_bundle --bundle .compliance/corpus-bundle.json --manifest ../my-rti/compliance/implementation-manifest.json --json
 ```
 
 Use `--edition all` when one implementation manifest covers both editions.
@@ -78,13 +70,8 @@ review step must accept real evidence before a binding can be promoted to
 
 To run an adapter directly from an RTI checkout:
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE='1'
-python -m hla_lab.traceability.compliance_sidecar check `
-  --bundle .compliance/corpus-bundle.json `
-  --manifest-output .compliance/implementation-manifest.json `
-  --json `
-  --adapter-command python tools/rti_compliance_adapter.py
+```console
+python -m hla_lab.traceability.compliance_sidecar check --bundle .compliance/corpus-bundle.json --manifest-output .compliance/implementation-manifest.json --json --adapter-command python tools/rti_compliance_adapter.py
 ```
 
 `--json` must appear before `--adapter-command` because all following tokens
@@ -98,17 +85,10 @@ requirement, transition, and API-surface counts and ratios. Its
 `fully_verified` flag is the strict behavioral-coverage result; `passed` only
 means that the manifest is structurally valid and has no verifier errors.
 
-```powershell
-python -m hla_lab.traceability.compliance_sidecar prepare `
-  --bundle .compliance/corpus-bundle.json `
-  --output .compliance/adapter-request.json
-python tools/rti_compliance_adapter.py < .compliance/adapter-request.json `
-  > .compliance/adapter-response.json
-python -m hla_lab.traceability.compliance_sidecar check `
-  --bundle .compliance/corpus-bundle.json `
-  --adapter-response .compliance/adapter-response.json `
-  --manifest-output .compliance/implementation-manifest.json `
-  --json
+```console
+python -m hla_lab.traceability.compliance_sidecar prepare --bundle .compliance/corpus-bundle.json --output .compliance/adapter-request.json
+python tools/rti_compliance_adapter.py < .compliance/adapter-request.json > .compliance/adapter-response.json
+python -m hla_lab.traceability.compliance_sidecar check --bundle .compliance/corpus-bundle.json --adapter-response .compliance/adapter-response.json --manifest-output .compliance/implementation-manifest.json --json
 ```
 
 The split form is useful when the RTI build system owns process execution or

@@ -5,7 +5,7 @@ typed source records, but none requires another publication's generated files
 or PDF output.
 
 | Publication                                   | Purpose                                                                                                                 | Build roots                                |
-|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | `hla-unofficial-faithful-reconstruction-2010` | The three 2010 faithful reconstructions used as provenance for the 2010 semantic corpus.                                | 1516, 1516.1, and 1516.2 faithful projects |
 | `hla-unofficial-faithful-reconstruction-2025` | Non-authoritative, page-faithful recreations used for provenance and visual comparison.                                 | 1516, 1516.1, 1516.2 faithful projects     |
 | `hla-hierarchy-reconstruction-2010`           | Reflowable hierarchy-first reconstruction of the 2010 corpus.                                                           | `hla-semantic-derivative-2010`             |
@@ -17,7 +17,7 @@ The source-controlled [registry](../data/publications.json) maps a publication
 to its explicit release-project IDs. Its members and expected PDFs are defined
 in [the release manifest](../data/release/documents.json).
 
-```powershell
+```console
 # Inspect destinations.
 hla-lab publish
 

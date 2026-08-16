@@ -77,7 +77,7 @@ the generic derivative renderer, and HLA-profile isolation.
 
 Run it directly or through the top-level builder:
 
-```powershell
+```console
 python topics/fixture/non-hla-demo-2025/build.py build
 hla-lab build topics/fixture/non-hla-demo-2025
 uv run pytest tests/test_portability_contracts.py -q

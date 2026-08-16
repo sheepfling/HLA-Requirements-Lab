@@ -12,7 +12,7 @@ can be exercised without importing an HLA profile.
 
 Build it from this directory with:
 
-```powershell
+```console
 python build.py build
 ```
 

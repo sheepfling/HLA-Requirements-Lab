@@ -52,7 +52,7 @@ the default remains strict matching.
 
 Audit both editions with:
 
-```powershell
+```console
 python -m hla_lab.traceability.api_traceability --check --require-complete --json
 ```
 
@@ -99,8 +99,7 @@ silently accepted.
 
 Run the source-only readiness check from the repository root:
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE='1'
+```console
 hla-lab status --require-api-contract
 hla-lab status --require-api-contract --json
 ```
@@ -117,20 +116,12 @@ contains source-addressable RTI evidence.
 
 Inspect crosswalk gaps directly:
 
-```powershell
-python -m hla_lab.traceability.compliance `
-  topics/ieee/hla-1516.1-2025 `
-  --api-target fedpro `
-  --api-gaps `
-  --json
+```console
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --api-target fedpro --api-gaps --json
 ```
 
 Query one requirement and receive its resolved Java/C++ declaration sources:
 
-```powershell
-python -m hla_lab.traceability.compliance `
-  topics/ieee/hla-1516.1-2025 `
-  --document hla-1516.1-2025 `
-  --api-binding-requirement-id req-federate-connection-lost `
-  --json
+```console
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --document hla-1516.1-2025 --api-binding-requirement-id req-federate-connection-lost --json
 ```

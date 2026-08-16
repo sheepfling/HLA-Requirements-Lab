@@ -88,10 +88,8 @@ TEST_CASE("RTIambassador connect", "[compliance][rti.service.connect]") {
 
 Have the RTI's existing build job write its normal JUnit report:
 
-```powershell
-build\rti_tests.exe "[compliance]" `
-  --reporter junit `
-  --out build\compliance\catch2-results.xml
+```console
+build/rti_tests.exe "[compliance]" --reporter junit --out build/compliance/catch2-results.xml
 ```
 
 The supplied JUnit-results adapter reads that report; it never runs an
@@ -109,7 +107,7 @@ runtime observation for the final behavior claim.
 
 CTest can be the outer runner when the RTI already uses CMake:
 
-```powershell
+```console
 ctest --test-dir build --output-on-failure
 ```
 
@@ -130,14 +128,14 @@ void connect_satisfies_contract() {
 
 Run through the build system already owned by the RTI:
 
-```powershell
-.\mvnw test
+```console
+./mvnw test
 ```
 
 or:
 
-```powershell
-.\gradlew test
+```console
+./gradlew test
 ```
 
 Pass the generated Surefire or Gradle JUnit XML report to the supplied adapter.
@@ -221,27 +219,15 @@ emits only unreviewed evidence and statuses no stronger than `implemented`.
 After the RTI CI job has run its tests, use the same command for C++ or Java by
 changing only the report path and catalog:
 
-```powershell
-python -m hla_lab.traceability.compliance_sidecar check `
-  --bundle .compliance/corpus-bundle.json `
-  --manifest-output .compliance/implementation-manifest.raw.json `
-  --json `
-  --adapter-command python -m hla_lab.traceability.junit_adapter `
-  --catalog compliance/test-catalog.json `
-  --results build/compliance/catch2-results.xml `
-  --repository example/my-cpp-rti
+```console
+python -m hla_lab.traceability.compliance_sidecar check --bundle .compliance/corpus-bundle.json --manifest-output .compliance/implementation-manifest.raw.json --json --adapter-command python -m hla_lab.traceability.junit_adapter --catalog compliance/test-catalog.json --results build/compliance/catch2-results.xml --repository example/my-cpp-rti
 ```
 
 For Maven or Gradle, point `--results` to its XML artifact and use a Java
 catalog. Repeat `--results` when one CI run produces more than one report:
 
-```powershell
-python -m hla_lab.traceability.junit_adapter `
-  --catalog compliance/test-catalog.json `
-  --results target/surefire-reports/TEST-example.rti.RtiAmbassadorIT.xml `
-  --repository example/my-java-rti `
-  < .compliance/adapter-request.json `
-  > .compliance/adapter-response.raw.json
+```console
+python -m hla_lab.traceability.junit_adapter --catalog compliance/test-catalog.json --results target/surefire-reports/TEST-example.rti.RtiAmbassadorIT.xml --repository example/my-java-rti < .compliance/adapter-request.json > .compliance/adapter-response.raw.json
 ```
 
 The second form is useful when the build system already owns the sidecar's
@@ -256,23 +242,15 @@ exported with `--edition all`; `document_id` keeps their evidence independent.
 
 The corpus checkout first exports a revision-pinned bundle:
 
-```powershell
-python -m hla_lab.publication.export_compliance_bundle `
-  --corpus-root . `
-  --edition all `
-  --revision <corpus-commit> `
-  --output .compliance/corpus-bundle.json
+```console
+python -m hla_lab.publication.export_compliance_bundle --corpus-root . --edition all --revision <corpus-commit> --output .compliance/corpus-bundle.json
 ```
 
 The RTI CI job then builds the RTI, runs its standard tests, invokes the
 adapter, and asks the sidecar to verify the response:
 
-```powershell
-python -m hla_lab.traceability.compliance_sidecar check `
-  --bundle .compliance/corpus-bundle.json `
-  --manifest-output .compliance/implementation-manifest.json `
-  --json `
-  --adapter-command python tools/rti_compliance_adapter.py
+```console
+python -m hla_lab.traceability.compliance_sidecar check --bundle .compliance/corpus-bundle.json --manifest-output .compliance/implementation-manifest.json --json --adapter-command python tools/rti_compliance_adapter.py
 ```
 
 For a native adapter, replace the final command with the C++ executable or
@@ -288,11 +266,8 @@ without claiming complete coverage.
 The verifier's JSON result includes a `coverage` object. It reports both the
 structural binding result and the behavioral testing roll-up:
 
-```powershell
-python -m hla_lab.publication.verify_compliance_bundle `
-  --bundle .compliance/corpus-bundle.json `
-  --manifest .compliance/implementation-manifest.json `
-  --json
+```console
+python -m hla_lab.publication.verify_compliance_bundle --bundle .compliance/corpus-bundle.json --manifest .compliance/implementation-manifest.json --json
 ```
 
 The same `coverage` object is returned by the sidecar adapter command. It
@@ -316,20 +291,12 @@ structural validation while still reporting planned or partial testing.
 
 For build systems that own process execution, use the split protocol:
 
-```powershell
-python -m hla_lab.traceability.compliance_sidecar prepare `
-  --bundle .compliance/corpus-bundle.json `
-  --output .compliance/adapter-request.json
+```console
+python -m hla_lab.traceability.compliance_sidecar prepare --bundle .compliance/corpus-bundle.json --output .compliance/adapter-request.json
 
-python tools/rti_compliance_adapter.py `
-  < .compliance/adapter-request.json `
-  > .compliance/adapter-response.json
+python tools/rti_compliance_adapter.py < .compliance/adapter-request.json > .compliance/adapter-response.json
 
-python -m hla_lab.traceability.compliance_sidecar check `
-  --bundle .compliance/corpus-bundle.json `
-  --adapter-response .compliance/adapter-response.json `
-  --manifest-output .compliance/implementation-manifest.json `
-  --json
+python -m hla_lab.traceability.compliance_sidecar check --bundle .compliance/corpus-bundle.json --adapter-response .compliance/adapter-response.json --manifest-output .compliance/implementation-manifest.json --json
 ```
 
 Keep adapter diagnostics on stderr and reserve stdout for one JSON response.

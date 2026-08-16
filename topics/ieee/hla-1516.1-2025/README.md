@@ -14,7 +14,7 @@ repository policy. The intended long-term source of truth is the text-based LaTe
 
 Requirements are documented in [`BUILDING.md`](BUILDING.md).
 
-```powershell
+```console
 python build.py generate
 python build.py build
 python build.py clean

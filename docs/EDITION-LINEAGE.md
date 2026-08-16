@@ -48,11 +48,8 @@ have been reviewed in both corpora, for example:
 
 Query a reviewed side-by-side projection with:
 
-```powershell
-python -m hla_lab.corpus.edition_lineage data/semantic/edition-lineage.json `
-  --baseline hla-1516.1-2010 `
-  --target hla-1516.1-2025 `
-  --kind requirement --reviewed-only --json
+```console
+python -m hla_lab.corpus.edition_lineage data/semantic/edition-lineage.json --baseline hla-1516.1-2010 --target hla-1516.1-2025 --kind requirement --reviewed-only --json
 ```
 
 When a comparison is supplied a `ComplianceCorpus`, validation also verifies
@@ -63,22 +60,13 @@ edition-to-edition requirements traceability matrix.
 For an immediately usable HLA inventory/differential report, compare the
 edition-qualified semantic models directly:
 
-```powershell
+```console
 # Reviewed lineage plus every requirement without a reviewed correspondence.
-python -m hla_lab.corpus.hla_edition_diff `
-  --standard ieee-1516.1 `
-  --kind requirement `
-  --format csv
+python -m hla_lab.corpus.hla_edition_diff --standard ieee-1516.1 --kind requirement --format csv
 
 # State-machine inventory and transition inventory use the same contract.
-python -m hla_lab.corpus.hla_edition_diff `
-  --standard ieee-1516.1 `
-  --kind state-machine `
-  --format json
-python -m hla_lab.corpus.hla_edition_diff `
-  --standard ieee-1516.1 `
-  --kind transition `
-  --format csv
+python -m hla_lab.corpus.hla_edition_diff --standard ieee-1516.1 --kind state-machine --format json
+python -m hla_lab.corpus.hla_edition_diff --standard ieee-1516.1 --kind transition --format csv
 ```
 
 The adapter defaults to `2010 -> 2025` and resolves roots from

@@ -63,7 +63,7 @@ better:
 ## Product surfaces
 
 | Surface         | Purpose                                                     |
-|-----------------|-------------------------------------------------------------|
+| --------------- | ----------------------------------------------------------- |
 | Semantic corpus | Canonical typed records and source references               |
 | Lab checks      | Readiness, authority, coverage, and relationship validation |
 | Traceability    | Requirement, transition, edition, API, and evidence links   |

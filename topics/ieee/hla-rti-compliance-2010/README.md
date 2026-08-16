@@ -5,7 +5,7 @@ of the faithful and hierarchy-reconstruction PDFs: it loads the semantic
 corpus directly and emits a readable evidence contract, JSON manifest, graph,
 and normalized CSV projections under ignored `output/compliance/`.
 
-```powershell
+```console
 hla-lab publish hla-rti-compliance-requirements-2025
 ```
 

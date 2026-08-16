@@ -11,7 +11,7 @@ material only and is not required for a normal build.
 
 Install the Python dependencies from the repository root:
 
-```powershell
+```console
 python -m pip install -e .
 ```
 
@@ -19,7 +19,7 @@ python -m pip install -e .
 
 From this directory:
 
-```powershell
+```console
 python build.py generate
 python build.py build
 python build.py clean

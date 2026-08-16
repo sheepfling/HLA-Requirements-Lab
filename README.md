@@ -76,7 +76,7 @@ From the repository root:
 Install the project and use the installed `hla-lab` entry point for normal
 workflows:
 
-```powershell
+```console
 python -m pip install -e .
 hla-lab status --require-api-contract
 hla-lab build
@@ -86,9 +86,14 @@ hla-lab publish
 For contributor tooling, `uv sync --dev` is an optional reproducible setup;
 prefix the same commands with `uv run` when using that environment.
 
+Command examples use `console` fences and one-line invocations when the same
+command works in PowerShell and POSIX shells. Truly shell-specific setup, such
+as enabling MiKTeX package installation on Windows, remains explicitly labeled
+with its required shell.
+
 The stable command has defaults for the common workflows:
 
-```powershell
+```console
 hla-lab                  # show the workflow menu
 hla-lab docs             # list supported document roots
 hla-lab status           # check all documents
@@ -105,7 +110,7 @@ hla-lab quality --fix
 Specialized operations that need detailed selectors remain available through
 their owning `hla_lab` module, but are not required for the normal workflow.
 
-```powershell
+```console
 python -m hla_lab.build.build list
 python -m hla_lab.build.build build all
 python -m hla_lab.build.build build topics/siso/example-document
@@ -122,7 +127,7 @@ python -m hla_lab.build.build publication build hla-rti-compliance-requirements-
 
 For the complete development quality workflow, use the dev dependency group:
 
-```powershell
+```console
 uv sync --dev
 uv run rumdl fmt .
 uv run rumdl check .
@@ -151,7 +156,7 @@ boundaries and commands.
 
 Semantic records can be queried directly from source-first LaTeX:
 
-```powershell
+```console
 python -m hla_lab.core.semantic_model topics/ieee/hla-1516-2025
 python -m hla_lab.core.semantic_model topics/ieee/hla-1516.2-2025
 python -m hla_lab.core.semantic_model topics/ieee/hla-1516.2-2025 --json
@@ -200,28 +205,15 @@ the `planned` status deliberately does not claim concrete implementation code.
 The same
 queries are available from the stdout-only CLI:
 
-```powershell
-python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
-  --machine federate-lifetime `
-  --state federate.not-connected `
-  --event Connect `
-  --include-candidates
-python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
-  --machine federate-lifetime --json
-python -m hla_lab.traceability.compliance `
-  topics/ieee/hla-1516-2025 `
-  topics/ieee/hla-1516.1-2025 `
-  topics/ieee/hla-1516.2-2025 `
-  --document hla-1516.1-2025 `
-  --implementation-status planned `
-  --interface-kind service `
-  --json
+```console
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --machine federate-lifetime --state federate.not-connected --event Connect --include-candidates
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --machine federate-lifetime --json
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516-2025 topics/ieee/hla-1516.1-2025 topics/ieee/hla-1516.2-2025 --document hla-1516.1-2025 --implementation-status planned --interface-kind service --json
 ```
 
 Before RTI code development, run the specification-surface readiness gate:
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE='1'
+```console
 python -m hla_lab.traceability.spec_readiness --root .
 python -m hla_lab.traceability.spec_readiness --root . --json
 ```
@@ -241,12 +233,9 @@ evidence remain separate implementation work. See
 
 Regenerate the text-only API manifests from the local comparison archives with:
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE='1'
-python -m hla_lab.corpus.ingest_hla_api --edition 2010 --root . `
-  --output topics/ieee/hla-1516.1-2010/semantic/api-surfaces.json
-python -m hla_lab.corpus.ingest_hla_api --edition 2025 --root . `
-  --output topics/ieee/hla-1516.1-2025/semantic/api-surfaces.json
+```console
+python -m hla_lab.corpus.ingest_hla_api --edition 2010 --root . --output topics/ieee/hla-1516.1-2010/semantic/api-surfaces.json
+python -m hla_lab.corpus.ingest_hla_api --edition 2025 --root . --output topics/ieee/hla-1516.1-2025/semantic/api-surfaces.json
 ```
 
 The inbox archives remain comparison inputs; only the generated, provenance-
@@ -254,14 +243,13 @@ annotated JSON is part of the semantic source tree.
 
 Crosswalk statuses can be queried without producing an audit file:
 
-```powershell
-python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 `
-  --api-target fedpro --api-gaps --json
+```console
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --api-target fedpro --api-gaps --json
 ```
 
 Audit the complete requirement-to-Java/C++ declaration path for both editions:
 
-```powershell
+```console
 python -m hla_lab.traceability.api_traceability --check --require-complete --json
 ```
 
@@ -295,12 +283,8 @@ Authoritative requirement records and their transition relationships live in
 links and implementation links are bidirectional and validated at load time.
 A corpus-level report can include all three documents:
 
-```powershell
-python -m hla_lab.traceability.compliance `
-  topics/ieee/hla-1516-2025 `
-  topics/ieee/hla-1516.1-2025 `
-  topics/ieee/hla-1516.2-2025 `
-  --json
+```console
+python -m hla_lab.traceability.compliance topics/ieee/hla-1516-2025 topics/ieee/hla-1516.1-2025 topics/ieee/hla-1516.2-2025 --json
 ```
 
 After reviewing a candidate, promote it with the source-only workflow. The
@@ -308,18 +292,14 @@ default transition coverage requires a reciprocal transition link; use
 `--coverage-kind` and `--coverage-note` for a reviewed requirement that is
 cross-cutting or document-wide:
 
-```powershell
-python -m hla_lab.traceability.promote_requirement `
-  topics/ieee/hla-1516.1-2025 `
-  <candidate-id> `
-  --transition <transition-id> `
-  --dry-run
+```console
+python -m hla_lab.traceability.promote_requirement topics/ieee/hla-1516.1-2025 <candidate-id> --transition <transition-id> --dry-run
 ```
 
 The deterministic coverage dashboard is stdout-only and keeps candidates,
 reviewed records, mappings, and remaining gaps separate:
 
-```powershell
+```console
 python -m hla_lab.reports.semantic_dashboard --json
 ```
 
@@ -330,7 +310,7 @@ tracked source tree.
 
 Run the complete contract suite with pytest:
 
-```powershell
+```console
 pytest tests
 ```
 
@@ -357,11 +337,8 @@ transitions, implementation mappings, and one-to-many requirement/transition
 mapping link tables. The JSON manifest remains canonical; use the standalone
 export option when working from an existing semantic model:
 
-```powershell
-python -m hla_lab.publication.compliance_publication `
-  topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json `
-  topics/ieee/hla-rti-compliance-2025/semantic/publication.json `
-  --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
+```console
+python -m hla_lab.publication.compliance_publication topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json topics/ieee/hla-rti-compliance-2025/semantic/publication.json --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
 ```
 
 Cross-edition requirements traceability is source-controlled separately in
@@ -397,7 +374,7 @@ logic, and traceability to clauses/services/callbacks/code—and its ignored
 `semantic-model.json` is generated from the same Pydantic records as the TeX.
 Build it with:
 
-```powershell
+```console
 python topics/ieee/hla-semantic-derivative-2025/build.py build
 ```
 
@@ -408,30 +385,26 @@ machine-readable Pydantic manifest from the same cross-document corpus. It
 deliberately distinguishes planned mapping seams from concrete and verified
 RTI implementation evidence. Build it with:
 
-```powershell
+```console
 python topics/ieee/hla-rti-compliance-2025/build.py build
 ```
 
 The full release smoke check covers the five currently ingested faithful PDFs,
 both derivatives, and the one-page non-HLA portability fixture:
 
-```powershell
-python -m hla_lab.publication.release_check `
-  --manifest data/release/documents.json `
-  --diagram-manifest data/state_machines/manifest.json `
-  --authority-manifest data/semantic/authority.json `
-  --json
+```console
+python -m hla_lab.publication.release_check --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --authority-manifest data/semantic/authority.json --json
 ```
 
 Capture a fresh, stdout-only semantic baseline with:
 
-```powershell
+```console
 python -m hla_lab.reports.semantic_metrics
 ```
 
 Coordinate-heavy source can be inspected separately from semantic records:
 
-```powershell
+```console
 python -m hla_lab.adapters.layout_model topics/ieee/hla-1516.1-2025
 ```
 
@@ -463,35 +436,27 @@ provide the active page order; each document's
 `semantic/faithful-layout.json` declares only layout-only wrappers, navigation
 insertions, and exceptional pages. Validate this boundary after a build with:
 
-```powershell
+```console
 python -m hla_lab.traceability.semantic_authority --check-generated --json
 ```
 
 State-machine diagrams can be exported as source-only DOT and Mermaid files:
 
-```powershell
-python -m hla_lab.diagrams.export_state_machine `
-  topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json `
-  --output .tmp/state-machines --format both
+```console
+python -m hla_lab.diagrams.export_state_machine topics/ieee/hla-1516.1-2025/semantic/federate-lifetime.json --output .tmp/state-machines --format both
 ```
 
 Generic relationship, hierarchy, conceptual, and protocol-layer diagrams use
 the same source-only contract and can be exported as TikZ or Mermaid:
 
-```powershell
-python -m hla_lab.diagrams.export_graph_diagram `
-  topics/ieee/hla-1516.1-2025/semantic/graph-diagrams.json `
-  --output .tmp/graph-diagrams --format both
+```console
+python -m hla_lab.diagrams.export_graph_diagram topics/ieee/hla-1516.1-2025/semantic/graph-diagrams.json --output .tmp/graph-diagrams --format both
 ```
 
 The faithful 1516.1 figure-surface gate and RTI-oriented coverage report are:
 
-```powershell
-python -m hla_lab.diagrams.diagram_surface_qa `
-  --surface-manifest data/semantic/diagram-surfaces.json `
-  --models topics/ieee/hla-1516.1-2025/semantic `
-  --generated topics/ieee/hla-1516.1-2025/output/semantic `
-  --expected-figures 33 --json
+```console
+python -m hla_lab.diagrams.diagram_surface_qa --surface-manifest data/semantic/diagram-surfaces.json --models topics/ieee/hla-1516.1-2025/semantic --generated topics/ieee/hla-1516.1-2025/output/semantic --expected-figures 33 --json
 python -m hla_lab.diagrams.rti_diagram_check topics/ieee/hla-1516.1-2025 --json
 ```
 
@@ -499,11 +464,8 @@ Visual review packets are likewise ignored and retain their generated TikZ,
 DOT, and Mermaid sources. Add `--graphviz` to render an SVG when Graphviz's
 `dot` executable is installed:
 
-```powershell
-python -m hla_lab.diagrams.review_state_machines `
-  --manifest data/state_machines/manifest.json `
-  --models topics/ieee/hla-1516.1-2025/semantic `
-  --reviews reviews --artifacts review-artifacts --graphviz
+```console
+python -m hla_lab.diagrams.review_state_machines --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews reviews --artifacts review-artifacts --graphviz
 ```
 
 ## Adding a document

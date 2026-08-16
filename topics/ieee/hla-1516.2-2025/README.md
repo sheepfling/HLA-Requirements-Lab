@@ -15,7 +15,7 @@ source of truth is the text-based LaTeX/TikZ/Python reconstruction.
 
 Requirements are documented in [`BUILDING.md`](BUILDING.md).
 
-```powershell
+```console
 python build.py build
 python build.py clean
 ```

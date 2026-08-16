@@ -72,7 +72,7 @@ files from another job.
 
 ## Public workflows
 
-```powershell
+```console
 hla-lab                  # show the workflow menu
 hla-lab docs             # list document roots
 hla-lab status           # validate the complete corpus
@@ -95,7 +95,7 @@ conveniences, not requirements for using the entry point.
 The ordered repository validation contract lives in `tools/ci.py`, not in the
 workflow YAML. Run the same checks locally with:
 
-```powershell
+```console
 python -m tools.ci quality
 python -m tools.ci release
 python -m tools.ci all

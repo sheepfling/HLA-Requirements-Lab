@@ -8,7 +8,7 @@ adapter boundary.
 ## Shared utilities
 
 | Module                      | API                                                     | Replaces or centralizes                                               |
-|-----------------------------|---------------------------------------------------------|-----------------------------------------------------------------------|
+| --------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------- |
 | `hla_lab/core/text.py`      | `tex_escape`                                            | LaTeX escaping in the renderer and diagram exporters                  |
 |                             | `safe_identifier`                                       | DOT/Mermaid/TikZ node aliases in state, sequence, and graph exporters |
 |                             | `safe_filename`                                         | bounded generated semantic filenames                                  |
