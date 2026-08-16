@@ -7,9 +7,11 @@
         \node[anchor=north west,text=hlaBlack] at (40.0,47.5) {%
                 {\HLAStandardsFont\bfseries\fontsize{21pt}{21pt}\selectfont IEEE SA}%
         };
-        \node[anchor=north west,inner sep=0pt] at (40.1,75.9) {%
-            \includegraphics[width=57.7pt]{assets/standards-association.png}%
-        };
+        \IfFileExists{assets/standards-association.png}{%
+            \node[anchor=north west,inner sep=0pt] at (40.1,75.9) {%
+                \includegraphics[width=57.7pt]{assets/standards-association.png}%
+            };
+        }{}
         \fill[hlaCyan] (39.95,97.10) rectangle (132.90,104.35);
 
         \node[anchor=north west,text=hlaBlack,inner sep=0pt] at (60.2,145.7) {%
@@ -41,9 +43,11 @@
             \scalebox{1.17}[1]{{\HLAStandardsFont\bfseries\fontsize{46.02pt}{46.02pt}\selectfont STANDARDS}}%
         };
 
-        \node[anchor=north west,inner sep=0pt] at (41.4,735.0) {%
-            \includegraphics[width=58.7pt,height=18pt,keepaspectratio]{assets/ieee-logo.png}%
-        };
+        \IfFileExists{assets/ieee-logo.png}{%
+            \node[anchor=north west,inner sep=0pt] at (41.4,735.0) {%
+                \includegraphics[width=58.7pt,height=18pt,keepaspectratio]{assets/ieee-logo.png}%
+            };
+        }{}
     \end{scope}
 \end{tikzpicture}
 \null
