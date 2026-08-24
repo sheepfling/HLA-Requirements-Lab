@@ -457,6 +457,24 @@ def _semanticize_visible_surfaces(
             r"successful invocation of the \emph{Join Federation Execution}",
             r"After successful invocation of the \emph{Join Federation Execution}",
         )
+
+        # The preceding normative sentence is semantically longer than the
+        # fixed source line it replaced, so it occupies two 12 pt lines.  The
+        # source page's next absolute block was only 12 pt below it, which
+        # caused the rendered paragraph to collide with the following line.
+        # Keep this correction local to the affected surface and leave the
+        # footnote furniture at its original position.
+        def _shift_following_fixed_block(match: re.Match[str]) -> str:
+            y = float(match.group(2))
+            if 408.0 <= y <= 672.9:
+                return f"{match.group(1)}{{{y + 12.0:.3f}}}{match.group(3)}"
+            return match.group(0)
+
+        body = re.sub(
+            r"(\\HLAFixedBlock\{[^{}]+\})\{([0-9]+(?:\.[0-9]+)?)\}(\{)",
+            _shift_following_fixed_block,
+            body,
+        )
     return body
 
 
