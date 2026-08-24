@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieee1516style}[2026/08/07 IEEE 1516.2-2010 reconstruction style]
+\ProvidesPackage{ieee1516style}[2026/08/24 HLA Requirements Lab 2010 source-compilation style]
 
 \RequirePackage[letterpaper,top=0.74in,bottom=0.72in,left=0.80in,right=0.80in,headheight=14pt,headsep=0.18in,footskip=0.35in]{geometry}
 % Use the repository's installed XeLaTeX font contract. The handoff's
@@ -35,9 +35,11 @@
 \setlist[itemize]{leftmargin=1.75em,label=---,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
 \setlist[enumerate]{leftmargin=1.75em,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
 
-\newcommand{\stdnumber}{IEEE Std 1516.2-2010}
-\newcommand{\stdtitleupper}{HIGH-LEVEL ARCHITECTURE (HLA) --- OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
-\newcommand{\stdshortupper}{IEEE STANDARD FOR MODELING AND SIMULATION (M\&S)}
+% These labels identify the independent Lab compilation. IEEE identifiers remain
+% in the technical body only where they identify supplied source references.
+\newcommand{\stdnumber}{HLA 1516.2 \textperiodcentered\ 2010 source compilation}
+\newcommand{\stdtitleupper}{OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
+\newcommand{\stdshortupper}{HLA REQUIREMENTS LAB}
 \newcommand{\stdcopyright}{}
 
 \newcommand{\bodyfont}{\fontsize{10.0}{12.0}\selectfont}
@@ -119,7 +121,7 @@
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
-\newcommand{\ieeeattribution}{Source reference: IEEE Std 1516.2\texttrademark-2010.}
+\newcommand{\ieeeattribution}{Source set: supplied HLA 1516.2 family materials from 2010.}
 
 % OMT table reconstruction helpers.  These are deliberately compact: the
 % source standard uses dense, fully ruled tables with small type.

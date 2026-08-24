@@ -166,6 +166,16 @@ class NoticeCleanupTests(unittest.TestCase):
         self.assertNotIn("IEEE Standard for", title_block["layout_body"])
         self.assertIn("HLA Requirements Lab", title_block["layout_body"])
 
+    def test_15162_2010_presentation_identity_is_lab_neutral(self) -> None:
+        root = TOPIC_ROOT / "hla-1516.2-2010"
+        style = (root / "ieee1516style.sty").read_text(encoding="utf-8")
+        self.assertNotIn("IEEE Std 1516.2-2010", style)
+        self.assertNotIn(
+            "IEEE STANDARD FOR MODELING AND SIMULATION (M\\&S)",
+            style,
+        )
+        self.assertIn("HLA REQUIREMENTS LAB", style)
+
 
 if __name__ == "__main__":
     unittest.main()
