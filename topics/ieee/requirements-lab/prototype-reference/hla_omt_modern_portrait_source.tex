@@ -1,0 +1,165 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,top=0.70in,bottom=0.72in,left=0.82in,right=0.82in,headheight=24pt,headsep=18pt,footskip=24pt]{geometry}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\setmainfont{Noto Serif}
+\setsansfont{Inter}
+\setmonofont{DejaVu Sans Mono}
+
+\definecolor{Ink}{HTML}{172334}
+\definecolor{Muted}{HTML}{687386}
+\definecolor{Blue}{HTML}{496B91}
+\definecolor{BlueLight}{HTML}{EAF0F6}
+\definecolor{Rule}{HTML}{D6DEE8}
+\definecolor{Orange}{HTML}{E7773F}
+\definecolor{PaperTint}{HTML}{F8FAFC}
+
+\hypersetup{colorlinks=true,linkcolor=Blue,urlcolor=Blue}
+\color{Ink}
+
+\newcommand{\tech}[1]{{\ttfamily #1}}
+\newcommand{\caps}[1]{{\sffamily\fontsize{7.4}{9}\selectfont\addfontfeatures{LetterSpace=5.0}\MakeUppercase{#1}}}
+\newcommand{\subhead}[1]{%
+  \vspace{0.8\baselineskip}%
+  {\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1}\par\vspace{4pt}%
+}
+\newcommand{\sectionband}[2]{%
+  \noindent\begin{minipage}[t]{0.12\textwidth}
+    {\sffamily\bfseries\fontsize{22}{22}\selectfont\color{Blue}#1}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.84\textwidth}
+    {\sffamily\bfseries\fontsize{17}{20}\selectfont #2}\par
+    \vspace{2pt}\color{Rule}\rule{\linewidth}{0.7pt}
+  \end{minipage}\par\vspace{9pt}%
+}
+\newcommand{\tblcaption}[2]{%
+  \vspace{4pt}
+  \noindent{\caps{TABLE #1}}\hspace{6pt}{\sffamily\bfseries\fontsize{9.3}{11.2}\selectfont #2}\par
+  \vspace{5pt}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\raisebox{0.5pt}{\color{Orange}\rule{12pt}{2.2pt}}\hspace{6pt}{\caps{HLA 1516.2-2025}}}
+\fancyhead[R]{{\caps{Object Model Template Specification}}}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{{\caps{HLA Requirements Lab · Derived Working Edition}}}
+\fancyfoot[R]{{\sffamily\fontsize{8}{9}\selectfont\color{Muted}\thepage}}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6.0pt}
+\setlength{\emergencystretch}{1.5em}
+\RaggedRight
+
+\begin{document}
+\setcounter{page}{47}
+
+% -----------------------------------------------------------------------------
+% PAGE 47 — prose treatment
+% -----------------------------------------------------------------------------
+{\caps{4.8 · Time Representation}}\par\vspace{5pt}
+
+{\fontsize{8.9}{12.1}\selectfont
+A logical time represents a single point on the HLA time axis. A logical time interval represents the distance between two points on the HLA time axis. During a federation execution, logical time may play two roles. Federates may associate themselves with points on the HLA time axis, and they may associate some of their activities, such as updating an instance attribute's value or sending an interaction, with points on the HLA time axis. These points on the HLA time axis are referred to as time positions when associated with a federate and timestamps when associated with their activities. As a federation execution progresses, federates may advance their time positions along the HLA time axis. Logical time intervals are used to specify a federate's lookahead and by the RTI to perform arithmetic operations with logical time values.
+
+The specific strategy used to advance time in a simulation is driven by the simulation's purpose. For example, faster-than-real time, event-stepped simulations are frequently used in analysis applications, whereas real time, time-stepped simulations are often used in training applications. The strategy chosen for advancing time is an important consideration in the design of a simulation, because it affects both simulation performance and the ability of a simulation to interoperate with other simulations in a federation. For this reason, it is important to document how a simulation supports the advancement of time in a federate's SOM and relevant SOM modules.
+
+IEEE Std 1516.1-2025 provides a variety of time management services to control the advancement of federates along the HLA time axis. These services allow multiple federates with differing internal time advancement strategies to interoperate in a meaningful way. For this reason, it is vital for all federation members to agree on how logical times and logical time intervals are represented across the federation, and document this agreement in the federation's FOM and relevant FOM modules.
+
+During federation execution, logical times and logical time intervals are represented as instances of the time representation abstract data type (TRADT). This abstract data type is provided to the RTI when federation execution is created so that an RTI knows how to use the logical times and logical time intervals. This table allows the data type and semantics of the abstract data type for logical times and logical time intervals to be explained in FOMs, FOM modules, SOMs, and SOM modules.
+
+It is also important to define the lookahead characteristics of both federates and federations. At the individual federate level, the specific means by which lookahead is supported may be a factor in assessing compatibility with other potential federates for a given federation application. For federations, it is important to document a common set of characteristics for how lookahead will be supported across the full federation. Thus, SOMs, SOM modules, FOMs and FOM modules all include representations of lookahead as well as timestamps.
+
+An abstract data type for lookahead is supplied when a federation execution is created. The lookahead entry in this table allows the data type and semantics of this abstract data type to be documented in FOMs, SOMs, FOM modules, and SOM modules.
+
+Semantic differences exist between the way time is represented for the purpose of depicting timestamps versus calculating lookahead. When depicting timestamps, time can be considered to be an absolute value on the HLA time axis, and thus, time comparisons can be drawn to determine if one timestamp is greater than another. Lookahead, in contrast, represents a duration of time, which can be added to timestamps but is generally not used for comparison purposes.
+
+Two time representations, \tech{HLAinteger64Time} and \tech{HLAfloat64Time}, are required to be supported by the HLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs. Federations may choose to use these default data types, supply their own time representations, or not supply any time representation (e.g., NA).
+}
+
+\subhead{4.8.2 Table format}
+{\fontsize{8.9}{12.1}\selectfont The template that shall be used for recording time representation is illustrated in Table 16.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 48 — modest table treatment
+% -----------------------------------------------------------------------------
+{\caps{4.8 · Time Representation}}\par\vspace{7pt}
+\tblcaption{16}{Time representation table}
+
+\begingroup
+\sffamily\fontsize{8.7}{11}\selectfont
+\renewcommand{\arraystretch}{1.42}
+\setlength{\tabcolsep}{8pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.27\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} X}
+\rowcolor{BlueLight}
+\textbf{Category} & \textbf{Data type} & \textbf{Semantics} \\
+\addlinespace[1.5pt]
+\tech{LogicalTime} & \tech{<type>} & \tech{<semantics>} \\
+\midrule[0.35pt]
+\tech{LogicalTimeInterval} & \tech{<type>} & \tech{<semantics>} \\
+\bottomrule[0.8pt]
+\end{tabularx}
+\endgroup
+
+\vspace{7pt}
+{\fontsize{9.2}{12.6}\selectfont
+The first column (Category) presents the two time-related values that are to be specified in the table: logical time and logical time interval. \tech{LogicalTime} and \tech{LogicalTimeInterval} correspond to the only two rows in this table.
+
+The second column (Data type) shall identify the data type of the time value. This data type shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record data type described in 4.14. ``NA'' shall be entered in this column when timestamp or lookahead information is inappropriate to the federate or federation.
+
+The third column (Semantics) shall expand and describe the use of the data type for time values. ``NA'' shall be entered in this column when semantics information is unnecessary.
+}
+
+\subhead{4.8.3 Inclusion criteria}
+{\fontsize{9.2}{12.6}\selectfont
+All federations shall document their use of logical time and logical time interval via the time representation table in a FOM and relevant FOM modules. All federates shall document their representation of logical time via the time representation table in a SOM and relevant SOM modules to the extent that it is used in the federate. For federates that support lookahead, the representation of logical time interval shall be documented via the time representation table in a SOM and relevant SOM modules.
+}
+
+\subhead{4.8.4 Example}
+{\fontsize{9.2}{12.6}\selectfont Table 17 provides an example of how the OMT tables are used to describe the representation of time for the restaurant application.}
+
+\tblcaption{17}{Time representation table example}
+\begingroup
+\sffamily\fontsize{8.7}{11}\selectfont
+\renewcommand{\arraystretch}{1.40}
+\setlength{\tabcolsep}{8pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth} X}
+\rowcolor{BlueLight}
+\textbf{Category} & \textbf{Data type} & \textbf{Semantics} \\
+\tech{LogicalTime} & \tech{HLAinteger64Time} & Integer value expressed in seconds \\
+\midrule[0.35pt]
+\tech{LogicalTimeInterval} & \tech{HLAinteger64Time} & Integer value expressed in seconds \\
+\midrule[0.35pt]
+\textit{Note} & NA & \\
+\bottomrule[0.8pt]
+\end{tabularx}
+\endgroup
+
+\vspace{8pt}
+{\color{Rule}\rule{\textwidth}{0.6pt}}\par\vspace{8pt}
+{\sffamily\bfseries\fontsize{13.5}{16}\selectfont 4.9 User-supplied tag table}\par
+\vspace{3pt}
+{\sffamily\bfseries\fontsize{10.2}{12.4}\selectfont 4.9.1 Purpose/background}\par\vspace{3pt}
+{\fontsize{8.8}{12}\selectfont The HLA RTI provides a mechanism for federates to supply tags with certain HLA services. These tags can be used to provide additional coordination and control over these services. The user-supplied tag table provides a means of documenting federation agreements regarding the data type to be used with these tags.}
+
+\newpage
+
+
+\end{document}

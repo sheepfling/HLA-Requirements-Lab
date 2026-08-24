@@ -1,13 +1,26 @@
 \documentclass[10pt,twoside,letterpaper]{article}
 \usepackage{hla1516}
+\input{../requirements-lab/style/rl-graphics.sty}
 
 \hypersetup{
-    pdftitle={IEEE Std 1516.1-2010 - Federate Interface Specification - LaTeX reconstruction},
-    pdfauthor={Reconstruction from IEEE Std 1516.1-2010},
-    pdfsubject={High Level Architecture Federate Interface Specification}
+    pdftitle={HLA 1516.1 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2010 HLA 1516.1 family source material}
 }
 
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabNumber}{HLA 1516.1}
+\newcommand{\HLALabDocumentTitle}{Federate Interface Specification}
+\newcommand{\HLALabDescriptor}{Source-traceable requirements and interface coverage}
+\newcommand{\HLALabTheme}{interface}
+\newcommand{\HLALabAccent}{HLALabOrange}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.1 family materials from 2010.}
+
 \begin{document}
+    \input{../hla-requirements-lab-cover}
     \input{output/semantic/semantic-manifest}
     \input{output/semantic/faithful-body}
 

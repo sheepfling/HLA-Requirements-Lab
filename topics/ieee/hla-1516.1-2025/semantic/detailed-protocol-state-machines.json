@@ -84,7 +84,6 @@
           "target_state": "rti-connection.initiate",
           "clause_id": "clause-12.13.4.4",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13",
             "requirement-candidate-content-clauses-12-programming-language-mappings-page-399-l41-13"
           ],
           "implementation_ids": [
@@ -139,7 +138,8 @@
           "clause_id": "clause-12.13.4.4",
           "implementation_ids": [
             "m16.transition.rti-connection-broken"
-          ]
+          ],
+          "requirement_ids": []
         },
         {
           "id": "rti-connection.reconnect-success",

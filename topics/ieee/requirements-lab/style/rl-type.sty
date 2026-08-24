@@ -1,0 +1,40 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-type.sty}[2026/08/23 v0.1 Requirements Lab typography]
+
+\RequirePackage{fontspec}
+
+\newfontfamily\RLSerif{Noto Serif}[Ligatures=NoCommon]
+% Inter is the prototype sans face. The checked-in role files are static
+% Regular, Italic, and ExtraBold instances generated from the official
+% package, so XeLaTeX embeds the intended faces without engine-specific axis
+% fallbacks.
+\IfFileExists{../requirements-lab/fonts/Inter-Regular.ttf}{}{\PackageError{requirements-lab}{Inter font files are missing}{Restore the checked-in Requirements Lab font bundle before building.}}
+\newfontfamily\RLSans{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\RLMono{DejaVu Sans Mono}[Ligatures=NoCommon]
+
+\setmainfont{Noto Serif}[Ligatures=NoCommon]
+
+\newcommand{\RLBodyFont}{\RLSerif\fontsize{9.75pt}{13.25pt}\selectfont\color{RLInk}}
+\newcommand{\RLTableFont}{\RLSans\fontsize{8.55pt}{10.7pt}\selectfont\color{RLInk}}
+\newcommand{\RLSmallFont}{\RLSans\fontsize{8.25pt}{10.2pt}\selectfont\color{RLInk}}
+\newcommand{\RLIdentifier}[1]{{\RLMono\fontsize{8.65pt}{10.7pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\RLType}[1]{{\RLMono\fontsize{8.65pt}{10.7pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\RLXML}[1]{{\RLMono\fontsize{8.5pt}{10.5pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\RLValue}[1]{{\RLMono\fontsize{8.65pt}{10.7pt}\selectfont\color{RLInk}\mbox{#1}}}
+\newcommand{\RLService}[1]{{\RLSans\fontsize{8.9pt}{11pt}\selectfont\color{RLBlueDeep}#1}}
+\newcommand{\RLClass}[1]{\RLIdentifier{#1}}
+\newcommand{\RLAttribute}[1]{\RLIdentifier{#1}}
+\newcommand{\RLInteraction}[1]{\RLIdentifier{#1}}

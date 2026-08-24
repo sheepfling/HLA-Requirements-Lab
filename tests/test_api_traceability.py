@@ -31,7 +31,7 @@ class ApiTraceabilityAuditTests(unittest.TestCase):
             },
             {
                 "hla-1516.1-2010": (942, 942, 186, 0),
-                "hla-1516.1-2025": (1697, 1697, 48, 0),
+                "hla-1516.1-2025": (1860, 1860, 48, 0),
             },
         )
 

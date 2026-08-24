@@ -287,6 +287,16 @@ def verify(
             )
             continue
         _, crosswalk = crosswalk_entry
+        if binding.requirement_ids and set(binding.requirement_ids) != set(mapping.requirement_ids):
+            findings.append(
+                _finding(
+                    "binding-requirement-mismatch",
+                    "error",
+                    binding.id,
+                    f"binding requirement IDs {sorted(binding.requirement_ids)} do not equal "
+                    f"mapping requirements {sorted(mapping.requirement_ids)}",
+                )
+            )
         selected = set(crosswalk.selected_api_surface_ids)
         candidates = set(crosswalk.candidate_api_surface_ids)
         requested_surfaces = set(binding.api_surface_ids)
@@ -340,6 +350,17 @@ def verify(
                 )
             )
         evidence = tuple(evidence_by_id[item] for item in binding.evidence_ids)
+        for item in evidence:
+            if item.requirement_ids and not set(item.requirement_ids) <= set(mapping.requirement_ids):
+                findings.append(
+                    _finding(
+                        "evidence-requirement-not-mapped",
+                        "error",
+                        item.id,
+                        f"evidence names requirements outside mapping {mapping.id}: "
+                        f"{sorted(set(item.requirement_ids) - set(mapping.requirement_ids))}",
+                    )
+                )
         if binding.status == "verified":
             if not evidence:
                 findings.append(

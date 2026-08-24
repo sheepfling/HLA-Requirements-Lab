@@ -1,0 +1,11 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-code.sty}[2026/08/23 v0.1 Requirements Lab code and XML]
+
+\RequirePackage{xcolor}
+
+% Plain LaTeX's verbatim environment must appear directly in the document
+% source, so the shared API supplies the surrounding typography as commands.
+\newcommand{\RLCodeStart}{\par\smallskip\noindent\begingroup\small\RLMono\color{RLInk}}
+\newcommand{\RLCodeEnd}{\endgroup\smallskip}
+
+\newcommand{\RLCodeInline}[1]{\colorbox{RLCode}{\RLMono\fontsize{8.4pt}{10pt}\selectfont\ #1\ }}

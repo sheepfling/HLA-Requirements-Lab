@@ -1,0 +1,39 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-notes.sty}[2026/08/23 v0.1 Requirements Lab notes]
+
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
+
+\NewDocumentCommand{\RLCallout}{m m m}{%
+    \par\smallskip
+    \noindent\fcolorbox{#1}{RLMist}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+            \RaggedRight
+            {\RLSans\bfseries\fontsize{8.5pt}{10pt}\selectfont\color{RLBlueDeep}#2}\par
+            \vspace{2pt}
+            {\RLSerif\mdseries\fontsize{9pt}{12pt}\selectfont\color{RLInk}#3}
+        \end{minipage}%
+    }%
+    \par\smallskip
+}
+
+\newcommand{\RLNote}[1]{\RLCallout{RLBlue}{NOTE}{#1}}
+\newcommand{\RLExample}[1]{\RLCallout{RLOrange}{EXAMPLE}{#1}}
+\newcommand{\RLRationale}[1]{\RLCallout{RLLine}{RATIONALE}{#1}}
+\newcommand{\RLLabNote}[1]{\RLCallout{RLBlueDeep}{LAB NOTE}{#1}}
+
+% Production pages use a quieter note treatment than the design-system
+% specimen.  The pale wash is intentionally borderless; it carries source
+% annotation without turning every note into a UI card.
+\NewDocumentCommand{\RLProductionNote}{m m}{%
+    \par\smallskip
+    \noindent\colorbox{RLMist}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+            \RaggedRight
+            {\RLSans\bfseries\fontsize{8.2pt}{9.8pt}\selectfont\color{RLBlueDeep}#1}\par
+            \vspace{2pt}
+            {\RLSerif\mdseries\fontsize{8.8pt}{11.5pt}\selectfont\color{RLInk}#2}
+        \end{minipage}%
+    }%
+    \par\smallskip
+}

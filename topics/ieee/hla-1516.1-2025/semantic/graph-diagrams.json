@@ -39,7 +39,7 @@
       "edges": [
         {
           "id": "figure-2-federate-lifeline",
-          "label": "",
+          "label": " ",
           "style": "dashed",
           "direction": "none",
           "points": [
@@ -55,7 +55,7 @@
         },
         {
           "id": "figure-2-rti-lifeline",
-          "label": "",
+          "label": " ",
           "style": "dashed",
           "direction": "none",
           "points": [
@@ -291,7 +291,7 @@
         },
         {
           "id": "figure-18-lower-bound",
-          "label": "",
+          "label": " ",
           "style": "solid",
           "direction": "none",
           "points": [
@@ -307,7 +307,7 @@
         },
         {
           "id": "figure-18-upper-bound",
-          "label": "",
+          "label": " ",
           "style": "solid",
           "direction": "none",
           "points": [

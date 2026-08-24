@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- The IEEE hereby grants a general, royalty-free license to copy, distribute, display and make derivative works from this material, for all purposes, provided that any use of the material contains the following attribution: “Reprinted with permission from IEEE 1516.2(TM)-2010”. Should you require additional information, contact the Manager, Standards Intellectual Property, IEEE Standards Association (stdsipr@ieee.org).-->
+<!-- This Lab companion schema is retained as a source-referenced technical asset. -->
 <!-- IEEE1516-2010-FDD Schema is a relaxed version of the IEEE1516-2010-OMT Schema defining the minimum set of OMT information required by any RTI. -->
 <!-- Updated 2010-08-16 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://standards.ieee.org/IEEE1516-2010"

@@ -45,10 +45,29 @@ class ContractRecord(BaseModel):
 
 
 class BundleRequirement(ContractRecord):
+    """One ordered, source-addressable requirement in a portable document."""
+
     id: str = Field(min_length=1)
+    # ``ordinal`` is a document-local presentation number.  It is deliberately
+    # not the semantic identity; ``id`` remains the only join key.
+    ordinal: int | None = Field(default=None, ge=1)
+    clause: str | None = None
     clause_id: str | None = None
     title: str = ""
     statement: str = ""
+    machine_statement: str = ""
+    kind: Literal["summary", "detailed"] = "detailed"
+    coverage_kind: Literal["transition", "cross-cutting", "document-wide", "not-applicable"] = (
+        "transition"
+    )
+    coverage_note: str = ""
+    transition_ids: tuple[str, ...] = ()
+    api_surface_scope: Literal["required", "cross-cutting", "not-applicable"] = "required"
+    api_surface_note: str = ""
+    api_surface_resolution: Literal["strict", "all-overloads"] = "strict"
+    extraction: Literal["explicit", "candidate"] = "explicit"
+    semantic_group_id: str | None = None
+    source: BundleSource | None = None
 
 
 class BundleTransition(ContractRecord):
@@ -183,7 +202,31 @@ class BundleDocument(ContractRecord):
         surface_ids = unique("API surface", self.api_surfaces)
         unique("API crosswalk", self.api_crosswalks)
         unique("requirement API binding", self.requirement_api_bindings)
+        ordinals = tuple(item.ordinal for item in self.requirements)
+        if any(item is not None for item in ordinals):
+            if any(item is None for item in ordinals):
+                raise ValueError(f"{self.document_id}: requirement ordinals must be complete")
+            expected_ordinals = tuple(range(1, len(self.requirements) + 1))
+            if ordinals != expected_ordinals:
+                raise ValueError(
+                    f"{self.document_id}: requirement ordinals must follow catalog order"
+                )
+        for requirement in self.requirements:
+            if len(requirement.transition_ids) != len(set(requirement.transition_ids)):
+                raise ValueError(
+                    f"{self.document_id}: requirement {requirement.id} transition IDs must be unique"
+                )
+            missing = set(requirement.transition_ids) - transition_ids
+            if missing:
+                raise ValueError(
+                    f"{self.document_id}: requirement {requirement.id} references missing "
+                    f"transitions {sorted(missing)}"
+                )
         for transition in self.transitions:
+            if len(transition.requirement_ids) != len(set(transition.requirement_ids)):
+                raise ValueError(
+                    f"{self.document_id}: transition {transition.id} requirement IDs must be unique"
+                )
             missing = set(transition.requirement_ids) - requirement_ids
             if missing:
                 raise ValueError(
@@ -191,6 +234,14 @@ class BundleDocument(ContractRecord):
                     f"missing requirements {sorted(missing)}"
                 )
         for mapping in self.mappings:
+            if len(mapping.requirement_ids) != len(set(mapping.requirement_ids)):
+                raise ValueError(
+                    f"{self.document_id}: mapping {mapping.id} requirement IDs must be unique"
+                )
+            if len(mapping.transition_ids) != len(set(mapping.transition_ids)):
+                raise ValueError(
+                    f"{self.document_id}: mapping {mapping.id} transition IDs must be unique"
+                )
             missing_requirements = set(mapping.requirement_ids) - requirement_ids
             missing_transitions = set(mapping.transition_ids) - transition_ids
             if missing_requirements or missing_transitions:
@@ -292,12 +343,17 @@ class EvidenceRecord(ContractRecord):
     review_status: Literal["unreviewed", "accepted", "rejected"] = "unreviewed"
     reviewer: str | None = None
     reviewed_at: str | None = None
+    requirement_ids: tuple[str, ...] = ()
     command: str | None = None
     artifact: str | None = None
     notes: str = ""
 
     @model_validator(mode="after")
     def validate_review(self) -> EvidenceRecord:
+        if any(not item for item in self.requirement_ids):
+            raise ValueError("evidence requirement IDs cannot be empty")
+        if len(self.requirement_ids) != len(set(self.requirement_ids)):
+            raise ValueError("evidence requirement IDs must be unique")
         if self.review_status == "accepted" and not self.reviewer:
             raise ValueError("accepted evidence must name a reviewer")
         if self.review_status == "accepted" and not self.reviewed_at:
@@ -320,6 +376,10 @@ class ComplianceTestCase(ContractRecord):
     language: str = Field(min_length=1)
     symbol: str = Field(min_length=1)
     api_surface_ids: tuple[str, ...] = Field(min_length=1)
+    # Optional for schema-v1 catalogs; new catalogs should name the exact
+    # requirement rows exercised by the test instead of relying only on the
+    # implementation mapping join.
+    requirement_ids: tuple[str, ...] = ()
     execution_mode: Literal["real", "mocked", "simulated", "unknown"]
     notes: str = ""
 
@@ -329,6 +389,10 @@ class ComplianceTestCase(ContractRecord):
             raise ValueError("compliance test API surface IDs cannot be empty")
         if len(self.api_surface_ids) != len(set(self.api_surface_ids)):
             raise ValueError("compliance test API surface IDs must be unique")
+        if any(not item for item in self.requirement_ids):
+            raise ValueError("compliance test requirement IDs cannot be empty")
+        if len(self.requirement_ids) != len(set(self.requirement_ids)):
+            raise ValueError("compliance test requirement IDs must be unique")
         return self
 
 
@@ -356,9 +420,18 @@ class ImplementationBinding(ContractRecord):
     symbol: str = Field(min_length=1)
     language: str = Field(min_length=1)
     status: Literal["planned", "partial", "implemented", "verified", "not_applicable", "deferred"]
+    requirement_ids: tuple[str, ...] = ()
     api_surface_ids: tuple[str, ...] = ()
     evidence_ids: tuple[str, ...] = ()
     notes: str = ""
+
+    @model_validator(mode="after")
+    def validate_requirement_ids(self) -> ImplementationBinding:
+        if any(not item for item in self.requirement_ids):
+            raise ValueError("implementation binding requirement IDs cannot be empty")
+        if len(self.requirement_ids) != len(set(self.requirement_ids)):
+            raise ValueError("implementation binding requirement IDs must be unique")
+        return self
 
 
 class ImplementationManifest(ContractRecord):
@@ -431,7 +504,23 @@ class AdapterDocumentRequest(ContractRecord):
     """The portion of a bundle assigned to one adapter invocation."""
 
     document_id: str = Field(min_length=1)
+    requirements: tuple[BundleRequirement, ...] = ()
     bindings: tuple[AdapterExpectedBinding, ...] = ()
+
+    @model_validator(mode="after")
+    def validate_requirement_catalog(self) -> AdapterDocumentRequest:
+        identifiers = [item.id for item in self.requirements]
+        if len(identifiers) != len(set(identifiers)):
+            raise ValueError(f"{self.document_id}: adapter requirement IDs must be unique")
+        ordinals = tuple(item.ordinal for item in self.requirements)
+        if any(item is not None for item in ordinals):
+            if any(item is None for item in ordinals):
+                raise ValueError(f"{self.document_id}: adapter requirement ordinals must be complete")
+            if ordinals != tuple(range(1, len(self.requirements) + 1)):
+                raise ValueError(
+                    f"{self.document_id}: adapter requirement ordinals must follow catalog order"
+                )
+        return self
 
 
 class AdapterRequest(ContractRecord):

@@ -1,0 +1,64 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-brand.sty}[2026/08/23 v0.1 Requirements Lab brand tokens]
+
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+
+\definecolor{RLBlue}{HTML}{496B91}
+\definecolor{RLBlueDeep}{HTML}{172334}
+% Orange is a decorative-only token.  Readable labels, headings, and running
+% text must use RLBlue, RLBlueDeep, RLInk, or RLMid instead.
+\definecolor{RLOrange}{HTML}{E7773F}
+\definecolor{RLInk}{HTML}{172334}
+\definecolor{RLMid}{HTML}{687386}
+\definecolor{RLLine}{HTML}{D6DEE8}
+\definecolor{RLTableBand}{HTML}{EAF0F6}
+\definecolor{RLMist}{HTML}{F8FAFC}
+\definecolor{RLWhite}{HTML}{FFFFFF}
+\definecolor{RLCode}{HTML}{F5F3ED}
+
+\providecommand{\RLPublicationName}{HLA Requirements Lab}
+\providecommand{\RLPublicationShort}{HLA REQUIREMENTS LAB}
+\providecommand{\RLPublicationFamily}{HLA 1516 FAMILY}
+\providecommand{\RLPublicationEdition}{Source compilation}
+\providecommand{\RLPublicationYear}{2025}
+\providecommand{\RLPublicationTheme}{omt}
+\providecommand{\RLPublicationNumber}{HLA 1516.2}
+\providecommand{\RLPublicationTitle}{Object Model Template (OMT) Specification}
+\providecommand{\RLPublicationDescriptor}{Contemporary systems-engineering reference edition}
+\providecommand{\RLPublicationSource}{Supplied HLA 1516.2 family source materials}
+\providecommand{\RLPublicationStatus}{Independent Lab compilation; source identifiers retained for traceability.}
+\providecommand{\RLClauseContext}{REFERENCE EDITION}
+\providecommand{\RLHeaderLeft}{\RLPublicationNumber\enspace\textperiodcentered\enspace\RLPublicationEdition}
+\providecommand{\RLHeaderRight}{\RLPublicationTitle}
+\providecommand{\RLLandscapeHeaderRight}{\RLPublicationTitle\enspace\textperiodcentered\enspace\RLClauseContext}
+\providecommand{\RLHeaderFooter}{HLA REQUIREMENTS LAB\enspace\textperiodcentered\enspace\RLPublicationEdition}
+
+\newcommand{\RLSetClauseContext}[1]{\renewcommand{\RLClauseContext}{#1}}
+\newcommand{\RLRule}{\par\noindent{\color{RLLine}\rule{\linewidth}{0.45pt}}\par}
+\newcommand{\RLAccentRule}{\par\noindent{\color{RLOrange}\rule{42pt}{2.2pt}}\par}
+\newcommand{\RLLabel}[1]{\textsf{\bfseries\color{RLBlueDeep}#1}}
+
+\newcommand{\RLMark}{%
+    \begin{tikzpicture}[baseline=-0.5ex]
+        \fill[RLBlue] (0,0) circle (0.58ex);
+        \fill[RLOrange] (0.92ex,0) circle (0.38ex);
+    \end{tikzpicture}%
+}
+
+\newcommand{\RLCoverGeometry}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \fill[RLBlue,fill opacity=.09,draw=none]
+            (current page.north west) -- ++(0,-2.4in) -- ++(3.4in,-5.0in)
+            -- ++(-1.2in,-2.6in) -- ++(-2.2in,0) -- cycle;
+        \fill[RLOrange,fill opacity=.13,draw=none]
+            (current page.north east) circle (2.35in);
+        \fill[RLBlue,fill opacity=.06,draw=none]
+            (current page.south east) -- ++(0,2.6in) -- ++(-2.8in,1.8in)
+            -- ++(-1.0in,-4.4in) -- cycle;
+        \draw[RLBlue,draw opacity=.26,line width=.8pt]
+            ([xshift=-1.1in,yshift=-2.0in]current page.north east) circle (1.12in);
+        \draw[RLOrange,draw opacity=.36,line width=1.1pt]
+            ([xshift=-1.1in,yshift=-2.0in]current page.north east) circle (.72in);
+    \end{tikzpicture}%
+}

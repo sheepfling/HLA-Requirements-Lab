@@ -204,11 +204,22 @@
           ]
         },
         {
+          "id": "establishing.divestiture-if-wanted",
+          "source_state": "establishing.owned.not-divesting",
+          "event": "Attribute Ownership Divestiture If Wanted",
+          "guard": "returned attribute set contains the instance attribute",
+          "target_state": "establishing.unowned.choice",
+          "clause_id": "clause-7.1.2",
+          "implementation_ids": [
+            "m16.transition.establishing-divestiture-if-wanted"
+          ]
+        },
+        {
           "id": "establishing.cancel-divestiture",
           "source_state": "establishing.owned.waiting",
           "event": "Cancel Negotiated Attribute Ownership Divestiture",
-          "target_state": "establishing.owned.completing",
-          "clause_id": "clause-7.1.2",
+          "target_state": "establishing.owned.not-divesting",
+          "clause_id": "clause-7.14",
           "implementation_ids": [
             "m16.transition.establishing-cancel-divestiture"
           ]
@@ -540,6 +551,14 @@
             "label_x": 11.2,
             "label_y": 15.85,
             "label_width": 2.6
+          },
+          "establishing.divestiture-if-wanted": {
+            "style": "bend-left",
+            "bend": 22,
+            "label": "Attribute Ownership\nDivestiture If Wanted\n[ret: divested]",
+            "label_x": 8.2,
+            "label_y": 16.8,
+            "label_width": 2.7
           },
           "establishing.cancel-divestiture": {
             "label": "Cancel Negotiated\nAttribute Ownership\nDivestiture",
@@ -893,7 +912,7 @@
         {
           "id": "temporal.async-disable",
           "source_state": "temporal.async.enabled",
-          "event": "Disable Asynchronously Delivery",
+          "event": "Disable Asynchronous Delivery",
           "target_state": "temporal.async.disabled",
           "clause_id": "clause-8.1.7",
           "implementation_ids": [
@@ -1124,7 +1143,7 @@
             "label_width": 1.8
           },
           "temporal.async-disable": {
-            "label": "Disable Asynchronously Delivery",
+            "label": "Disable Asynchronous Delivery",
             "label_x": 14.4,
             "label_y": 2.75,
             "label_width": 1.9

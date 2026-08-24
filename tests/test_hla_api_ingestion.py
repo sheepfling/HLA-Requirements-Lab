@@ -77,7 +77,7 @@ class HlaApiIngestionTests(unittest.TestCase):
     def test_loaded_editions_keep_semantic_seams_and_exact_bindings(self) -> None:
         for document_id, expected_semantic in (
             ("hla-1516.1-2010", 212),
-            ("hla-1516.1-2025", 281),
+            ("hla-1516.1-2025", 282),
         ):
             model = load_hla_document_model(ROOT / "topics" / "ieee" / document_id)
             self.assertEqual(

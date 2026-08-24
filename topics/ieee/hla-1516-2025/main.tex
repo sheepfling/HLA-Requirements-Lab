@@ -1,8 +1,27 @@
 \documentclass[10pt]{article}
 \usepackage{hla1516}
+\input{../requirements-lab/style/rl-graphics.sty}
+
+\hypersetup{
+    pdftitle={HLA 1516 family - 2025 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2025 HLA 1516 family source material}
+}
+
+\newcommand{\HLALabEditionYear}{2025}
+\newcommand{\HLALabEdition}{2025-source compilation}
+\newcommand{\HLALabNumber}{HLA 1516}
+\newcommand{\HLALabDocumentTitle}{Framework and Rules}
+\newcommand{\HLALabDescriptor}{Source-traceable framework requirements and vocabulary}
+\newcommand{\HLALabTheme}{framework}
+\newcommand{\HLALabAccent}{HLALabBlue}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516 family materials from 2025.}
 
 \begin{document}
-
+    \def\HLASkipSemanticContentElementData{}
+    \input{../hla-requirements-lab-cover}
     \input{output/semantic/semantic-manifest}
     \input{output/semantic/faithful-body}
 

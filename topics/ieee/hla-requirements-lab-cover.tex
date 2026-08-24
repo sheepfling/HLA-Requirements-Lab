@@ -1,0 +1,162 @@
+% Shared optional cover for the HLA Requirements Lab working editions.
+% This is intentionally separate from the source-page adapters: it gives the
+% lab products a recognizable front door without changing extracted content.
+% Product preambles load the shared graphics adapter before this cover is
+% included; keeping package loading out of this body fragment makes the cover
+% safe to include after \begin{document}.
+
+\providecommand{\HLALabEdition}{Source compilation}
+\providecommand{\HLALabEditionYear}{2026}
+\providecommand{\HLALabNumber}{HLA 1516.1}
+\providecommand{\HLALabDocumentTitle}{Federate Interface Specification}
+\providecommand{\HLALabDescriptor}{Source-traceable requirements and interface coverage}
+\providecommand{\HLALabTheme}{interface}
+\providecommand{\HLALabAccent}{HLALabOrange}
+% Orange is reserved for non-semantic decoration.  Readable edition/year
+% labels use the blue text token so they remain comfortable in print and on
+% screen.
+\providecommand{\HLALabYearAccent}{HLALabBlue}
+\providecommand{\HLALabKicker}{HLA REQUIREMENTS LAB | SOURCE COMPILATION}
+\providecommand{\HLALabSeries}{HLA 1516 FAMILY}
+\providecommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.1 family materials.}
+\providecommand{\HLALabStatusLine}{Lab-authored compilation for requirements analysis and interoperability work.}
+
+\definecolor{HLALabBlue}{RGB}{18,83,156}
+\definecolor{HLALabOrange}{RGB}{235,112,38}
+\definecolor{HLALabInk}{RGB}{24,36,54}
+\definecolor{HLALabMist}{RGB}{242,246,251}
+
+\def\HLALabFrameworkTheme{framework}
+\def\HLALabOmtTheme{omt}
+
+\newcommand{\HLALabCover}{%
+    \clearpage
+    \thispagestyle{empty}%
+    \begin{tikzpicture}[remember picture,overlay]
+        \begin{scope}[shift={(current page.north west)},x=1pt,y=-1pt]
+            % Large translucent planes keep the page lively while leaving the
+            % white reading field and title hierarchy calm and legible.
+            \fill[HLALabBlue,fill opacity=.12,draw=none]
+                (-48,92)--(256,92)--(458,348)--(280,694)--(-48,694)--cycle;
+            \fill[HLALabBlue,fill opacity=.07,draw=none]
+                (82,0)--(612,0)--(612,238)--(338,416)--cycle;
+            \fill[HLALabOrange,fill opacity=.18,draw=none]
+                (470,88) circle (158);
+            \fill[HLALabOrange,fill opacity=.10,draw=none]
+                (391,264)--(660,118)--(660,488)--(503,566)--cycle;
+
+            % Large translucent planes establish the family field. The supplied
+            % vector glyph below carries volume and edition identity.
+            \ifx\HLALabTheme\HLALabFrameworkTheme
+                \fill[HLALabBlue,fill opacity=.07,draw=none]
+                    (338,92) rectangle (612,144);
+                \draw[HLALabBlue,draw opacity=.30,line width=1.0pt]
+                    (468,188) circle (112);
+                \draw[HLALabOrange,draw opacity=.34,line width=1.2pt]
+                    (468,188) circle (72);
+                \draw[HLALabBlue,draw opacity=.24,line width=.55pt]
+                    (382,188)--(554,188) (468,102)--(468,274);
+            \else\ifx\HLALabTheme\HLALabOmtTheme
+                \fill[HLALabOrange,fill opacity=.10,draw=none]
+                    (350,120)--(612,120)--(612,382)--(350,382)--cycle;
+                \draw[HLALabBlue,draw opacity=.34,line width=1.0pt]
+                    (420,205)--(518,154)--(582,190)--(484,242)--cycle;
+                \draw[HLALabBlue,draw opacity=.28,line width=1.0pt]
+                    (420,205)--(420,306)--(484,343)--(484,242);
+                \draw[HLALabOrange,draw opacity=.42,line width=1.0pt]
+                    (518,154)--(518,255)--(582,291)--(582,190);
+                \draw[HLALabBlue,draw opacity=.22,line width=.55pt]
+                    (420,306)--(518,255) (484,343)--(582,291);
+            \fi\fi
+            \begin{scope}[shift={(540,270)},scale=42]
+                \RLFamilyGlyph{\HLALabEditionYear}{\HLALabTheme}
+            \end{scope}
+            \draw[HLALabBlue,draw opacity=.26,line width=1.1pt]
+                (70,718)--(340,718)--(532,526);
+            \draw[HLALabOrange,draw opacity=.44,line width=4.2pt]
+                (70,111)--(198,111);
+            \draw[HLALabBlue,draw opacity=.24,line width=.55pt]
+                (420,652)--(612,652);
+            \draw[HLALabOrange,draw opacity=.30,line width=.55pt]
+                (456,665)--(612,665);
+
+            % A small systems-like motif ties the geometric treatment back to
+            % the lab's traceability and interface focus.
+            \draw[HLALabBlue,draw opacity=.28,line width=.65pt]
+                (458,183)--(520,224)--(496,292)--(432,257)--cycle;
+            \draw[HLALabOrange,draw opacity=.42,line width=1.4pt]
+                (458,183)--(496,292);
+            \fill[HLALabOrange,fill opacity=.64] (458,183) circle (4.4);
+            \fill[HLALabBlue,fill opacity=.56] (520,224) circle (4.4);
+            \fill[HLALabBlue,fill opacity=.56] (432,257) circle (4.4);
+            \fill[HLALabOrange,fill opacity=.64] (496,292) circle (4.4);
+
+            \node[anchor=north west,inner sep=0pt,text=HLALabInk] at (70,72) {%
+                {\sffamily\bfseries\fontsize{9.6pt}{11pt}\selectfont HLA REQUIREMENTS LAB}%
+            };
+            \fill[\HLALabYearAccent,fill opacity=.10,draw=none]
+                (506,50) rectangle (612,118);
+            \draw[\HLALabYearAccent,draw opacity=.36,line width=.8pt]
+                (506,50)--(612,50)--(612,118)--(506,118)--cycle;
+            \node[anchor=north,text=\HLALabYearAccent] at (559,57) {%
+                {\sffamily\bfseries\fontsize{20pt}{22pt}\selectfont \HLALabEditionYear}%
+            };
+            \node[anchor=north,text=HLALabInk] at (559,94) {%
+                {\sffamily\fontsize{6.8pt}{8pt}\selectfont EDITION}%
+            };
+            \node[anchor=north west,inner sep=0pt,text=HLALabBlue] at (70,132) {%
+                {\sffamily\fontsize{8.2pt}{10pt}\selectfont \HLALabKicker}%
+            };
+
+            \node[anchor=north west,inner sep=0pt,text=HLALabInk] at (70,205) {%
+                \begin{minipage}[t]{390pt}
+                    \raggedright
+                    {\sffamily\bfseries\fontsize{28pt}{31pt}\selectfont
+                    HLA Requirements\par
+                    Lab}%
+                \end{minipage}%
+            };
+            \node[anchor=north west,inner sep=0pt,text=HLALabInk] at (72,304) {%
+                \begin{minipage}[t]{350pt}
+                    \raggedright
+                    {\sffamily\fontsize{13.2pt}{17pt}\selectfont
+                    \HLALabNumber\enspace--\enspace\HLALabEdition\par}
+                    \vspace{9pt}
+                    {\rmfamily\fontsize{14pt}{18pt}\selectfont\textit{\HLALabDocumentTitle}\par}
+                \end{minipage}%
+            };
+
+            \fill[HLALabMist,fill opacity=.90] (70,515) rectangle (478,674);
+            \draw[HLALabBlue,draw opacity=.25,line width=.8pt]
+                (70,515)--(478,515)--(478,674)--(70,674)--cycle;
+            \fill[\HLALabAccent] (70,515) rectangle (78,674);
+            \node[anchor=north west,inner sep=0pt,text=HLALabInk] at (96,546) {%
+                \begin{minipage}[t]{352pt}
+                    \raggedright
+                    {\sffamily\bfseries\fontsize{11pt}{14pt}\selectfont
+                    \HLALabDescriptor\par}
+                    \vspace{9pt}
+                    {\sffamily\fontsize{7.8pt}{9.4pt}\selectfont
+                    HLA Requirements Lab original work: cover, editorial compilation, semantic model, and quality gates.\par
+                    \vspace{4pt}
+                    Source reference: \HLALabSourceAttribution\par
+                    \vspace{3pt}
+                    Prepared from supplied HLA source materials; source identifiers retained for traceability.\par
+                    \vspace{3pt}
+                    {\sffamily\bfseries\fontsize{7.8pt}{9.4pt}\selectfont \HLALabStatusLine}}
+                \end{minipage}%
+            };
+
+            \node[anchor=south west,inner sep=0pt,text=HLALabInk] at (70,744) {%
+                {\sffamily\fontsize{8.4pt}{10pt}\selectfont \HLALabSeries\enspace\textbar\enspace\HLALabEdition\enspace\textbar\enspace SOURCE COMPILATION}%
+            };
+            \node[anchor=south east,inner sep=0pt,text=HLALabBlue] at (542,744) {%
+                {\sffamily\bfseries\fontsize{8.4pt}{10pt}\selectfont REQUIREMENTS LAB}%
+            };
+        \end{scope}
+    \end{tikzpicture}%
+    \null
+    \clearpage
+}
+
+\HLALabCover

@@ -203,6 +203,40 @@ def _argument_spans(text: str, start: int, count: int) -> tuple[tuple[int, int],
     return tuple(spans)
 
 
+def _fit_fixed_page_makeboxes(body: str) -> str:
+    """Fit numeric fixed-page ``makebox`` lines without changing source data.
+
+    The faithful HLA page adapters contain a small number of authored
+    ``makebox[...bp][l]`` lines whose measured width came from the source
+    document's original font. The Requirements Lab role font is intentionally
+    different, so those lines can protrude past the adapter's content frame.
+    Keep the authored width and alignment, but make the generated adapter
+    conditionally scale only when the visible line is wider than its box.
+    """
+    if "\\begin{HLAClauseSemanticPage}" not in body:
+        return body
+
+    replacements: list[tuple[int, int, str]] = []
+    cursor = 0
+    pattern = re.compile(r"\\makebox\[([0-9]+(?:\.[0-9]+)?)bp\]\[l\]\{")
+    while match := pattern.search(body, cursor):
+        span = balanced_span(body, match.end() - 1)
+        if span is None:
+            cursor = match.end()
+            continue
+        start, end = span
+        width = match.group(1)
+        content = body[start:end]
+        replacements.append(
+            (match.start(), end + 1, f"\\HLAConditionalMakeBox{{{width}}}{{{content}}}")
+        )
+        cursor = end + 1
+
+    for start, end, replacement in reversed(replacements):
+        body = body[:start] + replacement + body[end:]
+    return body
+
+
 def _replace_command_arguments(
     body: str,
     events: Sequence[tuple[int, tuple[str, ...], int]],
@@ -425,10 +459,19 @@ def render_build_manifest(
             f"{tex_escape(model.document_id)} ({len(model.clauses)} clauses)}}"
         ),
     ]
-    lines.extend(
-        f"\\input{{output/semantic/{Path(name).with_suffix('').as_posix()}}}"
-        for name in semantic_inputs
-    )
+    for name in semantic_inputs:
+        input_line = f"\\input{{output/semantic/{Path(name).with_suffix('').as_posix()}}}"
+        if name.startswith("content-element-"):
+            # Faithful page adapters already carry their source-positioned
+            # visible text.  Very large content-element text macros are only
+            # needed by layout-free semantic prose, so allow a faithful
+            # entrypoint to omit them when the TeX engine's memory budget is
+            # tighter than the complete typed manifest.
+            lines.extend(
+                ("\\ifdefined\\HLASkipSemanticContentElementData", "\\else", input_line, "\\fi")
+            )
+        else:
+            lines.append(input_line)
     return "\n".join(lines)
 
 
@@ -598,6 +641,7 @@ def generate(request: GenerationRequest) -> GenerationResult:
         block = content_blocks[identifier]
         body = block.layout_body or ""
         if block.layout_body is not None:
+            body = _fit_fixed_page_makeboxes(body)
             body = _semanticize_visible_surfaces(body, block, model, source)
         else:
             body = _semantic_content_body(block, model) or body

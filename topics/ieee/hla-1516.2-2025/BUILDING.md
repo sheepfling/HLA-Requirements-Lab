@@ -1,13 +1,13 @@
-# IEEE HLA 1516.2-2025 build
+# HLA Requirements Lab — 1516.2 build
 
-This is an unofficial, source-first LaTeX reconstruction. The separately held reference PDF is comparison
-material only and is not required for a normal build.
+This builds the independent HLA Requirements Lab 1516.2 source compilation. Supplied source material is retained
+for traceability; the output is not presented as a publisher-issued standard.
 
 ## Requirements
 
 - Python 3.11+
 - XeLaTeX and `latexmk`
-- Arimo, Tinos, Carlito, Noto Sans, and Noto Serif fonts
+- Checked-in Inter, Noto Serif, and DejaVu Sans Mono fonts
 
 Install the Python dependencies from the repository root:
 

@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,landscape,margin=0.24in]{geometry}
+\usepackage{rl_graphics}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\begin{document}
+\begin{tikzpicture}[x=1in,y=1in]
+  \node[anchor=north west,font=\sffamily\bfseries\fontsize{17}{19}\selectfont,text=RLInk] at (0,7.67) {HLA Requirements Lab - abstract family graphic system};
+  \node[anchor=north west,font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=RLMuted] at (0,7.30) {Vector-only TikZ study: volume identity by geometry and accent; edition identity by construction.};
+  \draw[draw=RLRule,line width=0.75pt] (0,7.07)--(10.26,7.07);
+
+  \RLCard{0.00}{3.49}{2010}{framework}
+  \RLCard{3.50}{3.49}{2010}{interface}
+  \RLCard{7.00}{3.49}{2010}{omt}
+
+  \RLCard{0.00}{0.00}{2025}{framework}
+  \RLCard{3.50}{0.00}{2025}{interface}
+  \RLCard{7.00}{0.00}{2025}{omt}
+
+  % Margin legend.
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{6.2}{7.3}\selectfont,text=RL2010] at (0.00,-0.20) {2010};
+  \node[anchor=west,font=\sffamily\fontsize{5.6}{6.8}\selectfont,text=RLMuted] at (0.38,-0.20) {contained, single-plane, baseline geometry};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{6.2}{7.3}\selectfont,text=RL2025] at (3.67,-0.20) {2025};
+  \node[anchor=west,font=\sffamily\fontsize{5.6}{6.8}\selectfont,text=RLMuted] at (4.05,-0.20) {layered, modular, visibly extensible geometry};
+  \node[anchor=east,font=\sffamily\fontsize{5.6}{6.8}\selectfont,text=RLMuted] at (10.26,-0.20) {No raster art, gradients, or external assets};
+\end{tikzpicture}
+\end{document}

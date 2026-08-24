@@ -186,6 +186,19 @@ def _promote(root: Path) -> dict[str, int]:
     profile = HLA_SOURCE_2010 if root.name == "hla-1516.1-2010" else HLA_SOURCE
     model = load_document_model(root, profile)
     candidates = tuple(item for item in model.requirements if item.extraction == "candidate")
+    if not candidates:
+        # This migration is intentionally safe to rerun after promotion.  The
+        # 2010 catalogs are source-controlled explicit records; an empty
+        # candidate queue is a closed corpus, not a signal to overwrite the
+        # catalog with an empty requirements file.
+        return {
+            "requirements": len(model.requirements),
+            "transitions": sum(len(machine.transitions) for machine in model.state_machines),
+            "links": len(model.requirement_links),
+            "planned_implementations": sum(
+                item.status == "planned" for item in model.implementations
+            ),
+        }
     transitions = tuple(
         transition for machine in model.state_machines for transition in machine.transitions
     )

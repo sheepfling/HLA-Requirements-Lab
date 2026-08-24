@@ -389,7 +389,7 @@ RTI implementation evidence. Build it with:
 python topics/ieee/hla-rti-compliance-2025/build.py build
 ```
 
-The full release smoke check covers the five currently ingested faithful PDFs,
+The full release smoke check covers the six currently ingested faithful PDFs,
 both derivatives, and the one-page non-HLA portability fixture:
 
 ```console

@@ -1,0 +1,70 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-frontmatter.sty}[2026/08/23 v0.1 Requirements Lab front matter]
+
+\RequirePackage{tikz}
+
+\newcommand{\RLCoverPage}{%
+    \clearpage\thispagestyle{empty}\RLCoverGeometry
+    \begin{tikzpicture}[remember picture,overlay,x=1in,y=-1in]
+        \begin{scope}[shift={(current page.north east)},shift={(-1.85,2.65)},scale=.40]
+            \RLFamilyGlyph{\RLPublicationYear}{\RLPublicationTheme}
+        \end{scope}
+    \end{tikzpicture}%
+    \vspace*{0.42in}
+    {\RLSans\fontsize{9pt}{11pt}\selectfont\bfseries\color{RLInk}\RLMark\enspace\RLPublicationShort\par}
+    \vspace{18pt}
+    {\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLBlue}\MakeUppercase{HLA REQUIREMENTS LAB \textperiodcentered\ SOURCE COMPILATION}\par}
+    \vspace{48pt}
+    {\RLSans\fontsize{29pt}{32pt}\selectfont\bfseries\color{RLInk}\RLPublicationName\par}
+    \vspace{22pt}
+    {\RLSans\fontsize{13pt}{16pt}\selectfont\color{RLBlueDeep}\RLPublicationNumber\enspace—\enspace\RLPublicationEdition\par}
+    \vspace{7pt}
+    {\RLSerif\fontsize{16pt}{20pt}\selectfont\itshape\color{RLInk}\RLPublicationTitle\par}
+    \vfill
+    \noindent\colorbox{RLMist}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+            \RLAccentRule
+            {\RLSans\bfseries\fontsize{10.8pt}{13pt}\selectfont\color{RLInk}\RLPublicationDescriptor\par}
+            \vspace{7pt}
+            {\RLSans\fontsize{8.2pt}{10pt}\selectfont\color{RLInk}
+            Lab-authored publication layer: cover, editorial compilation, semantic model, and quality gates.\par
+            \vspace{3pt}
+            Source set: \RLPublicationSource\par
+            \vspace{3pt}
+            \RLPublicationStatus\par}
+        \end{minipage}%
+    }
+    \vspace{18pt}
+    \RLRule
+    \vspace{6pt}
+    {\RLSans\fontsize{7.5pt}{9pt}\selectfont\color{RLMid}\RLPublicationFamily\hfill DESIGN SYSTEM v0.1\par}
+    \clearpage
+}
+
+\newcommand{\RLDocumentStatusPage}{%
+    \clearpage
+    \section*{Document status}
+    \RLAccentRule
+    \RLBodyFont
+    This is an HLA Requirements Lab source compilation: independently assembled, edited, and published by the Lab for requirements analysis and interoperability work.
+
+    It consolidates supplied HLA 1516-family source material. The edition label identifies the source set used for this compilation; it does not present this publication as an externally issued standard.
+
+    Source identifiers are retained for traceability. The Lab-authored layer includes the publication design, editorial compilation, semantic model, traceability surfaces, and quality gates.
+}
+
+\newcommand{\RLHowToReadPage}{%
+    \clearpage
+    \section*{How to read this edition}
+    \RLAccentRule
+    \RLBodyFont
+    The semantic source describes what a requirement, table, note, example, or reference is. The Requirements Lab publishing system decides how that material is presented on the page.
+
+    \begin{itemize}[leftmargin=1.4em,itemsep=0.35em]
+        \item Narrative prose uses a readable serif face.
+        \item Headings, navigation, and table headers use a restrained sans face.
+        \item Machine-significant identifiers use a compact monospace face.
+        \item Notes and examples are visually distinct without implying a change in normative status.
+        \item Lab-authored commentary is labeled explicitly and is never mixed invisibly into source-derived prose.
+    \end{itemize}
+}

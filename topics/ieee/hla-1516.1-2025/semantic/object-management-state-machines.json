@@ -332,7 +332,6 @@
           "target_state": "ownership.is-owned.choice",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
             "requirement-candidate-content-clauses-06-object-management-page-110-l16-4"
           ],
           "implementation_ids": [
@@ -359,7 +358,8 @@
           "clause_id": "clause-6.1.10",
           "implementation_ids": [
             "m16.transition.ownership-owned-disable-relevance"
-          ]
+          ],
+          "requirement_ids": []
         },
         {
           "id": "ownership.owned-enable-relevance",
@@ -369,7 +369,6 @@
           "target_state": "ownership.is-owned.control.initial",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
             "requirement-candidate-content-clauses-06-object-management-page-110-l16-4"
           ],
           "implementation_ids": [
@@ -384,7 +383,6 @@
           "target_state": "ownership.is-owned.control.initial",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l16-4",
             "requirement-candidate-content-clauses-06-object-management-page-110-l16-4"
           ],
           "implementation_ids": [
@@ -400,7 +398,8 @@
           "clause_id": "clause-6.1.10",
           "implementation_ids": [
             "m16.transition.ownership-owned-control-disable"
-          ]
+          ],
+          "requirement_ids": []
         },
         {
           "id": "ownership.updates-enter",
@@ -419,7 +418,6 @@
           "target_state": "ownership.is-owned.control.on",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10"
           ],
           "implementation_ids": [
@@ -433,7 +431,6 @@
           "target_state": "ownership.is-owned.control.off",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10"
           ],
           "implementation_ids": [
@@ -447,7 +444,6 @@
           "target_state": "ownership.is-owned.control.off",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10"
           ],
           "implementation_ids": [
@@ -461,7 +457,6 @@
           "target_state": "ownership.is-owned.control.on",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10"
           ],
           "implementation_ids": [
@@ -498,7 +493,6 @@
           "target_state": "ownership.is-not-owned.no-scope-notification",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -513,7 +507,6 @@
           "target_state": "ownership.is-not-owned.scope.initial",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -528,7 +521,6 @@
           "target_state": "ownership.is-not-owned.scope.initial",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -553,8 +545,6 @@
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -570,8 +560,6 @@
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -587,8 +575,6 @@
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -603,8 +589,6 @@
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
             "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l34-10",
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [
@@ -619,7 +603,6 @@
           "target_state": "ownership.is-not-owned.no-scope-notification",
           "clause_id": "clause-6.1.10",
           "requirement_ids": [
-            "requirement-candidate-content-clauses-06-object-management-page-110-l40-12",
             "requirement-candidate-content-clauses-06-object-management-page-110-l40-12"
           ],
           "implementation_ids": [

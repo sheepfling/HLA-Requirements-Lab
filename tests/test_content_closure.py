@@ -16,7 +16,7 @@ ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 class ContentClosureTests(unittest.TestCase):
     def test_all_15161_requirement_candidates_are_authoritative(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
-        self.assertEqual(len(model.requirements), 1697)
+        self.assertEqual(len(model.requirements), 1860)
         self.assertTrue(all(item.extraction == "explicit" for item in model.requirements))
         self.assertTrue(all(item.clause_id for item in model.requirements))
         self.assertEqual(model.requirement_reviews, ())
@@ -35,13 +35,13 @@ class ContentClosureTests(unittest.TestCase):
         transitions = tuple(
             transition for machine in model.state_machines for transition in machine.transitions
         )
-        self.assertEqual(len(transitions), 281)
-        self.assertEqual(len(model.implementations), 281)
+        self.assertEqual(len(transitions), 282)
+        self.assertEqual(len(model.implementations), 282)
         self.assertEqual(model.transitions_missing_implementation_mapping(), ())
         self.assertEqual(
             model.transition_coverage_counts(),
             {
-                "mapped": 281,
+                "mapped": 282,
                 "not-applicable": 0,
                 "deferred": 0,
                 "unclassified": 0,

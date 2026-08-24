@@ -93,7 +93,7 @@
 \boolfalse{hla-license-footer}
 \newcommand{\HLAEnableLicenseFooter}{\booltrue{hla-license-footer}}
 \newcommand{\HLADisableLicenseFooter}{\boolfalse{hla-license-footer}}
-\newcommand{\HLALicenseFooterText}{Authorized licensed use footer intentionally omitted from the clean recreation.}
+\newcommand{\HLALicenseFooterText}{}
 
 \newcommand{\HLAHeader}{%
     \sffamily\fontsize{7.98pt}{9.18pt}\selectfont
@@ -105,7 +105,6 @@
     \begin{minipage}{\textwidth}
     \centering
     \leavevmode\fontsize{10.02pt}{11pt}\selectfont\thepage\\[-1pt]
-    \sffamily\fontsize{7.98pt}{9.2pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.%
     \ifbool{hla-license-footer}{\\[-0.2pt]\fontsize{7pt}{8pt}\selectfont\HLALicenseFooterText}{}%
     \end{minipage}%
 }
@@ -387,14 +386,14 @@
             {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
         \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=229.463pt,yshift=-777.375pt]current page.north west)
-            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
+            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont}};
     }{%
         \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=300.96pt,yshift=-744.60pt]current page.north west)
             {{\HLAFacSerif\fontsize{9.96pt}{9.96pt}\selectfont #2}};
         \node[anchor=base west,inner sep=0pt,outer sep=0pt]
         at ([xshift=229.20pt,yshift=-754.32pt]current page.north west)
-            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
+            {{\HLAFacSans\fontsize{8.04pt}{8.04pt}\selectfont}};
     }%
     \end{tikzpicture}%
 }
@@ -427,15 +426,6 @@
 % header; physical pages 3--7 use the source's higher front-matter footer,
 % while physical pages 8--11 use the standard interior footer.
 \newcommand{\HLAFrontMatterFooterHigh}[1]{%
-    \begin{tikzpicture}[remember picture,overlay]
-    % Preserve the source content-stream order: copyright line, then page number.
-    \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-    at ([xshift=229.256pt,yshift=-745.077pt]current page.north west)
-        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}};
-    \node[anchor=base west,inner sep=0pt,outer sep=0pt]
-    at ([xshift=303.48pt,yshift=-737.76pt]current page.north west)
-        {{\HLAFacSerif\fontsize{10.02pt}{10.02pt}\selectfont #1}};
-    \end{tikzpicture}%
 }
 
 \newcommand{\HLAStartFrontMatterUnnumberedPage}[1]{%
@@ -659,7 +649,7 @@
     ([xshift=581.40pt,yshift=-476.34pt]current page.north west);
 
     \node[anchor=south west,text=HLADark] at ([xshift=24pt,yshift=33pt]current page.south west) {\IEEEWordmark};
-    \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial noncommercial LaTeX recreation.};
+    \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont HLA Requirements Lab working edition.};
     \end{tikzpicture}
     \null\par
     \clearpage
@@ -677,7 +667,7 @@
 
     \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-482pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont Approved 14 February 2025\\[9pt]\textbf{IEEE SA Standards Board}};
 
-    \node[anchor=south,text=HLADark] at ([yshift=20pt]current page.south) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial recreation.};
+    \node[anchor=south,text=HLADark] at ([yshift=20pt]current page.south) {\sffamily\fontsize{6.8pt}{8pt}\selectfont};
     \end{tikzpicture}
     \null
     \clearpage
@@ -756,7 +746,7 @@
 
 
     \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=33pt]current page.south west) {\IEEEWordmark};
-    \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont Reprinted with permission from IEEE Std 1516\texttrademark--2025. Unofficial noncommercial LaTeX recreation.};
+    \node[anchor=south west,text=HLADark] at ([xshift=60pt,yshift=14pt]current page.south west) {\sffamily\fontsize{6.8pt}{8pt}\selectfont HLA Requirements Lab working edition.};
     \end{tikzpicture}%
     \null\par
 }

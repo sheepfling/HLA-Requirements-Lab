@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ieee-hla}[2026/07/31 v1.0.1 Unofficial reusable IEEE HLA recreation class]
+\ProvidesClass{ieee-hla}[2026/08/24 v1.1 Requirements Lab fixed-page compatibility class]
 
 \LoadClass[10pt]{article}
 

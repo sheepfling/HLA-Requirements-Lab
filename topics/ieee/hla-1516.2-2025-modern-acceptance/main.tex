@@ -1,0 +1,334 @@
+\documentclass{requirements-lab}
+
+\hypersetup{
+    pdftitle={HLA Requirements Lab — OMT source-driven production pages},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={Source-driven production-page acceptance set for the HLA OMT family},
+    pdfkeywords={HLA, OMT, Requirements Lab, source compilation, production pages}
+}
+
+\renewcommand{\RLPublicationName}{HLA Requirements Lab}
+\renewcommand{\RLPublicationShort}{HLA REQUIREMENTS LAB}
+\renewcommand{\RLPublicationEdition}{source compilation}
+\renewcommand{\RLPublicationYear}{2025}
+\renewcommand{\RLPublicationTheme}{omt}
+\renewcommand{\RLPublicationNumber}{HLA OMT}
+\renewcommand{\RLPublicationTitle}{Source-driven production pages}
+\renewcommand{\RLPublicationFamily}{HLA 1516 FAMILY}
+\renewcommand{\RLPublicationDescriptor}{Production-page acceptance set for the OMT family}
+\renewcommand{\RLPublicationSource}{supplied HLA 1516-family source materials}
+\renewcommand{\RLPublicationStatus}{QA review set; complete body migration follows after interior acceptance.}
+\renewcommand{\RLClauseContext}{SOURCE-DRIVEN INTERIOR}
+\renewcommand{\RLHeaderLeft}{HLA 1516.2-2025}
+\renewcommand{\RLHeaderRight}{Object Model Template Specification}
+\renewcommand{\RLLandscapeHeaderRight}{Object Model Template Specification\enspace\textperiodcentered\enspace\RLClauseContext}
+\renewcommand{\RLHeaderFooter}{HLA Requirements Lab\enspace\textperiodcentered\enspace source compilation}
+
+\newcommand{\ASmallID}[1]{{\RLMono\fontsize{6.55pt}{7.9pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\BID}[1]{{\RLMono\fontsize{6.9pt}{8.2pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\TableTech}[1]{{\RLMono #1}}
+\newcommand{\ATemplate}[1]{{\RLMono\fontsize{6.35pt}{7.5pt}\selectfont\color{RLBlueDeep}#1}}
+\newcommand{\AText}[1]{{\RLSans\fontsize{6.65pt}{8.2pt}\selectfont\color{RLInk}#1}}
+\newcommand{\TreePrefix}[1]{{\RLMono\fontsize{7.25pt}{8.5pt}\selectfont\color{RLLine}#1}\hspace{2pt}}
+\newcommand{\TreeValue}[1]{{\RLMono\fontsize{7.25pt}{8.5pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\TreeRow}[3]{\TreePrefix{#1}\TreeValue{#2} & \TreeValue{#3}\\}
+\newcommand{\TreeEdge}[4]{% parent, child, rendered prefix, designation
+    \TreeRow{#3}{#2}{#4}%
+}
+\newcommand{\TreeRoot}[2]{\TreeValue{#1} & \TreeValue{#2}\\}
+\newcommand{\TableFieldHeader}[1]{%
+    \RLSans\bfseries\fontsize{6.1pt}{7.3pt}\selectfont\color{RLBlueDeep}\strut#1%
+}
+
+\setlength{\tabcolsep}{2.5pt}
+
+\begin{document}
+
+% The first page is intentionally QA-framed. The pages that follow are
+% source-driven production pages and do not repeat review labels or traces.
+\RLCoverPage
+
+% -----------------------------------------------------------------------------
+% Source prototype page 47 — prose treatment.
+% -----------------------------------------------------------------------------
+\RLSetClauseContext{4.8 TIME REPRESENTATION}
+\RLSubclauseLabel{4.8 \textperiodcentered\enspace Time representation}
+\begingroup
+\setlength{\parskip}{0.38em}
+\RLSerif\fontsize{8.9pt}{12.1pt}\selectfont\color{RLInk}
+
+A logical time represents a single point on the HLA time axis. A logical time interval represents the distance between two points on the HLA time axis. During a federation execution, logical time may play two roles. Federates may associate themselves with points on the HLA time axis, and they may associate some of their activities, such as updating an instance attribute's value or sending an interaction, with points on the HLA time axis. These points on the HLA time axis are referred to as time positions when associated with a federate and timestamps when associated with their activities. As a federation execution progresses, federates may advance their time positions along the HLA time axis. Logical time intervals are used to specify a federate's lookahead and by the RTI to perform arithmetic operations with logical time values.
+
+The specific strategy used to advance time in a simulation is driven by the simulation's purpose. For example, faster-than-real time, event-stepped simulations are frequently used in analysis applications, whereas real time, time-stepped simulations are often used in training applications. The strategy chosen for advancing time is an important consideration in the design of a simulation, because it affects both simulation performance and the ability of a simulation to interoperate with other simulations in a federation. For this reason, it is important to document how a simulation supports the advancement of time in a federate's SOM and relevant SOM modules.
+
+IEEE Std 1516.1-2025 provides a variety of time management services to control the advancement of federates along the HLA time axis. These services allow multiple federates with differing internal time advancement strategies to interoperate in a meaningful way. For this reason, it is vital for all federation members to agree on how logical times and logical time intervals are represented across the federation, and document this agreement in the federation's FOM and relevant FOM modules.
+
+During federation execution, logical times and logical time intervals are represented as instances of the time representation abstract data type (TRADT). This abstract data type is provided to the RTI when federation execution is created so that an RTI knows how to use the logical times and logical time intervals. This table allows the data type and semantics of the abstract data type for logical times and logical time intervals to be explained in FOMs, FOM modules, SOMs, and SOM modules.
+
+It is also important to define the lookahead characteristics of both federates and federations. At the individual federate level, the specific means by which lookahead is supported may be a factor in assessing compatibility with other potential federates for a given federation application. For federations, it is important to document a common set of characteristics for how lookahead will be supported across the full federation. Thus, SOMs, SOM modules, FOMs and FOM modules all include representations of lookahead as well as timestamps.
+
+An abstract data type for lookahead is supplied when a federation execution is created. The lookahead entry in this table allows the data type and semantics of this abstract data type to be documented in FOMs, SOMs, FOM modules, and SOM modules.
+
+Semantic differences exist between the way time is represented for the purpose of depicting timestamps versus calculating lookahead. When depicting timestamps, time can be considered to be an absolute value on the HLA time axis, and thus, time comparisons can be drawn to determine if one timestamp is greater than another. Lookahead, in contrast, represents a duration of time, which can be added to timestamps but is generally not used for comparison purposes.
+
+Two time representations, \RLIdentifier{HLAinteger64Time} and \RLIdentifier{HLAfloat64Time}, are required to be supported by the HLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs. Federations may choose to use these default data types, supply their own time representations, or not supply any time representation (e.g., NA).
+
+\RLMinorHeading{4.8.2 Table format}
+The template that shall be used for recording time representation is illustrated in Table 16.
+\endgroup
+\clearpage
+
+% -----------------------------------------------------------------------------
+% Source prototype page 48 — exact Table 16 treatment and source guidance.
+% -----------------------------------------------------------------------------
+\begingroup
+\setlength{\parskip}{0.38em}
+\RLSetClauseContext{4.8 TIME REPRESENTATION}
+\RLSubclauseLabel{4.8 \textperiodcentered\enspace Time representation}
+\RLInlineTableCaption{16}{Time representation table}
+{\RLSans\fontsize{8.7pt}{11pt}\selectfont\color{RLInk}
+\renewcommand{\arraystretch}{1.42}
+\setlength{\tabcolsep}{8pt}
+\begin{tabularx}{\linewidth}{@{}L{0.27\linewidth}L{0.25\linewidth}Y@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeader{Category} & \RLTableHeader{Data type} & \RLTableHeader{Semantics}\\
+\RLProductionHeaderSpace
+\RLIdentifier{LogicalTime} & \RLIdentifier{<type>} & \RLIdentifier{<semantics>}\\
+\RLProductionRowRule
+\RLIdentifier{LogicalTimeInterval} & \RLIdentifier{<type>} & \RLIdentifier{<semantics>}\\
+\RLProductionBottomRule
+\end{tabularx}}
+
+\RLSerif\fontsize{9.2pt}{12.6pt}\selectfont\color{RLInk}
+The first column (Category) presents the two time-related values that are to be specified in the table: logical time and logical time interval. \RLIdentifier{LogicalTime} and \RLIdentifier{LogicalTimeInterval} correspond to the only two rows in this table.
+
+The second column (Data type) shall identify the data type of the time value. This data type shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record data type described in 4.14. ``NA'' shall be entered in this column when timestamp or lookahead information is inappropriate to the federate or federation.
+
+The third column (Semantics) shall expand and describe the use of the data type for time values. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+\RLMinorHeading{4.8.3 Inclusion criteria}
+All federations shall document their use of logical time and logical time interval via the time representation table in a FOM and relevant FOM modules. All federates shall document their representation of logical time via the time representation table in a SOM and relevant SOM modules to the extent that it is used in the federate. For federates that support lookahead, the representation of logical time interval shall be documented via the time representation table in a SOM and relevant SOM modules.
+
+\RLMinorHeading{4.8.4 Example}
+Table 17 provides an example of how the OMT tables are used to describe the representation of time for the restaurant application.
+
+\RLInlineTableCaption{17}{Time representation table example}
+{\RLSans\fontsize{8.5pt}{10.5pt}\selectfont\color{RLInk}
+\renewcommand{\arraystretch}{1.40}
+\setlength{\tabcolsep}{8pt}
+\begin{tabularx}{\linewidth}{@{}L{0.26\linewidth}L{0.27\linewidth}Y@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeader{Category} & \RLTableHeader{Data type} & \RLTableHeader{Semantics}\\
+\RLProductionHeaderSpace
+\RLIdentifier{LogicalTime} & \RLIdentifier{HLAinteger64Time} & Integer value expressed in seconds\\
+\RLProductionRowRule
+\RLIdentifier{LogicalTimeInterval} & \RLIdentifier{HLAinteger64Time} & Integer value expressed in seconds\\
+\RLProductionRowRule
+\RLIdentifier{Note} & NA & \\
+\RLProductionBottomRule
+\end{tabularx}}
+
+\vspace{4pt}
+\RLRule
+\vspace{4pt}
+\RLMajorInFlow{4.9 User-supplied tag table}
+\RLMinorHeadingSmall{4.9.1 Purpose/background}
+The HLA RTI provides a mechanism for federates to supply tags with certain HLA services. These tags can be used to provide additional coordination and control over these services. The user-supplied tag table provides a means of documenting federation agreements regarding the data type to be used with these tags.
+
+\endgroup
+
+% -----------------------------------------------------------------------------
+% Source prototype page 58 — exact Table 29 treatment.
+% -----------------------------------------------------------------------------
+\RLSetClauseContext{4.14 DATA TYPE TABLES}
+\begin{RLLandscapePage}
+\RLInlineTableCaption{29}{Basic data representation table}
+{\RLSans\fontsize{7.35pt}{9.25pt}\selectfont\color{RLInk}
+\renewcommand{\arraystretch}{1.28}
+\setlength{\tabcolsep}{5.6pt}
+\setlength{\fboxsep}{1.2pt}
+\setlength{\parskip}{0pt}
+\arrayrulecolor{RLLine}
+% Keep this column specification identical to the supplied golden-master
+% prototype.  The shared L/C/Y wrappers use ragged2e's paragraph settings;
+% the source uses the standard LaTeX paragraph settings, which produce the
+% intended line breaks and keep both template rows on the page.
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.20\linewidth} >{\centering\arraybackslash}p{0.065\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}p{0.075\linewidth} X}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeader{Name} & \RLTableHeader{Size} & \RLTableHeader{Interpretation} & \RLTableHeader{Endian} & \RLTableHeader{Encoding}\\
+\addlinespace[1.0pt]
+\TableTech{HLAinteger16BE} & 16 bit & Integer in the range $[-2^{15},\,2^{15}-1]$ & Big & 16-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAinteger32BE} & 32 bit & Integer in the range $[-2^{31},\,2^{31}-1]$ & Big & 32-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAinteger64BE} & 64 bit & Integer in the range $[-2^{63},\,2^{63}-1]$ & Big & 64-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger16BE} & 16 bit & Integer in the range $[0,\,2^{16}-1]$ & Big & 16-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger32BE} & 32 bit & Integer in the range $[0,\,2^{32}-1]$ & Big & 32-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger64BE} & 64 bit & Integer in the range $[0,\,2^{64}-1]$ & Big & 64-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAfloat32BE} & 32 bit & Single-precision floating point number & Big & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985.\\
+\midrule[0.3pt]
+\TableTech{HLAfloat64BE} & 64 bit & Double-precision floating point number & Big & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985.\\
+\midrule[0.3pt]
+\TableTech{HLAoctetPairBE} & 16 bit & 16-bit value & Big & Assumed to be portable among hardware devices.\\
+\midrule[0.7pt]
+\TableTech{HLAinteger16LE} & 16 bit & Integer in the range $[-2^{15},\,2^{15}-1]$ & Little & 16-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAinteger32LE} & 32 bit & Integer in the range $[-2^{31},\,2^{31}-1]$ & Little & 32-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAinteger64LE} & 64 bit & Integer in the range $[-2^{63},\,2^{63}-1]$ & Little & 64-bit two's complement signed integer. The most significant bit contains the sign.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger8} & 8 bit & Integer in the range $[0,\,2^{8}-1]$ & Little & 8-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger16LE} & 16 bit & Integer in the range $[0,\,2^{16}-1]$ & Little & 16-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger32LE} & 32 bit & Integer in the range $[0,\,2^{32}-1]$ & Little & 32-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAunsignedInteger64LE} & 64 bit & Integer in the range $[0,\,2^{64}-1]$ & Little & 64-bit unsigned integer.\\
+\midrule[0.3pt]
+\TableTech{HLAfloat32LE} & 32 bit & Single-precision floating point number & Little & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985.\\
+\midrule[0.3pt]
+\TableTech{HLAfloat64LE} & 64 bit & Double-precision floating point number & Little & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985.\\
+\midrule[0.3pt]
+\TableTech{HLAoctetPairLE} & 16 bit & 16-bit value & Little & Assumed to be portable among hardware devices.\\
+\midrule[0.3pt]
+\TableTech{HLAoctet} & 8 bit & 8-bit value & Big & Assumed to be portable among hardware devices.\\
+\midrule[0.7pt]
+\TableTech{<name>} & \TableTech{<size>} & \TableTech{<interpretation>} & \TableTech{<endian>} & \TableTech{<encoding>}\\
+\midrule[0.3pt]
+\TableTech{<name>} & \TableTech{<size>} & \TableTech{<interpretation>} & \TableTech{<endian>} & \TableTech{<encoding>}\\
+\bottomrule[0.9pt]
+\end{tabularx}}
+\end{RLLandscapePage}
+
+% -----------------------------------------------------------------------------
+% Actual Table 5 hierarchy example, re-expressed as a tree. Parentage is
+% carried by TreeEdge records; the prefix is only the visual rendering.
+% -----------------------------------------------------------------------------
+\RLSetClauseContext{4.2 OBJECT CLASS STRUCTURE}
+\RLSubclauseLabel{4.2 \textperiodcentered\enspace Object class structure}
+\RLInlineTableCaption{5}{Object class structure table example — selected branches}
+{\RLSans\fontsize{8.5pt}{11pt}\selectfont\color{RLInk}
+\renewcommand{\arraystretch}{0.90}
+\begin{tabularx}{\linewidth}{@{}Y C{0.10\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeader{Class hierarchy} & \RLTableHeader{P/S}\\
+\RLProductionHeaderRule
+\TreeRoot{HLAobjectRoot}{N}
+\midrule[0.3pt]
+\TreeEdge{HLAobjectRoot}{Customer}{├──}{PS}
+\TreeEdge{HLAobjectRoot}{Bill}{├──}{PS}
+\TreeEdge{HLAobjectRoot}{Order}{├──}{PS}
+\midrule[0.3pt]
+\TreeEdge{HLAobjectRoot}{Employee}{├──}{N}
+\TreeEdge{Employee}{Server}{│\enspace└──}{PS}
+\midrule[0.3pt]
+\TreeEdge{HLAobjectRoot}{Food}{└──}{S}
+\TreeEdge{Food}{MainCourse}{\enspace\enspace├──}{PS}
+\TreeEdge{Food}{Drink}{\enspace\enspace├──}{S}
+\TreeEdge{Drink}{Water}{\enspace\enspace│\enspace└──}{PS}
+\TreeEdge{Food}{Appetizers}{\enspace\enspace├──}{S}
+\TreeEdge{Appetizers}{Soup}{\enspace\enspace│\enspace└──}{S}
+\TreeEdge{Soup}{ClamChowder}{\enspace\enspace│\enspace\enspace\enspace└──}{PS}
+\TreeEdge{Food}{Entree}{\enspace\enspace├──}{S}
+\TreeEdge{Entree}{Seafood}{\enspace\enspace│\enspace├──}{S}
+\TreeEdge{Seafood}{Fish}{\enspace\enspace│\enspace│\enspace├──}{PS}
+\TreeEdge{Seafood}{Lobster *[Note1]}{\enspace\enspace│\enspace│\enspace└──}{\shortstack[l]{PS\\[-1pt]*[Note2]}}
+\RLProductionBottomRule
+\end{tabularx}}
+
+% -----------------------------------------------------------------------------
+% Actual Table 10 with a selected portion of Table 11; exact eleven fields.
+% -----------------------------------------------------------------------------
+\RLSetClauseContext{4.5 ATTRIBUTE TABLES}
+\begin{RLLandscapePage}
+\RLInlineTableCaption{10}{Attribute table - representative template rows}
+{\RLSans\fontsize{6.55pt}{8.3pt}\selectfont\color{RLInk}
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}L{1.30in}L{1.47in}L{1.00in}L{0.72in}L{0.84in}L{0.60in}L{0.38in}L{0.38in}L{0.74in}L{0.68in}L{0.68in}@{}}
+\RLProductionTopRule
+\multicolumn{3}{@{}l}{\RLTableGroupHeader{Identity}} & \multicolumn{3}{l}{\RLTableGroupHeader{Update policy}} & \multicolumn{5}{l@{}}{\RLTableGroupHeader{Exchange}}\\
+\RLProductionHeaderRule
+\RLProductionHeaderBand
+\TableFieldHeader{Object} & \TableFieldHeader{Attribute} & \TableFieldHeader{Data type} & \TableFieldHeader{Update type} & \TableFieldHeader{Update condition} & \TableFieldHeader{Value Required} & \TableFieldHeader{D/A} & \TableFieldHeader{P/S} & \TableFieldHeader{Available dimensions} & \TableFieldHeader{Transpor\-tation} & \TableFieldHeader{Order}\\
+\RLProductionHeaderSpace
+\ASmallID{HLAobjectRoot} & \ASmallID{HLAprivilegeToDeleteObject} & \ASmallID{HLAtoken} & \ATemplate{<update type>} & \ATemplate{<update condition>} & \ATemplate{<value required>} & \AText{DA} & \AText{PS} & \ATemplate{<dimensions>} & \ATemplate{<transport>} & \ATemplate{<order>}\\
+\midrule[0.3pt]
+\ATemplate{<object class>} & \ATemplate{<attribute>} & \ATemplate{<data type>} & \ATemplate{<update type>} & \ATemplate{<update condition>} & \ATemplate{<value required>} & \ATemplate{<d/a>} & \ATemplate{<p/s>} & \ATemplate{<dimensions>} & \ATemplate{<transport>} & \ATemplate{<order>}\\
+\midrule[0.3pt]
+ & \ATemplate{<attribute>} & \ATemplate{<data type>} & \ATemplate{<update type>} & \ATemplate{<update condition>} & \ATemplate{<value required>} & \ATemplate{<d/a>} & \ATemplate{<p/s>} & \ATemplate{<dimensions>} & \ATemplate{<transport>} & \ATemplate{<order>}\\
+\RLProductionBottomRule
+\end{tabular}}
+
+\RLInlineTableCaption{11}{Attribute table example — selected source rows}
+{\RLSans\fontsize{6.55pt}{8.3pt}\selectfont\color{RLInk}
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}L{1.30in}L{1.47in}L{1.00in}L{0.72in}L{0.84in}L{0.60in}L{0.38in}L{0.38in}L{0.74in}L{0.68in}L{0.68in}@{}}
+\RLProductionTopRule
+\multicolumn{3}{@{}l}{\RLTableGroupHeader{Identity}} & \multicolumn{3}{l}{\RLTableGroupHeader{Update policy}} & \multicolumn{5}{l@{}}{\RLTableGroupHeader{Exchange}}\\
+\RLProductionHeaderRule
+\RLProductionHeaderBand
+\TableFieldHeader{Object} & \TableFieldHeader{Attribute} & \TableFieldHeader{Data type} & \TableFieldHeader{Update type} & \TableFieldHeader{Update condition} & \TableFieldHeader{Value Required} & \TableFieldHeader{D/A} & \TableFieldHeader{P/S} & \TableFieldHeader{Available dimensions} & \TableFieldHeader{Transpor\-tation} & \TableFieldHeader{Order}\\
+\RLProductionHeaderSpace
+\ASmallID{HLAobjectRoot} & \ASmallID{HLAprivilegeToDeleteObject} & \ASmallID{HLAtoken} & \AText{NA} & \AText{NA} & \AText{False} & \AText{DA} & \AText{PS} & \AText{NA} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\midrule[0.3pt]
+\ASmallID{Employee} & \ASmallID{Name} & \ASmallID{HLAunicodeString} & \AText{Conditional} & \AText{On change} & \AText{False} & \AText{DA} & \AText{PS} & \AText{NA} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\midrule[0.3pt]
+\ASmallID{Employee} & \ASmallID{PayRate} & \ASmallID{DollarRate} & \AText{Conditional} & \AText{Merit increase *[Note3]} & \AText{True} & \AText{DA} & \AText{PS} &  & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\midrule[0.3pt]
+\ASmallID{Employee} & \ASmallID{YearsOfService} & \ASmallID{Years} & \AText{Periodic} & \AText{1/year *[Note4]} & \AText{True} & \AText{DA} & \AText{PS} &  & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\midrule[0.3pt]
+\ASmallID{Employee} & \ASmallID{HomeNumber} & \ASmallID{HLAASCIIstring} & \AText{Conditional} & \AText{Employee request} & \AText{False} & \AText{DA} & \AText{PS} &  & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\midrule[0.3pt]
+\ASmallID{Employee} & \ASmallID{HomeAddress} & \ASmallID{AddressType} & \AText{Conditional} & \AText{Employee request} & \AText{False} & \AText{DA} & \AText{PS} &  & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\RLProductionRowRule
+\ASmallID{Employee.Server} & \ASmallID{Efficiency} & \ASmallID{ServerValue} & \AText{Conditional} & \AText{Performance review} & \AText{True} & \AText{DA} & \AText{PS} & \AText{NA} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\RLProductionRowRule
+\ASmallID{Food.Drink} & \ASmallID{NumberCups} & \ASmallID{DrinkCount} & \AText{Conditional} & \AText{Customer request} & \AText{True} & \AText{N} & \AText{PS} & \ASmallID{BarQuantity} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\RLProductionRowRule
+\ASmallID{Food.Drink.Soda} & \ASmallID{Flavor} & \ASmallID{FlavorType} & \AText{Conditional} & \AText{Customer request} & \AText{True} & \AText{N} & \AText{PS} & \ASmallID{SodaFlavor} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\RLProductionRowRule
+\ASmallID{Food.Drink.Soda} & \ASmallID{Light} & \AText{NA} & \AText{NA} & \AText{NA} & \AText{False} & \AText{N} & \AText{N} & \ASmallID{Sweetener} & \ASmallID{HLAreliable} & \AText{TimeStamp}\\
+\bottomrule[0.9pt]
+\end{tabular}}
+\end{RLLandscapePage}
+
+% -----------------------------------------------------------------------------
+% Actual Table 45 — complete long Note 6 and Note 7 content.
+% -----------------------------------------------------------------------------
+\RLSetClauseContext{4.15 NOTES}
+\RLSubclauseLabel{4.15 \textperiodcentered\enspace Notes}
+\RLInlineTableCaption{45}{Notes table example}
+{\RLSans\fontsize{7.9pt}{10.0pt}\selectfont\color{RLInk}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}L{0.15\linewidth}Y@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeader{Label} & \RLTableHeader{Semantics}\\
+\RLProductionHeaderSpace
+\RLIdentifier{Note 1} & \url{http://www.seasonalfoods.com/lobster}\\
+\RLProductionRowRule
+\RLIdentifier{Note 2} & For most general-purpose restaurant simulations, this is \textit{Subscribe} only.\\
+\RLProductionRowRule
+\RLIdentifier{Note 3} & Merit raises are not provided according to any regular time interval; they are provided on a supervisor's recommendation based on evidence of exceptional effort and performance.\\
+\RLProductionRowRule
+\RLIdentifier{Note 4} & Years of service are a factor in any merit raise. This value is only changed on the anniversary of the employee's hire.\\
+\RLProductionRowRule
+\RLIdentifier{Note 5} & Sometimes a dish can be modified to be gluten- or wheat-free, e.g. gluten-free pasta can be used for some pasta dishes, but dishes like ravioli and lasagna are usually pre-made with wheat pasta and can’t be modified.\\
+\RLProductionRowRule
+\RLIdentifier{Note 6} & Gluten Normalization Function:\par 1) No—Ingredients contain wheat and those ingredients can’t be modified\par 2) Intolerant—Ingredients can be modified to remove wheat, rye, or barley (cross-contamination free environment is N/A)\par 3) Celiac —Ingredients can be modified to remove wheat, rye, or barley; prepared in cross-contamination free environment\par 4) Allergy—Ingredients can be modified to remove wheat; prepared in cross-contamination free environment\par 5) All—No ingredients contain wheat, rye, or barley; prepared in cross-contamination free environment\\
+\RLProductionRowRule
+\RLIdentifier{Note 7} & Gluten is found in three grains: wheat, barley, and rye. Gluten intolerant individuals will have varying degrees of negative, but not necessarily debilitating, reactions to these foods. Individuals with Celiac disease will have debilitating reactions to these foods and suffer long-term, potentially life-threatening effects. Those with wheat allergies may suffer immediate, life-threatening reactions, but may be able to eat barley and rye. Depending on levels of sensitivity, cross-contamination in the kitchen can be dangerous to the extent that separate food preparation areas and tools are required.\\
+\RLProductionBottomRule
+\end{tabularx}}
+
+\end{document}

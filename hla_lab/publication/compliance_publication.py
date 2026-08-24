@@ -30,6 +30,7 @@ from hla_lab.core.semantic_model import (
     ImplementationEvidence,
     ImplementationMapping,
     SemanticRecord,
+    SourceRef,
 )
 from hla_lab.corpus.corpus_graph import CorpusSemanticGraph
 
@@ -143,6 +144,12 @@ class RequirementComplianceItem(SemanticRecord):
     implementation_mapping_ids: tuple[str, ...] = ()
     evidence_status: RequirementEvidenceStatus
     concrete_mapping_count: int = Field(ge=0)
+    # Catalog position is presentation metadata only; requirement_id remains
+    # the stable semantic join key across editions and generated projections.
+    ordinal: int | None = Field(default=None, ge=1)
+    extraction: Literal["explicit", "candidate"] = "explicit"
+    semantic_group_id: str | None = None
+    source: SourceRef | None = None
 
 
 class OperationalComplianceItem(SemanticRecord):
@@ -221,6 +228,30 @@ class CompliancePublicationManifest(SemanticRecord):
         qualified_ids = [item.qualified_id for item in self.requirements]
         if len(qualified_ids) != len(set(qualified_ids)):
             raise ValueError("compliance manifest requirement IDs must be unique")
+        requirement_document_order = tuple(item.document_id for item in self.requirements)
+        expected_document_order = tuple(
+            document_id
+            for document_id in self.profile.document_ids
+            for item in self.requirements
+            if item.document_id == document_id
+        )
+        if requirement_document_order != expected_document_order:
+            raise ValueError(
+                "compliance manifest requirements must follow profile document order"
+            )
+        for document_id in self.profile.document_ids:
+            rows = tuple(item for item in self.requirements if item.document_id == document_id)
+            ordinals = tuple(item.ordinal for item in rows)
+            if any(item is not None for item in ordinals):
+                if any(item is None for item in ordinals):
+                    raise ValueError(
+                        f"compliance manifest {document_id} requirement ordinals must be complete"
+                    )
+                if ordinals != tuple(range(1, len(rows) + 1)):
+                    raise ValueError(
+                        f"compliance manifest {document_id} requirement ordinals must follow "
+                        "catalog order"
+                    )
         operation_ids = [item.qualified_id for item in self.operations]
         if len(operation_ids) != len(set(operation_ids)):
             raise ValueError("compliance manifest operation IDs must be unique")
@@ -295,7 +326,7 @@ def _requirements(
 ) -> tuple[RequirementComplianceItem, ...]:
     result: list[RequirementComplianceItem] = []
     for model in models:
-        for requirement in model.ordered_requirements():
+        for ordinal, requirement in enumerate(model.ordered_requirements(), start=1):
             mappings = {
                 item.id: item
                 for item in (
@@ -330,9 +361,16 @@ def _requirements(
                     concrete_mapping_count=sum(
                         item.status in {"implemented", "verified"} for item in mappings.values()
                     ),
+                    ordinal=ordinal,
+                    extraction=requirement.extraction,
+                    semantic_group_id=requirement.semantic_group_id,
+                    source=requirement.source,
                 )
             )
-    return tuple(sorted(result, key=lambda item: (item.document_id, item.requirement_id)))
+    # ``model.ordered_requirements()`` is the canonical clause/source order.
+    # Do not re-sort by semantic ID here: IDs are stable cross-reference keys,
+    # and lexical sorting moves page 100 before page 20 (and item 10 before 2).
+    return tuple(result)
 
 
 def _operations(models: Iterable[DocumentModel]) -> tuple[OperationalComplianceItem, ...]:
@@ -760,6 +798,12 @@ def write_compliance_csv_exports(
             "coverage_note",
             "evidence_status",
             "concrete_mapping_count",
+            "ordinal",
+            "extraction",
+            "semantic_group_id",
+            "source_path",
+            "source_line",
+            "source_end_line",
         ),
         (
             {
@@ -775,6 +819,10 @@ def write_compliance_csv_exports(
                 "coverage_note": item.coverage_note,
                 "evidence_status": item.evidence_status,
                 "concrete_mapping_count": item.concrete_mapping_count,
+                "ordinal": item.ordinal or "",
+                "extraction": item.extraction,
+                "semantic_group_id": item.semantic_group_id or "",
+                **_csv_source_fields(item.source),
             }
             for item in manifest.requirements
         ),

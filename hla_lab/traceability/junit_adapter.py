@@ -112,6 +112,10 @@ def _test_key(test: ComplianceTestCase) -> _BindingKey:
 
 def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -> None:
     expected = _expected_bindings(request)
+    requirements_by_document = {
+        document.document_id: {item.id for item in document.requirements}
+        for document in request.documents
+    }
     grouped: dict[_BindingKey, list[ComplianceTestCase]] = defaultdict(list)
     for test in catalog.tests:
         key = _test_key(test)
@@ -135,6 +139,17 @@ def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -
                 f"catalog test {test.id} API surfaces must exactly match the selected "
                 f"crosswalk surfaces for {':'.join(key)}"
             )
+        if test.requirement_ids:
+            missing = set(test.requirement_ids) - requirements_by_document.get(test.document_id, set())
+            if missing:
+                raise ValueError(
+                    f"catalog test {test.id} references missing requirements: {sorted(missing)}"
+                )
+            if set(test.requirement_ids) != set(binding.requirement_ids):
+                raise ValueError(
+                    f"catalog test {test.id} requirement IDs must exactly match the "
+                    f"implementation mapping requirements for {':'.join(key)}"
+                )
         grouped[key].append(test)
 
     for key, tests in grouped.items():
@@ -190,6 +205,7 @@ def response_from_catalog(
             kind=test.kind,
             status=status,
             execution_mode=test.execution_mode,
+            requirement_ids=test.requirement_ids or expected[_test_key(test)].requirement_ids,
             command=test.command,
             artifact=artifact,
             notes=notes if not test.notes else f"{notes}; {test.notes}",
@@ -222,6 +238,10 @@ def response_from_catalog(
                 symbol=first_test.symbol,
                 language=first_test.language,
                 status=binding_status,
+                requirement_ids=(
+                    first_test.requirement_ids
+                    or expected[key].requirement_ids
+                ),
                 api_surface_ids=first_test.api_surface_ids,
                 evidence_ids=tuple(item.id for item in evidence_records),
                 notes="Generated from RTI-owned JUnit results; evidence remains unreviewed.",

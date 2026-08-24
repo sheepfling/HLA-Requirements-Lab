@@ -16,6 +16,9 @@
       "api_surface_ids": [
         "cpp-rtiambassador-connect"
       ],
+      "requirement_ids": [
+        "<requirement-id-from-corpus-bundle>"
+      ],
       "execution_mode": "real",
       "notes": "Replace the illustrative mapping and API IDs with IDs from corpus-bundle.json."
     },
@@ -33,6 +36,9 @@
       "symbol": "example.rti.RtiAmbassador#connect",
       "api_surface_ids": [
         "java-rtiambassador-connect"
+      ],
+      "requirement_ids": [
+        "<requirement-id-from-corpus-bundle>"
       ],
       "execution_mode": "real",
       "notes": "Replace the illustrative mapping and API IDs with IDs from corpus-bundle.json."

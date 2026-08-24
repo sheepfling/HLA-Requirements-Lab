@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -145,6 +146,20 @@ class Requirement(SemanticRecord):
             raise ValueError("clause_id must match clause")
         if self.clause_id != expected:
             object.__setattr__(self, "clause_id", expected)
+        # Older promoted requirement inventories generated their display title
+        # from the page adapter that happened to be active during migration.
+        # Keep authored titles intact, but repair the generated provenance form
+        # from the authoritative source span so a title cannot point reviewers
+        # at a different file than the record's source field.
+        generated_title = re.fullmatch(
+            r"Normative (?:statement|candidate) at .+:(\d+)",
+            self.title,
+        )
+        if generated_title:
+            label = "Normative statement" if "statement" in self.title else "Normative candidate"
+            corrected_title = f"{label} at {self.source.path}:{self.source.line}"
+            if self.title != corrected_title:
+                object.__setattr__(self, "title", corrected_title)
         if not self.machine_statement:
             object.__setattr__(
                 self,
@@ -1859,13 +1874,25 @@ class DocumentModel(SemanticRecord):
         )
 
     def ordered_requirements(self) -> tuple[Requirement, ...]:
-        """Return requirements grouped by owning clause and stable ID."""
+        """Return requirements grouped by clause and source/include position.
+
+        Requirement IDs are semantic cross-reference keys, not display-order
+        keys. Several IDs contain source coordinates, so lexical ID sorting
+        puts later source material before earlier material. The loader already
+        orders ``requirements`` by the authoritative include graph; preserve
+        that source order within each canonical clause instead of reconstructing
+        it from filenames. This keeps clause-oriented views deterministic
+        across both HLA editions without making a renumbering migration look
+        like an ID migration.
+        """
         clause_index = {item.id: index for index, item in enumerate(self.ordered_clauses())}
+        source_index = {item.id: index for index, item in enumerate(self.requirements)}
         return tuple(
             sorted(
                 self.requirements,
                 key=lambda item: (
                     clause_index.get(item.clause_id or "", len(clause_index)),
+                    source_index[item.id],
                     item.id,
                 ),
             )
@@ -3892,25 +3919,48 @@ def _load_layout_tables_from_file(
             for offset, args, _end in _command_events(text, rotated_name, 5)
         )
     primitives.sort(key=lambda item: item[0])
-    headings: list[tuple[int, str, str, str, SourceRef]] = []
+    headings: list[tuple[int, str, str, str, float, SourceRef]] = []
     for offset, kind, args in primitives:
         value = args[-1]
         heading = _table_heading(value, source)
         if heading is None:
             continue
         number, title = heading
-        headings.append((offset, kind, number, title, _source(root, path, text, offset)))
+        headings.append(
+            (
+                offset,
+                kind,
+                number,
+                title,
+                float(args[0]),
+                _source(root, path, text, offset),
+            )
+        )
     if not headings:
         return ()
 
     tables: list[Table] = []
-    for heading_index, (offset, kind, number, title, heading_source) in enumerate(headings):
+    for heading_index, (offset, kind, number, title, heading_first, heading_source) in enumerate(
+        headings
+    ):
         next_offset = (
             headings[heading_index + 1][0] if heading_index + 1 < len(headings) else len(text)
         )
         candidates: list[_TableLayoutText] = []
         for primitive_offset, primitive_kind, args in primitives:
-            if primitive_kind != kind or not offset < primitive_offset < next_offset:
+            if primitive_kind != kind:
+                continue
+            first = float(args[0])
+            in_source_segment = offset < primitive_offset < next_offset
+            # Rotated faithful pages commonly draw the table rows before the
+            # caption/heading.  The old offset-only window therefore retained
+            # only the continuation headers.  Use the visible table band as a
+            # second, layout-aware window; page furniture lives above 100pt or
+            # below 500pt on these pages and is excluded.
+            in_rotated_table_band = (
+                kind == "rotated" and heading_first + 20.0 <= first <= 500.0
+            )
+            if not in_source_segment and not in_rotated_table_band:
                 continue
             value = _table_text(args[-1])
             if not value or _table_heading(value, source) is not None:
@@ -3924,9 +3974,9 @@ def _load_layout_tables_from_file(
                 # 9pt or smaller; this keeps surrounding paragraph blocks out.
                 if font_size > 9.2:
                     continue
-                first, second = float(args[0]), float(args[1])
+                first, second = first, float(args[1])
             else:
-                first, second = float(args[0]), float(args[1])
+                first, second = first, float(args[1])
             candidates.append(
                 _TableLayoutText(
                     offset=primitive_offset,
@@ -4325,6 +4375,45 @@ def _link_table_cells_to_definitions(
             record_ids = list(cell.record_ids)
             if definition_id is not None and definition_id not in record_ids:
                 record_ids.append(definition_id)
+            cells.append(cell.model_copy(update={"record_ids": tuple(record_ids)}))
+        linked.append(table.model_copy(update={"cells": tuple(cells)}))
+    return tuple(linked)
+
+
+def _link_table_cells_to_requirements(
+    tables: Iterable[Table],
+    requirements: Iterable[Requirement],
+) -> tuple[Table, ...]:
+    """Attach source-overlapping explicit requirements to table cells.
+
+    Table rows promoted from a rotated or continuation layout are semantic
+    records in their own right.  Their source spans often cover several
+    cells, so interval overlap is the correct provenance test; exact text
+    matching would reintroduce the extraction loss this link is meant to
+    prevent.
+    """
+    by_path: dict[str, list[Requirement]] = defaultdict(list)
+    for requirement in requirements:
+        if not requirement.id.startswith("requirement-candidate-table-"):
+            continue
+        by_path[requirement.source.path.replace("\\", "/")].append(requirement)
+    linked: list[Table] = []
+    for table in tables:
+        cells: list[TableCell] = []
+        for cell in table.cells:
+            cell_path = cell.source.path.replace("\\", "/")
+            cell_start = cell.source.line
+            cell_end = cell.source.end_line or cell_start
+            record_ids = list(cell.record_ids)
+            for requirement in by_path.get(cell_path, ()):
+                requirement_start = requirement.source.line
+                requirement_end = requirement.source.end_line or requirement_start
+                if (
+                    requirement_start <= cell_end
+                    and cell_start <= requirement_end
+                    and requirement.id not in record_ids
+                ):
+                    record_ids.append(requirement.id)
             cells.append(cell.model_copy(update={"record_ids": tuple(record_ids)}))
         linked.append(table.model_copy(update={"cells": tuple(cells)}))
     return tuple(linked)
@@ -4844,13 +4933,50 @@ def _load_requirement_candidates(root: Path, source: LatexSourceProfile) -> tupl
         if unit_key in seen_units:
             continue
         seen_units.add(unit_key)
+        fixed_events = sorted(_command_events(text, source.fixed_text_block, 7))
+        fixed_event_index = {offset: index for index, (offset, _, _) in enumerate(fixed_events)}
         events: list[tuple[int, tuple[str, ...], int]] = []
-        events.extend(_command_events(text, source.fixed_text_block, 7))
+        events.extend(fixed_events)
         events.extend(_command_events(text, source.clause_paragraph, 1))
         events.extend(_command_events(text, source.clause_labeled_item, 2))
+        consumed_fixed_offsets: set[int] = set()
         for ordinal, (offset, args, end_offset) in enumerate(sorted(events), start=1):
+            if offset in consumed_fixed_offsets:
+                continue
             body = args[-1]
             statement = _machine_statement(body, source)
+            fixed_index = fixed_event_index.get(offset)
+            if fixed_index is not None and re.search(r"\bshall\b", statement, re.IGNORECASE):
+                # Faithful pages split one normative sentence across several
+                # fixed blocks and terminate each TeX line with ``%``.  Keep
+                # the immutable candidate ID anchored at the first block, but
+                # carry the complete source sentence and span into the record.
+                continuation = fixed_index
+                previous_y = float(args[1])
+                while continuation + 1 < len(fixed_events):
+                    without_marker = statement.rstrip().rstrip("%").rstrip()
+                    if without_marker.endswith(('.', ':', ';', '?', '!', ')')):
+                        break
+                    continuation += 1
+                    next_offset, next_args, next_end_offset = fixed_events[continuation]
+                    next_y = float(next_args[1])
+                    if next_y - previous_y > 18.0:
+                        break
+                    if re.search(
+                        r"\bshall\b",
+                        _machine_statement(next_args[-1], source),
+                        re.IGNORECASE,
+                    ):
+                        break
+                    consumed_fixed_offsets.add(next_offset)
+                    body = f"{body} {next_args[-1]}"
+                    statement = _machine_statement(body, source)
+                    end_offset = next_end_offset
+                    previous_y = next_y
+                # A percent at the end of a faithful layout block is a TeX
+                # line-comment marker, never part of the normative sentence.
+                statement = re.sub(r"\s*%", " ", statement)
+                statement = re.sub(r"\s+", " ", statement).strip()
             if not re.search(r"\bshall\b", statement, re.IGNORECASE):
                 continue
             clause_id = _nearest_heading(headings, offset)
@@ -5680,6 +5806,7 @@ def load_document_model(root: Path, source: LatexSourceProfile) -> DocumentModel
         table.model_copy(update={"family_id": family_by_table.get(table.id)}) for table in tables
     ]
     tables = list(_link_table_cells_to_definitions(tables, definitions.values()))
+    tables = list(_link_table_cells_to_requirements(tables, requirements.values()))
     notes = list(_load_notes(root, source))
     authored_notes = {item.id: item for item in _load_authored_notes(root)}
     notes = [authored_notes.get(item.id, item) for item in notes]

@@ -27,7 +27,7 @@ def load_bundle(path: Path) -> CorpusBundle:
 
 
 def build_adapter_request(bundle: CorpusBundle, request_id: str) -> AdapterRequest:
-    """Project only the binding information an external adapter needs."""
+    """Project the ordered requirement catalog and binding seams for an adapter."""
     documents: list[AdapterDocumentRequest] = []
     for document in bundle.documents:
         mappings = {item.id: item for item in document.mappings}
@@ -56,6 +56,7 @@ def build_adapter_request(bundle: CorpusBundle, request_id: str) -> AdapterReque
         documents.append(
             AdapterDocumentRequest(
                 document_id=document.document_id,
+                requirements=document.requirements,
                 bindings=tuple(sorted(expected, key=lambda item: item.implementation_mapping_id)),
             )
         )

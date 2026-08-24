@@ -2399,6 +2399,15 @@
       "source": null
     },
     {
+      "transition_id": "establishing.divestiture-if-wanted",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-divestiture-if-wanted"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
       "transition_id": "establishing.cancel-divestiture",
       "status": "mapped",
       "implementation_ids": [

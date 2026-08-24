@@ -1,0 +1,17 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-links.sty}[2026/08/23 v0.1 Requirements Lab links]
+
+\RequirePackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=RLBlueDeep,
+    urlcolor=RLBlue,
+    citecolor=RLBlueDeep,
+    pdfcreator={HLA Requirements Lab publishing system}
+}
+
+\newcommand{\RLLink}[2]{\href{#1}{\textcolor{RLBlueDeep}{#2}}}
+\newcommand{\RLExternalReference}[1]{\RLLink{#1}{\texttt{#1}}}
+\newcommand{\RLAnchor}[1]{\hypertarget{#1}{}}
+\newcommand{\RLClauseLink}[2]{\hyperlink{#1}{#2}}

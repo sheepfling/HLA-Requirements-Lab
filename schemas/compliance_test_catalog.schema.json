@@ -104,6 +104,15 @@
             "minLength": 1
           }
         },
+        "requirement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Optional explicit requirement IDs exercised by this test. When present, they must equal the selected implementation mapping's requirement IDs."
+        },
         "execution_mode": {
           "enum": [
             "real",

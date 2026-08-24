@@ -1362,8 +1362,6 @@
           "clause_id": "clause-5.1.5",
           "requirement_ids": [
             "requirement-candidate-content-clauses-05-declaration-management-page-085-l65-21",
-            "requirement-candidate-content-clauses-05-declaration-management-page-085-l65-21",
-            "requirement-candidate-content-clauses-05-declaration-management-page-085-l74-24",
             "requirement-candidate-content-clauses-05-declaration-management-page-085-l74-24"
           ],
           "implementation_ids": [
@@ -1448,8 +1446,6 @@
           "clause_id": "clause-5.1.5",
           "requirement_ids": [
             "requirement-candidate-content-clauses-05-declaration-management-page-085-l23-7",
-            "requirement-candidate-content-clauses-05-declaration-management-page-085-l23-7",
-            "requirement-candidate-content-clauses-05-declaration-management-page-085-l32-10",
             "requirement-candidate-content-clauses-05-declaration-management-page-085-l32-10"
           ],
           "implementation_ids": [

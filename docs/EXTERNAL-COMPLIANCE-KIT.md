@@ -9,9 +9,10 @@ contracts; the RTI does not import this repository's internal semantic modules.
 ## Portable boundary
 
 The corpus checkout exports a `CorpusBundle` containing the selected documents,
-requirements, transitions, API surfaces, implementation mappings, and API
-crosswalk statuses. The RTI checkout supplies an `ImplementationManifest` with
-the bindings it claims and links to its external evidence.
+an ordered, source-addressable requirement catalog, transitions, API surfaces,
+implementation mappings, and API crosswalk statuses. The RTI checkout supplies
+an `ImplementationManifest` with the bindings it claims and links to its
+external evidence.
 
 Both contracts are Pydantic-validated. The verifier joins records by:
 
@@ -21,6 +22,18 @@ document_id + implementation_mapping_id + target
 
 The corpus revision is also required to match. This permits 2010 and 2025
 records to be consumed side-by-side without matching on human wording.
+
+The machine-readable boundary schemas are
+[`schemas/corpus_bundle.schema.json`](../schemas/corpus_bundle.schema.json) and
+[`schemas/adapter_request.schema.json`](../schemas/adapter_request.schema.json).
+
+Requirement records carry a document-local `ordinal` for presentation, full
+normative/machine text, clause and coverage metadata, transition links,
+extraction status, and source provenance. The ordinal and array position are
+never identity; RTI catalogs and evidence use the stable requirement `id`.
+`AdapterRequest.documents[].requirements` carries this same catalog to an
+external test adapter, so the adapter does not need to reconstruct requirements
+from implementation mappings.
 
 ## Corpus-side commands
 

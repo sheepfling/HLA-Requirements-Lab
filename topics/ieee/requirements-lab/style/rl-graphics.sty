@@ -1,0 +1,179 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-graphics.sty}[2026/08/23 v0.2 Requirements Lab family graphics]
+
+% Adapted from the supplied HLA Requirements Lab family-graphics source. The
+% adapter deliberately keeps graphics-only colors and macros separate from
+% readable document text so orange remains an accent rather than a text color.
+\RequirePackage{etoolbox}
+\usetikzlibrary{arrows.meta,calc,positioning,backgrounds,shapes.geometric}
+
+\definecolor{RLGraphInk}{HTML}{172334}
+\definecolor{RLGraphMuted}{HTML}{687386}
+\definecolor{RLGraphRule}{HTML}{D6DEE8}
+\definecolor{RLGraphWhite}{HTML}{FFFFFF}
+\definecolor{RLGraphFramework}{HTML}{496B91}
+\definecolor{RLGraphFrameworkTint}{HTML}{EAF0F6}
+\definecolor{RLGraphInterface}{HTML}{6D5FA6}
+\definecolor{RLGraphInterfaceTint}{HTML}{EEEAF7}
+\definecolor{RLGraphOMT}{HTML}{CF7B31}
+\definecolor{RLGraphOMTTint}{HTML}{F7EEE4}
+\definecolor{RLGraph2010}{HTML}{637489}
+\definecolor{RLGraph2010Tint}{HTML}{EBEFF4}
+\definecolor{RLGraph2025}{HTML}{E7773F}
+\definecolor{RLGraph2025Tint}{HTML}{F7E8DF}
+
+\newcommand{\RLSetGraphicFamily}[1]{%
+    \ifstrequal{#1}{framework}{%
+        \colorlet{RLGraphAccent}{RLGraphFramework}%
+        \colorlet{RLGraphAccentTint}{RLGraphFrameworkTint}%
+    }{}%
+    \ifstrequal{#1}{interface}{%
+        \colorlet{RLGraphAccent}{RLGraphInterface}%
+        \colorlet{RLGraphAccentTint}{RLGraphInterfaceTint}%
+    }{}%
+    \ifstrequal{#1}{omt}{%
+        \colorlet{RLGraphAccent}{RLGraphOMT}%
+        \colorlet{RLGraphAccentTint}{RLGraphOMTTint}%
+    }{}%
+}
+
+\newcommand{\RLSetGraphicEdition}[1]{%
+    \ifnum#1=2010\relax
+        \colorlet{RLGraphEdition}{RLGraph2010}%
+        \colorlet{RLGraphEditionTint}{RLGraph2010Tint}%
+    \else
+        \colorlet{RLGraphEdition}{RLGraph2025}%
+        \colorlet{RLGraphEditionTint}{RLGraph2025Tint}%
+    \fi
+}
+
+\tikzset{
+    rl graph line/.style={draw=RLGraphAccent,line width=1.15pt,line cap=round,line join=round},
+    rl graph fine/.style={draw=RLGraphAccent!55,line width=0.62pt,line cap=round,line join=round},
+    rl graph faint/.style={draw=RLGraphAccent!25,line width=0.48pt,line cap=round,line join=round},
+    rl graph node/.style={circle,fill=RLGraphAccent,draw=RLGraphWhite,line width=0.7pt,minimum size=4.1pt,inner sep=0pt},
+    rl graph node open/.style={circle,fill=RLGraphWhite,draw=RLGraphAccent,line width=0.85pt,minimum size=4.1pt,inner sep=0pt},
+    rl graph arrow/.style={draw=RLGraphAccent,line width=1.0pt,-{Stealth[length=4.2pt,width=3.6pt]},line cap=round},
+    rl graph arrow muted/.style={draw=RLGraphAccent!55,line width=0.78pt,-{Stealth[length=3.7pt,width=3.1pt]},line cap=round},
+}
+
+\newcommand{\RLGraphicEditionFrame}[1]{%
+    \ifnum#1=2010\relax
+        \draw[draw=RLGraphAccent!45,line width=0.82pt] (-1.55,-1.55) rectangle (1.55,1.55);
+        \draw[draw=RLGraphAccent!16,line width=0.55pt] (-1.35,-1.35) rectangle (1.35,1.35);
+    \else
+        \draw[draw=RLGraphAccent!34,line width=0.74pt] (-1.55,-1.38) rectangle (1.34,1.50);
+        \draw[draw=RLGraphAccent!18,line width=0.58pt] (-1.18,-1.60) rectangle (1.60,1.18);
+        \draw[draw=RLGraphEdition,line width=1.05pt] (1.34,0.54) -- (1.34,1.50) -- (0.42,1.50);
+    \fi
+}
+
+\newcommand{\RLGraphCube}[4]{%
+    \begin{scope}[shift={(#1,#2)},scale=#3]
+        \coordinate (rla) at (-0.72,-0.62);
+        \coordinate (rlb) at (0.72,-0.62);
+        \coordinate (rlc) at (0.72,0.82);
+        \coordinate (rld) at (-0.72,0.82);
+        \coordinate (rlap) at (-0.20,-0.28);
+        \coordinate (rlbp) at (1.24,-0.28);
+        \coordinate (rlcp) at (1.24,1.16);
+        \coordinate (rldp) at (-0.20,1.16);
+        \draw[draw=RLGraphAccent!#4,line width=0.78pt,line join=round] (rla)--(rlb)--(rlc)--(rld)--cycle;
+        \draw[draw=RLGraphAccent!#4,line width=0.78pt,line join=round] (rlap)--(rlbp)--(rlcp)--(rldp)--cycle;
+        \foreach \p/\q in {rla/rlap,rlb/rlbp,rlc/rlcp,rld/rldp}{\draw[draw=RLGraphAccent!#4,line width=0.78pt] (\p)--(\q);}
+    \end{scope}
+}
+
+\newcommand{\RLOverviewGlyph}[1]{%
+    \RLGraphicEditionFrame{#1}%
+    \ifnum#1=2010\relax
+        \draw[rl graph fine] (0,0) circle (1.02);
+        \draw[rl graph faint] (0,0) circle (0.58);
+        \coordinate (rln1) at (90:1.02);
+        \coordinate (rln2) at (0:1.02);
+        \coordinate (rln3) at (270:1.02);
+        \coordinate (rln4) at (180:1.02);
+        \foreach \n in {rln1,rln2,rln3,rln4}{\draw[rl graph fine] (0,0) -- (\n);}
+        \draw[rl graph line] (rln1)--(rln2)--(rln3)--(rln4)--cycle;
+        \node[rl graph node] at (0,0) {};
+        \foreach \n in {rln1,rln2,rln3,rln4}{\node[rl graph node open] at (\n) {};}
+    \else
+        \draw[rl graph fine] (0,0) circle (0.84);
+        \draw[rl graph faint] (0.12,-0.06) circle (1.18);
+        \coordinate (rln1) at (104:1.18);
+        \coordinate (rln2) at (38:1.18);
+        \coordinate (rln3) at (-28:1.18);
+        \coordinate (rln4) at (-104:1.18);
+        \coordinate (rln5) at (176:1.18);
+        \coordinate (rln6) at (1.72,0.48);
+        \draw[rl graph fine] (rln1)--(rln2)--(rln3)--(rln4)--(rln5)--cycle;
+        \draw[rl graph line] (rln1)--(0.08,0.10)--(rln3);
+        \draw[rl graph line] (rln5)--(0.08,0.10)--(rln2);
+        \draw[rl graph fine] (rln4)--(0.08,0.10);
+        \draw[draw=RLGraphEdition,line width=1.22pt,line cap=round] (0.08,0.10)--(rln6);
+        \node[rl graph node] at (0.08,0.10) {};
+        \foreach \n in {rln1,rln2,rln3,rln4,rln5}{\node[rl graph node open] at (\n) {};}
+        \node[circle,fill=RLGraphEdition,draw=RLGraphWhite,line width=0.7pt,minimum size=4.5pt,inner sep=0pt] at (rln6) {};
+    \fi
+}
+
+\newcommand{\RLInterfaceGlyph}[1]{%
+    \RLGraphicEditionFrame{#1}%
+    \ifnum#1=2010\relax
+        \draw[rl graph line,rounded corners=2pt] (-1.27,-0.56) rectangle (-0.62,0.56);
+        \draw[rl graph line,rounded corners=2pt] (0.62,-0.56) rectangle (1.27,0.56);
+        \draw[rl graph fine] (-0.12,-0.82) rectangle (0.12,0.82);
+        \foreach \y in {-0.26,0,0.26}{%
+            \node[rl graph node open] at (-0.62,\y) {};
+            \node[rl graph node open] at (0.62,\y) {};
+        }
+        \draw[rl graph arrow] (-0.52,0.22) -- (0.50,0.22);
+        \draw[rl graph arrow] (0.52,-0.22) -- (-0.50,-0.22);
+    \else
+        \draw[rl graph fine,rounded corners=2pt] (-1.37,-0.72) rectangle (-0.62,0.48);
+        \draw[rl graph line,rounded corners=2pt] (-1.22,-0.49) rectangle (-0.47,0.71);
+        \draw[rl graph fine,rounded corners=2pt] (0.62,-0.48) rectangle (1.37,0.72);
+        \draw[rl graph line,rounded corners=2pt] (0.47,-0.71) rectangle (1.22,0.49);
+        \draw[rl graph fine] (-0.18,-0.90) -- (-0.18,0.90);
+        \draw[rl graph fine] (0.18,-0.90) -- (0.18,0.90);
+        \draw[rl graph arrow] (-0.40,0.42) -- (0.40,0.42);
+        \draw[rl graph arrow muted] (0.40,0.00) -- (-0.40,0.00);
+        \draw[rl graph arrow] (-0.40,-0.42) -- (0.40,-0.42);
+        \draw[draw=RLGraphEdition,line width=1.05pt,-{Stealth[length=4.0pt,width=3.4pt]},line cap=round]
+            (0.86,0.82) .. controls (0.20,1.22) and (-0.34,1.16) .. (-0.88,0.77);
+        \node[diamond,fill=RLGraphWhite,draw=RLGraphAccent,line width=0.9pt,minimum size=8.5pt,inner sep=0pt] at (0,0) {};
+    \fi
+}
+
+\newcommand{\RLOMTGlyph}[1]{%
+    \RLGraphicEditionFrame{#1}%
+    \ifnum#1=2010\relax
+        \RLGraphCube{-0.22}{-0.18}{0.92}{70}
+        \draw[rl graph fine] (-0.88,-0.20)--(-0.16,0.52)--(0.72,-0.12);
+        \node[rl graph node] at (-0.88,-0.20) {};
+        \node[rl graph node open] at (-0.16,0.52) {};
+        \node[rl graph node] at (0.72,-0.12) {};
+        \draw[rl graph faint] (-0.16,0.52)--(0.66,0.95);
+        \node[rl graph node open] at (0.66,0.95) {};
+    \else
+        \RLGraphCube{-0.48}{-0.37}{0.80}{55}
+        \RLGraphCube{0.08}{-0.04}{0.64}{28}
+        \draw[rl graph line] (-0.98,-0.34)--(-0.30,0.38)--(0.54,-0.16)--(0.90,0.58);
+        \draw[rl graph fine] (-0.30,0.38)--(0.20,0.92);
+        \draw[draw=RLGraphEdition,line width=1.15pt,line cap=round] (0.90,0.58)--(1.52,0.88);
+        \node[rl graph node] at (-0.98,-0.34) {};
+        \node[rl graph node open] at (-0.30,0.38) {};
+        \node[rl graph node] at (0.54,-0.16) {};
+        \node[rl graph node open] at (0.90,0.58) {};
+        \node[rl graph node open] at (0.20,0.92) {};
+        \node[rectangle,fill=RLGraphEdition,draw=RLGraphWhite,line width=0.7pt,minimum size=5.2pt,inner sep=0pt] at (1.52,0.88) {};
+    \fi
+}
+
+\newcommand{\RLFamilyGlyph}[2]{%
+    \RLSetGraphicFamily{#2}%
+    \RLSetGraphicEdition{#1}%
+    \ifstrequal{#2}{framework}{\RLOverviewGlyph{#1}}{}%
+    \ifstrequal{#2}{interface}{\RLInterfaceGlyph{#1}}{}%
+    \ifstrequal{#2}{omt}{\RLOMTGlyph{#1}}{}%
+}

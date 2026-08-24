@@ -1,13 +1,26 @@
 \documentclass[10pt,twoside]{article}
 \usepackage{ieee1516style}
+\input{../requirements-lab/style/rl-graphics.sty}
 
 \hypersetup{
-    pdftitle={IEEE Std 1516.2-2010 OMT Specification - LaTeX reconstruction},
-    pdfauthor={Reconstruction from user-supplied IEEE Std 1516.2-2010 source},
-    pdfsubject={High Level Architecture Object Model Template Specification}
+    pdftitle={HLA 1516.2 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2010 HLA 1516.2 family source material}
 }
 
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabNumber}{HLA 1516.2}
+\newcommand{\HLALabDocumentTitle}{Object Model Template (OMT) Specification}
+\newcommand{\HLALabDescriptor}{Source-traceable object model requirements and table contracts}
+\newcommand{\HLALabTheme}{omt}
+\newcommand{\HLALabAccent}{HLALabOrange}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.2 family materials from 2010.}
+
 \begin{document}
+    \input{../hla-requirements-lab-cover}
     \input{output/semantic/semantic-manifest}
     \input{output/semantic/faithful-body}
 

@@ -221,6 +221,17 @@ class CompliancePublicationTests(unittest.TestCase):
         self.assertIn("10\\% capacity while", rendered)
         self.assertNotIn("capacity \\% while", rendered)
 
+    def test_manifest_preserves_canonical_requirement_order(self) -> None:
+        model = _corpus().documents[0]
+        manifest = build_compliance_manifest(
+            ComplianceCorpus(documents=(model,)),
+            _profile(),
+        )
+        self.assertEqual(
+            [item.requirement_id for item in manifest.requirements],
+            [item.id for item in model.ordered_requirements()],
+        )
+
     def test_hla_publication_profile_is_source_controlled_and_typed(self) -> None:
         profile = load_compliance_publication_profile(
             ROOT / "topics/ieee/hla-rti-compliance-2025/semantic/publication.json"

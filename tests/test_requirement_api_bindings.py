@@ -34,9 +34,8 @@ class RequirementApiBindingTests(unittest.TestCase):
         self.assertEqual(
             Counter(item.status for item in restored.bindings),
             Counter(
-                reviewed=1683,
+                reviewed=1846,
                 matched=48,
-                unmatched=0,
             ),
         )
         self.assertEqual(build_requirement_api_bindings(self.model), restored.bindings)
@@ -62,7 +61,16 @@ class RequirementApiBindingTests(unittest.TestCase):
 
     def test_portable_bundle_preserves_binding_and_declaration_sources(self) -> None:
         document = _document(self.model)
-        self.assertEqual(len(document.requirement_api_bindings), 1731)
+        self.assertEqual(len(document.requirement_api_bindings), 1894)
+        self.assertEqual(
+            [item.ordinal for item in document.requirements],
+            list(range(1, len(document.requirements) + 1)),
+        )
+        first = document.requirements[0]
+        source = next(item for item in self.model.requirements if item.id == first.id).source
+        self.assertEqual(first.source.path, source.path)
+        self.assertEqual(first.kind, next(item for item in self.model.requirements if item.id == first.id).kind)
+        self.assertEqual(first.transition_ids, next(item for item in self.model.requirements if item.id == first.id).transition_ids)
         self.assertEqual(
             {item.requirement_id for item in document.requirement_api_bindings},
             {item.id for item in self.model.requirements},

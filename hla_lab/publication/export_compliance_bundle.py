@@ -52,11 +52,28 @@ def _document(model: DocumentModel) -> BundleDocument:
         requirements=tuple(
             BundleRequirement(
                 id=item.id,
+                ordinal=ordinal,
+                clause=item.clause,
                 clause_id=item.clause_id,
                 title=item.title,
                 statement=item.statement,
+                machine_statement=item.machine_statement or item.statement,
+                kind=item.kind,
+                coverage_kind=item.coverage_kind,
+                coverage_note=item.coverage_note,
+                transition_ids=item.transition_ids,
+                api_surface_scope=item.api_surface_scope,
+                api_surface_note=item.api_surface_note,
+                api_surface_resolution=item.api_surface_resolution,
+                extraction=item.extraction,
+                semantic_group_id=item.semantic_group_id,
+                source=BundleSource(
+                    path=item.source.path,
+                    line=item.source.line,
+                    end_line=item.source.end_line,
+                ),
             )
-            for item in model.requirements
+            for ordinal, item in enumerate(model.ordered_requirements(), start=1)
         ),
         transitions=transitions,
         mappings=tuple(

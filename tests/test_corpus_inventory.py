@@ -17,6 +17,17 @@ ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
 )
+INVENTORY_ROOTS = tuple(
+    REPO_ROOT / "topics" / "ieee" / name
+    for name in (
+        "hla-1516-2010",
+        "hla-1516.1-2010",
+        "hla-1516.2-2010",
+        "hla-1516-2025",
+        "hla-1516.1-2025",
+        "hla-1516.2-2025",
+    )
+)
 
 
 class CorpusInventoryTests(unittest.TestCase):
@@ -25,14 +36,24 @@ class CorpusInventoryTests(unittest.TestCase):
         inventory = CorpusInventory.model_validate(json.loads(path.read_text(encoding="utf-8")))
         self.assertEqual(
             {item.document_id for item in inventory.documents},
-            {"hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025"},
+            {
+                "hla-1516-2010",
+                "hla-1516.1-2010",
+                "hla-1516.2-2010",
+                "hla-1516-2025",
+                "hla-1516.1-2025",
+                "hla-1516.2-2025",
+            },
         )
         self.assertGreaterEqual(inventory.totals["clause"], 1800)
         self.assertEqual(inventory.totals.get("status:unclassified", 0), 0)
         # content-ownership closes the last HLA requirement queue; the inventory remains
         # source-controlled even when no migration work is outstanding.
         self.assertFalse(inventory.migration_queue)
-        rebuilt = build_inventory(ROOTS, REPO_ROOT / "data" / "release" / "documents.json")
+        rebuilt = build_inventory(
+            INVENTORY_ROOTS,
+            REPO_ROOT / "data" / "release" / "documents.json",
+        )
         self.assertEqual(
             {item.document_id for item in inventory.documents},
             {item.document_id for item in rebuilt.documents},
@@ -63,12 +84,12 @@ class CorpusInventoryTests(unittest.TestCase):
 
     def test_all_transitions_have_explicit_coverage_dispositions(self) -> None:
         model = load_document_model(ROOTS[1], HLA_SOURCE)
-        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 281)
-        self.assertEqual(len(model.transition_coverage), 281)
+        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 282)
+        self.assertEqual(len(model.transition_coverage), 282)
         self.assertEqual(model.transitions_missing_coverage(), ())
         self.assertEqual(
             model.transition_coverage_counts(),
-            {"mapped": 281, "not-applicable": 0, "deferred": 0, "unclassified": 0},
+            {"mapped": 282, "not-applicable": 0, "deferred": 0, "unclassified": 0},
         )
 
     def test_all_omt_tables_belong_to_families(self) -> None:
