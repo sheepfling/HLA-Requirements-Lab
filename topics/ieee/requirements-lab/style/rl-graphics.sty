@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesFile{rl-graphics.sty}[2026/08/23 v0.2 Requirements Lab family graphics]
+\ProvidesFile{rl-graphics.sty}[2026/08/24 v0.3 Requirements Lab family graphics]
 
 % Adapted from the supplied HLA Requirements Lab family-graphics source. The
 % adapter deliberately keeps graphics-only colors and macros separate from
@@ -22,19 +22,24 @@
 \definecolor{RLGraph2025}{HTML}{E7773F}
 \definecolor{RLGraph2025Tint}{HTML}{F7E8DF}
 
+\def\RLGraphFrameworkFamily{framework}
+\def\RLGraphInterfaceFamily{interface}
+\def\RLGraphOmtFamily{omt}
+
 \newcommand{\RLSetGraphicFamily}[1]{%
-    \ifstrequal{#1}{framework}{%
+    \edef\RLGraphFamilyValue{#1}%
+    \ifx\RLGraphFamilyValue\RLGraphFrameworkFamily
         \colorlet{RLGraphAccent}{RLGraphFramework}%
         \colorlet{RLGraphAccentTint}{RLGraphFrameworkTint}%
-    }{}%
-    \ifstrequal{#1}{interface}{%
+    \fi
+    \ifx\RLGraphFamilyValue\RLGraphInterfaceFamily
         \colorlet{RLGraphAccent}{RLGraphInterface}%
         \colorlet{RLGraphAccentTint}{RLGraphInterfaceTint}%
-    }{}%
-    \ifstrequal{#1}{omt}{%
+    \fi
+    \ifx\RLGraphFamilyValue\RLGraphOmtFamily
         \colorlet{RLGraphAccent}{RLGraphOMT}%
         \colorlet{RLGraphAccentTint}{RLGraphOMTTint}%
-    }{}%
+    \fi
 }
 
 \newcommand{\RLSetGraphicEdition}[1]{%
@@ -171,9 +176,12 @@
 }
 
 \newcommand{\RLFamilyGlyph}[2]{%
-    \RLSetGraphicFamily{#2}%
+    % Product preambles pass the family as a named macro. Expand it before
+    % comparing the volume so all six covers select their dedicated glyph.
+    \edef\RLGraphFamily{#2}%
+    \RLSetGraphicFamily{\RLGraphFamily}%
     \RLSetGraphicEdition{#1}%
-    \ifstrequal{#2}{framework}{\RLOverviewGlyph{#1}}{}%
-    \ifstrequal{#2}{interface}{\RLInterfaceGlyph{#1}}{}%
-    \ifstrequal{#2}{omt}{\RLOMTGlyph{#1}}{}%
+    \ifx\RLGraphFamily\RLGraphFrameworkFamily\RLOverviewGlyph{#1}\fi
+    \ifx\RLGraphFamily\RLGraphInterfaceFamily\RLInterfaceGlyph{#1}\fi
+    \ifx\RLGraphFamily\RLGraphOmtFamily\RLOMTGlyph{#1}\fi
 }

@@ -31,6 +31,8 @@ class CoverContractTests(unittest.TestCase):
         )
         self.assertIn("HLA Requirements Lab original work", cover)
         self.assertIn("\\HLALabStatusLine", cover)
+        self.assertIn("\\RLFamilyGlyph{\\HLALabEditionYear}{\\HLALabTheme}", cover)
+        self.assertIn("HLALabPurple", cover)
 
     def test_all_source_compilations_use_the_shared_cover(self) -> None:
         expected = {
@@ -55,6 +57,7 @@ class CoverContractTests(unittest.TestCase):
                 main,
             )
             self.assertIn(f"\\newcommand{{\\HLALabEditionYear}}{{{edition}}}", main)
+            self.assertIn("\\newcommand{\\HLALabTheme}", main)
             source_attribution = (
                 "\\newcommand{\\HLALabSourceAttribution}{"
                 f"Source set: supplied HLA {standard} family materials from {edition}."
@@ -81,6 +84,22 @@ class CoverContractTests(unittest.TestCase):
                 "\\newcommand{\\HLALabYearAccent}{HLALabBlue}",
                 main,
             )
+
+    def test_volume_accents_follow_the_family_graphics_system(self) -> None:
+        expected = {
+            "1516": "HLALabBlue",
+            "1516.1": "HLALabPurple",
+            "1516.2": "HLALabOrange",
+        }
+        for standard, accent in expected.items():
+            for edition in ("2010", "2025"):
+                main = (
+                    ROOT / "topics" / "ieee" / f"hla-{standard}-{edition}" / "main.tex"
+                ).read_text(encoding="utf-8")
+                self.assertIn(
+                    f"\\newcommand{{\\HLALabAccent}}{{{accent}}}",
+                    main,
+                )
 
 
 if __name__ == "__main__":

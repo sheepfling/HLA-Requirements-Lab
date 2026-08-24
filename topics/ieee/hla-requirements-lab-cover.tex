@@ -22,11 +22,13 @@
 \providecommand{\HLALabStatusLine}{Lab-authored compilation for requirements analysis and interoperability work.}
 
 \definecolor{HLALabBlue}{RGB}{18,83,156}
+\definecolor{HLALabPurple}{HTML}{6D5FA6}
 \definecolor{HLALabOrange}{RGB}{235,112,38}
 \definecolor{HLALabInk}{RGB}{24,36,54}
 \definecolor{HLALabMist}{RGB}{242,246,251}
 
 \def\HLALabFrameworkTheme{framework}
+\def\HLALabInterfaceTheme{interface}
 \def\HLALabOmtTheme{omt}
 
 \newcommand{\HLALabCover}{%
@@ -50,24 +52,17 @@
             \ifx\HLALabTheme\HLALabFrameworkTheme
                 \fill[HLALabBlue,fill opacity=.07,draw=none]
                     (338,92) rectangle (612,144);
-                \draw[HLALabBlue,draw opacity=.30,line width=1.0pt]
-                    (468,188) circle (112);
-                \draw[HLALabOrange,draw opacity=.34,line width=1.2pt]
-                    (468,188) circle (72);
-                \draw[HLALabBlue,draw opacity=.24,line width=.55pt]
-                    (382,188)--(554,188) (468,102)--(468,274);
+                \fill[HLALabBlue,fill opacity=.05,draw=none]
+                    (350,150)--(612,88)--(612,346)--(478,402)--cycle;
+            \else\ifx\HLALabTheme\HLALabInterfaceTheme
+                \fill[HLALabPurple,fill opacity=.07,draw=none]
+                    (338,92) rectangle (612,144);
+                \fill[HLALabPurple,fill opacity=.05,draw=none]
+                    (350,150)--(612,88)--(612,346)--(478,402)--cycle;
             \else\ifx\HLALabTheme\HLALabOmtTheme
                 \fill[HLALabOrange,fill opacity=.10,draw=none]
                     (350,120)--(612,120)--(612,382)--(350,382)--cycle;
-                \draw[HLALabBlue,draw opacity=.34,line width=1.0pt]
-                    (420,205)--(518,154)--(582,190)--(484,242)--cycle;
-                \draw[HLALabBlue,draw opacity=.28,line width=1.0pt]
-                    (420,205)--(420,306)--(484,343)--(484,242);
-                \draw[HLALabOrange,draw opacity=.42,line width=1.0pt]
-                    (518,154)--(518,255)--(582,291)--(582,190);
-                \draw[HLALabBlue,draw opacity=.22,line width=.55pt]
-                    (420,306)--(518,255) (484,343)--(582,291);
-            \fi\fi
+            \fi\fi\fi
             \begin{scope}[shift={(540,270)},scale=42]
                 \RLFamilyGlyph{\HLALabEditionYear}{\HLALabTheme}
             \end{scope}
@@ -79,17 +74,6 @@
                 (420,652)--(612,652);
             \draw[HLALabOrange,draw opacity=.30,line width=.55pt]
                 (456,665)--(612,665);
-
-            % A small systems-like motif ties the geometric treatment back to
-            % the lab's traceability and interface focus.
-            \draw[HLALabBlue,draw opacity=.28,line width=.65pt]
-                (458,183)--(520,224)--(496,292)--(432,257)--cycle;
-            \draw[HLALabOrange,draw opacity=.42,line width=1.4pt]
-                (458,183)--(496,292);
-            \fill[HLALabOrange,fill opacity=.64] (458,183) circle (4.4);
-            \fill[HLALabBlue,fill opacity=.56] (520,224) circle (4.4);
-            \fill[HLALabBlue,fill opacity=.56] (432,257) circle (4.4);
-            \fill[HLALabOrange,fill opacity=.64] (496,292) circle (4.4);
 
             \node[anchor=north west,inner sep=0pt,text=HLALabInk] at (70,72) {%
                 {\sffamily\bfseries\fontsize{9.6pt}{11pt}\selectfont HLA REQUIREMENTS LAB}%
