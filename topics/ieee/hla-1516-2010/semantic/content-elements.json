@@ -38,7 +38,9 @@
       "clause_id": "clause-1",
       "block_id": "content-clauses-01-overview-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-aef9fc7cd5ab"
+      ],
       "source": {
         "path": "clauses/01-overview.tex",
         "line": 1,
@@ -53,7 +55,9 @@
       "clause_id": "clause-2",
       "block_id": "content-clauses-02-normative-references-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-04334b71afc5"
+      ],
       "source": {
         "path": "clauses/02-normative-references.tex",
         "line": 1,
@@ -83,7 +87,9 @@
       "clause_id": "clause-3",
       "block_id": "content-clauses-03-definitions-part-02-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-1d45d0b82b77"
+      ],
       "source": {
         "path": "clauses/03-definitions-part-02.tex",
         "line": 1,
@@ -128,7 +134,18 @@
       "clause_id": "clause-4",
       "block_id": "content-clauses-04-summary-hla-rules-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-23708c71767f",
+        "req-2b0368a4b971",
+        "req-38af12c1c9a1",
+        "req-4c8e8a00c964",
+        "req-6e31787f0462",
+        "req-8eedb1282958",
+        "req-bdf2b292e41e",
+        "req-aea4e76e3124",
+        "req-6878da484828",
+        "req-65c137e14713"
+      ],
       "source": {
         "path": "clauses/04-summary-hla-rules.tex",
         "line": 1,
@@ -143,7 +160,26 @@
       "clause_id": "clause-5",
       "block_id": "content-clauses-05-federation-rules-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-e1130d0888e7",
+        "req-de98bde3e135",
+        "req-42c29c706655",
+        "req-8ed2c9e12ecd",
+        "req-83db51084633",
+        "req-fdfad6104c04",
+        "req-20bd39b6a0b8",
+        "req-0d62e306ec4e",
+        "req-12ccd9aef38a",
+        "req-e477bb5875b8",
+        "req-11cd9abff4aa",
+        "req-1d863902ec69",
+        "req-62eb964870a6",
+        "req-fdf5b7d5cb51",
+        "req-92ea86fa92f4",
+        "req-b39e52d19aa0",
+        "req-9c3c4dc83874",
+        "req-b2b907e40e26"
+      ],
       "source": {
         "path": "clauses/05-federation-rules.tex",
         "line": 1,
@@ -158,7 +194,21 @@
       "clause_id": "clause-6",
       "block_id": "content-clauses-06-federate-rules-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-ed4ed2c25c61",
+        "req-5823576094a1",
+        "req-a95e6433e181",
+        "req-853b267669d4",
+        "req-6b8d7a84dacf",
+        "req-33d4fc0b72a0",
+        "req-c65bc0100aeb",
+        "req-eb548d28fb95",
+        "req-17ddcee3e006",
+        "req-828e9e992fff",
+        "req-6adb65993cbe",
+        "req-3c96769f66d3",
+        "req-126f525f6b3c"
+      ],
       "source": {
         "path": "clauses/06-federate-rules.tex",
         "line": 1,
@@ -173,7 +223,20 @@
       "clause_id": "clause-A.2.5",
       "block_id": "content-clauses-annex-a-rationale-tex",
       "parent_id": null,
-      "record_ids": [],
+      "record_ids": [
+        "req-80d0e2a5b0d0",
+        "req-e861e1cd97a5",
+        "req-88840d83658f",
+        "req-5d9f1eb195c7",
+        "req-6952bdaa49dd",
+        "req-47030a416f43",
+        "req-a5c74f2088d0",
+        "req-f47a3978d3b8",
+        "req-661d1081151d",
+        "req-fe37e20927f3",
+        "req-c26f7112283a",
+        "req-11bcbbd625a3"
+      ],
       "source": {
         "path": "clauses/annex-a-rationale.tex",
         "line": 1,

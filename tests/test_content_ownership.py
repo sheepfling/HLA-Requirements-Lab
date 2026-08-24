@@ -23,7 +23,7 @@ ROOTS = {
 
 class ContentOwnershipTests(unittest.TestCase):
     def test_both_documents_have_typed_page_ownership(self) -> None:
-        expected_pages = {"hla-1516.1-2025": 436, "hla-1516.2-2025": 122}
+        expected_pages = {"hla-1516.1-2025": 435, "hla-1516.2-2025": 122}
         for document_id, root in ROOTS.items():
             model = load_document_model(root, HLA_SOURCE)
             if document_id == "hla-1516.1-2025":

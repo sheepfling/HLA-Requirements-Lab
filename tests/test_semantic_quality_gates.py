@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -71,6 +72,29 @@ class SemanticQualityGateTests(unittest.TestCase):
                     {item.id for item in model.requirements},
                 )
                 self.assertTrue(model.requirement_api_bindings)
+
+    def test_15161_source_anomaly_ledger_is_structured(self) -> None:
+        path = ROOT / "topics" / "ieee" / "hla-1516.1-2025" / "semantic" / "source-anomaly-ledger.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        required = {
+            "source_id",
+            "location",
+            "source_text",
+            "rendered_text",
+            "classification",
+            "reason",
+            "review_status",
+        }
+        allowed = {
+            "SOURCE_ANOMALY",
+            "COMPILATION_DEFECT",
+            "ENCODING_REPAIR",
+            "EDITORIAL_CONTAMINATION",
+            "CROSS_REFERENCE_DEFECT",
+        }
+        self.assertGreaterEqual(len(payload["entries"]), 10)
+        self.assertTrue(all(required <= set(entry) for entry in payload["entries"]))
+        self.assertTrue(all(entry["classification"] in allowed for entry in payload["entries"]))
 
 
 if __name__ == "__main__":

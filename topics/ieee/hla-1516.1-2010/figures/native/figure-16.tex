@@ -10,12 +10,12 @@
     f16 stroke/.style={draw=black,line width=.90pt},
     f16 partition/.style={draw=black,line width=.85pt,dash pattern=on 4.0pt off 4.0pt},
     f16 transition/.style={draw=black,line width=.95pt,-{Stealth[length=7.0pt,width=5.7pt]}},
-    f16 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.2}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.045},
-    f16 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.5}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.16},
-    f16 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.5}{12.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.24},
-    f16 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.4}{11.1}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.22},
-    f16 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.4}{10.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20},
-    f16 micro/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{8.4}{9.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20}
+    f16 title/.style={font=\RLSans\bfseries\fontsize{23.2}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.045},
+    f16 tab/.style={font=\RLSans\mdseries\fontsize{11.5}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.16},
+    f16 text/.style={font=\RLSans\mdseries\fontsize{11.5}{12.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.24},
+    f16 small/.style={font=\RLSans\mdseries\fontsize{10.4}{11.1}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.22},
+    f16 tiny/.style={font=\RLSans\mdseries\fontsize{9.4}{10.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20},
+    f16 micro/.style={font=\RLSans\mdseries\fontsize{8.4}{9.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.20}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -42,7 +42,7 @@
     \fill (88,307) circle[radius=8pt];
     % F16-P02 outer conditional connector.
     \draw[f16 stroke] (94,368) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (94,368) {C};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (94,368) {C};
     % F16-E01 outer initial -> outer C.
     \draw[f16 transition] (88,315) -- (91,351);
 
@@ -89,7 +89,7 @@
 
     % F16-P04 owned shallow history.
     \draw[f16 stroke] (838,168) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (838,168) {H};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (838,168) {H};
 
     % F16-E05 Not Divesting self-loop: Request Attribute Ownership Release.
     \draw[f16 transition] (286,214)
@@ -151,7 +151,7 @@
     % F16-P05 unowned initial and F16-P06 conditional connector.
     \fill (213,633) circle[radius=8pt];
     \draw[f16 stroke] (275,614) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (275,614) {C};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (275,614) {C};
     % F16-E19 initial -> C.
     \draw[f16 transition] (221,630) -- (258,619);
     % F16-E20 C -> Not Able.
@@ -216,7 +216,7 @@
     \node[f16 text] at (583,583.5) {Acquiring\\(i, k, j)};
     % F16-P08 acquisition-pending shallow history.
     \draw[f16 stroke] (592,508) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (592,508) {H};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (592,508) {H};
 
     % F16-S11 Not Acquiring.
     \draw[f16 stroke,rounded corners=7pt] (456,619) rectangle (532,648);
@@ -270,7 +270,7 @@
 
     % F16-P10 non-intrusive shallow history.
     \draw[f16 stroke] (826,635) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (826,635) {H};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (826,635) {H};
     % F16-E34 non-intrusive boundary -> H (state preserving callback).
     \draw[f16 transition] (791,656)
     .. controls (791,639) and (801,635) .. (809,635);

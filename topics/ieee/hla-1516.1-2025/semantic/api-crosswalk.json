@@ -2949,6 +2949,107 @@
       "notes": "Future binding projection; no exact source declaration is expected yet."
     },
     {
+      "id": "crosswalk.m16.transition.establishing-divestiture-if-wanted.cpp",
+      "implementation_mapping_id": "m16.transition.establishing-divestiture-if-wanted",
+      "target": "cpp",
+      "binding_kind": "native",
+      "language": "cpp",
+      "protocol": null,
+      "status": "matched",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.cpp.rtiambassador.attributeownershipdivestitureifwanted.3755f17bccdb"
+      ],
+      "selected_api_surface_ids": [
+        "api.2025.cpp.rtiambassador.attributeownershipdivestitureifwanted.3755f17bccdb"
+      ],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4680,
+        "end_line": null
+      },
+      "notes": "One source-derived declaration matched the semantic mapping name."
+    },
+    {
+      "id": "crosswalk.m16.transition.establishing-divestiture-if-wanted.fedpro",
+      "implementation_mapping_id": "m16.transition.establishing-divestiture-if-wanted",
+      "target": "fedpro",
+      "binding_kind": "protocol",
+      "language": "fedpro",
+      "protocol": "protobuf",
+      "status": "ambiguous",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.fedpro.rtiambassador.attributeownershipdivestitureifwantedrequest.75ab81262fc4",
+        "api.2025.fedpro.rtiambassador.attributeownershipdivestitureifwantedresponse.86ea82855885"
+      ],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4680,
+        "end_line": null
+      },
+      "notes": "Multiple source-derived declarations share the best name evidence."
+    },
+    {
+      "id": "crosswalk.m16.transition.establishing-divestiture-if-wanted.grpc",
+      "implementation_mapping_id": "m16.transition.establishing-divestiture-if-wanted",
+      "target": "grpc",
+      "binding_kind": "transport",
+      "language": "grpc",
+      "protocol": "grpc",
+      "status": "planned",
+      "strategy": "projection",
+      "candidate_api_surface_ids": [],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4680,
+        "end_line": null
+      },
+      "notes": "Future binding projection; no exact source declaration is expected yet."
+    },
+    {
+      "id": "crosswalk.m16.transition.establishing-divestiture-if-wanted.java",
+      "implementation_mapping_id": "m16.transition.establishing-divestiture-if-wanted",
+      "target": "java",
+      "binding_kind": "native",
+      "language": "java",
+      "protocol": null,
+      "status": "matched",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.java.rtiambassador.attributeownershipdivestitureifwanted.c83c19872105"
+      ],
+      "selected_api_surface_ids": [
+        "api.2025.java.rtiambassador.attributeownershipdivestitureifwanted.c83c19872105"
+      ],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4680,
+        "end_line": null
+      },
+      "notes": "One source-derived declaration matched the semantic mapping name."
+    },
+    {
+      "id": "crosswalk.m16.transition.establishing-divestiture-if-wanted.python",
+      "implementation_mapping_id": "m16.transition.establishing-divestiture-if-wanted",
+      "target": "python",
+      "binding_kind": "language-adapter",
+      "language": "python",
+      "protocol": null,
+      "status": "planned",
+      "strategy": "projection",
+      "candidate_api_surface_ids": [],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4680,
+        "end_line": null
+      },
+      "notes": "Future binding projection; no exact source declaration is expected yet."
+    },
+    {
       "id": "crosswalk.m16.transition.establishing-enter-choice.cpp",
       "implementation_mapping_id": "m16.transition.establishing-enter-choice",
       "target": "cpp",
@@ -23904,16 +24005,20 @@
       "binding_kind": "native",
       "language": "cpp",
       "protocol": null,
-      "status": "unmatched",
-      "strategy": "none",
-      "candidate_api_surface_ids": [],
-      "selected_api_surface_ids": [],
+      "status": "matched",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.cpp.rtiambassador.disableasynchronousdelivery.7f82dbc328dc"
+      ],
+      "selected_api_surface_ids": [
+        "api.2025.cpp.rtiambassador.disableasynchronousdelivery.7f82dbc328dc"
+      ],
       "source": {
         "path": "semantic/implementations.json",
         "line": 4437,
         "end_line": null
       },
-      "notes": "No source-derived declaration matched the semantic mapping name."
+      "notes": "One source-derived declaration matched the semantic mapping name."
     },
     {
       "id": "crosswalk.m16.transition.temporal-async-disable.fedpro",
@@ -23922,16 +24027,19 @@
       "binding_kind": "protocol",
       "language": "fedpro",
       "protocol": "protobuf",
-      "status": "unmatched",
-      "strategy": "none",
-      "candidate_api_surface_ids": [],
+      "status": "ambiguous",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.fedpro.rtiambassador.disableasynchronousdeliveryrequest.9e532ccfffc9",
+        "api.2025.fedpro.rtiambassador.disableasynchronousdeliveryresponse.ccd24c7473a4"
+      ],
       "selected_api_surface_ids": [],
       "source": {
         "path": "semantic/implementations.json",
         "line": 4437,
         "end_line": null
       },
-      "notes": "No source-derived declaration matched the semantic mapping name."
+      "notes": "Multiple source-derived declarations share the best name evidence."
     },
     {
       "id": "crosswalk.m16.transition.temporal-async-disable.grpc",
@@ -23958,16 +24066,20 @@
       "binding_kind": "native",
       "language": "java",
       "protocol": null,
-      "status": "unmatched",
-      "strategy": "none",
-      "candidate_api_surface_ids": [],
-      "selected_api_surface_ids": [],
+      "status": "matched",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.java.rtiambassador.disableasynchronousdelivery.5601ba1cdcee"
+      ],
+      "selected_api_surface_ids": [
+        "api.2025.java.rtiambassador.disableasynchronousdelivery.5601ba1cdcee"
+      ],
       "source": {
         "path": "semantic/implementations.json",
         "line": 4437,
         "end_line": null
       },
-      "notes": "No source-derived declaration matched the semantic mapping name."
+      "notes": "One source-derived declaration matched the semantic mapping name."
     },
     {
       "id": "crosswalk.m16.transition.temporal-async-disable.python",

@@ -26,11 +26,18 @@
 \RequirePackage{multirow}
 
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}
-\setsansfont{Arimo}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8.0pt plus 1.0pt minus 0.8pt}
+\setlength{\emergencystretch}{3em}
 \linespread{0.965}
 \setlist[itemize]{leftmargin=1.75em,label=---,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
 \setlist[enumerate]{leftmargin=1.75em,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
@@ -144,8 +151,8 @@
 \newcommand{\omtsubfield}[1]{\hspace*{1.25em}\textit{#1}}
 \newcommand{\omtdash}{---\hspace{0.35em}}
 % The Glyph category is represented by a small abstract object-model mark.
-% It is intentionally vector-only and does not carry the source example's
-% restaurant-specific fork/knife artwork into the Lab compilation.
+% It is intentionally vector-only so it remains crisp and portable in the
+% Lab compilation.
 \newcommand{\omtcategoryglyph}{%
     \raisebox{-0.35ex}{%
         \begin{tikzpicture}[x=1pt,y=1pt,baseline=(current bounding box.center)]

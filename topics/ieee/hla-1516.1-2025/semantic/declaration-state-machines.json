@@ -489,7 +489,7 @@
         },
         {
           "id": "class-attribute.publication.history",
-          "label": "",
+          "label": "H",
           "kind": "history"
         },
         {
@@ -512,7 +512,7 @@
         },
         {
           "id": "class-attribute.subscription.history",
-          "label": "",
+          "label": "H",
           "kind": "history"
         }
       ],

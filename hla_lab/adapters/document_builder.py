@@ -21,6 +21,7 @@ class BuildConfig:
     navigation_manifest: Path | None = None
     output_pdf: Path | None = None
     semantic_generator: Callable[[], object] | None = None
+    asset_generator: Callable[[], object] | None = None
 
 
 def _run(command: Sequence[str], *, cwd: Path) -> None:
@@ -33,6 +34,8 @@ def build(config: BuildConfig) -> Path:
         _run(["latexmk", "-C", "main.tex"], cwd=config.root)
     if config.semantic_generator is not None:
         config.semantic_generator()
+    if config.asset_generator is not None:
+        config.asset_generator()
 
     _run(["latexmk", "-xelatex", "main.tex"], cwd=config.root)
     built_pdf = DocumentResources(config.root).build / "main.pdf"

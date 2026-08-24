@@ -50,7 +50,7 @@ class CoverageContractTests(unittest.TestCase):
         model = load_document_model(ROOT, HLA_SOURCE)
         pages = tuple((ROOT / "sections" / "semantic").rglob("page-*.tex"))
         self.assertEqual(len(pages), 38)
-        self.assertEqual(len(model.content_blocks), 38)
+        self.assertEqual(len(model.content_blocks), 29)
         self.assertEqual(len(model.ordered_clauses()), 33)
         self.assertTrue(all(block.layout_body for block in model.content_blocks))
         self.assertTrue(

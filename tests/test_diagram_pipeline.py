@@ -17,7 +17,12 @@ from hla_lab.core.semantic_model import (
 from hla_lab.diagrams.diagram_qa import validate_renderable
 from hla_lab.diagrams.export_graph_diagram import render_mermaid as render_graph_mermaid
 from hla_lab.diagrams.export_graph_diagram import render_tikz as render_graph_tikz
+from hla_lab.diagrams.export_plantuml import render as render_plantuml
 from hla_lab.diagrams.export_sequence_diagram import render_mermaid, render_tikz
+from hla_lab.diagrams.plantuml_qa import (
+    validate_models as validate_plantuml_models,
+    validate_source as validate_plantuml_source,
+)
 from hla_lab.generation.generate_derivative import generate_derivative
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +84,32 @@ class DiagramPipelineTests(unittest.TestCase):
 
     def test_state_machine_renderer_has_no_unrenderable_transitions(self) -> None:
         self.assertEqual(validate_renderable(HLA_ROOT / "semantic"), [])
+
+    def test_plantuml_spike_preserves_harel_semantics_for_three_charts(self) -> None:
+        machines = {item.id: item for item in self.model.state_machines}
+        for machine_id in (
+            "global-synchronization-label",
+            "normal-activity-permitted",
+            "temporal-state",
+        ):
+            with self.subTest(machine=machine_id):
+                source = render_plantuml(machines[machine_id].model_dump(mode="json"))
+                self.assertEqual(validate_plantuml_source(machines[machine_id].model_dump(mode="json"), source), [])
+                self.assertNotIn("x=", source)
+                self.assertNotIn("y=", source)
+        joined = render_plantuml(machines["normal-activity-permitted"].model_dump(mode="json"))
+        self.assertIn('state "Temporal State"', joined)
+        self.assertIn('<<history>>', joined)
+        temporal = render_plantuml(machines["temporal-state"].model_dump(mode="json"))
+        self.assertIn("Enable Time Regulation", temporal)
+        self.assertIn("†", temporal)
+        synchronization = render_plantuml(
+            machines["global-synchronization-label"].model_dump(mode="json")
+        )
+        self.assertIn("∀", synchronization)
+
+    def test_every_state_machine_has_a_valid_plantuml_projection(self) -> None:
+        self.assertEqual(validate_plantuml_models(HLA_ROOT / "semantic"), [])
 
     def test_derivative_contains_sequence_semantics(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

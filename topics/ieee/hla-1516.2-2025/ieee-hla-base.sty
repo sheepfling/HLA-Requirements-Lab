@@ -18,6 +18,7 @@
 % production interior.
 \input{../requirements-lab/style/rl-brand.sty}
 \input{../requirements-lab/style/rl-type.sty}
+\input{../requirements-lab/style/rl-publication.sty}
 
 \let\HLAArial\RLSans
 \let\HLATimes\RLSerif
@@ -131,53 +132,11 @@
 \newcommand{\HLAStandardFooter}[1]{%
 }
 
-% The fixed-page body uses the same furniture as the accepted Requirements Lab
-% interior. Text remains dark blue/ink; orange is restricted to the short
-% decorative marker so it is never carrying document meaning.
-\newcommand{\HLARequirementsLabFurniture}{%
-    \begin{tikzpicture}[remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp]
-        \draw[RLOrange,line width=2.2bp] (90,31) -- (102,31);
-        \node[anchor=north west,inner sep=0pt,text=RLInk]
-            at (108,26) {\RLSans\fontsize{7.8bp}{9bp}\selectfont
-                \ifcsdef{HLALabNumber}{\HLALabNumber}{HLA 1516.2}%
-                \enspace\textperiodcentered\enspace
-                \ifcsdef{HLALabEdition}{\HLALabEdition}{Source compilation}};
-        \node[anchor=north east,inner sep=0pt,text=RLInk]
-            at (522,26) {\RLSans\fontsize{7.8bp}{9bp}\selectfont
-                \MakeUppercase{\ifcsdef{HLALabDocumentTitle}{\HLALabDocumentTitle}{Object Model Template (OMT) Specification}}};
-        \draw[RLLine,line width=.45bp] (90,43) -- (522,43);
-        \node[anchor=south west,inner sep=0pt,text=RLMid]
-            at (90,760) {\RLSans\fontsize{7.2bp}{8.4bp}\selectfont
-                HLA REQUIREMENTS LAB\enspace\textperiodcentered\enspace
-                \ifcsdef{HLALabEdition}{\HLALabEdition}{Source compilation}};
-        \node[anchor=south east,inner sep=0pt,text=RLMid]
-            at (522,760) {\RLSans\fontsize{8bp}{9bp}\selectfont\thepage};
-    \end{tikzpicture}%
-}
-
-% Use the page-style layer for production furniture. Overlay furniture is
-% retained above as a compatibility hook, but a page style is stable across
-% first, middle, and final pages when fixed-position adapters are shipped.
-\fancypagestyle{HLARL}{%
-    \fancyhf{}
-    \fancyhead[L]{%
-        \RLSans\fontsize{7.8bp}{9bp}\selectfont\color{RLInk}%
-        \raisebox{0.5pt}{\color{RLOrange}\rule{12bp}{2.2bp}}\hspace{6bp}%
-        \ifcsdef{HLALabNumber}{\HLALabNumber}{HLA 1516.2}%
-        \enspace\textperiodcentered\enspace
-        \ifcsdef{HLALabEdition}{\HLALabEdition}{Source compilation}}
-    \fancyhead[R]{%
-        \RLSans\fontsize{7.8bp}{9bp}\selectfont\color{RLInk}%
-        \MakeUppercase{\ifcsdef{HLALabDocumentTitle}{\HLALabDocumentTitle}{Object Model Template (OMT) Specification}}}
-    \fancyfoot[L]{%
-        \RLSans\fontsize{7.2bp}{8.4bp}\selectfont\color{RLMid}%
-        HLA REQUIREMENTS LAB\enspace\textperiodcentered\enspace
-        \ifcsdef{HLALabEdition}{\HLALabEdition}{Source compilation}}
-    \fancyfoot[R]{\RLSans\fontsize{8bp}{9bp}\selectfont\color{RLMid}\thepage}
-    \renewcommand{\headrulewidth}{0.45bp}
-    \renewcommand{\footrulewidth}{0pt}
-    \renewcommand{\headrule}{\hbox to\headwidth{\color{RLLine}\leaders\hrule height \headrulewidth\hfill}}
-}
+% The fixed-page body uses the same furniture as the accepted Requirements
+% Lab interior. The shared module keeps text dark blue/ink and reserves
+% orange for the short non-semantic marker.
+\newcommand{\HLARequirementsLabFurniture}{\RLFixedFurniture}
+\RLDefineFixedPageStyle{HLARL}
 
 % Fixed-layout front matter occasionally contains independent semantic blocks
 % whose visual order differs from the PDF content-stream order. This helper
@@ -294,9 +253,8 @@
     }{}
 }
 
-% The OMT Glyph category uses a small abstract object-model mark rather than
-% the inherited restaurant fork bitmap. Keep it live TikZ so it remains crisp,
-% portable, and independent of source-image baggage.
+% The OMT Glyph category uses a small abstract object-model mark. Keep it
+% live TikZ so it remains crisp, portable, and independent of source images.
 \NewDocumentCommand{\HLAObjectModelGlyphAt}{m m m m}{%
     \par\noindent
     \pgfmathsetmacro{\HLAObjectGlyphXScale}{#3/24}%

@@ -28,7 +28,7 @@ identifiers.
   for appearance.
 - A derived document may improve layout and navigation, but it does not silently
   rewrite source semantics. Any intentional editorial normalization belongs in
-  an explicit change record, not in a temporary intake or complaint list.
+  an explicit change record, not in a temporary intake list.
 - Visual hierarchy is independent of source parentage: tree renderers consume
   explicit parent-child edges, while indentation and branch glyphs are only
   presentation data.
@@ -50,6 +50,35 @@ identifiers.
   evidence.
 - Both editions pass the compliance-surface and unresolved-reference checks.
 
+## Shared presentation and build integrity
+
+- All six products consume the Requirements Lab publication profile and fixed-page
+  furniture; the canonical specimen remains 1516.2-2025.
+- Opening pages use the Lab identity, restrained blue/ink reading text, and
+  orange only for decorative accents.
+- Both 1516.2 editions render the OMT Glyph category as live TikZ/vector artwork.
+- Source trees contain no publisher boilerplate, ballot history, or legacy rights
+  language that would assign identity or obligations to an external publisher.
+- A release build must produce zero LaTeX errors, zero overfull boxes, and zero
+  shared-header height warnings for every product.
+- Representative rendered pages, including the page-23 bleed-risk check, are
+  visually inspected for clipping, cutoff, and furniture drift.
+
+For the six source-faithful HLA products, the release checker also treats
+`Overfull \\hbox`, missing-character diagnostics, and undersized-header
+diagnostics in `build/main.log` as release failures. Other repository
+publications retain their own build policies.
+
+Run the source-level and profile gates with:
+
+```console
+python -m unittest tests.test_semantic_quality_gates tests.test_style_profile_contracts tests.test_cover_contracts tests.test_modern_interior_contracts tests.test_authority_contracts tests.test_2010_requirement_closure
+python -m unittest tests.integration.test_release_check
+```
+
+The PDF build and rendered-page checks remain release-level gates because they
+depend on the local TeX runtime and page geometry.
+
 ## 2010 closure and edition-specific counts
 
 The 2010 roots use the legacy source adapter, which extracts normative
@@ -59,15 +88,18 @@ source-file distribution. It currently passes with no unpromoted candidates:
 
 | Document | Source inventory | Explicit catalog | Generic tables |
 |---|---:|---:|---:|
-| IEEE 1516-2010 | 55 | 55 | 2 |
-| IEEE 1516.1-2010 | 942 | 942 | 111 |
-| IEEE 1516.2-2010 | 388 | 388 | 76 |
+| IEEE 1516-2010 | 56 | 56 | 2 |
+| IEEE 1516.1-2010 | 1,529 | 1,529 | 111 |
+| IEEE 1516.2-2010 | 589 | 589 | 76 |
 
 The 2010 generic tables remain typed table data. Their cells are not silently
-converted into standalone requirements. This is why their counts do not rise
-to match the 2025.1 page-faithful Table 5 migration: that 163-record increase
-is a 2025 source-specific closure, not a shared requirement rule. Run the
-machine-enforced audit with:
+converted into standalone requirements. The improved legacy adapter now emits
+complete normative sentences and table-row obligations, carrying continuations
+across page/layout boundaries and resolving each record to its owning clause.
+The larger 1516.1-2010 and 1516.2-2010 counts are therefore source-closure
+increases, not cosmetic renumbering. Legacy joins remain usable through the
+per-edition `semantic/requirement-id-aliases.json` manifests.
+Run the machine-enforced audit with:
 
 ```console
 python -m hla_lab.traceability.requirement_closure --check --json
@@ -77,9 +109,9 @@ python -m hla_lab.traceability.requirement_closure --check --json
 
 | Document | Requirements | Transitions | Planned seams | API binding rows |
 |---|---:|---:|---:|---:|
-| IEEE 1516-2010 | 55 | — | — | — |
-| IEEE 1516.1-2010 | 942 | 212 | 212 | 1,078 |
-| IEEE 1516.2-2010 | 388 | — | — | — |
+| IEEE 1516-2010 | 56 | — | — | — |
+| IEEE 1516.1-2010 | 1,529 | 212 | 212 | 1,611 |
+| IEEE 1516.2-2010 | 589 | — | — | — |
 | IEEE 1516-2025 | 20 | — | — | — |
 | IEEE 1516.1-2025 | 1,860 | 282 | 282 | 1,894 |
 | IEEE 1516.2-2025 | 340 | — | — | — |

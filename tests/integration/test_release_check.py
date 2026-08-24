@@ -6,6 +6,8 @@ import json
 import unittest
 from pathlib import Path
 
+import fitz
+
 from hla_lab.publication.release_check import check_release
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -31,6 +33,30 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
                 for item in json.loads(manifest_path.read_text(encoding="utf-8"))["projects"]
             },
         )
+
+    def test_faithful_pdfs_preserve_letter_geometry_and_lab_furniture(self) -> None:
+        manifest = json.loads(
+            (REPO_ROOT / "data" / "release" / "documents.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        faithful = [item for item in manifest["projects"] if item.get("kind") == "faithful"]
+        self.assertEqual(len(faithful), 6)
+
+        for item in faithful:
+            pdf_path = REPO_ROOT / item["root"] / item["pdf"]
+            with self.subTest(document=item["id"]), fitz.open(pdf_path) as document:
+                self.assertEqual(len(document), item["expected_pages"])
+                for page in document:
+                    self.assertIn(
+                        (round(page.rect.width, 1), round(page.rect.height, 1)),
+                        {(612.0, 792.0), (792.0, 612.0)},
+                    )
+
+                sample_indices = {0, min(22, len(document) - 1), len(document) - 1}
+                for index in sorted(sample_indices):
+                    self.assertIn("HLA REQUIREMENTS LAB", document[index].get_text())
+                self.assertNotIn("IEEE Standard for", document[0].get_text())
 
 
 if __name__ == "__main__":

@@ -35,6 +35,7 @@ from hla_lab.core.semantic_model import (
 from hla_lab.core.source_adapter import LatexSourceProfile
 from hla_lab.core.text import safe_filename
 from hla_lab.diagrams.export_graph_diagram import render_tikz as render_graph_tikz
+from hla_lab.diagrams.export_plantuml import render as render_plantuml
 from hla_lab.diagrams.export_sequence_diagram import render_tikz as render_sequence_tikz
 from hla_lab.diagrams.render_state_machine import render as render_state_machine
 from hla_lab.generation.contracts import GenerationRequest, GenerationResult
@@ -74,10 +75,13 @@ def _embed_diagram(
     macro = ""
     if geometry is not None:
         x, y, width, height = geometry
+        embed_macro = "\\HLAEmbeddedGraphicAt" if input_name.endswith(".pdf") else "\\HLAEmbeddedTikZAt"
+        embed_body = (
+            f"  {embed_macro}{{{x:g}}}{{{y:g}}}{{{width:g}}}{{{height:g}}}{{"
+            f"output/semantic/{input_name}}}"
+        )
         macro = (
-            f"  \\HLAEmbeddedTikZAt{{{x:g}}}{{{y:g}}}{{{width:g}}}{{{height:g}}}{{%\n"
-            f"    \\input{{output/semantic/{input_name}}}%\n"
-            "  }\n"
+            embed_body + "%\n"
         )
     lines = body.splitlines()
     marker = f"Figure {figure_number}"
@@ -159,6 +163,30 @@ def _embed_diagram(
             lines.insert(caption_start, macro_line)
         return "\n".join(lines)
     return body
+
+
+def _landscape_figure_page_body(
+    *,
+    figure_number: int,
+    record_id: str,
+    caption: str,
+    input_name: str,
+) -> str:
+    """Render a figure-only source page through the modern landscape grammar."""
+
+    macro = "\\HLALandscapeFigurePDFPage" if input_name.endswith(".pdf") else "\\HLALandscapeFigurePage"
+    return "\n".join(
+        (
+            (
+                f"{macro}{{{figure_number}}}"
+                f"{{{tex_escape(caption)}}}"
+                f"{{output/semantic/{input_name}}}"
+            ),
+            "% The typed diagram record is selected by the source profile:",
+            f"% Figure {figure_number} -> {record_id}",
+            "",
+        )
+    )
 
 
 def _wrapped_macro(name: str, values: tuple[str, ...]) -> list[str]:
@@ -414,6 +442,21 @@ def _semanticize_visible_surfaces(
             )
     if normative_replacements:
         body = _replace_command_arguments(body, normative_events, tuple(normative_replacements))
+    # Source page 41 splits the federate-lifetime paragraph at a fixed line
+    # boundary after the word ``After``.  The semantic macro already contains
+    # the preceding sentence; keeping ``After`` on that fixed line makes the
+    # line wrap into the next absolute-positioned block and causes an overlap.
+    # Keep the correction local to this compiled surface and preserve the
+    # source anomaly in the anomaly ledger.
+    if model.document_id == "hla-1516.1-2025" and block.sequence == 40:
+        body = body.replace(
+            r"\SemanticContentBlockProseConnectServiceInfrastructureText After\linebreak%",
+            r"\SemanticContentBlockProseConnectServiceInfrastructureText\linebreak%",
+        )
+        body = body.replace(
+            r"successful invocation of the \emph{Join Federation Execution}",
+            r"After successful invocation of the \emph{Join Federation Execution}",
+        )
     return body
 
 
@@ -569,18 +612,31 @@ def generate(request: GenerationRequest) -> GenerationResult:
     # Diagram TeX is generated from the typed records and can be consumed by
     # both standalone review builds and faithful source-page adapters.
     diagram_inputs: dict[str, str] = {}
+    use_plantuml = request.state_machine_renderer == "plantuml"
     embedded_diagram_layout = {
         figure_number: (x, y, width, height)
         for figure_number, x, y, width, height in getattr(source, "embedded_diagram_layout", ())
+    }
+    landscape_figure_pages = {
+        page_sequence: (figure_number, record_id, caption)
+        for figure_number, page_sequence, record_id, caption in getattr(
+            source, "landscape_figure_pages", ()
+        )
     }
     diagram_bindings = getattr(source, "diagram_surface_bindings", ())
     if getattr(source, "diagram_surface_document_id", model.document_id) != model.document_id:
         diagram_bindings = ()
     for machine in model.state_machines:
         name = f"state-machine-{_generated_filename(machine.id)}.tex"
-        _write(output / name, render_state_machine(machine.model_dump(mode="json")))
+        machine_payload = machine.model_dump(mode="json")
+        _write(output / name, render_state_machine(machine_payload))
         generated_files.append(name)
-        diagram_inputs[machine.id] = name
+        plantuml_name = f"state-machine-{_generated_filename(machine.id)}.puml"
+        _write(output / plantuml_name, render_plantuml(machine_payload))
+        generated_files.append(plantuml_name)
+        diagram_inputs[machine.id] = (
+            f"state-machine-{_generated_filename(machine.id)}.pdf" if use_plantuml else name
+        )
     for diagram in model.sequence_diagrams:
         name = f"sequence-diagram-{_generated_filename(diagram.id)}.tex"
         _write(output / name, render_sequence_tikz(diagram))
@@ -640,7 +696,21 @@ def generate(request: GenerationRequest) -> GenerationResult:
         name = f"content-block-{_generated_filename(identifier)}.tex"
         block = content_blocks[identifier]
         body = block.layout_body or ""
-        if block.layout_body is not None:
+        landscape_page = landscape_figure_pages.get(block.sequence)
+        if landscape_page is not None:
+            figure_number, record_id, caption = landscape_page
+            input_name = diagram_inputs.get(record_id)
+            if input_name is None:
+                raise ValueError(
+                    f"landscape Figure {figure_number} references missing record {record_id}"
+                )
+            body = _landscape_figure_page_body(
+                figure_number=figure_number,
+                record_id=record_id,
+                caption=caption,
+                input_name=input_name,
+            )
+        elif block.layout_body is not None:
             body = _fit_fixed_page_makeboxes(body)
             body = _semanticize_visible_surfaces(body, block, model, source)
         else:

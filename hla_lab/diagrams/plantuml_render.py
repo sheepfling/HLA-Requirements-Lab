@@ -1,0 +1,61 @@
+"""Render generated PlantUML sources through the pinned EPS-to-PDF path."""
+
+from __future__ import annotations
+
+import argparse
+import subprocess
+from pathlib import Path
+
+
+def render_sources(
+    sources: tuple[Path, ...],
+    output_dir: Path,
+    *,
+    java: str = "java",
+    jar: Path,
+    epstopdf: str = "epstopdf",
+) -> tuple[Path, ...]:
+    """Render PlantUML source files as vector PDFs."""
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    jar = jar.resolve()
+    outputs: list[Path] = []
+    for source in sources:
+        source = source.resolve()
+        subprocess.run(
+            [java, "-jar", str(jar), "-charset", "UTF-8", "-teps", str(source)],
+            cwd=source.parent,
+            check=True,
+        )
+        eps = source.with_suffix(".eps")
+        output = output_dir / f"{source.stem}.pdf"
+        subprocess.run(
+            [epstopdf, f"--outfile={output}", str(eps)],
+            check=True,
+        )
+        outputs.append(output)
+    return tuple(outputs)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("sources", nargs="+", type=Path)
+    parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--jar", required=True, type=Path)
+    parser.add_argument("--java", default="java")
+    parser.add_argument("--epstopdf", default="epstopdf")
+    args = parser.parse_args()
+    outputs = render_sources(
+        tuple(args.sources),
+        args.output_dir,
+        java=args.java,
+        jar=args.jar,
+        epstopdf=args.epstopdf,
+    )
+    for output in outputs:
+        print(output)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

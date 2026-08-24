@@ -48,6 +48,7 @@ class BuildSettings(BaseModel):
     include_table_cells: bool = True
     include_faithful_body: bool = False
     faithful_body_exclude_path_parts: tuple[str, ...] = ()
+    state_machine_renderer: Literal["tikz", "plantuml"] = "tikz"
     include_outline: bool = False
     graph_metadata: str | None = None
 

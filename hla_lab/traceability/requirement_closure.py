@@ -16,7 +16,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.corpus.hla_2010_semantic import _requirements, _surface_inputs
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import REPO_ROOT, RESOURCES
+from hla_lab.paths import RESOURCES
 
 __all__ = [
     "RequirementClosureDocument",
@@ -92,6 +92,7 @@ def _document_report(root: Path) -> RequirementClosureDocument:
         for cell in table.cells
         for record_id in cell.record_ids
     )
+    api_binding_audit = bool(model.requirement_api_bindings)
     failures: list[str] = []
     if len(extracted) != len(model.requirements):
         failures.append(
@@ -105,9 +106,7 @@ def _document_report(root: Path) -> RequirementClosureDocument:
         failures.append("2010 requirement catalog retains review-queue records")
     if missing_source_paths:
         failures.append("one or more 2010 requirements point at missing source files")
-    if model.requirement_api_bindings and (
-        requirement_ids - binding_ids or binding_ids - requirement_ids
-    ):
+    if api_binding_audit and (requirement_ids - binding_ids or binding_ids - requirement_ids):
         failures.append("1516.1-2010 API bindings do not cover exactly the requirement catalog")
     return RequirementClosureDocument(
         document=model.document_id,
@@ -120,8 +119,12 @@ def _document_report(root: Path) -> RequirementClosureDocument:
         table_requirement_references=table_requirement_references,
         api_binding_rows=len(model.requirement_api_bindings),
         api_binding_requirement_ids=len(binding_ids),
-        missing_api_requirement_ids=tuple(sorted(requirement_ids - binding_ids)),
-        unexpected_api_requirement_ids=tuple(sorted(binding_ids - requirement_ids)),
+        missing_api_requirement_ids=(
+            tuple(sorted(requirement_ids - binding_ids)) if api_binding_audit else ()
+        ),
+        unexpected_api_requirement_ids=(
+            tuple(sorted(binding_ids - requirement_ids)) if api_binding_audit else ()
+        ),
         source_path_mismatches=source_path_mismatches,
         missing_source_paths=missing_source_paths,
         failures=tuple(failures),

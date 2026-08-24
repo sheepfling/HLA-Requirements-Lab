@@ -46,6 +46,7 @@
 \input{../requirements-lab/style/rl-math.sty}
 \input{../requirements-lab/style/rl-notes.sty}
 \input{../requirements-lab/style/rl-frontmatter.sty}
+\input{../requirements-lab/style/rl-publication.sty}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.62em}

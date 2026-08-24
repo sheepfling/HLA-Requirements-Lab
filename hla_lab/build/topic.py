@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import json
+import shutil
 from collections.abc import Sequence
 from pathlib import Path
 
@@ -20,6 +22,7 @@ from hla_lab.core.semantic_model import load_document_model
 from hla_lab.corpus.corpus_graph import build_corpus_graph, load_document_metadata
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.contracts import GenerationRequest
+from hla_lab.diagrams.plantuml_render import render_sources
 from hla_lab.generation.faithful_renderer import load_faithful_layout_profile
 from hla_lab.generation.generate_derivative import generate_from_hla
 from hla_lab.generation.semantic_generation import generate as generate_semantic
@@ -89,6 +92,7 @@ def _faithful_generator(root: Path, project: ReleaseProject, settings: BuildSett
                 include_faithful_body=settings.include_faithful_body,
                 faithful_layout_profile=layout,
                 faithful_body_exclude_path_parts=settings.faithful_body_exclude_path_parts,
+                state_machine_renderer=settings.state_machine_renderer,
             )
         )
 
@@ -152,13 +156,47 @@ def _config(root: Path, project: ReleaseProject, settings: BuildSettings) -> Bui
     navigation_manifest = (
         root / settings.navigation_manifest if settings.navigation_manifest is not None else None
     )
+    asset_generator = None
+    if settings.state_machine_renderer == "plantuml":
+        asset_generator = _plantuml_asset_generator(root)
     return BuildConfig(
         root=root,
         clean_before_build=settings.clean_before_build,
         navigation_manifest=navigation_manifest,
         output_pdf=root / project.pdf,
         semantic_generator=generator,
+        asset_generator=asset_generator,
     )
+
+
+def _plantuml_asset_generator(root: Path):
+    """Return the pinned PlantUML asset step for a faithful document build."""
+
+    document = DocumentResources(root)
+    lock_path = REPO_ROOT / "tools" / "plantuml" / "plantuml.lock.json"
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    version = str(lock["version"])
+    jar = REPO_ROOT / ".tools" / "plantuml" / f"plantuml-{version}.jar"
+
+    def render_assets() -> object:
+        sources = tuple(sorted(document.output_semantic.glob("state-machine-*.puml")))
+        if not sources:
+            raise RuntimeError(f"PlantUML build requested but no state-machine sources exist in {document.output_semantic}")
+        if not jar.is_file():
+            raise RuntimeError(f"Pinned PlantUML jar is missing: {jar}; see tools/plantuml/README.md")
+        java = shutil.which("java")
+        epstopdf = shutil.which("epstopdf")
+        if java is None or epstopdf is None:
+            raise RuntimeError("PlantUML asset build requires java and epstopdf on PATH")
+        return render_sources(
+            sources,
+            java=java,
+            epstopdf=epstopdf,
+            jar=jar,
+            output_dir=document.output_semantic,
+        )
+
+    return render_assets
 
 
 def project_config(root: Path) -> BuildConfig:
@@ -184,7 +222,10 @@ def generate(root: Path) -> object:
     config = project_config(root)
     if config.semantic_generator is None:
         raise ValueError(f"{root} has no semantic generator")
-    return config.semantic_generator()
+    result = config.semantic_generator()
+    if config.asset_generator is not None:
+        config.asset_generator()
+    return result
 
 
 def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:

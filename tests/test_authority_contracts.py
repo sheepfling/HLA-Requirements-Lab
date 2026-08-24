@@ -33,7 +33,7 @@ class AuthorityContractTests(unittest.TestCase):
         counts = {(item.document, item.surface): item.records for item in report.surfaces}
         self.assertEqual(counts[("hla-1516-2025", "definitions")], 161)
         self.assertEqual(counts[("hla-1516-2025", "requirements")], 20)
-        self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 433)
+        self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 432)
         self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 1860)
         self.assertEqual(counts[("hla-1516.1-2025", "transition-coverage")], 282)
         self.assertEqual(counts[("hla-1516.1-2025", "implementations")], 282)
@@ -44,13 +44,13 @@ class AuthorityContractTests(unittest.TestCase):
         self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 113)
         self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1019)
         self.assertEqual(counts[("hla-1516.2-2025", "table-families")], 80)
-        self.assertEqual(counts[("hla-1516-2010", "requirements")], 55)
-        self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 942)
-        self.assertEqual(counts[("hla-1516.2-2010", "requirements")], 388)
+        self.assertEqual(counts[("hla-1516-2010", "requirements")], 56)
+        self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 1529)
+        self.assertEqual(counts[("hla-1516.2-2010", "requirements")], 589)
         self.assertEqual(counts[("hla-1516.1-2010", "transition-coverage")], 212)
         self.assertEqual(counts[("hla-1516.1-2010", "implementations")], 212)
         self.assertEqual(counts[("hla-1516.1-2010", "requirement-links")], 132)
-        self.assertEqual(counts[("hla-1516.1-2010", "requirement-api-bindings")], 1078)
+        self.assertEqual(counts[("hla-1516.1-2010", "requirement-api-bindings")], 1611)
         self.assertEqual(counts[("hla-1516.1-2010", "diagram-surfaces")], 20)
 
     def test_candidate_queue_has_explicit_review_dispositions(self) -> None:

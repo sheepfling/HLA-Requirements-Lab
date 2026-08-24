@@ -10,12 +10,12 @@
     f12 stroke/.style={draw=black,line width=.90pt},
     f12 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
     f12 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
-    f12 title/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
-    f12 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.4}{13.2}\selectfont,align=center,inner sep=0pt},
-    f12 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{14.2}{15.2}\selectfont,align=center,inner sep=0pt},
-    f12 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.8}{12.6}\selectfont,align=center,inner sep=0pt},
-    f12 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.7}{11.5}\selectfont,align=center,inner sep=0pt},
-    f12 note/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.9}{11.7}\selectfont,align=left,inner sep=0pt}
+    f12 title/.style={font=\RLSans\bfseries\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
+    f12 tab/.style={font=\RLSans\mdseries\fontsize{12.4}{13.2}\selectfont,align=center,inner sep=0pt},
+    f12 text/.style={font=\RLSans\mdseries\fontsize{14.2}{15.2}\selectfont,align=center,inner sep=0pt},
+    f12 small/.style={font=\RLSans\mdseries\fontsize{11.8}{12.6}\selectfont,align=center,inner sep=0pt},
+    f12 tiny/.style={font=\RLSans\mdseries\fontsize{10.7}{11.5}\selectfont,align=center,inner sep=0pt},
+    f12 note/.style={font=\RLSans\mdseries\fontsize{10.9}{11.7}\selectfont,align=left,inner sep=0pt}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -42,7 +42,7 @@
 
     % Publication deep-history pseudo-state and empty-set transition.
     \draw[f12 stroke] (398,132) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (398,132) {H*};
+    \node[font=\RLSans\mdseries\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (398,132) {H*};
     % F12-E02 publication boundary -> H*.
     \draw[f12 transition] (321,106)
     .. controls (322,123) and (352,131) .. (381,132);
@@ -167,7 +167,7 @@
 
     % Subscription history pseudo-state.
     \draw[f12 stroke] (880,132) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (880,132) {H};
+    \node[font=\RLSans\mdseries\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (880,132) {H};
     % F12-E17 subscription boundary -> history.
     \draw[f12 transition] (788,106)
     .. controls (788,123) and (834,132) .. (863,132);

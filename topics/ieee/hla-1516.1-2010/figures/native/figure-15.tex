@@ -9,13 +9,13 @@
     line join=round,
     f15 stroke/.style={draw=black,line width=.90pt},
     f15 transition/.style={draw=black,line width=.92pt,-{Stealth[length=7.0pt,width=5.8pt]}},
-    f15 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.1}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.105},
-    f15 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.4}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.11},
-    f15 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.8}{12.5}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.18},
-    f15 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.5}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13},
-    f15 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.44},
-    f15 topguard/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.37},
-    f15 service/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.9}{13.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13}
+    f15 title/.style={font=\RLSans\bfseries\fontsize{23.1}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.105},
+    f15 tab/.style={font=\RLSans\mdseries\fontsize{11.4}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.11},
+    f15 text/.style={font=\RLSans\mdseries\fontsize{11.8}{12.5}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.18},
+    f15 small/.style={font=\RLSans\mdseries\fontsize{11.5}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13},
+    f15 tiny/.style={font=\RLSans\mdseries\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.44},
+    f15 topguard/.style={font=\RLSans\mdseries\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.37},
+    f15 service/.style={font=\RLSans\mdseries\fontsize{11.9}{13.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13}
 ]
     \path[use as bounding box] (0,0) rectangle (863,710);
 
@@ -40,7 +40,7 @@
     \fill (481,113) circle[radius=7pt];
     % F15-P02 outer conditional connector C.
     \draw[f15 stroke] (436,141) circle[radius=14pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{16}{16}\selectfont,inner sep=0pt] at (436,141) {C};
+    \node[font=\RLSans\mdseries\fontsize{16}{16}\selectfont,inner sep=0pt] at (436,141) {C};
     % F15-E01 outer initial -> outer C.
     \draw[f15 transition] (475,119) -- (447,134);
 
@@ -67,7 +67,7 @@
 
     % F15-P03 owned deep-history pseudo-state.
     \draw[f15 stroke] (96,208) circle[radius=17pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{20}{20}\selectfont,inner sep=0pt] at (94,209) {H};
+    \node[font=\RLSans\mdseries\fontsize{20}{20}\selectfont,inner sep=0pt] at (94,209) {H};
     \node[font=\fontsize{10.5}{10.5}\selectfont,inner sep=0pt] at (104,201) {$\ast$};
     % F15-E06 owned boundary -> H*.
     \draw[f15 transition] (185,156)
@@ -77,7 +77,7 @@
     % F15-P04 owned initial and F15-P05 owned conditional C.
     \fill (366,208) circle[radius=7pt];
     \draw[f15 stroke] (324,241) circle[radius=15pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{17}{17}\selectfont,inner sep=0pt] at (324,241) {C};
+    \node[font=\RLSans\mdseries\fontsize{17}{17}\selectfont,inner sep=0pt] at (324,241) {C};
     % F15-E07 owned initial -> owned C.
     \draw[f15 transition] (360,214) -- (337,231);
 
@@ -160,7 +160,7 @@
 
     % F15-P07 not-owned deep-history pseudo-state.
     \draw[f15 stroke] (542,210) circle[radius=17pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{20}{20}\selectfont,inner sep=0pt] at (540,211) {H};
+    \node[font=\RLSans\mdseries\fontsize{20}{20}\selectfont,inner sep=0pt] at (540,211) {H};
     \node[font=\fontsize{10.5}{10.5}\selectfont,inner sep=0pt] at (550,203) {$\ast$};
     % F15-E17 not-owned boundary -> H*.
     \draw[f15 transition] (621,156)
@@ -170,7 +170,7 @@
     % F15-P08 not-owned initial and F15-P09 conditional C.
     \fill (796,210) circle[radius=7pt];
     \draw[f15 stroke] (749,239) circle[radius=14pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{16}{16}\selectfont,inner sep=0pt] at (749,239) {C};
+    \node[font=\RLSans\mdseries\fontsize{16}{16}\selectfont,inner sep=0pt] at (749,239) {C};
     % F15-E18 not-owned initial -> C.
     \draw[f15 transition] (790,216) -- (760,231);
 

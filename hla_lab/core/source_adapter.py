@@ -40,6 +40,7 @@ class LatexSourceProfile(Protocol):
     diagram_surface_document_id: str | None
     diagram_surface_bindings: tuple[tuple[int, int, str], ...]
     embedded_diagram_layout: tuple[tuple[int, float, float, float, float], ...]
+    landscape_figure_pages: tuple[tuple[int, int, str, str], ...]
     definition_at: str
     definition_anchor: str
     definition_term: str

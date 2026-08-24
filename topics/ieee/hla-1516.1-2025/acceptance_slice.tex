@@ -1,0 +1,467 @@
+\documentclass[10pt,oneside]{article}
+\usepackage{hla2025}
+\input{../requirements-lab/style/rl-graphics.sty}
+\input{../requirements-lab/style/rl-code.sty}
+\input{../requirements-lab/style/rl-tables.sty}
+\newcommand{\RLSerifScale}{0.82}
+\input{../requirements-lab/style/rl-publication.sty}
+
+\title{HLA 1516.1 Requirements Lab acceptance slice}
+\author{HLA Requirements Lab}
+\date{2026-08-24}
+
+\hypersetup{
+    pdftitle={HLA 1516.1-2025 Federate Interface Specification --- acceptance slice},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={Staged production acceptance slice for the HLA 1516.1 source compilation},
+    pdfkeywords={HLA, 1516.1, federate interface, acceptance slice}
+}
+
+\newcommand{\HLALabEdition}{2025-source compilation}
+\newcommand{\HLALabEditionYear}{2025}
+\newcommand{\HLALabNumber}{HLA 1516.1}
+\newcommand{\HLALabDocumentTitle}{Federate Interface Specification}
+\newcommand{\HLALabDescriptor}{Acceptance slice for state charts, service contracts, MOM, API, and protocol grammar}
+\newcommand{\HLALabTheme}{interface}
+\newcommand{\HLALabAccent}{HLALabPurple}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.1 family materials from 2025.}
+\newcommand{\HLALabStatusLine}{Lab-authored acceptance slice; semantic source content remains traceable.}
+\RLConfigureHLAPublicationProfile
+
+\newcommand{\AcceptanceFigure}[4]{%
+    \clearpage
+    \thispagestyle{RLHLA}%
+    \phantomsection\HLAAnchor{figure:#1}\label{#4}%
+    \vspace*{8pt}%
+    {\RLFixedSans\bfseries\fontsize{15pt}{18pt}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+    \vspace{12pt}%
+    \begin{center}
+        \resizebox{0.92\linewidth}{!}{\input{#3}}%
+    \end{center}%
+    \vfill
+    {\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLMid}Figure~#1---#2\par}%
+    \clearpage
+}
+
+\newcommand{\AcceptancePlantFigure}[4]{%
+    \clearpage
+    \thispagestyle{RLHLA}%
+    \phantomsection\HLAAnchor{figure:#1}\label{#4}%
+    \vspace*{8pt}%
+    {\RLFixedSans\bfseries\fontsize{15pt}{18pt}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+    \vspace{12pt}%
+    \begin{center}
+        \includegraphics[width=0.96\linewidth,height=0.70\textheight,keepaspectratio]{#3}%
+    \end{center}%
+    \vfill
+    {\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLMid}Figure~#1---#2\par}%
+    \clearpage
+}
+
+\newcommand{\AcceptancePlantLandscapeFigure}[3]{%
+    \begin{RLLandscapePage}
+    \thispagestyle{rl}%
+    \phantomsection\HLAAnchor{figure:#1}\label{acceptance-figure-#1}%
+    \vspace*{2pt}%
+    {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+    \vspace{7pt}%
+    \begin{center}
+        \includegraphics[width=0.995\linewidth,height=0.90\textheight,keepaspectratio]{#3}%
+    \end{center}%
+    \vspace{3pt}%
+    {\RLFixedSans\fontsize{7.6pt}{9.2pt}\selectfont\color{RLMid}%
+        Figure~#1---#2\par}%
+    \end{RLLandscapePage}%
+}
+
+\newcommand{\AcceptanceSectionTitle}[1]{%
+    \par\vspace{4pt}\noindent
+    {\RLSans\bfseries\fontsize{7.4pt}{9pt}\selectfont\addfontfeatures{LetterSpace=1.1}\color{RLBlue}\MakeUppercase{#1}}%
+    \par\vspace{3pt}%
+}
+
+\newfontfamily\AcceptanceMono{DejaVu Sans Mono}[Ligatures=NoCommon,Mapping=none]
+\newcommand{\AcceptanceCode}[1]{{\AcceptanceMono\fontsize{7.65pt}{9.25pt}\selectfont\RaggedRight #1}}
+\newcommand{\AcceptanceType}[1]{{\RLMono\fontsize{8.1pt}{9.8pt}\selectfont\color{RLBlueDeep}\mbox{#1}}}
+\newcommand{\AcceptanceQuote}{\char34}
+\newcommand{\AcceptanceTableRow}{\addlinespace[2.5pt]\RLProductionRowRule}
+
+\begin{document}
+\def\HLASkipSemanticContentElementData{}
+\input{../hla-requirements-lab-cover}
+\input{output/semantic/semantic-manifest}
+
+% Title and publication-status page: deliberately concise and independent of
+% publisher-issued legal or ballot language.
+\clearpage
+\thispagestyle{RLHLA}
+\vspace*{12pt}
+{\RLFixedSans\bfseries\fontsize{21pt}{25pt}\selectfont\color{RLBlueDeep}
+    HLA 1516.1\par}
+\vspace{4pt}
+{\RLFixedSans\fontsize{14pt}{18pt}\selectfont\color{RLBlueDeep}
+    Federate Interface Specification\par}
+\vspace{7pt}
+{\RLSans\bfseries\fontsize{8pt}{10pt}\selectfont\addfontfeatures{LetterSpace=1.2}\color{RLBlue}
+    2025 SOURCE COMPILATION\par}
+\vspace{24pt}
+\RLRule
+\vspace{10pt}
+\AcceptanceSectionTitle{Publication status}
+This is a Requirements Lab compilation of supplied HLA 1516.1 family source
+material. It preserves clause, service, figure, table, and API identities for
+traceability while providing an independent editorial and presentation layer.
+\par
+\vspace{8pt}
+\AcceptanceSectionTitle{How to read this edition}
+Narrative requirements use the serif reading face. Service names, interface
+identifiers, data types, protocol tokens, and file paths use the technical
+monospace face. Figures are generated from typed semantic records; captions
+are generated by the document and are never embedded in the artwork.
+\vfill
+{\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLMid}
+    Prepared for HLA Requirements Lab review --- 2026-08-24\par}
+
+% Clause 1.4 and a compact definitions sample.
+\clearpage
+\thispagestyle{RLHLA}
+\HLAClause{1.4 Background}
+The HLA requires a language-independent specification (LIS) and multiple
+language bindings to support intersimulation communication in a distributed
+simulation domain. This acceptance page also exercises the ragged-right body
+treatment used for prose containing technical identifiers.
+\AcceptanceSectionTitle{Definitions sample}
+\textbf{accuracy}: The measure of the maximum deviation of an attribute or a
+parameter value in the simulation or federation from reality or another chosen
+standard or referent.
+
+\textbf{attribute ownership}: The property of an instance attribute that gives
+a joined federate the capability to supply values for that instance attribute
+to its federation execution.
+
+\textbf{authorizer}: An interface used to determine if a specific set of
+service invocations, including \AcceptanceType{Connect}, are allowed for the
+federate, given its credentials.
+
+\AcceptanceSectionTitle{Source reading rule}
+The word \emph{shall} indicates a mandatory requirement. Notes and examples
+remain visually distinct from normative service contracts.
+
+% Figure 1: small portrait state chart.
+\AcceptanceFigure{1}{Federation execution overview}
+    {output/semantic/state-machine-federation-execution.tex}{acceptance-figure-1}
+
+% Figure 3 plus the opening service-state prose, using a single generated
+% caption separated from the artwork.
+\clearpage
+\thispagestyle{RLHLA}
+\phantomsection\HLAAnchor{figure:3}\label{acceptance-figure-3}
+\HLAClause{4.1.1 Federate lifetime}
+\begin{center}
+    \resizebox{0.96\linewidth}{!}{\input{output/semantic/state-machine-federate-lifetime.tex}}%
+\end{center}
+\vspace{4pt}
+{\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLMid}Figure 3---Federate lifetime\par}
+\vspace{9pt}
+As shown in Figure 3, the initial state of any federate is
+\AcceptanceType{Not Connected}. Before a federate can work with an RTI, the
+federate shall perform a \AcceptanceType{Connect} to the RTI. Following
+successful simulation activities, the federate invokes
+\AcceptanceType{Resign Federation Execution} and may then perform a
+\AcceptanceType{Disconnect}.
+
+% Figure 4 mapping acceptance. This uses the PlantUML statechart spike.
+\AcceptancePlantFigure{4}{Joined federate state}
+    {output/semantic/state-machine-normal-activity-permitted.pdf}{acceptance-figure-4}
+
+\AcceptancePlantFigure{7}{Global synchronization label}
+    {output/semantic/state-machine-global-synchronization-label.pdf}{acceptance-figure-7}
+
+\AcceptanceFigure{8}{Awaiting synchronization}
+    {output/semantic/state-machine-awaiting-synchronization.tex}{acceptance-figure-8}
+
+% Figure 17 is a true landscape page with Requirements Lab furniture and
+% vector artwork generated by the pinned PlantUML renderer.
+\AcceptancePlantLandscapeFigure{17}{Temporal state}
+    {output/semantic/state-machine-temporal-state.pdf}
+
+% Service-contract acceptance pages.
+\clearpage
+\thispagestyle{RLHLA}
+\HLAClause{4 Interface service contracts}
+\begin{HLAServiceContract}{4.2 Connect}{FEDERATE $\rightarrow$ RTI}
+The \AcceptanceType{Connect} service shall be used to establish a connection
+between the unjoined federate and the RTI. No interaction between them may take
+place until a successful invocation has been performed.
+\HLAServiceContractSection{Supplied arguments}
+\begin{HLAServiceContractList}
+    \item Callback model.
+    \item Optional configuration name.
+    \item Optional RTI address.
+    \item Optional additional settings.
+    \item Optional credentials.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Returned arguments}
+\begin{HLAServiceContractList}
+    \item Status of parsing additional settings.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Preconditions}
+\begin{HLAServiceContractList}
+    \item Not connected.
+    \item The federate has the authority to connect.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Postconditions}
+\begin{HLAServiceContractList}
+    \item The unjoined federate is connected to the RTI.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Exceptions}
+\begin{HLAServiceContractList}
+    \item Unauthorized.
+    \item Invalid credentials.
+    \item Connection failed.
+\end{HLAServiceContractList}
+\end{HLAServiceContract}
+
+\begin{HLAServiceContract}{4.4 Connection Lost \textdagger}{RTI $\rightarrow$ FEDERATE}
+The \AcceptanceType{Connection Lost} service shall notify a previously joined
+federate that it has entered the Disconnected state as the result of a fault.
+The invocation is attempted on a best-effort basis.
+\HLAServiceContractSection{Supplied arguments}
+\begin{HLAServiceContractList}
+    \item Text description of the fault.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Returned arguments}
+\begin{HLAServiceContractList}
+    \item None.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Preconditions}
+\begin{HLAServiceContractList}
+    \item The joined federate is connected.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Postconditions}
+\begin{HLAServiceContractList}
+    \item The federate is notified that it has entered the Disconnected state.
+\end{HLAServiceContractList}
+\HLAServiceContractSection{Exceptions}
+\begin{HLAServiceContractList}
+    \item Federate internal error.
+\end{HLAServiceContractList}
+\end{HLAServiceContract}
+
+% MOM Table 5 acceptance: actual source rows, modern landscape registry, and
+% structured code examples rather than proportional JSON-like prose.
+\begin{RLLandscapePage}
+\thispagestyle{rl}
+\RLInlineTableCaption{5}{Encoding for HLAargument types}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{@{}p{0.22\linewidth}p{0.32\linewidth}p{0.38\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{Type} & \RLTableHeaderCell{Encoding} & \RLTableHeaderCell{Example}\\
+\RLProductionHeaderRule
+\AcceptanceType{AdditionalSettingsResultCode} &
+    \begin{minipage}[t]{\linewidth}\AcceptanceCode{Enumeration<SETTINGS\_IGNORED,\\[-1pt]
+    SETTINGS\_FAILED\_TO\_PARSE,\\[-1pt]
+    SETTINGS\_APPLIED>}\end{minipage} &
+    \AcceptanceCode{\AcceptanceQuote{}SETTINGS\_APPLIED\AcceptanceQuote{}}\\
+\AcceptanceTableRow
+\AcceptanceType{AttributeHandle} &
+    \AcceptanceType{String with value handle.toString()} &
+    \AcceptanceCode{\AcceptanceQuote{}AttributeHandle<1001>\AcceptanceQuote{}}\\
+\AcceptanceTableRow
+\AcceptanceType{AttributeHandleValueMap} &
+    \AcceptanceType{PairList<AttributeHandle:BinaryData>} &
+    \begin{minipage}[t]{\linewidth}\AcceptanceCode{\{\\[-1pt]
+    \AcceptanceQuote{}AttributeHandle<1001>\AcceptanceQuote{}: \AcceptanceQuote{}xFDcMa\AcceptanceQuote{},\\[-1pt]
+    \AcceptanceQuote{}AttributeHandle<1002>\AcceptanceQuote{}: \AcceptanceQuote{}R6lkHla\AcceptanceQuote{}\\[-1pt]
+    \}}\end{minipage}\\
+\AcceptanceTableRow
+\AcceptanceType{AttributeRegionAssociationList} &
+    \AcceptanceType{Array<AttributeRegionAssociation>} &
+    \begin{minipage}[t]{\linewidth}\AcceptanceCode{[\\[-1pt]
+    \{\\[-1pt]
+    \hspace*{8pt}\AcceptanceQuote{}attributeHandleSet\AcceptanceQuote{}: [\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}AttributeHandle<1>\AcceptanceQuote{},\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}AttributeHandle<2>\AcceptanceQuote{}],\\[-1pt]
+    \hspace*{8pt}\AcceptanceQuote{}regionHandleSet\AcceptanceQuote{}: [\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<1>\AcceptanceQuote{},\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<2>\AcceptanceQuote{}]\\[-1pt]
+    \}\\[-1pt]
+    ]}\end{minipage}\\
+\AcceptanceTableRow
+\AcceptanceType{ConfigurationResult} &
+    \begin{minipage}[t]{\linewidth}\AcceptanceCode{Record<configurationUsed:Boolean,\\[-1pt]
+    addressUsed:Boolean,\\[-1pt]
+    additionalSettingsResultCode:\\[-1pt]
+    AdditionalSettingsResultCode,\\[-1pt]
+    message:String>}\end{minipage} &
+    \begin{minipage}[t]{\linewidth}\AcceptanceCode{\{\\[-1pt]
+    \AcceptanceQuote{}configurationUsed\AcceptanceQuote{}: true,\\[-1pt]
+    \AcceptanceQuote{}addressUsed\AcceptanceQuote{}: true,\\[-1pt]
+    \AcceptanceQuote{}message\AcceptanceQuote{}: \AcceptanceQuote{}\AcceptanceQuote{}\\[-1pt]
+    \}}\end{minipage}\\
+\RLProductionBottomRule
+\end{longtable}
+\end{RLLandscapePage}
+
+% MOM hierarchy and a compact attribute matrix.
+\HLALandscapeFigurePage{19}{MOM object-class hierarchy}{output/semantic/graph-diagram-hla-1516.1.figure-19-mom-object-hierarchy.tex}
+\clearpage
+\thispagestyle{rl}
+\begin{RLLandscapePage}
+\thispagestyle{rl}
+\RLInlineTableCaption{8}{MOM attribute matrix --- acceptance sample}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{0.235\linewidth}p{0.255\linewidth}p{0.175\linewidth}p{0.115\linewidth}p{0.085\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{Object class} & \RLTableHeaderCell{Attribute} & \RLTableHeaderCell{Data type} & \RLTableHeaderCell{Update rate} & \RLTableHeaderCell{Order}\\
+\RLProductionHeaderRule
+\AcceptanceType{HLAmanager.HLAfederate} & \AcceptanceType{HLAfederateName} & \AcceptanceType{HLAunicodeString} & Static & N\\
+\AcceptanceTableRow
+\AcceptanceType{HLAmanager.HLAfederate} & \AcceptanceType{HLAfederateType} & \AcceptanceType{HLAunicodeString} & Static & N\\
+\AcceptanceTableRow
+\AcceptanceType{HLAmanager.HLAfederate} & \AcceptanceType{HLAfederateHost} & \AcceptanceType{HLAunicodeString} & Static & N\\
+\AcceptanceTableRow
+\AcceptanceType{HLAmanager.HLAfederation} & \AcceptanceType{HLAfederationName} & \AcceptanceType{HLAunicodeString} & Static & N\\
+\AcceptanceTableRow
+\AcceptanceType{HLAmanager.HLAfederation} & \AcceptanceType{HLARTIversion} & \AcceptanceType{HLAunicodeString} & Static & N\\
+\RLProductionBottomRule
+\end{longtable}
+\end{RLLandscapePage}
+
+% Java factory code acceptance.
+\clearpage
+\thispagestyle{RLHLA}
+\HLAClause{12.1 Java API code treatment}
+The Java mapping uses selectable monospace code with ASCII punctuation and
+preserved continuation indentation.
+\begin{RLCodeBlock}
+RtiFactory rtiFactory =
+    RtiFactoryFactory.getRtiFactory();
+RTIambassador rtiAmbassador =
+    rtiFactory.createRtiAmbassador();
+\end{RLCodeBlock}
+\AcceptanceSectionTitle{Technical token sample}
+\AcceptanceType{AuthorizerFactory}, \AcceptanceType{Authorizer},
+\AcceptanceType{RTIambassador}, \AcceptanceType{FederateAmbassador}, and
+\AcceptanceType{LogicalTime} are interface tokens, not bold serif prose.
+
+% Java/C++ registry acceptance.
+\begin{RLLandscapePage}
+\thispagestyle{rl}
+\RLInlineTableCaption{22 and 26}{Java and C++ encoding helper registry --- acceptance sample}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.31\linewidth}p{0.27\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{HLA data representation} & \RLTableHeaderCell{Encoding helper class} & \RLTableHeaderCell{Language type}\\
+\RLProductionHeaderRule
+\AcceptanceType{HLAoctet} & \AcceptanceType{HLAoctet} & \AcceptanceType{byte / Octet}\\
+\AcceptanceTableRow
+\AcceptanceType{HLAinteger32BE} & \AcceptanceType{HLAinteger32BE} & \AcceptanceType{int / Integer32}\\
+\AcceptanceTableRow
+\AcceptanceType{HLAfloat64LE} & \AcceptanceType{HLAfloat64LE} & \AcceptanceType{double / Float64}\\
+\AcceptanceTableRow
+\AcceptanceType{HLAunicodeString} & \AcceptanceType{HLAunicodeString} & \AcceptanceType{String / UnicodeString}\\
+\AcceptanceTableRow
+\AcceptanceType{HLAboolean} & \AcceptanceType{HLAboolean} & \AcceptanceType{boolean / Boolean}\\
+\RLProductionBottomRule
+\end{longtable}
+\end{RLLandscapePage}
+
+% Federate Protocol settings, byte layout, and message registry.
+\begin{RLLandscapePage}
+\thispagestyle{rl}
+\RLInlineTableCaption{31 and 32}{Federate Protocol settings}
+\begin{longtable}{@{}p{0.28\linewidth}p{0.50\linewidth}p{0.12\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{Name} & \RLTableHeaderCell{Description} & \RLTableHeaderCell{Default (s)}\\
+\RLProductionHeaderRule
+\AcceptanceType{RTI\_TIMEOUT\_HEART} & Missing federate message timeout. & 180\\
+\AcceptanceTableRow
+\AcceptanceType{RTI\_TIMEOUT\_PURGE} & Session purge timeout. & 600\\
+\AcceptanceTableRow
+\AcceptanceType{FED\_INT\_HEART} & Heartbeat interval. & 60\\
+\AcceptanceTableRow
+\AcceptanceType{FED\_TIMEOUT\_RECONNECT} & Reconnect timeout. & 600\\
+\RLProductionBottomRule
+\end{longtable}
+\vspace{8pt}
+\RLInlineTableCaption{33}{Protocol header byte layout}
+\begin{tabularx}{\linewidth}{@{}*{6}{>{\RaggedRight\arraybackslash}X}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{0..3} & \RLTableHeaderCell{4..7} & \RLTableHeaderCell{8..15} & \RLTableHeaderCell{16..19} & \RLTableHeaderCell{20..23} & \RLTableHeaderCell{24..n}\\
+\RLProductionHeaderRule
+Packet size & Sequence number & Session ID & Last received message & Message type & Payload\\
+\RLProductionBottomRule
+\end{tabularx}
+\end{RLLandscapePage}
+
+\begin{RLLandscapePage}
+\thispagestyle{rl}
+\RLInlineTableCaption{34--35}{Federate Protocol message registry}
+\begin{longtable}{@{}p{0.31\linewidth}p{0.23\linewidth}p{0.37\linewidth}@{}}
+\RLProductionTopRule
+\RLProductionHeaderBand
+\RLTableHeaderCell{Message} & \RLTableHeaderCell{Direction} & \RLTableHeaderCell{Payload grammar}\\
+\RLProductionHeaderRule
+\AcceptanceType{CTRL\_NEW\_SESSION} & FEDERATE $\rightarrow$ RTI & Session identifier and configuration\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_NEW\_SESSION\_STATUS} & RTI $\rightarrow$ FEDERATE & Status code and message\\
+\AcceptanceTableRow
+\AcceptanceType{HLA\_CALLBACK\_REQUEST} & RTI $\rightarrow$ FEDERATE & Callback name and argument record\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_RESUME} & FEDERATE $\rightarrow$ RTI & Last received message number\\
+\RLProductionBottomRule
+\end{longtable}
+\end{RLLandscapePage}
+
+% API file manifest as a directory tree.
+\clearpage
+\thispagestyle{RLHLA}
+\HLAClause{Annex B Java API file manifest}
+\begin{RLCodeBlock}
+hla/rti1516_2025/
+|-- RTIambassador.java
+|-- FederateAmbassador.java
+|-- RtiFactory.java
+|-- auth/
+|   |-- Authorizer.java
+|   `-- Credentials.java
+|-- encoding/
+|   `-- DataElement.java
+`-- time/
+    `-- LogicalTime.java
+\end{RLCodeBlock}
+\AcceptanceSectionTitle{Canonical path rule}
+Manifest entries are case-sensitive and remain in the source order used by the
+API artifact. The monospace treatment prevents names such as
+\AcceptanceType{RtiFactoryFactory} from being mistaken for prose.
+
+% Regenerated figure index: links use semantic anchors rather than fixed page
+% numbers, so the index remains correct when the acceptance slice reflows.
+\clearpage
+\thispagestyle{RLHLA}
+\HLAClause{Figure index for the acceptance slice}
+\begin{itemize}[leftmargin=26pt,itemsep=5pt]
+    \item \hyperlink{figure:1}{Figure 1 --- Federation execution overview}
+    \item \hyperlink{figure:3}{Figure 3 --- Federate lifetime}
+    \item \hyperlink{figure:4}{Figure 4 --- Joined federate state}
+    \item \hyperlink{figure:7}{Figure 7 --- Global synchronization label}
+    \item \hyperlink{figure:8}{Figure 8 --- Awaiting synchronization}
+    \item \hyperlink{figure:17}{Figure 17 --- Temporal state}
+    \item \hyperlink{figure:19}{Figure 19 --- MOM object-class hierarchy}
+\end{itemize}
+\vspace{12pt}
+The links above are generated from figure anchors. They do not depend on
+hardcoded source-page numbers.
+
+\end{document}

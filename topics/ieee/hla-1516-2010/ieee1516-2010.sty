@@ -12,8 +12,14 @@
 \RequirePackage{etoolbox}
 
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}
-\setsansfont{Arimo}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 
 \hypersetup{
     pdftitle={IEEE Std 1516-2010 - Framework and Rules - LaTeX reconstruction},
@@ -25,7 +31,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\JustifyingParindent}{0pt}
 \setlength{\parskip}{6.0pt}
-\setlength{\emergencystretch}{1.5em}
+\setlength{\emergencystretch}{3em}
 \widowpenalty=10000
 \clubpenalty=10000
 \displaywidowpenalty=10000

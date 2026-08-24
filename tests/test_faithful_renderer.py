@@ -111,9 +111,9 @@ class FaithfulRendererTests(unittest.TestCase):
 
     def test_hla_layout_profiles_declare_all_nonprose_boundaries(self) -> None:
         expected_entries = {
-            "hla-1516-2025": 38,
-            "hla-1516.1-2025": 437,
-            "hla-1516.2-2025": 122,
+            "hla-1516-2025": 29,
+            "hla-1516.1-2025": 430,
+            "hla-1516.2-2025": 113,
         }
         for name, expected_count in expected_entries.items():
             root = ROOT / "topics" / "ieee" / name

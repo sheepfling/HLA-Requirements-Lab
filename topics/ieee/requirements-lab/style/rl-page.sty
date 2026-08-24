@@ -2,6 +2,7 @@
 \ProvidesFile{rl-page.sty}[2026/08/23 v0.1 Requirements Lab page furniture]
 
 \RequirePackage{fancyhdr}
+\RequirePackage{tikz}
 
 \newif\ifRLEnabledPageStyle
 \RLEnabledPageStylefalse
@@ -22,6 +23,16 @@
 }
 
 \newcommand{\RLPageBreak}{\clearpage}
+
+\newcommand{\RLLandscapeFooterFurniture}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=south west,inner sep=0pt,xshift=0.72in,yshift=0.24in]
+            at (current page.south west) {\RLSans\fontsize{7.2pt}{8.4pt}\selectfont\color{RLMid}%
+                \MakeUppercase{\RLHeaderFooter}};
+        \node[anchor=south east,inner sep=0pt,xshift=-0.72in,yshift=0.24in]
+            at (current page.south east) {\RLSans\fontsize{8pt}{9pt}\selectfont\color{RLMid}\thepage};
+    \end{tikzpicture}%
+}
 
 % pdflscape rotates a portrait page after TeX lays it out, which also rotates
 % the furniture. The supplied prototype uses true landscape media dimensions;
@@ -44,7 +55,9 @@
     \special{papersize=792bp,612bp}%
     \setlength{\headwidth}{\textwidth}%
     \RLEnablePageStyle
+    \thispagestyle{rl}%
 }{%
+    \RLLandscapeFooterFurniture
     \clearpage
     \restoregeometry
     \endgroup

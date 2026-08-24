@@ -67,7 +67,7 @@
       "root": "topics/ieee/hla-1516-2025",
       "pdf": "dist/hla-requirements-lab-1516-2025-framework-and-rules.pdf",
       "log": "build/main.log",
-      "expected_pages": 29,
+      "expected_pages": 30,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -90,7 +90,7 @@
       "root": "topics/ieee/hla-1516.1-2025",
       "pdf": "dist/hla-requirements-lab-1516.1-2025-federate-interface.pdf",
       "log": "build/main.log",
-      "expected_pages": 425,
+      "expected_pages": 424,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -103,7 +103,8 @@
         "table_family_selection": "all",
         "include_table_cells": false,
         "include_faithful_body": true,
-        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"],
+        "state_machine_renderer": "plantuml"
       }
     },
     {

@@ -20,6 +20,7 @@
 \RequirePackage{needspace}
 \RequirePackage{setspace}
 \RequirePackage{hyperref}
+\RequirePackage{xstring}
 \RequirePackage{bookmark}
 \RequirePackage{pdflscape}
 \RequirePackage{rotating}
@@ -27,37 +28,65 @@
 
 \defaultfontfeatures{Ligatures=TeX}
 \ifHLAUseSourceFonts
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\newfontfamily\HLACoverFont{Calibri}
-\newfontfamily\HLAStandardsFont{Montserrat ExtraBold}
-\newfontfamily\HLALicenseFont{Arial}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLACoverFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLAStandardsFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLALicenseFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 \else
-\IfFontExistsTF{Tinos}{
-    \setmainfont{Tinos}
-}{
-    \setmainfont{TeX Gyre Termes}
-}
-\IfFontExistsTF{Arimo}{
-    \setsansfont{Arimo}
-}{
-    \setsansfont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Carlito}{
-    \newfontfamily\HLACoverFont{Carlito}
-}{
-    \newfontfamily\HLACoverFont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Noto Sans}{
-    \newfontfamily\HLAStandardsFont{Noto Sans}
-}{
-    \newfontfamily\HLAStandardsFont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Liberation Sans}{
-    \newfontfamily\HLALicenseFont{Liberation Sans}
-}{
-    \newfontfamily\HLALicenseFont{TeX Gyre Heros}
-}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLACoverFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLAStandardsFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLALicenseFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 \fi
 
 \definecolor{hlaCyan}{RGB}{0,174,239}
@@ -281,7 +310,7 @@
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
-        \justifying #4\fontsize{#5pt}{#6pt}\selectfont\setlength{\parindent}{0pt}#7\par
+        \RaggedRight #4\fontsize{#5pt}{#6pt}\selectfont\setlength{\parindent}{0pt}#7\par
         \end{minipage}%
     };%
 }
@@ -361,7 +390,7 @@
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
         \hfuzz=1.5pt%
-        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\RaggedRight
         \begin{itemize}[
             label=---,
             leftmargin=32pt,
@@ -398,7 +427,7 @@
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
         \hfuzz=1.5pt%
-        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\RaggedRight
         \begin{enumerate}[
             label=\alph*),
             leftmargin=22pt,
@@ -470,12 +499,61 @@
         \resizebox{#3pt}{#4pt}{#5}%
     };%
 }
+\newcommand{\HLAEmbeddedGraphicAt}[5]{%
+    \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+        \includegraphics[width=#3pt,height=#4pt,keepaspectratio]{#5}%
+    };%
+}
 \newcommand{\HLAFigureCaptionAt}[3]{%
     \HLAFixedCenteredBlock{90}{#2}{432}{\sffamily\bfseries}{9.96}{12}{%
         \HLAFigureAnchor{#1}Figure #1---#3%
     }%
 }
 
+% Modern figure-only pages use true landscape media dimensions.  The diagram
+% remains a selectable TikZ surface and receives its caption here exactly once;
+% no source-page masthead, folio, or rotated caption is carried into the page.
+\newcommand{\HLALandscapeFigurePage}[3]{%
+    \begin{RLLandscapePage}
+        \thispagestyle{rl}%
+        \HLAFigureAnchor{#1}%
+        \vspace*{2pt}%
+        {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
+            FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+        \vspace{7pt}%
+        \begin{center}
+            \resizebox{0.995\linewidth}{!}{\input{#3}}%
+        \end{center}%
+        \vspace{3pt}%
+        {\RLFixedSans\fontsize{7.6pt}{9.2pt}\selectfont\color{RLMid}%
+            Figure~#1---#2\par}%
+    \end{RLLandscapePage}%
+}
+\newcommand{\HLALandscapeFigurePDFPage}[3]{%
+    \begin{RLLandscapePage}
+        \thispagestyle{rl}%
+        \HLAFigureAnchor{#1}%
+        \vspace*{2pt}%
+        {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
+            FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+        \vspace{7pt}%
+        \begin{center}
+            \includegraphics[width=0.995\linewidth,height=0.90\textheight,keepaspectratio]{#3}%
+        \end{center}%
+        \vspace{3pt}%
+        {\RLFixedSans\fontsize{7.6pt}{9.2pt}\selectfont\color{RLMid}%
+            Figure~#1---#2\par}%
+    \end{RLLandscapePage}%
+}
+
+\newcommand{\HLAServiceDirectionFor}[1]{%
+    \begingroup
+    \edef\HLAServiceDirectionText{\detokenize{#1}}%
+    \IfSubStr{\HLAServiceDirectionText}{textdagger}%
+        {RTI $\rightarrow$ FEDERATE}%
+        {FEDERATE $\rightarrow$ RTI}%
+    \endgroup
+}
 
 % Clause 4 service-description helpers. Service and component headings share
 % fixed source-page geometry while retaining stable clause anchors and outline
@@ -485,10 +563,42 @@
     \pdfbookmark[#2]{#1 #3}{bookmark:clause:#1}%
 }
 \newcommand{\HLAServiceHeadingAt}[2]{%
-    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{10.98}{12}{#2}%
+    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{10.98}{12}{%
+        \makebox[\linewidth][l]{#2\hfill{\color{HLALabPurple}\fontsize{7.2pt}{8.4pt}\selectfont
+        \HLAServiceDirectionFor{#2}}}%
+    }%
 }
 \newcommand{\HLAServiceComponentHeadingAt}[2]{%
-    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{9.96}{12}{#2}%
+    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{8.8}{10.6}{#2}%
+}
+
+% Reusable natural-flow grammar for the interface contract pages.  This is
+% intentionally a quiet aligned contract, not a collection of web-style
+% cards: the repeated service fields remain explicit and searchable while the
+% small tracked labels reduce visual repetition.
+\newenvironment{HLAServiceContract}[2]{%
+    \par\medskip\noindent
+    \begin{minipage}{\linewidth}
+    \HLAServiceContractHeading{#1}{#2}%
+}{%
+    \end{minipage}\par\medskip
+}
+\newcommand{\HLAServiceContractHeading}[2]{%
+    \par\noindent
+    {\RLSans\bfseries\fontsize{11.2pt}{13.2pt}\selectfont\color{RLBlueDeep}#1}%
+    \hfill
+    {\RLSans\fontsize{7.4pt}{9pt}\selectfont\addfontfeatures{LetterSpace=1.0}\color{RLBlue}\MakeUppercase{#2}}%
+    \par\vspace{4pt}\noindent{\color{RLLine}\rule{\linewidth}{0.55pt}}\par\vspace{4pt}%
+}
+\newcommand{\HLAServiceContractSection}[1]{%
+    \par\smallskip\noindent
+    {\RLSans\bfseries\fontsize{7.3pt}{8.8pt}\selectfont\addfontfeatures{LetterSpace=1.0}\color{RLBlue}\MakeUppercase{#1}}%
+    \par\vspace{1.5pt}%
+}
+\newenvironment{HLAServiceContractList}{%
+    \begin{enumerate}[label=\alph*),leftmargin=22pt,labelsep=8pt,itemsep=2.5pt,topsep=0pt,parsep=0pt]
+}{%
+    \end{enumerate}
 }
 \newcommand{\HLAFixedRule}[4]{%
     \begin{tikzpicture}[remember picture,overlay]

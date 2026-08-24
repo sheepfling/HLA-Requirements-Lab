@@ -10,12 +10,12 @@
     f11 stroke/.style={draw=black,line width=.90pt},
     f11 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
     f11 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
-    f11 title/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{22.5}{23.5}\selectfont,align=center,inner sep=0pt},
-    f11 subtitle/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.5}{11.3}\selectfont,align=center,inner sep=0pt},
-    f11 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.0}{10.8}\selectfont,align=center,inner sep=0pt},
-    f11 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.0}{11.9}\selectfont,align=center,inner sep=0pt},
-    f11 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{9.3}{10.2}\selectfont,align=center,inner sep=0pt},
-    f11 guard/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{8.4}{9.3}\selectfont,align=center,inner sep=0pt}
+    f11 title/.style={font=\RLSans\bfseries\fontsize{22.5}{23.5}\selectfont,align=center,inner sep=0pt},
+    f11 subtitle/.style={font=\RLSans\mdseries\fontsize{10.5}{11.3}\selectfont,align=center,inner sep=0pt},
+    f11 tab/.style={font=\RLSans\mdseries\fontsize{10.0}{10.8}\selectfont,align=center,inner sep=0pt},
+    f11 text/.style={font=\RLSans\mdseries\fontsize{11.0}{11.9}\selectfont,align=center,inner sep=0pt},
+    f11 small/.style={font=\RLSans\mdseries\fontsize{9.3}{10.2}\selectfont,align=center,inner sep=0pt},
+    f11 guard/.style={font=\RLSans\mdseries\fontsize{8.4}{9.3}\selectfont,align=center,inner sep=0pt}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -43,10 +43,10 @@
 
     % F11-P01 - publication shallow-history pseudo-state.
     \draw[f11 stroke] (461,132) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (461,132) {H};
+    \node[font=\RLSans\mdseries\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (461,132) {H};
     % F11-P02 - subscription shallow-history pseudo-state.
     \draw[f11 stroke] (876,132) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (876,132) {H};
+    \node[font=\RLSans\mdseries\fontsize{18.5}{18.5}\selectfont,inner sep=0pt] at (876,132) {H};
 
     % F11-E01: publication-region boundary -> history; empty-set publish/unpublish.
     \draw[f11 transition] (393,112)

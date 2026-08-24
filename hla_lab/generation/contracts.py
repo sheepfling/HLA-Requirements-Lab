@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from hla_lab.adapters.latex_renderer import LatexDialect
 from hla_lab.core.semantic_model import DocumentModel
@@ -32,6 +33,7 @@ class GenerationRequest:
     include_faithful_body: bool = False
     faithful_layout_profile: FaithfulLayoutProfile | None = None
     faithful_body_exclude_path_parts: tuple[str, ...] = ()
+    state_machine_renderer: Literal["tikz", "plantuml"] = "tikz"
 
 
 @dataclass(frozen=True)

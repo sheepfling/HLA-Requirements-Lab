@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "aliases": [
+    {
+      "alias_id": "req-a6d5bd737f66",
+      "canonical_id": "req-0422ea5315d2",
+      "relation": "merged",
+      "reason": "Legacy table-fragment record is represented by the complete normative table-row candidate."
+    },
+    {
+      "alias_id": "req-28d6f7bcda18",
+      "canonical_id": "req-e5cc55b0f74a",
+      "relation": "merged",
+      "reason": "Legacy line-local encodedLength fragment is represented by the complete Java LogicalTime requirement."
+    },
+    {
+      "alias_id": "req-b21c4840838e",
+      "canonical_id": "req-e9108e372de0",
+      "relation": "merged",
+      "reason": "Legacy line-local encodedLength fragment is represented by the complete Java LogicalTimeInterval requirement."
+    }
+  ]
+}

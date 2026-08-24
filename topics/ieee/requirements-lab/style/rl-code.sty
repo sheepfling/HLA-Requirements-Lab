@@ -2,6 +2,7 @@
 \ProvidesFile{rl-code.sty}[2026/08/23 v0.1 Requirements Lab code and XML]
 
 \RequirePackage{xcolor}
+\RequirePackage{listings}
 
 % Plain LaTeX's verbatim environment must appear directly in the document
 % source, so the shared API supplies the surrounding typography as commands.
@@ -9,3 +10,21 @@
 \newcommand{\RLCodeEnd}{\endgroup\smallskip}
 
 \newcommand{\RLCodeInline}[1]{\colorbox{RLCode}{\RLMono\fontsize{8.4pt}{10pt}\selectfont\ #1\ }}
+
+\lstdefinestyle{RLCodeListing}{%
+    basicstyle=\RLMono\fontsize{8.2pt}{10.4pt}\selectfont\color{RLInk},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    breaklines=false,
+    frame=single,
+    framerule=0.35pt,
+    rulecolor=\color{RLLine},
+    backgroundcolor=\color{RLCode},
+    xleftmargin=6pt,
+    xrightmargin=6pt,
+    aboveskip=5pt,
+    belowskip=6pt,
+    captionpos=b
+}
+\lstnewenvironment{RLCodeBlock}{\lstset{style=RLCodeListing}}{}

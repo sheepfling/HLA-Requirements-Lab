@@ -197,7 +197,7 @@ class BuildIntegrationTests(unittest.TestCase):
             ).read_text(encoding="utf-8")
             manifest = (output / "semantic-manifest.tex").read_text(encoding="utf-8")
 
-        self.assertEqual(len(model.content_blocks), 439)
+        self.assertEqual(len(model.content_blocks), 432)
         self.assertIn(r"\SemanticContentBlockProseFederateLifetimeInitialStateText", data)
         self.assertIn("content-block-prose-federate-lifetime-initial-state-data.tex", manifest)
 

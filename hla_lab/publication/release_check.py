@@ -25,6 +25,11 @@ ERROR_PATTERNS = (
     re.compile(r"Runaway argument", re.IGNORECASE),
     re.compile(r"No pages of output", re.IGNORECASE),
 )
+LAYOUT_ERROR_PATTERNS = (
+    re.compile(r"Overfull \\hbox", re.MULTILINE),
+    re.compile(r"Missing character:", re.MULTILINE),
+    re.compile(r"headheight.*too small", re.IGNORECASE),
+)
 GENERATED_SUFFIXES = {
     ".aux",
     ".bbl",
@@ -69,15 +74,16 @@ def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
     )
 
 
-def _log_errors(path: Path) -> list[str]:
+def _log_errors(path: Path, *, strict_layout: bool = False) -> list[str]:
     if not path.is_file():
         return [f"missing log: {path.as_posix()}"]
     text = path.read_text(encoding="utf-8", errors="replace")
     lines = text.splitlines()
+    patterns = ERROR_PATTERNS + (LAYOUT_ERROR_PATTERNS if strict_layout else ())
     return [
         f"{path.as_posix()}:{index}: {line.strip()}"
         for index, line in enumerate(lines, start=1)
-        if any(pattern.search(line) for pattern in ERROR_PATTERNS)
+        if any(pattern.search(line) for pattern in patterns)
     ]
 
 
@@ -234,7 +240,10 @@ def check_release(
             "log": relative_log,
             "expected_pages": project.get("expected_pages"),
             "pages": None,
-            "log_errors": _log_errors(log),
+            "log_errors": _log_errors(
+                log,
+                strict_layout=project.get("kind") == "faithful",
+            ),
             "pdf_ignored": _ignored(repo_root, relative_pdf),
             "log_ignored": _ignored(repo_root, relative_log),
         }

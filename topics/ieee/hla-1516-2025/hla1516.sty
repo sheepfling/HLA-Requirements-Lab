@@ -20,20 +20,39 @@
 \RequirePackage{needspace}
 
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}[Scale=1.0]
-\setsansfont{Arimo}[Scale=1.0]
-\newfontfamily\HLACoverFont{Carlito}[Scale=1.0]
-\newfontfamily\HLADisplayFont{Arimo}[Scale=1.0]
-\newfontfamily\HLAFacSerif{Tinos}[Ligatures=NoCommon]
-\newfontfamily\HLAFacSans{Arimo}[Ligatures=NoCommon]
-% Tinos and Arimo expose the semicolon through a legacy Greek-question-mark
-% cmap entry in some XeTeX builds.  Use a metric-compatible serif fallback
-% for prose semicolons so PDF text extraction preserves U+003B exactly.
-\IfFontExistsTF{Liberation Serif}{%
-    \newfontfamily\HLASemicolonFont{Liberation Serif}[Ligatures=NoCommon]%
-}{%
-    \newfontfamily\HLASemicolonFont{Carlito}[Ligatures=NoCommon]%
-}
+\setmainfont{Noto Serif}[Scale=1.0]
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Scale=1.0,
+    Ligatures=NoCommon]
+\newfontfamily\HLACoverFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Scale=1.0,
+    Ligatures=NoCommon]
+\newfontfamily\HLADisplayFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLAFacSerif{Noto Serif}[Ligatures=NoCommon]
+\newfontfamily\HLAFacSans{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLASemicolonFont{Noto Serif}[Ligatures=NoCommon]
 \newcommand{\HLASemicolon}{{\HLASemicolonFont;}}
 
 % Zero-size page destinations support the contents links and cross-reference

@@ -53,6 +53,7 @@ class HlaSourceCommands:
     diagram_surface_document_id: str | None
     diagram_surface_bindings: tuple[tuple[int, int, str], ...]
     embedded_diagram_layout: tuple[tuple[int, float, float, float, float], ...]
+    landscape_figure_pages: tuple[tuple[int, int, str, str], ...]
     definition_at: str
     definition_anchor: str
     definition_term: str
@@ -152,6 +153,7 @@ def _base_commands(commands: Mapping[str, JsonValue]) -> HlaSourceCommands:
         diagram_surface_document_id=None,
         diagram_surface_bindings=(),
         embedded_diagram_layout=(),
+        landscape_figure_pages=(),
         definition_at=str(commands["definition_at"]),
         definition_anchor=str(commands["definition_anchor"]),
         definition_term=str(commands["definition_term"]),
@@ -193,12 +195,22 @@ def _load_source_profiles() -> dict[str, HlaSourceCommands]:
             )
             for geometry in item.get("embedded_diagram_layout", ())
         )
+        landscape_figure_pages = tuple(
+            (
+                int(page["figure"]),
+                int(page["page_sequence"]),
+                str(page["record_id"]),
+                str(page["caption"]),
+            )
+            for page in item.get("landscape_figure_pages", ())
+        )
         profile_id = str(item["id"])
         profiles[profile_id] = replace(
             commands,
             diagram_surface_document_id=item.get("diagram_surface_document_id"),
             diagram_surface_bindings=bindings,
             embedded_diagram_layout=layout,
+            landscape_figure_pages=landscape_figure_pages,
         )
     return profiles
 

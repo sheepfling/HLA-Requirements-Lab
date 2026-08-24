@@ -50,7 +50,7 @@ def _mutate_layout_block(root: Path, block_id: str, old: str, new: str) -> None:
 class SemanticProjectionTests(unittest.TestCase):
     def test_surface_records_are_recovered_behind_thin_page_adapters(self) -> None:
         expected = {
-            "hla-1516-2025": (4, 0, 16, 0),
+            "hla-1516-2025": (4, 0, 6, 0),
             "hla-1516.1-2025": (0, 17, 45, 92),
             "hla-1516.2-2025": (0, 0, 2, 89),
         }

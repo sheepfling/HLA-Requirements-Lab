@@ -196,7 +196,7 @@
 
     \subsubsection{Dynamic link compatibility}
 
-    Java dynamic link compatibility for this specification is provided through use of the service registry, as described in the javadoc for ServiceRegistry, available at http://java.sun.com/j2se/1.5.0/docs/api/javax/ imageio/spi/ServiceRegistry.html.
+    Java dynamic link compatibility for this specification is provided through use of the service registry, as described in the javadoc for ServiceRegistry, available at \url{http://java.sun.com/j2se/1.5.0/docs/api/javax/imageio/spi/ServiceRegistry.html}.
 
     The RTI shall provide the HLA 1516-2009.1 Java API classes in the package hla.rti1516e with corresponding subpackages. Each RTI vendor shall provide their RTI implementation classes in an implementation-specific package.
 
@@ -204,7 +204,7 @@
 
     The RTI shall provide implementations for the Encoding Helper classes in the hla.rti1516e.encoding package. The RTI shall also provide a class that implements the RtiFactory interface defined in the hla.rti1516e package. This class shall reside in an implementation-specific package outside of the hla.rti1516e hierarchy. The RtiFactory class shall be listed in a service registry entry, i.e., a file named hla.rti1516e.RtiFactory in the META-INF/services directory of the Java Archive (JAR) shall contain a line with the class name of the implementing class, e.g., com.mycompany.MyRtiFactoryImpl.
 
-    The RTI shall also provide implementations of the standardized time classes HLAinteger64Time, HLAinteger64Interval, HLAfloat64Time, and HLAfloat64Interval, along with their factory classes HLAinteger64TimeFactory and HLAfloat64TimeFactory. The time factories shall be listed in a service registry entry, i.e., a file named hla.rti1516e.LogicalTimeFactory in the META-INF/services directory of the JAR shall contain a line with the class name of each implementing class, e.g., com.mycompany.HLAinteger64TimeFactoryImpl and com.mycompany.HLAfloat64Time-FactoryImpl.
+    {\sloppy The RTI shall also provide implementations of the standardized time classes HLAinteger64Time,\allowbreak{} HLAinteger64Interval,\allowbreak{} HLAfloat64Time,\allowbreak{} and HLAfloat64Interval,\allowbreak{} along with their factory classes HLAinteger64TimeFactory and HLAfloat64TimeFactory. The time factories shall be listed in a service registry entry, i.e., a file named hla.rti1516e.LogicalTimeFactory in the META-INF/services directory of the JAR shall contain a line with the class name of each implementing class, e.g., com.mycompany.HLAinteger64TimeFactoryImpl\allowbreak{} and com.mycompany.HLAfloat64Time-FactoryImpl.\par}
 
     All RTIs shall support the interpretation of the FDD designator as a URL.
 
@@ -1203,7 +1203,7 @@ LogicalTimeFactoryFactory.getLogicalTimeFactory(HLAinteger64TimeFactory.class);}
 
     \paragraph{Optional message retraction designator}
 
-    The Update Attribute Values, Send Interaction, Send Interaction with Regions, and Delete Object Instance services may return a message retraction designator under certain circumstances. In the C++ API, this is implemented much like the definition indicator described above. The methods corresponding to these services always return an auto\_ptr\textless{}MessageRetractionHandle\textgreater{}. If the returned value is NULL, then the operation did not generate a message retraction designator; otherwise, the auto\_ptr\textless{}MessageRetractionHandle\textgreater{} holds the returned message retraction designator.
+    The Update Attribute Values, Send Interaction, Send Interaction with Regions, and Delete Object Instance services may return a message retraction designator under certain circumstances. In the C++ API, this is implemented much like the definition indicator described above. The methods corresponding to these services always return an auto\_ptr\textless{}\allowbreak MessageRetractionHandle\textgreater{}. If the returned value is NULL, then the operation did not generate a message retraction designator; otherwise, the auto\_ptr\textless{}\allowbreak MessageRetractionHandle\textgreater{} holds the returned message retraction designator.
 
     \paragraph{Collection of attribute designator set and region designator set pairs}
 

@@ -29,6 +29,18 @@ class ReleaseLogTests(unittest.TestCase):
             )
             self.assertEqual(_log_errors(path), [])
 
+    def test_release_log_check_reports_layout_diagnostics_for_faithful_products(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "main.log"
+            path.write_text(
+                "Overfull \\hbox (2.0pt too wide) in paragraph at lines 1--2\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(_log_errors(path), [])
+            errors = _log_errors(path, strict_layout=True)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("Overfull", errors[0])
+
 
 if __name__ == "__main__":
     unittest.main()

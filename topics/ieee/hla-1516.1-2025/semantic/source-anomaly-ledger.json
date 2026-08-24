@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516.1-2025-federate-interface",
+  "purpose": "Record source, compilation, encoding, and editorial anomalies without silently rewriting unresolved source meaning.",
+  "entries": [
+    {
+      "source_id": "hla15161-overview-service-groups",
+      "location": "Clause 1.4",
+      "source_text": "The interfaces comprise seven basic service groups plus an eighth support group; the same passage names data distribution management as DMM.",
+      "rendered_text": "Preserved for adjudication; no service-group count or DDM/DMM terminology was silently normalized.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The listed groups and terminology do not agree internally.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-footnotes-9-10",
+      "location": "Normative references",
+      "source_text": "Footnote markers 9 and 10 appear without visible footnote text.",
+      "rendered_text": "Markers retained only where present in the source projection; missing note bodies are not invented.",
+      "classification": "COMPILATION_DEFECT",
+      "reason": "The extracted source contains references whose note bodies are absent from the supplied material.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-private-use-glyphs",
+      "location": "FOM, FDD, DDM terms and figure captions",
+      "source_text": "Private-use glyphs surround some abbreviations and caption parentheses.",
+      "rendered_text": "Ordinary parentheses and Unicode text characters are used.",
+      "classification": "ENCODING_REPAIR",
+      "reason": "Private-use characters are not stable publication text.",
+      "review_status": "APPLIED"
+    },
+    {
+      "source_id": "hla15161-figure-caption-duplication",
+      "location": "Figures 3, 4, 5, 7, 8, and 9",
+      "source_text": "Figure captions are duplicated or embedded in the imported artwork region.",
+      "rendered_text": "Artwork is caption-free and each figure receives one generated Requirements Lab caption.",
+      "classification": "COMPILATION_DEFECT",
+      "reason": "Source-page furniture and generated captions were being composed together.",
+      "review_status": "PARTIALLY_APPLIED"
+    },
+    {
+      "source_id": "hla15161-infrastructure-after",
+      "location": "Federate Interface service text",
+      "source_text": "infrastructure.After",
+      "rendered_text": "Retained in the anomaly ledger pending source adjudication.",
+      "classification": "COMPILATION_DEFECT",
+      "reason": "The token appears to lack an expected separating space or punctuation.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-directed-interation",
+      "location": "FDD list",
+      "source_text": "Directed interation",
+      "rendered_text": "Retained in source data pending verification against the authoritative artifact.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "Likely spelling defect, but the corrected term must be verified before application.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-comment-note-contamination",
+      "location": "FOM-combination bullet",
+      "source_text": "A parenthetical Comment note is embedded in a normative bullet.",
+      "rendered_text": "Excluded from normative production prose; retained here as editorial provenance.",
+      "classification": "EDITORIAL_CONTAMINATION",
+      "reason": "An editorial instruction is not part of the normative sentence grammar.",
+      "review_status": "APPLIED"
+    },
+    {
+      "source_id": "hla15161-initiate-federate-save-enumeration",
+      "location": "Initiate Federate Save supplied arguments",
+      "source_text": "The supplied-argument list uses a) twice.",
+      "rendered_text": "Enumeration remains source-controlled pending comparison with the authoritative source.",
+      "classification": "COMPILATION_DEFECT",
+      "reason": "Repeated enumeration may be a transcription defect or an intentional source label.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-java-version-conflict",
+      "location": "Clause 12 Java mapping",
+      "source_text": "One subsection states Java 11; a later subsection says Java 5 is assumed.",
+      "rendered_text": "Both statements are retained with provenance; no version is selected silently.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The implementation baseline is internally inconsistent.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-time-class-capitalization",
+      "location": "Clause 12 and API file manifest",
+      "source_text": "Standardized time-class names vary in capitalization while filenames are case-sensitive.",
+      "rendered_text": "Technical tokens are rendered case-preserving pending validation against the supplied API artifact.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "A capitalization correction could change an API identifier.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-annex-a-cross-reference",
+      "location": "Annex A",
+      "source_text": "Annex A directs readers to Annex E for the Federate Protocol API; the API appears in Annex D.",
+      "rendered_text": "Cross-reference remains flagged until annex numbering is verified.",
+      "classification": "CROSS_REFERENCE_DEFECT",
+      "reason": "A hard-coded annex reference conflicts with the current annex inventory.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-annex-classification",
+      "location": "Annexes E and F",
+      "source_text": "Annex E is marked normative while disclaiming implementation requirements; Annex F is informative while containing shall statements.",
+      "rendered_text": "Classifications are not changed without source adjudication.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "Annex status and internal normative language conflict.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-annex-h-page-reference",
+      "location": "Annex H figure table",
+      "source_text": "Figure 1 is listed with a source page rather than its generated Requirements Lab page.",
+      "rendered_text": "Figure-page references are generated from labels and anchors.",
+      "classification": "CROSS_REFERENCE_DEFECT",
+      "reason": "Pagination changes when source figures become generated publication pages.",
+      "review_status": "IN_PROGRESS"
+    }
+  ]
+}

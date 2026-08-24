@@ -52,6 +52,59 @@ _HEADING = re.compile(
     r"\\(?P<command>clause|subclause|subsubclause|annexsection|annexsubsection|"
     r"section|subsection|subsubsection|paragraph|annexsubhead)\*?\s*\{"
 )
+_NORMATIVE_SENTENCE_END = re.compile(r"[.!?](?=\s+[A-Z0-9`\"(\[]|$)")
+_NORMATIVE_LAYOUT_ENVIRONMENT = re.compile(
+    r"(?s)\\begin\{(?:tikzpicture|picture)\*?\}.*?"
+    r"\\end\{(?:tikzpicture|picture)\*?\}"
+)
+_NATIVE_FIGURE = re.compile(
+    r"(?m)^\s*(?:\\stdnativefigure(?:\*?\[[^]]*\])?\s*)?"
+    r"(?:\\input\s*\{)?figures/native/[^}\s]+(?:\})?\s*$"
+)
+_NORMATIVE_STOP_WORDS = {
+    "a",
+    "an",
+    "about",
+    "after",
+    "also",
+    "among",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "because",
+    "been",
+    "being",
+    "during",
+    "for",
+    "from",
+    "have",
+    "if",
+    "in",
+    "into",
+    "must",
+    "of",
+    "on",
+    "or",
+    "shall",
+    "that",
+    "the",
+    "their",
+    "these",
+    "this",
+    "those",
+    "to",
+    "through",
+    "under",
+    "using",
+    "was",
+    "were",
+    "when",
+    "which",
+    "with",
+}
 
 
 def _arguments(text: str, offset: int, count: int) -> tuple[str, ...] | None:
@@ -71,10 +124,15 @@ def _arguments(text: str, offset: int, count: int) -> tuple[str, ...] | None:
 
 def _plain(value: str) -> str:
     value = re.sub(r"(?m)^\s*%.*$", "", value)
+    value = re.sub(r"figures/native/[^}\s]+", " ", value)
+    value = re.sub(r"\\(?:input|include)\s*\{[^{}]*\}", " ", value)
+    value = re.sub(r"\\stdnativefigure(?:\*?\[[^]]*\])?\s*\{[^{}]*\}", " ", value)
+    value = value.replace("\\\\", " ")
+    value = value.replace("&", " ")
     value = re.sub(r"\\(?:begin|end)\{[^{}]*\}", " ", value)
     value = re.sub(r"\\(?:vspace|hspace|addvspace)\*?\{[^{}]*\}", " ", value)
     try:
-        return _latex_text(value).strip()
+        return _latex_text(value).replace("\\\\", " ").strip()
     except ValueError:
         # Requirement candidates may be line-local slices through a larger
         # LaTeX command.  They remain useful inventory records even when the
@@ -248,6 +306,17 @@ def _clause_for(path: Path, headings: tuple[Heading, ...]) -> str | None:
     return f"clause-{root_number}" if root_number else None
 
 
+def _clause_for_line(
+    path: Path, headings: tuple[Heading, ...], line: int
+) -> str | None:
+    """Resolve the heading that owns a source line, not the file's final heading."""
+
+    prior = tuple(item for item in headings if item.line <= line)
+    if prior:
+        return f"clause-{prior[-1].number}"
+    return _clause_for(path, headings)
+
+
 def _paragraphs(
     root: Path, path: Path, text: str, block_id: str, clause_id: str | None
 ) -> tuple[ContentElement, ...]:
@@ -362,6 +431,205 @@ def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
     return tuple(records)
 
 
+@dataclass(frozen=True)
+class _NormativeCandidate:
+    """One sentence-level source candidate with a complete authored span."""
+
+    statement: str
+    line: int
+    end_line: int
+    offset: int
+
+
+def _mask_layout_source(text: str) -> str:
+    """Remove diagrams and table layout while preserving source line numbers."""
+
+    def blank(match: re.Match[str]) -> str:
+        return "".join("\n" if character == "\n" else " " for character in match.group(0))
+
+    masked = _NORMATIVE_LAYOUT_ENVIRONMENT.sub(blank, text)
+    # Native figures are authored as layout calls, not normative prose.  A
+    # complete source line may contain nested resize/input commands, so mask
+    # the line rather than trying to balance every layout wrapper.
+    return re.sub(r"(?m)^.*figures/native/[^\n]*$", blank, masked)
+
+
+def _normative_paragraphs(text: str) -> tuple[tuple[tuple[int, str], ...], ...]:
+    """Group prose lines without allowing layout artifacts to join sentences."""
+
+    lines = _mask_layout_source(text).splitlines()
+    paragraphs: list[tuple[tuple[int, str], ...]] = []
+    current: list[tuple[int, str]] = []
+    in_table = False
+    list_depth = 0
+    for number, raw in enumerate(lines, start=1):
+        stripped = raw.strip()
+        table_begin = re.search(r"\\begin\{(?:tabular|tabularx|longtable)\*?\}", raw)
+        if table_begin:
+            if current:
+                paragraphs.append(tuple(current))
+                current = []
+            in_table = True
+            raw = raw[table_begin.end() :]
+            if not raw.strip():
+                continue
+        table_end = re.search(r"\\end\{(?:tabular|tabularx|longtable)\*?\}", raw)
+        if table_end:
+            raw = raw[: table_end.start()]
+            if raw.strip():
+                current.append((number, raw))
+            if current:
+                paragraphs.append(tuple(current))
+                current = []
+            in_table = False
+            continue
+        if re.match(r"^\\(?:begin|end)\{(?:compactstdpage|annexstdpage)\}", stripped):
+            if current and re.match(r"^\\end", stripped):
+                current_text = _plain(" ".join(value for _, value in current))
+                if not re.search(
+                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+                    current_text.rstrip(" ;"),
+                    re.IGNORECASE,
+                ):
+                    paragraphs.append(tuple(current))
+                    current = []
+            continue
+        if not stripped:
+            continue
+        if re.match(
+            r"^\\(?:clause|subclause|subsubclause|annexsection|annexsubsection|"
+            r"section|subsection|subsubsection|paragraph|annexsubhead)\b",
+            stripped,
+        ):
+            continue
+        list_begin = re.match(
+            r"^\\begin\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
+            stripped,
+        )
+        if list_begin:
+            list_depth += 1
+            continue
+        list_end = re.match(
+            r"^\\end\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
+            stripped,
+        )
+        if list_end:
+            list_depth = max(0, list_depth - 1)
+            continue
+        item = re.search(r"\\item(?:\s*\[[^]]*\])?", raw)
+        if item and list_depth <= 1:
+            current_text = _plain(" ".join(value for _, value in current))
+            current_incomplete = bool(
+                re.search(
+                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+                    current_text.rstrip(" ;"),
+                    re.IGNORECASE,
+                )
+            )
+            if current and not current_incomplete:
+                paragraphs.append(tuple(current))
+                current = []
+            raw = raw[item.end() :]
+            if not raw.strip():
+                continue
+        current.append((number, raw))
+        if in_table and re.search(r"\\\\(?:\[[^]]*\])?\s*(?:%.*)?$", stripped):
+            paragraphs.append(tuple(current))
+            current = []
+    if current:
+        paragraphs.append(tuple(current))
+    return tuple(paragraphs)
+
+
+def _normative_candidates(text: str) -> tuple[_NormativeCandidate, ...]:
+    """Extract complete normative sentences from a legacy source file."""
+
+    candidates: list[_NormativeCandidate] = []
+    for paragraph in _normative_paragraphs(text):
+        pieces: list[str] = []
+        mapping: list[int] = []
+        for number, raw in paragraph:
+            cleaned = _plain(raw)
+            if not cleaned:
+                continue
+            if pieces:
+                pieces.append(" ")
+                mapping.append(number)
+            pieces.append(cleaned)
+            mapping.extend([number] * len(cleaned))
+        joined = "".join(pieces)
+        if not joined:
+            continue
+        starts = [0]
+        starts.extend(match.end() for match in _NORMATIVE_SENTENCE_END.finditer(joined))
+        for marker in re.finditer(r"(?=\s+[a-z]\))", joined):
+            prefix = joined[: marker.start()].rstrip()
+            if not re.search(
+                rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+                prefix,
+                re.IGNORECASE,
+            ):
+                starts.append(marker.start())
+        starts = sorted(set(starts))
+        segments: list[_NormativeCandidate] = []
+        for start, end in zip(starts, (*starts[1:], len(joined)), strict=True):
+            raw_statement = joined[start:end]
+            statement = raw_statement.strip(" ;")
+            # A legacy compact page can end immediately after the final list
+            # marker's conjunction.  Keep the authored source span, but do
+            # not publish a dangling glue word as a standalone obligation.
+            if re.search(r"\b(?:[a-z]|\d+)\)", statement) and re.search(
+                r"\s+(?:and|or)$", statement, re.IGNORECASE
+            ):
+                statement = re.sub(r"\s+(?:and|or)$", "", statement, flags=re.IGNORECASE)
+            if not statement:
+                continue
+            left = start + len(raw_statement) - len(raw_statement.lstrip())
+            right = end - len(raw_statement) + len(raw_statement.rstrip())
+            span = mapping[max(0, left) : min(len(mapping), right)]
+            if not span:
+                continue
+            segments.append(
+                _NormativeCandidate(
+                    statement=statement,
+                    line=min(span),
+                    end_line=max(span),
+                    offset=start,
+                )
+            )
+        merged: list[_NormativeCandidate] = []
+        for segment in segments:
+            marker = bool(re.match(r"^(?:[a-z]|\d+)\)", segment.statement.lstrip()))
+            previous_incomplete = bool(
+                merged
+                and re.search(
+                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+                    merged[-1].statement.rstrip(" ;"),
+                    re.IGNORECASE,
+                )
+            )
+            continuation = not re.search(
+                r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE
+            )
+            if merged and continuation and (previous_incomplete or marker):
+                prior = merged[-1]
+                merged[-1] = _NormativeCandidate(
+                    statement=f"{prior.statement} {segment.statement}".strip(),
+                    line=prior.line,
+                    end_line=segment.end_line,
+                    offset=prior.offset,
+                )
+            else:
+                merged.append(segment)
+        candidates.extend(
+            segment
+            for segment in merged
+            if len(segment.statement) >= 30
+            and re.search(r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE)
+        )
+    return tuple(candidates)
+
+
 def _requirements(root: Path, files: tuple[Path, ...]) -> tuple[Requirement, ...]:
     records: list[Requirement] = []
     seen: set[str] = set()
@@ -371,29 +639,34 @@ def _requirements(root: Path, files: tuple[Path, ...]) -> tuple[Requirement, ...
             continue
         text = path.read_text(encoding="utf-8")
         headings = _headings(root, path, text)
-        for _ordinal, match in enumerate(
-            re.finditer(r"[^\n]{0,500}\b(?:shall|must)\b[^\n]{0,800}", text, re.IGNORECASE), start=1
-        ):
-            statement = _plain(match.group(0)).strip()
+        candidates = _normative_candidates(text)
+        for candidate in candidates:
+            statement = candidate.statement
             if len(statement) < 30:
                 continue
-            digest = hashlib.sha1(f"{relative}:{match.start()}".encode()).hexdigest()[:12]
+            digest = hashlib.sha1(
+                f"{relative}:{candidate.line}:{candidate.offset}:{statement}".encode()
+            ).hexdigest()[:12]
             identifier = f"req-{digest}"
             if identifier in seen:
                 continue
             seen.add(identifier)
-            clause_id = _clause_for(path, headings)
+            clause_id = _clause_for_line(path, headings, candidate.line)
             clause_number = clause_id.removeprefix("clause-") if clause_id else None
             records.append(
                 Requirement(
                     id=identifier,
-                    title=f"Normative candidate {relative}:{line_number(text, match.start())}",
+                    title=f"Normative candidate {relative}:{candidate.line}",
                     statement=statement,
                     kind="detailed",
                     clause=clause_number,
                     clause_id=clause_id,
                     extraction="candidate",
-                    source=_source(root, path, text, match.start()),
+                    source=SourceRef(
+                        path=relative,
+                        line=candidate.line,
+                        end_line=candidate.end_line,
+                    ),
                 )
             )
     return tuple(records)
