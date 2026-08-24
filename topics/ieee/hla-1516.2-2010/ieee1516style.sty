@@ -125,6 +125,8 @@
 
 % OMT table reconstruction helpers.  These are deliberately compact: the
 % source standard uses dense, fully ruled tables with small type.
+\definecolor{HLAOMTBlue}{HTML}{496B91}
+\definecolor{HLAOMTOrange}{HTML}{E7773F}
 \newcommand{\omttablefont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omttablesmallfont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omtcaption}[1]{%
@@ -141,15 +143,19 @@
 \newcommand{\omtopt}[1]{[\textless#1\textgreater]}
 \newcommand{\omtsubfield}[1]{\hspace*{1.25em}\textit{#1}}
 \newcommand{\omtdash}{---\hspace{0.35em}}
-\newcommand{\restaurantglyph}{%
+% The Glyph category is represented by a small abstract object-model mark.
+% It is intentionally vector-only and does not carry the source example's
+% restaurant-specific fork/knife artwork into the Lab compilation.
+\newcommand{\omtcategoryglyph}{%
     \raisebox{-0.35ex}{%
         \begin{tikzpicture}[x=1pt,y=1pt,baseline=(current bounding box.center)]
-        \draw[cyan,line width=1.0pt] (0,0) rectangle (14,14);
-        \draw[black,line width=1.0pt] (4,3) -- (10.5,11);
-        \draw[black,line width=1.0pt] (10.5,3) -- (4.2,10.8);
-        \draw[black,line width=0.7pt] (3.4,10.7) -- (5.2,12.3);
-        \draw[black,line width=0.7pt] (4.1,10.0) -- (5.9,11.6);
-        \draw[black,line width=0.7pt] (9.8,10.9) -- (11.4,12.1);
+        \draw[HLAOMTBlue,line width=.75pt] (1.5,1.5) rectangle (20.5,20.5);
+        \draw[HLAOMTBlue,line width=.7pt] (4,14.5) -- (9.5,7) -- (15,11.5) -- (19,5);
+        \draw[HLAOMTBlue,line width=.55pt] (9.5,7) -- (9.5,18.5) (15,11.5) -- (15,18.5);
+        \fill[HLAOMTOrange] (4,14.5) circle (1.45);
+        \fill[HLAOMTOrange] (9.5,7) circle (1.45);
+        \fill[HLAOMTBlue] (15,11.5) circle (1.45);
+        \fill[HLAOMTBlue] (19,5) circle (1.45);
         \end{tikzpicture}%
     }%
 }

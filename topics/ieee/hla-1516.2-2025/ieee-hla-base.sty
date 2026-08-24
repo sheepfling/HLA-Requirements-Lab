@@ -294,6 +294,29 @@
     }{}
 }
 
+% The OMT Glyph category uses a small abstract object-model mark rather than
+% the inherited restaurant fork bitmap. Keep it live TikZ so it remains crisp,
+% portable, and independent of source-image baggage.
+\NewDocumentCommand{\HLAObjectModelGlyphAt}{m m m m}{%
+    \par\noindent
+    \pgfmathsetmacro{\HLAObjectGlyphXScale}{#3/24}%
+    \pgfmathsetmacro{\HLAObjectGlyphYScale}{#4/24}%
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
+    \begin{scope}[shift={(#1,#2)},xscale=\HLAObjectGlyphXScale,yscale=\HLAObjectGlyphYScale]
+        \draw[RLLine,line width=.45bp] (1.5,1.5) rectangle (22.5,22.5);
+        \draw[RLBlue,line width=.8bp] (4,15) -- (10,7.5) -- (16,12) -- (20,5);
+        \draw[RLBlue,line width=.55bp] (10,7.5) -- (10,19) (16,12) -- (16,19);
+        \fill[RLOrange] (4,15) circle (1.35);
+        \fill[RLOrange] (10,7.5) circle (1.35);
+        \fill[RLBlue] (16,12) circle (1.35);
+        \fill[RLBlue] (20,5) circle (1.35);
+    \end{scope}
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
+}
+
 \newcommand{\HLAClauseDashItem}[1]{%
     \begingroup
     \hfuzz=2.2pt%

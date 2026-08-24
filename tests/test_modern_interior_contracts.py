@@ -132,6 +132,32 @@ class ModernInteriorContractTests(unittest.TestCase):
         self.assertNotIn("IEEE Std 1516.2-2025", source)
         self.assertNotIn("IEEE Standard for Modeling and Simulation", source)
 
+    def test_omt_glyph_category_is_vector_only(self) -> None:
+        base = (ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "ieee-hla-base.sty").read_text(
+            encoding="utf-8"
+        )
+        blocks_2025 = (
+            ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json"
+        ).read_text(encoding="utf-8")
+        style_2010 = (
+            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty"
+        ).read_text(encoding="utf-8")
+        source_2010 = (
+            ROOT
+            / "topics"
+            / "ieee"
+            / "hla-1516.2-2010"
+            / "clauses"
+            / "clause04_omt_components_continuation.tex"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(r"\NewDocumentCommand{\HLAObjectModelGlyphAt}", base)
+        self.assertIn(r"\HLAObjectModelGlyphAt{369.000}{601.320}{24.000}{24.000}", blocks_2025)
+        self.assertNotIn("page-038-image-01.png", blocks_2025)
+        self.assertIn(r"\newcommand{\omtcategoryglyph}", style_2010)
+        self.assertIn(r"\omtcategoryglyph", source_2010)
+        self.assertNotIn(r"\restaurantglyph", style_2010 + source_2010)
+
     def test_supplied_prototype_reference_is_preserved_with_the_production_adapter(self) -> None:
         reference = LAB_ROOT / "prototype-reference"
 
