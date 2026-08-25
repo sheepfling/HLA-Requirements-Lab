@@ -221,6 +221,24 @@ class CompliancePublicationTests(unittest.TestCase):
         self.assertIn("10\\% capacity while", rendered)
         self.assertNotIn("capacity \\% while", rendered)
 
+    def test_publication_spaces_recovered_enumerator_markers(self) -> None:
+        model = _corpus().documents[0]
+        payload = model.model_dump(mode="json")
+        text = "The following applies: a)Federate save. b)None."
+        payload["requirements"][0]["statement"] = text
+        payload["requirements"][0]["machine_statement"] = text
+        mutated = type(model).model_validate(payload)
+
+        manifest = build_compliance_manifest(
+            ComplianceCorpus(documents=(mutated,)),
+            _profile(),
+        )
+
+        self.assertEqual(
+            manifest.requirements[0].statement,
+            "The following applies: a) Federate save. b) None.",
+        )
+
     def test_manifest_preserves_canonical_requirement_order(self) -> None:
         model = _corpus().documents[0]
         manifest = build_compliance_manifest(

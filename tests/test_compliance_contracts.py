@@ -53,7 +53,7 @@ class ComplianceContractTests(unittest.TestCase):
                 sum(item.kind == "state-transition" for item in implications),
                 sum(item.kind == "sequence-message" for item in implications),
             ),
-            (282, 14),
+            (297, 14),
         )
         filtered = self.corpus.state_sequence_implications(
             "hla-1516.1-2025",
@@ -70,7 +70,7 @@ class ComplianceContractTests(unittest.TestCase):
         self.assertEqual(
             report.operational_implication_counts,
             {
-                "direct": 282,
+                "direct": 297,
                 "clause-context": 0,
                 "unlinked": 14,
             },
@@ -113,7 +113,7 @@ class ComplianceContractTests(unittest.TestCase):
             (),
         )
         non_concrete = self.corpus.transitions_without_concrete_implementations("hla-1516.1-2025")
-        self.assertEqual(len(non_concrete), 282)
+        self.assertEqual(len(non_concrete), 297)
         planned = self.corpus.implementation_evidence(
             "hla-1516.1-2025",
             status="planned",
@@ -122,7 +122,7 @@ class ComplianceContractTests(unittest.TestCase):
             "hla-1516.1-2025",
             concrete=True,
         )
-        self.assertEqual(len(planned), 282)
+        self.assertEqual(len(planned), 283)
         self.assertEqual(concrete, ())
         self.assertTrue(all(not item.concrete for item in planned))
         self.assertTrue(all(not item.source_backed for item in planned))
@@ -176,7 +176,7 @@ class ComplianceContractTests(unittest.TestCase):
         )
         payload = json.loads(result.stdout)
         self.assertEqual(payload["compliance_corpus"]["document_ids"], ["hla-1516.1-2025"])
-        self.assertEqual(len(payload["compliance_corpus"]["implementation_evidence"]), 282)
+        self.assertEqual(len(payload["compliance_corpus"]["implementation_evidence"]), 283)
 
 
 if __name__ == "__main__":

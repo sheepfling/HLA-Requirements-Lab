@@ -35,13 +35,13 @@ class ContentClosureTests(unittest.TestCase):
         transitions = tuple(
             transition for machine in model.state_machines for transition in machine.transitions
         )
-        self.assertEqual(len(transitions), 282)
-        self.assertEqual(len(model.implementations), 282)
+        self.assertEqual(len(transitions), 297)
+        self.assertEqual(len(model.implementations), 283)
         self.assertEqual(model.transitions_missing_implementation_mapping(), ())
         self.assertEqual(
             model.transition_coverage_counts(),
             {
-                "mapped": 282,
+                "mapped": 297,
                 "not-applicable": 0,
                 "deferred": 0,
                 "unclassified": 0,

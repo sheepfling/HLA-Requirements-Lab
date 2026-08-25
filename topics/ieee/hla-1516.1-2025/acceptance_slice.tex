@@ -5,6 +5,24 @@
 \input{../requirements-lab/style/rl-tables.sty}
 \newcommand{\RLSerifScale}{0.82}
 \input{../requirements-lab/style/rl-publication.sty}
+\renewcommand{\RLAfterLandscapePage}{%
+    \newgeometry{left=90pt,right=90pt,top=67.7pt,bottom=76pt,headheight=30pt,headsep=13pt,footskip=46.5pt}%
+    \setlength{\paperwidth}{614.295pt}%
+    \setlength{\paperheight}{794.97pt}%
+    \setlength{\pdfpagewidth}{612bp}%
+    \setlength{\pdfpageheight}{792bp}%
+    \setlength{\textwidth}{434.295pt}%
+    \setlength{\textheight}{651.27pt}%
+    \setlength{\hsize}{434.295pt}%
+    \setlength{\columnwidth}{434.295pt}%
+    \setlength{\linewidth}{434.295pt}%
+    \setlength{\headwidth}{434.295pt}%
+    \setlength{\headheight}{30pt}%
+    \setlength{\headsep}{13pt}%
+    \setlength{\footskip}{46.5pt}%
+    \special{papersize=612bp,792bp}%
+    \pagestyle{RLHLA}%
+}
 
 \title{HLA 1516.1 Requirements Lab acceptance slice}
 \author{HLA Requirements Lab}
@@ -36,7 +54,7 @@
     \phantomsection\HLAAnchor{figure:#1}\label{#4}%
     \vspace*{8pt}%
     {\RLFixedSans\bfseries\fontsize{15pt}{18pt}\selectfont\color{RLBlueDeep}%
-        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+        FIGURE~#1\par}%
     \vspace{12pt}%
     \begin{center}
         \resizebox{0.92\linewidth}{!}{\input{#3}}%
@@ -52,7 +70,7 @@
     \phantomsection\HLAAnchor{figure:#1}\label{#4}%
     \vspace*{8pt}%
     {\RLFixedSans\bfseries\fontsize{15pt}{18pt}\selectfont\color{RLBlueDeep}%
-        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+        FIGURE~#1\par}%
     \vspace{12pt}%
     \begin{center}
         \includegraphics[width=0.96\linewidth,height=0.70\textheight,keepaspectratio]{#3}%
@@ -65,10 +83,10 @@
 \newcommand{\AcceptancePlantLandscapeFigure}[3]{%
     \begin{RLLandscapePage}
     \thispagestyle{rl}%
-    \phantomsection\HLAAnchor{figure:#1}\label{acceptance-figure-#1}%
+    \phantomsection\HLAAnchor{figure:#1}%
     \vspace*{2pt}%
     {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
-        FIGURE~#1\enspace\textcolor{RLMid}{/}\enspace #2\par}%
+        FIGURE~#1\par}%
     \vspace{7pt}%
     \begin{center}
         \includegraphics[width=0.995\linewidth,height=0.90\textheight,keepaspectratio]{#3}%
@@ -153,21 +171,18 @@ The word \emph{shall} indicates a mandatory requirement. Notes and examples
 remain visually distinct from normative service contracts.
 
 % Figure 1: small portrait state chart.
-\AcceptanceFigure{1}{Federation execution overview}
+\AcceptanceFigure{1}{Basic states of the federation execution}
     {output/semantic/state-machine-federation-execution.tex}{acceptance-figure-1}
 
-% Figure 3 plus the opening service-state prose, using a single generated
-% caption separated from the artwork.
+% Figure 3 is a dense hierarchical chart. Use a true landscape page so the
+% generated vector labels remain legible at publication scale. Clause 4.1.1
+% follows on a normal page rather than being squeezed beneath the artwork.
+\AcceptancePlantLandscapeFigure{3}{Federate lifetime}
+    {output/semantic/state-machine-federate-lifetime.pdf}
+
 \clearpage
 \thispagestyle{RLHLA}
-\phantomsection\HLAAnchor{figure:3}\label{acceptance-figure-3}
 \HLAClause{4.1.1 Federate lifetime}
-\begin{center}
-    \resizebox{0.96\linewidth}{!}{\input{output/semantic/state-machine-federate-lifetime.tex}}%
-\end{center}
-\vspace{4pt}
-{\RLSans\fontsize{8pt}{10pt}\selectfont\color{RLMid}Figure 3---Federate lifetime\par}
-\vspace{9pt}
 As shown in Figure 3, the initial state of any federate is
 \AcceptanceType{Not Connected}. Before a federate can work with an RTI, the
 federate shall perform a \AcceptanceType{Connect} to the RTI. Following
@@ -175,14 +190,15 @@ successful simulation activities, the federate invokes
 \AcceptanceType{Resign Federation Execution} and may then perform a
 \AcceptanceType{Disconnect}.
 
-% Figure 4 mapping acceptance. This uses the PlantUML statechart spike.
-\AcceptancePlantFigure{4}{Joined federate state}
-    {output/semantic/state-machine-normal-activity-permitted.pdf}{acceptance-figure-4}
+% Figure 4 mapping acceptance. This uses the PlantUML statechart spike and
+% keeps the caption aligned with the current semantic source record.
+\AcceptancePlantLandscapeFigure{4}{Joined federate state}
+    {output/semantic/state-machine-joined-federate-state.pdf}
 
-\AcceptancePlantFigure{7}{Global synchronization label}
-    {output/semantic/state-machine-global-synchronization-label.pdf}{acceptance-figure-7}
+\AcceptancePlantLandscapeFigure{7}{Global synch label (L)}
+    {output/semantic/state-machine-global-synchronization-label.pdf}
 
-\AcceptanceFigure{8}{Awaiting synchronization}
+\AcceptanceFigure{8}{Awaiting synchronization (s, L)}
     {output/semantic/state-machine-awaiting-synchronization.tex}{acceptance-figure-8}
 
 % Figure 17 is a true landscape page with Requirements Lab furniture and
@@ -195,9 +211,13 @@ successful simulation activities, the federate invokes
 \thispagestyle{RLHLA}
 \HLAClause{4 Interface service contracts}
 \begin{HLAServiceContract}{4.2 Connect}{FEDERATE $\rightarrow$ RTI}
-The \AcceptanceType{Connect} service shall be used to establish a connection
-between the unjoined federate and the RTI. No interaction between them may take
-place until a successful invocation has been performed.
+The \AcceptanceType{Connect} service allows the RTI to set up and initialize
+its communication infrastructure. The callback model argument indicates the
+desired callback model, either \AcceptanceType{IMMEDIATE} or
+\AcceptanceType{EVOKED}. The configuration name designates a named
+configuration that shall be used. If no configuration name is specified, or if
+no configuration with the specified name is found, the implementation's
+default configuration shall be used.
 \HLAServiceContractSection{Supplied arguments}
 \begin{HLAServiceContractList}
     \item Callback model.
@@ -224,13 +244,16 @@ place until a successful invocation has been performed.
     \item Unauthorized.
     \item Invalid credentials.
     \item Connection failed.
+    \item Unsupported callback model.
+    \item Already connected.
+    \item RTI internal error.
 \end{HLAServiceContractList}
 \end{HLAServiceContract}
 
 \begin{HLAServiceContract}{4.4 Connection Lost \textdagger}{RTI $\rightarrow$ FEDERATE}
-The \AcceptanceType{Connection Lost} service shall notify a previously joined
-federate that it has entered the Disconnected state as the result of a fault.
-The invocation is attempted on a best-effort basis.
+The source contract identifies the callback as \AcceptanceType{Connection Lost}
+and retains the supplied, returned, precondition, postcondition, and exception
+entries below.
 \HLAServiceContractSection{Supplied arguments}
 \begin{HLAServiceContractList}
     \item Text description of the fault.
@@ -253,11 +276,11 @@ The invocation is attempted on a best-effort basis.
 \end{HLAServiceContractList}
 \end{HLAServiceContract}
 
-% MOM Table 5 acceptance: actual source rows, modern landscape registry, and
-% structured code examples rather than proportional JSON-like prose.
+% MOM Table 5 acceptance: source pages 295--296, placed in the modern
+% landscape registry with structured code examples.
 \begin{RLLandscapePage}
 \thispagestyle{rl}
-\RLInlineTableCaption{5}{Encoding for HLAargument types}
+\RLInlineTableCaption{5}{Encoding for HLA argument types}
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.18}
 \begin{longtable}{@{}p{0.22\linewidth}p{0.32\linewidth}p{0.38\linewidth}@{}}
@@ -291,7 +314,13 @@ The invocation is attempted on a best-effort basis.
     \hspace*{16pt}\AcceptanceQuote{}AttributeHandle<2>\AcceptanceQuote{}],\\[-1pt]
     \hspace*{8pt}\AcceptanceQuote{}regionHandleSet\AcceptanceQuote{}: [\\[-1pt]
     \hspace*{16pt}\AcceptanceQuote{}RegionHandle<1>\AcceptanceQuote{},\\[-1pt]
-    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<2>\AcceptanceQuote{}]\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<2>\AcceptanceQuote{}],\\[-1pt]
+    \hspace*{8pt}\AcceptanceQuote{}attributeHandleSet\AcceptanceQuote{}: [\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}AttributeHandle<3>\AcceptanceQuote{},\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}AttributeHandle<4>\AcceptanceQuote{}],\\[-1pt]
+    \hspace*{8pt}\AcceptanceQuote{}regionHandleSet\AcceptanceQuote{}: [\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<5>\AcceptanceQuote{},\\[-1pt]
+    \hspace*{16pt}\AcceptanceQuote{}RegionHandle<6>\AcceptanceQuote{}]\\[-1pt]
     \}\\[-1pt]
     ]}\end{minipage}\\
 \AcceptanceTableRow
@@ -304,6 +333,8 @@ The invocation is attempted on a best-effort basis.
     \begin{minipage}[t]{\linewidth}\AcceptanceCode{\{\\[-1pt]
     \AcceptanceQuote{}configurationUsed\AcceptanceQuote{}: true,\\[-1pt]
     \AcceptanceQuote{}addressUsed\AcceptanceQuote{}: true,\\[-1pt]
+    \AcceptanceQuote{}additionalSettingsResultCode\AcceptanceQuote{}:\\[-1pt]
+    \AcceptanceQuote{}SETTINGS\_APPLIED\AcceptanceQuote{},\\[-1pt]
     \AcceptanceQuote{}message\AcceptanceQuote{}: \AcceptanceQuote{}\AcceptanceQuote{}\\[-1pt]
     \}}\end{minipage}\\
 \RLProductionBottomRule
@@ -312,6 +343,7 @@ The invocation is attempted on a best-effort basis.
 
 % MOM hierarchy and a compact attribute matrix.
 \HLALandscapeFigurePage{19}{MOM object-class hierarchy}{output/semantic/graph-diagram-hla-1516.1.figure-19-mom-object-hierarchy.tex}
+\HLALandscapeFigurePage{20}{MOM interaction-class hierarchy}{output/semantic/graph-diagram-hla-1516.1.figure-20-mom-interaction-hierarchy.tex}
 \clearpage
 \thispagestyle{rl}
 \begin{RLLandscapePage}
@@ -347,7 +379,14 @@ RtiFactory rtiFactory =
     RtiFactoryFactory.getRtiFactory();
 RTIambassador rtiAmbassador =
     rtiFactory.createRtiAmbassador();
+RtiFactory namedFactory =
+    RtiFactoryFactory.getRtiFactory("SomeRTI");
+Set<RtiFactory> rtiFactories =
+    RtiFactoryFactory.getRtiFactories();
 \end{RLCodeBlock}
+The factory mechanism uses the standardized \AcceptanceType{RtiFactory} and
+\AcceptanceType{RtiFactoryFactory} types. The named-factory and factory-set
+forms above are the source-defined alternatives to the default lookup.
 \AcceptanceSectionTitle{Technical token sample}
 \AcceptanceType{AuthorizerFactory}, \AcceptanceType{Authorizer},
 \AcceptanceType{RTIambassador}, \AcceptanceType{FederateAmbassador}, and
@@ -366,11 +405,13 @@ RTIambassador rtiAmbassador =
 \AcceptanceTableRow
 \AcceptanceType{HLAinteger32BE} & \AcceptanceType{HLAinteger32BE} & \AcceptanceType{int / Integer32}\\
 \AcceptanceTableRow
-\AcceptanceType{HLAfloat64LE} & \AcceptanceType{HLAfloat64LE} & \AcceptanceType{double / Float64}\\
+\AcceptanceType{HLAfloat64LE} & \AcceptanceType{HLAfloat64LE} & \AcceptanceType{double / double}\\
 \AcceptanceTableRow
-\AcceptanceType{HLAunicodeString} & \AcceptanceType{HLAunicodeString} & \AcceptanceType{String / UnicodeString}\\
+\AcceptanceType{HLAunicodeString} & \AcceptanceType{HLAunicodeString} & \AcceptanceType{String / std::wstring}\\
 \AcceptanceTableRow
-\AcceptanceType{HLAboolean} & \AcceptanceType{HLAboolean} & \AcceptanceType{boolean / Boolean}\\
+\AcceptanceType{HLAunicodeChar} & \AcceptanceType{HLAunicodeChar} & \AcceptanceType{short / wchar\_t}\\
+\AcceptanceTableRow
+\AcceptanceType{HLAbyte} & \AcceptanceType{HLAbyte} & \AcceptanceType{byte / char}\\
 \RLProductionBottomRule
 \end{longtable}
 \end{RLLandscapePage}
@@ -384,13 +425,15 @@ RTIambassador rtiAmbassador =
 \RLProductionHeaderBand
 \RLTableHeaderCell{Name} & \RLTableHeaderCell{Description} & \RLTableHeaderCell{Default (s)}\\
 \RLProductionHeaderRule
-\AcceptanceType{RTI\_TIMEOUT\_HEART} & Missing federate message timeout. & 180\\
+\AcceptanceType{RTI\_TIMEOUT\_HEART} & Missing federate message timeout. The RTI shall use this timeout to detect an offline federate and declare its session inactive. That federate may later reconnect. & 180\\
 \AcceptanceTableRow
-\AcceptanceType{RTI\_TIMEOUT\_PURGE} & Session purge timeout. & 600\\
+\AcceptanceType{RTI\_TIMEOUT\_PURGE} & Session purge timeout. The RTI shall use this timeout to purge inactive sessions. & 600\\
 \AcceptanceTableRow
 \AcceptanceType{FED\_INT\_HEART} & Heartbeat interval. & 60\\
 \AcceptanceTableRow
-\AcceptanceType{FED\_TIMEOUT\_RECONNECT} & Reconnect timeout. & 600\\
+\AcceptanceType{FED\_TIMEOUT\_HEART} & Missing RTI message timeout. The federate shall use this timeout to detect that the RTI cannot be reached. The federate may try to connect later. & 180\\
+\AcceptanceTableRow
+\AcceptanceType{FED\_TIMEOUT\_RECONNECT} & Reconnect timeout. The federate shall stop trying to reconnect after this interval. & 600\\
 \RLProductionBottomRule
 \end{longtable}
 \vspace{8pt}
@@ -400,7 +443,7 @@ RTIambassador rtiAmbassador =
 \RLProductionHeaderBand
 \RLTableHeaderCell{0..3} & \RLTableHeaderCell{4..7} & \RLTableHeaderCell{8..15} & \RLTableHeaderCell{16..19} & \RLTableHeaderCell{20..23} & \RLTableHeaderCell{24..n}\\
 \RLProductionHeaderRule
-Packet size & Sequence number & Session ID & Last received message & Message type & Payload\\
+Packet size & Sequence number & Session ID & Last received message no & Message type & Payload\\
 \RLProductionBottomRule
 \end{tabularx}
 \end{RLLandscapePage}
@@ -408,18 +451,34 @@ Packet size & Sequence number & Session ID & Last received message & Message typ
 \begin{RLLandscapePage}
 \thispagestyle{rl}
 \RLInlineTableCaption{34--35}{Federate Protocol message registry}
-\begin{longtable}{@{}p{0.31\linewidth}p{0.23\linewidth}p{0.37\linewidth}@{}}
+\begin{longtable}{@{}p{0.32\linewidth}p{0.22\linewidth}p{0.35\linewidth}@{}}
 \RLProductionTopRule
 \RLProductionHeaderBand
-\RLTableHeaderCell{Message} & \RLTableHeaderCell{Direction} & \RLTableHeaderCell{Payload grammar}\\
+\RLTableHeaderCell{Message type} & \RLTableHeaderCell{Direction} & \RLTableHeaderCell{Format reference}\\
 \RLProductionHeaderRule
-\AcceptanceType{CTRL\_NEW\_SESSION} & FEDERATE $\rightarrow$ RTI & Session identifier and configuration\\
+\AcceptanceType{CTRL\_NEW\_SESSION} & FEDERATE $\rightarrow$ RTI & See message format table.\\
 \AcceptanceTableRow
-\AcceptanceType{CTRL\_NEW\_SESSION\_STATUS} & RTI $\rightarrow$ FEDERATE & Status code and message\\
+\AcceptanceType{CTRL\_NEW\_SESSION\_STATUS} & RTI $\rightarrow$ FEDERATE & See message format table.\\
 \AcceptanceTableRow
-\AcceptanceType{HLA\_CALLBACK\_REQUEST} & RTI $\rightarrow$ FEDERATE & Callback name and argument record\\
+\AcceptanceType{CTRL\_HEARTBEAT} & FEDERATE $\rightarrow$ RTI & See message format table.\\
 \AcceptanceTableRow
-\AcceptanceType{CTRL\_RESUME} & FEDERATE $\rightarrow$ RTI & Last received message number\\
+\AcceptanceType{CTRL\_HEARTBEAT\_RESPONSE} & RTI $\rightarrow$ FEDERATE & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_TERMINATE\_SESSION} & FEDERATE $\rightarrow$ RTI & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_SESSION\_TERMINATED} & RTI $\rightarrow$ FEDERATE & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_RESUME\_REQUEST} & FEDERATE $\rightarrow$ RTI & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{CTRL\_RESUME\_STATUS} & RTI $\rightarrow$ FEDERATE & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{HLA\_CALL\_REQUEST} & FEDERATE $\rightarrow$ RTI & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{HLA\_CALL\_RESPONSE} & RTI $\rightarrow$ FEDERATE & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{HLA\_CALLBACK\_REQUEST} & RTI $\rightarrow$ FEDERATE & See message format table.\\
+\AcceptanceTableRow
+\AcceptanceType{HLA\_CALLBACK\_RESPONSE} & FEDERATE $\rightarrow$ RTI & See message format table.\\
 \RLProductionBottomRule
 \end{longtable}
 \end{RLLandscapePage}
@@ -452,11 +511,11 @@ API artifact. The monospace treatment prevents names such as
 \thispagestyle{RLHLA}
 \HLAClause{Figure index for the acceptance slice}
 \begin{itemize}[leftmargin=26pt,itemsep=5pt]
-    \item \hyperlink{figure:1}{Figure 1 --- Federation execution overview}
+    \item \hyperlink{figure:1}{Figure 1 --- Basic states of the federation execution}
     \item \hyperlink{figure:3}{Figure 3 --- Federate lifetime}
     \item \hyperlink{figure:4}{Figure 4 --- Joined federate state}
-    \item \hyperlink{figure:7}{Figure 7 --- Global synchronization label}
-    \item \hyperlink{figure:8}{Figure 8 --- Awaiting synchronization}
+    \item \hyperlink{figure:7}{Figure 7 --- Global synch label (L)}
+    \item \hyperlink{figure:8}{Figure 8 --- Awaiting synchronization (s, L)}
     \item \hyperlink{figure:17}{Figure 17 --- Temporal state}
     \item \hyperlink{figure:19}{Figure 19 --- MOM object-class hierarchy}
 \end{itemize}

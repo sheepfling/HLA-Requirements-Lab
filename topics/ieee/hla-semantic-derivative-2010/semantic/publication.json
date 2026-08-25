@@ -3,22 +3,22 @@
   "profile_id": "hla-semantic-derivative-2010",
   "title": "HLA 2010 semantic architecture",
   "subtitle": "Hierarchy-first requirements, operational behavior, and conformance views",
-  "description": "A generated publication contract for the IEEE HLA 1516, 1516.1, and 1516.2 2010 semantic corpus.",
+  "description": "A generated publication contract for the supplied HLA 1516-family 2010 source corpus.",
   "style_id": "semantic-reflowable-default",
   "documents": [
     {
       "id": "hla-1516-2010",
-      "title": "IEEE HLA 1516-2010 — Framework and Rules",
+      "title": "HLA 1516-2010 source material — Framework and Rules",
       "short_title": "IEEE 1516-2010"
     },
     {
       "id": "hla-1516.1-2010",
-      "title": "IEEE HLA 1516.1-2010 — Federate Interface Specification",
+      "title": "HLA 1516.1-2010 source material — Federate Interface Specification",
       "short_title": "IEEE 1516.1-2010"
     },
     {
       "id": "hla-1516.2-2010",
-      "title": "IEEE HLA 1516.2-2010 — Object Model Template",
+      "title": "HLA 1516.2-2010 source material — Object Model Template",
       "short_title": "IEEE 1516.2-2010"
     }
   ],

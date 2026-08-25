@@ -13,6 +13,7 @@
 \RequirePackage{longtable}
 \RequirePackage{array}
 \RequirePackage{booktabs}
+\RequirePackage{colortbl}
 \RequirePackage{ragged2e}
 \RequirePackage{url}
 \RequirePackage[hidelinks,hypertexnames=false]{hyperref}
@@ -24,6 +25,7 @@
 \RequirePackage{tikz}
 \RequirePackage{graphicx}
 \RequirePackage{multirow}
+\RequirePackage{etoolbox}
 
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Noto Serif}
@@ -33,7 +35,8 @@
     ItalicFont=Inter-Italic.ttf,
     BoldFont=Inter-ExtraBold.ttf,
     BoldItalicFont=Inter-Italic.ttf,
-    Ligatures=NoCommon]
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8.0pt plus 1.0pt minus 0.8pt}
@@ -44,7 +47,7 @@
 
 % These labels identify the independent Lab compilation. IEEE identifiers remain
 % in the technical body only where they identify supplied source references.
-\newcommand{\stdnumber}{HLA 1516.2 \textperiodcentered\ 2010 source compilation}
+\newcommand{\stdnumber}{HLA 1516.2 \textbar\ 2010 source compilation}
 \newcommand{\stdtitleupper}{OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
 \newcommand{\stdshortupper}{HLA REQUIREMENTS LAB}
 \newcommand{\stdcopyright}{}
@@ -137,32 +140,37 @@
 \newcommand{\omttablefont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omttablesmallfont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omtcaption}[1]{%
-    \par\vspace{0pt}\begin{center}%
-    {\sffamily\bfseries\fontsize{10.8}{12}\selectfont #1}\par
-    \end{center}\vspace{-2pt}%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1}\par
+        }%
+    }%
+    \par\vspace{3pt}%
 }
 \newcommand{\omtcontinuedcaption}[1]{%
-    \par\vspace{0pt}\begin{center}%
-    {\sffamily\bfseries\fontsize{10.8}{12}\selectfont #1 \textit{(continued)}}\par
-    \end{center}\vspace{-2pt}%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1 \textit{(continued)}}\par
+        }%
+    }%
+    \par\vspace{3pt}%
 }
 \newcommand{\omtph}[1]{\textless#1\textgreater}
 \newcommand{\omtopt}[1]{[\textless#1\textgreater]}
 \newcommand{\omtsubfield}[1]{\hspace*{1.25em}\textit{#1}}
 \newcommand{\omtdash}{---\hspace{0.35em}}
-% The Glyph category is represented by a small abstract object-model mark.
-% It is intentionally vector-only so it remains crisp and portable in the
-% Lab compilation.
+% The Glyph category is represented by a compact three-node hierarchy mark.
+% It is intentionally vector-only and contains no imported source artwork.
 \newcommand{\omtcategoryglyph}{%
     \raisebox{-0.35ex}{%
         \begin{tikzpicture}[x=1pt,y=1pt,baseline=(current bounding box.center)]
-        \draw[HLAOMTBlue,line width=.75pt] (1.5,1.5) rectangle (20.5,20.5);
-        \draw[HLAOMTBlue,line width=.7pt] (4,14.5) -- (9.5,7) -- (15,11.5) -- (19,5);
-        \draw[HLAOMTBlue,line width=.55pt] (9.5,7) -- (9.5,18.5) (15,11.5) -- (15,18.5);
-        \fill[HLAOMTOrange] (4,14.5) circle (1.45);
-        \fill[HLAOMTOrange] (9.5,7) circle (1.45);
-        \fill[HLAOMTBlue] (15,11.5) circle (1.45);
-        \fill[HLAOMTBlue] (19,5) circle (1.45);
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (7,11) -- (7,5);
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (17,11) -- (17,5);
+        \fill[HLAOMTOrange,draw=white,line width=.45pt] (12,18) circle (2.0);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (7,5) circle (1.8);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (17,5) circle (1.8);
         \end{tikzpicture}%
     }%
 }
@@ -176,24 +184,24 @@
         \begin{tikzpicture}[x=1pt,y=-1pt,xscale=#3]
         \tikzset{omtstruct/.style={anchor=west,inner sep=0pt,font=\fontsize{9}{10}\selectfont}}
         % Outer frame and vertical hierarchy columns (source Table 6 geometry).
-        \draw[line width=0.45pt] (0,0) rectangle (433.32,231.24);
-        \draw[line width=0.35pt] (71.88,0)--(71.88,231.24);
-        \draw[line width=0.35pt] (153.24,0)--(153.24,231.24);
-        \draw[line width=0.35pt] (234.60,0)--(234.60,231.24);
-        \draw[line width=0.35pt] (324.60,0)--(324.60,231.24);
-        \draw[line width=0.35pt] (355.68,0)--(355.68,231.24);
+        \draw[draw=RLBlue,line width=0.75pt] (0,0) rectangle (433.32,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,0)--(71.88,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,0)--(153.24,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,0)--(234.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (324.60,0)--(324.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (355.68,0)--(355.68,231.24);
         % Horizontal lines stop at the hierarchy level whose cell is being split.
-        \draw[line width=0.35pt] (153.24,15.48)--(433.32,15.48);
-        \draw[line width=0.35pt] (234.60,30.48)--(433.32,30.48);
-        \draw[line width=0.35pt] (234.60,55.44)--(433.32,55.44);
-        \draw[line width=0.35pt] (153.24,70.44)--(433.32,70.44);
-        \draw[line width=0.35pt] (234.60,85.44)--(433.32,85.44);
-        \draw[line width=0.35pt] (234.60,110.46)--(433.32,110.46);
-        \draw[line width=0.35pt] (153.24,125.46)--(433.32,125.46);
-        \draw[line width=0.35pt] (71.88,150.48)--(433.32,150.48);
-        \draw[line width=0.35pt] (234.60,165.48)--(433.32,165.48);
-        \draw[line width=0.35pt] (234.60,180.48)--(433.32,180.48);
-        \draw[line width=0.35pt] (71.88,205.50)--(433.32,205.50);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,15.48)--(433.32,15.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,30.48)--(433.32,30.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,55.44)--(433.32,55.44);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,70.44)--(433.32,70.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,85.44)--(433.32,85.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,110.46)--(433.32,110.46);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,125.46)--(433.32,125.46);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,150.48)--(433.32,150.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,165.48)--(433.32,165.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,180.48)--(433.32,180.48);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,205.50)--(433.32,205.50);
 
         % Root and the representative hierarchy entries.
         \node[omtstruct] at (6.6,104.6) {#1};

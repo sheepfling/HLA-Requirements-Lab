@@ -28,7 +28,8 @@
     BoldFont=Inter-ExtraBold.ttf,
     BoldItalicFont=Inter-Italic.ttf,
     Scale=1.0,
-    Ligatures=NoCommon]
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 \newfontfamily\HLACoverFont{Inter}[
     Path=../requirements-lab/fonts/,
     UprightFont=Inter-Regular.ttf,
@@ -36,14 +37,16 @@
     BoldFont=Inter-ExtraBold.ttf,
     BoldItalicFont=Inter-Italic.ttf,
     Scale=1.0,
-    Ligatures=NoCommon]
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 \newfontfamily\HLADisplayFont{Inter}[
     Path=../requirements-lab/fonts/,
     UprightFont=Inter-Regular.ttf,
     ItalicFont=Inter-Italic.ttf,
     BoldFont=Inter-ExtraBold.ttf,
     BoldItalicFont=Inter-Italic.ttf,
-    Ligatures=NoCommon]
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 \newfontfamily\HLAFacSerif{Noto Serif}[Ligatures=NoCommon]
 \newfontfamily\HLAFacSans{Inter}[
     Path=../requirements-lab/fonts/,
@@ -77,9 +80,9 @@
     pdflang={en-US},
     pdfdisplaydoctitle=true,
     hypertexnames=false,
-    pdftitle={IEEE Std 1516-2025 Framework and Rules - Unofficial LaTeX Recreation},
-    pdfauthor={Simulation Interoperability Standards Organization/Standards Activities Committee (SISO/SAC) of the IEEE Computer Society; unofficial LaTeX recreation},
-    pdfsubject={The High Level Architecture (HLA) framework, components, and rules for interoperable distributed modeling and simulation. Unofficial noncommercial LaTeX recreation of IEEE Std 1516-2025.},
+    pdftitle={HLA Requirements Lab Framework and Rules - 2025 source compilation},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={A Requirements Lab source compilation of HLA framework, components, and rules for interoperable distributed modeling and simulation.},
     pdfkeywords={architecture, class attribute, federate, federation, federation execution, federation object model, framework, High Level Architecture, IEEE 1516, instance attribute, interaction class, joined federate, object class, object model template, rules, runtime infrastructure, simulation object model}
 }
 
@@ -116,8 +119,8 @@
 
 \newcommand{\HLAHeader}{%
     \sffamily\fontsize{7.98pt}{9.18pt}\selectfont
-    IEEE Std 1516-2025\\[-0.3pt]
-    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules%
+    HLA 1516 \textbar\ 2025-source compilation\\[-0.3pt]
+    HLA REQUIREMENTS LAB---Framework and Rules%
 }
 
 \newcommand{\HLAFooter}{%
@@ -157,8 +160,7 @@
     \thispagestyle{hlaopener}
     \vspace*{0.64in}
     {\sffamily\bfseries\fontsize{19.98pt}{23.0pt}\selectfont
-    IEEE Standard for Modeling and Simulation\\
-    (M\&S) High Level Architecture (HLA)---\\
+    HLA Requirements Lab\\
     Framework and Rules\par}
     \vspace{0.51in}
 }
@@ -390,10 +392,10 @@
     \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
     at ([xshift=269.52pt,yshift=-43.50pt]current page.north west)
-        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Std 1516-2025}};
+        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont HLA 1516 \textbar\ 2025-source compilation}};
     \node[anchor=base west,inner sep=0pt,outer sep=0pt]
     at ([xshift=119.28pt,yshift=-52.677pt]current page.north west)
-        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Framework and Rules}};
+        {{\HLAFacSans\fontsize{7.98pt}{7.98pt}\selectfont HLA REQUIREMENTS LAB---Framework and Rules}};
     \end{tikzpicture}%
 }
 
@@ -420,8 +422,15 @@
 \newcommand{\HLAStartSemanticPages}{%
     \clearpage
     \begingroup
-    \newgeometry{left=90pt,right=90pt,top=57.18pt,bottom=74.40pt,headheight=0pt,headsep=0pt,footskip=0pt}%
-    \pagestyle{empty}%
+    % Keep the fallback fancyhdr geometry valid even on an overflow page.
+    % Most semantic pages paint furniture explicitly, but a footnote spill or
+    % other natural-flow page still needs nonzero header/footer reservations.
+    \newgeometry{left=90pt,right=90pt,top=57.18pt,bottom=74.40pt,headheight=20pt,headsep=13pt,footskip=46.5pt}%
+    % Keep the shared Lab style as the inherited page style. Individual
+    % semantic pages intentionally use \thispagestyle{empty} plus explicit
+    % overlay furniture; overflow pages (for example footnote spill pages)
+    % therefore still receive the standard header and footer.
+    \pagestyle{RLHLA}%
     \thispagestyle{empty}%
     \setlength{\parindent}{0pt}%
     \setlength{\parskip}{0pt}%
@@ -642,23 +651,23 @@
     \thispagestyle{empty}
     \HLABlockMotif
     \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont IEEE SA};
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont STANDARDS};
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont ASSOCIATION};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont HLA REQUIREMENTS LAB};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont SOURCE};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont COMPILATION};
     \fill[HLACyan] ([xshift=18pt,yshift=-105pt]current page.north west) rectangle ([xshift=119pt,yshift=-113pt]current page.north west);
 
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-151pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont IEEE Standard for Modeling and Simulation};
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-181.5pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont (M\&S) High Level Architecture (HLA)---};
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-212pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont Framework and Rules};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-151pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont HLA Requirements Lab};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-181.5pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont Framework and Rules};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-212pt]current page.north west) {\HLACoverFont\bfseries\fontsize{24.996pt}{30.54pt}\selectfont 2025 source compilation};
 
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-435pt]current page.north west) {\HLACoverFont\fontsize{16pt}{19pt}\selectfont IEEE Computer Society};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-435pt]current page.north west) {\HLACoverFont\fontsize{16pt}{19pt}\selectfont HLA Requirements Lab};
 
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-541pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Developed by the};
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-556pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Simulation Interoperability Standards/Organization/};
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-571pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Standards Activities Committee (SISO/SAC)};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-541pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Prepared from supplied source materials};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-556pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Editorial compilation and semantic model};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-571pt]current page.north west) {\HLACoverFont\fontsize{11.99pt}{14.4pt}\selectfont Requirements Lab quality gates};
 
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-628pt]current page.north west) {\HLACoverFont\bfseries\fontsize{11.99pt}{14.4pt}\selectfont IEEE Std 1516\texttrademark--2025};
-    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-643pt]current page.north west) {\HLACoverFont\fontsize{10.97pt}{13pt}\selectfont (Revision of IEEE Std 1516-2010)};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-628pt]current page.north west) {\HLACoverFont\bfseries\fontsize{11.99pt}{14.4pt}\selectfont HLA 1516 \textbar\ 2025-source compilation};
+    \node[anchor=north west,text=HLADark] at ([xshift=60pt,yshift=-643pt]current page.north west) {\HLACoverFont\fontsize{10.97pt}{13pt}\selectfont Framework and Rules};
 
     \node[rotate=90,anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]
     at ([xshift=580.32pt,yshift=-465.12pt]current page.north west)
@@ -677,14 +686,14 @@
 \newcommand{\HLAFormalTitlePage}{%
     \thispagestyle{empty}
     \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north,text=HLADark] at ([yshift=-34pt]current page.north) {\sffamily\bfseries\fontsize{11pt}{13pt}\selectfont IEEE Std 1516\texttrademark--2025};
-    \node[anchor=north,text=HLADark] at ([yshift=-50pt]current page.north) {\sffamily\fontsize{9.5pt}{11pt}\selectfont (Revision of IEEE Std 1516-2010)};
+    \node[anchor=north,text=HLADark] at ([yshift=-34pt]current page.north) {\sffamily\bfseries\fontsize{11pt}{13pt}\selectfont HLA 1516 \textbar\ 2025-source compilation};
+    \node[anchor=north,text=HLADark] at ([yshift=-50pt]current page.north) {\sffamily\fontsize{9.5pt}{11pt}\selectfont HLA Requirements Lab};
 
-    \node[anchor=north west,text=HLADark,text width=455pt,align=left] at ([xshift=60pt,yshift=-105pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{23pt}\selectfont IEEE Standard for Modeling and Simulation\\(M\&S) High Level Architecture (HLA)---\\Framework and Rules};
+    \node[anchor=north west,text=HLADark,text width=455pt,align=left] at ([xshift=60pt,yshift=-105pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{23pt}\selectfont HLA Requirements Lab\\Framework and Rules};
 
-    \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-260pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont Developed by the\\[5pt]\textbf{Simulation Interoperability Standards Organization/}\\\textbf{Standards Activity Committee (SISO/SAC)}\\[12pt]of the\\[7pt]\textbf{IEEE Computer Society}};
+    \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-260pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont Prepared from supplied source materials.\\[5pt]\textbf{Editorial compilation and semantic model}\\[12pt]HLA Requirements Lab quality gates};
 
-    \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-482pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont Approved 14 February 2025\\[9pt]\textbf{IEEE SA Standards Board}};
+    \node[anchor=north west,text=HLADark,text width=390pt,align=left] at ([xshift=60pt,yshift=-482pt]current page.north west) {\sffamily\fontsize{10.5pt}{15pt}\selectfont 2025 source compilation\\[9pt]\textbf{Prepared for Requirements Lab use}};
 
     \node[anchor=south,text=HLADark] at ([yshift=20pt]current page.south) {\sffamily\fontsize{6.8pt}{8pt}\selectfont};
     \end{tikzpicture}
@@ -700,9 +709,9 @@
     \thispagestyle{empty}%
     \HLABlockMotif
     \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont IEEE SA};
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont STANDARDS};
-    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont ASSOCIATION};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-51pt]current page.north west) {\sffamily\bfseries\fontsize{20pt}{20pt}\selectfont HLA REQUIREMENTS LAB};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-77pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont SOURCE};
+    \node[anchor=north west,text=HLADark] at ([xshift=18pt,yshift=-85pt]current page.north west) {\sffamily\bfseries\fontsize{7.5pt}{7.8pt}\selectfont COMPILATION};
     \fill[HLACyan] ([xshift=18pt,yshift=-105pt]current page.north west) rectangle ([xshift=119pt,yshift=-113pt]current page.north west);
 
     \node[anchor=base west,inner sep=0pt,outer sep=0pt,text=HLADark]

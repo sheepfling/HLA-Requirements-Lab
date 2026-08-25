@@ -22,12 +22,26 @@ def render_sources(
     outputs: list[Path] = []
     for source in sources:
         source = source.resolve()
-        subprocess.run(
+        eps = source.with_suffix(".eps")
+        # PlantUML 1.2024.6 can return exit code 0 while writing a rendered
+        # error page after Graphviz rejects a dense state chart.  Never allow
+        # an old EPS to survive a failed regeneration and be mistaken for a
+        # fresh release asset.
+        eps.unlink(missing_ok=True)
+        result = subprocess.run(
             [java, "-jar", str(jar), "-charset", "UTF-8", "-teps", str(source)],
             cwd=source.parent,
             check=True,
+            capture_output=True,
+            text=True,
         )
-        eps = source.with_suffix(".eps")
+        if not eps.is_file():
+            details = (result.stdout + "\n" + result.stderr).strip()
+            raise RuntimeError(f"PlantUML did not produce {eps}: {details[-2000:]}")
+        eps_text = eps.read_text(encoding="latin-1", errors="ignore")
+        if "An error has occurred" in eps_text or "java.lang." in eps_text:
+            eps.unlink(missing_ok=True)
+            raise RuntimeError(f"PlantUML produced an error diagram for {source}")
         output = output_dir / f"{source.stem}.pdf"
         subprocess.run(
             [epstopdf, f"--outfile={output}", str(eps)],

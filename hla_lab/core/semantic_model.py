@@ -756,6 +756,7 @@ class TableFamily(SemanticRecord):
     id: str = Field(min_length=1)
     title: str = Field(min_length=1)
     table_ids: tuple[str, ...] = Field(min_length=1)
+    table_captions: dict[str, str] = Field(default_factory=dict)
     clause_id: str | None = None
     source: SourceRef
 
@@ -3706,10 +3707,15 @@ def _files(root: Path) -> tuple[Path, ...]:
     to extraction without becoming ownership hints.
     """
     excluded = {".trash", "build", "dist", "output"}
+    # Acceptance slices are standalone review fixtures, not part of the
+    # source corpus. Keeping them out prevents temporary QA clauses from
+    # changing the source-controlled inventory and traceability counts.
+    excluded_files = {"acceptance_slice.tex"}
     all_files = tuple(
         path
         for path in root.rglob("*.tex")
         if not excluded.intersection(path.relative_to(root).parts)
+        and path.name not in excluded_files
     )
     by_relative = {path.relative_to(root).as_posix(): path for path in all_files}
     ordered: list[Path] = []
@@ -3717,7 +3723,7 @@ def _files(root: Path) -> tuple[Path, ...]:
 
     def visit(path: Path) -> None:
         resolved = path.resolve()
-        if resolved in visited or not path.is_file():
+        if resolved in visited or not path.is_file() or path.name in excluded_files:
             return
         if excluded.intersection(path.relative_to(root).parts):
             return

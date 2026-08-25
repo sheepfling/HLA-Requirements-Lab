@@ -15,6 +15,7 @@ from pydantic import Field, model_validator
 
 from hla_lab.adapters.latex_renderer import tex_escape
 from hla_lab.core.semantic_model import ContentBlock, DocumentModel, SemanticRecord
+from hla_lab.core.text import safe_filename
 
 __all__ = [
     "FaithfulLayoutEntry",
@@ -230,7 +231,11 @@ def build_faithful_layout_projection(
     )
 
 
-def render_faithful_body(projection: FaithfulLayoutProjection) -> str:
+def render_faithful_body(
+    projection: FaithfulLayoutProjection,
+    *,
+    use_generated_blocks: bool = False,
+) -> str:
     """Render a deterministic LaTeX include stream for faithful layout adapters."""
     lines = [
         "% Generated faithful body; edit semantic content-block records instead.",
@@ -240,6 +245,12 @@ def render_faithful_body(projection: FaithfulLayoutProjection) -> str:
         ),
         f"\\providecommand{{\\SemanticFaithfulBodyEntryCount}}{{{len(projection.entries)}}}",
     ]
+    if use_generated_blocks:
+        # Generated semantic blocks contain technical identifiers and long
+        # registry paths that are not present in the source-page adapters.
+        # Give ordinary prose enough stretch to avoid release-blocking boxes
+        # without changing the source-owned text or breaking identifiers.
+        lines.extend(("\\sloppy", "\\setlength{\\emergencystretch}{4em}"))
     for entry in projection.entries:
         block_ids = ",".join(entry.content_block_ids)
         comment = (
@@ -248,10 +259,21 @@ def render_faithful_body(projection: FaithfulLayoutProjection) -> str:
         )
         if entry.before_latex:
             lines.append(entry.before_latex)
+        input_path = _input_path(entry.source_path)
+        if use_generated_blocks and entry.content_block_ids and not entry.layout_only:
+            # Older products keep the authored clause file as a complete page
+            # adapter. Pointing the body at the generated semantic block lets
+            # asset substitutions reach the actual build instead of remaining
+            # stranded in an unused generated sidecar.
+            block_id = entry.content_block_ids[0]
+            input_path = (
+                "output/semantic/content-block-"
+                f"{safe_filename(block_id, max_length=96)}"
+            )
         lines.extend(
             (
                 comment,
-                f"\\input{{{_input_path(entry.source_path)}}}",
+                f"\\input{{{input_path}}}",
             )
         )
         if entry.after_latex:

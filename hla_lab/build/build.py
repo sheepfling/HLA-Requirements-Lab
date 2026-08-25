@@ -49,8 +49,28 @@ def publication_targets(identifier: str) -> list[Path]:
 
 def run_document(path: Path, action: str) -> None:
     """Run a document-local build entry point."""
+    manifest = load_release_manifest(RELEASE_MANIFEST)
+    relative_root = path.resolve().relative_to(ROOT).as_posix()
+    project = next(
+        item
+        for item in manifest.projects
+        if item.root.replace("\\", "/") == relative_root
+    )
+    if project.build is None:
+        # Fixtures are part of the corpus and must remain discoverable, but
+        # they intentionally do not participate in the publication build.
+        print(f"[skip {action}] {path.relative_to(ROOT)} (no release build settings)")
+        return
     print(f"[{action}] {path.relative_to(ROOT)}")
-    subprocess.run([sys.executable, "build.py", action], cwd=path, check=True)
+    # Keep the shared package importable when the selected topic is outside the
+    # repository root.  The old document-local launcher relied on the current
+    # directory being on sys.path, which made `build all` fail before the first
+    # PDF was compiled even though direct topic builds worked.
+    subprocess.run(
+        [sys.executable, "-m", "hla_lab.build.topic", action, "--root", str(path)],
+        cwd=ROOT,
+        check=True,
+    )
 
 
 def main() -> int:

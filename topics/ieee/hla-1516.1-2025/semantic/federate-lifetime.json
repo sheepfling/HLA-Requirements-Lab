@@ -524,7 +524,7 @@
       ],
       "layout": {
         "engine": "manual",
-        "direction": "left-to-right",
+        "direction": "top-to-bottom",
         "state_font": "tiny",
         "edge_label_font": "tiny",
         "edge_label_distance": 0.3,

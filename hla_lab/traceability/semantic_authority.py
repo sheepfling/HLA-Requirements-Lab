@@ -219,6 +219,23 @@ def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
     return project.build.faithful_body_exclude_path_parts if project.build is not None else ()
 
 
+def _use_generated_faithful_blocks(root: Path) -> bool:
+    """Read the declared faithful-body renderer mode for a document."""
+    manifest_path = resources(REPO_ROOT).release_manifest
+    if not manifest_path.is_file():
+        return False
+    try:
+        relative_root = root.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        project = next(
+            item
+            for item in load_release_manifest(manifest_path).projects
+            if item.root.replace("\\", "/") == relative_root
+        )
+    except (ValueError, StopIteration):
+        return False
+    return bool(project.build and project.build.use_generated_faithful_blocks)
+
+
 def _validate_faithful_layout(
     model: DocumentModel,
     root: Path,
@@ -233,6 +250,7 @@ def _validate_faithful_layout(
         profile=load_faithful_layout_profile(profile_path) if profile_path.is_file() else None,
         exclude_path_parts=_faithful_body_exclusions(root),
     )
+    use_generated_blocks = _use_generated_faithful_blocks(root)
     expected_sources = {entry.source_path for entry in projection.entries}
     main_path = document.main_tex
     main_inputs = _main_inputs(main_path)
@@ -266,7 +284,10 @@ def _validate_faithful_layout(
                 failures.append(
                     "generated faithful layout projection does not match semantic blocks"
                 )
-            if body_path.read_text(encoding="utf-8") != render_faithful_body(projection) + "\n":
+            if body_path.read_text(encoding="utf-8") != render_faithful_body(
+                projection,
+                use_generated_blocks=use_generated_blocks,
+            ) + "\n":
                 failures.append("generated faithful body does not match semantic layout projection")
     return FaithfulLayoutReport(
         document=model.document_id,

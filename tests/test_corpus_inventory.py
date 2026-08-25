@@ -84,12 +84,12 @@ class CorpusInventoryTests(unittest.TestCase):
 
     def test_all_transitions_have_explicit_coverage_dispositions(self) -> None:
         model = load_document_model(ROOTS[1], HLA_SOURCE)
-        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 282)
-        self.assertEqual(len(model.transition_coverage), 282)
+        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 297)
+        self.assertEqual(len(model.transition_coverage), 297)
         self.assertEqual(model.transitions_missing_coverage(), ())
         self.assertEqual(
             model.transition_coverage_counts(),
-            {"mapped": 282, "not-applicable": 0, "deferred": 0, "unclassified": 0},
+            {"mapped": 297, "not-applicable": 0, "deferred": 0, "unclassified": 0},
         )
 
     def test_all_omt_tables_belong_to_families(self) -> None:

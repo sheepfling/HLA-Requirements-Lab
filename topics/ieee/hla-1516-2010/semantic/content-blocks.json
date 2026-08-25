@@ -16,7 +16,7 @@
         "end_line": null
       },
       "sequence": 1,
-      "layout_body": "% Source PDF page 2: intentionally blank external-cover verso with only the\n% copy-specific licensed-use footer.\n\\thispagestyle{empty}\n\\begin{tikzpicture}[remember picture,overlay,x=1pt,y=1pt]\n \\coordinate (SW) at (current page.south west);\n \\ifShowLicenseFooter\n \\node[anchor=base west,inner sep=0pt,text=black] at ($(SW)+(58.760,7.000)$)\n {{\\licensefont\\licensefootertext}};\n \\fi\n\\end{tikzpicture}\n\\null\n\\newpage"
+      "layout_body": "% The supplied publisher cover verso is intentionally not reproduced in this Lab edition.\n\\thispagestyle{empty}\n\\null\n\\newpage"
     },
     {
       "id": "content-frontmatter-10-blank-verso-viii-tex",
@@ -63,7 +63,7 @@
         "end_line": null
       },
       "sequence": 11,
-      "layout_body": "% Source PDF page 12 / implicit printed page x: intentionally blank except\n% for the copy-specific licensed-use footer. No Roman folio or IEEE copyright\n% line is printed on the source page.\n\\thispagestyle{hlafrontlicense}\n\\mbox{}\n\\clearpage"
+      "layout_body": "% Source PDF page 12 / implicit printed page x: intentionally blank.\n% No source publisher footer is reproduced on this intentionally blank page.\n\\thispagestyle{empty}\n\\mbox{}\n\\clearpage"
     },
     {
       "id": "content-clauses-01-overview-tex",

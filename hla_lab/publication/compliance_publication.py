@@ -285,6 +285,61 @@ def _display_text(value: str) -> str:
         (r"\ ", " "),
     ):
         value = value.replace(escaped, plain)
+    # Remove layout-adapter residue before this text enters a lab-authored
+    # compliance view. These markers describe source boxes and are not
+    # normative content.
+    value = value.replace(r"\textbackslash{}", " ")
+    value = re.sub(r"\[l\]", " ", value)
+    value = re.sub(
+        r"\bskip\d+(?:\.\d+)?pt(?:\s+plus\s+\d+(?:\.\d+)?pt\s+minus\s+\d+(?:\.\d+)?pt)?",
+        " ",
+        value,
+    )
+    value = re.sub(
+        r"(?<=[A-Za-z])\d+(?:\.\d+)?pt\d+(?:\.\d+)?pt\s*(?=\.)",
+        "",
+        value,
+    )
+    value = re.sub(r"\d+(?:\.\d+)?(?:pt|bp)!", " ", value)
+    value = re.sub(r"\d+(?:\.\d+)?pt", " ", value)
+    value = value.replace(
+        "Thefollowingappliesforeachnamedvariantrecorddatatypeusingthe",
+        "The following applies for each named variant record datatype using the ",
+    )
+    for collapsed, spaced in (
+        ("sub-elementsalternative", "sub-elements alternative"),
+        ("variantrecord", "variant record"),
+        ("discriminantenumerators", "discriminant enumerators"),
+        ("nameddiscriminant", "named discriminant"),
+        ("eachenumerator", "each enumerator"),
+        ("namedalternatives", "named alternatives"),
+        ("ofallassociated", "of all associated"),
+        ("classHLA", "class HLA"),
+        ("theHLA", "the HLA"),
+        ("oneinteraction", "one interaction"),
+        ("eachinteraction", "each interaction"),
+        ("eachnamed", "each named"),
+        ("for eachnamed", "for each named"),
+        ("a)The", "a) The"),
+        ("b)The", "b) The"),
+        ("c)The", "c) The"),
+        ("d)The", "d) The"),
+        ("e)The", "e) The"),
+        ("f)The", "f) The"),
+        ("a)Object", "a) Object"),
+        ("b)Object", "b) Object"),
+        ("c)Object", "c) Object"),
+        ("d)Object", "d) Object"),
+        ("e)Object", "e) Object"),
+        ("f)Object", "f) Object"),
+    ):
+        value = value.replace(collapsed, spaced)
+    # Recovered source prose is not always consistent about the space after
+    # an enumerator marker.  Keep the authored marker, but make the published
+    # compliance view readable for every alphabetic item rather than carrying
+    # through a source-extraction artifact such as ``a)Federate``.
+    value = re.sub(r"(?<![A-Za-z])([a-z])\)(?=[A-Za-z])", r"\1) ", value)
+    value = re.sub(r"(?<=[a-z])(?=[A-Z])", "@@hlabreak@@", value)
     value = re.sub(r"(?<!\d)(?<!\d\s)\s*%\s*", " ", value)
     return " ".join(value.split())
 
@@ -522,8 +577,17 @@ def build_compliance_manifest(
 
 def _text(value: str) -> str:
     """Escape semantic source text while preserving source-style punctuation."""
+    rendered = tex_escape(_display_text(value)).replace(
+        "@@hlabreak@@", r"\allowbreak{}"
+    )
+    rendered = re.sub(
+        r"(?<=[A-Za-z0-9])\.(?=[A-Za-z])",
+        lambda match: f"{match.group(0)}\\allowbreak{{}}",
+        rendered,
+    )
+    rendered = rendered.replace(r"\_", r"\_\allowbreak{}")
     return (
-        tex_escape(_display_text(value))
+        rendered
         .replace("ₛ", r"\textsubscript{s}")
         .replace("∀", r"\ensuremath{\forall}")
         .replace("†", r"\textdagger{}")

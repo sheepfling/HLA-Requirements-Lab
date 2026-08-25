@@ -92,7 +92,9 @@ def _faithful_generator(root: Path, project: ReleaseProject, settings: BuildSett
                 include_faithful_body=settings.include_faithful_body,
                 faithful_layout_profile=layout,
                 faithful_body_exclude_path_parts=settings.faithful_body_exclude_path_parts,
+                use_generated_faithful_blocks=settings.use_generated_faithful_blocks,
                 state_machine_renderer=settings.state_machine_renderer,
+                service_page_renderer=settings.service_page_renderer,
             )
         )
 

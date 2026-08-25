@@ -20,7 +20,7 @@ class SemanticGraphTests(unittest.TestCase):
     def test_authored_implementation_seams_have_provenance_without_becoming_concrete(self) -> None:
         model = load_document_model(HLA_15161, HLA_SOURCE)
 
-        self.assertEqual(len(model.implementations), 282)
+        self.assertEqual(len(model.implementations), 283)
         self.assertTrue(all(item.source is not None for item in model.implementations))
         self.assertTrue(all(item.status == "planned" for item in model.implementations))
         self.assertEqual(
@@ -28,7 +28,7 @@ class SemanticGraphTests(unittest.TestCase):
                 item.source.path == "semantic/implementations.json"
                 for item in model.implementations
             ),
-            248,
+            249,
         )
 
     def test_sequence_messages_remain_explicitly_unlinked_without_invented_transitions(

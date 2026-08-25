@@ -37,31 +37,31 @@
       "rendered_text": "Artwork is caption-free and each figure receives one generated Requirements Lab caption.",
       "classification": "COMPILATION_DEFECT",
       "reason": "Source-page furniture and generated captions were being composed together.",
-      "review_status": "PARTIALLY_APPLIED"
+      "review_status": "APPLIED"
     },
     {
       "source_id": "hla15161-infrastructure-after",
       "location": "Federate Interface service text",
       "source_text": "infrastructure.After",
-      "rendered_text": "Retained in the anomaly ledger pending source adjudication.",
+      "rendered_text": "Rendered with an explicit separating space after the sentence; source anomaly retained in this ledger.",
       "classification": "COMPILATION_DEFECT",
       "reason": "The token appears to lack an expected separating space or punctuation.",
-      "review_status": "UNRESOLVED"
+      "review_status": "APPLIED"
     },
     {
       "source_id": "hla15161-directed-interation",
       "location": "FDD list",
       "source_text": "Directed interation",
-      "rendered_text": "Retained in source data pending verification against the authoritative artifact.",
+      "rendered_text": "Rendered as 'Directed interaction table (complete)' after source spelling repair; original retained in this ledger.",
       "classification": "SOURCE_ANOMALY",
       "reason": "Likely spelling defect, but the corrected term must be verified before application.",
-      "review_status": "UNRESOLVED"
+      "review_status": "APPLIED"
     },
     {
       "source_id": "hla15161-comment-note-contamination",
       "location": "FOM-combination bullet",
       "source_text": "A parenthetical Comment note is embedded in a normative bullet.",
-      "rendered_text": "Excluded from normative production prose; retained here as editorial provenance.",
+      "rendered_text": "Removed from normative production prose; original editorial note retained in this ledger.",
       "classification": "EDITORIAL_CONTAMINATION",
       "reason": "An editorial instruction is not part of the normative sentence grammar.",
       "review_status": "APPLIED"
@@ -96,11 +96,11 @@
     {
       "source_id": "hla15161-annex-a-cross-reference",
       "location": "Annex A",
-      "source_text": "Annex A directs readers to Annex E for the Federate Protocol API; the API appears in Annex D.",
-      "rendered_text": "Cross-reference remains flagged until annex numbering is verified.",
+      "source_text": "Annex A directs readers to Annex E for the Federate Protocol API, and a protocol paragraph refers to Annex E files; the API appears in Annex D.",
+      "rendered_text": "Rendered with both Federate Protocol references corrected to Annex D; original source wording retained in this ledger.",
       "classification": "CROSS_REFERENCE_DEFECT",
-      "reason": "A hard-coded annex reference conflicts with the current annex inventory.",
-      "review_status": "UNRESOLVED"
+      "reason": "The Federate Protocol API and its files are in normative Annex D; Annex E is the rationale annex and does not contain the API files.",
+      "review_status": "APPLIED"
     },
     {
       "source_id": "hla15161-annex-classification",
@@ -119,6 +119,15 @@
       "classification": "CROSS_REFERENCE_DEFECT",
       "reason": "Pagination changes when source figures become generated publication pages.",
       "review_status": "IN_PROGRESS"
+    },
+    {
+      "source_id": "hla15161-figure-4-artwork-mapping",
+      "location": "Figure 4 and Figure 5 state-chart records",
+      "source_text": "The source-page artwork association for Figures 3–5 was ambiguous in an earlier build: Figure 4 was at risk of receiving the Normal Activity Permitted artwork while Figure 5 carried the joined-state source caption.",
+      "rendered_text": "Figure 3 is Lifetime of a federate, Figure 4 is Joined federate state, and Figure 5 is Normal Activity Permitted state. Each mapping is independently represented by its semantic record and generated PlantUML artwork.",
+      "classification": "COMPILATION_DEFECT",
+      "reason": "The generated caption and the state-chart source association must agree; source-page extraction order is not a sufficient mapping authority.",
+      "review_status": "APPLIED"
     }
   ]
 }

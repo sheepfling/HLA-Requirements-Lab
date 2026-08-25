@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "document_id": "hla-1516.1-2010",
+  "review_standard": "semantic completeness plus publication-quality vector layout; corroborated cross-edition projections are explicit",
+  "approved_machine_ids": [
+    "hla-1516.1-2010:figure-01",
+    "hla-1516.1-2010:figure-03",
+    "hla-1516.1-2010:figure-04",
+    "hla-1516.1-2010:figure-05",
+    "hla-1516.1-2010:figure-06",
+    "hla-1516.1-2010:figure-07",
+    "hla-1516.1-2010:figure-08",
+    "hla-1516.1-2010:figure-09",
+    "hla-1516.1-2010:figure-10",
+    "hla-1516.1-2010:figure-11",
+    "hla-1516.1-2010:figure-12",
+    "hla-1516.1-2010:figure-13",
+    "hla-1516.1-2010:figure-14",
+    "hla-1516.1-2010:figure-15",
+    "hla-1516.1-2010:figure-16",
+    "hla-1516.1-2010:figure-17"
+  ],
+  "landscape_machine_ids": [
+    "hla-1516.1-2010:figure-01",
+    "hla-1516.1-2010:figure-03",
+    "hla-1516.1-2010:figure-04",
+    "hla-1516.1-2010:figure-05",
+    "hla-1516.1-2010:figure-06",
+    "hla-1516.1-2010:figure-07",
+    "hla-1516.1-2010:figure-08",
+    "hla-1516.1-2010:figure-09",
+    "hla-1516.1-2010:figure-10",
+    "hla-1516.1-2010:figure-11",
+    "hla-1516.1-2010:figure-12",
+    "hla-1516.1-2010:figure-13",
+    "hla-1516.1-2010:figure-14",
+    "hla-1516.1-2010:figure-15",
+    "hla-1516.1-2010:figure-16",
+    "hla-1516.1-2010:figure-17"
+  ],
+  "deferred_machine_ids": {},
+  "projection_sources": {
+    "hla-1516.1-2010:figure-05": "hla-1516.1-2025:normal-activity-permitted",
+    "hla-1516.1-2010:figure-06": "hla-1516.1-2025:federation-execution-sync-overview",
+    "hla-1516.1-2010:figure-09": "hla-1516.1-2025:local-synchronization-label",
+    "hla-1516.1-2010:figure-12": "hla-1516.1-2025:class-attribute-privilege-to-delete-object",
+    "hla-1516.1-2010:figure-13": "hla-1516.1-2025:interaction-class",
+    "hla-1516.1-2010:figure-14": "hla-1516.1-2025:object-instance-known",
+    "hla-1516.1-2010:figure-15": "hla-1516.1-2025:ownership-implications",
+    "hla-1516.1-2010:figure-16": "hla-1516.1-2025:establishing-ownership",
+    "hla-1516.1-2010:figure-17": "hla-1516.1-2025:temporal-state"
+  }
+}

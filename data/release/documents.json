@@ -47,7 +47,7 @@
       "root": "topics/ieee/hla-1516.1-2010",
       "pdf": "dist/hla-requirements-lab-1516.1-2010-federate-interface.pdf",
       "log": "build/main.log",
-      "expected_pages": 364,
+        "expected_pages": 340,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -58,7 +58,10 @@
         "table_family_selection": "all",
         "include_table_cells": true,
         "include_faithful_body": true,
-        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"]
+        "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"],
+        "use_generated_faithful_blocks": true,
+        "state_machine_renderer": "plantuml",
+        "service_page_renderer": "flow"
       }
     },
     {
@@ -90,7 +93,7 @@
       "root": "topics/ieee/hla-1516.1-2025",
       "pdf": "dist/hla-requirements-lab-1516.1-2025-federate-interface.pdf",
       "log": "build/main.log",
-      "expected_pages": 424,
+      "expected_pages": 502,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -104,7 +107,9 @@
         "include_table_cells": false,
         "include_faithful_body": true,
         "faithful_body_exclude_path_parts": ["frontmatter", "front-matter"],
-        "state_machine_renderer": "plantuml"
+        "use_generated_faithful_blocks": true,
+        "state_machine_renderer": "plantuml",
+        "service_page_renderer": "flow"
       }
     },
     {
@@ -135,7 +140,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2010",
       "pdf": "dist/hla-semantic-derivative-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 872,
+      "expected_pages": 1079,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -148,7 +153,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 1239,
+      "expected_pages": 1389,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -161,7 +166,7 @@
       "root": "topics/ieee/hla-rti-compliance-2025",
       "pdf": "dist/hla-rti-compliance-requirements-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 636,
+      "expected_pages": 756,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",
@@ -174,7 +179,7 @@
       "root": "topics/ieee/hla-rti-compliance-2010",
       "pdf": "dist/hla-rti-compliance-requirements-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 483,
+      "expected_pages": 690,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",

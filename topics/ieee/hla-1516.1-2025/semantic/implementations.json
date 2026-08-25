@@ -7953,6 +7953,48 @@
         "line": null,
         "version": null
       }
+    },
+    {
+      "id": "m16.transition.joined-federate-statechart",
+      "interface_kind": "handler",
+      "interface_name": "Joined Federate state chart",
+      "implementation": "planned.joined-federate-statechart",
+      "status": "planned",
+      "clause_ids": [
+        "clause-4.1.1"
+      ],
+      "requirement_ids": [],
+      "transition_ids": [
+        "joined-federate.initial-enter-active",
+        "joined-federate.request-save",
+        "joined-federate.request-restore",
+        "joined-federate.restore-request-failure",
+        "joined-federate.restore-request-success",
+        "joined-federate.initiate-save",
+        "joined-federate.save-begun",
+        "joined-federate.save-complete",
+        "joined-federate.federation-saved",
+        "joined-federate.restore-begun",
+        "joined-federate.initiate-restore",
+        "joined-federate.restore-complete",
+        "joined-federate.federation-restored",
+        "joined-federate.activity-permission-lost",
+        "joined-federate.activity-permission-restored"
+      ],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "M16 closure mapping: one planned implementation seam covers the source-derived joined-federate state chart; replace with concrete RTI/federate symbols when available.",
+      "implementation_ref": {
+        "symbol": "planned.joined-federate-statechart",
+        "language": "unspecified",
+        "repository": null,
+        "path": null,
+        "line": null,
+        "version": null
+      }
     }
   ]
 }

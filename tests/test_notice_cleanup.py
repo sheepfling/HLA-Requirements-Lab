@@ -1,10 +1,19 @@
-"""Guard the derived HLA editions against inherited IEEE notice boilerplate."""
+"""Prevent vendored source notices from leaking into Lab-authored editions.
+
+The repository may retain source-faithful downloads and official FOM material
+as provenance inputs.  Those inputs must not accidentally reintroduce
+publisher notices, participant boilerplate, or source-license language into
+the authored semantic and presentation outputs.
+"""
 
 from __future__ import annotations
 
 import json
 import unittest
 from pathlib import Path
+
+from hla_lab.corpus.hla_semantic import load_hla_document_model
+from hla_lab.generation.reflowable_renderer import _clean_content_text
 
 ROOT = Path(__file__).resolve().parents[1]
 TOPIC_ROOT = ROOT / "topics" / "ieee"
@@ -109,6 +118,29 @@ class NoticeCleanupTests(unittest.TestCase):
                         findings.append(f"{path.relative_to(ROOT)} contains {marker!r}")
         self.assertEqual(findings, [])
 
+    def test_derivative_models_exclude_source_frontmatter_and_preambles(self) -> None:
+        residue = (
+            "They can also be obtained on request from IEEE",
+            "standards.ieee.org/IPR/disclaimers.html",
+            "IEEE Standard for\\\\ Modeling and Simulation",
+        )
+        for document in ("hla-1516-2010", "hla-1516.2-2010", "hla-1516.1-2010"):
+            model = load_hla_document_model(TOPIC_ROOT / document)
+            visible = [
+                *(item.text for item in model.content_blocks),
+                *(item.text for item in model.content_elements),
+            ]
+            self.assertFalse(
+                any(marker in text for marker in residue for text in visible),
+                document,
+            )
+            frontmatter = [
+                item.text
+                for item in (*model.content_blocks, *model.content_elements)
+                if item.source.path.replace("\\", "/").startswith("frontmatter/")
+            ]
+            self.assertTrue(all(not text.strip() for text in frontmatter), document)
+
     def test_omitted_notice_blocks_are_removed_from_semantic_source(self) -> None:
         for document, block_ids in OMITTED_SEMANTIC_BLOCKS.items():
             path = TOPIC_ROOT / document / "semantic" / "content-blocks.json"
@@ -137,6 +169,7 @@ class NoticeCleanupTests(unittest.TestCase):
                 ],
                 [],
             )
+
             self.assertEqual(
                 [
                     element["id"]
@@ -145,6 +178,15 @@ class NoticeCleanupTests(unittest.TestCase):
                 ],
                 [],
             )
+
+    def test_shared_derived_text_cleanup_removes_editorial_source_residue(self) -> None:
+        source = (
+            "Directed interation table (complete). "
+            "(Comment note - description is not part of FDD nor should it be and thus "
+            "cannot be used for rejection.)"
+        )
+        cleaned = _clean_content_text(source)
+        self.assertEqual(cleaned, "Directed interaction table (complete).")
 
     def test_15162_2025_presentation_identity_is_lab_neutral(self) -> None:
         root = TOPIC_ROOT / "hla-1516.2-2025"
@@ -159,9 +201,7 @@ class NoticeCleanupTests(unittest.TestCase):
             (root / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
         )
         title_block = next(
-            block
-            for block in payload["content_blocks"]
-            if block["id"] == "content-15162-page-013"
+            block for block in payload["content_blocks"] if block["id"] == "content-15162-page-013"
         )
         self.assertNotIn("IEEE Standard for", title_block["layout_body"])
         self.assertIn("HLA Requirements Lab", title_block["layout_body"])

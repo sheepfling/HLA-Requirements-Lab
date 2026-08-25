@@ -7,11 +7,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from hla_lab.diagrams.export_plantuml import render
-
-
-def _alias(identifier: str) -> str:
-    return "s_" + re.sub(r"[^A-Za-z0-9]+", "_", identifier).strip("_")
+from hla_lab.diagrams.export_plantuml import _alias, render
 
 
 def validate_source(machine: dict[str, Any], source: str) -> list[str]:

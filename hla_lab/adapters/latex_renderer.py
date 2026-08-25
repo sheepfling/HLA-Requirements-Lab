@@ -270,7 +270,7 @@ def render_table_family_data(
         ),
     ]
     for table in ordered_tables:
-        caption = table.caption or table.title or table.id
+        caption = family.table_captions.get(table.id) or table.caption or table.title or table.id
         lines.append(
             f"\\providecommand{{\\{semantic_macro_name('Table', table.id, 'Caption')}}}"
             f"{{{tex_escape(caption)}}}"
@@ -317,9 +317,9 @@ def render_table_family_data(
     return "\n".join(lines)
 
 
-def render_table_data(table: Table) -> str:
+def render_table_data(table: Table, *, caption_override: str | None = None) -> str:
     """Render one typed table record for caption and cell consumers."""
-    caption = table.caption or table.title or table.id
+    caption = caption_override or table.caption or table.title or table.id
     lines = [
         "% Generated semantic table data; layout adapters consume these macros.",
         (

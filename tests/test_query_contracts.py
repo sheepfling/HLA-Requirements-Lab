@@ -100,7 +100,7 @@ class QueryContractTests(unittest.TestCase):
         self.assertEqual(coverage.status, "planned")
         self.assertFalse(coverage.concrete)
         self.assertEqual(self.model.transitions_without_implementation_mapping(), ())
-        self.assertEqual(len(self.model.transitions_without_concrete_implementation()), 282)
+        self.assertEqual(len(self.model.transitions_without_concrete_implementation()), 297)
 
     def test_corpus_selects_a_document_for_the_same_query_api(self) -> None:
         result = self.corpus.compliance_query(

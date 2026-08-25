@@ -3,22 +3,22 @@
   "profile_id": "hla-semantic-derivative-2025",
   "title": "HLA semantic architecture",
   "subtitle": "Hierarchy-first requirements, operational behavior, and conformance views",
-  "description": "A generated publication contract for the IEEE HLA 1516, 1516.1, and 1516.2 semantic corpus.",
+  "description": "A generated publication contract for the supplied HLA 1516-family 2025 source corpus.",
   "style_id": "semantic-reflowable-default",
   "documents": [
     {
       "id": "hla-1516-2025",
-      "title": "IEEE HLA 1516-2025 — Framework and Rules",
+      "title": "HLA 1516-2025 source material — Framework and Rules",
       "short_title": "IEEE 1516"
     },
     {
       "id": "hla-1516.1-2025",
-      "title": "IEEE HLA 1516.1-2025 — HLA Interface Specification",
+      "title": "HLA 1516.1-2025 source material — HLA Interface Specification",
       "short_title": "IEEE 1516.1"
     },
     {
       "id": "hla-1516.2-2025",
-      "title": "IEEE HLA 1516.2-2025 — Object Model Template",
+      "title": "HLA 1516.2-2025 source material — Object Model Template",
       "short_title": "IEEE 1516.2"
     }
   ],

@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,oneside]{article}
 
 \usepackage{fontspec}
 \usepackage[a4paper,margin=20mm]{geometry}
@@ -6,23 +6,52 @@
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
+\usepackage{ragged2e}
 \usepackage{longtable}
 \usepackage{xcolor}
+\usepackage{tikz}
+
+\input{../requirements-lab/style/rl-graphics.sty}
+\input{../requirements-lab/style/rl-publication.sty}
+\input{../requirements-lab/style/rl-derived.sty}
+
+\title{HLA Requirements Lab RTI compliance requirements --- 2010 source compilation}
+\author{HLA Requirements Lab}
+\date{2026-08-24}
+
+\hypersetup{
+    pdftitle={HLA Requirements Lab RTI compliance requirements --- 2010 source compilation},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={Lab-authored RTI compliance derivative of supplied HLA 2010 source material},
+    pdfkeywords={HLA, RTI, compliance, requirements, evidence, 2010}
+}
+
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabNumber}{HLA RTI compliance}
+\newcommand{\HLALabDocumentTitle}{RTI Compliance Requirements}
+\newcommand{\HLALabDescriptor}{Generated requirements, operational rules, and evidence readiness}
+\newcommand{\HLALabTheme}{interface}
+\newcommand{\HLALabAccent}{HLALabPurple}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA REQUIREMENTS LAB DERIVATIVES}
+\newcommand{\HLALabSourceAttribution}{Supplied HLA 1516-family source materials from 2010.}
+\newcommand{\HLALabStatusLine}{Lab-authored engineering derivative; not an externally issued standard.}
+\RLConfigureHLAPublicationProfile
+\RLConfigureDerivativeTypography
+\setlength{\headheight}{19pt}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.45em}
 \setlist{nosep,leftmargin=*}
 \setcounter{tocdepth}{1}
 \sloppy
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{HLA 2010 RTI compliance requirements}
-\rhead{Generated evidence-readiness view}
-\cfoot{\thepage}
-
 \begin{document}
+    \input{../hla-requirements-lab-cover}
     \tableofcontents
     \clearpage
+    \RaggedRight
+    \emergencystretch=2em
     \input{output/compliance/compliance-requirements}
 
 \end{document}

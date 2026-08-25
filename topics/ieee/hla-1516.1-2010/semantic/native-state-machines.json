@@ -52,7 +52,7 @@
         {
           "id": "hla-1516.1-2010:figure-01.s03",
           "label": "No Joined Federates",
-          "parent_id": "hla-1516.1-2010:figure-01.s00",
+          "parent_id": "hla-1516.1-2010:figure-01.s02",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-01.tex",
@@ -63,7 +63,7 @@
         {
           "id": "hla-1516.1-2010:figure-01.s04",
           "label": "Supporting Joined Federates",
-          "parent_id": "hla-1516.1-2010:figure-01.s00",
+          "parent_id": "hla-1516.1-2010:figure-01.s02",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-01.tex",
@@ -74,7 +74,7 @@
         {
           "id": "hla-1516.1-2010:figure-01.p02",
           "label": "",
-          "parent_id": "hla-1516.1-2010:figure-01.s00",
+          "parent_id": "hla-1516.1-2010:figure-01.s02",
           "kind": "initial",
           "source": {
             "path": "figures/native/figure-01.tex",
@@ -88,7 +88,7 @@
           "id": "hla-1516.1-2010:figure-01.e01",
           "source_state": "hla-1516.1-2010:figure-01.p01",
           "event": "outer initial -> Does Not Exist",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -107,9 +107,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e02",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-01.s01",
           "event": "Does Not Exist -> nested composite boundary; create",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -128,9 +128,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e03",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-01.s03",
           "event": "No Joined Federates -> Does Not Exist; destroy",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -153,9 +153,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e04",
-          "source_state": "hla-1516.1-2010:figure-01.p01",
+          "source_state": "hla-1516.1-2010:figure-01.p02",
           "event": "nested initial -> No Joined Federates",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -174,9 +174,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e05",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-01.s03",
           "event": "first join, rightward",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s04",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -195,9 +195,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e06",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-01.s04",
           "event": "last resign, leftward",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -219,9 +219,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-01.e07",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-01.s04",
           "event": "supporting-state clockwise self-loop",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-01.s04",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -356,7 +356,7 @@
         {
           "id": "hla-1516.1-2010:figure-03.p02",
           "label": "",
-          "parent_id": "hla-1516.1-2010:figure-03.s00",
+          "parent_id": "hla-1516.1-2010:figure-03.s02",
           "kind": "initial",
           "source": {
             "path": "figures/native/figure-03.tex",
@@ -367,7 +367,7 @@
         {
           "id": "hla-1516.1-2010:figure-03.s03",
           "label": "Not Joined",
-          "parent_id": "hla-1516.1-2010:figure-03.s00",
+          "parent_id": "hla-1516.1-2010:figure-03.s02",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-03.tex",
@@ -378,7 +378,7 @@
         {
           "id": "hla-1516.1-2010:figure-03.s04",
           "label": "Joined Federate",
-          "parent_id": "hla-1516.1-2010:figure-03.s00",
+          "parent_id": "hla-1516.1-2010:figure-03.s02",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-03.tex",
@@ -392,7 +392,7 @@
           "id": "hla-1516.1-2010:figure-03.e01",
           "source_state": "hla-1516.1-2010:figure-03.p01",
           "event": "outer initial -> Not Connected",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -413,9 +413,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e02",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-03.s01",
           "event": "Not Connected -> Connected composite boundary; Connect",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -436,9 +436,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e03",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-03.s02",
           "event": "Connected composite boundary -> Not Connected; Disconnect",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -457,9 +457,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e04",
-          "source_state": "hla-1516.1-2010:figure-03.p01",
+          "source_state": "hla-1516.1-2010:figure-03.p02",
           "event": "nested initial -> Not Joined",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -480,9 +480,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e05",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-03.s03",
           "event": "Not Joined -> Joined Federate; join",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s04",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -501,9 +501,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e06",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-03.s04",
           "event": "Joined Federate -> Not Joined; resign",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -522,9 +522,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-03.e07",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-03.s02",
           "event": "Connected composite boundary -> Not Connected; fault/exception route",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-03.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -614,7 +614,7 @@
     },
     {
       "id": "hla-1516.1-2010:figure-04",
-      "title": "Figure 4",
+      "title": "Joined Federate state",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-04.s00",
@@ -641,7 +641,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s02",
           "label": "Active",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s01",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -652,7 +652,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s03",
           "label": "Restore Request Pending",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s01",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -663,7 +663,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s04",
           "label": "Waiting for Restore to Begin",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s01",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -685,7 +685,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s06",
           "label": "Instructed to Save",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s05",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -696,7 +696,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s07",
           "label": "Saving",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s05",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -707,7 +707,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s08",
           "label": "Waiting for Federation to Save",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s05",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -729,7 +729,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s10",
           "label": "Waiting for Federation to Restore",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s09",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -740,7 +740,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s11",
           "label": "Restoring",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s09",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -751,7 +751,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.s12",
           "label": "Prepared to Restore",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s09",
           "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -774,7 +774,7 @@
           "id": "hla-1516.1-2010:figure-04.s14",
           "label": "Normal Activity Not Permitted",
           "parent_id": "hla-1516.1-2010:figure-04.s00",
-          "kind": "composite",
+          "kind": "normal",
           "source": {
             "path": "figures/native/figure-04.tex",
             "line": 93,
@@ -795,7 +795,7 @@
         {
           "id": "hla-1516.1-2010:figure-04.p02",
           "label": "",
-          "parent_id": "hla-1516.1-2010:figure-04.s00",
+          "parent_id": "hla-1516.1-2010:figure-04.s01",
           "kind": "initial",
           "source": {
             "path": "figures/native/figure-04.tex",
@@ -829,9 +829,9 @@
       "transitions": [
         {
           "id": "hla-1516.1-2010:figure-04.e01",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.p01",
           "event": "Transition E01",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -850,9 +850,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e02",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.p02",
           "event": "Transition E02",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -871,9 +871,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e03",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s01",
           "event": "Request Federation Save, Active Federate boundary to H",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.p03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -892,9 +892,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e04",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s02",
           "event": "Active to Restore Request Pending",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -913,9 +913,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e05",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s03",
           "event": "failed restore request confirmation, back to Active",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -934,9 +934,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e06",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s03",
           "event": "successful restore request confirmation",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s04",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -955,9 +955,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e07",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s05",
           "event": "Federation Saved callback, save composite to Active Federate boundary",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -978,9 +978,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e08",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s01",
           "event": "Initiate Federate Save callback and time-management guard",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s06",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1001,9 +1001,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e09",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s06",
           "event": "Federate Save Begun",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s07",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1025,9 +1025,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e10",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s07",
           "event": "Federate Save Complete",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s08",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1050,9 +1050,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e11",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s01",
           "event": "Federation Restore Begun callback",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s12",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1073,9 +1073,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e12",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s12",
           "event": "Initiate Federate Restore callback",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s11",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1094,9 +1094,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e13",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s11",
           "event": "Federate Restore Complete",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s10",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1119,9 +1119,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e14",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s09",
           "event": "Federation Restored callback, restore composite to Active Federate boundary",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1142,9 +1142,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e15",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.p04",
           "event": "Transition E15",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s13",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1163,9 +1163,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e16",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s14",
           "event": "in Active Federate -> Normal Activity Permitted",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s13",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1186,9 +1186,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-04.e17",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-04.s13",
           "event": "not in Active Federate -> Normal Activity Not Permitted",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-04.s14",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -1223,7 +1223,7 @@
         "image": "figures/native/figure-04.tex",
         "page": 42,
         "xref": null,
-        "caption": "Figure 4"
+        "caption": "Joined Federate state"
       },
       "layout": {
         "engine": "automatic",
@@ -1333,11 +1333,11 @@
         "rules": [],
         "annotations": []
       },
-      "notes": "State and transition markers are source-derived; null endpoints remain explicit when the native annotation does not identify both states."
+      "notes": "State and transition markers are source-derived; PlantUML promotion remains gated separately by endpoint completeness and layout review."
     },
     {
       "id": "hla-1516.1-2010:figure-05",
-      "title": "Figure 5",
+      "title": "Normal Activity Permitted state",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-05.s00",
@@ -1618,7 +1618,7 @@
         "image": "figures/native/figure-05.tex",
         "page": 44,
         "xref": null,
-        "caption": "Figure 5"
+        "caption": "Normal Activity Permitted state"
       },
       "layout": {
         "engine": "automatic",
@@ -1692,7 +1692,7 @@
     },
     {
       "id": "hla-1516.1-2010:figure-06",
-      "title": "Figure 6",
+      "title": "Federation execution and sync points",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-06.s00",
@@ -1917,7 +1917,7 @@
         "image": "figures/native/figure-06.tex",
         "page": 46,
         "xref": null,
-        "caption": "Figure 6"
+        "caption": "Federation execution and sync points"
       },
       "layout": {
         "engine": "automatic",
@@ -1971,7 +1971,7 @@
     },
     {
       "id": "hla-1516.1-2010:figure-07",
-      "title": "Figure 7",
+      "title": "Global synch label (L)",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-07.s00",
@@ -2007,6 +2007,17 @@
           }
         },
         {
+          "id": "hla-1516.1-2010:figure-07.s03",
+          "label": "Awaiting Synchronization (s, L)",
+          "parent_id": "hla-1516.1-2010:figure-07.s00",
+          "kind": "composite",
+          "source": {
+            "path": "figures/native/figure-07.tex",
+            "line": 64,
+            "end_line": null
+          }
+        },
+        {
           "id": "hla-1516.1-2010:figure-07.p01",
           "label": "",
           "parent_id": "hla-1516.1-2010:figure-07.s00",
@@ -2021,9 +2032,9 @@
       "transitions": [
         {
           "id": "hla-1516.1-2010:figure-07.e01",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-07.p01",
           "event": "initial entry to Synch Point Not Registered",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-07.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2044,7 +2055,7 @@
         },
         {
           "id": "hla-1516.1-2010:figure-07.e02",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-07.s01",
           "event": "registration request, Not Registered -> Validating",
           "target_state": "hla-1516.1-2010:figure-07.s02",
           "initiator": "unknown",
@@ -2070,7 +2081,7 @@
           "id": "hla-1516.1-2010:figure-07.e03",
           "source_state": "hla-1516.1-2010:figure-07.s02",
           "event": "registration failure, Validating -> Not Registered",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-07.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2095,7 +2106,7 @@
           "id": "hla-1516.1-2010:figure-07.e04",
           "source_state": "hla-1516.1-2010:figure-07.s02",
           "event": "registration success, Validating -> repeated Awaiting family",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-07.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2114,9 +2125,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-07.e05",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-07.s03",
           "event": "all subordinate members are complete; return to unregistered",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-07.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2147,7 +2158,7 @@
         "image": "figures/native/figure-07.tex",
         "page": 47,
         "xref": null,
-        "caption": "Figure 7"
+        "caption": "Global synch label (L)"
       },
       "layout": {
         "engine": "automatic",
@@ -2186,7 +2197,7 @@
     },
     {
       "id": "hla-1516.1-2010:figure-08",
-      "title": "Figure 8",
+      "title": "Awaiting synchronization (s,L)",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-08.s00",
@@ -2236,9 +2247,9 @@
       "transitions": [
         {
           "id": "hla-1516.1-2010:figure-08.e01",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-08.p01",
           "event": "members of synch_set enter the waiting state and are announced",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-08.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2261,9 +2272,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-08.e02",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-08.s01",
           "event": "the federate finishes its individual synchronization (or resigns)",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-08.p02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2284,9 +2295,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-08.e03",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-08.p01",
           "event": "federates outside synch_set bypass the waiting state",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-08.p02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -2319,7 +2330,7 @@
         "image": "figures/native/figure-08.tex",
         "page": 47,
         "xref": null,
-        "caption": "Figure 8"
+        "caption": "Awaiting synchronization (s,L)"
       },
       "layout": {
         "engine": "automatic",
@@ -2358,7 +2369,7 @@
     },
     {
       "id": "hla-1516.1-2010:figure-09",
-      "title": "Figure 9",
+      "title": "Local synch label (s, L)",
       "states": [
         {
           "id": "hla-1516.1-2010:figure-09.s00",
@@ -2570,7 +2581,7 @@
         "image": "figures/native/figure-09.tex",
         "page": 48,
         "xref": null,
-        "caption": "Figure 9"
+        "caption": "Local synch label (s, L)"
       },
       "layout": {
         "engine": "automatic",
@@ -3304,7 +3315,7 @@
       "transitions": [
         {
           "id": "hla-1516.1-2010:figure-11.e01",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s00",
           "event": "publication-region boundary -> history; empty-set publish/unpublish",
           "target_state": "hla-1516.1-2010:figure-11.p01",
           "initiator": "unknown",
@@ -3325,9 +3336,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-11.e07",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s00",
           "event": "subscription-region boundary -> history; empty-set subscribe/unsubscribe",
-          "target_state": "hla-1516.1-2010:figure-11.p01",
+          "target_state": "hla-1516.1-2010:figure-11.p02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -3413,9 +3424,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-11.e05",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s01",
           "event": "Published self-loop; Publish(i,j)",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-11.s01",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -3438,9 +3449,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-11.e06",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s02",
           "event": "Unpublished self-loop; Unpublish(i) or Unpublish(i,j)",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-11.s02",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -3528,9 +3539,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-11.e11",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s03",
           "event": "Subscribed self-loop; Subscribe(i,j)",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-11.s03",
           "initiator": "unknown",
           "guard": "",
           "action": "",
@@ -3553,9 +3564,9 @@
         },
         {
           "id": "hla-1516.1-2010:figure-11.e12",
-          "source_state": null,
+          "source_state": "hla-1516.1-2010:figure-11.s04",
           "event": "Unsubscribed self-loop; Unsubscribe(i) or Unsubscribe(i,j)",
-          "target_state": null,
+          "target_state": "hla-1516.1-2010:figure-11.s04",
           "initiator": "unknown",
           "guard": "",
           "action": "",

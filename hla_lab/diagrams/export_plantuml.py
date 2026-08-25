@@ -16,6 +16,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from hla_lab.diagrams.render_state_machine import _machine
+
 
 def _alias(identifier: str) -> str:
     return "s_" + re.sub(r"[^A-Za-z0-9]+", "_", identifier).strip("_")
@@ -25,12 +27,27 @@ def _group_alias(identifier: str) -> str:
     return "g_" + re.sub(r"[^A-Za-z0-9]+", "_", identifier).strip("_")
 
 
-def _label(value: object) -> str:
+def _label(value: object, *, quoted_context: bool = False) -> str:
     text = str(value).replace("�", "...").replace("…", "...")
-    # PlantUML does not accept backslash-escaped quotes inside a quoted state
-    # declaration.  Use the renderer's supported entity form instead, which
-    # preserves the visible ASCII quote without terminating the declaration.
-    text = text.replace("\\", "\\\\").replace('"', "&quot;")
+    # The source audit sometimes spells the printer's dagger out as a word
+    # when extracting labels from the native drawing.  PlantUML should carry
+    # the publication token itself, not that extraction placeholder.
+    text = re.sub(r"(?i)\bdagger\b", "†", text)
+    # Some extracted source labels carry XML/HTML entities from the PDF text
+    # layer. PlantUML does not decode those entities in state labels, so a
+    # literal ``&quot;`` would become publication-visible diagram text. Decode
+    # the small entity vocabulary used by the source before normalization.
+    text = text.replace("&quot;", '"').replace("&amp;", "&")
+    # State declarations are themselves quoted.  An HTML ``&quot;`` entity is
+    # rendered literally by the pinned renderer, while an escaped ASCII quote
+    # is rejected by some PlantUML state-parser paths.  The source records use
+    # quotes only to mark placeholder words such as ``first`` and ``last``;
+    # omit those delimiters in the diagram label rather than leaking markup or
+    # risking a parser collision.  Transition labels follow a colon and may
+    # retain ordinary ASCII quotation marks.
+    text = text.replace("\\", "\\\\")
+    if quoted_context:
+        text = re.sub(r'&quot;|"', "", text)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     wrapped: list[str] = []
     for line in text.split("\n"):
@@ -44,20 +61,6 @@ def _label(value: object) -> str:
             or [""]
         )
     return r"\n".join(wrapped)
-
-
-def _machine(payload: Mapping[str, Any], machine_id: str | None) -> Mapping[str, Any]:
-    machines = payload.get("state_machines", [])
-    if not isinstance(machines, list) or not machines:
-        raise ValueError("JSON file contains no state_machines")
-    if machine_id is None:
-        if len(machines) != 1:
-            raise ValueError("--machine is required when the file contains multiple machines")
-        return machines[0]
-    for machine in machines:
-        if machine.get("id") == machine_id:
-            return machine
-    raise ValueError(f"machine not found: {machine_id}")
 
 
 def _stereotype(kind: str) -> str:
@@ -157,6 +160,8 @@ def render(machine: Mapping[str, Any]) -> str:
         "  BorderColor #496B91",
         "}",
     ]
+    if isinstance(layout, Mapping) and layout.get("direction") == "left-to-right":
+        lines.insert(3, "left to right direction")
     transition_records: list[tuple[dict[str, Any], str, str]] = []
     for transition in machine.get("transitions", ()):
         if not isinstance(transition, dict):
@@ -169,33 +174,13 @@ def render(machine: Mapping[str, Any]) -> str:
         target_id = str(target)
         transition_records.append((transition, source_id, target_id))
 
-    transition_pairs = {
-        (str(item["source_state"]), str(item["target_state"]))
-        for item, _source_id, _target_id in transition_records
-    }
-    layout_nodes = (layout.get("nodes", {}) if isinstance(layout, Mapping) else {})
-    layout_transitions = (
-        layout.get("transitions", {}) if isinstance(layout, Mapping) else {}
-    )
-
     def transition_arrow(transition: dict[str, Any], source_id: str, target_id: str) -> str:
-        layout_transition = layout_transitions.get(transition.get("id"), {})
-        if source_id == target_id and isinstance(layout_transition, Mapping):
-            loop_direction = layout_transition.get("loop_direction")
-            if loop_direction in {"left", "right", "up", "down"}:
-                return f" -{loop_direction}-> "
-        if (target_id, source_id) not in transition_pairs:
-            return " --> "
-        source_position = layout_nodes.get(source_id, {})
-        target_position = layout_nodes.get(target_id, {})
-        if not isinstance(source_position, Mapping) or not isinstance(target_position, Mapping):
-            return " --> "
-        dx = float(target_position.get("x", 0)) - float(source_position.get("x", 0))
-        dy = float(target_position.get("y", 0)) - float(source_position.get("y", 0))
-        if abs(dx) >= abs(dy) and dx:
-            return " -right-> " if dx > 0 else " -left-> "
-        if dy:
-            return " -down-> " if dy > 0 else " -up-> "
+        # PlantUML's automatic state layout is the authority for connector
+        # routing.  The old exporter converted source-page coordinates into
+        # explicit -left/-right/-up/-down hints; dense nested charts can then
+        # make Graphviz fail with a Java IllegalStateException.  Keep the
+        # semantic endpoints and labels, but let the pinned renderer solve
+        # geometry consistently.
         return " --> "
 
     parent_for: dict[str, str | None] = {
@@ -226,6 +211,12 @@ def render(machine: Mapping[str, Any]) -> str:
 
         source_node = relation_node(source, source_kind)
         target_node = relation_node(target, target_kind)
+        if source_node != target_node and source_node is not None and target_node is not None:
+            # Cross-region relations are emitted at the document scope.  A
+            # relation declared inside the enclosing composite can be parsed
+            # as an intra-region edge by PlantUML, which is both fragile and
+            # liable to collapse the endpoint to a region frame.
+            return None
         target_chain = set(scope_chain(target_node))
         return next((item for item in scope_chain(source_node) if item in target_chain), None)
 
@@ -233,10 +224,13 @@ def render(machine: Mapping[str, Any]) -> str:
         kind = str(state_by_id[state_id].get("kind", "normal"))
         if kind in {"initial", "final"}:
             return "[*]"
-        current = state_id
-        while parent_for.get(current) != scope_id and parent_for.get(current) is not None:
-            current = str(parent_for[current])
-        return _alias(current)
+        # PlantUML aliases are document-global even when the declaration is
+        # nested inside a composite state.  Preserve the leaf endpoint for a
+        # cross-region edge instead of collapsing it to the containing region;
+        # the latter makes a transition such as Active -> Instructed to Save
+        # appear to terminate on the region frame and loses normative state
+        # topology.
+        return _alias(state_id)
 
     relations_by_scope: dict[str | None, list[str]] = defaultdict(list)
     for transition, source_id, target_id in transition_records:
@@ -266,12 +260,9 @@ def render(machine: Mapping[str, Any]) -> str:
             group = synthetic_groups[state_id]
             nested = children.get(state_id, [])
             lines.append(
-                f'{indent}state "{_label(group["title"])}" as {_group_alias(state_id)} {{'
+                f'{indent}state "{_label(group["title"], quoted_context=True)}" as {_group_alias(state_id)} {{'
             )
-            region_ids = [item for item in nested if item in synthetic_groups]
-            for index, child_id in enumerate(nested):
-                if child_id in synthetic_groups and index and len(region_ids) > 1:
-                    lines.append(indent + "  --")
+            for child_id in nested:
                 emit_state(child_id, indent + "  ")
             emit_scope_relations(state_id, indent + "  ")
             lines.append(indent + "}")
@@ -286,7 +277,7 @@ def render(machine: Mapping[str, Any]) -> str:
         # pseudostate as a publication-sized node without visible text.
         if not raw_label and kind in {"initial", "final"}:
             raw_label = " "
-        label = _label(raw_label)
+        label = _label(raw_label, quoted_context=True)
         stereotype = _stereotype(kind)
         rendered = f'{indent}state "{label}" as {_alias(state_id)}'
         if stereotype:

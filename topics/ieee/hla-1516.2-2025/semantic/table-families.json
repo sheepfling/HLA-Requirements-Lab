@@ -8,6 +8,10 @@
         "m4.p037.t01",
         "m4.p038.t01"
       ],
+      "table_captions": {
+        "m4.p037.t01": "Table 1—OMT metadata descriptions",
+        "m4.p038.t01": "Table 3—Object model identification table example"
+      },
       "clause_id": "clause-4.1",
       "source": {
         "path": "sections/semantic/clause-4a/page-037.tex",

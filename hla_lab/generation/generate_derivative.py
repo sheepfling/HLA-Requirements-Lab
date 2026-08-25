@@ -20,7 +20,12 @@ from hla_lab.core.semantic_model import (
 )
 from hla_lab.corpus.corpus_graph import CorpusDocumentDescriptor, build_corpus_graph
 from hla_lab.generation.hierarchy_compiler import CompiledHierarchy, compile_hierarchy
-from hla_lab.generation.reflowable_renderer import render_reflowable_document
+from hla_lab.generation.reflowable_renderer import (
+    _clean_table_cell_text,
+    _table_display_label,
+    _table_family_label,
+    render_reflowable_document,
+)
 from hla_lab.publication.publication_contract import (
     PublicationProfile,
     default_publication_profile,
@@ -67,6 +72,12 @@ def _display_escape(value: str) -> str:
 
 def _field(label: str, value: str) -> str:
     return f"\\textbf{{{_display_escape(label)}:}} {_display_escape(value)}"
+
+
+def _is_source_frontmatter(path: str) -> bool:
+    """Identify source publication furniture excluded from Lab derivatives."""
+    parts = path.replace("\\", "/").casefold().split("/")
+    return "frontmatter" in parts or "front-matter" in parts
 
 
 def _clause_link(model: DocumentModel, clause_id: str | None) -> str:
@@ -184,20 +195,30 @@ def _render_concepts(model: DocumentModel) -> list[str]:
 def _render_tables(model: DocumentModel) -> list[str]:
     """Render logical table families and their source-owned cells."""
     lines = [_heading(2, f"{model.document_id}: table families")]
-    if not model.table_families:
+    tables = {
+        table.id: table
+        for table in model.tables
+        if not _is_source_frontmatter(table.source.path)
+    }
+    families = tuple(
+        (family, tuple(table_id for table_id in family.table_ids if table_id in tables))
+        for family in model.table_families
+    )
+    families = tuple((family, table_ids) for family, table_ids in families if table_ids)
+    if not families:
         lines.append(r"\emph{No semantic table families are currently authored for this document.}")
         return lines
-    tables = {table.id: table for table in model.tables}
-    for family in model.table_families:
+    for family, table_ids in families:
+        family_label = _table_family_label(family, tables[table_ids[0]])
         lines.extend(
             (
                 _anchor(model.document_id, family.id),
-                _heading(3, family.title),
+                _heading(3, family_label),
                 f"{_field('Semantic ID', family.id)}\\\\",
                 f"{_field('Clause', '')}{_clause_link(model, family.clause_id)}\\\\",
             )
         )
-        for table_id in family.table_ids:
+        for table_id in table_ids:
             table = tables[table_id]
             family_link = (
                 _link(model.document_id, table.family_id)
@@ -212,7 +233,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
             lines.extend(
                 (
                     _anchor(model.document_id, table.id),
-                    _heading(4, table.caption or table.title or table.id),
+                    _heading(4, _table_display_label(table, family_label)),
                     f"{_field('Table', table.id)}\\\\",
                     f"{_field('Logical ID', table.logical_id or table.id)}\\\\",
                     f"{_field('Family', '')}{family_link}\\\\",
@@ -225,7 +246,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
                     f"\\texttt{{{_display_escape(cell.id)}}} "
                     f"[{cell.row if cell.row is not None else 'unknown'}, "
                     f"{cell.column if cell.column is not None else 'unknown'}]: "
-                    f"{_display_escape(cell.text)}"
+                    f"{_display_escape(_clean_table_cell_text(cell.text))}"
                     for cell in table.cells
                 )
             )

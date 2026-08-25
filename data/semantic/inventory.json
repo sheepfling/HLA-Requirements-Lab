@@ -15078,7 +15078,7 @@
       "document_id": "hla-1516.1-2010",
       "source_root": "topics/ieee/hla-1516.1-2010",
       "migration": "M10",
-      "expected_pages": 364,
+      "expected_pages": 370,
       "surface_counts": {
         "clause": 1359,
         "content-block": 23,
@@ -15090,7 +15090,7 @@
         "note": 51,
         "requirement": 1529,
         "requirement-link": 132,
-        "state": 160,
+        "state": 161,
         "state-machine": 16,
         "table": 111,
         "table-cell": 5890,
@@ -15099,7 +15099,7 @@
       },
       "status_counts": {
         "mapped": 424,
-        "reviewed": 11450
+        "reviewed": 11451
       },
       "items": [
         {
@@ -85674,6 +85674,19 @@
           "source": {
             "path": "figures/native/figure-07.tex",
             "line": 45,
+            "end_line": null
+          },
+          "owner_id": "hla-1516.1-2010:figure-07",
+          "notes": ""
+        },
+        {
+          "record_id": "hla-1516.1-2010:figure-07.s03",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "figures/native/figure-07.tex",
+            "line": 64,
             "end_line": null
           },
           "owner_id": "hla-1516.1-2010:figure-07",
@@ -169470,7 +169483,7 @@
       "document_id": "hla-1516.1-2025",
       "source_root": "topics/ieee/hla-1516.1-2025",
       "migration": "M10",
-      "expected_pages": 424,
+      "expected_pages": 427,
       "surface_counts": {
         "clause": 1670,
         "content-block": 432,
@@ -169478,20 +169491,20 @@
         "cross-reference": 2508,
         "definition": 161,
         "figure": 17,
-        "implementation": 282,
+        "implementation": 283,
         "note": 45,
         "requirement": 1860,
         "requirement-link": 32,
-        "state": 293,
-        "state-machine": 24,
+        "state": 306,
+        "state-machine": 25,
         "table": 92,
         "table-cell": 5159,
         "table-family": 46,
-        "transition": 282
+        "transition": 297
       },
       "status_counts": {
-        "mapped": 564,
-        "reviewed": 12924
+        "mapped": 580,
+        "reviewed": 12938
       },
       "items": [
         {
@@ -240956,6 +240969,19 @@
           "notes": ""
         },
         {
+          "record_id": "m16.transition.joined-federate-statechart",
+          "kind": "implementation",
+          "status": "mapped",
+          "migration": "M10",
+          "source": {
+            "path": "semantic/implementations.json",
+            "line": 4693,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
           "record_id": "m16.transition.normal-enter-history",
           "kind": "implementation",
           "status": "mapped",
@@ -269365,6 +269391,123 @@
           "notes": ""
         },
         {
+          "record_id": "joined.active.active",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.active.history",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.active.initial",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.active.restore-request-pending",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.active.waiting-for-restore-to-begin",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.normal.not-permitted",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.normal.permitted",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.restore.prepared",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.restore.restoring",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.restore.waiting",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.save.instructed",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.save.saving",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
+          "record_id": "joined.save.waiting",
+          "kind": "state",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": ""
+        },
+        {
           "record_id": "normal.history",
           "kind": "state",
           "status": "reviewed",
@@ -271130,6 +271273,19 @@
             "end_line": null
           },
           "owner_id": "clause-5.1.5",
+          "notes": ""
+        },
+        {
+          "record_id": "joined-federate-state",
+          "kind": "state-machine",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/04-federation-management-page-041.tex",
+            "line": 6,
+            "end_line": null
+          },
+          "owner_id": "clause-4.1.1",
           "notes": ""
         },
         {
@@ -341396,6 +341552,141 @@
           "source": null,
           "owner_id": "interaction-class",
           "notes": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step."
+        },
+        {
+          "record_id": "joined-federate.activity-permission-lost",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.activity-permission-restored",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.federation-restored",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.federation-saved",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.initial-enter-active",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.initiate-restore",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.initiate-save",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.request-restore",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.request-save",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.restore-begun",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.restore-complete",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.restore-request-failure",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.restore-request-success",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.save-begun",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
+        },
+        {
+          "record_id": "joined-federate.save-complete",
+          "kind": "transition",
+          "status": "mapped",
+          "migration": "M10",
+          "source": null,
+          "owner_id": "joined-federate-state",
+          "notes": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart."
         },
         {
           "record_id": "normal.enter-history",
@@ -584740,19 +585031,19 @@
     "cross-reference": 12246,
     "definition": 822,
     "figure": 55,
-    "implementation": 494,
+    "implementation": 495,
     "note": 197,
     "reference": 4,
     "requirement": 4394,
     "requirement-link": 164,
-    "state": 453,
-    "state-machine": 40,
-    "status:mapped": 988,
-    "status:reviewed": 44134,
+    "state": 467,
+    "state-machine": 41,
+    "status:mapped": 1004,
+    "status:reviewed": 44149,
     "table": 370,
     "table-cell": 19147,
     "table-family": 315,
-    "transition": 494
+    "transition": 509
   },
   "migration_queue": []
 }

@@ -29,10 +29,13 @@
 \providecommand{\RLPublicationSource}{Supplied HLA 1516.2 family source materials}
 \providecommand{\RLPublicationStatus}{Independent Lab compilation; source identifiers retained for traceability.}
 \providecommand{\RLClauseContext}{REFERENCE EDITION}
-\providecommand{\RLHeaderLeft}{\RLPublicationNumber\enspace\textperiodcentered\enspace\RLPublicationEdition}
+\providecommand{\RLHeaderLeft}{\RLPublicationNumber\enspace\textbar\enspace\RLPublicationEdition}
 \providecommand{\RLHeaderRight}{\RLPublicationTitle}
-\providecommand{\RLLandscapeHeaderRight}{\RLPublicationTitle\enspace\textperiodcentered\enspace\RLClauseContext}
-\providecommand{\RLHeaderFooter}{HLA REQUIREMENTS LAB\enspace\textperiodcentered\enspace\RLPublicationEdition}
+% Landscape pages use the same one-line publication identity as portrait
+% pages.  A generic "REFERENCE EDITION" suffix was inherited from an older
+% prototype and made generated figures look like a different publication.
+\providecommand{\RLLandscapeHeaderRight}{\RLPublicationTitle}
+\providecommand{\RLHeaderFooter}{HLA REQUIREMENTS LAB\enspace\textbar\enspace\RLPublicationEdition}
 
 \newcommand{\RLSetClauseContext}[1]{\renewcommand{\RLClauseContext}{#1}}
 \newcommand{\RLRule}{\par\noindent{\color{RLLine}\rule{\linewidth}{0.45pt}}\par}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -59,6 +60,117 @@ class Hla2010ContractTests(unittest.TestCase):
         self.assertNotIn("figures/native/figure-", body)
         self.assertEqual(body.count("output/semantic/state-machine-"), 16)
         self.assertEqual(body.count("output/semantic/graph-diagram-"), 4)
+
+    def test_15161_plantuml_review_manifest_is_explicit_and_artifacts_exist(self) -> None:
+        root = ROOTS[1]
+        payload = json.loads(
+            (root / "semantic" / "plantuml-review.json").read_text(encoding="utf-8")
+        )
+        model = load_document_model(root, HLA_SOURCE_2010)
+        machine_ids = {item.id for item in model.state_machines}
+        approved = set(payload["approved_machine_ids"])
+        deferred = set(payload["deferred_machine_ids"])
+        self.assertTrue(approved)
+        self.assertFalse(deferred)
+        self.assertTrue(approved <= machine_ids)
+        self.assertTrue(deferred <= machine_ids)
+        self.assertTrue(approved.isdisjoint(deferred))
+        self.assertEqual(
+            set(payload["projection_sources"]),
+            {
+                "hla-1516.1-2010:figure-05",
+                "hla-1516.1-2010:figure-06",
+                "hla-1516.1-2010:figure-09",
+                "hla-1516.1-2010:figure-12",
+                "hla-1516.1-2010:figure-13",
+                "hla-1516.1-2010:figure-14",
+                "hla-1516.1-2010:figure-15",
+                "hla-1516.1-2010:figure-16",
+                "hla-1516.1-2010:figure-17",
+            },
+        )
+        for machine_id in approved:
+            safe = machine_id.replace(":", "-")
+            with self.subTest(machine_id=machine_id):
+                self.assertTrue((root / "output" / "semantic" / f"state-machine-{safe}.puml").is_file())
+                self.assertTrue((root / "output" / "semantic" / f"state-machine-{safe}.pdf").is_file())
+
+        plantuml_sources = tuple((root / "output" / "semantic").glob("state-machine-*.puml"))
+        self.assertTrue(plantuml_sources)
+        self.assertTrue(
+            all("&quot;" not in path.read_text(encoding="utf-8") for path in plantuml_sources)
+        )
+
+    def test_15161_plantuml_statecharts_use_standalone_landscape_pages(self) -> None:
+        root = ROOTS[1]
+        model = load_document_model(root, HLA_SOURCE_2010)
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            generate(
+                GenerationRequest(
+                    root=root,
+                    output=output,
+                    source=HLA_SOURCE_2010,
+                    dialect=HLA_LATEX_DIALECT,
+                    content_block_ids=tuple(item.id for item in model.content_blocks),
+                    state_machine_renderer="plantuml",
+                    service_page_renderer="flow",
+                )
+            )
+            generated_body = "\n".join(
+                path.read_text(encoding="utf-8")
+                for path in output.glob("content-block-*.tex")
+            )
+        for figure_number in (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17):
+            with self.subTest(figure_number=figure_number):
+                self.assertIn(
+                    rf"\stdsemanticlandscapefigure{{{figure_number}}}",
+                    generated_body,
+                )
+        self.assertNotIn(
+            "\\begin{center}",
+            generated_body.split("\\stdsemanticlandscapefigure{8}", 1)[1].split(
+                "\\stdsemanticlandscapefigure{9}", 1
+            )[0],
+        )
+        self.assertNotIn(
+            "\\begin{center}",
+            generated_body.split("\\stdsemanticlandscapefigure{9}", 1)[1].split(
+                "\\subsubsection{FOM Document Data", 1
+            )[0],
+        )
+
+    def test_15162_2010_has_no_statechart_migration_scope(self) -> None:
+        model = load_document_model(ROOTS[2], HLA_SOURCE)
+        self.assertEqual(model.state_machines, ())
+
+    def test_15161_2010_flow_surface_removes_source_page_breaks(self) -> None:
+        root = ROOTS[1]
+        model = load_document_model(root, HLA_SOURCE_2010)
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            generate(
+                GenerationRequest(
+                    root=root,
+                    output=output,
+                    source=HLA_SOURCE_2010,
+                    dialect=HLA_LATEX_DIALECT,
+                    content_block_ids=tuple(item.id for item in model.content_blocks),
+                    service_page_renderer="flow",
+                )
+            )
+            body = "\n".join(
+                path.read_text(encoding="utf-8")
+                for path in output.glob("content-block-content-clauses-*.tex")
+                if any(f"clauses-{index:02d}-" in path.name for index in range(4, 11))
+            )
+        self.assertIn(r"\subsection{Connect service}", body)
+        self.assertIn(r"\HLAServiceDirectionLine{FEDERATE $\rightarrow$ RTI}", body)
+        self.assertIn(r"\HLAServiceDirectionLine{RTI $\rightarrow$ FEDERATE}", body)
+        self.assertNotIn(r"\clearpage", body)
+        self.assertNotIn(r"\vspace*{1.12in}", body)
+        self.assertNotIn("Comment note", body)
+        self.assertNotIn("Directed interation", body)
 
 
 if __name__ == "__main__":

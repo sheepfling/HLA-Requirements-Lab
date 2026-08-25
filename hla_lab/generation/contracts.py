@@ -33,7 +33,9 @@ class GenerationRequest:
     include_faithful_body: bool = False
     faithful_layout_profile: FaithfulLayoutProfile | None = None
     faithful_body_exclude_path_parts: tuple[str, ...] = ()
+    use_generated_faithful_blocks: bool = False
     state_machine_renderer: Literal["tikz", "plantuml"] = "tikz"
+    service_page_renderer: Literal["fixed", "flow"] = "fixed"
 
 
 @dataclass(frozen=True)
