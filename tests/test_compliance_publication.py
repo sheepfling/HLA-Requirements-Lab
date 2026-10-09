@@ -200,6 +200,24 @@ class CompliancePublicationTests(unittest.TestCase):
             self.assertEqual(len(written_paths), 5)
             self.assertTrue(all(path.is_file() for path in written_paths))
 
+    def test_csv_exports_are_deterministic_and_keep_link_rows_normalized(self) -> None:
+        manifest = build_compliance_manifest(_corpus(), _profile())
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            first = write_compliance_csv_exports(manifest, root / "first")
+            second = write_compliance_csv_exports(manifest, root / "second")
+
+            self.assertEqual(
+                tuple(path.name for path in first), tuple(path.name for path in second)
+            )
+            self.assertEqual(
+                tuple(path.read_bytes() for path in first),
+                tuple(path.read_bytes() for path in second),
+            )
+            self.assertEqual(len(_csv_rows(root / "first" / "requirement-mapping-links.csv")), 1)
+            self.assertEqual(len(_csv_rows(root / "first" / "transition-mapping-links.csv")), 1)
+
     def test_publication_normalizes_layout_markers_but_preserves_numeric_percentages(self) -> None:
         model = _corpus().documents[0]
         payload = model.model_dump(mode="json")

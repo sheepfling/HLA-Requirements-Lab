@@ -8,6 +8,57 @@ The project scope and definition of done are explicit in
 [`docs/SCOPE.md`](docs/SCOPE.md); the dependency direction and product
 boundaries are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
+## Quick task guide
+
+Use these commands for the three common contributor tasks:
+
+### Understand semantic mappings
+
+```console
+hla-lab map hla-1516.1-2025
+```
+
+This summarizes requirements, requirement-to-transition links, implementation
+status, API crosswalks, and the canonical JSON files. Omit the document ID to
+summarize all six source documents.
+
+### Regenerate LaTeX and PDF
+
+```console
+hla-lab generate topics/ieee/hla-1516.1-2025
+```
+
+This regenerates semantic LaTeX inputs, compiles with `latexmk -xelatex`, and
+prints the PDF destination declared in `data/release/documents.json`.
+
+### Generate the requirements matrix
+
+```console
+hla-lab matrix --edition 2025
+```
+
+This regenerates the compliance manifest, LaTeX source, and five normalized
+CSVs under `topics/ieee/hla-rti-compliance-2025/output/compliance/`. It does
+not run XeLaTeX.
+
+The matrix CSVs are `csv/requirements.csv`, `csv/transitions.csv`,
+`csv/implementation-mappings.csv`, `csv/requirement-mapping-links.csv`, and
+`csv/transition-mapping-links.csv`. The two link tables preserve one-to-many
+relationships as separate rows. The manifest and CSVs are generated, ignored
+outputs; authored semantic source stays in each document's `semantic/`
+directory. Use `--edition 2010` for the 2010 compliance matrix.
+
+`planned` and `partial` implementation mappings describe seams or incomplete
+work; they are not verified implementation evidence. `hla-lab map` reports
+implementation mappings, API crosswalks, and requirement-to-API bindings as
+separate relationships so their statuses remain clear.
+
+PDF builds need Python project dependencies, XeLaTeX, `latexmk`, Graphviz, and
+the fonts named by the document styles. `topics/ieee/hla-1516.2-2025/BUILDING.md`
+lists Debian/Ubuntu packages and font sources. If a build reports a missing
+font such as Tinos, install the documented font package and rerun the same
+command; a missing local font is a build prerequisite, not a corpus regression.
+
 ## Repository layout
 
 ```text
@@ -98,6 +149,9 @@ hla-lab                  # show the workflow menu
 hla-lab docs             # list supported document roots
 hla-lab status           # check all documents
 hla-lab build            # build all document products
+hla-lab generate topics/ieee/hla-1516.1-2025
+hla-lab map hla-1516.1-2025
+hla-lab matrix --edition 2025
 hla-lab build topics/fixture/non-hla-demo-2025
 hla-lab publish          # list declared publications
 hla-lab publish hla-hierarchy-reconstruction-2025
