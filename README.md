@@ -48,6 +48,11 @@ relationships as separate rows. The manifest and CSVs are generated, ignored
 outputs; authored semantic source stays in each document's `semantic/`
 directory. Use `--edition 2010` for the 2010 compliance matrix.
 
+To run either mapping or matrix command against another corpus checkout, add
+`--corpus-root /path/to/corpus-root`. The selected root must contain `data/`
+and `topics/`; document IDs, release projects, and semantic inputs are resolved
+from that root. Without the option, both commands use this repository.
+
 `planned` and `partial` implementation mappings describe seams or incomplete
 work; they are not verified implementation evidence. `hla-lab map` reports
 implementation mappings, API crosswalks, and requirement-to-API bindings as

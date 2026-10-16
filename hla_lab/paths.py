@@ -21,7 +21,9 @@ __all__ = [
     "RESOURCES",
     "DocumentResources",
     "RepositoryResources",
+    "document_catalog",
     "document_entry",
+    "document_entry_for_path",
     "document_entry_for_root",
     "document_roots",
     "resources",
@@ -162,7 +164,7 @@ class RepositoryResources:
     def document(self, document_id: str) -> DocumentResources:
         """Resolve a catalog document to its repository-owned path bundle."""
 
-        entry = document_entry(document_id)
+        entry = document_entry(document_id, self.root)
         relative_root = entry.root or f"topics/ieee/{entry.document_id}"
         return DocumentResources(self.root / relative_root)
 
@@ -184,9 +186,14 @@ DOCUMENT_MANIFEST = RESOURCES.edition_lineage_manifest
 
 
 def _load_document_manifest() -> EditionLineageManifest:
-    if not DOCUMENT_MANIFEST.is_file():
-        raise FileNotFoundError(f"missing document manifest: {DOCUMENT_MANIFEST}")
-    return load_edition_lineage(DOCUMENT_MANIFEST)
+    return _load_document_manifest_from(RESOURCES)
+
+
+def _load_document_manifest_from(repository: RepositoryResources) -> EditionLineageManifest:
+    path = repository.edition_lineage_manifest
+    if not path.is_file():
+        raise FileNotFoundError(f"missing document manifest: {path}")
+    return load_edition_lineage(path)
 
 
 DOCUMENT_CATALOG = _load_document_manifest()
@@ -194,30 +201,61 @@ DOCUMENT_IDS = tuple(item.document_id for item in DOCUMENT_CATALOG.documents)
 _DOCUMENTS_BY_ID = {item.document_id: item for item in DOCUMENT_CATALOG.documents}
 
 
-def document_entry(document_id: str) -> EditionDocument:
+def document_catalog(repo_root: Path = REPO_ROOT) -> EditionLineageManifest:
+    """Load the document identities declared by ``repo_root``."""
+
+    root = Path(repo_root)
+    if root.resolve() == REPO_ROOT:
+        return DOCUMENT_CATALOG
+    return _load_document_manifest_from(resources(root))
+
+
+def document_entry(document_id: str, repo_root: Path = REPO_ROOT) -> EditionDocument:
     """Return the canonical manifest entry for one corpus document."""
 
+    catalog = document_catalog(repo_root)
+    documents = (
+        _DOCUMENTS_BY_ID
+        if catalog is DOCUMENT_CATALOG
+        else {item.document_id: item for item in catalog.documents}
+    )
+    document_ids = (
+        DOCUMENT_IDS
+        if catalog is DOCUMENT_CATALOG
+        else tuple(item.document_id for item in catalog.documents)
+    )
     try:
-        return _DOCUMENTS_BY_ID[document_id]
+        return documents[document_id]
     except KeyError as error:
-        known = ", ".join(DOCUMENT_IDS)
+        known = ", ".join(document_ids)
         raise ValueError(f"unknown HLA document {document_id}; known: {known}") from error
 
 
-def document_entry_for_root(root_name: str) -> EditionDocument:
+def document_entry_for_root(root_name: str, repo_root: Path = REPO_ROOT) -> EditionDocument:
     """Resolve a document root, including isolated test/workspace suffixes."""
 
     try:
-        return document_entry(root_name)
+        return document_entry(root_name, repo_root)
     except ValueError:
+        catalog = document_catalog(repo_root)
         matches = tuple(
-            item
-            for item in DOCUMENT_CATALOG.documents
-            if root_name.startswith(item.document_id + "-")
+            item for item in catalog.documents if root_name.startswith(item.document_id + "-")
         )
         if len(matches) == 1:
             return matches[0]
         raise
+
+
+def document_entry_for_path(root: Path, repo_root: Path = REPO_ROOT) -> EditionDocument:
+    """Resolve a document root path using the selected corpus identity manifest."""
+
+    repository = resources(repo_root)
+    resolved = Path(root).resolve()
+    for entry in document_catalog(repository.root).documents:
+        relative_root = entry.root or f"topics/ieee/{entry.document_id}"
+        if (repository.root / relative_root).resolve() == resolved:
+            return entry
+    raise ValueError(f"unknown HLA document root {root} in corpus {repository.root}")
 
 
 def document_roots(
@@ -226,9 +264,18 @@ def document_roots(
 ) -> tuple[Path, ...]:
     """Resolve requested HLA document roots and reject unknown documents."""
 
-    requested = tuple(document_ids or DOCUMENT_IDS)
-    entries = tuple(document_entry(document_id) for document_id in requested)
-    roots = tuple(resources(repo_root).document(entry.document_id).root for entry in entries)
+    repository = resources(repo_root)
+    catalog = document_catalog(repository.root)
+    requested = tuple(document_ids or (item.document_id for item in catalog.documents))
+    documents = {item.document_id: item for item in catalog.documents}
+    known = ", ".join(documents)
+    missing_ids = tuple(document_id for document_id in requested if document_id not in documents)
+    if missing_ids:
+        raise ValueError(f"unknown HLA document(s): {', '.join(missing_ids)}; known: {known}")
+    entries = tuple(documents[document_id] for document_id in requested)
+    roots = tuple(
+        repository.root / (entry.root or f"topics/ieee/{entry.document_id}") for entry in entries
+    )
     missing = tuple(path for path in roots if not path.is_dir())
     if missing:
         missing_ids = ", ".join(path.name for path in missing)

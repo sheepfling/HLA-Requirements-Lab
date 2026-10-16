@@ -88,8 +88,11 @@ class LabCliTests(unittest.TestCase):
         self.assertIn("semantic/requirements.json", output.getvalue())
 
     def test_map_rejects_unknown_document_ids(self) -> None:
-        with self.assertRaises(SystemExit):
-            main(["map", "not-a-document"])
+        errors = io.StringIO()
+        with redirect_stderr(errors):
+            result = main(["map", "not-a-document"])
+        self.assertEqual(result, 2)
+        self.assertIn("unknown HLA document", errors.getvalue())
 
     def test_generate_routes_to_document_build_and_propagates_its_exit_code(self) -> None:
         with patch("hla_lab.cli._delegate", return_value=0) as delegate:
@@ -118,6 +121,7 @@ class LabCliTests(unittest.TestCase):
     def test_matrix_routes_both_editions_to_topic_generator_and_lists_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
+            release_projects = []
             calls = []
             for edition in ("2010", "2025"):
                 project = root / "topics" / "ieee" / f"hla-rti-compliance-{edition}"
@@ -134,7 +138,26 @@ class LabCliTests(unittest.TestCase):
                     "csv/transition-mapping-links.csv",
                 ):
                     (output / relative).write_text("generated", encoding="utf-8")
+                release_projects.append(
+                    {
+                        "id": f"hla-rti-compliance-requirements-{edition}",
+                        "publication_id": f"hla-rti-compliance-requirements-{edition}",
+                        "root": project.relative_to(root).as_posix(),
+                        "pdf": "dist/matrix.pdf",
+                        "log": "build/main.log",
+                        "kind": "requirements-publication",
+                        "build": {"strategy": "compliance"},
+                    }
+                )
 
+            release_manifest = root / "data" / "release" / "documents.json"
+            release_manifest.parent.mkdir(parents=True)
+            release_manifest.write_text(
+                json.dumps({"schema_version": 1, "projects": release_projects}),
+                encoding="utf-8",
+            )
+
+            for edition in ("2010", "2025"):
                 output_text = io.StringIO()
                 with (
                     patch("hla_lab.cli.REPO_ROOT", root),
@@ -155,12 +178,35 @@ class LabCliTests(unittest.TestCase):
             for args, kwargs in calls:
                 self.assertEqual(tuple(args[2:5]), ("hla_lab.build.topic", "generate", "--root"))
                 self.assertNotIn("latexmk", args)
+                self.assertIn("--repository-root", args)
+                self.assertEqual(args[args.index("--repository-root") + 1], str(root))
                 self.assertEqual(kwargs["cwd"], root)
 
     def test_matrix_reports_missing_project_and_missing_outputs_actionably(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             errors = io.StringIO()
+            release_manifest = root / "data" / "release" / "documents.json"
+            release_manifest.parent.mkdir(parents=True)
+            release_manifest.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "projects": [
+                            {
+                                "id": "hla-rti-compliance-requirements-2025",
+                                "publication_id": "hla-rti-compliance-requirements-2025",
+                                "root": "topics/ieee/hla-rti-compliance-2025",
+                                "pdf": "dist/matrix.pdf",
+                                "log": "build/main.log",
+                                "kind": "requirements-publication",
+                                "build": {"strategy": "compliance"},
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
             with patch("hla_lab.cli.REPO_ROOT", root), redirect_stderr(errors):
                 result = main(["matrix"])
             self.assertEqual(result, 2)
@@ -185,6 +231,27 @@ class LabCliTests(unittest.TestCase):
             root = Path(temporary)
             project = root / "topics" / "ieee" / "hla-rti-compliance-2025"
             project.mkdir(parents=True)
+            release_manifest = root / "data" / "release" / "documents.json"
+            release_manifest.parent.mkdir(parents=True)
+            release_manifest.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "projects": [
+                            {
+                                "id": "hla-rti-compliance-requirements-2025",
+                                "publication_id": "hla-rti-compliance-requirements-2025",
+                                "root": "topics/ieee/hla-rti-compliance-2025",
+                                "pdf": "dist/matrix.pdf",
+                                "log": "build/main.log",
+                                "kind": "requirements-publication",
+                                "build": {"strategy": "compliance"},
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
             errors = io.StringIO()
             with (
                 patch("hla_lab.cli.REPO_ROOT", root),
