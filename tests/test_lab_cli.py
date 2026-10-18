@@ -50,6 +50,31 @@ class LabCliTests(unittest.TestCase):
         self.assertIn("semantic/requirement-links.json", rendered)
         self.assertIn("not verified implementation evidence", rendered)
 
+    def test_map_defaults_to_all_documents_and_marks_absent_mapping_sources(self) -> None:
+        output = io.StringIO()
+        with redirect_stdout(output):
+            result = main(["map"])
+        rendered = output.getvalue()
+        self.assertEqual(result, 0)
+        self.assertIn("hla-1516-2010 (topics/ieee/hla-1516-2010)", rendered)
+        self.assertIn("hla-1516.2-2025 (topics/ieee/hla-1516.2-2025)", rendered)
+        self.assertIn("API crosswalks: not present", rendered)
+        self.assertIn("requirement API bindings: not present", rendered)
+        self.assertIn("requirement-to-transition links: not present", rendered)
+
+    def test_map_json_marks_missing_optional_source_files(self) -> None:
+        output = io.StringIO()
+        with redirect_stdout(output):
+            result = main(["map", "hla-1516-2025", "--json"])
+        payload = json.loads(output.getvalue())
+        document = payload["documents"][0]
+        self.assertEqual(result, 0)
+        self.assertIsNone(document["requirement_links"])
+        self.assertIsNone(document["implementations"])
+        self.assertIsNone(document["api_surfaces"])
+        self.assertIn("semantic/api-surfaces.json", document["semantic_files_missing"])
+        self.assertIn("semantic/requirements.json", document["semantic_files_present"])
+
     def test_map_json_reports_independent_mapping_relationships(self) -> None:
         output = io.StringIO()
         with redirect_stdout(output):

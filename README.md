@@ -20,7 +20,8 @@ hla-lab map hla-1516.1-2025
 
 This summarizes requirements, requirement-to-transition links, implementation
 status, API crosswalks, and the canonical JSON files. Omit the document ID to
-summarize all six source documents.
+summarize all six source documents. Mapping families absent from a document's
+canonical source are labeled `not present`.
 
 ### Regenerate LaTeX and PDF
 

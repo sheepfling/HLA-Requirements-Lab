@@ -133,32 +133,76 @@ def _map(command: MapCommand) -> int:
             requirements = _mapping_records(
                 root, "requirements.json", "requirements", command.corpus_root
             )
-            links = _mapping_records(root, "requirement-links.json", "links", command.corpus_root)
+            assert requirements is not None
+            links = _mapping_records(
+                root, "requirement-links.json", "links", command.corpus_root, required=False
+            )
             implementations = _mapping_records(
-                root, "implementations.json", "implementations", command.corpus_root
+                root,
+                "implementations.json",
+                "implementations",
+                command.corpus_root,
+                required=False,
             )
             api_surfaces = _mapping_records(
-                root, "api-surfaces.json", "api_surfaces", command.corpus_root
+                root,
+                "api-surfaces.json",
+                "api_surfaces",
+                command.corpus_root,
+                required=False,
             )
             api_crosswalks = _mapping_records(
-                root, "api-crosswalk.json", "api_crosswalks", command.corpus_root
+                root,
+                "api-crosswalk.json",
+                "api_crosswalks",
+                command.corpus_root,
+                required=False,
             )
             api_bindings = _mapping_records(
                 root,
                 "api-requirement-bindings.json",
                 "bindings",
                 command.corpus_root,
+                required=False,
             )
+            source_records = {
+                "requirements.json": requirements,
+                "requirement-links.json": links,
+                "implementations.json": implementations,
+                "api-surfaces.json": api_surfaces,
+                "api-crosswalk.json": api_crosswalks,
+                "api-requirement-bindings.json": api_bindings,
+            }
             documents.append(
                 {
                     "document": document_entry_for_path(root, command.corpus_root).document_id,
                     "root": root.relative_to(command.corpus_root).as_posix(),
                     "requirements": len(requirements),
-                    "requirement_links": len(links),
-                    "implementations": _mapping_status_counts(implementations),
-                    "api_surfaces": len(api_surfaces),
-                    "api_crosswalks": _mapping_status_counts(api_crosswalks),
-                    "requirement_api_bindings": _mapping_status_counts(api_bindings),
+                    "requirement_links": len(links) if links is not None else None,
+                    "implementations": (
+                        _mapping_status_counts(implementations)
+                        if implementations is not None
+                        else None
+                    ),
+                    "api_surfaces": len(api_surfaces) if api_surfaces is not None else None,
+                    "api_crosswalks": (
+                        _mapping_status_counts(api_crosswalks)
+                        if api_crosswalks is not None
+                        else None
+                    ),
+                    "requirement_api_bindings": (
+                        _mapping_status_counts(api_bindings) if api_bindings is not None else None
+                    ),
+                    "semantic_files_present": [
+                        f"semantic/{name}"
+                        for name, records in source_records.items()
+                        if records is not None
+                    ],
+                    "semantic_files_missing": [
+                        f"semantic/{name}"
+                        for name, records in source_records.items()
+                        if records is None
+                    ],
                 }
             )
     except (FileNotFoundError, ValueError) as error:
@@ -199,20 +243,25 @@ def _map(command: MapCommand) -> int:
         print(f"\n{item['document']} ({item['root']})")
         print(f"  requirements: {item['requirements']}  semantic/requirements.json")
         print(
-            f"  requirement-to-transition links: {item['requirement_links']}  "
+            "  requirement-to-transition links: "
+            f"{_format_optional_count(item['requirement_links'])}  "
             "semantic/requirement-links.json"
         )
         print(
-            f"  implementation mappings: {_format_counts(item['implementations'])}  "
+            f"  implementation mappings: {_format_optional_counts(item['implementations'])}  "
             "semantic/implementations.json"
         )
-        print(f"  declared API surfaces: {item['api_surfaces']}  semantic/api-surfaces.json")
         print(
-            f"  API crosswalks: {_format_counts(item['api_crosswalks'])}  "
+            f"  declared API surfaces: {_format_optional_count(item['api_surfaces'])}  "
+            "semantic/api-surfaces.json"
+        )
+        print(
+            f"  API crosswalks: {_format_optional_counts(item['api_crosswalks'])}  "
             "semantic/api-crosswalk.json"
         )
         print(
-            f"  requirement API bindings: {_format_counts(item['requirement_api_bindings'])}  "
+            f"  requirement API bindings: "
+            f"{_format_optional_counts(item['requirement_api_bindings'])}  "
             "semantic/api-requirement-bindings.json"
         )
     return 0
@@ -222,15 +271,27 @@ def _format_counts(values: dict[str, int]) -> str:
     return ", ".join(f"{key}={value}" for key, value in values.items()) or "none"
 
 
+def _format_optional_count(value: int | None) -> str:
+    return "not present" if value is None else str(value)
+
+
+def _format_optional_counts(values: dict[str, int] | None) -> str:
+    return "not present" if values is None else _format_counts(values)
+
+
 def _mapping_records(
     root: Path,
     filename: str,
     key: str,
     corpus_root: Path = REPO_ROOT,
-) -> list[dict[str, object]]:
+    *,
+    required: bool = True,
+) -> list[dict[str, object]] | None:
     """Load one canonical JSON array for the read-only mapping overview."""
     path = root / "semantic" / filename
     if not path.is_file():
+        if not required:
+            return None
         relative = path.relative_to(corpus_root).as_posix()
         raise FileNotFoundError(
             f"missing canonical mapping file {relative}; restore it from the source checkout"
