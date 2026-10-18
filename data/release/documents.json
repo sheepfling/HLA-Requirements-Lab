@@ -112,10 +112,12 @@
       "root": "topics/ieee/hla-1516.2-2025",
       "pdf": "dist/ieee-std-1516.2-2025-object-model-template-specification-recreation.pdf",
       "log": "build/main.log",
-      "expected_pages": 111,
+      "expected_pages": 124,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
+        "clean_before_build": true,
+        "navigation_manifest": "canonical/source-navigation.json",
         "definition_selection": "all",
         "definition_order": "ordered",
         "requirement_selection": "all",

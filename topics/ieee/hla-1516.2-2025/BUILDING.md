@@ -42,6 +42,11 @@ distribution requires it, then retry the build. The 1516.1 styles have
 font fallbacks; the 1516.2 style requires the named fonts. A font-resolution
 failure is a local build prerequisite issue.
 
+The repository's document-release workflow installs the five fonts above and
+checks that fontconfig resolves each requested family before compiling. If you
+run the build locally, use `fc-match` on the required family names before
+diagnosing a font-resolution failure as a document change.
+
 ## Build
 
 From this directory:
@@ -57,3 +62,17 @@ first and prints the configured PDF output path.
 
 The named output is written to `dist/`. Build products, PDFs, comparison material, and verification reports
 are local-only and ignored by the repository policy.
+
+The release build includes the reconstructed front cover, the canonical pages
+2–12, the faithful body (physical pages 13–123), and a text-only back cover
+based on the retained v1.0.1 PDF text. The original back-cover artwork source
+is unavailable, so no marks or artwork have been recreated there. A text label
+identifies the Twitter link present in the canonical link map. The build
+then applies the stored 124-page outline, page labels, and link destinations
+from `canonical/source-navigation.json`.
+
+To check the final PDF's page count, labels, outline, and link annotations:
+
+```console
+python tools/verify_pdf_navigation.py dist/ieee-std-1516.2-2025-object-model-template-specification-recreation.pdf
+```

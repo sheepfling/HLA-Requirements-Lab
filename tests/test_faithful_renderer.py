@@ -80,7 +80,10 @@ class FaithfulRendererTests(unittest.TestCase):
                 main = (root / "main.tex").read_text(encoding="utf-8")
                 self.assertEqual(main.count(r"\input{output/semantic/faithful-body}"), 1)
                 self.assertNotIn(r"\input{content/clauses/", main)
-                self.assertNotIn(r"\input{sections/semantic/", main)
+                if root.name == "hla-1516.2-2025":
+                    self.assertIn(r"\input{sections/semantic/frontmatter}", main)
+                else:
+                    self.assertNotIn(r"\input{sections/semantic/", main)
 
     def test_generation_emits_a_faithful_body_and_projection(self) -> None:
         root = ROOT / "topics" / "ieee" / "hla-1516-2025"
@@ -151,7 +154,12 @@ class FaithfulRendererTests(unittest.TestCase):
                 main = (ROOT / item["root"] / "main.tex").read_text(encoding="utf-8")
                 self.assertNotIn(r"\HLACoverPage", main)
                 self.assertNotIn(r"\HLABackCoverPage", main)
-                self.assertNotIn(r"\input{frontmatter/cover}", main)
+                if item["id"] == "hla-1516.2-2025":
+                    self.assertIn(r"\input{frontmatter/cover}", main)
+                    self.assertIn(r"\input{sections/semantic/frontmatter}", main)
+                    self.assertIn(r"\input{frontmatter/back-cover}", main)
+                else:
+                    self.assertNotIn(r"\input{frontmatter/cover}", main)
 
     def test_trimmed_projection_excludes_front_matter_adapters(self) -> None:
         for name in (
