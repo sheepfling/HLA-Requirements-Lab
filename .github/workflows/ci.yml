@@ -1,11 +1,14 @@
 name: CI
 
 on:
-  push:
   pull_request:
+    types: [closed]
+    branches: [feature/hla]
+  workflow_dispatch:
 
 jobs:
   quality:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -26,6 +29,7 @@ jobs:
         run: python -m tools.ci quality
 
   document-release:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     needs: quality
     steps:
