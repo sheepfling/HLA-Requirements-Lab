@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-import fitz
+import pymupdf as fitz
 
 
 def parse_args() -> argparse.Namespace:

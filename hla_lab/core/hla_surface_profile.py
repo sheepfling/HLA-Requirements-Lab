@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 from collections.abc import Mapping
+from pathlib import Path
 
 from hla_lab.core.hla_profile import SOURCE_PROFILE_MANIFEST
 from hla_lab.core.semantic_model import (
@@ -17,9 +18,22 @@ from hla_lab.core.semantic_model import (
     VerificationTest,
 )
 
-__all__ = ["HLA_API_OWNERS", "build_hla_surface_contract"]
+__all__ = ["HLA_API_OWNERS", "build_hla_surface_contract", "load_hla_api_owners"]
 
-HLA_API_OWNERS = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))["api_owners"]
+
+def load_hla_api_owners(manifest_path: Path = SOURCE_PROFILE_MANIFEST) -> dict[str, str]:
+    """Load API ownership vocabulary from the selected corpus profile manifest."""
+
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    owners = payload.get("api_owners")
+    if not isinstance(owners, dict) or any(
+        not isinstance(key, str) or not isinstance(value, str) for key, value in owners.items()
+    ):
+        raise ValueError(f"invalid API owner mapping in source profile manifest: {manifest_path}")
+    return owners
+
+
+HLA_API_OWNERS = load_hla_api_owners()
 
 
 def _source_for(mapping: ImplementationMapping) -> SourceRef:
@@ -57,7 +71,11 @@ def _mapping_ids_for_surfaces(
     )
 
 
-def build_hla_surface_contract(model: DocumentModel) -> DocumentModel:
+def build_hla_surface_contract(
+    model: DocumentModel,
+    *,
+    api_owners: Mapping[str, str] | None = None,
+) -> DocumentModel:
     """Attach complete HLA API, verification, and trace planning surfaces.
 
     Existing authored records remain authoritative.  The HLA projection fills
@@ -66,6 +84,7 @@ def build_hla_surface_contract(model: DocumentModel) -> DocumentModel:
     evidence or claims that a planned mapping has been implemented.
     """
 
+    owner_by_interface = HLA_API_OWNERS if api_owners is None else api_owners
     tr_id2_transition_machine = {
         transition.id: (transition, machine)
         for machine in model.state_machines
@@ -99,7 +118,7 @@ def build_hla_surface_contract(model: DocumentModel) -> DocumentModel:
             name=mapping.interface_name,
             interface_kind=mapping.interface_kind,
             binding_kind="semantic",
-            owner=HLA_API_OWNERS[mapping.interface_kind],
+            owner=owner_by_interface[mapping.interface_kind],
             language=language,
             signature=mapping.interface_name,
             clause_ids=tuple(sorted(clause_ids)),

@@ -32,11 +32,19 @@ def test_document_resources_keep_document_layout_together() -> None:
     assert document.main_tex == document.root / "main.tex"
 
 
-def test_registry_can_target_an_isolated_repository_root() -> None:
-    isolated = resources(Path("C:/tmp/hla-lab-copy"))
+def test_registry_can_target_an_isolated_repository_root(tmp_path: Path) -> None:
+    manifest = tmp_path / "data" / "semantic" / "edition-lineage.json"
+    manifest.parent.mkdir(parents=True)
+    manifest.write_text(
+        '{"schema_version":1,"documents":[{"document_id":"hla-1516-2025",'
+        '"standard_id":"IEEE 1516","edition":"2025","title":"Framework",'
+        '"root":"topics/ieee/hla-1516-2025"}],"relations":[]}',
+        encoding="utf-8",
+    )
+    isolated = resources(tmp_path)
 
     assert isinstance(isolated, RepositoryResources)
-    assert isolated.release_manifest == Path("C:/tmp/hla-lab-copy/data/release/documents.json")
+    assert isolated.release_manifest == tmp_path / "data" / "release" / "documents.json"
     assert isolated.document("hla-1516-2025").root == (
-        Path("C:/tmp/hla-lab-copy/topics/ieee/hla-1516-2025")
+        tmp_path / "topics" / "ieee" / "hla-1516-2025"
     )

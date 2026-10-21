@@ -7,13 +7,23 @@ import json
 import os
 import subprocess
 import sys
+from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass
+from pathlib import Path
 
 from hla_lab.traceability.semantic_coverage import build_report
 from hla_lab.traceability.spec_readiness import assess_corpus
 
-from .paths import DOCUMENT_IDS, REPO_ROOT, RESOURCES, document_roots
+from .paths import (
+    DOCUMENT_IDS,
+    REPO_ROOT,
+    RESOURCES,
+    document_entry_for_path,
+    document_roots,
+    resources,
+)
+from .publication.publication_registry import load_release_manifest
 
 
 def _document_ids(value: Sequence[str] | None) -> tuple[str, ...]:
@@ -35,6 +45,15 @@ class DocumentsCommand:
     """Validated options for the ``documents`` command."""
 
     document_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class MapCommand:
+    """Validated options for the ``map`` command."""
+
+    document_ids: tuple[str, ...] | None
+    corpus_root: Path
+    json_output: bool = False
 
 
 @dataclass(frozen=True)
@@ -105,6 +124,314 @@ def _documents(command: DocumentsCommand) -> int:
     return 0
 
 
+def _map(command: MapCommand) -> int:
+    """Print the canonical semantic mapping files and their current coverage."""
+    try:
+        roots = document_roots(command.corpus_root, command.document_ids)
+        documents = []
+        for root in roots:
+            requirements = _mapping_records(
+                root, "requirements.json", "requirements", command.corpus_root
+            )
+            assert requirements is not None
+            links = _mapping_records(
+                root, "requirement-links.json", "links", command.corpus_root, required=False
+            )
+            implementations = _mapping_records(
+                root,
+                "implementations.json",
+                "implementations",
+                command.corpus_root,
+                required=False,
+            )
+            api_surfaces = _mapping_records(
+                root,
+                "api-surfaces.json",
+                "api_surfaces",
+                command.corpus_root,
+                required=False,
+            )
+            api_crosswalks = _mapping_records(
+                root,
+                "api-crosswalk.json",
+                "api_crosswalks",
+                command.corpus_root,
+                required=False,
+            )
+            api_bindings = _mapping_records(
+                root,
+                "api-requirement-bindings.json",
+                "bindings",
+                command.corpus_root,
+                required=False,
+            )
+            source_records = {
+                "requirements.json": requirements,
+                "requirement-links.json": links,
+                "implementations.json": implementations,
+                "api-surfaces.json": api_surfaces,
+                "api-crosswalk.json": api_crosswalks,
+                "api-requirement-bindings.json": api_bindings,
+            }
+            documents.append(
+                {
+                    "document": document_entry_for_path(root, command.corpus_root).document_id,
+                    "root": root.relative_to(command.corpus_root).as_posix(),
+                    "requirements": len(requirements),
+                    "requirement_links": len(links) if links is not None else None,
+                    "implementations": (
+                        _mapping_status_counts(implementations)
+                        if implementations is not None
+                        else None
+                    ),
+                    "api_surfaces": len(api_surfaces) if api_surfaces is not None else None,
+                    "api_crosswalks": (
+                        _mapping_status_counts(api_crosswalks)
+                        if api_crosswalks is not None
+                        else None
+                    ),
+                    "requirement_api_bindings": (
+                        _mapping_status_counts(api_bindings) if api_bindings is not None else None
+                    ),
+                    "semantic_files_present": [
+                        f"semantic/{name}"
+                        for name, records in source_records.items()
+                        if records is not None
+                    ],
+                    "semantic_files_missing": [
+                        f"semantic/{name}"
+                        for name, records in source_records.items()
+                        if records is None
+                    ],
+                }
+            )
+    except (FileNotFoundError, ValueError) as error:
+        print(f"Cannot read semantic mapping: {error}", file=sys.stderr)
+        return 2
+
+    payload = {
+        "documents": documents,
+        "semantic_files": [
+            "semantic/requirements.json",
+            "semantic/requirement-links.json",
+            "semantic/implementations.json",
+            "semantic/api-surfaces.json",
+            "semantic/api-crosswalk.json",
+            "semantic/api-requirement-bindings.json",
+        ],
+        "status_notes": {
+            "implementation": (
+                "planned and partial are mapping plans, not verified implementation evidence"
+            ),
+            "api_crosswalk": "maps an implementation mapping to an API binding or projection",
+            "requirement_api_binding": "separate requirement-to-language-API relationship",
+        },
+    }
+    if command.json_output:
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return 0
+
+    print("Semantic mapping overview")
+    print("  requirement-links.json stores one row per requirement-to-transition link.")
+    print("  implementations.json links requirements/transitions to implementation seams.")
+    print(
+        "  api-crosswalk.json maps those seams to API bindings; "
+        "requirement API bindings are separate."
+    )
+    print("  Planned or partial mappings are not verified implementation evidence.")
+    for item in documents:
+        print(f"\n{item['document']} ({item['root']})")
+        print(f"  requirements: {item['requirements']}  semantic/requirements.json")
+        print(
+            "  requirement-to-transition links: "
+            f"{_format_optional_count(item['requirement_links'])}  "
+            "semantic/requirement-links.json"
+        )
+        print(
+            f"  implementation mappings: {_format_optional_counts(item['implementations'])}  "
+            "semantic/implementations.json"
+        )
+        print(
+            f"  declared API surfaces: {_format_optional_count(item['api_surfaces'])}  "
+            "semantic/api-surfaces.json"
+        )
+        print(
+            f"  API crosswalks: {_format_optional_counts(item['api_crosswalks'])}  "
+            "semantic/api-crosswalk.json"
+        )
+        print(
+            f"  requirement API bindings: "
+            f"{_format_optional_counts(item['requirement_api_bindings'])}  "
+            "semantic/api-requirement-bindings.json"
+        )
+    return 0
+
+
+def _format_counts(values: dict[str, int]) -> str:
+    return ", ".join(f"{key}={value}" for key, value in values.items()) or "none"
+
+
+def _format_optional_count(value: int | None) -> str:
+    return "not present" if value is None else str(value)
+
+
+def _format_optional_counts(values: dict[str, int] | None) -> str:
+    return "not present" if values is None else _format_counts(values)
+
+
+def _mapping_records(
+    root: Path,
+    filename: str,
+    key: str,
+    corpus_root: Path = REPO_ROOT,
+    *,
+    required: bool = True,
+) -> list[dict[str, object]] | None:
+    """Load one canonical JSON array for the read-only mapping overview."""
+    path = root / "semantic" / filename
+    if not path.is_file():
+        if not required:
+            return None
+        relative = path.relative_to(corpus_root).as_posix()
+        raise FileNotFoundError(
+            f"missing canonical mapping file {relative}; restore it from the source checkout"
+        )
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    records = payload.get(key) if isinstance(payload, dict) else None
+    if not isinstance(records, list) or any(not isinstance(record, dict) for record in records):
+        relative = path.relative_to(corpus_root).as_posix()
+        raise ValueError(f"expected a JSON array named '{key}' in {relative}")
+    return records
+
+
+def _mapping_status_counts(records: Sequence[dict[str, object]]) -> dict[str, int]:
+    return dict(
+        sorted(Counter(str(record.get("status", "unspecified")) for record in records).items())
+    )
+
+
+def _matrix(edition: str, corpus_root: Path = REPO_ROOT) -> int:
+    """Generate the compliance manifest and normalized CSVs without compiling LaTeX."""
+    repository = resources(Path(corpus_root).resolve())
+    project_id = f"hla-rti-compliance-requirements-{edition}"
+    try:
+        release_manifest = load_release_manifest(repository.release_manifest)
+        project = release_manifest.project(project_id)
+    except FileNotFoundError:
+        print(
+            f"Cannot generate the {edition} requirements matrix: missing release manifest "
+            f"{repository.release_manifest}. Select a corpus root containing data/release/.",
+            file=sys.stderr,
+        )
+        return 2
+    except ValueError as error:
+        print(
+            f"Cannot generate the {edition} requirements matrix from "
+            f"{repository.release_manifest}: {error}",
+            file=sys.stderr,
+        )
+        return 2
+
+    if project.build is None or project.build.strategy != "compliance":
+        print(
+            f"Cannot generate the {edition} requirements matrix: release project {project_id} "
+            "does not declare the compliance build strategy.",
+            file=sys.stderr,
+        )
+        return 2
+
+    root = repository.root / project.root
+    if not root.is_dir():
+        print(
+            f"Cannot generate the {edition} requirements matrix: source project is missing at "
+            f"{root.relative_to(repository.root)}. Check out the HLA corpus files and retry.",
+            file=sys.stderr,
+        )
+        return 2
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "hla_lab.build.topic",
+            "generate",
+            "--root",
+            str(root),
+            "--repository-root",
+            str(repository.root),
+        ],
+        cwd=REPO_ROOT,
+        check=False,
+    )
+    if result.returncode:
+        print(
+            f"Matrix generation failed for {edition}; check the compliance profile, release "
+            "manifest, and canonical semantic source files named in the error above.",
+            file=sys.stderr,
+        )
+        return result.returncode
+
+    output = root / "output" / "compliance"
+    csv_output = output / "csv"
+    expected = (
+        output / "compliance-manifest.json",
+        output / "compliance-requirements.tex",
+        csv_output / "requirements.csv",
+        csv_output / "transitions.csv",
+        csv_output / "implementation-mappings.csv",
+        csv_output / "requirement-mapping-links.csv",
+        csv_output / "transition-mapping-links.csv",
+    )
+    missing = tuple(path for path in expected if not path.is_file())
+    if missing:
+        paths = ", ".join(path.relative_to(repository.root).as_posix() for path in missing)
+        print(
+            "Matrix generation finished without its expected outputs: "
+            f"{paths}. Verify that this is a compliance project in data/release/documents.json.",
+            file=sys.stderr,
+        )
+        return 1
+
+    print(
+        f"Requirements matrix generated for {edition} under {output.relative_to(repository.root)}:"
+    )
+    for path in expected:
+        print(f"  {path.relative_to(repository.root).as_posix()}")
+    print("This writes the manifest, LaTeX source, and CSVs; it does not run XeLaTeX.")
+    return 0
+
+
+def _build_products(target: str) -> int:
+    """Validate a document target, then use the repository's canonical builder."""
+    from hla_lab.build.build import resolve_targets
+
+    try:
+        targets = resolve_targets(target)
+    except SystemExit as error:
+        detail = error.code if isinstance(error.code, str) else "invalid document or topic path"
+        print(
+            f"Cannot generate document PDFs: {detail}. Run `hla-lab docs` to list document roots.",
+            file=sys.stderr,
+        )
+        return 2
+    if not targets:
+        print(
+            f"No document build roots found under {target!r}. Run `hla-lab docs` to list "
+            "available document roots.",
+            file=sys.stderr,
+        )
+        return 2
+    result = _delegate("hla_lab.build.build", ("build", target))
+    if result:
+        print(
+            "PDF generation failed. Check the latexmk error and the document's build/main.log; "
+            "verify XeLaTeX, `latexmk`, Graphviz, TeX packages, and the required fonts. "
+            "See topics/ieee/hla-1516.2-2025/BUILDING.md for system prerequisites.",
+            file=sys.stderr,
+        )
+    return result
+
+
 def _test(command: TestCommand) -> int:
     parallel_root = RESOURCES.temporary / "pytest-parallel"
     if command.parallel:
@@ -153,6 +480,9 @@ def build_parser() -> argparse.ArgumentParser:
         description="Inspect, validate, and test the HLA Requirements Lab corpus.",
         epilog=(
             "Common workflows:\n"
+            "  hla-lab map hla-1516.1-2025\n"
+            "  hla-lab generate topics/ieee/hla-1516.1-2025\n"
+            "  hla-lab matrix --edition 2025\n"
             "  hla-lab status --require-api-contract\n"
             "  hla-lab build\n"
             "  hla-lab publish\n"
@@ -181,6 +511,47 @@ def build_parser() -> argparse.ArgumentParser:
         nargs="?",
         default="all",
         help="all, a document path, or a topic path (default: all)",
+    )
+
+    generate = subparsers.add_parser(
+        "generate",
+        help="regenerate semantic inputs and compile document PDFs (same as build)",
+    )
+    generate.add_argument(
+        "target",
+        nargs="?",
+        default="all",
+        help="all, a document path, or a topic path (default: all)",
+    )
+
+    mapping = subparsers.add_parser(
+        "map",
+        help="show where semantic requirements, implementation mappings, and API links live",
+    )
+    mapping.add_argument("documents", nargs="*", help="selected corpus document IDs")
+    mapping.add_argument("--json", action="store_true", help="print machine-readable JSON")
+    mapping.add_argument(
+        "--corpus-root",
+        type=Path,
+        default=REPO_ROOT,
+        help="corpus root containing data/ and topics/ (default: this checkout)",
+    )
+
+    matrix = subparsers.add_parser(
+        "matrix",
+        help="generate the compliance manifest and normalized requirements CSV matrix",
+    )
+    matrix.add_argument(
+        "--edition",
+        choices=("2010", "2025"),
+        default="2025",
+        help="HLA corpus edition (default: 2025)",
+    )
+    matrix.add_argument(
+        "--corpus-root",
+        type=Path,
+        default=REPO_ROOT,
+        help="corpus root containing data/ and topics/ (default: this checkout)",
     )
 
     clean = subparsers.add_parser("clean", help="remove generated products from all documents")
@@ -232,8 +603,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                 require_concrete=args.require_concrete,
             )
         )
-    if args.command in {"build", "make"}:
-        return _delegate("hla_lab.build.build", ("build", args.target))
+    if args.command == "map":
+        return _map(
+            MapCommand(
+                document_ids=tuple(args.documents) or None,
+                corpus_root=args.corpus_root,
+                json_output=args.json,
+            )
+        )
+    if args.command == "matrix":
+        return _matrix(args.edition, args.corpus_root)
+    if args.command in {"build", "make", "generate"}:
+        return _build_products(args.target)
     if args.command == "clean":
         return _delegate("hla_lab.build.build", ("clean",))
     if args.command in {"publish", "publication"}:

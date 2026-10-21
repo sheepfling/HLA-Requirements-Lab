@@ -5,12 +5,13 @@ from __future__ import annotations
 import json
 from collections.abc import Mapping
 from dataclasses import dataclass, replace
+from pathlib import Path
 from typing import Literal
 
 from hla_lab.adapters.latex_renderer import LatexDialect
 from hla_lab.core.coercions import coerce_int
 from hla_lab.core.json_types import JsonValue
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import REPO_ROOT, RESOURCES, resources
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -19,6 +20,7 @@ __all__ = [
     "HLA_SOURCE_PROFILES",
     "SOURCE_PROFILE_MANIFEST",
     "HlaSourceCommands",
+    "latex_dialect_for_root",
     "source_profile_for_document",
 ]
 
@@ -172,10 +174,12 @@ def _base_commands(commands: Mapping[str, JsonValue]) -> HlaSourceCommands:
     )
 
 
-def _load_source_profiles() -> dict[str, HlaSourceCommands]:
+def _load_source_profiles(
+    manifest_path: Path = SOURCE_PROFILE_MANIFEST,
+) -> dict[str, HlaSourceCommands]:
     """Load edition-specific faithful surface data from the source manifest."""
 
-    payload = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     commands = _base_commands(payload["command_vocabulary"])
     profiles: dict[str, HlaSourceCommands] = {}
     for item in payload.get("profiles", ()):
@@ -204,7 +208,11 @@ def _load_source_profiles() -> dict[str, HlaSourceCommands]:
 
 
 def _load_latex_dialect() -> LatexDialect:
-    payload = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))
+    return _load_latex_dialect_from(SOURCE_PROFILE_MANIFEST)
+
+
+def _load_latex_dialect_from(manifest_path: Path) -> LatexDialect:
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     return LatexDialect(**payload["latex_dialect"])
 
 
@@ -214,17 +222,34 @@ HLA_SOURCE_2010 = HLA_SOURCE_PROFILES["hla-2010"]
 HLA_LATEX_DIALECT = _load_latex_dialect()
 
 
-def source_profile_for_document(document_id: str) -> HlaSourceCommands:
+def source_profile_for_document(
+    document_id: str,
+    repo_root: Path = REPO_ROOT,
+) -> HlaSourceCommands:
     """Resolve the source profile declared by the canonical document registry."""
 
     from hla_lab.paths import document_entry_for_root
 
-    profile_id = document_entry_for_root(document_id).profile_id
+    profile_id = document_entry_for_root(document_id, repo_root).profile_id
     if profile_id is None:
         raise ValueError(f"document {document_id} has no source profile")
+    profile_manifest = resources(repo_root).source_profiles_manifest
+    profiles = (
+        HLA_SOURCE_PROFILES
+        if Path(repo_root).resolve() == REPO_ROOT
+        else _load_source_profiles(profile_manifest)
+    )
     try:
-        return HLA_SOURCE_PROFILES[profile_id]
+        return profiles[profile_id]
     except KeyError as error:
         raise ValueError(
             f"document {document_id} references unknown source profile {profile_id}"
         ) from error
+
+
+def latex_dialect_for_root(repo_root: Path = REPO_ROOT) -> LatexDialect:
+    """Load the LaTeX dialect declared by ``repo_root``."""
+
+    if Path(repo_root).resolve() == REPO_ROOT:
+        return HLA_LATEX_DIALECT
+    return _load_latex_dialect_from(resources(repo_root).source_profiles_manifest)

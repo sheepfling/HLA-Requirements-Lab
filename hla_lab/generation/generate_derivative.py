@@ -683,12 +683,14 @@ def generate_from_hla(
     output: Path,
     profile: PublicationProfile | None = None,
     graph_metadata: Mapping[str, CorpusDocumentDescriptor] | None = None,
+    repository_root: Path | None = None,
 ) -> Path:
     """Load the HLA profile at the adapter boundary for the initial derivative."""
     from hla_lab.corpus.hla_semantic import load_hla_corpus
+    from hla_lab.paths import REPO_ROOT
 
     return generate_derivative(
-        load_hla_corpus(tuple(roots)).documents,
+        load_hla_corpus(tuple(roots), repository_root or REPO_ROOT).documents,
         output,
         profile=profile,
         graph_metadata=graph_metadata,
