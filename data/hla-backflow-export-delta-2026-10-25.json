@@ -7228,5 +7228,2932 @@
       ],
       "created": []
     }
+  ],
+  "unattributed_requirement_changes": [
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-044-l108-35",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4",
+          "after": "4.1.3"
+        },
+        "clause_id": {
+          "before": "clause-4",
+          "after": "clause-4.1.3"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4",
+          "after": "m16.clause.4.1.3"
+        }
+      },
+      "before_sha256": "297f684d683c6f231302f35a5166bff5feb85df4a581001b3713366382265842",
+      "after_sha256": "2508b863895f4401d6e406aa92847e310a3a141f63d971aa7d2ff8b1d9525bfb"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-044-l27-8",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4",
+          "after": "4.1.2"
+        },
+        "clause_id": {
+          "before": "clause-4",
+          "after": "clause-4.1.2"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4",
+          "after": "m16.clause.4.1.2"
+        }
+      },
+      "before_sha256": "850985f536accea7ae5a7257183693f7a29bd0e5c904c047aa6d9b159bec667f",
+      "after_sha256": "5caf234aa453e4e2870b7edc8942d3cfe1d7b0d68b020c8d5011de3a0ab18937"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-044-l36-11",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4",
+          "after": "4.1.2"
+        },
+        "clause_id": {
+          "before": "clause-4",
+          "after": "clause-4.1.2"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4",
+          "after": "m16.clause.4.1.2"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 36,
+            "end_line": 41
+          },
+          "after": {
+            "path": "content/clauses/04-federation-management-page-044.tex",
+            "line": 33,
+            "end_line": 41
+          }
+        }
+      },
+      "before_sha256": "91dc8893f89d0a59bb4b89186048b24ed2233ef28fcb14132632139911a43739",
+      "after_sha256": "aec5993147c5556f962e0688bd8eb68534852d1630326241b62a4c8664125125"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-057-l44-6",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.11.4",
+          "after": "4.11"
+        },
+        "clause_id": {
+          "before": "clause-4.11.4",
+          "after": "clause-4.11"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.11.4",
+          "after": "m16.clause.4.11"
+        }
+      },
+      "before_sha256": "9cb77b8d6a16102a479c16993958b04bc9eac42ba4df4b2d5c27a68b9e0ded36",
+      "after_sha256": "dcfd6d818a682b3f88edb452ee4db10e235088f99828e5be0b230c578fbb1026"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-057-l56-8",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.11.4",
+          "after": "4.11.1"
+        },
+        "clause_id": {
+          "before": "clause-4.11.4",
+          "after": "clause-4.11.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.11.4",
+          "after": "m16.clause.4.11.1"
+        }
+      },
+      "before_sha256": "5858b95c89bb42c211d2db1d72092111e35dbef92cf4d84ce57bc74086bc64ec",
+      "after_sha256": "04d84b2ae95a31ea6ec225e1ebcb00e24f039cdb687b7bfdf02660a58479f2d4"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-062-l11-1",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.16",
+          "after": "4.15"
+        },
+        "clause_id": {
+          "before": "clause-4.16",
+          "after": "clause-4.15"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.16",
+          "after": "m16.clause.4.15"
+        }
+      },
+      "before_sha256": "4293b3e6ab6f16174d5d30542af1c4b954da8c81e65dc4cfea689e5d9df66817",
+      "after_sha256": "1d5a1a12809bea78244e0a407fbf0ba8f76f67230d49a8c7acb309b97de1bb49"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-067-l16-1",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.21.1",
+          "after": "4.20"
+        },
+        "clause_id": {
+          "before": "clause-4.21.1",
+          "after": "clause-4.20"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.21.1",
+          "after": "m16.clause.4.20"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/04-federation-management-page-067.tex",
+            "line": 16,
+            "end_line": 21
+          },
+          "after": {
+            "path": "content/clauses/04-federation-management-page-067.tex",
+            "line": 16,
+            "end_line": 18
+          }
+        }
+      },
+      "before_sha256": "d5988757791264832445ce1bddc1d4c7e6ba75d47e486d0ef5b6c1bc447659f7",
+      "after_sha256": "1a5c0359206b9e617f01f19c225105cbce94a21a016ed0ad17330c16641edb1e"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-067-l25-4",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.21.1",
+          "after": "4.20"
+        },
+        "clause_id": {
+          "before": "clause-4.21.1",
+          "after": "clause-4.20"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.21.1",
+          "after": "m16.clause.4.20"
+        }
+      },
+      "before_sha256": "af104d1afc1204692577c94ff3cad6b1f3b85219fbd7635d56b7ab1c516a1c00",
+      "after_sha256": "dca9630fc38dc6713f0f064a1b31bc33946cc8b901c0f178e3415e703b8f4a91"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-067-l34-7",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.21.1",
+          "after": "4.20"
+        },
+        "clause_id": {
+          "before": "clause-4.21.1",
+          "after": "clause-4.20"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.21.1",
+          "after": "m16.clause.4.20"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/04-federation-management-page-067.tex",
+            "line": 34,
+            "end_line": 36
+          },
+          "after": {
+            "path": "content/clauses/04-federation-management-page-067.tex",
+            "line": 31,
+            "end_line": 36
+          }
+        }
+      },
+      "before_sha256": "aca3be39157dd12fecbdb91c64a562839918214d8843ae2b912429e82b34e4ce",
+      "after_sha256": "8d00140dcab589a42cf8cf6114f2470c491eb7e2a618f53617e1f1ee889a93e1"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-067-l40-9",
+      "changed_fields": [
+        "machine_statement",
+        "statement"
+      ],
+      "readable_changes": {},
+      "before_sha256": "e1fe64754ba7e45d4ce03a96e2a0459952e66f038c06cb3be4d9b3ed2865f7de",
+      "after_sha256": "87f57db6af917437dd5dd4375bb2733f468596f13ad08b23eb4e74ce285ea120"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-04-federation-management-page-067-l52-13",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "4.21.1",
+          "after": "4.20"
+        },
+        "clause_id": {
+          "before": "clause-4.21.1",
+          "after": "clause-4.20"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.4.21.1",
+          "after": "m16.clause.4.20"
+        }
+      },
+      "before_sha256": "5a9f7c00c71799fb063dd6810f0c11d973001c6f1c4c63a90da98f79e73e6c2f",
+      "after_sha256": "6ce9bc193c055d196bfb2416f8bfd28f9499ac574fb64e9aa28cd61216401cfb"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-06-object-management-page-109-l25-6",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/06-object-management-page-109.tex",
+            "line": 25,
+            "end_line": 27
+          },
+          "after": {
+            "path": "content/clauses/06-object-management-page-109.tex",
+            "line": 22,
+            "end_line": 33
+          }
+        }
+      },
+      "before_sha256": "2356b5ff7019e097a6ad3f0989ebd8c033d5feedf8b5853003530f026eac92e4",
+      "after_sha256": "a6ef568b3f2c1b84da9f3ca6c8b28edc1e08caebce3114e2d71707c69150214e"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-06-object-management-page-115-l101-27",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/06-object-management-page-115.tex",
+            "line": 101,
+            "end_line": 103
+          },
+          "after": {
+            "path": "content/clauses/06-object-management-page-115.tex",
+            "line": 101,
+            "end_line": 104
+          }
+        }
+      },
+      "before_sha256": "031ad1980850a31419e241017ca130bb566b58c5783f48536600a7ba7e158ed6",
+      "after_sha256": "f1546c68c07d5e11ff02d6d9576794969335aaa20cd557911bd28dc3b796a67b"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l123-38",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/07-ownership-management-page-153.tex",
+            "line": 123,
+            "end_line": 128
+          },
+          "after": {
+            "path": "content/clauses/07-ownership-management-page-153.tex",
+            "line": 120,
+            "end_line": 126
+          }
+        }
+      },
+      "before_sha256": "184a9b07300bdee570dbf34e603fa5f73adbe69addee695eb86eab83910a168f",
+      "after_sha256": "d3f6f69f6a13ec8b849a19250565e14ac1d0b7fb76621fe823cc606989cffb31"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l129-40",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/07-ownership-management-page-153.tex",
+            "line": 129,
+            "end_line": 140
+          },
+          "after": {
+            "path": "content/clauses/07-ownership-management-page-153.tex",
+            "line": 126,
+            "end_line": 139
+          }
+        }
+      },
+      "before_sha256": "c905b76faac9d6808ae67dced65ac15d9d16d5c9b52d6beb4ebe1dbbbc7fa18e",
+      "after_sha256": "afb10a5edd7dfe52300d1219d291827d7421f8e1f728362d81da030bf900e834"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-07-ownership-management-page-175-l140-43",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.1"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/07-ownership-management-page-175.tex",
+            "line": 140,
+            "end_line": 145
+          },
+          "after": {
+            "path": "content/clauses/07-ownership-management-page-175.tex",
+            "line": 137,
+            "end_line": 147
+          }
+        }
+      },
+      "before_sha256": "def90b6ffaa6adf895d8203bac8aed3c69071b2ea3c858d176676becf522c4bc",
+      "after_sha256": "8fa0a4974094cb15c941bb3edb3903b44c094d6abcfa1a4d70fdea0474c39a17"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-07-ownership-management-page-175-l146-45",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.1"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.1"
+        }
+      },
+      "before_sha256": "7c3e978eda72247d071ce8827792a4dafa9ee1ceee51cecfd9a253c12ebcac24",
+      "after_sha256": "db24d99bdef386ced80bbebac0f29018389bea40b3b4e6e1e229c291411ddf42"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-178-l54-15",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-178.tex",
+            "line": 54,
+            "end_line": 80
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-178.tex",
+            "line": 51,
+            "end_line": 56
+          }
+        }
+      },
+      "before_sha256": "8e1b3ccf61af71b7093dac0a2fcb25d3d43685a94936f0ecba27397dcdca9200",
+      "after_sha256": "8eb3389d3a849b5d25cf8fea6b2787a634097ce2fffb205e86188527e2796ff3"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l132-41",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 132,
+            "end_line": 137
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 132,
+            "end_line": 135
+          }
+        }
+      },
+      "before_sha256": "b1dce6925cecb047cb5a082b03c5991d4dcc354cbaa5ec48c06eebbad7f49944",
+      "after_sha256": "917be3ecbb62bbd40e019d07727014bcc62ce756ae9c3d242aa24b7104bb71b7"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l138-43",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 138,
+            "end_line": 140
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 135,
+            "end_line": 138
+          }
+        }
+      },
+      "before_sha256": "1ca51bdc1dd2f1a93a59867e1f36fdb65fc3069b34b47ca68fd3e20d46f5aa4b",
+      "after_sha256": "b7c2c2a3bf570b5daef423e8fc5e6a8034027e555f9a649272eb4a8037b649d6"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l57-17",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.1.4",
+          "after": "8.1.3"
+        },
+        "clause_id": {
+          "before": "clause-8.1.4",
+          "after": "clause-8.1.3"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.1.4",
+          "after": "m16.clause.8.1.3"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 57,
+            "end_line": 65
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 56,
+            "end_line": 63
+          }
+        }
+      },
+      "before_sha256": "e0459aa08536c9d8678ec850cc4df29592df5c85f42ce1182a7c29ba9e5d4668",
+      "after_sha256": "cc5c4d5583dc0713e60d2445a406b7759dca77854a64de99422c45bd93945c92"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l69-20",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 69,
+            "end_line": 71
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 69,
+            "end_line": 72
+          }
+        }
+      },
+      "before_sha256": "ba0aee332297bdb9636b1955b1f24c3465d5c1ef05351caed564cc842d2ebec8",
+      "after_sha256": "163931a5bf99ff22a492d2add1398c7e7fac6d934215fa3d2c20c864558ccdb0"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l72-21",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 72,
+            "end_line": 74
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 71,
+            "end_line": 74
+          }
+        }
+      },
+      "before_sha256": "cee977c55ec9709ee1ca4d25ece19c5b7a9cd1e2652f0dbc249d4c5c3de83a55",
+      "after_sha256": "e610fd348b1631f3a4151594fb11be0eedd30811c7bbfe7b5f9eb04bd55ecdf6"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l78-23",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 78,
+            "end_line": 83
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 78,
+            "end_line": 81
+          }
+        }
+      },
+      "before_sha256": "fb4d5cf8116a22ee7814435445a891846b0dfd16b6166f482ed058a0488148c9",
+      "after_sha256": "bfa0cb3e7c220168c6d2bccc98ef46c364a16a8c1762e7ffb4e749f70a045f9d"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-180-l84-25",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 84,
+            "end_line": 86
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-180.tex",
+            "line": 81,
+            "end_line": 91
+          }
+        }
+      },
+      "before_sha256": "44abf6f232369d0b197c04522f8cf8a0e2803770b9cda8467f2578c28c77b8d0",
+      "after_sha256": "4be14154d806ad80d60436f1eadfc4209826733cd7fe267e5b129f3a8c6eb00a"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l118-3",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        }
+      },
+      "before_sha256": "960aa8883bfb1cdf6434f2583bc65daa993930b6dc800db84cb4a5c678628215",
+      "after_sha256": "b95b616185ec6956fb1338c2e91bc9573b554aae18d7fd9136f97bed34a2013a"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l121-4",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 121,
+            "end_line": 132
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 120,
+            "end_line": 130
+          }
+        }
+      },
+      "before_sha256": "8f10e2929784df7d11392feec63c9e477f597e2ddc34769c2e5d3448333caa9d",
+      "after_sha256": "fa0e57feb043a4b0ec6800cb3c44b700ece6d9349ac884d5f51f023883c72a79"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l133-8",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 133,
+            "end_line": 138
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 133,
+            "end_line": 136
+          }
+        }
+      },
+      "before_sha256": "e9a2920eb6e69c6d45f43444a0bf304d2a60431104e4e38a7a873deda9804e19",
+      "after_sha256": "91060bf4f3d180b38f77e9aa88e0b3aee1bab304a9fab9849a4cb625113dd68b"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l139-10",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 139,
+            "end_line": 144
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 135,
+            "end_line": 142
+          }
+        }
+      },
+      "before_sha256": "f38baff8563a5ab259c3b702058dffc92f66ad00ce1bfe71cd8a0b35fe40385d",
+      "after_sha256": "aa235d2f11258a8e9f744ab63cc4f32c3274f004d6922f3a005f415f244915fa"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l145-12",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 145,
+            "end_line": 147
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 142,
+            "end_line": 145
+          }
+        }
+      },
+      "before_sha256": "c765798fbe56e04448adc3eb2df37b6a3c3bfdfbfb96227187fd7818d293f244",
+      "after_sha256": "9349342ef321d2bbffd90f74e1bfa901fb7618c7a090931b73e10475e55968ff"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l157-16",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 157,
+            "end_line": 162
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-181.tex",
+            "line": 153,
+            "end_line": 160
+          }
+        }
+      },
+      "before_sha256": "4327aca64407eff4b00c1234013794b84043221469052c499491dfbb46d0c8c0",
+      "after_sha256": "ef51cd21183a4c7cb39179e646518d395c04f1eef93854f976a19c7d59ac4839"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-181-l163-18",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.4"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.4"
+        }
+      },
+      "before_sha256": "1f2a9cee08c1f4e533850b8a85d6958d73f0ab79534debfff5bbbe840b2058dd",
+      "after_sha256": "d648a884138d359af35fa2eb7497bca592e26b1b03571ce4c5333a8c81f6b633"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l10-2",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 10,
+            "end_line": 15
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 9,
+            "end_line": 13
+          }
+        }
+      },
+      "before_sha256": "05cfd93d28c8fb6a5f7d5be777f96ea2a06df147dd3933cc507c38e309af2462",
+      "after_sha256": "9f80fb26b11cfc890838594e48259205e10a482d2b397ab098e5929cbfce7d97"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l106-33",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.6"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.6"
+        }
+      },
+      "before_sha256": "ee75d2beb35383fd64436e3d967b921ed61cebac05c90a6469dc603dc53c7134",
+      "after_sha256": "41b0f23122ddfc9d3955528c664375afc2924a23b297fe2bfb3f0666783ea746"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l112-35",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.6"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.6"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 112,
+            "end_line": 126
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 112,
+            "end_line": 121
+          }
+        }
+      },
+      "before_sha256": "27b0982f6c04cedf4cb6285b37230e105c80335b13bb78eed02d289a3744ebc1",
+      "after_sha256": "a02bca6e74ad2e7d8f9e9d5a34cf547bb6f90e08f6d2baea9e603eb12dabca8b"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l127-40",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.6"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.6"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 127,
+            "end_line": 129
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 120,
+            "end_line": 127
+          }
+        }
+      },
+      "before_sha256": "082ec44d54260709230d6d910e4028127e15be0b2e2847399fffe76b065b4d88",
+      "after_sha256": "08f230a7450f8ba2095ae60c8ee787a572dc47a48865eecbc49b71da2e9a8b71"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l133-42",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.6"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.6"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 133,
+            "end_line": 138
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 130,
+            "end_line": 136
+          }
+        }
+      },
+      "before_sha256": "ccff7c5609065c74c38eea36fb2d6849f1f73029762613b18a7488c58a5c12d3",
+      "after_sha256": "848a5f1b683fd2dd45657dbf19cafecfa61dd1a076fee4fb82d2fadbc836048c"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l16-4",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        }
+      },
+      "before_sha256": "df35dfd1f532adbe205423b089b409bebb612d9fd4b9695b7db82d0fce1f1df8",
+      "after_sha256": "2553631f7020ce1d88eb613fc1f6af0e7f0e8d75a5862657ee4a97e0e891c119"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l19-5",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        }
+      },
+      "before_sha256": "cb31d73680ac80bae19d5a8d073217b6963a0d2633ade071300f2793ba00e7c9",
+      "after_sha256": "27bbf9693594093926726fa500c102dc36e25a50d17065ecc33992ecb24acfd0"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l22-6",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 22,
+            "end_line": 24
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 20,
+            "end_line": 25
+          }
+        }
+      },
+      "before_sha256": "0d89cb3c7ed20c134040bdc6ab3184ccb326b6d9834d575c3851c295ee39b700",
+      "after_sha256": "c661a0fbf589284928a065ccfff0e1e97c0f311cb42e596f9701282d6a57b5cc"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l25-7",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        }
+      },
+      "before_sha256": "4ed1b7dc594b413985ccf0329a4a163bd6aa70e018e2a4ce4276ab4c04d102c4",
+      "after_sha256": "6f833a6d05a2273a601f78eef2f3683e62011351cf493cd101cb01051adbc524"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l37-11",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 37,
+            "end_line": 42
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 37,
+            "end_line": 40
+          }
+        }
+      },
+      "before_sha256": "15a0a956211e29e936cb14d513597a259a675f3bcc7246ac618df31ad6b25f67",
+      "after_sha256": "c16268d30c19bb1dd496d2402922b004aa340b464cb3ecdbe4c3c6a940d166bd"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l43-13",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.5"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.5"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 43,
+            "end_line": 69
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-182.tex",
+            "line": 39,
+            "end_line": 52
+          }
+        }
+      },
+      "before_sha256": "1ac52b6ec78acad20a2823efcfb961d8c367d0384ff1f1be4e3d7e66f81c4142",
+      "after_sha256": "8517d8b1ca283bdb2899bf7b740ddc66f1baabfe2558d8e8a4daba3446448d54"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-182-l97-30",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8",
+          "after": "8.1.6"
+        },
+        "clause_id": {
+          "before": "clause-8",
+          "after": "clause-8.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8",
+          "after": "m16.clause.8.1.6"
+        }
+      },
+      "before_sha256": "229fa863ed6a33de59b9b2f9ada021240a6e48c4c0be20f728d81830f16b6648",
+      "after_sha256": "fd77bf8c7fbca91104d7d425c5dd50045335a7fa590ad3ea1bb7e1daaabe1832"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-187-l10-1",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.1.10",
+          "after": "8.1.8"
+        },
+        "clause_id": {
+          "before": "clause-8.1.10",
+          "after": "clause-8.1.8"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.1.10",
+          "after": "m16.clause.8.1.8"
+        }
+      },
+      "before_sha256": "1a0e8a96db656800811455c3280be8e1ab269842c685dd6d40a030dafb1126e9",
+      "after_sha256": "845bf4601dbfe10f90f913dd878165d77cc597720d5e2aa08100be613606429e"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-187-l25-6",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.1.10",
+          "after": "8.1.8"
+        },
+        "clause_id": {
+          "before": "clause-8.1.10",
+          "after": "clause-8.1.8"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.1.10",
+          "after": "m16.clause.8.1.8"
+        }
+      },
+      "before_sha256": "6f89522842ee019b78f225417786a0dbfd6efa6c94d758f4e5f6dd60d67b50da",
+      "after_sha256": "555feaa4546f08aafc0b6b11b17a537873a652b70b082d21ee6ac0de8208df93"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-187-l40-11",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.1.10",
+          "after": "8.1.8"
+        },
+        "clause_id": {
+          "before": "clause-8.1.10",
+          "after": "clause-8.1.8"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.1.10",
+          "after": "m16.clause.8.1.8"
+        }
+      },
+      "before_sha256": "75ceff80811318c3c910f9ab0c7089e3bbeec9703d975f4ab2e7ef32d9235297",
+      "after_sha256": "51aa96c9641c0a3f5014f169acc39f2009eb811204e14bb50f8bfa6c323fc27e"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-187-l46-13",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.1.10",
+          "after": "8.1.8"
+        },
+        "clause_id": {
+          "before": "clause-8.1.10",
+          "after": "clause-8.1.8"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.1.10",
+          "after": "m16.clause.8.1.8"
+        }
+      },
+      "before_sha256": "f8f93d8316120149c6facda8c4ea14a890c2e2df9429e5c5a65cf5da811e83b6",
+      "after_sha256": "1d8f1d486d892554131416c9ea4f1d6e1b309e86394e53a9ca230e17a5685c75"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-193-l58-12",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.7.5",
+          "after": "8.7"
+        },
+        "clause_id": {
+          "before": "clause-8.7.5",
+          "after": "clause-8.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.7.5",
+          "after": "m16.clause.8.7"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-193.tex",
+            "line": 58,
+            "end_line": 60
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-193.tex",
+            "line": 58,
+            "end_line": 61
+          }
+        }
+      },
+      "before_sha256": "2b45ea46c15398527c7e1bd70f73bae646bee59374005cf180794835f3c6ca0f",
+      "after_sha256": "ba33c8d6251f2b7a339cecd9de56fb82f6027c060b53b55000aaca370cdff8b3"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-194-l45-11",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.8.3",
+          "after": "8.8"
+        },
+        "clause_id": {
+          "before": "clause-8.8.3",
+          "after": "clause-8.8"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.8.3",
+          "after": "m16.clause.8.8"
+        }
+      },
+      "before_sha256": "bde6d40d0a4b1712f401189eb5e8d75fd9f7df64894f0f7eab522479ddb5ce8f",
+      "after_sha256": "f78abc5eb9893602aa6e7b5882011931db7c7cebbba89b4a34e19ac7dbc794eb"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-200-l173-52",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 173,
+            "end_line": 175
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 173,
+            "end_line": 188
+          }
+        }
+      },
+      "before_sha256": "f07d9e99a6de09afa443f58e07814172016088ccbce4f29726a43366593e2e33",
+      "after_sha256": "62adfe332145294dab7f9d08a74281704ebe39d6eb5bc170f74ac05cc33cfa8c"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-203-l92-24",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.14.3",
+          "after": "8.14"
+        },
+        "clause_id": {
+          "before": "clause-8.14.3",
+          "after": "clause-8.14"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.14.3",
+          "after": "m16.clause.8.14"
+        }
+      },
+      "before_sha256": "0579190963e7753115a822bb2a3cd6e06070bb400d04cb38b91b7de23311530d",
+      "after_sha256": "81f3c32b86ccacc4b0322ec4e593e6d3b07199d40b3c5514e8f8303acd0a9441"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-204-l38-9",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.15.3",
+          "after": "8.14.4"
+        },
+        "clause_id": {
+          "before": "clause-8.15.3",
+          "after": "clause-8.14.4"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.15.3",
+          "after": "m16.clause.8.14.4"
+        }
+      },
+      "before_sha256": "27ac3eeeaa9bc3f54ec4c466c24551ea0587c0868fa3b280ad8bc72648f86b38",
+      "after_sha256": "7f53e22ef989e421bf091f022afed5cb6a7b02558e96cba3f8f0f3f054157634"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-206-l26-3",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.18.1",
+          "after": "8.17"
+        },
+        "clause_id": {
+          "before": "clause-8.18.1",
+          "after": "clause-8.17"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.18.1",
+          "after": "m16.clause.8.17"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-206.tex",
+            "line": 26,
+            "end_line": 28
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-206.tex",
+            "line": 26,
+            "end_line": 29
+          }
+        }
+      },
+      "before_sha256": "a420eab49b94bc2f467ea38efb1331d7d3696447d95176ad0e1118cf6acfe259",
+      "after_sha256": "ec6133e33d0123d780299d308143a0d51f55da1be7f8e462fff664cf29545b42"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-206-l32-5",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.18.1",
+          "after": "8.17"
+        },
+        "clause_id": {
+          "before": "clause-8.18.1",
+          "after": "clause-8.17"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.18.1",
+          "after": "m16.clause.8.17"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-206.tex",
+            "line": 32,
+            "end_line": 37
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-206.tex",
+            "line": 29,
+            "end_line": 35
+          }
+        }
+      },
+      "before_sha256": "0a9179ff1e1fedee5536c0dd4341d3db284103b57abf9064fca5bde0e3214b81",
+      "after_sha256": "b1ed676521df1c1fb8aa2e6aeb98e6500b86ac68063a440efa5b782664bb2ace"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-207-l109-27",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.19.3",
+          "after": "8.19"
+        },
+        "clause_id": {
+          "before": "clause-8.19.3",
+          "after": "clause-8.19"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.19.3",
+          "after": "m16.clause.8.19"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-207.tex",
+            "line": 109,
+            "end_line": 111
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-207.tex",
+            "line": 109,
+            "end_line": 112
+          }
+        }
+      },
+      "before_sha256": "040eeab768955c1abd70430ef95dee9d282fb2e410a82467a3783a1126c61c7b",
+      "after_sha256": "b7394a5224268a731a8af6fd56436fa048741abc96abaa97bb1077aa1c717d08"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-207-l115-29",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "8.19.3",
+          "after": "8.19"
+        },
+        "clause_id": {
+          "before": "clause-8.19.3",
+          "after": "clause-8.19"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.8.19.3",
+          "after": "m16.clause.8.19"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-207.tex",
+            "line": 115,
+            "end_line": 120
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-207.tex",
+            "line": 113,
+            "end_line": 118
+          }
+        }
+      },
+      "before_sha256": "b16d9cb1bfb1367eeeea82b1017fbdc69bfdec99b05eca5907fca3ca86bb6729",
+      "after_sha256": "d1616afffeac534eb2d5886f6b2417ff23c33e603a528c54591b37f90dc16052"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l102-31",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "9c32fdcdd3163aff1cd3e4f1a6f12cb4b74935830507db524f8c4fe8fd342808",
+      "after_sha256": "322868181995d7e147f0727318ec0c0403e69f60af3f63421caac45219486809"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l111-34",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "662f3c8c8b397137171c739cce2a184a109f3ebad77abacb7f01f10de979dd06",
+      "after_sha256": "009d945dccc55b246da1fde8a9bc881096424548cbb6695d6e03379261a459b3"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l126-39",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "e9e307fd341221cf50f13f955cdbfa251735a9539a5f41da006b06cc11d18041",
+      "after_sha256": "1591226d4023063cdb181ed4f20d0cdf44d5d55ea1650c2c447c8b26115a9c9f"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l129-40",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "9a206ea75fd3aa6ea959ea1442251d2c57947fb723cb9b8ae90beeefede99981",
+      "after_sha256": "9b1eec99552ad88d4e0f73487cbac3d8e9c7566d73b25e713864615c21bf7842"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l135-42",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "621364955e83c08c8f5dd8df6e1e9de0aa8c2726b2d76b99fd8883da4dc3dace",
+      "after_sha256": "5fa1f34a1720ccd88378986c4359ba18fc14b3853713c3b9c9c3853d3df659cf"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l144-45",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "60603e1f757943f7561eb0ac1598293ca86f6d3f91d72499f016e2a667b72fdd",
+      "after_sha256": "b61a289a78d976ddc4a267f2c41fa3f2643e3caa721ccb9222efa90ea6694fc5"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l153-48",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "d40fbb8ee172a5a402aabbee2c08062d6342fd3532b88160fd8120a679c11055",
+      "after_sha256": "01abc811cffa228d99ace7c5072cd7d93ff51e4706e13a51112b38711ddf2c8b"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l180-57",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "9f8af8fafe34edb7045859ee0e7015961fa1ec085a9d072dd6480361d8a97450",
+      "after_sha256": "ad06037a1a5b28ed189432b8c05a8132bf6cdb535875229561d945b1a28761b2"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l84-25",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        }
+      },
+      "before_sha256": "98bf98759a260845c3ff9d605ad5e49a5759592ec91a87ac81bf7d5f882bbb1c",
+      "after_sha256": "9f1c07d4613de6626509e2ce7bd7251e259d6ab12d655b704815e73262425d39"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l90-27",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-216.tex",
+            "line": 90,
+            "end_line": 92
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-216.tex",
+            "line": 89,
+            "end_line": 92
+          }
+        }
+      },
+      "before_sha256": "422512f3fdbf3d933fadc96b585f77f7e0c0b8a3d5587370ef0f84f014e47cfa",
+      "after_sha256": "3fe7f55e424e6d2f98dc6ec5585f21f2b750c3d22ef4f3fac15c868c5270d138"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-08-time-management-page-216-l93-28",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9",
+          "after": "9.1.1"
+        },
+        "clause_id": {
+          "before": "clause-9",
+          "after": "clause-9.1.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9",
+          "after": "m16.clause.9.1.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/08-time-management-page-216.tex",
+            "line": 93,
+            "end_line": 98
+          },
+          "after": {
+            "path": "content/clauses/08-time-management-page-216.tex",
+            "line": 90,
+            "end_line": 98
+          }
+        }
+      },
+      "before_sha256": "0c95a710988a96fff2ad11f4f6252d28635b7cf2b98862da7330fee3deaf54df",
+      "after_sha256": "91e107b2f379b616417a9a93268f596621ad895f3f0a8a4a3363edba7e8d8985"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l104-34",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 104,
+            "end_line": 109
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 95,
+            "end_line": 109
+          }
+        }
+      },
+      "before_sha256": "9147e4c8985a89b06397017f692fa0bb3d1d5867227ae52235911a56a901e796",
+      "after_sha256": "a314e0dff9528b6a9f22dc942813397fa684d399a908bac46bfc805f3ab66399"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l11-3",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 11,
+            "end_line": 22
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 9,
+            "end_line": 18
+          }
+        }
+      },
+      "before_sha256": "9c79d6423092513f116f7e401abea227e22bed248d8182020190c951bfa7bc3c",
+      "after_sha256": "11f5b40b736a6deb8644a8ca818cad24a2d7ae0b4a94eb9ab04ccece96ead857"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l23-7",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 23,
+            "end_line": 28
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 18,
+            "end_line": 28
+          }
+        }
+      },
+      "before_sha256": "18a33dc912a17269dcba1ea2ab9ec335a21651e6cdff5bf860457d7377145f07",
+      "after_sha256": "d252922d1538374d74f54cf2d9ee9dccd00a995200bd31ee303ae60b8cf7db86"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l62-20",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 62,
+            "end_line": 70
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 60,
+            "end_line": 70
+          }
+        }
+      },
+      "before_sha256": "83b14bb9b4a91a90c823b7e220b4e58374fa79c910985d2d84b11e0e429a75f0",
+      "after_sha256": "9352f4f3f588c5e1934193bcd51de8c5f3855126a1edc25c2a480134dbc80f92"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l86-28",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 86,
+            "end_line": 91
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 75,
+            "end_line": 91
+          }
+        }
+      },
+      "before_sha256": "320f4f54919bcd7e0bf67af061410ba4c7db3a86471bd6b1044a70e33cf84862",
+      "after_sha256": "0e5461eb471403455527744d1cf3fd8125d25120652bf9555f7fd4047d79c893"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l92-30",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.2",
+          "after": "9.1.3.1"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.2",
+          "after": "clause-9.1.3.1"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.2",
+          "after": "m16.clause.9.1.3.1"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 92,
+            "end_line": 103
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-219.tex",
+            "line": 92,
+            "end_line": 98
+          }
+        }
+      },
+      "before_sha256": "efa79f89b8a455fa78ab25b68d8a7cb132a0e708a38a280f1d67df1ee82f52cb",
+      "after_sha256": "35c53c24f8b462a213e58bc78ee32b9a8d7f009605ee5ae29c627bb06bab28b3"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l98-32",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.3.3",
+          "after": "9.1.3.2"
+        },
+        "clause_id": {
+          "before": "clause-9.1.3.3",
+          "after": "clause-9.1.3.2"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.3.3",
+          "after": "m16.clause.9.1.3.2"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-220.tex",
+            "line": 98,
+            "end_line": 106
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-220.tex",
+            "line": 98,
+            "end_line": 105
+          }
+        }
+      },
+      "before_sha256": "a6cce1b0429f1fc5ace87bcff1f37ce54e317a0633c4f00ac08870f799343527",
+      "after_sha256": "2238cbf8bd0a959337946f3cc24e2f6f415e2c5ddb16e0652fba87b5d6646c50"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l18-4",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "8d118d7ee7876ccf994ee2614cf946cd4bda281b69407b0151511c7b1f2f653d",
+      "after_sha256": "3820de595d3f4d9c07f3830dd5383a6c8908d8b5a01451bf1d861e67da52451a"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l27-7",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "48f015f34d66d3a66cb0695b6998de9548cd6b77e08c07349d4ad88e79ce7d2d",
+      "after_sha256": "f7ecdb5e5876ac1f84841a0acddd70a3dd4e3e76012d8fa45b3b0f5d92afcedc"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l36-10",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "37fdea0fa389586cd8d458659c579d2b7db3b9b8e8dbc9066a8d2ca295ba521f",
+      "after_sha256": "c1ec1d81a4de0f3f68d4b5c3917c343a5f354cf450e546ba66271d58999cd334"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l45-13",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "de98082b834cda3a0d938175d886f43675eb0f9afb038a57102d52b57d5fba90",
+      "after_sha256": "bdd1ebbc27444af99112c3b62f8636c4ffa340a9562ee9c59c3297a44b4ed8c9"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l51-15",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "fc74ea33e77c6614a0574bd249af9c85ba349b478b4a42040f19971851dbb651",
+      "after_sha256": "3ae943d817fa66b2b0a8893ac032af1bdd240c8233cb1ab7868304d4510cda65"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l57-17",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "b5d5e0e4f38d33a9e9c714d1f1a7e5b014b2a3563a6970a8da1d32313c44daf5",
+      "after_sha256": "50cf95433cf910b5ed3aa588b3a32ae1825a3cfaa0029203a932d7ebf0bf319c"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l63-19",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "093b87bf2fd7a6717f69efab50fa5656ff0e43b2e569179f4936e2045dbf180a",
+      "after_sha256": "159735249cae2feb4733852618f3b8e4767d51e7515858663091e0e6aa8ef525"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l66-20",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "fa1efc8cf102e802b4237045aeb6c2a8a4c520869e6e580488e009db4615c5c7",
+      "after_sha256": "720ed93a94c0aeaf67cda90a09582e5e6390f0459728a9c75b1ed6ab7190d1d7"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l69-21",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.7"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.7"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.7"
+        }
+      },
+      "before_sha256": "747e57ffc524cc6796cddc1305441982f869b902821f4ddf27f6b79b98528a7a",
+      "after_sha256": "d20e0485f925cc7f784040982d5b9e09b61fdaa9e41d79a74d21ea7a98a59ca8"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l9-2",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "semantic_group_id"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.1.8",
+          "after": "9.1.6"
+        },
+        "clause_id": {
+          "before": "clause-9.1.8",
+          "after": "clause-9.1.6"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.1.8",
+          "after": "m16.clause.9.1.6"
+        }
+      },
+      "before_sha256": "8d0649c6d85baeeec77fb2da0bd6c8f07dd45b8370c0f215024b8f0a7135c8b1",
+      "after_sha256": "40f6484738e876d78a7b48ecfad32a2a3eb28be4b14641f4af4023808572d550"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l17-4",
+      "changed_fields": [
+        "clause",
+        "clause_id",
+        "machine_statement",
+        "semantic_group_id",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "clause": {
+          "before": "9.5.4",
+          "after": "9.5"
+        },
+        "clause_id": {
+          "before": "clause-9.5.4",
+          "after": "clause-9.5"
+        },
+        "semantic_group_id": {
+          "before": "m16.clause.9.5.4",
+          "after": "m16.clause.9.5"
+        },
+        "source": {
+          "before": {
+            "path": "content/clauses/09-data-distribution-management-page-229.tex",
+            "line": 17,
+            "end_line": 19
+          },
+          "after": {
+            "path": "content/clauses/09-data-distribution-management-page-229.tex",
+            "line": 14,
+            "end_line": 19
+          }
+        }
+      },
+      "before_sha256": "061b0616c7df7719f7f8eb2905bc094c44f9d00c557d65216e0861126701633a",
+      "after_sha256": "b0de13f3d7f2b73d10a339d27250a3788099e9000e818a6e3f9af2fe35ed0a11"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-233-l42-11",
+      "changed_fields": [
+        "machine_statement",
+        "statement"
+      ],
+      "readable_changes": {},
+      "before_sha256": "adeebc198d162fdc38acc552e77c8eecd7c09ac8afd3e726c8e2b552fd7a376e",
+      "after_sha256": "f17aa6516998a91894f3c2df654c65dbfa670ebe71cac67a37467a7e118881ce"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-11-management-object-model-page-294-l17-5",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-294.tex",
+            "line": 17,
+            "end_line": 19
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-294.tex",
+            "line": 17,
+            "end_line": 20
+          }
+        }
+      },
+      "before_sha256": "3cd5561c4119416a34fa7a05572bf49fbe45bd06b9b338df53ca6cd8ae131568",
+      "after_sha256": "dd7b284a4fddc6f7cd619961fea26728788ede0a9d550519688f8859ecd38e9d"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-content-clauses-11-management-object-model-page-294-l20-6",
+      "changed_fields": [
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-294.tex",
+            "line": 20,
+            "end_line": 25
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-294.tex",
+            "line": 19,
+            "end_line": 30
+          }
+        }
+      },
+      "before_sha256": "df7cd8f9c18febd4eb0980071555898490e2feaef5817456bb9bdd07c8649f3a",
+      "after_sha256": "e836847fde15c8ffa0ec1f1ca4f62dbfdc26add572d075899ba8fecd46f435ab"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-table-5-p296-r002",
+      "changed_fields": [
+        "coverage_note",
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 26,
+            "end_line": 41
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 24,
+            "end_line": 39
+          }
+        }
+      },
+      "before_sha256": "a24ec564623a0beedf4c3c99638d15b8833c326953423d4bc11b159d859f3159",
+      "after_sha256": "8e60ece51c4a57b68096f8994644431fea4e2924cad4954b3a682efde2ea4295"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-table-5-p296-r003",
+      "changed_fields": [
+        "coverage_note",
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 29,
+            "end_line": 44
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 27,
+            "end_line": 42
+          }
+        }
+      },
+      "before_sha256": "cd142ba17d09232d1a53662ba3006b15698bd20dcad1b081e419bdc20668c83b",
+      "after_sha256": "afc606d28393a404cf40a16bfb25e53c263ad24c0141987b457c8d519a2ba306"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-table-5-p296-r007",
+      "changed_fields": [
+        "coverage_note",
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 62,
+            "end_line": 71
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 60,
+            "end_line": 69
+          }
+        }
+      },
+      "before_sha256": "53d0b32eaaffb0d65517879a3c6fec894851142e9d525037e526f3de4cf54a3a",
+      "after_sha256": "c0f89b637ebd4104a867f1878646143a218aca22e9a56d83ec62a6bac6064aa3"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "change": "changed",
+      "id": "requirement-candidate-table-5-p296-r008",
+      "changed_fields": [
+        "coverage_note",
+        "machine_statement",
+        "source",
+        "statement",
+        "title"
+      ],
+      "readable_changes": {
+        "source": {
+          "before": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 65,
+            "end_line": 77
+          },
+          "after": {
+            "path": "content/clauses/11-management-object-model-page-296.tex",
+            "line": 63,
+            "end_line": 72
+          }
+        }
+      },
+      "before_sha256": "aeb09e8fa974c799853b6717e0a7a5da3d0b54096033c2265779a3a93de1608f",
+      "after_sha256": "6a76447fd47ab1a15b4fa789f2ceaf1bd1d128e3aead12d197f9e75bb2b926cf"
+    }
   ]
 }

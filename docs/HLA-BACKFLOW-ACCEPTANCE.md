@@ -166,8 +166,13 @@ The other three documents were unchanged. All 203 distinct original
 requirement IDs referenced by the 84 corrected Lab complaints are present in
 both exports and have a non-ordinal change. The five new requirement IDs are
 listed under RL-253, RL-321, and RL-322 in the issue snapshot. The 2010
-transition and 1516.2 requirement changes are additional branch changes;
-review them separately when updating a six-document Umbra pin.
+transition changes are additional branch changes; the two changed 1516.2
+requirements are part of the corrected complaints. Of the 297 changed
+1516.1-2025 requirement records, 201 belong to the corrected complaints,
+three are cited by other queue issues, and 93 are not cited by any of the 89
+issues. These 93 records are enumerated in the export-delta report with changed
+fields and before/after hashes. Review them, as well as the 2010 transitions,
+separately before updating a six-document Umbra pin.
 
 The [per-issue export delta](../data/hla-backflow-export-delta-2026-10-25.json)
 records the changed fields and before/after record hashes for every affected
@@ -175,8 +180,10 @@ stable ID across all 89 issues. It omits ordinal-only movement and includes
 readable before/after values for clause, source, extraction, and grouping
 metadata. Its 84 corrected issues cover 211 affected rows (203 distinct IDs)
 and five newly created IDs. RL-369 remains source-conflict-open regardless of
-its candidate delta. A regression checks that the delta names every
-snapshot issue and each corrected candidate.
+its candidate delta. The report also lists all 93 changed requirements that
+have no queue-issue attribution, so collateral export changes stay visible.
+A regression checks that the delta names every snapshot issue, each corrected
+candidate, and the unattributed changes.
 
 To reproduce this preview from the Lab checkout, with the sibling Umbra
 checkout and its existing ignored baseline bundle available:

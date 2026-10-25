@@ -49,3 +49,8 @@ def test_export_delta_covers_every_snapshot_issue_and_corrected_candidate() -> N
             created_ids.update(item["id"] for item in evidence["created"])
     assert len(corrected_ids) == 203
     assert len(created_ids) == 5
+    unattributed = delta["unattributed_requirement_changes"]
+    assert len(unattributed) == 93
+    assert all(item["document_id"] == "hla-1516.1-2025" for item in unattributed)
+    assert all(item["change"] == "changed" for item in unattributed)
+    assert all(item["changed_fields"] for item in unattributed)

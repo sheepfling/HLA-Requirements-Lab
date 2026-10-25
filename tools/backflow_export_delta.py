@@ -74,8 +74,11 @@ def build_delta(
     if len({issue["id"] for issue in issues}) != len(issues):
         raise ValueError("duplicate issue ID in backflow snapshot")
     results: list[dict[str, Any]] = []
+    attributed: dict[str, set[str]] = {}
     for issue in issues:
         document_id = issue["document_id"]
+        attributed.setdefault(document_id, set()).update(issue["affected_requirement_ids"])
+        attributed[document_id].update(issue.get("created_requirement_ids", ()))
         try:
             before = before_by_document[document_id]
             after = after_by_document[document_id]
@@ -107,6 +110,36 @@ def build_delta(
                 "created": created,
             }
         )
+    unattributed: list[dict[str, Any]] = []
+    for document_id in sorted(before_by_document.keys() | after_by_document.keys()):
+        before = before_by_document.get(document_id, {})
+        after = after_by_document.get(document_id, {})
+        excluded = attributed.get(document_id, set())
+        for requirement_id in sorted((before.keys() | after.keys()) - excluded):
+            if requirement_id not in before:
+                unattributed.append(
+                    {
+                        "document_id": document_id,
+                        "change": "created",
+                        "id": requirement_id,
+                        "after_sha256": _record_hash(after[requirement_id]),
+                    }
+                )
+            elif requirement_id not in after:
+                unattributed.append(
+                    {
+                        "document_id": document_id,
+                        "change": "removed",
+                        "id": requirement_id,
+                        "before_sha256": _record_hash(before[requirement_id]),
+                    }
+                )
+            else:
+                delta = requirement_delta(before[requirement_id], after[requirement_id])
+                if delta["changed_fields"]:
+                    unattributed.append(
+                        {"document_id": document_id, "change": "changed", **delta}
+                    )
     return {
         "schema_version": 1,
         "baseline": {
@@ -120,6 +153,7 @@ def build_delta(
             "sha256": candidate_sha256,
         },
         "issues": results,
+        "unattributed_requirement_changes": unattributed,
     }
 
 
