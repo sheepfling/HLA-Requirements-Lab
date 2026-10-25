@@ -1,4 +1,15 @@
 {
   "schema_version": 1,
-  "reviews": []
+  "reviews": [
+    {
+      "requirement_id": "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
+      "status": "non-normative",
+      "reason": "Table 2 introduction is explanatory layout prose, not a standalone obligation.",
+      "source": {
+        "path": "content/clauses/08-time-management-page-181.tex",
+        "line": 112,
+        "end_line": 115
+      }
+    }
+  ]
 }

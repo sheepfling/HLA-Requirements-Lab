@@ -50,14 +50,14 @@ changes cannot silently reintroduce unavailable or substituted reading roles.
 
 ## Product matrix
 
-| Product | Edition | Family | Body strategy | Shared profile |
-| --- | --- | --- | --- | --- |
-| HLA 1516 | 2010 | framework | source-faithful adapter | yes |
-| HLA 1516 | 2025 | framework | source-faithful adapter | yes |
-| HLA 1516.1 | 2010 | federate interface | source-faithful adapter | yes |
-| HLA 1516.1 | 2025 | federate interface | source-faithful adapter | yes |
-| HLA 1516.2 | 2010 | OMT | source-faithful adapter | yes |
-| HLA 1516.2 | 2025 | OMT | source-faithful adapter | yes |
+| Product    | Edition | Family             | Body strategy           | Shared profile |
+| ---------- | ------- | ------------------ | ----------------------- | -------------- |
+| HLA 1516   | 2010    | framework          | source-faithful adapter | yes            |
+| HLA 1516   | 2025    | framework          | source-faithful adapter | yes            |
+| HLA 1516.1 | 2010    | federate interface | source-faithful adapter | yes            |
+| HLA 1516.1 | 2025    | federate interface | source-faithful adapter | yes            |
+| HLA 1516.2 | 2010    | OMT                | source-faithful adapter | yes            |
+| HLA 1516.2 | 2025    | OMT                | source-faithful adapter | yes            |
 
 The shared profile is an implementation boundary and quality gate. It does
 not carry temporary review identifiers, ballot history, publisher identity, legacy legal

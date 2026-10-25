@@ -5,12 +5,15 @@ from __future__ import annotations
 import json
 from collections.abc import Mapping
 from dataclasses import dataclass, replace
+from importlib.resources import files
+from pathlib import Path
 from typing import Literal
+
+from pydantic import JsonValue
 
 from hla_lab.adapters.latex_renderer import LatexDialect
 from hla_lab.core.coercions import coerce_int
-from hla_lab.core.json_types import JsonValue
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import RESOURCES, document_entry_for_root
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -23,7 +26,8 @@ __all__ = [
 ]
 
 
-@dataclass
+# TODO: is this dataclasses mutable or immutable?
+@dataclass(slots=True)
 class HlaSourceCommands:
     """The HLA LaTeX vocabulary consumed by the source adapter."""
 
@@ -73,24 +77,31 @@ class HlaSourceCommands:
     layout_text_block_commands: tuple[tuple[str, int], ...]
 
 
-SOURCE_PROFILE_MANIFEST = RESOURCES.source_profiles_manifest
+SOURCE_PROFILE_MANIFEST = (
+    RESOURCES.source_profiles_manifest
+    if RESOURCES is not None
+    else files("hla_lab").joinpath("source_profiles.json")
+)
 
 
 def _strings(commands: Mapping[str, JsonValue], key: str) -> tuple[str, ...]:
-    value = commands[key]
+    value: JsonValue = commands[key]
     if not isinstance(value, list):
         raise ValueError(f"source profile command field {key} must be an array")
-    return tuple(str(item) for item in value)
+    items: list[JsonValue] = value
+    return tuple(str(item) for item in items)
 
 
 def _command_tuples(
     commands: Mapping[str, JsonValue], key: str, width: int
 ) -> tuple[tuple[JsonValue, ...], ...]:
-    value = commands[key]
+    value: JsonValue = commands[key]
     if not isinstance(value, list):
         raise ValueError(f"source profile command field {key} must be an array")
+    items: list[JsonValue] = value
     result = []
-    for item in value:
+    for raw_item in items:
+        item: JsonValue = raw_item
         if not isinstance(item, list) or len(item) != width:
             raise ValueError(f"source profile command field {key} has an invalid item")
         result.append(tuple(item))
@@ -226,12 +237,12 @@ HLA_SOURCE_2010 = HLA_SOURCE_PROFILES["hla-2010"]
 HLA_LATEX_DIALECT = _load_latex_dialect()
 
 
-def source_profile_for_document(document_id: str) -> HlaSourceCommands:
+def source_profile_for_document(
+    document_id: str, workspace_root: Path | None = None
+) -> HlaSourceCommands:
     """Resolve the source profile declared by the canonical document registry."""
 
-    from hla_lab.paths import document_entry_for_root
-
-    profile_id = document_entry_for_root(document_id).profile_id
+    profile_id = document_entry_for_root(document_id, workspace_root).profile_id
     if profile_id is None:
         raise ValueError(f"document {document_id} has no source profile")
     try:

@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -46,8 +46,8 @@ class LineageRecord(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    document_id: str = Field(min_length=1)
-    record_id: str = Field(min_length=1)
+    document_id: Annotated[str, Field(min_length=1)]
+    record_id: Annotated[str, Field(min_length=1)]
     kind: RecordKind
 
 
@@ -56,10 +56,10 @@ class EditionDocument(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    document_id: str = Field(min_length=1)
-    standard_id: str = Field(min_length=1)
-    edition: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    document_id: Annotated[str, Field(min_length=1)]
+    standard_id: Annotated[str, Field(min_length=1)]
+    edition: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     # Repository-local adapters may use these optional fields to resolve the
     # source tree and its profile without duplicating document IDs in code.
     # They remain optional so the generic lineage contract can still be used
@@ -74,29 +74,39 @@ class EditionRelation(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    id: str = Field(min_length=1)
-    stable_id: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    stable_id: Annotated[str, Field(min_length=1)]
     relation: LineageRelationKind
-    baseline_document_id: str = Field(min_length=1)
-    target_document_id: str = Field(min_length=1)
+    baseline_document_id: Annotated[str, Field(min_length=1)]
+    target_document_id: Annotated[str, Field(min_length=1)]
     baseline_records: tuple[LineageRecord, ...] = ()
     target_records: tuple[LineageRecord, ...] = ()
     review_status: ReviewStatus = "draft"
-    rationale: str = Field(min_length=1)
+    rationale: Annotated[str, Field(min_length=1)]
 
     @model_validator(mode="after")
     def validate_relation_shape(self) -> EditionRelation:
         if self.baseline_document_id == self.target_document_id:
             raise ValueError("edition relations must connect two different documents")
-        for side, document_id, records in (
-            ("baseline", self.baseline_document_id, self.baseline_records),
-            ("target", self.target_document_id, self.target_records),
-        ):
-            identifiers = [(item.document_id, item.record_id, item.kind) for item in records]
-            if len(identifiers) != len(set(identifiers)):
-                raise ValueError(f"{side} records must be unique within a relation")
-            if any(item.document_id != document_id for item in records):
-                raise ValueError(f"{side} records must belong to {document_id}")
+        self._validate_record_side("baseline", self.baseline_document_id, self.baseline_records)
+        self._validate_record_side("target", self.target_document_id, self.target_records)
+        self._validate_relation_cardinality()
+        self._validate_record_kinds()
+        return self
+
+    @staticmethod
+    def _validate_record_side(
+        side: str,
+        document_id: str,
+        records: Sequence[LineageRecord],
+    ) -> None:
+        identifiers = [(item.document_id, item.record_id, item.kind) for item in records]
+        if len(identifiers) != len(set(identifiers)):
+            raise ValueError(f"{side} records must be unique within a relation")
+        if any(item.document_id != document_id for item in records):
+            raise ValueError(f"{side} records must belong to {document_id}")
+
+    def _validate_relation_cardinality(self) -> None:
         baseline_count = len(self.baseline_records)
         target_count = len(self.target_records)
         if self.relation in {"unchanged", "revised"} and not (baseline_count and target_count):
@@ -111,10 +121,11 @@ class EditionRelation(BaseModel):
             raise ValueError(
                 "removed relations require at least one baseline and no target records"
             )
+
+    def _validate_record_kinds(self) -> None:
         kinds = {item.kind for item in (*self.baseline_records, *self.target_records)}
         if len(kinds) > 1:
             raise ValueError("a relation may only compare one semantic record kind")
-        return self
 
     @property
     def record_kind(self) -> RecordKind:
@@ -130,7 +141,7 @@ class EditionComparison(BaseModel):
     target: EditionDocument
     record_kind: RecordKind | None = None
     relations: tuple[EditionRelation, ...]
-    relation_counts: dict[str, int]
+    relation_counts: Mapping[str, int]
     unmapped_baseline_record_ids: tuple[str, ...] = ()
     unmapped_target_record_ids: tuple[str, ...] = ()
 
@@ -140,8 +151,8 @@ class EditionLineageManifest(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    schema_version: int = Field(default=1, ge=1)
-    documents: tuple[EditionDocument, ...] = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)] = 1
+    documents: Annotated[tuple[EditionDocument, ...], Field(min_length=1)]
     relations: tuple[EditionRelation, ...] = ()
 
     @model_validator(mode="after")

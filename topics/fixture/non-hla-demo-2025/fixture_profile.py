@@ -8,7 +8,7 @@ from typing import Literal
 from hla_lab.adapters.latex_renderer import LatexDialect
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class DemoSourceCommands:
     """The source vocabulary supplied by this document family."""
 

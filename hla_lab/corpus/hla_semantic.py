@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterable
 from pathlib import Path
-import re
 
 from hla_lab.core.hla_profile import (
     HLA_LATEX_DIALECT,
@@ -17,6 +17,7 @@ from hla_lab.core.semantic_model import (
     DocumentModel,
     load_document_model,
 )
+from hla_lab.core.source_paths import is_source_frontmatter, source_path_parts
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -27,7 +28,6 @@ __all__ = [
 ]
 
 
-_FRONTMATTER_PATH = re.compile(r"(?:^|/)(?:frontmatter|front-matter)(?:/|$)", re.IGNORECASE)
 _NOTICE_MARKER = re.compile(
     r"\bThey can also be obtained on request from IEEE or viewed at\b",
     re.IGNORECASE,
@@ -37,7 +37,7 @@ _INTERFACE_OVERVIEW_MARKER = re.compile(r"\bOverview\s+Scope\b", re.IGNORECASE)
 
 
 def _is_frontmatter(path: str) -> bool:
-    return bool(_FRONTMATTER_PATH.search(path.replace("\\", "/")))
+    return is_source_frontmatter(path)
 
 
 def _clean_source_surface_text(text: str, source_path: str) -> str:
@@ -55,12 +55,12 @@ def _clean_source_surface_text(text: str, source_path: str) -> str:
         if clause:
             return text[clause.start() :].lstrip()
         return ""
-    normalized_path = source_path.replace("\\", "/").casefold()
-    if normalized_path.endswith("/clauses/01-overview.tex") or normalized_path == "clauses/01-overview.tex":
-        if "IEEE Standard for" in text:
-            clause = _CLAUSE_ONE_MARKER.search(text) or _INTERFACE_OVERVIEW_MARKER.search(text)
-            if clause:
-                return text[clause.start() :].lstrip()
+    if source_path_parts(source_path)[-2:] == ("clauses", "01-overview.tex") and (
+        "IEEE Standard for" in text
+    ):
+        clause = _CLAUSE_ONE_MARKER.search(text) or _INTERFACE_OVERVIEW_MARKER.search(text)
+        if clause:
+            return text[clause.start() :].lstrip()
     return text
 
 
@@ -94,14 +94,22 @@ def _sanitize_hla_derivative_model(model: DocumentModel) -> DocumentModel:
     )
 
 
-def load_hla_document_model(root: Path) -> DocumentModel:
+def load_hla_document_model(
+    root: Path, *, workspace_root: Path | None = None
+) -> DocumentModel:
     """Load one HLA source tree through the generic semantic model."""
-    source = source_profile_for_document(root.name)
+    source = source_profile_for_document(root.name, workspace_root)
     return _sanitize_hla_derivative_model(
         build_hla_surface_contract(load_document_model(root, source))
     )
 
 
-def load_hla_corpus(roots: Iterable[Path]) -> ComplianceCorpus:
+def load_hla_corpus(
+    roots: Iterable[Path], *, workspace_root: Path | None = None
+) -> ComplianceCorpus:
     """Load HLA document roots through the generic corpus loader."""
-    return ComplianceCorpus(documents=tuple(load_hla_document_model(root) for root in roots))
+    return ComplianceCorpus(
+        documents=tuple(
+            load_hla_document_model(root, workspace_root=workspace_root) for root in roots
+        )
+    )

@@ -5,25 +5,24 @@ from __future__ import annotations
 import json
 import re
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE, source_profile_for_document
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.generation.semantic_generation import (
+    _modern_2025_statechart_reflow_page,
     _modern_api_manifest_page,
     _modern_java_factory_page,
     _modern_mom_definition_rows,
     _modern_mom_hierarchy_rows,
     _modern_protocol_prose_page,
     _modern_service_flow_page,
-    _modern_2025_statechart_reflow_page,
     _modern_statechart_reflow_page,
     _modern_table_text,
     _semanticize_visible_surfaces,
 )
+from tests.support import TEST_REPO_ROOT
 
-
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 DOC_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 SLICE = DOC_ROOT / "acceptance_slice.tex"
 
@@ -69,7 +68,11 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             r"\AcceptancePlantLandscapeFigure{17}{Temporal state}",
             self.source,
         )
-        self.assertNotIn("resizebox{0.96\\linewidth}{!}{\\input{output/semantic/state-machine-federate-lifetime.tex}}", self.source)
+        self.assertNotIn(
+            "resizebox{0.96\\linewidth}{!}{"
+            "\\input{output/semantic/state-machine-federate-lifetime.tex}}",
+            self.source,
+        )
 
     def test_full_2025_sync_chart_run_has_one_landscape_page_per_chart(self) -> None:
         blocks = json.loads(
@@ -92,7 +95,11 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             sequence=46,
             figures=[
                 (7, "state-machine-global-synchronization-label.pdf", "Global synch label (L)"),
-                (8, "state-machine-awaiting-synchronization.pdf", "Awaiting synchronization (s, L)"),
+                (
+                    8,
+                    "state-machine-awaiting-synchronization.pdf",
+                    "Awaiting synchronization (s, L)",
+                ),
             ],
         )
         figure9 = _modern_2025_statechart_reflow_page(
@@ -127,15 +134,18 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
     def test_service_directions_and_protocol_tokens_are_textual(self) -> None:
         self.assertIn(r"{4.2 Connect}{FEDERATE $\rightarrow$ RTI}", self.source)
         self.assertIn(r"{4.4 Connection Lost \textdagger}{RTI $\rightarrow$ FEDERATE}", self.source)
-        for token in (r"CTRL\_NEW\_SESSION", r"CTRL\_NEW\_SESSION\_STATUS", r"HLA\_CALLBACK\_REQUEST"):
+        for token in (
+            r"CTRL\_NEW\_SESSION",
+            r"CTRL\_NEW\_SESSION\_STATUS",
+            r"HLA\_CALLBACK\_REQUEST",
+        ):
             self.assertIn(token, self.source)
-        self.assertIn(r"\RLInlineTableCaption{34--35}{Federate Protocol message registry}", self.source)
+        self.assertIn(
+            r"\RLInlineTableCaption{34--35}{Federate Protocol message registry}",
+            self.source,
+        )
 
     def test_acceptance_slice_uses_source_backed_contracts_and_tables(self) -> None:
-        content = json.loads(
-            (DOC_ROOT / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
-        )["content_blocks"]
-        source_blocks = {item["id"]: item for item in content}
         normalized_source = re.sub(r"\s+", " ", self.source)
         self.assertIn(
             "service allows the RTI to set up and initialize its communication infrastructure.",
@@ -190,12 +200,11 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             with self.subTest(rendered_marker=marker):
                 self.assertIn(marker, self.source)
 
-        api = json.loads(
-            (DOC_ROOT / "semantic" / "api-surfaces.json").read_text(encoding="utf-8")
-        )["api_surfaces"]
+        api = json.loads((DOC_ROOT / "semantic" / "api-surfaces.json").read_text(encoding="utf-8"))[
+            "api_surfaces"
+        ]
         java_connect = next(
-            item for item in api
-            if item.get("language") == "java" and item.get("name") == "connect"
+            item for item in api if item.get("language") == "java" and item.get("name") == "connect"
         )
         self.assertIn("ConfigurationResult connect", java_connect["signature"])
         for marker in ("RtiFactoryFactory", "RtiFactory", "RTIambassador"):
@@ -257,14 +266,21 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
         model = load_document_model(DOC_ROOT, HLA_SOURCE)
         table6 = next(item for item in model.tables if item.number == "6" and not item.continuation)
         table7 = next(item for item in model.tables if item.number == "7" and not item.continuation)
-        table17 = next(item for item in model.tables if item.number == "17" and not item.continuation)
-        table18 = next(item for item in model.tables if item.number == "18" and not item.continuation)
+        table17 = next(
+            item for item in model.tables if item.number == "17" and not item.continuation
+        )
+        table18 = next(
+            item for item in model.tables if item.number == "18" and not item.continuation
+        )
 
-        self.assertEqual(_modern_mom_hierarchy_rows(table6)[:3], [
-            ("0", "HLAobjectRoot (N)"),
-            ("1", "HLAmanager (N)"),
-            ("2", "HLAfederate (P)"),
-        ])
+        self.assertEqual(
+            _modern_mom_hierarchy_rows(table6)[:3],
+            [
+                ("0", "HLAobjectRoot (N)"),
+                ("1", "HLAmanager (N)"),
+                ("2", "HLAfederate (P)"),
+            ],
+        )
         hierarchy = _modern_mom_hierarchy_rows(table7)
         self.assertTrue(hierarchy)
         self.assertNotIn(" / ", " ".join(value for _depth, value in hierarchy))

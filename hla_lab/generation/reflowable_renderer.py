@@ -9,7 +9,9 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping, Sequence
+from pathlib import PureWindowsPath
+from types import MappingProxyType
 from typing import TypeVar
 
 from hla_lab.adapters.latex_renderer import tex_escape
@@ -18,8 +20,14 @@ from hla_lab.core.semantic_model import (
     ContentElement,
     CrossReference,
     DocumentModel,
+    GraphDiagram,
 )
-from hla_lab.corpus.corpus_graph import CorpusSemanticGraph
+from hla_lab.core.source_paths import is_source_frontmatter
+from hla_lab.corpus.corpus_graph import (
+    CorpusGraphEdge,
+    CorpusGraphFinding,
+    CorpusSemanticGraph,
+)
 from hla_lab.publication.publication_contract import PublicationProfile
 
 __all__ = ["render_reflowable_document"]
@@ -105,8 +113,7 @@ def _text(value: str) -> str:
     )
     rendered = rendered.replace(r"\_", r"\_\allowbreak{}")
     return (
-        rendered
-        .replace("ₛ", r"\textsubscript{s}")
+        rendered.replace("ₛ", r"\textsubscript{s}")
         .replace("∀", r"\ensuremath{\forall}")
         .replace("≤", r"\ensuremath{\leq}")
         .replace("≥", r"\ensuremath{\geq}")
@@ -116,45 +123,42 @@ def _text(value: str) -> str:
     )
 
 
-def _is_source_frontmatter(path: str) -> bool:
-    """Identify source publication furniture excluded from Lab derivatives."""
-    parts = path.replace("\\", "/").casefold().split("/")
-    return "frontmatter" in parts or "front-matter" in parts
-
-
-_TABLE_LABEL_ACRONYMS = {
-    "api": "API",
-    "ddm": "DDM",
-    "fdd": "FDD",
-    "fom": "FOM",
-    "i": "I",
-    "ii": "II",
-    "iii": "III",
-    "iv": "IV",
-    "mom": "MOM",
-    "omt": "OMT",
-    "rti": "RTI",
-}
+_TABLE_LABEL_ACRONYMS = MappingProxyType(
+    {
+        "api": "API",
+        "ddm": "DDM",
+        "fdd": "FDD",
+        "fom": "FOM",
+        "i": "I",
+        "ii": "II",
+        "iii": "III",
+        "iv": "IV",
+        "mom": "MOM",
+        "omt": "OMT",
+        "rti": "RTI",
+    }
+)
 
 
 def _source_table_label(path: str) -> str:
     """Turn a source filename into a readable fallback table label."""
-    filename = path.replace("\\", "/").rsplit("/", 1)[-1]
+    filename = PureWindowsPath(path).name
     stem = re.sub(r"\.[^.]+$", "", filename)
     stem = re.sub(r"^\d+[-_]", "", stem)
     words = re.split(r"[-_]", stem)
-    return " ".join(
-        _TABLE_LABEL_ACRONYMS.get(word.casefold(), word.capitalize())
-        for word in words
-        if word
-    ) or "Source table"
+    return (
+        " ".join(
+            _TABLE_LABEL_ACRONYMS.get(word.casefold(), word.capitalize()) for word in words if word
+        )
+        or "Source table"
+    )
 
 
 def _table_family_label(family: object, table: object) -> str:
     title = str(getattr(family, "title", "") or "").strip()
     if title and not title.casefold().startswith(("table-", "table_family-")):
         return title
-    return _source_table_label(str(getattr(table, "source").path))
+    return _source_table_label(str(table.source.path))
 
 
 def _table_display_label(table: object, family_label: str) -> str:
@@ -213,7 +217,8 @@ def _clean_content_text(value: str) -> str:
     # not publication content. Normalize the associated FDD spelling defect
     # at this boundary for every derived edition.
     text = re.sub(
-        r"\s*\(Comment note - description is not part of FDD nor should it be and thus cannot be used for rejection\.\)",
+        r"\s*\(Comment note - description is not part of FDD nor should it be "
+        r"and thus cannot be used for rejection\.\)",
         "",
         text,
     )
@@ -239,7 +244,8 @@ def _clean_content_text(value: str) -> str:
     # removed above; apply the same content filter once more to the now
     # normalized sentence.
     text = re.sub(
-        r"\s*\(Comment note - description is not part of FDD nor should it be and thus cannot be used for rejection\.\)",
+        r"\s*\(Comment note - description is not part of FDD nor should it be "
+        r"and thus cannot be used for rejection\.\)",
         "",
         text,
     )
@@ -330,7 +336,7 @@ def _clause_groups(
 def _render_clause_tree(
     model: DocumentModel,
     clause_id: str,
-    render_body: Callable[[str | None], list[str]],
+    render_body: Callable[[str | None], Sequence[str]],
     *,
     base_level: int = 2,
 ) -> list[str]:
@@ -395,6 +401,24 @@ def _render_content_element(
 ) -> list[str]:
     visible_text = _clean_content_text(element.text)
     text = _text(visible_text)
+    special = _render_special_content_element(model, element, text, children, cross_references)
+    if special is not None:
+        return special
+    if not visible_text:
+        return []
+    lines = [_anchor(model.document_id, element.id)]
+    if element.kind == "paragraph":
+        return [*lines, *_render_paragraph_segments(model, element)]
+    return [*lines, text]
+
+
+def _render_special_content_element(
+    model: DocumentModel,
+    element: ContentElement,
+    text: str,
+    children: Mapping[str, tuple[ContentElement, ...]],
+    cross_references: Mapping[str, tuple[CrossReference, ...]],
+) -> list[str] | None:
     if element.kind == "list":
         lines = [_anchor(model.document_id, element.id), "\\begin{itemize}"]
         for child in children.get(element.id, ()):
@@ -414,23 +438,23 @@ def _render_content_element(
             return [
                 _anchor(model.document_id, element.id),
                 ", ".join(
-                    f"\\hyperlink{{{tex_escape(item.target_document_id)}:{tex_escape(item.target_record_id)}}}"
+                    f"\\hyperlink{{{tex_escape(item.target_document_id)}:"
+                    f"{tex_escape(item.target_record_id)}}}"
                     f"{{{_text(item.label)}}}"
                     for item in links
                 ),
             ]
-    if not visible_text:
-        return []
-    lines = [_anchor(model.document_id, element.id)]
-    if element.kind == "paragraph":
-        for kind, segment in _content_segments(model, element.text):
-            if kind == "heading":
-                lines.extend(("\\par", f"\\textbf{{{_text(segment)}}}\\\\"))
-            else:
-                lines.append(_text(segment))
-                lines.append("\\par")
-        return lines
-    return [*lines, text]
+    return None
+
+
+def _render_paragraph_segments(model: DocumentModel, element: ContentElement) -> list[str]:
+    lines: list[str] = []
+    for kind, segment in _content_segments(model, element.text):
+        if kind == "heading":
+            lines.extend(("\\par", f"\\textbf{{{_text(segment)}}}\\\\"))
+        else:
+            lines.extend((_text(segment), "\\par"))
+    return lines
 
 
 def _render_operations(model: DocumentModel, profile: PublicationProfile) -> list[str]:
@@ -577,13 +601,10 @@ def _render_tables(model: DocumentModel, profile: PublicationProfile) -> list[st
             1,
             f"Semantic tables — {_document_title(profile, model)}",
             numbered=True,
-        )
+        ),
     ]
-    tables = {
-        item.id: item
-        for item in model.tables
-        if not _is_source_frontmatter(item.source.path)
-    }
+    visible_tables = filter(lambda item: not is_source_frontmatter(item.source.path), model.tables)
+    tables = {item.id: item for item in visible_tables}
     families = tuple(
         (family, tuple(table_id for table_id in family.table_ids if table_id in tables))
         for family in model.table_families
@@ -629,6 +650,112 @@ def _render_tables(model: DocumentModel, profile: PublicationProfile) -> list[st
     return lines
 
 
+def _traceability_list_section(
+    title: str,
+    records: Sequence[T],
+    render_item: Callable[[T], str],
+) -> list[str]:
+    if not records:
+        return []
+    return [
+        _heading(2, title),
+        "\\begin{itemize}",
+        *(render_item(item) for item in records),
+        "\\end{itemize}",
+    ]
+
+
+def _traceability_graph_edge(
+    model: DocumentModel,
+    graph: CorpusSemanticGraph,
+    edge: CorpusGraphEdge,
+) -> str:
+    source = graph.node(edge.source_node_id)
+    target = graph.node(edge.target_node_id)
+    return (
+        f"\\item {_anchor(model.document_id, edge.id)}"
+        f"{_link(source.document_id, source.record_id, source.record_id)} "
+        "$\\rightarrow$ "
+        f"{_link(target.document_id, target.record_id, target.record_id)} "
+        f"({_text(edge.relation)}; {_text(edge.evidence)})"
+    )
+
+
+def _traceability_graph_finding(finding: CorpusGraphFinding) -> str:
+    nodes = ", ".join(_text(item) for item in finding.node_ids)
+    return (
+        f"\\item {_text(finding.kind)} ({_text(finding.severity)}, "
+        f"similarity {finding.similarity:.2f}): {_text(finding.message)} [{nodes}]"
+    )
+
+
+def _traceability_graph_section(
+    model: DocumentModel,
+    graph: CorpusSemanticGraph | None,
+) -> list[str]:
+    if graph is None:
+        return []
+    lines: list[str] = []
+    edges = graph.cross_document_edges(model.document_id)
+    if edges:
+        lines.extend(
+            (
+                _heading(2, "Cross-document semantic graph"),
+                _text(
+                    f"{len(edges)} graph edges touch this document. "
+                    "Candidate matches are review data, not normative links."
+                ),
+                r"\begin{sloppypar}",
+                "\\begin{itemize}",
+            )
+        )
+        lines.extend(_traceability_graph_edge(model, graph, edge) for edge in edges)
+        lines.extend(("\\end{itemize}", r"\end{sloppypar}"))
+    findings = graph.findings_for(model.document_id)
+    if findings:
+        lines.extend(
+            (
+                _heading(2, "Cross-document review findings"),
+                _text(
+                    f"{len(findings)} findings are available in the machine-readable graph. "
+                    "The visible list is a navigational sample; review the graph artifact "
+                    "for the full set."
+                ),
+                "\\begin{itemize}",
+            )
+        )
+        lines.extend(_traceability_graph_finding(item) for item in findings[:120])
+        lines.append("\\end{itemize}")
+    return lines
+
+
+def _traceability_diagram(model: DocumentModel, diagram: GraphDiagram) -> list[str]:
+    lines = [
+        _anchor(model.document_id, diagram.id),
+        _heading(3, diagram.title),
+        f"\\emph{{{len(diagram.nodes)} nodes; {len(diagram.edges)} edges.}}",
+    ]
+    if diagram.edges:
+        lines.append("\\begin{itemize}")
+        lines.extend(
+            f"\\item {_anchor(model.document_id, edge.id)}"
+            f"{_text(edge.source or 'free-form')} $\\rightarrow$ "
+            f"{_text(edge.target or 'free-form')}: {_text(edge.label)}"
+            for edge in diagram.edges
+        )
+        lines.append("\\end{itemize}")
+    return lines
+
+
+def _traceability_diagrams(model: DocumentModel) -> list[str]:
+    if not model.graph_diagrams:
+        return []
+    lines = [_heading(2, "Conceptual and architecture diagrams")]
+    for diagram in model.graph_diagrams:
+        lines.extend(_traceability_diagram(model, diagram))
+    return lines
+
+
 def _render_traceability(
     model: DocumentModel,
     profile: PublicationProfile,
@@ -641,133 +768,80 @@ def _render_traceability(
             numbered=True,
         )
     ]
-    if model.references:
-        lines.append(_heading(2, "References"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}{_text(item.label)}: {_text(item.text)}"
-            for item in model.references
+    lines.extend(
+        _traceability_list_section(
+            "References",
+            model.references,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}"
+                f"{_text(item.label)}: {_text(item.text)}"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if model.cross_references:
-        lines.append(_heading(2, "Cross-reference edges"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}{_text(item.owner_id)} "
-            f"$\\rightarrow$ {item.target_document_id}:{item.target_record_id} "
-            f"({_text(item.relation)})"
-            for item in model.cross_references
+    )
+    lines.extend(
+        _traceability_list_section(
+            "Cross-reference edges",
+            model.cross_references,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}{_text(item.owner_id)} "
+                f"$\\rightarrow$ {item.target_document_id}:{item.target_record_id} "
+                f"({_text(item.relation)})"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if corpus_graph is not None:
-        graph_edges = corpus_graph.cross_document_edges(model.document_id)
-        if graph_edges:
-            lines.append(_heading(2, "Cross-document semantic graph"))
-            lines.append(
-                _text(
-                    f"{len(graph_edges)} graph edges touch this document. "
-                    "Candidate matches are review data, not normative links."
-                )
-            )
-            # Candidate graph labels can be long semantic IDs. Keep the
-            # navigational projection readable without turning a line-wrap
-            # artifact into a release-log error.
-            lines.append(r"\begin{sloppypar}")
-            lines.append("\\begin{itemize}")
-            for edge in graph_edges:
-                source = corpus_graph.node(edge.source_node_id)
-                target = corpus_graph.node(edge.target_node_id)
-                lines.append(
-                    f"\\item {_anchor(model.document_id, edge.id)}"
-                    f"{_link(source.document_id, source.record_id, source.record_id)} "
-                    "$\\rightarrow$ "
-                    f"{_link(target.document_id, target.record_id, target.record_id)} "
-                    f"({_text(edge.relation)}; {_text(edge.evidence)})"
-                )
-            lines.append("\\end{itemize}")
-            lines.append(r"\end{sloppypar}")
-        findings = corpus_graph.findings_for(model.document_id)
-        if findings:
-            lines.append(_heading(2, "Cross-document review findings"))
-            lines.append(
-                _text(
-                    f"{len(findings)} findings are available in the machine-readable graph. "
-                    "The visible list is a navigational sample; review the graph artifact "
-                    "for the full set."
-                )
-            )
-            lines.append("\\begin{itemize}")
-            for finding in findings[:120]:
-                lines.append(
-                    f"\\item {_text(finding.kind)} ({_text(finding.severity)}, "
-                    f"similarity {finding.similarity:.2f}): {_text(finding.message)} "
-                    f"[{', '.join(_text(item) for item in finding.node_ids)}]"
-                )
-            lines.append("\\end{itemize}")
-    if model.figures:
-        lines.append(_heading(2, "Figures"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}Figure {item.number}: "
-            f"{_text(item.caption or 'Caption not recorded.')}"
-            for item in model.figures
+    )
+    lines.extend(_traceability_graph_section(model, corpus_graph))
+    lines.extend(
+        _traceability_list_section(
+            "Figures",
+            model.figures,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}Figure {item.number}: "
+                f"{_text(item.caption or 'Caption not recorded.')}"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if model.graph_diagrams:
-        lines.append(_heading(2, "Conceptual and architecture diagrams"))
-        for diagram in model.graph_diagrams:
-            lines.extend(
-                (
-                    _anchor(model.document_id, diagram.id),
-                    _heading(3, diagram.title),
-                    f"\\emph{{{len(diagram.nodes)} nodes; {len(diagram.edges)} edges.}}",
-                )
-            )
-            if diagram.edges:
-                lines.append("\\begin{itemize}")
-                lines.extend(
-                    f"\\item {_anchor(model.document_id, edge.id)}"
-                    f"{_text(edge.source or 'free-form')} $\\rightarrow$ "
-                    f"{_text(edge.target or 'free-form')}: {_text(edge.label)}"
-                    for edge in diagram.edges
-                )
-                lines.append("\\end{itemize}")
-    if model.implementations:
-        lines.append(_heading(2, "Implementation seams"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}{_text(item.interface_kind)} "
-            f"{_text(item.interface_name)} $\\rightarrow$ "
-            f"{_text(item.implementation)} ({_text(item.status)})"
-            for item in model.implementations
+    )
+    lines.extend(_traceability_diagrams(model))
+    lines.extend(
+        _traceability_list_section(
+            "Implementation seams",
+            model.implementations,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}{_text(item.interface_kind)} "
+                f"{_text(item.interface_name)} $\\rightarrow$ "
+                f"{_text(item.implementation)} ({_text(item.status)})"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if model.notes:
-        lines.append(_heading(2, "Notes"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}{_text(item.text)} ({_text(item.kind)})"
-            for item in model.notes
+    )
+    lines.extend(
+        _traceability_list_section(
+            "Notes",
+            model.notes,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}"
+                f"{_text(item.text)} ({_text(item.kind)})"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if model.examples:
-        lines.append(_heading(2, "Examples"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}Example {item.number}: "
-            f"{_text(item.title)}"
-            for item in model.examples
+    )
+    lines.extend(
+        _traceability_list_section(
+            "Examples",
+            model.examples,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}Example {item.number}: "
+                f"{_text(item.title)}"
+            ),
         )
-        lines.append("\\end{itemize}")
-    if model.annexes:
-        lines.append(_heading(2, "Annexes"))
-        lines.append("\\begin{itemize}")
-        lines.extend(
-            f"\\item {_anchor(model.document_id, item.id)}Annex {item.letter}: "
-            f"{_text(item.title)} ({_text(item.status)})"
-            for item in model.annexes
+    )
+    lines.extend(
+        _traceability_list_section(
+            "Annexes",
+            model.annexes,
+            lambda item: (
+                f"\\item {_anchor(model.document_id, item.id)}Annex {item.letter}: "
+                f"{_text(item.title)} ({_text(item.status)})"
+            ),
         )
-        lines.append("\\end{itemize}")
+    )
     return lines
 
 

@@ -6,13 +6,15 @@ import json
 import subprocess
 import sys
 import unittest
-from pathlib import Path
+
+from pydantic import JsonValue
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.traceability.semantic_coverage import build_report
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 ROOTS = tuple(sorted((REPO_ROOT / "topics" / "ieee").glob("hla-1516*/")))
 
@@ -60,10 +62,11 @@ class CoverageContractTests(unittest.TestCase):
                 for text in (path.read_text(encoding="utf-8") for path in pages)
             )
         )
-        navigation = json.loads(
+        navigation: dict[str, JsonValue] = json.loads(
             (ROOT / "canonical" / "source-navigation.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(sum(isinstance(item, dict) for item in navigation["outline"]), 33)
+        outline: list[JsonValue] = navigation["outline"]
+        self.assertEqual(sum(isinstance(item, dict) for item in outline), 33)
 
     def test_1516_content_block_source_and_layout_are_separate_fields(self) -> None:
         payload = json.loads(

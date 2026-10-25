@@ -11,3 +11,6 @@ Current product boundaries and operating contracts:
 - [Edition lineage](EDITION-LINEAGE.md)
 - [Document-family onboarding](DOCUMENT-FAMILY-ONBOARDING.md)
 - [Utility consolidation](UTILITY-CONSOLIDATION.md)
+- [HLA implementation backflow acceptance](HLA-BACKFLOW-ACCEPTANCE.md)
+- [Requirements Lab rights](HLA-REQUIREMENTS-LAB-RIGHTS.md)
+- [Semantic quality gates](SEMANTIC-QUALITY-GATES.md)

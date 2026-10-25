@@ -5,7 +5,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+from pydantic import JsonValue
+
+from hla_lab.paths import RESOURCES
+
+ROOT = RESOURCES.root
 
 REPLACEMENTS = (
     (
@@ -22,11 +26,20 @@ REPLACEMENTS = (
 
 
 def _replace(path: Path, old: str, new: str) -> int:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"expected a JSON object in {path}")
+    raw_blocks: JsonValue = payload.get("content_blocks", [])
+    if not isinstance(raw_blocks, list):
+        raise ValueError(f"expected content_blocks to be an array in {path}")
+    blocks: list[JsonValue] = raw_blocks
     count = 0
-    for block in payload["content_blocks"]:
+    for raw_block in blocks:
+        if not isinstance(raw_block, dict):
+            continue
+        block: dict[str, JsonValue] = raw_block
         for key in ("text", "layout_body"):
-            value = block.get(key)
+            value: JsonValue = block.get(key)
             if isinstance(value, str):
                 count += value.count(old)
                 block[key] = value.replace(old, new)

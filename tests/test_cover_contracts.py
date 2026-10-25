@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests.support import TEST_REPO_ROOT
+
+ROOT = TEST_REPO_ROOT
 SHARED_COVER = ROOT / "topics" / "ieee" / "hla-requirements-lab-cover.tex"
 
 
@@ -36,17 +37,17 @@ class CoverContractTests(unittest.TestCase):
 
     def test_all_source_compilations_use_the_shared_cover(self) -> None:
         expected = {
-            ("1516.1", "2010"): (370,),
-            ("1516.1", "2025"): (427,),
+            ("1516.1", "2010"): (340,),
+            ("1516.1", "2025"): (502,),
             ("1516", "2010"): (27,),
             ("1516", "2025"): (30,),
             ("1516.2", "2010"): (101,),
             ("1516.2", "2025"): (112,),
         }
         for (standard, edition), (expected_pages,) in expected.items():
-            main = (
-                ROOT / "topics" / "ieee" / f"hla-{standard}-{edition}" / "main.tex"
-            ).read_text(encoding="utf-8")
+            main = (ROOT / "topics" / "ieee" / f"hla-{standard}-{edition}" / "main.tex").read_text(
+                encoding="utf-8"
+            )
             self.assertIn(
                 "\\input{../requirements-lab/style/rl-graphics.sty}",
                 main,
@@ -77,9 +78,9 @@ class CoverContractTests(unittest.TestCase):
 
     def test_readable_edition_labels_use_blue_text(self) -> None:
         for standard in ("1516", "1516.1", "1516.2"):
-            main = (
-                ROOT / "topics" / "ieee" / f"hla-{standard}-2025" / "main.tex"
-            ).read_text(encoding="utf-8")
+            main = (ROOT / "topics" / "ieee" / f"hla-{standard}-2025" / "main.tex").read_text(
+                encoding="utf-8"
+            )
             self.assertIn(
                 "\\newcommand{\\HLALabYearAccent}{HLALabBlue}",
                 main,

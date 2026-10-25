@@ -6,13 +6,13 @@ import json
 import re
 import unittest
 from collections import Counter
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.corpus.corpus_inventory import CorpusInventory, build_inventory
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
@@ -47,9 +47,10 @@ class CorpusInventoryTests(unittest.TestCase):
         )
         self.assertGreaterEqual(inventory.totals["clause"], 1800)
         self.assertEqual(inventory.totals.get("status:unclassified", 0), 0)
-        # content-ownership closes the last HLA requirement queue; the inventory remains
-        # source-controlled even when no migration work is outstanding.
-        self.assertFalse(inventory.migration_queue)
+        # The Table 2 introduction is retained as a reviewed non-normative candidate.
+        self.assertEqual(len(inventory.migration_queue), 1)
+        self.assertEqual(inventory.migration_queue[0].status, "non-normative")
+        self.assertTrue(inventory.migration_queue[0].record_id.endswith("page-181-l115-2"))
         rebuilt = build_inventory(
             INVENTORY_ROOTS,
             REPO_ROOT / "data" / "release" / "documents.json",
@@ -80,7 +81,7 @@ class CorpusInventoryTests(unittest.TestCase):
             )
             statements = re.findall(r"\\HLANormativeRuleStatement\{([^}]*)\}", text)
             self.assertTrue(statements)
-            self.assertTrue(all(value.startswith("\\SemanticRequirement") for value in statements))
+            self.assertTrue(all(re.match(r"^\\SemanticRequirement", value) for value in statements))
 
     def test_all_transitions_have_explicit_coverage_dispositions(self) -> None:
         model = load_document_model(ROOTS[1], HLA_SOURCE)

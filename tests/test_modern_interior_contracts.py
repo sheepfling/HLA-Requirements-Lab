@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests.support import TEST_REPO_ROOT
+
+ROOT = TEST_REPO_ROOT
 LAB_ROOT = ROOT / "topics" / "ieee" / "requirements-lab"
 SLICE_ROOT = ROOT / "topics" / "ieee" / "hla-1516.2-2025-modern-acceptance"
 
@@ -15,9 +16,7 @@ class ModernInteriorContractTests(unittest.TestCase):
         typography = (LAB_ROOT / "style" / "rl-type.sty").read_text(encoding="utf-8")
         page = (LAB_ROOT / "style" / "rl-page.sty").read_text(encoding="utf-8")
         graphics = (LAB_ROOT / "style" / "rl-graphics.sty").read_text(encoding="utf-8")
-        frontmatter = (LAB_ROOT / "style" / "rl-frontmatter.sty").read_text(
-            encoding="utf-8"
-        )
+        frontmatter = (LAB_ROOT / "style" / "rl-frontmatter.sty").read_text(encoding="utf-8")
 
         self.assertIn(r"\newfontfamily\RLSerif{Noto Serif}", typography)
         self.assertIn(r"\newfontfamily\RLSans{Inter}", typography)
@@ -37,7 +36,7 @@ class ModernInteriorContractTests(unittest.TestCase):
         self.assertIn(r"\RLOMTGlyph", graphics)
         self.assertIn("RLGraph2010", graphics)
         self.assertIn("RLGraph2025", graphics)
-        self.assertIn("HLA REQUIREMENTS LAB \\textperiodcentered\\ SOURCE COMPILATION", frontmatter)
+        self.assertIn("HLA REQUIREMENTS LAB \\textbar\\ SOURCE COMPILATION", frontmatter)
         self.assertNotIn("UNOFFICIAL", frontmatter)
 
     def test_shared_table_layer_exposes_the_modern_table_grammar(self) -> None:
@@ -139,9 +138,9 @@ class ModernInteriorContractTests(unittest.TestCase):
         blocks_2025 = (
             ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json"
         ).read_text(encoding="utf-8")
-        style_2010 = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty"
-        ).read_text(encoding="utf-8")
+        style_2010 = (ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty").read_text(
+            encoding="utf-8"
+        )
         source_2010 = (
             ROOT
             / "topics"

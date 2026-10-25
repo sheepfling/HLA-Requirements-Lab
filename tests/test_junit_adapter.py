@@ -21,8 +21,9 @@ from hla_lab.traceability.compliance_contract import (
 )
 from hla_lab.traceability.compliance_sidecar import build_adapter_request, manifest_from_response
 from hla_lab.traceability.junit_adapter import parse_junit_results, response_from_catalog
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _bundle() -> CorpusBundle:

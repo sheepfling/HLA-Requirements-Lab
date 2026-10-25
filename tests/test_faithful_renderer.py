@@ -16,8 +16,9 @@ from hla_lab.generation.faithful_renderer import (
     render_faithful_body,
 )
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:

@@ -21,12 +21,18 @@ from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, source_profile_for_docum
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.corpus.corpus_graph import build_corpus_graph, load_document_metadata
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.diagrams.plantuml_render import render_sources
+from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.faithful_renderer import load_faithful_layout_profile
 from hla_lab.generation.generate_derivative import generate_from_hla
 from hla_lab.generation.semantic_generation import generate as generate_semantic
-from hla_lab.paths import REPO_ROOT, RESOURCES, DocumentResources, document_roots
+from hla_lab.paths import (
+    RESOURCES,
+    DocumentResources,
+    document_roots,
+    repository_root,
+    resources,
+)
 from hla_lab.publication.compliance_publication import (
     load_compliance_publication_profile,
     write_compliance_publication,
@@ -41,8 +47,8 @@ from hla_lab.publication.publication_registry import (
 
 __all__ = ["generate", "main", "project_config"]
 
-PUBLICATION_MANIFEST = RESOURCES.publications_manifest
-RELEASE_MANIFEST = RESOURCES.release_manifest
+PUBLICATION_MANIFEST = RESOURCES.publications_manifest if RESOURCES is not None else None
+RELEASE_MANIFEST = RESOURCES.release_manifest if RESOURCES is not None else None
 
 
 def _selected_ids(model: object, field: str, selection: str, ordering: str) -> tuple[str, ...]:
@@ -95,6 +101,12 @@ def _faithful_generator(root: Path, project: ReleaseProject, settings: BuildSett
                 use_generated_faithful_blocks=settings.use_generated_faithful_blocks,
                 state_machine_renderer=settings.state_machine_renderer,
                 service_page_renderer=settings.service_page_renderer,
+                canonical_source=(
+                    source_profile_for_document("hla-1516.1-2025")
+                    if project.id == "hla-1516.1-2010"
+                    and settings.state_machine_renderer == "plantuml"
+                    else None
+                ),
             )
         )
 
@@ -102,9 +114,9 @@ def _faithful_generator(root: Path, project: ReleaseProject, settings: BuildSett
 
 
 def _source_roots(project: ReleaseProject) -> tuple[Path, ...]:
-    registry = load_publication_registry(PUBLICATION_MANIFEST)
+    registry = load_publication_registry(resources().publications_manifest)
     publication = registry.publication(project.publication_id)
-    return document_roots(REPO_ROOT, publication.source_document_ids)
+    return document_roots(repository_root(), publication.source_document_ids)
 
 
 def _derivative_generator(root: Path, project: ReleaseProject):
@@ -126,7 +138,7 @@ def _compliance_generator(root: Path, project: ReleaseProject, settings: BuildSe
     source_roots = _source_roots(project)
     if settings.graph_metadata is None:
         raise ValueError(f"compliance project {project.id} has no graph metadata path")
-    metadata_path = REPO_ROOT / settings.graph_metadata
+    metadata_path = repository_root() / settings.graph_metadata
 
     def generate_blocks() -> object:
         corpus = load_hla_corpus(source_roots)
@@ -175,25 +187,36 @@ def _plantuml_asset_generator(root: Path):
     """Return the pinned PlantUML asset step for a faithful document build."""
 
     document = DocumentResources(root)
-    lock_path = REPO_ROOT / "tools" / "plantuml" / "plantuml.lock.json"
+    workspace = repository_root()
+    lock_path = workspace / "tools" / "plantuml" / "plantuml.lock.json"
     lock = json.loads(lock_path.read_text(encoding="utf-8"))
     version = str(lock["version"])
-    jar = REPO_ROOT / ".tools" / "plantuml" / f"plantuml-{version}.jar"
+    jar = workspace / ".tools" / "plantuml" / f"plantuml-{version}.jar"
 
     def render_assets() -> object:
         sources = tuple(sorted(document.output_semantic.glob("state-machine-*.puml")))
         if not sources:
-            raise RuntimeError(f"PlantUML build requested but no state-machine sources exist in {document.output_semantic}")
+            raise RuntimeError(
+                "PlantUML build requested but no state-machine sources exist "
+                f"in {document.output_semantic}"
+            )
         if not jar.is_file():
-            raise RuntimeError(f"Pinned PlantUML jar is missing: {jar}; see tools/plantuml/README.md")
+            raise RuntimeError(
+                f"Pinned PlantUML jar is missing: {jar}; see tools/plantuml/README.md"
+            )
         java = shutil.which("java")
         epstopdf = shutil.which("epstopdf")
-        if java is None or epstopdf is None:
-            raise RuntimeError("PlantUML asset build requires java and epstopdf on PATH")
+        ghostscript = next(
+            (path for name in ("mgs", "gswin64c", "gs") if (path := shutil.which(name))),
+            None,
+        )
+        if java is None or (epstopdf is None and ghostscript is None):
+            raise RuntimeError("PlantUML asset build requires java and an EPS-to-PDF converter")
         return render_sources(
             sources,
             java=java,
             epstopdf=epstopdf,
+            ghostscript=ghostscript,
             jar=jar,
             output_dir=document.output_semantic,
         )
@@ -204,8 +227,9 @@ def _plantuml_asset_generator(root: Path):
 def project_config(root: Path) -> BuildConfig:
     """Resolve one document root to its fully data-declared build config."""
     root = root.resolve()
-    release_manifest = load_release_manifest(RELEASE_MANIFEST)
-    relative_root = root.relative_to(REPO_ROOT).as_posix()
+    workspace = repository_root()
+    release_manifest = load_release_manifest(resources(workspace).release_manifest)
+    relative_root = root.relative_to(workspace).as_posix()
     try:
         project = next(
             item
@@ -238,7 +262,8 @@ def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:
         "--root", type=Path, help="document root when invoking the shared runner directly"
     )
     args = parser.parse_args(argv)
-    resolved_root = (root or args.root or Path.cwd()).resolve()
+    selected_root = root or args.root
+    resolved_root = (selected_root or repository_root()).resolve()
     if args.action == "generate":
         generate(resolved_root)
         return 0

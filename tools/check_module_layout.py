@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import argparse
 import ast
 import sys
 from collections.abc import Iterable, Sequence
 from pathlib import Path
+from types import EllipsisType
+
+from hla_lab.paths import repository_root
 
 __all__ = ["check_paths", "main"]
 
@@ -27,12 +31,12 @@ def _is_all_assignment(node: ast.stmt) -> bool:
 
 
 def _is_module_docstring(node: ast.stmt, *, first: bool) -> bool:
-    return (
-        first
-        and isinstance(node, ast.Expr)
-        and isinstance(node.value, ast.Constant)
-        and isinstance(node.value.value, str)
+    if not (first and isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant)):
+        return False
+    constant_value: str | bytes | int | float | complex | bool | EllipsisType | None = (
+        node.value.value
     )
+    return isinstance(constant_value, str)
 
 
 def _check_file(path: Path) -> tuple[str, ...]:
@@ -50,8 +54,9 @@ def _check_file(path: Path) -> tuple[str, ...]:
 
     all_index, all_node = assignments[0]
     for index, node in enumerate(tree.body[:all_index]):
-        if isinstance(node, (ast.Import, ast.ImportFrom)) or _is_module_docstring(
-            node, first=index == 0
+        statement: ast.stmt = node
+        if isinstance(statement, (ast.Import, ast.ImportFrom)) or _is_module_docstring(
+            statement, first=index == 0
         ):
             continue
         errors.append(
@@ -76,7 +81,12 @@ def check_paths(paths: Iterable[Path]) -> tuple[str, ...]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Check module layout and return a process exit code."""
 
-    roots = tuple(Path(value) for value in (argv or DEFAULT_ROOTS))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, help="Repository root")
+    parser.add_argument("paths", nargs="*", help="Repository-relative paths to inspect")
+    args = parser.parse_args(argv)
+    root = repository_root(args.root)
+    roots = tuple(root / value for value in (args.paths or DEFAULT_ROOTS))
     errors = check_paths(roots)
     if errors:
         print("Module layout violations:", file=sys.stderr)

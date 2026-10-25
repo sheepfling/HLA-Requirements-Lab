@@ -9,11 +9,24 @@ import subprocess
 import sys
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
 
 import fitz
+from pydantic import JsonValue
 
-from hla_lab.paths import REPO_ROOT, document_roots, resources
+from hla_lab.paths import document_roots, repository_root, resources
+from hla_lab.publication.publication_registry import (
+    load_publication_registry,
+    load_release_manifest,
+    publication_projects,
+)
+from hla_lab.traceability.api_traceability import (
+    build_report as build_api_traceability_report,
+)
+from hla_lab.traceability.api_traceability import (
+    default_roots as api_traceability_roots,
+)
+from hla_lab.traceability.semantic_authority import validate_authority
+from hla_lab.traceability.semantic_coverage import build_report as build_semantic_coverage
 
 ERROR_PATTERNS = (
     # TeX diagnostic lines begin with ``! ``. Do not mistake a wrapped math
@@ -30,28 +43,33 @@ LAYOUT_ERROR_PATTERNS = (
     re.compile(r"Missing character:", re.MULTILINE),
     re.compile(r"headheight.*too small", re.IGNORECASE),
 )
-GENERATED_SUFFIXES = {
-    ".aux",
-    ".bbl",
-    ".bcf",
-    ".blg",
-    ".fdb_latexmk",
-    ".fls",
-    ".log",
-    ".out",
-    ".pdf",
-    ".run.xml",
-    ".synctex.gz",
-    ".toc",
-    ".xdv",
-}
-GENERATED_PARTS = {"build", "dist", "output", ".tmp", "reviews", "review-artifacts"}
+GENERATED_SUFFIXES = frozenset(
+    {
+        ".aux",
+        ".bbl",
+        ".bcf",
+        ".blg",
+        ".fdb_latexmk",
+        ".fls",
+        ".log",
+        ".out",
+        ".pdf",
+        ".run.xml",
+        ".synctex.gz",
+        ".toc",
+        ".xdv",
+    }
+)
+GENERATED_PARTS = frozenset({"build", "dist", "output", ".tmp", "reviews", "review-artifacts"})
 SOURCE_BUILD_PATH = ("hla_lab", "build")
 
 
-def _load_manifest(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict) or not isinstance(payload.get("projects"), list):
+def _load_manifest(path: Path) -> dict[str, JsonValue]:
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"invalid release manifest: {path}")
+    projects: JsonValue = payload.get("projects")
+    if not isinstance(projects, list):
         raise ValueError(f"invalid release manifest: {path}")
     return payload
 
@@ -118,20 +136,28 @@ def _ignored(repo_root: Path, relative_path: str) -> bool:
     return result.returncode == 0
 
 
-def _diagram_report(path: Path | None) -> dict[str, Any]:
+def _diagram_report(path: Path | None) -> dict[str, JsonValue]:
     if path is None:
         return {"available": False, "statuses": {}, "review_gaps": []}
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict) or not isinstance(payload.get("diagrams"), list):
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
         raise ValueError(f"invalid diagram manifest: {path}")
-    diagrams = payload.get("diagrams", [])
+    raw_diagrams: JsonValue = payload.get("diagrams")
+    if not isinstance(raw_diagrams, list):
+        raise ValueError(f"invalid diagram manifest: {path}")
+    diagrams: list[JsonValue] = raw_diagrams
+    diagram_records: list[dict[str, JsonValue]] = []
     statuses: dict[str, int] = {}
-    for item in diagrams:
+    for raw_item in diagrams:
+        item: JsonValue = raw_item
+        if not isinstance(item, dict):
+            raise ValueError(f"invalid diagram manifest row: {path}")
+        diagram_records.append(item)
         status = str(item.get("status", "unknown"))
         statuses[status] = statuses.get(status, 0) + 1
     gaps = [
         str(item.get("diagram_id", "unknown"))
-        for item in diagrams
+        for item in diagram_records
         if item.get("status") in {"needs_review", "unmodeled"}
     ]
     return {
@@ -143,22 +169,25 @@ def _diagram_report(path: Path | None) -> dict[str, Any]:
 
 
 def _selected_projects(
-    manifest: Mapping[str, Any],
+    manifest: Mapping[str, JsonValue],
     manifest_path: Path,
     *,
     publication_id: str | None,
     publication_registry_path: Path,
-) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
+) -> tuple[list[dict[str, JsonValue]], dict[str, JsonValue] | None]:
     """Return all projects or the explicit membership of one publication."""
-    projects = list(manifest["projects"])
+    raw_projects: JsonValue = manifest["projects"]
+    if not isinstance(raw_projects, list):
+        raise ValueError(f"invalid release manifest: {manifest_path}")
+    project_values: list[JsonValue] = raw_projects
+    projects: list[dict[str, JsonValue]] = []
+    for raw_project in project_values:
+        project: JsonValue = raw_project
+        if not isinstance(project, dict):
+            raise ValueError(f"invalid project entry in release manifest: {manifest_path}")
+        projects.append(project)
     if publication_id is None:
         return projects, None
-    from hla_lab.publication.publication_registry import (
-        load_publication_registry,
-        load_release_manifest,
-        publication_projects,
-    )
-
     registry = load_publication_registry(publication_registry_path)
     release_manifest = load_release_manifest(manifest_path)
     publication = registry.publication(publication_id)
@@ -171,6 +200,43 @@ def _selected_projects(
     )
 
 
+def _inspect_project(
+    repo_root: Path,
+    project: Mapping[str, JsonValue],
+) -> tuple[dict[str, JsonValue], list[str]]:
+    root = repo_root / str(project["root"])
+    pdf = root / str(project["pdf"])
+    log = root / str(project["log"])
+    relative_pdf = pdf.relative_to(repo_root).as_posix()
+    relative_log = log.relative_to(repo_root).as_posix()
+    report: dict[str, JsonValue] = {
+        "id": project["id"],
+        "kind": project.get("kind", "document"),
+        "pdf": relative_pdf,
+        "log": relative_log,
+        "expected_pages": project.get("expected_pages"),
+        "pages": None,
+        "log_errors": _log_errors(log, strict_layout=project.get("kind") == "faithful"),
+        "pdf_ignored": _ignored(repo_root, relative_pdf),
+        "log_ignored": _ignored(repo_root, relative_log),
+    }
+    failures: list[str] = []
+    if pdf.is_file():
+        with fitz.open(pdf) as document:
+            report["pages"] = len(document)
+        expected = project.get("expected_pages")
+        if expected is not None and report["pages"] != expected:
+            failures.append(f"{project['id']}: expected {expected} pages, got {report['pages']}")
+    else:
+        failures.append(f"{project['id']}: missing PDF {relative_pdf}")
+    failures.extend(report["log_errors"])
+    if not report["pdf_ignored"]:
+        failures.append(f"{project['id']}: PDF is not ignored by Git: {relative_pdf}")
+    if not report["log_ignored"]:
+        failures.append(f"{project['id']}: build log is not ignored by Git: {relative_log}")
+    return report, failures
+
+
 def check_release(
     repo_root: Path,
     manifest_path: Path,
@@ -180,7 +246,7 @@ def check_release(
     authority_manifest: Path | None = None,
     publication_id: str | None = None,
     publication_registry_path: Path | None = None,
-) -> dict[str, Any]:
+) -> dict[str, JsonValue]:
     """Build when requested and return typed PDF/log/source-hygiene findings."""
     repo_root = repo_root.resolve()
     repo_resources = resources(repo_root)
@@ -201,7 +267,7 @@ def check_release(
         candidate = repo_resources.authority_manifest
         authority_manifest = candidate if candidate.is_file() else None
     if authority_manifest is None:
-        authority_payload: dict[str, Any] = {
+        authority_payload: dict[str, JsonValue] = {
             "available": False,
             "surfaces": [],
             "failures": [],
@@ -209,8 +275,6 @@ def check_release(
         }
         authority_failures: tuple[str, ...] = ()
     else:
-        from hla_lab.traceability.semantic_authority import validate_authority
-
         authority_report = validate_authority(
             document_roots(repo_root),
             authority_manifest.resolve(),
@@ -218,50 +282,14 @@ def check_release(
         )
         authority_payload = authority_report.model_dump(mode="json")
         authority_failures = authority_report.failures
-    from hla_lab.traceability.api_traceability import build_report as build_api_traceability_report
-    from hla_lab.traceability.api_traceability import default_roots as api_traceability_roots
-    from hla_lab.traceability.semantic_coverage import build_report as build_semantic_coverage
-
     semantic_coverage = build_semantic_coverage(document_roots(repo_root))
     api_traceability = build_api_traceability_report(api_traceability_roots(repo_root))
 
-    projects: list[dict[str, Any]] = []
+    projects: list[dict[str, JsonValue]] = []
     failures: list[str] = []
     for project in selected_projects:
-        root = repo_root / str(project["root"])
-        pdf = root / str(project["pdf"])
-        log = root / str(project["log"])
-        relative_pdf = pdf.relative_to(repo_root).as_posix()
-        relative_log = log.relative_to(repo_root).as_posix()
-        project_report: dict[str, Any] = {
-            "id": project["id"],
-            "kind": project.get("kind", "document"),
-            "pdf": relative_pdf,
-            "log": relative_log,
-            "expected_pages": project.get("expected_pages"),
-            "pages": None,
-            "log_errors": _log_errors(
-                log,
-                strict_layout=project.get("kind") == "faithful",
-            ),
-            "pdf_ignored": _ignored(repo_root, relative_pdf),
-            "log_ignored": _ignored(repo_root, relative_log),
-        }
-        if pdf.is_file():
-            with fitz.open(pdf) as document:
-                project_report["pages"] = len(document)
-            expected = project.get("expected_pages")
-            if expected is not None and project_report["pages"] != expected:
-                failures.append(
-                    f"{project['id']}: expected {expected} pages, got {project_report['pages']}"
-                )
-        else:
-            failures.append(f"{project['id']}: missing PDF {relative_pdf}")
-        failures.extend(project_report["log_errors"])
-        if not project_report["pdf_ignored"]:
-            failures.append(f"{project['id']}: PDF is not ignored by Git: {relative_pdf}")
-        if not project_report["log_ignored"]:
-            failures.append(f"{project['id']}: build log is not ignored by Git: {relative_log}")
+        project_report, project_failures = _inspect_project(repo_root, project)
+        failures.extend(project_failures)
         projects.append(project_report)
 
     tracked_generated = _tracked_generated(repo_root)
@@ -292,35 +320,34 @@ def main() -> int:
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=resources(REPO_ROOT).release_manifest,
         help="Release project manifest",
     )
     parser.add_argument("--diagram-manifest", type=Path)
     parser.add_argument(
         "--authority-manifest",
         type=Path,
-        default=resources(REPO_ROOT).authority_manifest,
         help="Semantic authority manifest",
     )
     parser.add_argument("--publication", help="Check only one publication destination")
     parser.add_argument(
         "--publication-manifest",
         type=Path,
-        default=resources(REPO_ROOT).publications_manifest,
         help="Publication destination registry",
     )
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     parser.add_argument("--build", action="store_true", help="Build every manifest project first")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
-    repo_root = REPO_ROOT
+    repo_root = repository_root(args.root)
+    registry_paths = resources(repo_root)
     report = check_release(
         repo_root,
-        args.manifest,
+        args.manifest or registry_paths.release_manifest,
         build=args.build,
         diagram_manifest=args.diagram_manifest,
-        authority_manifest=args.authority_manifest,
+        authority_manifest=args.authority_manifest or registry_paths.authority_manifest,
         publication_id=args.publication,
-        publication_registry_path=args.publication_manifest,
+        publication_registry_path=args.publication_manifest or registry_paths.publications_manifest,
     )
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))

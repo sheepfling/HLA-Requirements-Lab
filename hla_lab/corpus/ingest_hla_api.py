@@ -12,7 +12,9 @@ import argparse
 import hashlib
 import re
 import xml.etree.ElementTree as ET
+from collections.abc import MutableSequence
 from pathlib import Path
+from types import MappingProxyType
 from zipfile import ZipFile
 
 from hla_lab.core.io import write_json
@@ -21,10 +23,13 @@ from hla_lab.core.text import normalize_whitespace, slugify
 from hla_lab.paths import REPO_ROOT, resources
 
 ROOT = REPO_ROOT
-OWNER_BY_FILE = {
-    "RTIambassador": ("RTIambassador", "service"),
-    "FederateAmbassador": ("FederateAmbassador", "callback"),
-}
+_DELIMITER_PAIRS = (("<", ">"), ("(", ")"), ("[", "]"), ("{", "}"))
+OWNER_BY_FILE = MappingProxyType(
+    {
+        "RTIambassador": ("RTIambassador", "service"),
+        "FederateAmbassador": ("FederateAmbassador", "callback"),
+    }
+)
 
 
 def _relative(path: Path) -> str:
@@ -46,28 +51,24 @@ def _stable_id(edition: str, binding: str, owner: str, name: str, signature: str
     return f"api.{edition}.{binding}.{owner_slug}.{name_slug}.{digest}"
 
 
+def _update_nesting(depths: MutableSequence[int], char: str) -> None:
+    for index, (opening, closing) in enumerate(_DELIMITER_PAIRS):
+        if char == opening:
+            depths[index] += 1
+            return
+        if char == closing:
+            if depths[index]:
+                depths[index] -= 1
+            return
+
+
 def _split_top_level(value: str) -> tuple[str, ...]:
     parts: list[str] = []
     start = 0
-    angle = paren = bracket = brace = 0
+    depths = [0] * len(_DELIMITER_PAIRS)
     for index, char in enumerate(value):
-        if char == "<":
-            angle += 1
-        elif char == ">" and angle:
-            angle -= 1
-        elif char == "(":
-            paren += 1
-        elif char == ")" and paren:
-            paren -= 1
-        elif char == "[":
-            bracket += 1
-        elif char == "]" and bracket:
-            bracket -= 1
-        elif char == "{":
-            brace += 1
-        elif char == "}" and brace:
-            brace -= 1
-        elif char == "," and not any((angle, paren, bracket, brace)):
+        _update_nesting(depths, char)
+        if char == "," and not any(depths):
             parts.append(value[start:index].strip())
             start = index + 1
     tail = value[start:].strip()
@@ -159,7 +160,7 @@ def _cxx_declarations(
     while index < len(lines):
         line = lines[index]
         stripped = line.strip()
-        if stripped.startswith(("//", "/*", "*", "*/")):
+        if re.match(r"^(?://|/\*|\*|\*/)", stripped):
             comments.append(stripped)
             index += 1
             continue
@@ -225,7 +226,7 @@ def _java_declarations(
     while index < len(lines):
         line = lines[index]
         stripped = line.strip()
-        if stripped.startswith(("//", "/*", "*", "*/")):
+        if re.match(r"^(?://|/\*|\*|\*/)", stripped):
             comments.append(stripped)
             index += 1
             continue

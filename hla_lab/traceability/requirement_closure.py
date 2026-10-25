@@ -11,12 +11,13 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from pathlib import Path
+from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.corpus.hla_2010_semantic import _requirements, _surface_inputs
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import RESOURCES, resources
 
 __all__ = [
     "RequirementClosureDocument",
@@ -26,10 +27,21 @@ __all__ = [
 
 
 ROOTS_2010 = (
-    RESOURCES.document("hla-1516-2010").root,
-    RESOURCES.document("hla-1516.1-2010").root,
-    RESOURCES.document("hla-1516.2-2010").root,
+    tuple(
+        RESOURCES.document(document_id).root
+        for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
+    )
+    if RESOURCES is not None
+    else ()
 )
+
+
+def _default_roots() -> tuple[Path, ...]:
+    registry = resources()
+    return tuple(
+        registry.document(document_id).root
+        for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
+    )
 
 
 class _ReportModel(BaseModel):
@@ -39,16 +51,16 @@ class _ReportModel(BaseModel):
 class RequirementClosureDocument(_ReportModel):
     """One 2010 document's source-to-catalog closure evidence."""
 
-    document: str = Field(min_length=1)
-    requirements: int = Field(ge=0)
-    source_candidates: int = Field(ge=0)
-    explicit_requirements: int = Field(ge=0)
-    candidate_requirements: int = Field(ge=0)
-    requirement_reviews: int = Field(ge=0)
-    table_count: int = Field(ge=0)
-    table_requirement_references: int = Field(ge=0)
-    api_binding_rows: int = Field(ge=0)
-    api_binding_requirement_ids: int = Field(ge=0)
+    document: Annotated[str, Field(min_length=1)]
+    requirements: Annotated[int, Field(ge=0)]
+    source_candidates: Annotated[int, Field(ge=0)]
+    explicit_requirements: Annotated[int, Field(ge=0)]
+    candidate_requirements: Annotated[int, Field(ge=0)]
+    requirement_reviews: Annotated[int, Field(ge=0)]
+    table_count: Annotated[int, Field(ge=0)]
+    table_requirement_references: Annotated[int, Field(ge=0)]
+    api_binding_rows: Annotated[int, Field(ge=0)]
+    api_binding_requirement_ids: Annotated[int, Field(ge=0)]
     missing_api_requirement_ids: tuple[str, ...] = ()
     unexpected_api_requirement_ids: tuple[str, ...] = ()
     source_path_mismatches: tuple[str, ...] = ()
@@ -80,11 +92,7 @@ def _document_report(root: Path) -> RequirementClosureDocument:
         )
     )
     missing_source_paths = tuple(
-        sorted(
-            item.id
-            for item in model.requirements
-            if not (root / item.source.path).is_file()
-        )
+        sorted(item.id for item in model.requirements if not (root / item.source.path).is_file())
     )
     table_requirement_references = sum(
         record_id in requirement_ids
@@ -132,14 +140,13 @@ def _document_report(root: Path) -> RequirementClosureDocument:
     )
 
 
-def build_report(roots: tuple[Path, ...] = ROOTS_2010) -> RequirementClosureReport:
+def build_report(roots: tuple[Path, ...] | None = None) -> RequirementClosureReport:
     """Build a deterministic source-to-catalog audit for 2010 roots."""
 
-    documents = tuple(_document_report(root) for root in roots)
+    selected_roots = roots if roots is not None else _default_roots()
+    documents = tuple(_document_report(root) for root in selected_roots)
     failures = tuple(
-        f"{document.document}: {failure}"
-        for document in documents
-        for failure in document.failures
+        f"{document.document}: {failure}" for document in documents for failure in document.failures
     )
     return RequirementClosureReport(
         documents=documents,
@@ -154,7 +161,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    roots = tuple(args.root or ROOTS_2010)
+    roots = tuple(args.root or ()) or _default_roots()
     report = build_report(roots)
     if args.json:
         print(report.model_dump_json(indent=2))

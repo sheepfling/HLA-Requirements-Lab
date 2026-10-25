@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-10-25",
+  "source_page": "https://standards.ieee.org/ieee/1516.1/6688/",
+  "archive_url": "https://standards.ieee.org/wp-content/uploads/2025/08/1516.1-2025_downloads.zip",
+  "archive_sha256": "27b81429f46fe10af26d961ed22661dfcc98535d77a92f135c43d6b4f74d16f4",
+  "nested_archive": {
+    "path": "1516.1-2025_downloads/1516-2025_API_XML_2025_08_14.zip",
+    "sha256": "a8a259b545e4754d2dc86a08ae8f36105320e0917bacad28b465da7481318b51"
+  },
+  "entries": [
+    {
+      "path": "1516-2025_API_XML_2025_08_14/java/hla/rti1516_2025/ConfigurationResult.java",
+      "sha256": "2b8f2254ef9431caeb10c8317b09782b3e1cd63de515373c6fc505320a98345d",
+      "observation": "Lines 17, 22, and 28 use additionalSettingsResultCode as the constructor argument and field name.",
+      "issue_id": "RL-256",
+      "scope": "Confirms the 2025 Java API field spelling; does not verify the printed Table 5 example."
+    },
+    {
+      "path": "1516-2025_API_XML_2025_08_14/xml/HLAstandardMIM-2025.xml",
+      "sha256": "2945adb7dcd051e2bce41b3b251f9704eb071a1d159a3672d90fe09e33ffde71",
+      "observation": "Lines 3300-3305 assign FederateRestoreStatus value 19 and FederateRestoreStatusSet value 20.",
+      "issue_id": "RL-369",
+      "scope": "Confirms the MIM names and values; does not adjudicate the conflicting Table 5 row."
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import re
+from collections.abc import MutableSet, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -37,7 +38,7 @@ from hla_lab.core.text import slugify
 from hla_lab.paths import DocumentResources
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Heading:
     offset: int
     command: str
@@ -61,50 +62,52 @@ _NATIVE_FIGURE = re.compile(
     r"(?m)^\s*(?:\\stdnativefigure(?:\*?\[[^]]*\])?\s*)?"
     r"(?:\\input\s*\{)?figures/native/[^}\s]+(?:\})?\s*$"
 )
-_NORMATIVE_STOP_WORDS = {
-    "a",
-    "an",
-    "about",
-    "after",
-    "also",
-    "among",
-    "and",
-    "are",
-    "as",
-    "at",
-    "be",
-    "by",
-    "because",
-    "been",
-    "being",
-    "during",
-    "for",
-    "from",
-    "have",
-    "if",
-    "in",
-    "into",
-    "must",
-    "of",
-    "on",
-    "or",
-    "shall",
-    "that",
-    "the",
-    "their",
-    "these",
-    "this",
-    "those",
-    "to",
-    "through",
-    "under",
-    "using",
-    "was",
-    "were",
-    "when",
-    "which",
-    "with",
-}
+_NORMATIVE_STOP_WORDS = frozenset(
+    {
+        "a",
+        "an",
+        "about",
+        "after",
+        "also",
+        "among",
+        "and",
+        "are",
+        "as",
+        "at",
+        "be",
+        "by",
+        "because",
+        "been",
+        "being",
+        "during",
+        "for",
+        "from",
+        "have",
+        "if",
+        "in",
+        "into",
+        "must",
+        "of",
+        "on",
+        "or",
+        "shall",
+        "that",
+        "the",
+        "their",
+        "these",
+        "this",
+        "those",
+        "to",
+        "through",
+        "under",
+        "using",
+        "was",
+        "were",
+        "when",
+        "which",
+        "with",
+    }
+)
 
 
 def _arguments(text: str, offset: int, count: int) -> tuple[str, ...] | None:
@@ -306,9 +309,7 @@ def _clause_for(path: Path, headings: tuple[Heading, ...]) -> str | None:
     return f"clause-{root_number}" if root_number else None
 
 
-def _clause_for_line(
-    path: Path, headings: tuple[Heading, ...], line: int
-) -> str | None:
+def _clause_for_line(path: Path, headings: tuple[Heading, ...], line: int) -> str | None:
     """Resolve the heading that owns a source line, not the file's final heading."""
 
     prior = tuple(item for item in headings if item.line <= line)
@@ -362,6 +363,106 @@ def _content(
     return tuple(blocks), tuple(elements)
 
 
+def _definition_record(
+    root: Path,
+    path: Path,
+    text: str,
+    term_value: str,
+    body: str,
+    offset: int,
+    headings: tuple[Heading, ...],
+    seen: MutableSet[str],
+    seen_values: MutableSet[tuple[str, str]],
+) -> Definition | None:
+    term = _plain(term_value)
+    if not term:
+        return None
+    body_text = _plain(body)
+    normalized = (term, body_text)
+    if normalized in seen_values:
+        return None
+    seen_values.add(normalized)
+    definition_id = f"def-{slugify(term)}"
+    if definition_id in seen:
+        digest = hashlib.sha1(f"{path}:{offset}".encode()).hexdigest()[:8]
+        definition_id = f"{definition_id}-{digest}"
+    seen.add(definition_id)
+    return Definition(
+        id=definition_id,
+        term=term,
+        text=body_text,
+        clause_id=_clause_for(path, headings),
+        source=_source(root, path, text, offset),
+    )
+
+
+def _command_definitions(
+    root: Path,
+    path: Path,
+    text: str,
+    headings: tuple[Heading, ...],
+    seen: MutableSet[str],
+    seen_values: MutableSet[tuple[str, str]],
+) -> list[Definition]:
+    records: list[Definition] = []
+    for command, arity in (("defentry", 2), ("term", 1)):
+        for match in re.finditer(rf"\\{command}\b", text):
+            values = _arguments(text, match.start(), arity)
+            if values is None:
+                continue
+            if command == "defentry":
+                body = values[1]
+            else:
+                line_end = text.find("\n", match.end())
+                body = text[match.end() : line_end if line_end >= 0 else len(text)]
+            record = _definition_record(
+                root,
+                path,
+                text,
+                values[0],
+                body,
+                match.start(),
+                headings,
+                seen,
+                seen_values,
+            )
+            if record is not None:
+                records.append(record)
+    return records
+
+
+def _environment_definitions(
+    root: Path,
+    path: Path,
+    text: str,
+    headings: tuple[Heading, ...],
+    seen: MutableSet[str],
+    seen_values: MutableSet[tuple[str, str]],
+) -> list[Definition]:
+    records: list[Definition] = []
+    for match in re.finditer(r"\\begin\{definition\}", text):
+        opening = try_balanced_group(text, match.end(), skip_whitespace=True)
+        if opening is None:
+            continue
+        term_raw, body_start = opening
+        end_marker = text.find(r"\end{definition}", body_start)
+        body = text[body_start : end_marker if end_marker >= 0 else len(text)]
+        record = _definition_record(
+            root,
+            path,
+            text,
+            term_raw,
+            body,
+            match.start(),
+            headings,
+            seen,
+            seen_values,
+        )
+        if record is not None:
+            records.append(record)
+    return records
+
+
 def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
     records: list[Definition] = []
     seen: set[str] = set()
@@ -369,69 +470,12 @@ def _definitions(root: Path, files: tuple[Path, ...]) -> tuple[Definition, ...]:
     for path in files:
         text = path.read_text(encoding="utf-8")
         headings = _headings(root, path, text)
-        for command, arity in (("defentry", 2), ("term", 1)):
-            for match in re.finditer(rf"\\{command}\b", text):
-                values = _arguments(text, match.start(), arity)
-                if values is None:
-                    continue
-                term = _plain(values[0])
-                if not term:
-                    continue
-                if command == "defentry":
-                    body = values[1]
-                else:
-                    line_end = text.find("\n", match.end())
-                    body = text[match.end() : line_end if line_end >= 0 else len(text)]
-                normalized = (term, _plain(body))
-                if normalized in seen_values:
-                    continue
-                seen_values.add(normalized)
-                definition_id = f"def-{slugify(term)}"
-                if definition_id in seen:
-                    digest = hashlib.sha1(f"{path}:{match.start()}".encode()).hexdigest()[:8]
-                    definition_id = f"{definition_id}-{digest}"
-                seen.add(definition_id)
-                records.append(
-                    Definition(
-                        id=definition_id,
-                        term=term,
-                        text=_plain(body),
-                        clause_id=_clause_for(path, headings),
-                        source=_source(root, path, text, match.start()),
-                    )
-                )
-        for match in re.finditer(r"\\begin\{definition\}", text):
-            opening = try_balanced_group(text, match.end(), skip_whitespace=True)
-            if opening is None:
-                continue
-            term_raw, body_start = opening
-            term = _plain(term_raw)
-            if not term:
-                continue
-            end_marker = text.find(r"\end{definition}", body_start)
-            body = text[body_start : end_marker if end_marker >= 0 else len(text)]
-            normalized = (term, _plain(body))
-            if normalized in seen_values:
-                continue
-            seen_values.add(normalized)
-            definition_id = f"def-{slugify(term)}"
-            if definition_id in seen:
-                digest = hashlib.sha1(f"{path}:{match.start()}".encode()).hexdigest()[:8]
-                definition_id = f"{definition_id}-{digest}"
-            seen.add(definition_id)
-            records.append(
-                Definition(
-                    id=definition_id,
-                    term=term,
-                    text=_plain(body),
-                    clause_id=_clause_for(path, _headings(root, path, text)),
-                    source=_source(root, path, text, match.start()),
-                )
-            )
+        records.extend(_command_definitions(root, path, text, headings, seen, seen_values))
+        records.extend(_environment_definitions(root, path, text, headings, seen, seen_values))
     return tuple(records)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class _NormativeCandidate:
     """One sentence-level source candidate with a complete authored span."""
 
@@ -454,141 +498,181 @@ def _mask_layout_source(text: str) -> str:
     return re.sub(r"(?m)^.*figures/native/[^\n]*$", blank, masked)
 
 
-def _normative_paragraphs(text: str) -> tuple[tuple[tuple[int, str], ...], ...]:
-    """Group prose lines without allowing layout artifacts to join sentences."""
+@dataclass(slots=True)
+class _ParagraphState:
+    paragraphs: list[tuple[tuple[int, str], ...]]
+    current: list[tuple[int, str]]
+    in_table: bool = False
+    list_depth: int = 0
 
-    lines = _mask_layout_source(text).splitlines()
-    paragraphs: list[tuple[tuple[int, str], ...]] = []
-    current: list[tuple[int, str]] = []
-    in_table = False
-    list_depth = 0
-    for number, raw in enumerate(lines, start=1):
-        stripped = raw.strip()
-        table_begin = re.search(r"\\begin\{(?:tabular|tabularx|longtable)\*?\}", raw)
-        if table_begin:
-            if current:
-                paragraphs.append(tuple(current))
-                current = []
-            in_table = True
-            raw = raw[table_begin.end() :]
-            if not raw.strip():
-                continue
-        table_end = re.search(r"\\end\{(?:tabular|tabularx|longtable)\*?\}", raw)
-        if table_end:
-            raw = raw[: table_end.start()]
-            if raw.strip():
-                current.append((number, raw))
-            if current:
-                paragraphs.append(tuple(current))
-                current = []
-            in_table = False
-            continue
-        if re.match(r"^\\(?:begin|end)\{(?:compactstdpage|annexstdpage)\}", stripped):
-            if current and re.match(r"^\\end", stripped):
-                current_text = _plain(" ".join(value for _, value in current))
-                if not re.search(
-                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
-                    current_text.rstrip(" ;"),
-                    re.IGNORECASE,
-                ):
-                    paragraphs.append(tuple(current))
-                    current = []
-            continue
-        if not stripped:
-            continue
-        if re.match(
+
+def _flush_paragraph(state: _ParagraphState) -> None:
+    if state.current:
+        state.paragraphs.append(tuple(state.current))
+        state.current.clear()
+
+
+def _current_is_incomplete(state: _ParagraphState) -> bool:
+    current_text = _plain(" ".join(value for _, value in state.current))
+    return bool(
+        re.search(
+            rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+            current_text.rstrip(" ;"),
+            re.IGNORECASE,
+        )
+    )
+
+
+def _table_line(
+    number: int,
+    raw: str,
+    state: _ParagraphState,
+) -> tuple[str, bool]:
+    table_begin = re.search(r"\\begin\{(?:tabular|tabularx|longtable)\*?\}", raw)
+    if table_begin:
+        _flush_paragraph(state)
+        state.in_table = True
+        raw = raw[table_begin.end() :]
+        if not raw.strip():
+            return raw, True
+    table_end = re.search(r"\\end\{(?:tabular|tabularx|longtable)\*?\}", raw)
+    if table_end:
+        raw = raw[: table_end.start()]
+        if raw.strip():
+            state.current.append((number, raw))
+        _flush_paragraph(state)
+        state.in_table = False
+        return raw, True
+    return raw, False
+
+
+def _page_environment_boundary(stripped: str, state: _ParagraphState) -> bool:
+    if not re.match(r"^\\(?:begin|end)\{(?:compactstdpage|annexstdpage)\}", stripped):
+        return False
+    if state.current and re.match(r"^\\end", stripped) and not _current_is_incomplete(state):
+        _flush_paragraph(state)
+    return True
+
+
+def _is_heading_or_blank(stripped: str) -> bool:
+    if not stripped:
+        return True
+    return bool(
+        re.match(
             r"^\\(?:clause|subclause|subsubclause|annexsection|annexsubsection|"
             r"section|subsection|subsubsection|paragraph|annexsubhead)\b",
             stripped,
+        )
+    )
+
+
+def _list_environment_boundary(stripped: str, state: _ParagraphState) -> bool:
+    if re.match(
+        r"^\\begin\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
+        stripped,
+    ):
+        state.list_depth += 1
+        return True
+    if re.match(
+        r"^\\end\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
+        stripped,
+    ):
+        state.list_depth = max(0, state.list_depth - 1)
+        return True
+    return False
+
+
+def _list_item_text(raw: str, state: _ParagraphState) -> tuple[str, bool]:
+    item = re.search(r"\\item(?:\s*\[[^]]*\])?", raw)
+    if item is None or state.list_depth > 1:
+        return raw, False
+    if state.current and not _current_is_incomplete(state):
+        _flush_paragraph(state)
+    raw = raw[item.end() :]
+    return raw, not raw.strip()
+
+
+def _normative_paragraphs(text: str) -> tuple[tuple[tuple[int, str], ...], ...]:
+    """Group prose lines without allowing layout artifacts to join sentences."""
+    state = _ParagraphState(paragraphs=[], current=[])
+    for number, original in enumerate(_mask_layout_source(text).splitlines(), start=1):
+        raw, consumed = _table_line(number, original, state)
+        if consumed:
+            continue
+        stripped = raw.strip()
+        if _page_environment_boundary(stripped, state):
+            continue
+        if _is_heading_or_blank(stripped):
+            continue
+        if _list_environment_boundary(stripped, state):
+            continue
+        raw, skip = _list_item_text(raw, state)
+        if skip:
+            continue
+        state.current.append((number, raw))
+        if state.in_table and re.search(r"\\\\(?:\[[^]]*\])?\s*(?:%.*)?$", stripped):
+            _flush_paragraph(state)
+    _flush_paragraph(state)
+    return tuple(state.paragraphs)
+
+
+def _joined_normative_paragraph(
+    paragraph: tuple[tuple[int, str], ...],
+) -> tuple[str, list[int]]:
+    pieces: list[str] = []
+    mapping: list[int] = []
+    for number, raw in paragraph:
+        cleaned = _plain(raw)
+        if not cleaned:
+            continue
+        if pieces:
+            pieces.append(" ")
+            mapping.append(number)
+        pieces.append(cleaned)
+        mapping.extend([number] * len(cleaned))
+    return "".join(pieces), mapping
+
+
+def _normative_starts(joined: str) -> list[int]:
+    starts = [0]
+    starts.extend(match.end() for match in _NORMATIVE_SENTENCE_END.finditer(joined))
+    for marker in re.finditer(r"(?=\s+[a-z]\))", joined):
+        prefix = joined[: marker.start()].rstrip()
+        if not _incomplete_normative_phrase(prefix, strip_terminators=False):
+            starts.append(marker.start())
+    return sorted(set(starts))
+
+
+def _incomplete_normative_phrase(value: str, *, strip_terminators: bool = True) -> bool:
+    candidate = value.rstrip(" ;") if strip_terminators else value
+    return bool(
+        re.search(
+            rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
+            candidate,
+            re.IGNORECASE,
+        )
+    )
+
+
+def _normative_segments(
+    joined: str,
+    mapping: Sequence[int],
+    starts: Sequence[int],
+) -> list[_NormativeCandidate]:
+    segments: list[_NormativeCandidate] = []
+    for start, end in zip(starts, (*starts[1:], len(joined)), strict=True):
+        raw_statement = joined[start:end]
+        statement = raw_statement.strip(" ;")
+        if re.search(r"\b(?:[a-z]|\d+)\)", statement) and re.search(
+            r"\s+(?:and|or)$", statement, re.IGNORECASE
         ):
+            statement = re.sub(r"\s+(?:and|or)$", "", statement, flags=re.IGNORECASE)
+        if not statement:
             continue
-        list_begin = re.match(
-            r"^\\begin\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
-            stripped,
-        )
-        if list_begin:
-            list_depth += 1
-            continue
-        list_end = re.match(
-            r"^\\end\{(?:stdalphalist|stdnumlist|stddashlist|enumerate|itemize)\}",
-            stripped,
-        )
-        if list_end:
-            list_depth = max(0, list_depth - 1)
-            continue
-        item = re.search(r"\\item(?:\s*\[[^]]*\])?", raw)
-        if item and list_depth <= 1:
-            current_text = _plain(" ".join(value for _, value in current))
-            current_incomplete = bool(
-                re.search(
-                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
-                    current_text.rstrip(" ;"),
-                    re.IGNORECASE,
-                )
-            )
-            if current and not current_incomplete:
-                paragraphs.append(tuple(current))
-                current = []
-            raw = raw[item.end() :]
-            if not raw.strip():
-                continue
-        current.append((number, raw))
-        if in_table and re.search(r"\\\\(?:\[[^]]*\])?\s*(?:%.*)?$", stripped):
-            paragraphs.append(tuple(current))
-            current = []
-    if current:
-        paragraphs.append(tuple(current))
-    return tuple(paragraphs)
-
-
-def _normative_candidates(text: str) -> tuple[_NormativeCandidate, ...]:
-    """Extract complete normative sentences from a legacy source file."""
-
-    candidates: list[_NormativeCandidate] = []
-    for paragraph in _normative_paragraphs(text):
-        pieces: list[str] = []
-        mapping: list[int] = []
-        for number, raw in paragraph:
-            cleaned = _plain(raw)
-            if not cleaned:
-                continue
-            if pieces:
-                pieces.append(" ")
-                mapping.append(number)
-            pieces.append(cleaned)
-            mapping.extend([number] * len(cleaned))
-        joined = "".join(pieces)
-        if not joined:
-            continue
-        starts = [0]
-        starts.extend(match.end() for match in _NORMATIVE_SENTENCE_END.finditer(joined))
-        for marker in re.finditer(r"(?=\s+[a-z]\))", joined):
-            prefix = joined[: marker.start()].rstrip()
-            if not re.search(
-                rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
-                prefix,
-                re.IGNORECASE,
-            ):
-                starts.append(marker.start())
-        starts = sorted(set(starts))
-        segments: list[_NormativeCandidate] = []
-        for start, end in zip(starts, (*starts[1:], len(joined)), strict=True):
-            raw_statement = joined[start:end]
-            statement = raw_statement.strip(" ;")
-            # A legacy compact page can end immediately after the final list
-            # marker's conjunction.  Keep the authored source span, but do
-            # not publish a dangling glue word as a standalone obligation.
-            if re.search(r"\b(?:[a-z]|\d+)\)", statement) and re.search(
-                r"\s+(?:and|or)$", statement, re.IGNORECASE
-            ):
-                statement = re.sub(r"\s+(?:and|or)$", "", statement, flags=re.IGNORECASE)
-            if not statement:
-                continue
-            left = start + len(raw_statement) - len(raw_statement.lstrip())
-            right = end - len(raw_statement) + len(raw_statement.rstrip())
-            span = mapping[max(0, left) : min(len(mapping), right)]
-            if not span:
-                continue
+        left = start + len(raw_statement) - len(raw_statement.lstrip())
+        right = end - len(raw_statement) + len(raw_statement.rstrip())
+        span = mapping[max(0, left) : min(len(mapping), right)]
+        if span:
             segments.append(
                 _NormativeCandidate(
                     statement=statement,
@@ -597,37 +681,57 @@ def _normative_candidates(text: str) -> tuple[_NormativeCandidate, ...]:
                     offset=start,
                 )
             )
-        merged: list[_NormativeCandidate] = []
-        for segment in segments:
-            marker = bool(re.match(r"^(?:[a-z]|\d+)\)", segment.statement.lstrip()))
-            previous_incomplete = bool(
-                merged
-                and re.search(
-                    rf"\b(?:{'|'.join(sorted(_NORMATIVE_STOP_WORDS))})$",
-                    merged[-1].statement.rstrip(" ;"),
-                    re.IGNORECASE,
-                )
+    return segments
+
+
+def _merge_normative_segments(
+    segments: Sequence[_NormativeCandidate],
+) -> list[_NormativeCandidate]:
+    merged: list[_NormativeCandidate] = []
+    for segment in segments:
+        marker = bool(re.match(r"^(?:[a-z]|\d+)\)", segment.statement.lstrip()))
+        previous_incomplete = bool(merged and _incomplete_normative_phrase(merged[-1].statement))
+        continuation = not re.search(r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE)
+        if merged and continuation and (previous_incomplete or marker):
+            prior = merged[-1]
+            merged[-1] = _NormativeCandidate(
+                statement=f"{prior.statement} {segment.statement}".strip(),
+                line=prior.line,
+                end_line=segment.end_line,
+                offset=prior.offset,
             )
-            continuation = not re.search(
-                r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE
-            )
-            if merged and continuation and (previous_incomplete or marker):
-                prior = merged[-1]
-                merged[-1] = _NormativeCandidate(
-                    statement=f"{prior.statement} {segment.statement}".strip(),
-                    line=prior.line,
-                    end_line=segment.end_line,
-                    offset=prior.offset,
-                )
-            else:
-                merged.append(segment)
-        candidates.extend(
-            segment
-            for segment in merged
-            if len(segment.statement) >= 30
-            and re.search(r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE)
-        )
-    return tuple(candidates)
+        else:
+            merged.append(segment)
+    return merged
+
+
+def _is_normative_candidate(segment: _NormativeCandidate) -> bool:
+    return len(segment.statement) >= 30 and bool(
+        re.search(r"\b(?:shall|must)\b", segment.statement, re.IGNORECASE)
+    )
+
+
+def _paragraph_candidates(
+    paragraph: tuple[tuple[int, str], ...],
+) -> tuple[_NormativeCandidate, ...]:
+    joined, mapping = _joined_normative_paragraph(paragraph)
+    if not joined:
+        return ()
+    segments = _normative_segments(joined, mapping, _normative_starts(joined))
+    return tuple(
+        segment
+        for segment in _merge_normative_segments(segments)
+        if _is_normative_candidate(segment)
+    )
+
+
+def _normative_candidates(text: str) -> tuple[_NormativeCandidate, ...]:
+    """Extract complete normative sentences from a legacy source file."""
+    return tuple(
+        candidate
+        for paragraph in _normative_paragraphs(text)
+        for candidate in _paragraph_candidates(paragraph)
+    )
 
 
 def _requirements(root: Path, files: tuple[Path, ...]) -> tuple[Requirement, ...]:
@@ -849,7 +953,8 @@ def promote_adapters(root: Path) -> int:
     for path in files:
         adapter = (
             "% Generated adapter; visible content is authored in semantic/content-blocks.json.\n"
-            f"\\input{{output/semantic/content-block-content-{slugify(path.relative_to(root).as_posix())}}}\n"
+            "\\input{output/semantic/content-block-content-"
+            f"{slugify(path.relative_to(root).as_posix())}}}\n"
         )
         path.write_text(adapter, encoding="utf-8")
         count += 1

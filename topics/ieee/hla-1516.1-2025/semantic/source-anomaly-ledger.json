@@ -128,6 +128,24 @@
       "classification": "COMPILATION_DEFECT",
       "reason": "The generated caption and the state-chart source association must agree; source-page extraction order is not a sufficient mapping authority.",
       "review_status": "APPLIED"
+    },
+    {
+      "source_id": "hla15161-table-5-configuration-result-example",
+      "location": "Table 5, page 296, ConfigurationResult example",
+      "source_text": "The field is additionalSettingsResultCode, while the printed example says addtionalSettingsResultCode; the extracted message type also has a stray closing bracket.",
+      "rendered_text": "The structured candidate names the field additionalSettingsResultCode and quotes the example spelling separately. No rule is inferred from the example typo.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "RL-256's field spelling is corroborated by the IEEE SA 2025 Java ConfigurationResult auxiliary declaration. The supplied Table 5 example still differs, and the licensed primary page has not been independently adjudicated.",
+      "review_status": "UNRESOLVED"
+    },
+    {
+      "source_id": "hla15161-table-5-restore-status-set-name",
+      "location": "Table 5, page 297, FederateHandleRestoreStatusSet row",
+      "source_text": "The supplied Table 5 page prints FederateHandleRestoreStatusSet as Array<FederateHandleRestoreStatus>.",
+      "rendered_text": "The literal Table 5 spelling is retained with a source-conflict note; no MIM type-20 mapping is inferred from it.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "RL-369: Table 14 on page 324 of the supplied 1516.1 material names type 19 FederateRestoreStatus and type 20 FederateRestoreStatusSet. The IEEE SA 1516.1-2025 auxiliary MIM XML and the supplied 1516.2-2025 MIM agree; neither names FederateHandleRestoreStatus. The licensed 1516.1 Table 5 page needs adjudication before either spelling can be selected as a correction.",
+      "review_status": "UNRESOLVED"
     }
   ]
 }

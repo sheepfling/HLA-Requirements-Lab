@@ -160,9 +160,10 @@ def export_bundle(
     bundle_id: str,
     corpus_revision: str,
     output: Path,
+    workspace_root: Path | None = None,
 ) -> CorpusBundle:
     """Load HLA sources and emit a validated portable bundle."""
-    corpus = load_hla_corpus(roots)
+    corpus = load_hla_corpus(roots, workspace_root=workspace_root)
     bundle = CorpusBundle(
         schema_version=1,
         bundle_id=bundle_id,
@@ -190,6 +191,7 @@ def main() -> None:
         bundle_id=args.bundle_id,
         corpus_revision=args.revision,
         output=args.output,
+        workspace_root=args.corpus_root,
     )
     print(f"wrote {len(bundle.documents)} documents to {args.output}")
 

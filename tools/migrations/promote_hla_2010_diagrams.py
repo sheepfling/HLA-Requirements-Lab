@@ -11,7 +11,11 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections.abc import Mapping, Sequence
 from pathlib import Path
+from types import MappingProxyType
+
+from pydantic import JsonValue
 
 from hla_lab.core.parsing import line_number
 from hla_lab.core.semantic_model import (
@@ -34,157 +38,161 @@ from hla_lab.paths import RESOURCES, DocumentResources
 ROOT = RESOURCES.document("hla-1516.1-2010").root
 STATE_FIGURES = (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)
 GRAPH_FIGURES = (2, 18, 19, 20)
-PAGE_BY_FIGURE = {
-    1: 39,
-    2: 40,
-    3: 41,
-    4: 42,
-    5: 44,
-    6: 46,
-    7: 47,
-    8: 47,
-    9: 48,
-    10: 83,
-    11: 84,
-    12: 85,
-    13: 86,
-    14: 103,
-    15: 104,
-    16: 138,
-    17: 171,
-    18: 205,
-    19: 262,
-    20: 263,
-}
+PAGE_BY_FIGURE = MappingProxyType(
+    {
+        1: 39,
+        2: 40,
+        3: 41,
+        4: 42,
+        5: 44,
+        6: 46,
+        7: 47,
+        8: 47,
+        9: 48,
+        10: 83,
+        11: 84,
+        12: 85,
+        13: 86,
+        14: 103,
+        15: 104,
+        16: 138,
+        17: 171,
+        18: 205,
+        19: 262,
+        20: 263,
+    }
+)
 
 # Captions that are split across several source comments or contain a generic
 # placeholder in the native source.  These are semantic labels, not layout
 # coordinates; the remaining state labels are recovered from their markers.
-LABEL_OVERRIDES = {
-    1: {
-        "S00": "Federation Execution",
-        "S01": "Federation Execution Does Not Exist",
-        "S02": "Federation Execution Exists",
-        "S03": "No Joined Federates",
-        "S04": "Supporting Joined Federates",
-    },
-    3: {
-        "S00": "Lifetime of a Federate",
-        "S01": "Not Connected",
-        "S02": "Connected",
-        "S03": "Not Joined",
-        "S04": "Joined Federate",
-    },
-    4: {
-        "S00": "Joined Federate",
-        "S01": "Active Federate",
-        "S02": "Active",
-        "S03": "Restore Request Pending",
-        "S04": "Waiting for Restore to Begin",
-        "S05": "Federate Save in Progress",
-        "S06": "Instructed to Save",
-        "S07": "Saving",
-        "S08": "Waiting for Federation to Save",
-        "S09": "Federate Restore in Progress",
-        "S10": "Waiting for Federation to Restore",
-        "S11": "Restoring",
-        "S12": "Prepared to Restore",
-        "S13": "Normal Activity Permitted",
-        "S14": "Normal Activity Not Permitted",
-    },
-    5: {
-        "S00": "Normal Activity Permitted",
-        "S01": "First Object Class",
-        "S02": "Last Object Class",
-        "S03": "First Interaction Class",
-        "S04": "Last Interaction Class",
-    },
-    7: {
-        "S00": "Global Synch Label",
-        "S01": "Synch Point Not Registered",
-        "S02": "Validating Synch Point",
-    },
-    8: {"S00": "Awaiting Synchronization", "S01": "Waiting for Federate to Synchronize"},
-    9: {
-        "S00": "Local Synch Label",
-        "S01": "No Activity",
-        "S02": "Attempting to Register Synch Point",
-        "S03": "Moving to Synch Point",
-        "S04": "Waiting for Rest of Federation to Synchronize",
-    },
-    10: {
-        "S01": "Class Attribute (i, HLAprivilegeToDeleteObject)",
-        "S02": "Second Available Class Attribute",
-        "S03": "Last Available Class Attribute",
-        "S04": "Object Instance (i, 1) Not Known",
-        "S05": "Object Instance (i, 1) Known",
-        "S06": "Object Instance (i, 1) No Longer Known",
-        "S07": "Object Instance (i, k) Not Known",
-        "S08": "Object Instance (i, k) Known",
-        "S09": "Object Instance (i, k) No Longer Known",
-    },
-    11: {
-        "S00": "Class Attribute (i, j)",
-        "S01": "Published (i, j)",
-        "S02": "Unpublished (i, j)",
-        "S03": "Subscribed (i, j)",
-        "S04": "Unsubscribed (i, j)",
-    },
-    12: {
-        "S00": "Class Attribute",
-        "S01": "Implicit Publication",
-        "S02": "Implicitly Unpublished",
-        "S03": "Implicitly Published",
-        "S04": "Explicit Publication",
-        "S05": "Explicitly Unpublished",
-        "S06": "Explicitly Published",
-        "S07": "Subscribed",
-        "S08": "Unsubscribed",
-    },
-    13: {
-        "S00": "Interaction Class",
-        "S01": "Unpublished (m)",
-        "S02": "Published (m)",
-        "S03": "No Control Sends",
-        "S04": "Control Sends In Use",
-        "S05": "Interaction Relevance Unknown",
-        "S06": "Interactions Turned On",
-        "S07": "Interactions Turned Off",
-        "S08": "Subscribed (m)",
-        "S09": "Unsubscribed (m)",
-    },
-    14: {"S00": "Object Instance (i, k) Known"},
-    15: {
-        "S00": "Ownership Implications",
-        "S01": "Is Owned",
-        "S02": "No Control Updates",
-        "S03": "Control Updates In Use",
-        "S05": "Control Updates Resolved",
-        "S06": "Control Updates Disabled",
-        "S07": "Is Not Owned",
-        "S08": "No Scope Notification",
-        "S09": "Notify of Scope In Use",
-        "S11": "Scope Notification Resolved",
-        "S12": "Scope Notification Disabled",
-    },
-    16: {
-        "S00": "Establishing Ownership of Instance Attribute",
-        "S01": "Owned (i, k, j)",
-        "S02": "Not Divesting",
-        "S03": "Waiting for a New Owner to be Found",
-        "S04": "Completing Divestiture",
-        "S05": "Unowned (i, k, j)",
-        "S06": "Not Able to Acquire",
-        "S07": "Able to Acquire",
-        "S08": "Acquisition Pending",
-        "S09": "Trying to Cancel Acquisition",
-        "S10": "Acquiring",
-        "S11": "Not Acquiring",
-        "S12": "Willing to Acquire",
-        "S13": "Not Trying to Acquire",
-    },
-    17: {"S00": "Temporal State"},
-}
+LABEL_OVERRIDES = MappingProxyType(
+    {
+        1: {
+            "S00": "Federation Execution",
+            "S01": "Federation Execution Does Not Exist",
+            "S02": "Federation Execution Exists",
+            "S03": "No Joined Federates",
+            "S04": "Supporting Joined Federates",
+        },
+        3: {
+            "S00": "Lifetime of a Federate",
+            "S01": "Not Connected",
+            "S02": "Connected",
+            "S03": "Not Joined",
+            "S04": "Joined Federate",
+        },
+        4: {
+            "S00": "Joined Federate",
+            "S01": "Active Federate",
+            "S02": "Active",
+            "S03": "Restore Request Pending",
+            "S04": "Waiting for Restore to Begin",
+            "S05": "Federate Save in Progress",
+            "S06": "Instructed to Save",
+            "S07": "Saving",
+            "S08": "Waiting for Federation to Save",
+            "S09": "Federate Restore in Progress",
+            "S10": "Waiting for Federation to Restore",
+            "S11": "Restoring",
+            "S12": "Prepared to Restore",
+            "S13": "Normal Activity Permitted",
+            "S14": "Normal Activity Not Permitted",
+        },
+        5: {
+            "S00": "Normal Activity Permitted",
+            "S01": "First Object Class",
+            "S02": "Last Object Class",
+            "S03": "First Interaction Class",
+            "S04": "Last Interaction Class",
+        },
+        7: {
+            "S00": "Global Synch Label",
+            "S01": "Synch Point Not Registered",
+            "S02": "Validating Synch Point",
+        },
+        8: {"S00": "Awaiting Synchronization", "S01": "Waiting for Federate to Synchronize"},
+        9: {
+            "S00": "Local Synch Label",
+            "S01": "No Activity",
+            "S02": "Attempting to Register Synch Point",
+            "S03": "Moving to Synch Point",
+            "S04": "Waiting for Rest of Federation to Synchronize",
+        },
+        10: {
+            "S01": "Class Attribute (i, HLAprivilegeToDeleteObject)",
+            "S02": "Second Available Class Attribute",
+            "S03": "Last Available Class Attribute",
+            "S04": "Object Instance (i, 1) Not Known",
+            "S05": "Object Instance (i, 1) Known",
+            "S06": "Object Instance (i, 1) No Longer Known",
+            "S07": "Object Instance (i, k) Not Known",
+            "S08": "Object Instance (i, k) Known",
+            "S09": "Object Instance (i, k) No Longer Known",
+        },
+        11: {
+            "S00": "Class Attribute (i, j)",
+            "S01": "Published (i, j)",
+            "S02": "Unpublished (i, j)",
+            "S03": "Subscribed (i, j)",
+            "S04": "Unsubscribed (i, j)",
+        },
+        12: {
+            "S00": "Class Attribute",
+            "S01": "Implicit Publication",
+            "S02": "Implicitly Unpublished",
+            "S03": "Implicitly Published",
+            "S04": "Explicit Publication",
+            "S05": "Explicitly Unpublished",
+            "S06": "Explicitly Published",
+            "S07": "Subscribed",
+            "S08": "Unsubscribed",
+        },
+        13: {
+            "S00": "Interaction Class",
+            "S01": "Unpublished (m)",
+            "S02": "Published (m)",
+            "S03": "No Control Sends",
+            "S04": "Control Sends In Use",
+            "S05": "Interaction Relevance Unknown",
+            "S06": "Interactions Turned On",
+            "S07": "Interactions Turned Off",
+            "S08": "Subscribed (m)",
+            "S09": "Unsubscribed (m)",
+        },
+        14: {"S00": "Object Instance (i, k) Known"},
+        15: {
+            "S00": "Ownership Implications",
+            "S01": "Is Owned",
+            "S02": "No Control Updates",
+            "S03": "Control Updates In Use",
+            "S05": "Control Updates Resolved",
+            "S06": "Control Updates Disabled",
+            "S07": "Is Not Owned",
+            "S08": "No Scope Notification",
+            "S09": "Notify of Scope In Use",
+            "S11": "Scope Notification Resolved",
+            "S12": "Scope Notification Disabled",
+        },
+        16: {
+            "S00": "Establishing Ownership of Instance Attribute",
+            "S01": "Owned (i, k, j)",
+            "S02": "Not Divesting",
+            "S03": "Waiting for a New Owner to be Found",
+            "S04": "Completing Divestiture",
+            "S05": "Unowned (i, k, j)",
+            "S06": "Not Able to Acquire",
+            "S07": "Able to Acquire",
+            "S08": "Acquisition Pending",
+            "S09": "Trying to Cancel Acquisition",
+            "S10": "Acquiring",
+            "S11": "Not Acquiring",
+            "S12": "Willing to Acquire",
+            "S13": "Not Trying to Acquire",
+        },
+        17: {"S00": "Temporal State"},
+    }
+)
 
 
 def _source(path: Path, text: str, offset: int) -> SourceRef:
@@ -249,7 +257,7 @@ def _kind(identifier: str, label: str, marker_text: str) -> str:
     return "normal"
 
 
-def _resolve_token(token: str, states: dict[str, State], initial: tuple[str, ...]) -> str | None:
+def _resolve_token(token: str, states: Mapping[str, State], initial: tuple[str, ...]) -> str | None:
     token = token.strip().replace(" ", "")
     if re.fullmatch(r"[SP]\d{2}", token):
         return next(
@@ -265,7 +273,7 @@ def _resolve_token(token: str, states: dict[str, State], initial: tuple[str, ...
 
 
 def _transition_endpoints(
-    description: str, states: dict[str, State], initial: tuple[str, ...]
+    description: str, states: Mapping[str, State], initial: tuple[str, ...]
 ) -> tuple[str | None, str | None]:
     token_match = re.search(r"\b([SP]\d{2})\s*[-=]>\s*([SP]\d{2})\b", description, re.I)
     if token_match:
@@ -570,79 +578,104 @@ def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
     )
 
 
-def promote(root: Path) -> None:
-    native = root / "figures" / "native"
-    existing_state = DocumentResources(root).semantic_file("native-state-machines.json")
-    prior_transitions: dict[str, dict[str, object]] = {}
-    if existing_state.exists():
-        payload = json.loads(existing_state.read_text(encoding="utf-8"))
-        prior_transitions = {
-            transition["id"]: transition
-            for machine in payload.get("state_machines", ())
-            for transition in machine.get("transitions", ())
-        }
-    coverage_file = DocumentResources(root).semantic_file("transition-coverage.json")
-    coverage_transitions: dict[str, dict[str, object]] = {}
-    if coverage_file.exists():
-        coverage_payload = json.loads(coverage_file.read_text(encoding="utf-8"))
-        coverage_transitions = {
-            coverage["transition_id"]: coverage
-            for coverage in coverage_payload.get("transition_coverage", ())
-        }
-    links_file = DocumentResources(root).semantic_file("requirement-links.json")
-    requirement_links: dict[str, list[str]] = {}
-    if links_file.exists():
-        links_payload = json.loads(links_file.read_text(encoding="utf-8"))
-        for link in links_payload.get("links", ()):
-            requirement_links.setdefault(link["transition_id"], []).append(link["requirement_id"])
-    state_machines: list[StateMachine] = []
-    graph_diagrams: list[GraphDiagram] = []
-    surfaces: list[dict[str, object]] = []
-    for figure in (*STATE_FIGURES, *GRAPH_FIGURES):
-        path = native / f"figure-{figure:02d}.tex"
-        text = path.read_text(encoding="utf-8")
-        if figure in STATE_FIGURES:
-            record = _state_machine(path, figure, text)
-            enriched_transitions = []
-            for transition in record.transitions:
-                prior = prior_transitions.get(transition.id, {})
-                updates = {}
-                for key in ("clause_id", "requirement_ids", "implementation_ids"):
-                    if key not in prior:
-                        continue
-                    value = prior[key]
-                    if key in {"requirement_ids", "implementation_ids"}:
-                        value = tuple(value)
-                    updates[key] = value
-                coverage = coverage_transitions.get(transition.id, {})
-                if not updates.get("implementation_ids") and "implementation_ids" in coverage:
-                    updates["implementation_ids"] = tuple(coverage["implementation_ids"])
-                if not updates.get("requirement_ids") and transition.id in requirement_links:
-                    updates["requirement_ids"] = tuple(requirement_links[transition.id])
-                enriched_transitions.append(transition.model_copy(update=updates))
-            record = record.model_copy(update={"transitions": tuple(enriched_transitions)})
-            state_machines.append(record)
-            kind = "state_machine"
-        else:
-            record = _graph(path, figure, text)
-            graph_diagrams.append(record)
-            kind = "graph_diagram"
-        surfaces.append(
-            {
-                "id": f"figure-{figure:02d}",
-                "document_id": "hla-1516.1-2010",
-                "page": PAGE_BY_FIGURE[figure],
-                "figure_number": figure,
-                "status": "generated",
-                "record_id": record.id,
-                "record_kind": kind,
-                "reason": (
-                    "Semantic record owns figure meaning; native TikZ is retained only "
-                    "as a faithful geometry adapter."
-                ),
-            }
+def _prior_transitions(path: Path) -> dict[str, dict[str, JsonValue]]:
+    if not path.exists():
+        return {}
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        str(transition["id"]): transition
+        for machine in payload.get("state_machines", ())
+        for transition in machine.get("transitions", ())
+    }
+
+
+def _coverage_by_transition(path: Path) -> dict[str, dict[str, JsonValue]]:
+    if not path.exists():
+        return {}
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        str(coverage["transition_id"]): coverage
+        for coverage in payload.get("transition_coverage", ())
+    }
+
+
+def _requirement_ids_by_transition(path: Path) -> dict[str, list[str]]:
+    if not path.exists():
+        return {}
+    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    links: dict[str, list[str]] = {}
+    for link in payload.get("links", ()):
+        links.setdefault(str(link["transition_id"]), []).append(str(link["requirement_id"]))
+    return links
+
+
+def _enrich_state_machine(
+    record: StateMachine,
+    prior_transitions: Mapping[str, Mapping[str, JsonValue]],
+    coverage_transitions: Mapping[str, Mapping[str, JsonValue]],
+    requirement_links: Mapping[str, Sequence[str]],
+) -> StateMachine:
+    enriched = []
+    for transition in record.transitions:
+        prior = prior_transitions.get(transition.id, {})
+        updates = {}
+        for key in ("clause_id", "requirement_ids", "implementation_ids"):
+            if key in prior:
+                value = prior[key]
+                if key in {"requirement_ids", "implementation_ids"}:
+                    value = tuple(value)
+                updates[key] = value
+        coverage = coverage_transitions.get(transition.id, {})
+        if not updates.get("implementation_ids") and "implementation_ids" in coverage:
+            updates["implementation_ids"] = tuple(coverage["implementation_ids"])
+        if not updates.get("requirement_ids") and transition.id in requirement_links:
+            updates["requirement_ids"] = tuple(requirement_links[transition.id])
+        enriched.append(transition.model_copy(update=updates))
+    return record.model_copy(update={"transitions": tuple(enriched)})
+
+
+def _promote_figure(
+    native: Path,
+    figure: int,
+    prior_transitions: Mapping[str, Mapping[str, JsonValue]],
+    coverage_transitions: Mapping[str, Mapping[str, JsonValue]],
+    requirement_links: Mapping[str, Sequence[str]],
+) -> tuple[StateMachine | GraphDiagram, str]:
+    path = native / f"figure-{figure:02d}.tex"
+    text = path.read_text(encoding="utf-8")
+    if figure in STATE_FIGURES:
+        record = _state_machine(path, figure, text)
+        record = _enrich_state_machine(
+            record, prior_transitions, coverage_transitions, requirement_links
         )
-    semantic = DocumentResources(root).semantic
+        return record, "state_machine"
+    return _graph(path, figure, text), "graph_diagram"
+
+
+def _figure_surface(
+    figure: int, record: StateMachine | GraphDiagram, kind: str
+) -> dict[str, JsonValue]:
+    return {
+        "id": f"figure-{figure:02d}",
+        "document_id": "hla-1516.1-2010",
+        "page": PAGE_BY_FIGURE[figure],
+        "figure_number": figure,
+        "status": "generated",
+        "record_id": record.id,
+        "record_kind": kind,
+        "reason": (
+            "Semantic record owns figure meaning; native TikZ is retained only "
+            "as a faithful geometry adapter."
+        ),
+    }
+
+
+def _write_promoted_diagrams(
+    semantic: Path,
+    state_machines: Sequence[StateMachine],
+    graph_diagrams: Sequence[GraphDiagram],
+    surfaces: Sequence[Mapping[str, JsonValue]],
+) -> None:
     (semantic / "native-state-machines.json").write_text(
         json.dumps(
             StateMachineFile(schema_version=2, state_machines=tuple(state_machines)).model_dump(
@@ -664,8 +697,30 @@ def promote(root: Path) -> None:
         encoding="utf-8",
     )
     (semantic / "diagram-surfaces.json").write_text(
-        json.dumps({"schema_version": 1, "surfaces": surfaces}, indent=2) + "\n", encoding="utf-8"
+        json.dumps({"schema_version": 1, "surfaces": surfaces}, indent=2) + "\n",
+        encoding="utf-8",
     )
+
+
+def promote(root: Path) -> None:
+    native = root / "figures" / "native"
+    semantic = DocumentResources(root).semantic
+    prior_transitions = _prior_transitions(semantic / "native-state-machines.json")
+    coverage_transitions = _coverage_by_transition(semantic / "transition-coverage.json")
+    requirement_links = _requirement_ids_by_transition(semantic / "requirement-links.json")
+    state_machines: list[StateMachine] = []
+    graph_diagrams: list[GraphDiagram] = []
+    surfaces: list[dict[str, JsonValue]] = []
+    for figure in (*STATE_FIGURES, *GRAPH_FIGURES):
+        record, kind = _promote_figure(
+            native, figure, prior_transitions, coverage_transitions, requirement_links
+        )
+        if isinstance(record, StateMachine):
+            state_machines.append(record)
+        else:
+            graph_diagrams.append(record)
+        surfaces.append(_figure_surface(figure, record, kind))
+    _write_promoted_diagrams(semantic, state_machines, graph_diagrams, surfaces)
     print(f"promoted {len(state_machines)} state machines and {len(graph_diagrams)} graph diagrams")
 
 

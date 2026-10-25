@@ -23,9 +23,9 @@ document_id + implementation_mapping_id + target
 The corpus revision is also required to match. This permits 2010 and 2025
 records to be consumed side-by-side without matching on human wording.
 
-The machine-readable boundary schemas are
-[`schemas/corpus_bundle.schema.json`](../schemas/corpus_bundle.schema.json) and
-[`schemas/adapter_request.schema.json`](../schemas/adapter_request.schema.json).
+Generate the machine-readable boundary schemas with
+`hla-lab-schema corpus_bundle` and `hla-lab-schema adapter_request`.
+The source models are in `hla_lab.traceability.compliance_contract`.
 
 Requirement records carry a document-local `ordinal` for presentation, full
 normative/machine text, clause and coverage metadata, transition links,

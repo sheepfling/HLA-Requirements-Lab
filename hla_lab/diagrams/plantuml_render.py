@@ -13,7 +13,8 @@ def render_sources(
     *,
     java: str = "java",
     jar: Path,
-    epstopdf: str = "epstopdf",
+    epstopdf: str | None = "epstopdf",
+    ghostscript: str | None = None,
 ) -> tuple[Path, ...]:
     """Render PlantUML source files as vector PDFs."""
 
@@ -43,10 +44,34 @@ def render_sources(
             eps.unlink(missing_ok=True)
             raise RuntimeError(f"PlantUML produced an error diagram for {source}")
         output = output_dir / f"{source.stem}.pdf"
-        subprocess.run(
-            [epstopdf, f"--outfile={output}", str(eps)],
-            check=True,
-        )
+        output.unlink(missing_ok=True)
+        converted = False
+        if epstopdf is not None:
+            try:
+                subprocess.run([epstopdf, f"--outfile={output}", str(eps)], check=True)
+                converted = True
+            except (OSError, subprocess.CalledProcessError):
+                if ghostscript is None:
+                    raise
+                output.unlink(missing_ok=True)
+        if not converted:
+            if ghostscript is None:
+                raise RuntimeError("EPS-to-PDF rendering requires epstopdf or Ghostscript")
+            subprocess.run(
+                [
+                    ghostscript,
+                    "-q",
+                    "-dBATCH",
+                    "-dNOPAUSE",
+                    "-dEPSCrop",
+                    "-sDEVICE=pdfwrite",
+                    f"-sOutputFile={output}",
+                    str(eps),
+                ],
+                check=True,
+            )
+        if not output.is_file() or output.stat().st_size == 0:
+            raise RuntimeError(f"EPS-to-PDF conversion did not produce {output}")
         outputs.append(output)
     return tuple(outputs)
 
@@ -58,6 +83,7 @@ def main() -> int:
     parser.add_argument("--jar", required=True, type=Path)
     parser.add_argument("--java", default="java")
     parser.add_argument("--epstopdf", default="epstopdf")
+    parser.add_argument("--ghostscript")
     args = parser.parse_args()
     outputs = render_sources(
         tuple(args.sources),
@@ -65,6 +91,7 @@ def main() -> int:
         java=args.java,
         jar=args.jar,
         epstopdf=args.epstopdf,
+        ghostscript=args.ghostscript,
     )
     for output in outputs:
         print(output)

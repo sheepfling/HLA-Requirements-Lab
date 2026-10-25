@@ -11,8 +11,9 @@ from hla_lab.core.semantic_model import DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.publication.publication_registry import load_release_manifest
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 DOCUMENT_ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")

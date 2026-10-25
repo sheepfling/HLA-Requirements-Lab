@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
 
 import fitz
 
 from hla_lab.publication.release_check import check_release
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = TEST_REPO_ROOT
 
 
 class ReleaseCheckIntegrationTests(unittest.TestCase):
@@ -36,9 +36,7 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
 
     def test_faithful_pdfs_preserve_letter_geometry_and_lab_furniture(self) -> None:
         manifest = json.loads(
-            (REPO_ROOT / "data" / "release" / "documents.json").read_text(
-                encoding="utf-8"
-            )
+            (REPO_ROOT / "data" / "release" / "documents.json").read_text(encoding="utf-8")
         )
         faithful = [item for item in manifest["projects"] if item.get("kind") == "faithful"]
         self.assertEqual(len(faithful), 6)

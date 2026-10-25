@@ -7,6 +7,7 @@ import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from types import MappingProxyType
 
 from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
@@ -15,13 +16,16 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.traceability.semantic_authority import validate_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ALL_ROOTS = tuple(sorted((REPO_ROOT / "topics" / "ieee").glob("hla-1516*/")))
-ROOTS = {
-    name: REPO_ROOT / "topics" / "ieee" / name
-    for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
-}
+ROOTS = MappingProxyType(
+    {
+        name: REPO_ROOT / "topics" / "ieee" / name
+        for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
+    }
+)
 
 
 def _copy_without_generated(source_root: Path, destination: Path) -> None:

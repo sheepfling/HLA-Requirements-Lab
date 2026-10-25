@@ -12,11 +12,34 @@ import json
 import re
 import textwrap
 from collections import defaultdict
-from collections.abc import Mapping
+from collections.abc import Mapping, MutableSequence, Sequence
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
+from pydantic import JsonValue
+
+from hla_lab.core.semantic_model import (
+    State,
+    StateMachine,
+    StateMachineLayout,
+    Transition,
+)
 from hla_lab.diagrams.render_state_machine import _machine
+
+
+@dataclass(frozen=True, slots=True)
+class _SyntheticGroup:
+    title: str
+
+
+@dataclass(slots=True)
+class _RenderContext:
+    state_by_id: Mapping[str, State]
+    synthetic_groups: Mapping[str, _SyntheticGroup]
+    children: Mapping[str | None, Sequence[str]]
+    parent_for: Mapping[str, str | None]
+    relations_by_scope: Mapping[str | None, Sequence[str]]
+    lines: MutableSequence[str]
 
 
 def _alias(identifier: str) -> str:
@@ -74,33 +97,33 @@ def _stereotype(kind: str) -> str:
     }.get(kind, "")
 
 
-def render(machine: Mapping[str, Any]) -> str:
-    """Return PlantUML source for one semantic state-machine record."""
-
-    states = [item for item in machine.get("states", []) if isinstance(item, dict)]
-    state_by_id = {str(item["id"]): item for item in states if item.get("id")}
+def _synthetic_groups(
+    machine: StateMachine,
+    state_by_id: Mapping[str, State],
+) -> dict[str, _SyntheticGroup]:
     # Layout containers are semantic region declarations, not coordinates for
     # PlantUML.  Convert their path-like IDs into composite/orthogonal regions
     # while deliberately discarding x/y geometry.
-    synthetic_groups: dict[str, dict[str, Any]] = {}
-    layout = machine.get("layout") or {}
-    for container in layout.get("containers", ()) if isinstance(layout, Mapping) else ():
-        if not isinstance(container, Mapping) or not container.get("id"):
-            continue
-        container_id = str(container["id"])
+    groups: dict[str, _SyntheticGroup] = {}
+    layout = machine.layout or StateMachineLayout()
+    for container in layout.containers:
+        container_id = container.id
         group_id = re.sub(r"\.(?:container|outer|frame)$", "", container_id)
         if not group_id or group_id in state_by_id:
             continue
         if not any(
-            state_id == group_id or state_id.startswith(group_id + ".")
-            for state_id in state_by_id
+            state_id == group_id or state_id.startswith(group_id + ".") for state_id in state_by_id
         ):
             continue
-        synthetic_groups[group_id] = {
-            "title": str(container.get("title") or group_id),
-            "parallel": False,
-        }
+        groups[group_id] = _SyntheticGroup(title=container.title or group_id)
+    return groups
 
+
+def _children_by_scope(
+    states: Sequence[State],
+    state_by_id: Mapping[str, State],
+    synthetic_groups: Mapping[str, _SyntheticGroup],
+) -> dict[str | None, list[str]]:
     children: dict[str | None, list[str]] = defaultdict(list)
     for group_id in synthetic_groups:
         parents = [
@@ -111,10 +134,10 @@ def render(machine: Mapping[str, Any]) -> str:
         parent = max(parents, key=len) if parents else None
         children[parent].append(group_id)
     for state in states:
-        state_id = str(state["id"])
-        parent = state.get("parent_id")
-        if parent is not None and str(parent) in state_by_id:
-            parent_id: str | None = str(parent)
+        state_id = state.id
+        parent = state.parent_id
+        if parent is not None and parent in state_by_id:
+            parent_id: str | None = parent
         else:
             parents = [
                 group_id
@@ -123,7 +146,156 @@ def render(machine: Mapping[str, Any]) -> str:
             ]
             parent_id = max(parents, key=len) if parents else None
         children[parent_id].append(state_id)
+    return children
 
+
+def _valid_transition_records(
+    machine: StateMachine,
+    state_by_id: Mapping[str, State],
+) -> list[tuple[Transition, str, str]]:
+    records: list[tuple[Transition, str, str]] = []
+    for transition in machine.transitions:
+        source = transition.source_state
+        target = transition.target_state
+        if (
+            source is not None
+            and target is not None
+            and source in state_by_id
+            and target in state_by_id
+        ):
+            records.append((transition, source, target))
+    return records
+
+
+def _scope_chain(node_id: str | None, parent_for: Mapping[str, str | None]) -> list[str | None]:
+    chain: list[str | None] = []
+    current = node_id
+    while current is not None:
+        chain.append(current)
+        current = parent_for.get(current)
+    chain.append(None)
+    return chain
+
+
+def _relation_node(
+    state_id: str,
+    kind: str,
+    parent_for: Mapping[str, str | None],
+    children: Mapping[str | None, Sequence[str]],
+) -> str | None:
+    if kind in {"initial", "final"} or not children.get(state_id):
+        return parent_for.get(state_id)
+    return state_id
+
+
+def _transition_scope(
+    transition: Transition,
+    state_by_id: Mapping[str, State],
+    parent_for: Mapping[str, str | None],
+    children: Mapping[str | None, Sequence[str]],
+) -> str | None:
+    source = transition.source_state
+    target = transition.target_state
+    if source is None or target is None:
+        return None
+    source_node = _relation_node(source, state_by_id[source].kind, parent_for, children)
+    target_node = _relation_node(target, state_by_id[target].kind, parent_for, children)
+    if source_node != target_node and source_node is not None and target_node is not None:
+        return None
+    target_chain = set(_scope_chain(target_node, parent_for))
+    return next(
+        (item for item in _scope_chain(source_node, parent_for) if item in target_chain), None
+    )
+
+
+def _direct_reference(state_id: str, state_by_id: Mapping[str, State]) -> str:
+    if state_by_id[state_id].kind in {"initial", "final"}:
+        return "[*]"
+    return _alias(state_id)
+
+
+def _transition_relation(
+    transition: Transition,
+    source_id: str,
+    target_id: str,
+    context: _RenderContext,
+) -> tuple[str | None, str]:
+    scope_id = _transition_scope(
+        transition,
+        context.state_by_id,
+        context.parent_for,
+        context.children,
+    )
+    source_ref = _direct_reference(source_id, context.state_by_id)
+    target_ref = _direct_reference(target_id, context.state_by_id)
+    label_parts = [
+        part
+        for part in (
+            transition.event.strip(),
+            f"[{transition.guard.strip()}]" if transition.guard.strip() else "",
+            transition.action.strip(),
+        )
+        if part
+    ]
+    transition_label = r"\n".join(_label(part) for part in label_parts)
+    suffix = f" : {transition_label}" if transition_label else ""
+    return scope_id, f"{source_ref} --> {target_ref}{suffix}"
+
+
+def _relations_by_scope(
+    records: Sequence[tuple[Transition, str, str]],
+    context: _RenderContext,
+) -> dict[str | None, list[str]]:
+    relations: dict[str | None, list[str]] = defaultdict(list)
+    for transition, source_id, target_id in records:
+        scope_id, relation = _transition_relation(transition, source_id, target_id, context)
+        relations[scope_id].append(relation)
+    return relations
+
+
+def _emit_scope_relations(context: _RenderContext, scope_id: str | None, indent: str) -> None:
+    context.lines.extend(
+        indent + relation for relation in context.relations_by_scope.get(scope_id, ())
+    )
+
+
+def _emit_state(context: _RenderContext, state_id: str, indent: str) -> None:
+    if state_id in context.synthetic_groups:
+        group = context.synthetic_groups[state_id]
+        nested = context.children.get(state_id, ())
+        context.lines.append(
+            f'{indent}state "{_label(group.title, quoted_context=True)}" as '
+            f"{_group_alias(state_id)} {{"
+        )
+        for child_id in nested:
+            _emit_state(context, child_id, indent + "  ")
+        _emit_scope_relations(context, state_id, indent + "  ")
+        context.lines.append(indent + "}")
+        return
+    state = context.state_by_id[state_id]
+    kind = state.kind
+    if kind in {"initial", "final"}:
+        return
+    raw_label = state.label
+    if not raw_label and kind in {"initial", "final"}:
+        raw_label = " "
+    label = _label(raw_label, quoted_context=True)
+    stereotype = _stereotype(kind)
+    rendered = f'{indent}state "{label}" as {_alias(state_id)}'
+    if stereotype:
+        rendered += f" <<{stereotype}>>"
+    nested = context.children.get(state_id, ())
+    if not nested:
+        context.lines.append(rendered)
+        return
+    context.lines.append(rendered + " {")
+    for child_id in nested:
+        _emit_state(context, child_id, indent + "  ")
+    _emit_scope_relations(context, state_id, indent + "  ")
+    context.lines.append(indent + "}")
+
+
+def _plantuml_preamble(direction: str) -> list[str]:
     lines = [
         "@startuml",
         "' Generated from the typed HLA state-machine record; do not edit by hand.",
@@ -160,142 +332,32 @@ def render(machine: Mapping[str, Any]) -> str:
         "  BorderColor #496B91",
         "}",
     ]
-    if isinstance(layout, Mapping) and layout.get("direction") == "left-to-right":
+    if direction == "left-to-right":
         lines.insert(3, "left to right direction")
-    transition_records: list[tuple[dict[str, Any], str, str]] = []
-    for transition in machine.get("transitions", ()):
-        if not isinstance(transition, dict):
-            continue
-        source = transition.get("source_state")
-        target = transition.get("target_state")
-        if source not in state_by_id or target not in state_by_id:
-            continue
-        source_id = str(source)
-        target_id = str(target)
-        transition_records.append((transition, source_id, target_id))
+    return lines
 
-    def transition_arrow(transition: dict[str, Any], source_id: str, target_id: str) -> str:
-        # PlantUML's automatic state layout is the authority for connector
-        # routing.  The old exporter converted source-page coordinates into
-        # explicit -left/-right/-up/-down hints; dense nested charts can then
-        # make Graphviz fail with a Java IllegalStateException.  Keep the
-        # semantic endpoints and labels, but let the pinned renderer solve
-        # geometry consistently.
-        return " --> "
 
-    parent_for: dict[str, str | None] = {
-        child: parent for parent, nested in children.items() for child in nested
-    }
-
-    def scope_chain(node_id: str | None) -> list[str | None]:
-        chain: list[str | None] = []
-        current = node_id
-        while current is not None:
-            chain.append(current)
-            current = parent_for.get(current)
-        chain.append(None)
-        return chain
-
-    def transition_scope(transition: dict[str, Any]) -> str | None:
-        source = str(transition["source_state"])
-        target = str(transition["target_state"])
-        source_kind = str(state_by_id[source].get("kind", "normal"))
-        target_kind = str(state_by_id[target].get("kind", "normal"))
-
-        def relation_node(state_id: str, kind: str) -> str | None:
-            if kind in {"initial", "final"}:
-                return parent_for.get(state_id)
-            # A leaf cannot contain a relation declaration, so put self-loops
-            # and leaf-to-leaf edges in their nearest composite scope.
-            return state_id if children.get(state_id) else parent_for.get(state_id)
-
-        source_node = relation_node(source, source_kind)
-        target_node = relation_node(target, target_kind)
-        if source_node != target_node and source_node is not None and target_node is not None:
-            # Cross-region relations are emitted at the document scope.  A
-            # relation declared inside the enclosing composite can be parsed
-            # as an intra-region edge by PlantUML, which is both fragile and
-            # liable to collapse the endpoint to a region frame.
-            return None
-        target_chain = set(scope_chain(target_node))
-        return next((item for item in scope_chain(source_node) if item in target_chain), None)
-
-    def direct_reference(state_id: str, scope_id: str | None) -> str:
-        kind = str(state_by_id[state_id].get("kind", "normal"))
-        if kind in {"initial", "final"}:
-            return "[*]"
-        # PlantUML aliases are document-global even when the declaration is
-        # nested inside a composite state.  Preserve the leaf endpoint for a
-        # cross-region edge instead of collapsing it to the containing region;
-        # the latter makes a transition such as Active -> Instructed to Save
-        # appear to terminate on the region frame and loses normative state
-        # topology.
-        return _alias(state_id)
-
-    relations_by_scope: dict[str | None, list[str]] = defaultdict(list)
-    for transition, source_id, target_id in transition_records:
-        scope_id = transition_scope(transition)
-        source_ref = direct_reference(source_id, scope_id)
-        target_ref = direct_reference(target_id, scope_id)
-        event = str(transition.get("event", "")).strip()
-        guard = str(transition.get("guard", "")).strip()
-        action = str(transition.get("action", "")).strip()
-        label_parts = [
-            part
-            for part in (event, f"[{guard}]" if guard else "", action)
-            if part
-        ]
-        transition_label = r"\n".join(_label(part) for part in label_parts)
-        suffix = f" : {transition_label}" if transition_label else ""
-        relations_by_scope[scope_id].append(
-            f"{source_ref}{transition_arrow(transition, source_id, target_id)}{target_ref}{suffix}"
-        )
-
-    def emit_scope_relations(scope_id: str | None, indent: str) -> None:
-        for relation in relations_by_scope.get(scope_id, ()):
-            lines.append(indent + relation)
-
-    def emit_state(state_id: str, indent: str) -> None:
-        if state_id in synthetic_groups:
-            group = synthetic_groups[state_id]
-            nested = children.get(state_id, [])
-            lines.append(
-                f'{indent}state "{_label(group["title"], quoted_context=True)}" as {_group_alias(state_id)} {{'
-            )
-            for child_id in nested:
-                emit_state(child_id, indent + "  ")
-            emit_scope_relations(state_id, indent + "  ")
-            lines.append(indent + "}")
-            return
-        state = state_by_id[state_id]
-        kind = str(state.get("kind", "normal"))
-        if kind in {"initial", "final"}:
-            return
-        raw_label = state.get("label", "")
-        # PlantUML rejects an empty quoted state label.  A single space keeps
-        # the alias addressable while the stereotype styling renders the
-        # pseudostate as a publication-sized node without visible text.
-        if not raw_label and kind in {"initial", "final"}:
-            raw_label = " "
-        label = _label(raw_label, quoted_context=True)
-        stereotype = _stereotype(kind)
-        rendered = f'{indent}state "{label}" as {_alias(state_id)}'
-        if stereotype:
-            rendered += f" <<{stereotype}>>"
-        nested = children.get(state_id, [])
-        if not nested:
-            lines.append(rendered)
-            return
-        lines.append(rendered + " {")
-        for index, child_id in enumerate(nested):
-            emit_state(child_id, indent + "  ")
-        emit_scope_relations(state_id, indent + "  ")
-        lines.append(indent + "}")
-
-    for state_id in children.get(None, []):
-        emit_state(state_id, "")
-    emit_scope_relations(None, "")
-
+def render(machine: StateMachine | Mapping[str, JsonValue]) -> str:
+    """Return PlantUML source for one semantic state-machine record."""
+    machine = StateMachine.model_validate(machine)
+    state_by_id = {item.id: item for item in machine.states}
+    synthetic_groups = _synthetic_groups(machine, state_by_id)
+    children = _children_by_scope(machine.states, state_by_id, synthetic_groups)
+    parent_for = {child: parent for parent, nested in children.items() for child in nested}
+    lines = _plantuml_preamble(machine.layout.direction if machine.layout else "")
+    context = _RenderContext(
+        state_by_id=state_by_id,
+        synthetic_groups=synthetic_groups,
+        children=children,
+        parent_for=parent_for,
+        relations_by_scope={},
+        lines=lines,
+    )
+    records = _valid_transition_records(machine, state_by_id)
+    context.relations_by_scope = _relations_by_scope(records, context)
+    for state_id in children.get(None, ()):
+        _emit_state(context, state_id, "")
+    _emit_scope_relations(context, None, "")
     lines.extend(["@enduml", ""])
     return "\n".join(lines)
 

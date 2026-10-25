@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -60,13 +60,13 @@ class ReleaseProject(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    id: str = Field(min_length=1)
-    publication_id: str = Field(min_length=1)
-    root: str = Field(min_length=1)
-    pdf: str = Field(min_length=1)
-    log: str = Field(min_length=1)
-    expected_pages: int | None = Field(default=None, ge=1)
-    kind: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    publication_id: Annotated[str, Field(min_length=1)]
+    root: Annotated[str, Field(min_length=1)]
+    pdf: Annotated[str, Field(min_length=1)]
+    log: Annotated[str, Field(min_length=1)]
+    expected_pages: Annotated[int | None, Field(ge=1)] = None
+    kind: Annotated[str, Field(min_length=1)]
     build: BuildSettings | None = None
 
 
@@ -75,8 +75,8 @@ class ReleaseManifest(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    schema_version: int = Field(ge=1)
-    projects: tuple[ReleaseProject, ...] = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)]
+    projects: Annotated[tuple[ReleaseProject, ...], Field(min_length=1)]
 
     @model_validator(mode="after")
     def validate_unique_project_ids(self) -> ReleaseManifest:
@@ -100,12 +100,12 @@ class Publication(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    id: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
     kind: PublicationKind
-    title: str = Field(min_length=1)
-    description: str = Field(min_length=1)
-    project_ids: tuple[str, ...] = Field(min_length=1)
-    source_document_ids: tuple[str, ...] = Field(min_length=1)
+    title: Annotated[str, Field(min_length=1)]
+    description: Annotated[str, Field(min_length=1)]
+    project_ids: Annotated[tuple[str, ...], Field(min_length=1)]
+    source_document_ids: Annotated[tuple[str, ...], Field(min_length=1)]
 
     @model_validator(mode="after")
     def validate_unique_project_ids(self) -> Publication:
@@ -119,8 +119,8 @@ class PublicationRegistry(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    schema_version: int = Field(ge=1)
-    publications: tuple[Publication, ...] = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)]
+    publications: Annotated[tuple[Publication, ...], Field(min_length=1)]
 
     @model_validator(mode="after")
     def validate_unique_publication_ids(self) -> PublicationRegistry:

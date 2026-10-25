@@ -12,10 +12,11 @@ import argparse
 import json
 import re
 from collections import Counter, defaultdict
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping, MutableMapping, Sequence
+from collections.abc import Set as AbstractSet
 from itertools import combinations
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal, TypeAlias
 
 from pydantic import Field, model_validator
 
@@ -65,6 +66,8 @@ FindingKind = Literal[
     "supersession-gap",
 ]
 FindingSeverity = Literal["info", "warning", "error"]
+RecordRef: TypeAlias = tuple[str, str, SourceRef]
+CandidateRecord: TypeAlias = tuple[str, str, SourceRef, str, str, frozenset[str]]
 DocumentRelationship = Literal[
     "standalone",
     "companion",
@@ -78,8 +81,8 @@ DocumentRelationship = Literal[
 class CorpusDocumentDescriptor(SemanticRecord):
     """Edition and relationship metadata for a graph document node."""
 
-    document_id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    document_id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     edition: str | None = None
     relationship: DocumentRelationship = "unknown"
     related_document_ids: tuple[str, ...] = ()
@@ -89,11 +92,11 @@ class CorpusDocumentDescriptor(SemanticRecord):
 class CorpusGraphNode(SemanticRecord):
     """A qualified semantic record addressable from a corpus graph."""
 
-    id: str = Field(min_length=1)
-    document_id: str = Field(min_length=1)
-    record_id: str = Field(min_length=1)
-    kind: str = Field(min_length=1)
-    label: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    document_id: Annotated[str, Field(min_length=1)]
+    record_id: Annotated[str, Field(min_length=1)]
+    kind: Annotated[str, Field(min_length=1)]
+    label: Annotated[str, Field(min_length=1)]
     external: bool = False
     source: SourceRef | None = None
 
@@ -101,12 +104,12 @@ class CorpusGraphNode(SemanticRecord):
 class CorpusGraphEdge(SemanticRecord):
     """A typed graph edge with evidence level and optional source provenance."""
 
-    id: str = Field(min_length=1)
-    source_node_id: str = Field(min_length=1)
-    target_node_id: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    source_node_id: Annotated[str, Field(min_length=1)]
+    target_node_id: Annotated[str, Field(min_length=1)]
     relation: GraphRelation
     evidence: GraphEvidence
-    confidence: float = Field(default=1.0, ge=0.0, le=1.0)
+    confidence: Annotated[float, Field(ge=0.0, le=1.0)] = 1.0
     note: str = ""
     source: SourceRef | None = None
 
@@ -114,27 +117,27 @@ class CorpusGraphEdge(SemanticRecord):
 class CorpusGraphFinding(SemanticRecord):
     """A review finding derived from multiple corpus records."""
 
-    id: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
     kind: FindingKind
     severity: FindingSeverity
-    document_ids: tuple[str, ...] = Field(min_length=2)
-    node_ids: tuple[str, ...] = Field(min_length=2)
-    similarity: float = Field(default=1.0, ge=0.0, le=1.0)
-    message: str = Field(min_length=1)
+    document_ids: Annotated[tuple[str, ...], Field(min_length=2)]
+    node_ids: Annotated[tuple[str, ...], Field(min_length=2)]
+    similarity: Annotated[float, Field(ge=0.0, le=1.0)] = 1.0
+    message: Annotated[str, Field(min_length=1)]
     source: SourceRef | None = None
 
 
 class CorpusDocumentMetadataFile(SemanticRecord):
     """Source-controlled metadata for a corpus's editions and relationships."""
 
-    schema_version: int = Field(ge=1)
+    schema_version: Annotated[int, Field(ge=1)]
     documents: tuple[CorpusDocumentDescriptor, ...]
 
 
 class CorpusSemanticGraph(SemanticRecord):
     """Serializable graph projection for cross-document semantic queries."""
 
-    schema_version: int = Field(default=1, ge=1)
+    schema_version: Annotated[int, Field(ge=1)] = 1
     documents: tuple[CorpusDocumentDescriptor, ...]
     nodes: tuple[CorpusGraphNode, ...]
     edges: tuple[CorpusGraphEdge, ...]
@@ -142,43 +145,59 @@ class CorpusSemanticGraph(SemanticRecord):
 
     @model_validator(mode="after")
     def validate_graph_integrity(self) -> CorpusSemanticGraph:
-        document_ids = [item.document_id for item in self.documents]
-        if len(document_ids) != len(set(document_ids)):
-            raise ValueError("corpus graph document IDs must be unique")
-        node_ids = [item.id for item in self.nodes]
-        if len(node_ids) != len(set(node_ids)):
-            raise ValueError("corpus graph node IDs must be unique")
-        edge_ids = [item.id for item in self.edges]
-        if len(edge_ids) != len(set(edge_ids)):
-            raise ValueError("corpus graph edge IDs must be unique")
+        document_ids = self._unique_ids(
+            "corpus graph document IDs", [item.document_id for item in self.documents]
+        )
+        self._unique_ids("corpus graph node IDs", [item.id for item in self.nodes])
+        self._unique_ids("corpus graph edge IDs", [item.id for item in self.edges])
         node_index = {item.id: item for item in self.nodes}
-        known_documents = set(document_ids)
+        self._validate_node_documents(document_ids)
+        self._validate_edge_endpoints(node_index)
+        self._validate_related_documents(document_ids)
+        self._unique_ids("corpus graph finding IDs", [item.id for item in self.findings])
+        self._validate_finding_references(document_ids, node_index)
+        return self
+
+    @staticmethod
+    def _unique_ids(label: str, identifiers: Sequence[str]) -> set[str]:
+        unique = set(identifiers)
+        if len(identifiers) != len(unique):
+            raise ValueError(f"{label} must be unique")
+        return unique
+
+    def _validate_node_documents(self, document_ids: AbstractSet[str]) -> None:
         for node in self.nodes:
-            if node.external and node.document_id in known_documents:
+            if node.external and node.document_id in document_ids:
                 raise ValueError(f"external graph node names a known document: {node.id}")
-            if not node.external and node.document_id not in known_documents:
+            if not node.external and node.document_id not in document_ids:
                 raise ValueError(f"graph node {node.id} names an unknown internal document")
+
+    def _validate_edge_endpoints(self, node_index: Mapping[str, CorpusGraphNode]) -> None:
         for edge in self.edges:
             if edge.source_node_id not in node_index:
                 raise ValueError(f"graph edge {edge.id} has a missing source node")
             if edge.target_node_id not in node_index:
                 raise ValueError(f"graph edge {edge.id} has a missing target node")
+
+    def _validate_related_documents(self, document_ids: AbstractSet[str]) -> None:
         for document in self.documents:
-            invalid = set(document.related_document_ids) - known_documents
+            invalid = set(document.related_document_ids) - document_ids
             if invalid:
                 raise ValueError(
                     f"document {document.document_id} has unknown related documents "
                     f"{sorted(invalid)}"
                 )
-        finding_ids = [item.id for item in self.findings]
-        if len(finding_ids) != len(set(finding_ids)):
-            raise ValueError("corpus graph finding IDs must be unique")
+
+    def _validate_finding_references(
+        self,
+        document_ids: AbstractSet[str],
+        node_index: Mapping[str, CorpusGraphNode],
+    ) -> None:
         for finding in self.findings:
-            if not set(finding.document_ids) <= known_documents:
+            if not set(finding.document_ids) <= document_ids:
                 raise ValueError(f"graph finding {finding.id} names an unknown document")
-            if not set(finding.node_ids) <= set(node_index):
+            if not set(finding.node_ids) <= node_index.keys():
                 raise ValueError(f"graph finding {finding.id} has a missing node")
-        return self
 
     def edges_for(
         self,
@@ -384,53 +403,47 @@ def _document_descriptors(
     return tuple(result)
 
 
-def build_corpus_graph(
-    corpus: ComplianceCorpus,
+def _add_node(
+    nodes: MutableMapping[str, CorpusGraphNode],
+    document_id: str,
+    record_id: str,
+    kind: str,
+    label: str,
+    source: SourceRef | None,
     *,
-    metadata: Mapping[str, CorpusDocumentDescriptor] | None = None,
-) -> CorpusSemanticGraph:
-    """Build a deterministic graph from a validated corpus.
+    external: bool = False,
+) -> str:
+    node_id = _qualified_id(document_id, record_id)
+    nodes.setdefault(
+        node_id,
+        CorpusGraphNode(
+            id=node_id,
+            document_id=document_id,
+            record_id=record_id,
+            kind=kind,
+            label=label or record_id,
+            external=external,
+            source=source,
+        ),
+    )
+    return node_id
 
-    Existing semantic dependencies become graph edges.  Exact definition-term
-    matches are added as candidate edges only; they are intentionally not
-    emitted as normative references or merged records.
-    """
-    descriptors = _document_descriptors(corpus, metadata)
-    nodes: dict[str, CorpusGraphNode] = {}
-    edges: dict[str, CorpusGraphEdge] = {}
 
-    def add_node(
-        document_id: str,
-        record_id: str,
-        kind: str,
-        label: str,
-        source: SourceRef | None,
-        *,
-        external: bool = False,
-    ) -> str:
-        node_id = _qualified_id(document_id, record_id)
-        nodes.setdefault(
-            node_id,
-            CorpusGraphNode(
-                id=node_id,
-                document_id=document_id,
-                record_id=record_id,
-                kind=kind,
-                label=label or record_id,
-                external=external,
-                source=source,
-            ),
-        )
-        return node_id
-
+def _add_dependency_edges(
+    corpus: ComplianceCorpus,
+    document_ids: AbstractSet[str],
+    nodes: MutableMapping[str, CorpusGraphNode],
+    edges: MutableMapping[str, CorpusGraphEdge],
+) -> None:
     for model in corpus.documents:
         labels = _record_labels(model)
         for record in (*model.definitions, *model.requirements):
             kind, label, source = labels[record.id]
-            add_node(model.document_id, record.id, kind, label, source)
+            _add_node(nodes, model.document_id, record.id, kind, label, source)
         for dependency in model.semantic_dependencies():
             source_details = labels.get(dependency.source_record_id)
-            source_node = add_node(
+            source_node = _add_node(
+                nodes,
                 dependency.source_document_id,
                 dependency.source_record_id,
                 dependency.source_kind,
@@ -438,19 +451,20 @@ def build_corpus_graph(
                 source_details[2] if source_details else dependency.source,
             )
             target_details = labels.get(dependency.target_record_id)
-            target_node = add_node(
+            target_node = _add_node(
+                nodes,
                 dependency.target_document_id,
                 dependency.target_record_id,
                 dependency.target_kind,
                 target_details[1] if target_details else dependency.target_record_id,
                 target_details[2] if target_details else None,
-                external=dependency.target_document_id
-                not in {item.document_id for item in corpus.documents},
+                external=dependency.target_document_id not in document_ids,
             )
+            edge_id = f"dependency:{dependency.id}"
             edges.setdefault(
-                f"dependency:{dependency.id}",
+                edge_id,
                 CorpusGraphEdge(
-                    id=f"dependency:{dependency.id}",
+                    id=edge_id,
                     source_node_id=source_node,
                     target_node_id=target_node,
                     relation=dependency.relation,
@@ -459,10 +473,19 @@ def build_corpus_graph(
                 ),
             )
 
-    definitions: dict[str, list[tuple[str, str, SourceRef]]] = defaultdict(list)
-    requirements: dict[str, list[tuple[str, str, SourceRef]]] = defaultdict(list)
-    definition_records: list[tuple[str, str, SourceRef, str, str, frozenset[str]]] = []
-    requirement_records: list[tuple[str, str, SourceRef, str, str, frozenset[str]]] = []
+
+def _candidate_records(
+    corpus: ComplianceCorpus,
+) -> tuple[
+    dict[str, list[RecordRef]],
+    dict[str, list[RecordRef]],
+    list[CandidateRecord],
+    list[CandidateRecord],
+]:
+    definitions: dict[str, list[RecordRef]] = defaultdict(list)
+    requirements: dict[str, list[RecordRef]] = defaultdict(list)
+    definition_records: list[CandidateRecord] = []
+    requirement_records: list[CandidateRecord] = []
     for model in corpus.documents:
         for definition in model.definitions:
             normalized_term = _normalized_text(definition.term)
@@ -495,74 +518,71 @@ def build_corpus_graph(
                     frozenset(normalized_statement.split()),
                 )
             )
+    return definitions, requirements, definition_records, requirement_records
 
-    def add_candidate_edges(
-        groups: Mapping[str, Sequence[tuple[str, str, SourceRef]]],
-        relation: Literal["shared-definition-term", "shared-requirement-statement"],
-        note: str,
-    ) -> None:
-        for normalized, records in sorted(groups.items()):
-            if not normalized:
+
+def _add_candidate_edges(
+    groups: Mapping[str, Sequence[RecordRef]],
+    relation: Literal["shared-definition-term", "shared-requirement-statement"],
+    note: str,
+    edges: MutableMapping[str, CorpusGraphEdge],
+) -> None:
+    for normalized, records in sorted(groups.items()):
+        if not normalized:
+            continue
+        for left, right in combinations(sorted(records), 2):
+            if left[0] == right[0]:
                 continue
-            for left, right in combinations(sorted(records), 2):
-                if left[0] == right[0]:
-                    continue
-                source = _qualified_id(left[0], left[1])
-                target = _qualified_id(right[0], right[1])
-                edge_id = f"candidate:{relation}:{source}->{target}"
-                edges.setdefault(
-                    edge_id,
-                    CorpusGraphEdge(
-                        id=edge_id,
-                        source_node_id=source,
-                        target_node_id=target,
-                        relation=relation,
-                        evidence="candidate",
-                        confidence=1.0,
-                        note=note,
-                        source=left[2],
-                    ),
-                )
+            source = _qualified_id(left[0], left[1])
+            target = _qualified_id(right[0], right[1])
+            edge_id = f"candidate:{relation}:{source}->{target}"
+            edges.setdefault(
+                edge_id,
+                CorpusGraphEdge(
+                    id=edge_id,
+                    source_node_id=source,
+                    target_node_id=target,
+                    relation=relation,
+                    evidence="candidate",
+                    confidence=1.0,
+                    note=note,
+                    source=left[2],
+                ),
+            )
 
-    add_candidate_edges(
-        definitions,
-        "shared-definition-term",
-        "Exact normalized term match; review before treating as equivalent.",
+
+def _add_finding(
+    findings: MutableMapping[str, CorpusGraphFinding],
+    kind: FindingKind,
+    severity: FindingSeverity,
+    left: CandidateRecord,
+    right: CandidateRecord,
+    similarity: float,
+    message: str,
+) -> None:
+    node_ids = tuple(sorted((_qualified_id(left[0], left[1]), _qualified_id(right[0], right[1]))))
+    document_ids = tuple(sorted({left[0], right[0]}))
+    finding_id = f"{kind}:{node_ids[0]}:{node_ids[1]}"
+    findings.setdefault(
+        finding_id,
+        CorpusGraphFinding(
+            id=finding_id,
+            kind=kind,
+            severity=severity,
+            document_ids=document_ids,
+            node_ids=node_ids,
+            similarity=similarity,
+            message=message,
+            source=left[2],
+        ),
     )
-    add_candidate_edges(
-        requirements,
-        "shared-requirement-statement",
-        "Exact normalized statement match; review before treating as shared normative text.",
-    )
-    findings: dict[str, CorpusGraphFinding] = {}
 
-    def add_finding(
-        kind: FindingKind,
-        severity: FindingSeverity,
-        left: tuple[str, str, SourceRef, str, str, frozenset[str]],
-        right: tuple[str, str, SourceRef, str, str, frozenset[str]],
-        similarity: float,
-        message: str,
-    ) -> None:
-        node_ids = tuple(
-            sorted((_qualified_id(left[0], left[1]), _qualified_id(right[0], right[1])))
-        )
-        document_ids = tuple(sorted({left[0], right[0]}))
-        finding_id = f"{kind}:{node_ids[0]}:{node_ids[1]}"
-        findings.setdefault(
-            finding_id,
-            CorpusGraphFinding(
-                id=finding_id,
-                kind=kind,
-                severity=severity,
-                document_ids=document_ids,
-                node_ids=node_ids,
-                similarity=similarity,
-                message=message,
-                source=left[2],
-            ),
-        )
 
+def _same_term_definition_findings(
+    definitions: Mapping[str, Sequence[RecordRef]],
+    definition_records: Sequence[CandidateRecord],
+    findings: MutableMapping[str, CorpusGraphFinding],
+) -> None:
     definition_by_id = {(item[0], item[1]): item for item in definition_records}
     for _normalized, records in sorted(definitions.items()):
         for left_key, right_key in combinations(sorted(records), 2):
@@ -570,32 +590,32 @@ def build_corpus_graph(
                 continue
             left = definition_by_id[(left_key[0], left_key[1])]
             right = definition_by_id[(right_key[0], right_key[1])]
-            similarity = _token_similarity(left[5], right[5])
-            if left[4] == right[4]:
-                add_finding(
-                    "duplicate-definition",
-                    "info",
-                    left,
-                    right,
-                    1.0,
-                    "Exact term and definition text match; review before merging records.",
-                )
-            else:
-                add_finding(
-                    "conflicting-definition",
-                    "warning",
-                    left,
-                    right,
-                    similarity,
-                    "The same normalized term has different definition text across documents.",
-                )
+            same_text = left[4] == right[4]
+            _add_finding(
+                findings,
+                "duplicate-definition" if same_text else "conflicting-definition",
+                "info" if same_text else "warning",
+                left,
+                right,
+                1.0 if same_text else _token_similarity(left[5], right[5]),
+                "Exact term and definition text match; review before merging records."
+                if same_text
+                else "The same normalized term has different definition text across documents.",
+            )
 
-    for left, right in combinations(sorted(definition_records, key=lambda item: item[:2]), 2):
+
+def _near_duplicate_definition_findings(
+    definition_records: Sequence[CandidateRecord],
+    findings: MutableMapping[str, CorpusGraphFinding],
+) -> None:
+    ordered = sorted(definition_records, key=lambda item: item[:2])
+    for left, right in combinations(ordered, 2):
         if left[0] == right[0] or left[4] == right[4]:
             continue
         similarity = _token_similarity(left[5], right[5])
         if similarity >= 0.92:
-            add_finding(
+            _add_finding(
+                findings,
                 "near-duplicate-definition",
                 "warning",
                 left,
@@ -604,9 +624,15 @@ def build_corpus_graph(
                 "Definition text is highly similar across documents; review for duplication.",
             )
 
+
+def _requirement_findings(
+    requirement_records: Sequence[CandidateRecord],
+    findings: MutableMapping[str, CorpusGraphFinding],
+) -> None:
     for left, right in _near_duplicate_pairs(requirement_records):
         if left[4] == right[4]:
-            add_finding(
+            _add_finding(
+                findings,
                 "duplicate-requirement",
                 "info",
                 left,
@@ -617,7 +643,8 @@ def build_corpus_graph(
             continue
         similarity = _token_similarity(left[5], right[5])
         if similarity >= 0.92:
-            add_finding(
+            _add_finding(
+                findings,
                 "near-duplicate-requirement",
                 "warning",
                 left,
@@ -628,6 +655,42 @@ def build_corpus_graph(
                     "review their relationship."
                 ),
             )
+
+
+def build_corpus_graph(
+    corpus: ComplianceCorpus,
+    *,
+    metadata: Mapping[str, CorpusDocumentDescriptor] | None = None,
+) -> CorpusSemanticGraph:
+    """Build a deterministic graph from a validated corpus.
+
+    Existing semantic dependencies become graph edges.  Exact definition-term
+    matches are added as candidate edges only; they are intentionally not
+    emitted as normative references or merged records.
+    """
+    descriptors = _document_descriptors(corpus, metadata)
+    nodes: dict[str, CorpusGraphNode] = {}
+    edges: dict[str, CorpusGraphEdge] = {}
+    document_ids = {item.document_id for item in corpus.documents}
+    _add_dependency_edges(corpus, document_ids, nodes, edges)
+
+    definitions, requirements, definition_records, requirement_records = _candidate_records(corpus)
+    _add_candidate_edges(
+        definitions,
+        "shared-definition-term",
+        "Exact normalized term match; review before treating as equivalent.",
+        edges,
+    )
+    _add_candidate_edges(
+        requirements,
+        "shared-requirement-statement",
+        "Exact normalized statement match; review before treating as shared normative text.",
+        edges,
+    )
+    findings: dict[str, CorpusGraphFinding] = {}
+    _same_term_definition_findings(definitions, definition_records, findings)
+    _near_duplicate_definition_findings(definition_records, findings)
+    _requirement_findings(requirement_records, findings)
     return CorpusSemanticGraph(
         documents=descriptors,
         nodes=tuple(sorted(nodes.values(), key=lambda item: item.id)),

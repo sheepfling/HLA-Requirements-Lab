@@ -29,8 +29,9 @@ from hla_lab.traceability.compliance_sidecar import (
     manifest_from_response,
     run_adapter,
 )
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _bundle(*, crosswalk_status: str = "matched") -> CorpusBundle:

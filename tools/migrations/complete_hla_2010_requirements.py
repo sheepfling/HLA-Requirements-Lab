@@ -11,7 +11,10 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections.abc import Mapping
 from pathlib import Path
+
+from pydantic import JsonValue
 
 from hla_lab.core.hla_profile import HLA_SOURCE, HLA_SOURCE_2010
 from hla_lab.core.io import write_json
@@ -35,57 +38,59 @@ ROOTS = (
     RESOURCES.document("hla-1516.2-2010").root,
 )
 
-STOP_TERMS = {
-    "about",
-    "after",
-    "again",
-    "allow",
-    "also",
-    "and",
-    "any",
-    "are",
-    "been",
-    "before",
-    "being",
-    "between",
-    "both",
-    "each",
-    "from",
-    "have",
-    "into",
-    "must",
-    "not",
-    "once",
-    "only",
-    "onto",
-    "over",
-    "same",
-    "shall",
-    "should",
-    "some",
-    "state",
-    "than",
-    "that",
-    "their",
-    "them",
-    "then",
-    "there",
-    "these",
-    "they",
-    "this",
-    "those",
-    "through",
-    "under",
-    "used",
-    "using",
-    "when",
-    "where",
-    "which",
-    "with",
-    "within",
-    "without",
-    "would",
-}
+STOP_TERMS = frozenset(
+    {
+        "about",
+        "after",
+        "again",
+        "allow",
+        "also",
+        "and",
+        "any",
+        "are",
+        "been",
+        "before",
+        "being",
+        "between",
+        "both",
+        "each",
+        "from",
+        "have",
+        "into",
+        "must",
+        "not",
+        "once",
+        "only",
+        "onto",
+        "over",
+        "same",
+        "shall",
+        "should",
+        "some",
+        "state",
+        "than",
+        "that",
+        "their",
+        "them",
+        "then",
+        "there",
+        "these",
+        "they",
+        "this",
+        "those",
+        "through",
+        "under",
+        "used",
+        "using",
+        "when",
+        "where",
+        "which",
+        "with",
+        "within",
+        "without",
+        "would",
+    }
+)
 
 
 def _terms(value: str) -> frozenset[str]:
@@ -152,10 +157,10 @@ def _matches(requirements: tuple[object, ...], transition: object) -> tuple[str,
 
 
 def _update_machines(
-    root: Path, updates: dict[str, tuple[str, tuple[str, ...], tuple[str, ...]]]
+    root: Path, updates: Mapping[str, tuple[str, tuple[str, ...], tuple[str, ...]]]
 ) -> None:
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(raw, dict) or "state_machines" not in raw:
             continue
         changed = False

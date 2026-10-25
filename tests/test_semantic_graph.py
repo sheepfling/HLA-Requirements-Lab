@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_corpus, load_document_model
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 HLA_15161 = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 CORPUS_ROOTS = tuple(
     ROOT / "topics" / "ieee" / name

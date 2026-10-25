@@ -6,16 +6,17 @@ import argparse
 import json
 import re
 from pathlib import Path
+from types import MappingProxyType
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, JsonValue
 
 from hla_lab.paths import REPO_ROOT, DocumentResources, resources
 from hla_lab.publication.publication_registry import load_release_manifest
 
-EXCLUDED_PARTS = {".trash", "build", "dist", "output"}
+EXCLUDED_PARTS = frozenset({".trash", "build", "dist", "output"})
 PAGE_FRAGMENT_PATTERN = re.compile(r"(?:^|-)page-\d+\.tex$", re.IGNORECASE)
 CONTENT_BLOCK_INPUT_PATTERN = re.compile(r"\\input\{output/semantic/content-block-[^}]+\}")
-DATA_SUFFIXES = {".csv", ".json", ".jsonl", ".yaml", ".yml"}
+DATA_SUFFIXES = frozenset({".csv", ".json", ".jsonl", ".yaml", ".yml"})
 
 
 class SemanticMetrics(BaseModel):
@@ -42,20 +43,22 @@ class SemanticMetrics(BaseModel):
     coordinate_share: float
 
 
-MARKERS = {
-    "stable_id_markers": re.compile(r"\\HLAStableID\b"),
-    "fixed_coordinate_markers": re.compile(
-        r"\\(?:HLA(?:Fixed|ClausePlaced|RulePlaced|Coordinate)[A-Za-z]*|HLAPlaced[A-Za-z]*)\b"
-    ),
-    "heading_markers": re.compile(
-        r"\\(?:HLAClauseHeading|HLASubclauseHeading|HLADetailedRuleHeading|"
-        r"HLASummaryRule|HLANormativeRuleStatement|pdfbookmark)\b"
-    ),
-    "definition_markers": re.compile(r"(?:\\begin\{hladefinition\}|\\HLADefinitionAt)"),
-    "requirement_markers": re.compile(
-        r"\\(?:HLANormativeRuleStatement|HLAFixedRule|HLASummaryRule|HLADetailedRuleHeading)\b"
-    ),
-}
+MARKERS = MappingProxyType(
+    {
+        "stable_id_markers": re.compile(r"\\HLAStableID\b"),
+        "fixed_coordinate_markers": re.compile(
+            r"\\(?:HLA(?:Fixed|ClausePlaced|RulePlaced|Coordinate)[A-Za-z]*|HLAPlaced[A-Za-z]*)\b"
+        ),
+        "heading_markers": re.compile(
+            r"\\(?:HLAClauseHeading|HLASubclauseHeading|HLADetailedRuleHeading|"
+            r"HLASummaryRule|HLANormativeRuleStatement|pdfbookmark)\b"
+        ),
+        "definition_markers": re.compile(r"(?:\\begin\{hladefinition\}|\\HLADefinitionAt)"),
+        "requirement_markers": re.compile(
+            r"\\(?:HLANormativeRuleStatement|HLAFixedRule|HLASummaryRule|HLADetailedRuleHeading)\b"
+        ),
+    }
+)
 
 
 def _source_files(root: Path, suffix: str) -> tuple[Path, ...]:
@@ -70,18 +73,25 @@ def _marker_count(text: str, pattern: re.Pattern[str]) -> int:
     return len(pattern.findall(text))
 
 
+def _read_json(path: Path) -> JsonValue | None:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
 def _authored_record_count(root: Path, field: str) -> int:
     """Count text-based authored records without reading generated output."""
     semantic_root = DocumentResources(root).semantic
     total = 0
     for path in semantic_root.glob("*.json"):
-        try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
+        payload = _read_json(path)
+        if payload is None:
             continue
-        values = payload.get(field, ()) if isinstance(payload, dict) else ()
-        if isinstance(values, list):
-            total += len(values)
+        if isinstance(payload, dict):
+            values: JsonValue | tuple[()] = payload.get(field, ())
+            if isinstance(values, list):
+                total += len(values)
     return total
 
 
@@ -133,14 +143,20 @@ def _content_element_block_coverage(root: Path) -> float:
     blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
     if not blocks_path.is_file():
         return 0.0
-    try:
-        payload = json.loads(blocks_path.read_text(encoding="utf-8"))
-        blocks = payload.get("content_blocks", [])
-    except (OSError, json.JSONDecodeError):
+    payload = _read_json(blocks_path)
+    if payload is None:
         return 0.0
-    if not blocks:
+    if not isinstance(payload, dict):
         return 0.0
-    covered = sum(bool(item.get("element_ids")) for item in blocks if isinstance(item, dict))
+    raw_blocks: JsonValue | list[JsonValue] = payload.get("content_blocks", [])
+    if not isinstance(raw_blocks, list) or not raw_blocks:
+        return 0.0
+    blocks: list[JsonValue] = raw_blocks
+    covered = 0
+    for raw_item in blocks:
+        item: JsonValue = raw_item
+        if isinstance(item, dict) and item.get("element_ids"):
+            covered += 1
     return round(covered / len(blocks), 4)
 
 

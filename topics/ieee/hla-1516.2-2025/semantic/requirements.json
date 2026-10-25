@@ -839,24 +839,24 @@
     },
     {
       "id": "requirement-candidate-sections-semantic-clause-4b-page-058-l34-8",
-      "title": "Normative statement at sections/semantic/clause-4b/page-058.tex:34",
-      "statement": "Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by theHLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs.Federations may choose to use these default data types, supply their own time representations, or not supplyany time representation (e.g., NA).",
+      "title": "Normative statement at sections/semantic/clause-4b/page-058.tex:33",
+      "statement": "Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by the HLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs. Federations may choose to use these default data types, supply their own time representations, or not supply any time representation (e.g., NA).",
       "kind": "detailed",
-      "clause": "4",
-      "clause_id": "clause-4",
-      "machine_statement": "Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by theHLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs.Federations may choose to use these default data types, supply their own time representations, or not supplyany time representation (e.g., NA).",
+      "clause": "4.8.1",
+      "clause_id": "clause-4.8.1",
+      "machine_statement": "Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by the HLA and are described in detail in IEEE Std 1516.1-2025. These types shall be provided by all RTIs. Federations may choose to use these default data types, supply their own time representations, or not supply any time representation (e.g., NA).",
       "transition_ids": [],
       "coverage_kind": "cross-cutting",
-      "coverage_note": "Source-derived normative statement owned by clause-4. IEEE 1516.2 defines the OMT document and data semantics without a modeled RTI state machine, so this record is checked as cross-cutting document content.",
+      "coverage_note": "Source-derived HLA time-representation support requirement in §4.8.1; cross-cutting document content with no modeled RTI state transition.",
       "api_surface_scope": "required",
       "api_surface_note": "",
       "api_surface_resolution": "strict",
       "extraction": "explicit",
-      "semantic_group_id": "m17.clause-4",
+      "semantic_group_id": "m17.clause-4.8.1",
       "source": {
         "path": "sections/semantic/clause-4b/page-058.tex",
-        "line": 34,
-        "end_line": 34
+        "line": 33,
+        "end_line": 33
       }
     },
     {
@@ -6823,15 +6823,15 @@
     },
     {
       "id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-110-l90-20",
-      "title": "Normative statement at sections/semantic/clause-7-annexes-a-c/page-110.tex:90",
-      "statement": "[l]ThefollowingappliesforeachnamedvariantrecorddatatypeusingtheHLAextendableVariantRecord encoding: Alternatives of variant record, with sub-elementsalternative type and alternative semantics shall be merged. For a named alternative of a variantrecord, all discriminant enumerators shall be merged. If the same named discriminant",
+      "title": "Normative statement at sections/semantic/clause-7-annexes-a-c/page-110.tex:89",
+      "statement": "The following applies for each named variant record data type using the HLAextendableVariantRecord encoding: Alternatives of variant record, with sub-elements alternative type and alternative semantics shall be merged. For a named alternative of a variant record, all discriminant enumerators shall be merged. If the same named discriminant enumerator is specified for more than one named alternative, either as a single enumerator or part of a range, the merge shall fail. In case a variant record data type with HLAextendableVariantRecord includes an alternative using HLAother, the merge shall also fail.",
       "kind": "detailed",
       "clause": "C.3",
       "clause_id": "clause-C.3",
-      "machine_statement": "[l]ThefollowingappliesforeachnamedvariantrecorddatatypeusingtheHLAextendableVariantRecord encoding: Alternatives of variant record, with sub-elementsalternative type and alternative semantics shall be merged. For a named alternative of a variantrecord, all discriminant enumerators shall be merged. If the same named discriminant",
+      "machine_statement": "The following applies for each named variant record data type using the HLAextendableVariantRecord encoding: Alternatives of variant record, with sub-elements alternative type and alternative semantics shall be merged. For a named alternative of a variant record, all discriminant enumerators shall be merged. If the same named discriminant enumerator is specified for more than one named alternative, either as a single enumerator or part of a range, the merge shall fail. In case a variant record data type with HLAextendableVariantRecord includes an alternative using HLAother, the merge shall also fail.",
       "transition_ids": [],
       "coverage_kind": "cross-cutting",
-      "coverage_note": "Source-derived normative statement owned by clause-C.3. IEEE 1516.2 defines the OMT document and data semantics without a modeled RTI state machine, so this record is checked as cross-cutting document content.",
+      "coverage_note": "Source-derived normative statement owned by clause-C.3. IEEE 1516.2 defines the OMT document and data semantics without a modeled RTI state machine, so this record is checked as cross-cutting document content. The final conditions continue in sections/semantic/clause-7-annexes-a-c/page-111.tex:5. The same continuation appears in output/semantic/content-block-content-15162-page-111.tex:37-38.",
       "api_surface_scope": "required",
       "api_surface_note": "",
       "api_surface_resolution": "strict",
@@ -6839,8 +6839,8 @@
       "semantic_group_id": "m17.clause-C.3",
       "source": {
         "path": "sections/semantic/clause-7-annexes-a-c/page-110.tex",
-        "line": 90,
-        "end_line": 90
+        "line": 89,
+        "end_line": 89
       }
     },
     {

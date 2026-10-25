@@ -1,0 +1,111 @@
+schema_version = 1
+
+[files]
+include = [
+  "hla_lab/**/*.py",
+  "tests/**/*.py",
+  "tools/**/*.py",
+  "examples/**/*.py",
+  "topics/**/*.py",
+]
+exclude = ["**/__pycache__/**", "**/build/**", "**/dist/**"]
+
+[checks.python_style]
+extensions = [".py"]
+exclude = []
+opaque_boundary_marker_prefix = "# opaque-boundary: "
+opaque_boundary_min_reason_chars = 12
+
+[checks.path_discovery]
+extensions = [".py"]
+exclude = []
+
+[checks.runtime_types]
+extensions = [".py"]
+exclude = []
+
+[checks.line_length]
+exclude = []
+
+[checks.line_length.limits]
+".py" = 100
+
+[checks.file_size]
+code_extensions = [".py"]
+code_limit = 1200
+hard_limit = 2000
+initializer_name = "__init__.py"
+initializer_limit = 150
+exclude = []
+
+[checks.cyclomatic_complexity]
+metric = "cyclomatic"
+maximum = 10
+severity = "warning"
+timeout_seconds = 60
+
+[checks.cyclomatic_complexity.files]
+include = ["hla_lab/**/*.py", "tools/**/*.py"]
+exclude = ["**/__pycache__/**"]
+
+[[checks.cyclomatic_complexity.backends]]
+language = "python"
+backend = "ruff"
+version = "0.16.1"
+
+[orchestration]
+default_profile = "python-review"
+failure_threshold = "error"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "Python source style"
+rule = "python-style"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "Runtime type flow"
+rule = "runtime-types"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "Path discovery"
+rule = "path-discovery"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "Line length"
+rule = "line-length"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "File size"
+rule = "file-size"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.steps]]
+kind = "rule"
+name = "Cyclomatic complexity"
+rule = "cyclomatic-complexity"
+severity = "warning"
+rollout = "provisional"
+
+[[orchestration.profiles]]
+name = "python-review"
+steps = [
+  "Python source style",
+  "Runtime type flow",
+  "Path discovery",
+  "Line length",
+  "File size",
+  "Cyclomatic complexity",
+]

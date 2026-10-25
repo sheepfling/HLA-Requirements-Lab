@@ -5,20 +5,22 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from hla_lab.core.json_types import JsonObject
+from hla_lab.paths import RESOURCES
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = RESOURCES.root
 
 
-def _load(name: str) -> tuple[Path, dict]:
+def _load(name: str) -> tuple[Path, JsonObject]:
     path = ROOT / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
     return path, json.loads(path.read_text(encoding="utf-8"))
 
 
-def _write_opening_furniture_json(path: Path, payload: dict) -> None:
+def _write_opening_furniture_json(path: Path, payload: JsonObject) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def _block(payload: dict, block_id: str) -> dict:
+def _block(payload: JsonObject, block_id: str) -> JsonObject:
     return next(item for item in payload["content_blocks"] if item["id"] == block_id)
 
 

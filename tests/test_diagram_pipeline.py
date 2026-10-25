@@ -21,12 +21,15 @@ from hla_lab.diagrams.export_plantuml import render as render_plantuml
 from hla_lab.diagrams.export_sequence_diagram import render_mermaid, render_tikz
 from hla_lab.diagrams.plantuml_qa import (
     validate_models as validate_plantuml_models,
+)
+from hla_lab.diagrams.plantuml_qa import (
     validate_source as validate_plantuml_source,
 )
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import _cross_edition_plantuml_payload
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 HLA_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
 
@@ -108,12 +111,15 @@ class DiagramPipelineTests(unittest.TestCase):
         ):
             with self.subTest(machine=machine_id):
                 source = render_plantuml(machines[machine_id].model_dump(mode="json"))
-                self.assertEqual(validate_plantuml_source(machines[machine_id].model_dump(mode="json"), source), [])
+                self.assertEqual(
+                    validate_plantuml_source(machines[machine_id].model_dump(mode="json"), source),
+                    [],
+                )
                 self.assertNotIn("x=", source)
                 self.assertNotIn("y=", source)
         joined = render_plantuml(machines["normal-activity-permitted"].model_dump(mode="json"))
         self.assertIn('state "Temporal State"', joined)
-        self.assertIn('<<history>>', joined)
+        self.assertIn("<<history>>", joined)
         temporal = render_plantuml(machines["temporal-state"].model_dump(mode="json"))
         self.assertIn("Enable Time Regulation", temporal)
         self.assertIn("†", temporal)
@@ -128,9 +134,7 @@ class DiagramPipelineTests(unittest.TestCase):
 
     def test_2025_figure_four_uses_the_joined_federate_state_model(self) -> None:
         profile = json.loads(
-            (ROOT / "data" / "semantic" / "source-profiles.json").read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data" / "semantic" / "source-profiles.json").read_text(encoding="utf-8")
         )
         bindings = next(
             item["diagram_surface_bindings"]
@@ -151,11 +155,7 @@ class DiagramPipelineTests(unittest.TestCase):
                 "Federate Restore in Progress",
                 "Normal Activity",
             },
-            {
-                item.title
-                for item in joined.layout.containers
-                if item.id != "joined.outer"
-            },
+            {item.title for item in joined.layout.containers if item.id != "joined.outer"},
         )
         source = render_plantuml(joined.model_dump(mode="json"))
         self.assertEqual(validate_plantuml_source(joined.model_dump(mode="json"), source), [])
@@ -241,10 +241,7 @@ class DiagramPipelineTests(unittest.TestCase):
             (root / "semantic" / "plantuml-review.json").read_text(encoding="utf-8")
         )
         self.assertIn("hla-1516.1-2010:figure-07", review["approved_machine_ids"])
-        machines = {
-            item.id: item
-            for item in load_document_model(root, HLA_SOURCE).state_machines
-        }
+        machines = {item.id: item for item in load_document_model(root, HLA_SOURCE).state_machines}
         figure = machines["hla-1516.1-2010:figure-07"]
         self.assertEqual(len(figure.states), 5)
         self.assertEqual(len(figure.transitions), 5)

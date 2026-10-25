@@ -4364,7 +4364,12 @@
       "clause_ids": [
         "clause-8.11"
       ],
-      "requirement_ids": [],
+      "requirement_ids": [
+        "requirement-service-flow-nmra-current-time-precondition",
+        "requirement-service-flow-nmra-time-passed-exception",
+        "requirement-service-flow-nmra-not-advancing-precondition",
+        "requirement-service-flow-nmra-advancing-exception"
+      ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
       "source": {
@@ -6666,7 +6671,9 @@
       "clause_ids": [
         "clause-10.23"
       ],
-      "requirement_ids": [],
+      "requirement_ids": [
+        "requirement-service-flow-get-dimension-handle-name-not-found"
+      ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
       "source": {

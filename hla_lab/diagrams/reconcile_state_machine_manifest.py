@@ -7,7 +7,8 @@ import json
 import re
 from collections.abc import MutableMapping
 from pathlib import Path
-from typing import Any
+
+from pydantic import JsonValue
 
 from hla_lab.diagrams.review_policy import review_defaults
 
@@ -56,13 +57,15 @@ def _canonical_entries(models_dir: Path, reviews_dir: Path) -> dict[str, dict[st
 
 
 def reconcile(
-    manifest: MutableMapping[str, Any], models_dir: Path, reviews_dir: Path
-) -> MutableMapping[str, Any]:
+    manifest: MutableMapping[str, JsonValue], models_dir: Path, reviews_dir: Path
+) -> MutableMapping[str, JsonValue]:
     canonical = _canonical_entries(models_dir, reviews_dir)
-    diagrams = manifest.get("diagrams", [])
-    if not isinstance(diagrams, list):
+    raw_diagrams: JsonValue = manifest.get("diagrams", [])
+    if not isinstance(raw_diagrams, list):
         raise ValueError("manifest diagrams must be an array")
-    for item in diagrams:
+    diagrams: list[JsonValue] = raw_diagrams
+    for raw_item in diagrams:
+        item: JsonValue = raw_item
         if not isinstance(item, dict):
             continue
         filename = Path(str(item.get("source_image", ""))).name
@@ -97,7 +100,10 @@ def reconcile(
             str(item["diagram_type"]), str(item["status"])
         )
 
-    for scope in manifest.get("document_scopes", []):
+    raw_scopes: JsonValue = manifest.get("document_scopes", [])
+    scopes: list[JsonValue] = raw_scopes if isinstance(raw_scopes, list) else []
+    for raw_scope in scopes:
+        scope: JsonValue = raw_scope
         if (
             isinstance(scope, dict)
             and scope.get("inventory_status") == "reviewed_no_state_diagrams"
@@ -117,7 +123,9 @@ def main() -> None:
     parser.add_argument("--reviews", type=Path, required=True)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
-    manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+    manifest: JsonValue = json.loads(args.manifest.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        raise ValueError("manifest must be a JSON object")
     result = reconcile(manifest, args.models, args.reviews)
     rendered = json.dumps(result, indent=2, ensure_ascii=False) + "\n"
     if args.write:

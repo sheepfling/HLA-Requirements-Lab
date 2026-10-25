@@ -5,12 +5,13 @@ from __future__ import annotations
 import argparse
 import re
 from pathlib import Path
+from typing import Annotated
 
 from pydantic import Field
 
 from hla_lab.core.semantic_model import ApiSurface, ComplianceIssue, DocumentModel, SemanticRecord
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import document_roots
+from hla_lab.paths import REPO_ROOT, document_roots
 
 __all__ = [
     "DocumentReadiness",
@@ -24,27 +25,27 @@ __all__ = [
 class ReadinessFinding(SemanticRecord):
     """A deterministic readiness diagnostic."""
 
-    code: str = Field(min_length=1)
-    severity: str = Field(min_length=1)
-    message: str = Field(min_length=1)
+    code: Annotated[str, Field(min_length=1)]
+    severity: Annotated[str, Field(min_length=1)]
+    message: Annotated[str, Field(min_length=1)]
     record_ids: tuple[str, ...] = ()
 
 
 class DocumentReadiness(SemanticRecord):
     """Readiness counts and gaps for one specification document."""
 
-    document_id: str = Field(min_length=1)
-    requirement_count: int = Field(ge=0)
-    explicit_requirement_count: int = Field(ge=0)
-    candidate_requirement_count: int = Field(ge=0)
-    state_machine_count: int = Field(ge=0)
-    transition_count: int = Field(ge=0)
-    implementation_mapping_count: int = Field(ge=0)
-    api_surface_count: int = Field(ge=0)
-    verification_test_count: int = Field(ge=0)
-    state_trace_count: int = Field(ge=0)
-    planned_mapping_count: int = Field(ge=0)
-    concrete_mapping_count: int = Field(ge=0)
+    document_id: Annotated[str, Field(min_length=1)]
+    requirement_count: Annotated[int, Field(ge=0)]
+    explicit_requirement_count: Annotated[int, Field(ge=0)]
+    candidate_requirement_count: Annotated[int, Field(ge=0)]
+    state_machine_count: Annotated[int, Field(ge=0)]
+    transition_count: Annotated[int, Field(ge=0)]
+    implementation_mapping_count: Annotated[int, Field(ge=0)]
+    api_surface_count: Annotated[int, Field(ge=0)]
+    verification_test_count: Annotated[int, Field(ge=0)]
+    state_trace_count: Annotated[int, Field(ge=0)]
+    planned_mapping_count: Annotated[int, Field(ge=0)]
+    concrete_mapping_count: Annotated[int, Field(ge=0)]
     requirements_without_verification: tuple[str, ...] = ()
     transitions_without_verification: tuple[str, ...] = ()
     transitions_without_api_surface: tuple[str, ...] = ()
@@ -252,7 +253,7 @@ def _default_roots(root: Path) -> tuple[Path, ...]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser.add_argument("--root", type=Path, default=REPO_ROOT)
     parser.add_argument("--document", action="append", help="Restrict to a document ID")
     parser.add_argument("--require-concrete", action="store_true")
     parser.add_argument("--require-language-contract", action="store_true")

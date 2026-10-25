@@ -10,22 +10,29 @@ dependencies = [
 
 [project.scripts]
 hla-lab = "hla_lab.cli:main"
+hla-lab-schema = "hla_lab.schemas:main"
+hla-lab-model = "hla_lab.semantic_model_cli:main"
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "wheel>=0.42"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["hla_lab*"]
+include = ["hla_lab*", "tools*"]
+
+[tool.setuptools.package-data]
+hla_lab = ["source_profiles.json"]
 
 [dependency-groups]
 dev = [
+    "alphus[python] @ git+https://github.com/sheepfling/alphus.git@b4b6055a6ae0286912b461cd2b4262b3318c5a0c",
     "mdrepo>=0.0.1,<0.1",
     "pre-commit>=4.0",
     "pytest>=9.0.3,<10",
     "pytest-xdist>=3.6,<4",
+    "pyright==1.1.414",
     "rumdl>=0.2.49,<0.3",
-    "ruff>=0.12",
+    "ruff==0.16.1",
 ]
 
 [tool.rumdl]

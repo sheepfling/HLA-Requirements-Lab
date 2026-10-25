@@ -86,11 +86,11 @@ The 2010 roots use the legacy source adapter, which extracts normative
 audit compares that source inventory with the promoted catalogs by count and
 source-file distribution. It currently passes with no unpromoted candidates:
 
-| Document | Source inventory | Explicit catalog | Generic tables |
-|---|---:|---:|---:|
-| IEEE 1516-2010 | 56 | 56 | 2 |
-| IEEE 1516.1-2010 | 1,529 | 1,529 | 111 |
-| IEEE 1516.2-2010 | 589 | 589 | 76 |
+| Document         | Source inventory | Explicit catalog | Generic tables |
+| ---------------- | ---------------: | ---------------: | -------------: |
+| IEEE 1516-2010   |               56 |               56 |              2 |
+| IEEE 1516.1-2010 |            1,529 |            1,529 |            111 |
+| IEEE 1516.2-2010 |              589 |              589 |             76 |
 
 The 2010 generic tables remain typed table data. Their cells are not silently
 converted into standalone requirements. The improved legacy adapter now emits
@@ -107,14 +107,14 @@ python -m hla_lab.traceability.requirement_closure --check --json
 
 ## Current clean counts
 
-| Document | Requirements | Transitions | Planned seams | API binding rows |
-|---|---:|---:|---:|---:|
-| IEEE 1516-2010 | 56 | — | — | — |
-| IEEE 1516.1-2010 | 1,529 | 212 | 212 | 1,611 |
-| IEEE 1516.2-2010 | 589 | — | — | — |
-| IEEE 1516-2025 | 20 | — | — | — |
-| IEEE 1516.1-2025 | 1,860 | 282 | 282 | 1,894 |
-| IEEE 1516.2-2025 | 340 | — | — | — |
+| Document         | Requirements | Transitions | Planned seams | API binding rows |
+| ---------------- | -----------: | ----------: | ------------: | ---------------: |
+| IEEE 1516-2010   |           56 |           — |             — |                — |
+| IEEE 1516.1-2010 |        1,529 |         212 |           212 |            1,611 |
+| IEEE 1516.2-2010 |          589 |           — |             — |                — |
+| IEEE 1516-2025   |           20 |           — |             — |                — |
+| IEEE 1516.1-2025 |        1,865 |         297 |           283 |            1,904 |
+| IEEE 1516.2-2025 |          340 |           — |             — |                — |
 
 The quality-gate tests live in
 `tests/test_semantic_quality_gates.py`; they assert these properties rather

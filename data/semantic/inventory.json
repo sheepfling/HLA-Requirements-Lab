@@ -15078,7 +15078,7 @@
       "document_id": "hla-1516.1-2010",
       "source_root": "topics/ieee/hla-1516.1-2010",
       "migration": "M10",
-      "expected_pages": 370,
+      "expected_pages": 340,
       "surface_counts": {
         "clause": 1359,
         "content-block": 23,
@@ -169483,17 +169483,17 @@
       "document_id": "hla-1516.1-2025",
       "source_root": "topics/ieee/hla-1516.1-2025",
       "migration": "M10",
-      "expected_pages": 427,
+      "expected_pages": 502,
       "surface_counts": {
         "clause": 1670,
         "content-block": 432,
         "content-element": 585,
-        "cross-reference": 2508,
+        "cross-reference": 2513,
         "definition": 161,
         "figure": 17,
         "implementation": 283,
         "note": 45,
-        "requirement": 1860,
+        "requirement": 1865,
         "requirement-link": 32,
         "state": 306,
         "state-machine": 25,
@@ -169504,7 +169504,8 @@
       },
       "status_counts": {
         "mapped": 580,
-        "reviewed": 12938
+        "non-normative": 1,
+        "reviewed": 12947
       },
       "items": [
         {
@@ -193905,7 +193906,7 @@
             "line": 1,
             "end_line": 185
           },
-          "owner_id": "clause-8",
+          "owner_id": "clause-9",
           "notes": ""
         },
         {
@@ -201445,7 +201446,7 @@
             "line": 1,
             "end_line": 185
           },
-          "owner_id": "clause-8",
+          "owner_id": "clause-9",
           "notes": "Typed paragraph content owned by content-15161-page-216."
         },
         {
@@ -220767,6 +220768,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15161-page-199-paragraph-001-007",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-199.tex",
+            "line": 1,
+            "end_line": 159
+          },
+          "owner_id": "content-element-content-15161-page-199-paragraph-001",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15161-page-200-paragraph-001-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -220833,6 +220847,45 @@
         },
         {
           "record_id": "xref-content-element-content-15161-page-200-paragraph-001-006",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 1,
+            "end_line": 190
+          },
+          "owner_id": "content-element-content-15161-page-200-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15161-page-200-paragraph-001-007",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 1,
+            "end_line": 190
+          },
+          "owner_id": "content-element-content-15161-page-200-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15161-page-200-paragraph-001-008",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 1,
+            "end_line": 190
+          },
+          "owner_id": "content-element-content-15161-page-200-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15161-page-200-paragraph-001-009",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M10",
@@ -225487,6 +225540,19 @@
         },
         {
           "record_id": "xref-content-element-content-15161-page-260-paragraph-001-001",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/10-support-services-page-260.tex",
+            "line": 1,
+            "end_line": 178
+          },
+          "owner_id": "content-element-content-15161-page-260-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15161-page-260-paragraph-001-002",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M10",
@@ -243822,11 +243888,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
-            "line": 33,
+            "line": 43,
             "end_line": 53
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.1",
+          "notes": "Semantic group: m16.clause.4.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15",
@@ -243835,11 +243901,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-040.tex",
-            "line": 54,
-            "end_line": 59
+            "line": 51,
+            "end_line": 56
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.1",
+          "notes": "Semantic group: m16.clause.4.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-042-l10-3",
@@ -243890,8 +243956,8 @@
             "line": 108,
             "end_line": 134
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.3",
+          "notes": "Semantic group: m16.clause.4.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l15-4",
@@ -243900,11 +243966,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-044.tex",
-            "line": 15,
+            "line": 12,
             "end_line": 26
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l27-8",
@@ -243916,8 +243982,8 @@
             "line": 27,
             "end_line": 35
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l36-11",
@@ -243926,11 +243992,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-044.tex",
-            "line": 36,
+            "line": 33,
             "end_line": 41
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l54-17",
@@ -243939,11 +244005,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-044.tex",
-            "line": 54,
+            "line": 48,
             "end_line": 62
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l72-23",
@@ -243952,11 +244018,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-044.tex",
-            "line": 72,
-            "end_line": 77
+            "line": 69,
+            "end_line": 74
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-044-l78-25",
@@ -243965,11 +244031,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-044.tex",
-            "line": 78,
+            "line": 75,
             "end_line": 83
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m16.clause.4."
+          "owner_id": "clause-4.1.2",
+          "notes": "Semantic group: m16.clause.4.1.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4",
@@ -244735,8 +244801,8 @@
             "line": 32,
             "end_line": 43
           },
-          "owner_id": "clause-4.11.4",
-          "notes": "Semantic group: m16.clause.4.11.4."
+          "owner_id": "clause-4.11",
+          "notes": "Semantic group: m16.clause.4.11."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-057-l44-6",
@@ -244748,8 +244814,8 @@
             "line": 44,
             "end_line": 49
           },
-          "owner_id": "clause-4.11.4",
-          "notes": "Semantic group: m16.clause.4.11.4."
+          "owner_id": "clause-4.11",
+          "notes": "Semantic group: m16.clause.4.11."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-057-l56-8",
@@ -244761,8 +244827,8 @@
             "line": 56,
             "end_line": 58
           },
-          "owner_id": "clause-4.11.4",
-          "notes": "Semantic group: m16.clause.4.11.4."
+          "owner_id": "clause-4.11.1",
+          "notes": "Semantic group: m16.clause.4.11.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-058-l112-33",
@@ -244891,8 +244957,8 @@
             "line": 11,
             "end_line": 15
           },
-          "owner_id": "clause-4.16",
-          "notes": "Semantic group: m16.clause.4.16."
+          "owner_id": "clause-4.15",
+          "notes": "Semantic group: m16.clause.4.15."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-062-l140-35",
@@ -244917,8 +244983,8 @@
             "line": 28,
             "end_line": 31
           },
-          "owner_id": "clause-4.16",
-          "notes": "Semantic group: m16.clause.4.16."
+          "owner_id": "clause-4.15",
+          "notes": "Semantic group: m16.clause.4.15."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-063-l117-26",
@@ -244980,7 +245046,7 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-065.tex",
             "line": 109,
-            "end_line": 113
+            "end_line": 131
           },
           "owner_id": "clause-4.19",
           "notes": "Semantic group: m16.clause.4.19."
@@ -245071,10 +245137,10 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-067.tex",
             "line": 16,
-            "end_line": 21
+            "end_line": 18
           },
-          "owner_id": "clause-4.21.1",
-          "notes": "Semantic group: m16.clause.4.21.1."
+          "owner_id": "clause-4.20",
+          "notes": "Semantic group: m16.clause.4.20."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-067-l22-3",
@@ -245083,11 +245149,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-067.tex",
-            "line": 22,
-            "end_line": 24
+            "line": 19,
+            "end_line": 27
           },
-          "owner_id": "clause-4.21.1",
-          "notes": "Semantic group: m16.clause.4.21.1."
+          "owner_id": "clause-4.20",
+          "notes": "Semantic group: m16.clause.4.20."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-067-l25-4",
@@ -245099,8 +245165,8 @@
             "line": 25,
             "end_line": 33
           },
-          "owner_id": "clause-4.21.1",
-          "notes": "Semantic group: m16.clause.4.21.1."
+          "owner_id": "clause-4.20",
+          "notes": "Semantic group: m16.clause.4.20."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-067-l34-7",
@@ -245109,11 +245175,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-067.tex",
-            "line": 34,
+            "line": 31,
             "end_line": 36
           },
-          "owner_id": "clause-4.21.1",
-          "notes": "Semantic group: m16.clause.4.21.1."
+          "owner_id": "clause-4.20",
+          "notes": "Semantic group: m16.clause.4.20."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-067-l37-8",
@@ -245122,8 +245188,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-067.tex",
-            "line": 37,
-            "end_line": 39
+            "line": 34,
+            "end_line": 42
           },
           "owner_id": "clause-4.20",
           "notes": "Semantic group: m16.clause.4.20."
@@ -245151,8 +245217,8 @@
             "line": 52,
             "end_line": 54
           },
-          "owner_id": "clause-4.21.1",
-          "notes": "Semantic group: m16.clause.4.21.1."
+          "owner_id": "clause-4.20",
+          "notes": "Semantic group: m16.clause.4.20."
         },
         {
           "record_id": "requirement-candidate-content-clauses-04-federation-management-page-068-l115-29",
@@ -245201,7 +245267,7 @@
           "source": {
             "path": "content/clauses/04-federation-management-page-069.tex",
             "line": 64,
-            "end_line": 66
+            "end_line": 68
           },
           "owner_id": "clause-4.23",
           "notes": "Semantic group: m16.clause.4.23."
@@ -245213,7 +245279,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-069.tex",
-            "line": 67,
+            "line": 64,
             "end_line": 69
           },
           "owner_id": "clause-4.23",
@@ -245226,7 +245292,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/04-federation-management-page-069.tex",
-            "line": 70,
+            "line": 67,
             "end_line": 75
           },
           "owner_id": "clause-4.23",
@@ -246438,8 +246504,8 @@
             "line": 32,
             "end_line": 37
           },
-          "owner_id": "clause-5.1.4",
-          "notes": "Semantic group: m16.clause.5.1.4."
+          "owner_id": "clause-5.1.3",
+          "notes": "Semantic group: m16.clause.5.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-05-declaration-management-page-084-l44-14",
@@ -248035,7 +248101,7 @@
           "source": {
             "path": "content/clauses/06-object-management-page-109.tex",
             "line": 10,
-            "end_line": 24
+            "end_line": 18
           },
           "owner_id": "clause-6.1.9",
           "notes": "Semantic group: m16.clause.6.1.9."
@@ -248099,8 +248165,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-109.tex",
-            "line": 25,
-            "end_line": 27
+            "line": 22,
+            "end_line": 33
           },
           "owner_id": "clause-6.1.9",
           "notes": "Semantic group: m16.clause.6.1.9."
@@ -248568,7 +248634,7 @@
           "source": {
             "path": "content/clauses/06-object-management-page-115.tex",
             "line": 101,
-            "end_line": 103
+            "end_line": 104
           },
           "owner_id": "clause-6.5.3",
           "notes": "Semantic group: m16.clause.6.5.3."
@@ -248581,7 +248647,7 @@
           "source": {
             "path": "content/clauses/06-object-management-page-115.tex",
             "line": 104,
-            "end_line": 106
+            "end_line": 107
           },
           "owner_id": "clause-6.5.3",
           "notes": "Semantic group: m16.clause.6.5.3."
@@ -248593,7 +248659,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-115.tex",
-            "line": 107,
+            "line": 104,
             "end_line": 109
           },
           "owner_id": "clause-6.5.3",
@@ -248606,7 +248672,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-115.tex",
-            "line": 110,
+            "line": 107,
             "end_line": 115
           },
           "owner_id": "clause-6.5.3",
@@ -249051,8 +249117,8 @@
             "line": 61,
             "end_line": 69
           },
-          "owner_id": "clause-6.11.1",
-          "notes": "Semantic group: m16.clause.6.11.1."
+          "owner_id": "clause-6.11",
+          "notes": "Semantic group: m16.clause.6.11."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-122-l73-21",
@@ -249077,8 +249143,8 @@
             "line": 79,
             "end_line": 84
           },
-          "owner_id": "clause-6.11.1",
-          "notes": "Semantic group: m16.clause.6.11.1."
+          "owner_id": "clause-6.11",
+          "notes": "Semantic group: m16.clause.6.11."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-122-l85-25",
@@ -249220,8 +249286,8 @@
             "line": 41,
             "end_line": 46
           },
-          "owner_id": "clause-6.12.4",
-          "notes": "Semantic group: m16.clause.6.12.4."
+          "owner_id": "clause-6.12",
+          "notes": "Semantic group: m16.clause.6.12."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-124-l47-14",
@@ -249233,8 +249299,8 @@
             "line": 47,
             "end_line": 52
           },
-          "owner_id": "clause-6.12.4",
-          "notes": "Semantic group: m16.clause.6.12.4."
+          "owner_id": "clause-6.12",
+          "notes": "Semantic group: m16.clause.6.12."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-124-l53-16",
@@ -249246,8 +249312,8 @@
             "line": 53,
             "end_line": 58
           },
-          "owner_id": "clause-6.12.4",
-          "notes": "Semantic group: m16.clause.6.12.4."
+          "owner_id": "clause-6.12",
+          "notes": "Semantic group: m16.clause.6.12."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-125-l100-29",
@@ -249945,11 +250011,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-132.tex",
-            "line": 107,
+            "line": 101,
             "end_line": 112
           },
-          "owner_id": "clause-6.18.1",
-          "notes": "Semantic group: m16.clause.6.18.1."
+          "owner_id": "clause-6.17.4",
+          "notes": "Semantic group: m16.clause.6.17.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-132-l113-32",
@@ -249958,11 +250024,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-132.tex",
-            "line": 113,
+            "line": 110,
             "end_line": 118
           },
-          "owner_id": "clause-6.18.1",
-          "notes": "Semantic group: m16.clause.6.18.1."
+          "owner_id": "clause-6.17.4",
+          "notes": "Semantic group: m16.clause.6.17.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-132-l140-38",
@@ -250335,11 +250401,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-139.tex",
-            "line": 150,
+            "line": 144,
             "end_line": 155
           },
-          "owner_id": "clause-6.25.1",
-          "notes": "Semantic group: m16.clause.6.25.1."
+          "owner_id": "clause-6.25",
+          "notes": "Semantic group: m16.clause.6.25."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-140-l178-51",
@@ -250377,8 +250443,8 @@
             "line": 11,
             "end_line": 16
           },
-          "owner_id": "clause-6.27",
-          "notes": "Semantic group: m16.clause.6.27."
+          "owner_id": "clause-6.26",
+          "notes": "Semantic group: m16.clause.6.26."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-141-l125-32",
@@ -250455,8 +250521,8 @@
             "line": 156,
             "end_line": 161
           },
-          "owner_id": "clause-6.29.1",
-          "notes": "Semantic group: m16.clause.6.29.1."
+          "owner_id": "clause-6.29",
+          "notes": "Semantic group: m16.clause.6.29."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-143-l162-44",
@@ -250465,11 +250531,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/06-object-management-page-143.tex",
-            "line": 162,
+            "line": 159,
             "end_line": 167
           },
-          "owner_id": "clause-6.29.1",
-          "notes": "Semantic group: m16.clause.6.29.1."
+          "owner_id": "clause-6.29",
+          "notes": "Semantic group: m16.clause.6.29."
         },
         {
           "record_id": "requirement-candidate-content-clauses-06-object-management-page-144-l100-24",
@@ -250608,8 +250674,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
-            "line": 100,
-            "end_line": 102
+            "line": 97,
+            "end_line": 103
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250622,7 +250688,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 103,
-            "end_line": 105
+            "end_line": 107
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250660,8 +250726,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
-            "line": 121,
-            "end_line": 123
+            "line": 118,
+            "end_line": 126
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250674,7 +250740,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 124,
-            "end_line": 132
+            "end_line": 157
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250687,7 +250753,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 16,
-            "end_line": 21
+            "end_line": 23
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250712,8 +250778,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
-            "line": 52,
-            "end_line": 57
+            "line": 49,
+            "end_line": 56
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250726,7 +250792,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 58,
-            "end_line": 60
+            "end_line": 61
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250738,8 +250804,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
-            "line": 61,
-            "end_line": 69
+            "line": 58,
+            "end_line": 68
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250752,7 +250818,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 70,
-            "end_line": 81
+            "end_line": 80
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250764,8 +250830,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
-            "line": 82,
-            "end_line": 87
+            "line": 79,
+            "end_line": 86
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250778,7 +250844,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-148.tex",
             "line": 88,
-            "end_line": 93
+            "end_line": 97
           },
           "owner_id": "clause-7",
           "notes": "Semantic group: m16.clause.7."
@@ -250829,7 +250895,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-150.tex",
-            "line": 152,
+            "line": 149,
             "end_line": 157
           },
           "owner_id": "clause-7.1.2.1",
@@ -251183,8 +251249,8 @@
             "line": 108,
             "end_line": 110
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l111-35",
@@ -251196,8 +251262,8 @@
             "line": 111,
             "end_line": 116
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l123-38",
@@ -251235,8 +251301,8 @@
             "line": 15,
             "end_line": 29
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l30-9",
@@ -251248,8 +251314,8 @@
             "line": 30,
             "end_line": 35
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l36-11",
@@ -251261,8 +251327,8 @@
             "line": 36,
             "end_line": 44
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l45-14",
@@ -251274,8 +251340,8 @@
             "line": 45,
             "end_line": 59
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l60-19",
@@ -251287,8 +251353,8 @@
             "line": 60,
             "end_line": 74
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l75-24",
@@ -251300,8 +251366,8 @@
             "line": 75,
             "end_line": 80
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.2.2",
+          "notes": "Semantic group: m16.clause.7.1.2.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l84-26",
@@ -251313,8 +251379,8 @@
             "line": 84,
             "end_line": 86
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l87-27",
@@ -251326,8 +251392,8 @@
             "line": 87,
             "end_line": 95
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l96-30",
@@ -251339,8 +251405,8 @@
             "line": 96,
             "end_line": 98
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-153-l99-31",
@@ -251352,8 +251418,8 @@
             "line": 99,
             "end_line": 107
           },
-          "owner_id": "clause-7.1.4",
-          "notes": "Semantic group: m16.clause.7.1.4."
+          "owner_id": "clause-7.1.3",
+          "notes": "Semantic group: m16.clause.7.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-154-l102-32",
@@ -251869,8 +251935,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-161.tex",
-            "line": 152,
-            "end_line": 157
+            "line": 149,
+            "end_line": 162
           },
           "owner_id": "clause-7.8",
           "notes": "Semantic group: m16.clause.7.8."
@@ -251896,7 +251962,7 @@
           "source": {
             "path": "content/clauses/07-ownership-management-page-161.tex",
             "line": 167,
-            "end_line": 172
+            "end_line": 173
           },
           "owner_id": "clause-7.8",
           "notes": "Semantic group: m16.clause.7.8."
@@ -252119,8 +252185,8 @@
             "line": 14,
             "end_line": 19
           },
-          "owner_id": "clause-7.10.6",
-          "notes": "Semantic group: m16.clause.7.10.6."
+          "owner_id": "clause-7.10",
+          "notes": "Semantic group: m16.clause.7.10."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-166-l14-1",
@@ -252548,8 +252614,8 @@
             "line": 131,
             "end_line": 139
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.1",
+          "notes": "Semantic group: m16.clause.8.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-175-l140-43",
@@ -252558,11 +252624,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/07-ownership-management-page-175.tex",
-            "line": 140,
-            "end_line": 145
+            "line": 137,
+            "end_line": 147
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.1",
+          "notes": "Semantic group: m16.clause.8.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-175-l146-45",
@@ -252574,8 +252640,8 @@
             "line": 146,
             "end_line": 148
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.1",
+          "notes": "Semantic group: m16.clause.8.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-07-ownership-management-page-175-l29-7",
@@ -252909,8 +252975,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-178.tex",
-            "line": 108,
-            "end_line": 110
+            "line": 105,
+            "end_line": 113
           },
           "owner_id": "clause-8",
           "notes": "Semantic group: m16.clause.8."
@@ -253001,7 +253067,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-178.tex",
             "line": 45,
-            "end_line": 50
+            "end_line": 49
           },
           "owner_id": "clause-8",
           "notes": "Semantic group: m16.clause.8."
@@ -253013,8 +253079,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-178.tex",
-            "line": 51,
-            "end_line": 53
+            "line": 48,
+            "end_line": 55
           },
           "owner_id": "clause-8",
           "notes": "Semantic group: m16.clause.8."
@@ -253026,8 +253092,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-178.tex",
-            "line": 54,
-            "end_line": 80
+            "line": 51,
+            "end_line": 56
           },
           "owner_id": "clause-8",
           "notes": "Semantic group: m16.clause.8."
@@ -253091,7 +253157,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-178.tex",
-            "line": 93,
+            "line": 90,
             "end_line": 107
           },
           "owner_id": "clause-8",
@@ -253198,8 +253264,8 @@
             "line": 21,
             "end_line": 26
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l27-7",
@@ -253211,8 +253277,8 @@
             "line": 27,
             "end_line": 32
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l39-11",
@@ -253224,8 +253290,8 @@
             "line": 39,
             "end_line": 41
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l45-13",
@@ -253237,8 +253303,8 @@
             "line": 45,
             "end_line": 56
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l57-17",
@@ -253250,8 +253316,8 @@
             "line": 57,
             "end_line": 65
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l69-20",
@@ -253299,8 +253365,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-180.tex",
-            "line": 84,
-            "end_line": 86
+            "line": 81,
+            "end_line": 91
           },
           "owner_id": "clause-8.1.4",
           "notes": "Semantic group: m16.clause.8.1.4."
@@ -253312,8 +253378,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-180.tex",
-            "line": 87,
-            "end_line": 92
+            "line": 83,
+            "end_line": 91
           },
           "owner_id": "clause-8.1.4",
           "notes": "Semantic group: m16.clause.8.1.4."
@@ -253328,8 +253394,8 @@
             "line": 9,
             "end_line": 14
           },
-          "owner_id": "clause-8.1.4",
-          "notes": "Semantic group: m16.clause.8.1.4."
+          "owner_id": "clause-8.1.3",
+          "notes": "Semantic group: m16.clause.8.1.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-180-l93-28",
@@ -253338,8 +253404,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-180.tex",
-            "line": 93,
-            "end_line": 101
+            "line": 89,
+            "end_line": 97
           },
           "owner_id": "clause-8.1.4",
           "notes": "Semantic group: m16.clause.8.1.4."
@@ -253347,15 +253413,15 @@
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
           "kind": "requirement",
-          "status": "reviewed",
+          "status": "non-normative",
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-181.tex",
             "line": 115,
             "end_line": 117
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Table 2 introduction is explanatory layout prose, not a standalone obligation."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l118-3",
@@ -253367,8 +253433,8 @@
             "line": 118,
             "end_line": 120
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l121-4",
@@ -253380,8 +253446,8 @@
             "line": 121,
             "end_line": 132
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l133-8",
@@ -253393,8 +253459,8 @@
             "line": 133,
             "end_line": 138
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l139-10",
@@ -253406,8 +253472,8 @@
             "line": 139,
             "end_line": 144
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l145-12",
@@ -253419,8 +253485,8 @@
             "line": 145,
             "end_line": 147
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l148-13",
@@ -253432,8 +253498,8 @@
             "line": 148,
             "end_line": 156
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l157-16",
@@ -253445,8 +253511,8 @@
             "line": 157,
             "end_line": 162
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l163-18",
@@ -253458,8 +253524,8 @@
             "line": 163,
             "end_line": 168
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.4",
+          "notes": "Semantic group: m16.clause.8.1.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l10-2",
@@ -253471,8 +253537,8 @@
             "line": 10,
             "end_line": 15
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l100-31",
@@ -253484,8 +253550,8 @@
             "line": 100,
             "end_line": 105
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l106-33",
@@ -253497,8 +253563,8 @@
             "line": 106,
             "end_line": 111
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l112-35",
@@ -253510,8 +253576,8 @@
             "line": 112,
             "end_line": 126
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l127-40",
@@ -253523,8 +253589,8 @@
             "line": 127,
             "end_line": 129
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l133-42",
@@ -253536,8 +253602,8 @@
             "line": 133,
             "end_line": 138
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l16-4",
@@ -253549,8 +253615,8 @@
             "line": 16,
             "end_line": 18
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l19-5",
@@ -253562,8 +253628,8 @@
             "line": 19,
             "end_line": 21
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l22-6",
@@ -253575,8 +253641,8 @@
             "line": 22,
             "end_line": 24
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l25-7",
@@ -253588,8 +253654,8 @@
             "line": 25,
             "end_line": 36
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l37-11",
@@ -253601,8 +253667,8 @@
             "line": 37,
             "end_line": 42
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l43-13",
@@ -253614,8 +253680,8 @@
             "line": 43,
             "end_line": 69
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l7-1",
@@ -253627,8 +253693,8 @@
             "line": 7,
             "end_line": 9
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l73-23",
@@ -253640,8 +253706,8 @@
             "line": 73,
             "end_line": 84
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l88-28",
@@ -253653,8 +253719,8 @@
             "line": 88,
             "end_line": 90
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.5",
+          "notes": "Semantic group: m16.clause.8.1.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-182-l97-30",
@@ -253666,8 +253732,8 @@
             "line": 97,
             "end_line": 99
           },
-          "owner_id": "clause-8",
-          "notes": "Semantic group: m16.clause.8."
+          "owner_id": "clause-8.1.6",
+          "notes": "Semantic group: m16.clause.8.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-183-l118-39",
@@ -253913,8 +253979,8 @@
             "line": 10,
             "end_line": 15
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-187-l16-3",
@@ -253923,11 +253989,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-187.tex",
-            "line": 16,
-            "end_line": 21
+            "line": 13,
+            "end_line": 24
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-187-l22-5",
@@ -253939,8 +254005,8 @@
             "line": 22,
             "end_line": 24
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-187-l25-6",
@@ -253952,8 +254018,8 @@
             "line": 25,
             "end_line": 30
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-187-l40-11",
@@ -253965,8 +254031,8 @@
             "line": 40,
             "end_line": 45
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-187-l46-13",
@@ -253978,8 +254044,8 @@
             "line": 46,
             "end_line": 51
           },
-          "owner_id": "clause-8.1.10",
-          "notes": "Semantic group: m16.clause.8.1.10."
+          "owner_id": "clause-8.1.8",
+          "notes": "Semantic group: m16.clause.8.1.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-188-l138-43",
@@ -254210,10 +254276,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-191.tex",
             "line": 73,
-            "end_line": 75
+            "end_line": 78
           },
-          "owner_id": "clause-8.5.5",
-          "notes": "Semantic group: m16.clause.8.5.5."
+          "owner_id": "clause-8.5",
+          "notes": "Semantic group: m16.clause.8.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-191-l76-18",
@@ -254225,8 +254291,8 @@
             "line": 76,
             "end_line": 81
           },
-          "owner_id": "clause-8.5.5",
-          "notes": "Semantic group: m16.clause.8.5.5."
+          "owner_id": "clause-8.5",
+          "notes": "Semantic group: m16.clause.8.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l63-17",
@@ -254236,10 +254302,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-192.tex",
             "line": 63,
-            "end_line": 65
+            "end_line": 68
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l66-18",
@@ -254249,10 +254315,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-192.tex",
             "line": 66,
-            "end_line": 68
+            "end_line": 70
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l69-19",
@@ -254262,10 +254328,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-192.tex",
             "line": 69,
-            "end_line": 71
+            "end_line": 73
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l72-20",
@@ -254275,10 +254341,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-192.tex",
             "line": 72,
-            "end_line": 77
+            "end_line": 79
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l78-22",
@@ -254290,8 +254356,8 @@
             "line": 78,
             "end_line": 83
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l84-24",
@@ -254300,11 +254366,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-192.tex",
-            "line": 84,
-            "end_line": 89
+            "line": 81,
+            "end_line": 88
           },
-          "owner_id": "clause-8.6.3",
-          "notes": "Semantic group: m16.clause.8.6.3."
+          "owner_id": "clause-8.6",
+          "notes": "Semantic group: m16.clause.8.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-192-l93-27",
@@ -254342,8 +254408,8 @@
             "line": 31,
             "end_line": 33
           },
-          "owner_id": "clause-8.7.5",
-          "notes": "Semantic group: m16.clause.8.7.5."
+          "owner_id": "clause-8.6.4",
+          "notes": "Semantic group: m16.clause.8.6.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-193-l34-7",
@@ -254355,8 +254421,8 @@
             "line": 34,
             "end_line": 36
           },
-          "owner_id": "clause-8.7.5",
-          "notes": "Semantic group: m16.clause.8.7.5."
+          "owner_id": "clause-8.6.4",
+          "notes": "Semantic group: m16.clause.8.6.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-193-l58-12",
@@ -254368,8 +254434,8 @@
             "line": 58,
             "end_line": 60
           },
-          "owner_id": "clause-8.7.5",
-          "notes": "Semantic group: m16.clause.8.7.5."
+          "owner_id": "clause-8.7",
+          "notes": "Semantic group: m16.clause.8.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-193-l61-13",
@@ -254381,8 +254447,8 @@
             "line": 61,
             "end_line": 66
           },
-          "owner_id": "clause-8.7.5",
-          "notes": "Semantic group: m16.clause.8.7.5."
+          "owner_id": "clause-8.7",
+          "notes": "Semantic group: m16.clause.8.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-194-l21-3",
@@ -254394,8 +254460,8 @@
             "line": 21,
             "end_line": 26
           },
-          "owner_id": "clause-8.8.3",
-          "notes": "Semantic group: m16.clause.8.8.3."
+          "owner_id": "clause-8.8",
+          "notes": "Semantic group: m16.clause.8.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-194-l27-5",
@@ -254407,8 +254473,8 @@
             "line": 27,
             "end_line": 29
           },
-          "owner_id": "clause-8.8.3",
-          "notes": "Semantic group: m16.clause.8.8.3."
+          "owner_id": "clause-8.8",
+          "notes": "Semantic group: m16.clause.8.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-194-l45-11",
@@ -254420,8 +254486,8 @@
             "line": 45,
             "end_line": 53
           },
-          "owner_id": "clause-8.8.3",
-          "notes": "Semantic group: m16.clause.8.8.3."
+          "owner_id": "clause-8.8",
+          "notes": "Semantic group: m16.clause.8.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-194-l69-19",
@@ -254433,8 +254499,8 @@
             "line": 69,
             "end_line": 83
           },
-          "owner_id": "clause-8.8.3",
-          "notes": "Semantic group: m16.clause.8.8.3."
+          "owner_id": "clause-8.8",
+          "notes": "Semantic group: m16.clause.8.8."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-195-l110-31",
@@ -254470,7 +254536,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-195.tex",
             "line": 137,
-            "end_line": 139
+            "end_line": 163
           },
           "owner_id": "clause-8.9",
           "notes": "Semantic group: m16.clause.8.9."
@@ -254522,7 +254588,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-197.tex",
             "line": 104,
-            "end_line": 115
+            "end_line": 111
           },
           "owner_id": "clause-8.10.2",
           "notes": "Semantic group: m16.clause.8.10.2."
@@ -254600,7 +254666,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-197.tex",
             "line": 98,
-            "end_line": 103
+            "end_line": 105
           },
           "owner_id": "clause-8.10.2",
           "notes": "Semantic group: m16.clause.8.10.2."
@@ -254717,7 +254783,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-200.tex",
             "line": 131,
-            "end_line": 133
+            "end_line": 136
           },
           "owner_id": "clause-8.12",
           "notes": "Semantic group: m16.clause.8.12."
@@ -254730,7 +254796,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-200.tex",
             "line": 134,
-            "end_line": 139
+            "end_line": 142
           },
           "owner_id": "clause-8.12",
           "notes": "Semantic group: m16.clause.8.12."
@@ -254743,7 +254809,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-200.tex",
             "line": 140,
-            "end_line": 142
+            "end_line": 163
           },
           "owner_id": "clause-8.12",
           "notes": "Semantic group: m16.clause.8.12."
@@ -254768,7 +254834,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-200.tex",
-            "line": 170,
+            "line": 167,
             "end_line": 172
           },
           "owner_id": "clause-8.12",
@@ -254782,7 +254848,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-200.tex",
             "line": 173,
-            "end_line": 175
+            "end_line": 188
           },
           "owner_id": "clause-8.12",
           "notes": "Semantic group: m16.clause.8.12."
@@ -254901,8 +254967,8 @@
             "line": 104,
             "end_line": 106
           },
-          "owner_id": "clause-8.13.3",
-          "notes": "Semantic group: m16.clause.8.13.3."
+          "owner_id": "clause-8.13",
+          "notes": "Semantic group: m16.clause.8.13."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-202-l107-29",
@@ -254914,8 +254980,8 @@
             "line": 107,
             "end_line": 130
           },
-          "owner_id": "clause-8.13.3",
-          "notes": "Semantic group: m16.clause.8.13.3."
+          "owner_id": "clause-8.13",
+          "notes": "Semantic group: m16.clause.8.13."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-202-l131-37",
@@ -254940,8 +255006,8 @@
             "line": 104,
             "end_line": 109
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.14",
+          "notes": "Semantic group: m16.clause.8.14."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-203-l113-31",
@@ -254953,8 +255019,8 @@
             "line": 113,
             "end_line": 118
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.14",
+          "notes": "Semantic group: m16.clause.8.14."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-203-l47-12",
@@ -254966,8 +255032,8 @@
             "line": 47,
             "end_line": 55
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.13.4",
+          "notes": "Semantic group: m16.clause.8.13.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-203-l68-19",
@@ -254979,8 +255045,8 @@
             "line": 68,
             "end_line": 70
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.13.4",
+          "notes": "Semantic group: m16.clause.8.13.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-203-l92-24",
@@ -254992,8 +255058,8 @@
             "line": 92,
             "end_line": 94
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.14",
+          "notes": "Semantic group: m16.clause.8.14."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-203-l95-25",
@@ -255005,8 +255071,8 @@
             "line": 95,
             "end_line": 100
           },
-          "owner_id": "clause-8.14.3",
-          "notes": "Semantic group: m16.clause.8.14.3."
+          "owner_id": "clause-8.14",
+          "notes": "Semantic group: m16.clause.8.14."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-204-l113-31",
@@ -255031,8 +255097,8 @@
             "line": 38,
             "end_line": 46
           },
-          "owner_id": "clause-8.15.3",
-          "notes": "Semantic group: m16.clause.8.15.3."
+          "owner_id": "clause-8.14.4",
+          "notes": "Semantic group: m16.clause.8.14.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-204-l74-21",
@@ -255044,8 +255110,8 @@
             "line": 74,
             "end_line": 79
           },
-          "owner_id": "clause-8.15.3",
-          "notes": "Semantic group: m16.clause.8.15.3."
+          "owner_id": "clause-8.14.4",
+          "notes": "Semantic group: m16.clause.8.14.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-204-l86-25",
@@ -255057,8 +255123,8 @@
             "line": 86,
             "end_line": 91
           },
-          "owner_id": "clause-8.15.3",
-          "notes": "Semantic group: m16.clause.8.15.3."
+          "owner_id": "clause-8.14.4",
+          "notes": "Semantic group: m16.clause.8.14.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-205-l73-17",
@@ -255096,8 +255162,8 @@
             "line": 26,
             "end_line": 28
           },
-          "owner_id": "clause-8.18.1",
-          "notes": "Semantic group: m16.clause.8.18.1."
+          "owner_id": "clause-8.17",
+          "notes": "Semantic group: m16.clause.8.17."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-206-l29-4",
@@ -255109,8 +255175,8 @@
             "line": 29,
             "end_line": 31
           },
-          "owner_id": "clause-8.18.1",
-          "notes": "Semantic group: m16.clause.8.18.1."
+          "owner_id": "clause-8.17",
+          "notes": "Semantic group: m16.clause.8.17."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-206-l32-5",
@@ -255122,8 +255188,8 @@
             "line": 32,
             "end_line": 37
           },
-          "owner_id": "clause-8.18.1",
-          "notes": "Semantic group: m16.clause.8.18.1."
+          "owner_id": "clause-8.17",
+          "notes": "Semantic group: m16.clause.8.17."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-207-l109-27",
@@ -255135,8 +255201,8 @@
             "line": 109,
             "end_line": 111
           },
-          "owner_id": "clause-8.19.3",
-          "notes": "Semantic group: m16.clause.8.19.3."
+          "owner_id": "clause-8.19",
+          "notes": "Semantic group: m16.clause.8.19."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-207-l112-28",
@@ -255148,8 +255214,8 @@
             "line": 112,
             "end_line": 114
           },
-          "owner_id": "clause-8.19.3",
-          "notes": "Semantic group: m16.clause.8.19.3."
+          "owner_id": "clause-8.19",
+          "notes": "Semantic group: m16.clause.8.19."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-207-l115-29",
@@ -255161,8 +255227,8 @@
             "line": 115,
             "end_line": 120
           },
-          "owner_id": "clause-8.19.3",
-          "notes": "Semantic group: m16.clause.8.19.3."
+          "owner_id": "clause-8.19",
+          "notes": "Semantic group: m16.clause.8.19."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-208-l162-43",
@@ -255418,8 +255484,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-213.tex",
-            "line": 76,
-            "end_line": 78
+            "line": 73,
+            "end_line": 81
           },
           "owner_id": "clause-8.25.3",
           "notes": "Semantic group: m16.clause.8.25.3."
@@ -255432,7 +255498,7 @@
           "source": {
             "path": "content/clauses/08-time-management-page-213.tex",
             "line": 79,
-            "end_line": 87
+            "end_line": 84
           },
           "owner_id": "clause-8.25.3",
           "notes": "Semantic group: m16.clause.8.25.3."
@@ -255444,8 +255510,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-213.tex",
-            "line": 88,
-            "end_line": 93
+            "line": 85,
+            "end_line": 92
           },
           "owner_id": "clause-8.25.3",
           "notes": "Semantic group: m16.clause.8.25.3."
@@ -255457,7 +255523,7 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-213.tex",
-            "line": 94,
+            "line": 91,
             "end_line": 102
           },
           "owner_id": "clause-8.25.3",
@@ -255499,8 +255565,8 @@
             "line": 102,
             "end_line": 107
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l111-34",
@@ -255512,8 +255578,8 @@
             "line": 111,
             "end_line": 122
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l126-39",
@@ -255525,8 +255591,8 @@
             "line": 126,
             "end_line": 128
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l129-40",
@@ -255538,8 +255604,8 @@
             "line": 129,
             "end_line": 134
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l135-42",
@@ -255551,8 +255617,8 @@
             "line": 135,
             "end_line": 143
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l144-45",
@@ -255564,8 +255630,8 @@
             "line": 144,
             "end_line": 149
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l153-48",
@@ -255577,8 +255643,8 @@
             "line": 153,
             "end_line": 161
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l180-57",
@@ -255590,8 +255656,8 @@
             "line": 180,
             "end_line": 182
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l48-13",
@@ -255603,8 +255669,8 @@
             "line": 48,
             "end_line": 50
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l54-15",
@@ -255616,8 +255682,8 @@
             "line": 54,
             "end_line": 62
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l66-19",
@@ -255627,10 +255693,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
             "line": 66,
-            "end_line": 68
+            "end_line": 71
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l69-20",
@@ -255640,10 +255706,10 @@
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
             "line": 69,
-            "end_line": 71
+            "end_line": 74
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l72-21",
@@ -255655,8 +255721,8 @@
             "line": 72,
             "end_line": 77
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l78-23",
@@ -255665,11 +255731,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
-            "line": 78,
+            "line": 75,
             "end_line": 80
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l84-25",
@@ -255681,8 +255747,8 @@
             "line": 84,
             "end_line": 86
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l87-26",
@@ -255691,11 +255757,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
-            "line": 87,
+            "line": 84,
             "end_line": 89
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l90-27",
@@ -255704,11 +255770,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
-            "line": 90,
+            "line": 89,
             "end_line": 92
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-216-l93-28",
@@ -255717,11 +255783,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/08-time-management-page-216.tex",
-            "line": 93,
+            "line": 90,
             "end_line": 98
           },
-          "owner_id": "clause-9",
-          "notes": "Semantic group: m16.clause.9."
+          "owner_id": "clause-9.1.1",
+          "notes": "Semantic group: m16.clause.9.1.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-08-time-management-page-217-l101-32",
@@ -256029,11 +256095,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
-            "line": 104,
+            "line": 95,
             "end_line": 109
           },
-          "owner_id": "clause-9.1.3.2",
-          "notes": "Semantic group: m16.clause.9.1.3.2."
+          "owner_id": "clause-9.1.3.1",
+          "notes": "Semantic group: m16.clause.9.1.3.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l11-3",
@@ -256173,10 +256239,10 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
             "line": 92,
-            "end_line": 103
+            "end_line": 98
           },
-          "owner_id": "clause-9.1.3.2",
-          "notes": "Semantic group: m16.clause.9.1.3.2."
+          "owner_id": "clause-9.1.3.1",
+          "notes": "Semantic group: m16.clause.9.1.3.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l107-35",
@@ -256188,8 +256254,8 @@
             "line": 107,
             "end_line": 112
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l11-3",
@@ -256201,8 +256267,8 @@
             "line": 11,
             "end_line": 13
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l113-37",
@@ -256214,8 +256280,8 @@
             "line": 113,
             "end_line": 118
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l122-39",
@@ -256253,8 +256319,8 @@
             "line": 14,
             "end_line": 16
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l140-45",
@@ -256264,7 +256330,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-220.tex",
             "line": 140,
-            "end_line": 142
+            "end_line": 145
           },
           "owner_id": "clause-9.1.3.3",
           "notes": "Semantic group: m16.clause.9.1.3.3."
@@ -256277,7 +256343,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-220.tex",
             "line": 143,
-            "end_line": 148
+            "end_line": 149
           },
           "owner_id": "clause-9.1.3.3",
           "notes": "Semantic group: m16.clause.9.1.3.3."
@@ -256318,8 +256384,8 @@
             "line": 17,
             "end_line": 25
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l26-8",
@@ -256331,8 +256397,8 @@
             "line": 26,
             "end_line": 31
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l35-11",
@@ -256344,8 +256410,8 @@
             "line": 35,
             "end_line": 40
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l41-13",
@@ -256357,8 +256423,8 @@
             "line": 41,
             "end_line": 46
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l50-16",
@@ -256370,8 +256436,8 @@
             "line": 50,
             "end_line": 55
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l56-18",
@@ -256383,8 +256449,8 @@
             "line": 56,
             "end_line": 61
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l65-21",
@@ -256396,8 +256462,8 @@
             "line": 65,
             "end_line": 76
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l77-25",
@@ -256409,8 +256475,8 @@
             "line": 77,
             "end_line": 85
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l8-2",
@@ -256422,8 +256488,8 @@
             "line": 8,
             "end_line": 10
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l86-28",
@@ -256435,8 +256501,8 @@
             "line": 86,
             "end_line": 88
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l92-30",
@@ -256448,8 +256514,8 @@
             "line": 92,
             "end_line": 94
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l95-31",
@@ -256461,8 +256527,8 @@
             "line": 95,
             "end_line": 97
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l98-32",
@@ -256474,8 +256540,8 @@
             "line": 98,
             "end_line": 106
           },
-          "owner_id": "clause-9.1.3.3",
-          "notes": "Semantic group: m16.clause.9.1.3.3."
+          "owner_id": "clause-9.1.3.2",
+          "notes": "Semantic group: m16.clause.9.1.3.2."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l14-4",
@@ -256875,7 +256941,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-224.tex",
             "line": 137,
-            "end_line": 142
+            "end_line": 181
           },
           "owner_id": "clause-9.1.6",
           "notes": "Semantic group: m16.clause.9.1.6."
@@ -256953,7 +257019,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-224.tex",
             "line": 89,
-            "end_line": 91
+            "end_line": 94
           },
           "owner_id": "clause-9.1.6",
           "notes": "Semantic group: m16.clause.9.1.6."
@@ -257020,8 +257086,8 @@
             "line": 18,
             "end_line": 26
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l27-7",
@@ -257033,8 +257099,8 @@
             "line": 27,
             "end_line": 35
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l36-10",
@@ -257046,8 +257112,8 @@
             "line": 36,
             "end_line": 41
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l45-13",
@@ -257059,8 +257125,8 @@
             "line": 45,
             "end_line": 50
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l51-15",
@@ -257072,8 +257138,8 @@
             "line": 51,
             "end_line": 56
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l57-17",
@@ -257085,8 +257151,8 @@
             "line": 57,
             "end_line": 59
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l63-19",
@@ -257098,8 +257164,8 @@
             "line": 63,
             "end_line": 65
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l66-20",
@@ -257111,8 +257177,8 @@
             "line": 66,
             "end_line": 68
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l69-21",
@@ -257124,8 +257190,8 @@
             "line": 69,
             "end_line": 74
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l9-2",
@@ -257137,8 +257203,8 @@
             "line": 9,
             "end_line": 14
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.6",
+          "notes": "Semantic group: m16.clause.9.1.6."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l96-30",
@@ -257150,8 +257216,8 @@
             "line": 96,
             "end_line": 104
           },
-          "owner_id": "clause-9.1.8",
-          "notes": "Semantic group: m16.clause.9.1.8."
+          "owner_id": "clause-9.1.7",
+          "notes": "Semantic group: m16.clause.9.1.7."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-226-l15-2",
@@ -257303,11 +257369,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-229.tex",
-            "line": 146,
+            "line": 143,
             "end_line": 151
           },
-          "owner_id": "clause-9.5.4",
-          "notes": "Semantic group: m16.clause.9.5.4."
+          "owner_id": "clause-9.5.3",
+          "notes": "Semantic group: m16.clause.9.5.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l17-4",
@@ -257316,11 +257382,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-229.tex",
-            "line": 17,
+            "line": 14,
             "end_line": 19
           },
-          "owner_id": "clause-9.5.4",
-          "notes": "Semantic group: m16.clause.9.5.4."
+          "owner_id": "clause-9.5",
+          "notes": "Semantic group: m16.clause.9.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l20-5",
@@ -257329,11 +257395,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-229.tex",
-            "line": 20,
+            "line": 17,
             "end_line": 22
           },
-          "owner_id": "clause-9.5.4",
-          "notes": "Semantic group: m16.clause.9.5.4."
+          "owner_id": "clause-9.5",
+          "notes": "Semantic group: m16.clause.9.5."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l23-6",
@@ -257498,11 +257564,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-231.tex",
-            "line": 100,
+            "line": 97,
             "end_line": 105
           },
-          "owner_id": "clause-9.6.6",
-          "notes": "Semantic group: m16.clause.9.6.6."
+          "owner_id": "clause-9.6.3",
+          "notes": "Semantic group: m16.clause.9.6.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-232-l121-34",
@@ -257629,7 +257695,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-233.tex",
             "line": 30,
-            "end_line": 32
+            "end_line": 38
           },
           "owner_id": "clause-9.8",
           "notes": "Semantic group: m16.clause.9.8."
@@ -257641,8 +257707,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-233.tex",
-            "line": 33,
-            "end_line": 35
+            "line": 30,
+            "end_line": 38
           },
           "owner_id": "clause-9.8",
           "notes": "Semantic group: m16.clause.9.8."
@@ -257655,7 +257721,7 @@
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-233.tex",
             "line": 36,
-            "end_line": 41
+            "end_line": 44
           },
           "owner_id": "clause-9.8",
           "notes": "Semantic group: m16.clause.9.8."
@@ -258018,11 +258084,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/09-data-distribution-management-page-236.tex",
-            "line": 32,
+            "line": 29,
             "end_line": 37
           },
-          "owner_id": "clause-9.10",
-          "notes": "Semantic group: m16.clause.9.10."
+          "owner_id": "clause-9.9.3",
+          "notes": "Semantic group: m16.clause.9.9.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-09-data-distribution-management-page-237-l103-33",
@@ -259815,8 +259881,8 @@
             "line": 20,
             "end_line": 34
           },
-          "owner_id": "clause-10.60.6",
-          "notes": "Semantic group: m16.clause.10.60.6."
+          "owner_id": "clause-10.59.4",
+          "notes": "Semantic group: m16.clause.10.59.4."
         },
         {
           "record_id": "requirement-candidate-content-clauses-10-support-services-page-287-l102-33",
@@ -260088,8 +260154,8 @@
             "line": 9,
             "end_line": 23
           },
-          "owner_id": "clause-11.3",
-          "notes": "Semantic group: m16.clause.11.3."
+          "owner_id": "clause-11.2.1",
+          "notes": "Semantic group: m16.clause.11.2.1."
         },
         {
           "record_id": "requirement-candidate-content-clauses-10-support-services-page-288-l96-31",
@@ -260332,11 +260398,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/11-management-object-model-page-290.tex",
-            "line": 12,
+            "line": 9,
             "end_line": 14
           },
-          "owner_id": "clause-11.4.1",
-          "notes": "Semantic group: m16.clause.11.4.1."
+          "owner_id": "clause-11.3",
+          "notes": "Semantic group: m16.clause.11.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-11-management-object-model-page-290-l120-39",
@@ -260515,10 +260581,10 @@
           "source": {
             "path": "content/clauses/11-management-object-model-page-290.tex",
             "line": 75,
-            "end_line": 77
+            "end_line": 79
           },
-          "owner_id": "clause-11.4.1",
-          "notes": "Semantic group: m16.clause.11.4.1."
+          "owner_id": "clause-11.3",
+          "notes": "Semantic group: m16.clause.11.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-11-management-object-model-page-290-l78-25",
@@ -260527,11 +260593,11 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/11-management-object-model-page-290.tex",
-            "line": 78,
+            "line": 75,
             "end_line": 83
           },
-          "owner_id": "clause-11.4.1",
-          "notes": "Semantic group: m16.clause.11.4.1."
+          "owner_id": "clause-11.3",
+          "notes": "Semantic group: m16.clause.11.3."
         },
         {
           "record_id": "requirement-candidate-content-clauses-11-management-object-model-page-290-l96-31",
@@ -261009,7 +261075,7 @@
           "source": {
             "path": "content/clauses/11-management-object-model-page-294.tex",
             "line": 14,
-            "end_line": 16
+            "end_line": 19
           },
           "owner_id": "clause-11.5.2.1",
           "notes": "Semantic group: m16.clause.11.5.2.1."
@@ -261022,7 +261088,7 @@
           "source": {
             "path": "content/clauses/11-management-object-model-page-294.tex",
             "line": 17,
-            "end_line": 19
+            "end_line": 20
           },
           "owner_id": "clause-11.5.2.1",
           "notes": "Semantic group: m16.clause.11.5.2.1."
@@ -261034,8 +261100,8 @@
           "migration": "M10",
           "source": {
             "path": "content/clauses/11-management-object-model-page-294.tex",
-            "line": 20,
-            "end_line": 25
+            "line": 19,
+            "end_line": 30
           },
           "owner_id": "clause-11.5.2.1",
           "notes": "Semantic group: m16.clause.11.5.2.1."
@@ -267500,6 +267566,71 @@
           },
           "owner_id": "clause-11.5.1",
           "notes": "Semantic group: m16.table-5."
+        },
+        {
+          "record_id": "requirement-service-flow-get-dimension-handle-name-not-found",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/10-support-services-page-260.tex",
+            "line": 38,
+            "end_line": 40
+          },
+          "owner_id": "clause-10.23.5",
+          "notes": "Semantic group: m17.service-flow.10.23.5."
+        },
+        {
+          "record_id": "requirement-service-flow-nmra-advancing-exception",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 23,
+            "end_line": 23
+          },
+          "owner_id": "clause-8.11.5",
+          "notes": "Semantic group: m17.service-flow.8.11.5."
+        },
+        {
+          "record_id": "requirement-service-flow-nmra-current-time-precondition",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-199.tex",
+            "line": 145,
+            "end_line": 147
+          },
+          "owner_id": "clause-8.11.3",
+          "notes": "Semantic group: m17.service-flow.8.11.3."
+        },
+        {
+          "record_id": "requirement-service-flow-nmra-not-advancing-precondition",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 11,
+            "end_line": 11
+          },
+          "owner_id": "clause-8.11.3",
+          "notes": "Semantic group: m17.service-flow.8.11.3."
+        },
+        {
+          "record_id": "requirement-service-flow-nmra-time-passed-exception",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M10",
+          "source": {
+            "path": "content/clauses/08-time-management-page-200.tex",
+            "line": 21,
+            "end_line": 21
+          },
+          "owner_id": "clause-8.11.5",
+          "notes": "Semantic group: m17.service-flow.8.11.5."
         },
         {
           "record_id": "requirement-source-refinement-available-attribute-declaration",
@@ -542507,8 +542638,8 @@
             "line": 34,
             "end_line": 34
           },
-          "owner_id": "clause-4",
-          "notes": "Semantic group: m17.clause-4."
+          "owner_id": "clause-4.8.1",
+          "notes": "Semantic group: m17.clause-4.8.1."
         },
         {
           "record_id": "requirement-candidate-sections-semantic-clause-4b-page-058-l42-9",
@@ -585028,22 +585159,32 @@
     "clause": 3340,
     "content-block": 630,
     "content-element": 1947,
-    "cross-reference": 12246,
+    "cross-reference": 12251,
     "definition": 822,
     "figure": 55,
     "implementation": 495,
     "note": 197,
     "reference": 4,
-    "requirement": 4394,
+    "requirement": 4399,
     "requirement-link": 164,
     "state": 467,
     "state-machine": 41,
     "status:mapped": 1004,
-    "status:reviewed": 44149,
+    "status:non-normative": 1,
+    "status:reviewed": 44158,
     "table": 370,
     "table-cell": 19147,
     "table-family": 315,
     "transition": 509
   },
-  "migration_queue": []
+  "migration_queue": [
+    {
+      "document": "hla-1516.1-2025",
+      "migration": "M10",
+      "kind": "requirement",
+      "record_id": "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
+      "status": "non-normative",
+      "notes": "Table 2 introduction is explanatory layout prose, not a standalone obligation."
+    }
+  ]
 }

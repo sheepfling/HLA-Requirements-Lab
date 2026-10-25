@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sys
 
+
 def main() -> None:
     request = json.load(sys.stdin)
     bindings = []

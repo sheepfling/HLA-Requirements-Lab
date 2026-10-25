@@ -13,9 +13,11 @@ import argparse
 import json
 import sys
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Set as AbstractSet
 from dataclasses import dataclass
 from pathlib import Path
+from types import BuiltinFunctionType, FunctionType
 from typing import Literal
 from xml.etree import ElementTree
 
@@ -33,7 +35,7 @@ _EvidenceStatus = Literal["planned", "passed", "failed", "blocked"]
 _BindingKey = tuple[str, str, str]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class JunitCaseResult:
     """One test case observed in a JUnit-compatible XML artifact."""
 
@@ -46,7 +48,7 @@ def load_catalog(path: Path) -> ComplianceTestCatalog:
     return ComplianceTestCatalog.model_validate_json(path.read_text(encoding="utf-8"))
 
 
-def _local_name(tag: object) -> str:
+def _local_name(tag: str | FunctionType | BuiltinFunctionType) -> str:
     if not isinstance(tag, str):
         return ""
     return tag.rsplit("}", maxsplit=1)[-1].lower()
@@ -118,40 +120,55 @@ def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -
     }
     grouped: dict[_BindingKey, list[ComplianceTestCase]] = defaultdict(list)
     for test in catalog.tests:
-        key = _test_key(test)
-        binding = expected.get(key)
-        if binding is None:
-            raise ValueError(
-                f"catalog test {test.id} references binding outside the request: {':'.join(key)}"
-            )
-        if binding.crosswalk_status != "matched" or not binding.selected_api_surface_ids:
-            raise ValueError(
-                f"catalog test {test.id} needs a matched crosswalk with an exact API surface: "
-                f"{':'.join(key)}"
-            )
-        if test.language != binding.language:
-            raise ValueError(
-                f"catalog test {test.id} language {test.language} does not match expected "
-                f"language {binding.language}"
-            )
-        if set(test.api_surface_ids) != set(binding.selected_api_surface_ids):
-            raise ValueError(
-                f"catalog test {test.id} API surfaces must exactly match the selected "
-                f"crosswalk surfaces for {':'.join(key)}"
-            )
-        if test.requirement_ids:
-            missing = set(test.requirement_ids) - requirements_by_document.get(test.document_id, set())
-            if missing:
-                raise ValueError(
-                    f"catalog test {test.id} references missing requirements: {sorted(missing)}"
-                )
-            if set(test.requirement_ids) != set(binding.requirement_ids):
-                raise ValueError(
-                    f"catalog test {test.id} requirement IDs must exactly match the "
-                    f"implementation mapping requirements for {':'.join(key)}"
-                )
+        key = _validate_catalog_test(test, expected, requirements_by_document)
         grouped[key].append(test)
 
+    _validate_grouped_test_symbols(grouped)
+
+
+def _validate_catalog_test(
+    test: ComplianceTestCase,
+    expected: Mapping[_BindingKey, AdapterExpectedBinding],
+    requirements_by_document: Mapping[str, AbstractSet[str]],
+) -> _BindingKey:
+    key = _test_key(test)
+    binding = expected.get(key)
+    if binding is None:
+        raise ValueError(
+            f"catalog test {test.id} references binding outside the request: {':'.join(key)}"
+        )
+    if binding.crosswalk_status != "matched" or not binding.selected_api_surface_ids:
+        raise ValueError(
+            f"catalog test {test.id} needs a matched crosswalk with an exact API surface: "
+            f"{':'.join(key)}"
+        )
+    if test.language != binding.language:
+        raise ValueError(
+            f"catalog test {test.id} language {test.language} does not match expected "
+            f"language {binding.language}"
+        )
+    if set(test.api_surface_ids) != set(binding.selected_api_surface_ids):
+        raise ValueError(
+            f"catalog test {test.id} API surfaces must exactly match the selected "
+            f"crosswalk surfaces for {':'.join(key)}"
+        )
+    if test.requirement_ids:
+        missing = set(test.requirement_ids) - requirements_by_document.get(test.document_id, set())
+        if missing:
+            raise ValueError(
+                f"catalog test {test.id} references missing requirements: {sorted(missing)}"
+            )
+        if set(test.requirement_ids) != set(binding.requirement_ids):
+            raise ValueError(
+                f"catalog test {test.id} requirement IDs must exactly match the "
+                f"implementation mapping requirements for {':'.join(key)}"
+            )
+    return key
+
+
+def _validate_grouped_test_symbols(
+    grouped: Mapping[_BindingKey, Sequence[ComplianceTestCase]],
+) -> None:
     for key, tests in grouped.items():
         first = tests[0]
         for test in tests[1:]:
@@ -163,7 +180,7 @@ def _validate_catalog(request: AdapterRequest, catalog: ComplianceTestCatalog) -
 
 def _result_for(
     test: ComplianceTestCase,
-    results: dict[str, tuple[JunitCaseResult, ...]],
+    results: Mapping[str, tuple[JunitCaseResult, ...]],
 ) -> JunitCaseResult | None:
     matches = results.get(test.result_selector, ())
     if len(matches) > 1:
@@ -178,7 +195,7 @@ def _result_for(
 def response_from_catalog(
     request: AdapterRequest,
     catalog: ComplianceTestCatalog,
-    results: dict[str, tuple[JunitCaseResult, ...]],
+    results: Mapping[str, tuple[JunitCaseResult, ...]],
     *,
     adapter_id: str,
     repository: str,
@@ -238,10 +255,7 @@ def response_from_catalog(
                 symbol=first_test.symbol,
                 language=first_test.language,
                 status=binding_status,
-                requirement_ids=(
-                    first_test.requirement_ids
-                    or expected[key].requirement_ids
-                ),
+                requirement_ids=(first_test.requirement_ids or expected[key].requirement_ids),
                 api_surface_ids=first_test.api_surface_ids,
                 evidence_ids=tuple(item.id for item in evidence_records),
                 notes="Generated from RTI-owned JUnit results; evidence remains unreviewed.",

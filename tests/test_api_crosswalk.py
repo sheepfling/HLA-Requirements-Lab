@@ -5,13 +5,13 @@ from __future__ import annotations
 import json
 import unittest
 from collections import Counter
-from pathlib import Path
 
 from hla_lab.core.semantic_model import ApiCrosswalkFile
 from hla_lab.corpus.hla_api_crosswalk import hla_api_targets
 from hla_lab.corpus.hla_semantic import load_hla_document_model
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 class ApiCrosswalkTests(unittest.TestCase):

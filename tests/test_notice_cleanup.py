@@ -10,12 +10,14 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
+from types import MappingProxyType
 
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.generation.reflowable_renderer import _clean_content_text
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 TOPIC_ROOT = ROOT / "topics" / "ieee"
 DOCUMENTS = (
     "hla-1516-2010",
@@ -53,51 +55,53 @@ LEGACY_NOTICE_MARKERS = (
     "standard license",
 )
 
-OMITTED_SEMANTIC_BLOCKS = {
-    "hla-1516-2010": {
-        "content-frontmatter-01-external-cover-tex",
-        "content-frontmatter-03-title-page-tex",
-        "content-frontmatter-04-copyright-abstract-tex",
-        "content-frontmatter-05-ieee-notices-tex",
-        "content-frontmatter-07-updating-participants-tex",
-        "content-frontmatter-08-participants-ballot-tex",
-        "content-frontmatter-09-standards-board-tex",
-    },
-    "hla-1516.1-2010": {
-        "content-frontmatter-title-tex",
-        "content-frontmatter-publication-tex",
-        "content-frontmatter-standards-notice-tex",
-        "content-frontmatter-introduction-tex",
-        "content-frontmatter-participants-tex",
-    },
-    "hla-1516-2025": {
-        "content-front-matter-context-001",
-        "content-front-matter-context-002",
-        "content-front-matter-normative-001",
-        "content-front-matter-normative-002",
-        "content-front-matter-context-003",
-        "content-front-matter-context-004",
-    },
-    "hla-1516.1-2025": {
-        "content-15161-page-003",
-        "content-15161-page-004",
-        "content-15161-page-005",
-        "content-15161-page-006",
-        "content-15161-page-007",
-        "content-15161-page-008",
-    },
-    "hla-1516.2-2025": {
-        "content-15162-page-002",
-        "content-15162-page-003",
-        "content-15162-page-004",
-        "content-15162-page-005",
-        "content-15162-page-006",
-        "content-15162-page-007",
-        "content-15162-page-008",
-        "content-15162-page-009",
-        "content-15162-page-010",
-    },
-}
+OMITTED_SEMANTIC_BLOCKS = MappingProxyType(
+    {
+        "hla-1516-2010": {
+            "content-frontmatter-01-external-cover-tex",
+            "content-frontmatter-03-title-page-tex",
+            "content-frontmatter-04-copyright-abstract-tex",
+            "content-frontmatter-05-ieee-notices-tex",
+            "content-frontmatter-07-updating-participants-tex",
+            "content-frontmatter-08-participants-ballot-tex",
+            "content-frontmatter-09-standards-board-tex",
+        },
+        "hla-1516.1-2010": {
+            "content-frontmatter-title-tex",
+            "content-frontmatter-publication-tex",
+            "content-frontmatter-standards-notice-tex",
+            "content-frontmatter-introduction-tex",
+            "content-frontmatter-participants-tex",
+        },
+        "hla-1516-2025": {
+            "content-front-matter-context-001",
+            "content-front-matter-context-002",
+            "content-front-matter-normative-001",
+            "content-front-matter-normative-002",
+            "content-front-matter-context-003",
+            "content-front-matter-context-004",
+        },
+        "hla-1516.1-2025": {
+            "content-15161-page-003",
+            "content-15161-page-004",
+            "content-15161-page-005",
+            "content-15161-page-006",
+            "content-15161-page-007",
+            "content-15161-page-008",
+        },
+        "hla-1516.2-2025": {
+            "content-15162-page-002",
+            "content-15162-page-003",
+            "content-15162-page-004",
+            "content-15162-page-005",
+            "content-15162-page-006",
+            "content-15162-page-007",
+            "content-15162-page-008",
+            "content-15162-page-009",
+            "content-15162-page-010",
+        },
+    }
+)
 
 
 def _authored_files(document_root: Path):
@@ -137,7 +141,7 @@ class NoticeCleanupTests(unittest.TestCase):
             frontmatter = [
                 item.text
                 for item in (*model.content_blocks, *model.content_elements)
-                if item.source.path.replace("\\", "/").startswith("frontmatter/")
+                if PureWindowsPath(item.source.path).parts[0] == "frontmatter"
             ]
             self.assertTrue(all(not text.strip() for text in frontmatter), document)
 

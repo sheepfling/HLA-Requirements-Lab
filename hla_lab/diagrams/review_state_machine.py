@@ -9,7 +9,6 @@ import shutil
 import subprocess
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any
 
 from hla_lab.core.semantic_model import StateMachine
 from hla_lab.diagrams.export_state_machine import render_dot, render_mermaid
@@ -57,13 +56,13 @@ def _executable(path: str | Path) -> str:
 
 
 def _review_record(
-    machine: Mapping[str, Any],
+    machine: StateMachine,
     semantic_source: str,
     source_image: str,
     artifact_dir: Path,
     compile_note: str,
 ) -> str:
-    machine_id = machine["id"]
+    machine_id = machine.id
     return f"""# Review: `{machine_id}`
 
 ## Provenance
@@ -159,11 +158,11 @@ def main() -> None:
     args.artifacts.mkdir(parents=True, exist_ok=True)
     machine_tex = render(machine)
     (args.artifacts / "machine.tex").write_text(machine_tex, encoding="utf-8")
-    typed_machine = StateMachine.model_validate(machine)
+    typed_machine = machine
     (args.artifacts / "machine.dot").write_text(render_dot(typed_machine), encoding="utf-8")
     (args.artifacts / "machine.mmd").write_text(render_mermaid(typed_machine), encoding="utf-8")
     (args.artifacts / "review.tex").write_text(
-        _wrapper(machine_tex, machine["title"]), encoding="utf-8"
+        _wrapper(machine_tex, machine.title), encoding="utf-8"
     )
 
     compiled = False
@@ -243,7 +242,7 @@ def main() -> None:
     if args.review_record.exists():
         record = _merge_review_record(record, args.review_record.read_text(encoding="utf-8"))
     args.review_record.write_text(record, encoding="utf-8")
-    print(f"machine: {machine['id']}")
+    print(f"machine: {machine.id}")
     print(f"artifacts: {args.artifacts}")
     print(f"compiled: {'yes' if compiled else 'no'}")
     print(f"review record: {args.review_record}")

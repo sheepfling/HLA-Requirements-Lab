@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
+from types import MappingProxyType
 
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 PRODUCTS = (
     "hla-1516-2010",
     "hla-1516-2025",
@@ -27,17 +28,21 @@ STALE_PUBLICATION_PHRASES = (
     "All rights reserved",
 )
 
-OPENING_BLOCKS = {
-    "hla-1516-2025": "content-1-normative-001",
-    "hla-1516.1-2025": "content-15161-page-016",
-    "hla-1516.2-2025": "content-15162-page-013",
-}
+OPENING_BLOCKS = MappingProxyType(
+    {
+        "hla-1516-2025": "content-1-normative-001",
+        "hla-1516.1-2025": "content-15161-page-016",
+        "hla-1516.2-2025": "content-15162-page-013",
+    }
+)
 
-OPENING_SOURCES = {
-    "hla-1516-2010": "clauses/01-overview.tex",
-    "hla-1516.1-2010": "clauses/01-overview.tex",
-    "hla-1516.2-2010": "clauses/clause01_overview.tex",
-}
+OPENING_SOURCES = MappingProxyType(
+    {
+        "hla-1516-2010": "clauses/01-overview.tex",
+        "hla-1516.1-2010": "clauses/01-overview.tex",
+        "hla-1516.2-2010": "clauses/clause01_overview.tex",
+    }
+)
 
 
 class StyleProfileContractTests(unittest.TestCase):
@@ -45,21 +50,21 @@ class StyleProfileContractTests(unittest.TestCase):
         readme = (ROOT / "topics" / "ieee" / "requirements-lab" / "README.md").read_text(
             encoding="utf-8"
         )
-        profile = (
-            ROOT / "topics" / "ieee" / "requirements-lab" / "STYLE-PROFILE.md"
-        ).read_text(encoding="utf-8")
+        profile = (ROOT / "topics" / "ieee" / "requirements-lab" / "STYLE-PROFILE.md").read_text(
+            encoding="utf-8"
+        )
 
         self.assertIn("1516.2-2025 source compilation is the canonical style", readme)
         self.assertIn("style/rl-publication.sty", readme)
         self.assertIn("style/rl-fixed-page.sty", readme)
         self.assertIn("topics/ieee/hla-1516.2-2025/", profile)
-        self.assertIn("The six products are deliberately not forced into one body-layout class", profile)
+        self.assertIn(
+            "The six products are deliberately not forced into one body-layout class", profile
+        )
 
     def test_all_six_products_expose_the_shared_profile_hook(self) -> None:
         for product in PRODUCTS:
-            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(
-                encoding="utf-8"
-            )
+            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(encoding="utf-8")
             if product != "hla-1516.2-2025":
                 self.assertIn(
                     "\\input{../requirements-lab/style/rl-publication.sty}",
@@ -74,9 +79,9 @@ class StyleProfileContractTests(unittest.TestCase):
         publication = (
             ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-publication.sty"
         ).read_text(encoding="utf-8")
-        omt_base = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "ieee-hla-base.sty"
-        ).read_text(encoding="utf-8")
+        omt_base = (ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "ieee-hla-base.sty").read_text(
+            encoding="utf-8"
+        )
 
         self.assertIn("\\newcommand{\\RLDefineFixedPageStyle}", fixed)
         self.assertIn("\\newcommand{\\RLFixedFurniture}", fixed)
@@ -106,21 +111,14 @@ class StyleProfileContractTests(unittest.TestCase):
             "hla-1516.2-2010": "ieee1516style.sty",
         }
         for product, filename in adapter_styles.items():
-            body = (ROOT / "topics" / "ieee" / product / filename).read_text(
-                encoding="utf-8"
-            )
+            body = (ROOT / "topics" / "ieee" / product / filename).read_text(encoding="utf-8")
             self.assertIn("Noto Serif", body, product)
             self.assertIn("Inter", body, product)
             self.assertNotIn(r"\setmainfont{Tinos}", body, product)
             self.assertNotIn(r"\setsansfont{Arimo}", body, product)
 
         publication = (
-            ROOT
-            / "topics"
-            / "ieee"
-            / "requirements-lab"
-            / "style"
-            / "rl-publication.sty"
+            ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-publication.sty"
         ).read_text(encoding="utf-8")
         self.assertIn(r"\input{../requirements-lab/style/rl-type.sty}", publication)
         self.assertIn(r"\renewcommand{\HLAFacSerif}{\RLSerif}", publication)
@@ -138,18 +136,23 @@ class StyleProfileContractTests(unittest.TestCase):
             self.assertNotIn(r"\fontfamily{qhv}", body, str(path.relative_to(root)))
 
     def test_direct_header_adapters_delegate_to_the_shared_header(self) -> None:
-        framework_2025 = (
-            ROOT / "topics" / "ieee" / "hla-1516-2025" / "main.tex"
-        ).read_text(encoding="utf-8")
-        omt_2010 = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "main.tex"
-        ).read_text(encoding="utf-8")
+        framework_2025 = (ROOT / "topics" / "ieee" / "hla-1516-2025" / "main.tex").read_text(
+            encoding="utf-8"
+        )
+        omt_2010 = (ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "main.tex").read_text(
+            encoding="utf-8"
+        )
         fixed = (
             ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-fixed-page.sty"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("\\renewcommand{\\HLASemanticHeader}{\\RLFixedHeaderFurniture}", framework_2025)
-        self.assertIn("\\renewcommand{\\HLASemanticFooter}[2][standard]{\\RLFixedFooterFurniture}", framework_2025)
+        self.assertIn(
+            "\\renewcommand{\\HLASemanticHeader}{\\RLFixedHeaderFurniture}", framework_2025
+        )
+        self.assertIn(
+            "\\renewcommand{\\HLASemanticFooter}[2][standard]{\\RLFixedFooterFurniture}",
+            framework_2025,
+        )
         self.assertIn("\\renewcommand{\\standardheaders}{\\pagestyle{RLHLA}}", omt_2010)
         self.assertIn("\\newcommand{\\RLFixedHeaderFurniture}", fixed)
 
@@ -160,9 +163,7 @@ class StyleProfileContractTests(unittest.TestCase):
             "hla-1516.2-2010": "21pt",
         }
         for product, height in expected.items():
-            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(
-                encoding="utf-8"
-            )
+            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(encoding="utf-8")
             self.assertIn(f"\\setlength{{\\headheight}}{{{height}}}", main, product)
 
     def test_derived_products_reserve_shared_header_height(self) -> None:
@@ -172,9 +173,7 @@ class StyleProfileContractTests(unittest.TestCase):
             "hla-semantic-derivative-2010",
             "hla-semantic-derivative-2025",
         ):
-            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(
-                encoding="utf-8"
-            )
+            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(encoding="utf-8")
             self.assertIn(r"\setlength{\headheight}{19pt}", main, product)
 
     def test_derived_products_use_shared_reflowable_typography(self) -> None:
@@ -190,9 +189,7 @@ class StyleProfileContractTests(unittest.TestCase):
             "hla-semantic-derivative-2010",
             "hla-semantic-derivative-2025",
         ):
-            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(
-                encoding="utf-8"
-            )
+            main = (ROOT / "topics" / "ieee" / product / "main.tex").read_text(encoding="utf-8")
             self.assertIn(r"\input{../requirements-lab/style/rl-derived.sty}", main, product)
             self.assertIn(r"\RLConfigureDerivativeTypography", main, product)
 
@@ -201,9 +198,9 @@ class StyleProfileContractTests(unittest.TestCase):
             ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-brand.sty"
         ).read_text(encoding="utf-8")
         self.assertIn(r"\providecommand{\RLLandscapeHeaderRight}{\RLPublicationTitle}", brand)
-        page = (
-            ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-page.sty"
-        ).read_text(encoding="utf-8")
+        page = (ROOT / "topics" / "ieee" / "requirements-lab" / "style" / "rl-page.sty").read_text(
+            encoding="utf-8"
+        )
         self.assertIn(r"\renewcommand{\RLHeaderRight}{\RLPublicationTitle}", page)
 
     def test_landscape_statecharts_have_one_generated_caption(self) -> None:
@@ -243,12 +240,7 @@ class StyleProfileContractTests(unittest.TestCase):
 
         opener = json.loads(
             (
-                ROOT
-                / "topics"
-                / "ieee"
-                / "hla-1516-2025"
-                / "semantic"
-                / "content-blocks.json"
+                ROOT / "topics" / "ieee" / "hla-1516-2025" / "semantic" / "content-blocks.json"
             ).read_text(encoding="utf-8")
         )
         body = next(
@@ -272,19 +264,17 @@ class StyleProfileContractTests(unittest.TestCase):
             self.assertNotIn("IEEE Standard for", body, product)
 
         for product, relative_path in OPENING_SOURCES.items():
-            body = (ROOT / "topics" / "ieee" / product / relative_path).read_text(
-                encoding="utf-8"
-            )
+            body = (ROOT / "topics" / "ieee" / product / relative_path).read_text(encoding="utf-8")
             self.assertIn("\\RLDocumentOpeningTitle", body, product)
             self.assertNotIn("IEEE Standard for", body, product)
 
     def test_omt_glyph_category_is_live_vector_artwork_in_both_editions(self) -> None:
-        omt_2010 = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty"
-        ).read_text(encoding="utf-8")
-        omt_2025 = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "ieee-hla-base.sty"
-        ).read_text(encoding="utf-8")
+        omt_2010 = (ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty").read_text(
+            encoding="utf-8"
+        )
+        omt_2025 = (ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "ieee-hla-base.sty").read_text(
+            encoding="utf-8"
+        )
 
         self.assertIn(r"\newcommand{\omtcategoryglyph}", omt_2010)
         self.assertIn(r"\begin{tikzpicture}", omt_2010)
@@ -296,12 +286,12 @@ class StyleProfileContractTests(unittest.TestCase):
         self.assertIn(r"\fill[RLOrange", omt_2025)
 
     def test_2010_omt_tables_use_the_shared_quiet_rule_surface(self) -> None:
-        style = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty"
-        ).read_text(encoding="utf-8")
-        main = (
-            ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "main.tex"
-        ).read_text(encoding="utf-8")
+        style = (ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "ieee1516style.sty").read_text(
+            encoding="utf-8"
+        )
+        main = (ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "main.tex").read_text(
+            encoding="utf-8"
+        )
 
         self.assertIn(r"\colorbox{RLTableBand}", style)
         self.assertIn(r"draw=RLBlue", style)
@@ -312,16 +302,13 @@ class StyleProfileContractTests(unittest.TestCase):
     def test_2025_omt_example_caption_is_explicitly_semantic(self) -> None:
         payload = json.loads(
             (
-                ROOT
-                / "topics"
-                / "ieee"
-                / "hla-1516.2-2025"
-                / "semantic"
-                / "table-families.json"
+                ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "table-families.json"
             ).read_text(encoding="utf-8")
         )
         family = next(
-            item for item in payload["table_families"] if item["id"] == "omt-object-model-identification"
+            item
+            for item in payload["table_families"]
+            if item["id"] == "omt-object-model-identification"
         )
         self.assertEqual(
             family["table_captions"]["m4.p038.t01"],

@@ -14,6 +14,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from pydantic import JsonValue
+
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import _latex_text, load_document_model
 from hla_lab.paths import RESOURCES, DocumentResources
@@ -56,7 +58,7 @@ def migrate(root: Path) -> tuple[Path, Path]:
     model = load_document_model(root, HLA_SOURCE)
     pages = _page_files(root)
     counts: Counter[str] = Counter()
-    records: list[dict[str, object]] = []
+    records: list[dict[str, JsonValue]] = []
 
     for sequence, path in enumerate(pages, start=1):
         raw = path.read_text(encoding="utf-8")
@@ -95,7 +97,7 @@ def migrate(root: Path) -> tuple[Path, Path]:
         encoding="utf-8",
     )
 
-    outline: list[object] = [item.model_dump(mode="json") for item in model.ordered_clauses()]
+    outline: list[JsonValue] = [item.model_dump(mode="json") for item in model.ordered_clauses()]
     for annex in model.annexes:
         outline.append(
             [

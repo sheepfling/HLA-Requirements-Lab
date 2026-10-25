@@ -12,7 +12,7 @@ from pathlib import Path
 from hla_lab.paths import DocumentResources
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class BuildConfig:
     """Document-specific settings for the common builder."""
 
@@ -24,6 +24,7 @@ class BuildConfig:
     asset_generator: Callable[[], object] | None = None
 
 
+# TODO: THIS should have been a reusable utility
 def _run(command: Sequence[str], *, cwd: Path) -> None:
     subprocess.run(command, cwd=cwd, check=True)
 

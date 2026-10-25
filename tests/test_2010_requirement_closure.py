@@ -7,15 +7,15 @@ import re
 import subprocess
 import sys
 import unittest
-from pathlib import Path
 from unittest.mock import patch
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.traceability.requirement_closure import build_report
+from tests.support import TEST_REPO_ROOT
 from tools.migrations.complete_hla_2010_requirements import _promote
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 class RequirementClosure2010Tests(unittest.TestCase):
@@ -80,9 +80,7 @@ class RequirementClosure2010Tests(unittest.TestCase):
                 )
                 requirement_ids = {item.id for item in model.requirements}
                 block_ids = {
-                    record_id
-                    for block in model.content_blocks
-                    for record_id in block.record_ids
+                    record_id for block in model.content_blocks for record_id in block.record_ids
                 }
                 element_ids = {
                     record_id

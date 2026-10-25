@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import argparse
 import re
-from pathlib import Path
-from typing import Literal
+from pathlib import Path, PureWindowsPath
+from types import MappingProxyType
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.core.semantic_model import ComplianceIssue, DocumentModel, SemanticRecord
+from hla_lab.core.source_paths import normalized_source_path
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.faithful_renderer import (
     FaithfulLayoutProjection,
@@ -41,6 +43,28 @@ SurfaceKind = Literal[
     "api_crosswalks",
     "requirement_api_bindings",
 ]
+_SURFACE_RECORD_ATTRIBUTES = MappingProxyType(
+    {
+        "definitions": "definitions",
+        "requirements": "requirements",
+        "requirement_reviews": "requirement_reviews",
+        "content_blocks": "content_blocks",
+        "content_elements": "content_elements",
+        "transition_coverage": "transition_coverage",
+        "implementations": "implementations",
+        "requirement_links": "requirement_links",
+        "table_families": "table_families",
+        "references": "references",
+        "cross_references": "cross_references",
+        "figures": "figures",
+        "diagram_surfaces": "diagram_surfaces",
+        "notes": "notes",
+        "tables": "tables",
+        "api_surfaces": "api_surfaces",
+        "api_crosswalks": "api_crosswalks",
+        "requirement_api_bindings": "requirement_api_bindings",
+    }
+)
 
 
 class AuthoritySurfaceReport(BaseModel):
@@ -90,7 +114,7 @@ class AuthoritySurface(BaseModel):
 
     id: str
     kind: SurfaceKind
-    source_paths: tuple[str, ...] = Field(min_length=1)
+    source_paths: Annotated[tuple[str, ...], Field(min_length=1)]
     selection: Selection
     generated_glob: str | None = None
 
@@ -102,7 +126,7 @@ class AuthorityDocument(BaseModel):
 
     document_id: str
     root: str
-    surfaces: tuple[AuthoritySurface, ...] = Field(min_length=1)
+    surfaces: Annotated[tuple[AuthoritySurface, ...], Field(min_length=1)]
 
 
 class AuthorityManifest(BaseModel):
@@ -111,7 +135,7 @@ class AuthorityManifest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     schema_version: int
-    documents: tuple[AuthorityDocument, ...] = Field(min_length=1)
+    documents: Annotated[tuple[AuthorityDocument, ...], Field(min_length=1)]
 
 
 def load_authority(path: Path) -> AuthorityManifest:
@@ -120,43 +144,8 @@ def load_authority(path: Path) -> AuthorityManifest:
 
 
 def _surface_records(model: DocumentModel, surface: AuthoritySurface) -> tuple[SemanticRecord, ...]:
-    records: tuple[SemanticRecord, ...]
-    if surface.kind == "definitions":
-        records = model.definitions
-    elif surface.kind == "requirements":
-        records = model.requirements
-    elif surface.kind == "requirement_reviews":
-        records = model.requirement_reviews
-    elif surface.kind == "content_blocks":
-        records = model.content_blocks
-    elif surface.kind == "content_elements":
-        records = model.content_elements
-    elif surface.kind == "transition_coverage":
-        records = model.transition_coverage
-    elif surface.kind == "implementations":
-        records = model.implementations
-    elif surface.kind == "requirement_links":
-        records = model.requirement_links
-    elif surface.kind == "references":
-        records = model.references
-    elif surface.kind == "cross_references":
-        records = model.cross_references
-    elif surface.kind == "figures":
-        records = model.figures
-    elif surface.kind == "diagram_surfaces":
-        records = model.diagram_surfaces
-    elif surface.kind == "notes":
-        records = model.notes
-    elif surface.kind == "tables":
-        records = model.tables
-    elif surface.kind == "api_surfaces":
-        records = model.api_surfaces
-    elif surface.kind == "api_crosswalks":
-        records = model.api_crosswalks
-    elif surface.kind == "requirement_api_bindings":
-        records = model.requirement_api_bindings
-    else:
-        records = model.table_families
+    attribute = _SURFACE_RECORD_ATTRIBUTES[surface.kind]
+    records = getattr(model, attribute)
     if surface.selection == "explicit":
         records = tuple(
             record for record in records if getattr(record, "extraction", None) == "explicit"
@@ -199,7 +188,7 @@ def _main_inputs(path: Path) -> tuple[str, ...]:
     if not path.is_file():
         return ()
     values = re.findall(r"\\input\s*\{([^}]+)\}", path.read_text(encoding="utf-8"))
-    return tuple(value.strip().replace("\\", "/").removesuffix(".tex") + ".tex" for value in values)
+    return tuple(PureWindowsPath(value.strip()).with_suffix(".tex").as_posix() for value in values)
 
 
 def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
@@ -212,7 +201,7 @@ def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
         project = next(
             item
             for item in load_release_manifest(manifest_path).projects
-            if item.root.replace("\\", "/") == relative_root
+            if normalized_source_path(item.root) == relative_root
         )
     except (ValueError, StopIteration):
         return ()
@@ -229,7 +218,7 @@ def _use_generated_faithful_blocks(root: Path) -> bool:
         project = next(
             item
             for item in load_release_manifest(manifest_path).projects
-            if item.root.replace("\\", "/") == relative_root
+            if normalized_source_path(item.root) == relative_root
         )
     except (ValueError, StopIteration):
         return False
@@ -284,10 +273,14 @@ def _validate_faithful_layout(
                 failures.append(
                     "generated faithful layout projection does not match semantic blocks"
                 )
-            if body_path.read_text(encoding="utf-8") != render_faithful_body(
-                projection,
-                use_generated_blocks=use_generated_blocks,
-            ) + "\n":
+            if (
+                body_path.read_text(encoding="utf-8")
+                != render_faithful_body(
+                    projection,
+                    use_generated_blocks=use_generated_blocks,
+                )
+                + "\n"
+            ):
                 failures.append("generated faithful body does not match semantic layout projection")
     return FaithfulLayoutReport(
         document=model.document_id,
@@ -368,13 +361,14 @@ def validate_authority(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", type=Path, default=resources(REPO_ROOT).authority_manifest)
+    parser.add_argument("--manifest", type=Path)
     parser.add_argument("--root", action="append", type=Path)
     parser.add_argument("--check-generated", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+    manifest = args.manifest or resources(REPO_ROOT).authority_manifest
     roots = tuple(args.root or document_roots(REPO_ROOT))
-    report = validate_authority(roots, args.manifest, check_generated=args.check_generated)
+    report = validate_authority(roots, manifest, check_generated=args.check_generated)
     rendered = report.model_dump_json(indent=2)
     print(rendered)
     if report.failures:

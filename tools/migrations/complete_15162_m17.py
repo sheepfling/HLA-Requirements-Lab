@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
@@ -114,7 +115,7 @@ def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
     return tuple(definitions)
 
 
-def _promoted_requirements(model: object, annex_by_path: dict[str, str]) -> tuple[Requirement, ...]:
+def _promoted_requirements(annex_by_path: Mapping[str, str]) -> tuple[Requirement, ...]:
     candidates = _load_requirement_candidates(ROOT, HLA_SOURCE)
     if len(candidates) != 340:
         raise ValueError(
@@ -222,7 +223,7 @@ def complete(root: Path = ROOT) -> dict[str, int]:
         {item.id for item in model.clauses},
     )
     definitions = _table_semantic_definitions(model)
-    requirements = _promoted_requirements(model, annex_by_path)
+    requirements = _promoted_requirements(annex_by_path)
     semantic = ROOT / "semantic"
     _write_json(
         semantic / "definitions.json",

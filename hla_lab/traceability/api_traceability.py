@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from collections.abc import Mapping, MutableSequence
+from collections.abc import Set as AbstractSet
 from pathlib import Path
+from types import MappingProxyType
 
 from pydantic import BaseModel, ConfigDict
 
@@ -23,10 +26,12 @@ __all__ = [
 ]
 
 API_TRACEABILITY_DOCUMENT_IDS = ("hla-1516.1-2010", "hla-1516.1-2025")
-DECLARATION_SUFFIXES = {
-    "cpp": {".h", ".hh", ".hpp"},
-    "java": {".java"},
-}
+DECLARATION_SUFFIXES = MappingProxyType(
+    {
+        "cpp": {".h", ".hh", ".hpp"},
+        "java": {".java"},
+    }
+)
 
 
 class ApiTraceabilityReportModel(BaseModel):
@@ -42,7 +47,7 @@ class ApiTraceabilityDocumentReport(ApiTraceabilityReportModel):
     requirement_count: int
     covered_requirement_count: int
     binding_count: int
-    status_counts: dict[str, int]
+    status_counts: Mapping[str, int]
     matched_binding_count: int
     review_gap_count: int
     external_source_count: int
@@ -75,12 +80,11 @@ def _source_is_valid(surface: ApiSurface) -> bool:
     )
 
 
-def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
-    requirement_ids = {item.id for item in model.requirements}
-    binding_requirement_ids = {item.requirement_id for item in model.requirement_api_bindings}
-    surfaces = {item.id: item for item in model.api_surfaces}
-    failures: list[str] = []
-
+def _append_requirement_coverage_findings(
+    requirement_ids: AbstractSet[str],
+    binding_requirement_ids: AbstractSet[str],
+    failures: MutableSequence[str],
+) -> None:
     missing_requirements = requirement_ids - binding_requirement_ids
     unexpected_requirements = binding_requirement_ids - requirement_ids
     if missing_requirements:
@@ -93,10 +97,11 @@ def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
             + ", ".join(sorted(unexpected_requirements))
         )
 
-    rebuilt = build_requirement_api_bindings(model)
-    if rebuilt != model.requirement_api_bindings:
-        failures.append("API traceability manifest is stale or not deterministically generated")
 
+def _append_surface_source_findings(
+    model: DocumentModel,
+    failures: MutableSequence[str],
+) -> int:
     external_source_count = 0
     for surface in model.api_surfaces:
         if surface.language not in DECLARATION_SUFFIXES:
@@ -107,7 +112,14 @@ def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
             failures.append(
                 f"{surface.id}: {surface.language} surface lacks a valid declaration source"
             )
+    return external_source_count
 
+
+def _append_binding_surface_findings(
+    model: DocumentModel,
+    surfaces: Mapping[str, ApiSurface],
+    failures: MutableSequence[str],
+) -> None:
     for binding in model.requirement_api_bindings:
         referenced_ids = set(binding.candidate_api_surface_ids)
         if binding.api_surface_id is not None:
@@ -126,6 +138,22 @@ def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
                 failures.append(
                     f"{binding.id}: referenced surface {surface_id} lacks a valid source"
                 )
+
+
+def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
+    requirement_ids = {item.id for item in model.requirements}
+    binding_requirement_ids = {item.requirement_id for item in model.requirement_api_bindings}
+    surfaces = {item.id: item for item in model.api_surfaces}
+    failures: list[str] = []
+
+    _append_requirement_coverage_findings(requirement_ids, binding_requirement_ids, failures)
+
+    rebuilt = build_requirement_api_bindings(model)
+    if rebuilt != model.requirement_api_bindings:
+        failures.append("API traceability manifest is stale or not deterministically generated")
+
+    external_source_count = _append_surface_source_findings(model, failures)
+    _append_binding_surface_findings(model, surfaces, failures)
 
     status_counts = dict(Counter(item.status for item in model.requirement_api_bindings))
     review_gap_count = sum(

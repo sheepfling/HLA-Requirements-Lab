@@ -3,28 +3,29 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.traceability.semantic_authority import load_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 
 
 class ContentClosureTests(unittest.TestCase):
     def test_all_15161_requirement_candidates_are_authoritative(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
-        self.assertEqual(len(model.requirements), 1860)
-        self.assertTrue(all(item.extraction == "explicit" for item in model.requirements))
+        self.assertEqual(len(model.requirements), 1865)
+        self.assertEqual(sum(item.extraction == "explicit" for item in model.requirements), 1864)
+        self.assertEqual(sum(item.extraction == "candidate" for item in model.requirements), 1)
         self.assertTrue(all(item.clause_id for item in model.requirements))
-        self.assertEqual(model.requirement_reviews, ())
+        self.assertEqual(len(model.requirement_reviews), 1)
         self.assertEqual(
             model.requirement_review_counts(),
             {
                 "deferred": 0,
-                "non-normative": 0,
+                "non-normative": 1,
                 "layout-only": 0,
                 "unreviewed": 0,
             },

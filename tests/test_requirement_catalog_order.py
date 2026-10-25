@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
 
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.publication.export_compliance_bundle import _document
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 DOCUMENTS = (
     "hla-1516-2010",
     "hla-1516.1-2010",

@@ -14,8 +14,9 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.reports.semantic_metrics import measure_document
 from hla_lab.traceability.semantic_authority import load_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 
 

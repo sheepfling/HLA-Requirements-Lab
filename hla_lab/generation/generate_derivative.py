@@ -18,7 +18,9 @@ from hla_lab.core.semantic_model import (
     SourceRef,
     Transition,
 )
+from hla_lab.core.source_paths import is_source_frontmatter
 from hla_lab.corpus.corpus_graph import CorpusDocumentDescriptor, build_corpus_graph
+from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.hierarchy_compiler import CompiledHierarchy, compile_hierarchy
 from hla_lab.generation.reflowable_renderer import (
     _clean_table_cell_text,
@@ -72,12 +74,6 @@ def _display_escape(value: str) -> str:
 
 def _field(label: str, value: str) -> str:
     return f"\\textbf{{{_display_escape(label)}:}} {_display_escape(value)}"
-
-
-def _is_source_frontmatter(path: str) -> bool:
-    """Identify source publication furniture excluded from Lab derivatives."""
-    parts = path.replace("\\", "/").casefold().split("/")
-    return "frontmatter" in parts or "front-matter" in parts
 
 
 def _clause_link(model: DocumentModel, clause_id: str | None) -> str:
@@ -196,9 +192,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
     """Render logical table families and their source-owned cells."""
     lines = [_heading(2, f"{model.document_id}: table families")]
     tables = {
-        table.id: table
-        for table in model.tables
-        if not _is_source_frontmatter(table.source.path)
+        table.id: table for table in model.tables if not is_source_frontmatter(table.source.path)
     }
     families = tuple(
         (family, tuple(table_id for table_id in family.table_ids if table_id in tables))
@@ -706,8 +700,6 @@ def generate_from_hla(
     graph_metadata: Mapping[str, CorpusDocumentDescriptor] | None = None,
 ) -> Path:
     """Load the HLA profile at the adapter boundary for the initial derivative."""
-    from hla_lab.corpus.hla_semantic import load_hla_corpus
-
     return generate_derivative(
         load_hla_corpus(tuple(roots)).documents,
         output,

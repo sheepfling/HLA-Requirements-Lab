@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
+from pathlib import PurePosixPath
 
 from pydantic import ValidationError
 
@@ -20,8 +20,9 @@ from hla_lab.core.semantic_model import (
     Transition,
 )
 from hla_lab.corpus.hla_semantic import load_hla_corpus, load_hla_document_model
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 HLA_ROOT = REPO_ROOT / "topics" / "ieee"
 DOCUMENT_ROOTS = tuple(
     HLA_ROOT / name
@@ -72,7 +73,7 @@ class DocumentModelTests(unittest.TestCase):
         )
         self.assertEqual(
             requirement.title,
-            "Normative statement at content/clauses/08-time-management-page-182.tex:43",
+            "Normative statement at content/clauses/08-time-management-page-182.tex:39",
         )
 
     def test_ordered_requirements_preserve_source_order_within_clauses(self) -> None:
@@ -86,7 +87,9 @@ class DocumentModelTests(unittest.TestCase):
         clause_four_a = [
             item
             for item in omt.ordered_requirements()
-            if item.source.path.startswith("sections/semantic/clause-4a/")
+            if PurePosixPath(item.source.path).is_relative_to(
+                PurePosixPath("sections/semantic/clause-4a")
+            )
         ]
         self.assertEqual(
             [(item.source.path, item.source.line) for item in clause_four_a[:2]],
@@ -99,28 +102,25 @@ class DocumentModelTests(unittest.TestCase):
     def test_requirement_order_contract_holds_for_both_editions(self) -> None:
         for year in ("2010", "2025"):
             roots = tuple(
-                HLA_ROOT / f"hla-{suffix}-{year}"
-                for suffix in ("1516", "1516.1", "1516.2")
+                HLA_ROOT / f"hla-{suffix}-{year}" for suffix in ("1516", "1516.1", "1516.2")
             )
             for root in roots:
                 with self.subTest(document=root.name):
                     model = load_hla_document_model(root)
                     ordered = model.ordered_requirements()
-                    raw_position = {
-                        item.id: index for index, item in enumerate(model.requirements)
-                    }
+                    raw_position = {item.id: index for index, item in enumerate(model.requirements)}
                     clause_position = {
                         item.id: index for index, item in enumerate(model.ordered_clauses())
                     }
                     self.assertEqual(
                         [clause_position[item.clause_id] for item in ordered if item.clause_id],
-                        sorted(clause_position[item.clause_id] for item in ordered if item.clause_id),
+                        sorted(
+                            clause_position[item.clause_id] for item in ordered if item.clause_id
+                        ),
                     )
                     for clause_id in {item.clause_id for item in ordered}:
                         positions = [
-                            raw_position[item.id]
-                            for item in ordered
-                            if item.clause_id == clause_id
+                            raw_position[item.id] for item in ordered if item.clause_id == clause_id
                         ]
                         self.assertEqual(positions, sorted(positions))
 
@@ -147,14 +147,10 @@ class DocumentModelTests(unittest.TestCase):
 
     def test_ownership_and_temporal_state_machine_labels_are_consistent(self) -> None:
         ownership = next(
-            item
-            for item in self.lifecycle.state_machines
-            if item.id == "establishing-ownership"
+            item for item in self.lifecycle.state_machines if item.id == "establishing-ownership"
         )
         cancellation = next(
-            item
-            for item in ownership.transitions
-            if item.id == "establishing.cancel-divestiture"
+            item for item in ownership.transitions if item.id == "establishing.cancel-divestiture"
         )
         self.assertEqual(cancellation.target_state, "establishing.owned.not-divesting")
         self.assertEqual(cancellation.clause_id, "clause-7.14")
@@ -219,9 +215,7 @@ class DocumentModelTests(unittest.TestCase):
         }
         self.assertEqual(len(table_rows), 140)
         self.assertTrue(any("UserSuppliedTag" in item.statement for item in table_rows.values()))
-        user_tag_cell = next(
-            cell for cell in table_303.cells if "UserSuppliedTag" in cell.text
-        )
+        user_tag_cell = next(cell for cell in table_303.cells if "UserSuppliedTag" in cell.text)
         self.assertTrue(
             any(
                 item.startswith("requirement-candidate-table-5-")

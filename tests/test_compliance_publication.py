@@ -29,8 +29,9 @@ from hla_lab.publication.compliance_publication import (
     write_compliance_csv_exports,
     write_compliance_publication,
 )
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _source(line: int) -> SourceRef:

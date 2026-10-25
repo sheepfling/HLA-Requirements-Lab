@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+import json
+from collections.abc import MutableMapping
 
-ROOT = Path(__file__).resolve().parents[2]
+from pydantic import JsonValue
+
+from hla_lab.paths import RESOURCES
+
+ROOT = RESOURCES.root
 TARGET = ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json"
 OLD = "IEEE Std 1516.2-2025"
 NEW = "this specification"
@@ -21,22 +26,46 @@ TITLE_REPLACEMENTS = (
 )
 
 
-def main() -> None:
-    import json
+def _load_blocks() -> tuple[dict[str, JsonValue], list[JsonValue]]:
+    payload: JsonValue = json.loads(TARGET.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"expected a JSON object in {TARGET}")
+    raw_blocks: JsonValue = payload.get("content_blocks", [])
+    if not isinstance(raw_blocks, list):
+        raise ValueError(f"expected content_blocks to be an array in {TARGET}")
+    return payload, raw_blocks
 
-    payload = json.loads(TARGET.read_text(encoding="utf-8"))
+
+def _normalize_block(block: MutableMapping[str, JsonValue]) -> tuple[int, int]:
     count = 0
     title_count = 0
-    for block in payload["content_blocks"]:
-        for key in ("text", "layout_body"):
-            if isinstance(block.get(key), str):
-                count += block[key].count(OLD)
-                block[key] = block[key].replace(OLD, NEW)
-        if block.get("id") == "content-15162-page-013":
-            for old, new in TITLE_REPLACEMENTS:
-                occurrences = block["layout_body"].count(old)
-                title_count += occurrences
-                block["layout_body"] = block["layout_body"].replace(old, new)
+    for key in ("text", "layout_body"):
+        value: JsonValue = block.get(key)
+        if isinstance(value, str):
+            count += value.count(OLD)
+            block[key] = value.replace(OLD, NEW)
+    if block.get("id") == "content-15162-page-013":
+        for old, new in TITLE_REPLACEMENTS:
+            layout_body: JsonValue = block["layout_body"]
+            if not isinstance(layout_body, str):
+                raise ValueError("content block layout_body must be text")
+            occurrences = layout_body.count(old)
+            title_count += occurrences
+            block["layout_body"] = layout_body.replace(old, new)
+    return count, title_count
+
+
+def main() -> None:
+    payload, blocks = _load_blocks()
+    count = 0
+    title_count = 0
+    for raw_block in blocks:
+        if not isinstance(raw_block, dict):
+            continue
+        block: dict[str, JsonValue] = raw_block
+        block_count, block_title_count = _normalize_block(block)
+        count += block_count
+        title_count += block_title_count
     if count not in (0, 6):
         raise SystemExit(f"expected 0 or 6 self-references, found {count}")
     if title_count not in (0, len(TITLE_REPLACEMENTS)):

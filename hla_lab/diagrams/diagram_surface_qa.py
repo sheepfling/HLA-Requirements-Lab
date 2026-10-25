@@ -8,6 +8,8 @@ import re
 from pathlib import Path
 from typing import TypedDict
 
+from pydantic import JsonValue
+
 from hla_lab.core.semantic_model import DiagramSurfaceFile
 
 
@@ -23,13 +25,20 @@ class DiagramQaReport(TypedDict):
 def _semantic_record_ids(models_dir: Path) -> set[str]:
     record_ids: set[str] = set()
     for path in sorted(models_dir.glob("*.json")):
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(raw, dict):
             continue
         for key in ("state_machines", "sequence_diagrams", "graph_diagrams"):
-            for record in raw.get(key, []):
-                if isinstance(record, dict) and isinstance(record.get("id"), str):
-                    record_ids.add(record["id"])
+            raw_records: JsonValue = raw.get(key, [])
+            if not isinstance(raw_records, list):
+                continue
+            records: list[JsonValue] = raw_records
+            for raw_record in records:
+                record: JsonValue = raw_record
+                if isinstance(record, dict):
+                    record_id: JsonValue = record.get("id")
+                    if isinstance(record_id, str):
+                        record_ids.add(record_id)
     return record_ids
 
 

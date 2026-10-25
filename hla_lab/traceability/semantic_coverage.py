@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Mapping
 from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict
@@ -20,19 +21,19 @@ class CoverageReportModel(BaseModel):
 
 class RequirementCoverage(CoverageReportModel):
     candidates: int
-    reviews: dict[str, int]
+    reviews: Mapping[str, int]
 
 
 class TransitionCoverage(CoverageReportModel):
     total: int
-    coverage: dict[str, int]
+    coverage: Mapping[str, int]
 
 
 class CoverageDocumentReport(CoverageReportModel):
     document: str
     requirements: RequirementCoverage
     transitions: TransitionCoverage
-    sequence_diagrams: dict[str, int]
+    sequence_diagrams: Mapping[str, int]
     content_blocks: int
     content_elements: int
     semantic_records_without_source: int

@@ -15,8 +15,9 @@ from hla_lab.generation.reflowable_renderer import (
     render_reflowable_document,
 )
 from hla_lab.publication.publication_contract import default_publication_profile
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 FIXTURE_ROOT = ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 
 

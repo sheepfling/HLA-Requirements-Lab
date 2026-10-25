@@ -5,14 +5,15 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, JsonValue
 
 from hla_lab.core.semantic_model import DocumentModel, SourceRef
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import REPO_ROOT, document_entry, document_roots, resources
+from hla_lab.paths import document_entry, document_roots, resources
 
 InventoryStatus = Literal[
     "reviewed",
@@ -32,8 +33,8 @@ class InventoryItem(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    record_id: str = Field(min_length=1)
-    kind: str = Field(min_length=1)
+    record_id: Annotated[str, Field(min_length=1)]
+    kind: Annotated[str, Field(min_length=1)]
     status: InventoryStatus
     migration: Literal["M8", "M9", "M10", "M11", "complete"]
     source: SourceRef | None = None
@@ -46,10 +47,10 @@ class MigrationQueueItem(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    document: str = Field(min_length=1)
+    document: Annotated[str, Field(min_length=1)]
     migration: Literal["M8", "M9", "M10", "M11", "complete"]
-    kind: str = Field(min_length=1)
-    record_id: str = Field(min_length=1)
+    kind: Annotated[str, Field(min_length=1)]
+    record_id: Annotated[str, Field(min_length=1)]
     status: InventoryStatus
     notes: str = ""
 
@@ -59,12 +60,12 @@ class DocumentInventory(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    document_id: str = Field(min_length=1)
-    source_root: str = Field(min_length=1)
+    document_id: Annotated[str, Field(min_length=1)]
+    source_root: Annotated[str, Field(min_length=1)]
     migration: Literal["M9", "M10", "M11"]
-    expected_pages: int | None = Field(default=None, ge=1)
-    surface_counts: dict[str, int]
-    status_counts: dict[str, int]
+    expected_pages: Annotated[int | None, Field(ge=1)] = None
+    surface_counts: Mapping[str, int]
+    status_counts: Mapping[str, int]
     items: tuple[InventoryItem, ...]
 
 
@@ -73,14 +74,16 @@ class CorpusInventory(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    schema_version: int = Field(ge=1)
+    schema_version: Annotated[int, Field(ge=1)]
     documents: tuple[DocumentInventory, ...]
-    totals: dict[str, int]
+    totals: Mapping[str, int]
     migration_queue: tuple[MigrationQueueItem, ...]
 
 
-def _migration_for(document_id: str) -> Literal["M9", "M10", "M11"]:
-    migration = document_entry(document_id).migration
+def _migration_for(
+    document_id: str, workspace_root: Path | None = None
+) -> Literal["M9", "M10", "M11"]:
+    migration = document_entry(document_id, workspace_root).migration
     if migration not in {"M9", "M10", "M11"}:
         raise ValueError(f"document {document_id} has no valid migration assignment")
     return migration  # type: ignore[return-value]
@@ -106,23 +109,35 @@ def _item(
     )
 
 
-def _document_inventory(model: DocumentModel, expected_pages: int | None) -> DocumentInventory:
-    migration = _migration_for(model.document_id)
-    items: list[InventoryItem] = []
+def _clause_items(model: DocumentModel) -> list[InventoryItem]:
+    return [
+        _item(record.id, "clause", "reviewed", "complete", record.source)
+        for record in model.clauses
+    ]
 
-    for record in model.clauses:
-        items.append(_item(record.id, "clause", "reviewed", "complete", record.source))
-    for record in model.definitions:
-        items.append(
-            _item(
-                record.id,
-                "definition",
-                "reviewed",
-                migration,
-                record.source,
-                record.clause_id,
-            )
+
+def _definition_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    return [
+        _item(
+            record.id,
+            "definition",
+            "reviewed",
+            migration,
+            record.source,
+            record.clause_id,
         )
+        for record in model.definitions
+    ]
+
+
+def _requirement_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    items = []
     for record in model.requirements:
         review = next(
             (item for item in model.requirement_reviews if item.requirement_id == record.id), None
@@ -134,6 +149,15 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
             if review is not None
             else "candidate-deferred"
         )
+        note = (
+            (
+                review.reason
+                if review is not None
+                else "Candidate retained until a reviewer confirms normative scope."
+            )
+            if record.extraction == "candidate"
+            else f"Semantic group: {record.semantic_group_id}."
+        )
         items.append(
             _item(
                 record.id,
@@ -142,96 +166,138 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
                 migration,
                 record.source,
                 record.clause_id,
-                (
-                    review.reason
-                    if review is not None
-                    else "Candidate retained until a reviewer confirms normative scope."
-                )
-                if record.extraction == "candidate"
-                else f"Semantic group: {record.semantic_group_id}.",
+                note,
             )
         )
-    for record in model.requirement_links:
-        items.append(_item(record.id, "requirement-link", "reviewed", "complete", record.source))
-    for record in model.content_blocks:
-        items.append(
-            _item(
-                record.id,
-                "content-block",
-                "reviewed",
-                migration,
-                record.source,
-                record.clause_id,
-            )
+    return items
+
+
+def _content_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    items = [
+        _item(record.id, "requirement-link", "reviewed", "complete", record.source)
+        for record in model.requirement_links
+    ]
+    items.extend(
+        _item(
+            record.id,
+            "content-block",
+            "reviewed",
+            migration,
+            record.source,
+            record.clause_id,
         )
-    for record in model.content_elements:
-        items.append(
-            _item(
-                record.id,
-                "content-element",
-                "reviewed",
-                migration,
-                record.source,
-                record.clause_id or record.block_id,
-                f"Typed {record.kind} content owned by {record.block_id}.",
-            )
+        for record in model.content_blocks
+    )
+    items.extend(
+        _item(
+            record.id,
+            "content-element",
+            "reviewed",
+            migration,
+            record.source,
+            record.clause_id or record.block_id,
+            f"Typed {record.kind} content owned by {record.block_id}.",
         )
-    for record in model.state_machines:
+        for record in model.content_elements
+    )
+    return items
+
+
+def _state_machine_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    items: list[InventoryItem] = []
+    for machine in model.state_machines:
         items.append(
             _item(
-                record.id,
+                machine.id,
                 "state-machine",
                 "reviewed",
                 migration,
-                record.source,
-                record.clause_id,
+                machine.source,
+                machine.clause_id,
             )
         )
-        for state in record.states:
-            items.append(_item(state.id, "state", "reviewed", migration, state.source, record.id))
-        for transition in record.transitions:
+        items.extend(
+            _item(state.id, "state", "reviewed", migration, state.source, machine.id)
+            for state in machine.states
+        )
+        for transition in machine.transitions:
             coverage = next(
                 (item for item in model.transition_coverage if item.transition_id == transition.id),
                 None,
             )
-            status = coverage.status if coverage is not None else "unclassified"
             items.append(
                 _item(
                     transition.id,
                     "transition",
-                    status,
+                    coverage.status if coverage is not None else "unclassified",
                     migration,
                     transition.source,
-                    record.id,
+                    machine.id,
                     coverage.reason
                     if coverage is not None
                     else "No transition coverage disposition yet.",
                 )
             )
-    for record in model.implementations:
-        items.append(_item(record.id, "implementation", "mapped", migration, record.source))
-    for record in model.tables:
-        table_status = (
+    return items
+
+
+def _implementation_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    return [
+        _item(record.id, "implementation", "mapped", migration, record.source)
+        for record in model.implementations
+    ]
+
+
+def _table_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    items: list[InventoryItem] = []
+    for table in model.tables:
+        status = (
             "reviewed"
-            if all(cell.row is not None and cell.column is not None for cell in record.cells)
+            if all(cell.row is not None and cell.column is not None for cell in table.cells)
             else "layout-exception"
         )
-        items.append(_item(record.id, "table", table_status, migration, record.source))
-        for cell in record.cells:
-            items.append(
-                _item(cell.id, "table-cell", table_status, migration, cell.source, record.id)
-            )
-    for record in model.table_families:
-        items.append(
-            _item(
-                record.id,
-                "table-family",
-                "reviewed",
-                migration,
-                record.source,
-                record.clause_id,
-            )
+        items.append(_item(table.id, "table", status, migration, table.source))
+        items.extend(
+            _item(cell.id, "table-cell", status, migration, cell.source, table.id)
+            for cell in table.cells
         )
+    return items
+
+
+def _table_family_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    return [
+        _item(
+            record.id,
+            "table-family",
+            "reviewed",
+            migration,
+            record.source,
+            record.clause_id,
+        )
+        for record in model.table_families
+    ]
+
+
+def _owned_record_items(
+    model: DocumentModel,
+    migration: Literal["M9", "M10", "M11"],
+) -> list[InventoryItem]:
+    items = []
     for kind, records in (
         ("reference", model.references),
         ("cross-reference", model.cross_references),
@@ -243,7 +309,27 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
         for record in records:
             owner = getattr(record, "owner_id", None) or getattr(record, "clause_id", None)
             items.append(_item(record.id, kind, "reviewed", migration, record.source, owner))
+    return items
 
+
+def _document_inventory(
+    model: DocumentModel,
+    expected_pages: int | None,
+    *,
+    workspace_root: Path | None = None,
+) -> DocumentInventory:
+    migration = _migration_for(model.document_id, workspace_root)
+    items = [
+        *_clause_items(model),
+        *_definition_items(model, migration),
+        *_requirement_items(model, migration),
+        *_content_items(model, migration),
+        *_state_machine_items(model, migration),
+        *_implementation_items(model, migration),
+        *_table_items(model, migration),
+        *_table_family_items(model, migration),
+        *_owned_record_items(model, migration),
+    ]
     surface_counts = dict(sorted(Counter(item.kind for item in items).items()))
     status_counts = dict(sorted(Counter(item.status for item in items).items()))
     return DocumentInventory(
@@ -257,20 +343,37 @@ def _document_inventory(model: DocumentModel, expected_pages: int | None) -> Doc
     )
 
 
+def _expected_page_counts(release_manifest: Path | None) -> dict[str, int]:
+    expected_pages: dict[str, int] = {}
+    if release_manifest is None or not release_manifest.is_file():
+        return expected_pages
+    manifest: JsonValue = json.loads(release_manifest.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        return expected_pages
+    raw_projects: JsonValue = manifest.get("projects", [])
+    if not isinstance(raw_projects, list):
+        return expected_pages
+    projects: list[JsonValue] = raw_projects
+    for raw_project in projects:
+        project: JsonValue = raw_project
+        if isinstance(project, dict) and project.get("id") and project.get("expected_pages"):
+            expected_pages[str(project["id"])] = int(project["expected_pages"])
+    return expected_pages
+
+
 def build_inventory(
     roots: tuple[Path, ...],
     release_manifest: Path | None = None,
+    *,
+    workspace_root: Path | None = None,
 ) -> CorpusInventory:
     """Load validated models and return the deterministic inventory."""
-    expected_pages: dict[str, int] = {}
-    if release_manifest is not None and release_manifest.is_file():
-        manifest = json.loads(release_manifest.read_text(encoding="utf-8"))
-        for project in manifest.get("projects", []):
-            if isinstance(project, dict) and project.get("id") and project.get("expected_pages"):
-                expected_pages[str(project["id"])] = int(project["expected_pages"])
-    corpus = load_hla_corpus(roots)
+    expected_pages = _expected_page_counts(release_manifest)
+    corpus = load_hla_corpus(roots, workspace_root=workspace_root)
     documents = tuple(
-        _document_inventory(model, expected_pages.get(model.document_id))
+        _document_inventory(
+            model, expected_pages.get(model.document_id), workspace_root=workspace_root
+        )
         for model in sorted(corpus.documents, key=lambda item: item.document_id)
     )
     totals = Counter()
@@ -312,20 +415,21 @@ def build_inventory(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--workspace-root", type=Path, help="Repository root for document catalog")
     parser.add_argument(
         "--root", action="append", type=Path, help="Document root; repeat per document"
     )
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=resources(REPO_ROOT).release_manifest,
         help="Release manifest used for expected page counts",
     )
     parser.add_argument("--output", type=Path, help="Source-controlled JSON output path")
     parser.add_argument("--write", action="store_true", help="Write --output instead of printing")
     args = parser.parse_args()
-    roots = tuple(args.root or document_roots(REPO_ROOT))
-    inventory = build_inventory(roots, args.manifest)
+    roots = tuple(args.root or document_roots(args.workspace_root))
+    manifest = args.manifest or resources(args.workspace_root).release_manifest
+    inventory = build_inventory(roots, manifest, workspace_root=args.workspace_root)
     rendered = json.dumps(inventory.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n"
     if args.write:
         if args.output is None:

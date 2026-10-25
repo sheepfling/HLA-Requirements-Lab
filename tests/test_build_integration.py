@@ -7,7 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from unittest.mock import patch
 
 from hla_lab.adapters.document_builder import BuildConfig
@@ -28,8 +28,9 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.reports.semantic_dashboard import build_dashboard
 from hla_lab.traceability.promote_requirement import promote_requirement
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 DOCUMENT_ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in (
@@ -44,10 +45,10 @@ class BuildIntegrationTests(unittest.TestCase):
     def test_semantic_dashboard_reports_reviewed_and_candidate_coverage(self) -> None:
         report = build_dashboard(DOCUMENT_ROOTS)
         self.assertEqual(report.totals.documents, 3)
-        self.assertEqual(report.totals.explicit_requirements, 2220)
+        self.assertEqual(report.totals.explicit_requirements, 2224)
         self.assertEqual(report.totals.unresolved_references, 0)
         lifecycle = next(item for item in report.documents if item.document == "hla-1516.1-2025")
-        self.assertEqual(lifecycle.requirements.explicit, 1860)
+        self.assertEqual(lifecycle.requirements.explicit, 1864)
         self.assertEqual(
             lifecycle.requirements.explicit_transition_requirements_with_reviewed_links,
             15,
@@ -84,6 +85,14 @@ class BuildIntegrationTests(unittest.TestCase):
                 ),
             ),
         )
+        second_machine = machine.model_copy(
+            update={
+                "id": "machine-2",
+                "transitions": (
+                    machine.transitions[0].model_copy(update={"id": "machine-2.transition"}),
+                ),
+            }
+        )
         model = DocumentModel(
             document_id="fixture",
             clauses=(
@@ -98,7 +107,7 @@ class BuildIntegrationTests(unittest.TestCase):
             ),
             definitions=(),
             requirements=(candidate,),
-            state_machines=(machine,),
+            state_machines=(machine, second_machine),
         )
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -109,9 +118,9 @@ class BuildIntegrationTests(unittest.TestCase):
             )
             (semantic / "machine.json").write_text(
                 json.dumps(
-                    StateMachineFile(schema_version=2, state_machines=(machine,)).model_dump(
-                        mode="json"
-                    )
+                    StateMachineFile(
+                        schema_version=2, state_machines=(machine, second_machine)
+                    ).model_dump(mode="json")
                 ),
                 encoding="utf-8",
             )
@@ -119,7 +128,7 @@ class BuildIntegrationTests(unittest.TestCase):
                 root,
                 candidate.id,
                 model=model,
-                transition_ids=("machine.transition",),
+                transition_ids=("machine.transition", "machine-2.transition"),
                 notes="Reviewed fixture link.",
             )
             requirements = json.loads((semantic / "requirements.json").read_text(encoding="utf-8"))
@@ -130,8 +139,8 @@ class BuildIntegrationTests(unittest.TestCase):
         self.assertEqual(requirements["requirements"][0]["id"], candidate.id)
         self.assertEqual(links["links"][0]["requirement_id"], candidate.id)
         self.assertEqual(
-            state_source["state_machines"][0]["transitions"][0]["requirement_ids"],
-            [candidate.id],
+            [item["transitions"][0]["requirement_ids"] for item in state_source["state_machines"]],
+            [[candidate.id], [candidate.id]],
         )
 
     def test_generic_layers_do_not_import_hla_profile(self) -> None:
@@ -293,7 +302,7 @@ class BuildIntegrationTests(unittest.TestCase):
             for item in json.loads(
                 (DOCUMENT_ROOTS[2] / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
             )["content_blocks"]
-            if item["source"]["path"].endswith("clause-4a/page-037.tex")
+            if PurePosixPath(item["source"]["path"]).parts[-2:] == ("clause-4a", "page-037.tex")
         )
         self.assertIn(
             r"\SemanticTableMFourPZeroThreeSevenTZeroOneCaption",

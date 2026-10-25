@@ -6,7 +6,6 @@ import json
 import subprocess
 import sys
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import (
@@ -16,8 +15,9 @@ from hla_lab.core.semantic_model import (
     load_corpus,
     load_document_model,
 )
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 DOCUMENT_ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in (

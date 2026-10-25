@@ -5768,7 +5768,6 @@
       "block_id": "content-15161-page-181",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
         "requirement-candidate-content-clauses-08-time-management-page-181-l118-3",
         "requirement-candidate-content-clauses-08-time-management-page-181-l121-4",
         "requirement-candidate-content-clauses-08-time-management-page-181-l133-8",
@@ -5776,7 +5775,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-181-l145-12",
         "requirement-candidate-content-clauses-08-time-management-page-181-l148-13",
         "requirement-candidate-content-clauses-08-time-management-page-181-l157-16",
-        "requirement-candidate-content-clauses-08-time-management-page-181-l163-18"
+        "requirement-candidate-content-clauses-08-time-management-page-181-l163-18",
+        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2"
       ],
       "source": {
         "path": "content/clauses/08-time-management-page-181.tex",
@@ -6159,7 +6159,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-199-l64-20",
         "requirement-candidate-content-clauses-08-time-management-page-199-l73-23",
         "requirement-candidate-content-clauses-08-time-management-page-199-l79-25",
-        "requirement-candidate-content-clauses-08-time-management-page-199-l91-29"
+        "requirement-candidate-content-clauses-08-time-management-page-199-l91-29",
+        "requirement-service-flow-nmra-current-time-precondition"
       ],
       "source": {
         "path": "content/clauses/08-time-management-page-199.tex",
@@ -6181,7 +6182,10 @@
         "requirement-candidate-content-clauses-08-time-management-page-200-l140-41",
         "requirement-candidate-content-clauses-08-time-management-page-200-l164-49",
         "requirement-candidate-content-clauses-08-time-management-page-200-l170-51",
-        "requirement-candidate-content-clauses-08-time-management-page-200-l173-52"
+        "requirement-candidate-content-clauses-08-time-management-page-200-l173-52",
+        "requirement-service-flow-nmra-time-passed-exception",
+        "requirement-service-flow-nmra-not-advancing-precondition",
+        "requirement-service-flow-nmra-advancing-exception"
       ],
       "source": {
         "path": "content/clauses/08-time-management-page-200.tex",
@@ -6487,7 +6491,7 @@
       "id": "content-element-content-15161-page-216-paragraph-001",
       "kind": "paragraph",
       "text": "217 216 9.1 1 Overview 9.1.1 2 Definitions for DDM hla-body hlafixedpage 90.000 69.120 432.000 12.00 12.00 9. Data distribution management (DDM) 97.403 9.1 Overview 90.000 120.786 432.000 9.96 12.00 DDM services may be used by joined federates to reduce both the transmission and the reception of 90.000 131.766 432.000 9.96 12.00 irrelevant data. Whereas DM services provide information on data relevance at the class attribute level, 90.001 142.805 431.999 9.96 12.00 DDM services add the capability to further refine the data requirements at the instance attribute level. 90.001 153.785 431.999 9.96 12.00 Similarly, whereas DM services provide information on data relevance at the interaction class level, DDM 90.001 164.765 431.999 9.96 12.00 services add the capability to further refine the data requirements at the specific interaction level. Producers 90.001 175.805 431.999 9.96 12.00 and consumers of data communicated between joined federates may use the DDM services to bound the 90.001 186.785 431.999 9.96 12.00 relevance of such communicated data. As a result, the RTI can help recognize the irrelevant data and reduce 90.001 197.765 431.999 9.96 12.00 its delivery to consumers. The relevance of communicating interactions or instance attribute updates is 90.001 208.804 431.999 9.96 12.00 expressed by giving a bounding for relevant communication in a space of user-defined dimensions. Both 90.002 219.784 431.998 9.96 12.00 consumers and producers specify the upper and lower bounds for the relevant portion of that space, and the 90.002 230.764 431.998 9.96 12.00 overlap of producers’ and consumers’ region sets is used to bound relevant communication. 253.665 9.1.1 Definitions for DDM 90.002 277.804 431.998 9.96 12.00 The DDM services shall be based on the following concepts and terms: 100.022 292.804 421.978 9.96 12.00 a) 121.983 292.804 400.017 9.96 12.00 A dimension shall be a named interval of nonnegative integers. The interval shall be defined by an 121.982 303.784 400.018 9.96 12.00 ordered pair of values. The first value is 0 (zero) for every dimension. The second value, which can 121.982 314.764 400.018 9.96 12.00 vary for each dimension, is that dimension’s upper bound as specified in the FDD. 100.021 325.803 421.979 9.96 12.00 b) 121.981 325.803 400.019 9.96 12.00 A range shall be a continuous semi-open interval on a dimension. The interval is defined by an 121.981 337.803 400.019 9.96 12.00 ordered pair of values. The first component of the pair shall be called range lower bound , and the 121.982 349.803 400.018 9.96 12.00 second component shall be called range upper bound . The range upper bound shall be strictly 121.983 361.803 400.017 9.96 12.00 greater than the range lower bound. The minimum possible difference between a range lower bound 121.983 373.803 400.017 9.96 12.00 and a range upper bound shall be 1 (one). 100.023 385.802 421.977 9.96 12.00 c) 121.984 385.802 400.016 9.96 12.00 A region specification shall be a set of ranges. The dimensions contained in a region specification 121.983 397.802 400.017 9.96 12.00 shall be the dimensions of the ranges that are included in the region specification. A region 121.983 409.802 400.017 9.96 12.00 specification shall contain at most one range for any given dimension. Each range in a region 121.983 421.802 400.017 9.96 12.00 specification shall be defined in terms of the bounds [0, the corresponding dimension’s upper 121.983 433.802 400.017 9.96 12.00 bound). 100.023 445.802 421.977 9.96 12.00 d) 121.983 445.802 400.017 9.96 12.00 A region template shall be an incomplete region specification where one or more dimensions have 121.983 457.801 400.017 9.96 12.00 not been assigned ranges. 100.023 469.801 421.977 9.96 12.00 e) 121.984 469.801 400.016 9.96 12.00 A region realization shall be a region specification that is associated with an instance attribute for 121.983 481.801 400.017 9.96 12.00 update, with a sent interaction or with a class attribute or interaction class for subscription. The 121.983 493.801 400.017 9.96 12.00 generic term region may be used in circumstances where a region specification, a region realization, 121.984 505.801 400.016 9.96 12.00 or both apply. 100.024 517.800 421.976 9.96 12.00 f) 121.961 517.800 400.039 9.96 12.00 The RTI shall provide the default region , which is defined as having the range [0, the range’s 121.984 529.800 400.016 9.96 12.00 dimension’s upper bound) for each dimension found in the FDD. The default region shall have all 121.984 541.800 400.016 9.96 12.00 dimensions found in the FDD, regardless of the class attribute or interaction class with which it is 121.983 553.800 400.017 9.96 12.00 associated. The default region realization shall not have a region specification. There shall be no 121.983 565.800 400.017 9.96 12.00 way for a joined federate to refer to the default region. If a joined federate creates a region that has as 121.983 577.799 400.017 9.96 12.00 its dimensions all dimensions found in the FDD and has the range [0, the range’s dimension’s upper 121.983 589.799 400.017 9.96 12.00 bound) for each dimension, this region shall be equivalent to the default region, but it is not the 121.983 601.799 400.017 9.96 12.00 default region. 100.024 613.799 421.976 9.96 12.00 g) 121.983 613.799 400.017 9.96 12.00 A collection of attribute designator set and region designator set pairs shall be interpreted as a set of 121.983 625.799 400.017 9.96 12.00 (attribute designator, region designator) pairs. The interpreted form can be viewed as if constructed 121.983 637.798 400.017 9.96 12.00 in the following manner: 121.983 652.798 400.017 9.96 12.00 1) 142.031 652.798 379.969 9.96 12.00 The interpreted form begins as an empty set of (attribute designator, region designator) pairs. 121.983 667.798 400.017 9.96 12.00 2) 142.040 667.798 379.960 9.96 12.00 For each pair (of sets) in the attribute designator set and region designator set pair collection, 142.024 679.798 379.976 9.96 12.00 create the cross product of the attribute designator set with its region designator set. The result 142.024 691.798 379.976 9.96 12.00 is a collection of (attribute designator, region designator) pairs. The union of all such (attribute 142.024 703.797 379.976 9.96 12.00 designator, region designator) pairs shall be the interpreted form. hlafixedpage",
-      "clause_id": "clause-8",
+      "clause_id": "clause-9",
       "block_id": "content-15161-page-216",
       "parent_id": null,
       "record_ids": [
@@ -7457,7 +7461,8 @@
       "block_id": "content-15161-page-260",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23"
+        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23",
+        "requirement-service-flow-get-dimension-handle-name-not-found"
       ],
       "source": {
         "path": "content/clauses/10-support-services-page-260.tex",

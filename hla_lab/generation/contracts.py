@@ -15,7 +15,7 @@ from hla_lab.generation.faithful_renderer import (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class GenerationRequest:
     """All inputs that control one deterministic semantic generation run."""
 
@@ -36,9 +36,10 @@ class GenerationRequest:
     use_generated_faithful_blocks: bool = False
     state_machine_renderer: Literal["tikz", "plantuml"] = "tikz"
     service_page_renderer: Literal["fixed", "flow"] = "fixed"
+    canonical_source: LatexSourceProfile | None = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class GenerationResult:
     """Typed outputs produced by one semantic generation run."""
 

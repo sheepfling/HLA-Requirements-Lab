@@ -11,25 +11,30 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import MappingProxyType
 
+from hla_lab.core.json_types import JsonObject
+from hla_lab.paths import RESOURCES
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = RESOURCES.root
 TARGETS = (
     ROOT / "topics" / "ieee" / "hla-1516.1-2010",
     ROOT / "topics" / "ieee" / "hla-1516.2-2010",
 )
-FALLBACK_SOURCE_PATHS = {
-    "hla-1516.2-2010": {
-        "clauses/clause03_definitions_continuation.tex": "clauses/clause03_definitions.tex",
+FALLBACK_SOURCE_PATHS = MappingProxyType(
+    {
+        "hla-1516.2-2010": {
+            "clauses/clause03_definitions_continuation.tex": "clauses/clause03_definitions.tex",
+        }
     }
-}
+)
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> JsonObject:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _write_requirement_owner_json(path: Path, payload: dict) -> None:
+def _write_requirement_owner_json(path: Path, payload: JsonObject) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
@@ -55,9 +60,8 @@ def repair(root: Path) -> int:
         block = block_by_source.get(owner_path)
         element = element_by_source.get(owner_path)
         if block is None or element is None:
-            raise ValueError(
-                f"{root.name}: no content owner for {requirement_id} at {source_path}"
-            )
+            message = f"{root.name}: no content owner for {requirement_id} at {source_path}"
+            raise ValueError(message)
         for owner in (block, element):
             record_ids = owner.setdefault("record_ids", [])
             if requirement_id not in record_ids:

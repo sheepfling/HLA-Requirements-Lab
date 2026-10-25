@@ -4,22 +4,46 @@ from __future__ import annotations
 
 import io
 import os
+import subprocess
+import sys
+import tempfile
 import unittest
 from contextlib import redirect_stdout
 from unittest.mock import patch
 
 from hla_lab.cli import _test_workers, build_parser, main
-from hla_lab.paths import DOCUMENT_IDS, document_roots
+from hla_lab.paths import document_ids, document_roots
 
 
 class LabCliTests(unittest.TestCase):
+    def test_help_and_schemas_work_without_a_corpus_workspace(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment["HLA_LAB_ROOT"] = ""
+        with tempfile.TemporaryDirectory() as workspace:
+            for arguments, expected in (
+                (["--help"], "hla-lab"),
+                (["schema", "--list"], "requirements"),
+            ):
+                with self.subTest(arguments=arguments):
+                    result = subprocess.run(
+                        [sys.executable, "-m", "hla_lab.cli", *arguments],
+                        cwd=workspace,
+                        env=environment,
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn(expected, result.stdout)
+
     def test_empty_command_prints_workflow_help(self) -> None:
         output = io.StringIO()
         with redirect_stdout(output):
             result = main([])
         self.assertEqual(result, 0)
-        self.assertIn("hla-lab build", output.getvalue())
-        self.assertIn("hla-lab quality", output.getvalue())
+        self.assertIn("hla-lab --root . build", output.getvalue())
+        self.assertIn("hla-lab --root . quality", output.getvalue())
 
     def test_common_aliases_parse(self) -> None:
         parser = build_parser()
@@ -30,7 +54,7 @@ class LabCliTests(unittest.TestCase):
 
     def test_public_document_catalog_matches_the_supported_corpus(self) -> None:
         roots = document_roots()
-        self.assertEqual(tuple(path.name for path in roots), DOCUMENT_IDS)
+        self.assertEqual(tuple(path.name for path in roots), document_ids())
         self.assertTrue(all(path.is_dir() for path in roots))
 
     def test_documents_command_is_stable_and_machine_readable_enough_for_shells(self) -> None:

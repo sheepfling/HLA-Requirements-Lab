@@ -9,8 +9,9 @@ from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE, HLA_SOURCE_2
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 ROOTS = (
     ROOT / "topics" / "ieee" / "hla-1516-2010",
     ROOT / "topics" / "ieee" / "hla-1516.1-2010",
@@ -92,8 +93,12 @@ class Hla2010ContractTests(unittest.TestCase):
         for machine_id in approved:
             safe = machine_id.replace(":", "-")
             with self.subTest(machine_id=machine_id):
-                self.assertTrue((root / "output" / "semantic" / f"state-machine-{safe}.puml").is_file())
-                self.assertTrue((root / "output" / "semantic" / f"state-machine-{safe}.pdf").is_file())
+                self.assertTrue(
+                    (root / "output" / "semantic" / f"state-machine-{safe}.puml").is_file()
+                )
+                self.assertTrue(
+                    (root / "output" / "semantic" / f"state-machine-{safe}.pdf").is_file()
+                )
 
         plantuml_sources = tuple((root / "output" / "semantic").glob("state-machine-*.puml"))
         self.assertTrue(plantuml_sources)
@@ -115,11 +120,11 @@ class Hla2010ContractTests(unittest.TestCase):
                     content_block_ids=tuple(item.id for item in model.content_blocks),
                     state_machine_renderer="plantuml",
                     service_page_renderer="flow",
+                    canonical_source=HLA_SOURCE,
                 )
             )
             generated_body = "\n".join(
-                path.read_text(encoding="utf-8")
-                for path in output.glob("content-block-*.tex")
+                path.read_text(encoding="utf-8") for path in output.glob("content-block-*.tex")
             )
         for figure_number in (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17):
             with self.subTest(figure_number=figure_number):

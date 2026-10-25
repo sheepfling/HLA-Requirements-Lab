@@ -3903,7 +3903,6 @@
       "text": "",
       "clause_id": "clause-8",
       "record_ids": [
-        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
         "requirement-candidate-content-clauses-08-time-management-page-181-l118-3",
         "requirement-candidate-content-clauses-08-time-management-page-181-l121-4",
         "requirement-candidate-content-clauses-08-time-management-page-181-l133-8",
@@ -3911,7 +3910,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-181-l145-12",
         "requirement-candidate-content-clauses-08-time-management-page-181-l148-13",
         "requirement-candidate-content-clauses-08-time-management-page-181-l157-16",
-        "requirement-candidate-content-clauses-08-time-management-page-181-l163-18"
+        "requirement-candidate-content-clauses-08-time-management-page-181-l163-18",
+        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2"
       ],
       "element_ids": [
         "content-element-content-15161-page-181-paragraph-001"
@@ -4330,7 +4330,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-199-l64-20",
         "requirement-candidate-content-clauses-08-time-management-page-199-l73-23",
         "requirement-candidate-content-clauses-08-time-management-page-199-l79-25",
-        "requirement-candidate-content-clauses-08-time-management-page-199-l91-29"
+        "requirement-candidate-content-clauses-08-time-management-page-199-l91-29",
+        "requirement-service-flow-nmra-current-time-precondition"
       ],
       "element_ids": [
         "content-element-content-15161-page-199-paragraph-001"
@@ -4354,7 +4355,10 @@
         "requirement-candidate-content-clauses-08-time-management-page-200-l140-41",
         "requirement-candidate-content-clauses-08-time-management-page-200-l164-49",
         "requirement-candidate-content-clauses-08-time-management-page-200-l170-51",
-        "requirement-candidate-content-clauses-08-time-management-page-200-l173-52"
+        "requirement-candidate-content-clauses-08-time-management-page-200-l173-52",
+        "requirement-service-flow-nmra-time-passed-exception",
+        "requirement-service-flow-nmra-not-advancing-precondition",
+        "requirement-service-flow-nmra-advancing-exception"
       ],
       "element_ids": [
         "content-element-content-15161-page-200-paragraph-001"
@@ -4694,7 +4698,7 @@
       "id": "content-15161-page-216",
       "kind": "context",
       "text": "",
-      "clause_id": "clause-8",
+      "clause_id": "clause-9",
       "record_ids": [
         "requirement-candidate-content-clauses-08-time-management-page-216-l48-13",
         "requirement-candidate-content-clauses-08-time-management-page-216-l54-15",
@@ -5750,7 +5754,8 @@
       "text": "",
       "clause_id": "clause-10",
       "record_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23"
+        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23",
+        "requirement-service-flow-get-dimension-handle-name-not-found"
       ],
       "element_ids": [
         "content-element-content-15161-page-260-paragraph-001"

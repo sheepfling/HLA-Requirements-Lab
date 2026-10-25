@@ -30,8 +30,8 @@ Python modules from this repository.
 
 An RTI repository should keep a small catalog such as
 [`examples/compliance-test-catalog.json`](../examples/compliance-test-catalog.json).
-The schema is
-[`schemas/compliance_test_catalog.schema.json`](../schemas/compliance_test_catalog.schema.json).
+Generate its JSON Schema with `hla-lab-schema compliance_test_catalog`.
+The source model is `hla_lab.traceability.compliance_contract.ComplianceTestCatalog`.
 
 Each entry has four important identities:
 

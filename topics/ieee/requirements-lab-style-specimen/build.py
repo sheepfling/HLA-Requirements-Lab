@@ -15,7 +15,11 @@ OUTPUT = DIST / "requirements-lab-style-specimen-v0.1.pdf"
 def build() -> None:
     BUILD.mkdir(exist_ok=True)
     DIST.mkdir(exist_ok=True)
-    subprocess.run(["latexmk", "-xelatex", "-interaction=nonstopmode", "main.tex"], cwd=ROOT, check=True)
+    subprocess.run(
+        ["latexmk", "-xelatex", "-interaction=nonstopmode", "main.tex"],
+        cwd=ROOT,
+        check=True,
+    )
     shutil.copy2(BUILD / "main.pdf", OUTPUT)
     print(OUTPUT)
 

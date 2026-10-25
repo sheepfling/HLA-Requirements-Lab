@@ -19,7 +19,9 @@ import json
 import re
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
+from types import MappingProxyType
+
+from pydantic import JsonValue
 
 from hla_lab.core.io import write_json
 from hla_lab.core.semantic_model import Requirement, RequirementFile
@@ -39,85 +41,87 @@ DOCUMENTS = (
 )
 ROOTS = tuple(ROOT / document for document in DOCUMENTS)
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9-]{2,}")
-_STOP_WORDS = {
-    "about",
-    "after",
-    "also",
-    "among",
-    "and",
-    "are",
-    "because",
-    "been",
-    "being",
-    "during",
-    "from",
-    "have",
-    "into",
-    "must",
-    "shall",
-    "that",
-    "the",
-    "their",
-    "these",
-    "this",
-    "those",
-    "through",
-    "under",
-    "using",
-    "which",
-    "with",
-}
-_2010_API_DISPOSITIONS: dict[str, dict[str, str]] = {
-    "req-4035a87fed87": {
-        "api_surface_resolution": "all-overloads",
-        "api_surface_note": (
-            "The named callback is represented by all reviewed overload declarations."
-        ),
-    },
-    "req-4718f44df6e8": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Behavioral state invariant; no direct language API declaration is asserted."
-        ),
-    },
-    "req-5421cc4829a9": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Behavioral state invariant; no direct language API declaration is asserted."
-        ),
-    },
-    "req-625332dd1f54": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Behavioral state invariant; no direct language API declaration is asserted."
-        ),
-    },
-    "req-6a8c0463fc94": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Federation lifecycle invariant; no direct language API declaration is asserted."
-        ),
-    },
-    "req-959bfe345492": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Federation lifecycle invariant; no direct language API declaration is asserted."
-        ),
-    },
-    "req-f39daa299f9c": {
-        "api_surface_scope": "cross-cutting",
-        "api_surface_note": (
-            "Object-model state invariant; no direct language API declaration is asserted."
-        ),
-    },
-}
+_STOP_WORDS = frozenset(
+    {
+        "about",
+        "after",
+        "also",
+        "among",
+        "and",
+        "are",
+        "because",
+        "been",
+        "being",
+        "during",
+        "from",
+        "have",
+        "into",
+        "must",
+        "shall",
+        "that",
+        "the",
+        "their",
+        "these",
+        "this",
+        "those",
+        "through",
+        "under",
+        "using",
+        "which",
+        "with",
+    }
+)
+_2010_API_DISPOSITIONS: dict[str, dict[str, str]] = MappingProxyType(
+    {
+        "req-4035a87fed87": {
+            "api_surface_resolution": "all-overloads",
+            "api_surface_note": (
+                "The named callback is represented by all reviewed overload declarations."
+            ),
+        },
+        "req-4718f44df6e8": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Behavioral state invariant; no direct language API declaration is asserted."
+            ),
+        },
+        "req-5421cc4829a9": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Behavioral state invariant; no direct language API declaration is asserted."
+            ),
+        },
+        "req-625332dd1f54": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Behavioral state invariant; no direct language API declaration is asserted."
+            ),
+        },
+        "req-6a8c0463fc94": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Federation lifecycle invariant; no direct language API declaration is asserted."
+            ),
+        },
+        "req-959bfe345492": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Federation lifecycle invariant; no direct language API declaration is asserted."
+            ),
+        },
+        "req-f39daa299f9c": {
+            "api_surface_scope": "cross-cutting",
+            "api_surface_note": (
+                "Object-model state invariant; no direct language API declaration is asserted."
+            ),
+        },
+    }
+)
 
 
 def _tokens(value: str) -> frozenset[str]:
     return frozenset(
-        token
-        for token in _TOKEN.findall(value.casefold())
-        if token not in _STOP_WORDS
+        token for token in _TOKEN.findall(value.casefold()) if token not in _STOP_WORDS
     )
 
 
@@ -173,13 +177,11 @@ def _new_id(document: str, candidate: Requirement) -> str:
     return f"req-{digest}"
 
 
-def _promote_2010(root: Path) -> dict[str, Any]:
+def _promote_2010(root: Path) -> dict[str, JsonValue]:
     semantic = DocumentResources(root).semantic
     requirement_path = semantic / "requirements.json"
     existing_payload = json.loads(requirement_path.read_text(encoding="utf-8"))
-    existing = tuple(
-        Requirement.model_validate(item) for item in existing_payload["requirements"]
-    )
+    existing = tuple(Requirement.model_validate(item) for item in existing_payload["requirements"])
     candidates = _requirements(root, _surface_inputs(root))
     candidate_to_old, matched_candidates, matched_old = _match_existing(candidates, existing)
     aliases_path = semantic / "requirement-id-aliases.json"
@@ -192,9 +194,7 @@ def _promote_2010(root: Path) -> dict[str, Any]:
     for old in existing:
         if old.id in matched_old:
             continue
-        same_path = tuple(
-            item for item in candidates if item.source.path == old.source.path
-        )
+        same_path = tuple(item for item in candidates if item.source.path == old.source.path)
         if not same_path:
             raise ValueError(
                 f"{root.name}: cannot disposition legacy requirement without a source path: "
@@ -231,8 +231,7 @@ def _promote_2010(root: Path) -> dict[str, Any]:
                 update={
                     "id": _new_id(root.name, candidate),
                     "title": (
-                        f"Normative statement at {candidate.source.path}:"
-                        f"{candidate.source.line}"
+                        f"Normative statement at {candidate.source.path}:{candidate.source.line}"
                     ),
                     "machine_statement": candidate.statement,
                     "coverage_kind": "cross-cutting",
@@ -277,9 +276,7 @@ def _promote_2010(root: Path) -> dict[str, Any]:
             requirements=tuple(records),
         ).model_dump(mode="json"),
     )
-    unique_aliases = {
-        str(item["alias_id"]): item for item in aliases
-    }
+    unique_aliases = {str(item["alias_id"]): item for item in aliases}
     write_json(
         aliases_path,
         {"schema_version": 1, "aliases": list(unique_aliases.values())},
@@ -307,10 +304,14 @@ def _update_ownership(root: Path) -> None:
     for item in requirements:
         ids_by_path[item.source.path] = (*ids_by_path[item.source.path], item.id)
     aliases_path = semantic / "requirement-id-aliases.json"
-    removed_ids = {
-        str(item["alias_id"])
-        for item in json.loads(aliases_path.read_text(encoding="utf-8")).get("aliases", [])
-    } if aliases_path.is_file() else set()
+    removed_ids = (
+        {
+            str(item["alias_id"])
+            for item in json.loads(aliases_path.read_text(encoding="utf-8")).get("aliases", [])
+        }
+        if aliases_path.is_file()
+        else set()
+    )
     # A prior interrupted run may have written the promoted requirements before
     # it could write the alias file.  Treat any orphaned requirement-shaped ID
     # as retired as well; non-requirement record IDs remain untouched.
@@ -390,17 +391,18 @@ def _canonicalize(root: Path) -> int:
             {
                 "schema_version": 1,
                 "bindings": [
-                    item.model_dump(mode="json") for item in build_requirement_api_bindings(
-                        load_hla_document_model(root)
-                    )
+                    item.model_dump(mode="json")
+                    for item in build_requirement_api_bindings(load_hla_document_model(root))
                 ],
             },
         )
     return len(ordered)
 
 
-def build(roots: tuple[Path, ...] = ROOTS, *, dry_run: bool = False) -> tuple[dict[str, Any], ...]:
-    reports: list[dict[str, Any]] = []
+def build(
+    roots: tuple[Path, ...] = ROOTS, *, dry_run: bool = False
+) -> tuple[dict[str, JsonValue], ...]:
+    reports: list[dict[str, JsonValue]] = []
     for root in roots:
         if root.name.endswith("-2010"):
             if dry_run:

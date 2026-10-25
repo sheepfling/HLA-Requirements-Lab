@@ -5,8 +5,12 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from dataclasses import dataclass
-from pathlib import Path
+from collections.abc import Mapping, MutableMapping, Sequence
+from collections.abc import Set as AbstractSet
+from dataclasses import dataclass, field
+from pathlib import Path, PurePosixPath
+
+from pydantic import JsonValue
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.parsing import try_balanced_group
@@ -14,7 +18,7 @@ from hla_lab.core.semantic_model import ContentElement, SourceRef, load_document
 from hla_lab.paths import RESOURCES, DocumentResources
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Event:
     name: str
     start: int
@@ -22,7 +26,7 @@ class Event:
     args: tuple[str, ...]
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Spec:
     kind: str
     text: str
@@ -32,54 +36,69 @@ class Spec:
     record_ids: tuple[str, ...] = ()
 
 
-LIST_ENVIRONMENTS = {
-    "hlaoverviewservicelist",
-    "hlaacronymrows",
-    "hlasummaryrules",
-}
+LIST_ENVIRONMENTS = frozenset(
+    {
+        "hlaoverviewservicelist",
+        "hlaacronymrows",
+        "hlasummaryrules",
+    }
+)
 
-HEADING_COMMANDS = {
-    "HLAClauseHeading",
-    "HLASubclauseHeading",
-    "HLADetailedRuleHeading",
-    "HLARationaleHeading",
-    "HLAFrontHeading",
-    "HLAFrontHeadingAdjusted",
-    "HLAFrontMajorHeadingAdjusted",
-    "HLAMinorClauseHeading",
-}
+HEADING_COMMANDS = frozenset(
+    {
+        "HLAClauseHeading",
+        "HLASubclauseHeading",
+        "HLADetailedRuleHeading",
+        "HLARationaleHeading",
+        "HLAFrontHeading",
+        "HLAFrontHeadingAdjusted",
+        "HLAFrontMajorHeadingAdjusted",
+        "HLAMinorClauseHeading",
+    }
+)
 
 
-def _events(text: str, names: set[str]) -> tuple[Event, ...]:
+def _events(text: str, names: AbstractSet[str]) -> tuple[Event, ...]:
     pattern = re.compile(r"\\(?P<name>[A-Za-z@]+)")
     result: list[Event] = []
     for match in pattern.finditer(text):
         name = match.group("name")
         if name not in names:
             continue
-        cursor = match.end()
+        cursor = _event_argument_start(text, match.end())
+        if cursor is None:
+            continue
+        args, end = _event_arguments(text, cursor)
+        result.append(Event(name, match.start(), end, args))
+    return tuple(result)
+
+
+def _event_argument_start(text: str, cursor: int) -> int | None:
+    while cursor < len(text) and text[cursor].isspace():
+        cursor += 1
+    if cursor < len(text) and text[cursor] == "*":
+        cursor += 1
+    if cursor < len(text) and text[cursor] == "[":
+        optional = try_balanced_group(text, cursor, "[", "]")
+        if optional is None:
+            return None
+        cursor = optional[1]
+    return cursor
+
+
+def _event_arguments(text: str, cursor: int) -> tuple[tuple[str, ...], int]:
+    arguments: list[str] = []
+    while cursor < len(text):
         while cursor < len(text) and text[cursor].isspace():
             cursor += 1
-        if cursor < len(text) and text[cursor] == "*":
-            cursor += 1
-        if cursor < len(text) and text[cursor] == "[":
-            optional = try_balanced_group(text, cursor, "[", "]")
-            if optional is None:
-                continue
-            cursor = optional[1]
-        args: list[str] = []
-        while cursor < len(text):
-            while cursor < len(text) and text[cursor].isspace():
-                cursor += 1
-            if cursor >= len(text) or text[cursor] != "{":
-                break
-            value = try_balanced_group(text, cursor)
-            if value is None:
-                break
-            args.append(value[0])
-            cursor = value[1]
-        result.append(Event(name, match.start(), cursor, tuple(args)))
-    return tuple(result)
+        if cursor >= len(text) or text[cursor] != "{":
+            break
+        value = try_balanced_group(text, cursor)
+        if value is None:
+            break
+        arguments.append(value[0])
+        cursor = value[1]
+    return tuple(arguments), cursor
 
 
 def _environments(text: str) -> tuple[tuple[str, int, int, str], ...]:
@@ -158,7 +177,9 @@ def _strip_commands(text: str) -> str:
     value = re.sub(r"\b[-+]?\d+(?:\.\d+)?pt\b", " ", value)
     value = re.sub(r"\b[-+]?\d+(?:\.\d+)?bp\b", " ", value)
     value = re.sub(
-        r"\b(?:remember|picture|overlay|current|page|north|south|east|west|anchor|inner|outer|sep|align|justify|selectfont|HLATitlePage|HLAPublicationPage|HLASemanticPage|flushright)\b",
+        r"\b(?:remember|picture|overlay|current|page|north|south|east|west|anchor|"
+        r"inner|outer|sep|align|justify|selectfont|HLATitlePage|HLAPublicationPage|"
+        r"HLASemanticPage|flushright)\b",
         " ",
         value,
     )
@@ -176,7 +197,7 @@ def _paragraphs(raw: str) -> tuple[str, ...]:
     return tuple(values)
 
 
-def _source_for(block: dict[str, object], body: str, offset: int) -> dict[str, object]:
+def _source_for(block: Mapping[str, JsonValue], body: str, offset: int) -> dict[str, JsonValue]:
     source = block["source"]
     assert isinstance(source, dict)
     line = int(source["line"]) + body.count("\n", 0, offset)
@@ -187,7 +208,7 @@ def _source_for(block: dict[str, object], body: str, offset: int) -> dict[str, o
     }
 
 
-def _clause_positions(body: str, clause_ids: set[str]) -> tuple[tuple[int, str], ...]:
+def _clause_positions(body: str, clause_ids: AbstractSet[str]) -> tuple[tuple[int, str], ...]:
     positions: list[tuple[int, str]] = []
     for event in _events(
         body,
@@ -216,7 +237,7 @@ def _clause_at(
     return current
 
 
-def _record_ids_for_input(path: str, known_ids: set[str]) -> tuple[str, ...]:
+def _record_ids_for_input(path: str, known_ids: AbstractSet[str]) -> tuple[str, ...]:
     match = re.search(r"(?:definition|requirement)-(.+?)(?:\.tex)?$", path)
     if match is None:
         return ()
@@ -227,19 +248,269 @@ def _record_ids_for_input(path: str, known_ids: set[str]) -> tuple[str, ...]:
     return ()
 
 
+@dataclass(slots=True)
+class _BlockContext:
+    block: MutableMapping[str, JsonValue]
+    body: str
+    block_id: str
+    clause_id: str | None
+    positions: tuple[tuple[int, str], ...]
+    specs: list[Spec] = field(default_factory=list)
+    occupied: list[tuple[int, int]] = field(default_factory=list)
+    list_number: int = 0
+
+    def clause_at(self, offset: int) -> str | None:
+        return _clause_at(self.clause_id, self.positions, offset)
+
+    def next_list_id(self) -> str:
+        self.list_number += 1
+        return f"content-element-{self.block_id}-list-{self.list_number:03d}"
+
+
+def _row_event_spec(
+    event: Event,
+    context: _BlockContext,
+    env_offset: int,
+    list_id: str,
+    known_ids: AbstractSet[str],
+) -> Spec | None:
+    if event.name == "HLAAcronymRow" and len(event.args) >= 3:
+        value = f"{_strip_commands(event.args[1])} — {_strip_commands(event.args[2])}"
+        record_ids: tuple[str, ...] = ()
+    elif len(event.args) >= 2:
+        value = _strip_commands(event.args[1])
+        record_ids = (event.args[0],) if event.args[0] in known_ids else ()
+    else:
+        return None
+    offset = env_offset + event.start
+    return Spec("list-item", value, offset, context.clause_at(offset), list_id, record_ids)
+
+
+def _append_list_item_specs(
+    context: _BlockContext,
+    env_body: str,
+    env_offset: int,
+    list_id: str,
+    known_ids: AbstractSet[str],
+) -> None:
+    row_events = _events(env_body, {"HLAAcronymRow", "HLASummaryRule"})
+    if row_events:
+        for event in row_events:
+            spec = _row_event_spec(event, context, env_offset, list_id, known_ids)
+            if spec is not None:
+                context.specs.append(spec)
+        return
+    item_events = _events(env_body, {"item"})
+    boundaries = [event.start for event in item_events] + [len(env_body)]
+    for index, event in enumerate(item_events):
+        value = _strip_commands(env_body[event.end : boundaries[index + 1]])
+        if value:
+            offset = env_offset + event.start
+            context.specs.append(
+                Spec("list-item", value, offset, context.clause_at(offset), list_id)
+            )
+
+
+def _extract_list_specs(context: _BlockContext, known_ids: AbstractSet[str]) -> None:
+    for env_name, start, end, env_body in _environments(context.body):
+        list_id = context.next_list_id()
+        context.specs.append(Spec("list", env_name, start, context.clause_at(start)))
+        context.occupied.append((start, end))
+        env_offset = start + context.body[start:end].find(env_body)
+        _append_list_item_specs(context, env_body, env_offset, list_id, known_ids)
+
+
+def _direct_prose_value(event: Event) -> str | None:
+    if not event.args:
+        return None
+    if event.name == "HLAClauseLabeledItem" and len(event.args) >= 2:
+        value = f"{_strip_commands(event.args[0])} {_strip_commands(event.args[-1])}"
+    elif event.name == "HLAContentsEntry" and len(event.args) >= 4:
+        number = _strip_commands(event.args[1])
+        title = _strip_commands(event.args[2])
+        page = _strip_commands(event.args[3])
+        value = " ".join(part for part in (number, title, f"(page {page})" if page else "") if part)
+    else:
+        value = _strip_commands(event.args[-1])
+    return value if len(value) >= 12 else None
+
+
+def _extract_direct_prose(context: _BlockContext, events: Sequence[Event]) -> None:
+    for event in events:
+        value = _direct_prose_value(event)
+        if value is None:
+            continue
+        clause_id = context.clause_at(event.start)
+        if event.name in {"HLAClauseDashItem", "HLAClauseLabeledItem"}:
+            list_id = context.next_list_id()
+            context.specs.extend(
+                (
+                    Spec("list", event.name, event.start, clause_id),
+                    Spec("list-item", value, event.start, clause_id, list_id),
+                )
+            )
+        else:
+            kind = "note" if event.name == "HLANoteBlock" else "paragraph"
+            context.specs.append(Spec(kind, value, event.start, clause_id))
+        context.occupied.append((event.start, event.end))
+
+
+def _extract_footnotes_and_notes(context: _BlockContext) -> None:
+    for event in _events(context.body, {"footnote", "footnotetext"}):
+        if not event.args:
+            continue
+        context.specs.append(
+            Spec(
+                "footnote",
+                _strip_commands(event.args[-1]),
+                event.start,
+                context.clause_at(event.start),
+            )
+        )
+        context.occupied.append((event.start, event.end))
+    for match in re.finditer(r"\bNOTE---(?P<text>.*?)(?:\\par\b|$)", context.body, re.DOTALL):
+        note_text = _strip_commands(match.group("text"))
+        if not note_text:
+            continue
+        context.specs.append(
+            Spec("note", note_text, match.start(), context.clause_at(match.start()))
+        )
+        context.occupied.append((match.start(), match.end()))
+
+
+def _extract_cross_references(context: _BlockContext, known_ids: AbstractSet[str]) -> None:
+    for event in _events(context.body, {"input"}):
+        if not event.args:
+            continue
+        path = PurePosixPath(event.args[0])
+        if path.parts[:2] != ("output", "semantic"):
+            continue
+        if any(start <= event.start < end for start, end in context.occupied):
+            continue
+        path_text = path.as_posix()
+        identifiers = _record_ids_for_input(path_text, known_ids)
+        context.specs.append(
+            Spec(
+                "cross-reference",
+                f"Semantic record {path.stem}",
+                event.start,
+                context.clause_at(event.start),
+                record_ids=identifiers,
+            )
+        )
+        context.occupied.append((event.start, event.end))
+
+
+def _extract_formulas(context: _BlockContext) -> None:
+    for match in re.finditer(r"\\\((.+?)\\\)|\\\[(.+?)\\\]", context.body, re.DOTALL):
+        context.specs.append(
+            Spec(
+                "formula",
+                _strip_commands(match.group(1) or match.group(2) or ""),
+                match.start(),
+                context.clause_at(match.start()),
+            )
+        )
+        context.occupied.append((match.start(), match.end()))
+
+
+def _paragraph_body(context: _BlockContext) -> str:
+    prose = context.body
+    for start, end in sorted(context.occupied, reverse=True):
+        prose = prose[:start] + "\n\n" + prose[end:]
+    structural_commands = HEADING_COMMANDS | {
+        "HLAStartFrontMatterUnnumberedPage",
+        "HLAStartFrontMatterPage",
+        "HLAStartSemanticPage",
+        "HLAStartSemanticOpenerPage",
+        "HLAContentMarker",
+    }
+    events = sorted(_events(prose, structural_commands), key=lambda item: item.start, reverse=True)
+    for event in events:
+        prose = prose[: event.start] + "\n\n" + prose[event.end :]
+    return prose
+
+
+def _extract_paragraph_specs(context: _BlockContext, has_direct_events: bool) -> None:
+    paragraphs = () if has_direct_events else _paragraphs(_paragraph_body(context))
+    for value in paragraphs:
+        if re.search(r"(?:HLA(?:Clause|Table)|m\d+\.|\b\d+\.\d{3}\b)", value):
+            continue
+        offset = context.body.find(value[:24]) if value[:24] else 0
+        context.specs.append(
+            Spec("paragraph", value, max(offset, 0), context.clause_at(max(offset, 0)))
+        )
+
+
+def _append_fallback_spec(context: _BlockContext) -> None:
+    if context.specs:
+        return
+    fallback = (
+        ""
+        if context.block_id.startswith("content-15162")
+        and context.block.get("layout_body") is not None
+        else _strip_commands(str(context.block.get("text") or ""))
+    )
+    fallback = re.sub(r"^\d+\s+", "", fallback)
+    if fallback and len(fallback) >= 12:
+        spec = Spec("paragraph", fallback, 0, context.clause_id)
+    else:
+        spec = Spec(
+            "paragraph",
+            f"Layout adapter for {context.block_id}; no independent prose surface was present.",
+            0,
+            context.clause_id,
+        )
+    context.specs.append(spec)
+
+
+def _serialize_specs(context: _BlockContext) -> tuple[dict[str, JsonValue], ...]:
+    context.specs.sort(key=lambda item: (item.offset, 0 if item.kind == "list" else 1))
+    output: list[dict[str, JsonValue]] = []
+    for local_index, spec in enumerate(context.specs, 1):
+        identifier = f"content-element-{context.block_id}-{spec.kind}-{local_index:03d}"
+        element = ContentElement(
+            id=identifier,
+            kind=spec.kind,  # type: ignore[arg-type]
+            text=spec.text,
+            clause_id=spec.clause_id,
+            block_id=context.block_id,
+            parent_id=spec.parent_id,
+            record_ids=spec.record_ids,
+            source=SourceRef.model_validate(_source_for(context.block, context.body, spec.offset)),
+            sequence=local_index,
+        )
+        output.append(element.model_dump(mode="json"))
+    temporary_to_real: dict[str, str] = {}
+    list_index = 0
+    for spec, item in zip(context.specs, output, strict=True):
+        if spec.kind == "list":
+            list_index += 1
+            temporary_id = f"content-element-{context.block_id}-list-{list_index:03d}"
+            temporary_to_real[temporary_id] = str(item["id"])
+    for item in output:
+        parent = item.get("parent_id")
+        if parent in temporary_to_real:
+            item["parent_id"] = temporary_to_real[parent]
+    context.block["element_ids"] = [str(item["id"]) for item in output]
+    return tuple(output)
+
+
 def _extract_block(
-    block: dict[str, object],
+    block: MutableMapping[str, JsonValue],
     *,
-    clause_ids: set[str],
-    known_ids: set[str],
-) -> tuple[dict[str, object], ...]:
+    clause_ids: AbstractSet[str],
+    known_ids: AbstractSet[str],
+) -> tuple[dict[str, JsonValue], ...]:
     body = str(block.get("layout_body") or "")
-    block_id = str(block["id"])
-    positions = _clause_positions(body, clause_ids)
-    specs: list[Spec] = []
-    occupied: list[tuple[int, int]] = []
-    list_numbers = 0
-    direct_prose_events = _events(
+    context = _BlockContext(
+        block=block,
+        body=body,
+        block_id=str(block["id"]),
+        clause_id=str(block.get("clause_id") or "") or None,
+        positions=_clause_positions(body, clause_ids),
+    )
+    direct_events = _events(
         body,
         {
             "HLAClauseParagraph",
@@ -253,278 +524,14 @@ def _extract_block(
             "HLAContentsEntry",
         },
     )
-
-    for env_name, start, end, env_body in _environments(body):
-        list_numbers += 1
-        list_id = f"content-element-{block_id}-list-{list_numbers:03d}"
-        specs.append(
-            Spec(
-                "list",
-                env_name,
-                start,
-                _clause_at(str(block.get("clause_id") or "") or None, positions, start),
-            )
-        )
-        occupied.append((start, end))
-        env_offset = start + body[start:end].find(env_body)
-        row_events = _events(env_body, {"HLAAcronymRow", "HLASummaryRule"})
-        item_events = _events(env_body, {"item"})
-        if row_events:
-            for _index, event in enumerate(row_events, 1):
-                if event.name == "HLAAcronymRow" and len(event.args) >= 3:
-                    value = f"{_strip_commands(event.args[1])} — {_strip_commands(event.args[2])}"
-                    record_ids: tuple[str, ...] = ()
-                elif len(event.args) >= 2:
-                    value = _strip_commands(event.args[1])
-                    record_ids = (event.args[0],) if event.args[0] in known_ids else ()
-                else:
-                    continue
-                specs.append(
-                    Spec(
-                        "list-item",
-                        value,
-                        env_offset + event.start,
-                        _clause_at(
-                            str(block.get("clause_id") or "") or None,
-                            positions,
-                            env_offset + event.start,
-                        ),
-                        list_id,
-                        record_ids,
-                    )
-                )
-        elif item_events:
-            boundaries = [event.start for event in item_events] + [len(env_body)]
-            for index, event in enumerate(item_events):
-                part = env_body[event.end : boundaries[index + 1]]
-                value = _strip_commands(part)
-                if value:
-                    specs.append(
-                        Spec(
-                            "list-item",
-                            value,
-                            env_offset + event.start,
-                            _clause_at(
-                                str(block.get("clause_id") or "") or None,
-                                positions,
-                                env_offset + event.start,
-                            ),
-                            list_id,
-                        )
-                    )
-
-    # Semantic page adapters retain prose inside positioned layout macros.
-    # Extract those macros directly so the typed content surface contains the
-    # words of the paragraph, rather than the coordinates and wrapper
-    # commands that happen to surround it.
-    for event in direct_prose_events:
-        if not event.args:
-            continue
-        if event.name == "HLAClauseLabeledItem" and len(event.args) >= 2:
-            value = f"{_strip_commands(event.args[0])} {_strip_commands(event.args[-1])}"
-        elif event.name == "HLAContentsEntry" and len(event.args) >= 4:
-            number = _strip_commands(event.args[1])
-            title = _strip_commands(event.args[2])
-            page = _strip_commands(event.args[3])
-            value = " ".join(
-                part for part in (number, title, f"(page {page})" if page else "") if part
-            )
-        else:
-            value = _strip_commands(event.args[-1])
-        if not value or len(value) < 12:
-            continue
-        if event.name in {"HLAClauseDashItem", "HLAClauseLabeledItem"}:
-            list_numbers += 1
-            list_id = f"content-element-{block_id}-list-{list_numbers:03d}"
-            clause_id = _clause_at(
-                str(block.get("clause_id") or "") or None,
-                positions,
-                event.start,
-            )
-            specs.extend(
-                (
-                    Spec("list", event.name, event.start, clause_id),
-                    Spec("list-item", value, event.start, clause_id, list_id),
-                )
-            )
-        else:
-            kind = "note" if event.name == "HLANoteBlock" else "paragraph"
-            specs.append(
-                Spec(
-                    kind,
-                    value,
-                    event.start,
-                    _clause_at(
-                        str(block.get("clause_id") or "") or None,
-                        positions,
-                        event.start,
-                    ),
-                )
-            )
-        occupied.append((event.start, event.end))
-
-    footnotes = _events(body, {"footnote", "footnotetext"})
-    for event in footnotes:
-        if not event.args:
-            continue
-        specs.append(
-            Spec(
-                "footnote",
-                _strip_commands(event.args[-1]),
-                event.start,
-                _clause_at(str(block.get("clause_id") or "") or None, positions, event.start),
-            )
-        )
-        occupied.append((event.start, event.end))
-
-    for match in re.finditer(r"\bNOTE---(?P<text>.*?)(?:\\par\b|$)", body, re.DOTALL):
-        note_text = _strip_commands(match.group("text"))
-        if not note_text:
-            continue
-        specs.append(
-            Spec(
-                "note",
-                note_text,
-                match.start(),
-                _clause_at(str(block.get("clause_id") or "") or None, positions, match.start()),
-            )
-        )
-        occupied.append((match.start(), match.end()))
-
-    input_events = _events(body, {"input"})
-    for event in input_events:
-        if not event.args or not event.args[0].startswith("output/semantic/"):
-            continue
-        if any(start <= event.start < end for start, end in occupied):
-            continue
-        path = event.args[0]
-        identifiers = _record_ids_for_input(path, known_ids)
-        label = path.rsplit("/", 1)[-1].removesuffix(".tex")
-        specs.append(
-            Spec(
-                "cross-reference",
-                f"Semantic record {label}",
-                event.start,
-                _clause_at(str(block.get("clause_id") or "") or None, positions, event.start),
-                record_ids=identifiers,
-            )
-        )
-        occupied.append((event.start, event.end))
-
-    formulas = list(re.finditer(r"\\\((.+?)\\\)|\\\[(.+?)\\\]", body, re.DOTALL))
-    for match in formulas:
-        specs.append(
-            Spec(
-                "formula",
-                _strip_commands(match.group(1) or match.group(2) or ""),
-                match.start(),
-                _clause_at(str(block.get("clause_id") or "") or None, positions, match.start()),
-            )
-        )
-        occupied.append((match.start(), match.end()))
-
-    # The exact layout body owns headings and geometry; the paragraph records
-    # retain only prose. Remove structure-bearing commands before normalizing.
-    prose = body
-    for start, end in sorted(occupied, reverse=True):
-        prose = prose[:start] + "\n\n" + prose[end:]
-    for event in sorted(
-        _events(
-            prose,
-            HEADING_COMMANDS
-            | {
-                "HLAStartFrontMatterUnnumberedPage",
-                "HLAStartFrontMatterPage",
-                "HLAStartSemanticPage",
-                "HLAStartSemanticOpenerPage",
-                "HLAContentMarker",
-            },
-        ),
-        key=lambda item: item.start,
-        reverse=True,
-    ):
-        prose = prose[: event.start] + "\n\n" + prose[event.end :]
-    # Once a semantic page has explicit positioned prose events, residual
-    # wrapper geometry is layout noise rather than a second prose surface.
-    generic_paragraphs = () if direct_prose_events else _paragraphs(prose)
-    for _index, value in enumerate(generic_paragraphs, 1):
-        if re.search(r"(?:HLA(?:Clause|Table)|m\d+\.|\b\d+\.\d{3}\b)", value):
-            continue
-        offset = body.find(value[:24]) if value[:24] else 0
-        if offset < 0:
-            offset = 0
-        specs.append(
-            Spec(
-                "paragraph",
-                value,
-                offset,
-                _clause_at(str(block.get("clause_id") or "") or None, positions, offset),
-            )
-        )
-
-    if not specs:
-        fallback = (
-            ""
-            if block_id.startswith("content-15162") and block.get("layout_body") is not None
-            else _strip_commands(str(block.get("text") or ""))
-        )
-        fallback = re.sub(r"^\d+\s+", "", fallback)
-        if fallback and len(fallback) >= 12:
-            specs.append(
-                Spec(
-                    "paragraph",
-                    fallback,
-                    0,
-                    str(block.get("clause_id") or "") or None,
-                )
-            )
-        else:
-            specs.append(
-                Spec(
-                    "paragraph",
-                    f"Layout adapter for {block_id}; no independent prose surface was present.",
-                    0,
-                    str(block.get("clause_id") or "") or None,
-                )
-            )
-
-    # Keep source order for the semantic document while ensuring list parents
-    # are emitted before their children.
-    specs.sort(key=lambda item: (item.offset, 0 if item.kind == "list" else 1))
-    output: list[dict[str, object]] = []
-    for local_index, spec in enumerate(specs, 1):
-        identifier = f"content-element-{block_id}-{spec.kind}-{local_index:03d}"
-        parent_id = spec.parent_id
-        if parent_id is not None:
-            # The temporary parent is the stable list ID generated above.
-            parent_id = parent_id
-        element = ContentElement(
-            id=identifier,
-            kind=spec.kind,  # type: ignore[arg-type]
-            text=spec.text,
-            clause_id=spec.clause_id,
-            block_id=block_id,
-            parent_id=parent_id,
-            record_ids=spec.record_ids,
-            source=SourceRef.model_validate(_source_for(block, body, spec.offset)),
-            sequence=local_index,
-        )
-        output.append(element.model_dump(mode="json"))
-
-    # Replace temporary list IDs with their emitted IDs. The list is always
-    # emitted before its items due to the sort above.
-    temporary_to_real: dict[str, str] = {}
-    list_index = 0
-    for spec, item in zip(specs, output, strict=True):
-        if spec.kind == "list":
-            list_index += 1
-            temporary_to_real[f"content-element-{block_id}-list-{list_index:03d}"] = str(item["id"])
-    for item in output:
-        parent = item.get("parent_id")
-        if parent in temporary_to_real:
-            item["parent_id"] = temporary_to_real[parent]
-    block["element_ids"] = [str(item["id"]) for item in output]
-    return tuple(output)
+    _extract_list_specs(context, known_ids)
+    _extract_direct_prose(context, direct_events)
+    _extract_footnotes_and_notes(context)
+    _extract_cross_references(context, known_ids)
+    _extract_formulas(context)
+    _extract_paragraph_specs(context, bool(direct_events))
+    _append_fallback_spec(context)
+    return _serialize_specs(context)
 
 
 def migrate(root: Path) -> None:
@@ -533,7 +540,7 @@ def migrate(root: Path) -> None:
     payload = json.loads(blocks_path.read_text(encoding="utf-8"))
     blocks = payload["content_blocks"]
     known_ids = set(model.semantic_record_ids())
-    elements: list[dict[str, object]] = []
+    elements: list[dict[str, JsonValue]] = []
     for block in blocks:
         elements.extend(
             _extract_block(

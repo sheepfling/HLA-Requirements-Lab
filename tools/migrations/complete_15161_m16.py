@@ -20,7 +20,11 @@ import argparse
 import json
 import re
 from collections import defaultdict
+from collections.abc import Mapping, Sequence
 from pathlib import Path
+from types import MappingProxyType
+
+from pydantic import JsonValue
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.io import write_json
@@ -44,122 +48,121 @@ from hla_lab.core.text import slugify
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.paths import RESOURCES, DocumentResources
+from tools.migrations.m16_source_records import _m16_candidates, _table_5_row_requirements
 
 ROOT = RESOURCES.document("hla-1516.1-2025").root
 
 # These are source-coordinate corrections from the authoritative source review.
 # handoff.  Candidate IDs remain immutable; only the checker-visible clause
 # owner and its derived semantic group move to the active service/section.
-_SOURCE_CLAUSE_OVERRIDES: dict[tuple[str, int], str] = {
-    **{
-        ("content/clauses/06-object-management-page-112.tex", line): "6.1.12"
-        for line in (48, 51, 66)
-    },
-    ("content/clauses/07-ownership-management-page-150.tex", 152): "7.1.2.1",
-    ("content/clauses/07-ownership-management-page-154.tex", 66): "7.1.4",
-    **{
-        ("content/clauses/07-ownership-management-page-157.tex", line): "7.4"
-        for line in (79, 103)
-    },
-    **{
-        ("content/clauses/07-ownership-management-page-162.tex", line): "7.8"
-        for line in (16, 22, 28, 34, 43, 52, 58, 64, 76)
-    },
-    ("content/clauses/07-ownership-management-page-163.tex", 24): "7.8.4",
-    **{
-        ("content/clauses/07-ownership-management-page-166.tex", line): "7.11"
-        for line in (14, 20, 41)
-    },
-    **{
-        ("content/clauses/07-ownership-management-page-167.tex", line): "7.12"
-        for line in (13, 28)
-    },
-    **{
-        ("content/clauses/07-ownership-management-page-168.tex", line): "7.13"
-        for line in (23, 35, 38, 44)
-    },
-    **{
-        ("content/clauses/07-ownership-management-page-170.tex", line): "7.15"
-        for line in (13, 16, 19, 25, 34, 46, 52)
-    },
-    **{
-        ("content/clauses/07-ownership-management-page-171.tex", line): "7.16"
-        for line in (46, 52)
-    },
-    ("content/clauses/10-support-services-page-252.tex", 17): "10.12",
-    ("content/clauses/10-support-services-page-264.tex", 133): "10.29",
-    ("content/clauses/10-support-services-page-265.tex", 45): "10.30",
-    ("content/clauses/10-support-services-page-265.tex", 150): "10.31",
-    ("content/clauses/10-support-services-page-266.tex", 95): "10.32",
-    ("content/clauses/10-support-services-page-267.tex", 39): "10.33",
-    **{
-        ("content/clauses/10-support-services-page-277.tex", line): "10.47"
-        for line in (28, 31, 37)
-    },
-    **{
-        ("content/clauses/11-management-object-model-page-292.tex", line): "11.5"
-        for line in (9, 18, 21, 24, 30, 57)
-    },
-    ("content/clauses/05-declaration-management-page-090.tex", 79): "5.2",
-    **{
-        ("content/clauses/05-declaration-management-page-091.tex", line): "5.3"
-        for line in (121, 127)
-    },
-    ("content/clauses/05-declaration-management-page-093.tex", 17): "5.4",
-    ("content/clauses/05-declaration-management-page-093.tex", 140): "5.5",
-    **{
-        ("content/clauses/05-declaration-management-page-097.tex", line): "5.8"
-        for line in (20, 23, 26)
-    },
-    ("content/clauses/05-declaration-management-page-099.tex", 75): "5.10",
-    ("content/clauses/05-declaration-management-page-100.tex", 129): "5.11",
-    **{
-        ("content/clauses/05-declaration-management-page-102.tex", line): "5.12"
-        for line in (10, 19)
-    },
-    ("content/clauses/05-declaration-management-page-103.tex", 108): "5.13",
-    **{
-        ("content/clauses/04-federation-management-page-067.tex", line): "4.20"
-        for line in (37, 40)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-068.tex", line): "4.22"
-        for line in (115, 118)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-069.tex", line): "4.23"
-        for line in (64, 67, 70, 76, 133)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-072.tex", line): "4.26"
-        for line in (17, 20, 23, 26)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-072.tex", line): "4.27"
-        for line in (131, 134, 137)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-074.tex", line): "4.29"
-        for line in (112, 115, 124)
-    },
-    **{
-        ("content/clauses/04-federation-management-page-075.tex", line): "4.30"
-        for line in (44, 47)
-    },
-    ("content/clauses/04-federation-management-page-076.tex", 15): "4.31",
-    **{
-        ("content/clauses/04-federation-management-page-078.tex", line): "4.33"
-        for line in (20, 29)
-    },
-    **{
-        ("content/clauses/06-object-management-page-113.tex", line): "6.2"
-        for line in (21, 24)
-    },
-    **{
-        ("content/clauses/06-object-management-page-137.tex", line): "6.22"
-        for line in (40, 43)
-    },
-}
+_SOURCE_CLAUSE_OVERRIDES: Mapping[tuple[str, int], str] = MappingProxyType(
+    {
+        **{
+            ("content/clauses/06-object-management-page-112.tex", line): "6.1.12"
+            for line in (48, 51, 66)
+        },
+        ("content/clauses/07-ownership-management-page-150.tex", 152): "7.1.2.1",
+        ("content/clauses/07-ownership-management-page-154.tex", 66): "7.1.4",
+        **{
+            ("content/clauses/07-ownership-management-page-157.tex", line): "7.4"
+            for line in (79, 103)
+        },
+        **{
+            ("content/clauses/07-ownership-management-page-162.tex", line): "7.8"
+            for line in (16, 22, 28, 34, 43, 52, 58, 64, 76)
+        },
+        ("content/clauses/07-ownership-management-page-163.tex", 24): "7.8.4",
+        **{
+            ("content/clauses/07-ownership-management-page-166.tex", line): "7.11"
+            for line in (14, 20, 41)
+        },
+        **{
+            ("content/clauses/07-ownership-management-page-167.tex", line): "7.12"
+            for line in (13, 28)
+        },
+        **{
+            ("content/clauses/07-ownership-management-page-168.tex", line): "7.13"
+            for line in (23, 35, 38, 44)
+        },
+        **{
+            ("content/clauses/07-ownership-management-page-170.tex", line): "7.15"
+            for line in (13, 16, 19, 25, 34, 46, 52)
+        },
+        **{
+            ("content/clauses/07-ownership-management-page-171.tex", line): "7.16"
+            for line in (46, 52)
+        },
+        ("content/clauses/10-support-services-page-252.tex", 17): "10.12",
+        ("content/clauses/10-support-services-page-264.tex", 133): "10.29",
+        ("content/clauses/10-support-services-page-265.tex", 45): "10.30",
+        ("content/clauses/10-support-services-page-265.tex", 150): "10.31",
+        ("content/clauses/10-support-services-page-266.tex", 95): "10.32",
+        ("content/clauses/10-support-services-page-267.tex", 39): "10.33",
+        **{
+            ("content/clauses/10-support-services-page-277.tex", line): "10.47"
+            for line in (28, 31, 37)
+        },
+        **{
+            ("content/clauses/11-management-object-model-page-292.tex", line): "11.5"
+            for line in (9, 18, 21, 24, 30, 57)
+        },
+        ("content/clauses/05-declaration-management-page-090.tex", 79): "5.2",
+        **{
+            ("content/clauses/05-declaration-management-page-091.tex", line): "5.3"
+            for line in (121, 127)
+        },
+        ("content/clauses/05-declaration-management-page-093.tex", 17): "5.4",
+        ("content/clauses/05-declaration-management-page-093.tex", 140): "5.5",
+        **{
+            ("content/clauses/05-declaration-management-page-097.tex", line): "5.8"
+            for line in (20, 23, 26)
+        },
+        ("content/clauses/05-declaration-management-page-099.tex", 75): "5.10",
+        ("content/clauses/05-declaration-management-page-100.tex", 129): "5.11",
+        **{
+            ("content/clauses/05-declaration-management-page-102.tex", line): "5.12"
+            for line in (10, 19)
+        },
+        ("content/clauses/05-declaration-management-page-103.tex", 108): "5.13",
+        **{
+            ("content/clauses/04-federation-management-page-067.tex", line): "4.20"
+            for line in (37, 40)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-068.tex", line): "4.22"
+            for line in (115, 118)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-069.tex", line): "4.23"
+            for line in (64, 67, 70, 76, 133)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-072.tex", line): "4.26"
+            for line in (17, 20, 23, 26)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-072.tex", line): "4.27"
+            for line in (131, 134, 137)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-074.tex", line): "4.29"
+            for line in (112, 115, 124)
+        },
+        **{
+            ("content/clauses/04-federation-management-page-075.tex", line): "4.30"
+            for line in (44, 47)
+        },
+        ("content/clauses/04-federation-management-page-076.tex", 15): "4.31",
+        **{
+            ("content/clauses/04-federation-management-page-078.tex", line): "4.33"
+            for line in (20, 29)
+        },
+        **{("content/clauses/06-object-management-page-113.tex", line): "6.2" for line in (21, 24)},
+        **{
+            ("content/clauses/06-object-management-page-137.tex", line): "6.22" for line in (40, 43)
+        },
+    }
+)
 
 # Granular source facts that are present in the faithful 2025 layout but were
 # not emitted as standalone candidates by the original page extractor.  These
@@ -439,17 +442,19 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
 # service whose description continues onto that page.  These are deliberately
 # explicit rather than inferred from page adjacency: the next page can begin
 # a different service before its first normative statement.
-_SOURCE_CONTINUATION_LINKS: dict[str, tuple[str, ...]] = {
-    "content/clauses/06-object-management-page-142.tex": (
-        "requirement-candidate-content-clauses-06-object-management-page-141-l125-32",
-        "requirement-candidate-content-clauses-06-object-management-page-141-l131-34",
-        "requirement-candidate-content-clauses-06-object-management-page-141-l137-36",
-        "requirement-candidate-content-clauses-06-object-management-page-141-l143-38",
-    ),
-    "content/clauses/06-object-management-page-143.tex": (
-        "requirement-candidate-content-clauses-06-object-management-page-142-l173-48",
-    ),
-}
+_SOURCE_CONTINUATION_LINKS: Mapping[str, tuple[str, ...]] = MappingProxyType(
+    {
+        "content/clauses/06-object-management-page-142.tex": (
+            "requirement-candidate-content-clauses-06-object-management-page-141-l125-32",
+            "requirement-candidate-content-clauses-06-object-management-page-141-l131-34",
+            "requirement-candidate-content-clauses-06-object-management-page-141-l137-36",
+            "requirement-candidate-content-clauses-06-object-management-page-141-l143-38",
+        ),
+        "content/clauses/06-object-management-page-143.tex": (
+            "requirement-candidate-content-clauses-06-object-management-page-142-l173-48",
+        ),
+    }
+)
 
 
 def _source_refinement_requirements() -> tuple[Requirement, ...]:
@@ -477,92 +482,6 @@ def _source_refinement_requirements() -> tuple[Requirement, ...]:
             _SOURCE_REQUIREMENT_REFINEMENTS
         )
     )
-
-
-def _table_row_text(value: str) -> str:
-    """Normalize a Table 5 cell without turning layout punctuation into prose."""
-    value = re.sub(r"\\[a-zA-Z]+(?:\{[^{}]*\})?", " ", value)
-    value = value.replace("%", " ").replace("\\", " ")
-    return re.sub(r"\s+", " ", value).strip(" ,")
-
-
-def _table_5_row_requirements(model: object) -> tuple[Requirement, ...]:
-    """Promote Table 5's typed rows as explicit, source-addressable candidates."""
-    records: list[Requirement] = []
-    tables = getattr(model, "tables", ())
-    for table in tables:
-        if getattr(table, "number", None) != "5":
-            continue
-        by_row: dict[int, list[object]] = defaultdict(list)
-        for cell in table.cells:
-            if cell.row is not None:
-                by_row[cell.row].append(cell)
-        start_rows: list[int] = []
-        for row, cells in sorted(by_row.items()):
-            type_cell = max(cells, key=lambda item: item.column if item.column is not None else -1)
-            type_text = _table_row_text(type_cell.text)
-            if type_text.casefold() in {"type", "(continued)", ""} or type_text in {"\\", ",", "]"}:
-                continue
-            if type_cell.column is None or type_cell.column < 6:
-                continue
-            start_rows.append(row)
-        for ordinal, start_row in enumerate(start_rows, start=1):
-            end_row = start_rows[ordinal] if ordinal < len(start_rows) else max(by_row) + 1
-            row_cells = [cell for row in range(start_row, end_row) for cell in by_row.get(row, ())]
-            if not row_cells:
-                continue
-            values_by_column: dict[int, list[str]] = defaultdict(list)
-            for cell in row_cells:
-                if cell.column is None:
-                    continue
-                value = _table_row_text(cell.text)
-                if value and value not in {"\\", ",", "]"}:
-                    values_by_column[cell.column].append(value)
-            columns = sorted(values_by_column, reverse=True)
-            if not columns:
-                continue
-            type_value = " ".join(dict.fromkeys(values_by_column[columns[0]]))
-            encoding_value = (
-                " ".join(dict.fromkeys(values_by_column[columns[1]]))
-                if len(columns) > 1
-                else ""
-            )
-            example_value = (
-                " ".join(dict.fromkeys(values_by_column[columns[-1]]))
-                if len(columns) > 2
-                else ""
-            )
-            first_cell = min(row_cells, key=lambda item: item.source.line)
-            last_line = max(cell.source.end_line or cell.source.line for cell in row_cells)
-            page = table.id.rsplit("-p", 1)[-1]
-            records.append(
-                Requirement(
-                    id=f"requirement-candidate-table-5-p{page}-r{ordinal:03d}",
-                    title=f"Table 5 row: {type_value}",
-                    statement=(
-                        f"Table 5 defines the {type_value} row with encoding "
-                        f"{encoding_value or 'unspecified'} and example "
-                        f"{example_value or 'unspecified'}."
-                    ),
-                    kind="detailed",
-                    clause="11.5.1",
-                    machine_statement=(
-                        f"Table 5 type {type_value}; encoding {encoding_value or 'unspecified'}; "
-                        f"example {example_value or 'unspecified'}."
-                    ),
-                    coverage_kind="cross-cutting",
-                    coverage_note=(
-                        "Structured Table 5 row candidate; it records the wire-shape source "
-                        "without promoting the example to a normative lexical rule."
-                    ),
-                    api_surface_scope="cross-cutting",
-                    api_surface_note="Table structure is not itself a callable API mapping.",
-                    extraction="explicit",
-                    semantic_group_id="m16.table-5",
-                    source=first_cell.source.model_copy(update={"end_line": last_line}),
-                )
-            )
-    return tuple(records)
 
 
 def _repair_requirement_record_links(root: Path) -> None:
@@ -635,9 +554,7 @@ def _repair_requirement_record_links(root: Path) -> None:
 
     links_path = semantic_root / "requirement-links.json"
     if links_path.is_file():
-        payload = RequirementLinkFile.model_validate_json(
-            links_path.read_text(encoding="utf-8")
-        )
+        payload = RequirementLinkFile.model_validate_json(links_path.read_text(encoding="utf-8"))
         repaired = tuple(item for item in payload.links if item.requirement_id in valid_ids)
         if repaired != payload.links:
             _write_json(
@@ -663,57 +580,60 @@ def _repair_requirement_record_links(root: Path) -> None:
                 ).model_dump(mode="json"),
             )
 
-_STOP_TERMS = {
-    "about",
-    "after",
-    "again",
-    "allow",
-    "also",
-    "and",
-    "any",
-    "are",
-    "been",
-    "before",
-    "being",
-    "between",
-    "both",
-    "each",
-    "from",
-    "have",
-    "into",
-    "must",
-    "not",
-    "once",
-    "only",
-    "onto",
-    "over",
-    "same",
-    "shall",
-    "should",
-    "some",
-    "state",
-    "than",
-    "that",
-    "their",
-    "them",
-    "then",
-    "there",
-    "these",
-    "they",
-    "this",
-    "those",
-    "through",
-    "under",
-    "used",
-    "using",
-    "when",
-    "where",
-    "which",
-    "with",
-    "within",
-    "without",
-    "would",
-}
+
+_STOP_TERMS = frozenset(
+    {
+        "about",
+        "after",
+        "again",
+        "allow",
+        "also",
+        "and",
+        "any",
+        "are",
+        "been",
+        "before",
+        "being",
+        "between",
+        "both",
+        "each",
+        "from",
+        "have",
+        "into",
+        "must",
+        "not",
+        "once",
+        "only",
+        "onto",
+        "over",
+        "same",
+        "shall",
+        "should",
+        "some",
+        "state",
+        "than",
+        "that",
+        "their",
+        "them",
+        "then",
+        "there",
+        "these",
+        "they",
+        "this",
+        "those",
+        "through",
+        "under",
+        "used",
+        "using",
+        "when",
+        "where",
+        "which",
+        "with",
+        "within",
+        "without",
+        "would",
+    }
+)
 
 
 def _terms(text: str) -> frozenset[str]:
@@ -770,11 +690,11 @@ _write_json = write_json
 
 def _update_state_machine_sources(
     root: Path,
-    transition_updates: dict[str, tuple[tuple[str, ...], tuple[str, ...]]],
+    transition_updates: Mapping[str, tuple[tuple[str, ...], tuple[str, ...]]],
 ) -> None:
     """Write only reciprocal requirement/implementation fields into machine JSON."""
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
         if not isinstance(raw, dict) or "state_machines" not in raw:
             continue
         changed = False
@@ -794,95 +714,78 @@ def _update_state_machine_sources(
             _write_json(path, raw)
 
 
-def migrate(root: Path = ROOT) -> dict[str, int]:
-    """Promote 1516.1 candidates and close its operational mappings."""
-    _repair_requirement_record_links(root)
-    model = load_hla_document_model(root)
-    candidates = _load_requirement_candidates(root, HLA_SOURCE)
-    content_blocks = ContentBlockFile.model_validate_json(
-        DocumentResources(root).semantic_file("content-blocks.json").read_text(encoding="utf-8")
-    ).content_blocks
-    annex_by_path = {}
-    for block in content_blocks:
-        match = re.search(r"\\textbf\{Annex ([A-I])\}", block.layout_body or "")
-        if match:
-            annex_by_path[block.source.path] = match.group(1)
-    candidates = tuple(
-        candidate.model_copy(
-            update={
-                "clause": annex_by_path.get(candidate.source.path, candidate.clause),
-                "clause_id": (
-                    f"clause-{annex_by_path[candidate.source.path]}"
-                    if candidate.source.path in annex_by_path
-                    else candidate.clause_id
-                ),
+def _refresh_authored_candidate(
+    existing: Requirement,
+    candidate: Requirement,
+) -> Requirement:
+    update = {
+        "title": candidate.title.replace("Normative candidate", "Normative statement"),
+        "statement": candidate.statement,
+        "machine_statement": candidate.machine_statement,
+        "source": candidate.source,
+    }
+    corrected_clause = _SOURCE_CLAUSE_OVERRIDES.get((candidate.source.path, candidate.source.line))
+    if corrected_clause is not None:
+        update.update(
+            {
+                "clause": corrected_clause,
+                "clause_id": f"clause-{corrected_clause}",
+                "semantic_group_id": f"m16.clause.{corrected_clause}",
             }
         )
-        for candidate in candidates
-    )
+    return existing.model_copy(update=update)
+
+
+def _authored_requirements(
+    model: object,
+    candidates: Sequence[Requirement],
+) -> tuple[dict[str, Requirement], tuple[Requirement, ...], tuple[Requirement, ...]]:
     candidate_ids = {item.id for item in candidates}
     authored = {
         item.id: item
         for item in model.requirements
         if item.extraction == "explicit"
-        and (
-            not item.id.startswith("requirement-candidate-")
-            or item.id in candidate_ids
-        )
+        and (not item.id.startswith("requirement-candidate-") or item.id in candidate_ids)
     }
-    source_refinements = (
-        *_source_refinement_requirements(),
-        *_table_5_row_requirements(model),
-    )
-    authored.update({item.id: item for item in source_refinements})
-    # A completed migration can be run again. Reconcile the source-owned
-    # metadata of already-promoted candidates before deciding which candidates
-    # still need promotion. This keeps a source-heading/provenance correction
-    # durable without disturbing reviewed coverage or implementation fields.
+    refinements = (*_source_refinement_requirements(), *_table_5_row_requirements(model))
+    authored.update({item.id: item for item in refinements})
     for candidate in candidates:
         existing = authored.get(candidate.id)
-        if existing is None:
-            continue
-        update = {
-            "title": candidate.title.replace("Normative candidate", "Normative statement"),
-            "statement": candidate.statement,
-            "machine_statement": candidate.machine_statement,
-            "source": candidate.source,
-        }
-        corrected_clause = _SOURCE_CLAUSE_OVERRIDES.get(
-            (candidate.source.path, candidate.source.line)
-        )
-        if corrected_clause is not None:
-            update.update(
-                {
-                    "clause": corrected_clause,
-                    "clause_id": f"clause-{corrected_clause}",
-                    "semantic_group_id": f"m16.clause.{corrected_clause}",
-                }
-            )
-        authored[candidate.id] = existing.model_copy(
-            update=update,
-        )
-    # Do not append source candidates that have already been promoted into the
-    # authored requirement file.
-    candidates = tuple(candidate for candidate in candidates if candidate.id not in authored)
-    candidate_ids = {item.id for item in candidates}
-    if len(candidate_ids) != len(candidates):
+        if existing is not None:
+            authored[candidate.id] = _refresh_authored_candidate(existing, candidate)
+    # Already promoted candidates remain authored and are not appended twice.
+    remaining = tuple(candidate for candidate in candidates if candidate.id not in authored)
+    if len({item.id for item in remaining}) != len(remaining):
         raise ValueError("candidate extraction produced duplicate IDs")
+    return authored, remaining, refinements
 
-    transitions = _all_transitions(model)
-    requirement_order = {
-        item.id: index for index, item in enumerate((*authored.values(), *candidates))
-    }
-    candidate_matches: dict[str, list[str]] = defaultdict(list)
+
+def _requirement_order(
+    authored: Mapping[str, Requirement],
+    candidates: Sequence[Requirement],
+) -> dict[str, int]:
+    return {item.id: index for index, item in enumerate((*authored.values(), *candidates))}
+
+
+def _candidate_transition_matches(
+    candidates: Sequence[Requirement],
+    transitions: Sequence[object],
+) -> dict[str, list[str]]:
+    matches: dict[str, list[str]] = defaultdict(list)
     for transition in transitions:
         for requirement_id in _transition_matches(candidates, transition):
-            candidate_matches[requirement_id].append(transition.id)
-    # Rebuild the candidate records with explicit ownership and an honest
-    # distinction between direct state links and clause-scoped requirements.
-    promoted: list[Requirement] = list(authored.values())
+            matches[requirement_id].append(transition.id)
+    return matches
+
+
+def _promote_candidates(
+    authored: Mapping[str, Requirement],
+    candidates: Sequence[Requirement],
+    matches: Mapping[str, Sequence[str]],
+) -> list[Requirement]:
+    promoted = list(authored.values())
     for candidate in candidates:
-        transition_ids = tuple(candidate_matches.get(candidate.id, ()))
+        transition_ids = tuple(matches.get(candidate.id, ()))
         if transition_ids:
             coverage_kind = "transition"
             coverage_note = (
@@ -913,88 +816,132 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
             )
         )
     promoted.sort(key=lambda item: (item.source.path, item.source.line, item.id))
+    return promoted
 
-    reqs_by_transition: dict[str, list[str]] = defaultdict(list)
+
+def _requirements_by_transition(
+    promoted: Sequence[Requirement],
+    requirement_order: Mapping[str, int],
+) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = defaultdict(list)
     for requirement in promoted:
         for transition_id in requirement.transition_ids:
-            reqs_by_transition[transition_id].append(requirement.id)
-    for transition_id in reqs_by_transition:
-        reqs_by_transition[transition_id].sort(key=lambda item: requirement_order.get(item, 0))
+            result[transition_id].append(requirement.id)
+    for requirement_ids in result.values():
+        requirement_ids.sort(key=lambda item: requirement_order.get(item, 0))
+    return result
 
-    existing_implementations = list(model.implementations)
-    implementation_by_transition: dict[str, list[str]] = defaultdict(list)
-    for implementation in existing_implementations:
+
+def _implementation_index(implementations: Sequence[object]) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = defaultdict(list)
+    for implementation in implementations:
         for transition_id in implementation.transition_ids:
-            implementation_by_transition[transition_id].append(implementation.id)
-    implementations = []
-    for implementation in existing_implementations:
-        transition_ids = implementation.transition_ids
-        requirement_ids = tuple(
+            result[transition_id].append(implementation.id)
+    return result
+
+
+def _updated_implementation(
+    implementation: object,
+    transitions: Sequence[object],
+    requirements_by_transition: Mapping[str, Sequence[str]],
+) -> object:
+    transition_ids = implementation.transition_ids
+    requirement_ids = tuple(
+        dict.fromkeys(
             requirement_id
             for transition_id in transition_ids
-            for requirement_id in reqs_by_transition.get(transition_id, ())
+            for requirement_id in requirements_by_transition.get(transition_id, ())
         )
-        requirement_ids = tuple(dict.fromkeys(requirement_ids))
-        clause_ids = tuple(
-            dict.fromkeys(
-                (
-                    *implementation.clause_ids,
-                    *(
-                        transition.clause_id
-                        for transition in transitions
-                        if transition.id in transition_ids and transition.clause_id
-                    ),
-                )
-            )
-        )
-        implementations.append(
-            implementation.model_copy(
-                update={"requirement_ids": requirement_ids, "clause_ids": clause_ids}
-            )
-        )
-    for transition in transitions:
-        if implementation_by_transition.get(transition.id):
-            continue
-        implementation_id = f"m16.transition.{slugify(transition.id, fallback='transition')}"
-        implementation_by_transition[transition.id].append(implementation_id)
-        event = transition.event.strip()
-        event_lower = event.casefold()
-        if "†" in event or "callback" in event_lower or "rti" in event_lower:
-            interface_kind = "callback"
-        elif event:
-            interface_kind = "service"
-        else:
-            interface_kind = "handler"
-        implementations.append(
-            ImplementationMapping(
-                id=implementation_id,
-                interface_kind=interface_kind,
-                interface_name=event or f"Transition {transition.id}",
-                implementation=f"planned.{slugify(transition.id, fallback='transition')}",
-                status="planned",
-                clause_ids=(transition.clause_id,) if transition.clause_id else (),
-                requirement_ids=tuple(reqs_by_transition.get(transition.id, ())),
-                transition_ids=(transition.id,),
-                source=transition.source,
-                notes=(
-                    "M16 closure mapping: planned integration seam for the modeled "
-                    "transition; replace with a concrete RTI/federate symbol when available."
+    )
+    clause_ids = tuple(
+        dict.fromkeys(
+            (
+                *implementation.clause_ids,
+                *(
+                    transition.clause_id
+                    for transition in transitions
+                    if transition.id in transition_ids and transition.clause_id
                 ),
             )
         )
-    implementations.sort(
-        key=lambda item: (
-            item.transition_ids[0] if item.transition_ids else "",
-            item.id,
-        )
+    )
+    return implementation.model_copy(
+        update={"requirement_ids": requirement_ids, "clause_ids": clause_ids}
     )
 
-    transition_updates: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {}
-    for transition in transitions:
-        requirement_ids = tuple(reqs_by_transition.get(transition.id, ()))
-        implementation_ids = tuple(implementation_by_transition[transition.id])
-        transition_updates[transition.id] = (requirement_ids, implementation_ids)
 
+def _planned_implementation(
+    transition: object,
+    requirement_ids: Sequence[str],
+) -> ImplementationMapping:
+    event = transition.event.strip()
+    event_lower = event.casefold()
+    if "†" in event or "callback" in event_lower or "rti" in event_lower:
+        interface_kind = "callback"
+    elif event:
+        interface_kind = "service"
+    else:
+        interface_kind = "handler"
+    return ImplementationMapping(
+        id=f"m16.transition.{slugify(transition.id, fallback='transition')}",
+        interface_kind=interface_kind,
+        interface_name=event or f"Transition {transition.id}",
+        implementation=f"planned.{slugify(transition.id, fallback='transition')}",
+        status="planned",
+        clause_ids=(transition.clause_id,) if transition.clause_id else (),
+        requirement_ids=tuple(requirement_ids),
+        transition_ids=(transition.id,),
+        source=transition.source,
+        notes=(
+            "M16 closure mapping: planned integration seam for the modeled transition; "
+            "replace with a concrete RTI/federate symbol when available."
+        ),
+    )
+
+
+def _reconciled_implementations(
+    source_implementations: Sequence[object],
+    transitions: Sequence[object],
+    requirements_by_transition: Mapping[str, Sequence[str]],
+) -> tuple[list[ImplementationMapping], dict[str, list[str]]]:
+    implementation_by_transition = _implementation_index(source_implementations)
+    implementations = [
+        _updated_implementation(item, transitions, requirements_by_transition)
+        for item in source_implementations
+    ]
+    for transition in transitions:
+        if implementation_by_transition.get(transition.id):
+            continue
+        implementation = _planned_implementation(
+            transition, requirements_by_transition.get(transition.id, ())
+        )
+        implementation_by_transition[transition.id].append(implementation.id)
+        implementations.append(implementation)
+    implementations.sort(
+        key=lambda item: (item.transition_ids[0] if item.transition_ids else "", item.id)
+    )
+    return implementations, implementation_by_transition
+
+
+def _transition_updates(
+    transitions: Sequence[object],
+    requirements_by_transition: Mapping[str, Sequence[str]],
+    implementations_by_transition: Mapping[str, Sequence[str]],
+) -> dict[str, tuple[tuple[str, ...], tuple[str, ...]]]:
+    return {
+        transition.id: (
+            tuple(requirements_by_transition.get(transition.id, ())),
+            tuple(implementations_by_transition[transition.id]),
+        )
+        for transition in transitions
+    }
+
+
+def _requirement_links(
+    model: object,
+    promoted: Sequence[Requirement],
+    requirement_order: Mapping[str, int],
+) -> list[RequirementLink]:
     links_by_pair = {
         (item.requirement_id, item.transition_id): item for item in model.requirement_links
     }
@@ -1015,7 +962,7 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
                     notes="M16 deterministic same-clause event-term relationship.",
                 ),
             )
-    links = sorted(
+    return sorted(
         links_by_pair.values(),
         key=lambda item: (
             requirement_order.get(item.requirement_id, 0),
@@ -1024,11 +971,16 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
         ),
     )
 
-    coverage = [
+
+def _transition_coverage(
+    transitions: Sequence[object],
+    updates: Mapping[str, tuple[tuple[str, ...], tuple[str, ...]]],
+) -> list[TransitionCoverage]:
+    return [
         TransitionCoverage(
             transition_id=transition.id,
             status="mapped",
-            implementation_ids=transition_updates[transition.id][1],
+            implementation_ids=updates[transition.id][1],
             reason=(
                 "Explicit planned implementation seam recorded for the modeled transition; "
                 "the mapping is complete while concrete code remains a separate maturity step."
@@ -1038,7 +990,14 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
         for transition in transitions
     ]
 
-    semantic_root = DocumentResources(root).semantic
+
+def _write_primary_records(
+    semantic_root: Path,
+    promoted: Sequence[Requirement],
+    links: Sequence[RequirementLink],
+    implementations: Sequence[ImplementationMapping],
+    coverage: Sequence[TransitionCoverage],
+) -> None:
     _write_json(
         semantic_root / "requirements.json",
         RequirementFile(schema_version=1, requirements=tuple(promoted)).model_dump(mode="json"),
@@ -1063,8 +1022,12 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
             mode="json"
         ),
     )
-    _update_state_machine_sources(root, transition_updates)
 
+
+def _requirement_paths(
+    promoted: Sequence[Requirement],
+    requirement_order: Mapping[str, int],
+) -> dict[str, list[str]]:
     requirement_ids_by_path: dict[str, list[str]] = defaultdict(list)
     for requirement in promoted:
         requirement_ids_by_path[requirement.source.path].append(requirement.id)
@@ -1076,13 +1039,17 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
                 )
             if requirement_id not in requirement_ids_by_path[path]:
                 requirement_ids_by_path[path].append(requirement_id)
-    content_blocks_path = semantic_root / "content-blocks.json"
-    content_blocks_payload = ContentBlockFile.model_validate_json(
-        content_blocks_path.read_text(encoding="utf-8")
-    )
+    return requirement_ids_by_path
+
+
+def _updated_content_blocks(
+    content_blocks: Sequence[object],
+    requirement_ids_by_path: Mapping[str, Sequence[str]],
+    requirement_order: Mapping[str, int],
+) -> tuple[list[object], dict[str, tuple[str, ...]]]:
     block_requirement_ids: dict[str, tuple[str, ...]] = {}
     updated_blocks = []
-    for block in content_blocks_payload.content_blocks:
+    for block in content_blocks:
         if block.layout_body is None:
             updated_blocks.append(block)
             continue
@@ -1101,21 +1068,30 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
                 update={"record_ids": tuple(dict.fromkeys((*non_requirement_ids, *ids)))}
             )
         )
+    return updated_blocks, block_requirement_ids
+
+
+def _write_content_links(
+    semantic_root: Path,
+    requirement_ids_by_path: Mapping[str, Sequence[str]],
+    requirement_order: Mapping[str, int],
+) -> None:
+    blocks_path = semantic_root / "content-blocks.json"
+    blocks = ContentBlockFile.model_validate_json(blocks_path.read_text(encoding="utf-8"))
+    updated_blocks, ids_by_block = _updated_content_blocks(
+        blocks.content_blocks, requirement_ids_by_path, requirement_order
+    )
     _write_json(
-        content_blocks_path,
+        blocks_path,
         ContentBlockFile(
-            schema_version=content_blocks_payload.schema_version,
-            content_blocks=tuple(updated_blocks),
+            schema_version=blocks.schema_version, content_blocks=tuple(updated_blocks)
         ).model_dump(mode="json"),
     )
-
-    content_elements_path = semantic_root / "content-elements.json"
-    content_elements_payload = ContentElementFile.model_validate_json(
-        content_elements_path.read_text(encoding="utf-8")
-    )
+    elements_path = semantic_root / "content-elements.json"
+    elements = ContentElementFile.model_validate_json(elements_path.read_text(encoding="utf-8"))
     updated_elements = []
-    for element in content_elements_payload.content_elements:
-        ids = block_requirement_ids.get(element.block_id, ())
+    for element in elements.content_elements:
+        ids = ids_by_block.get(element.block_id, ())
         non_requirement_ids = tuple(
             item for item in element.record_ids if not item.startswith("requirement-")
         )
@@ -1125,30 +1101,35 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
             )
         )
     _write_json(
-        content_elements_path,
+        elements_path,
         ContentElementFile(
-            schema_version=content_elements_payload.schema_version,
-            content_elements=tuple(updated_elements),
+            schema_version=elements.schema_version, content_elements=tuple(updated_elements)
         ).model_dump(mode="json"),
     )
 
-    # Keep the API binding manifest synchronized with the expanded source
-    # inventory.  Cross-cutting/table records receive explicit reviewed
-    # ``no-api`` rows rather than disappearing from the traceability surface.
+
+def _write_bindings_and_validate(root: Path, semantic_root: Path) -> object:
     binding_model = load_hla_document_model(root)
-    binding_path = semantic_root / "api-requirement-bindings.json"
     binding_payload = RequirementApiBindingFile(
         schema_version=1,
         bindings=build_requirement_api_bindings(binding_model),
     )
-    _write_json(binding_path, binding_payload.model_dump(mode="json"))
-
-    # Validate the complete authored model after all reciprocal writes.
+    _write_json(
+        semantic_root / "api-requirement-bindings.json", binding_payload.model_dump(mode="json")
+    )
     final = load_hla_document_model(root)
     final.assert_compliance()
+    return final
+
+
+def _migration_result(
+    final: object,
+    candidate_count: int,
+    refinement_count: int,
+) -> dict[str, int]:
     return {
-        "candidates_promoted": len(candidates),
-        "source_refinements": len(source_refinements),
+        "candidates_promoted": candidate_count,
+        "source_refinements": refinement_count,
         "requirements": len(final.requirements),
         "requirement_links": len(final.requirement_links),
         "implementations": len(final.implementations),
@@ -1157,6 +1138,38 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
         "deferred_transitions": final.transition_coverage_counts()["deferred"],
         "deferred_requirements": final.requirement_review_counts()["deferred"],
     }
+
+
+def migrate(root: Path = ROOT) -> dict[str, int]:
+    """Promote 1516.1 candidates and close its operational mappings."""
+    _repair_requirement_record_links(root)
+    model = load_hla_document_model(root)
+    candidates = _m16_candidates(root)
+    authored, candidates, refinements = _authored_requirements(model, candidates)
+    requirement_order = _requirement_order(authored, candidates)
+    transitions = _all_transitions(model)
+    matches = _candidate_transition_matches(candidates, transitions)
+    promoted = _promote_candidates(authored, candidates, matches)
+    requirements_by_transition = _requirements_by_transition(promoted, requirement_order)
+    implementations, implementations_by_transition = _reconciled_implementations(
+        model.implementations, transitions, requirements_by_transition
+    )
+    updates = _transition_updates(
+        transitions, requirements_by_transition, implementations_by_transition
+    )
+    links = _requirement_links(model, promoted, requirement_order)
+    coverage = _transition_coverage(transitions, updates)
+    semantic_root = DocumentResources(root).semantic
+    _write_primary_records(semantic_root, promoted, links, implementations, coverage)
+    _update_state_machine_sources(root, updates)
+    requirement_ids_by_path = _requirement_paths(promoted, requirement_order)
+    _write_content_links(semantic_root, requirement_ids_by_path, requirement_order)
+    final = _write_bindings_and_validate(root, semantic_root)
+    return _migration_result(
+        final,
+        len(candidates),
+        len(refinements),
+    )
 
 
 def main() -> None:

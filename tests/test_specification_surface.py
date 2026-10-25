@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.semantic_model import (
     DocumentModel,
@@ -16,8 +15,9 @@ from hla_lab.core.semantic_model import (
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.traceability.spec_readiness import assess_corpus
 from hla_lab.traceability.state_trace import replay_trace
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 HLA_ROOT = ROOT / "topics" / "ieee"
 
 

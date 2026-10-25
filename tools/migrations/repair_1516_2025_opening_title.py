@@ -3,16 +3,17 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
+from hla_lab.paths import RESOURCES
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = RESOURCES.root
 PATH = ROOT / "topics" / "ieee" / "hla-1516-2025" / "semantic" / "content-blocks.json"
 
 
 def main() -> None:
     payload = json.loads(PATH.read_text(encoding="utf-8"))
-    block = next(item for item in payload["content_blocks"] if item["id"] == "content-1-normative-001")
+    target_id = "content-1-normative-001"
+    block = next(item for item in payload["content_blocks"] if item["id"] == target_id)
     old = r"""HLA Requirements Lab\linebreak
 HLA 1516 family\linebreak
 2025-source compilation\linebreak

@@ -6,11 +6,11 @@ import json
 import subprocess
 import sys
 import unittest
-from pathlib import Path
 
 from hla_lab.traceability.api_traceability import build_report
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 EDITION_ROOTS = tuple(ROOT / "topics" / "ieee" / f"hla-1516.1-{year}" for year in ("2010", "2025"))
 
 
@@ -31,7 +31,7 @@ class ApiTraceabilityAuditTests(unittest.TestCase):
             },
             {
                 "hla-1516.1-2010": (1529, 1529, 126, 0),
-                "hla-1516.1-2025": (1860, 1860, 48, 0),
+                "hla-1516.1-2025": (1865, 1865, 53, 0),
             },
         )
 

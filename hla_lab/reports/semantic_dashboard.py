@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from collections.abc import Mapping
 from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.semantic_model import ComplianceIssue, DocumentModel
+from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.paths import REPO_ROOT, document_roots
 
 
@@ -26,16 +28,16 @@ class RequirementDashboard(DashboardModel):
     explicit_transition_covered: int
     explicit_non_transition_covered: int
     explicit_transition_requirements_with_reviewed_links: int
-    review_dispositions: dict[str, int]
+    review_dispositions: Mapping[str, int]
 
 
 class ImplementationDashboard(DashboardModel):
     total: int
-    by_status: dict[str, int]
-    by_interface_kind: dict[str, int]
+    by_status: Mapping[str, int]
+    by_interface_kind: Mapping[str, int]
     with_requirement_links: int
     with_source_reference: int
-    effective_transition_status: dict[str, int]
+    effective_transition_status: Mapping[str, int]
     concrete_transition_mappings: int
 
 
@@ -49,7 +51,7 @@ class StateMachineDashboard(DashboardModel):
     transitions_with_action: int
     transitions_with_precondition: int
     transitions_with_postcondition: int
-    transition_coverage: dict[str, int]
+    transition_coverage: Mapping[str, int]
 
 
 class SequenceDashboard(DashboardModel):
@@ -60,9 +62,9 @@ class SequenceDashboard(DashboardModel):
 
 class IssueDashboard(DashboardModel):
     reviewed: int
-    reviewed_by_code: dict[str, int]
+    reviewed_by_code: Mapping[str, int]
     including_candidates: int
-    including_candidates_by_code: dict[str, int]
+    including_candidates_by_code: Mapping[str, int]
 
 
 class M5ContractDashboard(DashboardModel):
@@ -205,8 +207,6 @@ def _document_report(model: DocumentModel) -> DocumentDashboard:
 
 def build_dashboard(roots: tuple[Path, ...]) -> DashboardReport:
     """Load an HLA corpus at the CLI boundary and return source-only metrics."""
-    from hla_lab.corpus.hla_semantic import load_hla_corpus
-
     corpus = load_hla_corpus(roots)
     documents = [_document_report(model) for model in corpus.documents]
     unresolved = corpus.unresolved_reference_issues()

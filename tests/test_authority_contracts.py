@@ -16,8 +16,9 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.traceability.semantic_authority import validate_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOTS = tuple(sorted((REPO_ROOT / "topics" / "ieee").glob("hla-1516*/")))
 ROOTS_2025 = tuple(root for root in ROOTS if root.name.endswith("-2025"))
 ROOTS_2010 = tuple(root for root in ROOTS if root.name.endswith("-2010"))
@@ -34,11 +35,11 @@ class AuthorityContractTests(unittest.TestCase):
         self.assertEqual(counts[("hla-1516-2025", "definitions")], 161)
         self.assertEqual(counts[("hla-1516-2025", "requirements")], 20)
         self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 432)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 1860)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 1864)
         self.assertEqual(counts[("hla-1516.1-2025", "transition-coverage")], 297)
         self.assertEqual(counts[("hla-1516.1-2025", "implementations")], 283)
         self.assertEqual(counts[("hla-1516.1-2025", "requirement-links")], 32)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 1894)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 1904)
         self.assertEqual(counts[("hla-1516.2-2025", "definitions")], 83)
         self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 340)
         self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 113)

@@ -2,10 +2,26 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
+from typing import TypedDict
 
 import fitz
+from pydantic import JsonValue
+
+PdfLink = TypedDict(
+    "PdfLink",
+    {
+        "from": fitz.Rect,
+        "kind": int,
+        "uri": str,
+        "page": int,
+        "to": fitz.Point,
+        "zoom": float,
+        "name": str,
+    },
+    total=False,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -24,10 +40,10 @@ def delete_existing_links(document: fitz.Document) -> None:
             page.delete_link(link)
 
 
-def insert_link(document: fitz.Document, record: dict[str, Any]) -> None:
+def insert_link(document: fitz.Document, record: Mapping[str, JsonValue]) -> None:
     page = document[int(record["source_page"])]
     link_type = str(record["type"])
-    link: dict[str, Any] = {"from": fitz.Rect(record["rectangle"])}
+    link: PdfLink = {"from": fitz.Rect(record["rectangle"])}
     if link_type == "uri":
         link["kind"] = fitz.LINK_URI
         link["uri"] = str(record["uri"])

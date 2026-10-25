@@ -4,15 +4,14 @@ from __future__ import annotations
 
 import json
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 EDITION_ROOTS = tuple(
-    ROOT / "topics" / "ieee" / name
-    for name in ("hla-1516.1-2010", "hla-1516.1-2025")
+    ROOT / "topics" / "ieee" / name for name in ("hla-1516.1-2010", "hla-1516.1-2025")
 )
 FORBIDDEN_LEGACY_TOKENS = ("rl-", "candidate-intake-", "temporary-")
 
@@ -74,7 +73,9 @@ class SemanticQualityGateTests(unittest.TestCase):
                 self.assertTrue(model.requirement_api_bindings)
 
     def test_15161_source_anomaly_ledger_is_structured(self) -> None:
-        path = ROOT / "topics" / "ieee" / "hla-1516.1-2025" / "semantic" / "source-anomaly-ledger.json"
+        path = (
+            ROOT / "topics" / "ieee" / "hla-1516.1-2025" / "semantic" / "source-anomaly-ledger.json"
+        )
         payload = json.loads(path.read_text(encoding="utf-8"))
         required = {
             "source_id",

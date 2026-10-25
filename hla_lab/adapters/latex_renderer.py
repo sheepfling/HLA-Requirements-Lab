@@ -24,7 +24,7 @@ from hla_lab.core.semantic_model import (
 from hla_lab.core.text import tex_escape
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class LatexDialect:
     """Commands and environments supplied by a document's LaTeX profile."""
 

@@ -6,7 +6,6 @@ import json
 import subprocess
 import sys
 import unittest
-from pathlib import Path
 
 from pydantic import ValidationError
 
@@ -17,8 +16,9 @@ from hla_lab.core.semantic_model import (
     ImplementationReference,
     load_document_model,
 )
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 HLA_ROOT = REPO_ROOT / "topics" / "ieee"
 DOCUMENT_ROOTS = tuple(
     HLA_ROOT / name

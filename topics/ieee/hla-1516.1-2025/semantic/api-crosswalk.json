@@ -11490,6 +11490,138 @@
       "notes": "Future binding projection; no exact source declaration is expected yet."
     },
     {
+      "id": "crosswalk.m16.transition.joined-federate-statechart.cpp",
+      "implementation_mapping_id": "m16.transition.joined-federate-statechart",
+      "target": "cpp",
+      "binding_kind": "native",
+      "language": "cpp",
+      "protocol": null,
+      "status": "ambiguous",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.cpp.federateambassador.federationrestorebegun.de392bc11dd5",
+        "api.2025.cpp.federateambassador.federationrestored.765ce1cad6f3",
+        "api.2025.cpp.federateambassador.federationsaved.5c6a41e2de0c",
+        "api.2025.cpp.federateambassador.initiatefederaterestore.18b2594f61f0",
+        "api.2025.cpp.federateambassador.initiatefederatesave.47c9e9fdb49f",
+        "api.2025.cpp.federateambassador.initiatefederatesave.8a45c6ccb6d1",
+        "api.2025.cpp.rtiambassador.federaterestorecomplete.c2567e07cf13",
+        "api.2025.cpp.rtiambassador.federatesavebegun.4d2693ce9551",
+        "api.2025.cpp.rtiambassador.federatesavecomplete.e775cf801fae",
+        "api.2025.cpp.rtiambassador.requestfederationrestore.12708949c200",
+        "api.2025.cpp.rtiambassador.requestfederationsave.00166fe13269",
+        "api.2025.cpp.rtiambassador.requestfederationsave.32986a607094"
+      ],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "Multiple source-derived declarations share the best name evidence."
+    },
+    {
+      "id": "crosswalk.m16.transition.joined-federate-statechart.fedpro",
+      "implementation_mapping_id": "m16.transition.joined-federate-statechart",
+      "target": "fedpro",
+      "binding_kind": "protocol",
+      "language": "fedpro",
+      "protocol": "protobuf",
+      "status": "ambiguous",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.fedpro.federateambassador.federationrestorebegun.5b14d2b76573",
+        "api.2025.fedpro.federateambassador.federationrestored.fc59e56f7f9a",
+        "api.2025.fedpro.federateambassador.federationsaved.71b633281686",
+        "api.2025.fedpro.federateambassador.initiatefederaterestore.eb5673bc1a3b",
+        "api.2025.fedpro.federateambassador.initiatefederatesave.16b67c9792ca",
+        "api.2025.fedpro.rtiambassador.federaterestorecompleterequest.9c5080a866a5",
+        "api.2025.fedpro.rtiambassador.federaterestorecompleteresponse.2c8e42619c0e",
+        "api.2025.fedpro.rtiambassador.federatesavebegunrequest.5c02427ca42e",
+        "api.2025.fedpro.rtiambassador.federatesavebegunresponse.72166a9e5932",
+        "api.2025.fedpro.rtiambassador.federatesavecompleterequest.60e990d823df",
+        "api.2025.fedpro.rtiambassador.federatesavecompleteresponse.74b5fc638bd5",
+        "api.2025.fedpro.rtiambassador.requestfederationrestorerequest.9f036e86ad9e",
+        "api.2025.fedpro.rtiambassador.requestfederationrestoreresponse.76832cd68a8f",
+        "api.2025.fedpro.rtiambassador.requestfederationsaverequest.97a40c8968dc",
+        "api.2025.fedpro.rtiambassador.requestfederationsaveresponse.c2ff3bd35f56"
+      ],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "Multiple source-derived declarations share the best name evidence."
+    },
+    {
+      "id": "crosswalk.m16.transition.joined-federate-statechart.grpc",
+      "implementation_mapping_id": "m16.transition.joined-federate-statechart",
+      "target": "grpc",
+      "binding_kind": "transport",
+      "language": "grpc",
+      "protocol": "grpc",
+      "status": "planned",
+      "strategy": "projection",
+      "candidate_api_surface_ids": [],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "Future binding projection; no exact source declaration is expected yet."
+    },
+    {
+      "id": "crosswalk.m16.transition.joined-federate-statechart.java",
+      "implementation_mapping_id": "m16.transition.joined-federate-statechart",
+      "target": "java",
+      "binding_kind": "native",
+      "language": "java",
+      "protocol": null,
+      "status": "ambiguous",
+      "strategy": "normalized",
+      "candidate_api_surface_ids": [
+        "api.2025.java.federateambassador.federationrestorebegun.799704e4d49d",
+        "api.2025.java.federateambassador.federationrestored.3d14eba2408f",
+        "api.2025.java.federateambassador.federationsaved.d24e332fddce",
+        "api.2025.java.federateambassador.initiatefederaterestore.5794dff51127",
+        "api.2025.java.federateambassador.initiatefederatesave.5ec9ee043954",
+        "api.2025.java.federateambassador.initiatefederatesave.88704c719056",
+        "api.2025.java.rtiambassador.federaterestorecomplete.9cfa9ff6d09e",
+        "api.2025.java.rtiambassador.federatesavebegun.473629f3fd88",
+        "api.2025.java.rtiambassador.federatesavecomplete.73471ab22550",
+        "api.2025.java.rtiambassador.requestfederationrestore.e1ae8aabe5a6",
+        "api.2025.java.rtiambassador.requestfederationsave.0168f1931d00",
+        "api.2025.java.rtiambassador.requestfederationsave.f8e5a5072464"
+      ],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "Multiple source-derived declarations share the best name evidence."
+    },
+    {
+      "id": "crosswalk.m16.transition.joined-federate-statechart.python",
+      "implementation_mapping_id": "m16.transition.joined-federate-statechart",
+      "target": "python",
+      "binding_kind": "language-adapter",
+      "language": "python",
+      "protocol": null,
+      "status": "planned",
+      "strategy": "projection",
+      "candidate_api_surface_ids": [],
+      "selected_api_surface_ids": [],
+      "source": {
+        "path": "semantic/implementations.json",
+        "line": 4693,
+        "end_line": null
+      },
+      "notes": "Future binding projection; no exact source declaration is expected yet."
+    },
+    {
       "id": "crosswalk.m16.transition.normal-enter-history.cpp",
       "implementation_mapping_id": "m16.transition.normal-enter-history",
       "target": "cpp",

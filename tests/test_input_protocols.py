@@ -16,6 +16,7 @@ class InputProtocolTests(unittest.TestCase):
         machine = MappingProxyType(
             {
                 "id": "example",
+                "title": "Example state machine",
                 "states": [],
                 "transitions": [],
                 "layout": {},
