@@ -11868,7 +11868,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-181.tex",
-        "line": 120,
+        "line": 118,
         "end_line": 130
       }
     },
@@ -11973,7 +11973,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 9,
+        "line": 7,
         "end_line": 13
       }
     },
@@ -12093,7 +12093,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 20,
+        "line": 19,
         "end_line": 25
       }
     },
@@ -12138,7 +12138,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 39,
+        "line": 37,
         "end_line": 52
       }
     },
@@ -13923,7 +13923,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-207.tex",
-        "line": 113,
+        "line": 112,
         "end_line": 118
       }
     },
@@ -14553,7 +14553,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/08-time-management-page-216.tex",
-        "line": 89,
+        "line": 87,
         "end_line": 92
       }
     },
@@ -14943,7 +14943,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 9,
+        "line": 8,
         "end_line": 18
       }
     },
@@ -15033,7 +15033,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 18,
+        "line": 17,
         "end_line": 28
       }
     },
@@ -15063,7 +15063,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 60,
+        "line": 59,
         "end_line": 70
       }
     },
@@ -15078,7 +15078,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 75,
+        "line": 74,
         "end_line": 91
       }
     },
@@ -20703,7 +20703,7 @@
       "rationale": "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
       "source": {
         "path": "content/clauses/11-management-object-model-page-294.tex",
-        "line": 19,
+        "line": 17,
         "end_line": 30
       }
     },

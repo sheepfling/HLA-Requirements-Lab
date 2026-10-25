@@ -73,7 +73,7 @@ class DocumentModelTests(unittest.TestCase):
         )
         self.assertEqual(
             requirement.title,
-            "Normative statement at content/clauses/08-time-management-page-182.tex:39",
+            "Normative statement at content/clauses/08-time-management-page-182.tex:37",
         )
 
     def test_ordered_requirements_preserve_source_order_within_clauses(self) -> None:

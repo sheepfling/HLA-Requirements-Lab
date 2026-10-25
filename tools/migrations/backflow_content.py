@@ -56,7 +56,7 @@ def repair_page_216() -> None:
         ),
         "90-27": (
             "A region specification shall contain at most one range for any given dimension.",
-            89,
+            87,
             92,
         ),
         "93-28": (
@@ -114,7 +114,7 @@ def repair_page_219_region_relationships() -> None:
             "which the FDD defines a default range and that are available dimensions of the "
             "instance attribute, class attribute, interaction class, or sent interaction with "
             "which the region specification is being associated.",
-            9,
+            8,
             18,
         ),
         "23-7": (
@@ -122,7 +122,7 @@ def repair_page_219_region_relationships() -> None:
             "realization that contains no dimensions if all available dimensions have the "
             "excluded indicator specified in the FDD; such a region realization shall not "
             "overlap with any other region realization, even the default region.",
-            18,
+            17,
             28,
         ),
         "50-16": (
@@ -143,7 +143,7 @@ def repair_page_219_region_relationships() -> None:
             "service has been invoked at least once for all of the dimensions of the region, "
             "followed by the invocation of the Commit Region Modifications service for that "
             "region.",
-            60,
+            59,
             70,
         ),
         "86-28": (
@@ -154,7 +154,7 @@ def repair_page_219_region_relationships() -> None:
             "a region specification. The effects of the Set Range Bounds service invocations "
             "are still pending and shall take effect if and when the Commit Region "
             "Modifications service is successfully invoked for that region.",
-            75,
+            74,
             91,
         ),
     }

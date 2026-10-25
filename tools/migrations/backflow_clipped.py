@@ -320,7 +320,7 @@ def repair_clipped_clause_statements() -> None:
             "As shown in these two tables, a message retraction designator is provided to both "
             "the sender and the receiver if the sent message order type is TSO, regardless of "
             "the order type of the received message.",
-            120,
+            118,
             130,
         ),
         TIME + "181-l133-8": (
@@ -367,7 +367,7 @@ def repair_clipped_clause_statements() -> None:
             "Time Regulation service. The RTI shall subsequently make the joined federate "
             "time-regulating by invoking the Time Regulation Enabled service at that joined "
             "federate.",
-            9,
+            7,
             13,
         ),
         TIME + "182-l19-5": (
@@ -379,7 +379,7 @@ def repair_clipped_clause_statements() -> None:
         TIME + "182-l22-6": (
             "Lookahead shall be a logical time interval that establishes the lowest value of "
             "timestamps that can be sent in TSO messages by the joined federate.",
-            20,
+            19,
             25,
         ),
         TIME + "182-l37-11": (
@@ -396,7 +396,7 @@ def repair_clipped_clause_statements() -> None:
             "a time advancement service that moves the joined federate's logical time forward "
             "lifts this additional restriction (and imposes the restriction of the subsequent "
             "advancement service).",
-            39,
+            37,
             52,
         ),
         TIME + "182-l73-23": (
@@ -573,7 +573,7 @@ def repair_clipped_clause_statements() -> None:
             "If the argument indicates that LITS is defined for the joined federate, then "
             "the optional returned argument shall be supplied to indicate the joined "
             "federate's current LITS.",
-            113,
+            112,
             118,
         ),
         SUPPORT + "259-l144-44": (

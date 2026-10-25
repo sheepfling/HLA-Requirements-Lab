@@ -53,7 +53,7 @@ the default remains strict matching.
 Audit both editions with:
 
 ```console
-python -m hla_lab.traceability.api_traceability --check --require-complete --json
+python -m hla_lab.traceability.api_traceability --workspace-root . --check --require-complete --json
 ```
 
 The audit verifies manifest determinism, requirement coverage, language/source

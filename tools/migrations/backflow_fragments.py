@@ -465,7 +465,7 @@ def repair_local_fragments() -> None:
             "be followed by one or more service report records (see ServiceReportRecord "
             "in Table 5).",
             "11.5.2.1",
-            19,
+            17,
             30,
         ),
         TIME + "180-l84-25": (

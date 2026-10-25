@@ -373,11 +373,11 @@ class HlaBackflowTests(unittest.TestCase):
     def test_page_219_region_rules_precede_instance_attribute_heading(self) -> None:
         by_id = {item["id"]: item for item in _read("requirements.json")["requirements"]}
         expected = {
-            "11-3": ("A region specification", "associated.", 9),
-            "23-7": ("A region specification", "default region.", 18),
+            "11-3": ("A region specification", "associated.", 8),
+            "23-7": ("A region specification", "default region.", 17),
             "50-16": ("If a federate invokes", "all of its dimensions.", 42),
-            "62-20": ("The effects", "for that region.", 60),
-            "86-28": ("If a federate invokes", "for that region.", 75),
+            "62-20": ("The effects", "for that region.", 59),
+            "86-28": ("If a federate invokes", "for that region.", 74),
         }
         for suffix, (opening, ending, source_line) in expected.items():
             record = next(item for key, item in by_id.items() if f"page-219-l{suffix}" in key)

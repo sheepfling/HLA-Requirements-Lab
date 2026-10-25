@@ -286,7 +286,7 @@ python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --api-targ
 Audit the complete requirement-to-Java/C++ declaration path for both editions:
 
 ```console
-python -m hla_lab.traceability.api_traceability --check --require-complete --json
+python -m hla_lab.traceability.api_traceability --workspace-root . --check --require-complete --json
 ```
 
 For use from an independent RTI repository, export a portable corpus bundle

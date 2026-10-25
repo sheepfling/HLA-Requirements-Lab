@@ -8,7 +8,7 @@
   "candidate": {
     "bundle_id": "umbra-hla-requirements",
     "corpus_revision": "working-tree-backflow-2026-10-25",
-    "sha256": "b3981c99a891fab33b38654f28cbe744d451a97290b3105fc3abec48f65a8a9c"
+    "sha256": "0bea82182c73c837d87e94d1b3c5d7bad79502d004ec5ded9192665924fc3f9c"
   },
   "issues": [
     {
@@ -8020,13 +8020,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-181.tex",
-            "line": 120,
+            "line": 118,
             "end_line": 130
           }
         }
       },
       "before_sha256": "8f10e2929784df7d11392feec63c9e477f597e2ddc34769c2e5d3448333caa9d",
-      "after_sha256": "fa0e57feb043a4b0ec6800cb3c44b700ece6d9349ac884d5f51f023883c72a79"
+      "after_sha256": "823578d2f819d9aaa5331501abc6d3ee3bf9e1ed39a11fd4770f6fce3b2a4c43"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -8255,13 +8255,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-182.tex",
-            "line": 9,
+            "line": 7,
             "end_line": 13
           }
         }
       },
       "before_sha256": "05cfd93d28c8fb6a5f7d5be777f96ea2a06df147dd3933cc507c38e309af2462",
-      "after_sha256": "9f80fb26b11cfc890838594e48259205e10a482d2b397ab098e5929cbfce7d97"
+      "after_sha256": "d35dec4997fcb887aa9a5aaa8995fd2c1342d96b71a2d3f664b7405fc5fb8613"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -8502,13 +8502,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-182.tex",
-            "line": 20,
+            "line": 19,
             "end_line": 25
           }
         }
       },
       "before_sha256": "0d89cb3c7ed20c134040bdc6ab3184ccb326b6d9834d575c3851c295ee39b700",
-      "after_sha256": "c661a0fbf589284928a065ccfff0e1e97c0f311cb42e596f9701282d6a57b5cc"
+      "after_sha256": "43289bc57c8a454a35882ed03bb7660a7846a07d26cada2195fabfa6a6f38a4c"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -8611,13 +8611,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-182.tex",
-            "line": 39,
+            "line": 37,
             "end_line": 52
           }
         }
       },
       "before_sha256": "1ac52b6ec78acad20a2823efcfb961d8c367d0384ff1f1be4e3d7e66f81c4142",
-      "after_sha256": "8517d8b1ca283bdb2899bf7b740ddc66f1baabfe2558d8e8a4daba3446448d54"
+      "after_sha256": "79f7561542357d3cc3b937bc12540003344b5e69cc8fbef45fa4f582a2c4d0d0"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9056,13 +9056,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-207.tex",
-            "line": 113,
+            "line": 112,
             "end_line": 118
           }
         }
       },
       "before_sha256": "b16d9cb1bfb1367eeeea82b1017fbdc69bfdec99b05eca5907fca3ca86bb6729",
-      "after_sha256": "d1616afffeac534eb2d5886f6b2417ff23c33e603a528c54591b37f90dc16052"
+      "after_sha256": "f673e08dcc0b5a507d0c32a05fdf8eb73560fac9070f7746a097674750baa372"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9334,13 +9334,13 @@
           },
           "after": {
             "path": "content/clauses/08-time-management-page-216.tex",
-            "line": 89,
+            "line": 87,
             "end_line": 92
           }
         }
       },
       "before_sha256": "422512f3fdbf3d933fadc96b585f77f7e0c0b8a3d5587370ef0f84f014e47cfa",
-      "after_sha256": "3fe7f55e424e6d2f98dc6ec5585f21f2b750c3d22ef4f3fac15c868c5270d138"
+      "after_sha256": "8499b2ab1f5925e14050766321e5203d7aa6095adb87a73e2195cd287d3525f7"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9460,13 +9460,13 @@
           },
           "after": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
-            "line": 9,
+            "line": 8,
             "end_line": 18
           }
         }
       },
       "before_sha256": "9c79d6423092513f116f7e401abea227e22bed248d8182020190c951bfa7bc3c",
-      "after_sha256": "11f5b40b736a6deb8644a8ca818cad24a2d7ae0b4a94eb9ab04ccece96ead857"
+      "after_sha256": "55cbeeed9914e015c1dc6cea95478f60f0ad988179500d1e14d0b58deaa28c09"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9502,13 +9502,13 @@
           },
           "after": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
-            "line": 18,
+            "line": 17,
             "end_line": 28
           }
         }
       },
       "before_sha256": "18a33dc912a17269dcba1ea2ab9ec335a21651e6cdff5bf860457d7377145f07",
-      "after_sha256": "d252922d1538374d74f54cf2d9ee9dccd00a995200bd31ee303ae60b8cf7db86"
+      "after_sha256": "e720dd7554054e29004fa4700f6b68f10645de9b773e852df4f71d9cfa556f44"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9544,13 +9544,13 @@
           },
           "after": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
-            "line": 60,
+            "line": 59,
             "end_line": 70
           }
         }
       },
       "before_sha256": "83b14bb9b4a91a90c823b7e220b4e58374fa79c910985d2d84b11e0e429a75f0",
-      "after_sha256": "9352f4f3f588c5e1934193bcd51de8c5f3855126a1edc25c2a480134dbc80f92"
+      "after_sha256": "aa3363eb2d7337623783039916a546c88f8911cc285e63461b3b47c511b544a6"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -9586,13 +9586,13 @@
           },
           "after": {
             "path": "content/clauses/09-data-distribution-management-page-219.tex",
-            "line": 75,
+            "line": 74,
             "end_line": 91
           }
         }
       },
       "before_sha256": "320f4f54919bcd7e0bf67af061410ba4c7db3a86471bd6b1044a70e33cf84862",
-      "after_sha256": "0e5461eb471403455527744d1cf3fd8125d25120652bf9555f7fd4047d79c893"
+      "after_sha256": "b24727084de68b19940932dabf0d9b04a63985c0c4bbf2f82e2df7200c9bc0ff"
     },
     {
       "document_id": "hla-1516.1-2025",
@@ -10035,13 +10035,13 @@
           },
           "after": {
             "path": "content/clauses/11-management-object-model-page-294.tex",
-            "line": 19,
+            "line": 17,
             "end_line": 30
           }
         }
       },
       "before_sha256": "df7cd8f9c18febd4eb0980071555898490e2feaef5817456bb9bdd07c8649f3a",
-      "after_sha256": "e836847fde15c8ffa0ec1f1ca4f62dbfdc26add572d075899ba8fecd46f435ab"
+      "after_sha256": "06eff25389b394b1e4a6c912447655777089002fd74b07054056b0d0502e9df0"
     },
     {
       "document_id": "hla-1516.1-2025",

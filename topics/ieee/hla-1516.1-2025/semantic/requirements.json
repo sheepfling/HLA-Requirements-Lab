@@ -16217,7 +16217,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-181-l121-4",
-      "title": "Normative statement at content/clauses/08-time-management-page-181.tex:120",
+      "title": "Normative statement at content/clauses/08-time-management-page-181.tex:118",
       "statement": "The order type of a received message shall be determined by whether that joined federate is time-constrained and by the order type of the corresponding sent message. As shown in these two tables, a message retraction designator is provided to both the sender and the receiver if the sent message order type is TSO, regardless of the order type of the received message.",
       "kind": "detailed",
       "clause": "8.1.4",
@@ -16233,7 +16233,7 @@
       "semantic_group_id": "m16.clause.8.1.4",
       "source": {
         "path": "content/clauses/08-time-management-page-181.tex",
-        "line": 120,
+        "line": 118,
         "end_line": 130
       }
     },
@@ -16393,7 +16393,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-182-l10-2",
-      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:9",
+      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:7",
       "statement": "A joined federate shall request to become time-regulating by invoking the Enable Time Regulation service. The RTI shall subsequently make the joined federate time-regulating by invoking the Time Regulation Enabled service at that joined federate.",
       "kind": "detailed",
       "clause": "8.1.5",
@@ -16409,7 +16409,7 @@
       "semantic_group_id": "m16.clause.8.1.5",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 9,
+        "line": 7,
         "end_line": 13
       }
     },
@@ -16459,7 +16459,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-182-l22-6",
-      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:20",
+      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:19",
       "statement": "Lookahead shall be a logical time interval that establishes the lowest value of timestamps that can be sent in TSO messages by the joined federate.",
       "kind": "detailed",
       "clause": "8.1.5",
@@ -16475,7 +16475,7 @@
       "semantic_group_id": "m16.clause.8.1.5",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 20,
+        "line": 19,
         "end_line": 25
       }
     },
@@ -16525,7 +16525,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-182-l43-13",
-      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:39",
+      "title": "Normative statement at content/clauses/08-time-management-page-182.tex:37",
       "statement": "If such a joined federate has advanced its logical time by use of Time Advance Request or Next Message Request service, it shall not send TSO messages that contain timestamps less than or equal to its logical time (plus its lookahead, which is zero), rather than the usual less-than restriction. Subsequent use of a time advancement service that moves the joined federate's logical time forward lifts this additional restriction (and imposes the restriction of the subsequent advancement service).",
       "kind": "detailed",
       "clause": "8.1.5",
@@ -16541,7 +16541,7 @@
       "semantic_group_id": "m16.clause.8.1.5",
       "source": {
         "path": "content/clauses/08-time-management-page-182.tex",
-        "line": 39,
+        "line": 37,
         "end_line": 52
       }
     },
@@ -19781,7 +19781,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-207-l115-29",
-      "title": "Normative statement at content/clauses/08-time-management-page-207.tex:113",
+      "title": "Normative statement at content/clauses/08-time-management-page-207.tex:112",
       "statement": "If the argument indicates that LITS is defined for the joined federate, then the optional returned argument shall be supplied to indicate the joined federate's current LITS.",
       "kind": "detailed",
       "clause": "8.19",
@@ -19797,7 +19797,7 @@
       "semantic_group_id": "m16.clause.8.19",
       "source": {
         "path": "content/clauses/08-time-management-page-207.tex",
-        "line": 113,
+        "line": 112,
         "end_line": 118
       }
     },
@@ -20529,7 +20529,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-08-time-management-page-216-l90-27",
-      "title": "Normative statement at content/clauses/08-time-management-page-216.tex:89",
+      "title": "Normative statement at content/clauses/08-time-management-page-216.tex:87",
       "statement": "A region specification shall contain at most one range for any given dimension.",
       "kind": "detailed",
       "clause": "9.1.1",
@@ -20545,7 +20545,7 @@
       "semantic_group_id": "m16.clause.9.1.1",
       "source": {
         "path": "content/clauses/08-time-management-page-216.tex",
-        "line": 89,
+        "line": 87,
         "end_line": 92
       }
     },
@@ -21497,7 +21497,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l11-3",
-      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:9",
+      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:8",
       "statement": "A region specification may contain an empty set of ranges. The region realization derived from such a region specification shall contain only the dimensions for which the FDD defines a default range and that are available dimensions of the instance attribute, class attribute, interaction class, or sent interaction with which the region specification is being associated.",
       "kind": "detailed",
       "clause": "9.1.3.1",
@@ -21513,13 +21513,13 @@
       "semantic_group_id": "m16.clause.9.1.3.1",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 9,
+        "line": 8,
         "end_line": 18
       }
     },
     {
       "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l23-7",
-      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:18",
+      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:17",
       "statement": "A region specification with an empty set of ranges may result in a region realization that contains no dimensions if all available dimensions have the excluded indicator specified in the FDD; such a region realization shall not overlap with any other region realization, even the default region.",
       "kind": "detailed",
       "clause": "9.1.3.1",
@@ -21535,7 +21535,7 @@
       "semantic_group_id": "m16.clause.9.1.3.1",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 18,
+        "line": 17,
         "end_line": 28
       }
     },
@@ -21563,7 +21563,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l62-20",
-      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:60",
+      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:59",
       "statement": "The effects of the Set Range Bounds service invocations that were made, if any, are still pending. They shall take effect if and when the Set Range Bounds service has been invoked at least once for all of the dimensions of the region, followed by the invocation of the Commit Region Modifications service for that region.",
       "kind": "detailed",
       "clause": "9.1.3.1",
@@ -21579,13 +21579,13 @@
       "semantic_group_id": "m16.clause.9.1.3.1",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 60,
+        "line": 59,
         "end_line": 70
       }
     },
     {
       "id": "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l86-28",
-      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:75",
+      "title": "Normative statement at content/clauses/09-data-distribution-management-page-219.tex:74",
       "statement": "If a federate invokes the Create Region service, followed by at least one Set Range Bounds service invocation for every one of the dimensions that were specified when the region was created, but does not invoke the Commit Region Modifications service, the region continues to be only a region template, not a region specification. The effects of the Set Range Bounds service invocations are still pending and shall take effect if and when the Commit Region Modifications service is successfully invoked for that region.",
       "kind": "detailed",
       "clause": "9.1.3.1",
@@ -21601,7 +21601,7 @@
       "semantic_group_id": "m16.clause.9.1.3.1",
       "source": {
         "path": "content/clauses/09-data-distribution-management-page-219.tex",
-        "line": 75,
+        "line": 74,
         "end_line": 91
       }
     },
@@ -33223,7 +33223,7 @@
     },
     {
       "id": "requirement-candidate-content-clauses-11-management-object-model-page-294-l20-6",
-      "title": "Normative statement at content/clauses/11-management-object-model-page-294.tex:19",
+      "title": "Normative statement at content/clauses/11-management-object-model-page-294.tex:17",
       "statement": "The service report log file shall begin with an initial record containing information about the federate’s connection configuration, the joined federation’s HLAfederation object, and the joined federate's HLAfederate object (see ServiceReportInitialRecord in Table 5). The initial record shall be followed by one or more service report records (see ServiceReportRecord in Table 5).",
       "kind": "detailed",
       "clause": "11.5.2.1",
@@ -33239,7 +33239,7 @@
       "semantic_group_id": "m16.clause.11.5.2.1",
       "source": {
         "path": "content/clauses/11-management-object-model-page-294.tex",
-        "line": 19,
+        "line": 17,
         "end_line": 30
       }
     },

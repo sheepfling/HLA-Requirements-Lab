@@ -179,9 +179,11 @@ def default_roots(repo_root: Path = REPO_ROOT) -> tuple[Path, ...]:
     return document_roots(repo_root, API_TRACEABILITY_DOCUMENT_IDS)
 
 
-def build_report(roots: tuple[Path, ...]) -> ApiTraceabilityReport:
+def build_report(
+    roots: tuple[Path, ...], *, workspace_root: Path | None = None
+) -> ApiTraceabilityReport:
     """Audit deterministic requirement-to-API manifests for the supplied roots."""
-    corpus = load_hla_corpus(roots)
+    corpus = load_hla_corpus(roots, workspace_root=workspace_root)
     documents = tuple(_document_report(model) for model in corpus.documents)
     failures = tuple(
         f"{document.document}: {failure}" for document in documents for failure in document.failures
@@ -203,6 +205,11 @@ def main() -> int:
         help="Document root to audit; defaults to both hla-1516.1 editions",
     )
     parser.add_argument(
+        "--workspace-root",
+        type=Path,
+        help="Workspace containing source profiles and the HLA document roots",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="Exit nonzero when the API traceability contract fails",
@@ -214,8 +221,11 @@ def main() -> int:
     )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    roots = tuple(args.root) if args.root else default_roots(REPO_ROOT)
-    report = build_report(roots)
+    workspace_root = args.workspace_root or REPO_ROOT
+    if workspace_root is None:
+        parser.error("workspace root is required; pass --workspace-root or set HLA_LAB_ROOT")
+    roots = tuple(args.root) if args.root else default_roots(workspace_root)
+    report = build_report(roots, workspace_root=workspace_root)
     if args.json:
         print(report.model_dump_json(indent=2))
     else:

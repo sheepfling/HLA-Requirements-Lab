@@ -66,7 +66,7 @@ Run the tests with:
 .\.venv\Scripts\python.exe -m pytest tests/test_hla_backflow.py -q
 ```
 
-The 2026-10-25 complete suite passed with 332 tests, 2 skips, and 935
+The 2026-10-25 complete suite passed with 333 tests, 2 skips, and 935
 subtests using four parallel workers. This run includes the 84 corrected
 issue dispositions, the export-delta report, and the cross-page source checks.
 The six-document check and complete 2025 API traceability audit passed after
@@ -93,6 +93,10 @@ Umbra handoff exporter now passes `--corpus-root` through its model loader; an
 outside-workspace export produced all three 2025 documents without a root
 environment variable. The installed `hla-lab --root <workspace> check --json`
 command also completed for all six documents from that external directory.
+The API traceability CLI now accepts `--workspace-root` and completed from an
+external directory with both `HLA_LAB_ROOT` and `PYTHONPATH` unset. CI passes
+that root explicitly, and the rebuilt API binding manifest reflects the
+corrected source spans.
 
 The 502-page 1516.1-2025 PDF build also passed a publication check. Page 270
 keeps the region rule and following heading separate. The Table 5 source pages
@@ -174,6 +178,22 @@ issues. These 93 records are enumerated in the export-delta report with changed
 fields and before/after hashes. Review them, as well as the 2010 transitions,
 separately before updating a six-document Umbra pin.
 
+A source-span audit checked all 93 unattributed 1516.1 requirement records
+against their semantic page-layout lines. All spans point to valid pages and
+lines. It corrected 11 start lines that omitted the opening words or necessary
+context of the new statement; the source-line regression checks those starts.
+Nine remaining nonliteral openings are contextual paraphrases or normalized
+Table 5 field descriptions, and their cited spans contain the underlying
+source language. For the 73 unattributed records whose clause changed, 66
+match the nearest numbered heading in source-page order; the remaining seven
+are on pages 57, 62, and 67, where the service bookmarks and following
+component headings place them under §§4.11, 4.15, and 4.20 respectively.
+A separate read-only audit compared all 22 changed 2010
+transition endpoints against the authored native state machines: every pair
+matches, and each endpoint names a state in its machine. The older export had
+20 missing source endpoints and 21 missing target endpoints among these 22
+transitions.
+
 The [per-issue export delta](../data/hla-backflow-export-delta-2026-10-25.json)
 records the changed fields and before/after record hashes for every affected
 stable ID across all 89 issues. It omits ordinal-only movement and includes
@@ -197,11 +217,11 @@ checkout and its existing ignored baseline bundle available:
 The baseline bundle's SHA-256 is
 `4e0160b1e2dd81ba3df4f36911735f2cb04848d3ea3f45e1652943c6a0f255c2`;
 the preview bundle's is
-`b3981c99a891fab33b38654f28cbe744d451a97290b3105fc3abec48f65a8a9c`.
-These ignored files are comparison inputs, not a new pin. After this Lab
-branch is reviewed and committed, export with that commit SHA, rerun `resync`,
-review the changes to all three affected documents, then update Umbra's lock
-and issue ledger with the reviewed revision.
+`0bea82182c73c837d87e94d1b3c5d7bad79502d004ec5ded9192665924fc3f9c`.
+These ignored files are comparison inputs, not a new pin. For an upstream pin,
+export with the final Lab commit SHA, rerun `resync`, review the changes to all
+three affected documents, then update Umbra's lock and issue ledger with the
+reviewed revision.
 
 Before changing any Lab-content issue status, review the new Lab export
 against its pinned source and retain the stable candidate IDs. Resolve
