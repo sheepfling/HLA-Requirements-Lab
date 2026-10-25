@@ -6,13 +6,11 @@ import json
 from pathlib import Path
 
 from hla_lab.core.json_types import JsonObject
-from hla_lab.paths import RESOURCES
-
-ROOT = RESOURCES.root
+from tools.migrations.workspace import migration_root
 
 
 def _load(name: str) -> tuple[Path, JsonObject]:
-    path = ROOT / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
+    path = migration_root() / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
     return path, json.loads(path.read_text(encoding="utf-8"))
 
 

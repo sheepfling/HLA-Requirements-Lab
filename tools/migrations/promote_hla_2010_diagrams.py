@@ -33,9 +33,9 @@ from hla_lab.core.semantic_model import (
     StateMachineLayout,
     Transition,
 )
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.paths import DocumentResources
+from tools.migrations.workspace import document_root
 
-ROOT = RESOURCES.document("hla-1516.1-2010").root
 STATE_FIGURES = (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)
 GRAPH_FIGURES = (2, 18, 19, 20)
 PAGE_BY_FIGURE = MappingProxyType(
@@ -195,8 +195,8 @@ LABEL_OVERRIDES = MappingProxyType(
 )
 
 
-def _source(path: Path, text: str, offset: int) -> SourceRef:
-    return SourceRef(path=path.relative_to(ROOT).as_posix(), line=line_number(text, offset))
+def _source(root: Path, path: Path, text: str, offset: int) -> SourceRef:
+    return SourceRef(path=path.relative_to(root).as_posix(), line=line_number(text, offset))
 
 
 def _title(text: str, figure: int) -> str:
@@ -290,7 +290,7 @@ def _transition_endpoints(
     return (None, None)
 
 
-def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
+def _state_machine(root: Path, path: Path, figure: int, text: str) -> StateMachine:
     state_markers = _marker_records(text, figure, "[SP]")
     states: dict[str, State] = {}
     root_id: str | None = None
@@ -304,7 +304,7 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
             and _kind(identifier, label, marker_text) in {"initial", "final"}
             else label,
             kind=_kind(identifier, label, marker_text),
-            source=_source(path, text, offset),
+            source=_source(root, path, text, offset),
         )
         if identifier == "S00":
             root_id = state_id
@@ -327,7 +327,7 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
                 source_state=source_state,
                 event=event,
                 target_state=target_state,
-                source=_source(path, text, offset),
+                source=_source(root, path, text, offset),
             )
         )
     positions = {
@@ -340,9 +340,9 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
         states=tuple(states.values()),
         transitions=tuple(transitions),
         initial_state_ids=initial,
-        source=SourceRef(path=path.relative_to(ROOT).as_posix(), line=1),
+        source=SourceRef(path=path.relative_to(root).as_posix(), line=1),
         provenance=DiagramProvenance(
-            image=path.relative_to(ROOT).as_posix(),
+            image=path.relative_to(root).as_posix(),
             page=PAGE_BY_FIGURE[figure],
             caption=_title(text, figure),
         ),
@@ -354,7 +354,7 @@ def _state_machine(path: Path, figure: int, text: str) -> StateMachine:
     )
 
 
-def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
+def _graph(root: Path, path: Path, figure: int, text: str) -> GraphDiagram:
     title = _title(text, figure)
     annotations: tuple[GraphAnnotation, ...] = ()
     if figure == 2:
@@ -371,7 +371,7 @@ def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
                 target="rti",
                 label=description.strip(" ."),
                 direction="both" if index in {4, 5, 6} else "forward",
-                source_ref=_source(path, text, offset),
+                source_ref=_source(root, path, text, offset),
             )
             for index, (_identifier, description, offset) in enumerate(
                 _marker_records(text, figure, "E"), start=1
@@ -567,9 +567,9 @@ def _graph(path: Path, figure: int, text: str) -> GraphDiagram:
         nodes=nodes,
         edges=edges,
         annotations=annotations,
-        source=SourceRef(path=path.relative_to(ROOT).as_posix(), line=1),
+        source=SourceRef(path=path.relative_to(root).as_posix(), line=1),
         provenance=DiagramProvenance(
-            image=path.relative_to(ROOT).as_posix(), page=PAGE_BY_FIGURE[figure], caption=title
+            image=path.relative_to(root).as_posix(), page=PAGE_BY_FIGURE[figure], caption=title
         ),
         notes=(
             "Semantic graph ownership is promoted from the annotated source fixture; "
@@ -635,6 +635,7 @@ def _enrich_state_machine(
 
 
 def _promote_figure(
+    root: Path,
     native: Path,
     figure: int,
     prior_transitions: Mapping[str, Mapping[str, JsonValue]],
@@ -644,12 +645,12 @@ def _promote_figure(
     path = native / f"figure-{figure:02d}.tex"
     text = path.read_text(encoding="utf-8")
     if figure in STATE_FIGURES:
-        record = _state_machine(path, figure, text)
+        record = _state_machine(root, path, figure, text)
         record = _enrich_state_machine(
             record, prior_transitions, coverage_transitions, requirement_links
         )
         return record, "state_machine"
-    return _graph(path, figure, text), "graph_diagram"
+    return _graph(root, path, figure, text), "graph_diagram"
 
 
 def _figure_surface(
@@ -713,7 +714,7 @@ def promote(root: Path) -> None:
     surfaces: list[dict[str, JsonValue]] = []
     for figure in (*STATE_FIGURES, *GRAPH_FIGURES):
         record, kind = _promote_figure(
-            native, figure, prior_transitions, coverage_transitions, requirement_links
+            root, native, figure, prior_transitions, coverage_transitions, requirement_links
         )
         if isinstance(record, StateMachine):
             state_machines.append(record)
@@ -726,8 +727,8 @@ def promote(root: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("root", type=Path, default=ROOT, nargs="?")
-    promote(parser.parse_args().root)
+    parser.add_argument("root", type=Path, nargs="?")
+    promote(parser.parse_args().root or document_root("hla-1516.1-2010"))
 
 
 if __name__ == "__main__":

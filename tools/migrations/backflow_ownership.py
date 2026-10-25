@@ -6,12 +6,12 @@ import json
 
 from tools.migrations.backflow_common import (
     FEDERATION,
-    OMT_SEMANTIC,
     OWNERSHIP,
     TIME,
     _read,
     _set_statement,
     _write,
+    omt_semantic_root,
 )
 
 
@@ -287,7 +287,7 @@ def repair_cross_page_statements() -> None:
         grant["coverage_note"] += note
     _write("requirements.json", payload)
 
-    path = OMT_SEMANTIC / "requirements.json"
+    path = omt_semantic_root() / "requirements.json"
     omt = json.loads(path.read_text(encoding="utf-8"))
     record = next(
         item

@@ -28,9 +28,9 @@ from hla_lab.core.semantic_model import Requirement, RequirementFile
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_2010_semantic import _requirements, _surface_inputs
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.paths import DocumentResources
+from tools.migrations.workspace import document_root
 
-ROOT = RESOURCES.ieee_topics
 DOCUMENTS = (
     "hla-1516-2010",
     "hla-1516.1-2010",
@@ -39,7 +39,6 @@ DOCUMENTS = (
     "hla-1516.1-2025",
     "hla-1516.2-2025",
 )
-ROOTS = tuple(ROOT / document for document in DOCUMENTS)
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9-]{2,}")
 _STOP_WORDS = frozenset(
     {
@@ -400,8 +399,9 @@ def _canonicalize(root: Path) -> int:
 
 
 def build(
-    roots: tuple[Path, ...] = ROOTS, *, dry_run: bool = False
+    roots: tuple[Path, ...] | None = None, *, dry_run: bool = False
 ) -> tuple[dict[str, JsonValue], ...]:
+    roots = roots if roots is not None else tuple(document_root(document) for document in DOCUMENTS)
     reports: list[dict[str, JsonValue]] = []
     for root in roots:
         if root.name.endswith("-2010"):
@@ -444,12 +444,15 @@ def build(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("roots", nargs="*", type=Path, default=ROOTS)
+    parser.add_argument("roots", nargs="*", type=Path)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     print(
         json.dumps(
-            build(tuple(root.resolve() for root in args.roots), dry_run=args.dry_run),
+            build(
+                tuple(root.resolve() for root in args.roots) if args.roots else None,
+                dry_run=args.dry_run,
+            ),
             indent=2,
         )
     )

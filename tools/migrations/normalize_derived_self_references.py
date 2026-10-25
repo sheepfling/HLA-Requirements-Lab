@@ -4,13 +4,12 @@ from __future__ import annotations
 
 import json
 from collections.abc import MutableMapping
+from pathlib import Path
 
 from pydantic import JsonValue
 
-from hla_lab.paths import RESOURCES
+from tools.migrations.workspace import document_root
 
-ROOT = RESOURCES.root
-TARGET = ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json"
 OLD = "IEEE Std 1516.2-2025"
 NEW = "this specification"
 TITLE_REPLACEMENTS = (
@@ -26,13 +25,13 @@ TITLE_REPLACEMENTS = (
 )
 
 
-def _load_blocks() -> tuple[dict[str, JsonValue], list[JsonValue]]:
-    payload: JsonValue = json.loads(TARGET.read_text(encoding="utf-8"))
+def _load_blocks(target: Path) -> tuple[dict[str, JsonValue], list[JsonValue]]:
+    payload: JsonValue = json.loads(target.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
-        raise ValueError(f"expected a JSON object in {TARGET}")
+        raise ValueError(f"expected a JSON object in {target}")
     raw_blocks: JsonValue = payload.get("content_blocks", [])
     if not isinstance(raw_blocks, list):
-        raise ValueError(f"expected content_blocks to be an array in {TARGET}")
+        raise ValueError(f"expected content_blocks to be an array in {target}")
     return payload, raw_blocks
 
 
@@ -56,7 +55,8 @@ def _normalize_block(block: MutableMapping[str, JsonValue]) -> tuple[int, int]:
 
 
 def main() -> None:
-    payload, blocks = _load_blocks()
+    target = document_root("hla-1516.2-2025") / "semantic" / "content-blocks.json"
+    payload, blocks = _load_blocks(target)
     count = 0
     title_count = 0
     for raw_block in blocks:
@@ -72,8 +72,8 @@ def main() -> None:
         raise SystemExit(
             f"expected 0 or {len(TITLE_REPLACEMENTS)} title replacements, found {title_count}"
         )
-    TARGET.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"normalized {count} self-references and {title_count} title fragments in {TARGET}")
+    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"normalized {count} self-references and {title_count} title fragments in {target}")
 
 
 if __name__ == "__main__":

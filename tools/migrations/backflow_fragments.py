@@ -10,7 +10,6 @@ from tools.migrations.backflow_common import (
     FEDERATION,
     MOM,
     OBJECTS,
-    OMT_SEMANTIC,
     OWNERSHIP,
     SUPPORT,
     TIME,
@@ -18,6 +17,7 @@ from tools.migrations.backflow_common import (
     _set_clause,
     _set_statement,
     _write,
+    omt_semantic_root,
 )
 
 
@@ -375,7 +375,7 @@ def repair_remaining_section_continuations() -> None:
         _set_statement(by_id[requirement_id], statement, line, end_line)
     _write("requirements.json", payload)
 
-    omt_path = OMT_SEMANTIC / "requirements.json"
+    omt_path = omt_semantic_root() / "requirements.json"
     omt = json.loads(omt_path.read_text(encoding="utf-8"))
     record = next(
         item

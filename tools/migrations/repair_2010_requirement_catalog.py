@@ -30,12 +30,9 @@ from hla_lab.core.semantic_model import RequirementApiBindingFile
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_2010_semantic import _plain
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.paths import DocumentResources
+from tools.migrations.workspace import document_root
 
-ROOTS = tuple(
-    RESOURCES.document(document).root
-    for document in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
-)
 FRAMEWORK = "hla-1516-2010"
 _BREAK = re.compile(r"\\(?:linebreak|newline|newpage)\b")
 _COMMAND_BOUNDARY = re.compile(
@@ -668,10 +665,14 @@ def repair(root: Path, *, dry_run: bool = False) -> dict[str, JsonValue]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("roots", nargs="*", type=Path, default=ROOTS)
+    parser.add_argument("roots", nargs="*", type=Path)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    for root in args.roots:
+    roots = args.roots or [
+        document_root(document_id)
+        for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
+    ]
+    for root in roots:
         result = repair(root, dry_run=args.dry_run)
         print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0

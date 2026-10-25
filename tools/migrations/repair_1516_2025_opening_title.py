@@ -4,14 +4,12 @@ from __future__ import annotations
 
 import json
 
-from hla_lab.paths import RESOURCES
-
-ROOT = RESOURCES.root
-PATH = ROOT / "topics" / "ieee" / "hla-1516-2025" / "semantic" / "content-blocks.json"
+from tools.migrations.workspace import document_root
 
 
 def main() -> None:
-    payload = json.loads(PATH.read_text(encoding="utf-8"))
+    path = document_root("hla-1516-2025") / "semantic" / "content-blocks.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
     target_id = "content-1-normative-001"
     block = next(item for item in payload["content_blocks"] if item["id"] == target_id)
     old = r"""HLA Requirements Lab\linebreak
@@ -30,7 +28,7 @@ Framework and Rules"""
     if block["layout_body"].count(old_font) != 1:
         raise ValueError("1516-2025 opener title font declaration is not unique")
     block["layout_body"] = block["layout_body"].replace(old_font, new_font, 1)
-    PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

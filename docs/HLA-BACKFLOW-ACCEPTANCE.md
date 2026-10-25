@@ -97,6 +97,13 @@ The API traceability CLI now accepts `--workspace-root` and completed from an
 external directory with both `HLA_LAB_ROOT` and `PYTHONPATH` unset. CI passes
 that root explicitly, and the rebuilt API binding manifest reflects the
 corrected source spans.
+The 27 retained historical migration modules also import from outside the
+checkout without a configured root. Their shared workspace helper resolves
+paths only when an operation runs; the reusable backflow binding and
+crosswalk rebuilders accept an explicit workspace root. Five migration
+commands with argument parsers displayed `--help` from outside the checkout.
+An offline source distribution and wheel build included the migration package
+and its shared workspace helper.
 
 The 502-page 1516.1-2025 PDF build also passed a publication check. Page 270
 keeps the region rule and following heading separate. The Table 5 source pages

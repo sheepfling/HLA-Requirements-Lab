@@ -3,13 +3,11 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from hla_lab.core.json_types import JsonObject
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import resources
 
-ROOT = RESOURCES.root
-SEMANTIC = ROOT / "topics/ieee/hla-1516.1-2025/semantic"
-OMT_SEMANTIC = ROOT / "topics/ieee/hla-1516.2-2025/semantic"
 PAGE_216 = "requirement-candidate-content-clauses-08-time-management-page-216-l"
 FEDERATION = "requirement-candidate-content-clauses-04-federation-management-page-"
 OBJECTS = "requirement-candidate-content-clauses-06-object-management-page-"
@@ -21,12 +19,20 @@ DECLARATION = "requirement-candidate-content-clauses-05-declaration-management-p
 MOM = "requirement-candidate-content-clauses-11-management-object-model-page-"
 
 
+def semantic_root(workspace_root: Path | None = None) -> Path:
+    return resources(workspace_root).document("hla-1516.1-2025").semantic
+
+
+def omt_semantic_root(workspace_root: Path | None = None) -> Path:
+    return resources(workspace_root).document("hla-1516.2-2025").semantic
+
+
 def _read(name: str) -> JsonObject:
-    return json.loads((SEMANTIC / name).read_text(encoding="utf-8"))
+    return json.loads((semantic_root() / name).read_text(encoding="utf-8"))
 
 
 def _write(name: str, payload: JsonObject) -> None:
-    (SEMANTIC / name).write_text(
+    (semantic_root() / name).write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
 

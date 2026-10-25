@@ -60,6 +60,32 @@ class PortabilityContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertGreater(int(result.stdout.strip()), 0)
 
+    def test_historical_migrations_import_without_workspace_root(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.pop("HLA_LAB_ROOT", None)
+        script = (
+            "import importlib, pkgutil, sys, tools.migrations as migrations; "
+            "from pathlib import Path; "
+            "from tools.migrations.workspace import document_root; "
+            "modules = [entry.name for entry in "
+            "pkgutil.iter_modules(migrations.__path__, migrations.__name__ + '.')]; "
+            "[importlib.import_module(name) for name in modules]; "
+            "assert document_root('hla-1516.1-2025', Path(sys.argv[1])).is_dir(); "
+            "print(len(modules))"
+        )
+        with tempfile.TemporaryDirectory() as workspace:
+            result = subprocess.run(
+                [sys.executable, "-B", "-c", script, str(REPO_ROOT)],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertGreaterEqual(int(result.stdout.strip()), 27)
+
     def test_workspace_commands_show_help_without_configured_root(self) -> None:
         environment = os.environ.copy()
         environment.pop("PYTHONPATH", None)

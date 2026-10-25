@@ -7,9 +7,7 @@ from pathlib import Path
 from types import MappingProxyType
 
 from hla_lab.core.json_types import JsonObject
-from hla_lab.paths import RESOURCES
-
-ROOT = RESOURCES.root
+from tools.migrations.workspace import migration_root
 
 
 def _replace_once(body: str, old: str, new: str, *, label: str) -> str:
@@ -88,7 +86,7 @@ Framework and Rules\par}""",
 
 
 def _load_blocks(name: str) -> tuple[Path, JsonObject, list[JsonObject]]:
-    path = ROOT / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
+    path = migration_root() / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
     payload = json.loads(path.read_text(encoding="utf-8"))
     return path, payload, payload["content_blocks"]
 

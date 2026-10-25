@@ -7,22 +7,23 @@ from pathlib import Path
 
 from pydantic import JsonValue
 
-from hla_lab.paths import RESOURCES
+from tools.migrations.workspace import migration_root
 
-ROOT = RESOURCES.root
 
-REPLACEMENTS = (
-    (
-        ROOT / "topics" / "ieee" / "hla-1516.2-2010" / "semantic" / "content-blocks.json",
-        r"\restaurantglyph",
-        r"\omtcategoryglyph",
-    ),
-    (
-        ROOT / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json",
-        r"\HLAPlacedImage{369.000}{601.320}{24.000}{24.000}{assets/semantic/page-038-image-01.png}",
-        r"\HLAObjectModelGlyphAt{369.000}{601.320}{24.000}{24.000}",
-    ),
-)
+def _replacements() -> tuple[tuple[Path, str, str], ...]:
+    root = migration_root()
+    return (
+        (
+            root / "topics" / "ieee" / "hla-1516.2-2010" / "semantic" / "content-blocks.json",
+            r"\restaurantglyph",
+            r"\omtcategoryglyph",
+        ),
+        (
+            root / "topics" / "ieee" / "hla-1516.2-2025" / "semantic" / "content-blocks.json",
+            r"\HLAPlacedImage{369.000}{601.320}{24.000}{24.000}{assets/semantic/page-038-image-01.png}",
+            r"\HLAObjectModelGlyphAt{369.000}{601.320}{24.000}{24.000}",
+        ),
+    )
 
 
 def _replace(path: Path, old: str, new: str) -> int:
@@ -50,7 +51,7 @@ def _replace(path: Path, old: str, new: str) -> int:
 
 
 def main() -> None:
-    for path, old, new in REPLACEMENTS:
+    for path, old, new in _replacements():
         _replace(path, old, new)
         print(f"migrated OMT glyph source in {path}")
 

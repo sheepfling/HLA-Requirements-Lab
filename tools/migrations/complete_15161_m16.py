@@ -47,10 +47,9 @@ from hla_lab.core.semantic_model import (
 from hla_lab.core.text import slugify
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.paths import DocumentResources
 from tools.migrations.m16_source_records import _m16_candidates, _table_5_row_requirements
-
-ROOT = RESOURCES.document("hla-1516.1-2025").root
+from tools.migrations.workspace import document_root
 
 # These are source-coordinate corrections from the authoritative source review.
 # handoff.  Candidate IDs remain immutable; only the checker-visible clause
@@ -1140,8 +1139,9 @@ def _migration_result(
     }
 
 
-def migrate(root: Path = ROOT) -> dict[str, int]:
+def migrate(root: Path | None = None) -> dict[str, int]:
     """Promote 1516.1 candidates and close its operational mappings."""
+    root = root or document_root("hla-1516.1-2025")
     _repair_requirement_record_links(root)
     model = load_hla_document_model(root)
     candidates = _m16_candidates(root)
@@ -1174,7 +1174,7 @@ def migrate(root: Path = ROOT) -> dict[str, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--root", type=Path)
     args = parser.parse_args()
     print(json.dumps(migrate(args.root), indent=2))
 

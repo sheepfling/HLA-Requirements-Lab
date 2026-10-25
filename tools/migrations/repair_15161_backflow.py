@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import MutableMapping
+from pathlib import Path
 from typing import cast
 
 from hla_lab.core.hla_profile import HLA_SOURCE
@@ -19,7 +20,7 @@ from hla_lab.corpus.api_crosswalk import (
 )
 from hla_lab.corpus.hla_api_crosswalk import generate
 from tools.migrations.backflow_clipped import repair_clipped_clause_statements
-from tools.migrations.backflow_common import ROOT, SEMANTIC
+from tools.migrations.backflow_common import semantic_root
 from tools.migrations.backflow_content import (
     repair_page_192_service_narrative,
     repair_page_216,
@@ -44,20 +45,23 @@ from tools.migrations.backflow_tables import (
     repair_time_table_and_caption,
     restore_missing_service_flow_candidates,
 )
+from tools.migrations.workspace import migration_root
 
 
-def rebuild_api_bindings() -> None:
+def rebuild_api_bindings(workspace_root: Path | None = None) -> None:
     """Keep the authored manifest identical to the deterministic API crosswalk."""
-    model = load_document_model(SEMANTIC.parent, HLA_SOURCE)
+    semantic = semantic_root(workspace_root)
+    model = load_document_model(semantic.parent, HLA_SOURCE)
     write_requirement_api_bindings(
-        SEMANTIC / "api-requirement-bindings.json",
+        semantic / "api-requirement-bindings.json",
         build_requirement_api_bindings(model),
     )
 
 
-def rebuild_api_crosswalk() -> None:
+def rebuild_api_crosswalk(workspace_root: Path | None = None) -> None:
     """Project every authored implementation mapping to every 2025 API target."""
-    generate(SEMANTIC.parent, "2025", SEMANTIC / "api-crosswalk.json")
+    semantic = semantic_root(workspace_root)
+    generate(semantic.parent, "2025", semantic / "api-crosswalk.json")
 
 
 def _apply_resolution_notes(issues: MutableMapping[str, JsonObject]) -> None:
@@ -282,7 +286,7 @@ def _issues_by_id(payload: JsonObject) -> dict[str, JsonObject]:
 
 
 def mark_resolved(*issue_ids: str) -> None:
-    path = ROOT / "data/hla-backflow-2026-10-24.json"
+    path = migration_root() / "data/hla-backflow-2026-10-24.json"
     raw_payload: JsonValue | dict[str, JsonValue] = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(raw_payload, dict):
         raise ValueError("backflow ledger must be a JSON object")

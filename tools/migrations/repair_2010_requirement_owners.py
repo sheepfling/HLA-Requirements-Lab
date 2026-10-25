@@ -14,13 +14,8 @@ from pathlib import Path
 from types import MappingProxyType
 
 from hla_lab.core.json_types import JsonObject
-from hla_lab.paths import RESOURCES
+from tools.migrations.workspace import document_root
 
-ROOT = RESOURCES.root
-TARGETS = (
-    ROOT / "topics" / "ieee" / "hla-1516.1-2010",
-    ROOT / "topics" / "ieee" / "hla-1516.2-2010",
-)
 FALLBACK_SOURCE_PATHS = MappingProxyType(
     {
         "hla-1516.2-2010": {
@@ -74,7 +69,8 @@ def repair(root: Path) -> int:
 
 
 def main() -> None:
-    for root in TARGETS:
+    for document_id in ("hla-1516.1-2010", "hla-1516.2-2010"):
+        root = document_root(document_id)
         print(f"{root.name}: added {repair(root)} requirement-owner links")
 
 

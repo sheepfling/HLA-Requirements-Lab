@@ -30,13 +30,8 @@ from hla_lab.core.semantic_model import (
     load_document_model,
 )
 from hla_lab.core.text import slugify
-from hla_lab.paths import RESOURCES, DocumentResources
-
-ROOTS = (
-    RESOURCES.document("hla-1516-2010").root,
-    RESOURCES.document("hla-1516.1-2010").root,
-    RESOURCES.document("hla-1516.2-2010").root,
-)
+from hla_lab.paths import DocumentResources
+from tools.migrations.workspace import document_root
 
 STOP_TERMS = frozenset(
     {
@@ -359,9 +354,13 @@ def _promote(root: Path) -> dict[str, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("roots", nargs="*", type=Path, default=ROOTS)
+    parser.add_argument("roots", nargs="*", type=Path)
     args = parser.parse_args()
-    for root in args.roots:
+    roots = args.roots or [
+        document_root(document_id)
+        for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
+    ]
+    for root in roots:
         print(root, _promote(root))
 
 
