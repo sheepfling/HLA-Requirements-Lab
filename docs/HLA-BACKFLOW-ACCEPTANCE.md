@@ -16,11 +16,11 @@ they are not upstream status changes.
 
 ## Current local dispositions
 
-| Disposition             | Count | Evidence and remaining action                                                                                                                                          |
-| ----------------------- | ----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Corrected in Lab branch |    84 | Local semantic repairs and issue-specific regression checks; review and publish through the Lab export before upstream closure.                                        |
-| Verified in Umbra       |     4 | Read-only 2026-10-25 checks no longer reproduce RL-261, RL-268, RL-354, or RL-371; reconcile their status in Umbra.                                                    |
-| Source conflict dispositioned | 1 | RL-369 retains the literal Table 5 spelling without a direct type-20 binding; the implementation follows the independently corroborated MIM type-20 name. |
+| Disposition                   | Count | Evidence and remaining action                                                                                                                             |
+| ----------------------------- | ----: | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Corrected in Lab branch       |    84 | Local semantic repairs and issue-specific regression checks; review and publish through the Lab export before upstream closure.                           |
+| Verified in Umbra             |     4 | Read-only 2026-10-25 checks no longer reproduce RL-261, RL-268, RL-354, or RL-371; reconcile their status in Umbra.                                       |
+| Source conflict dispositioned |     1 | RL-369 retains the literal Table 5 spelling without a direct type-20 binding; the implementation follows the independently corroborated MIM type-20 name. |
 
 The [backflow regression tests](../tests/test_hla_backflow.py) compare the
 snapshot to the frozen queue, validate every affected candidate ID, check all
