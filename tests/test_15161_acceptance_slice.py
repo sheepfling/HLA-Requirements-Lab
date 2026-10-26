@@ -4,10 +4,17 @@ from __future__ import annotations
 
 import json
 import re
+import tempfile
 import unittest
+from pathlib import Path
 
-from hla_lab.core.hla_profile import HLA_SOURCE, source_profile_for_document
+from hla_lab.core.hla_profile import (
+    HLA_LATEX_DIALECT,
+    HLA_SOURCE,
+    source_profile_for_document,
+)
 from hla_lab.core.semantic_model import load_document_model
+from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import (
     _modern_2025_statechart_reflow_page,
     _modern_api_manifest_page,
@@ -19,6 +26,7 @@ from hla_lab.generation.semantic_generation import (
     _modern_statechart_reflow_page,
     _modern_table_text,
     _semanticize_visible_surfaces,
+    generate,
 )
 from tests.support import TEST_REPO_ROOT
 
@@ -343,6 +351,47 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
         overview = _modern_protocol_prose_page(by_sequence[395]["layout_body"])
         self.assertIn(r"\HLAProtocolBullet{", overview)
         self.assertNotIn("HLA_CALL_RE- ", protocol)
+
+    def test_reflowed_protocol_pages_keep_figures_21_through_26(self) -> None:
+        source = source_profile_for_document("hla-1516.1-2025", ROOT)
+        model = load_document_model(DOC_ROOT, source)
+        sequences = {395, 398, 399, 400, 401}
+        content_block_ids = tuple(
+            block.id for block in model.content_blocks if block.sequence in sequences
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            result = generate(
+                GenerationRequest(
+                    root=DOC_ROOT,
+                    output=output,
+                    source=source,
+                    dialect=HLA_LATEX_DIALECT,
+                    content_block_ids=content_block_ids,
+                    state_machine_renderer="plantuml",
+                )
+            )
+            generated = "\n".join(
+                (output / name).read_text(encoding="utf-8")
+                for name in result.generated_files
+                if name.startswith("content-block-") and name.endswith(".tex")
+            )
+
+        embedded = re.findall(
+            r"output/semantic/(?:state-machine|sequence-diagram|graph-diagram)-[^}\s]+",
+            generated,
+        )
+        self.assertEqual(
+            {
+                "output/semantic/graph-diagram-hla-1516.1.figure-21-federate-protocol-layers.tex",
+                "output/semantic/sequence-diagram-hla-1516.1.figure-22-message-sequence-numbers.tex",
+                "output/semantic/sequence-diagram-hla-1516.1.figure-23-response-messages.tex",
+                "output/semantic/state-machine-federate-connection-reconnection.pdf",
+                "output/semantic/state-machine-rti-connection-reconnection.pdf",
+                "output/semantic/sequence-diagram-hla-1516.1.figure-26-successful-reconnection.tex",
+            },
+            set(embedded),
+        )
 
     def test_known_source_surface_defects_are_corrected_in_generated_pages(self) -> None:
         model = load_document_model(DOC_ROOT, HLA_SOURCE)

@@ -817,6 +817,31 @@ def _embed_bound_diagram_surfaces(
     return body, embedded
 
 
+def _embed_protocol_flow_diagram(body: str, figure_number: int, input_name: str) -> str:
+    """Keep generated diagrams on protocol pages reflowed from fixed source pages."""
+    if r"\begin{HLAProtocolFlowPage}" not in body:
+        return body
+    asset_path = f"output/semantic/{input_name}"
+    if asset_path in body:
+        return body
+    caption = f"Figure {figure_number}---"
+    lines = body.splitlines()
+    for index, line in enumerate(lines):
+        if caption not in line:
+            continue
+        if input_name.endswith(".pdf"):
+            diagram = rf"\HLAProtocolFlowDiagram{{{asset_path}}}"
+        else:
+            diagram = rf"\resizebox{{0.95\linewidth}}{{!}}{{\input{{{asset_path}}}}}"
+        lines[index + 1 : index + 1] = [
+            r"\begin{center}",
+            diagram,
+            r"\end{center}",
+        ]
+        return "\n".join(lines)
+    return body
+
+
 def _embed_model_diagrams(
     body: str,
     block: ContentBlock,
@@ -845,6 +870,7 @@ def _embed_model_diagrams(
             caption=assets.captions.get(diagram.id),
             landscape=diagram.id in assets.landscape_plantuml_ids,
         )
+        body = _embed_protocol_flow_diagram(body, figure_number, input_name)
     return body
 
 
@@ -943,21 +969,22 @@ def _write_optional_layout_outputs(context: _GenerationContext) -> None:
         context.generated_files.append(name)
         context.semantic_inputs.append(name)
     if request.include_faithful_body:
-        context.faithful_layout = build_faithful_layout_projection(
+        projection = build_faithful_layout_projection(
             context.model,
             content_block_ids=request.content_block_ids,
             profile=request.faithful_layout_profile,
             exclude_path_parts=request.faithful_body_exclude_path_parts,
         )
+        context.faithful_layout = projection
         _write(
             request.output / "faithful-layout.json",
-            context.faithful_layout.model_dump_json(indent=2),
+            projection.model_dump_json(indent=2),
         )
         context.generated_files.append("faithful-layout.json")
         _write(
             request.output / "faithful-body.tex",
             render_faithful_body(
-                context.faithful_layout,
+                projection,
                 use_generated_blocks=request.use_generated_faithful_blocks,
             ),
         )
