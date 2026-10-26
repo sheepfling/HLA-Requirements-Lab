@@ -19,6 +19,43 @@ def _read(name: str) -> JsonObject:
 
 
 class HlaBackflowTests(unittest.TestCase):
+    def test_source_page_clause_owners_for_umbra_tck(self) -> None:
+        expected = {
+            "hla-1516.1-2025": {
+                "043-l65-19": "4.1.2",
+                "094-l111-29": "5.6",
+                "094-l117-31": "5.6",
+                "094-l123-33": "5.6",
+                "095-l17-2": "5.6.4",
+                "095-l74-19": "5.7",
+                "095-l83-22": "5.7",
+                "095-l86-23": "5.7",
+                "095-l89-24": "5.7",
+                "190-l64-15": "8.3.4",
+                "190-l67-16": "8.3.4",
+                "190-l76-19": "8.3.4",
+                "190-l103-25": "8.4",
+                "190-l106-26": "8.4",
+            },
+            "hla-1516.2-2025": {
+                "110-l6-1": "C.2",
+                "110-l18-4": "C.2",
+                "110-l22-5": "C.2",
+                "110-l26-6": "C.2",
+                "110-l30-7": "C.2",
+                "111-l6-1": "C.3",
+            },
+        }
+        for document_id, owners in expected.items():
+            records = json.loads(
+                (ROOT / "topics" / "ieee" / document_id / "semantic" / "requirements.json").read_text(encoding="utf-8")
+            )["requirements"]
+            for suffix, clause in owners.items():
+                with self.subTest(document=document_id, source=suffix):
+                    record = next(item for item in records if item["id"].endswith(suffix))
+                    self.assertEqual(record["clause"], clause)
+                    self.assertEqual(record["clause_id"], f"clause-{clause}")
+
     def test_corrected_candidates_have_complete_statement_boundaries(self) -> None:
         issues = json.loads(
             (ROOT / "data/hla-backflow-2026-10-24.json").read_text(encoding="utf-8")
@@ -119,7 +156,7 @@ class HlaBackflowTests(unittest.TestCase):
             {
                 "corrected-in-lab": 84,
                 "verified-in-umbra": 4,
-                "source-conflict-open": 1,
+                "source-conflict-dispositioned": 1,
             },
         )
         self.assertTrue(all(item["verification"] for item in payload["issues"]))
@@ -1065,7 +1102,7 @@ class HlaBackflowTests(unittest.TestCase):
         self.assertEqual(configuration["review_status"], "UNRESOLVED")
         self.assertIn("addtionalSettingsResultCode", configuration["source_text"])
         self.assertIn("additionalSettingsResultCode", configuration["source_text"])
-        self.assertEqual(restore_set["review_status"], "UNRESOLVED")
+        self.assertEqual(restore_set["review_status"], "REVIEWED_CONFLICT")
         self.assertIn("FederateHandleRestoreStatusSet", restore_set["source_text"])
         self.assertIn("FederateRestoreStatusSet", restore_set["reason"])
         self.assertIn("no MIM type-20 mapping", restore_set["rendered_text"])

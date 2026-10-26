@@ -67,9 +67,9 @@
       "location": "p.297, content-15161-page-297 layout_body, Table 5 restore-status collection row; semantic/requirements.json candidate r007",
       "complaint": "Table 5 restore-status set name conflicts with the MIM; prior RL-083 citation",
       "candidate_records": 1,
-      "resolution": "source-conflict-open",
+      "resolution": "source-conflict-dispositioned",
       "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_source_conflicts_remain_explicit; pinned 1516.1 Table 14 and 1516.2 MIM comparison; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
-      "resolution_note": "Pinned 1516.1 Table 5 literally prints FederateHandleRestoreStatusSet / Array<FederateHandleRestoreStatus>, while its own Table 14 and the 1516.2 MIM assign type 19 to FederateRestoreStatus and type 20 to FederateRestoreStatusSet. IEEE SA's linked 2025 MIM XML confirms those values (data/hla-15161-official-auxiliary-evidence-2026-10-25.json). The source-anomaly ledger records the Table 5 conflict as unresolved; no type-20 mapping is inferred pending licensed-page adjudication.",
+      "resolution_note": "Pinned 1516.1 Table 5 literally prints FederateHandleRestoreStatusSet / Array<FederateHandleRestoreStatus>, while its own Table 14 and the 1516.2 MIM assign type 19 to FederateRestoreStatus and type 20 to FederateRestoreStatusSet. IEEE SA's linked 2025 MIM XML confirms those values (data/hla-15161-official-auxiliary-evidence-2026-10-25.json). The reviewed implementation mapping uses the independently documented MIM type-20 spelling. The Table 5 candidate remains a literal source-anomaly record with no direct API or type-20 mapping; this closes the mapping complaint without claiming the printed Table 5 text was corrected.",
       "document_id": "hla-1516.1-2025",
       "affected_requirement_ids": [
         "requirement-candidate-table-5-p297-r007"

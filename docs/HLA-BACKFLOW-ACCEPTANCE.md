@@ -5,8 +5,8 @@ This branch reviews the 89 Requirements Lab issues that were open in the
 guards against omission. The [issue snapshot](../data/hla-backflow-2026-10-24.json)
 records each complaint, its affected candidate IDs, the local disposition, and
 its verification pointer. Umbra's `compliance/requirements-lab/known-issues.json`
-remains authoritative for upstream status; this branch does not change that
-register or resynchronize an unchanged pinned export.
+remains authoritative for upstream status. The 2026-10-26 handoff updates that
+register and pins the reviewed Lab changes.
 
 A read-only comparison on 2026-10-25 found the Umbra register still has 139
 records, including 89 marked open. For those 89, the IDs, document IDs, and
@@ -20,7 +20,7 @@ they are not upstream status changes.
 | ----------------------- | ----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Corrected in Lab branch |    84 | Local semantic repairs and issue-specific regression checks; review and publish through the Lab export before upstream closure.                                        |
 | Verified in Umbra       |     4 | Read-only 2026-10-25 checks no longer reproduce RL-261, RL-268, RL-354, or RL-371; reconcile their status in Umbra.                                                    |
-| Source conflict open    |     1 | RL-369 retains the literal Table 5 spelling and does not infer a MIM type-20 mapping; adjudicate against the licensed 1516.1-2025 page or an authoritative correction. |
+| Source conflict dispositioned | 1 | RL-369 retains the literal Table 5 spelling without a direct type-20 binding; the implementation follows the independently corroborated MIM type-20 name. |
 
 The [backflow regression tests](../tests/test_hla_backflow.py) compare the
 snapshot to the frozen queue, validate every affected candidate ID, check all
@@ -113,8 +113,8 @@ column and readable examples. The
 assignment.
 
 The local `topics/ieee/hla-1516.1-2025/semantic/source-anomaly-ledger.json`
-records RL-256's ConfigurationResult example spelling and RL-369's
-restore-status set name as unresolved source anomalies. The corrected
+records RL-256's ConfigurationResult example spelling as unresolved and RL-369's
+restore-status set name as a reviewed source conflict. The corrected
 requirement candidates preserve the printed examples as provenance; example
 spelling is not promoted into a new lexical obligation. The
 [IEEE SA 2025 auxiliary evidence](../data/hla-15161-official-auxiliary-evidence-2026-10-25.json)
@@ -130,7 +130,9 @@ The Table 5 candidate has one reviewed binding with no selected or candidate
 API surface; the regression checks that no direct API mapping is promoted from
 the disputed name.
 No additional licensed page or authoritative correction is available for the
-RL-369 Table 5 name conflict. The public
+RL-369 Table 5 name conflict. The independent Table 14 and MIM evidence
+provides the implementation type-20 mapping, while the Table 5 record remains
+literal and unbound. The public
 [IEEE SA 1516.1-2025 listing](https://standards.ieee.org/ieee/1516.1/6688/)
 offers purchase or subscription access and does not display the disputed
 Table 5 page or an adjudication of these spellings. Its linked auxiliary
@@ -206,8 +208,8 @@ records the changed fields and before/after record hashes for every affected
 stable ID across all 89 issues. It omits ordinal-only movement and includes
 readable before/after values for clause, source, extraction, and grouping
 metadata. Its 84 corrected issues cover 211 affected rows (203 distinct IDs)
-and five newly created IDs. RL-369 remains source-conflict-open regardless of
-its candidate delta. The report also lists all 93 changed requirements that
+and five newly created IDs. RL-369 was source-conflict-open in this historical preview regardless of
+its candidate delta; the later review disposition is recorded above. The report also lists all 93 changed requirements that
 have no queue-issue attribution, so collateral export changes stay visible.
 A regression checks that the delta names every snapshot issue, each corrected
 candidate, and the unattributed changes.
@@ -230,10 +232,12 @@ export with the final Lab commit SHA, rerun `resync`, review the changes to all
 three affected documents, then update Umbra's lock and issue ledger with the
 reviewed revision.
 
-Before changing any Lab-content issue status, review the new Lab export
-against its pinned source and retain the stable candidate IDs. Resolve
-RL-369 only with primary-source evidence; keep its direct type-20 mapping
-withheld until then. The `.tex` page paths on some historical candidates are
+The 2026-10-26 TCK audit found 20 additional source page ownership mistakes
+in the Lab requirement catalog. These were corrected in place with stable IDs:
+§§4.1.2, 5.6, 5.6.4, 5.7, 8.3.4, and 8.4 in 1516.1, and §§C.2 and C.3
+in 1516.2. Page 178 remains owned by broad clause 8; its over-specific TCK
+section pointers are corrected in Umbra. RL-369 remains unbound to type 20;
+the implementation maps that type from Table 14 and the official MIM. The `.tex` page paths on some historical candidates are
 generated adapters that input semantic page content, so their line numbers do
 not independently locate the prose in the adapter. Use the semantic page
 layout and the candidate's source span together when reviewing those rows.

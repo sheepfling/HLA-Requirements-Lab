@@ -142,10 +142,10 @@
       "source_id": "hla15161-table-5-restore-status-set-name",
       "location": "Table 5, page 297, FederateHandleRestoreStatusSet row",
       "source_text": "The supplied Table 5 page prints FederateHandleRestoreStatusSet as Array<FederateHandleRestoreStatus>.",
-      "rendered_text": "The literal Table 5 spelling is retained with a source-conflict note; no MIM type-20 mapping is inferred from it.",
+      "rendered_text": "The literal Table 5 spelling is retained with a source-conflict note; no MIM type-20 mapping is inferred from it. The implementation uses the independently documented type-20 MIM spelling.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "RL-369: Table 14 on page 324 of the supplied 1516.1 material names type 19 FederateRestoreStatus and type 20 FederateRestoreStatusSet. The IEEE SA 1516.1-2025 auxiliary MIM XML and the supplied 1516.2-2025 MIM agree; neither names FederateHandleRestoreStatus. The licensed 1516.1 Table 5 page needs adjudication before either spelling can be selected as a correction.",
-      "review_status": "UNRESOLVED"
+      "reason": "RL-369: Table 14 on page 324 of the supplied 1516.1 material names type 19 FederateRestoreStatus and type 20 FederateRestoreStatusSet. The IEEE SA 1516.1-2025 auxiliary MIM XML and the supplied 1516.2-2025 MIM agree; neither names FederateHandleRestoreStatus. This evidence resolves the implementation mapping to the MIM's type-20 spelling while preserving the conflicting Table 5 literal. The licensed Table 5 text is not silently corrected; a publisher correction would be needed to change that text.",
+      "review_status": "REVIEWED_CONFLICT"
     }
   ]
 }
