@@ -4,11 +4,9 @@ from __future__ import (
     annotations,
 )
 
-import json
 import re
 from collections.abc import (
     Mapping,
-    MutableMapping,
     MutableSequence,
     Sequence,
 )
@@ -18,10 +16,9 @@ from pathlib import (
 from types import (
     MappingProxyType,
 )
+from typing import Annotated, Literal
 
-from pydantic import (
-    JsonValue,
-)
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from hla_lab.adapters.latex_renderer import (
     tex_escape,
@@ -29,6 +26,7 @@ from hla_lab.adapters.latex_renderer import (
 from hla_lab.core.parsing import (
     balanced_span,
 )
+from hla_lab.core.semantic_model import State, StateMachine
 from hla_lab.core.text import (
     safe_filename,
 )
@@ -85,44 +83,33 @@ def _remove_latex_macro_invocations(
     return "".join(pieces)
 
 
-def _plantuml_ready(machine: Mapping[str, JsonValue]) -> bool:
+class PlantUmlReviewManifest(BaseModel):
+    """Explicit source-owned approval for generated PlantUML diagrams."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    schema_version: Literal[2]
+    document_id: str
+    review_standard: str
+    approved_machine_ids: tuple[str, ...]
+    landscape_machine_ids: tuple[str, ...]
+    deferred_machine_ids: Annotated[Mapping[str, str], Field(default_factory=dict)]
+    projection_sources: Annotated[Mapping[str, str], Field(default_factory=dict)]
+
+    @model_validator(mode="after")
+    def validate_landscape_approvals(self) -> PlantUmlReviewManifest:
+        if not set(self.landscape_machine_ids) <= set(self.approved_machine_ids):
+            raise ValueError("landscape_machine_ids must be a subset of approved_machine_ids")
+        return self
+
+
+def _plantuml_ready(machine: StateMachine) -> bool:
     """Return whether every asserted transition has renderable endpoints."""
-
-    raw_states: JsonValue = machine.get("states", [])
-    if not isinstance(raw_states, list):
-        return False
-    states: list[JsonValue] = raw_states
-    state_ids: set[str] = set()
-    for raw_state in states:
-        state: JsonValue = raw_state
-        if isinstance(state, dict) and state.get("id"):
-            state_ids.add(str(state["id"]))
-    raw_transitions: JsonValue = machine.get("transitions", [])
-    if not isinstance(raw_transitions, list):
-        return False
-    transitions: list[JsonValue] = raw_transitions
-    transition_records: list[dict[str, JsonValue]] = []
-    for raw_transition in transitions:
-        transition: JsonValue = raw_transition
-        if isinstance(transition, dict):
-            transition_records.append(transition)
+    state_ids = {state.id for state in machine.states}
     return bool(state_ids) and all(
-        transition.get("source_state") in state_ids and transition.get("target_state") in state_ids
-        for transition in transition_records
+        transition.source_state in state_ids and transition.target_state in state_ids
+        for transition in machine.transitions
     )
-
-
-def _manifest_string_list(value: JsonValue, path: Path, field: str) -> list[str]:
-    if not isinstance(value, list):
-        raise ValueError(f"{path}: {field} must be a list of strings")
-    raw_items: list[JsonValue] = value
-    strings: list[str] = []
-    for raw_item in raw_items:
-        item: JsonValue = raw_item
-        if not isinstance(item, str):
-            raise ValueError(f"{path}: {field} must be a list of strings")
-        strings.append(item)
-    return strings
 
 
 def _plantuml_review(root: Path) -> tuple[set[str], set[str]] | None:
@@ -138,20 +125,8 @@ def _plantuml_review(root: Path) -> tuple[set[str], set[str]] | None:
     path = root / "semantic" / "plantuml-review.json"
     if not path.is_file():
         return None
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"{path}: review manifest must be a JSON object")
-    approved = _manifest_string_list(
-        payload.get("approved_machine_ids"), path, "approved_machine_ids"
-    )
-    landscape = _manifest_string_list(
-        payload.get("landscape_machine_ids", []), path, "landscape_machine_ids"
-    )
-    approved_ids = set(approved)
-    landscape_ids = set(landscape)
-    if not landscape_ids <= approved_ids:
-        raise ValueError(f"{path}: landscape_machine_ids must be a subset of approved_machine_ids")
-    return approved_ids, landscape_ids
+    manifest = PlantUmlReviewManifest.model_validate_json(path.read_text(encoding="utf-8"))
+    return set(manifest.approved_machine_ids), set(manifest.landscape_machine_ids)
 
 
 _2010_PLANTUML_CORROBORATION = MappingProxyType(
@@ -171,8 +146,8 @@ _2010_PLANTUML_CORROBORATION = MappingProxyType(
 
 def _canonical_payload_for_machine(
     machine_id: str,
-    canonical_payloads: Mapping[str, Mapping[str, JsonValue]],
-) -> Mapping[str, JsonValue] | None:
+    canonical_payloads: Mapping[str, StateMachine],
+) -> StateMachine | None:
     figure_match = re.search(r"figure-(\d+)$", machine_id)
     if figure_match is None:
         return None
@@ -180,84 +155,73 @@ def _canonical_payload_for_machine(
     return canonical_payloads.get(canonical_id or "")
 
 
-def _canonical_state_id_map(states: Sequence[JsonValue], machine_id: str) -> dict[str, str]:
-    state_ids: dict[str, str] = {}
-    for raw_state in states:
-        if not isinstance(raw_state, dict) or not raw_state.get("id"):
-            continue
-        old_id = str(raw_state["id"])
-        state_ids[old_id] = f"{machine_id}.{old_id.split('.', 1)[-1]}"
-    return state_ids
-
-
-def _remap_canonical_states(
-    states: Sequence[JsonValue], state_ids: Mapping[str, str], machine_id: str
-) -> None:
-    for raw_state in states:
-        if not isinstance(raw_state, dict):
-            continue
-        old_id = str(raw_state.get("id", ""))
-        raw_state["id"] = state_ids.get(old_id, f"{machine_id}.{old_id}")
-        parent_id = raw_state.get("parent_id")
-        if parent_id in state_ids:
-            raw_state["parent_id"] = state_ids[str(parent_id)]
-
-
-def _remap_canonical_transitions(
-    transitions: Sequence[JsonValue], state_ids: Mapping[str, str], machine_id: str
-) -> None:
-    for raw_transition in transitions:
-        if not isinstance(raw_transition, dict):
-            continue
-        raw_transition["id"] = f"{machine_id}.{raw_transition.get('id', 'transition')}"
-        for key in ("source_state", "target_state"):
-            endpoint = raw_transition.get(key)
-            if endpoint in state_ids:
-                raw_transition[key] = state_ids[str(endpoint)]
-
-
-def _apply_authoritative_machine_fields(
-    payload: MutableMapping[str, JsonValue],
-    machine_payload: Mapping[str, JsonValue],
-    machine_id: str,
-    state_ids: Mapping[str, str],
-) -> None:
-    for field in ("title", "clause_id", "source", "provenance"):
-        payload[field] = machine_payload.get(field, payload.get(field))
-    payload["id"] = machine_id
-    payload["initial_state_ids"] = [
-        state_ids.get(str(value), f"{machine_id}.{value}")
-        for value in payload.get("initial_state_ids", ())
-    ]
-    payload["notes"] = (
-        "PlantUML artwork projection corroborated against the corresponding "
-        "2025 Harel state record; the 2010 source record remains the document authority."
-    )
+def _canonical_state_id_map(states: Sequence[State], machine_id: str) -> dict[str, str]:
+    return {state.id: f"{machine_id}.{state.id.split('.', 1)[-1]}" for state in states}
 
 
 def _project_canonical_machine(
-    canonical: Mapping[str, JsonValue],
-    machine_payload: Mapping[str, JsonValue],
+    canonical: StateMachine,
+    machine: StateMachine,
     machine_id: str,
-) -> dict[str, JsonValue]:
-    payload: dict[str, JsonValue] = json.loads(json.dumps(canonical))
-    states_value = payload.get("states", [])
-    states = states_value if isinstance(states_value, list) else []
-    state_ids = _canonical_state_id_map(states, machine_id)
-    _remap_canonical_states(states, state_ids, machine_id)
-    transitions_value = payload.get("transitions", [])
-    transitions = transitions_value if isinstance(transitions_value, list) else []
-    _remap_canonical_transitions(transitions, state_ids, machine_id)
-    _apply_authoritative_machine_fields(payload, machine_payload, machine_id, state_ids)
-    return payload
+) -> StateMachine:
+    state_ids = _canonical_state_id_map(canonical.states, machine_id)
+    states = tuple(
+        state.model_copy(
+            update={
+                "id": state_ids[state.id],
+                "parent_id": state_ids.get(state.parent_id)
+                if state.parent_id is not None
+                else None,
+            }
+        )
+        for state in canonical.states
+    )
+    transitions = tuple(
+        transition.model_copy(
+            update={
+                "id": f"{machine_id}.{transition.id}",
+                "source_state": (
+                    state_ids.get(transition.source_state, transition.source_state)
+                    if transition.source_state is not None
+                    else None
+                ),
+                "target_state": (
+                    state_ids.get(transition.target_state, transition.target_state)
+                    if transition.target_state is not None
+                    else None
+                ),
+            }
+        )
+        for transition in canonical.transitions
+    )
+    projected = canonical.model_copy(
+        update={
+            "id": machine_id,
+            "title": machine.title,
+            "clause_id": machine.clause_id,
+            "source": machine.source,
+            "provenance": machine.provenance,
+            "states": states,
+            "transitions": transitions,
+            "initial_state_ids": tuple(
+                state_ids.get(identifier, f"{machine_id}.{identifier}")
+                for identifier in canonical.initial_state_ids
+            ),
+            "notes": (
+                "PlantUML artwork projection corroborated against the corresponding "
+                "2025 Harel state record; the 2010 source record remains the document authority."
+            ),
+        }
+    )
+    return StateMachine.model_validate(projected.model_dump())
 
 
 def _cross_edition_plantuml_payload(
-    machine_payload: Mapping[str, JsonValue],
+    machine_payload: StateMachine,
     *,
     document_id: str,
-    canonical_payloads: Mapping[str, Mapping[str, JsonValue]],
-) -> dict[str, JsonValue]:
+    canonical_payloads: Mapping[str, StateMachine],
+) -> StateMachine:
     """Complete 2010 PlantUML projections from an explicit family crosswalk.
 
     The 2010 source records remain authoritative for the faithful document,
@@ -265,13 +229,14 @@ def _cross_edition_plantuml_payload(
     mappings, so the corresponding 2025 Harel record supplies artwork topology
     without replacing the 2010 semantic source record.
     """
-    if document_id != "hla-1516.1-2010" or _plantuml_ready(machine_payload):
-        return machine_payload  # type: ignore[return-value]
-    machine_id = str(machine_payload.get("id", ""))
+    machine = machine_payload
+    if document_id != "hla-1516.1-2010" or _plantuml_ready(machine):
+        return machine
+    machine_id = machine.id
     canonical = _canonical_payload_for_machine(machine_id, canonical_payloads)
     if canonical is None:
-        return machine_payload  # type: ignore[return-value]
-    return _project_canonical_machine(canonical, machine_payload, machine_id)
+        return machine
+    return _project_canonical_machine(canonical, machine, machine_id)
 
 
 def _diagram_embed_macro(

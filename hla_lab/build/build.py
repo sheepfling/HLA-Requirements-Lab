@@ -8,16 +8,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-from hla_lab.paths import REPO_ROOT, RESOURCES, repository_root, resources
+from hla_lab.paths import repository_root, resources
 from hla_lab.publication.publication_registry import (
     load_publication_registry,
     load_release_manifest,
     publication_projects,
 )
-
-ROOT = REPO_ROOT
-PUBLICATION_MANIFEST = RESOURCES.publications_manifest if RESOURCES is not None else None
-RELEASE_MANIFEST = RESOURCES.release_manifest if RESOURCES is not None else None
 
 
 def documents() -> list[Path]:

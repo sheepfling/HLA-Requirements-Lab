@@ -9,17 +9,24 @@ from collections import Counter
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Annotated, TypeAlias
 
-from hla_lab.core.json_types import JsonObject, JsonValue
+from pydantic import BaseModel, ConfigDict, Field
+
 from hla_lab.core.semantic_model import (
     ApiCrosswalk,
+    ApiSurface,
     ComplianceCorpus,
+    ComplianceCorpusReport,
     ComplianceIssue,
     ComplianceQueryResult,
     DocumentModel,
+    ImplementationMapping,
     Requirement,
     RequirementApiBinding,
+    RequirementApplicability,
     Transition,
+    TransitionImplementationCoverage,
 )
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 
@@ -136,6 +143,48 @@ class _ComplianceSnapshot:
     issues: tuple[ComplianceIssue, ...]
 
 
+class _QualifiedComplianceIssue(ComplianceIssue):
+    document: str
+
+
+ComplianceIssues: TypeAlias = tuple[ComplianceIssue | _QualifiedComplianceIssue, ...]
+
+
+class _CompliancePayload(BaseModel):
+    """Validated machine-readable result for the compliance CLI."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    documents: tuple[str, ...]
+    query: tuple[Requirement, ...]
+    unmapped_transitions: tuple[str, ...]
+    transition_coverage: Mapping[str, int] | Mapping[str, Mapping[str, int]]
+    requirement_reviews: Mapping[str, int] | Mapping[str, Mapping[str, int]]
+    issue_counts: Mapping[str, int]
+    issues: ComplianceIssues
+    implementation_mappings: (
+        tuple[ImplementationMapping, ...]
+        | Mapping[str, tuple[ImplementationMapping, ...]]
+    ) = ()
+    api_crosswalks: tuple[ApiCrosswalk, ...] | Mapping[str, tuple[ApiCrosswalk, ...]] = ()
+    api_crosswalk_counts: Annotated[
+        Mapping[str, int] | Mapping[str, Mapping[str, int]], Field(default_factory=dict)
+    ]
+    requirement_api_bindings: (
+        tuple[RequirementApiBinding, ...]
+        | Mapping[str, tuple[RequirementApiBinding, ...]]
+    ) = ()
+    requirement_api_binding_counts: Annotated[
+        Mapping[str, int] | Mapping[str, Mapping[str, int]], Field(default_factory=dict)
+    ]
+    requirement_api_surfaces: tuple[ApiSurface, ...] | Mapping[str, tuple[ApiSurface, ...]] = ()
+    compliance_corpus: ComplianceCorpusReport | None = None
+    document: str | None = None
+    applicability: tuple[RequirementApplicability, ...] | None = None
+    query_transition_coverage: tuple[TransitionImplementationCoverage, ...] | None = None
+    query_implementation_status_counts: Mapping[str, int] | None = None
+
+
 def _validate_arguments(parser: argparse.ArgumentParser, args: argparse.Namespace) -> None:
     if args.json and hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[reportAttributeAccessIssue]
@@ -222,40 +271,42 @@ def _compliance_snapshot(
     )
 
 
-def _base_payload(snapshot: _ComplianceSnapshot) -> JsonObject:
+def _base_payload(snapshot: _ComplianceSnapshot) -> _CompliancePayload:
     model = snapshot.model
     unmapped = snapshot.unmapped_by_document.get(model.document_id, ()) if model else ()
-    return {
-        "documents": [document.document_id for document in snapshot.corpus.documents],
-        "query": [item.model_dump(mode="json") for item in snapshot.query],
-        "unmapped_transitions": (
-            [item.id for item in unmapped]
+    return _CompliancePayload(
+        documents=tuple(document.document_id for document in snapshot.corpus.documents),
+        query=snapshot.query,
+        unmapped_transitions=(
+            tuple(item.id for item in unmapped)
             if model is not None
-            else [
+            else tuple(
                 f"{document_id}:{item.id}"
                 for document_id, items in snapshot.unmapped_by_document.items()
                 for item in items
-            ]
+            )
         ),
-        "transition_coverage": (
+        transition_coverage=(
             snapshot.transition_coverage.get(model.document_id, {})
             if model is not None
             else snapshot.transition_coverage
         ),
-        "requirement_reviews": (
+        requirement_reviews=(
             snapshot.requirement_reviews.get(model.document_id, {})
             if model is not None
             else snapshot.requirement_reviews
         ),
-        "issue_counts": dict(Counter(item.code for item in snapshot.issues)),
-        "issues": [item.model_dump(mode="json") for item in snapshot.issues],
-    }
+        issue_counts=dict(Counter(item.code for item in snapshot.issues)),
+        api_crosswalk_counts={},
+        requirement_api_binding_counts={},
+        issues=snapshot.issues,
+    )
 
 
 def _filtered_implementations(
     document: DocumentModel,
     args: argparse.Namespace,
-) -> list[JsonObject]:
+) -> tuple[ImplementationMapping, ...]:
     mappings = document.implementations
     if args.implementation_status:
         mappings = tuple(item for item in mappings if item.status == args.implementation_status)
@@ -267,19 +318,20 @@ def _filtered_implementations(
         mappings = tuple(item for item in mappings if args.clause_id in item.clause_ids)
     if args.transition_id:
         mappings = tuple(item for item in mappings if args.transition_id in item.transition_ids)
-    return [item.model_dump(mode="json") for item in mappings]
+    return tuple(mappings)
 
 
 def _implementation_payload(
     corpus: ComplianceCorpus,
     model: DocumentModel | None,
     args: argparse.Namespace,
-) -> JsonValue:
+) -> tuple[ImplementationMapping, ...] | dict[str, tuple[ImplementationMapping, ...]]:
     by_document = {
         document.document_id: _filtered_implementations(document, args)
         for document in corpus.documents
     }
-    return by_document.get(model.document_id, []) if model is not None else by_document
+    selected = by_document.get(model.document_id, ()) if model is not None else by_document
+    return selected
 
 
 def _filtered_crosswalks(
@@ -300,16 +352,18 @@ def _crosswalk_payload(
     corpus: ComplianceCorpus,
     model: DocumentModel | None,
     args: argparse.Namespace,
-) -> tuple[JsonValue, dict[str, dict[str, int]]]:
-    by_document: dict[str, list[JsonObject]] = {}
+) -> tuple[
+    tuple[ApiCrosswalk, ...] | dict[str, tuple[ApiCrosswalk, ...]], dict[str, dict[str, int]]
+]:
+    by_document: dict[str, tuple[ApiCrosswalk, ...]] = {}
     counts: dict[str, dict[str, int]] = {}
     for document in corpus.documents:
         crosswalks = _filtered_crosswalks(document, args)
-        by_document[document.document_id] = [item.model_dump(mode="json") for item in crosswalks]
+        by_document[document.document_id] = crosswalks
         counts[document.document_id] = dict(
             Counter(item.status for item in document.api_crosswalks)
         )
-    selected = by_document.get(model.document_id, []) if model is not None else by_document
+    selected = by_document.get(model.document_id, ()) if model is not None else by_document
     return selected, counts
 
 
@@ -336,7 +390,7 @@ def _filtered_api_bindings(
 def _api_binding_document(
     document: DocumentModel,
     args: argparse.Namespace,
-) -> tuple[list[JsonObject], dict[str, int], list[JsonObject]]:
+) -> tuple[tuple[RequirementApiBinding, ...], dict[str, int], tuple[ApiSurface, ...]]:
     bindings = _filtered_api_bindings(document, args)
     surfaces = {
         surface_id
@@ -347,9 +401,9 @@ def _api_binding_document(
         )
     }
     return (
-        [item.model_dump(mode="json") for item in bindings],
+        bindings,
         dict(Counter(item.status for item in document.requirement_api_bindings)),
-        [item.model_dump(mode="json") for item in document.api_surfaces if item.id in surfaces],
+        tuple(item for item in document.api_surfaces if item.id in surfaces),
     )
 
 
@@ -357,10 +411,14 @@ def _api_binding_payloads(
     corpus: ComplianceCorpus,
     model: DocumentModel | None,
     args: argparse.Namespace,
-) -> tuple[JsonValue, dict[str, dict[str, int]], JsonValue]:
-    bindings: dict[str, list[JsonObject]] = {}
+) -> tuple[
+    tuple[RequirementApiBinding, ...] | dict[str, tuple[RequirementApiBinding, ...]],
+    dict[str, dict[str, int]],
+    tuple[ApiSurface, ...] | dict[str, tuple[ApiSurface, ...]],
+]:
+    bindings: dict[str, tuple[RequirementApiBinding, ...]] = {}
     counts: dict[str, dict[str, int]] = {}
-    surfaces: dict[str, list[JsonObject]] = {}
+    surfaces: dict[str, tuple[ApiSurface, ...]] = {}
     for document in corpus.documents:
         (
             bindings[document.document_id],
@@ -369,9 +427,9 @@ def _api_binding_payloads(
         ) = _api_binding_document(document, args)
     if model is not None:
         return (
-            bindings.get(model.document_id, []),
+            bindings.get(model.document_id, ()),
             counts,
-            surfaces.get(model.document_id, []),
+            surfaces.get(model.document_id, ()),
         )
     return bindings, counts, surfaces
 
@@ -389,7 +447,7 @@ def _corpus_report_requested(args: argparse.Namespace) -> bool:
 def _corpus_report_payload(
     snapshot: _ComplianceSnapshot,
     args: argparse.Namespace,
-) -> JsonObject | None:
+) -> ComplianceCorpusReport | None:
     if not _corpus_report_requested(args):
         return None
     report = snapshot.corpus.compliance_report(
@@ -409,71 +467,74 @@ def _corpus_report_payload(
             concrete=True if args.concrete_only else None,
         )
         report = report.model_copy(update={"implementation_evidence": evidence})
-    return report.model_dump(mode="json")
+    return report
 
 
 def _finish_payload(
-    payload: JsonObject,
+    payload: _CompliancePayload,
     snapshot: _ComplianceSnapshot,
-) -> None:
+) -> _CompliancePayload:
     if snapshot.query_result is not None:
-        payload["applicability"] = [
-            item.model_dump(mode="json") for item in snapshot.query_result.applicable_requirements
-        ]
-        payload["query_transition_coverage"] = [
-            item.model_dump(mode="json") for item in snapshot.query_result.transition_coverage
-        ]
-        payload["query_implementation_status_counts"] = (
-            snapshot.query_result.implementation_status_counts
+        payload = payload.model_copy(
+            update={
+                "applicability": snapshot.query_result.applicable_requirements,
+                "query_transition_coverage": snapshot.query_result.transition_coverage,
+                "query_implementation_status_counts": (
+                    snapshot.query_result.implementation_status_counts
+                ),
+            }
         )
     if snapshot.model is not None:
-        payload["document"] = snapshot.model.document_id
-        return
-    payload["issues"] = [
-        {"document": document_id, **issue.model_dump(mode="json")}
-        for document_id, items in snapshot.document_issues.items()
-        for issue in items
-    ]
-    payload["issues"].extend(
-        item.model_dump(mode="json") for item in snapshot.corpus.unresolved_reference_issues()
+        return payload.model_copy(update={"document": snapshot.model.document_id})
+    issues: ComplianceIssues = (
+        tuple(
+            _QualifiedComplianceIssue(document=document_id, **issue.model_dump())
+            for document_id, items in snapshot.document_issues.items()
+            for issue in items
+        )
+        + snapshot.corpus.unresolved_reference_issues()
     )
+    return payload.model_copy(update={"issues": issues})
 
 
 def _build_payload(
     snapshot: _ComplianceSnapshot,
     args: argparse.Namespace,
-) -> tuple[JsonObject, dict[str, dict[str, int]], dict[str, dict[str, int]], bool]:
+) -> tuple[_CompliancePayload, dict[str, dict[str, int]], dict[str, dict[str, int]], bool]:
     payload = _base_payload(snapshot)
-    payload["implementation_mappings"] = _implementation_payload(
-        snapshot.corpus, snapshot.model, args
-    )
+    implementation_mappings = _implementation_payload(snapshot.corpus, snapshot.model, args)
     crosswalks, crosswalk_counts = _crosswalk_payload(snapshot.corpus, snapshot.model, args)
-    payload["api_crosswalks"] = crosswalks
-    payload["api_crosswalk_counts"] = (
-        crosswalk_counts.get(snapshot.model.document_id, {})
-        if snapshot.model is not None
-        else crosswalk_counts
-    )
     bindings, binding_counts, surfaces = _api_binding_payloads(
         snapshot.corpus, snapshot.model, args
     )
-    payload["requirement_api_bindings"] = bindings
-    payload["requirement_api_binding_counts"] = (
-        binding_counts.get(snapshot.model.document_id, {})
-        if snapshot.model is not None
-        else binding_counts
+    report_counts: dict[str, int] | dict[str, dict[str, int]]
+    binding_report_counts: dict[str, int] | dict[str, dict[str, int]]
+    if snapshot.model is not None:
+        report_counts = crosswalk_counts.get(snapshot.model.document_id, {})
+        binding_report_counts = binding_counts.get(snapshot.model.document_id, {})
+    else:
+        report_counts = crosswalk_counts
+        binding_report_counts = binding_counts
+    payload = payload.model_copy(
+        update={
+            "implementation_mappings": implementation_mappings,
+            "api_crosswalks": crosswalks,
+            "api_crosswalk_counts": report_counts,
+            "requirement_api_bindings": bindings,
+            "requirement_api_binding_counts": binding_report_counts,
+            "requirement_api_surfaces": surfaces,
+        }
     )
-    payload["requirement_api_surfaces"] = surfaces
     corpus_report = _corpus_report_payload(snapshot, args)
     if corpus_report is not None:
-        payload["compliance_corpus"] = corpus_report
-    _finish_payload(payload, snapshot)
+        payload = payload.model_copy(update={"compliance_corpus": corpus_report})
+    payload = _finish_payload(payload, snapshot)
     return payload, crosswalk_counts, binding_counts, corpus_report is not None
 
 
 def _print_summary(
     snapshot: _ComplianceSnapshot,
-    payload: Mapping[str, JsonValue],
+    payload: _CompliancePayload,
     crosswalk_counts: Mapping[str, Mapping[str, int]],
     binding_counts: Mapping[str, Mapping[str, int]],
     wants_corpus_report: bool,
@@ -499,14 +560,14 @@ def _print_summary(
     )
     print(f"requirement API binding gaps: {binding_gap_count}")
     print(f"compliance issues: {len(snapshot.issues)}")
-    if wants_corpus_report:
-        report = payload["compliance_corpus"]
+    if wants_corpus_report and payload.compliance_corpus is not None:
+        report = payload.compliance_corpus
         print(
             "M24 corpus projection: "
-            f"{len(report['state_sequence_implications'])} implications, "
-            f"{len(report['dependencies'])} dependencies, "
-            f"{len(report['missing_implementation_mappings'])} unmapped transitions, "
-            f"{len(report['implementation_evidence'])} implementation evidence records"
+            f"{len(report.state_sequence_implications)} implications, "
+            f"{len(report.dependencies)} dependencies, "
+            f"{len(report.missing_implementation_mappings)} unmapped transitions, "
+            f"{len(report.implementation_evidence)} implementation evidence records"
         )
     for item in snapshot.query:
         print(f"{item.id}: {item.statement}")
@@ -523,7 +584,13 @@ def main() -> None:
     snapshot = _compliance_snapshot(corpus, model, args)
     payload, crosswalk_counts, binding_counts, wants_corpus_report = _build_payload(snapshot, args)
     if args.json:
-        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                payload.model_dump(mode="json", exclude_unset=True),
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
         return
     _print_summary(snapshot, payload, crosswalk_counts, binding_counts, wants_corpus_report)
 

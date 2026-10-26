@@ -7,16 +7,16 @@ from tools.migrations.backflow_common import (
     OWNERSHIP,
     SUPPORT,
     TIME,
-    _read,
+    _read_requirements,
     _set_statement,
-    _write,
+    _write_requirements,
 )
 
 
 def repair_clipped_clause_statements() -> None:
     """Restore full sentences from the pinned page layouts, retaining stable IDs."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         OWNERSHIP + "153-l15-4": (
             "When a joined federate invokes the Attribute Ownership Acquisition service "
@@ -585,4 +585,4 @@ def repair_clipped_clause_statements() -> None:
     }
     for requirement_id, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[requirement_id], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)

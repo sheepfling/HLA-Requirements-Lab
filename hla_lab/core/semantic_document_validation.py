@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from collections.abc import Set as AbstractSet
 
+from hla_lab.core.semantic_document_queries import _SemanticDocumentFields
 from hla_lab.core.semantic_ordering import _clause_sort_key
 from hla_lab.core.semantic_types import (
     StateMachine,
@@ -13,7 +14,7 @@ from hla_lab.core.semantic_types import (
 )
 
 
-class DocumentValidationMixin:
+class DocumentValidationMixin(_SemanticDocumentFields):
     def _validate_unique_record_ids(self) -> None:
         for label, records in (
             ("clause", self.clauses),

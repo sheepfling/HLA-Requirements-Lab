@@ -3,42 +3,42 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 from pathlib import Path
-from typing import TypedDict
 
-from pydantic import JsonValue
+from pydantic import BaseModel, ConfigDict
 
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import DiagramSurfaceFile
 
 
-class DiagramQaReport(TypedDict):
+class DiagramQaReport(BaseModel):
+    """Validated ownership and generated-output result for diagram surfaces."""
+
+    model_config = ConfigDict(frozen=True)
+
     passed: bool
-    failures: list[str]
+    failures: tuple[str, ...]
     generated_figure_count: int
     embedded_diagram_count: int
     non_generatable_asset_count: int
-    generated_record_ids: list[str]
+    generated_record_ids: tuple[str, ...]
 
 
 def _semantic_record_ids(models_dir: Path) -> set[str]:
     record_ids: set[str] = set()
     for path in sorted(models_dir.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict):
-            continue
-        for key in ("state_machines", "sequence_diagrams", "graph_diagrams"):
-            raw_records: JsonValue = raw.get(key, [])
-            if not isinstance(raw_records, list):
-                continue
-            records: list[JsonValue] = raw_records
-            for raw_record in records:
-                record: JsonValue = raw_record
-                if isinstance(record, dict):
-                    record_id: JsonValue = record.get("id")
-                    if isinstance(record_id, str):
-                        record_ids.add(record_id)
+        semantic_file = SemanticDiagramFileEnvelope.model_validate_json(
+            path.read_text(encoding="utf-8")
+        )
+        for field, records in (
+            ("state_machines", semantic_file.state_machines),
+            ("sequence_diagrams", semantic_file.sequence_diagrams),
+            ("graph_diagrams", semantic_file.graph_diagrams),
+        ):
+            if field in semantic_file.model_fields_set and records is None:
+                raise ValueError(f"{path}: {field} must be an array")
+            record_ids.update(record.id for record in records or ())
     return record_ids
 
 
@@ -49,8 +49,7 @@ def validate(
     *,
     expected_figures: int | None = None,
 ) -> DiagramQaReport:
-    payload = json.loads(surface_manifest.read_text(encoding="utf-8"))
-    manifest = DiagramSurfaceFile.model_validate(payload)
+    manifest = DiagramSurfaceFile.model_validate_json(surface_manifest.read_text(encoding="utf-8"))
     failures: list[str] = []
     generated = [item for item in manifest.surfaces if item.status == "generated"]
     figure_numbers = [item.figure_number for item in generated if item.figure_number is not None]
@@ -90,14 +89,14 @@ def validate(
         )
     failures.extend(f"binary figure dependency: {item}" for item in binary_commands)
     excluded_assets = sum(item.status == "non-generatable" for item in manifest.surfaces)
-    return {
-        "passed": not failures,
-        "failures": failures,
-        "generated_figure_count": figure_surface_count,
-        "embedded_diagram_count": embedded_count,
-        "non_generatable_asset_count": excluded_assets,
-        "generated_record_ids": sorted(item.record_id for item in generated if item.record_id),
-    }
+    return DiagramQaReport(
+        passed=not failures,
+        failures=tuple(failures),
+        generated_figure_count=figure_surface_count,
+        embedded_diagram_count=embedded_count,
+        non_generatable_asset_count=excluded_assets,
+        generated_record_ids=tuple(sorted(item.record_id for item in generated if item.record_id)),
+    )
 
 
 def main() -> int:
@@ -115,12 +114,12 @@ def main() -> int:
         expected_figures=args.expected_figures,
     )
     if args.json:
-        print(json.dumps(report, ensure_ascii=False, indent=2))
+        print(report.model_dump_json(indent=2))
     else:
-        print(f"diagram surface QA: {'passed' if report['passed'] else 'failed'}")
-        for failure in report["failures"]:
+        print(f"diagram surface QA: {'passed' if report.passed else 'failed'}")
+        for failure in report.failures:
             print(f"failure: {failure}")
-    return 0 if report["passed"] else 1
+    return 0 if report.passed else 1
 
 
 if __name__ == "__main__":

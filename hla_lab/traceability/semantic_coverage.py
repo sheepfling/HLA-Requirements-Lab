@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.semantic_model import DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import REPO_ROOT, document_roots
+from hla_lab.paths import document_roots, repository_root
 
 
 class CoverageReportModel(BaseModel):
@@ -116,12 +116,13 @@ def build_report(roots: tuple[Path, ...]) -> CoverageReport:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", action="append", type=Path)
+    parser.add_argument("--workspace-root", type=Path, help="used to discover default documents")
     parser.add_argument("--json", action="store_true")
     parser.add_argument(
         "--check", action="store_true", help="Exit nonzero when coverage is incomplete"
     )
     args = parser.parse_args()
-    roots = tuple(args.root or document_roots(REPO_ROOT))
+    roots = tuple(args.root or document_roots(repository_root(args.workspace_root)))
     report = build_report(roots)
     if args.json:
         print(report.model_dump_json(indent=2))

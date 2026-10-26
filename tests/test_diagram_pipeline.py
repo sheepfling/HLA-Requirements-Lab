@@ -110,26 +110,22 @@ class DiagramPipelineTests(unittest.TestCase):
             "temporal-state",
         ):
             with self.subTest(machine=machine_id):
-                source = render_plantuml(machines[machine_id].model_dump(mode="json"))
+                source = render_plantuml(machines[machine_id])
                 self.assertEqual(
-                    validate_plantuml_source(machines[machine_id].model_dump(mode="json"), source),
+                    validate_plantuml_source(machines[machine_id], source),
                     [],
                 )
                 self.assertNotIn("x=", source)
                 self.assertNotIn("y=", source)
-        joined = render_plantuml(machines["normal-activity-permitted"].model_dump(mode="json"))
+        joined = render_plantuml(machines["normal-activity-permitted"])
         self.assertIn('state "Temporal State"', joined)
         self.assertIn("<<history>>", joined)
-        temporal = render_plantuml(machines["temporal-state"].model_dump(mode="json"))
+        temporal = render_plantuml(machines["temporal-state"])
         self.assertIn("Enable Time Regulation", temporal)
         self.assertIn("†", temporal)
-        synchronization = render_plantuml(
-            machines["global-synchronization-label"].model_dump(mode="json")
-        )
+        synchronization = render_plantuml(machines["global-synchronization-label"])
         self.assertIn("∀", synchronization)
-        overview = render_plantuml(
-            machines["federation-execution-sync-overview"].model_dump(mode="json")
-        )
+        overview = render_plantuml(machines["federation-execution-sync-overview"])
         self.assertNotIn("&quot;", overview)
 
     def test_2025_figure_four_uses_the_joined_federate_state_model(self) -> None:
@@ -157,8 +153,8 @@ class DiagramPipelineTests(unittest.TestCase):
             },
             {item.title for item in joined.layout.containers if item.id != "joined.outer"},
         )
-        source = render_plantuml(joined.model_dump(mode="json"))
-        self.assertEqual(validate_plantuml_source(joined.model_dump(mode="json"), source), [])
+        source = render_plantuml(joined)
+        self.assertEqual(validate_plantuml_source(joined, source), [])
         self.assertIn("Request Federation Save", source)
         self.assertIn("Federate Save Begun", source)
         self.assertIn("Federate Restore Complete", source)
@@ -171,7 +167,7 @@ class DiagramPipelineTests(unittest.TestCase):
         machines = {item.id: item for item in self.model.state_machines}
         for machine_id in ("federate-lifetime", "joined-federate-state", "temporal-state"):
             with self.subTest(machine=machine_id):
-                source = render_plantuml(machines[machine_id].model_dump(mode="json"))
+                source = render_plantuml(machines[machine_id])
                 self.assertNotRegex(source, r" -(?:left|right|up|down)-> ")
                 self.assertIn(" --> ", source)
 
@@ -214,7 +210,7 @@ class DiagramPipelineTests(unittest.TestCase):
         }
         canonical_root = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
         canonical = {
-            item.id: item.model_dump(mode="json")
+            item.id: item
             for item in load_document_model(
                 canonical_root,
                 source_profile_for_document("hla-1516.1-2025"),
@@ -223,7 +219,7 @@ class DiagramPipelineTests(unittest.TestCase):
         projections = review["projection_sources"]
         for machine_id in approved:
             with self.subTest(machine=machine_id):
-                payload = machines[machine_id].model_dump(mode="json")
+                payload = machines[machine_id]
                 source_id = projections.get(machine_id)
                 if source_id:
                     payload = _cross_edition_plantuml_payload(
@@ -246,7 +242,7 @@ class DiagramPipelineTests(unittest.TestCase):
         self.assertEqual(len(figure.states), 5)
         self.assertEqual(len(figure.transitions), 5)
         self.assertTrue(all(item.source_state and item.target_state for item in figure.transitions))
-        source = render_plantuml(figure.model_dump(mode="json"))
+        source = render_plantuml(figure)
         self.assertIn("[*] -->", source)
         for event in (
             "initial entry to Synch Point Not Registered",

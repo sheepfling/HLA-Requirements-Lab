@@ -16,8 +16,6 @@ from collections.abc import Mapping, MutableSequence, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
-from pydantic import JsonValue
-
 from hla_lab.core.semantic_model import (
     State,
     StateMachine,
@@ -105,7 +103,7 @@ def _synthetic_groups(
     # PlantUML.  Convert their path-like IDs into composite/orthogonal regions
     # while deliberately discarding x/y geometry.
     groups: dict[str, _SyntheticGroup] = {}
-    layout = machine.layout or StateMachineLayout()
+    layout = machine.layout or StateMachineLayout(nodes={}, transitions={})
     for container in layout.containers:
         container_id = container.id
         group_id = re.sub(r"\.(?:container|outer|frame)$", "", container_id)
@@ -337,14 +335,15 @@ def _plantuml_preamble(direction: str) -> list[str]:
     return lines
 
 
-def render(machine: StateMachine | Mapping[str, JsonValue]) -> str:
-    """Return PlantUML source for one semantic state-machine record."""
-    machine = StateMachine.model_validate(machine)
+def render(machine: StateMachine) -> str:
+    """Render one validated state-machine model as PlantUML source."""
     state_by_id = {item.id: item for item in machine.states}
     synthetic_groups = _synthetic_groups(machine, state_by_id)
     children = _children_by_scope(machine.states, state_by_id, synthetic_groups)
     parent_for = {child: parent for parent, nested in children.items() for child in nested}
-    lines = _plantuml_preamble(machine.layout.direction if machine.layout else "")
+    lines = _plantuml_preamble(
+        machine.layout.direction if machine.layout else ""
+    )
     context = _RenderContext(
         state_by_id=state_by_id,
         synthetic_groups=synthetic_groups,

@@ -142,12 +142,13 @@ def _segment_entries(
     entries.sort(key=lambda item: (item.sequence, item.layout_only, item.source_path))
     if not entries:
         return ()
-    duplicates = used_sources.intersection(item.source_path for item in entries)
+    duplicates = set(used_sources).intersection(item.source_path for item in entries)
     if duplicates:
         raise ValueError(
             f"faithful layout adapters appear in multiple segments: {sorted(duplicates)}"
         )
-    used_sources.update(item.source_path for item in entries)
+    for entry in entries:
+        used_sources.add(entry.source_path)
     entries[0] = entries[0].model_copy(
         update={"before_latex": _append_latex(entries[0].before_latex, segment.before_latex)}
     )

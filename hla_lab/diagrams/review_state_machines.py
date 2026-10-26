@@ -3,17 +3,19 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import subprocess
 import sys
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
-from pydantic import JsonValue
-
-from hla_lab.core.semantic_model import StateMachine, StateMachineFile
-from hla_lab.paths import REPO_ROOT
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
+from hla_lab.core.semantic_model import StateMachine
+from hla_lab.diagrams.state_machine_inventory import (
+    DiagramInventoryEntry,
+    StateMachineInventory,
+)
+from hla_lab.paths import repository_root
 
 
 def _review_index(reviews_dir: Path) -> dict[str, Path]:
@@ -37,7 +39,7 @@ def _artifact_from_record(record: Path) -> str | None:
 def _source_image(
     machine: StateMachine,
     model_rel: str,
-    diagrams: Sequence[Mapping[str, JsonValue]],
+    diagrams: Sequence[DiagramInventoryEntry],
     record: Path,
 ) -> str:
     if machine.provenance is not None and machine.provenance.image:
@@ -48,22 +50,14 @@ def _source_image(
         if match:
             return match.group(1)
     for diagram in diagrams:
-        if diagram.get("model") == model_rel and diagram.get("source_image"):
-            return str(diagram["source_image"])
+        if diagram.model == model_rel:
+            return diagram.source_image
     raise ValueError(f"no source image found for {machine.id}")
 
 
-def _manifest_diagrams(path: Path) -> list[dict[str, JsonValue]]:
-    manifest: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    raw_diagrams: JsonValue = manifest.get("diagrams", []) if isinstance(manifest, dict) else []
-    if not isinstance(raw_diagrams, list):
-        return []
-    diagram_values: list[JsonValue] = raw_diagrams
-    diagrams: list[dict[str, JsonValue]] = []
-    for item in diagram_values:
-        if isinstance(item, dict):
-            diagrams.append(item)
-    return diagrams
+def _manifest_diagrams(path: Path) -> tuple[DiagramInventoryEntry, ...]:
+    manifest = StateMachineInventory.model_validate_json(path.read_text(encoding="utf-8"))
+    return manifest.diagrams
 
 
 def _model_entries(
@@ -73,10 +67,13 @@ def _model_entries(
     entries: list[tuple[Path, str, StateMachine]] = []
     for model_path in model_files:
         model_rel = model_path.resolve().relative_to(repo_root).as_posix()
-        payload: JsonValue = json.loads(model_path.read_text(encoding="utf-8"))
-        if not isinstance(payload, dict) or "state_machines" not in payload:
+        state_machine_file = SemanticDiagramFileEnvelope.model_validate_json(
+            model_path.read_text(encoding="utf-8")
+        )
+        if "state_machines" not in state_machine_file.model_fields_set:
             continue
-        state_machine_file = StateMachineFile.model_validate(payload)
+        if state_machine_file.state_machines is None:
+            raise ValueError(f"{model_path}: state_machines must be an array")
         entries.extend(
             (model_path, model_rel, machine) for machine in state_machine_file.state_machines
         )
@@ -91,7 +88,7 @@ def _run_review(
     review_index: Mapping[str, Path],
     reviews_dir: Path,
     artifacts_rel: Path,
-    diagrams: Sequence[Mapping[str, JsonValue]],
+    diagrams: Sequence[DiagramInventoryEntry],
     repo_root: Path,
     args: argparse.Namespace,
 ) -> None:
@@ -132,6 +129,7 @@ def _run_review(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     parser.add_argument("--models", type=Path, required=True)
     parser.add_argument("--reviews", type=Path, required=True)
     parser.add_argument("--artifacts", type=Path, required=True)
@@ -142,7 +140,7 @@ def main() -> None:
     parser.add_argument("--pdftoppm", type=Path)
     args = parser.parse_args()
 
-    repo_root = REPO_ROOT
+    repo_root = repository_root(args.root)
     diagrams = _manifest_diagrams(args.manifest)
     reviews_dir = args.reviews.resolve()
     artifacts_rel = args.artifacts.resolve().relative_to(repo_root)

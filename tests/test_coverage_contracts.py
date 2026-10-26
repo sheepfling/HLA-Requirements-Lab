@@ -2,15 +2,20 @@
 
 from __future__ import annotations
 
-import json
 import subprocess
 import sys
 import unittest
 
-from pydantic import JsonValue
+from pydantic import TypeAdapter
 
 from hla_lab.core.hla_profile import HLA_SOURCE
+from hla_lab.core.navigation_manifest import (
+    NavigationOutlineItem,
+    SourceNavigationManifest,
+)
 from hla_lab.core.semantic_model import load_document_model
+from hla_lab.core.semantic_types import ContentBlockFile
+from hla_lab.reports.semantic_dashboard import DashboardReport
 from hla_lab.traceability.semantic_coverage import build_report
 from tests.support import TEST_REPO_ROOT
 
@@ -35,9 +40,9 @@ class CoverageContractTests(unittest.TestCase):
             capture_output=True,
             text=True,
         )
-        payload = json.loads(result.stdout)
+        payload = DashboardReport.model_validate_json(result.stdout)
         self.assertEqual(
-            {item["document"] for item in payload["documents"]},
+            {item.document for item in payload.documents},
             {
                 "hla-1516-2010",
                 "hla-1516.1-2010",
@@ -62,22 +67,22 @@ class CoverageContractTests(unittest.TestCase):
                 for text in (path.read_text(encoding="utf-8") for path in pages)
             )
         )
-        navigation: dict[str, JsonValue] = json.loads(
+        navigation = SourceNavigationManifest.model_validate_json(
             (ROOT / "canonical" / "source-navigation.json").read_text(encoding="utf-8")
         )
-        outline: list[JsonValue] = navigation["outline"]
-        self.assertEqual(sum(isinstance(item, dict) for item in outline), 33)
+        structured_outline = TypeAdapter(tuple[NavigationOutlineItem, ...]).validate_python(
+            navigation.outline[:33]
+        )
+        self.assertEqual(len(structured_outline), 33)
 
     def test_1516_content_block_source_and_layout_are_separate_fields(self) -> None:
-        payload = json.loads(
+        content = ContentBlockFile.model_validate_json(
             (ROOT / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(payload["schema_version"], 2)
-        self.assertTrue(all(item["text"] is not None for item in payload["content_blocks"]))
-        self.assertTrue(all(item["layout_body"] for item in payload["content_blocks"]))
-        self.assertTrue(
-            all("page-" in item["source"]["path"] for item in payload["content_blocks"])
-        )
+        self.assertEqual(content.schema_version, 2)
+        self.assertTrue(all(item.text is not None for item in content.content_blocks))
+        self.assertTrue(all(item.layout_body for item in content.content_blocks))
+        self.assertTrue(all("page-" in item.source.path for item in content.content_blocks))
 
 
 if __name__ == "__main__":

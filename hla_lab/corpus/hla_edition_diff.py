@@ -15,9 +15,9 @@ import sys
 from collections.abc import Mapping
 from collections.abc import Set as AbstractSet
 from pathlib import Path
-from typing import Literal, cast
+from typing import Literal, TypeAlias, cast
 
-from pydantic import JsonValue
+from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.semantic_model import (
     ComplianceCorpus,
@@ -30,10 +30,11 @@ from hla_lab.corpus.edition_lineage import (
     EditionComparison,
     EditionLineageManifest,
     EditionRelation,
+    LineageRelationKind,
     load_edition_lineage,
 )
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import REPO_ROOT, resources
+from hla_lab.paths import repository_root, resources
 
 __all__ = ["build_report", "main"]
 
@@ -46,15 +47,81 @@ RowStatus = Literal[
     "target-unmapped",
     "target-machine-added",
 ]
+_CsvValue: TypeAlias = str | int | float | bool | tuple[str, ...] | None
+_CsvRow: TypeAlias = dict[str, _CsvValue]
+_CsvOutputRow: TypeAlias = dict[str, str | int | float | bool | None]
 
 
-class _JsonEncoder(json.JSONEncoder):
-    """Keep the CLI independent of a dataframe or export dependency."""
+class _DiffModel(BaseModel):
+    """Immutable base for the edition-difference output contract."""
 
-    def default(self, value: object) -> object:
-        if hasattr(value, "model_dump"):
-            return value.model_dump(mode="json")  # type: ignore[no-any-return]
-        return super().default(value)
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+
+class _DiffRowBase(_DiffModel):
+    status: RowStatus
+    relation: LineageRelationKind | None
+    stable_id: str | None
+    record_id: str
+
+
+class RequirementDiffRow(_DiffRowBase):
+    title: str
+    statement: str
+    clause_id: str | None
+    extraction: str
+    transition_ids: tuple[str, ...]
+    source_path: str | None
+    source_line: int | None
+
+
+class StateMachineDiffRow(_DiffRowBase):
+    title: str
+    clause_id: str | None
+    state_count: int
+    transition_count: int
+    state_ids: tuple[str, ...]
+    transition_ids: tuple[str, ...]
+    state_ids_added_in_target: tuple[str, ...]
+    state_ids_removed_from_target: tuple[str, ...]
+    transition_ids_added_in_target: tuple[str, ...]
+    transition_ids_removed_from_target: tuple[str, ...]
+    source_path: str | None
+    source_line: int | None
+
+
+class TransitionDiffRow(_DiffRowBase):
+    machine_id: str
+    source_state: str | None
+    event: str
+    target_state: str | None
+    clause_id: str | None
+    requirement_ids: tuple[str, ...]
+    implementation_ids: tuple[str, ...]
+    source_path: str | None
+    source_line: int | None
+    derived_from_state_machine: str | None = None
+
+
+DiffRow = RequirementDiffRow | StateMachineDiffRow | TransitionDiffRow
+
+
+class DiffCounts(_DiffModel):
+    reviewed: int
+    baseline_unmapped: int
+    target_unmapped: int
+    target_machine_added: int
+
+
+class EditionDiffReport(_DiffModel):
+    schema_version: Literal[1]
+    record_kind: RecordKind
+    baseline: str
+    target: str
+    lineage_relation_counts: Mapping[str, int]
+    counts: DiffCounts
+    interpretation: str
+    rows: tuple[DiffRow, ...]
 
 
 def _document_id(manifest: EditionLineageManifest, standard_id: str, edition: str) -> str:
@@ -71,29 +138,41 @@ def _document_id(manifest: EditionLineageManifest, standard_id: str, edition: st
     return matches[0].document_id
 
 
-def _source_fields(record: Requirement | StateMachine | Transition) -> dict[str, JsonValue]:
-    source = getattr(record, "source", None)
+def _source_fields(
+    record: Requirement | StateMachine | Transition,
+) -> tuple[str | None, int | None]:
+    source = record.source
     if source is None:
-        return {"source_path": None, "source_line": None}
-    return {"source_path": source.path, "source_line": source.line}
+        return None, None
+    return source.path, source.line
+
+
+def _relation_fields(
+    relation: EditionRelation | None,
+) -> tuple[LineageRelationKind | None, str | None]:
+    if relation is None:
+        return None, None
+    return relation.relation, relation.stable_id
 
 
 def _requirement_row(
     record: Requirement, *, side: RowStatus, relation: EditionRelation | None = None
-) -> dict[str, JsonValue]:
-    row = {
-        "status": side,
-        "relation": getattr(relation, "relation", None),
-        "stable_id": getattr(relation, "stable_id", None),
-        "record_id": record.id,
-        "title": record.title,
-        "statement": record.statement,
-        "clause_id": record.clause_id,
-        "extraction": record.extraction,
-        "transition_ids": list(record.transition_ids),
-    }
-    row.update(_source_fields(record))
-    return row
+) -> RequirementDiffRow:
+    relation_kind, stable_id = _relation_fields(relation)
+    source_path, source_line = _source_fields(record)
+    return RequirementDiffRow(
+        status=side,
+        relation=relation_kind,
+        stable_id=stable_id,
+        record_id=record.id,
+        source_path=source_path,
+        source_line=source_line,
+        title=record.title,
+        statement=record.statement,
+        clause_id=record.clause_id,
+        extraction=record.extraction,
+        transition_ids=record.transition_ids,
+    )
 
 
 def _state_machine_row(
@@ -105,25 +184,27 @@ def _state_machine_row(
     state_ids_removed: AbstractSet[str] | None = None,
     transition_ids_added: AbstractSet[str] | None = None,
     transition_ids_removed: AbstractSet[str] | None = None,
-) -> dict[str, JsonValue]:
-    row = {
-        "status": side,
-        "relation": getattr(relation, "relation", None),
-        "stable_id": getattr(relation, "stable_id", None),
-        "record_id": record.id,
-        "title": record.title,
-        "clause_id": record.clause_id,
-        "state_count": len(record.states),
-        "transition_count": len(record.transitions),
-        "state_ids": [item.id for item in record.states],
-        "transition_ids": [item.id for item in record.transitions],
-        "state_ids_added_in_target": sorted(state_ids_added or set()),
-        "state_ids_removed_from_target": sorted(state_ids_removed or set()),
-        "transition_ids_added_in_target": sorted(transition_ids_added or set()),
-        "transition_ids_removed_from_target": sorted(transition_ids_removed or set()),
-    }
-    row.update(_source_fields(record))
-    return row
+) -> StateMachineDiffRow:
+    relation_kind, stable_id = _relation_fields(relation)
+    source_path, source_line = _source_fields(record)
+    return StateMachineDiffRow(
+        status=side,
+        relation=relation_kind,
+        stable_id=stable_id,
+        record_id=record.id,
+        source_path=source_path,
+        source_line=source_line,
+        title=record.title,
+        clause_id=record.clause_id,
+        state_count=len(record.states),
+        transition_count=len(record.transitions),
+        state_ids=tuple(item.id for item in record.states),
+        transition_ids=tuple(item.id for item in record.transitions),
+        state_ids_added_in_target=tuple(sorted(state_ids_added or set())),
+        state_ids_removed_from_target=tuple(sorted(state_ids_removed or set())),
+        transition_ids_added_in_target=tuple(sorted(transition_ids_added or set())),
+        transition_ids_removed_from_target=tuple(sorted(transition_ids_removed or set())),
+    )
 
 
 def _transition_row(
@@ -132,22 +213,24 @@ def _transition_row(
     *,
     side: RowStatus,
     relation: EditionRelation | None = None,
-) -> dict[str, JsonValue]:
-    row = {
-        "status": side,
-        "relation": getattr(relation, "relation", None),
-        "stable_id": getattr(relation, "stable_id", None),
-        "record_id": record.id,
-        "machine_id": machine.id,
-        "source_state": record.source_state,
-        "event": record.event,
-        "target_state": record.target_state,
-        "clause_id": record.clause_id,
-        "requirement_ids": list(record.requirement_ids),
-        "implementation_ids": list(record.implementation_ids),
-    }
-    row.update(_source_fields(record))
-    return row
+) -> TransitionDiffRow:
+    relation_kind, stable_id = _relation_fields(relation)
+    source_path, source_line = _source_fields(record)
+    return TransitionDiffRow(
+        status=side,
+        relation=relation_kind,
+        stable_id=stable_id,
+        record_id=record.id,
+        source_path=source_path,
+        source_line=source_line,
+        machine_id=machine.id,
+        source_state=record.source_state,
+        event=record.event,
+        target_state=record.target_state,
+        clause_id=record.clause_id,
+        requirement_ids=record.requirement_ids,
+        implementation_ids=record.implementation_ids,
+    )
 
 
 def _record_index(model: DocumentModel, kind: RecordKind) -> RecordIndex:
@@ -204,7 +287,7 @@ def _record_row(
     transition_ids_added: AbstractSet[str] = frozenset(),
     transition_ids_removed: AbstractSet[str] = frozenset(),
     added_target_machine_ids: AbstractSet[str] = frozenset(),
-) -> dict[str, JsonValue]:
+) -> DiffRow:
     if kind == "requirement":
         return _requirement_row(cast(Requirement, record), side=side, relation=relation)
     if kind == "state-machine":
@@ -223,7 +306,7 @@ def _record_row(
         resolved_side = "target-machine-added"
     row = _transition_row(machine, transition, side=resolved_side, relation=relation)
     if resolved_side == "target-machine-added":
-        row["derived_from_state_machine"] = machine.id
+        row = row.model_copy(update={"derived_from_state_machine": machine.id})
     return row
 
 
@@ -234,7 +317,7 @@ def _relation_rows(
     *,
     kind: RecordKind,
     added_target_machine_ids: AbstractSet[str],
-) -> tuple[list[dict[str, JsonValue]], set[str], set[str]]:
+) -> tuple[list[DiffRow], set[str], set[str]]:
     baseline_records = [item for item in relation.baseline_records if item.kind == kind]
     target_records = [item for item in relation.target_records if item.kind == kind]
     state_delta = (
@@ -275,7 +358,7 @@ def _unmapped_rows(
     kind: RecordKind,
     side: RowStatus,
     added_target_machine_ids: AbstractSet[str] = frozenset(),
-) -> list[dict[str, JsonValue]]:
+) -> list[DiffRow]:
     return [
         _record_row(
             index[record_id],
@@ -294,10 +377,10 @@ def _rows(
     kind: RecordKind,
     *,
     added_target_machine_ids: AbstractSet[str] | None = None,
-) -> list[dict[str, JsonValue]]:
+) -> list[DiffRow]:
     baseline_index = _record_index(baseline, kind)
     target_index = _record_index(target, kind)
-    rows: list[dict[str, JsonValue]] = []
+    rows: list[DiffRow] = []
     linked_baseline: set[str] = set()
     linked_target: set[str] = set()
 
@@ -340,7 +423,7 @@ def build_report(
     target: DocumentModel,
     kind: RecordKind,
     reviewed_only: bool = False,
-) -> dict[str, JsonValue]:
+) -> EditionDiffReport:
     comparison = manifest.comparison(
         baseline.document_id,
         target.document_id,
@@ -370,49 +453,45 @@ def build_report(
         added_target_machine_ids=added_target_machine_ids,
     )
     if reviewed_only:
-        rows = [row for row in rows if row["status"] == "reviewed"]
-    return cast(
-        dict[str, JsonValue],
-        {
-            "schema_version": 1,
-            "record_kind": kind,
-            "baseline": baseline.document_id,
-            "target": target.document_id,
-            "lineage_relation_counts": comparison.relation_counts,
-            "counts": {
-                "reviewed": sum(row["status"] == "reviewed" for row in rows),
-                "baseline_unmapped": sum(row["status"] == "baseline-unmapped" for row in rows),
-                "target_unmapped": sum(row["status"] == "target-unmapped" for row in rows),
-                "target_machine_added": sum(
-                    row["status"] == "target-machine-added" for row in rows
-                ),
-            },
-            "interpretation": (
-                "Unmapped rows are inventory differences without reviewed lineage; "
-                "they are not assertions that a requirement or state-machine surface "
-                "was added or removed. Transitions marked target-machine-added inherit "
-                "a reviewed added classification from their owning state machine."
-            ),
-            "rows": rows,
-        },
+        rows = [row for row in rows if row.status == "reviewed"]
+    return EditionDiffReport(
+        schema_version=1,
+        record_kind=kind,
+        baseline=baseline.document_id,
+        target=target.document_id,
+        lineage_relation_counts=dict(comparison.relation_counts),
+        counts=DiffCounts(
+            reviewed=sum(row.status == "reviewed" for row in rows),
+            baseline_unmapped=sum(row.status == "baseline-unmapped" for row in rows),
+            target_unmapped=sum(row.status == "target-unmapped" for row in rows),
+            target_machine_added=sum(row.status == "target-machine-added" for row in rows),
+        ),
+        interpretation=(
+            "Unmapped rows are inventory differences without reviewed lineage; "
+            "they are not assertions that a requirement or state-machine surface "
+            "was added or removed. Transitions marked target-machine-added inherit "
+            "a reviewed added classification from their owning state machine."
+        ),
+        rows=tuple(rows),
     )
 
 
-def _print_csv(report: Mapping[str, JsonValue]) -> None:
-    raw_rows: JsonValue = report["rows"]
-    if not isinstance(raw_rows, list) or not raw_rows:
+def _print_csv(report: EditionDiffReport) -> None:
+    if not report.rows:
         return
-    rows: list[JsonValue] = raw_rows
-    flattened: list[dict[str, JsonValue]] = []
-    for raw_row in rows:
-        if not isinstance(raw_row, dict):
-            continue
-        row: dict[str, JsonValue] = raw_row
-        flattened_row: dict[str, JsonValue] = {}
-        for key, value in row.items():
-            flattened_row[key] = (
-                ";".join(str(item) for item in value) if isinstance(value, list) else value
-            )
+    flattened: list[_CsvOutputRow] = []
+    for row in report.rows:
+        serialized = cast(
+            _CsvRow,
+            row.model_dump(mode="python", exclude_unset=True),
+        )
+        flattened_row: _CsvOutputRow = {}
+        for key, value in serialized.items():
+            match value:
+                case tuple() as parts:
+                    flattened_row[key] = ";".join(parts)
+                case _:
+                    flattened_row[key] = value
         flattened.append(flattened_row)
     if not flattened:
         return
@@ -435,39 +514,38 @@ def main() -> int:
         choices=("requirement", "state-machine", "transition"),
         default="requirement",
     )
-    parser.add_argument("--root", type=Path, default=REPO_ROOT, help="Repository root")
+    parser.add_argument("--root", type=Path, help="explicit repository root")
     parser.add_argument("--reviewed-only", action="store_true")
     parser.add_argument("--format", choices=("json", "csv", "summary"), default="summary")
     args = parser.parse_args()
 
-    repo_resources = resources(args.root)
-    manifest = load_edition_lineage(
-        args.manifest or repo_resources.edition_lineage_manifest
-    )
+    workspace_root = repository_root(args.root)
+    repo_resources = resources(workspace_root)
+    manifest = load_edition_lineage(args.manifest or repo_resources.edition_lineage_manifest)
     baseline_id = _document_id(manifest, args.standard, args.baseline_edition)
     target_id = _document_id(manifest, args.standard, args.target_edition)
     baseline = load_hla_document_model(
-        repo_resources.document(baseline_id).root, workspace_root=args.root
+        repo_resources.document(baseline_id).root, workspace_root=workspace_root
     )
     target = load_hla_document_model(
-        repo_resources.document(target_id).root, workspace_root=args.root
+        repo_resources.document(target_id).root, workspace_root=workspace_root
     )
     report = build_report(
         manifest=manifest,
         baseline=baseline,
         target=target,
-        kind=args.kind,
+        kind=cast(RecordKind, args.kind),
         reviewed_only=args.reviewed_only,
     )
     if args.format == "json":
-        print(json.dumps(report, indent=2, cls=_JsonEncoder))
+        print(report.model_dump_json(indent=2, exclude_unset=True))
     elif args.format == "csv":
         _print_csv(report)
     else:
         print(f"{baseline_id} -> {target_id}: {args.kind}")
-        print(json.dumps(report["counts"], sort_keys=True))
-        print(json.dumps(report["lineage_relation_counts"], sort_keys=True))
-        print(report["interpretation"])
+        print(json.dumps(report.counts.model_dump(mode="json"), sort_keys=True))
+        print(json.dumps(report.lineage_relation_counts, sort_keys=True))
+        print(report.interpretation)
     return 0
 
 

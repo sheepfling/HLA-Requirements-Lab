@@ -9,29 +9,32 @@ meaning and the native source only owns exceptional page geometry.
 from __future__ import annotations
 
 import argparse
-import json
 import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from types import MappingProxyType
-
-from pydantic import JsonValue
+from typing import Literal
 
 from hla_lab.core.parsing import line_number
 from hla_lab.core.semantic_model import (
     DiagramProvenance,
+    DiagramSurface,
+    DiagramSurfaceFile,
     GraphAnnotation,
     GraphDiagram,
     GraphDiagramFile,
     GraphEdge,
     GraphNode,
     NodePosition,
+    RequirementLinkFile,
     SourceRef,
     State,
     StateMachine,
     StateMachineFile,
     StateMachineLayout,
     Transition,
+    TransitionCoverage,
+    TransitionCoverageFile,
 )
 from hla_lab.paths import DocumentResources
 from tools.migrations.workspace import document_root
@@ -578,59 +581,69 @@ def _graph(root: Path, path: Path, figure: int, text: str) -> GraphDiagram:
     )
 
 
-def _prior_transitions(path: Path) -> dict[str, dict[str, JsonValue]]:
+def _prior_transitions(path: Path) -> dict[str, Transition]:
     if not path.exists():
         return {}
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    payload = StateMachineFile.model_validate_json(path.read_text(encoding="utf-8"))
     return {
-        str(transition["id"]): transition
-        for machine in payload.get("state_machines", ())
-        for transition in machine.get("transitions", ())
+        transition.id: transition
+        for machine in payload.state_machines
+        for transition in machine.transitions
     }
 
 
-def _coverage_by_transition(path: Path) -> dict[str, dict[str, JsonValue]]:
+def _coverage_by_transition(path: Path) -> dict[str, TransitionCoverage]:
     if not path.exists():
         return {}
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    return {
-        str(coverage["transition_id"]): coverage
-        for coverage in payload.get("transition_coverage", ())
-    }
+    payload = TransitionCoverageFile.model_validate_json(path.read_text(encoding="utf-8"))
+    return {coverage.transition_id: coverage for coverage in payload.transition_coverage}
 
 
 def _requirement_ids_by_transition(path: Path) -> dict[str, list[str]]:
     if not path.exists():
         return {}
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
+    payload = RequirementLinkFile.model_validate_json(path.read_text(encoding="utf-8"))
     links: dict[str, list[str]] = {}
-    for link in payload.get("links", ()):
-        links.setdefault(str(link["transition_id"]), []).append(str(link["requirement_id"]))
+    for link in payload.links:
+        links.setdefault(link.transition_id, []).append(link.requirement_id)
     return links
 
 
 def _enrich_state_machine(
     record: StateMachine,
-    prior_transitions: Mapping[str, Mapping[str, JsonValue]],
-    coverage_transitions: Mapping[str, Mapping[str, JsonValue]],
+    prior_transitions: Mapping[str, Transition],
+    coverage_transitions: Mapping[str, TransitionCoverage],
     requirement_links: Mapping[str, Sequence[str]],
 ) -> StateMachine:
-    enriched = []
+    enriched: list[Transition] = []
     for transition in record.transitions:
-        prior = prior_transitions.get(transition.id, {})
-        updates = {}
-        for key in ("clause_id", "requirement_ids", "implementation_ids"):
-            if key in prior:
-                value = prior[key]
-                if key in {"requirement_ids", "implementation_ids"}:
-                    value = tuple(value)
-                updates[key] = value
-        coverage = coverage_transitions.get(transition.id, {})
-        if not updates.get("implementation_ids") and "implementation_ids" in coverage:
-            updates["implementation_ids"] = tuple(coverage["implementation_ids"])
-        if not updates.get("requirement_ids") and transition.id in requirement_links:
-            updates["requirement_ids"] = tuple(requirement_links[transition.id])
-        enriched.append(transition.model_copy(update=updates))
+        prior = prior_transitions.get(transition.id)
+        updated = transition
+        prior_requirement_ids: tuple[str, ...] = ()
+        prior_implementation_ids: tuple[str, ...] = ()
+        if prior is not None:
+            if "clause_id" in prior.model_fields_set:
+                updated = updated.model_copy(update={"clause_id": prior.clause_id})
+            if "requirement_ids" in prior.model_fields_set:
+                prior_requirement_ids = prior.requirement_ids
+                updated = updated.model_copy(update={"requirement_ids": prior_requirement_ids})
+            if "implementation_ids" in prior.model_fields_set:
+                prior_implementation_ids = prior.implementation_ids
+                updated = updated.model_copy(
+                    update={"implementation_ids": prior_implementation_ids}
+                )
+        coverage = coverage_transitions.get(transition.id)
+        if (
+            coverage is not None
+            and not prior_implementation_ids
+            and "implementation_ids" in coverage.model_fields_set
+        ):
+            updated = updated.model_copy(update={"implementation_ids": coverage.implementation_ids})
+        if not prior_requirement_ids and transition.id in requirement_links:
+            updated = updated.model_copy(
+                update={"requirement_ids": tuple(requirement_links[transition.id])}
+            )
+        enriched.append(updated)
     return record.model_copy(update={"transitions": tuple(enriched)})
 
 
@@ -638,10 +651,10 @@ def _promote_figure(
     root: Path,
     native: Path,
     figure: int,
-    prior_transitions: Mapping[str, Mapping[str, JsonValue]],
-    coverage_transitions: Mapping[str, Mapping[str, JsonValue]],
+    prior_transitions: Mapping[str, Transition],
+    coverage_transitions: Mapping[str, TransitionCoverage],
     requirement_links: Mapping[str, Sequence[str]],
-) -> tuple[StateMachine | GraphDiagram, str]:
+) -> tuple[StateMachine | GraphDiagram, Literal["state_machine", "graph_diagram"]]:
     path = native / f"figure-{figure:02d}.tex"
     text = path.read_text(encoding="utf-8")
     if figure in STATE_FIGURES:
@@ -654,51 +667,48 @@ def _promote_figure(
 
 
 def _figure_surface(
-    figure: int, record: StateMachine | GraphDiagram, kind: str
-) -> dict[str, JsonValue]:
-    return {
-        "id": f"figure-{figure:02d}",
-        "document_id": "hla-1516.1-2010",
-        "page": PAGE_BY_FIGURE[figure],
-        "figure_number": figure,
-        "status": "generated",
-        "record_id": record.id,
-        "record_kind": kind,
-        "reason": (
+    figure: int,
+    record: StateMachine | GraphDiagram,
+    kind: Literal["state_machine", "graph_diagram"],
+) -> DiagramSurface:
+    return DiagramSurface(
+        id=f"figure-{figure:02d}",
+        document_id="hla-1516.1-2010",
+        page=PAGE_BY_FIGURE[figure],
+        figure_number=figure,
+        status="generated",
+        record_id=record.id,
+        record_kind=kind,
+        reason=(
             "Semantic record owns figure meaning; native TikZ is retained only "
             "as a faithful geometry adapter."
         ),
-    }
+    )
 
 
 def _write_promoted_diagrams(
     semantic: Path,
     state_machines: Sequence[StateMachine],
     graph_diagrams: Sequence[GraphDiagram],
-    surfaces: Sequence[Mapping[str, JsonValue]],
+    surfaces: Sequence[DiagramSurface],
 ) -> None:
     (semantic / "native-state-machines.json").write_text(
-        json.dumps(
-            StateMachineFile(schema_version=2, state_machines=tuple(state_machines)).model_dump(
-                mode="json"
-            ),
-            indent=2,
+        StateMachineFile(schema_version=2, state_machines=tuple(state_machines)).model_dump_json(
+            indent=2
         )
         + "\n",
         encoding="utf-8",
     )
     (semantic / "native-graph-diagrams.json").write_text(
-        json.dumps(
-            GraphDiagramFile(schema_version=1, graph_diagrams=tuple(graph_diagrams)).model_dump(
-                mode="json"
-            ),
-            indent=2,
+        GraphDiagramFile(schema_version=1, graph_diagrams=tuple(graph_diagrams)).model_dump_json(
+            indent=2
         )
         + "\n",
         encoding="utf-8",
     )
     (semantic / "diagram-surfaces.json").write_text(
-        json.dumps({"schema_version": 1, "surfaces": surfaces}, indent=2) + "\n",
+        DiagramSurfaceFile(schema_version=1, surfaces=tuple(surfaces)).model_dump_json(indent=2)
+        + "\n",
         encoding="utf-8",
     )
 
@@ -711,7 +721,7 @@ def promote(root: Path) -> None:
     requirement_links = _requirement_ids_by_transition(semantic / "requirement-links.json")
     state_machines: list[StateMachine] = []
     graph_diagrams: list[GraphDiagram] = []
-    surfaces: list[dict[str, JsonValue]] = []
+    surfaces: list[DiagramSurface] = []
     for figure in (*STATE_FIGURES, *GRAPH_FIGURES):
         record, kind = _promote_figure(
             root, native, figure, prior_transitions, coverage_transitions, requirement_links

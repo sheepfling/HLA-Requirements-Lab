@@ -15,18 +15,26 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
 import re
-from collections.abc import Mapping, MutableMapping, MutableSequence, MutableSet, Sequence
+from collections.abc import Mapping, MutableSequence, MutableSet, Sequence
 from collections.abc import Set as AbstractSet
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
-from pydantic import JsonValue
+from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.io import write_json
 from hla_lab.core.parsing import line_number, try_balanced_group
-from hla_lab.core.semantic_model import RequirementApiBindingFile
+from hla_lab.core.semantic_model import (
+    ContentBlock,
+    ContentBlockFile,
+    ContentElement,
+    ContentElementFile,
+    Requirement,
+    RequirementApiBindingFile,
+    RequirementFile,
+    SourceRef,
+)
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_2010_semantic import _plain
 from hla_lab.corpus.hla_semantic import load_hla_document_model
@@ -91,6 +99,17 @@ class Candidate:
     offset: int
     statement: str
     kind: str
+
+
+class _RequirementRepairSummary(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    document: str
+    requirements_before: int
+    requirements_after: int
+    fallbacks: tuple[str, ...]
+    content_blocks_updated: int
+    content_elements_updated: int
 
 
 def _clean(value: str) -> str:
@@ -289,13 +308,11 @@ def _framework_candidates(root: Path, path: Path, text: str) -> tuple[Candidate,
     return _unique_candidates(candidates)
 
 
-def _generic_repair(root: Path, requirement: Mapping[str, JsonValue]) -> tuple[str, int, int]:
-    source: JsonValue = requirement["source"]
-    assert isinstance(source, dict)
-    path = str(source["path"])
+def _generic_repair(root: Path, requirement: Requirement) -> tuple[str, int, int]:
+    path = requirement.source.path
     text = (root / path).read_text(encoding="utf-8")
-    statement = str(requirement.get("statement", ""))
-    anchor = _find_anchor_line(text, statement, int(source["line"]))
+    statement = requirement.statement
+    anchor = _find_anchor_line(text, statement, requirement.source.line)
     lines = _source_lines(text)
     end = anchor
     cleaned = _clean(statement)
@@ -312,18 +329,12 @@ def _generic_repair(root: Path, requirement: Mapping[str, JsonValue]) -> tuple[s
     return cleaned, anchor, max(anchor, end)
 
 
-def _candidate_score(
-    requirement: Mapping[str, JsonValue], candidate: Candidate
-) -> tuple[int, int, int]:
-    source: JsonValue = requirement["source"]
-    assert isinstance(source, dict)
-    old_line = int(source["line"])
-    wanted = set(_tokens(str(requirement.get("statement", ""))))
+def _candidate_score(requirement: Requirement, candidate: Candidate) -> tuple[int, int, int]:
+    old_line = requirement.source.line
+    wanted = set(_tokens(requirement.statement))
     actual = set(_tokens(candidate.statement))
     overlap = len(wanted & actual)
-    exact = int(
-        _normalize(_clean(str(requirement.get("statement", "")))) in _normalize(candidate.statement)
-    )
+    exact = int(_normalize(_clean(requirement.statement)) in _normalize(candidate.statement))
     return exact, overlap, -abs(candidate.line - old_line)
 
 
@@ -389,8 +400,12 @@ def _update_content_links(
     semantic = DocumentResources(root).semantic
     blocks_path = semantic / "content-blocks.json"
     elements_path = semantic / "content-elements.json"
-    blocks_payload = json.loads(blocks_path.read_text(encoding="utf-8"))
-    elements_payload = json.loads(elements_path.read_text(encoding="utf-8"))
+    blocks_payload = ContentBlockFile.model_validate_json(blocks_path.read_text(encoding="utf-8"))
+    elements_payload = ContentElementFile.model_validate_json(
+        elements_path.read_text(encoding="utf-8")
+    )
+    blocks = list(blocks_payload.content_blocks)
+    elements = list(elements_payload.content_elements)
     source_paths = tuple(requirement_ids_by_path)
 
     def ids_for(path: str) -> tuple[str, ...]:
@@ -408,37 +423,51 @@ def _update_content_links(
         return tuple(dict.fromkeys((*exact, *identifiers)))
 
     block_count = 0
-    for block in blocks_payload["content_blocks"]:
-        additions = ids_for(str(block["source"]["path"]))
+    for index, block in enumerate(blocks):
+        additions = ids_for(block.source.path)
         if not additions:
             continue
-        values = tuple(dict.fromkeys((*block.get("record_ids", []), *additions)))
-        if list(values) != block.get("record_ids", []):
-            block["record_ids"] = list(values)
+        values = tuple(dict.fromkeys((*block.record_ids, *additions)))
+        if values != block.record_ids:
+            blocks[index] = block.model_copy(update={"record_ids": values})
             block_count += 1
     element_count = 0
-    for element in elements_payload["content_elements"]:
-        additions = ids_for(str(element["source"]["path"]))
+    for index, element in enumerate(elements):
+        additions = ids_for(element.source.path)
         if not additions:
             continue
-        values = tuple(dict.fromkeys((*element.get("record_ids", []), *additions)))
-        if list(values) != element.get("record_ids", []):
-            element["record_ids"] = list(values)
+        values = tuple(dict.fromkeys((*element.record_ids, *additions)))
+        if values != element.record_ids:
+            elements[index] = element.model_copy(update={"record_ids": values})
             element_count += 1
-    write_json(blocks_path, blocks_payload)
-    write_json(elements_path, elements_payload)
+    updated_blocks = ContentBlockFile(
+        schema_version=blocks_payload.schema_version,
+        content_blocks=tuple(
+            ContentBlock.model_validate(block.model_dump(mode="python", exclude_unset=True))
+            for block in blocks
+        ),
+    )
+    updated_elements = ContentElementFile(
+        schema_version=elements_payload.schema_version,
+        content_elements=tuple(
+            ContentElement.model_validate(element.model_dump(mode="python", exclude_unset=True))
+            for element in elements
+        ),
+    )
+    blocks_path.write_text(
+        updated_blocks.model_dump_json(indent=2, exclude_unset=True) + "\n",
+        encoding="utf-8",
+    )
+    elements_path.write_text(
+        updated_elements.model_dump_json(indent=2, exclude_unset=True) + "\n",
+        encoding="utf-8",
+    )
     return block_count, element_count
 
 
-def _load_repair_requirements(root: Path) -> tuple[Path, JsonValue, list[JsonValue]]:
+def _load_repair_requirements(root: Path) -> tuple[Path, RequirementFile]:
     path = DocumentResources(root).semantic_file("requirements.json")
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"expected a JSON object in {path}")
-    raw_requirements: JsonValue = payload.get("requirements", [])
-    if not isinstance(raw_requirements, list):
-        raise ValueError(f"expected requirements to be an array in {path}")
-    return path, payload, raw_requirements
+    return path, RequirementFile.model_validate_json(path.read_text(encoding="utf-8"))
 
 
 def _framework_candidate_index(root: Path) -> dict[str, tuple[Candidate, ...]]:
@@ -456,15 +485,13 @@ def _framework_candidate_index(root: Path) -> dict[str, tuple[Candidate, ...]]:
 
 def _candidate_for_requirement(
     root: Path,
-    requirement: Mapping[str, JsonValue],
+    requirement: Requirement,
     candidates_by_path: Mapping[str, tuple[Candidate, ...]],
     used_candidates: AbstractSet[tuple[str, int]],
 ) -> Candidate | None:
     if root.name != FRAMEWORK:
         return None
-    source: JsonValue = requirement["source"]
-    assert isinstance(source, dict)
-    path = str(source["path"])
+    path = requirement.source.path
     available = [
         item
         for item in candidates_by_path.get(path, ())
@@ -479,41 +506,44 @@ def _candidate_for_requirement(
 
 def _repair_one_requirement(
     root: Path,
-    requirement: MutableMapping[str, JsonValue],
+    requirement: Requirement,
     candidates_by_path: Mapping[str, tuple[Candidate, ...]],
     used_candidates: MutableSet[tuple[str, int]],
     fallback_ids: MutableSequence[str],
-) -> MutableMapping[str, JsonValue]:
-    source: JsonValue = requirement["source"]
-    assert isinstance(source, dict)
-    path = str(source["path"])
+) -> Requirement:
+    path = requirement.source.path
     candidate = _candidate_for_requirement(root, requirement, candidates_by_path, used_candidates)
     if candidate is None:
         statement, line, end_line = _generic_repair(root, requirement)
-        fallback_ids.append(str(requirement["id"]))
+        fallback_ids.append(requirement.id)
     else:
         used_candidates.add((candidate.path, candidate.offset))
         statement, line, end_line = candidate.statement, candidate.line, candidate.end_line
-    requirement["statement"] = statement
-    requirement["machine_statement"] = statement
-    requirement["source"] = {"path": path, "line": line, "end_line": end_line}
-    requirement["title"] = f"Normative statement at {path}:{line}"
+    repaired = requirement.model_copy(
+        update={
+            "statement": statement,
+            "machine_statement": statement,
+            "source": SourceRef(path=path, line=line, end_line=end_line),
+            "title": f"Normative statement at {path}:{line}",
+        }
+    )
     if root.name == FRAMEWORK:
-        _apply_framework_fields(requirement, path, statement, line)
-    return requirement
+        repaired = _apply_framework_fields(repaired, path, statement, line)
+    return Requirement.model_validate(repaired.model_dump(mode="python"))
 
 
 def _apply_framework_fields(
-    requirement: MutableMapping[str, JsonValue],
+    requirement: Requirement,
     path: str,
     statement: str,
     line: int,
-) -> None:
+) -> Requirement:
+    updated = requirement
     if path == "clauses/04-summary-hla-rules.tex":
-        requirement["kind"] = "summary"
+        updated = updated.model_copy(update={"kind": "summary"})
     if path == "clauses/annex-a-rationale.tex":
-        requirement.update(
-            {
+        updated = updated.model_copy(
+            update={
                 "coverage_kind": "not-applicable",
                 "coverage_note": (
                     "Informative Annex A rationale quotation retained for source traceability; "
@@ -523,7 +553,10 @@ def _apply_framework_fields(
                 "api_surface_note": "Informative rationale has no direct API surface.",
             }
         )
-    requirement["semantic_group_id"] = _framework_rule_group(path, statement, line)
+    updated = updated.model_copy(
+        update={"semantic_group_id": _framework_rule_group(path, statement, line)}
+    )
+    return Requirement.model_validate(updated.model_dump(mode="python"))
 
 
 def _additional_framework_requirement(
@@ -531,42 +564,42 @@ def _additional_framework_requirement(
     candidate: Candidate,
     existing: AbstractSet[str],
     used_candidates: AbstractSet[tuple[str, int]],
-    repaired: Sequence[Mapping[str, JsonValue]],
-) -> dict[str, JsonValue] | None:
+    repaired: Sequence[Requirement],
+) -> Requirement | None:
     normalized = _normalize(candidate.statement)
     if normalized in existing or (candidate.path, candidate.offset) in used_candidates:
         return None
     digest = hashlib.sha1(f"{candidate.path}:{candidate.offset}".encode()).hexdigest()[:12]
     identifier = f"req-{digest}"
-    if any(item["id"] == identifier for item in repaired):
+    if any(item.id == identifier for item in repaired):
         return None
     clause = "5" if PurePosixPath(path).parts[1].startswith("05") else "6"
-    return {
-        "id": identifier,
-        "title": f"Normative statement {path}:{candidate.line}",
-        "statement": candidate.statement,
-        "kind": "detailed",
-        "clause": clause,
-        "clause_id": f"clause-{clause}",
-        "machine_statement": candidate.statement,
-        "transition_ids": [],
-        "coverage_kind": "cross-cutting",
-        "coverage_note": (
+    return Requirement(
+        id=identifier,
+        title=f"Normative statement {path}:{candidate.line}",
+        statement=candidate.statement,
+        kind="detailed",
+        clause=clause,
+        clause_id=f"clause-{clause}",
+        machine_statement=candidate.statement,
+        transition_ids=(),
+        coverage_kind="cross-cutting",
+        coverage_note=(
             "Source-derived normative statement retained at clause scope; "
             "no modeled state transition was asserted."
         ),
-        "extraction": "explicit",
-        "semantic_group_id": _framework_rule_group(path, candidate.statement, candidate.line),
-        "source": {"path": path, "line": candidate.line, "end_line": candidate.end_line},
-    }
+        extraction="explicit",
+        semantic_group_id=_framework_rule_group(path, candidate.statement, candidate.line),
+        source=SourceRef(path=path, line=candidate.line, end_line=candidate.end_line),
+    )
 
 
 def _append_missing_framework_requirements(
-    repaired: MutableSequence[MutableMapping[str, JsonValue]],
+    repaired: MutableSequence[Requirement],
     candidates_by_path: Mapping[str, tuple[Candidate, ...]],
     used_candidates: AbstractSet[tuple[str, int]],
 ) -> None:
-    existing = {_normalize(str(item["statement"])) for item in repaired}
+    existing = {_normalize(item.statement) for item in repaired}
     for path in ("clauses/05-federation-rules.tex", "clauses/06-federate-rules.tex"):
         for candidate in candidates_by_path.get(path, ()):
             addition = _additional_framework_requirement(
@@ -578,27 +611,27 @@ def _append_missing_framework_requirements(
 
 
 def _sort_requirements_by_source(
-    repaired: MutableSequence[MutableMapping[str, JsonValue]],
+    repaired: MutableSequence[Requirement],
 ) -> None:
-    source_paths = {str(item["source"]["path"]) for item in repaired}
+    source_paths = {item.source.path for item in repaired}
     source_order = {path: index for index, path in enumerate(sorted(source_paths))}
     repaired.sort(
         key=lambda item: (
-            source_order[str(item["source"]["path"])],
-            int(item["source"]["line"]),
-            str(item["id"]),
+            source_order[item.source.path],
+            item.source.line,
+            item.id,
         )
     )
 
 
 def _requirement_ids_by_path(
-    repaired: Sequence[Mapping[str, JsonValue]],
+    repaired: Sequence[Requirement],
 ) -> dict[str, tuple[str, ...]]:
     result: dict[str, tuple[str, ...]] = {}
     for item in repaired:
-        path = str(item["source"]["path"])
+        path = item.source.path
         result.setdefault(path, ())
-        result[path] += (str(item["id"]),)
+        result[path] += (item.id,)
     return result
 
 
@@ -606,16 +639,20 @@ def _write_repair(
     root: Path,
     semantic: Path,
     requirements_path: Path,
-    payload: Mapping[str, JsonValue],
-    repaired: Sequence[Mapping[str, JsonValue]],
+    payload: RequirementFile,
+    repaired: Sequence[Requirement],
     ids_by_path: Mapping[str, tuple[str, ...]],
     dry_run: bool,
 ) -> tuple[int, int]:
     if dry_run:
         return 0, 0
-    write_json(
-        requirements_path,
-        {"schema_version": payload.get("schema_version", 1), "requirements": repaired},
+    requirements_path.write_text(
+        RequirementFile(
+            schema_version=payload.schema_version,
+            requirements=tuple(repaired),
+        ).model_dump_json(indent=2, exclude_unset=True)
+        + "\n",
+        encoding="utf-8",
     )
     blocks, elements = _update_content_links(root, ids_by_path)
     if root.name == "hla-1516.1-2010":
@@ -630,20 +667,18 @@ def _write_repair(
     return blocks, elements
 
 
-def repair(root: Path, *, dry_run: bool = False) -> dict[str, JsonValue]:
+def repair(root: Path, *, dry_run: bool = False) -> _RequirementRepairSummary:
     semantic = DocumentResources(root).semantic
-    requirements_path, payload, requirements = _load_repair_requirements(root)
-    original_count = len(requirements)
+    requirements_path, payload = _load_repair_requirements(root)
+    original_count = len(payload.requirements)
     candidates_by_path = _framework_candidate_index(root)
-    repaired: list[dict[str, JsonValue]] = []
+    repaired: list[Requirement] = []
     used_candidates: set[tuple[str, int]] = set()
     fallback_ids: list[str] = []
-    for raw_requirement in requirements:
-        if not isinstance(raw_requirement, dict):
-            raise ValueError("each requirement catalog entry must be an object")
+    for requirement in payload.requirements:
         repaired.append(
             _repair_one_requirement(
-                root, raw_requirement, candidates_by_path, used_candidates, fallback_ids
+                root, requirement, candidates_by_path, used_candidates, fallback_ids
             )
         )
     if root.name == FRAMEWORK:
@@ -653,14 +688,14 @@ def repair(root: Path, *, dry_run: bool = False) -> dict[str, JsonValue]:
     blocks, elements = _write_repair(
         root, semantic, requirements_path, payload, repaired, ids_by_path, dry_run
     )
-    return {
-        "document": root.name,
-        "requirements_before": original_count,
-        "requirements_after": len(repaired),
-        "fallbacks": fallback_ids,
-        "content_blocks_updated": blocks,
-        "content_elements_updated": elements,
-    }
+    return _RequirementRepairSummary(
+        document=root.name,
+        requirements_before=original_count,
+        requirements_after=len(repaired),
+        fallbacks=tuple(fallback_ids),
+        content_blocks_updated=blocks,
+        content_elements_updated=elements,
+    )
 
 
 def main() -> int:
@@ -674,7 +709,7 @@ def main() -> int:
     ]
     for root in roots:
         result = repair(root, dry_run=args.dry_run)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(result.model_dump_json(indent=2))
     return 0
 
 

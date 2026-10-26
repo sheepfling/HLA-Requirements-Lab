@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from types import MappingProxyType
 
-from hla_lab.core.json_types import JsonObject
+from hla_lab.core.semantic_model import ContentBlock, ContentBlockFile
 from tools.migrations.workspace import migration_root
 
 
@@ -85,37 +84,62 @@ Framework and Rules\par}""",
 )
 
 
-def _load_blocks(name: str) -> tuple[Path, JsonObject, list[JsonObject]]:
+def _load_blocks(name: str) -> tuple[Path, ContentBlockFile]:
     path = migration_root() / "topics" / "ieee" / name / "semantic" / "content-blocks.json"
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    return path, payload, payload["content_blocks"]
+    payload = ContentBlockFile.model_validate_json(path.read_text(encoding="utf-8"))
+    return path, payload
 
 
-def _write_opening_identity_json(path: Path, payload: JsonObject) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+def _write_opening_identity_json(path: Path, payload: ContentBlockFile) -> None:
+    path.write_text(payload.model_dump_json(indent=2, exclude_unset=True) + "\n", encoding="utf-8")
+
+
+def _replace_block(
+    payload: ContentBlockFile,
+    block_id: str,
+    *,
+    layout_body: str,
+    text: str | None = None,
+) -> ContentBlockFile:
+    blocks = list(payload.content_blocks)
+    index = next(index for index, item in enumerate(blocks) if item.id == block_id)
+    updates = {"layout_body": layout_body}
+    if text is not None:
+        updates["text"] = text
+    updated_block = blocks[index].model_copy(update=updates)
+    blocks[index] = ContentBlock.model_validate(
+        updated_block.model_dump(mode="python", exclude_unset=True)
+    )
+    return ContentBlockFile(schema_version=payload.schema_version, content_blocks=tuple(blocks))
 
 
 def main() -> None:
     for name, (block_id, old, new) in NATURAL_FLOW_REPLACEMENTS.items():
-        path, payload, blocks = _load_blocks(name)
-        block = next(item for item in blocks if item["id"] == block_id)
-        block["layout_body"] = _replace_once(
-            block["layout_body"], old, new, label=f"{name}/{block_id}"
+        path, payload = _load_blocks(name)
+        block = next(item for item in payload.content_blocks if item.id == block_id)
+        if block.layout_body is None:
+            raise ValueError(f"{name}/{block_id}: content block has no layout body")
+        payload = _replace_block(
+            payload,
+            block_id,
+            layout_body=_replace_once(block.layout_body, old, new, label=f"{name}/{block_id}"),
         )
         _write_opening_identity_json(path, payload)
 
     for name, (block_id, old, new) in FIXED_PAGE_REPLACEMENTS.items():
-        path, payload, blocks = _load_blocks(name)
-        block = next(item for item in blocks if item["id"] == block_id)
-        block["layout_body"] = _replace_once(
-            block["layout_body"], old, new, label=f"{name}/{block_id}"
-        )
+        path, payload = _load_blocks(name)
+        block = next(item for item in payload.content_blocks if item.id == block_id)
+        if block.layout_body is None:
+            raise ValueError(f"{name}/{block_id}: content block has no layout body")
+        layout_body = _replace_once(block.layout_body, old, new, label=f"{name}/{block_id}")
+        text = None
         if name == "hla-1516-2025":
-            block["text"] = block["text"].replace(
+            text = block.text.replace(
                 r"IEEE Standard for Modeling and Simulation (M\&S) "
                 r"High Level Architecture (HLA)--- Framework and Rules",
                 "HLA Requirements Lab HLA 1516 family 2025-source compilation Framework and Rules",
             )
+        payload = _replace_block(payload, block_id, layout_body=layout_body, text=text)
         _write_opening_identity_json(path, payload)
 
 

@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-import json
-from collections.abc import MutableMapping
 from pathlib import Path
 
-from pydantic import JsonValue
-
+from hla_lab.core.semantic_model import ContentBlock, ContentBlockFile
 from tools.migrations.workspace import document_root
 
 OLD = "IEEE Std 1516.2-2025"
@@ -25,45 +22,40 @@ TITLE_REPLACEMENTS = (
 )
 
 
-def _load_blocks(target: Path) -> tuple[dict[str, JsonValue], list[JsonValue]]:
-    payload: JsonValue = json.loads(target.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"expected a JSON object in {target}")
-    raw_blocks: JsonValue = payload.get("content_blocks", [])
-    if not isinstance(raw_blocks, list):
-        raise ValueError(f"expected content_blocks to be an array in {target}")
-    return payload, raw_blocks
+def _load_blocks(target: Path) -> ContentBlockFile:
+    return ContentBlockFile.model_validate_json(target.read_text(encoding="utf-8"))
 
 
-def _normalize_block(block: MutableMapping[str, JsonValue]) -> tuple[int, int]:
+def _normalize_block(block: ContentBlock) -> tuple[ContentBlock, int, int]:
     count = 0
     title_count = 0
-    for key in ("text", "layout_body"):
-        value: JsonValue = block.get(key)
-        if isinstance(value, str):
+    updates: dict[str, str] = {}
+    for field in ("text", "layout_body"):
+        value = getattr(block, field)
+        if value is not None:
             count += value.count(OLD)
-            block[key] = value.replace(OLD, NEW)
-    if block.get("id") == "content-15162-page-013":
+            updates[field] = value.replace(OLD, NEW)
+    if block.id == "content-15162-page-013":
         for old, new in TITLE_REPLACEMENTS:
-            layout_body: JsonValue = block["layout_body"]
-            if not isinstance(layout_body, str):
+            layout_body = updates.get("layout_body", block.layout_body)
+            if layout_body is None:
                 raise ValueError("content block layout_body must be text")
             occurrences = layout_body.count(old)
             title_count += occurrences
-            block["layout_body"] = layout_body.replace(old, new)
-    return count, title_count
+            updates["layout_body"] = layout_body.replace(old, new)
+    updated = block.model_copy(update=updates) if updates else block
+    return updated, count, title_count
 
 
 def main() -> None:
     target = document_root("hla-1516.2-2025") / "semantic" / "content-blocks.json"
-    payload, blocks = _load_blocks(target)
+    payload = _load_blocks(target)
     count = 0
     title_count = 0
-    for raw_block in blocks:
-        if not isinstance(raw_block, dict):
-            continue
-        block: dict[str, JsonValue] = raw_block
-        block_count, block_title_count = _normalize_block(block)
+    blocks: list[ContentBlock] = []
+    for block in payload.content_blocks:
+        updated_block, block_count, block_title_count = _normalize_block(block)
+        blocks.append(updated_block)
         count += block_count
         title_count += block_title_count
     if count not in (0, 6):
@@ -72,7 +64,17 @@ def main() -> None:
         raise SystemExit(
             f"expected 0 or {len(TITLE_REPLACEMENTS)} title replacements, found {title_count}"
         )
-    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    updated_payload = ContentBlockFile(
+        schema_version=payload.schema_version,
+        content_blocks=tuple(
+            ContentBlock.model_validate(block.model_dump(mode="python", exclude_unset=True))
+            for block in blocks
+        ),
+    )
+    target.write_text(
+        updated_payload.model_dump_json(indent=2, exclude_unset=True) + "\n",
+        encoding="utf-8",
+    )
     print(f"normalized {count} self-references and {title_count} title fragments in {target}")
 
 

@@ -4,7 +4,6 @@ from __future__ import (
     annotations,
 )
 
-import json
 import re
 from collections.abc import (
     Mapping,
@@ -15,13 +14,11 @@ from pathlib import (
     Path,
 )
 
-from pydantic import (
-    JsonValue,
-)
-
+from hla_lab.core.navigation_manifest import SourceNavigationManifest
 from hla_lab.core.parsing import (
     line_number,
 )
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model_authored import _load_authored_content_blocks
 from hla_lab.core.semantic_model_resources import (
     _document_resources,
@@ -571,15 +568,12 @@ def _collect_navigation_annexes(records: MutableMapping[str, Annex], root: Path)
     navigation = _document_resources(root).canonical_file("source-navigation.json")
     if not navigation.is_file():
         return
-    raw: JsonValue = json.loads(navigation.read_text(encoding="utf-8"))
-    outline_value: JsonValue = raw.get("outline", []) if isinstance(raw, dict) else []
-    outline: list[JsonValue] = outline_value if isinstance(outline_value, list) else []
+    manifest = SourceNavigationManifest.model_validate_json(navigation.read_text(encoding="utf-8"))
     navigation_source = SourceRef(path=navigation.relative_to(root).as_posix(), line=1)
-    for raw_entry in outline:
-        entry: JsonValue = raw_entry
-        if not isinstance(entry, list) or len(entry) < 2:
-            continue
-        _store_annex_descriptor(records, str(entry[1]).strip(), navigation_source)
+    for entry in manifest.outline:
+        match entry:
+            case (_, label) | (_, label, _):
+                _store_annex_descriptor(records, str(label).strip(), navigation_source)
 
 
 def _load_annexes(root: Path, source: LatexSourceProfile) -> tuple[Annex, ...]:
@@ -619,7 +613,7 @@ def _requirement_candidate_units(
         relative = path.relative_to(root).as_posix()
         if "frontmatter" in relative or "generated" in relative or relative in adapter_paths:
             continue
-        units.append((path, path.read_text(encoding="utf-8"), heading_context[path]))
+        units.append((path, path.read_text(encoding="utf-8"), tuple(heading_context[path])))
     for block in authored_blocks:
         if block.layout_body is None:
             continue
@@ -784,10 +778,13 @@ def _load_state_machines(root: Path) -> tuple[StateMachine, ...]:
         return ()
     machines: list[StateMachine] = []
     for path in sorted(semantic_root.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or "state_machines" not in raw:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
-        payload = StateMachineFile.model_validate(raw)
+        if envelope.schema_version is None or envelope.state_machines is None:
+            raise ValueError(f"{path}: state-machine model needs schema_version and state_machines")
+        payload = StateMachineFile.model_validate_json(source)
         machines.extend(payload.state_machines)
     return tuple(machines)
 
@@ -799,10 +796,13 @@ def _load_sequence_diagrams(root: Path) -> tuple[SequenceDiagram, ...]:
         return ()
     diagrams: list[SequenceDiagram] = []
     for path in sorted(semantic_root.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or "sequence_diagrams" not in raw:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "sequence_diagrams" not in envelope.model_fields_set:
             continue
-        payload = SequenceDiagramFile.model_validate(raw)
+        if envelope.schema_version is None or envelope.sequence_diagrams is None:
+            raise ValueError(f"{path}: sequence diagram model needs schema_version and records")
+        payload = SequenceDiagramFile.model_validate_json(source)
         diagrams.extend(payload.sequence_diagrams)
     return tuple(diagrams)
 
@@ -814,10 +814,13 @@ def _load_graph_diagrams(root: Path) -> tuple[GraphDiagram, ...]:
         return ()
     diagrams: list[GraphDiagram] = []
     for path in sorted(semantic_root.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or "graph_diagrams" not in raw:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "graph_diagrams" not in envelope.model_fields_set:
             continue
-        payload = GraphDiagramFile.model_validate(raw)
+        if envelope.schema_version is None or envelope.graph_diagrams is None:
+            raise ValueError(f"{path}: graph diagram model needs schema_version and records")
+        payload = GraphDiagramFile.model_validate_json(source)
         diagrams.extend(payload.graph_diagrams)
     return tuple(diagrams)
 
@@ -827,5 +830,5 @@ def _load_diagram_surfaces(root: Path) -> tuple[DiagramSurface, ...]:
     path = _document_resources(root).semantic_file("diagram-surfaces.json")
     if not path.is_file():
         return ()
-    payload = DiagramSurfaceFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    payload = DiagramSurfaceFile.model_validate_json(path.read_text(encoding="utf-8"))
     return payload.surfaces

@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from collections.abc import Set as AbstractSet
 from typing import Annotated, Literal, TypeAlias
 
-from pydantic import Field, model_validator
+from pydantic import ConfigDict, Field, model_validator
 
 from hla_lab.core.semantic_base import (
     RequirementApplicabilityRelation,
@@ -355,6 +355,17 @@ class GraphDiagramFile(SemanticRecord):
 
     schema_version: Annotated[int, Field(ge=1)]
     graph_diagrams: tuple[GraphDiagram, ...]
+
+
+class SemanticDiagramFileEnvelope(SemanticRecord):
+    """Known diagram collections when scanning a mixed semantic directory."""
+
+    model_config = ConfigDict(extra="ignore", frozen=True)
+
+    schema_version: int | None = None
+    state_machines: tuple[StateMachine, ...] | None = None
+    sequence_diagrams: tuple[SequenceDiagram, ...] | None = None
+    graph_diagrams: tuple[GraphDiagram, ...] | None = None
 
 
 class DiagramSurface(SemanticRecord):

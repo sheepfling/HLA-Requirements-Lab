@@ -3,19 +3,31 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
-from collections.abc import Mapping, MutableMapping, Sequence
+from collections.abc import Sequence
 from collections.abc import Set as AbstractSet
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 
-from pydantic import JsonValue
+from pydantic import ConfigDict
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.parsing import try_balanced_group
-from hla_lab.core.semantic_model import ContentElement, SourceRef, load_document_model
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.core.semantic_model import (
+    ContentBlock,
+    ContentBlockFile,
+    ContentElement,
+    ContentElementFile,
+    SourceRef,
+    load_document_model,
+)
+from hla_lab.paths import DocumentResources, repository_root, resources
+
+
+class _MutableContentBlock(ContentBlock):
+    """Mutable migration view derived from the canonical content block model."""
+
+    model_config = ConfigDict(frozen=False, validate_assignment=True)
 
 
 @dataclass(frozen=True, slots=True)
@@ -197,15 +209,13 @@ def _paragraphs(raw: str) -> tuple[str, ...]:
     return tuple(values)
 
 
-def _source_for(block: Mapping[str, JsonValue], body: str, offset: int) -> dict[str, JsonValue]:
-    source = block["source"]
-    assert isinstance(source, dict)
-    line = int(source["line"]) + body.count("\n", 0, offset)
-    return {
-        "path": source["path"],
-        "line": line,
-        "end_line": max(line, line + body[offset:].count("\n")),
-    }
+def _source_for(block: _MutableContentBlock, body: str, offset: int) -> SourceRef:
+    line = block.source.line + body.count("\n", 0, offset)
+    return SourceRef(
+        path=block.source.path,
+        line=line,
+        end_line=max(line, line + body[offset:].count("\n")),
+    )
 
 
 def _clause_positions(body: str, clause_ids: AbstractSet[str]) -> tuple[tuple[int, str], ...]:
@@ -250,7 +260,7 @@ def _record_ids_for_input(path: str, known_ids: AbstractSet[str]) -> tuple[str, 
 
 @dataclass(slots=True)
 class _BlockContext:
-    block: MutableMapping[str, JsonValue]
+    block: _MutableContentBlock
     body: str
     block_id: str
     clause_id: str | None
@@ -447,9 +457,8 @@ def _append_fallback_spec(context: _BlockContext) -> None:
         return
     fallback = (
         ""
-        if context.block_id.startswith("content-15162")
-        and context.block.get("layout_body") is not None
-        else _strip_commands(str(context.block.get("text") or ""))
+        if context.block_id.startswith("content-15162") and context.block.layout_body is not None
+        else _strip_commands(context.block.text)
     )
     fallback = re.sub(r"^\d+\s+", "", fallback)
     if fallback and len(fallback) >= 12:
@@ -464,9 +473,9 @@ def _append_fallback_spec(context: _BlockContext) -> None:
     context.specs.append(spec)
 
 
-def _serialize_specs(context: _BlockContext) -> tuple[dict[str, JsonValue], ...]:
+def _serialize_specs(context: _BlockContext) -> tuple[ContentElement, ...]:
     context.specs.sort(key=lambda item: (item.offset, 0 if item.kind == "list" else 1))
-    output: list[dict[str, JsonValue]] = []
+    output: list[ContentElement] = []
     for local_index, spec in enumerate(context.specs, 1):
         identifier = f"content-element-{context.block_id}-{spec.kind}-{local_index:03d}"
         element = ContentElement(
@@ -477,37 +486,37 @@ def _serialize_specs(context: _BlockContext) -> tuple[dict[str, JsonValue], ...]
             block_id=context.block_id,
             parent_id=spec.parent_id,
             record_ids=spec.record_ids,
-            source=SourceRef.model_validate(_source_for(context.block, context.body, spec.offset)),
+            source=_source_for(context.block, context.body, spec.offset),
             sequence=local_index,
         )
-        output.append(element.model_dump(mode="json"))
+        output.append(element)
     temporary_to_real: dict[str, str] = {}
     list_index = 0
     for spec, item in zip(context.specs, output, strict=True):
         if spec.kind == "list":
             list_index += 1
             temporary_id = f"content-element-{context.block_id}-list-{list_index:03d}"
-            temporary_to_real[temporary_id] = str(item["id"])
-    for item in output:
-        parent = item.get("parent_id")
+            temporary_to_real[temporary_id] = item.id
+    for index, item in enumerate(output):
+        parent = item.parent_id
         if parent in temporary_to_real:
-            item["parent_id"] = temporary_to_real[parent]
-    context.block["element_ids"] = [str(item["id"]) for item in output]
+            output[index] = item.model_copy(update={"parent_id": temporary_to_real[parent]})
+    context.block.element_ids = tuple(item.id for item in output)
     return tuple(output)
 
 
 def _extract_block(
-    block: MutableMapping[str, JsonValue],
+    block: _MutableContentBlock,
     *,
     clause_ids: AbstractSet[str],
     known_ids: AbstractSet[str],
-) -> tuple[dict[str, JsonValue], ...]:
-    body = str(block.get("layout_body") or "")
+) -> tuple[ContentElement, ...]:
+    body = block.layout_body or ""
     context = _BlockContext(
         block=block,
         body=body,
-        block_id=str(block["id"]),
-        clause_id=str(block.get("clause_id") or "") or None,
+        block_id=block.id,
+        clause_id=block.clause_id,
         positions=_clause_positions(body, clause_ids),
     )
     direct_events = _events(
@@ -537,10 +546,13 @@ def _extract_block(
 def migrate(root: Path) -> None:
     model = load_document_model(root, HLA_SOURCE)
     blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
-    payload = json.loads(blocks_path.read_text(encoding="utf-8"))
-    blocks = payload["content_blocks"]
+    payload = ContentBlockFile.model_validate_json(blocks_path.read_text(encoding="utf-8"))
+    blocks = [
+        _MutableContentBlock.model_validate(block.model_dump(mode="python", exclude_unset=True))
+        for block in payload.content_blocks
+    ]
     known_ids = set(model.semantic_record_ids())
-    elements: list[dict[str, JsonValue]] = []
+    elements: list[ContentElement] = []
     for block in blocks:
         elements.extend(
             _extract_block(
@@ -550,29 +562,40 @@ def migrate(root: Path) -> None:
             )
         )
     blocks_path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        ContentBlockFile(
+            schema_version=payload.schema_version,
+            content_blocks=tuple(
+                ContentBlock.model_validate(block.model_dump(mode="python", exclude_unset=True))
+                for block in blocks
+            ),
+        ).model_dump_json(indent=2, exclude_unset=True)
+        + "\n",
         encoding="utf-8",
     )
     DocumentResources(root).semantic_file("content-elements.json").write_text(
-        json.dumps(
-            {"schema_version": 1, "content_elements": elements}, ensure_ascii=False, indent=2
+        ContentElementFile(schema_version=1, content_elements=tuple(elements)).model_dump_json(
+            indent=2
         )
         + "\n",
         encoding="utf-8",
     )
     print(f"content blocks: {len(blocks)}")
     print(f"content elements: {len(elements)}")
-    kinds = sorted({str(item["kind"]) for item in elements})
+    kinds = sorted({item.kind for item in elements})
     print(f"kinds: {', '.join(kinds)}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("root", type=Path, nargs="?", help="document root to migrate")
     parser.add_argument(
-        "root", type=Path, nargs="?", default=RESOURCES.document("hla-1516-2025").root
+        "--workspace-root", type=Path, help="workspace for the default document root"
     )
     args = parser.parse_args()
-    migrate(args.root)
+    root = (
+        args.root or resources(repository_root(args.workspace_root)).document("hla-1516-2025").root
+    )
+    migrate(root)
 
 
 if __name__ == "__main__":

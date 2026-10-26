@@ -2,28 +2,24 @@
 
 from __future__ import annotations
 
-from pydantic import JsonValue
+from typing import TypeAlias, cast
 
 __all__ = ["coerce_int", "optional_float"]
 
+_ScalarInput: TypeAlias = str | bytes | bytearray | int | float
 
-def coerce_int(value: JsonValue | bytes | bytearray, *, label: str = "value") -> int:
+
+def coerce_int(value: object, *, label: str = "value") -> int:
     """Convert a JSON-like numeric scalar to ``int`` with a useful error."""
-    # TODO: why not just do a `int(value)` and catch the exception? this extra check is redundant
-    if isinstance(value, (str, bytes, bytearray, int, float)):
-        try:
-            return int(value)
-        except (TypeError, ValueError, OverflowError) as error:
-            raise ValueError(f"{label} must be an integer, got {value!r}") from error
-    raise ValueError(f"{label} must be numeric, got {type(value).__name__}")
-
-
-def optional_float(value: JsonValue | bytes | bytearray) -> float | None:
-    """Convert a blank-or-invalid scalar to ``None`` instead of raising."""
-    # TODO: why not just do a `float(value)` and catch the exception? this extra check is redundant
-    if not isinstance(value, (str, bytes, bytearray, int, float)):
-        return None
     try:
-        return float(value)
+        return int(cast(_ScalarInput, value))
+    except (TypeError, ValueError, OverflowError) as error:
+        raise ValueError(f"{label} must be an integer, got {value!r}") from error
+
+
+def optional_float(value: object) -> float | None:
+    """Convert a blank-or-invalid scalar to ``None`` instead of raising."""
+    try:
+        return float(cast(_ScalarInput, value))
     except (TypeError, ValueError, OverflowError):
         return None

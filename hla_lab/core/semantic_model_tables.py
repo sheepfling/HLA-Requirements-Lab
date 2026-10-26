@@ -36,7 +36,6 @@ from hla_lab.core.semantic_text import (
     _commands,
 )
 from hla_lab.core.semantic_types import (
-    CommandEvent,
     ContentBlock,
     Definition,
     Requirement,
@@ -386,10 +385,8 @@ class _TableFileState:
     current_cell: str | None = None
 
 
-def _table_semantic_events(
-    text: str, source: LatexSourceProfile
-) -> list[tuple[int, str, tuple[str, ...]]]:
-    events: list[tuple[int, str, tuple[str, ...]]] = []
+def _table_semantic_events(text: str, source: LatexSourceProfile) -> list[TablePrimitive]:
+    events: list[TablePrimitive] = []
     for name, count, kind in (
         (source.stable_id, 1, "stable"),
         (source.table_grid_cell, 4, "grid"),
@@ -463,7 +460,7 @@ def _read_table_semantics(
     root: Path,
     path: Path,
     text: str,
-    events: Sequence[CommandEvent],
+    events: Sequence[TablePrimitive],
 ) -> _TableFileState:
     state = _TableFileState(table_sources={}, grids={}, candidates={})
     for offset, kind, args in events:
@@ -735,6 +732,9 @@ def _derive_table_families(
                 id=family_id,
                 title=first.title or first.caption or logical_id,
                 table_ids=tuple(item.id for item in fragments),
+                table_captions={
+                    item.id: item.caption for item in fragments if item.caption is not None
+                },
                 clause_id=block_clause_by_path.get(source_path),
                 source=first.source,
             )

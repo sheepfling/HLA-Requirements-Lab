@@ -44,13 +44,7 @@ def model_for(name: str) -> type[BaseModel]:
     except KeyError as error:
         choices = ", ".join(SCHEMA_NAMES)
         raise ValueError(f"unknown contract {name!r}; choose from {choices}") from error
-    model: object = getattr(importlib.import_module(module_name), class_name)
-    try:
-        is_model = issubclass(model, BaseModel)
-    except TypeError:
-        is_model = False
-    if not is_model:
-        raise TypeError(f"{module_name}.{class_name} is not a Pydantic model")
+    model = getattr(importlib.import_module(module_name), class_name)
     return cast(type[BaseModel], model)
 
 

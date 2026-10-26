@@ -2,23 +2,23 @@
 
 from __future__ import annotations
 
-import json
-
 from tools.migrations.backflow_common import (
     FEDERATION,
     OWNERSHIP,
     TIME,
-    _read,
+    _read_requirement_file,
+    _read_requirements,
     _set_statement,
-    _write,
+    _write_requirement_file,
+    _write_requirements,
     omt_semantic_root,
 )
 
 
 def repair_ownership_overview() -> None:
     """Make the Clause 7 ownership overview candidates complete."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         "16-3": (
             "The ability to transfer ownership of instance attributes among joined federates "
@@ -131,13 +131,13 @@ def repair_ownership_overview() -> None:
     }
     for suffix, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[OWNERSHIP + "148-l" + suffix], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_time_order_and_acquisition() -> None:
     """Restore complete rules for FQR, order type, and acquisition."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         TIME + "200-l131-38": (
             "The Flush Queue Request service shall request that all messages queued in the RTI "
@@ -242,15 +242,15 @@ def repair_time_order_and_acquisition() -> None:
         "content/clauses/07-ownership-management-page-162.tex:7-10."
     )
     record = by_id[OWNERSHIP + "161-l167-50"]
-    if continuation_note.strip() not in record["coverage_note"]:
-        record["coverage_note"] += continuation_note
-    _write("requirements.json", payload)
+    if continuation_note.strip() not in record.coverage_note:
+        record.coverage_note += continuation_note
+    _write_requirements(payload)
 
 
 def repair_cross_page_statements() -> None:
     """Join statements whose last source line is on the next physical page."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     save = by_id[FEDERATION + "065-l109-26"]
     _set_statement(
         save,
@@ -283,17 +283,16 @@ def repair_cross_page_statements() -> None:
         " The second bullet continues in "
         "output/semantic/content-block-content-15161-page-199.tex:14-17."
     )
-    if note.strip() not in grant["coverage_note"]:
-        grant["coverage_note"] += note
-    _write("requirements.json", payload)
+    if note.strip() not in grant.coverage_note:
+        grant.coverage_note += note
+    _write_requirements(payload)
 
     path = omt_semantic_root() / "requirements.json"
-    omt = json.loads(path.read_text(encoding="utf-8"))
+    omt = _read_requirement_file(path)
     record = next(
         item
-        for item in omt["requirements"]
-        if item["id"]
-        == "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-110-l90-20"
+        for item in omt.requirements
+        if item.id == "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-110-l90-20"
     )
     _set_statement(
         record,
@@ -312,6 +311,6 @@ def repair_cross_page_statements() -> None:
         " The final conditions continue in "
         "output/semantic/content-block-content-15162-page-111.tex:37-38."
     )
-    if note.strip() not in record["coverage_note"]:
-        record["coverage_note"] += note
-    path.write_text(json.dumps(omt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if note.strip() not in record.coverage_note:
+        record.coverage_note += note
+    _write_requirement_file(path, omt)

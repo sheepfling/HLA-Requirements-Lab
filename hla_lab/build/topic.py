@@ -27,7 +27,6 @@ from hla_lab.generation.faithful_renderer import load_faithful_layout_profile
 from hla_lab.generation.generate_derivative import generate_from_hla
 from hla_lab.generation.semantic_generation import generate as generate_semantic
 from hla_lab.paths import (
-    RESOURCES,
     DocumentResources,
     document_roots,
     repository_root,
@@ -46,9 +45,6 @@ from hla_lab.publication.publication_registry import (
 )
 
 __all__ = ["generate", "main", "project_config"]
-
-PUBLICATION_MANIFEST = RESOURCES.publications_manifest if RESOURCES is not None else None
-RELEASE_MANIFEST = RESOURCES.release_manifest if RESOURCES is not None else None
 
 
 def _selected_ids(model: object, field: str, selection: str, ordering: str) -> tuple[str, ...]:

@@ -73,29 +73,31 @@ def _modern_table_code_cell(values: Sequence[str]) -> str:
 def _modern_table5_page(table: Table, *, sequence: int) -> str:
     """Render one source Table 5 page as a typed three-column registry."""
 
-    cells = tuple(
-        sorted(
-            (cell for cell in table.cells if cell.row is not None and cell.column is not None),
-            key=lambda cell: (cell.row, -cell.column, cell.id),
-        )
-    )
-    type_start_column = max((cell.column for cell in cells), default=0)
-    starts = [index for index, cell in enumerate(cells) if cell.column == type_start_column]
+    located_cells = []
+    for cell in table.cells:
+        if cell.row is None or cell.column is None:
+            continue
+        located_cells.append((cell.row, cell.column, cell))
+    cells = tuple(sorted(located_cells, key=lambda item: (item[0], -item[1], item[2].id)))
+    type_start_column = max((column for _row, column, _cell in cells), default=0)
+    starts = [
+        index for index, (_row, column, _cell) in enumerate(cells) if column == type_start_column
+    ]
     rows: list[tuple[list[str], list[str], list[str]]] = []
     for index, start in enumerate(starts):
         group = cells[start : starts[index + 1] if index + 1 < len(starts) else None]
         if not group:
             continue
-        type_column = group[0].column
+        type_column = group[0][1]
         # Continuation lines in the source table can be indented one column
         # left of the first encoding line.  The table's three visual columns
         # occupy ranges of source-cell columns, not one coordinate each.
         encoding_left = type_column - 3
-        type_values = [cell.text for cell in group if cell.column == type_column]
+        type_values = [cell.text for _row, column, cell in group if column == type_column]
         encoding_values = [
-            cell.text for cell in group if encoding_left <= cell.column < type_column
+            cell.text for _row, column, cell in group if encoding_left <= column < type_column
         ]
-        example_values = [cell.text for cell in group if cell.column < encoding_left]
+        example_values = [cell.text for _row, column, cell in group if column < encoding_left]
         if type_values and _modern_table_text(type_values[0]).casefold() == "type":
             continue
         rows.append((type_values, encoding_values, example_values))

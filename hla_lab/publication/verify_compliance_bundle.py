@@ -510,7 +510,7 @@ def verify(
 
     _append_binding_findings(
         manifest.bindings,
-        manifest.document_ids,
+        frozenset(manifest.document_ids),
         mappings_by_key,
         crosswalks_by_key,
         evidence_by_id,

@@ -6,8 +6,10 @@ import json
 import re
 import unittest
 from collections import Counter
+from pathlib import Path
 
 from hla_lab.core.json_types import JsonObject
+from hla_lab.core.semantic_model import ContentBlockFile
 from tests.support import TEST_REPO_ROOT
 
 ROOT = TEST_REPO_ROOT
@@ -16,6 +18,15 @@ SEMANTIC = ROOT / "topics/ieee/hla-1516.1-2025/semantic"
 
 def _read(name: str) -> JsonObject:
     return json.loads((SEMANTIC / name).read_text(encoding="utf-8"))
+
+
+def _layout_by_source(path: Path) -> dict[str, list[str]]:
+    payload = ContentBlockFile.model_validate_json(path.read_text(encoding="utf-8"))
+    return {
+        item.source.path: item.layout_body.splitlines()
+        for item in payload.content_blocks
+        if item.layout_body is not None
+    }
 
 
 class HlaBackflowTests(unittest.TestCase):
@@ -48,7 +59,9 @@ class HlaBackflowTests(unittest.TestCase):
         }
         for document_id, owners in expected.items():
             records = json.loads(
-                (ROOT / "topics" / "ieee" / document_id / "semantic" / "requirements.json").read_text(encoding="utf-8")
+                (
+                    ROOT / "topics" / "ieee" / document_id / "semantic" / "requirements.json"
+                ).read_text(encoding="utf-8")
             )["requirements"]
             for suffix, clause in owners.items():
                 with self.subTest(document=document_id, source=suffix):
@@ -76,15 +89,9 @@ class HlaBackflowTests(unittest.TestCase):
             }
         }
         layouts = {
-            document_id: {
-                item["source"]["path"]: item["layout_body"].splitlines()
-                for item in json.loads(
-                    (
-                        ROOT / "topics" / "ieee" / document_id / "semantic" / "content-blocks.json"
-                    ).read_text(encoding="utf-8")
-                )["content_blocks"]
-                if isinstance(item.get("layout_body"), str)
-            }
+            document_id: _layout_by_source(
+                ROOT / "topics" / "ieee" / document_id / "semantic" / "content-blocks.json"
+            )
             for document_id in catalogs
         }
         lower_case_table_fields = {
@@ -911,13 +918,7 @@ class HlaBackflowTests(unittest.TestCase):
                         (semantic / "requirements.json").read_text(encoding="utf-8")
                     )["requirements"]
                 }
-                layouts[document_id] = {
-                    item["source"]["path"]: item["layout_body"].splitlines()
-                    for item in json.loads(
-                        (semantic / "content-blocks.json").read_text(encoding="utf-8")
-                    )["content_blocks"]
-                    if isinstance(item.get("layout_body"), str)
-                }
+                layouts[document_id] = _layout_by_source(semantic / "content-blocks.json")
             with self.subTest(issue=issue_id):
                 record = next(
                     item
@@ -1051,11 +1052,7 @@ class HlaBackflowTests(unittest.TestCase):
         }
         self.assertEqual(len(table_ids), 37)
         requirements = {item["id"]: item for item in _read("requirements.json")["requirements"]}
-        pages = {
-            item["source"]["path"]: item["layout_body"].splitlines()
-            for item in _read("content-blocks.json")["content_blocks"]
-            if isinstance(item.get("layout_body"), str)
-        }
+        pages = _layout_by_source(SEMANTIC / "content-blocks.json")
         bindings = _read("api-requirement-bindings.json")["bindings"]
         examples = {
             "p295-r001": ('"SETTINGS_APPLIED"',),

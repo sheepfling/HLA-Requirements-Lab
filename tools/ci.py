@@ -57,6 +57,7 @@ def quality_commands(
         (_tool("mdrepo"), "check", ".", "--format", "github"),
         ruff_check,
         ruff_format,
+        _python(python, "-m", "pyright", "--pythonpath", python),
         _python(python, "-m", "compileall", "-q", "hla_lab", "tools", "topics"),
         _python(python, "-m", "hla_lab.cli", "test", "--parallel"),
         _python(python, "-m", "hla_lab.build.build", "list"),

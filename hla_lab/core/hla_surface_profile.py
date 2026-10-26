@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import json
 from collections import defaultdict
 from collections.abc import Mapping
 
-from hla_lab.core.hla_profile import SOURCE_PROFILE_MANIFEST
+from hla_lab.core.hla_profile import HLA_SOURCE_PROFILE_MANIFEST
 from hla_lab.core.semantic_model import (
     ApiSurface,
     DocumentModel,
@@ -22,7 +21,7 @@ from hla_lab.core.semantic_model import (
 
 __all__ = ["HLA_API_OWNERS", "build_hla_surface_contract"]
 
-HLA_API_OWNERS = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))["api_owners"]
+HLA_API_OWNERS = HLA_SOURCE_PROFILE_MANIFEST.api_owners
 
 
 def _source_for(mapping: ImplementationMapping) -> SourceRef:

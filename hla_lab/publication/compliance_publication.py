@@ -21,7 +21,6 @@ from typing import Annotated, Literal
 from pydantic import Field, model_validator
 
 from hla_lab.adapters.latex_renderer import tex_escape
-from hla_lab.core.json_types import JsonValue
 from hla_lab.core.links import latex_anchor, qualified_id
 from hla_lab.core.semantic_model import (
     ComplianceCorpus,
@@ -48,6 +47,9 @@ __all__ = [
     "write_compliance_csv_exports",
     "write_compliance_publication",
 ]
+
+_CsvCell = str | int | bool | None
+_CsvRow = Mapping[str, _CsvCell]
 
 ComplianceView = Literal[
     "scope",
@@ -813,7 +815,7 @@ def _csv_source_fields(source: SemanticRecord | None) -> dict[str, str]:
 
 
 def _write_csv(
-    path: Path, fieldnames: tuple[str, ...], rows: Iterable[Mapping[str, JsonValue]]
+    path: Path, fieldnames: tuple[str, ...], rows: Iterable[_CsvRow]
 ) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as stream:

@@ -22,13 +22,13 @@ from hla_lab.generation.semantic_generation_tables import _modern_table_text
 
 def _protocol_cells_by_row(table: Table) -> dict[int, dict[int, list[str]]]:
     by_row: dict[int, dict[int, list[str]]] = {}
-    for cell in sorted(
-        (cell for cell in table.cells if cell.row is not None and cell.column is not None),
-        key=lambda cell: (cell.row, cell.column, cell.id),
-    ):
-        by_row.setdefault(cell.row, {}).setdefault(cell.column, []).append(
-            _modern_table_text(cell.text)
-        )
+    cells = []
+    for cell in table.cells:
+        if cell.row is None or cell.column is None:
+            continue
+        cells.append((cell.row, cell.column, cell))
+    for row, column, cell in sorted(cells, key=lambda item: (item[0], item[1], item[2].id)):
+        by_row.setdefault(row, {}).setdefault(column, []).append(_modern_table_text(cell.text))
     return by_row
 
 

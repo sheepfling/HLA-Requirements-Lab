@@ -21,7 +21,7 @@ build-backend = "setuptools.build_meta"
 include = ["hla_lab*", "tools*"]
 
 [tool.setuptools.package-data]
-hla_lab = ["source_profiles.json"]
+hla_lab = ["py.typed", "source_profiles.json"]
 
 [dependency-groups]
 dev = [
@@ -65,7 +65,9 @@ select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
 "topics/_template/**/*.py" = ["T201"]
 
 [tool.pyright]
-include = ["hla_lab", "topics"]
+include = ["hla_lab", "tools", "topics"]
+# One-off source migrations mutate corpus files and retain legacy JSON handling.
+exclude = ["tools/migrations/**"]
 pythonVersion = "3.11"
 typeCheckingMode = "basic"
 

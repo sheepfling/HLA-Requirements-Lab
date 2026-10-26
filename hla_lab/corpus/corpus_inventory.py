@@ -9,11 +9,12 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, JsonValue
+from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.core.semantic_model import DocumentModel, SourceRef
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.paths import document_entry, document_roots, resources
+from hla_lab.publication.publication_registry import ReleaseManifest
 
 InventoryStatus = Literal[
     "reviewed",
@@ -347,17 +348,10 @@ def _expected_page_counts(release_manifest: Path | None) -> dict[str, int]:
     expected_pages: dict[str, int] = {}
     if release_manifest is None or not release_manifest.is_file():
         return expected_pages
-    manifest: JsonValue = json.loads(release_manifest.read_text(encoding="utf-8"))
-    if not isinstance(manifest, dict):
-        return expected_pages
-    raw_projects: JsonValue = manifest.get("projects", [])
-    if not isinstance(raw_projects, list):
-        return expected_pages
-    projects: list[JsonValue] = raw_projects
-    for raw_project in projects:
-        project: JsonValue = raw_project
-        if isinstance(project, dict) and project.get("id") and project.get("expected_pages"):
-            expected_pages[str(project["id"])] = int(project["expected_pages"])
+    manifest = ReleaseManifest.model_validate_json(release_manifest.read_text(encoding="utf-8"))
+    for project in manifest.projects:
+        if project.expected_pages is not None:
+            expected_pages[project.id] = project.expected_pages
     return expected_pages
 
 

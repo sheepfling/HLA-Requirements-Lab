@@ -7,19 +7,27 @@ import json
 import re
 from pathlib import Path
 
-from pydantic import JsonValue
-
-from hla_lab.core.semantic_model import StateMachine, StateMachineFile, StateMachineLayout
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
+from hla_lab.core.semantic_model import (
+    StateMachine,
+    StateMachineFile,
+    StateMachineLayout,
+)
 from hla_lab.diagrams.render_state_machine import _layout_nodes, render
 
 
 def _canonical_machines(models_dir: Path) -> tuple[tuple[Path, StateMachine], ...]:
     machines: list[tuple[Path, StateMachine]] = []
     for path in sorted(models_dir.glob("*.json")):
-        payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(payload, dict) or "state_machines" not in payload:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
-        state_machine_file = StateMachineFile.model_validate(payload)
+        if envelope.schema_version is None or envelope.state_machines is None:
+            raise ValueError(
+                f"{path}: state-machine model requires schema_version and state_machines"
+            )
+        state_machine_file = StateMachineFile.model_validate_json(source)
         machines.extend((path, item) for item in state_machine_file.state_machines)
     return tuple(machines)
 
@@ -28,7 +36,7 @@ def validate_renderable(models_dir: Path) -> list[str]:
     """Validate that every modeled state transition has a rendered endpoint."""
     failures: list[str] = []
     for path, machine in _canonical_machines(models_dir):
-        layout = machine.layout or StateMachineLayout()
+        layout = machine.layout or StateMachineLayout(nodes={}, transitions={})
         nodes = _layout_nodes(machine, layout)
         missing_endpoints = [
             transition.id

@@ -8,17 +8,21 @@ from tools.migrations.backflow_common import (
     OBJECTS,
     PAGE_216,
     TIME,
-    _read,
+    _read_content_blocks,
+    _read_content_elements,
+    _read_requirements,
     _set_clause,
     _set_statement,
-    _write,
+    _write_content_blocks,
+    _write_content_elements,
+    _write_requirements,
 )
 
 
 def repair_page_216() -> None:
     """Repair DDM page ownership and split definition statements."""
-    requirements = _read("requirements.json")
-    by_id = {item["id"]: item for item in requirements["requirements"]}
+    requirements = _read_requirements()
+    by_id = {item.id: item for item in requirements.requirements}
     corrections = {
         "66-19": (
             "A range shall be a continuous semi-open interval on a dimension. "
@@ -66,8 +70,8 @@ def repair_page_216() -> None:
             98,
         ),
     }
-    for item in requirements["requirements"]:
-        if not item["id"].startswith(PAGE_216):
+    for item in requirements.requirements:
+        if not item.id.startswith(PAGE_216):
             continue
         _set_clause(item, "9.1.1")
     for suffix, (statement, line, end_line) in corrections.items():
@@ -83,30 +87,32 @@ def repair_page_216() -> None:
     }
     for suffix, missing in omitted_facets.items():
         record = by_id[PAGE_216 + suffix]
-        record["semantic_group_id"] = "m16.range-definition.9.1.1"
-        record["coverage_note"] = (
+        record.semantic_group_id = "m16.range-definition.9.1.1"
+        record.coverage_note = (
             "One facet of the continuous §9.1.1 range definition. Claim complete range "
             "semantics only when evidence covers all four consecutive stable candidate IDs, "
             f"including {missing}."
         )
-    _write("requirements.json", requirements)
+    _write_requirements(requirements)
 
-    for name, key in (
-        ("content-blocks.json", "content_blocks"),
-        ("content-elements.json", "content_elements"),
-    ):
-        payload = _read(name)
-        affected = [item for item in payload[key] if "page-216" in item["id"]]
+    for is_block in (True, False):
+        payload = _read_content_blocks() if is_block else _read_content_elements()
+        records = payload.content_blocks if is_block else payload.content_elements
+        affected = [item for item in records if "page-216" in item.id]
         if len(affected) != 1:
+            name = "content-blocks.json" if is_block else "content-elements.json"
             raise ValueError(f"Expected one page-216 item in {name}, found {len(affected)}")
-        affected[0]["clause_id"] = "clause-9"
-        _write(name, payload)
+        affected[0].clause_id = "clause-9"
+        if is_block:
+            _write_content_blocks(payload)
+        else:
+            _write_content_elements(payload)
 
 
 def repair_page_219_region_relationships() -> None:
     """Keep the region rules before the 9.1.3.2 heading complete and in 9.1.3.1."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         "11-3": (
             "A region specification may contain an empty set of ranges. The region realization "
@@ -162,13 +168,13 @@ def repair_page_219_region_relationships() -> None:
         record = by_id[DDM + "219-l" + suffix]
         _set_clause(record, "9.1.3.1")
         _set_statement(record, statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_page_192_service_narrative() -> None:
     """Complete the Time Constrained Enabled prose before the 8.6.1 heading."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         "93-27": (
             "When a joined federate changes to be time-constrained, TSO messages stored in "
@@ -189,13 +195,13 @@ def repair_page_192_service_narrative() -> None:
         record = by_id[TIME + "192-l" + suffix]
         _set_clause(record, "8.6")
         _set_statement(record, statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_service_prose() -> None:
     """Restore complete service statements and the headings visible at each span."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         FEDERATION + "040-l33-8": (
             "If a federate is forced to leave the joined state for any reason other than calling "
@@ -303,4 +309,4 @@ def repair_service_prose() -> None:
         _set_statement(record, statement, line, end_line)
         _set_clause(record, clause)
     _set_clause(by_id[FEDERATION + "044-l108-35"], "4.1.3")
-    _write("requirements.json", payload)
+    _write_requirements(payload)

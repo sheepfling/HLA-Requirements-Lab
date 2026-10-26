@@ -8,8 +8,6 @@ import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
-from pydantic import JsonValue
-
 from hla_lab.core.semantic_model import (
     NodePosition,
     State,
@@ -348,10 +346,9 @@ def _transition_lines(
     return lines
 
 
-def render(machine: StateMachine | Mapping[str, JsonValue]) -> str:
-    """Render a validated state machine, accepting JSON mappings at the boundary."""
-    machine = StateMachine.model_validate(machine)
-    layout = machine.layout or StateMachineLayout()
+def render(machine: StateMachine) -> str:
+    """Render one validated state-machine model as a TikZ picture."""
+    layout = machine.layout or StateMachineLayout(nodes={}, transitions={})
     nodes = _layout_nodes(machine, layout)
     states = tuple(
         state for state in machine.states if state.id in nodes and nodes[state.id].visible

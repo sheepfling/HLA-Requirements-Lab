@@ -113,9 +113,7 @@ def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
     return tuple(definitions)
 
 
-def _promoted_requirements(
-    root: Path, annex_by_path: Mapping[str, str]
-) -> tuple[Requirement, ...]:
+def _promoted_requirements(root: Path, annex_by_path: Mapping[str, str]) -> tuple[Requirement, ...]:
     candidates = _load_requirement_candidates(root, HLA_SOURCE)
     if len(candidates) != 340:
         raise ValueError(

@@ -195,7 +195,9 @@ def _draw_hierarchy_group(
     nodes: Mapping[str, GraphNode],
 ) -> list[str]:
     source = nodes[source_id]
-    targets = [nodes[edge.target] for edge in edges if edge.target in nodes]
+    targets = [
+        nodes[edge.target] for edge in edges if edge.target is not None and edge.target in nodes
+    ]
     if not targets:
         return []
     descending = _hierarchy_direction(source, targets)

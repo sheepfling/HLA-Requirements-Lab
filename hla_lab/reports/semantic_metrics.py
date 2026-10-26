@@ -5,18 +5,31 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections.abc import Callable
 from pathlib import Path
 from types import MappingProxyType
+from typing import TypeVar
 
-from pydantic import BaseModel, ConfigDict, JsonValue
+from pydantic import BaseModel, ConfigDict, ValidationError
 
-from hla_lab.paths import REPO_ROOT, DocumentResources, resources
+from hla_lab.core.semantic_types import (
+    ContentBlock,
+    ContentBlockFile,
+    ContentElement,
+    ContentElementFile,
+    TableFamily,
+    TableFamilyFile,
+)
+from hla_lab.paths import DocumentResources, repository_root, resources
 from hla_lab.publication.publication_registry import load_release_manifest
 
 EXCLUDED_PARTS = frozenset({".trash", "build", "dist", "output"})
 PAGE_FRAGMENT_PATTERN = re.compile(r"(?:^|-)page-\d+\.tex$", re.IGNORECASE)
 CONTENT_BLOCK_INPUT_PATTERN = re.compile(r"\\input\{output/semantic/content-block-[^}]+\}")
 DATA_SUFFIXES = frozenset({".csv", ".json", ".jsonl", ".yaml", ".yml"})
+Record = TypeVar("Record", ContentBlock, ContentElement, TableFamily)
+FileModel = TypeVar("FileModel", ContentBlockFile, ContentElementFile, TableFamilyFile)
+RecordReader = Callable[[FileModel], tuple[Record, ...]]
 
 
 class SemanticMetrics(BaseModel):
@@ -73,26 +86,45 @@ def _marker_count(text: str, pattern: re.Pattern[str]) -> int:
     return len(pattern.findall(text))
 
 
-def _read_json(path: Path) -> JsonValue | None:
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-
-
-def _authored_record_count(root: Path, field: str) -> int:
-    """Count text-based authored records without reading generated output."""
+def _authored_records(
+    root: Path,
+    model_type: type[FileModel],
+    records: RecordReader[FileModel, Record],
+) -> tuple[Record, ...]:
+    """Load a known authored-record file through its Pydantic contract."""
     semantic_root = DocumentResources(root).semantic
-    total = 0
+    found: list[Record] = []
     for path in semantic_root.glob("*.json"):
-        payload = _read_json(path)
-        if payload is None:
+        try:
+            model = model_type.model_validate_json(path.read_text(encoding="utf-8"))
+        except (OSError, ValidationError):
             continue
-        if isinstance(payload, dict):
-            values: JsonValue | tuple[()] = payload.get(field, ())
-            if isinstance(values, list):
-                total += len(values)
-    return total
+        found.extend(records(model))
+    return tuple(found)
+
+
+def _authored_record_count(
+    root: Path,
+    model_type: type[FileModel],
+    records: RecordReader[FileModel, Record],
+) -> int:
+    """Count records from files of one known authored semantic type."""
+    return len(_authored_records(root, model_type, records))
+
+
+def _content_element_block_coverage(root: Path) -> float:
+    """Return the fraction of authored content blocks linked to elements."""
+    blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
+    if not blocks_path.is_file():
+        return 0.0
+    try:
+        content_file = ContentBlockFile.model_validate_json(blocks_path.read_text(encoding="utf-8"))
+    except (OSError, ValidationError):
+        return 0
+    if not content_file.content_blocks:
+        return 0
+    covered = sum(bool(block.element_ids) for block in content_file.content_blocks)
+    return round(covered / len(content_file.content_blocks), 4)
 
 
 def measure_document(root: Path) -> SemanticMetrics:
@@ -122,10 +154,16 @@ def measure_document(root: Path) -> SemanticMetrics:
         if page_fragments
         else 0.0,
         data_files=len(data_files),
-        content_blocks=_authored_record_count(root, "content_blocks"),
-        content_elements=_authored_record_count(root, "content_elements"),
+        content_blocks=_authored_record_count(
+            root, ContentBlockFile, lambda file: file.content_blocks
+        ),
+        content_elements=_authored_record_count(
+            root, ContentElementFile, lambda file: file.content_elements
+        ),
         content_element_block_coverage=_content_element_block_coverage(root),
-        table_families=_authored_record_count(root, "table_families"),
+        table_families=_authored_record_count(
+            root, TableFamilyFile, lambda file: file.table_families
+        ),
         stable_id_markers=marker_counts["stable_id_markers"],
         fixed_coordinate_markers=marker_counts["fixed_coordinate_markers"],
         heading_markers=marker_counts["heading_markers"],
@@ -136,28 +174,6 @@ def measure_document(root: Path) -> SemanticMetrics:
             4,
         ),
     )
-
-
-def _content_element_block_coverage(root: Path) -> float:
-    """Return the fraction of authored content blocks linked to elements."""
-    blocks_path = DocumentResources(root).semantic_file("content-blocks.json")
-    if not blocks_path.is_file():
-        return 0.0
-    payload = _read_json(blocks_path)
-    if payload is None:
-        return 0.0
-    if not isinstance(payload, dict):
-        return 0.0
-    raw_blocks: JsonValue | list[JsonValue] = payload.get("content_blocks", [])
-    if not isinstance(raw_blocks, list) or not raw_blocks:
-        return 0.0
-    blocks: list[JsonValue] = raw_blocks
-    covered = 0
-    for raw_item in blocks:
-        item: JsonValue = raw_item
-        if isinstance(item, dict) and item.get("element_ids"):
-            covered += 1
-    return round(covered / len(blocks), 4)
 
 
 def discover_documents(repo_root: Path) -> tuple[Path, ...]:
@@ -174,14 +190,16 @@ def main() -> None:
         type=Path,
         help="Document roots; defaults to all document-local build.py projects",
     )
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     parser.add_argument(
         "--json",
         action="store_true",
         help="Print machine-readable JSON instead of a compact table",
     )
     args = parser.parse_args()
-    repo_root = REPO_ROOT
-    roots = tuple(path.resolve() for path in args.roots) or discover_documents(repo_root)
+    roots = tuple(path.resolve() for path in args.roots)
+    if not roots:
+        roots = discover_documents(repository_root(args.root))
     metrics = [measure_document(root).model_dump(mode="json") for root in roots]
     if args.json:
         print(json.dumps(metrics, indent=2))

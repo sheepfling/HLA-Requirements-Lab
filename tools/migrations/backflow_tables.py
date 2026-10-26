@@ -2,25 +2,39 @@
 
 from __future__ import annotations
 
+from hla_lab.core.semantic_model import SourceRef
 from tools.migrations.backflow_common import (
     TIME,
-    _read,
+    _MutableRequirement,
+    _MutableRequirementApiBinding,
+    _MutableRequirementReview,
+    _read_api_surfaces,
+    _read_content_blocks,
+    _read_content_elements,
+    _read_requirement_api_bindings,
+    _read_requirement_reviews,
+    _read_requirements,
     _set_statement,
-    _write,
+    _write_api_surfaces,
+    _write_content_blocks,
+    _write_content_elements,
+    _write_requirement_api_bindings,
+    _write_requirement_reviews,
+    _write_requirements,
 )
 
 
 def repair_table_5_records() -> None:
     """Put complete Table 5 types on their parent rows and label member fragments."""
-    payload = _read("requirements.json")
-    rows = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    rows = {item.id: item for item in payload.requirements}
 
     def set_row(page: int, ordinal: int, title: str, statement: str) -> None:
         row = rows[f"requirement-candidate-table-5-p{page}-r{ordinal:03d}"]
-        row["title"] = f"Table 5 {title}"
-        row["statement"] = statement
-        row["machine_statement"] = statement
-        row["coverage_note"] = (
+        row.title = f"Table 5 {title}"
+        row.statement = statement
+        row.machine_statement = statement
+        row.coverage_note = (
             "Structured Table 5 type, field, or enumerant; example values illustrate "
             "the source and do not create a lexical requirement."
         )
@@ -192,7 +206,7 @@ def repair_table_5_records() -> None:
         "Array<FederateHandleRestoreStatus>. Its example depicts two restore-status "
         "records but has malformed field punctuation in the pinned source.",
     )
-    rows["requirement-candidate-table-5-p297-r007"]["coverage_note"] = (
+    rows["requirement-candidate-table-5-p297-r007"].coverage_note = (
         "Source discrepancy: IEEE 1516.2-2025 MIM names "
         "FederateRestoreStatus (type 19) and FederateRestoreStatusSet (type 20); "
         "it has no FederateHandleRestoreStatus identifier. Preserve the Table 5 "
@@ -226,16 +240,15 @@ def repair_table_5_records() -> None:
     spans.update({(296, ordinal): (171 + 3 * (ordinal - 31),) * 2 for ordinal in range(31, 35)})
     spans.update({(297, ordinal): (78 + 3 * (ordinal - 4),) * 2 for ordinal in range(4, 7)})
     for (page, ordinal), (line, end_line) in spans.items():
-        rows[f"requirement-candidate-table-5-p{page}-r{ordinal:03d}"]["source"].update(
-            line=line, end_line=end_line
-        )
-    _write("requirements.json", payload)
+        row = rows[f"requirement-candidate-table-5-p{page}-r{ordinal:03d}"]
+        row.source = SourceRef(path=row.source.path, line=line, end_line=end_line)
+    _write_requirements(payload)
 
 
 def repair_time_table_and_caption() -> None:
     """Restore the TAR bound and remove a caption fragment from the catalog."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     _set_statement(
         by_id[TIME + "178-l45-12"],
         "For Time Advance Request with zero lookahead, the joined federate shall not "
@@ -257,88 +270,85 @@ def repair_time_table_and_caption() -> None:
     continuation = (
         " The final sentence continues in content/clauses/08-time-management-page-181.tex:112."
     )
-    if continuation not in order_rule["coverage_note"]:
-        order_rule["coverage_note"] += continuation
+    if continuation not in order_rule.coverage_note:
+        order_rule.coverage_note += continuation
     obsolete = TIME + "181-l115-2"
     if obsolete not in by_id:
-        candidate = dict(by_id[TIME + "180-l156-49"])
-        candidate["id"] = obsolete
-        payload["requirements"].append(candidate)
+        candidate = _MutableRequirement.model_validate(
+            by_id[TIME + "180-l156-49"].model_dump(mode="python", exclude_unset=True)
+        )
+        candidate.id = obsolete
+        payload.requirements.append(candidate)
     else:
         candidate = by_id[obsolete]
-    candidate["title"] = "Non-normative Table 2 introduction"
-    candidate["statement"] = (
+    candidate.title = "Non-normative Table 2 introduction"
+    candidate.statement = (
         "Table 2 illustrates how the order type of a sent message shall be determined."
     )
-    candidate["machine_statement"] = candidate["statement"]
-    candidate["extraction"] = "candidate"
-    candidate["coverage_note"] = "Layout prose introducing Table 2; reviewed as non-normative."
-    candidate["source"] = {
-        "path": "content/clauses/08-time-management-page-181.tex",
-        "line": 112,
-        "end_line": 115,
-    }
-    _write("requirements.json", payload)
-    for name, key in (
-        ("content-blocks.json", "content_blocks"),
-        ("content-elements.json", "content_elements"),
-    ):
-        content = _read(name)
-        if key == "content_blocks":
-            targets = [item for item in content[key] if item["id"] == "content-15161-page-181"]
-        else:
-            targets = [
-                item for item in content[key] if item["block_id"] == "content-15161-page-181"
-            ]
-        for item in targets:
-            if obsolete not in item["record_ids"]:
-                item["record_ids"].append(obsolete)
-        _write(name, content)
-    reviews = _read("requirement-review.json")
-    if not any(item["requirement_id"] == obsolete for item in reviews["reviews"]):
-        reviews["reviews"].append(
-            {
-                "requirement_id": obsolete,
-                "status": "non-normative",
-                "reason": (
+    candidate.machine_statement = candidate.statement
+    candidate.extraction = "candidate"
+    candidate.coverage_note = "Layout prose introducing Table 2; reviewed as non-normative."
+    candidate.source = SourceRef(
+        path="content/clauses/08-time-management-page-181.tex", line=112, end_line=115
+    )
+    _write_requirements(payload)
+
+    blocks = _read_content_blocks()
+    for item in blocks.content_blocks:
+        if item.id == "content-15161-page-181" and obsolete not in item.record_ids:
+            item.record_ids += (obsolete,)
+    _write_content_blocks(blocks)
+
+    elements = _read_content_elements()
+    for item in elements.content_elements:
+        if item.block_id == "content-15161-page-181" and obsolete not in item.record_ids:
+            item.record_ids += (obsolete,)
+    _write_content_elements(elements)
+
+    reviews = _read_requirement_reviews()
+    review = next((item for item in reviews.reviews if item.requirement_id == obsolete), None)
+    if review is None:
+        reviews.reviews.append(
+            _MutableRequirementReview(
+                requirement_id=obsolete,
+                status="non-normative",
+                reason=(
                     "Table 2 introduction is explanatory layout prose, not a standalone obligation."
                 ),
-                "source": candidate["source"],
-            }
+                source=candidate.source,
+            )
         )
     else:
-        next(item for item in reviews["reviews"] if item["requirement_id"] == obsolete)[
-            "source"
-        ] = candidate["source"]
-    _write("requirement-review.json", reviews)
-    bindings = _read("api-requirement-bindings.json")
-    if not any(item["requirement_id"] == obsolete for item in bindings["bindings"]):
-        bindings["bindings"].append(
-            {
-                "id": f"binding.{obsolete}.no-api",
-                "requirement_id": obsolete,
-                "api_surface_id": None,
-                "candidate_api_surface_ids": [],
-                "language": "unspecified",
-                "relationship": "cross-cutting",
-                "status": "reviewed",
-                "rationale": "Explanatory Table 2 introduction reviewed as non-normative.",
-                "source": candidate["source"],
-            }
+        review.source = candidate.source
+    _write_requirement_reviews(reviews)
+
+    bindings = _read_requirement_api_bindings()
+    binding = next((item for item in bindings.bindings if item.requirement_id == obsolete), None)
+    if binding is None:
+        bindings.bindings.append(
+            _MutableRequirementApiBinding(
+                id=f"binding.{obsolete}.no-api",
+                requirement_id=obsolete,
+                api_surface_id=None,
+                candidate_api_surface_ids=(),
+                language="unspecified",
+                relationship="cross-cutting",
+                status="reviewed",
+                rationale="Explanatory Table 2 introduction reviewed as non-normative.",
+                source=candidate.source,
+            )
         )
     else:
-        for item in bindings["bindings"]:
-            if item["requirement_id"] == obsolete:
-                item["source"] = candidate["source"]
-    _write("api-requirement-bindings.json", bindings)
+        binding.source = candidate.source
+    _write_requirement_api_bindings(bindings)
 
 
 def restore_missing_service_flow_candidates() -> None:
     """Add the omitted NMRA and Get Dimension Handle flow items."""
-    requirements = _read("requirements.json")
-    by_id = {item["id"]: item for item in requirements["requirements"]}
-    surfaces = _read("api-surfaces.json")
-    by_surface = {item["id"]: item for item in surfaces["api_surfaces"]}
+    requirements = _read_requirements()
+    by_id = {item.id: item for item in requirements.requirements}
+    surfaces = _read_api_surfaces()
+    by_surface = {item.id: item for item in surfaces.api_surfaces}
     specs = (
         (
             "requirement-service-flow-nmra-current-time-precondition",
@@ -396,55 +406,53 @@ def restore_missing_service_flow_candidates() -> None:
             260,
         ),
     )
-    blocks = _read("content-blocks.json")
-    elements = _read("content-elements.json")
+    blocks = _read_content_blocks()
+    elements = _read_content_elements()
     for requirement_id, clause, path, line, end_line, statement, api_id, page in specs:
-        source = {"path": "content/clauses/" + path, "line": line, "end_line": end_line}
+        source = SourceRef(path="content/clauses/" + path, line=line, end_line=end_line)
         if requirement_id not in by_id:
-            record = {
-                "id": requirement_id,
-                "title": f"Service-flow item at {source['path']}:{line}",
-                "statement": statement,
-                "kind": "detailed",
-                "clause": clause,
-                "clause_id": f"clause-{clause}",
-                "machine_statement": statement,
-                "transition_ids": [],
-                "coverage_kind": "cross-cutting",
-                "coverage_note": (
+            record = _MutableRequirement(
+                id=requirement_id,
+                title=f"Service-flow item at {source.path}:{line}",
+                statement=statement,
+                kind="detailed",
+                clause=clause,
+                clause_id=f"clause-{clause}",
+                machine_statement=statement,
+                transition_ids=(),
+                coverage_kind="cross-cutting",
+                coverage_note=(
                     "Explicit service-flow precondition or exception from the pinned 2025 source."
                 ),
-                "api_surface_scope": "required",
-                "api_surface_note": (
+                api_surface_scope="required",
+                api_surface_note=(
                     "Reviewed against the official 2025 C++ RTIambassador declaration."
                 ),
-                "api_surface_resolution": "strict",
-                "extraction": "explicit",
-                "semantic_group_id": f"m17.service-flow.{clause}",
-                "source": source,
-            }
-            requirements["requirements"].append(record)
+                api_surface_resolution="strict",
+                extraction="explicit",
+                semantic_group_id=f"m17.service-flow.{clause}",
+                source=source,
+            )
+            requirements.requirements.append(record)
             by_id[requirement_id] = record
         else:
             record = by_id[requirement_id]
-            record["source"] = source
-            record["title"] = f"Service-flow item at {source['path']}:{line}"
-            record["statement"] = statement
-            record["machine_statement"] = statement
+            record.source = source
+            record.title = f"Service-flow item at {source.path}:{line}"
+            record.statement = statement
+            record.machine_statement = statement
         surface = by_surface[api_id]
-        if requirement_id not in surface["requirement_ids"]:
-            surface["requirement_ids"].append(requirement_id)
+        if requirement_id not in surface.requirement_ids:
+            surface.requirement_ids += (requirement_id,)
         block = next(
-            item for item in blocks["content_blocks"] if item["id"] == f"content-15161-page-{page}"
+            item for item in blocks.content_blocks if item.id == f"content-15161-page-{page}"
         )
-        if requirement_id not in block["record_ids"]:
-            block["record_ids"].append(requirement_id)
-        element = next(
-            item for item in elements["content_elements"] if item["block_id"] == block["id"]
-        )
-        if requirement_id not in element["record_ids"]:
-            element["record_ids"].append(requirement_id)
-    _write("requirements.json", requirements)
-    _write("api-surfaces.json", surfaces)
-    _write("content-blocks.json", blocks)
-    _write("content-elements.json", elements)
+        if requirement_id not in block.record_ids:
+            block.record_ids += (requirement_id,)
+        element = next(item for item in elements.content_elements if item.block_id == block.id)
+        if requirement_id not in element.record_ids:
+            element.record_ids += (requirement_id,)
+    _write_requirements(requirements)
+    _write_api_surfaces(surfaces)
+    _write_content_blocks(blocks)
+    _write_content_elements(elements)

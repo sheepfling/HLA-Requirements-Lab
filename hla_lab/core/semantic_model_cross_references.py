@@ -4,7 +4,6 @@ from __future__ import (
     annotations,
 )
 
-import json
 import re
 from collections.abc import (
     Iterable,
@@ -16,10 +15,7 @@ from pathlib import (
     Path,
 )
 
-from pydantic import (
-    JsonValue,
-)
-
+from hla_lab.core.navigation_manifest import NavigationOutlineItem, SourceNavigationManifest
 from hla_lab.core.semantic_model_resources import _clause_shape, _document_resources
 from hla_lab.core.semantic_types import (
     Annex,
@@ -385,35 +381,24 @@ def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
     path = _document_resources(root).canonical_file("source-navigation.json")
     if not path.is_file():
         return ()
-    raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    outline_value: JsonValue = raw.get("outline", []) if isinstance(raw, dict) else []
-    outline: list[JsonValue] = outline_value if isinstance(outline_value, list) else []
+    manifest = SourceNavigationManifest.model_validate_json(path.read_text(encoding="utf-8"))
     source = SourceRef(path=path.relative_to(root).as_posix(), line=1)
     clauses: dict[str, Clause] = {}
-    for raw_entry in outline:
-        entry: JsonValue = raw_entry
-        if isinstance(entry, dict):
-            identifier = str(entry.get("id", "")).strip()
-            if not identifier:
-                continue
-            try:
-                entry_source = (
-                    source if "source" not in entry else SourceRef.model_validate(entry["source"])
+    for entry in manifest.outline:
+        match entry:
+            case NavigationOutlineItem() as outline_item:
+                clauses[outline_item.id] = Clause(
+                    id=outline_item.id,
+                    number=outline_item.number,
+                    title=outline_item.title,
+                    parent_id=outline_item.parent_id,
+                    level=outline_item.level,
+                    source=outline_item.source or source,
                 )
-                clauses[identifier] = Clause(
-                    id=identifier,
-                    number=str(entry["number"]),
-                    title=str(entry["title"]),
-                    parent_id=entry.get("parent_id"),
-                    level=int(entry["level"]),
-                    source=entry_source,
-                )
-            except (KeyError, TypeError, ValueError):
                 continue
-            continue
-        if not isinstance(entry, list) or len(entry) < 2:
-            continue
-        label = str(entry[1]).strip()
+            case (_, label) | (_, label, _):
+                pass
+        label = str(label).strip()
         annex = re.match(r"Annex\s+([A-H])\s+\((?:normative|informative)\).+", label)
         numbered = re.match(r"(?P<number>\d+(?:\.\d+)*)\.\s+.+", label)
         if annex:

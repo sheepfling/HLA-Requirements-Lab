@@ -11,7 +11,7 @@ from pydantic import Field
 
 from hla_lab.core.semantic_model import ApiSurface, ComplianceIssue, DocumentModel, SemanticRecord
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import REPO_ROOT, document_roots
+from hla_lab.paths import document_roots, repository_root
 
 __all__ = [
     "DocumentReadiness",
@@ -253,13 +253,14 @@ def _default_roots(root: Path) -> tuple[Path, ...]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=REPO_ROOT)
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     parser.add_argument("--document", action="append", help="Restrict to a document ID")
     parser.add_argument("--require-concrete", action="store_true")
     parser.add_argument("--require-language-contract", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    roots = _default_roots(args.root)
+    workspace_root = repository_root(args.root)
+    roots = _default_roots(workspace_root)
     if args.document:
         wanted = set(args.document)
         roots = tuple(root for root in roots if root.name in wanted)

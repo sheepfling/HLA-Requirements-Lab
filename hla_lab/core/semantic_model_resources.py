@@ -12,10 +12,6 @@ from pathlib import (
     Path,
 )
 
-from pydantic import (
-    JsonValue,
-)
-
 from hla_lab.core.parsing import (
     line_number,
 )
@@ -125,7 +121,3 @@ def _clause_shape(identifier: str) -> tuple[str, str | None, int]:
     parts = number.split(".")
     parent = ".".join(parts[:-1]) if len(parts) > 1 else None
     return number, f"clause-{parent}" if parent else None, len(parts)
-
-
-def _source_ref(value: Mapping[str, JsonValue]) -> SourceRef | None:
-    return SourceRef.model_validate(value)

@@ -4,21 +4,20 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Mapping, MutableMapping, Sequence
+from collections.abc import Sequence
 from collections.abc import Set as AbstractSet
 from pathlib import Path
 from typing import Literal
 
-from pydantic import JsonValue
-
 from hla_lab.core.io import write_json
-from hla_lab.core.json_types import JsonObject
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import (
     DocumentModel,
     Requirement,
     RequirementFile,
     RequirementLink,
     RequirementLinkFile,
+    StateMachine,
     StateMachineFile,
 )
 from hla_lab.core.text import slugify
@@ -28,26 +27,23 @@ from hla_lab.paths import DocumentResources
 RequirementLinkRelation = Literal[
     "governs", "precondition", "postcondition", "enables", "prohibits"
 ]
-
-
-def _json_payload(path: Path, default: Mapping[str, JsonValue]) -> JsonObject:
-    if not path.is_file():
-        return dict(default)
-    payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"semantic source must be a JSON object: {path}")
-    return payload
+CoverageKind = Literal["transition", "cross-cutting", "document-wide", "not-applicable"]
 
 
 def _load_state_machine_payloads(
     root: Path,
-) -> tuple[tuple[Path, JsonObject, StateMachineFile], ...]:
-    payloads: list[tuple[Path, JsonObject, StateMachineFile]] = []
+) -> tuple[tuple[Path, StateMachineFile], ...]:
+    payloads: list[tuple[Path, StateMachineFile]] = []
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        payload = _json_payload(path, {})
-        if "state_machines" not in payload:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
-        payloads.append((path, payload, StateMachineFile.model_validate(payload)))
+        if envelope.schema_version is None or envelope.state_machines is None:
+            raise ValueError(
+                f"{path}: state-machine model requires schema_version and state_machines"
+            )
+        payloads.append((path, StateMachineFile.model_validate_json(source)))
     return tuple(payloads)
 
 
@@ -65,7 +61,7 @@ def promote_requirement(
     *,
     model: DocumentModel | None = None,
     transition_ids: tuple[str, ...] = (),
-    coverage_kind: str = "transition",
+    coverage_kind: CoverageKind = "transition",
     coverage_note: str = "",
     relation: RequirementLinkRelation = "governs",
     notes: str = "",
@@ -99,7 +95,7 @@ def promote_requirement(
             links,
             new_links,
             state_payloads,
-            transition_ids,
+            updated_machines,
         )
     return promoted
 
@@ -117,7 +113,7 @@ def _candidate_for_promotion(model: DocumentModel, candidate_id: str) -> Require
 def _validate_coverage(
     model: DocumentModel,
     transition_ids: Sequence[str],
-    coverage_kind: str,
+    coverage_kind: CoverageKind,
     coverage_note: str,
 ) -> None:
     if coverage_kind == "transition" and not transition_ids:
@@ -140,14 +136,12 @@ def _promoted_requirement(
     coverage_kind: str,
     coverage_note: str,
 ) -> Requirement:
-    payload = candidate.model_dump(mode="json")
+    payload = candidate.model_dump()
     payload.update(
-        {
-            "extraction": "explicit",
-            "transition_ids": list(transition_ids),
-            "coverage_kind": coverage_kind,
-            "coverage_note": coverage_note,
-        }
+        extraction="explicit",
+        transition_ids=tuple(transition_ids),
+        coverage_kind=coverage_kind,
+        coverage_note=coverage_note,
     )
     return Requirement.model_validate(payload)
 
@@ -157,8 +151,10 @@ def _load_requirement_file(
     promoted: Requirement,
 ) -> tuple[Path, RequirementFile]:
     path = DocumentResources(root).semantic_file("requirements.json")
-    record = RequirementFile.model_validate(
-        _json_payload(path, {"schema_version": 1, "requirements": []})
+    record = (
+        RequirementFile.model_validate_json(path.read_text(encoding="utf-8"))
+        if path.is_file()
+        else RequirementFile(schema_version=1, requirements=())
     )
     if any(item.id == promoted.id for item in record.requirements):
         raise ValueError(f"requirement source already contains ID: {promoted.id}")
@@ -173,8 +169,10 @@ def _load_requirement_links(
     notes: str,
 ) -> tuple[Path, RequirementLinkFile, tuple[RequirementLink, ...], tuple[RequirementLink, ...]]:
     path = DocumentResources(root).semantic_file("requirement-links.json")
-    record = RequirementLinkFile.model_validate(
-        _json_payload(path, {"schema_version": 1, "links": []})
+    record = (
+        RequirementLinkFile.model_validate_json(path.read_text(encoding="utf-8"))
+        if path.is_file()
+        else RequirementLinkFile(schema_version=1, links=())
     )
     existing = {(item.requirement_id, item.transition_id) for item in record.links}
     new_links: list[RequirementLink] = []
@@ -200,10 +198,10 @@ def _updated_state_machine_records(
     model: DocumentModel,
     transition_ids: Sequence[str],
     requirement_id: str,
-) -> tuple[tuple[object, ...], set[str]]:
+) -> tuple[tuple[StateMachine, ...], set[str]]:
     selected = set(transition_ids)
     touched: set[str] = set()
-    machines = []
+    machines: list[StateMachine] = []
     for machine in model.state_machines:
         transitions = []
         for transition in machine.transitions:
@@ -234,7 +232,7 @@ def _validated_updated_model(
     candidate: Requirement,
     promoted: Requirement,
     links: Sequence[RequirementLink],
-    machines: Sequence[object],
+    machines: Sequence[StateMachine],
 ) -> DocumentModel:
     updated = model.model_copy(
         update={
@@ -248,59 +246,6 @@ def _validated_updated_model(
     return DocumentModel.model_validate(updated.model_dump(mode="json"))
 
 
-def _add_requirement_to_transition(
-    transition: MutableMapping[str, JsonValue],
-    transition_ids: AbstractSet[str],
-    requirement_id: str,
-) -> bool:
-    if transition.get("id") not in transition_ids:
-        return False
-    raw_ids: JsonValue = transition.get("requirement_ids", [])
-    ids: list[JsonValue] = list(raw_ids) if isinstance(raw_ids, list) else []
-    if requirement_id in ids:
-        return False
-    ids.append(requirement_id)
-    transition["requirement_ids"] = ids
-    return True
-
-
-def _sync_machine_transition_payload(
-    machine: MutableMapping[str, JsonValue],
-    transition_ids: AbstractSet[str],
-    requirement_id: str,
-) -> bool:
-    raw_transitions: JsonValue = machine.get("transitions", [])
-    if not isinstance(raw_transitions, list):
-        return False
-    changed = False
-    transitions: list[JsonValue] = raw_transitions
-    for transition in transitions:
-        if isinstance(transition, dict):
-            changed = (
-                _add_requirement_to_transition(transition, transition_ids, requirement_id)
-                or changed
-            )
-    return changed
-
-
-def _sync_state_machine_payload(
-    payload: MutableMapping[str, JsonValue],
-    transition_ids: AbstractSet[str],
-    requirement_id: str,
-) -> bool:
-    raw_machines: JsonValue = payload.get("state_machines", [])
-    if not isinstance(raw_machines, list):
-        return False
-    changed = False
-    machines: list[JsonValue] = raw_machines
-    for machine in machines:
-        if isinstance(machine, dict):
-            changed = (
-                _sync_machine_transition_payload(machine, transition_ids, requirement_id) or changed
-            )
-    return changed
-
-
 def _write_promotion(
     requirement_path: Path,
     requirement_file: RequirementFile,
@@ -309,15 +254,15 @@ def _write_promotion(
     link_file: RequirementLinkFile,
     links: Sequence[RequirementLink],
     new_links: Sequence[RequirementLink],
-    state_payloads: Sequence[tuple[Path, JsonObject, StateMachineFile]],
-    transition_ids: Sequence[str],
+    state_payloads: Sequence[tuple[Path, StateMachineFile]],
+    updated_machines: Sequence[StateMachine],
 ) -> None:
     _write_json(
         requirement_path,
         RequirementFile(
             schema_version=requirement_file.schema_version,
             requirements=(*requirement_file.requirements, promoted),
-        ).model_dump(mode="json"),
+        ),
     )
     if new_links:
         _write_json(
@@ -325,13 +270,21 @@ def _write_promotion(
             RequirementLinkFile(
                 schema_version=link_file.schema_version,
                 links=tuple(links),
-            ).model_dump(mode="json"),
+            ),
         )
-    if transition_ids:
-        selected = set(transition_ids)
-        for path, payload, _ in state_payloads:
-            if _sync_state_machine_payload(payload, selected, promoted.id):
-                _write_json(path, payload)
+    updated_by_id = {machine.id: machine for machine in updated_machines}
+    for path, state_machine_file in state_payloads:
+        machines = tuple(
+            updated_by_id.get(machine.id, machine) for machine in state_machine_file.state_machines
+        )
+        if machines != state_machine_file.state_machines:
+            _write_json(
+                path,
+                StateMachineFile(
+                    schema_version=state_machine_file.schema_version,
+                    state_machines=machines,
+                ),
+            )
 
 
 def main() -> None:

@@ -5,15 +5,11 @@ from __future__ import (
 )
 
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from collections.abc import Set as AbstractSet
 from dataclasses import dataclass
 from pathlib import (
     Path,
-)
-
-from pydantic import (
-    JsonValue,
 )
 
 from hla_lab.adapters.latex_renderer import (
@@ -254,7 +250,7 @@ def _semanticize_requirement_headings(
     )
     if replacements:
         body = _replace_command_arguments(body, events, replacements)
-    return body, events
+    return body, tuple(events)
 
 
 def _semanticize_requirement_statements(
@@ -475,7 +471,7 @@ class _DiagramAssets:
     landscape_pages: dict[int, tuple[int, str, str]]
     bindings: tuple[tuple[int, int, str], ...]
     landscape_plantuml_ids: set[str]
-    canonical_plantuml_payloads: dict[str, dict[str, JsonValue]]
+    canonical_plantuml_payloads: dict[str, StateMachine]
     use_plantuml: bool
     reviewed_plantuml_ids: set[str] | None
 
@@ -544,7 +540,7 @@ def _write_model_record_data(context: _GenerationContext) -> None:
 
 def _canonical_plantuml_payloads(
     context: _GenerationContext, use_plantuml: bool
-) -> dict[str, dict[str, JsonValue]]:
+) -> dict[str, StateMachine]:
     request = context.request
     if not use_plantuml or request.canonical_source is None:
         return {}
@@ -552,7 +548,7 @@ def _canonical_plantuml_payloads(
     if not canonical_root.is_dir():
         return {}
     canonical_model = load_document_model(canonical_root, request.canonical_source)
-    return {item.id: item.model_dump(mode="json") for item in canonical_model.state_machines}
+    return {item.id: item for item in canonical_model.state_machines}
 
 
 def _prepare_diagram_assets(context: _GenerationContext) -> _DiagramAssets:
@@ -593,11 +589,11 @@ def _prepare_diagram_assets(context: _GenerationContext) -> _DiagramAssets:
 
 
 def _needs_native_plantuml_fallback(
-    machine_id: str, payload: Mapping[str, JsonValue], assets: _DiagramAssets
+    machine_id: str, machine: StateMachine, assets: _DiagramAssets
 ) -> bool:
     if not assets.use_plantuml:
         return False
-    return not _plantuml_ready(payload) or (
+    return not _plantuml_ready(machine) or (
         assets.reviewed_plantuml_ids is not None and machine_id not in assets.reviewed_plantuml_ids
     )
 
@@ -607,13 +603,12 @@ def _write_state_machine_asset(
 ) -> None:
     output = context.request.output
     name = f"state-machine-{_generated_filename(machine.id)}.tex"
-    source_payload: dict[str, JsonValue] = machine.model_dump(mode="json")
     plantuml_payload = _cross_edition_plantuml_payload(
-        source_payload,
+        machine,
         document_id=context.model.document_id,
         canonical_payloads=assets.canonical_plantuml_payloads,
     )
-    _write(output / name, render_state_machine(source_payload))
+    _write(output / name, render_state_machine(machine))
     context.generated_files.append(name)
     plantuml_name = f"state-machine-{_generated_filename(machine.id)}.puml"
     _write(output / plantuml_name, render_plantuml(plantuml_payload))

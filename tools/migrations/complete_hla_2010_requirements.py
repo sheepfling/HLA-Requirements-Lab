@@ -9,15 +9,13 @@ No planned seam is presented as concrete implementation evidence.
 from __future__ import annotations
 
 import argparse
-import json
 import re
 from collections.abc import Mapping
 from pathlib import Path
 
-from pydantic import JsonValue
-
 from hla_lab.core.hla_profile import HLA_SOURCE, HLA_SOURCE_2010
 from hla_lab.core.io import write_json
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import (
     ImplementationFile,
     ImplementationMapping,
@@ -25,6 +23,7 @@ from hla_lab.core.semantic_model import (
     RequirementLink,
     RequirementLinkFile,
     RequirementReviewFile,
+    StateMachineFile,
     TransitionCoverage,
     TransitionCoverageFile,
     load_document_model,
@@ -155,31 +154,50 @@ def _update_machines(
     root: Path, updates: Mapping[str, tuple[str, tuple[str, ...], tuple[str, ...]]]
 ) -> None:
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or "state_machines" not in raw:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
+        if envelope.state_machines is None:
+            raise ValueError(f"state_machines must be an array in {path}")
+        state_machines = StateMachineFile.model_validate_json(source)
         changed = False
-        for machine in raw["state_machines"]:
-            machine_clause = _figure_clause(str(machine.get("id", "")))
-            if machine.get("clause_id") != machine_clause:
-                machine["clause_id"] = machine_clause
-                changed = True
-            for transition in machine.get("transitions", []):
-                transition_id = str(transition.get("id", ""))
+        updated_machines = []
+        for machine in state_machines.state_machines:
+            machine_clause = _figure_clause(machine.id)
+            machine_updates = (
+                {"clause_id": machine_clause} if machine.clause_id != machine_clause else {}
+            )
+            transitions = list(machine.transitions)
+            for index, transition in enumerate(transitions):
+                transition_id = transition.id
                 if transition_id not in updates:
                     continue
                 clause_id, requirement_ids, implementation_ids = updates[transition_id]
                 values = {
                     "clause_id": clause_id,
-                    "requirement_ids": list(requirement_ids),
-                    "implementation_ids": list(implementation_ids),
+                    "requirement_ids": requirement_ids,
+                    "implementation_ids": implementation_ids,
                 }
-                for key, value in values.items():
-                    if transition.get(key) != value:
-                        transition[key] = value
-                        changed = True
+                transition_updates = {
+                    key: value for key, value in values.items() if getattr(transition, key) != value
+                }
+                if transition_updates:
+                    transitions[index] = transition.model_copy(update=transition_updates)
+                    changed = True
+            if machine_updates:
+                changed = True
+            updated_machines.append(
+                machine.model_copy(update={**machine_updates, "transitions": tuple(transitions)})
+            )
         if changed:
-            _write(path, raw)
+            _write(
+                path,
+                StateMachineFile(
+                    schema_version=state_machines.schema_version,
+                    state_machines=tuple(updated_machines),
+                ).model_dump(mode="json", exclude_unset=True),
+            )
 
 
 def _promote(root: Path) -> dict[str, int]:

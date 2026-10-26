@@ -9,7 +9,7 @@ from pathlib import Path
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.io import write_json
 from hla_lab.core.semantic_model import Definition, SourceRef, load_document_model
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import repository_root, resources
 
 DEFINITION_PATTERN = re.compile(
     r"\\begin\{hladefinition\}(?:\[([^\]]+)\])?\{([^{}]+)\}\{([^{}]+)\}"
@@ -88,11 +88,14 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=RESOURCES.document("hla-1516-2025").root)
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=RESOURCES.document("hla-1516-2025").semantic_file("definitions.json"),
-    )
+    parser.add_argument("--root", type=Path, help="document root to migrate")
+    parser.add_argument("--output", type=Path, help="semantic definitions output path")
+    parser.add_argument("--workspace-root", type=Path, help="workspace for default paths")
     args = parser.parse_args()
-    print(migrate(args.root, args.output))
+    workspace = repository_root(args.workspace_root) if args.root is None else args.workspace_root
+    default_root = (
+        resources(workspace).document("hla-1516-2025").root if args.root is None else args.root
+    )
+    root = args.root or default_root
+    output = args.output or root / "semantic" / "definitions.json"
+    print(migrate(root, output))

@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+from hla_lab.diagrams.state_machine_inventory import (
+    DiagramStatus,
+    DiagramType,
+    ReviewPriority,
+)
+
 __all__ = ["review_defaults"]
 
 
-def review_defaults(diagram_type: str, status: str) -> tuple[str, str]:
+def review_defaults(diagram_type: DiagramType, status: DiagramStatus) -> tuple[ReviewPriority, str]:
     """Return the default severity and explanation for a diagram review row."""
 
     if diagram_type != "state_machine":

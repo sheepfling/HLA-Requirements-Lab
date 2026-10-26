@@ -9,11 +9,14 @@ so later layout changes do not silently break semantic ownership.
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from types import MappingProxyType
 
-from hla_lab.core.json_types import JsonObject
+from hla_lab.core.semantic_model import (
+    ContentBlockFile,
+    ContentElementFile,
+    RequirementFile,
+)
 from tools.migrations.workspace import document_root
 
 FALLBACK_SOURCE_PATHS = MappingProxyType(
@@ -25,46 +28,61 @@ FALLBACK_SOURCE_PATHS = MappingProxyType(
 )
 
 
-def _load(path: Path) -> JsonObject:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write_requirement_owner_json(path: Path, payload: JsonObject) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
 def repair(root: Path) -> int:
     semantic = root / "semantic"
-    requirements = _load(semantic / "requirements.json")["requirements"]
+    requirement_file = RequirementFile.model_validate_json(
+        (semantic / "requirements.json").read_text(encoding="utf-8")
+    )
     blocks_path = semantic / "content-blocks.json"
     elements_path = semantic / "content-elements.json"
-    blocks_payload = _load(blocks_path)
-    elements_payload = _load(elements_path)
-    blocks = blocks_payload["content_blocks"]
-    elements = elements_payload["content_elements"]
+    blocks_payload = ContentBlockFile.model_validate_json(blocks_path.read_text(encoding="utf-8"))
+    elements_payload = ContentElementFile.model_validate_json(
+        elements_path.read_text(encoding="utf-8")
+    )
+    blocks = list(blocks_payload.content_blocks)
+    elements = list(elements_payload.content_elements)
 
-    block_by_source = {item["source"]["path"]: item for item in blocks}
-    element_by_source = {item["source"]["path"]: item for item in elements}
+    block_by_source = {item.source.path: index for index, item in enumerate(blocks)}
+    element_by_source = {item.source.path: index for index, item in enumerate(elements)}
     fallback = FALLBACK_SOURCE_PATHS.get(root.name, {})
     changed = 0
 
-    for requirement in requirements:
-        requirement_id = requirement["id"]
-        source_path = requirement["source"]["path"]
+    for requirement in requirement_file.requirements:
+        requirement_id = requirement.id
+        source_path = requirement.source.path
         owner_path = fallback.get(source_path, source_path)
-        block = block_by_source.get(owner_path)
-        element = element_by_source.get(owner_path)
-        if block is None or element is None:
+        block_index = block_by_source.get(owner_path)
+        element_index = element_by_source.get(owner_path)
+        if block_index is None or element_index is None:
             message = f"{root.name}: no content owner for {requirement_id} at {source_path}"
             raise ValueError(message)
-        for owner in (block, element):
-            record_ids = owner.setdefault("record_ids", [])
-            if requirement_id not in record_ids:
-                record_ids.append(requirement_id)
-                changed += 1
+        block = blocks[block_index]
+        if requirement_id not in block.record_ids:
+            blocks[block_index] = block.model_copy(
+                update={"record_ids": (*block.record_ids, requirement_id)}
+            )
+            changed += 1
+        element = elements[element_index]
+        if requirement_id not in element.record_ids:
+            elements[element_index] = element.model_copy(
+                update={"record_ids": (*element.record_ids, requirement_id)}
+            )
+            changed += 1
 
-    _write_requirement_owner_json(blocks_path, blocks_payload)
-    _write_requirement_owner_json(elements_path, elements_payload)
+    updated_blocks = ContentBlockFile(
+        schema_version=blocks_payload.schema_version,
+        content_blocks=tuple(blocks),
+    )
+    updated_elements = ContentElementFile(
+        schema_version=elements_payload.schema_version,
+        content_elements=tuple(elements),
+    )
+    blocks_path.write_text(
+        updated_blocks.model_dump_json(indent=2, exclude_unset=True) + "\n", encoding="utf-8"
+    )
+    elements_path.write_text(
+        updated_elements.model_dump_json(indent=2, exclude_unset=True) + "\n", encoding="utf-8"
+    )
     return changed
 
 

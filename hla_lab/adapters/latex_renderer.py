@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import re
 from collections.abc import Iterable
-from dataclasses import dataclass
+
+from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.semantic_model import (
     Clause,
@@ -24,9 +25,10 @@ from hla_lab.core.semantic_model import (
 from hla_lab.core.text import tex_escape
 
 
-@dataclass(frozen=True, slots=True)
-class LatexDialect:
+class LatexDialect(BaseModel):
     """Commands and environments supplied by a document's LaTeX profile."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
     clause_heading_command: str
     subclause_heading_command: str

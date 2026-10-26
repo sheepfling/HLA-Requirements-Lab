@@ -14,7 +14,7 @@ from pydantic import BaseModel, ConfigDict
 from hla_lab.core.semantic_model import ApiSurface, DocumentModel, SourceRef
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import REPO_ROOT, document_roots
+from hla_lab.paths import document_roots, repository_root
 
 __all__ = [
     "API_TRACEABILITY_DOCUMENT_IDS",
@@ -174,9 +174,9 @@ def _document_report(model: DocumentModel) -> ApiTraceabilityDocumentReport:
     )
 
 
-def default_roots(repo_root: Path = REPO_ROOT) -> tuple[Path, ...]:
+def default_roots(repo_root: Path | None = None) -> tuple[Path, ...]:
     """Return the two HLA 1516.1 edition roots covered by this audit."""
-    return document_roots(repo_root, API_TRACEABILITY_DOCUMENT_IDS)
+    return document_roots(repository_root(repo_root), API_TRACEABILITY_DOCUMENT_IDS)
 
 
 def build_report(
@@ -221,9 +221,7 @@ def main() -> int:
     )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    workspace_root = args.workspace_root or REPO_ROOT
-    if workspace_root is None:
-        parser.error("workspace root is required; pass --workspace-root or set HLA_LAB_ROOT")
+    workspace_root = repository_root(args.workspace_root)
     roots = tuple(args.root) if args.root else default_roots(workspace_root)
     report = build_report(roots, workspace_root=workspace_root)
     if args.json:

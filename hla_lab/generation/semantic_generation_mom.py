@@ -7,13 +7,12 @@ from __future__ import (
 import re
 from collections.abc import (
     Mapping,
-    MutableMapping,
-    MutableSequence,
     Sequence,
 )
 from collections.abc import (
     Set as AbstractSet,
 )
+from dataclasses import dataclass
 from types import MappingProxyType
 
 from hla_lab.adapters.latex_renderer import (
@@ -300,9 +299,9 @@ def _mom_content_fallback(cells: Sequence[TableCell]) -> tuple[list[str], list[l
 def _mom_registry_header_boundary(
     number: str,
     cells: Sequence[TableCell],
-    rows: MutableMapping[int, MutableSequence[TableCell]],
+    rows: Mapping[int, Sequence[TableCell]],
     header_rows: Sequence[int],
-) -> tuple[MutableMapping[int, MutableSequence[TableCell]], int]:
+) -> tuple[Mapping[int, Sequence[TableCell]], int]:
     header_end = max(header_rows, default=0)
     if number not in {"17", "18"}:
         return rows, header_end
@@ -361,15 +360,16 @@ def _mom_registry_field_key(
     anchors: Mapping[str, int],
     start_anchor: int,
 ) -> str:
+    column = cell.column if cell.column is not None else -1
     if number in {"17", "18"}:
         target = "object" if number == "17" else "interaction"
-        return target if cell.column >= start_anchor - 1 else "semantics"
+        return target if column >= start_anchor - 1 else "semantics"
     if len(source_order) == 1:
         return source_order[0]
-    key = min(source_order, key=lambda item: abs(cell.column - anchors[item]))
+    key = min(source_order, key=lambda item: abs(column - anchors[item]))
     for index, candidate in enumerate(source_order[:-1]):
         next_key = source_order[index + 1]
-        if anchors[candidate] <= cell.column < anchors[next_key]:
+        if anchors[candidate] <= column < anchors[next_key]:
             return candidate
     return key
 
@@ -413,7 +413,7 @@ def _reorder_mom_registry_fields(
     start_key: str,
 ) -> tuple[list[str], list[list[str]]]:
     if start_key not in labels:
-        return labels, rows
+        return list(labels), [list(row) for row in rows]
     start_index = labels.index(start_key)
     order = [start_index] + [index for index in range(len(labels)) if index != start_index]
     return (
@@ -422,9 +422,11 @@ def _reorder_mom_registry_fields(
     )
 
 
-def _split_mom_interaction_prose(rows: MutableSequence[MutableSequence[str]]) -> None:
+def _split_mom_interaction_prose(rows: Sequence[Sequence[str]]) -> list[list[str]]:
     markers = (". It shall ", ". Cause the RTI ", ". The interaction ")
-    for row in rows:
+    split_rows: list[list[str]] = []
+    for source_row in rows:
+        row = list(source_row)
         interaction = row[0]
         for marker in markers:
             split_at = interaction.find(marker)
@@ -434,6 +436,8 @@ def _split_mom_interaction_prose(rows: MutableSequence[MutableSequence[str]]) ->
             row[0] = interaction[: split_at + 1].strip()
             row[1] = f"{tail} {row[1]}".strip().replace("the The interaction", "the interaction")
             break
+        split_rows.append(row)
+    return split_rows
 
 
 def _modern_mom_registry_rows(table: Table) -> tuple[list[str], list[list[str]]]:
@@ -463,7 +467,7 @@ def _modern_mom_registry_rows(table: Table) -> tuple[list[str], list[list[str]]]
             output_rows.append([" ".join(values[key]) for key, _aliases in plan])
     labels, output_rows = _reorder_mom_registry_fields(labels, output_rows, start_key)
     if number == "18" and len(labels) >= 2:
-        _split_mom_interaction_prose(output_rows)
+        output_rows = _split_mom_interaction_prose(output_rows)
     return labels, output_rows
 
 
@@ -619,28 +623,40 @@ def _mom_definition_prose(
     ]
 
 
+@dataclass(frozen=True, slots=True)
+class _MomRowUpdate:
+    row: tuple[str, ...]
+    append: bool
+
+
 def _append_mom_definition_row(
     number: str,
     values: Sequence[tuple[str, int]],
-    rows: MutableSequence[MutableSequence[str]],
-) -> None:
+    previous_row: Sequence[str] | None,
+) -> _MomRowUpdate | None:
     if not values:
-        return
+        return None
     pattern = re.compile(r"(?:HLA|HL)[A-Za-z0-9_.]+(?: \(cont\.\))?")
     identifiers = [(value, column) for value, column in values if pattern.fullmatch(value)]
     targets, parents = _mom_definition_identifiers(number, identifiers)
     prose = _mom_definition_prose(values, identifiers, number)
     if targets:
         target = re.sub(r" \(cont\.\)$", "", targets[0][0]).replace("HLmanager.", "HLAmanager.")
-        if rows and rows[-1][0] == target:
-            rows[-1][2] = f"{rows[-1][2]} {' '.join(prose)}".strip()
+        if previous_row is not None and previous_row[0] == target:
+            updated = list(previous_row)
+            prose_column = 2 if len(updated) > 2 else -1
+            updated[prose_column] = f"{updated[prose_column]} {' '.join(prose)}".strip()
+            return _MomRowUpdate(row=tuple(updated), append=False)
         elif number == "17":
-            rows.append([target, " ".join(prose)])
+            return _MomRowUpdate(row=(target, " ".join(prose)), append=True)
         else:
             parent = " ".join(parents) or _inferred_mom_parent(number, target)
-            rows.append([target, parent, " ".join(prose)])
-    elif rows:
-        rows[-1][-1] = f"{rows[-1][-1]} {' '.join(prose)}".strip()
+            return _MomRowUpdate(row=(target, parent, " ".join(prose)), append=True)
+    elif previous_row is not None:
+        updated = list(previous_row)
+        updated[-1] = f"{updated[-1]} {' '.join(prose)}".strip()
+        return _MomRowUpdate(row=tuple(updated), append=False)
+    return None
 
 
 def _modern_mom_definition_rows(table: Table) -> tuple[list[str], list[list[str]]]:
@@ -656,11 +672,20 @@ def _modern_mom_definition_rows(table: Table) -> tuple[list[str], list[list[str]
     rows: list[list[str]] = []
     for _row_number, cells in sorted(_modern_mom_cells_by_row(table).items()):
         values = [
-            (_modern_table_text(cell.text), int(cell.column))
+            (_modern_table_text(cell.text), cell.column if cell.column is not None else -1)
             for cell in cells
             if _modern_table_text(cell.text)
         ]
-        _append_mom_definition_row(number, values, rows)
+        update = _append_mom_definition_row(
+            number,
+            values,
+            previous_row=rows[-1] if rows else None,
+        )
+        if update is not None:
+            if update.append:
+                rows.append(list(update.row))
+            else:
+                rows[-1] = list(update.row)
     label = "Object class" if number == "17" else "Interaction class"
     headers = [label, "Semantics"] if number == "17" else [label, "Parent class", "Semantics"]
     return headers, rows

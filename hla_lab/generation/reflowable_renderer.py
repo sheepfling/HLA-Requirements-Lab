@@ -21,6 +21,8 @@ from hla_lab.core.semantic_model import (
     CrossReference,
     DocumentModel,
     GraphDiagram,
+    Table,
+    TableFamily,
 )
 from hla_lab.core.source_paths import is_source_frontmatter
 from hla_lab.corpus.corpus_graph import (
@@ -154,19 +156,19 @@ def _source_table_label(path: str) -> str:
     )
 
 
-def _table_family_label(family: object, table: object) -> str:
-    title = str(getattr(family, "title", "") or "").strip()
+def _table_family_label(family: TableFamily, table: Table) -> str:
+    title = family.title.strip()
     if title and not title.casefold().startswith(("table-", "table_family-")):
         return title
-    return _source_table_label(str(table.source.path))
+    return _source_table_label(table.source.path)
 
 
-def _table_display_label(table: object, family_label: str) -> str:
-    title = str(getattr(table, "caption", None) or getattr(table, "title", None) or "").strip()
-    identifier = str(getattr(table, "id", ""))
+def _table_display_label(table: Table, family_label: str) -> str:
+    title = str(table.caption or table.title or "").strip()
+    identifier = table.id
     if title and not title.casefold().startswith("table-") and title != identifier:
         return title
-    number = getattr(table, "number", None)
+    number = table.number
     return f"{family_label} {number}" if number else family_label
 
 

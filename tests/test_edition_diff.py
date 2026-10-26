@@ -161,19 +161,13 @@ class EditionDifferentialTests(unittest.TestCase):
             kind="requirement",
         )
 
-        self.assertEqual(
-            report["counts"],
-            {
-                "reviewed": 2,
-                "baseline_unmapped": 0,
-                "target_unmapped": 0,
-                "target_machine_added": 0,
-            },
-        )
-        rows = report["rows"]
-        self.assertEqual({row["record_id"] for row in rows}, {"req-2010", "req-2025"})
-        self.assertTrue(all(row["status"] == "reviewed" for row in rows))
-        self.assertIn("not assertions", report["interpretation"])
+        self.assertEqual(report.counts.reviewed, 2)
+        self.assertEqual(report.counts.baseline_unmapped, 0)
+        self.assertEqual(report.counts.target_unmapped, 0)
+        self.assertEqual(report.counts.target_machine_added, 0)
+        self.assertEqual({row.record_id for row in report.rows}, {"req-2010", "req-2025"})
+        self.assertTrue(all(row.status == "reviewed" for row in report.rows))
+        self.assertIn("not assertions", report.interpretation)
 
     def test_state_machine_and_transition_reports_include_unmapped_inventory(self) -> None:
         state_report = build_report(
@@ -189,17 +183,17 @@ class EditionDifferentialTests(unittest.TestCase):
             kind="transition",
         )
 
-        self.assertEqual(state_report["counts"]["reviewed"], 2)
-        state_rows = state_report["rows"]
+        self.assertEqual(state_report.counts.reviewed, 2)
+        state_rows = state_report.rows
         self.assertEqual(
-            state_rows[0]["transition_ids_added_in_target"]
-            + state_rows[0]["transition_ids_removed_from_target"],
-            ["transition-2025", "transition-2010"],
+            state_rows[0].transition_ids_added_in_target
+            + state_rows[0].transition_ids_removed_from_target,
+            ("transition-2025", "transition-2010"),
         )
-        self.assertEqual(transition_report["counts"]["baseline_unmapped"], 1)
-        self.assertEqual(transition_report["counts"]["target_unmapped"], 1)
+        self.assertEqual(transition_report.counts.baseline_unmapped, 1)
+        self.assertEqual(transition_report.counts.target_unmapped, 1)
         self.assertEqual(
-            {row["record_id"] for row in transition_report["rows"]},
+            {row.record_id for row in transition_report.rows},
             {"transition-2010", "transition-2025"},
         )
 
@@ -253,10 +247,10 @@ class EditionDifferentialTests(unittest.TestCase):
             kind="transition",
         )
 
-        self.assertEqual(report["counts"]["target_machine_added"], 1)
-        row = next(row for row in report["rows"] if row["record_id"] == "new-transition")
-        self.assertEqual(row["status"], "target-machine-added")
-        self.assertEqual(row["derived_from_state_machine"], "new-machine")
+        self.assertEqual(report.counts.target_machine_added, 1)
+        row = next(row for row in report.rows if row.record_id == "new-transition")
+        self.assertEqual(row.status, "target-machine-added")
+        self.assertEqual(row.derived_from_state_machine, "new-machine")
 
 
 if __name__ == "__main__":

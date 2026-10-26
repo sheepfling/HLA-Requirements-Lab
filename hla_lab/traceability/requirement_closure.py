@@ -17,7 +17,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.corpus.hla_2010_semantic import _requirements, _surface_inputs
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES, resources
+from hla_lab.paths import repository_root, resources
 
 __all__ = [
     "RequirementClosureDocument",
@@ -26,18 +26,8 @@ __all__ = [
 ]
 
 
-ROOTS_2010 = (
-    tuple(
-        RESOURCES.document(document_id).root
-        for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
-    )
-    if RESOURCES is not None
-    else ()
-)
-
-
-def _default_roots() -> tuple[Path, ...]:
-    registry = resources()
+def _default_roots(workspace_root: Path) -> tuple[Path, ...]:
+    registry = resources(workspace_root)
     return tuple(
         registry.document(document_id).root
         for document_id in ("hla-1516-2010", "hla-1516.1-2010", "hla-1516.2-2010")
@@ -140,10 +130,14 @@ def _document_report(root: Path) -> RequirementClosureDocument:
     )
 
 
-def build_report(roots: tuple[Path, ...] | None = None) -> RequirementClosureReport:
+def build_report(
+    roots: tuple[Path, ...] | None = None,
+    *,
+    workspace_root: Path | None = None,
+) -> RequirementClosureReport:
     """Build a deterministic source-to-catalog audit for 2010 roots."""
 
-    selected_roots = roots if roots is not None else _default_roots()
+    selected_roots = roots if roots is not None else _default_roots(repository_root(workspace_root))
     documents = tuple(_document_report(root) for root in selected_roots)
     failures = tuple(
         f"{document.document}: {failure}" for document in documents for failure in document.failures
@@ -158,11 +152,12 @@ def build_report(roots: tuple[Path, ...] | None = None) -> RequirementClosureRep
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", action="append", type=Path)
+    parser.add_argument("--workspace-root", type=Path, help="used to discover default documents")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    roots = tuple(args.root or ()) or _default_roots()
-    report = build_report(roots)
+    roots = tuple(args.root) if args.root else None
+    report = build_report(roots, workspace_root=args.workspace_root)
     if args.json:
         print(report.model_dump_json(indent=2))
     else:

@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import repository_root, resources
 
 DEFINITION_PATTERN = re.compile(
     r"\\begin\{hladefinition\}(?:\[[^\]]+\])?\{([^{}]+)\}\{[^{}]+\}"
@@ -40,7 +40,13 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=RESOURCES.document("hla-1516-2025").root)
+    parser.add_argument("--root", type=Path, help="document root to migrate")
+    parser.add_argument(
+        "--workspace-root", type=Path, help="workspace for the default document root"
+    )
     args = parser.parse_args()
-    for path in promote(args.root):
+    root = (
+        args.root or resources(repository_root(args.workspace_root)).document("hla-1516-2025").root
+    )
+    for path in promote(root):
         print(path)

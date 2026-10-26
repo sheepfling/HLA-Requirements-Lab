@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-
 from tools.migrations.backflow_common import (
     DDM,
     DECLARATION,
@@ -13,18 +11,24 @@ from tools.migrations.backflow_common import (
     OWNERSHIP,
     SUPPORT,
     TIME,
-    _read,
+    _read_content_blocks,
+    _read_content_elements,
+    _read_requirement_file,
+    _read_requirements,
     _set_clause,
     _set_statement,
-    _write,
+    _write_content_blocks,
+    _write_content_elements,
+    _write_requirement_file,
+    _write_requirements,
     omt_semantic_root,
 )
 
 
 def repair_clause_boundaries() -> None:
     """Correct candidates attributed to a later heading on their source page."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     clause_groups = {
         "4.20": [
             FEDERATION + "067-l" + suffix
@@ -139,13 +143,13 @@ def repair_clause_boundaries() -> None:
     }
     for requirement_id, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[requirement_id], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_more_clause_boundaries() -> None:
     """Correct additional service and subsection boundaries reported by Umbra."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     groups = {
         "4.11": [FEDERATION + "057-l32-5", FEDERATION + "057-l44-6"],
         "4.11.1": [FEDERATION + "057-l56-8"],
@@ -160,18 +164,16 @@ def repair_more_clause_boundaries() -> None:
             for s in ("84-26", "87-27", "96-30", "99-31", "108-34", "111-35")
         ],
         "8.1.3": [TIME + "180-l" + s for s in ("9-1", "21-5", "27-7", "39-11", "45-13", "57-17")],
-        "8.1.4": [
-            item["id"] for item in payload["requirements"] if item["id"].startswith(TIME + "181-l")
-        ],
+        "8.1.4": [item.id for item in payload.requirements if item.id.startswith(TIME + "181-l")],
         "8.1.5": [
-            item["id"]
-            for item in payload["requirements"]
-            if item["id"].startswith(TIME + "182-l") and item["source"]["line"] < 97
+            item.id
+            for item in payload.requirements
+            if item.id.startswith(TIME + "182-l") and item.source.line < 97
         ],
         "8.1.6": [
-            item["id"]
-            for item in payload["requirements"]
-            if item["id"].startswith(TIME + "182-l") and item["source"]["line"] >= 97
+            item.id
+            for item in payload.requirements
+            if item.id.startswith(TIME + "182-l") and item.source.line >= 97
         ],
         "8.6": [TIME + "192-l63-17"],
         "8.6.4": [TIME + "193-l31-6", TIME + "193-l34-7"],
@@ -185,9 +187,9 @@ def repair_more_clause_boundaries() -> None:
         "8.19": [TIME + "207-l109-27", TIME + "207-l112-28", TIME + "207-l115-29"],
         "9.1.6": [DDM + "225-l9-2"],
         "9.1.7": [
-            item["id"]
-            for item in payload["requirements"]
-            if item["id"].startswith(DDM + "225-l") and 18 <= item["source"]["line"] < 108
+            item.id
+            for item in payload.requirements
+            if item.id.startswith(DDM + "225-l") and 18 <= item.source.line < 108
         ],
         "9.5": [DDM + "229-l17-4", DDM + "229-l20-5"],
         "9.5.3": [DDM + "229-l146-44"],
@@ -224,13 +226,13 @@ def repair_more_clause_boundaries() -> None:
     }
     for requirement_id, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[requirement_id], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_fragmented_statements() -> None:
     """Split adjacent line fragments into source-complete requirement statements."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         DDM + "224-l89-29": (
             "The Receive Interaction service shall be invoked at a joined federate only "
@@ -295,19 +297,19 @@ def repair_fragmented_statements() -> None:
     }
     for requirement_id, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[requirement_id], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_remaining_section_continuations() -> None:
     """Repair time and DDM paragraphs crossing semantic page boundaries."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
-    for item in payload["requirements"]:
-        if item["id"].startswith(DDM + "220-l") and item["source"]["line"] < 122:
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
+    for item in payload.requirements:
+        if item.id.startswith(DDM + "220-l") and item.source.line < 122:
             _set_clause(item, "9.1.3.2")
-        if item["id"].startswith(TIME + "192-l") and 63 <= item["source"]["line"] <= 84:
+        if item.id.startswith(TIME + "192-l") and 63 <= item.source.line <= 84:
             _set_clause(item, "8.6")
-        if item["id"].startswith(OWNERSHIP + "175-l") and item["source"]["line"] >= 131:
+        if item.id.startswith(OWNERSHIP + "175-l") and item.source.line >= 131:
             _set_clause(item, "8.1.1")
     corrections = {
         OWNERSHIP + "175-l131-40": (
@@ -373,18 +375,18 @@ def repair_remaining_section_continuations() -> None:
     }
     for requirement_id, (statement, line, end_line) in corrections.items():
         _set_statement(by_id[requirement_id], statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
     omt_path = omt_semantic_root() / "requirements.json"
-    omt = json.loads(omt_path.read_text(encoding="utf-8"))
+    omt = _read_requirement_file(omt_path)
     record = next(
         item
-        for item in omt["requirements"]
-        if item["id"] == "requirement-candidate-sections-semantic-clause-4b-page-058-l34-8"
+        for item in omt.requirements
+        if item.id == "requirement-candidate-sections-semantic-clause-4b-page-058-l34-8"
     )
     _set_clause(record, "4.8.1")
-    record["semantic_group_id"] = "m17.clause-4.8.1"
-    record["coverage_note"] = (
+    record.semantic_group_id = "m17.clause-4.8.1"
+    record.coverage_note = (
         "Source-derived HLA time-representation support requirement in §4.8.1; "
         "cross-cutting document content with no modeled RTI state transition."
     )
@@ -398,13 +400,13 @@ def repair_remaining_section_continuations() -> None:
         33,
         33,
     )
-    omt_path.write_text(json.dumps(omt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _write_requirement_file(omt_path, omt)
 
 
 def repair_local_fragments() -> None:
     """Restore self-contained statements from adjacent source lines."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         MOM + "290-l12-3": (
             "Parameters may be added to any MOM interaction class. Interactions of these "
@@ -522,13 +524,13 @@ def repair_local_fragments() -> None:
         record = by_id[requirement_id]
         _set_clause(record, clause)
         _set_statement(record, statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
 
 def repair_contextual_fragments() -> None:
     """Recover missing subjects, lists, and neighboring sentence boundaries."""
-    payload = _read("requirements.json")
-    by_id = {item["id"]: item for item in payload["requirements"]}
+    payload = _read_requirements()
+    by_id = {item.id: item for item in payload.requirements}
     corrections = {
         OBJECTS + "109-l10-1": (
             "Interaction I shall have a candidate received class at joined federate F if "
@@ -656,21 +658,26 @@ def repair_contextual_fragments() -> None:
         record = by_id[requirement_id]
         _set_clause(record, clause)
         _set_statement(record, statement, line, end_line)
-    _write("requirements.json", payload)
+    _write_requirements(payload)
 
     # The 2025 semantic transcription lost a short conditional phrase in a
     # fixed-layout line. The corresponding 2010 clause confirms the wording.
     damaged = "Fned federate Fscribed"
     restored = "if joined federate F is subscribed"
-    for name, key in (
-        ("content-blocks.json", "content_blocks"),
-        ("content-elements.json", "content_elements"),
-    ):
-        source = _read(name)
-        item = next(x for x in source[key] if "page-109" in x["id"])
-        field = "layout_body" if name == "content-blocks.json" else "text"
-        if damaged in item[field]:
-            item[field] = item[field].replace(damaged, restored)
-        elif restored not in item[field]:
-            raise ValueError(f"Expected damaged page-109 phrase in {name}")
-        _write(name, source)
+    blocks = _read_content_blocks()
+    block = next(item for item in blocks.content_blocks if "page-109" in item.id)
+    if block.layout_body is None:
+        raise ValueError("page-109 content block has no layout body")
+    if damaged in block.layout_body:
+        block.layout_body = block.layout_body.replace(damaged, restored)
+    elif restored not in block.layout_body:
+        raise ValueError("Expected damaged page-109 phrase in content-blocks.json")
+    _write_content_blocks(blocks)
+
+    elements = _read_content_elements()
+    element = next(item for item in elements.content_elements if "page-109" in item.id)
+    if damaged in element.text:
+        element.text = element.text.replace(damaged, restored)
+    elif restored not in element.text:
+        raise ValueError("Expected damaged page-109 phrase in content-elements.json")
+    _write_content_elements(elements)

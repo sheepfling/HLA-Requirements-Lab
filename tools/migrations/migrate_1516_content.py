@@ -9,16 +9,19 @@ provenance, but no longer own the document prose.
 from __future__ import annotations
 
 import argparse
-import json
 import re
 from collections import Counter
 from pathlib import Path
 
-from pydantic import JsonValue
-
 from hla_lab.core.hla_profile import HLA_SOURCE
+from hla_lab.core.navigation_manifest import (
+    LegacyNavigationEntry,
+    NavigationOutlineItem,
+    SourceNavigationManifest,
+)
 from hla_lab.core.semantic_model import _latex_text, load_document_model
-from hla_lab.paths import RESOURCES, DocumentResources
+from hla_lab.core.semantic_types import ContentBlock, ContentBlockFile
+from hla_lab.paths import DocumentResources, repository_root, resources
 
 PAGE_PATTERN = re.compile(r"page-(?P<number>\d+)\.tex$")
 CLAUSE_PATTERNS = (
@@ -58,7 +61,7 @@ def migrate(root: Path) -> tuple[Path, Path]:
     model = load_document_model(root, HLA_SOURCE)
     pages = _page_files(root)
     counts: Counter[str] = Counter()
-    records: list[dict[str, JsonValue]] = []
+    records: list[ContentBlock] = []
 
     for sequence, path in enumerate(pages, start=1):
         raw = path.read_text(encoding="utf-8")
@@ -73,16 +76,18 @@ def migrate(root: Path) -> tuple[Path, Path]:
         )
         relative = path.relative_to(root).as_posix()
         records.append(
-            {
-                "id": block_id,
-                "kind": kind,
-                "text": _semantic_text(raw),
-                "clause_id": clauses[0] if clauses else None,
-                "record_ids": list(clauses),
-                "source": {"path": relative, "line": 1, "end_line": raw.count("\n") + 1},
-                "sequence": sequence,
-                "layout_body": raw,
-            }
+            ContentBlock.model_validate(
+                {
+                    "id": block_id,
+                    "kind": kind,
+                    "text": _semantic_text(raw),
+                    "clause_id": clauses[0] if clauses else None,
+                    "record_ids": list(clauses),
+                    "source": {"path": relative, "line": 1, "end_line": raw.count("\n") + 1},
+                    "sequence": sequence,
+                    "layout_body": raw,
+                }
+            )
         )
         adapter = (
             "% Semantic content adapter; prose is authored in semantic/content-blocks.json.\n"
@@ -92,33 +97,34 @@ def migrate(root: Path) -> tuple[Path, Path]:
 
     semantic_path = DocumentResources(root).semantic_file("content-blocks.json")
     semantic_path.write_text(
-        json.dumps({"schema_version": 2, "content_blocks": records}, ensure_ascii=False, indent=2)
+        ContentBlockFile(schema_version=2, content_blocks=tuple(records)).model_dump_json(
+            indent=2, exclude_unset=True
+        )
         + "\n",
         encoding="utf-8",
     )
 
-    outline: list[JsonValue] = [item.model_dump(mode="json") for item in model.ordered_clauses()]
+    outline: list[NavigationOutlineItem | LegacyNavigationEntry] = [
+        NavigationOutlineItem.model_validate(item.model_dump(mode="json"))
+        for item in model.ordered_clauses()
+    ]
     for annex in model.annexes:
         outline.append(
-            [
+            (
                 0,
                 f"Annex {annex.letter} ({annex.status}) {annex.title}",
-            ]
+            )
         )
     navigation_path = DocumentResources(root).canonical_file("source-navigation.json")
     navigation_path.parent.mkdir(parents=True, exist_ok=True)
+    navigation = SourceNavigationManifest(
+        schema_version=2,
+        document=model.document_id,
+        outline=tuple(outline),
+        notes="Canonical clause order and ownership for the data-driven 1516 build.",
+    )
     navigation_path.write_text(
-        json.dumps(
-            {
-                "schema_version": 2,
-                "document": model.document_id,
-                "outline": outline,
-                "notes": "Canonical clause order and ownership for the data-driven 1516 build.",
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
-        + "\n",
+        navigation.model_dump_json(indent=2, exclude_unset=True) + "\n",
         encoding="utf-8",
     )
     return semantic_path, navigation_path
@@ -126,9 +132,15 @@ def migrate(root: Path) -> tuple[Path, Path]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=RESOURCES.document("hla-1516-2025").root)
+    parser.add_argument("--root", type=Path, help="document root to migrate")
+    parser.add_argument(
+        "--workspace-root", type=Path, help="workspace for the default document root"
+    )
     args = parser.parse_args()
-    semantic_path, navigation_path = migrate(args.root)
+    root = (
+        args.root or resources(repository_root(args.workspace_root)).document("hla-1516-2025").root
+    )
+    semantic_path, navigation_path = migrate(root)
     print(semantic_path)
     print(navigation_path)
 

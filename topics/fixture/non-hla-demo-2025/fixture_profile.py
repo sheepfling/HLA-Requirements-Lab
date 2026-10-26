@@ -8,7 +8,7 @@ from typing import Literal
 from hla_lab.adapters.latex_renderer import LatexDialect
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(slots=True)
 class DemoSourceCommands:
     """The source vocabulary supplied by this document family."""
 
@@ -24,15 +24,21 @@ class DemoSourceCommands:
     normative_rule_statement: str = "DemoNormativeRuleStatement"
     bibliography_entry: str = "DemoBibliographyEntry"
     footnote_text: str = "footnotetext"
+    additional_note_commands: tuple[str, ...] = ()
     stable_id: str = "DemoStableID"
     table_grid_cell: str = "DemoTableGridCell"
     table_cell_text: str = "DemoTableCellText"
+    table_text_line: str = "DemoTableTextLine"
     placed_block: str = "DemoPlacedBlock"
     table_caption: str = "DemoTableCaption"
     table_domain: Literal["generic", "omt"] = "generic"
     figure_image: str = "DemoFigureImageAt"
     figure_caption: str = "DemoFigureCaptionAt"
     figure_anchor: str = "DemoFigureAnchor"
+    diagram_surface_document_id: str | None = None
+    diagram_surface_bindings: tuple[tuple[int, int, str], ...] = ()
+    embedded_diagram_layout: tuple[tuple[int, float, float, float, float], ...] = ()
+    landscape_figure_pages: tuple[tuple[int, int, str, str], ...] = ()
     definition_at: str = "DemoDefinitionAt"
     definition_anchor: str = "DemoDefinitionAnchor"
     definition_term: str = "DemoDefinitionTerm"

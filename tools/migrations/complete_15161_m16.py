@@ -24,10 +24,9 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from types import MappingProxyType
 
-from pydantic import JsonValue
-
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.io import write_json
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import (
     ContentBlockFile,
     ContentElementFile,
@@ -40,6 +39,7 @@ from hla_lab.core.semantic_model import (
     RequirementLinkFile,
     RequirementReviewFile,
     SourceRef,
+    StateMachineFile,
     TransitionCoverage,
     TransitionCoverageFile,
     _load_requirement_candidates,
@@ -693,24 +693,41 @@ def _update_state_machine_sources(
 ) -> None:
     """Write only reciprocal requirement/implementation fields into machine JSON."""
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        raw: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or "state_machines" not in raw:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
+        if envelope.state_machines is None:
+            raise ValueError(f"state_machines must be an array in {path}")
+        state_machines = StateMachineFile.model_validate_json(source)
         changed = False
-        for machine in raw.get("state_machines", []):
-            for transition in machine.get("transitions", []):
-                transition_id = transition.get("id")
+        updated_machines = []
+        for machine in state_machines.state_machines:
+            transitions = list(machine.transitions)
+            for index, transition in enumerate(transitions):
+                transition_id = transition.id
                 if transition_id not in transition_updates:
                     continue
                 requirement_ids, implementation_ids = transition_updates[transition_id]
-                if transition.get("requirement_ids", []) != list(requirement_ids):
-                    transition["requirement_ids"] = list(requirement_ids)
+                values = {
+                    "requirement_ids": requirement_ids,
+                    "implementation_ids": implementation_ids,
+                }
+                updates = {
+                    key: value for key, value in values.items() if getattr(transition, key) != value
+                }
+                if updates:
+                    transitions[index] = transition.model_copy(update=updates)
                     changed = True
-                if transition.get("implementation_ids", []) != list(implementation_ids):
-                    transition["implementation_ids"] = list(implementation_ids)
-                    changed = True
+            updated_machines.append(machine.model_copy(update={"transitions": tuple(transitions)}))
         if changed:
-            _write_json(path, raw)
+            _write_json(
+                path,
+                StateMachineFile(
+                    schema_version=state_machines.schema_version,
+                    state_machines=tuple(updated_machines),
+                ).model_dump(mode="json", exclude_unset=True),
+            )
 
 
 def _refresh_authored_candidate(

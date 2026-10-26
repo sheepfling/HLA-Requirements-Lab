@@ -3,16 +3,18 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import cast
-
-from pydantic import JsonValue
 
 from hla_lab.core.text import slugify
 from hla_lab.diagrams.review_policy import review_defaults
+from hla_lab.diagrams.state_machine_inventory import (
+    DiagramInventoryEntry,
+    DiagramType,
+    DocumentInventoryScope,
+    StateMachineInventory,
+)
 
 IMAGE_PATTERN = re.compile(r"source-p(?P<page>\d+)-xref(?P<xref>\d+)\.(?P<ext>png|jpg|jpeg)$", re.I)
 DEFAULT_DOCUMENT = "1516.1"
@@ -20,21 +22,6 @@ DEFAULT_DOCUMENT = "1516.1"
 
 def _document_slug(document: str) -> str:
     return slugify(document, fallback="", separator="_")
-
-
-def _mapping_entries(
-    existing: Mapping[str, JsonValue] | None, key: str
-) -> tuple[dict[str, JsonValue], ...]:
-    value: JsonValue = (existing or {}).get(key, [])
-    if not isinstance(value, list):
-        return ()
-    items: list[JsonValue] = value
-    entries: list[dict[str, JsonValue]] = []
-    for raw_item in items:
-        item: JsonValue = raw_item
-        if isinstance(item, dict):
-            entries.append(item)
-    return tuple(entries)
 
 
 def _image_candidates(extracted: Path) -> tuple[tuple[Path, re.Match[str]], ...]:
@@ -55,31 +42,29 @@ def _diagram_entry(
     path: Path,
     match: re.Match[str],
     repository_root: Path,
-    prior_entries: Mapping[str, Mapping[str, JsonValue]],
-) -> dict[str, JsonValue]:
+    prior_entries: Mapping[str, DiagramInventoryEntry],
+) -> DiagramInventoryEntry:
     page = int(match.group("page"))
     xref = match.group("xref")
-    entry: dict[str, JsonValue] = {
-        "diagram_id": f"hla{_document_slug(document)}_p{page:03d}_xref{xref}",
-        "source_image": path.relative_to(repository_root).as_posix(),
-        "document": document,
-        "page": page,
-        "xref": xref,
-        "diagram_type": "unclassified",
-        "status": "unmodeled",
-        "model": None,
-        "confidence": None,
-        "notes": "",
-    }
-    prior = prior_entries.get(entry["diagram_id"])
-    if prior is not None:
-        for field in ("diagram_type", "status", "model", "confidence", "notes"):
-            if field in prior:
-                entry[field] = prior[field]
-    entry["review_priority"], entry["review_reason"] = review_defaults(
-        str(entry["diagram_type"]), str(entry["status"])
+    diagram_id = f"hla{_document_slug(document)}_p{page:03d}_xref{xref}"
+    prior = prior_entries.get(diagram_id)
+    diagram_type: DiagramType = prior.diagram_type if prior is not None else "unclassified"
+    status = prior.status if prior is not None else "unmodeled"
+    review_priority, review_reason = review_defaults(diagram_type, status)
+    return DiagramInventoryEntry(
+        diagram_id=diagram_id,
+        source_image=path.relative_to(repository_root).as_posix(),
+        document=document,
+        page=page,
+        xref=xref,
+        diagram_type=diagram_type,
+        status=status,
+        model=prior.model if prior is not None else None,
+        confidence=prior.confidence if prior is not None else None,
+        notes=prior.notes if prior is not None else "",
+        review_priority=review_priority,
+        review_reason=review_reason,
     )
-    return entry
 
 
 def _document_scope(
@@ -87,45 +72,43 @@ def _document_scope(
     extracted: Path,
     repository_root: Path,
     candidate_count: int,
-    prior_scopes: Mapping[str, Mapping[str, JsonValue]],
-) -> dict[str, JsonValue]:
+    prior_scopes: Mapping[str, DocumentInventoryScope],
+) -> DocumentInventoryScope:
     exists = extracted.exists()
-    scope: dict[str, JsonValue] = {
-        "document": document,
-        "source_directory": extracted.relative_to(repository_root).as_posix(),
-        "inventory_status": "inventoried" if exists else "not_started",
-        "extracted_candidates": candidate_count,
-        "notes": ""
-        if exists
-        else "No extracted-image directory exists yet; review source pages/vector figures.",
-    }
     prior_scope = prior_scopes.get(document)
+    inventory_status = "inventoried" if exists else "not_started"
+    notes = (
+        ""
+        if exists
+        else "No extracted-image directory exists yet; review source pages/vector figures."
+    )
     if not exists and prior_scope is not None:
-        for field in ("inventory_status", "notes"):
-            if field in prior_scope:
-                scope[field] = prior_scope[field]
-    return scope
+        inventory_status = prior_scope.inventory_status
+        notes = prior_scope.notes
+    return DocumentInventoryScope(
+        document=document,
+        source_directory=extracted.relative_to(repository_root).as_posix(),
+        inventory_status=inventory_status,
+        extracted_candidates=candidate_count,
+        notes=notes,
+    )
 
 
 def build_inventory(
     sources: Sequence[tuple[str, Path]],
     manifest_path: Path,
-    existing: Mapping[str, JsonValue] | None = None,
-) -> dict[str, JsonValue]:
+    existing: StateMachineInventory | None = None,
+) -> StateMachineInventory:
     """Build a stable, text-only manifest from extracted image filenames."""
     repository_root = manifest_path.parent.parent.parent
-    prior_entries = {
-        cast(str, item.get("diagram_id")): item
-        for item in _mapping_entries(existing, "diagrams")
-        if item.get("diagram_id")
-    }
-    prior_scopes = {
-        cast(str, item.get("document")): item
-        for item in _mapping_entries(existing, "document_scopes")
-        if item.get("document")
-    }
-    diagrams: list[dict[str, JsonValue]] = []
-    scopes: list[dict[str, JsonValue]] = []
+    prior_entries = (
+        {item.diagram_id: item for item in existing.diagrams} if existing is not None else {}
+    )
+    prior_scopes = (
+        {item.document: item for item in existing.document_scopes} if existing is not None else {}
+    )
+    diagrams: list[DiagramInventoryEntry] = []
+    scopes: list[DocumentInventoryScope] = []
     for document, extracted in sources:
         candidates = _image_candidates(extracted)
         diagrams.extend(
@@ -135,12 +118,12 @@ def build_inventory(
         scopes.append(
             _document_scope(document, extracted, repository_root, len(candidates), prior_scopes)
         )
-    return {
-        "schema_version": "0.1",
-        "generated_by": "hla_lab/diagrams/inventory_state_machines.py",
-        "document_scopes": scopes,
-        "diagrams": diagrams,
-    }
+    return StateMachineInventory(
+        schema_version="0.1",
+        generated_by="hla_lab/diagrams/inventory_state_machines.py",
+        document_scopes=tuple(scopes),
+        diagrams=tuple(diagrams),
+    )
 
 
 def main() -> None:
@@ -170,9 +153,11 @@ def main() -> None:
         sources.append((document, Path(path)))
     existing = None
     if args.manifest.exists():
-        existing = json.loads(args.manifest.read_text(encoding="utf-8"))
+        existing = StateMachineInventory.model_validate_json(
+            args.manifest.read_text(encoding="utf-8")
+        )
     manifest = build_inventory(sources, args.manifest, existing)
-    rendered = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
+    rendered = manifest.model_dump_json(indent=2) + "\n"
     if args.write:
         args.manifest.parent.mkdir(parents=True, exist_ok=True)
         args.manifest.write_text(rendered, encoding="utf-8")

@@ -21,7 +21,7 @@ from collections import defaultdict
 from pathlib import Path
 from types import MappingProxyType
 
-from pydantic import JsonValue
+from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.io import write_json
 from hla_lab.core.semantic_model import Requirement, RequirementFile
@@ -39,6 +39,23 @@ DOCUMENTS = (
     "hla-1516.1-2025",
     "hla-1516.2-2025",
 )
+
+
+class _RequirementCatalogBuildReport(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    document: str
+    before: int
+    source_candidates: int | None = None
+    after: int | None = None
+    dry_run: bool | None = None
+    canonical_count: int | None = None
+    preserved_ids: int | None = None
+    new_ids: int | None = None
+    unmatched_candidates: int | None = None
+    aliases: int | None = None
+
+
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9-]{2,}")
 _STOP_WORDS = frozenset(
     {
@@ -176,11 +193,13 @@ def _new_id(document: str, candidate: Requirement) -> str:
     return f"req-{digest}"
 
 
-def _promote_2010(root: Path) -> dict[str, JsonValue]:
+def _promote_2010(root: Path) -> _RequirementCatalogBuildReport:
     semantic = DocumentResources(root).semantic
     requirement_path = semantic / "requirements.json"
-    existing_payload = json.loads(requirement_path.read_text(encoding="utf-8"))
-    existing = tuple(Requirement.model_validate(item) for item in existing_payload["requirements"])
+    existing_payload = RequirementFile.model_validate_json(
+        requirement_path.read_text(encoding="utf-8")
+    )
+    existing = existing_payload.requirements
     candidates = _requirements(root, _surface_inputs(root))
     candidate_to_old, matched_candidates, matched_old = _match_existing(candidates, existing)
     aliases_path = semantic / "requirement-id-aliases.json"
@@ -271,7 +290,7 @@ def _promote_2010(root: Path) -> dict[str, JsonValue]:
     write_json(
         requirement_path,
         RequirementFile(
-            schema_version=existing_payload.get("schema_version", 1),
+            schema_version=existing_payload.schema_version,
             requirements=tuple(records),
         ).model_dump(mode="json"),
     )
@@ -280,16 +299,16 @@ def _promote_2010(root: Path) -> dict[str, JsonValue]:
         aliases_path,
         {"schema_version": 1, "aliases": list(unique_aliases.values())},
     )
-    return {
-        "document": root.name,
-        "before": len(existing),
-        "source_candidates": len(candidates),
-        "after": len(records),
-        "preserved_ids": len(matched_old),
-        "new_ids": len(records) - len(matched_candidates),
-        "unmatched_candidates": len(candidates) - len(matched_candidates),
-        "aliases": len(unique_aliases),
-    }
+    return _RequirementCatalogBuildReport(
+        document=root.name,
+        before=len(existing),
+        source_candidates=len(candidates),
+        after=len(records),
+        preserved_ids=len(matched_old),
+        new_ids=len(records) - len(matched_candidates),
+        unmatched_candidates=len(candidates) - len(matched_candidates),
+        aliases=len(unique_aliases),
+    )
 
 
 def _update_ownership(root: Path) -> None:
@@ -400,44 +419,43 @@ def _canonicalize(root: Path) -> int:
 
 def build(
     roots: tuple[Path, ...] | None = None, *, dry_run: bool = False
-) -> tuple[dict[str, JsonValue], ...]:
+) -> tuple[_RequirementCatalogBuildReport, ...]:
     roots = roots if roots is not None else tuple(document_root(document) for document in DOCUMENTS)
-    reports: list[dict[str, JsonValue]] = []
+    reports: list[_RequirementCatalogBuildReport] = []
     for root in roots:
         if root.name.endswith("-2010"):
             if dry_run:
                 model = load_hla_document_model(root)
                 candidates = _requirements(root, _surface_inputs(root))
                 reports.append(
-                    {
-                        "document": root.name,
-                        "before": len(model.requirements),
-                        "source_candidates": len(candidates),
-                        "after": len(candidates),
-                        "dry_run": True,
-                    }
+                    _RequirementCatalogBuildReport(
+                        document=root.name,
+                        before=len(model.requirements),
+                        source_candidates=len(candidates),
+                        after=len(candidates),
+                        dry_run=True,
+                    )
                 )
                 continue
             report = _promote_2010(root)
             _update_ownership(root)
-            report["canonical_count"] = _canonicalize(root)
-            reports.append(report)
+            reports.append(report.model_copy(update={"canonical_count": _canonicalize(root)}))
         else:
             if not dry_run:
                 reports.append(
-                    {
-                        "document": root.name,
-                        "before": len(load_hla_document_model(root).requirements),
-                        "canonical_count": _canonicalize(root),
-                    }
+                    _RequirementCatalogBuildReport(
+                        document=root.name,
+                        before=len(load_hla_document_model(root).requirements),
+                        canonical_count=_canonicalize(root),
+                    )
                 )
             else:
                 reports.append(
-                    {
-                        "document": root.name,
-                        "before": len(load_hla_document_model(root).requirements),
-                        "dry_run": True,
-                    }
+                    _RequirementCatalogBuildReport(
+                        document=root.name,
+                        before=len(load_hla_document_model(root).requirements),
+                        dry_run=True,
+                    )
                 )
     return tuple(reports)
 
@@ -449,10 +467,13 @@ def main() -> int:
     args = parser.parse_args()
     print(
         json.dumps(
-            build(
-                tuple(root.resolve() for root in args.roots) if args.roots else None,
-                dry_run=args.dry_run,
-            ),
+            [
+                report.model_dump(mode="json", exclude_unset=True)
+                for report in build(
+                    tuple(root.resolve() for root in args.roots) if args.roots else None,
+                    dry_run=args.dry_run,
+                )
+            ],
             indent=2,
         )
     )

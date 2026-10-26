@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence
-from typing import Literal
+from typing import TYPE_CHECKING, Literal, Protocol
 
 from hla_lab.core.semantic_text import _tokens
 from hla_lab.core.semantic_types import (
@@ -15,9 +15,14 @@ from hla_lab.core.semantic_types import (
     Clause,
     ComplianceIssue,
     ComplianceQueryResult,
+    ContentBlock,
     ContentElement,
+    CrossReference,
     Definition,
+    DiagramSurface,
+    Example,
     Figure,
+    GraphDiagram,
     ImplementationEvidence,
     ImplementationMapping,
     ImplementationStatus,
@@ -28,20 +33,119 @@ from hla_lab.core.semantic_types import (
     RequirementApiBinding,
     RequirementApplicability,
     RequirementApplicabilityRelation,
+    RequirementLink,
     RequirementMatch,
+    RequirementReview,
     SequenceDiagram,
     StateMachine,
     StateTrace,
     Table,
     TableCell,
+    TableFamily,
     Transition,
+    TransitionCoverage,
     TransitionCoverageStatus,
     TransitionImplementationCoverage,
     VerificationTest,
 )
 
+if TYPE_CHECKING:
 
-class DocumentQueryMixin:
+    class _SemanticDocumentFields(Protocol):
+        @property
+        def document_id(self) -> str: ...
+
+        @property
+        def clauses(self) -> tuple[Clause, ...]: ...
+
+        @property
+        def definitions(self) -> tuple[Definition, ...]: ...
+
+        @property
+        def requirements(self) -> tuple[Requirement, ...]: ...
+
+        @property
+        def requirement_reviews(self) -> tuple[RequirementReview, ...]: ...
+
+        @property
+        def requirement_links(self) -> tuple[RequirementLink, ...]: ...
+
+        @property
+        def transition_coverage(self) -> tuple[TransitionCoverage, ...]: ...
+
+        @property
+        def content_blocks(self) -> tuple[ContentBlock, ...]: ...
+
+        @property
+        def diagram_surfaces(self) -> tuple[DiagramSurface, ...]: ...
+
+        @property
+        def content_elements(self) -> tuple[ContentElement, ...]: ...
+
+        @property
+        def state_machines(self) -> tuple[StateMachine, ...]: ...
+
+        @property
+        def sequence_diagrams(self) -> tuple[SequenceDiagram, ...]: ...
+
+        @property
+        def graph_diagrams(self) -> tuple[GraphDiagram, ...]: ...
+
+        @property
+        def implementations(self) -> tuple[ImplementationMapping, ...]: ...
+
+        @property
+        def api_surfaces(self) -> tuple[ApiSurface, ...]: ...
+
+        @property
+        def api_crosswalks(self) -> tuple[ApiCrosswalk, ...]: ...
+
+        @property
+        def requirement_api_bindings(self) -> tuple[RequirementApiBinding, ...]: ...
+
+        @property
+        def verification_tests(self) -> tuple[VerificationTest, ...]: ...
+
+        @property
+        def state_traces(self) -> tuple[StateTrace, ...]: ...
+
+        @property
+        def tables(self) -> tuple[Table, ...]: ...
+
+        @property
+        def table_families(self) -> tuple[TableFamily, ...]: ...
+
+        @property
+        def references(self) -> tuple[Reference, ...]: ...
+
+        @property
+        def cross_references(self) -> tuple[CrossReference, ...]: ...
+
+        @property
+        def notes(self) -> tuple[Note, ...]: ...
+
+        @property
+        def figures(self) -> tuple[Figure, ...]: ...
+
+        @property
+        def examples(self) -> tuple[Example, ...]: ...
+
+        @property
+        def annexes(self) -> tuple[Annex, ...]: ...
+
+        @property
+        def clause_order(self) -> tuple[str, ...]: ...
+
+        @property
+        def schema_version(self) -> int: ...
+
+else:
+
+    class _SemanticDocumentFields:
+        pass
+
+
+class DocumentQueryMixin(_SemanticDocumentFields):
     def find_definition(self, term: str) -> Definition | None:
         """Find a definition by case-insensitive term."""
         wanted = term.casefold()
@@ -380,7 +484,7 @@ class DocumentQueryMixin:
             and transition.event.casefold().strip() == wanted_event
         )
         requirements = {item.id: item for item in self.requirements}
-        relation_priority = {
+        relation_priority: dict[RequirementApplicabilityRelation, int] = {
             "transition": 0,
             "reviewed-link": 1,
             "implementation": 2,

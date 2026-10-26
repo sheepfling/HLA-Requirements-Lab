@@ -21,13 +21,13 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
             manifest_path,
             diagram_manifest=REPO_ROOT / "data" / "state_machines" / "manifest.json",
         )
-        self.assertTrue(report["passed"], report["failures"])
-        self.assertEqual(report["tracked_generated"], [])
-        self.assertEqual(report["diagram_review"]["review_gaps"], [])
-        self.assertTrue(report["semantic_authority"]["passed"])
-        self.assertTrue(report["api_traceability"]["passed"])
+        self.assertTrue(report.passed, report.failures)
+        self.assertEqual(report.tracked_generated, ())
+        self.assertEqual(report.diagram_review.review_gaps, ())
+        self.assertTrue(report.semantic_authority.passed)
+        self.assertTrue(report.api_traceability.passed)
         self.assertEqual(
-            {item["id"]: item["pages"] for item in report["projects"]},
+            {item.id: item.pages for item in report.projects},
             {
                 str(item["id"]): item["expected_pages"]
                 for item in json.loads(manifest_path.read_text(encoding="utf-8"))["projects"]

@@ -2,21 +2,17 @@
 
 from __future__ import annotations
 
-import json
 import re
-from collections.abc import Mapping
 from pathlib import Path
 
-from pydantic import JsonValue
-
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import StateMachine, StateMachineFile
 from hla_lab.diagrams.export_plantuml import _alias, render
 
 
-def validate_source(machine: StateMachine | Mapping[str, JsonValue], source: str) -> list[str]:
+def validate_source(machine: StateMachine, source: str) -> list[str]:
     """Validate source preservation before a PlantUML renderer is invoked."""
 
-    machine = StateMachine.model_validate(machine)
     failures: list[str] = []
     machine_id = machine.id
     if not source.startswith("@startuml\n") or not source.rstrip().endswith("@enduml"):
@@ -32,7 +28,9 @@ def validate_source(machine: StateMachine | Mapping[str, JsonValue], source: str
     if missing_states:
         failures.append(f"{machine_id}: omitted states {sorted(missing_states)}")
 
-    transitions = [item for item in machine.transitions if item.source_state and item.target_state]
+    transitions = [
+        item for item in machine.transitions if item.source_state and item.target_state
+    ]
     actual_transitions = len(re.findall(r"(?:-->|-(?:left|right|up|down)->)", source))
     if actual_transitions != len(transitions):
         failures.append(
@@ -41,11 +39,13 @@ def validate_source(machine: StateMachine | Mapping[str, JsonValue], source: str
         )
 
     initial_edges = sum(
-        item.source_state in {state.id for state in machine.states if state.kind == "initial"}
+        item.source_state
+        in {state.id for state in machine.states if state.kind == "initial"}
         for item in transitions
     )
     final_edges = sum(
-        item.target_state in {state.id for state in machine.states if state.kind == "final"}
+        item.target_state
+        in {state.id for state in machine.states if state.kind == "final"}
         for item in transitions
     )
     if initial_edges != source.count("[*] -->"):
@@ -75,10 +75,15 @@ def validate_models(models_dir: Path) -> list[str]:
 
     failures: list[str] = []
     for path in sorted(models_dir.glob("*.json")):
-        payload: JsonValue = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(payload, dict) or "state_machines" not in payload:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
-        state_machine_file = StateMachineFile.model_validate(payload)
+        if envelope.schema_version is None or envelope.state_machines is None:
+            raise ValueError(
+                f"{path}: state-machine model requires schema_version and state_machines"
+            )
+        state_machine_file = StateMachineFile.model_validate_json(source)
         for machine in state_machine_file.state_machines:
             failures.extend(validate_source(machine, render(machine)))
     return failures

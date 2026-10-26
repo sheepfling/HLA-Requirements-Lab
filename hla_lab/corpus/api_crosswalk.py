@@ -38,6 +38,9 @@ __all__ = [
 ]
 
 BindingKind = Literal["native", "protocol", "language-adapter", "transport"]
+ApiRelationship = Literal[
+    "direct", "transition-backed", "callback", "not-applicable", "cross-cutting"
+]
 
 
 @dataclass(frozen=True, slots=True)
@@ -97,7 +100,7 @@ _DECLARATION_MENTION_TAILS = frozenset(
     }
 )
 
-_SEMANTIC_SURFACE_HINTS: dict[str, tuple[tuple[str, ...], ...]] = MappingProxyType(
+_SEMANTIC_SURFACE_HINTS: Mapping[str, tuple[tuple[str, ...], ...]] = MappingProxyType(
     {
         "getAutoProvideSwitch": (("auto", "provide", "switch"),),
         "localDeleteObjectInstance": (("local", "delete", "object", "instance"),),
@@ -267,7 +270,7 @@ def write_api_crosswalk(output: Path, rows: tuple[ApiCrosswalk, ...]) -> None:
 def _binding_relationship(
     mapping: ImplementationMapping,
     surfaces: tuple[ApiSurface, ...] = (),
-) -> str:
+) -> ApiRelationship:
     if mapping.interface_kind == "callback" or (
         surfaces and all(surface.interface_kind == "callback" for surface in surfaces)
     ):
@@ -401,7 +404,7 @@ def _matched_bindings(
     selected: tuple[str, ...],
     mappings: Mapping[str, ImplementationMapping],
     surfaces_by_id: Mapping[str, ApiSurface],
-    source: SourceRef | None,
+    source: SourceRef,
 ) -> tuple[RequirementApiBinding, ...]:
     all_overloads = requirement.api_surface_resolution == "all-overloads"
     rationale = (
@@ -433,7 +436,7 @@ def _ambiguous_binding(
     candidates: tuple[str, ...],
     mappings: Mapping[str, ImplementationMapping],
     surfaces_by_id: Mapping[str, ApiSurface],
-    source: SourceRef | None,
+    source: SourceRef,
 ) -> RequirementApiBinding:
     candidate_surfaces = tuple(surfaces_by_id[surface_id] for surface_id in candidates)
     return RequirementApiBinding(
@@ -451,8 +454,8 @@ def _ambiguous_binding(
 def _unmatched_binding(
     requirement: Requirement,
     language: str,
-    relationship: str,
-    source: SourceRef | None,
+    relationship: ApiRelationship,
+    source: SourceRef,
 ) -> RequirementApiBinding:
     return RequirementApiBinding(
         id=f"binding.{slugify(requirement.id)}.{language}.unmatched",
@@ -485,14 +488,12 @@ def _language_bindings(
     if requirement.api_surface_resolution == "all-overloads":
         selected = tuple(sorted(set(selected) | set(candidates)))
         candidates = ()
-    relationship = next(
-        (
-            _binding_relationship(mapping)
-            for mapping in mappings.values()
-            if mapping.requirement_ids and requirement.id in mapping.requirement_ids
-        ),
-        "transition-backed",
+    relationships: tuple[ApiRelationship, ...] = tuple(
+        _binding_relationship(mapping)
+        for mapping in mappings.values()
+        if mapping.requirement_ids and requirement.id in mapping.requirement_ids
     )
+    relationship: ApiRelationship = relationships[0] if relationships else "transition-backed"
     source = next((row.source for row in rows if row.source is not None), requirement.source)
     if selected:
         return _matched_bindings(requirement, language, selected, mappings, surfaces_by_id, source)

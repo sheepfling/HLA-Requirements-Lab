@@ -19,7 +19,7 @@ from hla_lab.generation.faithful_renderer import (
     load_faithful_layout_profile,
     render_faithful_body,
 )
-from hla_lab.paths import REPO_ROOT, DocumentResources, document_roots, resources
+from hla_lab.paths import DocumentResources, document_roots, repository_root, resources
 from hla_lab.publication.publication_registry import load_release_manifest
 
 Selection = Literal["all", "explicit"]
@@ -191,13 +191,13 @@ def _main_inputs(path: Path) -> tuple[str, ...]:
     return tuple(PureWindowsPath(value.strip()).with_suffix(".tex").as_posix() for value in values)
 
 
-def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
+def _faithful_body_exclusions(root: Path, workspace_root: Path) -> tuple[str, ...]:
     """Read the faithful-body trim policy from the release manifest."""
-    manifest_path = resources(REPO_ROOT).release_manifest
+    manifest_path = resources(workspace_root).release_manifest
     if not manifest_path.is_file():
         return ()
     try:
-        relative_root = root.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        relative_root = root.resolve().relative_to(workspace_root.resolve()).as_posix()
         project = next(
             item
             for item in load_release_manifest(manifest_path).projects
@@ -208,13 +208,13 @@ def _faithful_body_exclusions(root: Path) -> tuple[str, ...]:
     return project.build.faithful_body_exclude_path_parts if project.build is not None else ()
 
 
-def _use_generated_faithful_blocks(root: Path) -> bool:
+def _use_generated_faithful_blocks(root: Path, workspace_root: Path) -> bool:
     """Read the declared faithful-body renderer mode for a document."""
-    manifest_path = resources(REPO_ROOT).release_manifest
+    manifest_path = resources(workspace_root).release_manifest
     if not manifest_path.is_file():
         return False
     try:
-        relative_root = root.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        relative_root = root.resolve().relative_to(workspace_root.resolve()).as_posix()
         project = next(
             item
             for item in load_release_manifest(manifest_path).projects
@@ -229,6 +229,7 @@ def _validate_faithful_layout(
     model: DocumentModel,
     root: Path,
     *,
+    workspace_root: Path,
     check_generated: bool,
 ) -> FaithfulLayoutReport:
     """Verify that semantic blocks, not ``main.tex``, order faithful pages."""
@@ -237,9 +238,9 @@ def _validate_faithful_layout(
     projection = build_faithful_layout_projection(
         model,
         profile=load_faithful_layout_profile(profile_path) if profile_path.is_file() else None,
-        exclude_path_parts=_faithful_body_exclusions(root),
+        exclude_path_parts=_faithful_body_exclusions(root, workspace_root),
     )
-    use_generated_blocks = _use_generated_faithful_blocks(root)
+    use_generated_blocks = _use_generated_faithful_blocks(root, workspace_root)
     expected_sources = {entry.source_path for entry in projection.entries}
     main_path = document.main_tex
     main_inputs = _main_inputs(main_path)
@@ -293,9 +294,14 @@ def _validate_faithful_layout(
 
 
 def validate_authority(
-    roots: tuple[Path, ...], manifest_path: Path, *, check_generated: bool = False
+    roots: tuple[Path, ...],
+    manifest_path: Path,
+    *,
+    check_generated: bool = False,
+    workspace_root: Path | None = None,
 ) -> AuthorityValidationReport:
     """Validate declared source ownership and optionally generated consumers."""
+    workspace_root = repository_root(workspace_root)
     manifest = load_authority(manifest_path)
     corpus = load_hla_corpus(roots)
     models = {model.document_id: model for model in corpus.documents}
@@ -312,6 +318,8 @@ def validate_authority(
             failures.append(f"{document.document_id}: document is not loaded")
             continue
         root = Path(document.root)
+        if not root.is_absolute():
+            root = workspace_root / root
         if not root.is_dir():
             failures.append(f"{document.document_id}: root does not exist: {root}")
         for surface in document.surfaces:
@@ -341,6 +349,7 @@ def validate_authority(
         layout_report = _validate_faithful_layout(
             model,
             root,
+            workspace_root=workspace_root,
             check_generated=check_generated,
         )
         faithful_layouts.append(layout_report)
@@ -363,12 +372,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--root", action="append", type=Path)
+    parser.add_argument("--workspace-root", type=Path, help="explicit corpus workspace root")
     parser.add_argument("--check-generated", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    manifest = args.manifest or resources(REPO_ROOT).authority_manifest
-    roots = tuple(args.root or document_roots(REPO_ROOT))
-    report = validate_authority(roots, manifest, check_generated=args.check_generated)
+    workspace_root = repository_root(args.workspace_root)
+    manifest = args.manifest or resources(workspace_root).authority_manifest
+    roots = tuple(args.root or document_roots(workspace_root))
+    report = validate_authority(
+        roots,
+        manifest,
+        check_generated=args.check_generated,
+        workspace_root=workspace_root,
+    )
     rendered = report.model_dump_json(indent=2)
     print(rendered)
     if report.failures:

@@ -94,9 +94,7 @@ def _sanitize_hla_derivative_model(model: DocumentModel) -> DocumentModel:
     )
 
 
-def load_hla_document_model(
-    root: Path, *, workspace_root: Path | None = None
-) -> DocumentModel:
+def load_hla_document_model(root: Path, *, workspace_root: Path | None = None) -> DocumentModel:
     """Load one HLA source tree through the generic semantic model."""
     source = source_profile_for_document(root.name, workspace_root)
     return _sanitize_hla_derivative_model(

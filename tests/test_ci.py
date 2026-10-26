@@ -6,6 +6,8 @@ import os
 import subprocess
 import sys
 import tempfile
+from collections.abc import Mapping, Sequence
+from pathlib import Path
 
 from tests.support import TEST_REPO_ROOT
 from tools import ci
@@ -17,6 +19,7 @@ def test_quality_commands_match_the_repository_contract() -> None:
     assert commands[0] == ("python", "-m", "hla_lab.cli", "check", "--json")
     assert any(command[1:3] == ("fmt", "--check") for command in commands)
     assert any(command[1:3] == ("check", ".") for command in commands)
+    assert ("python", "-m", "pyright", "--pythonpath", "python") in commands
     assert ("python", "-m", "hla_lab.cli", "test", "--parallel") in commands
     assert (
         "python",
@@ -98,16 +101,17 @@ def test_installed_ci_module_shows_help_outside_workspace() -> None:
 
 def test_ci_child_gets_explicit_root_without_pythonpath_injection(monkeypatch) -> None:
     monkeypatch.delenv("PYTHONPATH", raising=False)
-    observed: dict[str, object] = {}
+    observed: list[tuple[Sequence[str], Path, Mapping[str, str], bool]] = []
 
-    def fake_run(command: object, *, cwd: object, env: dict[str, str], check: bool) -> object:
-        observed.update(command=command, cwd=cwd, env=env, check=check)
+    def fake_run(
+        command: Sequence[str], *, cwd: Path, env: Mapping[str, str], check: bool
+    ) -> subprocess.CompletedProcess[bytes]:
+        observed.append((command, cwd, env, check))
         return subprocess.CompletedProcess(command, 0)
 
     monkeypatch.setattr(ci.subprocess, "run", fake_run)
     assert ci.run_command(("python", "-m", "hla_lab.cli", "check"), root=TEST_REPO_ROOT) == 0
-    assert observed["cwd"] == TEST_REPO_ROOT
-    environment = observed["env"]
-    assert isinstance(environment, dict)
+    _, cwd, environment, _ = observed[0]
+    assert cwd == TEST_REPO_ROOT
     assert environment["HLA_LAB_ROOT"] == str(TEST_REPO_ROOT)
     assert "PYTHONPATH" not in environment

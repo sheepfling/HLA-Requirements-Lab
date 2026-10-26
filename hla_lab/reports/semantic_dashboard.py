@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict
 
 from hla_lab.core.semantic_model import ComplianceIssue, DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.paths import REPO_ROOT, document_roots
+from hla_lab.paths import document_roots, repository_root
 
 
 class DashboardModel(BaseModel):
@@ -236,8 +236,8 @@ def build_dashboard(roots: tuple[Path, ...]) -> DashboardReport:
     )
 
 
-def _default_roots() -> tuple[Path, ...]:
-    return document_roots(REPO_ROOT)
+def _default_roots(workspace_root: Path | None = None) -> tuple[Path, ...]:
+    return document_roots(repository_root(workspace_root))
 
 
 def main() -> None:
@@ -248,9 +248,11 @@ def main() -> None:
         type=Path,
         help="Document roots; defaults to all document-local build.py projects",
     )
+    parser.add_argument("--workspace-root", type=Path, help="used to discover default documents")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
-    report = build_dashboard(tuple(path.resolve() for path in args.roots) or _default_roots())
+    roots = tuple(path.resolve() for path in args.roots) or _default_roots(args.workspace_root)
+    report = build_dashboard(roots)
     if args.json:
         print(report.model_dump_json(indent=2))
         return

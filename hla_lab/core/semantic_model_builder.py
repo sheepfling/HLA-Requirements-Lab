@@ -283,7 +283,7 @@ class _DocumentModelBuilder:
         text: str,
         detailed_headings: Sequence[DetailedHeading],
     ) -> None:
-        detailed_headings.sort(key=lambda item: item[0])
+        detailed_headings = sorted(detailed_headings, key=lambda item: item[0])
         for offset, args, end_offset in _command_events(
             text, self.source.normative_rule_statement, 1
         ):
