@@ -341,9 +341,7 @@ def render(machine: StateMachine) -> str:
     synthetic_groups = _synthetic_groups(machine, state_by_id)
     children = _children_by_scope(machine.states, state_by_id, synthetic_groups)
     parent_for = {child: parent for parent, nested in children.items() for child in nested}
-    lines = _plantuml_preamble(
-        machine.layout.direction if machine.layout else ""
-    )
+    lines = _plantuml_preamble(machine.layout.direction if machine.layout else "")
     context = _RenderContext(
         state_by_id=state_by_id,
         synthetic_groups=synthetic_groups,

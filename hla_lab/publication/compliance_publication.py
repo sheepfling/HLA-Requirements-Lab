@@ -814,9 +814,7 @@ def _csv_source_fields(source: SemanticRecord | None) -> dict[str, str]:
     }
 
 
-def _write_csv(
-    path: Path, fieldnames: tuple[str, ...], rows: Iterable[_CsvRow]
-) -> Path:
+def _write_csv(path: Path, fieldnames: tuple[str, ...], rows: Iterable[_CsvRow]) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fieldnames, extrasaction="raise")

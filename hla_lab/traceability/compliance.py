@@ -163,16 +163,14 @@ class _CompliancePayload(BaseModel):
     issue_counts: Mapping[str, int]
     issues: ComplianceIssues
     implementation_mappings: (
-        tuple[ImplementationMapping, ...]
-        | Mapping[str, tuple[ImplementationMapping, ...]]
+        tuple[ImplementationMapping, ...] | Mapping[str, tuple[ImplementationMapping, ...]]
     ) = ()
     api_crosswalks: tuple[ApiCrosswalk, ...] | Mapping[str, tuple[ApiCrosswalk, ...]] = ()
     api_crosswalk_counts: Annotated[
         Mapping[str, int] | Mapping[str, Mapping[str, int]], Field(default_factory=dict)
     ]
     requirement_api_bindings: (
-        tuple[RequirementApiBinding, ...]
-        | Mapping[str, tuple[RequirementApiBinding, ...]]
+        tuple[RequirementApiBinding, ...] | Mapping[str, tuple[RequirementApiBinding, ...]]
     ) = ()
     requirement_api_binding_counts: Annotated[
         Mapping[str, int] | Mapping[str, Mapping[str, int]], Field(default_factory=dict)

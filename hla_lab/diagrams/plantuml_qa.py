@@ -28,9 +28,7 @@ def validate_source(machine: StateMachine, source: str) -> list[str]:
     if missing_states:
         failures.append(f"{machine_id}: omitted states {sorted(missing_states)}")
 
-    transitions = [
-        item for item in machine.transitions if item.source_state and item.target_state
-    ]
+    transitions = [item for item in machine.transitions if item.source_state and item.target_state]
     actual_transitions = len(re.findall(r"(?:-->|-(?:left|right|up|down)->)", source))
     if actual_transitions != len(transitions):
         failures.append(
@@ -39,13 +37,11 @@ def validate_source(machine: StateMachine, source: str) -> list[str]:
         )
 
     initial_edges = sum(
-        item.source_state
-        in {state.id for state in machine.states if state.kind == "initial"}
+        item.source_state in {state.id for state in machine.states if state.kind == "initial"}
         for item in transitions
     )
     final_edges = sum(
-        item.target_state
-        in {state.id for state in machine.states if state.kind == "final"}
+        item.target_state in {state.id for state in machine.states if state.kind == "final"}
         for item in transitions
     )
     if initial_edges != source.count("[*] -->"):
