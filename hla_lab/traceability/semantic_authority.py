@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.core.semantic_model import ComplianceIssue, DocumentModel, SemanticRecord
 from hla_lab.core.source_paths import normalized_source_path
+from hla_lab.core.text import safe_filename
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.faithful_renderer import (
     FaithfulLayoutProjection,
@@ -163,24 +164,37 @@ def _source_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
     return tuple(sorted(set(matches)))
 
 
-def _generated_matches(root: Path, surface: AuthoritySurface) -> tuple[Path, ...]:
+def _generated_matches(
+    root: Path,
+    surface: AuthoritySurface,
+    record_ids: tuple[str, ...],
+) -> tuple[Path, ...]:
     """Find generated data inputs without confusing IDs ending in ``-data``.
 
     A semantic ID such as ``federation-object-model-document-data`` produces
     both ``...-data.tex`` (the visible record) and ``...-data-data.tex`` (the
     machine-readable projection). The broad historical glob matches both, so
-    discard the visible sibling when its projection is present.
+    discard the visible sibling when its projection is present. Explicit
+    requirement surfaces also match only their selected IDs; candidate records
+    can have generated projections without belonging to that surface.
     """
     if not surface.generated_glob:
         return ()
     matches = tuple(sorted(root.glob(surface.generated_glob)))
-    return tuple(
+    projections = tuple(
         path
         for path in matches
         if not (
             path.name.endswith("-data.tex") and path.with_name(f"{path.stem}-data.tex").is_file()
         )
     )
+    if surface.kind != "requirements" or surface.selection != "explicit":
+        return projections
+    expected_names = {
+        f"requirement-{safe_filename(record_id, max_length=96)}-data.tex"
+        for record_id in record_ids
+    }
+    return tuple(path for path in projections if path.name in expected_names)
 
 
 def _main_inputs(path: Path) -> tuple[str, ...]:
@@ -330,7 +344,16 @@ def validate_authority(
             records = _surface_records(model, surface)
             generated_matches: tuple[Path, ...] = ()
             if surface.generated_glob:
-                generated_matches = _generated_matches(root, surface)
+                explicit_requirement_ids = (
+                    tuple(
+                        requirement.id
+                        for requirement in model.requirements
+                        if requirement.extraction == "explicit"
+                    )
+                    if surface.kind == "requirements" and surface.selection == "explicit"
+                    else ()
+                )
+                generated_matches = _generated_matches(root, surface, explicit_requirement_ids)
                 if check_generated and len(generated_matches) != len(records):
                     failures.append(
                         f"{document.document_id}/{surface.id}: expected {len(records)} generated "

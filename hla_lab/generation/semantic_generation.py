@@ -818,7 +818,7 @@ def _embed_bound_diagram_surfaces(
 
 
 def _embed_protocol_flow_diagram(body: str, figure_number: int, input_name: str) -> str:
-    """Keep generated diagrams on protocol pages reflowed from fixed source pages."""
+    """Keep each generated protocol diagram with its caption on the reflowed page."""
     if r"\begin{HLAProtocolFlowPage}" not in body:
         return body
     asset_path = f"output/semantic/{input_name}"
@@ -832,11 +832,14 @@ def _embed_protocol_flow_diagram(body: str, figure_number: int, input_name: str)
         if input_name.endswith(".pdf"):
             diagram = rf"\HLAProtocolFlowDiagram{{{asset_path}}}"
         else:
-            diagram = rf"\resizebox{{0.95\linewidth}}{{!}}{{\input{{{asset_path}}}}}"
-        lines[index + 1 : index + 1] = [
-            r"\begin{center}",
+            width = "0.38" if figure_number in {22, 23} else "0.55"
+            diagram = rf"\resizebox{{{width}\linewidth}}{{!}}{{\input{{{asset_path}}}}}"
+        lines[index : index + 1] = [
+            r"\noindent\begin{minipage}{\linewidth}",
+            r"\centering",
+            line,
             diagram,
-            r"\end{center}",
+            r"\end{minipage}\par",
         ]
         return "\n".join(lines)
     return body

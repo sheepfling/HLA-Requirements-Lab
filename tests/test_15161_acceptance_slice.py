@@ -381,6 +381,10 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             r"output/semantic/(?:state-machine|sequence-diagram|graph-diagram)-[^}\s]+",
             generated,
         )
+        self.assertEqual(generated.count(r"\begin{minipage}{\linewidth}"), 6)
+        self.assertEqual(generated.count(r"\end{minipage}\par"), 6)
+        self.assertEqual(generated.count(r"\resizebox{0.38\linewidth}{!}"), 2)
+        self.assertEqual(generated.count(r"\resizebox{0.55\linewidth}{!}"), 2)
         self.assertEqual(
             {
                 "output/semantic/graph-diagram-hla-1516.1.figure-21-federate-protocol-layers.tex",

@@ -15,7 +15,11 @@ from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
-from hla_lab.traceability.semantic_authority import validate_authority
+from hla_lab.traceability.semantic_authority import (
+    AuthoritySurface,
+    _generated_matches,
+    validate_authority,
+)
 from tests.support import TEST_REPO_ROOT
 
 REPO_ROOT = TEST_REPO_ROOT
@@ -25,6 +29,25 @@ ROOTS_2010 = tuple(root for root in ROOTS if root.name.endswith("-2010"))
 
 
 class AuthorityContractTests(unittest.TestCase):
+    def test_explicit_requirement_surface_ignores_candidate_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output = root / "output" / "semantic"
+            output.mkdir(parents=True)
+            (output / "requirement-selected-data.tex").write_text("selected\n", encoding="utf-8")
+            (output / "requirement-candidate-data.tex").write_text("candidate\n", encoding="utf-8")
+            surface = AuthoritySurface(
+                id="requirements",
+                kind="requirements",
+                source_paths=("semantic/requirements.json",),
+                selection="explicit",
+                generated_glob="output/semantic/requirement-*-data.tex",
+            )
+
+            matches = _generated_matches(root, surface, ("selected",))
+
+        self.assertEqual([path.name for path in matches], ["requirement-selected-data.tex"])
+
     def test_authority_manifest_covers_migrated_surfaces(self) -> None:
         report = validate_authority(
             ROOTS, REPO_ROOT / "data" / "semantic" / "authority.json", check_generated=False
