@@ -249,13 +249,15 @@ def project_config(root: Path, *, workspace_root: Path | None = None) -> BuildCo
     return _config(root, project, project.build, workspace)
 
 
-def generate(root: Path, *, workspace_root: Path | None = None) -> object:
-    """Generate semantic build inputs for the product at ``root``."""
+def generate(
+    root: Path, *, workspace_root: Path | None = None, render_assets: bool = True
+) -> object:
+    """Generate semantic build inputs and, optionally, rendered assets."""
     config = project_config(root, workspace_root=workspace_root)
     if config.semantic_generator is None:
         raise ValueError(f"{root} has no semantic generator")
     result = config.semantic_generator()
-    if config.asset_generator is not None:
+    if render_assets and config.asset_generator is not None:
         config.asset_generator()
     return result
 
@@ -268,11 +270,20 @@ def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:
         "--root", type=Path, help="document root when invoking the shared runner directly"
     )
     parser.add_argument("--workspace-root", type=Path)
+    parser.add_argument(
+        "--skip-assets",
+        action="store_true",
+        help="generate semantic build inputs without rendering external diagram assets",
+    )
     args = parser.parse_args(argv)
     selected_root = root or args.root
     resolved_root = (selected_root or repository_root()).resolve()
     if args.action == "generate":
-        generate(resolved_root, workspace_root=args.workspace_root)
+        generate(
+            resolved_root,
+            workspace_root=args.workspace_root,
+            render_assets=not args.skip_assets,
+        )
         return 0
     if args.action == "clean":
         clean_document(resolved_root)

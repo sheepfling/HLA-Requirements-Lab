@@ -105,7 +105,15 @@ def quality_commands(
             "--format",
             "both",
         ),
-        _python(python, "-m", "hla_lab.build.topic", "generate", "--root", hla_topic),
+        _python(
+            python,
+            "-m",
+            "hla_lab.build.topic",
+            "generate",
+            "--root",
+            hla_topic,
+            "--skip-assets",
+        ),
         _python(
             python,
             "-m",
