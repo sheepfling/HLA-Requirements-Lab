@@ -41,5 +41,7 @@ jobs:
       - run: python -m pip install --upgrade pip
       - name: Install development dependencies
         run: python -m pip install -e . pytest
+      - name: Install pinned PlantUML renderer
+        run: python -m hla_lab.diagrams.plantuml_install --root .
       - name: Run document-release CI
         run: python -m tools.ci release --root .
