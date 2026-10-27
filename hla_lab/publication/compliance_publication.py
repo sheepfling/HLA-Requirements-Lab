@@ -152,6 +152,7 @@ class RequirementComplianceItem(SemanticRecord):
     extraction: Literal["explicit", "candidate"] = "explicit"
     semantic_group_id: str | None = None
     source: SourceRef | None = None
+    additional_sources: tuple[SourceRef, ...] = ()
 
 
 class OperationalComplianceItem(SemanticRecord):
@@ -420,6 +421,7 @@ def _requirements(
                     extraction=requirement.extraction,
                     semantic_group_id=requirement.semantic_group_id,
                     source=requirement.source,
+                    additional_sources=requirement.additional_sources,
                 )
             )
     # ``model.ordered_requirements()`` is the canonical clause/source order.
@@ -656,6 +658,16 @@ def _requirement_lines(
                         f"\\textbf{{ID.}} \\texttt{{{_identifier(item.requirement_id)}}}",
                         f"\\textbf{{Title.}} {_text(_requirement_title(item.title))}",
                         f"\\textbf{{Requirement.}} {_text(item.statement)}",
+                        "\\textbf{Source.} "
+                        + (
+                            ", ".join(
+                                _text(f"{source.path}:{source.line}"
+                                      + (f"-{source.end_line}" if source.end_line else ""))
+                                for source in (item.source, *item.additional_sources)
+                                if source is not None
+                            )
+                            or "None recorded."
+                        ),
                         f"\\textbf{{Machine expression.}} {_text(item.machine_statement)}",
                         f"\\textbf{{Coverage.}} {_text(item.coverage_kind)}"
                         + (f" — {_text(item.coverage_note)}" if item.coverage_note else ""),
@@ -886,6 +898,30 @@ def write_compliance_csv_exports(
             for item in manifest.requirements
         ),
     )
+    requirement_sources_path = _write_csv(
+        output / "requirement-source-spans.csv",
+        (
+            "qualified_requirement_id",
+            "document_id",
+            "requirement_id",
+            "span_order",
+            "source_path",
+            "source_line",
+            "source_end_line",
+        ),
+        (
+            {
+                "qualified_requirement_id": item.qualified_id,
+                "document_id": item.document_id,
+                "requirement_id": item.requirement_id,
+                "span_order": order,
+                **_csv_source_fields(source),
+            }
+            for item in manifest.requirements
+            for order, source in enumerate((item.source, *item.additional_sources), start=1)
+            if source is not None
+        ),
+    )
     transitions_path = _write_csv(
         output / "transitions.csv",
         (
@@ -1038,6 +1074,7 @@ def write_compliance_csv_exports(
     )
     return (
         requirements_path,
+        requirement_sources_path,
         transitions_path,
         mappings_path,
         requirement_links_path,

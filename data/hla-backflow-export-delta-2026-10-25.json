@@ -189,7 +189,8 @@
           "after_sha256": "19d40c39acc0a431691eef89bdfff61e58932afad48dd5a154d63e4df5c8629d"
         }
       ],
-      "created": []
+      "created": [],
+      "resolution_note": "The printed Table 5 row is a high-confidence editorial typo: it adds Handle to both FederateRestoreStatusSet and FederateRestoreStatus. Table 14 in the same standard maps type 20 to FederateRestoreStatusSet and type 19 to FederateRestoreStatus; the official Java/C++ callbacks and FedPro data types corroborate FederateRestoreStatus. Map the semantic collection to type 20 and its elements to type 19. Preserve the literal Table 5 text and do not invent API symbols from it. No IEEE correction was found, so this is a semantic mapping resolution, not a publisher correction."
     },
     {
       "id": "RL-253",

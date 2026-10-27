@@ -317,7 +317,7 @@ def validate_authority(
     """Validate declared source ownership and optionally generated consumers."""
     workspace_root = repository_root(workspace_root)
     manifest = load_authority(manifest_path)
-    corpus = load_hla_corpus(roots)
+    corpus = load_hla_corpus(roots, workspace_root=workspace_root)
     models = {model.document_id: model for model in corpus.documents}
     reports: list[AuthoritySurfaceReport] = []
     faithful_layouts: list[FaithfulLayoutReport] = []

@@ -65,16 +65,16 @@ class DocumentModelTests(unittest.TestCase):
             "The service shall use typed data.",
         )
 
-    def test_generated_requirement_title_uses_authoritative_source_span(self) -> None:
+    def test_generated_requirement_title_is_readable_and_source_is_authoritative(self) -> None:
         requirement = next(
             item
             for item in self.lifecycle.requirements
             if item.id == "requirement-candidate-content-clauses-08-time-management-page-182-l43-13"
         )
-        self.assertEqual(
-            requirement.title,
-            "Normative statement at content/clauses/08-time-management-page-182.tex:37",
-        )
+        self.assertTrue(requirement.title.startswith("If such a joined federate"))
+        self.assertNotIn("content/clauses", requirement.title)
+        self.assertEqual(requirement.source.path, "content/clauses/08-time-management-page-182.tex")
+        self.assertEqual(requirement.source.line, 37)
 
     def test_ordered_requirements_preserve_source_order_within_clauses(self) -> None:
         framework = self.models[0]
@@ -125,10 +125,6 @@ class DocumentModelTests(unittest.TestCase):
                         self.assertEqual(positions, sorted(positions))
 
     def test_source_clause_owners_use_active_service_sections(self) -> None:
-        by_source = {
-            (item.source.path, item.source.line): item.clause_id
-            for item in self.lifecycle.requirements
-        }
         expected = {
             ("content/clauses/06-object-management-page-112.tex", 48): "clause-6.1.12",
             ("content/clauses/07-ownership-management-page-162.tex", 16): "clause-7.8",
@@ -143,7 +139,14 @@ class DocumentModelTests(unittest.TestCase):
         }
         for source, clause_id in expected.items():
             with self.subTest(source=source):
-                self.assertEqual(by_source[source], clause_id)
+                path, line = source
+                covering = {
+                    item.clause_id
+                    for item in self.lifecycle.requirements
+                    if item.source.path == path
+                    and item.source.line <= line <= (item.source.end_line or item.source.line)
+                }
+                self.assertIn(clause_id, covering)
 
     def test_ownership_and_temporal_state_machine_labels_are_consistent(self) -> None:
         ownership = next(
@@ -183,14 +186,14 @@ class DocumentModelTests(unittest.TestCase):
             "requirement-source-refinement-available-attribute-declaration": "clause-5.1.2",
             "requirement-source-refinement-unpublication-pending-acquisition": "clause-5.3.3",
             "requirement-source-refinement-directed-interaction-ownership-delivery": "clause-5.12",
-            "requirement-source-refinement-passive-subscription-delivery": "clause-3",
+            "requirement-source-refinement-passive-subscription-delivery": "clause-3.1",
             "requirement-source-refinement-relaxed-ddm-delivery": "clause-9.1.8",
             "requirement-source-refinement-mom-service-report-file": "clause-11.6",
             "requirement-source-refinement-time-constrained-save-boundary": "clause-4.20",
-            "requirement-source-refinement-connection-loss-automatic-resign": "clause-4",
-            "requirement-source-refinement-guard-and-cross-machine-state-constraints": "clause-4",
-            "requirement-source-refinement-service-exception-precedence": "clause-1",
-            "requirement-source-refinement-object-state-completeness": "clause-1",
+            "requirement-source-refinement-connection-loss-automatic-resign": "clause-4.1.6",
+            "requirement-source-refinement-guard-and-cross-machine-state-constraints": "clause-4.1.1",
+            "requirement-source-refinement-service-exception-precedence": "clause-1.6",
+            "requirement-source-refinement-object-state-completeness": "clause-1.4.1",
         }
         by_id = {item.id: item for item in self.lifecycle.requirements}
         for requirement_id, clause_id in expected.items():

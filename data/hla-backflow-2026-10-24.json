@@ -69,7 +69,7 @@
       "candidate_records": 1,
       "resolution": "source-conflict-dispositioned",
       "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_source_conflicts_remain_explicit; pinned 1516.1 Table 14 and 1516.2 MIM comparison; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
-      "resolution_note": "Pinned 1516.1 Table 5 literally prints FederateHandleRestoreStatusSet / Array<FederateHandleRestoreStatus>, while its own Table 14 and the 1516.2 MIM assign type 19 to FederateRestoreStatus and type 20 to FederateRestoreStatusSet. IEEE SA's linked 2025 MIM XML confirms those values (data/hla-15161-official-auxiliary-evidence-2026-10-25.json). The reviewed implementation mapping uses the independently documented MIM type-20 spelling. The Table 5 candidate remains a literal source-anomaly record with no direct API or type-20 mapping; this closes the mapping complaint without claiming the printed Table 5 text was corrected.",
+      "resolution_note": "The printed Table 5 row is a high-confidence editorial typo: it adds Handle to both FederateRestoreStatusSet and FederateRestoreStatus. Table 14 in the same standard maps type 20 to FederateRestoreStatusSet and type 19 to FederateRestoreStatus; the official Java/C++ callbacks and FedPro data types corroborate FederateRestoreStatus. Map the semantic collection to type 20 and its elements to type 19. Preserve the literal Table 5 text and do not invent API symbols from it. No IEEE correction was found, so this is a semantic mapping resolution, not a publisher correction.",
       "document_id": "hla-1516.1-2025",
       "affected_requirement_ids": [
         "requirement-candidate-table-5-p297-r007"
@@ -1219,12 +1219,13 @@
       "category": "Incomplete, fragmented, or corrupted candidate text",
       "location": "p.161, 152-172",
       "complaint": "Page-161 §7.8 acquisition requirements are split and truncated",
-      "candidate_records": 3,
+      "candidate_records": 4,
       "resolution": "corrected-in-lab",
       "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_continuations_point_to_their_actual_rules",
       "document_id": "hla-1516.1-2025",
       "affected_requirement_ids": [
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45",
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45-confirm",
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l158-47",
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l167-50"
       ]
@@ -1317,8 +1318,9 @@
       "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
       "document_id": "hla-1516.1-2025",
       "affected_requirement_ids": [
-        "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15"
-      ]
+        "req-federate-disconnect-after-resign"
+      ],
+      "resolution_note": "The complete rule is carried by the authored transition requirement; the former candidate ID resolves through requirement-id-aliases.json."
     },
     {
       "id": "RL-386",

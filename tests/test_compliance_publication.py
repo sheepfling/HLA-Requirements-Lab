@@ -198,8 +198,29 @@ class CompliancePublicationTests(unittest.TestCase):
 
             direct_csv_output = output / "direct-csv"
             written_paths = write_compliance_csv_exports(manifest, direct_csv_output)
-            self.assertEqual(len(written_paths), 5)
+            self.assertEqual(len(written_paths), 6)
             self.assertTrue(all(path.is_file() for path in written_paths))
+
+    def test_cross_page_requirement_keeps_all_source_spans_in_every_projection(self) -> None:
+        model = _corpus().documents[0]
+        payload = model.model_dump(mode="json")
+        payload["requirements"][0]["additional_sources"] = [
+            {"path": "continuation.tex", "line": 9, "end_line": 12}
+        ]
+        updated = DocumentModel.model_validate(payload)
+        manifest = build_compliance_manifest(ComplianceCorpus(documents=(updated,)), _profile())
+        item = manifest.requirements[0]
+        self.assertEqual(item.additional_sources[0].path, "continuation.tex")
+        self.assertIn("continuation.tex", manifest.to_json())
+        rendered = render_compliance_document(manifest, (updated,))
+        self.assertIn("continuation.", rendered)
+        self.assertIn("tex:9-12", rendered)
+        with tempfile.TemporaryDirectory() as temporary:
+            write_compliance_csv_exports(manifest, Path(temporary))
+            rows = _csv_rows(Path(temporary) / "requirement-source-spans.csv")
+        self.assertEqual([row["span_order"] for row in rows], ["1", "2"])
+        self.assertEqual(rows[1]["source_path"], "continuation.tex")
+        self.assertEqual(rows[1]["source_end_line"], "12")
 
     def test_publication_normalizes_layout_markers_but_preserves_numeric_percentages(self) -> None:
         model = _corpus().documents[0]

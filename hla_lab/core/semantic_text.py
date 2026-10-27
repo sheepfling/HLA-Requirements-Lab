@@ -75,6 +75,8 @@ def _unwrap_commands(value: str, names: Sequence[str], count: int, body_index: i
 
 def _latex_text(value: str, source: LatexSourceProfile | None = None) -> str:
     value = re.sub(r"(?m)^\s*%.*$", "", value)
+    value = value.replace(r"\ ", " ")
+    value = re.sub(r"\\([&_#$%])", r"\1", value)
     value = value.replace("\\linebreak", " ").replace("\\par", " ")
     value = re.sub(r"\\(?:begin|end)\{[^{}]*\}", " ", value)
     value = re.sub(r"\\(?:addvspace|vspace|hspace)\*?\{[^{}]*\}", " ", value)

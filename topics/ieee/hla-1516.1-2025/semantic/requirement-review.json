@@ -4,11 +4,121 @@
     {
       "requirement_id": "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
       "status": "non-normative",
-      "reason": "Table 2 introduction is explanatory layout prose, not a standalone obligation.",
+      "reason": "Table 2 introduction explains the adjacent table; its normative cases remain in the table record.",
       "source": {
         "path": "content/clauses/08-time-management-page-181.tex",
         "line": 112,
-        "end_line": 115
+        "end_line": 117
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-08-time-management-page-181-l118-3",
+      "status": "non-normative",
+      "reason": "Table 3 introduction explains the adjacent table; its normative cases remain in the table record.",
+      "source": {
+        "path": "content/clauses/08-time-management-page-181.tex",
+        "line": 118,
+        "end_line": 120
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-428-l82-27",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-428.tex",
+        "line": 82,
+        "end_line": 87
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-426-l235-78",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-426.tex",
+        "line": 229,
+        "end_line": 256
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-426-l265-88",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-426.tex",
+        "line": 256,
+        "end_line": 282
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-431-l85-28",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-431.tex",
+        "line": 67,
+        "end_line": 96
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l46-15",
+      "status": "non-normative",
+      "reason": "Annex F is labeled informative. IEEE SA Standards Board Operations Manual 8.1.4 says informative annexes are for information only and are not normative. Preserve this sentence as source text; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-433.tex",
+        "line": 43,
+        "end_line": 48
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l43-14",
+      "status": "non-normative",
+      "reason": "Annex F is labeled informative. IEEE SA Standards Board Operations Manual 8.1.4 says informative annexes are for information only and are not normative. Preserve this sentence as source text; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-433.tex",
+        "line": 43,
+        "end_line": 45
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-426-l220-73",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-426.tex",
+        "line": 217,
+        "end_line": 228
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-429-l13-4",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-429.tex",
+        "line": 13,
+        "end_line": 24
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l25-8",
+      "status": "non-normative",
+      "reason": "Annex F is labeled informative. IEEE SA Standards Board Operations Manual 8.1.4 says informative annexes are for information only and are not normative. Preserve this sentence as source text; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-433.tex",
+        "line": 25,
+        "end_line": 27
+      }
+    },
+    {
+      "requirement_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-429-l136-45",
+      "status": "non-normative",
+      "reason": "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the annex is required in an HLA implementation. Preserve this sentence as rationale/source evidence; it creates no independent conformance requirement.",
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-429.tex",
+        "line": 136,
+        "end_line": 165
       }
     }
   ]

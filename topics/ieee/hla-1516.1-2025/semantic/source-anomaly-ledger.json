@@ -7,19 +7,30 @@
       "source_id": "hla15161-overview-service-groups",
       "location": "Clause 1.4",
       "source_text": "The interfaces comprise seven basic service groups plus an eighth support group; the same passage names data distribution management as DMM.",
-      "rendered_text": "Preserved for adjudication; no service-group count or DDM/DMM terminology was silently normalized.",
+      "rendered_text": "The semantic inventory follows the seven named entries: six basic groups plus Support services. Data Distribution Management is identified as DDM in mapping metadata. The contradictory count and DMM spelling remain recorded as source text.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "The listed groups and terminology do not agree internally.",
-      "review_status": "UNRESOLVED"
+      "reason": "The captured page says seven basic groups plus an eighth support group, but its enumeration contains seven items total, including Support services. It also prints DMM where this edition otherwise uses DDM.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Use the enumerated names and count for semantic grouping; normalize DMM to DDM only in mapping metadata. Preserve the contradictory prose literally in the source layer.",
+      "mapping_effect": "Do not create an eighth group or an extra requirement from the conflicting ordinal.",
+      "evidence_refs": [
+        "content-15161-page-017",
+        "content-15161-page-018"
+      ]
     },
     {
       "source_id": "hla15161-footnotes-9-10",
       "location": "Normative references",
       "source_text": "Footnote markers 9 and 10 appear without visible footnote text.",
-      "rendered_text": "Markers retained only where present in the source projection; missing note bodies are not invented.",
+      "rendered_text": "Retain the source markers without inventing footnote text or deriving requirements from the missing notes.",
       "classification": "COMPILATION_DEFECT",
-      "reason": "The extracted source contains references whose note bodies are absent from the supplied material.",
-      "review_status": "UNRESOLVED"
+      "reason": "The supplied source capture shows markers 9 and 10 and isolated note numbers, but contains no note bodies.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Treat the note bodies as absent from the supplied source capture; preserve the markers as source evidence and leave their meaning unspecified.",
+      "mapping_effect": "No requirement or API binding is derived from either marker.",
+      "evidence_refs": [
+        "content-15161-page-021"
+      ]
     },
     {
       "source_id": "hla15161-private-use-glyphs",
@@ -27,125 +38,213 @@
       "source_text": "Private-use glyphs surround some abbreviations and caption parentheses.",
       "rendered_text": "Ordinary parentheses and Unicode text characters are used.",
       "classification": "ENCODING_REPAIR",
-      "reason": "Private-use characters are not stable publication text.",
-      "review_status": "APPLIED"
+      "reason": "Private-use glyphs in the source projection are unstable publication characters.",
+      "review_status": "RESOLVED",
+      "resolution": "Replace only private-use wrapper glyphs with ordinary punctuation or their visible Unicode text equivalent.",
+      "mapping_effect": "No requirement meaning, identifier, or API binding changes.",
+      "evidence_refs": [
+        "content-elements.json"
+      ]
     },
     {
       "source_id": "hla15161-figure-caption-duplication",
       "location": "Figures 3, 4, 5, 7, 8, and 9",
       "source_text": "Figure captions are duplicated or embedded in the imported artwork region.",
-      "rendered_text": "Artwork is caption-free and each figure receives one generated Requirements Lab caption.",
+      "rendered_text": "Each figure uses one generated caption attached to its reviewed semantic artwork.",
       "classification": "COMPILATION_DEFECT",
-      "reason": "Source-page furniture and generated captions were being composed together.",
-      "review_status": "APPLIED"
+      "reason": "Source page furniture was composed with imported artwork, duplicating figure captions.",
+      "review_status": "RESOLVED",
+      "resolution": "Keep artwork caption-free and render one caption from the semantic figure record.",
+      "mapping_effect": "Figure IDs and their source associations remain unchanged.",
+      "evidence_refs": [
+        "content-elements.json",
+        "semantic figure records"
+      ]
     },
     {
       "source_id": "hla15161-infrastructure-after",
       "location": "Federate Interface service text",
       "source_text": "infrastructure.After",
-      "rendered_text": "Rendered with an explicit separating space after the sentence; source anomaly retained in this ledger.",
+      "rendered_text": "Rendered with a separating space after the sentence.",
       "classification": "COMPILATION_DEFECT",
-      "reason": "The token appears to lack an expected separating space or punctuation.",
-      "review_status": "APPLIED"
+      "reason": "The captured text joins the end of one sentence and the next word as infrastructure.After.",
+      "review_status": "RESOLVED",
+      "resolution": "Insert the missing word boundary after infrastructure.",
+      "mapping_effect": "No requirement or API binding changes.",
+      "evidence_refs": [
+        "content-elements.json"
+      ]
     },
     {
       "source_id": "hla15161-directed-interation",
       "location": "FDD list",
       "source_text": "Directed interation",
-      "rendered_text": "Rendered as 'Directed interaction table (complete)' after source spelling repair; original retained in this ledger.",
+      "rendered_text": "Render Directed interaction table (complete); retain the source typo in this ledger.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "Likely spelling defect, but the corrected term must be verified before application.",
-      "review_status": "APPLIED"
+      "reason": "The FDD list prints Directed interation; the intended term is corroborated by the repeated Directed interaction terminology in the same edition.",
+      "review_status": "RESOLVED",
+      "resolution": "Correct the obvious spelling error in the derived label while preserving the source literal here.",
+      "mapping_effect": "Use the canonical Directed interaction label for mapping.",
+      "evidence_refs": [
+        "content-15161-page-047"
+      ]
     },
     {
       "source_id": "hla15161-comment-note-contamination",
       "location": "FOM-combination bullet",
       "source_text": "A parenthetical Comment note is embedded in a normative bullet.",
-      "rendered_text": "Removed from normative production prose; original editorial note retained in this ledger.",
+      "rendered_text": "Remove the editorial note from normative production prose and retain its literal content in this ledger.",
       "classification": "EDITORIAL_CONTAMINATION",
-      "reason": "An editorial instruction is not part of the normative sentence grammar.",
-      "review_status": "APPLIED"
+      "reason": "An editorial Comment note was embedded inside a normative FOM-combination bullet.",
+      "review_status": "RESOLVED",
+      "resolution": "Exclude the parenthetical editorial instruction from the derived rule text.",
+      "mapping_effect": "The note creates no requirement or API binding.",
+      "evidence_refs": [
+        "content-15161-page-048"
+      ]
     },
     {
       "source_id": "hla15161-initiate-federate-save-enumeration",
       "location": "Initiate Federate Save supplied arguments",
       "source_text": "The supplied-argument list uses a) twice.",
-      "rendered_text": "Enumeration remains source-controlled pending comparison with the authoritative source.",
+      "rendered_text": "Preserve the duplicate source labels in the source layer; represent the arguments as an ordered label followed by an optional time value.",
       "classification": "COMPILATION_DEFECT",
-      "reason": "Repeated enumeration may be a transcription defect or an intentional source label.",
-      "review_status": "UNRESOLVED"
+      "reason": "The source lists Federation save label and Optional timestamp with the same a) label.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Use argument order and declaration names, not the duplicated alphabetic labels, as the semantic identity of these parameters.",
+      "mapping_effect": "The first parameter remains the save label and the second remains the optional time; they are not merged.",
+      "evidence_refs": [
+        "content-15161-page-067",
+        "api-surface: FederateAmbassador.initiateFederateSave(String label)",
+        "api-surface: FederateAmbassador.initiateFederateSave(String label, LogicalTime time)"
+      ]
     },
     {
       "source_id": "hla15161-java-version-conflict",
       "location": "Clause 12 Java mapping",
       "source_text": "One subsection states Java 11; a later subsection says Java 5 is assumed.",
-      "rendered_text": "Both statements are retained with provenance; no version is selected silently.",
+      "rendered_text": "Keep both source statements visible in provenance. Use Java 11 as the implementation baseline; treat the Java 5 sentence as a conflicting legacy note.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "The implementation baseline is internally inconsistent.",
-      "review_status": "UNRESOLVED"
+      "reason": "Clause 12.11 says the Java API shall be based on Java 11; a later paragraph in 12.11.6 says Java 5 is assumed.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Prefer the explicit shall statement in 12.11 for the implementation baseline, while retaining the contradictory Java 5 sentence without rewriting it.",
+      "mapping_effect": "Use Java 11 API declarations for implementation mapping.",
+      "evidence_refs": [
+        "content-15161-page-358",
+        "content-15161-page-369"
+      ]
     },
     {
       "source_id": "hla15161-time-class-capitalization",
       "location": "Clause 12 and API file manifest",
       "source_text": "Standardized time-class names vary in capitalization while filenames are case-sensitive.",
-      "rendered_text": "Technical tokens are rendered case-preserving pending validation against the supplied API artifact.",
+      "rendered_text": "Keep technical tokens case-preserving; distinguish language API class identifiers from MIM symbolic names.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "A capitalization correction could change an API identifier.",
-      "review_status": "UNRESOLVED"
+      "reason": "The source uses uppercase class names such as HLAInteger64Time and lowercase symbolic MIM names such as HLAinteger64Time in different contexts.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Do not globally normalize time-type capitalization. Match each token using its declared namespace and role.",
+      "mapping_effect": "Case-sensitive Java class and filename mappings use the class spelling; MIM labels retain the symbolic-name spelling.",
+      "evidence_refs": [
+        "content-15161-page-354",
+        "content-15161-page-355",
+        "content-15161-page-356"
+      ]
     },
     {
       "source_id": "hla15161-annex-a-cross-reference",
       "location": "Annex A",
       "source_text": "Annex A directs readers to Annex E for the Federate Protocol API, and a protocol paragraph refers to Annex E files; the API appears in Annex D.",
-      "rendered_text": "Rendered with both Federate Protocol references corrected to Annex D; original source wording retained in this ledger.",
+      "rendered_text": "Correct the two Federate Protocol references to Annex D and preserve the original Annex E wording in this ledger.",
       "classification": "CROSS_REFERENCE_DEFECT",
-      "reason": "The Federate Protocol API and its files are in normative Annex D; Annex E is the rationale annex and does not contain the API files.",
-      "review_status": "APPLIED"
+      "reason": "The Federate Protocol API is listed and defined in normative Annex D; Annex E is the rationale annex.",
+      "review_status": "RESOLVED",
+      "resolution": "Use Annex D for the Federate Protocol API and its files.",
+      "mapping_effect": "Protocol mappings resolve to Annex D declarations.",
+      "evidence_refs": [
+        "content-15161-page-015",
+        "content-15161-page-020",
+        "content-15161-page-414"
+      ]
     },
     {
       "source_id": "hla15161-annex-classification",
       "location": "Annexes E and F",
       "source_text": "Annex E is marked normative while disclaiming implementation requirements; Annex F is informative while containing shall statements.",
-      "rendered_text": "Classifications are not changed without source adjudication.",
+      "rendered_text": "Preserve the annex labels and wording as source evidence. Treat Annex E as rationale with no independent implementation obligations, and Annex F as informative.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "Annex status and internal normative language conflict.",
-      "review_status": "UNRESOLVED"
+      "reason": "Annex E is labeled normative but its overview says nothing in it is required in an HLA implementation. Annex F is labeled informative while containing shall-like text.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "The seven Annex E and three Annex F shall-like records are reviewed as non-normative source candidates. The source classification inconsistency remains explicitly noted.",
+      "mapping_effect": "These ten records are excluded from the normative requirement set and from direct API obligation mapping.",
+      "evidence_refs": [
+        "content-15161-page-423",
+        "content-15161-page-433",
+        "IEEE SA Standards Board Operations Manual 8.1.4"
+      ]
     },
     {
       "source_id": "hla15161-annex-h-page-reference",
       "location": "Annex H figure table",
       "source_text": "Figure 1 is listed with a source page rather than its generated Requirements Lab page.",
-      "rendered_text": "Figure-page references are generated from labels and anchors.",
+      "rendered_text": "Treat the source figure list as a printed-page index only. The reflowable derivative does not reuse those numbers as generated-page references.",
       "classification": "CROSS_REFERENCE_DEFECT",
-      "reason": "Pagination changes when source figures become generated publication pages.",
-      "review_status": "IN_PROGRESS"
+      "reason": "Annex H's figure table uses printed source-page numbers; those numbers are not page numbers in the generated derivative.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Keep source page numbers as provenance and use semantic figure anchors where a figure is modeled; do not claim a source page is a generated PDF page.",
+      "mapping_effect": "No requirement or API mapping depends on Annex H pagination.",
+      "evidence_refs": [
+        "content-elements.json: content-15161-page-435"
+      ]
     },
     {
       "source_id": "hla15161-figure-4-artwork-mapping",
       "location": "Figure 4 and Figure 5 state-chart records",
       "source_text": "The source-page artwork association for Figures 3–5 was ambiguous in an earlier build: Figure 4 was at risk of receiving the Normal Activity Permitted artwork while Figure 5 carried the joined-state source caption.",
-      "rendered_text": "Figure 3 is Lifetime of a federate, Figure 4 is Joined federate state, and Figure 5 is Normal Activity Permitted state. Each mapping is independently represented by its semantic record and generated PlantUML artwork.",
+      "rendered_text": "Figure 3 is Lifetime of a federate, Figure 4 is Joined federate state, and Figure 5 is Normal Activity Permitted state.",
       "classification": "COMPILATION_DEFECT",
-      "reason": "The generated caption and the state-chart source association must agree; source-page extraction order is not a sufficient mapping authority.",
-      "review_status": "APPLIED"
+      "reason": "Reviewed figure associations distinguish Figure 4 Joined federate state from Figure 5 Normal Activity Permitted state.",
+      "review_status": "RESOLVED",
+      "resolution": "Bind each caption and generated artwork to its reviewed figure record.",
+      "mapping_effect": "No requirement-to-API binding changes.",
+      "evidence_refs": [
+        "content-15161-page-054",
+        "content-15161-page-055"
+      ]
     },
     {
       "source_id": "hla15161-table-5-configuration-result-example",
       "location": "Table 5, page 296, ConfigurationResult example",
       "source_text": "The field is additionalSettingsResultCode, while the printed example says addtionalSettingsResultCode; the extracted message type also has a stray closing bracket.",
-      "rendered_text": "The structured candidate names the field additionalSettingsResultCode and quotes the example spelling separately. No rule is inferred from the example typo.",
+      "rendered_text": "Use additionalSettingsResultCode as the structured field. Preserve the misspelled example only as source evidence; do not create a field from it.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "RL-256's field spelling is corroborated by the IEEE SA 2025 Java ConfigurationResult auxiliary declaration. The supplied Table 5 example still differs, and the licensed primary page has not been independently adjudicated.",
-      "review_status": "UNRESOLVED"
+      "reason": "Table 5's field is spelled additionalSettingsResultCode while its example has addtionalSettingsResultCode and malformed punctuation.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "The Table 5 field and supplied Java declaration agree on additionalSettingsResultCode; the example typo remains a source conflict.",
+      "mapping_effect": "Only the canonical field spelling is eligible for an API binding; the misspelling has no separate binding.",
+      "evidence_refs": [
+        "content-15161-page-296",
+        "data/hla-15161-official-auxiliary-evidence-2026-10-25.json: RL-256"
+      ]
     },
     {
       "source_id": "hla15161-table-5-restore-status-set-name",
       "location": "Table 5, page 297, FederateHandleRestoreStatusSet row",
       "source_text": "The supplied Table 5 page prints FederateHandleRestoreStatusSet as Array<FederateHandleRestoreStatus>.",
-      "rendered_text": "The literal Table 5 spelling is retained with a source-conflict note; no MIM type-20 mapping is inferred from it. The implementation uses the independently documented type-20 MIM spelling.",
+      "rendered_text": "For semantic mapping, treat Table 5's extra Handle tokens as a likely typographical error: use FederateRestoreStatusSet (MIM type 20), containing FederateRestoreStatus (type 19). Preserve the exact Table 5 spelling and example as printed source evidence.",
       "classification": "SOURCE_ANOMALY",
-      "reason": "RL-369: Table 14 on page 324 of the supplied 1516.1 material names type 19 FederateRestoreStatus and type 20 FederateRestoreStatusSet. The IEEE SA 1516.1-2025 auxiliary MIM XML and the supplied 1516.2-2025 MIM agree; neither names FederateHandleRestoreStatus. This evidence resolves the implementation mapping to the MIM's type-20 spelling while preserving the conflicting Table 5 literal. The licensed Table 5 text is not silently corrected; a publisher correction would be needed to change that text.",
-      "review_status": "REVIEWED_CONFLICT"
+      "reason": "Table 5 prints FederateHandleRestoreStatusSet as Array<FederateHandleRestoreStatus>. The same standard's Table 14 assigns type 20 to FederateRestoreStatusSet and type 19 to FederateRestoreStatus; the supplied Java and C++ callback declarations and FedPro messages also use FederateRestoreStatus without the extra Handle token.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Resolve the mapping to FederateRestoreStatusSet with FederateRestoreStatus elements. Table 14 in the same standard is decisive for the MIM type numbers; Java, C++, and FedPro API declarations corroborate the element identifier and provide no declaration named FederateHandleRestoreStatus. The Table 5 row is therefore a high-confidence editorial/source typo, although no IEEE correction was found; do not rewrite its literal.",
+      "mapping_effect": "Map semantic type 20 to FederateRestoreStatusSet and its elements to FederateRestoreStatus. Do not create a type or API binding for the spurious FederateHandleRestoreStatusSet/FederateHandleRestoreStatus spellings.",
+      "evidence_refs": [
+        "content-15161-page-297",
+        "content-15161-page-324",
+        "data/hla-15161-official-auxiliary-evidence-2026-10-25.json: RL-369",
+        "api.2025.java.federateambassador.federationrestorestatusresponse.bc12ec4286e0",
+        "api.2025.cpp.federateambassador.federationrestorestatusresponse.000dead4d6cb",
+        "api.2025.fedpro.fedprodatatypes.federaterestorestatus.1e54de9139cb",
+        "1516.2-2025 MIM semantic source"
+      ]
     }
   ]
 }

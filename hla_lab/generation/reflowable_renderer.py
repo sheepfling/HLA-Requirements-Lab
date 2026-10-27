@@ -200,6 +200,17 @@ def _trace_identifier(value: str) -> str:
     )
 
 
+def _printed_source_label(source, clause: str | None = None) -> str:
+    span = str(source.line)
+    if source.end_line is not None and source.end_line != source.line:
+        span += f"–{source.end_line}"
+    prefix = f"§{clause}, " if clause else ""
+    page = re.search(r"page-(\d+)\.tex$", source.path)
+    if page is not None:
+        return f"{prefix}printed p. {int(page.group(1))}, lines {span}"
+    return f"{prefix}{source.path}, lines {span}"
+
+
 def _clause_title(number: str, title: str) -> str:
     """Avoid repeating a clause number recovered inside its title text."""
     prefixes = (f"{number}. ", f"{number} ")
@@ -341,19 +352,31 @@ def _render_clause_tree(
     render_body: Callable[[str | None], Sequence[str]],
     *,
     base_level: int = 2,
+    included_clause_ids: set[str] | None = None,
 ) -> list[str]:
+    if included_clause_ids is not None and clause_id not in included_clause_ids:
+        return []
     clause = next(item for item in model.clauses if item.id == clause_id)
+    heading_level = min(base_level + clause.level - 1, 4)
     lines = [
         _anchor(model.document_id, clause.id),
         _heading(
-            min(base_level + clause.level - 1, 4),
+            heading_level,
             _clause_title(clause.number, clause.title),
             numbered=False,
         ),
     ]
+    if heading_level == 4:
+        # LaTeX paragraphs are run-in headings. End the heading explicitly so
+        # the first unbreakable requirement block starts below its clause.
+        lines.append(r"\mbox{}\par")
     lines.extend(render_body(clause.id))
     for child in model.children_of(clause.id):
-        lines.extend(_render_clause_tree(model, child.id, render_body, base_level=base_level))
+        lines.extend(_render_clause_tree(
+            model, child.id, render_body,
+            base_level=base_level,
+            included_clause_ids=included_clause_ids,
+        ))
     return lines
 
 
@@ -506,26 +529,43 @@ def _render_operations(model: DocumentModel, profile: PublicationProfile) -> lis
 
 
 def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> list[str]:
-    grouped = _clause_groups(model.requirements, clause_getter=lambda item: item.clause_id)
+    explicit = tuple(item for item in model.requirements if item.extraction == "explicit")
+    candidates = tuple(item for item in model.requirements if item.extraction == "candidate")
+    grouped = _clause_groups(explicit, clause_getter=lambda item: item.clause_id)
+    clauses_by_id = {item.id: item for item in model.clauses}
+    active_clauses: set[str] = set()
+    for requirement in explicit:
+        clause_id = requirement.clause_id
+        while clause_id and clause_id not in active_clauses:
+            active_clauses.add(clause_id)
+            clause_id = clauses_by_id[clause_id].parent_id
 
     def body(clause_id: str | None) -> list[str]:
         lines: list[str] = []
         for requirement in sorted(grouped.get(clause_id, ()), key=lambda item: item.id):
-            review_label = "" if requirement.extraction == "explicit" else " [candidate]"
             title = requirement.title
             if title.casefold().startswith("normative statement at "):
                 title = "Normative statement"
             lines.extend(
                 (
+                    r"\par\noindent\begin{minipage}{\linewidth}",
                     _anchor(model.document_id, requirement.id),
-                    _heading(4, f"{title}{review_label}"),
+                    _heading(4, title),
                     f"\\texttt{{\\footnotesize {_trace_identifier(requirement.id)}}}\\par",
                     _text(requirement.statement),
+                    f"\\par\\smallskip{{\\footnotesize Source: {_text(_printed_source_label(requirement.source, requirement.clause))}}}\\par",
                 )
             )
-            if requirement.coverage_note:
+            for source in requirement.additional_sources:
+                lines.append(
+                    f"{{\\footnotesize Additional source: {_text(_printed_source_label(source, requirement.clause))}}}\\par"
+                )
+            if requirement.coverage_note and requirement.coverage_note not in {
+                "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
+                "Source refinement retained as an explicit semantic fact; the record preserves source traceability without asserting a state transition.",
+            }:
                 lines.append(f"\\emph{{Coverage: {_text(requirement.coverage_note)}}}")
-            lines.append("\\par")
+            lines.append(r"\par\end{minipage}\par\medskip")
         return lines
 
     lines = [
@@ -536,10 +576,33 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         )
     ]
     for clause in model.root_clauses():
-        lines.extend(_render_clause_tree(model, clause.id, body))
+        lines.extend(_render_clause_tree(
+            model, clause.id, body, included_clause_ids=active_clauses,
+        ))
     if grouped.get(None):
         lines.append(_heading(2, "Unassigned requirements"))
         lines.extend(body(None))
+    if candidates:
+        reviews = {item.requirement_id: item for item in model.requirement_reviews}
+        lines.append(_heading(2, "Source candidate review"))
+        for requirement in sorted(candidates, key=lambda item: item.id):
+            review = reviews.get(requirement.id)
+            disposition = (
+                f"{review.status}: {review.reason}" if review is not None else "unreviewed"
+            )
+            lines.extend((
+                r"\par\noindent\begin{minipage}{\linewidth}",
+                _heading(4, requirement.title),
+                f"\\texttt{{\\footnotesize {_trace_identifier(requirement.id)}}}\\par",
+                _text(requirement.statement),
+                f"\\par\\smallskip{{\\footnotesize Source: {_text(_printed_source_label(requirement.source, requirement.clause))}}}\\par",
+                f"\\emph{{Disposition: {_text(disposition)}}}\\par",
+            ))
+            for source in requirement.additional_sources:
+                lines.append(
+                    f"{{\\footnotesize Additional source: {_text(_printed_source_label(source, requirement.clause))}}}\\par"
+                )
+            lines.append(r"\par\end{minipage}\par\medskip")
     return lines
 
 

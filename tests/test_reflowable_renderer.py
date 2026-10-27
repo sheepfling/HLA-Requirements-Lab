@@ -9,9 +9,11 @@ import unittest
 from pathlib import Path
 
 from hla_lab.core.semantic_model import load_document_model
+from hla_lab.core.semantic_base import SourceRef
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.reflowable_renderer import (
     _clean_table_cell_text,
+    _printed_source_label,
     render_reflowable_document,
 )
 from hla_lab.publication.publication_contract import default_publication_profile
@@ -48,7 +50,17 @@ class ReflowableRendererTests(unittest.TestCase):
             "A widget provider shall validate the input before producing a result.", reflowable
         )
         self.assertIn("validated input", reflowable)
+        self.assertIn("Source: source/semantic", reflowable)
+        self.assertIn(r"\begin{minipage}{\linewidth}", reflowable)
+        self.assertIn(r"\end{minipage}", reflowable)
         self.assertNotIn("DemoFixedBlock", reflowable)
+
+    def test_printed_page_locator_uses_source_page_and_clause(self) -> None:
+        source = SourceRef(path="content/clauses/08-time-management-page-181.tex", line=112, end_line=117)
+        self.assertEqual(
+            _printed_source_label(source, "8.1.4"),
+            "§8.1.4, printed p. 181, lines 112–117",
+        )
 
     def test_semantic_mutation_reaches_reflowable_view(self) -> None:
         profile = _fixture_profile()

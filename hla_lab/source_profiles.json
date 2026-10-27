@@ -71,6 +71,16 @@
     ],
     "hierarchy_heading_commands": [
       [
+        "HLAServiceHeadingAt",
+        2,
+        1
+      ],
+      [
+        "HLAServiceComponentHeadingAt",
+        2,
+        1
+      ],
+      [
         "HLAAnnexSubclauseHeading",
         1,
         0

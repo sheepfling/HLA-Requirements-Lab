@@ -11094,8 +11094,7 @@
         "req-federate-connect-before-rti-work",
         "req-federate-connection-lost",
         "req-federate-disconnect-after-resign",
-        "requirement-candidate-content-clauses-04-federation-management-page-040-l33-8",
-        "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15"
+        "requirement-candidate-content-clauses-04-federation-management-page-040-l33-8"
       ],
       "source": {
         "path": "content/clauses/04-federation-management-page-040.tex",

@@ -238,7 +238,7 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
         "content/clauses/03-definitions-page-030.tex",
         22,
         27,
-        "3",
+        "3.1",
         "Passive subscription delivery semantics",
         (
             "Unlike an active subscription, a passive subscription is not used by the RTI to "
@@ -385,7 +385,7 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
         "content/clauses/04-federation-management-page-050.tex",
         36,
         46,
-        "4",
+        "4.1.6",
         "Connection-loss automatic-resign and federation continuation",
         (
             "After reporting lost federates, the RTI shall perform a resign on behalf of "
@@ -398,15 +398,40 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
     (
         "guard-and-cross-machine-state-constraints",
         "content/clauses/04-federation-management-page-041.tex",
-        1,
-        68,
-        "4",
-        "Joined-federate guard and cross-machine state constraints",
+        9,
+        22,
+        "4.1.1",
+        "Joined-federate state-transition guards",
         (
-            "State-machine guards enable transitions when their assertions become true; a "
-            "guard-only transition occurs immediately when its guard is true, and the "
-            "parallel joined-federate machines constrain one another, including the Active "
-            "and Normal Activity Permitted relationship and save admission states."
+            "A guarded state transition may occur when its guard assertion becomes true; "
+            "if the transition has no associated service invocation, it occurs immediately "
+            "when the guard becomes true."
+        ),
+    ),
+    (
+        "parallel-state-constraints",
+        "content/clauses/04-federation-management-page-041.tex",
+        24,
+        52,
+        "4.1.1",
+        "Parallel joined-federate state constraints",
+        (
+            "A joined federate may be in Normal Activity Permitted if and only if it is "
+            "in Active Federate; it may be in Normal Activity Not Permitted if and only if "
+            "it is Instructed to Save, Saving, Waiting for Federation to Save, Prepared to "
+            "Restore, Restoring, Waiting for Federation to Restore, or Waiting for Restore to Begin."
+        ),
+    ),
+    (
+        "save-admission-state-constraint",
+        "content/clauses/04-federation-management-page-041.tex",
+        54,
+        64,
+        "4.1.1",
+        "Initiate Federate Save admission states",
+        (
+            "A joined federate in Active shall not receive Initiate Federate Save unless it "
+            "is Not Constrained or Time Advancing."
         ),
     ),
     (
@@ -414,7 +439,7 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
         "content/clauses/01-overview-page-020.tex",
         15,
         23,
-        "1",
+        "1.6",
         "Service-exception precedence",
         (
             "Service exceptions are listed in increasing precedence; when multiple exception "
@@ -425,14 +450,14 @@ _SOURCE_REQUIREMENT_REFINEMENTS: tuple[tuple[str, str, int, int, str, str, str],
     (
         "object-state-completeness",
         "content/clauses/01-overview-page-017.tex",
-        64,
-        68,
-        "1",
+        51,
+        57,
+        "1.4.1",
         "Federation-visible object-instance state completeness",
         (
-            "The complete set of attribute values for an object instance defines its state "
-            "from the federation perspective; additional non-communicated state held by a "
-            "federate is outside the HLA FOM."
+            "From the federation perspective, the set of all attribute values for an object "
+            "instance shall completely define its state; additional state not communicated "
+            "between federates is outside the HLA FOM."
         ),
     ),
 )
@@ -730,46 +755,19 @@ def _update_state_machine_sources(
             )
 
 
-def _refresh_authored_candidate(
-    existing: Requirement,
-    candidate: Requirement,
-) -> Requirement:
-    update = {
-        "title": candidate.title.replace("Normative candidate", "Normative statement"),
-        "statement": candidate.statement,
-        "machine_statement": candidate.machine_statement,
-        "source": candidate.source,
-    }
-    corrected_clause = _SOURCE_CLAUSE_OVERRIDES.get((candidate.source.path, candidate.source.line))
-    if corrected_clause is not None:
-        update.update(
-            {
-                "clause": corrected_clause,
-                "clause_id": f"clause-{corrected_clause}",
-                "semantic_group_id": f"m16.clause.{corrected_clause}",
-            }
-        )
-    return existing.model_copy(update=update)
-
-
 def _authored_requirements(
     model: object,
     candidates: Sequence[Requirement],
 ) -> tuple[dict[str, Requirement], tuple[Requirement, ...], tuple[Requirement, ...]]:
-    candidate_ids = {item.id for item in candidates}
     authored = {
         item.id: item
         for item in model.requirements
         if item.extraction == "explicit"
-        and (not item.id.startswith("requirement-candidate-") or item.id in candidate_ids)
     }
     refinements = (*_source_refinement_requirements(), *_table_5_row_requirements(model))
     authored.update({item.id: item for item in refinements})
-    for candidate in candidates:
-        existing = authored.get(candidate.id)
-        if existing is not None:
-            authored[candidate.id] = _refresh_authored_candidate(existing, candidate)
-    # Already promoted candidates remain authored and are not appended twice.
+    # Promoted candidates are curated records. New extractor behavior must not
+    # silently rewrite their reviewed boundaries, wording, or stable IDs.
     remaining = tuple(candidate for candidate in candidates if candidate.id not in authored)
     if len({item.id for item in remaining}) != len(remaining):
         raise ValueError("candidate extraction produced duplicate IDs")

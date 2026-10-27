@@ -72,6 +72,10 @@ def _document(model: DocumentModel) -> BundleDocument:
                     line=item.source.line,
                     end_line=item.source.end_line,
                 ),
+                additional_sources=tuple(
+                    BundleSource(path=span.path, line=span.line, end_line=span.end_line)
+                    for span in item.additional_sources
+                ),
             )
             for ordinal, item in enumerate(model.ordered_requirements(), start=1)
         ),

@@ -47,10 +47,13 @@ class CorpusInventoryTests(unittest.TestCase):
         )
         self.assertGreaterEqual(inventory.totals["clause"], 1800)
         self.assertEqual(inventory.totals.get("status:unclassified", 0), 0)
-        # The Table 2 introduction is retained as a reviewed non-normative candidate.
-        self.assertEqual(len(inventory.migration_queue), 1)
-        self.assertEqual(inventory.migration_queue[0].status, "non-normative")
-        self.assertTrue(inventory.migration_queue[0].record_id.endswith("page-181-l115-2"))
+        # Table introductions and Annex E/F shall-like prose are reviewed as non-normative.
+        self.assertEqual(len(inventory.migration_queue), 12)
+        self.assertEqual({item.status for item in inventory.migration_queue}, {"non-normative"})
+        self.assertEqual(
+            sum(item.document == "hla-1516.1-2025" for item in inventory.migration_queue),
+            12,
+        )
         rebuilt = build_inventory(
             INVENTORY_ROOTS,
             REPO_ROOT / "data" / "release" / "documents.json",

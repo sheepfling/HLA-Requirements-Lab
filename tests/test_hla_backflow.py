@@ -315,7 +315,7 @@ class HlaBackflowTests(unittest.TestCase):
             "RL-373": ("Federate Resigned service",),
             "RL-374": ("Change Default Attribute Order Type service",),
             "RL-375": ("Unconditional Attribute Ownership Divestiture service",),
-            "RL-376": ("Request Divestiture Confirmation service", "remain pending"),
+            "RL-376": ("Request Divestiture Confirmation", "remain pending"),
             "RL-377": ("exclusive", "Upon registration of an object instance"),
             "RL-378": ("optimistic logical time argument", "message delivery"),
             "RL-379": ("dimensions contained in a region specification",),
@@ -569,7 +569,7 @@ class HlaBackflowTests(unittest.TestCase):
         by_id = {item["id"]: item for item in _read("requirements.json")["requirements"]}
         cases = {
             "04-federation-management-page-040-l33-8": ("4.1.1", "If a federate is forced"),
-            "04-federation-management-page-040-l54-15": ("4.1.1", "When a federate"),
+            "req-federate-disconnect-after-resign": ("4.1.1", "When a federate"),
             "04-federation-management-page-044-l15-4": ("4.1.2", "When a joined federate"),
             "04-federation-management-page-044-l27-8": ("4.1.2", "Once a federation"),
             "04-federation-management-page-044-l36-11": ("4.1.2", "All saved information"),
@@ -765,16 +765,16 @@ class HlaBackflowTests(unittest.TestCase):
     def test_local_fragment_reconstruction(self) -> None:
         by_id = {item["id"]: item for item in _read("requirements.json")["requirements"]}
         checks = {
-            "page-290-l12-3": ("11.3", "Parameters may be added", "parameters."),
-            "page-290-l75-24": ("11.3", "Classes of interaction", "RTI."),
-            "page-290-l78-25": ("11.3", "These classes of interaction", "development."),
-            "page-178-l51-14": ("8", "The third column", "advancement."),
-            "page-178-l54-15": ("8", "Only messages", "advancement."),
+            "page-290-l12-3": ("11.3.1", "Parameters may be added", "parameters."),
+            "page-290-l75-24": ("11.3.1", "Classes of interaction", "RTI."),
+            "page-290-l78-25": ("11.3.1", "These classes of interaction", "development."),
+            "page-178-l51-14": ("8.1.2", "The third column", "advancement."),
+            "page-178-l54-15": ("8.1.2", "Only messages", "advancement."),
             "page-294-l14-4": ("11.5.2.1", "The same JSON", "records."),
             "page-294-l17-5": ("11.5.2.1", "Each service report", "records."),
             "page-180-l93-28": ("8.1.4", "In the case", "instance."),
-            "page-197-l98-29": ("8.10.2", "A Time Advance Grant", "delivered."),
-            "page-197-l104-31": ("8.10.2", "The Time Advance Grant", "grant."),
+            "page-197-l98-29": ("8.10", "A Time Advance Grant", "delivered."),
+            "page-197-l104-31": ("8.10", "The Time Advance Grant", "grant."),
             "page-150-l152-47": ("7.1.2.1", "The joined federate", "federates."),
         }
         for suffix, (clause, opening, ending) in checks.items():
@@ -1096,13 +1096,16 @@ class HlaBackflowTests(unittest.TestCase):
         }
         configuration = anomalies["hla15161-table-5-configuration-result-example"]
         restore_set = anomalies["hla15161-table-5-restore-status-set-name"]
-        self.assertEqual(configuration["review_status"], "UNRESOLVED")
+        self.assertEqual(configuration["review_status"], "DISPOSITIONED")
         self.assertIn("addtionalSettingsResultCode", configuration["source_text"])
         self.assertIn("additionalSettingsResultCode", configuration["source_text"])
-        self.assertEqual(restore_set["review_status"], "REVIEWED_CONFLICT")
+        self.assertEqual(restore_set["review_status"], "DISPOSITIONED")
         self.assertIn("FederateHandleRestoreStatusSet", restore_set["source_text"])
         self.assertIn("FederateRestoreStatusSet", restore_set["reason"])
-        self.assertIn("no MIM type-20 mapping", restore_set["rendered_text"])
+        self.assertIn("likely typographical error", restore_set["rendered_text"])
+        self.assertIn("FederateRestoreStatusSet (MIM type 20)", restore_set["rendered_text"])
+        self.assertIn("FederateRestoreStatus (type 19)", restore_set["rendered_text"])
+        self.assertIn("type 20", restore_set["mapping_effect"])
         table_14_page = next(
             item
             for item in _read("content-blocks.json")["content_blocks"]
@@ -1111,6 +1114,15 @@ class HlaBackflowTests(unittest.TestCase):
         table_14_row = table_14_page[table_14_page.index("FederateRestoreStatusSet") :]
         self.assertIn("20%", table_14_row[:180])
         self.assertNotIn("FederateHandleRestoreStatusSet", table_14_page)
+        api_surfaces = _read("api-surfaces.json")["api_surfaces"]
+        restore_api = [
+            item for item in api_surfaces
+            if item.get("name") == "federationRestoreStatusResponse"
+            and item.get("language") in {"java", "cpp"}
+        ]
+        self.assertEqual(len(restore_api), 2)
+        self.assertTrue(all("FederateRestoreStatus" in item["signature"] for item in restore_api))
+        self.assertTrue(all("FederateHandleRestoreStatus" not in item["signature"] for item in restore_api))
         literal = next(
             item
             for item in _read("requirements.json")["requirements"]
@@ -1145,7 +1157,7 @@ class HlaBackflowTests(unittest.TestCase):
             caption["statement"],
             "Table 2 illustrates how the order type of a sent message shall be determined.",
         )
-        self.assertEqual((caption["source"]["line"], caption["source"]["end_line"]), (112, 115))
+        self.assertEqual((caption["source"]["line"], caption["source"]["end_line"]), (112, 117))
         page_181 = next(
             item["layout_body"].splitlines()
             for item in _read("content-blocks.json")["content_blocks"]

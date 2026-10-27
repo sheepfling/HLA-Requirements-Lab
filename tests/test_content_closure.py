@@ -16,20 +16,27 @@ ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 class ContentClosureTests(unittest.TestCase):
     def test_all_15161_requirement_candidates_are_authoritative(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
-        self.assertEqual(len(model.requirements), 1865)
-        self.assertEqual(sum(item.extraction == "explicit" for item in model.requirements), 1864)
-        self.assertEqual(sum(item.extraction == "candidate" for item in model.requirements), 1)
+        self.assertEqual(len(model.requirements), 2014)
+        self.assertEqual(sum(item.extraction == "explicit" for item in model.requirements), 2002)
+        self.assertEqual(sum(item.extraction == "candidate" for item in model.requirements), 12)
         self.assertTrue(all(item.clause_id for item in model.requirements))
-        self.assertEqual(len(model.requirement_reviews), 1)
+        self.assertEqual(len(model.requirement_reviews), 12)
         self.assertEqual(
             model.requirement_review_counts(),
             {
                 "deferred": 0,
-                "non-normative": 1,
+                "non-normative": 12,
                 "layout-only": 0,
                 "unreviewed": 0,
             },
         )
+        annex_records = [
+            item
+            for item in model.requirements
+            if item.clause and item.clause.startswith(("E", "F"))
+        ]
+        self.assertEqual(len(annex_records), 10)
+        self.assertTrue(all(item.extraction == "candidate" for item in annex_records))
 
     def test_every_transition_has_reciprocal_planned_implementation_coverage(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)

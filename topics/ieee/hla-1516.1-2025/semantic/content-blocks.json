@@ -125,7 +125,18 @@
       "record_ids": [
         "requirement-candidate-content-clauses-01-overview-page-018-l4-1",
         "requirement-candidate-content-clauses-01-overview-page-018-l18-2",
-        "requirement-candidate-content-clauses-01-overview-page-018-l58-7"
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7",
+        "requirement-candidate-content-clauses-01-overview-page-018-l18-2-unique",
+        "requirement-candidate-content-clauses-01-overview-page-018-l18-2-generated",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-federate",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-object-class",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-attribute",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-object-instance",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-interaction-class",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-parameter",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-order",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-transportation",
+        "requirement-candidate-content-clauses-01-overview-page-018-l58-7-dimension"
       ],
       "element_ids": [
         "content-element-content-15161-page-018-paragraph-001",
@@ -594,7 +605,10 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-038-l21-4",
-        "requirement-candidate-content-clauses-04-federation-management-page-038-l27-5"
+        "requirement-candidate-content-clauses-04-federation-management-page-038-l27-5",
+        "requirement-candidate-content-clauses-04-federation-management-page-038-l21-4-disconnect",
+        "requirement-candidate-content-clauses-04-federation-management-page-038-l27-5-evoked",
+        "requirement-candidate-content-clauses-04-federation-management-page-038-l27-5-both"
       ],
       "element_ids": [
         "content-element-content-15161-page-038-paragraph-001",
@@ -619,7 +633,8 @@
       "text": "",
       "clause_id": "clause-4",
       "record_ids": [
-        "requirement-candidate-content-clauses-04-federation-management-page-039-l4-1"
+        "requirement-candidate-content-clauses-04-federation-management-page-039-l4-1",
+        "requirement-candidate-content-clauses-04-federation-management-page-039-l4-1-multiple-federations"
       ],
       "element_ids": [
         "content-element-content-15161-page-039-paragraph-001",
@@ -642,7 +657,9 @@
       "text": "",
       "clause_id": "clause-4",
       "record_ids": [
-        "requirement-source-refinement-guard-and-cross-machine-state-constraints"
+        "requirement-source-refinement-guard-and-cross-machine-state-constraints",
+        "requirement-source-refinement-parallel-state-constraints",
+        "requirement-source-refinement-save-admission-state-constraint"
       ],
       "element_ids": [
         "content-element-content-15161-page-041-paragraph-001"
@@ -706,7 +723,8 @@
         "requirement-candidate-content-clauses-04-federation-management-page-044-l54-17",
         "requirement-candidate-content-clauses-04-federation-management-page-044-l72-23",
         "requirement-candidate-content-clauses-04-federation-management-page-044-l78-25",
-        "requirement-candidate-content-clauses-04-federation-management-page-044-l108-35"
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l108-35",
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l54-17-deliver"
       ],
       "element_ids": [
         "content-element-content-15161-page-044-paragraph-001"
@@ -760,7 +778,15 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4",
-        "requirement-candidate-content-clauses-04-federation-management-page-047-l77-24"
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l77-24",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-interaction-structure",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-directed-interaction",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-attributes",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-parameters",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-dimensions",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-transportation",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-update-rates",
+        "requirement-candidate-content-clauses-04-federation-management-page-047-l17-4-switches"
       ],
       "element_ids": [
         "content-element-content-15161-page-047-paragraph-001"
@@ -788,6 +814,13 @@
         "requirement-candidate-content-clauses-04-federation-management-page-048-l48-15",
         "requirement-candidate-content-clauses-04-federation-management-page-048-l54-17",
         "requirement-candidate-content-clauses-04-federation-management-page-048-l57-18",
+        "req-fom-module-reject-attribute-conflict",
+        "req-fom-module-reject-interaction-conflict",
+        "req-fom-module-reject-dimension-conflict",
+        "req-fom-module-reject-transport-conflict",
+        "req-fom-module-reject-update-rate-conflict",
+        "req-fom-module-reject-switch-conflict",
+        "req-fom-module-reject-noncompliant-module",
         "requirement-candidate-content-clauses-04-federation-management-page-048-l129-42",
         "requirement-candidate-content-clauses-04-federation-management-page-048-l132-43",
         "requirement-candidate-content-clauses-04-federation-management-page-048-l138-45",
@@ -823,7 +856,8 @@
         "requirement-candidate-content-clauses-04-federation-management-page-049-l133-42",
         "requirement-candidate-content-clauses-04-federation-management-page-049-l145-46",
         "requirement-candidate-content-clauses-04-federation-management-page-049-l157-50",
-        "requirement-candidate-content-clauses-04-federation-management-page-049-l163-52"
+        "requirement-candidate-content-clauses-04-federation-management-page-049-l163-52",
+        "requirement-candidate-content-clauses-04-federation-management-page-049-l133-42-defaults"
       ],
       "element_ids": [
         "content-element-content-15161-page-049-paragraph-001"
@@ -856,7 +890,8 @@
         "requirement-candidate-content-clauses-04-federation-management-page-050-l78-25",
         "requirement-candidate-content-clauses-04-federation-management-page-050-l84-27",
         "requirement-candidate-content-clauses-04-federation-management-page-050-l123-40",
-        "requirement-candidate-content-clauses-04-federation-management-page-050-l126-41"
+        "requirement-candidate-content-clauses-04-federation-management-page-050-l126-41",
+        "requirement-candidate-content-clauses-04-federation-management-page-050-l123-40-exception"
       ],
       "element_ids": [
         "content-element-content-15161-page-050-paragraph-001"
@@ -879,7 +914,8 @@
         "requirement-candidate-content-clauses-04-federation-management-page-051-l18-3",
         "requirement-candidate-content-clauses-04-federation-management-page-051-l23-4",
         "requirement-candidate-content-clauses-04-federation-management-page-051-l28-5",
-        "requirement-candidate-content-clauses-04-federation-management-page-051-l33-6"
+        "requirement-candidate-content-clauses-04-federation-management-page-051-l33-6",
+        "requirement-candidate-content-clauses-04-federation-management-page-051-l18-3-default"
       ],
       "element_ids": [
         "content-element-content-15161-page-051-paragraph-001"
@@ -922,7 +958,12 @@
         "requirement-candidate-content-clauses-04-federation-management-page-053-l50-8",
         "requirement-candidate-content-clauses-04-federation-management-page-053-l55-9",
         "requirement-candidate-content-clauses-04-federation-management-page-053-l58-10",
-        "requirement-candidate-content-clauses-04-federation-management-page-053-l87-18"
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l87-18",
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l50-8-before-fom",
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l50-8-reserved-name",
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l43-7-independence",
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l43-7-no-intercommunication",
+        "requirement-candidate-content-clauses-04-federation-management-page-053-l43-7-authorization"
       ],
       "element_ids": [
         "content-element-content-15161-page-053-paragraph-001"
@@ -942,7 +983,10 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-054-l38-10",
-        "requirement-candidate-content-clauses-04-federation-management-page-054-l101-29"
+        "requirement-candidate-content-clauses-04-federation-management-page-054-l101-29",
+        "requirement-candidate-content-clauses-04-federation-management-page-054-l101-29-stopped",
+        "requirement-candidate-content-clauses-04-federation-management-page-054-l101-29-resigned",
+        "requirement-candidate-content-clauses-04-federation-management-page-054-l101-29-authorization"
       ],
       "element_ids": [
         "content-element-content-15161-page-054-paragraph-001"
@@ -962,7 +1006,8 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-055-l34-5",
-        "requirement-candidate-content-clauses-04-federation-management-page-055-l93-18"
+        "requirement-candidate-content-clauses-04-federation-management-page-055-l93-18",
+        "requirement-candidate-content-clauses-04-federation-management-page-055-l34-5-report"
       ],
       "element_ids": [
         "content-element-content-15161-page-055-paragraph-001"
@@ -982,7 +1027,8 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-056-l27-3",
-        "requirement-candidate-content-clauses-04-federation-management-page-056-l86-16"
+        "requirement-candidate-content-clauses-04-federation-management-page-056-l86-16",
+        "requirement-candidate-content-clauses-04-federation-management-page-056-l27-3-report"
       ],
       "element_ids": [
         "content-element-content-15161-page-056-paragraph-001"
@@ -1003,7 +1049,13 @@
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5",
         "requirement-candidate-content-clauses-04-federation-management-page-057-l44-6",
-        "requirement-candidate-content-clauses-04-federation-management-page-057-l56-8"
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l56-8",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-intent",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-name-unique",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-name-assigned",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-type",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-designator",
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5-authorization"
       ],
       "element_ids": [
         "content-element-content-15161-page-057-paragraph-001"
@@ -1024,7 +1076,10 @@
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-058-l112-33",
         "requirement-candidate-content-clauses-04-federation-management-page-058-l125-35",
-        "requirement-candidate-content-clauses-04-federation-management-page-058-l147-40"
+        "requirement-candidate-content-clauses-04-federation-management-page-058-l147-40",
+        "requirement-candidate-content-clauses-04-federation-management-page-058-l147-40-assumption",
+        "requirement-candidate-content-clauses-04-federation-management-page-058-l112-33-designator",
+        "requirement-candidate-content-clauses-04-federation-management-page-058-l112-33-actions"
       ],
       "element_ids": [
         "content-element-content-15161-page-058-paragraph-001"
@@ -1043,7 +1098,9 @@
       "text": "",
       "clause_id": "clause-4",
       "record_ids": [
-        "requirement-candidate-content-clauses-04-federation-management-page-059-l8-1"
+        "requirement-candidate-content-clauses-04-federation-management-page-059-l8-1",
+        "requirement-candidate-content-clauses-04-federation-management-page-059-l8-1-owned",
+        "requirement-candidate-content-clauses-04-federation-management-page-059-l8-1-last-federate"
       ],
       "element_ids": [
         "content-element-content-15161-page-059-paragraph-001"
@@ -1063,7 +1120,9 @@
       "clause_id": "clause-4",
       "record_ids": [
         "req-federate-resigned-callback-behavior",
-        "requirement-candidate-content-clauses-04-federation-management-page-060-l139-34"
+        "requirement-candidate-content-clauses-04-federation-management-page-060-l139-34",
+        "requirement-candidate-content-clauses-04-federation-management-page-060-l139-34-announce",
+        "requirement-candidate-content-clauses-04-federation-management-page-060-l139-34-all"
       ],
       "element_ids": [
         "content-element-content-15161-page-060-paragraph-001"
@@ -1084,7 +1143,11 @@
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-061-l11-1",
         "requirement-candidate-content-clauses-04-federation-management-page-061-l77-17",
-        "requirement-candidate-content-clauses-04-federation-management-page-061-l158-40"
+        "requirement-candidate-content-clauses-04-federation-management-page-061-l158-40",
+        "requirement-candidate-content-clauses-04-federation-management-page-061-l11-1-members",
+        "requirement-candidate-content-clauses-04-federation-management-page-061-l11-1-resigned",
+        "requirement-candidate-content-clauses-04-federation-management-page-061-l11-1-tag",
+        "requirement-candidate-content-clauses-04-federation-management-page-061-l158-40-response"
       ],
       "element_ids": [
         "content-element-content-15161-page-061-paragraph-001"
@@ -1106,7 +1169,9 @@
         "requirement-candidate-content-clauses-04-federation-management-page-062-l11-1",
         "requirement-candidate-content-clauses-04-federation-management-page-062-l28-6",
         "requirement-candidate-content-clauses-04-federation-management-page-062-l102-26",
-        "requirement-candidate-content-clauses-04-federation-management-page-062-l140-35"
+        "requirement-candidate-content-clauses-04-federation-management-page-062-l140-35",
+        "requirement-candidate-content-clauses-04-federation-management-page-062-l140-35-invoke",
+        "requirement-candidate-content-clauses-04-federation-management-page-062-l140-35-set"
       ],
       "element_ids": [
         "content-element-content-15161-page-062-paragraph-001"
@@ -1126,7 +1191,12 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-063-l12-1",
-        "requirement-candidate-content-clauses-04-federation-management-page-063-l117-26"
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l117-26",
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l12-1-new-joiners",
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l12-1-resignation",
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l12-1-tag",
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l117-26-late-join",
+        "requirement-candidate-content-clauses-04-federation-management-page-063-l117-26-default-success"
       ],
       "element_ids": [
         "content-element-content-15161-page-063-paragraph-001"
@@ -1145,7 +1215,10 @@
       "text": "",
       "clause_id": "clause-4",
       "record_ids": [
-        "requirement-candidate-content-clauses-04-federation-management-page-064-l132-35"
+        "requirement-candidate-content-clauses-04-federation-management-page-064-l132-35",
+        "requirement-candidate-content-clauses-04-federation-management-page-064-l132-35-all-members",
+        "requirement-candidate-content-clauses-04-federation-management-page-064-l132-35-deregister",
+        "requirement-candidate-content-clauses-04-federation-management-page-064-l132-35-remove-set"
       ],
       "element_ids": [
         "content-element-content-15161-page-064-paragraph-001"
@@ -1167,7 +1240,8 @@
         "requirement-candidate-content-clauses-04-federation-management-page-065-l93-23",
         "requirement-candidate-content-clauses-04-federation-management-page-065-l96-24",
         "requirement-candidate-content-clauses-04-federation-management-page-065-l100-25",
-        "requirement-candidate-content-clauses-04-federation-management-page-065-l109-26"
+        "requirement-candidate-content-clauses-04-federation-management-page-065-l109-26",
+        "requirement-candidate-content-clauses-04-federation-management-page-065-l100-25-eligible"
       ],
       "element_ids": [
         "content-element-content-15161-page-065-paragraph-001"
@@ -1188,7 +1262,8 @@
       "record_ids": [
         "requirement-candidate-content-clauses-04-federation-management-page-066-l10-1",
         "requirement-candidate-content-clauses-04-federation-management-page-066-l16-3",
-        "requirement-candidate-content-clauses-04-federation-management-page-066-l22-5"
+        "requirement-candidate-content-clauses-04-federation-management-page-066-l22-5",
+        "requirement-candidate-content-clauses-04-federation-management-page-066-l22-5-replace"
       ],
       "element_ids": [
         "content-element-content-15161-page-066-paragraph-001"
@@ -1529,7 +1604,14 @@
         "requirement-candidate-content-clauses-05-declaration-management-page-081-l113-34",
         "requirement-candidate-content-clauses-05-declaration-management-page-081-l134-41",
         "requirement-candidate-content-clauses-05-declaration-management-page-081-l158-49",
-        "requirement-candidate-content-clauses-05-declaration-management-page-081-l185-58"
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l185-58",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l104-31-cycle",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-discovery",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-attributes",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-send",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-receive",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-parameters",
+        "requirement-candidate-content-clauses-05-declaration-management-page-081-l44-12-directed"
       ],
       "element_ids": [
         "content-element-content-15161-page-081-paragraph-001"
@@ -2247,7 +2329,8 @@
         "requirement-candidate-content-clauses-06-object-management-page-111-l19-4",
         "requirement-candidate-content-clauses-06-object-management-page-111-l25-6",
         "requirement-candidate-content-clauses-06-object-management-page-111-l49-14",
-        "requirement-candidate-content-clauses-06-object-management-page-111-l58-17"
+        "requirement-candidate-content-clauses-06-object-management-page-111-l58-17",
+        "requirement-candidate-content-clauses-06-object-management-page-111-l25-6-best-effort"
       ],
       "element_ids": [
         "content-element-content-15161-page-111-paragraph-001"
@@ -2282,7 +2365,11 @@
         "requirement-candidate-content-clauses-06-object-management-page-112-l108-33",
         "requirement-candidate-content-clauses-06-object-management-page-112-l114-35",
         "requirement-candidate-content-clauses-06-object-management-page-112-l129-40",
-        "requirement-candidate-content-clauses-06-object-management-page-112-l138-43"
+        "requirement-candidate-content-clauses-06-object-management-page-112-l138-43",
+        "requirement-candidate-content-clauses-06-object-management-page-112-l42-12-delivery",
+        "requirement-candidate-content-clauses-06-object-management-page-112-l51-15-division",
+        "requirement-candidate-content-clauses-06-object-management-page-112-l51-15-combination",
+        "requirement-candidate-content-clauses-06-object-management-page-112-l75-22-owner-rate"
       ],
       "element_ids": [
         "content-element-content-15161-page-112-paragraph-001"
@@ -2304,7 +2391,8 @@
         "requirement-candidate-content-clauses-06-object-management-page-113-l21-3",
         "requirement-candidate-content-clauses-06-object-management-page-113-l24-4",
         "requirement-candidate-content-clauses-06-object-management-page-113-l153-40",
-        "requirement-candidate-content-clauses-06-object-management-page-113-l165-44"
+        "requirement-candidate-content-clauses-06-object-management-page-113-l165-44",
+        "requirement-candidate-content-clauses-06-object-management-page-113-l24-4-result"
       ],
       "element_ids": [
         "content-element-content-15161-page-113-paragraph-001"
@@ -2346,7 +2434,8 @@
         "requirement-candidate-content-clauses-06-object-management-page-115-l101-27",
         "requirement-candidate-content-clauses-06-object-management-page-115-l104-28",
         "requirement-candidate-content-clauses-06-object-management-page-115-l107-29",
-        "requirement-candidate-content-clauses-06-object-management-page-115-l110-30"
+        "requirement-candidate-content-clauses-06-object-management-page-115-l110-30",
+        "requirement-candidate-content-clauses-06-object-management-page-115-l110-30-no-single-name-callback"
       ],
       "element_ids": [
         "content-element-content-15161-page-115-paragraph-001"
@@ -2416,7 +2505,9 @@
         "requirement-candidate-content-clauses-06-object-management-page-118-l58-15",
         "requirement-candidate-content-clauses-06-object-management-page-118-l64-17",
         "requirement-candidate-content-clauses-06-object-management-page-118-l67-18",
-        "requirement-candidate-content-clauses-06-object-management-page-118-l70-19"
+        "requirement-candidate-content-clauses-06-object-management-page-118-l70-19",
+        "requirement-candidate-content-clauses-06-object-management-page-118-l22-3-association",
+        "requirement-candidate-content-clauses-06-object-management-page-118-l43-10-equality"
       ],
       "element_ids": [
         "content-element-content-15161-page-118-paragraph-001"
@@ -2998,7 +3089,8 @@
       "record_ids": [
         "requirement-candidate-content-clauses-06-object-management-page-142-l173-48",
         "requirement-candidate-content-clauses-06-object-management-page-143-l156-42",
-        "requirement-candidate-content-clauses-06-object-management-page-143-l162-44"
+        "requirement-candidate-content-clauses-06-object-management-page-143-l162-44",
+        "requirement-candidate-content-clauses-06-object-management-page-143-l162-44-response"
       ],
       "element_ids": [
         "content-element-content-15161-page-143-paragraph-001"
@@ -3156,7 +3248,8 @@
         "requirement-candidate-content-clauses-07-ownership-management-page-150-l74-23",
         "requirement-candidate-content-clauses-07-ownership-management-page-150-l116-36",
         "requirement-candidate-content-clauses-07-ownership-management-page-150-l125-39",
-        "requirement-candidate-content-clauses-07-ownership-management-page-150-l152-47"
+        "requirement-candidate-content-clauses-07-ownership-management-page-150-l152-47",
+        "requirement-candidate-content-clauses-07-ownership-management-page-150-l74-23-if-available"
       ],
       "element_ids": [
         "content-element-content-15161-page-150-paragraph-001"
@@ -3213,7 +3306,8 @@
         "requirement-candidate-content-clauses-07-ownership-management-page-152-l137-44",
         "requirement-candidate-content-clauses-07-ownership-management-page-152-l149-48",
         "requirement-candidate-content-clauses-07-ownership-management-page-152-l155-50",
-        "requirement-candidate-content-clauses-07-ownership-management-page-152-l161-52"
+        "requirement-candidate-content-clauses-07-ownership-management-page-152-l161-52",
+        "requirement-candidate-content-clauses-07-ownership-management-page-152-l86-27-release"
       ],
       "element_ids": [
         "content-element-content-15161-page-152-paragraph-001"
@@ -3245,7 +3339,8 @@
         "requirement-candidate-content-clauses-07-ownership-management-page-153-l108-34",
         "requirement-candidate-content-clauses-07-ownership-management-page-153-l111-35",
         "requirement-candidate-content-clauses-07-ownership-management-page-153-l123-38",
-        "requirement-candidate-content-clauses-07-ownership-management-page-153-l129-40"
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l129-40",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l60-19-pending"
       ],
       "element_ids": [
         "content-element-content-15161-page-153-paragraph-001"
@@ -3431,7 +3526,8 @@
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l143-42",
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45",
         "requirement-candidate-content-clauses-07-ownership-management-page-161-l158-47",
-        "requirement-candidate-content-clauses-07-ownership-management-page-161-l167-50"
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l167-50",
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45-confirm"
       ],
       "element_ids": [
         "content-element-content-15161-page-161-paragraph-001"
@@ -3541,7 +3637,8 @@
       "record_ids": [
         "requirement-candidate-content-clauses-07-ownership-management-page-166-l14-1",
         "requirement-candidate-content-clauses-07-ownership-management-page-166-l20-3",
-        "requirement-candidate-content-clauses-07-ownership-management-page-166-l41-10"
+        "requirement-candidate-content-clauses-07-ownership-management-page-166-l41-10",
+        "requirement-candidate-content-clauses-07-ownership-management-page-166-l20-3-acquisition-result"
       ],
       "element_ids": [
         "content-element-content-15161-page-166-paragraph-001"
@@ -3796,7 +3893,9 @@
         "requirement-candidate-content-clauses-07-ownership-management-page-177-l62-19",
         "requirement-candidate-content-clauses-07-ownership-management-page-177-l98-31",
         "requirement-candidate-content-clauses-07-ownership-management-page-177-l110-35",
-        "requirement-candidate-content-clauses-07-ownership-management-page-177-l140-45"
+        "requirement-candidate-content-clauses-07-ownership-management-page-177-l140-45",
+        "requirement-candidate-content-clauses-07-ownership-management-page-177-l62-19-service",
+        "requirement-candidate-content-clauses-07-ownership-management-page-177-l110-35-next-advance"
       ],
       "element_ids": [
         "content-element-content-15161-page-177-paragraph-001"
@@ -3884,7 +3983,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-180-l138-43",
         "requirement-candidate-content-clauses-08-time-management-page-180-l144-45",
         "requirement-candidate-content-clauses-08-time-management-page-180-l150-47",
-        "requirement-candidate-content-clauses-08-time-management-page-180-l156-49"
+        "requirement-candidate-content-clauses-08-time-management-page-180-l156-49",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l9-1-passels",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l9-1-receiving"
       ],
       "element_ids": [
         "content-element-content-15161-page-180-paragraph-001"
@@ -3911,7 +4012,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-181-l148-13",
         "requirement-candidate-content-clauses-08-time-management-page-181-l157-16",
         "requirement-candidate-content-clauses-08-time-management-page-181-l163-18",
-        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2"
+        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2",
+        "requirement-candidate-content-clauses-08-time-management-page-181-l163-18-timestamp"
       ],
       "element_ids": [
         "content-element-content-15161-page-181-paragraph-001"
@@ -3945,7 +4047,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-182-l106-33",
         "requirement-candidate-content-clauses-08-time-management-page-182-l112-35",
         "requirement-candidate-content-clauses-08-time-management-page-182-l127-40",
-        "requirement-candidate-content-clauses-08-time-management-page-182-l133-42"
+        "requirement-candidate-content-clauses-08-time-management-page-182-l133-42",
+        "requirement-candidate-content-clauses-08-time-management-page-182-l10-2-enabled",
+        "requirement-candidate-content-clauses-08-time-management-page-182-l100-31-enabled"
       ],
       "element_ids": [
         "content-element-content-15161-page-182-paragraph-001"
@@ -4086,7 +4190,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-188-l93-28",
         "requirement-candidate-content-clauses-08-time-management-page-188-l99-30",
         "requirement-candidate-content-clauses-08-time-management-page-188-l138-43",
-        "requirement-candidate-content-clauses-08-time-management-page-188-l144-45"
+        "requirement-candidate-content-clauses-08-time-management-page-188-l144-45",
+        "requirement-candidate-content-clauses-08-time-management-page-188-l69-21-tso-name",
+        "requirement-candidate-content-clauses-08-time-management-page-188-l69-21-ro-name"
       ],
       "element_ids": [
         "content-element-content-15161-page-188-paragraph-001"
@@ -4405,7 +4511,8 @@
       "record_ids": [
         "requirement-candidate-content-clauses-08-time-management-page-202-l104-28",
         "requirement-candidate-content-clauses-08-time-management-page-202-l107-29",
-        "requirement-candidate-content-clauses-08-time-management-page-202-l131-37"
+        "requirement-candidate-content-clauses-08-time-management-page-202-l131-37",
+        "requirement-candidate-content-clauses-08-time-management-page-202-l107-29-olt"
       ],
       "element_ids": [
         "content-element-content-15161-page-202-paragraph-001"
@@ -4429,7 +4536,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-203-l92-24",
         "requirement-candidate-content-clauses-08-time-management-page-203-l95-25",
         "requirement-candidate-content-clauses-08-time-management-page-203-l104-28",
-        "requirement-candidate-content-clauses-08-time-management-page-203-l113-31"
+        "requirement-candidate-content-clauses-08-time-management-page-203-l113-31",
+        "requirement-candidate-content-clauses-08-time-management-page-203-l95-25-logical-time"
       ],
       "element_ids": [
         "content-element-content-15161-page-203-paragraph-001"
@@ -4717,7 +4825,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-216-l135-42",
         "requirement-candidate-content-clauses-08-time-management-page-216-l144-45",
         "requirement-candidate-content-clauses-08-time-management-page-216-l153-48",
-        "requirement-candidate-content-clauses-08-time-management-page-216-l180-57"
+        "requirement-candidate-content-clauses-08-time-management-page-216-l180-57",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l135-42-no-reference",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l54-15-ordered-pair"
       ],
       "element_ids": [
         "content-element-content-15161-page-216-paragraph-001"
@@ -4878,7 +4988,8 @@
         "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l68-21",
         "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l71-22",
         "requirement-source-refinement-relaxed-ddm-overlap",
-        "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l89-28"
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l89-28",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-221-l89-28-normalization"
       ],
       "element_ids": [
         "content-element-content-15161-page-221-paragraph-001"
@@ -4901,7 +5012,10 @@
         "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l23-6",
         "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l83-26",
         "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l89-28",
-        "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l98-31"
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l98-31",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l23-6-unsubscribe-object",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l23-6-subscribe-interaction",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-222-l23-6-unsubscribe-interaction"
       ],
       "element_ids": [
         "content-element-content-15161-page-222-paragraph-001"
@@ -4930,7 +5044,8 @@
         "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l103-34",
         "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l109-36",
         "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l118-39",
-        "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l145-48"
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l145-48",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-223-l40-13-available"
       ],
       "element_ids": [
         "content-element-content-15161-page-223-paragraph-001"
@@ -5033,7 +5148,8 @@
       "clause_id": "clause-9",
       "record_ids": [
         "requirement-candidate-content-clauses-09-data-distribution-management-page-227-l26-6",
-        "requirement-candidate-content-clauses-09-data-distribution-management-page-227-l173-48"
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-227-l173-48",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-227-l173-48-in-use"
       ],
       "element_ids": [
         "content-element-content-15161-page-227-paragraph-001"
@@ -5937,7 +6053,8 @@
         "requirement-candidate-content-clauses-10-support-services-page-269-l50-13",
         "requirement-candidate-content-clauses-10-support-services-page-269-l53-14",
         "requirement-candidate-content-clauses-10-support-services-page-269-l164-51",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52"
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-269-paragraph-001"
@@ -5977,7 +6094,8 @@
       "clause_id": "clause-10",
       "record_ids": [
         "requirement-candidate-content-clauses-10-support-services-page-271-l64-18",
-        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19"
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19",
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-271-paragraph-001"
@@ -5999,7 +6117,8 @@
         "requirement-candidate-content-clauses-10-support-services-page-272-l29-6",
         "requirement-candidate-content-clauses-10-support-services-page-272-l32-7",
         "requirement-candidate-content-clauses-10-support-services-page-272-l143-44",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45"
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-272-paragraph-001"
@@ -6041,7 +6160,8 @@
         "requirement-candidate-content-clauses-10-support-services-page-274-l55-15",
         "requirement-candidate-content-clauses-10-support-services-page-274-l58-16",
         "requirement-candidate-content-clauses-10-support-services-page-274-l181-57",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58"
+        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-274-paragraph-001"
@@ -6104,7 +6224,8 @@
         "requirement-candidate-content-clauses-10-support-services-page-277-l31-7",
         "requirement-candidate-content-clauses-10-support-services-page-277-l37-9",
         "requirement-candidate-content-clauses-10-support-services-page-277-l184-58",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59"
+        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-277-paragraph-001"
@@ -6124,7 +6245,8 @@
       "clause_id": "clause-10",
       "record_ids": [
         "requirement-candidate-content-clauses-10-support-services-page-278-l110-33",
-        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34"
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34",
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34-effect"
       ],
       "element_ids": [
         "content-element-content-15161-page-278-paragraph-001"
@@ -6254,7 +6376,9 @@
         "requirement-candidate-content-clauses-10-support-services-page-284-l158-49",
         "requirement-candidate-content-clauses-10-support-services-page-284-l164-51",
         "requirement-candidate-content-clauses-10-support-services-page-284-l167-52",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53"
+        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20-precision",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22-true"
       ],
       "element_ids": [
         "content-element-content-15161-page-284-paragraph-001"
@@ -6274,7 +6398,9 @@
       "clause_id": "clause-10",
       "record_ids": [
         "requirement-candidate-content-clauses-10-support-services-page-285-l14-1",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2"
+        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-true",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-false"
       ],
       "element_ids": [
         "content-element-content-15161-page-285-paragraph-001"
@@ -6328,7 +6454,9 @@
         "requirement-candidate-content-clauses-10-support-services-page-287-l102-33",
         "requirement-candidate-content-clauses-10-support-services-page-287-l105-34",
         "requirement-candidate-content-clauses-10-support-services-page-287-l108-35",
-        "requirement-candidate-content-clauses-10-support-services-page-287-l123-40"
+        "requirement-candidate-content-clauses-10-support-services-page-287-l123-40",
+        "requirement-candidate-content-clauses-10-support-services-page-287-l60-19-register",
+        "requirement-candidate-content-clauses-10-support-services-page-287-l63-20-send"
       ],
       "element_ids": [
         "content-element-content-15161-page-287-paragraph-001"
@@ -6354,7 +6482,8 @@
         "requirement-candidate-content-clauses-10-support-services-page-288-l66-21",
         "requirement-candidate-content-clauses-10-support-services-page-288-l69-22",
         "requirement-candidate-content-clauses-10-support-services-page-288-l75-24",
-        "requirement-candidate-content-clauses-10-support-services-page-288-l96-31"
+        "requirement-candidate-content-clauses-10-support-services-page-288-l96-31",
+        "requirement-candidate-content-clauses-10-support-services-page-288-l75-24-value-request"
       ],
       "element_ids": [
         "content-element-content-15161-page-288-paragraph-001"
@@ -6424,7 +6553,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-290-l165-54",
         "requirement-candidate-content-clauses-11-management-object-model-page-290-l174-57",
         "requirement-candidate-content-clauses-11-management-object-model-page-290-l180-59",
-        "requirement-candidate-content-clauses-11-management-object-model-page-290-l183-60"
+        "requirement-candidate-content-clauses-11-management-object-model-page-290-l183-60",
+        "requirement-candidate-content-clauses-11-management-object-model-page-290-l165-54-no-metadata"
       ],
       "element_ids": [
         "content-element-content-15161-page-290-paragraph-001"
@@ -6457,7 +6587,9 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-291-l146-48",
         "requirement-candidate-content-clauses-11-management-object-model-page-291-l185-61",
         "requirement-candidate-content-clauses-11-management-object-model-page-291-l191-63",
-        "requirement-candidate-content-clauses-11-management-object-model-page-291-l200-66"
+        "requirement-candidate-content-clauses-11-management-object-model-page-291-l200-66",
+        "requirement-candidate-content-clauses-11-management-object-model-page-291-l77-25-transport",
+        "requirement-candidate-content-clauses-11-management-object-model-page-291-l77-25-ddm"
       ],
       "element_ids": [
         "content-element-content-15161-page-291-paragraph-001"
@@ -6513,7 +6645,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-293-l119-39",
         "requirement-candidate-content-clauses-11-management-object-model-page-293-l122-40",
         "requirement-candidate-content-clauses-11-management-object-model-page-293-l128-42",
-        "requirement-candidate-content-clauses-11-management-object-model-page-293-l131-43"
+        "requirement-candidate-content-clauses-11-management-object-model-page-293-l131-43",
+        "requirement-candidate-content-clauses-11-management-object-model-page-292-l117-38-composites"
       ],
       "element_ids": [
         "content-element-content-15161-page-293-paragraph-001"
@@ -6535,7 +6668,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-294-l14-4",
         "requirement-candidate-content-clauses-11-management-object-model-page-294-l17-5",
         "requirement-candidate-content-clauses-11-management-object-model-page-294-l20-6",
-        "requirement-candidate-content-clauses-11-management-object-model-page-294-l26-8"
+        "requirement-candidate-content-clauses-11-management-object-model-page-294-l26-8",
+        "requirement-candidate-content-clauses-11-management-object-model-page-294-l20-6-records"
       ],
       "element_ids": [
         "content-element-content-15161-page-294-paragraph-001"
@@ -7811,7 +7945,10 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-356-l326-108",
         "requirement-candidate-content-clauses-11-management-object-model-page-356-l383-127",
         "requirement-candidate-content-clauses-11-management-object-model-page-356-l389-129",
-        "requirement-candidate-content-clauses-11-management-object-model-page-356-l395-131"
+        "requirement-candidate-content-clauses-11-management-object-model-page-356-l395-131",
+        "requirement-candidate-content-clauses-11-management-object-model-page-356-l326-108-connect",
+        "requirement-candidate-content-clauses-11-management-object-model-page-356-l326-108-federation",
+        "requirement-candidate-content-clauses-11-management-object-model-page-356-l326-108-join"
       ],
       "element_ids": [
         "content-element-content-15161-page-356-paragraph-001"
@@ -7849,7 +7986,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-357-l151-49",
         "requirement-candidate-content-clauses-11-management-object-model-page-357-l187-61",
         "requirement-candidate-content-clauses-11-management-object-model-page-357-l199-65",
-        "requirement-candidate-content-clauses-11-management-object-model-page-357-l202-66"
+        "requirement-candidate-content-clauses-11-management-object-model-page-357-l202-66",
+        "requirement-candidate-content-clauses-11-management-object-model-page-357-l34-10-create"
       ],
       "element_ids": [
         "content-element-content-15161-page-357-paragraph-001"
@@ -8011,7 +8149,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-363-l25-8",
         "requirement-candidate-content-clauses-11-management-object-model-page-363-l28-9",
         "requirement-candidate-content-clauses-11-management-object-model-page-363-l37-12",
-        "requirement-candidate-content-clauses-11-management-object-model-page-363-l43-14"
+        "requirement-candidate-content-clauses-11-management-object-model-page-363-l43-14",
+        "requirement-candidate-content-clauses-11-management-object-model-page-363-l4-1-element-types"
       ],
       "element_ids": [
         "content-element-content-15161-page-363-paragraph-001"
@@ -8240,7 +8379,9 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-374-l184-60",
         "requirement-candidate-content-clauses-11-management-object-model-page-374-l349-115",
         "requirement-candidate-content-clauses-11-management-object-model-page-374-l379-125",
-        "requirement-candidate-content-clauses-11-management-object-model-page-374-l382-126"
+        "requirement-candidate-content-clauses-11-management-object-model-page-374-l382-126",
+        "requirement-candidate-content-clauses-11-management-object-model-page-374-l184-60-rti-factory",
+        "requirement-candidate-content-clauses-11-management-object-model-page-374-l382-126-return-name"
       ],
       "element_ids": [
         "content-element-content-15161-page-374-paragraph-001"
@@ -8423,7 +8564,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-381-l13-4",
         "requirement-candidate-content-clauses-11-management-object-model-page-381-l16-5",
         "requirement-candidate-content-clauses-11-management-object-model-page-381-l22-7",
-        "requirement-candidate-content-clauses-11-management-object-model-page-381-l25-8"
+        "requirement-candidate-content-clauses-11-management-object-model-page-381-l25-8",
+        "requirement-candidate-content-clauses-11-management-object-model-page-381-l4-1-element-types"
       ],
       "element_ids": [
         "content-element-content-15161-page-381-paragraph-001"
@@ -8629,7 +8771,8 @@
         "requirement-candidate-content-clauses-11-management-object-model-page-392-l232-75",
         "requirement-candidate-content-clauses-11-management-object-model-page-392-l259-84",
         "requirement-candidate-content-clauses-11-management-object-model-page-392-l268-87",
-        "requirement-candidate-content-clauses-11-management-object-model-page-392-l277-90"
+        "requirement-candidate-content-clauses-11-management-object-model-page-392-l277-90",
+        "requirement-candidate-content-clauses-11-management-object-model-page-392-l232-75-best-effort"
       ],
       "element_ids": [
         "content-element-content-15161-page-392-paragraph-001"
@@ -8734,7 +8877,8 @@
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l60-19",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l114-37",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l117-38",
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l126-41"
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l126-41",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-397-l45-14-set"
       ],
       "element_ids": [
         "content-element-content-15161-page-397-paragraph-001"
@@ -9064,7 +9208,10 @@
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l14-4",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l20-6",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l38-12",
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l50-16"
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l50-16",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l20-6-tls",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l20-6-websocket",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-411-l20-6-secure-websocket"
       ],
       "element_ids": [
         "content-element-content-15161-page-411-paragraph-001"
@@ -9089,7 +9236,10 @@
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l27-8",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l51-16",
         "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l66-21",
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l81-26"
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l81-26",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l51-16-server-validation",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l51-16-server-key",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-412-l51-16-federate-validation"
       ],
       "element_ids": [
         "content-element-content-15161-page-412-paragraph-001"
@@ -9687,8 +9837,7 @@
         "req-federate-connect-before-rti-work",
         "req-federate-connection-lost",
         "req-federate-disconnect-after-resign",
-        "requirement-candidate-content-clauses-04-federation-management-page-040-l33-8",
-        "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15"
+        "requirement-candidate-content-clauses-04-federation-management-page-040-l33-8"
       ],
       "element_ids": [
         "content-element-content-15161-page-040-paragraph-001"

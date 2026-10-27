@@ -35,8 +35,8 @@ class RequirementApiBindingTests(unittest.TestCase):
         self.assertEqual(
             Counter(item.status for item in restored.bindings),
             Counter(
-                reviewed=1851,
-                matched=53,
+                reviewed=1194,
+                matched=2234,
             ),
         )
         self.assertEqual(build_requirement_api_bindings(self.model), restored.bindings)
@@ -46,7 +46,7 @@ class RequirementApiBindingTests(unittest.TestCase):
         matched = tuple(
             item for item in self.model.requirement_api_bindings if item.status == "matched"
         )
-        self.assertEqual(len(matched), 53)
+        self.assertEqual(len(matched), 2234)
         for binding in matched:
             self.assertIsNotNone(binding.api_surface_id)
             surface = surfaces[binding.api_surface_id]
@@ -55,6 +55,30 @@ class RequirementApiBindingTests(unittest.TestCase):
             self.assertIsNotNone(surface.source)
             self.assertTrue(surface.source.path.endswith((".h", ".java")))
 
+    def test_required_service_rules_select_source_backed_declarations(self) -> None:
+        matched_ids = {
+            item.requirement_id for item in self.model.requirement_api_bindings
+            if item.status == "matched"
+        }
+        required_ids = {
+            item.id for item in self.model.requirements
+            if item.api_surface_scope == "required"
+        }
+        self.assertFalse(required_ids - matched_ids)
+        surfaces = {item.id: item for item in self.model.api_surfaces}
+        create = "requirement-candidate-content-clauses-04-federation-management-page-053-l43-7"
+        create_names = {
+            surfaces[item.api_surface_id].name
+            for item in self.model.api_bindings_for_requirement(create)
+            if item.api_surface_id
+        }
+        self.assertEqual(create_names, {"createFederationExecution"})
+        rejection = self.model.api_bindings_for_requirement("req-fom-module-reject-attribute-conflict")
+        self.assertEqual(
+            {surfaces[item.api_surface_id].name for item in rejection if item.api_surface_id},
+            {"createFederationExecution", "createFederationExecutionWithMIM", "joinFederationExecution"},
+        )
+
     def test_requirement_query_exposes_both_language_declarations(self) -> None:
         rows = self.model.api_bindings_for_requirement("req-federate-connection-lost")
         self.assertEqual({item.language for item in rows}, {"cpp", "java"})
@@ -62,7 +86,7 @@ class RequirementApiBindingTests(unittest.TestCase):
 
     def test_portable_bundle_preserves_binding_and_declaration_sources(self) -> None:
         document = _document(self.model)
-        self.assertEqual(len(document.requirement_api_bindings), 1904)
+        self.assertEqual(len(document.requirement_api_bindings), 3428)
         self.assertEqual(
             [item.ordinal for item in document.requirements],
             list(range(1, len(document.requirements) + 1)),

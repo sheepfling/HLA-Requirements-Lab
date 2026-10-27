@@ -314,7 +314,11 @@ def _direct_binding(
         language=surface.language,
         relationship="callback" if surface.interface_kind == "callback" else "direct",
         status="matched",
-        rationale="Requirement directly names the source-backed API surface.",
+        rationale=(
+            "Requirement directly names the source-backed API surface."
+            if requirement.transition_ids
+            else "Source-backed clause association links this requirement to the API declaration."
+        ),
         source=surface.source or requirement.source,
     )
 
@@ -324,7 +328,7 @@ def _no_api_binding(
     mappings: Mapping[str, ImplementationMapping],
     direct_surfaces: Sequence[str],
 ) -> RequirementApiBinding | None:
-    if mappings and (requirement.api_surface_scope == "required" or direct_surfaces):
+    if direct_surfaces or (mappings and requirement.api_surface_scope == "required"):
         return None
     relationship = (
         requirement.api_surface_scope
@@ -541,6 +545,8 @@ def build_requirement_api_bindings(
             bindings[binding.id] = binding
 
         mappings = _requirement_mappings(requirement, mappings_by_transition)
+        if direct_surfaces and not mappings:
+            continue
         no_api_binding = _no_api_binding(requirement, mappings, direct_surfaces)
         if no_api_binding is not None:
             bindings[no_api_binding.id] = no_api_binding

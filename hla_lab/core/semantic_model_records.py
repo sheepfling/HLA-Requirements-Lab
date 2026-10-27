@@ -191,12 +191,14 @@ def _collect_hierarchy_id_commands(
             )
 
 
-def _fixed_text_heading_parts(raw_value: str, source: LatexSourceProfile) -> tuple[str, str] | None:
-    if r"\textbf" not in raw_value:
+def _fixed_text_heading_parts(
+    raw_value: str, source: LatexSourceProfile, style: str = ""
+) -> tuple[str, str] | None:
+    if r"\textbf" not in raw_value and r"\bfseries" not in style:
         return None
     value = _latex_text(raw_value, source).replace("%", "").strip()
     match = re.match(
-        r"(?P<number>[A-Za-z](?:\.\d+)*|\d+(?:\.\d+)*)\.\s+.+",
+        r"(?P<number>[A-Za-z]\.\d+(?:\.\d+)*|\d+(?:\.\d+)*)(?:\.)?\s+\S.+",
         value,
     )
     if not match:
@@ -212,7 +214,14 @@ def _collect_fixed_text_headings(
     source: LatexSourceProfile,
 ) -> None:
     for offset, args, end_offset in _command_events(text, source.fixed_text_block, 7):
-        parts = _fixed_text_heading_parts(args[-1], source)
+        parts = _fixed_text_heading_parts(args[-1], source, args[3])
+        if parts is None and r"\textbf" in args[-1]:
+            annex = re.fullmatch(
+                r"Annex\s+([A-Za-z])", _latex_text(args[-1], source).strip("% \n")
+            )
+            if annex is not None:
+                letter = annex.group(1).upper()
+                parts = (f"clause-{letter}", f"Annex {letter}")
         if parts is not None:
             _store_heading_event(
                 events, root, path, text, offset, end_offset, parts, overwrite=False
@@ -273,11 +282,14 @@ def _hierarchy_headings(
     path: Path,
     text: str,
     source: LatexSourceProfile,
+    *,
+    include_navigation: bool = True,
 ) -> tuple[tuple[int, str, str, SourceRef], ...]:
     events: dict[int, tuple[int, str, str, SourceRef]] = {}
     _collect_clause_command_headings(events, root, path, text, source)
     _collect_hierarchy_heading_commands(events, root, path, text, source)
-    _collect_hierarchy_id_commands(events, root, path, text, source)
+    if include_navigation:
+        _collect_hierarchy_id_commands(events, root, path, text, source)
     _collect_fixed_text_headings(events, root, path, text, source)
     _collect_annex_headings(events, root, path, text, source)
     _collect_content_marker_headings(events, root, path, text, source)
@@ -614,14 +626,25 @@ def _requirement_candidate_units(
         if "frontmatter" in relative or "generated" in relative or relative in adapter_paths:
             continue
         units.append((path, path.read_text(encoding="utf-8"), tuple(heading_context[path])))
-    for block in authored_blocks:
+    prior_heading: HeadingEvent | None = None
+    for block in sorted(authored_blocks, key=lambda item: item.sequence):
         if block.layout_body is None:
             continue
         if "frontmatter" in block.source.path or "generated" in block.source.path:
             continue
         virtual_path = root / block.source.path
-        local_headings = list(_hierarchy_headings(root, virtual_path, block.layout_body, source))
-        if block.clause_id is not None and not any(
+        local_headings = list(
+            _hierarchy_headings(
+                root, virtual_path, block.layout_body, source, include_navigation=False
+            )
+        )
+        inherited = prior_heading
+        if inherited is not None:
+            local_headings.insert(
+                0,
+                (-1, inherited[1], inherited[2], inherited[3]),
+            )
+        elif block.clause_id is not None and not any(
             item[1] == block.clause_id for item in local_headings
         ):
             local_headings.insert(
@@ -634,20 +657,45 @@ def _requirement_candidate_units(
                 ),
             )
         units.append((virtual_path, block.layout_body, tuple(local_headings)))
+        if local_headings:
+            prior_heading = local_headings[-1]
     return units
 
 
 def _extend_fixed_candidate_statement(
     body: str,
     statement: str,
+    start_offset: int,
     end_offset: int,
     args: Sequence[str],
     fixed_index: int | None,
     fixed_events: Sequence[CommandEvent],
     source: LatexSourceProfile,
-) -> tuple[str, str, int, tuple[int, ...]]:
+) -> tuple[str, str, int, int, tuple[int, ...]]:
     if fixed_index is None or not re.search(r"\bshall\b", statement, re.IGNORECASE):
-        return body, statement, end_offset, ()
+        return body, statement, start_offset, end_offset, ()
+    # A physical PDF line can start in the middle of a sentence. Walk back
+    # through the same paragraph before extracting a requirement from the
+    # line containing "shall". The earlier lines carry the subject or guard.
+    previous_index = fixed_index
+    while previous_index > 0:
+        previous_offset, previous_args, _previous_end = fixed_events[previous_index - 1]
+        current_y = float(fixed_events[previous_index][1][1])
+        previous_y = float(previous_args[1])
+        previous_text = _machine_statement(previous_args[-1], source).strip()
+        if (
+            current_y < previous_y
+            or current_y - previous_y > 18.0
+            or not previous_text
+            or re.search(r"[.!?]\s*$", previous_text)
+            or re.search(r"\bshall\b", previous_text, re.IGNORECASE)
+            or "\\bfseries" in previous_args[3]
+        ):
+            break
+        body = f"{previous_args[-1]} {body}"
+        start_offset = previous_offset
+        previous_index -= 1
+    statement = _machine_statement(body, source)
     continuation = fixed_index
     previous_y = float(args[1])
     consumed_offsets: list[int] = []
@@ -660,12 +708,6 @@ def _extend_fixed_candidate_statement(
         next_y = float(next_args[1])
         if next_y - previous_y > 18.0:
             break
-        if re.search(
-            r"\bshall\b",
-            _machine_statement(next_args[-1], source),
-            re.IGNORECASE,
-        ):
-            break
         consumed_offsets.append(next_offset)
         body = f"{body} {next_args[-1]}"
         statement = _machine_statement(body, source)
@@ -673,7 +715,7 @@ def _extend_fixed_candidate_statement(
         previous_y = next_y
     statement = re.sub(r"\s*%", " ", statement)
     statement = re.sub(r"\s+", " ", statement).strip()
-    return body, statement, end_offset, tuple(consumed_offsets)
+    return body, statement, start_offset, end_offset, tuple(consumed_offsets)
 
 
 def _candidate_requirement_for_event(
@@ -691,9 +733,10 @@ def _candidate_requirement_for_event(
     offset, args, end_offset = event
     body = args[-1]
     statement = _machine_statement(body, source)
-    body, statement, end_offset, consumed = _extend_fixed_candidate_statement(
+    body, statement, source_start_offset, end_offset, consumed = _extend_fixed_candidate_statement(
         body,
         statement,
+        offset,
         end_offset,
         args,
         fixed_event_index.get(offset),
@@ -712,7 +755,7 @@ def _candidate_requirement_for_event(
         clause=clause,
         machine_statement=statement,
         extraction="candidate",
-        source=_source(root, path, text, offset, end_offset),
+        source=_source(root, path, text, source_start_offset, end_offset),
     )
     return requirement, consumed
 

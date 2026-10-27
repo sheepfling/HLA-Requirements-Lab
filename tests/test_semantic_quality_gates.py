@@ -6,7 +6,7 @@ import json
 import unittest
 
 from hla_lab.core.hla_profile import HLA_SOURCE
-from hla_lab.core.semantic_model import load_document_model
+from hla_lab.core.semantic_model import SourceAnomalyLedger, load_document_model
 from tests.support import TEST_REPO_ROOT
 
 ROOT = TEST_REPO_ROOT
@@ -49,7 +49,9 @@ class SemanticQualityGateTests(unittest.TestCase):
                         requirement.id,
                     )
                     self.assertNotIn("%", requirement.statement, requirement.id)
-                    if " at " in requirement.title:
+                    if requirement.title.casefold().startswith(
+                        ("normative statement at ", "normative candidate at ")
+                    ):
                         self.assertIn(requirement.source.path, requirement.title)
                         self.assertIn(f":{requirement.source.line}", requirement.title)
 
@@ -77,6 +79,7 @@ class SemanticQualityGateTests(unittest.TestCase):
             ROOT / "topics" / "ieee" / "hla-1516.1-2025" / "semantic" / "source-anomaly-ledger.json"
         )
         payload = json.loads(path.read_text(encoding="utf-8"))
+        ledger = SourceAnomalyLedger.model_validate(payload)
         required = {
             "source_id",
             "location",
@@ -96,6 +99,13 @@ class SemanticQualityGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(payload["entries"]), 10)
         self.assertTrue(all(required <= set(entry) for entry in payload["entries"]))
         self.assertTrue(all(entry["classification"] in allowed for entry in payload["entries"]))
+        self.assertEqual(len(ledger.entries), 16)
+        self.assertTrue(
+            all(item.review_status in {"RESOLVED", "DISPOSITIONED"} for item in ledger.entries)
+        )
+        self.assertTrue(
+            all(item.resolution and item.mapping_effect and item.evidence_refs for item in ledger.entries)
+        )
 
 
 if __name__ == "__main__":

@@ -469,7 +469,7 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             "hla15161-comment-note-contamination",
             "hla15161-annex-a-cross-reference",
         ):
-            self.assertEqual(status[source_id], "APPLIED")
+            self.assertEqual(status[source_id], "RESOLVED")
 
 
 if __name__ == "__main__":

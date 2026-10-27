@@ -121,6 +121,8 @@ __all__ = [
     "SequenceMessage",
     "SequenceParticipant",
     "SourceOrderedRecord",
+    "SourceAnomaly",
+    "SourceAnomalyLedger",
     "SourceRef",
     "State",
     "StateMachine",
@@ -248,6 +250,7 @@ class Requirement(SemanticRecord):
     extraction: Literal["explicit", "candidate"] = "explicit"
     semantic_group_id: str | None = None
     source: SourceRef
+    additional_sources: tuple[SourceRef, ...] = ()
 
     @model_validator(mode="after")
     def normalize_clause_id(self) -> Requirement:
@@ -987,3 +990,40 @@ class Annex(SemanticRecord):
     title: Annotated[str, Field(min_length=1)]
     status: AnnexStatus = "unknown"
     source: SourceRef
+
+
+class SourceAnomaly(SemanticRecord):
+    """A source discrepancy with an explicit, mapping-safe disposition."""
+
+    source_id: Annotated[str, Field(min_length=1)]
+    location: Annotated[str, Field(min_length=1)]
+    source_text: Annotated[str, Field(min_length=1)]
+    rendered_text: Annotated[str, Field(min_length=1)]
+    classification: Literal[
+        "SOURCE_ANOMALY",
+        "COMPILATION_DEFECT",
+        "ENCODING_REPAIR",
+        "EDITORIAL_CONTAMINATION",
+        "CROSS_REFERENCE_DEFECT",
+    ]
+    reason: Annotated[str, Field(min_length=1)]
+    review_status: Literal["RESOLVED", "DISPOSITIONED"]
+    resolution: Annotated[str, Field(min_length=1)]
+    mapping_effect: Annotated[str, Field(min_length=1)]
+    evidence_refs: tuple[Annotated[str, Field(min_length=1)], ...]
+
+
+class SourceAnomalyLedger(SemanticRecord):
+    """Validated source anomaly ledger for one document."""
+
+    schema_version: Annotated[int, Field(ge=1)]
+    document_id: Annotated[str, Field(min_length=1)]
+    purpose: Annotated[str, Field(min_length=1)]
+    entries: tuple[SourceAnomaly, ...]
+
+    @model_validator(mode="after")
+    def validate_unique_source_ids(self) -> SourceAnomalyLedger:
+        ids = [item.source_id for item in self.entries]
+        if len(ids) != len(set(ids)):
+            raise ValueError("source anomaly IDs must be unique")
+        return self

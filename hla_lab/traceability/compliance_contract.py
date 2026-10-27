@@ -70,6 +70,7 @@ class BundleRequirement(ContractRecord):
     extraction: Literal["explicit", "candidate"] = "explicit"
     semantic_group_id: str | None = None
     source: BundleSource | None = None
+    additional_sources: tuple[BundleSource, ...] = ()
 
 
 class BundleTransition(ContractRecord):

@@ -32,8 +32,8 @@ class ContentOwnershipTests(unittest.TestCase):
             model = load_document_model(root, HLA_SOURCE)
             if document_id == "hla-1516.1-2025":
                 page_files = tuple((root / "content").rglob("*-page-*.tex"))
-                self.assertEqual(len(model.requirements), 1865)
-                self.assertEqual(len(model.requirement_reviews), 1)
+                self.assertEqual(len(model.requirements), 2014)
+                self.assertEqual(len(model.requirement_reviews), 12)
                 self.assertEqual(len(model.definitions), 161)
                 self.assertEqual(len(model.tables), 92)
                 self.assertEqual(sum(len(item.cells) for item in model.tables), 5159)

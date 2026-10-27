@@ -45,10 +45,10 @@ class BuildIntegrationTests(unittest.TestCase):
     def test_semantic_dashboard_reports_reviewed_and_candidate_coverage(self) -> None:
         report = build_dashboard(DOCUMENT_ROOTS)
         self.assertEqual(report.totals.documents, 3)
-        self.assertEqual(report.totals.explicit_requirements, 2224)
+        self.assertEqual(report.totals.explicit_requirements, 2362)
         self.assertEqual(report.totals.unresolved_references, 0)
         lifecycle = next(item for item in report.documents if item.document == "hla-1516.1-2025")
-        self.assertEqual(lifecycle.requirements.explicit, 1864)
+        self.assertEqual(lifecycle.requirements.explicit, 2002)
         self.assertEqual(
             lifecycle.requirements.explicit_transition_requirements_with_reviewed_links,
             15,
