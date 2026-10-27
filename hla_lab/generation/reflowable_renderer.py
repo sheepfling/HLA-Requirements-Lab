@@ -203,7 +203,7 @@ def _trace_identifier(value: str) -> str:
 def _printed_source_label(source, clause: str | None = None) -> str:
     span = str(source.line)
     if source.end_line is not None and source.end_line != source.line:
-        span += f"–{source.end_line}"
+        span += f"\u2013{source.end_line}"
     prefix = f"§{clause}, " if clause else ""
     page = re.search(r"page-(\d+)\.tex$", source.path)
     if page is not None:
@@ -372,11 +372,15 @@ def _render_clause_tree(
         lines.append(r"\mbox{}\par")
     lines.extend(render_body(clause.id))
     for child in model.children_of(clause.id):
-        lines.extend(_render_clause_tree(
-            model, child.id, render_body,
-            base_level=base_level,
-            included_clause_ids=included_clause_ids,
-        ))
+        lines.extend(
+            _render_clause_tree(
+                model,
+                child.id,
+                render_body,
+                base_level=base_level,
+                included_clause_ids=included_clause_ids,
+            )
+        )
     return lines
 
 
@@ -544,6 +548,7 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         lines: list[str] = []
         for requirement in sorted(grouped.get(clause_id, ()), key=lambda item: item.id):
             title = requirement.title
+            source_label = _printed_source_label(requirement.source, requirement.clause)
             if title.casefold().startswith("normative statement at "):
                 title = "Normative statement"
             lines.extend(
@@ -553,16 +558,23 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
                     _heading(4, title),
                     f"\\texttt{{\\footnotesize {_trace_identifier(requirement.id)}}}\\par",
                     _text(requirement.statement),
-                    f"\\par\\smallskip{{\\footnotesize Source: {_text(_printed_source_label(requirement.source, requirement.clause))}}}\\par",
+                    (f"\\par\\smallskip{{\\footnotesize Source: {_text(source_label)}}}\\par"),
                 )
             )
             for source in requirement.additional_sources:
                 lines.append(
-                    f"{{\\footnotesize Additional source: {_text(_printed_source_label(source, requirement.clause))}}}\\par"
+                    f"{{\\footnotesize Additional source: "
+                    f"{_text(_printed_source_label(source, requirement.clause))}}}\\par"
                 )
             if requirement.coverage_note and requirement.coverage_note not in {
-                "Source-derived normative statement retained at clause scope; no modeled state transition was asserted by the conservative event matcher.",
-                "Source refinement retained as an explicit semantic fact; the record preserves source traceability without asserting a state transition.",
+                (
+                    "Source-derived normative statement retained at clause scope; no modeled "
+                    "state transition was asserted by the conservative event matcher."
+                ),
+                (
+                    "Source refinement retained as an explicit semantic fact; the record preserves "
+                    "source traceability without asserting a state transition."
+                ),
             }:
                 lines.append(f"\\emph{{Coverage: {_text(requirement.coverage_note)}}}")
             lines.append(r"\par\end{minipage}\par\medskip")
@@ -576,9 +588,14 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         )
     ]
     for clause in model.root_clauses():
-        lines.extend(_render_clause_tree(
-            model, clause.id, body, included_clause_ids=active_clauses,
-        ))
+        lines.extend(
+            _render_clause_tree(
+                model,
+                clause.id,
+                body,
+                included_clause_ids=active_clauses,
+            )
+        )
     if grouped.get(None):
         lines.append(_heading(2, "Unassigned requirements"))
         lines.extend(body(None))
@@ -587,20 +604,24 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         lines.append(_heading(2, "Source candidate review"))
         for requirement in sorted(candidates, key=lambda item: item.id):
             review = reviews.get(requirement.id)
+            source_label = _printed_source_label(requirement.source, requirement.clause)
             disposition = (
                 f"{review.status}: {review.reason}" if review is not None else "unreviewed"
             )
-            lines.extend((
-                r"\par\noindent\begin{minipage}{\linewidth}",
-                _heading(4, requirement.title),
-                f"\\texttt{{\\footnotesize {_trace_identifier(requirement.id)}}}\\par",
-                _text(requirement.statement),
-                f"\\par\\smallskip{{\\footnotesize Source: {_text(_printed_source_label(requirement.source, requirement.clause))}}}\\par",
-                f"\\emph{{Disposition: {_text(disposition)}}}\\par",
-            ))
+            lines.extend(
+                (
+                    r"\par\noindent\begin{minipage}{\linewidth}",
+                    _heading(4, requirement.title),
+                    f"\\texttt{{\\footnotesize {_trace_identifier(requirement.id)}}}\\par",
+                    _text(requirement.statement),
+                    (f"\\par\\smallskip{{\\footnotesize Source: {_text(source_label)}}}\\par"),
+                    f"\\emph{{Disposition: {_text(disposition)}}}\\par",
+                )
+            )
             for source in requirement.additional_sources:
                 lines.append(
-                    f"{{\\footnotesize Additional source: {_text(_printed_source_label(source, requirement.clause))}}}\\par"
+                    f"{{\\footnotesize Additional source: "
+                    f"{_text(_printed_source_label(source, requirement.clause))}}}\\par"
                 )
             lines.append(r"\par\end{minipage}\par\medskip")
     return lines

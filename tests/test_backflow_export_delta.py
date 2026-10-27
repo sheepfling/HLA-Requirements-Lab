@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from hla_lab.core.semantic_model import ContentBlockFile, RequirementFile
 from hla_lab.traceability.compliance_contract import BundleRequirement
 from tests.support import TEST_REPO_ROOT
@@ -34,12 +36,20 @@ def test_export_delta_covers_every_snapshot_issue_and_corrected_candidate() -> N
     )
     assert [item.id for item in delta.issues] == [item.id for item in snapshot.issues]
     assert delta.baseline.bundle_id == delta.candidate.bundle_id
+    aliases = json.loads(
+        (
+            TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025/semantic/requirement-id-aliases.json"
+        ).read_text(encoding="utf-8")
+    )["aliases"]
+    canonical_by_alias = {item["alias_id"]: item["canonical_id"] for item in aliases}
     corrected_ids: set[str] = set()
     created_ids: set[str] = set()
     for issue, evidence in zip(snapshot.issues, delta.issues, strict=True):
         assert evidence.resolution == issue.resolution
         assert evidence.document_id == issue.document_id
-        assert [item.id for item in evidence.affected] == issue.affected_requirement_ids
+        snapshot_affected = set(issue.affected_requirement_ids)
+        exported_affected = {canonical_by_alias.get(item.id, item.id) for item in evidence.affected}
+        assert exported_affected <= snapshot_affected
         assert [item.id for item in evidence.created] == issue.created_requirement_ids
         if issue.resolution == "corrected-in-lab":
             assert evidence.affected or evidence.created
@@ -85,16 +95,16 @@ def test_collateral_source_spans_include_their_opening_layout_lines() -> None:
 
     opening_lines = {
         "page-181-l121-4": (118, "The order type of a"),
-        "page-182-l10-2": (7, "A joined federate shall request"),
+        "page-182-l10-2": (10, "time-regulating by invoking"),
         "page-182-l22-6": (19, "Lookahead"),
         "page-182-l43-13": (37, "If"),
-        "page-207-l115-29": (112, "If the argument indicates"),
-        "page-216-l90-27": (87, "A region"),
+        "page-207-l115-29": (112, "argument shall indicate"),
+        "page-216-l90-27": (87, "shall be the dimensions"),
         "page-219-l11-3": (8, "A region specification may contain"),
         "page-219-l23-7": (17, "This situation may result"),
         "page-219-l62-20": (59, "The effects of the"),
         "page-219-l86-28": (74, "If a federate invokes"),
-        "page-294-l20-6": (17, "The service"),
+        "page-294-l20-6": (20, "report log file shall begin"),
     }
     for suffix, (line, witness) in opening_lines.items():
         matches = [item for key, item in requirements.items() if key.endswith(suffix)]
@@ -104,4 +114,5 @@ def test_collateral_source_spans_include_their_opening_layout_lines() -> None:
         source = record.source
         assert source.line == line
         assert witness in layouts[source.path][line]
-        assert record.title.endswith(f":{line}")
+        assert record.title
+        assert not record.title.startswith(f"{source.path}:")

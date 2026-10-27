@@ -24,7 +24,6 @@ from hla_lab.core.semantic_model import (
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from tools.migrations.workspace import document_root
 
-
 ALIASES: dict[str, tuple[str, ...]] = {
     "clause-4.15": (
         "synchronizationPointRegistrationSucceeded",
@@ -78,17 +77,19 @@ def _surface_family(model, requirement) -> tuple[str, tuple[str, ...]] | None:
         alias_names = ALIASES.get(clause_id, ())
         if not title_terms and not alias_names:
             continue
-        ids = tuple(sorted(
-            surface.id
-            for surface in model.api_surfaces
-            if surface.binding_kind == "native"
-            and surface.language in {"java", "cpp"}
-            and clause_id in surface.clause_ids
-            and (
-                surface.name in alias_names
-                or bool(title_terms) and _name_terms(surface.name) == title_terms
+        ids = tuple(
+            sorted(
+                surface.id
+                for surface in model.api_surfaces
+                if surface.binding_kind == "native"
+                and surface.language in {"java", "cpp"}
+                and clause_id in surface.clause_ids
+                and (
+                    surface.name in alias_names
+                    or (bool(title_terms) and _name_terms(surface.name) == title_terms)
+                )
             )
-        ))
+        )
         if ids:
             return clause_id, ids
     return None
@@ -116,17 +117,21 @@ def proposal(root: Path):
                 "Source clause rule with no one-to-one callable declaration in the reviewed Java/C++ API headings.",
             )
     rejection_ids = {
-        requirement.id for requirement in model.requirements
+        requirement.id
+        for requirement in model.requirements
         if requirement.id.startswith("req-fom-module-reject-")
     }
     if len(rejection_ids) != 7:
         raise ValueError(f"Expected seven reviewed FOM rejection cases; found {len(rejection_ids)}")
-    fom_surfaces = tuple(sorted(
-        surface.id for surface in model.api_surfaces
-        if surface.binding_kind == "native"
-        and surface.language in {"java", "cpp"}
-        and surface.name in FOM_SERVICE_NAMES
-    ))
+    fom_surfaces = tuple(
+        sorted(
+            surface.id
+            for surface in model.api_surfaces
+            if surface.binding_kind == "native"
+            and surface.language in {"java", "cpp"}
+            and surface.name in FOM_SERVICE_NAMES
+        )
+    )
     if not fom_surfaces:
         raise ValueError("No source-backed Create/Join FOM service declarations found")
     for requirement_id in rejection_ids:
@@ -141,10 +146,14 @@ def write(root: Path, families, scopes) -> None:
     requirements = RequirementFile.model_validate_json(requirement_path.read_text(encoding="utf-8"))
     surfaces = ApiSurfaceFile.model_validate_json(surface_path.read_text(encoding="utf-8"))
     changed_requirements = tuple(
-        item.model_copy(update={
-            "api_surface_scope": scopes[item.id][0],
-            "api_surface_note": scopes[item.id][1],
-        }) if item.id in scopes else item
+        item.model_copy(
+            update={
+                "api_surface_scope": scopes[item.id][0],
+                "api_surface_note": scopes[item.id][1],
+            }
+        )
+        if item.id in scopes
+        else item
         for item in requirements.requirements
     )
     reqs_by_surface: dict[str, set[str]] = defaultdict(set)
@@ -152,29 +161,50 @@ def write(root: Path, families, scopes) -> None:
         for surface_id in surface_ids:
             reqs_by_surface[surface_id].add(requirement_id)
     changed_surfaces = tuple(
-        item.model_copy(update={
-            "requirement_ids": tuple(sorted(
-                set(identifier for identifier in item.requirement_ids if not identifier.startswith(PREFIX))
-                | reqs_by_surface[item.id]
-            )),
-        })
+        item.model_copy(
+            update={
+                "requirement_ids": tuple(
+                    sorted(
+                        set(
+                            identifier
+                            for identifier in item.requirement_ids
+                            if not identifier.startswith(PREFIX)
+                        )
+                        | reqs_by_surface[item.id]
+                    )
+                ),
+            }
+        )
         for item in surfaces.api_surfaces
     )
     requirement_path.write_text(
         json.dumps(
-            requirements.model_copy(update={"requirements": changed_requirements}).model_dump(mode="json"),
-            ensure_ascii=False, indent=2,
-        ) + "\n", encoding="utf-8",
+            requirements.model_copy(update={"requirements": changed_requirements}).model_dump(
+                mode="json"
+            ),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
     )
     surface_path.write_text(
         json.dumps(
             surfaces.model_copy(update={"api_surfaces": changed_surfaces}).model_dump(mode="json"),
-            ensure_ascii=False, indent=2,
-        ) + "\n", encoding="utf-8",
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
     )
     rebuilt = build_requirement_api_bindings(load_document_model(root, HLA_SOURCE))
     binding_path.write_text(
-        json.dumps(RequirementApiBindingFile(schema_version=1, bindings=rebuilt).model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
+        json.dumps(
+            RequirementApiBindingFile(schema_version=1, bindings=rebuilt).model_dump(mode="json"),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
     )
 

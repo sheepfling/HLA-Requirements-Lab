@@ -969,7 +969,7 @@ class HlaBackflowTests(unittest.TestCase):
             by_id["requirement-candidate-table-5-p296-r031"]["statement"],
         )
         self.assertIn(
-            "FederateRestoreStatusSet (type 20)",
+            "use FederateRestoreStatusSet (type 20)",
             by_id["requirement-candidate-table-5-p297-r007"]["coverage_note"],
         )
 
@@ -1116,13 +1116,16 @@ class HlaBackflowTests(unittest.TestCase):
         self.assertNotIn("FederateHandleRestoreStatusSet", table_14_page)
         api_surfaces = _read("api-surfaces.json")["api_surfaces"]
         restore_api = [
-            item for item in api_surfaces
+            item
+            for item in api_surfaces
             if item.get("name") == "federationRestoreStatusResponse"
             and item.get("language") in {"java", "cpp"}
         ]
         self.assertEqual(len(restore_api), 2)
         self.assertTrue(all("FederateRestoreStatus" in item["signature"] for item in restore_api))
-        self.assertTrue(all("FederateHandleRestoreStatus" not in item["signature"] for item in restore_api))
+        self.assertTrue(
+            all("FederateHandleRestoreStatus" not in item["signature"] for item in restore_api)
+        )
         literal = next(
             item
             for item in _read("requirements.json")["requirements"]

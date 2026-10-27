@@ -661,8 +661,10 @@ def _requirement_lines(
                         "\\textbf{Source.} "
                         + (
                             ", ".join(
-                                _text(f"{source.path}:{source.line}"
-                                      + (f"-{source.end_line}" if source.end_line else ""))
+                                _text(
+                                    f"{source.path}:{source.line}"
+                                    + (f"-{source.end_line}" if source.end_line else "")
+                                )
                                 for source in (item.source, *item.additional_sources)
                                 if source is not None
                             )

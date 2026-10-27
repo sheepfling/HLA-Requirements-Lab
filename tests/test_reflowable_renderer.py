@@ -8,8 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from hla_lab.core.semantic_model import load_document_model
 from hla_lab.core.semantic_base import SourceRef
+from hla_lab.core.semantic_model import load_document_model
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.reflowable_renderer import (
     _clean_table_cell_text,
@@ -56,10 +56,12 @@ class ReflowableRendererTests(unittest.TestCase):
         self.assertNotIn("DemoFixedBlock", reflowable)
 
     def test_printed_page_locator_uses_source_page_and_clause(self) -> None:
-        source = SourceRef(path="content/clauses/08-time-management-page-181.tex", line=112, end_line=117)
+        source = SourceRef(
+            path="content/clauses/08-time-management-page-181.tex", line=112, end_line=117
+        )
         self.assertEqual(
             _printed_source_label(source, "8.1.4"),
-            "§8.1.4, printed p. 181, lines 112–117",
+            "§8.1.4, printed p. 181, lines 112\u2013117",
         )
 
     def test_semantic_mutation_reaches_reflowable_view(self) -> None:

@@ -35970,7 +35970,7 @@
       "machine_statement": "Table 5 prints FederateHandleRestoreStatusSet with encoding Array<FederateHandleRestoreStatus>. Its example depicts two restore-status records but has malformed field punctuation in the pinned source.",
       "transition_ids": [],
       "coverage_kind": "cross-cutting",
-      "coverage_note": "Table 5 likely contains an editorial typo: semantic type 20 is FederateRestoreStatusSet containing FederateRestoreStatus (type 19), corroborated by Table 14 and Java/C++/FedPro declarations. Preserve the literal Table 5 names as source provenance; no API binding is inferred from the anomalous tokens.",
+      "coverage_note": "Table 5 likely contains an editorial typo: use FederateRestoreStatusSet (type 20) with FederateRestoreStatus (type 19), corroborated by Table 14 and Java/C++/FedPro declarations. Preserve the literal Table 5 names as source provenance; no API binding is inferred from the anomalous tokens.",
       "api_surface_scope": "cross-cutting",
       "api_surface_note": "Table structure is not itself a callable API mapping.",
       "api_surface_resolution": "strict",

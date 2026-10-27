@@ -6,6 +6,7 @@ import argparse
 import json
 import re
 from collections import Counter, defaultdict
+from itertools import pairwise
 from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
@@ -53,7 +54,11 @@ def sentence_matches(root: Path) -> tuple[list[dict[str, object]], Counter[str]]
             continue
         path = requirement.source.path
         anchor = requirement.source.line
-        matched = [item for item in by_path[path] if item.source.line <= anchor <= (item.source.end_line or item.source.line)]
+        matched = [
+            item
+            for item in by_path[path]
+            if item.source.line <= anchor <= (item.source.end_line or item.source.line)
+        ]
         if len(matched) != 1 or anchor not in events[path]:
             counts["no_unique_passage"] += 1
             continue
@@ -85,8 +90,14 @@ def sentence_matches(root: Path) -> tuple[list[dict[str, object]], Counter[str]]
             counts["no_shall_on_anchor"] += 1
             continue
         target = anchored[0] + shall.start()
-        cuts = [0, *[m.end() for m in re.finditer(r"(?<=[.!?])\s+(?=[A-Z(])", passage_text)], len(passage_text)]
-        sentence = next(((start, end) for start, end in zip(cuts, cuts[1:]) if start <= target < end), None)
+        cuts = [
+            0,
+            *[m.end() for m in re.finditer(r"(?<=[.!?])\s+(?=[A-Z(])", passage_text)],
+            len(passage_text),
+        ]
+        sentence = next(
+            ((start, end) for start, end in pairwise(cuts) if start <= target < end), None
+        )
         if sentence is None:
             counts["no_sentence"] += 1
             continue
@@ -107,9 +118,22 @@ def sentence_matches(root: Path) -> tuple[list[dict[str, object]], Counter[str]]
         }
         rows.append(row)
         counts["mapped"] += 1
-    by_sentence = Counter((row["path"], row["new_source"]["line"], row["new_source"]["end_line"], row["new_statement"]) for row in rows)
+    by_sentence = Counter(
+        (
+            row["path"],
+            row["new_source"]["line"],
+            row["new_source"]["end_line"],
+            row["new_statement"],
+        )
+        for row in rows
+    )
     for row in rows:
-        row["duplicate_count"] = by_sentence[row["path"], row["new_source"]["line"], row["new_source"]["end_line"], row["new_statement"]]
+        row["duplicate_count"] = by_sentence[
+            row["path"],
+            row["new_source"]["line"],
+            row["new_source"]["end_line"],
+            row["new_statement"],
+        ]
     counts["unique_sentences"] = sum(row["duplicate_count"] == 1 for row in rows)
     counts["duplicate_sentences"] = sum(row["duplicate_count"] > 1 for row in rows)
     return rows, counts

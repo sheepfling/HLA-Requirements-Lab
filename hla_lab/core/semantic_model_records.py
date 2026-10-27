@@ -216,9 +216,7 @@ def _collect_fixed_text_headings(
     for offset, args, end_offset in _command_events(text, source.fixed_text_block, 7):
         parts = _fixed_text_heading_parts(args[-1], source, args[3])
         if parts is None and r"\textbf" in args[-1]:
-            annex = re.fullmatch(
-                r"Annex\s+([A-Za-z])", _latex_text(args[-1], source).strip("% \n")
-            )
+            annex = re.fullmatch(r"Annex\s+([A-Za-z])", _latex_text(args[-1], source).strip("% \n"))
             if annex is not None:
                 letter = annex.group(1).upper()
                 parts = (f"clause-{letter}", f"Annex {letter}")

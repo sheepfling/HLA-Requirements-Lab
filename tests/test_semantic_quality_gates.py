@@ -104,7 +104,10 @@ class SemanticQualityGateTests(unittest.TestCase):
             all(item.review_status in {"RESOLVED", "DISPOSITIONED"} for item in ledger.entries)
         )
         self.assertTrue(
-            all(item.resolution and item.mapping_effect and item.evidence_refs for item in ledger.entries)
+            all(
+                item.resolution and item.mapping_effect and item.evidence_refs
+                for item in ledger.entries
+            )
         )
 
 

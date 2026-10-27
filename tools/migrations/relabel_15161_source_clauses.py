@@ -69,7 +69,10 @@ def relabel(root: Path, *, check: bool) -> int:
                 }
             )
         )
-    count = sum(before.clause != after.clause for before, after in zip(document.requirements, changed))
+    count = sum(
+        before.clause != after.clause
+        for before, after in zip(document.requirements, changed, strict=True)
+    )
     if not check and count:
         payload = document.model_copy(update={"requirements": tuple(changed)}).model_dump(
             mode="json", exclude_unset=True

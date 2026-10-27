@@ -234,9 +234,7 @@ DECISIONS = {
             "Keep source page numbers as provenance and use semantic figure anchors where a "
             "figure is modeled; do not claim a source page is a generated PDF page."
         ),
-        "mapping_effect": (
-            "No requirement or API mapping depends on Annex H pagination."
-        ),
+        "mapping_effect": ("No requirement or API mapping depends on Annex H pagination."),
         "evidence_refs": ["content-elements.json: content-15161-page-435"],
     },
     "hla15161-figure-4-artwork-mapping": {
@@ -334,22 +332,31 @@ def resolve(root: Path, workspace_root: Path) -> None:
     requirement_path = root / "semantic/requirements.json"
     requirements = RequirementFile.model_validate_json(requirement_path.read_text(encoding="utf-8"))
     target_id = "requirement-candidate-table-5-p297-r007"
-    requirements = requirements.model_copy(update={
-        "requirements": tuple(
-            item.model_copy(update={
-                "coverage_note": (
-                    "Table 5 likely contains an editorial typo: semantic type 20 is "
-                    "FederateRestoreStatusSet containing FederateRestoreStatus (type 19), "
-                    "corroborated by Table 14 and Java/C++/FedPro declarations. Preserve the "
-                    "literal Table 5 names as source provenance; no API binding is inferred from "
-                    "the anomalous tokens."
+    requirements = requirements.model_copy(
+        update={
+            "requirements": tuple(
+                item.model_copy(
+                    update={
+                        "coverage_note": (
+                            "Table 5 likely contains an editorial typo: use FederateRestoreStatusSet "
+                            "(type 20) with FederateRestoreStatus (type 19), "
+                            "corroborated by Table 14 and Java/C++/FedPro declarations. Preserve the "
+                            "literal Table 5 names as source provenance; no API binding is inferred from "
+                            "the anomalous tokens."
+                        )
+                    }
                 )
-            }) if item.id == target_id else item
-            for item in requirements.requirements
-        )
-    })
+                if item.id == target_id
+                else item
+                for item in requirements.requirements
+            )
+        }
+    )
     requirement_path.write_text(
-        json.dumps(requirements.model_dump(mode="json", exclude_unset=True), ensure_ascii=False, indent=2) + "\n",
+        json.dumps(
+            requirements.model_dump(mode="json", exclude_unset=True), ensure_ascii=False, indent=2
+        )
+        + "\n",
         encoding="utf-8",
     )
     backflow_note = (
@@ -361,17 +368,10 @@ def resolve(root: Path, workspace_root: Path) -> None:
         "text and do not invent API symbols from it. No IEEE correction was found, so this is a "
         "semantic mapping resolution, not a publisher correction."
     )
-    for ledger_path in (
-        workspace_root / "data/hla-backflow-2026-10-24.json",
-        workspace_root / "data/hla-backflow-export-delta-2026-10-25.json",
-    ):
-        if not ledger_path.is_file():
-            continue
+    ledger_path = workspace_root / "data/hla-backflow-2026-10-24.json"
+    if ledger_path.is_file():
         backflow = json.loads(ledger_path.read_text(encoding="utf-8"))
-        issue_list = backflow.get("issues", []) if isinstance(backflow, dict) else []
-        if ledger_path.name == "hla-backflow-export-delta-2026-10-25.json":
-            issue_list = backflow.get("issues", backflow.get("entries", []))
-        for issue in issue_list:
+        for issue in backflow.get("issues", []):
             if issue.get("id") == "RL-369":
                 issue["resolution_note"] = backflow_note
         ledger_path.write_text(

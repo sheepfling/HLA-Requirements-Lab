@@ -42,9 +42,9 @@ REVIEW_TITLES = {
     "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l43-14": "FDD validity under the XML Schema",
     "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l46-15": "RTI support for valid FDDs",
 }
-REVIEW_TITLES[
-    "requirement-candidate-content-clauses-01-overview-page-018-l4-1"
-] = "At most one federate or the RTI shall update an attribute"
+REVIEW_TITLES["requirement-candidate-content-clauses-01-overview-page-018-l4-1"] = (
+    "At most one federate or the RTI shall update an attribute"
+)
 
 ANNEX_E_REASON = (
     "Annex E is labeled normative, but its E.1 overview explicitly says that nothing in the "

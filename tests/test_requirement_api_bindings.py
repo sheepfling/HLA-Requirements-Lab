@@ -57,12 +57,12 @@ class RequirementApiBindingTests(unittest.TestCase):
 
     def test_required_service_rules_select_source_backed_declarations(self) -> None:
         matched_ids = {
-            item.requirement_id for item in self.model.requirement_api_bindings
+            item.requirement_id
+            for item in self.model.requirement_api_bindings
             if item.status == "matched"
         }
         required_ids = {
-            item.id for item in self.model.requirements
-            if item.api_surface_scope == "required"
+            item.id for item in self.model.requirements if item.api_surface_scope == "required"
         }
         self.assertFalse(required_ids - matched_ids)
         surfaces = {item.id: item for item in self.model.api_surfaces}
@@ -73,10 +73,16 @@ class RequirementApiBindingTests(unittest.TestCase):
             if item.api_surface_id
         }
         self.assertEqual(create_names, {"createFederationExecution"})
-        rejection = self.model.api_bindings_for_requirement("req-fom-module-reject-attribute-conflict")
+        rejection = self.model.api_bindings_for_requirement(
+            "req-fom-module-reject-attribute-conflict"
+        )
         self.assertEqual(
             {surfaces[item.api_surface_id].name for item in rejection if item.api_surface_id},
-            {"createFederationExecution", "createFederationExecutionWithMIM", "joinFederationExecution"},
+            {
+                "createFederationExecution",
+                "createFederationExecutionWithMIM",
+                "joinFederationExecution",
+            },
         )
 
     def test_requirement_query_exposes_both_language_declarations(self) -> None:

@@ -2,28 +2,28 @@
 
 from __future__ import annotations
 
-import unittest
 import json
 import re
+import unittest
 from collections import Counter
 
 from hla_lab.core.hla_profile import HLA_SOURCE
+from hla_lab.core.semantic_model import load_document_model
 from hla_lab.core.semantic_model_records import _load_requirement_candidates
 from hla_lab.core.semantic_text import _machine_statement
-from hla_lab.core.semantic_model import load_document_model
 from hla_lab.publication.export_compliance_bundle import _document
 from tests.support import TEST_REPO_ROOT
 from tools.migrations.relabel_15161_source_clauses import source_clause_owners
-from tools.migrations.repair_15161_shared_sentences import REPAIRS as SHARED_SENTENCE_REPAIRS
-from tools.migrations.repair_15161_mom_fragments import REPAIRS as MOM_REPAIRS
 from tools.migrations.repair_15161_cross_page import FIRST as CROSS_PAGE_ID
 from tools.migrations.repair_15161_java_annex import ADDED as JAVA_ADDED
 from tools.migrations.repair_15161_java_annex import PREFIX as JAVA_PREFIX
 from tools.migrations.repair_15161_java_annex import REPAIRS as JAVA_REPAIRS
+from tools.migrations.repair_15161_mom_fragments import REPAIRS as MOM_REPAIRS
 from tools.migrations.repair_15161_reviewed_fragments import ADDED as REVIEWED_ADDED
 from tools.migrations.repair_15161_reviewed_fragments import COMPOUND_SPLITS
 from tools.migrations.repair_15161_reviewed_fragments import PREFIX as REVIEWED_PREFIX
 from tools.migrations.repair_15161_reviewed_fragments import REPAIRS as REVIEWED_REPAIRS
+from tools.migrations.repair_15161_shared_sentences import REPAIRS as SHARED_SENTENCE_REPAIRS
 
 
 class RequirementCandidateBoundaryTests(unittest.TestCase):
@@ -74,7 +74,8 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
         model = load_document_model(root, HLA_SOURCE)
         layouts = {
             block.source.path: block.layout_body.splitlines()
-            for block in model.content_blocks if block.layout_body
+            for block in model.content_blocks
+            if block.layout_body
         }
         by_id = {item.id: item for item in model.requirements}
         for base_suffix, pieces in COMPOUND_SPLITS.items():
@@ -86,8 +87,11 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
                     record = by_id[identifier]
                     self.assertEqual(record.statement, statement)
                     self.assertEqual((record.source.line, record.source.end_line), (start, end))
-                    source_lines = layouts[record.source.path][start - 1:end]
-                    self.assertRegex(_machine_statement(" ".join(source_lines), HLA_SOURCE), r"\bshall\b")
+                    source_lines = layouts[record.source.path][start - 1 : end]
+                    self.assertRegex(
+                        _machine_statement(" ".join(source_lines), HLA_SOURCE), r"\bshall\b"
+                    )
+
     def test_java_annex_obligations_are_complete_and_source_traced(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
         model = load_document_model(root, HLA_SOURCE)
@@ -117,13 +121,16 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
         bundle = _document(model)
         exported = next(item for item in bundle.requirements if item.id == CROSS_PAGE_ID)
         self.assertEqual(len(exported.additional_sources), 1)
-        self.assertEqual(exported.additional_sources[0].path, requirement.additional_sources[0].path)
+        self.assertEqual(
+            exported.additional_sources[0].path, requirement.additional_sources[0].path
+        )
 
     def test_restore_status_enumeration_traces_continuation_page(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
         model = load_document_model(root, HLA_SOURCE)
         requirement = next(
-            item for item in model.requirements
+            item
+            for item in model.requirements
             if item.id.endswith("04-federation-management-page-079-l158-43")
         )
         self.assertIn("Federate waiting for federation to restore", requirement.statement)
@@ -133,10 +140,22 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
     def test_table_order_type_introductions_are_reviewed_pointers(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
         model = load_document_model(root, HLA_SOURCE)
-        candidates = {item.id: item for item in model.requirements if item.extraction == "candidate"}
-        self.assertEqual(len(candidates), 2)
+        candidates = {
+            item.id: item for item in model.requirements if item.extraction == "candidate"
+        }
+        self.assertEqual(len(candidates), 12)
+        table_introductions = {
+            key: item
+            for key, item in candidates.items()
+            if key.endswith("page-181-l115-2") or key.endswith("page-181-l118-3")
+        }
+        self.assertEqual(len(table_introductions), 2)
         for suffix, table in (("l115-2", "Table 2"), ("l118-3", "Table 3")):
-            record = next(item for key, item in candidates.items() if key.endswith("page-181-" + suffix))
+            record = next(
+                item
+                for key, item in table_introductions.items()
+                if key.endswith("page-181-" + suffix)
+            )
             self.assertTrue(record.statement.startswith(table + " illustrates"))
             self.assertEqual(len(record.additional_sources), 1)
             self.assertTrue(record.additional_sources[0].path.endswith("page-181.tex"))
@@ -144,13 +163,20 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
 
     def test_merged_disconnect_id_has_a_canonical_alias(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
-        aliases = json.loads((root / "semantic/requirement-id-aliases.json").read_text(encoding="utf-8"))["aliases"]
+        aliases = json.loads(
+            (root / "semantic/requirement-id-aliases.json").read_text(encoding="utf-8")
+        )["aliases"]
         self.assertIn(
             {
-                "alias_id": "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15",
+                "alias_id": (
+                    "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15"
+                ),
                 "canonical_id": "req-federate-disconnect-after-resign",
                 "relation": "merged",
-                "reason": "Exact duplicate of the authored Disconnect transition requirement; its full printed sentence is retained by the canonical record.",
+                "reason": (
+                    "Exact duplicate of the authored Disconnect transition requirement; its full "
+                    "printed sentence is retained by the canonical record."
+                ),
             },
             aliases,
         )
@@ -164,7 +190,9 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
     def test_promoted_candidates_follow_visible_source_headings(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
         owners = source_clause_owners(root)
-        requirements = json.loads((root / "semantic/requirements.json").read_text(encoding="utf-8"))["requirements"]
+        requirements = json.loads(
+            (root / "semantic/requirements.json").read_text(encoding="utf-8")
+        )["requirements"]
         for record in requirements:
             if not record["id"].startswith(
                 ("requirement-candidate-content-clauses-", "requirement-source-refinement-")
@@ -178,13 +206,19 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
 
     def test_page_48_rejection_cases_are_atomic_and_traced(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
-        requirements = json.loads((root / "semantic/requirements.json").read_text(encoding="utf-8"))["requirements"]
-        bindings = json.loads((root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8"))["bindings"]
+        requirements = json.loads(
+            (root / "semantic/requirements.json").read_text(encoding="utf-8")
+        )["requirements"]
+        bindings = json.loads(
+            (root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8")
+        )["bindings"]
         by_id = {record["id"]: record for record in requirements}
         bindings_by_id = {}
         for binding in bindings:
             bindings_by_id.setdefault(binding["requirement_id"], []).append(binding)
-        cases = [identifier for identifier in by_id if identifier.startswith("req-fom-module-reject-")]
+        cases = [
+            identifier for identifier in by_id if identifier.startswith("req-fom-module-reject-")
+        ]
         self.assertEqual(len(cases), 7)
         for identifier in cases:
             with self.subTest(requirement=identifier):
@@ -193,12 +227,18 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
                 self.assertTrue(record["statement"].endswith("."))
                 self.assertEqual(record["statement"].count("shall"), 1)
                 self.assertEqual({row["status"] for row in bindings_by_id[identifier]}, {"matched"})
-                self.assertEqual({row["language"] for row in bindings_by_id[identifier]}, {"cpp", "java"})
+                self.assertEqual(
+                    {row["language"] for row in bindings_by_id[identifier]}, {"cpp", "java"}
+                )
 
     def test_reviewed_shared_sentence_obligations_are_atomic(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
-        requirements = json.loads((root / "semantic/requirements.json").read_text(encoding="utf-8"))["requirements"]
-        bindings = json.loads((root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8"))["bindings"]
+        requirements = json.loads(
+            (root / "semantic/requirements.json").read_text(encoding="utf-8")
+        )["requirements"]
+        bindings = json.loads(
+            (root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8")
+        )["bindings"]
         by_id = {record["id"]: record for record in requirements}
         bindings_by_id = {}
         for binding in bindings:
@@ -208,15 +248,25 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
             with self.subTest(requirement=identifier):
                 record = by_id[identifier]
                 self.assertEqual(record["statement"], statement)
-                self.assertEqual((record["source"]["line"], record["source"]["end_line"]), (start, end))
+                self.assertEqual(
+                    (record["source"]["line"], record["source"]["end_line"]), (start, end)
+                )
                 self.assertEqual(len(re.findall(r"\bshall\b", statement)), 1)
                 self.assertIn(identifier, bindings_by_id)
 
     def test_mom_list_fragments_are_complete_and_traced(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
-        requirements = json.loads((root / "semantic/requirements.json").read_text(encoding="utf-8"))["requirements"]
-        bindings = json.loads((root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8"))["bindings"]
-        by_page = {record["id"].rsplit("page-", 1)[-1]: record for record in requirements if "page-" in record["id"]}
+        requirements = json.loads(
+            (root / "semantic/requirements.json").read_text(encoding="utf-8")
+        )["requirements"]
+        bindings = json.loads(
+            (root / "semantic/api-requirement-bindings.json").read_text(encoding="utf-8")
+        )["bindings"]
+        by_page = {
+            record["id"].rsplit("page-", 1)[-1]: record
+            for record in requirements
+            if "page-" in record["id"]
+        }
         binding_by_id = {record["requirement_id"]: record for record in bindings}
         for suffix, (statement, start, end) in MOM_REPAIRS.items():
             if any(key.endswith(suffix) for key in REVIEWED_REPAIRS):
@@ -224,7 +274,9 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
             with self.subTest(requirement=suffix):
                 record = by_page[suffix]
                 self.assertEqual(record["statement"], statement)
-                self.assertEqual((record["source"]["line"], record["source"]["end_line"]), (start, end))
+                self.assertEqual(
+                    (record["source"]["line"], record["source"]["end_line"]), (start, end)
+                )
                 self.assertTrue(statement.endswith((".", ":")))
                 self.assertIn(record["id"], binding_by_id)
 

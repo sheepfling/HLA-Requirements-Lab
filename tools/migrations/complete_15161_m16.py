@@ -759,11 +759,7 @@ def _authored_requirements(
     model: object,
     candidates: Sequence[Requirement],
 ) -> tuple[dict[str, Requirement], tuple[Requirement, ...], tuple[Requirement, ...]]:
-    authored = {
-        item.id: item
-        for item in model.requirements
-        if item.extraction == "explicit"
-    }
+    authored = {item.id: item for item in model.requirements if item.extraction == "explicit"}
     refinements = (*_source_refinement_requirements(), *_table_5_row_requirements(model))
     authored.update({item.id: item for item in refinements})
     # Promoted candidates are curated records. New extractor behavior must not

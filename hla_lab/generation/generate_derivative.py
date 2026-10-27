@@ -99,7 +99,10 @@ def _requirement_heading(requirement: Requirement) -> str:
     if not requirement.title.casefold().startswith("normative statement at "):
         return requirement.title
     sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", " ".join(requirement.statement.split()))
-    lead = next((sentence for sentence in sentences if re.search(r"\bshall\b", sentence, re.I)), sentences[0])
+    lead = next(
+        (sentence for sentence in sentences if re.search(r"\bshall\b", sentence, re.I)),
+        sentences[0],
+    )
     lead = lead.strip().rstrip(".:;!?")
     if len(lead) > 112:
         lead = lead[:110].rsplit(" ", 1)[0].rstrip(" ,;:") + "…"
@@ -742,4 +745,8 @@ if __name__ == "__main__":
     parser.add_argument("roots", nargs="+", type=Path)
     parser.add_argument("--workspace-root", type=Path, required=True)
     arguments = parser.parse_args()
-    print(generate_from_hla(arguments.roots, arguments.output, workspace_root=arguments.workspace_root))
+    print(
+        generate_from_hla(
+            arguments.roots, arguments.output, workspace_root=arguments.workspace_root
+        )
+    )

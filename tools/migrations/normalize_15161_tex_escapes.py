@@ -7,7 +7,11 @@ import json
 from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
-from hla_lab.core.semantic_model import RequirementApiBindingFile, RequirementFile, load_document_model
+from hla_lab.core.semantic_model import (
+    RequirementApiBindingFile,
+    RequirementFile,
+    load_document_model,
+)
 from hla_lab.core.semantic_text import _machine_statement
 from hla_lab.corpus.api_crosswalk import build_requirement_api_bindings
 from tools.migrations.workspace import document_root
@@ -27,21 +31,41 @@ def normalize(root: Path) -> int:
             updated.append(requirement)
             continue
         statement = _machine_statement(requirement.statement, HLA_SOURCE).rstrip("\\").rstrip()
-        updated.append(requirement.model_copy(update={
-            "statement": statement,
-            "machine_statement": statement,
-        }))
+        updated.append(
+            requirement.model_copy(
+                update={
+                    "statement": statement,
+                    "machine_statement": statement,
+                }
+            )
+        )
         count += 1
     if count:
         path.write_text(
-            json.dumps(document.model_copy(update={"requirements": tuple(updated)}).model_dump(mode="json", exclude_unset=True), ensure_ascii=False, indent=2) + "\n",
+            json.dumps(
+                document.model_copy(update={"requirements": tuple(updated)}).model_dump(
+                    mode="json", exclude_unset=True
+                ),
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
             encoding="utf-8",
         )
         binding_path = root / "semantic/api-requirement-bindings.json"
-        binding_file = RequirementApiBindingFile.model_validate_json(binding_path.read_text(encoding="utf-8"))
+        binding_file = RequirementApiBindingFile.model_validate_json(
+            binding_path.read_text(encoding="utf-8")
+        )
         model = load_document_model(root, HLA_SOURCE)
         binding_path.write_text(
-            json.dumps(binding_file.model_copy(update={"bindings": build_requirement_api_bindings(model)}).model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
+            json.dumps(
+                binding_file.model_copy(
+                    update={"bindings": build_requirement_api_bindings(model)}
+                ).model_dump(mode="json"),
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
             encoding="utf-8",
         )
     print(f"Normalized {count} requirement statements")

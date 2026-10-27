@@ -94,8 +94,10 @@ class DerivativeTests(unittest.TestCase):
     def test_source_derived_requirement_uses_substantive_heading(self) -> None:
         model = next(item for item in self.models if item.document_id == "hla-1516.1-2025")
         requirement = next(
-            item for item in model.requirements
-            if item.id.startswith("requirement-candidate-content-clauses-") and "shall" in item.statement
+            item
+            for item in model.requirements
+            if item.id.startswith("requirement-candidate-content-clauses-")
+            and "shall" in item.statement
         )
         heading = _requirement_heading(requirement)
         self.assertIn("shall", heading)

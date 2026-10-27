@@ -63,6 +63,8 @@ select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
 
 [tool.ruff.lint.per-file-ignores]
 "topics/_template/**/*.py" = ["T201"]
+# Source-repair migrations embed long, typographically exact source fragments.
+"tools/migrations/*.py" = ["E501", "RUF001"]
 
 [tool.pyright]
 include = ["hla_lab", "tools", "topics"]

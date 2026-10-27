@@ -191,7 +191,9 @@ class DocumentModelTests(unittest.TestCase):
             "requirement-source-refinement-mom-service-report-file": "clause-11.6",
             "requirement-source-refinement-time-constrained-save-boundary": "clause-4.20",
             "requirement-source-refinement-connection-loss-automatic-resign": "clause-4.1.6",
-            "requirement-source-refinement-guard-and-cross-machine-state-constraints": "clause-4.1.1",
+            (
+                "requirement-source-refinement-guard-and-cross-machine-state-constraints"
+            ): "clause-4.1.1",
             "requirement-source-refinement-service-exception-precedence": "clause-1.6",
             "requirement-source-refinement-object-state-completeness": "clause-1.4.1",
         }
