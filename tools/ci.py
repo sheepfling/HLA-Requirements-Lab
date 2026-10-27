@@ -59,7 +59,6 @@ def quality_commands(
         ruff_format,
         _python(python, "-m", "pyright", "--pythonpath", python),
         _python(python, "-m", "compileall", "-q", "hla_lab", "tools", "topics"),
-        _python(python, "-m", "hla_lab.cli", "test", "--parallel"),
         _python(python, "-m", "hla_lab.build.build", "list"),
         _python(python, "-m", "hla_lab.reports.semantic_metrics", "--json"),
         _python(python, "-m", "hla_lab.reports.semantic_dashboard", "--json"),
@@ -146,6 +145,9 @@ def quality_commands(
             "--json",
         ),
         _python(python, "-m", "hla_lab.diagrams.rti_diagram_check", hla_topic, "--json"),
+        # Tests consume generated semantic table and diagram artifacts. Prepare
+        # those outputs above so a clean CI checkout behaves like a built workspace.
+        _python(python, "-m", "hla_lab.cli", "test", "--parallel"),
     )
     if not fix:
         commands += (("git", "diff", "--exit-code"),)
