@@ -38,6 +38,7 @@ def test_quality_commands_match_the_repository_contract() -> None:
         "generate",
         "--root",
         str(TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"),
+        "--skip-assets",
     ) in commands
     assert commands[-1] == ("git", "diff", "--exit-code")
 
