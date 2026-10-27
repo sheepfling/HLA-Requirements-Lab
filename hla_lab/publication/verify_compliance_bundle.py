@@ -299,7 +299,7 @@ def _verified_binding_keys(
     binding_by_key: Mapping[tuple[str, str, str], ImplementationBinding],
     passing_evidence_ids: AbstractSet[str],
     failed_evidence_ids: AbstractSet[str],
-    accepted_real_evidence_ids: AbstractSet[str],
+    qualifying_evidence_ids: AbstractSet[str],
     selected_crosswalks_by_key: Mapping[tuple[str, str, str], BundleCrosswalk],
 ) -> tuple[set[tuple[str, str, str]], set[tuple[str, str, str]]]:
     tested_keys: set[tuple[str, str, str]] = set()
@@ -322,7 +322,7 @@ def _verified_binding_keys(
                 and crosswalk is not None
                 and crosswalk.status == "matched"
                 and set(binding.api_surface_ids) == selected_surfaces
-                and evidence_ids & accepted_real_evidence_ids
+                and evidence_ids & qualifying_evidence_ids
             ):
                 verified_keys.add(key)
     return tested_keys, verified_keys
@@ -397,6 +397,13 @@ def verify(
         for item in manifest.evidence
         if item.review_status == "accepted" and item.execution_mode == "real"
     }
+    qualifying_evidence_ids = {
+        item.id
+        for item in manifest.evidence
+        if item.status in {"passed", "observed"}
+        and item.review_status == "accepted"
+        and item.execution_mode == "real"
+    }
     unaccepted_evidence_ids = {
         item.id for item in manifest.evidence if item.review_status != "accepted"
     }
@@ -406,7 +413,7 @@ def verify(
         binding_by_key,
         passing_evidence_ids,
         failed_evidence_ids,
-        accepted_real_evidence_ids,
+        qualifying_evidence_ids,
         selected_crosswalks_by_key,
     )
 
@@ -422,7 +429,18 @@ def verify(
             covered.update((document_id, identifier) for identifier in getattr(mapping, field))
         return covered
 
-    verified_requirement_keys = covered_semantic_keys(verified_keys, "requirement_ids")
+    verified_requirement_keys: set[tuple[str, str]] = set()
+    for key in verified_keys:
+        binding = binding_by_key[key]
+        mapping = mappings_by_key[(key[0], key[1])]
+        for evidence_id in set(binding.evidence_ids) & qualifying_evidence_ids:
+            evidence = evidence_by_id[evidence_id]
+            requirement_ids = evidence.requirement_ids or mapping.requirement_ids
+            verified_requirement_keys.update(
+                (key[0], identifier)
+                for identifier in requirement_ids
+                if identifier in mapping.requirement_ids
+            )
     verified_transition_keys = covered_semantic_keys(verified_keys, "transition_ids")
     verified_api_surface_keys = {
         (document_id, surface_id)

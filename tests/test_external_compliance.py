@@ -189,6 +189,79 @@ class ExternalComplianceTests(unittest.TestCase):
         )
         self.assertEqual(result.coverage.non_real_evidence_ids, ("evidence-1",))
 
+    def test_requirement_coverage_uses_requirements_named_by_accepted_evidence(self) -> None:
+        bundle = _bundle()
+        document = bundle.documents[0]
+        second_requirement = BundleRequirement(
+            id="req-2",
+            clause_id="clause-2",
+            title="Disconnect",
+            statement="The RTI shall disconnect.",
+        )
+        second_transition = BundleTransition(
+            id="transition-2",
+            machine_id="machine-1",
+            event="Disconnect",
+            requirement_ids=("req-2",),
+        )
+        mapping = document.mappings[0].model_copy(
+            update={
+                "requirement_ids": ("req-1", "req-2"),
+                "transition_ids": ("transition-1", "transition-2"),
+            }
+        )
+        document = document.model_copy(
+            update={
+                "requirements": (*document.requirements, second_requirement),
+                "transitions": (*document.transitions, second_transition),
+                "mappings": (mapping,),
+            }
+        )
+        bundle = bundle.model_copy(update={"documents": (document,)})
+        manifest = _manifest().model_copy(
+            update={
+                "evidence": (
+                    _manifest().evidence[0].model_copy(update={"requirement_ids": ("req-1",)}),
+                )
+            }
+        )
+
+        result = verify(bundle, manifest)
+
+        self.assertTrue(result.passed)
+        self.assertEqual(result.coverage.requirements_with_verified_evidence_count, 1)
+        self.assertEqual(result.coverage.requirement_coverage, 0.5)
+        self.assertEqual(result.coverage.untested_requirement_ids, ("doc-1:req-2",))
+        self.assertFalse(result.coverage.fully_verified)
+
+    def test_verified_coverage_requires_one_evidence_record_to_qualify(self) -> None:
+        manifest = _manifest().model_copy(
+            update={
+                "bindings": (
+                    _manifest()
+                    .bindings[0]
+                    .model_copy(update={"evidence_ids": ("mock-pass", "real-planned")}),
+                ),
+                "evidence": (
+                    _manifest()
+                    .evidence[0]
+                    .model_copy(update={"id": "mock-pass", "execution_mode": "mocked"}),
+                    _manifest()
+                    .evidence[0]
+                    .model_copy(update={"id": "real-planned", "status": "planned"}),
+                ),
+            }
+        )
+
+        result = verify(_bundle(), manifest)
+
+        self.assertFalse(result.passed)
+        self.assertEqual(result.coverage.tested_binding_count, 1)
+        self.assertEqual(result.coverage.verified_binding_count, 0)
+        self.assertEqual(result.coverage.binding_coverage, 0)
+        self.assertEqual(result.coverage.requirements_with_verified_evidence_count, 0)
+        self.assertEqual(result.coverage.api_surfaces_with_verified_evidence_count, 0)
+
     def test_accepted_evidence_requires_a_reviewer_and_timestamp(self) -> None:
         with self.assertRaisesRegex(ValueError, "must name a reviewer"):
             EvidenceRecord(
