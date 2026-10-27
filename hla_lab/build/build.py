@@ -56,8 +56,18 @@ def run_document(path: Path, action: str) -> None:
         item for item in manifest.projects if item.root.replace("\\", "/") == relative_root
     )
     if project.build is None:
-        # Fixtures are part of the corpus and must remain discoverable, but
-        # they intentionally do not participate in the publication build.
+        # Generic fixture projects own a small local build adapter rather
+        # than HLA-specific manifest settings. Run that adapter so release
+        # checks can validate their declared PDF and log just like other
+        # projects.
+        if project.kind == "fixture":
+            print(f"[{action}] {path.relative_to(workspace)} (fixture adapter)")
+            subprocess.run(
+                [sys.executable, str(path / "build.py"), action],
+                cwd=path,
+                check=True,
+            )
+            return
         print(f"[skip {action}] {path.relative_to(workspace)} (no release build settings)")
         return
     print(f"[{action}] {path.relative_to(workspace)}")

@@ -140,7 +140,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2010",
       "pdf": "dist/hla-semantic-derivative-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 1079,
+      "expected_pages": 1054,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -153,7 +153,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 1389,
+      "expected_pages": 1368,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -166,7 +166,7 @@
       "root": "topics/ieee/hla-rti-compliance-2025",
       "pdf": "dist/hla-rti-compliance-requirements-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 756,
+      "expected_pages": 880,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",
@@ -179,7 +179,7 @@
       "root": "topics/ieee/hla-rti-compliance-2010",
       "pdf": "dist/hla-rti-compliance-requirements-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 690,
+      "expected_pages": 742,
       "kind": "derivative",
       "build": {
         "strategy": "compliance",

@@ -138,6 +138,7 @@ GENERATED_SUFFIXES = frozenset(
 )
 GENERATED_PARTS = frozenset({"build", "dist", "output", ".tmp", "reviews", "review-artifacts"})
 SOURCE_BUILD_PATH = ("hla_lab", "build")
+REFERENCE_PARTS = frozenset({"prototype-reference"})
 
 
 def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
@@ -188,7 +189,10 @@ def _tracked_generated(repo_root: Path) -> list[str]:
                 Path(path).parts[: len(SOURCE_BUILD_PATH)] != SOURCE_BUILD_PATH
                 and GENERATED_PARTS.intersection(Path(path).parts)
             )
-            or Path(path).suffix in GENERATED_SUFFIXES
+            or (
+                Path(path).suffix in GENERATED_SUFFIXES
+                and not REFERENCE_PARTS.intersection(Path(path).parts)
+            )
         )
     )
 
