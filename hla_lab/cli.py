@@ -258,7 +258,7 @@ def _map(command: MapCommand) -> int:
     table.add_column("Requirement API bindings")
     for item in documents:
         table.add_row(
-            f"{item['document']}\\n[dim]{item['root']}[/dim]",
+            f"{item['document']} ({item['root']})",
             str(item["requirements"]),
             _format_optional_count(item["requirement_links"]),
             _format_optional_counts(item["implementations"]),
