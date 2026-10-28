@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from hla_lab.build.topic import project_config
 from hla_lab.cli import main
+from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.core.hla_profile import source_profile_for_document
 from hla_lab.paths import DOCUMENT_IDS, RESOURCES, document_roots, resources
 
@@ -112,6 +113,25 @@ def test_document_resources_and_identities_come_from_selected_catalog(tmp_path: 
     (tmp_path / "topics" / "alternate" / "standard-9").mkdir(parents=True)
     assert document_roots(tmp_path) == (tmp_path / "topics" / "alternate" / "standard-9",)
     assert DOCUMENT_IDS != ("alternate-standard-9",)
+
+
+def test_hla_loader_uses_catalog_identity_when_directory_name_differs(tmp_path: Path) -> None:
+    _write_document_manifest(tmp_path, profile_id="alternate-hla-profile")
+    document_root = tmp_path / "topics" / "alternate" / "standard-9"
+    document_root.mkdir(parents=True)
+
+    with (
+        patch("hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=object()) as profile,
+        patch("hla_lab.corpus.hla_semantic.load_hla_api_owners", return_value={}),
+        patch("hla_lab.corpus.hla_semantic.load_document_model", return_value=object()),
+        patch(
+            "hla_lab.corpus.hla_semantic.build_hla_surface_contract",
+            side_effect=lambda model, api_owners: model,
+        ),
+    ):
+        load_hla_document_model(document_root, tmp_path)
+
+    profile.assert_called_once_with("alternate-standard-9", tmp_path)
 
 
 def test_alternate_document_identity_resolves_its_selected_source_profile(tmp_path: Path) -> None:
