@@ -5,12 +5,16 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import subprocess
 import sys
 from collections import Counter
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
+
+from rich.console import Console
+from rich.table import Table
 
 from hla_lab.traceability.semantic_coverage import build_report
 from hla_lab.traceability.spec_readiness import assess_corpus
@@ -65,6 +69,13 @@ class TestCommand:
 
 
 DEFAULT_TEST_WORKERS = "4"
+_VERBOSE = False
+
+
+def _run_process(command: Sequence[str], *, cwd: Path = REPO_ROOT) -> int:
+    if _VERBOSE:
+        print(f"Running in {cwd}: {shlex.join(command)}", file=sys.stderr)
+    return subprocess.run(command, cwd=cwd, check=False).returncode
 
 
 def _test_workers() -> str:
@@ -231,43 +242,35 @@ def _map(command: MapCommand) -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
 
-    print("Semantic mapping overview")
-    print("  requirement-links.json stores one row per requirement-to-transition link.")
-    print("  implementations.json links requirements/transitions to implementation seams.")
-    print(
-        "  api-crosswalk.json maps those seams to API bindings; "
-        "requirement API bindings are separate."
+    console = Console()
+    console.print(
+        "[dim]Links connect requirements to transitions; implementation mappings describe "
+        "seams, API crosswalks map seams to API bindings, and requirement API bindings are "
+        "separate. Planned or partial mappings are not verified implementation evidence.[/dim]"
     )
-    print("  Planned or partial mappings are not verified implementation evidence.")
+    table = Table(title="Semantic mapping overview")
+    table.add_column("Document", style="cyan", no_wrap=True)
+    table.add_column("Requirements", justify="right")
+    table.add_column("Req → transitions", justify="right")
+    table.add_column("Implementation mappings")
+    table.add_column("API surfaces", justify="right")
+    table.add_column("API crosswalks")
+    table.add_column("Requirement API bindings")
     for item in documents:
-        print(f"\n{item['document']} ({item['root']})")
-        print(f"  requirements: {item['requirements']}  semantic/requirements.json")
-        print(
-            "  requirement-to-transition links: "
-            f"{_format_optional_count(item['requirement_links'])}  "
-            "semantic/requirement-links.json"
+        table.add_row(
+            f"{item['document']}\\n[dim]{item['root']}[/dim]",
+            str(item["requirements"]),
+            _format_optional_count(item["requirement_links"]),
+            _format_optional_counts(item["implementations"]),
+            _format_optional_count(item["api_surfaces"]),
+            _format_optional_counts(item["api_crosswalks"]),
+            _format_optional_counts(item["requirement_api_bindings"]),
         )
-        print(
-            f"  implementation mappings: {_format_optional_counts(item['implementations'])}  "
-            "semantic/implementations.json"
-        )
-        print(
-            f"  declared API surfaces: {_format_optional_count(item['api_surfaces'])}  "
-            "semantic/api-surfaces.json"
-        )
-        print(
-            f"  API crosswalks: {_format_optional_counts(item['api_crosswalks'])}  "
-            "semantic/api-crosswalk.json"
-        )
-        print(
-            f"  requirement API bindings: "
-            f"{_format_optional_counts(item['requirement_api_bindings'])}  "
-            "semantic/api-requirement-bindings.json"
-        )
+    console.print(table)
     return 0
 
 
-def _format_counts(values: dict[str, int]) -> str:
+def _format_counts(values: Mapping[str, int]) -> str:
     return ", ".join(f"{key}={value}" for key, value in values.items()) or "none"
 
 
@@ -275,7 +278,7 @@ def _format_optional_count(value: int | None) -> str:
     return "not present" if value is None else str(value)
 
 
-def _format_optional_counts(values: dict[str, int] | None) -> str:
+def _format_optional_counts(values: Mapping[str, int] | None) -> str:
     return "not present" if values is None else _format_counts(values)
 
 
@@ -286,7 +289,7 @@ def _mapping_records(
     corpus_root: Path = REPO_ROOT,
     *,
     required: bool = True,
-) -> list[dict[str, object]] | None:
+) -> list[Mapping[str, object]] | None:
     """Load one canonical JSON array for the read-only mapping overview."""
     path = root / "semantic" / filename
     if not path.is_file():
@@ -298,13 +301,13 @@ def _mapping_records(
         )
     payload = json.loads(path.read_text(encoding="utf-8"))
     records = payload.get(key) if isinstance(payload, dict) else None
-    if not isinstance(records, list) or any(not isinstance(record, dict) for record in records):
+    if not isinstance(records, list) or any(not isinstance(record, Mapping) for record in records):
         relative = path.relative_to(corpus_root).as_posix()
         raise ValueError(f"expected a JSON array named '{key}' in {relative}")
     return records
 
 
-def _mapping_status_counts(records: Sequence[dict[str, object]]) -> dict[str, int]:
+def _mapping_status_counts(records: Sequence[Mapping[str, object]]) -> dict[str, int]:
     return dict(
         sorted(Counter(str(record.get("status", "unspecified")) for record in records).items())
     )
@@ -349,7 +352,7 @@ def _matrix(edition: str, corpus_root: Path = REPO_ROOT) -> int:
         )
         return 2
 
-    result = subprocess.run(
+    result = _run_process(
         [
             sys.executable,
             "-m",
@@ -361,9 +364,8 @@ def _matrix(edition: str, corpus_root: Path = REPO_ROOT) -> int:
             str(repository.root),
         ],
         cwd=REPO_ROOT,
-        check=False,
     )
-    if result.returncode:
+    if result:
         print(
             f"Matrix generation failed for {edition}; check the compliance profile, release "
             "manifest, and canonical semantic source files named in the error above.",
@@ -403,24 +405,6 @@ def _matrix(edition: str, corpus_root: Path = REPO_ROOT) -> int:
 
 def _build_products(target: str) -> int:
     """Validate a document target, then use the repository's canonical builder."""
-    from hla_lab.build.build import resolve_targets
-
-    try:
-        targets = resolve_targets(target)
-    except SystemExit as error:
-        detail = error.code if isinstance(error.code, str) else "invalid document or topic path"
-        print(
-            f"Cannot generate document PDFs: {detail}. Run `hla-lab docs` to list document roots.",
-            file=sys.stderr,
-        )
-        return 2
-    if not targets:
-        print(
-            f"No document build roots found under {target!r}. Run `hla-lab docs` to list "
-            "available document roots.",
-            file=sys.stderr,
-        )
-        return 2
     result = _delegate("hla_lab.build.build", ("build", target))
     if result:
         print(
@@ -447,16 +431,12 @@ def _test(command: TestCommand) -> int:
         else []
     )
     pytest_command = [sys.executable, "-m", "pytest", *parallel, "tests", *command.pytest_args]
-    return subprocess.run(pytest_command, cwd=REPO_ROOT, check=False).returncode
+    return _run_process(pytest_command)
 
 
 def _delegate(module: str, arguments: Sequence[str]) -> int:
     """Run an owning module behind the stable user-facing command."""
-    return subprocess.run(
-        [sys.executable, "-m", module, *arguments],
-        cwd=REPO_ROOT,
-        check=False,
-    ).returncode
+    return _run_process([sys.executable, "-m", module, *arguments])
 
 
 def _add_check_arguments(command: argparse.ArgumentParser) -> None:
@@ -491,6 +471,7 @@ def build_parser() -> argparse.ArgumentParser:
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    parser.add_argument("-v", "--verbose", action="store_true", help="print subprocess commands")
     subparsers = parser.add_subparsers(dest="command")
 
     documents = subparsers.add_parser(
@@ -581,12 +562,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    global _VERBOSE
     values = list(argv) if argv is not None else sys.argv[1:]
     if values[:1] == ["test"]:
         args, forwarded = build_parser().parse_known_args(values)
         args.pytest_args.extend(forwarded)
     else:
         args = build_parser().parse_args(values)
+    _VERBOSE = args.verbose
     if not getattr(args, "command", None):
         build_parser().print_help()
         return 0
