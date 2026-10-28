@@ -1,0 +1,12 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-math.sty}[2026/08/23 v0.1 Requirements Lab mathematics]
+
+\RequirePackage{amsmath}
+
+\newcommand{\RLVariable}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\RLEquationLabel}[1]{\tag{#1}}
+\newcommand{\RLDefinitionPair}[2]{%
+    \noindent\begin{tabularx}{\linewidth}{@{}L{0.22\linewidth}Y@{}}
+        \RLIdentifier{#1} & #2\\
+    \end{tabularx}%
+}

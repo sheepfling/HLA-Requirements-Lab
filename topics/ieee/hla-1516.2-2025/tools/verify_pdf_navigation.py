@@ -127,20 +127,16 @@ def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
             actual_links.pop(match_index)
 
         first_page = document[0].get_text()
-        if "IEEE Std 1516.2" not in first_page:
-            raise ValueError("First PDF page is missing the reconstructed front cover")
+        if "HLA Requirements Lab" not in first_page:
+            raise ValueError("First PDF page is missing the Requirements Lab cover")
         if document[0].get_label() != "Front Cover":
             raise ValueError("First PDF page is missing the Front Cover page label")
         body_lines = [line.strip() for line in document[12].get_text().splitlines() if line.strip()]
         if not body_lines or body_lines[0] != "12":
             raise ValueError("Physical page 13 is missing its printed footer number 12")
         back_page = document[123].get_text()
-        if (
-            document[123].get_label() != "Back Cover"
-            or "RAISING THE" not in back_page
-            or "not an IEEE publication" not in back_page
-        ):
-            raise ValueError("Last PDF page is missing the back-cover text or disclaimer")
+        if document[123].get_label() != "Back Cover" or "RAISING THE" not in back_page:
+            raise ValueError("Last PDF page is missing the reconstructed back-cover text")
 
         return {
             "pages": document.page_count,

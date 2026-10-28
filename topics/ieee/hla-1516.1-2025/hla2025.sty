@@ -20,6 +20,7 @@
 \RequirePackage{needspace}
 \RequirePackage{setspace}
 \RequirePackage{hyperref}
+\RequirePackage{xstring}
 \RequirePackage{bookmark}
 \RequirePackage{pdflscape}
 \RequirePackage{rotating}
@@ -27,37 +28,65 @@
 
 \defaultfontfeatures{Ligatures=TeX}
 \ifHLAUseSourceFonts
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
-\newfontfamily\HLACoverFont{Calibri}
-\newfontfamily\HLAStandardsFont{Montserrat ExtraBold}
-\newfontfamily\HLALicenseFont{Arial}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLACoverFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLAStandardsFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLALicenseFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 \else
-\IfFontExistsTF{Tinos}{
-    \setmainfont{Tinos}
-}{
-    \setmainfont{TeX Gyre Termes}
-}
-\IfFontExistsTF{Arimo}{
-    \setsansfont{Arimo}
-}{
-    \setsansfont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Carlito}{
-    \newfontfamily\HLACoverFont{Carlito}
-}{
-    \newfontfamily\HLACoverFont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Noto Sans}{
-    \newfontfamily\HLAStandardsFont{Noto Sans}
-}{
-    \newfontfamily\HLAStandardsFont{TeX Gyre Heros}
-}
-\IfFontExistsTF{Liberation Sans}{
-    \newfontfamily\HLALicenseFont{Liberation Sans}
-}{
-    \newfontfamily\HLALicenseFont{TeX Gyre Heros}
-}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLACoverFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLAStandardsFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
+\newfontfamily\HLALicenseFont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon]
 \fi
 
 \definecolor{hlaCyan}{RGB}{0,174,239}
@@ -105,15 +134,15 @@
 
 \newcommand{\HLAHeaderText}{%
     \sffamily\fontsize{7.98pt}{10pt}\selectfont
-    IEEE Std 1516.1-2025\\[-0.2pt]
-    IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---\\[-0.2pt]
+    HLA 1516.1 \textbar\ 2025-source compilation\\[-0.2pt]
+    HLA REQUIREMENTS LAB\\[-0.2pt]
     Federate Interface Specification%
 }
 
 \newcommand{\HLAHeaderTextNoIEEE}{%
     \sffamily\fontsize{7.98pt}{10pt}\selectfont
-    IEEE Std 1516.1-2025\\[-0.2pt]
-    Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---\\[-0.2pt]
+    HLA 1516.1 \textbar\ 2025-source compilation\\[-0.2pt]
+    HLA REQUIREMENTS LAB\\[-0.2pt]
     Federate Interface Specification%
 }
 
@@ -121,7 +150,6 @@
     \begin{minipage}{\textwidth}
     \centering
     {\rmfamily\fontsize{9.96pt}{10pt}\selectfont\thepage}\\[-0.2pt]
-    {\sffamily\fontsize{7.98pt}{8.5pt}\selectfont Copyright \textcopyright{} 2025 IEEE. All rights reserved.}
     \end{minipage}%
 }
 
@@ -163,23 +191,42 @@
 
 \pagestyle{hla-body}
 
+% Inter's embedded ToUnicode map assigns private-use code points to a few
+% ordinary ASCII punctuation glyphs. Keep the visual sans role, but emit
+% parentheses and plus signs through the Noto Serif text face so extracted
+% production text remains ordinary Unicode.
+\newcommand{\HLAAsciiOpenParen}{{\rmfamily(}}
+\newcommand{\HLAAsciiCloseParen}{{\rmfamily)}}
+\newcommand{\HLAAsciiPlus}{{\rmfamily+}}
+\ExplSyntaxOn
+\tl_new:N \l_hla_ascii_punctuation_tl
+\cs_new_protected:Npn \HLAAsciiPunctuationText #1
+  {
+    \tl_set:Nn \l_hla_ascii_punctuation_tl {#1}
+    \tl_replace_all:Nnn \l_hla_ascii_punctuation_tl {(} {\HLAAsciiOpenParen}
+    \tl_replace_all:Nnn \l_hla_ascii_punctuation_tl {)} {\HLAAsciiCloseParen}
+    \tl_replace_all:Nnn \l_hla_ascii_punctuation_tl {+} {\HLAAsciiPlus}
+    \tl_use:N \l_hla_ascii_punctuation_tl
+  }
+\ExplSyntaxOff
+
 \newcommand{\HLAFrontHeading}[1]{%
-        {\sffamily\bfseries\fontsize{13.98pt}{16pt}\selectfont #1\par}%
+        {\sffamily\bfseries\fontsize{13.98pt}{16pt}\selectfont \HLAAsciiPunctuationText{#1}\par}%
 }
 
 \newcommand{\HLAClause}[1]{%
     \Needspace{3\baselineskip}%
-    {\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont #1\par}%
+    {\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont \HLAAsciiPunctuationText{#1}\par}%
 }
 
 \newcommand{\HLASubclause}[1]{%
     \Needspace{2.5\baselineskip}%
-    {\sffamily\bfseries\fontsize{10.98pt}{13pt}\selectfont #1\par}%
+    {\sffamily\bfseries\fontsize{10.98pt}{13pt}\selectfont \HLAAsciiPunctuationText{#1}\par}%
 }
 
 \newcommand{\HLASubsubclause}[1]{%
     \Needspace{2.25\baselineskip}%
-    {\sffamily\bfseries\fontsize{9.96pt}{12pt}\selectfont #1\par}%
+    {\sffamily\bfseries\fontsize{9.96pt}{12pt}\selectfont \HLAAsciiPunctuationText{#1}\par}%
 }
 
 \newenvironment{hlaalphlist}{%
@@ -215,9 +262,9 @@
     \makebox[0pt][r]{\raisebox{2.0pt}{\fontsize{6.36pt}{7pt}\selectfont #1}\hspace{1.7pt}}#2\par}%
 }
 
-\newcommand{\HLATitleMark}{IEEE Std 1516.1\texttrademark-2025}
-\newcommand{\HLARevisionText}{(Revision of IEEE Std 1516.1-2010)}
-\newcommand{\HLADocumentTitle}{IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)---Federate Interface Specification}
+\newcommand{\HLATitleMark}{HLA 1516.1}
+\newcommand{\HLARevisionText}{}
+\newcommand{\HLADocumentTitle}{HLA Requirements Lab Federate Interface Specification}
 
 \newcommand{\HLACoverPattern}{%
     \begin{scope}[shift={(current page.north west)},x=1pt,y=-1pt]
@@ -272,6 +319,12 @@
 }{%
     \end{scope}
     \end{tikzpicture}%
+    % Some MOM registry pages are true landscape pages assembled directly by
+    % the faithful adapter rather than by RLLandscapePage. Give those fixed
+    % pages the same explicit footer as the shared landscape run.
+    \ifdim\paperwidth>\paperheight
+        \RLLandscapeFooterFurniture
+    \fi
     \mbox{}%
 }
 
@@ -282,7 +335,7 @@
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
-        \justifying #4\fontsize{#5pt}{#6pt}\selectfont\setlength{\parindent}{0pt}#7\par
+        \RaggedRight #4\fontsize{#5pt}{#6pt}\selectfont\setlength{\parindent}{0pt}\HLAAsciiPunctuationText{#7}\par
         \end{minipage}%
     };%
 }
@@ -300,7 +353,7 @@
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
-        #4\fontsize{#5pt}{#6pt}\selectfont\centering #7\par
+        #4\fontsize{#5pt}{#6pt}\selectfont\centering \HLAAsciiPunctuationText{#7}\par
         \end{minipage}%
     };%
 }
@@ -325,21 +378,21 @@
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
         #4\fontsize{#5pt}{#6pt}\selectfont\centering
-        \special{pdf:literal direct 3 Tr}#7\special{pdf:literal direct 0 Tr}\par
+        \special{pdf:literal direct 3 Tr}\HLAAsciiPunctuationText{#7}\special{pdf:literal direct 0 Tr}\par
         \end{minipage}%
     };%
 }
 
 \newcommand{\HLATocLineAt}[7]{%
     \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#2,#1) {%
-            {\rmfamily\fontsize{9.96pt}{12pt}\selectfont #3}%
+            {\rmfamily\fontsize{9.96pt}{12pt}\selectfont \HLAAsciiPunctuationText{#3}}%
     };%
     \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#4,#1) {%
             {\rmfamily\fontsize{9.96pt}{12pt}\selectfont
-        \makebox[#6pt][l]{#5\leaders\hbox{.}\hfill}}%
+        \makebox[#6pt][l]{\HLAAsciiPunctuationText{#5}\leaders\hbox{.}\hfill}}%
     };%
     \node[anchor=north east,inner sep=0pt,outer sep=0pt] at (522,#1) {%
-            {\rmfamily\fontsize{9.96pt}{12pt}\selectfont #7}%
+            {\rmfamily\fontsize{9.96pt}{12pt}\selectfont \HLAAsciiPunctuationText{#7}}%
     };%
 }
 
@@ -362,7 +415,7 @@
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
         \hfuzz=1.5pt%
-        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\RaggedRight
         \begin{itemize}[
             label=---,
             leftmargin=32pt,
@@ -399,7 +452,7 @@
         \setlength{\parskip}{0pt}%
         \hbadness=10000%
         \hfuzz=1.5pt%
-        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\justifying
+        \rmfamily\fontsize{9.96pt}{12pt}\selectfont\RaggedRight
         \begin{enumerate}[
             label=\alph*),
             leftmargin=22pt,
@@ -457,7 +510,13 @@
 % Provenance-tracked figure helpers for body pages. The extracted source asset
 % remains at the exact source-page rectangle while the caption stays native and
 % searchable. Figure anchors are independent of the raster asset.
-\newcommand{\HLAFigureAnchor}[1]{\HLAAnchor{figure:#1}}
+\newcommand{\HLAFigureAnchor}[1]{%
+    \ifcsname HLAFigureAnchorUsed:#1\endcsname
+    \else
+        \expandafter\gdef\csname HLAFigureAnchorUsed:#1\endcsname{}%
+        \phantomsection\label{figure:#1}\HLAAnchor{figure:#1}%
+    \fi
+}
 \newcommand{\HLAFigureImageAt}[5]{%
     \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
         \includegraphics[width=#3pt,height=#4pt]{#5}%
@@ -468,7 +527,12 @@
 % analogue into the faithful build.
 \newcommand{\HLAEmbeddedTikZAt}[5]{%
     \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
-        \resizebox{#3pt}{#4pt}{#5}%
+        \resizebox{#3pt}{#4pt}{\input{#5}}%
+    };%
+}
+\newcommand{\HLAEmbeddedGraphicAt}[5]{%
+    \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (#1,#2) {%
+        \includegraphics[width=#3pt,height=#4pt,keepaspectratio]{#5}%
     };%
 }
 \newcommand{\HLAFigureCaptionAt}[3]{%
@@ -477,6 +541,55 @@
     }%
 }
 
+% Modern figure-only pages use true landscape media dimensions.  The diagram
+% remains a selectable TikZ surface and receives its caption here exactly once;
+% no source-page masthead, folio, or rotated caption is carried into the page.
+\newcommand{\HLALandscapeFigurePage}[3]{%
+    \begin{RLLandscapePage}
+        \thispagestyle{rl}%
+        \HLAFigureAnchor{#1}%
+        \vspace*{2pt}%
+        {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\par}%
+        \vspace{7pt}%
+        \begin{center}
+            \resizebox{0.995\linewidth}{!}{\input{#3}}%
+        \end{center}%
+        \vspace{3pt}%
+        {\RLFixedSans\fontsize{7.6pt}{9.2pt}\selectfont\color{RLMid}%
+            \HLAAsciiPunctuationText{Figure~#1---#2}\par}%
+    \end{RLLandscapePage}%
+}
+\newcommand{\HLALandscapeFigurePDFPage}[3]{%
+    \begin{RLLandscapePage}
+        \thispagestyle{rl}%
+        \HLAFigureAnchor{#1}%
+        \vspace*{2pt}%
+        {\RLFixedSans\bfseries\fontsize{10.5pt}{12.5pt}\selectfont\color{RLBlueDeep}%
+            FIGURE~#1\par}%
+        \vspace{7pt}%
+        \begin{center}
+            \includegraphics[width=0.995\linewidth,height=0.90\textheight,keepaspectratio]{#3}%
+        \end{center}%
+        \vspace{3pt}%
+        {\RLFixedSans\fontsize{7.6pt}{9.2pt}\selectfont\color{RLMid}%
+            \HLAAsciiPunctuationText{Figure~#1---#2}\par}%
+    \end{RLLandscapePage}%
+}
+
+\newcommand{\HLAServiceDirectionFor}[1]{%
+    \begingroup
+    \edef\HLAServiceDirectionText{\detokenize{#1}}%
+    \IfSubStr{\HLAServiceDirectionText}{textdagger}%
+        {RTI $\rightarrow$ FEDERATE}%
+        {FEDERATE $\rightarrow$ RTI}%
+    \endgroup
+}
+
+% Technical API identifiers in the natural-flow interface pages use the same
+% monospace role as the shared Requirements Lab code and table surfaces.
+\newcommand{\HLAAPIToken}[1]{{\RLMono\fontsize{8.9pt}{10.8pt}\selectfont\color{RLBlueDeep}\mbox{\detokenize{#1}}}}
+\newcommand{\HLAUnderscore}{{\char"5F}}
 
 % Clause 4 service-description helpers. Service and component headings share
 % fixed source-page geometry while retaining stable clause anchors and outline
@@ -486,10 +599,113 @@
     \pdfbookmark[#2]{#1 #3}{bookmark:clause:#1}%
 }
 \newcommand{\HLAServiceHeadingAt}[2]{%
-    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{10.98}{12}{#2}%
+    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{10.98}{12}{%
+        \makebox[\linewidth][l]{#2\hfill{\color{HLALabPurple}\fontsize{7.2pt}{8.4pt}\selectfont
+        \HLAServiceDirectionFor{#2}}}%
+    }%
 }
 \newcommand{\HLAServiceComponentHeadingAt}[2]{%
-    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{9.96}{12}{#2}%
+    \HLAFixedBlock{90}{#1}{432}{\sffamily\bfseries\raggedright}{8.8}{10.6}{#2}%
+}
+
+% Natural-flow service pages used by the modern body migration. These keep
+% the compact contract grammar from the acceptance slice while allowing long
+% service descriptions to break at ordinary paragraph boundaries.
+\newenvironment{HLAServiceFlowPage}{%
+    \pagestyle{hla-body}%
+    \par\noindent
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{5pt}%
+    \RaggedRight
+}{%
+    \par
+}
+% The Java/C++ mapping and API manifest pages can flow onto continuation
+% pages. Keep the shared running furniture active for the entire environment,
+% not only for its first source page.
+\newenvironment{HLAAPIFlowPage}{%
+    \pagestyle{hla-body}%
+    \par\noindent
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{5pt}%
+    \RaggedRight
+}{%
+    \par
+}
+% Protocol prose uses the same quiet natural-flow surface as service
+% contracts, with a narrow rule label for normative message rules.
+\newenvironment{HLAProtocolFlowPage}{%
+    \pagestyle{hla-body}%
+    \par\noindent
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{5pt}%
+    \RaggedRight
+}{%
+    \par
+}
+\newcommand{\HLAProtocolFlowDiagram}[1]{%
+    \begin{center}%
+        \includegraphics[width=0.95\linewidth,height=0.42\textheight,keepaspectratio]{#1}%
+    \end{center}%
+}
+\newcommand{\HLAProtocolRule}[2]{%
+    \par\noindent
+    \makebox[22pt][l]{{\RLSans\fontsize{8.7pt}{10.4pt}\selectfont\color{RLBlueDeep}\HLAAsciiPunctuationText{#1}}}%
+    \HLAAsciiPunctuationText{#2}\par
+}
+\newcommand{\HLAProtocolBullet}[1]{%
+    \par\noindent
+    \makebox[16pt][l]{{\RLSans\fontsize{8.7pt}{10.4pt}\selectfont\color{RLBlueDeep}--}}%
+    \HLAAsciiPunctuationText{#1}\par
+}
+
+\newcommand{\HLAServiceFlowHeading}[2]{%
+    \par\medskip\noindent
+    {\RLSans\bfseries\fontsize{10.8pt}{12.8pt}\selectfont\color{RLBlueDeep}#1}%
+    \hfill
+    {\RLSans\fontsize{7.1pt}{8.5pt}\selectfont\addfontfeatures{LetterSpace=0.8}\color{RLBlue}\MakeUppercase{#2}}%
+    \par\vspace{3pt}\noindent{\color{RLLine}\rule{\linewidth}{0.5pt}}\par\vspace{2pt}%
+}
+\newcommand{\HLAServiceFlowSection}[1]{%
+    \par\smallskip\noindent
+    {\RLSans\bfseries\fontsize{7.2pt}{8.6pt}\selectfont\addfontfeatures{LetterSpace=0.8}\color{RLBlue}\MakeUppercase{#1}}%
+    \par\vspace{1pt}%
+}
+\newcommand{\HLAServiceFlowParagraph}[1]{%
+    \par\noindent #1\par
+}
+\newcommand{\HLAServiceFlowItem}[2]{%
+    \par\noindent
+    \makebox[22pt][l]{{\RLSans\fontsize{9.3pt}{11pt}\selectfont #1}}#2\par
+}
+
+% Reusable natural-flow grammar for the interface contract pages.  This is
+% intentionally a quiet aligned contract, not a collection of web-style
+% cards: the repeated service fields remain explicit and searchable while the
+% small tracked labels reduce visual repetition.
+\newenvironment{HLAServiceContract}[2]{%
+    \par\medskip\noindent
+    \begin{minipage}{\linewidth}
+    \HLAServiceContractHeading{#1}{#2}%
+}{%
+    \end{minipage}\par\medskip
+}
+\newcommand{\HLAServiceContractHeading}[2]{%
+    \par\noindent
+    {\RLSans\bfseries\fontsize{11.2pt}{13.2pt}\selectfont\color{RLBlueDeep}#1}%
+    \hfill
+    {\RLSans\fontsize{7.4pt}{9pt}\selectfont\addfontfeatures{LetterSpace=1.0}\color{RLBlue}\MakeUppercase{#2}}%
+    \par\vspace{4pt}\noindent{\color{RLLine}\rule{\linewidth}{0.55pt}}\par\vspace{4pt}%
+}
+\newcommand{\HLAServiceContractSection}[1]{%
+    \par\smallskip\noindent
+    {\RLSans\bfseries\fontsize{7.3pt}{8.8pt}\selectfont\addfontfeatures{LetterSpace=1.0}\color{RLBlue}\MakeUppercase{#1}}%
+    \par\vspace{1.5pt}%
+}
+\newenvironment{HLAServiceContractList}{%
+    \begin{enumerate}[label=\alph*),leftmargin=22pt,labelsep=8pt,itemsep=2.5pt,topsep=0pt,parsep=0pt]
+}{%
+    \end{enumerate}
 }
 \newcommand{\HLAFixedRule}[4]{%
     \begin{tikzpicture}[remember picture,overlay]

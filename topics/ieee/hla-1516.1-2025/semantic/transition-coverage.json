@@ -2399,6 +2399,15 @@
       "source": null
     },
     {
+      "transition_id": "establishing.divestiture-if-wanted",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.establishing-divestiture-if-wanted"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
       "transition_id": "establishing.cancel-divestiture",
       "status": "mapped",
       "implementation_ids": [
@@ -2684,6 +2693,145 @@
         "m16.transition.temporal-async-enable"
       ],
       "reason": "Explicit planned implementation seam recorded for the modeled transition; the mapping is complete while concrete code remains a separate maturity step.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.initial-enter-active",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-041.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "joined-federate.request-save",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.request-restore",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.restore-request-failure",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.restore-request-success",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.initiate-save",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.save-begun",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.save-complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.federation-saved",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.restore-begun",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.initiate-restore",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.restore-complete",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.federation-restored",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.activity-permission-lost",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
+      "source": null
+    },
+    {
+      "transition_id": "joined-federate.activity-permission-restored",
+      "status": "mapped",
+      "implementation_ids": [
+        "m16.transition.joined-federate-statechart"
+      ],
+      "reason": "Explicit planned implementation seam recorded for the source-derived joined-federate state chart.",
       "source": null
     }
   ]

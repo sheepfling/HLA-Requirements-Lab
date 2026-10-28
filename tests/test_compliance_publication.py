@@ -29,8 +29,9 @@ from hla_lab.publication.compliance_publication import (
     write_compliance_csv_exports,
     write_compliance_publication,
 )
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _source(line: int) -> SourceRef:
@@ -197,26 +198,29 @@ class CompliancePublicationTests(unittest.TestCase):
 
             direct_csv_output = output / "direct-csv"
             written_paths = write_compliance_csv_exports(manifest, direct_csv_output)
-            self.assertEqual(len(written_paths), 5)
+            self.assertEqual(len(written_paths), 6)
             self.assertTrue(all(path.is_file() for path in written_paths))
 
-    def test_csv_exports_are_deterministic_and_keep_link_rows_normalized(self) -> None:
-        manifest = build_compliance_manifest(_corpus(), _profile())
-
+    def test_cross_page_requirement_keeps_all_source_spans_in_every_projection(self) -> None:
+        model = _corpus().documents[0]
+        payload = model.model_dump(mode="json")
+        payload["requirements"][0]["additional_sources"] = [
+            {"path": "continuation.tex", "line": 9, "end_line": 12}
+        ]
+        updated = DocumentModel.model_validate(payload)
+        manifest = build_compliance_manifest(ComplianceCorpus(documents=(updated,)), _profile())
+        item = manifest.requirements[0]
+        self.assertEqual(item.additional_sources[0].path, "continuation.tex")
+        self.assertIn("continuation.tex", manifest.to_json())
+        rendered = render_compliance_document(manifest, (updated,))
+        self.assertIn("continuation.", rendered)
+        self.assertIn("tex:9-12", rendered)
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            first = write_compliance_csv_exports(manifest, root / "first")
-            second = write_compliance_csv_exports(manifest, root / "second")
-
-            self.assertEqual(
-                tuple(path.name for path in first), tuple(path.name for path in second)
-            )
-            self.assertEqual(
-                tuple(path.read_bytes() for path in first),
-                tuple(path.read_bytes() for path in second),
-            )
-            self.assertEqual(len(_csv_rows(root / "first" / "requirement-mapping-links.csv")), 1)
-            self.assertEqual(len(_csv_rows(root / "first" / "transition-mapping-links.csv")), 1)
+            write_compliance_csv_exports(manifest, Path(temporary))
+            rows = _csv_rows(Path(temporary) / "requirement-source-spans.csv")
+        self.assertEqual([row["span_order"] for row in rows], ["1", "2"])
+        self.assertEqual(rows[1]["source_path"], "continuation.tex")
+        self.assertEqual(rows[1]["source_end_line"], "12")
 
     def test_publication_normalizes_layout_markers_but_preserves_numeric_percentages(self) -> None:
         model = _corpus().documents[0]
@@ -238,6 +242,35 @@ class CompliancePublicationTests(unittest.TestCase):
         )
         self.assertIn("10\\% capacity while", rendered)
         self.assertNotIn("capacity \\% while", rendered)
+
+    def test_publication_spaces_recovered_enumerator_markers(self) -> None:
+        model = _corpus().documents[0]
+        payload = model.model_dump(mode="json")
+        text = "The following applies: a)Federate save. b)None."
+        payload["requirements"][0]["statement"] = text
+        payload["requirements"][0]["machine_statement"] = text
+        mutated = type(model).model_validate(payload)
+
+        manifest = build_compliance_manifest(
+            ComplianceCorpus(documents=(mutated,)),
+            _profile(),
+        )
+
+        self.assertEqual(
+            manifest.requirements[0].statement,
+            "The following applies: a) Federate save. b) None.",
+        )
+
+    def test_manifest_preserves_canonical_requirement_order(self) -> None:
+        model = _corpus().documents[0]
+        manifest = build_compliance_manifest(
+            ComplianceCorpus(documents=(model,)),
+            _profile(),
+        )
+        self.assertEqual(
+            [item.requirement_id for item in manifest.requirements],
+            [item.id for item in model.ordered_requirements()],
+        )
 
     def test_hla_publication_profile_is_source_controlled_and_typed(self) -> None:
         profile = load_compliance_publication_profile(

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,7 +15,7 @@ from hla_lab.core.semantic_model import SourceRef, _commands, _files, _latex_tex
 from hla_lab.core.source_adapter import LatexSourceProfile
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class LayoutBlock:
     """A layout primitive with its geometry kept separate from semantic text."""
 
@@ -38,7 +39,7 @@ class LayoutInventory(BaseModel):
     layout_blocks: int
     nonempty_text_blocks: int
     text_characters: int
-    kinds: dict[str, int]
+    kinds: Mapping[str, int]
 
 
 def _block(

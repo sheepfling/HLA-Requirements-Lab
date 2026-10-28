@@ -2,37 +2,33 @@
 
 from __future__ import annotations
 
-import tempfile
 import unittest
-from pathlib import Path
 from types import MappingProxyType
 
+from hla_lab.core.semantic_diagram_types import StateMachineFile
+from hla_lab.core.semantic_model import StateMachine
 from hla_lab.diagrams.render_state_machine import render
-from hla_lab.diagrams.state_machine_metrics import validate_model
 
 
 class InputProtocolTests(unittest.TestCase):
-    def test_state_machine_renderer_accepts_a_read_only_mapping(self) -> None:
-        machine = MappingProxyType(
-            {
-                "id": "example",
-                "states": [],
-                "transitions": [],
-                "layout": {},
-            }
+    def test_state_machine_renderer_accepts_a_validated_model(self) -> None:
+        machine = StateMachine(
+            id="example",
+            title="Example state machine",
+            states=(),
+            transitions=(),
         )
 
         output = render(machine)
 
         self.assertIn("tikzpicture", output)
 
-    def test_state_machine_validation_accepts_a_read_only_mapping(self) -> None:
-        model = MappingProxyType({"schema_version": "0.1", "state_machines": []})
+    def test_state_machine_file_validates_a_read_only_mapping_at_ingress(self) -> None:
+        payload = MappingProxyType({"schema_version": 2, "state_machines": ()})
 
-        with tempfile.TemporaryDirectory() as temporary:
-            errors = validate_model(Path(temporary) / "model.json", model)
+        model = StateMachineFile.model_validate(payload)
 
-        self.assertEqual(errors, [])
+        self.assertEqual(model.state_machines, ())
 
 
 if __name__ == "__main__":

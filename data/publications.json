@@ -4,8 +4,8 @@
     {
       "id": "hla-unofficial-faithful-reconstruction-2010",
       "kind": "faithful-reconstruction",
-      "title": "HLA 2010 unofficial faithful reconstruction",
-      "description": "The three 2010 faithful reconstructions, kept separate from the 2025 edition while their shared semantic corpus is migrated.",
+      "title": "HLA Requirements Lab 2010 source compilations",
+      "description": "Three Lab-authored compilations of supplied 2010 HLA 1516-family source material, kept distinct from the 2025 source set.",
       "project_ids": [
         "hla-1516-2010",
         "hla-1516.2-2010",
@@ -20,8 +20,8 @@
     {
       "id": "hla-unofficial-faithful-reconstruction-2025",
       "kind": "faithful-reconstruction",
-      "title": "HLA 2025 unofficial faithful reconstruction",
-      "description": "Page-faithful, non-authoritative reconstructions of IEEE 1516, 1516.1, and 1516.2 for provenance and visual comparison.",
+      "title": "HLA Requirements Lab 2025 source compilations",
+      "description": "Three Lab-authored compilations of supplied 2025 HLA 1516-family source material for provenance and visual comparison.",
       "project_ids": [
         "hla-1516-2025",
         "hla-1516.1-2025",

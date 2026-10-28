@@ -18,8 +18,9 @@ from hla_lab.core.semantic_model import (
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 FRAMEWORK = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 OMT = REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025"
 SERVICES = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"

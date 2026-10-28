@@ -21,8 +21,9 @@ from hla_lab.traceability.compliance_contract import (
 )
 from hla_lab.traceability.compliance_sidecar import build_adapter_request, manifest_from_response
 from hla_lab.traceability.junit_adapter import parse_junit_results, response_from_catalog
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _bundle() -> CorpusBundle:
@@ -153,7 +154,11 @@ def _two_binding_bundle() -> CorpusBundle:
     return bundle.model_copy(update={"documents": (expanded_document,)})
 
 
-def _catalog(*, selector: str = "example.rti.ConnectIT#connect") -> ComplianceTestCatalog:
+def _catalog(
+    *,
+    selector: str = "example.rti.ConnectIT#connect",
+    requirement_ids: tuple[str, ...] = ("req-1",),
+) -> ComplianceTestCatalog:
     return ComplianceTestCatalog.model_validate(
         {
             "schema_version": 1,
@@ -171,6 +176,7 @@ def _catalog(*, selector: str = "example.rti.ConnectIT#connect") -> ComplianceTe
                     "language": "cpp",
                     "symbol": "RTI::RTIambassador::connect",
                     "api_surface_ids": ["api.cpp.connect"],
+                    "requirement_ids": list(requirement_ids),
                     "execution_mode": "real",
                 }
             ],
@@ -194,6 +200,10 @@ def _write_result(
 class JunitAdapterTests(unittest.TestCase):
     def test_junit_result_creates_unreviewed_implemented_binding(self) -> None:
         request = build_adapter_request(_bundle(), "request-1")
+        self.assertEqual(
+            [item.id for item in request.documents[0].requirements],
+            ["req-1"],
+        )
         with tempfile.TemporaryDirectory() as temporary:
             result_path = Path(temporary) / "results.xml"
             _write_result(result_path)
@@ -210,6 +220,8 @@ class JunitAdapterTests(unittest.TestCase):
         self.assertEqual(response.evidence[0].status, "passed")
         self.assertEqual(response.evidence[0].execution_mode, "real")
         self.assertEqual(response.evidence[0].review_status, "unreviewed")
+        self.assertEqual(response.evidence[0].requirement_ids, ("req-1",))
+        self.assertEqual(response.bindings[0].requirement_ids, ("req-1",))
         manifest = manifest_from_response(request, response)
         result = verify(_bundle(), manifest)
         self.assertTrue(result.passed)
@@ -337,6 +349,7 @@ class JunitAdapterTests(unittest.TestCase):
                         "language": "java",
                         "symbol": "example.rti.RtiAmbassador#connect",
                         "api_surface_ids": ("api.java.connect",),
+                        "requirement_ids": ("req-java-1",),
                     }
                 ),
             ),
@@ -438,6 +451,17 @@ class JunitAdapterTests(unittest.TestCase):
             response_from_catalog(
                 request,
                 catalog,
+                {},
+                adapter_id="junit-results-adapter",
+                repository="example/rti",
+            )
+
+    def test_catalog_rejects_requirement_id_outside_ordered_request_catalog(self) -> None:
+        request = build_adapter_request(_bundle(), "request-1")
+        with self.assertRaisesRegex(ValueError, "missing requirements"):
+            response_from_catalog(
+                request,
+                _catalog(requirement_ids=("missing-requirement",)),
                 {},
                 adapter_id="junit-results-adapter",
                 repository="example/rti",

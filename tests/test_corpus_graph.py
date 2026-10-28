@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.semantic_model import (
     Clause,
@@ -19,6 +18,7 @@ from hla_lab.corpus.corpus_graph import (
     build_corpus_graph,
     load_document_metadata,
 )
+from tests.support import TEST_REPO_ROOT
 
 
 def _source(path: str, line: int) -> SourceRef:
@@ -107,8 +107,7 @@ class CorpusGraphTests(unittest.TestCase):
 
     def test_hla_metadata_is_source_controlled_and_typed(self) -> None:
         metadata_path = (
-            Path(__file__).resolve().parents[1]
-            / "topics/ieee/hla-semantic-derivative-2025/semantic/corpus.json"
+            TEST_REPO_ROOT / "topics/ieee/hla-semantic-derivative-2025/semantic/corpus.json"
         )
         metadata = load_document_metadata(metadata_path)
 

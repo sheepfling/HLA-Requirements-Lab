@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,8 +17,9 @@ from hla_lab.publication.publication_contract import (
     load_publication_profile,
     publication_destination,
 )
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 FIXTURE_ROOT = ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 FIXTURE_PROFILE = FIXTURE_ROOT / "fixture_profile.py"
 HLA_PROFILE = (
@@ -25,9 +28,6 @@ HLA_PROFILE = (
 
 
 def _load_fixture_source() -> object:
-    import importlib.util
-    import sys
-
     spec = importlib.util.spec_from_file_location("m25_fixture_profile", FIXTURE_PROFILE)
     if spec is None or spec.loader is None:
         raise AssertionError(f"unable to load fixture profile: {FIXTURE_PROFILE}")

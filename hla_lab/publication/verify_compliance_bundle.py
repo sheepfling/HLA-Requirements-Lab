@@ -5,13 +5,20 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter
+from collections.abc import Mapping, MutableSequence, Sequence
+from collections.abc import Set as AbstractSet
 from pathlib import Path
 
 from hla_lab.traceability.compliance_contract import (
+    BundleCrosswalk,
+    BundleDocument,
+    BundleMapping,
     ComplianceCoverage,
     ComplianceFinding,
     ComplianceResult,
     CorpusBundle,
+    EvidenceRecord,
+    ImplementationBinding,
     ImplementationManifest,
 )
 
@@ -35,15 +42,237 @@ def _finding(
     )
 
 
-def verify(
+def _resolve_binding_records(
+    binding: ImplementationBinding,
+    document_ids: AbstractSet[str],
+    mappings_by_key: Mapping[tuple[str, str], BundleMapping],
+    crosswalks_by_key: Mapping[tuple[str, str, str], tuple[BundleDocument, BundleCrosswalk]],
+    findings: MutableSequence[ComplianceFinding],
+) -> tuple[BundleMapping, BundleCrosswalk] | None:
+    if binding.document_id not in document_ids:
+        findings.append(
+            _finding(
+                "binding-document-not-selected",
+                "error",
+                binding.id,
+                f"binding targets document {binding.document_id}, which is not selected "
+                "by the manifest",
+            )
+        )
+        return None
+    mapping = mappings_by_key.get((binding.document_id, binding.implementation_mapping_id))
+    if mapping is None:
+        findings.append(
+            _finding(
+                "mapping-not-in-bundle",
+                "error",
+                binding.id,
+                "implementation mapping is not present in the selected corpus bundle",
+            )
+        )
+        return None
+    key = (binding.document_id, binding.implementation_mapping_id, binding.target)
+    crosswalk_entry = crosswalks_by_key.get(key)
+    if crosswalk_entry is None:
+        findings.append(
+            _finding(
+                "crosswalk-not-in-bundle",
+                "error",
+                binding.id,
+                "implementation target has no corresponding corpus crosswalk",
+            )
+        )
+        return None
+    return mapping, crosswalk_entry[1]
+
+
+def _append_concrete_surface_findings(
+    binding: ImplementationBinding,
+    crosswalk: BundleCrosswalk,
+    requested_surfaces: AbstractSet[str],
+    selected_surfaces: AbstractSet[str],
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    if crosswalk.status != "matched":
+        findings.append(
+            _finding(
+                "binding-on-unresolved-crosswalk",
+                "error",
+                binding.id,
+                f"{binding.status} binding requires a matched crosswalk, found {crosswalk.status}",
+            )
+        )
+    if not requested_surfaces:
+        findings.append(
+            _finding(
+                "binding-missing-api-surface",
+                "error",
+                binding.id,
+                "concrete binding must name its exact API surface IDs",
+            )
+        )
+    elif requested_surfaces != selected_surfaces:
+        findings.append(
+            _finding(
+                "binding-surface-mismatch",
+                "error",
+                binding.id,
+                f"binding surfaces {sorted(requested_surfaces)} do not equal "
+                f"selected surfaces {sorted(selected_surfaces)}",
+            )
+        )
+
+
+def _append_surface_findings(
+    binding: ImplementationBinding,
+    crosswalk: BundleCrosswalk,
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    selected_surfaces = set(crosswalk.selected_api_surface_ids)
+    candidate_surfaces = set(crosswalk.candidate_api_surface_ids)
+    requested_surfaces = set(binding.api_surface_ids)
+    if not requested_surfaces <= candidate_surfaces:
+        findings.append(
+            _finding(
+                "api-surface-not-candidate",
+                "error",
+                binding.id,
+                "implementation names surfaces outside crosswalk candidates: "
+                f"{sorted(requested_surfaces - candidate_surfaces)}",
+            )
+        )
+    if binding.status in {"implemented", "verified"}:
+        _append_concrete_surface_findings(
+            binding, crosswalk, requested_surfaces, selected_surfaces, findings
+        )
+    elif crosswalk.status != "matched":
+        findings.append(
+            _finding(
+                "binding-crosswalk-gap",
+                "warning",
+                binding.id,
+                f"binding remains {binding.status} while crosswalk is {crosswalk.status}",
+            )
+        )
+
+
+def _append_evidence_requirement_finding(
+    evidence: EvidenceRecord,
+    mapping: BundleMapping,
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    if evidence.requirement_ids and not set(evidence.requirement_ids) <= set(
+        mapping.requirement_ids
+    ):
+        findings.append(
+            _finding(
+                "evidence-requirement-not-mapped",
+                "error",
+                evidence.id,
+                f"evidence names requirements outside mapping {mapping.id}: "
+                f"{sorted(set(evidence.requirement_ids) - set(mapping.requirement_ids))}",
+            )
+        )
+
+
+def _append_verified_evidence_findings(
+    binding: ImplementationBinding,
+    evidence: Sequence[EvidenceRecord],
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    if not evidence:
+        findings.append(
+            _finding(
+                "verified-binding-without-evidence",
+                "error",
+                binding.id,
+                "verified binding must link at least one evidence record",
+            )
+        )
+    if not any(item.status in {"passed", "observed"} for item in evidence):
+        findings.append(
+            _finding(
+                "verified-binding-without-passing-evidence",
+                "error",
+                binding.id,
+                "verified binding needs passed or observed evidence",
+            )
+        )
+    if not any(
+        item.status in {"passed", "observed"}
+        and item.review_status == "accepted"
+        and item.execution_mode == "real"
+        for item in evidence
+    ):
+        findings.append(
+            _finding(
+                "verified-binding-without-accepted-real-evidence",
+                "error",
+                binding.id,
+                "verified binding needs accepted evidence from a real execution",
+            )
+        )
+
+
+def _append_evidence_findings(
+    binding: ImplementationBinding,
+    mapping: BundleMapping,
+    evidence_by_id: Mapping[str, EvidenceRecord],
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    evidence = tuple(evidence_by_id[item] for item in binding.evidence_ids)
+    for item in evidence:
+        _append_evidence_requirement_finding(item, mapping, findings)
+    if binding.status == "verified":
+        _append_verified_evidence_findings(binding, evidence, findings)
+    if any(item.status == "failed" for item in evidence):
+        findings.append(
+            _finding(
+                "binding-has-failed-evidence",
+                "error",
+                binding.id,
+                "implementation binding links failed evidence",
+            )
+        )
+
+
+def _append_binding_findings(
+    bindings: Sequence[ImplementationBinding],
+    document_ids: AbstractSet[str],
+    mappings_by_key: Mapping[tuple[str, str], BundleMapping],
+    crosswalks_by_key: Mapping[tuple[str, str, str], tuple[BundleDocument, BundleCrosswalk]],
+    evidence_by_id: Mapping[str, EvidenceRecord],
+    findings: MutableSequence[ComplianceFinding],
+) -> None:
+    for binding in bindings:
+        records = _resolve_binding_records(
+            binding, document_ids, mappings_by_key, crosswalks_by_key, findings
+        )
+        if records is None:
+            continue
+        mapping, crosswalk = records
+        if binding.requirement_ids and set(binding.requirement_ids) != set(mapping.requirement_ids):
+            findings.append(
+                _finding(
+                    "binding-requirement-mismatch",
+                    "error",
+                    binding.id,
+                    f"binding requirement IDs {sorted(binding.requirement_ids)} do not equal "
+                    f"mapping requirements {sorted(mapping.requirement_ids)}",
+                )
+            )
+        _append_surface_findings(binding, crosswalk, findings)
+        _append_evidence_findings(binding, mapping, evidence_by_id, findings)
+
+
+def _select_documents(
     bundle: CorpusBundle,
     manifest: ImplementationManifest,
-) -> ComplianceResult:
-    """Verify scope, mapping joins, API bindings, and external evidence."""
-    findings: list[ComplianceFinding] = []
+    findings: MutableSequence[ComplianceFinding],
+) -> tuple[BundleDocument | None, ...]:
     documents = {item.document_id: item for item in bundle.documents}
-    selected_documents = tuple(documents.get(identifier) for identifier in manifest.document_ids)
-    for document_id, document in zip(manifest.document_ids, selected_documents, strict=True):
+    selected = tuple(documents.get(identifier) for identifier in manifest.document_ids)
+    for document_id, document in zip(manifest.document_ids, selected, strict=True):
         if document is None:
             findings.append(
                 _finding(
@@ -62,6 +291,50 @@ def verify(
                 f"manifest expects {manifest.corpus_revision}, bundle is {bundle.corpus_revision}",
             )
         )
+    return selected
+
+
+def _verified_binding_keys(
+    expected_keys: AbstractSet[tuple[str, str, str]],
+    binding_by_key: Mapping[tuple[str, str, str], ImplementationBinding],
+    passing_evidence_ids: AbstractSet[str],
+    failed_evidence_ids: AbstractSet[str],
+    qualifying_evidence_ids: AbstractSet[str],
+    selected_crosswalks_by_key: Mapping[tuple[str, str, str], BundleCrosswalk],
+) -> tuple[set[tuple[str, str, str]], set[tuple[str, str, str]]]:
+    tested_keys: set[tuple[str, str, str]] = set()
+    verified_keys: set[tuple[str, str, str]] = set()
+    for key in expected_keys:
+        binding = binding_by_key.get(key)
+        if binding is None:
+            continue
+        evidence_ids = set(binding.evidence_ids)
+        has_passing_evidence = bool(evidence_ids & passing_evidence_ids)
+        has_failed_evidence = bool(evidence_ids & failed_evidence_ids)
+        if has_passing_evidence and not has_failed_evidence:
+            tested_keys.add(key)
+            crosswalk = selected_crosswalks_by_key.get(key)
+            selected_surfaces = (
+                set(crosswalk.selected_api_surface_ids) if crosswalk is not None else set()
+            )
+            if (
+                binding.status == "verified"
+                and crosswalk is not None
+                and crosswalk.status == "matched"
+                and set(binding.api_surface_ids) == selected_surfaces
+                and evidence_ids & qualifying_evidence_ids
+            ):
+                verified_keys.add(key)
+    return tested_keys, verified_keys
+
+
+def verify(
+    bundle: CorpusBundle,
+    manifest: ImplementationManifest,
+) -> ComplianceResult:
+    """Verify scope, mapping joins, API bindings, and external evidence."""
+    findings: list[ComplianceFinding] = []
+    selected_documents = _select_documents(bundle, manifest, findings)
 
     evidence_by_id = {item.id: item for item in manifest.evidence}
     crosswalks_by_key = {
@@ -124,37 +397,28 @@ def verify(
         for item in manifest.evidence
         if item.review_status == "accepted" and item.execution_mode == "real"
     }
+    qualifying_evidence_ids = {
+        item.id
+        for item in manifest.evidence
+        if item.status in {"passed", "observed"}
+        and item.review_status == "accepted"
+        and item.execution_mode == "real"
+    }
     unaccepted_evidence_ids = {
         item.id for item in manifest.evidence if item.review_status != "accepted"
     }
     non_real_evidence_ids = {item.id for item in manifest.evidence if item.execution_mode != "real"}
-    tested_keys: set[tuple[str, str, str]] = set()
-    verified_keys: set[tuple[str, str, str]] = set()
-    for key in expected_keys:
-        binding = binding_by_key.get(key)
-        if binding is None:
-            continue
-        evidence_ids = set(binding.evidence_ids)
-        has_passing_evidence = bool(evidence_ids & passing_evidence_ids)
-        has_failed_evidence = bool(evidence_ids & failed_evidence_ids)
-        if has_passing_evidence and not has_failed_evidence:
-            tested_keys.add(key)
-            crosswalk = selected_crosswalks_by_key.get(key)
-            selected_surfaces = (
-                set(crosswalk.selected_api_surface_ids) if crosswalk is not None else set()
-            )
-            evidence_ids = set(binding.evidence_ids)
-            if (
-                binding.status == "verified"
-                and crosswalk is not None
-                and crosswalk.status == "matched"
-                and set(binding.api_surface_ids) == selected_surfaces
-                and evidence_ids & accepted_real_evidence_ids
-            ):
-                verified_keys.add(key)
+    tested_keys, verified_keys = _verified_binding_keys(
+        expected_keys,
+        binding_by_key,
+        passing_evidence_ids,
+        failed_evidence_ids,
+        qualifying_evidence_ids,
+        selected_crosswalks_by_key,
+    )
 
     def covered_semantic_keys(
-        keys: set[tuple[str, str, str]],
+        keys: AbstractSet[tuple[str, str, str]],
         field: str,
     ) -> set[tuple[str, str]]:
         covered: set[tuple[str, str]] = set()
@@ -165,7 +429,18 @@ def verify(
             covered.update((document_id, identifier) for identifier in getattr(mapping, field))
         return covered
 
-    verified_requirement_keys = covered_semantic_keys(verified_keys, "requirement_ids")
+    verified_requirement_keys: set[tuple[str, str]] = set()
+    for key in verified_keys:
+        binding = binding_by_key[key]
+        mapping = mappings_by_key[(key[0], key[1])]
+        for evidence_id in set(binding.evidence_ids) & qualifying_evidence_ids:
+            evidence = evidence_by_id[evidence_id]
+            requirement_ids = evidence.requirement_ids or mapping.requirement_ids
+            verified_requirement_keys.update(
+                (key[0], identifier)
+                for identifier in requirement_ids
+                if identifier in mapping.requirement_ids
+            )
     verified_transition_keys = covered_semantic_keys(verified_keys, "transition_ids")
     verified_api_surface_keys = {
         (document_id, surface_id)
@@ -251,138 +526,14 @@ def verify(
                 )
             )
 
-    for binding in manifest.bindings:
-        key = (binding.document_id, binding.implementation_mapping_id, binding.target)
-        if binding.document_id not in manifest.document_ids:
-            findings.append(
-                _finding(
-                    "binding-document-not-selected",
-                    "error",
-                    binding.id,
-                    f"binding targets document {binding.document_id}, which is not selected "
-                    "by the manifest",
-                )
-            )
-            continue
-        mapping = mappings_by_key.get((binding.document_id, binding.implementation_mapping_id))
-        crosswalk_entry = crosswalks_by_key.get(key)
-        if mapping is None:
-            findings.append(
-                _finding(
-                    "mapping-not-in-bundle",
-                    "error",
-                    binding.id,
-                    "implementation mapping is not present in the selected corpus bundle",
-                )
-            )
-            continue
-        if crosswalk_entry is None:
-            findings.append(
-                _finding(
-                    "crosswalk-not-in-bundle",
-                    "error",
-                    binding.id,
-                    "implementation target has no corresponding corpus crosswalk",
-                )
-            )
-            continue
-        _, crosswalk = crosswalk_entry
-        selected = set(crosswalk.selected_api_surface_ids)
-        candidates = set(crosswalk.candidate_api_surface_ids)
-        requested_surfaces = set(binding.api_surface_ids)
-        if not requested_surfaces <= candidates:
-            findings.append(
-                _finding(
-                    "api-surface-not-candidate",
-                    "error",
-                    binding.id,
-                    f"implementation names surfaces outside crosswalk candidates: "
-                    f"{sorted(requested_surfaces - candidates)}",
-                )
-            )
-        if binding.status in {"implemented", "verified"}:
-            if crosswalk.status != "matched":
-                findings.append(
-                    _finding(
-                        "binding-on-unresolved-crosswalk",
-                        "error",
-                        binding.id,
-                        f"{binding.status} binding requires a matched crosswalk, "
-                        f"found {crosswalk.status}",
-                    )
-                )
-            if not requested_surfaces:
-                findings.append(
-                    _finding(
-                        "binding-missing-api-surface",
-                        "error",
-                        binding.id,
-                        "concrete binding must name its exact API surface IDs",
-                    )
-                )
-            elif requested_surfaces != selected:
-                findings.append(
-                    _finding(
-                        "binding-surface-mismatch",
-                        "error",
-                        binding.id,
-                        f"binding surfaces {sorted(requested_surfaces)} do not equal "
-                        f"selected surfaces {sorted(selected)}",
-                    )
-                )
-        elif crosswalk.status != "matched":
-            findings.append(
-                _finding(
-                    "binding-crosswalk-gap",
-                    "warning",
-                    binding.id,
-                    f"binding remains {binding.status} while crosswalk is {crosswalk.status}",
-                )
-            )
-        evidence = tuple(evidence_by_id[item] for item in binding.evidence_ids)
-        if binding.status == "verified":
-            if not evidence:
-                findings.append(
-                    _finding(
-                        "verified-binding-without-evidence",
-                        "error",
-                        binding.id,
-                        "verified binding must link at least one evidence record",
-                    )
-                )
-            if not any(item.status in {"passed", "observed"} for item in evidence):
-                findings.append(
-                    _finding(
-                        "verified-binding-without-passing-evidence",
-                        "error",
-                        binding.id,
-                        "verified binding needs passed or observed evidence",
-                    )
-                )
-            if not any(
-                item.status in {"passed", "observed"}
-                and item.review_status == "accepted"
-                and item.execution_mode == "real"
-                for item in evidence
-            ):
-                findings.append(
-                    _finding(
-                        "verified-binding-without-accepted-real-evidence",
-                        "error",
-                        binding.id,
-                        "verified binding needs accepted evidence from a real execution",
-                    )
-                )
-        if any(item.status == "failed" for item in evidence):
-            findings.append(
-                _finding(
-                    "binding-has-failed-evidence",
-                    "error",
-                    binding.id,
-                    "implementation binding links failed evidence",
-                )
-            )
-
+    _append_binding_findings(
+        manifest.bindings,
+        frozenset(manifest.document_ids),
+        mappings_by_key,
+        crosswalks_by_key,
+        evidence_by_id,
+        findings,
+    )
     coverage = coverage.model_copy(
         update={
             "fully_verified": coverage.fully_verified

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import Field, model_validator
 
@@ -30,17 +30,17 @@ __all__ = [
 class PublicationDocument(SemanticRecord):
     """A source document represented in a generated publication."""
 
-    id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
-    short_title: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
+    short_title: Annotated[str, Field(min_length=1)]
 
 
 class ProjectionContract(SemanticRecord):
     """The semantic record families and output role of one publication view."""
 
-    id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
-    purpose: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
+    purpose: Annotated[str, Field(min_length=1)]
     record_kinds: tuple[str, ...] = ()
     output: Literal["section", "table", "annex", "index"] = "section"
     per_document: bool = True
@@ -59,11 +59,11 @@ class ProjectionContract(SemanticRecord):
 class PublicationSection(SemanticRecord):
     """One ordered, addressable section in the publication outline."""
 
-    id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
-    order: int = Field(ge=1)
-    projection_id: str = Field(min_length=1)
-    level: int = Field(ge=1, le=3, default=1)
+    id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
+    order: Annotated[int, Field(ge=1)]
+    projection_id: Annotated[str, Field(min_length=1)]
+    level: Annotated[int, Field(ge=1, le=3)] = 1
     per_document: bool = True
     required: bool = True
 
@@ -71,12 +71,12 @@ class PublicationSection(SemanticRecord):
 class PublicationProfile(SemanticRecord):
     """Canonical publication outline and projection contract."""
 
-    schema_version: int = Field(default=1, ge=1)
-    profile_id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)] = 1
+    profile_id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     subtitle: str = ""
     description: str = ""
-    style_id: str = Field(default="semantic-reflowable-default", min_length=1)
+    style_id: Annotated[str, Field(min_length=1)] = "semantic-reflowable-default"
     documents: tuple[PublicationDocument, ...] = ()
     projections: tuple[ProjectionContract, ...]
     sections: tuple[PublicationSection, ...]

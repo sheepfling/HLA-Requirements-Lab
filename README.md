@@ -8,85 +8,14 @@ The project scope and definition of done are explicit in
 [`docs/SCOPE.md`](docs/SCOPE.md); the dependency direction and product
 boundaries are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-## Quick task guide
-
-Use these commands for the three common contributor tasks:
-
-### Understand semantic mappings
-
-```console
-hla-lab map hla-1516.1-2025
-```
-
-This summarizes requirements, requirement-to-transition links, implementation
-status, API crosswalks, and the canonical JSON files. Omit the document ID to
-summarize all six source documents. Mapping families absent from a document's
-canonical source are labeled `not present`.
-
-### Regenerate LaTeX and PDF
-
-```console
-hla-lab generate topics/ieee/hla-1516.1-2025
-```
-
-This regenerates semantic LaTeX inputs, compiles with `latexmk -xelatex`, and
-prints the PDF destination declared in `data/release/documents.json`.
-
-### Generate the requirements matrix
-
-```console
-hla-lab matrix --edition 2025
-```
-
-This regenerates the compliance manifest, LaTeX source, and five normalized
-CSVs under `topics/ieee/hla-rti-compliance-2025/output/compliance/`. It does
-not run XeLaTeX.
-
-The matrix CSVs are `csv/requirements.csv`, `csv/transitions.csv`,
-`csv/implementation-mappings.csv`, `csv/requirement-mapping-links.csv`, and
-`csv/transition-mapping-links.csv`. The two link tables preserve one-to-many
-relationships as separate rows. The manifest and CSVs are generated, ignored
-outputs; authored semantic source stays in each document's `semantic/`
-directory. Use `--edition 2010` for the 2010 compliance matrix.
-
-To run either mapping or matrix command against another corpus checkout, add
-`--corpus-root /path/to/corpus-root`. The selected root must contain `data/`
-and `topics/`; document IDs, release projects, and semantic inputs are resolved
-from that root. Without the option, both commands use this repository.
-
-### External implementation and evidence status
-
-`planned` and `partial` describe external RTI implementation mappings and their
-evidence. They do not indicate unfinished `hla-lab` commands. The map keeps
-implementation mappings, API crosswalks, and requirement-to-API bindings as
-separate relationships so their status is clear.
-
-### Verbose diagnostics
-
-Add `--verbose` before a command to print the subprocess command and working
-directory when the CLI delegates work. For example:
-
-```console
-hla-lab --verbose generate topics/ieee/hla-1516.1-2025
-hla-lab --verbose matrix --edition 2025
-```
-
-Use the normal command without `--verbose` for concise output.
-
-PDF builds need Python project dependencies, XeLaTeX, `latexmk`, Graphviz, and
-the fonts named by the document styles. `topics/ieee/hla-1516.2-2025/BUILDING.md`
-lists Debian/Ubuntu packages and font sources. If a build reports a missing
-font such as Tinos, install the documented font package and rerun the same
-command; a missing local font is a build prerequisite, not a corpus regression.
-
 ## Repository layout
 
 ```text
 hla_lab/                 # stable public CLI and domain orchestration
 topics/ieee/             # 2010/2025 HLA source corpus and adapters
 data/                    # authority, inventory, release, and lineage manifests
-schemas/                 # portable JSON contracts
-tools/                   # CI orchestration and one-time corpus migrations
+hla_lab/schemas.py       # Pydantic contract registry and on-demand JSON Schema export
+tools/                   # installed CI tooling and one-time corpus migrations
 tests/                   # capability-oriented contract tests
 docs/                    # active architecture and product contracts
 ```
@@ -149,10 +78,21 @@ workflows:
 
 ```console
 python -m pip install -e .
-hla-lab status --require-api-contract
-hla-lab build
-hla-lab publish
+hla-lab --root . status --require-api-contract
+hla-lab --root . build
+hla-lab --root . publish
+hla-lab-schema --list
 ```
+
+Corpus commands require an explicit workspace. Set `HLA_LAB_ROOT`, or pass
+`--root <workspace>` before the subcommand (for example,
+`hla-lab --root . status`). The package does not infer a corpus root from its
+installation location or the current directory.
+Contract models are importable from `hla_lab.schemas`; `hla-lab schema <name>`
+or the standalone `hla-lab-schema <name>` command generates JSON Schema on
+demand for external consumers. The specialized model and inventory commands
+accept `--workspace-root` in addition to a document root, for example
+`hla-lab-model topics/ieee/hla-1516.1-2025 --workspace-root .`.
 
 For contributor tooling, `uv sync --dev` is an optional reproducible setup;
 prefix the same commands with `uv run` when using that environment.
@@ -166,19 +106,19 @@ The stable command has defaults for the common workflows:
 
 ```console
 hla-lab                  # show the workflow menu
-hla-lab docs             # list supported document roots
-hla-lab status           # check all documents
-hla-lab build            # build all document products
-hla-lab generate topics/ieee/hla-1516.1-2025
-hla-lab map hla-1516.1-2025
-hla-lab matrix --edition 2025
-hla-lab build topics/fixture/non-hla-demo-2025
-hla-lab publish          # list declared publications
-hla-lab publish hla-hierarchy-reconstruction-2025
-hla-lab clean            # clean all document products
-hla-lab test --parallel
-hla-lab quality          # run the ordered quality workflow
-hla-lab quality --fix
+hla-lab --root . docs             # list supported document roots
+hla-lab --root . status           # check all documents
+hla-lab --root . map hla-1516.1-2025  # show semantic mapping coverage
+hla-lab --root . matrix --edition 2025 # generate compliance manifest and CSVs
+hla-lab --root . build            # build all document products
+hla-lab --root . generate topics/ieee/hla-1516.1-2025
+hla-lab --root . build topics/fixture/non-hla-demo-2025
+hla-lab --root . publish          # list declared publications
+hla-lab --root . publish hla-hierarchy-reconstruction-2025
+hla-lab --root . clean            # clean all document products
+hla-lab --root . test --parallel
+hla-lab --root . quality          # run the ordered quality workflow
+hla-lab --root . quality --fix
 ```
 
 Specialized operations that need detailed selectors remain available through
@@ -210,7 +150,32 @@ uv run pre-commit run --all-files
 uv run pytest tests
 ```
 
-`hla-lab test --parallel` uses `pytest-xdist` workers for the capability suite;
+Alphus is pinned to an immutable Git revision in the development dependencies.
+Its initial Python review profile is local and advisory: it reports source
+style, path discovery, runtime type-flow, file-size, line-length, and
+cyclomatic-complexity findings without changing the existing CI gates. Preview
+the selected checks, then save a JSON report under the ignored `out/quality/`
+directory:
+
+Create an isolated Python 3.11 environment for the pinned Alphus, Ruff,
+and Pyright tooling. On Windows, run:
+
+```console
+uv venv --python 3.11 out/alphus-env
+uv pip install --python out/alphus-env/Scripts/python.exe -r tools/requirements-alphus.txt
+out/alphus-env/Scripts/python.exe -c "from pathlib import Path; Path('out/quality').mkdir(parents=True, exist_ok=True)"
+out/alphus-env/Scripts/alphus.exe --root . --config tools/quality-gates.toml --plan --profile python-review
+out/alphus-env/Scripts/alphus.exe --root . --config tools/quality-gates.toml --run --json --history-dir out/quality/history --profile python-review > out/quality/alphus-python-review.json
+```
+
+On macOS or Linux, invoke the matching tools under `out/alphus-env/bin/`.
+
+Review findings before promoting any rule to a blocking check. The exact
+revision and its optional complexity analyzer are also recorded in
+[`tools/requirements-alphus.txt`](tools/requirements-alphus.txt) for pip-based
+development environments.
+
+`hla-lab --root . test --parallel` uses `pytest-xdist` workers for the capability suite;
 the default remains serial for easier debugging. Tests write temporary
 fixtures to isolated directories, so the parallel path is suitable for CI.
 
@@ -324,7 +289,7 @@ python -m hla_lab.traceability.compliance topics/ieee/hla-1516.1-2025 --api-targ
 Audit the complete requirement-to-Java/C++ declaration path for both editions:
 
 ```console
-python -m hla_lab.traceability.api_traceability --check --require-complete --json
+python -m hla_lab.traceability.api_traceability --workspace-root . --check --require-complete --json
 ```
 
 For use from an independent RTI repository, export a portable corpus bundle
@@ -341,8 +306,8 @@ Use the RTI-owned test catalog to connect Catch2/CTest or JUnit 5/Maven/Gradle
 behavior tests to stable evidence IDs, implementation mappings, and exact API
 surfaces. The complete onboarding flow is documented in
 [`docs/RTI-TEST-INTEGRATION.md`](docs/RTI-TEST-INTEGRATION.md), with a portable
-catalog schema in
-[`schemas/compliance_test_catalog.schema.json`](schemas/compliance_test_catalog.schema.json)
+catalog schema generated with `hla-lab-schema compliance_test_catalog` (from
+the Pydantic model in [`hla_lab/schemas.py`](hla_lab/schemas.py))
 and an example in
 [`examples/compliance-test-catalog.json`](examples/compliance-test-catalog.json).
 The verifier's JSON `coverage` object provides requirement, transition, API,
@@ -463,7 +428,7 @@ RTI implementation evidence. Build it with:
 python topics/ieee/hla-rti-compliance-2025/build.py build
 ```
 
-The full release smoke check covers the five currently ingested faithful PDFs,
+The full release smoke check covers the six currently ingested faithful PDFs,
 both derivatives, and the one-page non-HLA portability fixture:
 
 ```console
@@ -541,6 +506,9 @@ DOT, and Mermaid sources. Add `--graphviz` to render an SVG when Graphviz's
 ```console
 python -m hla_lab.diagrams.review_state_machines --manifest data/state_machines/manifest.json --models topics/ieee/hla-1516.1-2025/semantic --reviews reviews --artifacts review-artifacts --graphviz
 ```
+
+The pinned PlantUML release renderer is documented in
+[`tools/plantuml/README.md`](tools/plantuml/README.md).
 
 ## Adding a document
 

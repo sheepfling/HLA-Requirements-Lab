@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
@@ -19,11 +20,9 @@ from hla_lab.core.semantic_model import (
     load_document_model,
 )
 from hla_lab.core.text import normalize_whitespace, slugify
-from hla_lab.paths import RESOURCES
 from tools.migrations.migrate_remaining_content import _annex_clause_by_path
 from tools.migrations.migrate_remaining_content import migrate as migrate_content
-
-ROOT = RESOURCES.document("hla-1516.2-2025").root
+from tools.migrations.workspace import document_root
 
 _write_json = write_json
 
@@ -114,8 +113,8 @@ def _table_semantic_definitions(model: object) -> tuple[Definition, ...]:
     return tuple(definitions)
 
 
-def _promoted_requirements(model: object, annex_by_path: dict[str, str]) -> tuple[Requirement, ...]:
-    candidates = _load_requirement_candidates(ROOT, HLA_SOURCE)
+def _promoted_requirements(root: Path, annex_by_path: Mapping[str, str]) -> tuple[Requirement, ...]:
+    candidates = _load_requirement_candidates(root, HLA_SOURCE)
     if len(candidates) != 340:
         raise ValueError(
             f"expected 340 1516.2 candidates before promotion, found {len(candidates)}"
@@ -148,13 +147,13 @@ def _promoted_requirements(model: object, annex_by_path: dict[str, str]) -> tupl
     return tuple(records)
 
 
-def _attach_requirement_ownership() -> None:
-    semantic = ROOT / "semantic"
+def _attach_requirement_ownership(root: Path) -> None:
+    semantic = root / "semantic"
     block_path = semantic / "content-blocks.json"
     element_path = semantic / "content-elements.json"
     blocks = ContentBlockFile.model_validate_json(block_path.read_text(encoding="utf-8"))
     elements = ContentElementFile.model_validate_json(element_path.read_text(encoding="utf-8"))
-    model = load_document_model(ROOT, HLA_SOURCE)
+    model = load_document_model(root, HLA_SOURCE)
     requirement_ids_by_path: dict[str, list[str]] = {}
     for requirement in model.requirements:
         requirement_ids_by_path.setdefault(requirement.source.path, []).append(requirement.id)
@@ -193,9 +192,9 @@ def _attach_requirement_ownership() -> None:
     )
 
 
-def _repair_intermediate_content() -> None:
+def _repair_intermediate_content(root: Path) -> None:
     """Recover from an interrupted pre-M17 extraction before model loading."""
-    path = ROOT / "semantic" / "content-elements.json"
+    path = root / "semantic" / "content-elements.json"
     if not path.is_file():
         return
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -208,22 +207,21 @@ def _repair_intermediate_content() -> None:
         _write_json(path, payload)
 
 
-def complete(root: Path = ROOT) -> dict[str, int]:
-    global ROOT
-    ROOT = root.resolve()
-    _repair_intermediate_content()
-    model = load_document_model(ROOT, HLA_SOURCE)
+def complete(root: Path | None = None) -> dict[str, int]:
+    root = (root or document_root("hla-1516.2-2025")).resolve()
+    _repair_intermediate_content(root)
+    model = load_document_model(root, HLA_SOURCE)
     blocks_payload = json.loads(
-        (ROOT / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
+        (root / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
     )
     annex_by_path = _annex_clause_by_path(
-        ROOT,
+        root,
         list(blocks_payload.get("content_blocks", [])),
         {item.id for item in model.clauses},
     )
     definitions = _table_semantic_definitions(model)
-    requirements = _promoted_requirements(model, annex_by_path)
-    semantic = ROOT / "semantic"
+    requirements = _promoted_requirements(root, annex_by_path)
+    semantic = root / "semantic"
     _write_json(
         semantic / "definitions.json",
         DefinitionFile(schema_version=1, definitions=definitions).model_dump(mode="json"),
@@ -239,9 +237,9 @@ def complete(root: Path = ROOT) -> dict[str, int]:
 
     # Re-extract after authored promotion so the normal content migration sees
     # the complete semantic ID set and writes readable page projections.
-    migrate_content(ROOT)
-    _attach_requirement_ownership()
-    closed = load_document_model(ROOT, HLA_SOURCE)
+    migrate_content(root)
+    _attach_requirement_ownership(root)
+    closed = load_document_model(root, HLA_SOURCE)
     if len(closed.requirements) != 340 or any(
         item.extraction != "explicit" or not item.clause_id for item in closed.requirements
     ):

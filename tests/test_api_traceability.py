@@ -3,14 +3,16 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
+import tempfile
 import unittest
-from pathlib import Path
 
 from hla_lab.traceability.api_traceability import build_report
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 EDITION_ROOTS = tuple(ROOT / "topics" / "ieee" / f"hla-1516.1-{year}" for year in ("2010", "2025"))
 
 
@@ -30,45 +32,55 @@ class ApiTraceabilityAuditTests(unittest.TestCase):
                 for item in report.documents
             },
             {
-                "hla-1516.1-2010": (942, 942, 186, 0),
-                "hla-1516.1-2025": (1697, 1697, 48, 0),
+                "hla-1516.1-2010": (1529, 1529, 126, 0),
+                "hla-1516.1-2025": (2014, 2014, 2234, 0),
             },
         )
 
     def test_audit_cli_is_machine_readable_and_enforced(self) -> None:
-        result = subprocess.run(
-            [
-                sys.executable,
-                "-m",
-                "hla_lab.traceability.api_traceability",
-                "--check",
-                "--json",
-            ],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        environment = os.environ.copy()
+        environment.pop("HLA_LAB_ROOT", None)
+        environment.pop("PYTHONPATH", None)
+        with tempfile.TemporaryDirectory() as outside_workspace:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "hla_lab.traceability.api_traceability",
+                    "--workspace-root",
+                    str(ROOT),
+                    "--check",
+                    "--json",
+                ],
+                cwd=outside_workspace,
+                env=environment,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            strict = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "hla_lab.traceability.api_traceability",
+                    "--workspace-root",
+                    str(ROOT),
+                    "--check",
+                    "--require-complete",
+                    "--json",
+                ],
+                cwd=outside_workspace,
+                env=environment,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
         payload = json.loads(result.stdout)
         self.assertTrue(payload["passed"])
         self.assertTrue(payload["complete"])
         self.assertEqual(
             {item["document"] for item in payload["documents"]},
             {"hla-1516.1-2010", "hla-1516.1-2025"},
-        )
-        strict = subprocess.run(
-            [
-                sys.executable,
-                "-m",
-                "hla_lab.traceability.api_traceability",
-                "--check",
-                "--require-complete",
-                "--json",
-            ],
-            cwd=ROOT,
-            check=False,
-            capture_output=True,
-            text=True,
         )
         self.assertEqual(strict.returncode, 0)
 

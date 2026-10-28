@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sys
 
+
 def main() -> None:
     request = json.load(sys.stdin)
     bindings = []
@@ -45,6 +46,7 @@ def main() -> None:
         sys.stdout,
         ensure_ascii=False,
     )
+
 
 if __name__ == "__main__":
     main()

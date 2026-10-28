@@ -16,8 +16,9 @@ from hla_lab.generation.faithful_renderer import (
     render_faithful_body,
 )
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 
 
 def _block(identifier: str, sequence: int, source_path: str) -> ContentBlock:
@@ -114,9 +115,9 @@ class FaithfulRendererTests(unittest.TestCase):
 
     def test_hla_layout_profiles_declare_all_nonprose_boundaries(self) -> None:
         expected_entries = {
-            "hla-1516-2025": 38,
-            "hla-1516.1-2025": 437,
-            "hla-1516.2-2025": 122,
+            "hla-1516-2025": 29,
+            "hla-1516.1-2025": 430,
+            "hla-1516.2-2025": 113,
         }
         for name, expected_count in expected_entries.items():
             root = ROOT / "topics" / "ieee" / name

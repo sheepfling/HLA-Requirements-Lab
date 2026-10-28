@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterable, Mapping
 from pathlib import Path
 
@@ -18,9 +19,16 @@ from hla_lab.core.semantic_model import (
     SourceRef,
     Transition,
 )
+from hla_lab.core.source_paths import is_source_frontmatter
 from hla_lab.corpus.corpus_graph import CorpusDocumentDescriptor, build_corpus_graph
+from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.hierarchy_compiler import CompiledHierarchy, compile_hierarchy
-from hla_lab.generation.reflowable_renderer import render_reflowable_document
+from hla_lab.generation.reflowable_renderer import (
+    _clean_table_cell_text,
+    _table_display_label,
+    _table_family_label,
+    render_reflowable_document,
+)
 from hla_lab.publication.publication_contract import (
     PublicationProfile,
     default_publication_profile,
@@ -74,7 +82,31 @@ def _clause_link(model: DocumentModel, clause_id: str | None) -> str:
 
 
 def _source_ref(source: SourceRef) -> str:
-    return _source_line(source.path, source.line, source.end_line)
+    locator = _source_line(source.path, source.line, source.end_line)
+    printed_page = re.search(r"page-(\d+)\.tex$", source.path)
+    if printed_page is None:
+        return locator
+    span = (
+        str(source.line)
+        if source.end_line is None or source.end_line == source.line
+        else f"{source.line}--{source.end_line}"
+    )
+    return f"printed p. {int(printed_page.group(1))}, lines {span} ({locator})"
+
+
+def _requirement_heading(requirement: Requirement) -> str:
+    """Use a short substantive heading while leaving provenance in the source field."""
+    if not requirement.title.casefold().startswith("normative statement at "):
+        return requirement.title
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", " ".join(requirement.statement.split()))
+    lead = next(
+        (sentence for sentence in sentences if re.search(r"\bshall\b", sentence, re.I)),
+        sentences[0],
+    )
+    lead = lead.strip().rstrip(".:;!?")
+    if len(lead) > 112:
+        lead = lead[:110].rsplit(" ", 1)[0].rstrip(" ,;:") + "…"
+    return lead or "Source-derived requirement"
 
 
 def _itemize(items: Iterable[str], *, empty: str = "None recorded.") -> list[str]:
@@ -184,20 +216,28 @@ def _render_concepts(model: DocumentModel) -> list[str]:
 def _render_tables(model: DocumentModel) -> list[str]:
     """Render logical table families and their source-owned cells."""
     lines = [_heading(2, f"{model.document_id}: table families")]
-    if not model.table_families:
+    tables = {
+        table.id: table for table in model.tables if not is_source_frontmatter(table.source.path)
+    }
+    families = tuple(
+        (family, tuple(table_id for table_id in family.table_ids if table_id in tables))
+        for family in model.table_families
+    )
+    families = tuple((family, table_ids) for family, table_ids in families if table_ids)
+    if not families:
         lines.append(r"\emph{No semantic table families are currently authored for this document.}")
         return lines
-    tables = {table.id: table for table in model.tables}
-    for family in model.table_families:
+    for family, table_ids in families:
+        family_label = _table_family_label(family, tables[table_ids[0]])
         lines.extend(
             (
                 _anchor(model.document_id, family.id),
-                _heading(3, family.title),
+                _heading(3, family_label),
                 f"{_field('Semantic ID', family.id)}\\\\",
                 f"{_field('Clause', '')}{_clause_link(model, family.clause_id)}\\\\",
             )
         )
-        for table_id in family.table_ids:
+        for table_id in table_ids:
             table = tables[table_id]
             family_link = (
                 _link(model.document_id, table.family_id)
@@ -212,7 +252,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
             lines.extend(
                 (
                     _anchor(model.document_id, table.id),
-                    _heading(4, table.caption or table.title or table.id),
+                    _heading(4, _table_display_label(table, family_label)),
                     f"{_field('Table', table.id)}\\\\",
                     f"{_field('Logical ID', table.logical_id or table.id)}\\\\",
                     f"{_field('Family', '')}{family_link}\\\\",
@@ -225,7 +265,7 @@ def _render_tables(model: DocumentModel) -> list[str]:
                     f"\\texttt{{{_display_escape(cell.id)}}} "
                     f"[{cell.row if cell.row is not None else 'unknown'}, "
                     f"{cell.column if cell.column is not None else 'unknown'}]: "
-                    f"{_display_escape(cell.text)}"
+                    f"{_display_escape(_clean_table_cell_text(cell.text))}"
                     for cell in table.cells
                 )
             )
@@ -381,7 +421,7 @@ def _render_prose(model: DocumentModel) -> list[str]:
 def _render_requirement(requirement: Requirement, model: DocumentModel) -> list[str]:
     lines = [
         _anchor(model.document_id, requirement.id),
-        _heading(3, requirement.title),
+        _heading(3, _requirement_heading(requirement)),
         f"{_field('Semantic ID', requirement.id)}\\\\",
         f"{_field('Semantic group', requirement.semantic_group_id or requirement.id)}\\\\",
         f"{_display_escape(requirement.statement)}\\\\",
@@ -397,6 +437,8 @@ def _render_requirement(requirement: Requirement, model: DocumentModel) -> list[
             + r"\\"
         )
     lines.append(f"{_field('Source', '')}{_source_ref(requirement.source)}")
+    for source in requirement.additional_sources:
+        lines.append(f"{_field('Additional source', '')}{_source_ref(source)}")
     return lines
 
 
@@ -683,14 +725,12 @@ def generate_from_hla(
     output: Path,
     profile: PublicationProfile | None = None,
     graph_metadata: Mapping[str, CorpusDocumentDescriptor] | None = None,
-    repository_root: Path | None = None,
+    *,
+    workspace_root: Path | None = None,
 ) -> Path:
     """Load the HLA profile at the adapter boundary for the initial derivative."""
-    from hla_lab.corpus.hla_semantic import load_hla_corpus
-    from hla_lab.paths import REPO_ROOT
-
     return generate_derivative(
-        load_hla_corpus(tuple(roots), repository_root or REPO_ROOT).documents,
+        load_hla_corpus(tuple(roots), workspace_root=workspace_root).documents,
         output,
         profile=profile,
         graph_metadata=graph_metadata,
@@ -703,5 +743,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("roots", nargs="+", type=Path)
+    parser.add_argument("--workspace-root", type=Path, required=True)
     arguments = parser.parse_args()
-    print(generate_from_hla(arguments.roots, arguments.output))
+    print(
+        generate_from_hla(
+            arguments.roots, arguments.output, workspace_root=arguments.workspace_root
+        )
+    )

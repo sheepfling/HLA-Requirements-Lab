@@ -10,12 +10,12 @@
     f17 stroke/.style={draw=black,line width=.90pt},
     f17 partition/.style={draw=black,line width=.80pt,dash pattern=on 4.0pt off 4.0pt},
     f17 transition/.style={draw=black,line width=.95pt,-{Stealth[length=7.0pt,width=5.7pt]}},
-    f17 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{23.4}{24.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.03},
-    f17 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.1}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
-    f17 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.6}{13.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=.99},
-    f17 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.0}{11.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
-    f17 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.0}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
-    f17 note/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{10.7}{11.5}\selectfont,align=left,anchor=north west,inner sep=0pt,xscale=1.00}
+    f17 title/.style={font=\RLSans\bfseries\fontsize{23.4}{24.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.03},
+    f17 tab/.style={font=\RLSans\mdseries\fontsize{12.1}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 text/.style={font=\RLSans\mdseries\fontsize{12.6}{13.3}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=.99},
+    f17 small/.style={font=\RLSans\mdseries\fontsize{11.0}{11.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 tiny/.style={font=\RLSans\mdseries\fontsize{10.0}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.00},
+    f17 note/.style={font=\RLSans\mdseries\fontsize{10.7}{11.5}\selectfont,align=left,anchor=north west,inner sep=0pt,xscale=1.00}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -48,7 +48,7 @@
 
     % F17-P01 deep history used by Send Message.
     \draw[f17 stroke] (478,136) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (478,136) {H*};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (478,136) {H*};
 
     % F17-E01 Temporal State boundary -> H*: Send Message.
     \draw[f17 transition] (365,111)
@@ -123,7 +123,7 @@
 
     % F17-P06 shallow history and F17-E06 Receive Message #2.
     \draw[f17 stroke] (451,620) circle[radius=16pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\selectfont\fontsize{18}{18}\selectfont,inner sep=0pt] at (451,620) {H};
+    \node[font=\RLSans\mdseries\fontsize{18}{18}\selectfont,inner sep=0pt] at (451,620) {H};
     \draw[f17 transition] (360,658)
     .. controls (388,634) and (414,617) .. (434,620);
     \node[f17 small] at (399,620) {Receive\\Message \#2};

@@ -6,12 +6,12 @@
     f4 stroke/.style={draw=black,line width=.32pt},
     f4 transition/.style={draw=black,line width=.40pt,-{Stealth[length=3.0pt,width=2.8pt]}},
     f4 partition/.style={draw=black,line width=.28pt,dash pattern=on 3.0pt off 2.5pt},
-    f4 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{4.45}{4.85}\selectfont,align=center,inner sep=0pt},
-    f4 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.90}{4.28}\selectfont,align=center,inner sep=.35pt,fill=white},
-    f4 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.55}{3.90}\selectfont,align=center,inner sep=.30pt,fill=white},
-    f4 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{3.95}{4.32}\selectfont,align=center,inner sep=0pt},
-    f4 title/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{7.35}{8.00}\selectfont,align=center,inner sep=0pt},
-    f4 caption/.style={font=\fontfamily{qhv}\fontseries{bc}\fontshape{n}\selectfont\fontsize{7.05}{7.72}\selectfont,align=center,inner sep=0pt}
+    f4 text/.style={font=\RLSans\mdseries\fontsize{4.45}{4.85}\selectfont,align=center,inner sep=0pt},
+    f4 small/.style={font=\RLSans\mdseries\fontsize{3.90}{4.28}\selectfont,align=center,inner sep=.35pt,fill=white},
+    f4 tiny/.style={font=\RLSans\mdseries\fontsize{3.55}{3.90}\selectfont,align=center,inner sep=.30pt,fill=white},
+    f4 tab/.style={font=\RLSans\mdseries\fontsize{3.95}{4.32}\selectfont,align=center,inner sep=0pt},
+    f4 title/.style={font=\RLSans\bfseries\fontsize{7.35}{8.00}\selectfont,align=center,inner sep=0pt},
+    f4 caption/.style={font=\RLSans\bfseries\fontsize{7.05}{7.72}\selectfont,align=center,inner sep=0pt}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -108,7 +108,7 @@
 
         % F04-P03: shallow history state.
         \draw[f4 stroke] (377,201) circle[radius=12.5];
-        \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{7.65}{7.95}\selectfont,inner sep=0pt] at (377,201) {H};
+        \node[font=\RLSans\mdseries\fontsize{7.65}{7.95}\selectfont,inner sep=0pt] at (377,201) {H};
 
         % F04-E03: Request Federation Save, Active Federate boundary to H.
         \draw[f4 transition] (260,168) .. controls (268,188) and (316,198) .. (364,201);

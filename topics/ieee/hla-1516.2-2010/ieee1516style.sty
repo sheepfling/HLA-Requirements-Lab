@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieee1516style}[2026/08/07 IEEE 1516.2-2010 reconstruction style]
+\ProvidesPackage{ieee1516style}[2026/08/24 HLA Requirements Lab 2010 source-compilation style]
 
 \RequirePackage[letterpaper,top=0.74in,bottom=0.72in,left=0.80in,right=0.80in,headheight=14pt,headsep=0.18in,footskip=0.35in]{geometry}
 % Use the repository's installed XeLaTeX font contract. The handoff's
@@ -13,6 +13,7 @@
 \RequirePackage{longtable}
 \RequirePackage{array}
 \RequirePackage{booktabs}
+\RequirePackage{colortbl}
 \RequirePackage{ragged2e}
 \RequirePackage{url}
 \RequirePackage[hidelinks,hypertexnames=false]{hyperref}
@@ -24,21 +25,32 @@
 \RequirePackage{tikz}
 \RequirePackage{graphicx}
 \RequirePackage{multirow}
+\RequirePackage{etoolbox}
 
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}
-\setsansfont{Arimo}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8.0pt plus 1.0pt minus 0.8pt}
+\setlength{\emergencystretch}{3em}
 \linespread{0.965}
 \setlist[itemize]{leftmargin=1.75em,label=---,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
 \setlist[enumerate]{leftmargin=1.75em,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
 
-\newcommand{\stdnumber}{IEEE Std 1516.2-2010}
-\newcommand{\stdtitleupper}{HIGH-LEVEL ARCHITECTURE (HLA) --- OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
-\newcommand{\stdshortupper}{IEEE STANDARD FOR MODELING AND SIMULATION (M\&S)}
-\newcommand{\stdcopyright}{Copyright \textcopyright\ 2010 IEEE. All rights reserved.}
+% These labels identify the independent Lab compilation. IEEE identifiers remain
+% in the technical body only where they identify supplied source references.
+\newcommand{\stdnumber}{HLA 1516.2 \textbar\ 2010 source compilation}
+\newcommand{\stdtitleupper}{OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
+\newcommand{\stdshortupper}{HLA REQUIREMENTS LAB}
+\newcommand{\stdcopyright}{}
 
 \newcommand{\bodyfont}{\fontsize{10.0}{12.0}\selectfont}
 \newcommand{\smallbodyfont}{\fontsize{8.15}{9.65}\selectfont}
@@ -119,35 +131,46 @@
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
-\newcommand{\ieeeattribution}{Reprinted with permission from IEEE Std 1516.2\texttrademark-2010.}
+\newcommand{\ieeeattribution}{Source set: supplied HLA 1516.2 family materials from 2010.}
 
 % OMT table reconstruction helpers.  These are deliberately compact: the
 % source standard uses dense, fully ruled tables with small type.
+\definecolor{HLAOMTBlue}{HTML}{496B91}
+\definecolor{HLAOMTOrange}{HTML}{E7773F}
 \newcommand{\omttablefont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omttablesmallfont}{\fontsize{9}{10.9}\selectfont}
 \newcommand{\omtcaption}[1]{%
-    \par\vspace{0pt}\begin{center}%
-    {\sffamily\bfseries\fontsize{10.8}{12}\selectfont #1}\par
-    \end{center}\vspace{-2pt}%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1}\par
+        }%
+    }%
+    \par\vspace{3pt}%
 }
 \newcommand{\omtcontinuedcaption}[1]{%
-    \par\vspace{0pt}\begin{center}%
-    {\sffamily\bfseries\fontsize{10.8}{12}\selectfont #1 \textit{(continued)}}\par
-    \end{center}\vspace{-2pt}%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1 \textit{(continued)}}\par
+        }%
+    }%
+    \par\vspace{3pt}%
 }
 \newcommand{\omtph}[1]{\textless#1\textgreater}
 \newcommand{\omtopt}[1]{[\textless#1\textgreater]}
 \newcommand{\omtsubfield}[1]{\hspace*{1.25em}\textit{#1}}
 \newcommand{\omtdash}{---\hspace{0.35em}}
-\newcommand{\restaurantglyph}{%
+% The Glyph category is represented by a compact three-node hierarchy mark.
+% It is intentionally vector-only and contains no imported source artwork.
+\newcommand{\omtcategoryglyph}{%
     \raisebox{-0.35ex}{%
         \begin{tikzpicture}[x=1pt,y=1pt,baseline=(current bounding box.center)]
-        \draw[cyan,line width=1.0pt] (0,0) rectangle (14,14);
-        \draw[black,line width=1.0pt] (4,3) -- (10.5,11);
-        \draw[black,line width=1.0pt] (10.5,3) -- (4.2,10.8);
-        \draw[black,line width=0.7pt] (3.4,10.7) -- (5.2,12.3);
-        \draw[black,line width=0.7pt] (4.1,10.0) -- (5.9,11.6);
-        \draw[black,line width=0.7pt] (9.8,10.9) -- (11.4,12.1);
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (7,11) -- (7,5);
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (17,11) -- (17,5);
+        \fill[HLAOMTOrange,draw=white,line width=.45pt] (12,18) circle (2.0);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (7,5) circle (1.8);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (17,5) circle (1.8);
         \end{tikzpicture}%
     }%
 }
@@ -161,24 +184,24 @@
         \begin{tikzpicture}[x=1pt,y=-1pt,xscale=#3]
         \tikzset{omtstruct/.style={anchor=west,inner sep=0pt,font=\fontsize{9}{10}\selectfont}}
         % Outer frame and vertical hierarchy columns (source Table 6 geometry).
-        \draw[line width=0.45pt] (0,0) rectangle (433.32,231.24);
-        \draw[line width=0.35pt] (71.88,0)--(71.88,231.24);
-        \draw[line width=0.35pt] (153.24,0)--(153.24,231.24);
-        \draw[line width=0.35pt] (234.60,0)--(234.60,231.24);
-        \draw[line width=0.35pt] (324.60,0)--(324.60,231.24);
-        \draw[line width=0.35pt] (355.68,0)--(355.68,231.24);
+        \draw[draw=RLBlue,line width=0.75pt] (0,0) rectangle (433.32,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,0)--(71.88,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,0)--(153.24,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,0)--(234.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (324.60,0)--(324.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (355.68,0)--(355.68,231.24);
         % Horizontal lines stop at the hierarchy level whose cell is being split.
-        \draw[line width=0.35pt] (153.24,15.48)--(433.32,15.48);
-        \draw[line width=0.35pt] (234.60,30.48)--(433.32,30.48);
-        \draw[line width=0.35pt] (234.60,55.44)--(433.32,55.44);
-        \draw[line width=0.35pt] (153.24,70.44)--(433.32,70.44);
-        \draw[line width=0.35pt] (234.60,85.44)--(433.32,85.44);
-        \draw[line width=0.35pt] (234.60,110.46)--(433.32,110.46);
-        \draw[line width=0.35pt] (153.24,125.46)--(433.32,125.46);
-        \draw[line width=0.35pt] (71.88,150.48)--(433.32,150.48);
-        \draw[line width=0.35pt] (234.60,165.48)--(433.32,165.48);
-        \draw[line width=0.35pt] (234.60,180.48)--(433.32,180.48);
-        \draw[line width=0.35pt] (71.88,205.50)--(433.32,205.50);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,15.48)--(433.32,15.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,30.48)--(433.32,30.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,55.44)--(433.32,55.44);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,70.44)--(433.32,70.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,85.44)--(433.32,85.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,110.46)--(433.32,110.46);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,125.46)--(433.32,125.46);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,150.48)--(433.32,150.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,165.48)--(433.32,165.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,180.48)--(433.32,180.48);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,205.50)--(433.32,205.50);
 
         % Root and the representative hierarchy entries.
         \node[omtstruct] at (6.6,104.6) {#1};

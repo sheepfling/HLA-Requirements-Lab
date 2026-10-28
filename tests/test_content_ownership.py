@@ -7,32 +7,36 @@ import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from types import MappingProxyType
 
 from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.traceability.semantic_authority import load_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-ROOTS = {
-    "hla-1516.1-2025": REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025",
-    "hla-1516.2-2025": REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025",
-}
+REPO_ROOT = TEST_REPO_ROOT
+ROOTS = MappingProxyType(
+    {
+        "hla-1516.1-2025": REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025",
+        "hla-1516.2-2025": REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025",
+    }
+)
 
 
 class ContentOwnershipTests(unittest.TestCase):
     def test_both_documents_have_typed_page_ownership(self) -> None:
-        expected_pages = {"hla-1516.1-2025": 436, "hla-1516.2-2025": 122}
+        expected_pages = {"hla-1516.1-2025": 435, "hla-1516.2-2025": 122}
         for document_id, root in ROOTS.items():
             model = load_document_model(root, HLA_SOURCE)
             if document_id == "hla-1516.1-2025":
                 page_files = tuple((root / "content").rglob("*-page-*.tex"))
-                self.assertEqual(len(model.requirements), 1697)
-                self.assertEqual(len(model.requirement_reviews), 0)
+                self.assertEqual(len(model.requirements), 2014)
+                self.assertEqual(len(model.requirement_reviews), 12)
                 self.assertEqual(len(model.definitions), 161)
                 self.assertEqual(len(model.tables), 92)
-                self.assertEqual(sum(len(item.cells) for item in model.tables), 2047)
+                self.assertEqual(sum(len(item.cells) for item in model.tables), 5159)
                 self.assertEqual(len(model.table_families), 46)
             else:
                 page_files = tuple((root / "sections" / "semantic").rglob("page-*.tex"))

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.build.build import publication_targets
 from hla_lab.publication.publication_registry import (
@@ -11,8 +10,9 @@ from hla_lab.publication.publication_registry import (
     load_release_manifest,
     publication_projects,
 )
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 REGISTRY_PATH = ROOT / "data" / "publications.json"
 RELEASE_PATH = ROOT / "data" / "release" / "documents.json"
 

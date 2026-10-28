@@ -3,65 +3,15 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from collections import Counter
-from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
+
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope, StateMachineFile
+from hla_lab.diagrams.state_machine_inventory import StateMachineInventory
 
 STATUSES = ("unmodeled", "classified", "draft", "needs_review", "validated", "rendered", "accepted")
-MODEL_STATUSES = {"draft", "needs_review", "validated", "rendered", "accepted"}
-
-
-def _load(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError("top-level JSON value must be an object")
-    return value
-
-
-def validate_model(path: Path, model: Mapping[str, Any]) -> list[str]:
-    errors: list[str] = []
-    for field in ("schema_version", "state_machines"):
-        if field not in model:
-            errors.append(f"{path}: missing {field}")
-    machines = model.get("state_machines", [])
-    if not isinstance(machines, list):
-        return [*errors, f"{path}: state_machines must be an array"]
-    machine_ids = [item.get("id") for item in machines if isinstance(item, dict)]
-    if len(machine_ids) != len(set(machine_ids)):
-        errors.append(f"{path}: duplicate state-machine IDs")
-    for machine in machines:
-        if not isinstance(machine, dict):
-            errors.append(f"{path}: state machine is not an object")
-            continue
-        states = machine.get("states", [])
-        transitions = machine.get("transitions", [])
-        if not isinstance(states, list) or not isinstance(transitions, list):
-            errors.append(f"{path}: machine {machine.get('id')} states/transitions must be arrays")
-            continue
-        state_ids = [item.get("id") for item in states if isinstance(item, dict)]
-        if len(state_ids) != len(set(state_ids)):
-            errors.append(f"{path}: machine {machine.get('id')} has duplicate state IDs")
-        state_set = set(state_ids)
-        transition_ids = [item.get("id") for item in transitions if isinstance(item, dict)]
-        if len(transition_ids) != len(set(transition_ids)):
-            errors.append(f"{path}: machine {machine.get('id')} has duplicate transition IDs")
-        for transition in transitions:
-            if not isinstance(transition, dict):
-                errors.append(f"{path}: transition is not an object")
-                continue
-            for field in ("id", "source_state", "target_state", "event"):
-                if field not in transition:
-                    errors.append(f"{path}: transition missing {field}")
-            for endpoint in ("source_state", "target_state"):
-                value = transition.get(endpoint)
-                if value is not None and value not in state_set:
-                    errors.append(
-                        f"{path}: transition {transition.get('id')} has unknown {endpoint} {value}"
-                    )
-    return errors
+MODEL_STATUSES = frozenset({"draft", "needs_review", "validated", "rendered", "accepted"})
 
 
 def _review_metrics(reviews_dir: Path, artifacts_dir: Path) -> list[str]:
@@ -88,19 +38,14 @@ def report(
     reviews_dir: Path | None = None,
     artifacts_dir: Path | None = None,
 ) -> tuple[str, int]:
-    manifest = _load(manifest_path)
-    diagrams = manifest.get("diagrams", [])
-    if not isinstance(diagrams, list):
-        return "manifest error: diagrams must be an array", 1
-    statuses = Counter(
-        str(item.get("status", "missing")) for item in diagrams if isinstance(item, dict)
-    )
-    priorities = Counter(
-        str(item.get("review_priority", "unassigned"))
-        for item in diagrams
-        if isinstance(item, dict)
-    )
-    scopes = manifest.get("document_scopes", [])
+    try:
+        manifest = StateMachineInventory.model_validate_json(
+            manifest_path.read_text(encoding="utf-8")
+        )
+    except (OSError, ValueError) as exc:
+        return f"manifest error: {exc}", 1
+    statuses = Counter(item.status for item in manifest.diagrams)
+    priorities = Counter(item.review_priority for item in manifest.diagrams)
     errors: list[str] = []
     model_files = (
         sorted(path for path in models_dir.glob("*.json") if path.name != manifest_path.name)
@@ -111,18 +56,18 @@ def report(
     canonical_model_files = 0
     for path in model_files:
         try:
-            model = _load(path)
-            # The semantic directory also contains supporting mappings such as
-            # implementations.json. Only canonical model files carry the
-            # state_machines collection and should contribute to model metrics.
-            if "state_machines" not in model:
+            source = path.read_text(encoding="utf-8")
+            envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+            if "state_machines" not in envelope.model_fields_set:
                 continue
+            if envelope.schema_version is None or envelope.state_machines is None:
+                raise ValueError("state-machine model requires schema_version and state_machines")
+            state_machine_file = StateMachineFile.model_validate_json(source)
             canonical_model_files += 1
-            canonical_machines += len(model.get("state_machines", ()))
-            errors.extend(validate_model(path, model))
-        except (OSError, json.JSONDecodeError, ValueError) as exc:
+            canonical_machines += len(state_machine_file.state_machines)
+        except (OSError, ValueError) as exc:
             errors.append(f"{path}: {exc}")
-    total = len(diagrams)
+    total = len(manifest.diagrams)
     modeled = sum(statuses[status] for status in MODEL_STATUSES)
     classified = total - statuses["unmodeled"]
     coverage = modeled / total if total else 0.0
@@ -130,10 +75,8 @@ def report(
         f"manifest: {manifest_path}",
         "scopes: "
         + ", ".join(
-            f"{item.get('document')}={item.get('inventory_status')}"
-            f"({item.get('extracted_candidates', 0)})"
-            for item in scopes
-            if isinstance(item, dict)
+            f"{item.document}={item.inventory_status}({item.extracted_candidates})"
+            for item in manifest.document_scopes
         ),
         f"diagrams: {total}",
         (

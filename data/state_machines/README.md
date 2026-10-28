@@ -2,8 +2,9 @@
 
 This directory is reserved for canonical, renderer-independent representations
 of extracted state-machine diagrams. The current prose-derived pilot lives in
-`topics/ieee/hla-1516.1-2025/semantic/`. The JSON contract is defined in
-[`schemas/state_machine.schema.json`](../../schemas/state_machine.schema.json).
+`topics/ieee/hla-1516.1-2025/semantic/`. The JSON contract is defined by the
+[Pydantic state-machine model](../../hla_lab/schemas.py); run
+`hla-lab-schema state_machine` to generate its JSON Schema.
 
 The source image remains provenance only. TikZ, Graphviz, Mermaid, and other
 formats should be generated from these records rather than edited directly.

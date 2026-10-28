@@ -19,15 +19,36 @@
 \RequirePackage{graphicx}
 \RequirePackage{caption}
 \RequirePackage{xcolor}
+\RequirePackage{colortbl}
+\RequirePackage{etoolbox}
 \RequirePackage{pdflscape}
 \RequirePackage{tabularx}
 \RequirePackage{ragged2e}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows.meta,calc,positioning,fit,backgrounds}
 
+% The source MOM run uses the generic pdflscape `landscape` environment.
+% Route that legacy wrapper through the shared Requirements Lab true-landscape
+% page so its table pages keep horizontal Lab furniture and the correct media
+% orientation.  RLLandscapePage is provided by rl-publication.sty after this
+% source-faithful package is loaded, but the command is resolved when the
+% environment is used.
+\renewenvironment{landscape}{%
+    \begin{RLLandscapePage}%
+}{%
+    \end{RLLandscapePage}%
+}
+
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}
-\setsansfont{Arimo}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 
 
 \setlength{\parindent}{0pt}
@@ -62,10 +83,10 @@
 {\thesubparagraph}{0.55em}{}
 \titlespacing*{\subparagraph}{0pt}{9pt plus 2pt minus 1pt}{4.5pt}
 
-\newcommand{\StdShort}{IEEE Std 1516.1-2010}
-\newcommand{\StdLongHeader}{HIGH LEVEL ARCHITECTURE (HLA)---FEDERATE INTERFACE SPECIFICATION}
-\newcommand{\StdLongHeaderEven}{IEEE STANDARD FOR MODELING AND SIMULATION (M\&S)}
-\newcommand{\CopyrightLine}{Copyright \textcopyright\ 2010 IEEE. All rights reserved.}
+\newcommand{\StdShort}{HLA 1516.1 \textbar\ 2010-source compilation}
+\newcommand{\StdLongHeader}{FEDERATE INTERFACE SPECIFICATION}
+\newcommand{\StdLongHeaderEven}{HLA REQUIREMENTS LAB}
+\newcommand{\CopyrightLine}{}
 
 \fancypagestyle{body}{%
     \fancyhf{}
@@ -124,7 +145,7 @@
 
 \newcommand{\term}[1]{\textbf{#1}:}
 \newcommand{\rtiinitiated}{\textdagger}
-\newcommand{\sourceattribution}{Reprinted with permission from IEEE Std 1516.1\texttrademark-2010.}
+\newcommand{\sourceattribution}{Source set: supplied HLA 1516.1 family materials from 2010.}
 
 % Nonfloating standard figure used during page-faithful reconstruction.
 % The source figure stencil already contains its printed caption.
@@ -165,9 +186,61 @@
 \newcommand{\stdnativefigure}[2][\linewidth]{%
     \par\vspace{4pt}%
     \begin{center}%
-    \resizebox{#1}{!}{\input{#2}}\par
+    \filename@parse{#2}%
+    \def\HLANativePDFExtension{pdf}%
+    \ifx\filename@ext\HLANativePDFExtension
+        \includegraphics[width=#1,keepaspectratio]{#2}%
+    \else
+        \resizebox{#1}{!}{\input{#2}}%
+    \fi\par
     \end{center}%
     \vspace{1pt}%
+}
+
+% Generated vector figures use a document-owned caption rather than the
+% caption that was embedded in the legacy TikZ stencil.  Keeping the caption
+% outside the artwork preserves selectable text and makes the one-caption
+% invariant explicit in the generated faithful body.
+\newcommand{\stdsemanticcaption}[1]{%
+    \par\vspace{3pt}%
+    {\sffamily\bfseries\fontsize{9.2}{10.4}\selectfont #1\par}%
+    \vspace{1pt}%
+}
+\newcommand{\stdsemanticfigure}[3][\linewidth]{%
+    \par\vspace{4pt}%
+    \begin{center}%
+    \includegraphics[width=#1,keepaspectratio]{#2}\par
+    \stdsemanticcaption{#3}%
+    \end{center}%
+    \vspace{1pt}%
+}
+
+% Service direction is semantic metadata, not color coding.  The 2010 body
+% retains its numbered subsection headings, while the generated modernization
+% layer adds this quiet line directly beneath each service title.
+\newcommand{\HLAServiceDirectionLine}[1]{%
+    \par\vspace{-3pt}\noindent
+    {\RLSans\fontsize{7.1pt}{8.5pt}\selectfont
+    \addfontfeatures{LetterSpace=0.8}\color{RLBlue}\MakeUppercase{#1}\par}%
+    \vspace{3pt}%
+}
+
+\newcommand{\stdsemanticlandscapefigure}[3]{%
+    % RLLandscapePage establishes true landscape media dimensions. Do not
+    % nest pdflscape here: a second rotation would put page furniture on the
+    % short edges and leave following prose on the figure page.
+    \begin{RLLandscapePage}%
+    \thispagestyle{rl}%
+    \par\vspace*{4pt}%
+    {\sffamily\bfseries\fontsize{10.5}{12.5}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\par}%
+    \vspace{7pt}%
+    \begin{center}%
+    \includegraphics[width=.975\linewidth,height=.80\textheight,keepaspectratio]{#3}\par
+    \stdsemanticcaption{Figure #1---#2}%
+    \end{center}%
+    \vspace{2pt}%
+    \end{RLLandscapePage}%
 }
 
 
@@ -206,16 +279,21 @@
 % the standard's page numbering remains stable while the table data stays
 % native, searchable LaTeX rather than a page raster.
 \newcommand{\momtabletitle}[1]{%
-    \par\vspace{2pt}%
-    \begin{center}\sffamily\bfseries\fontsize{9.4}{10.6}\selectfont #1\end{center}%
-    \vspace{2pt}%
+    \par\vspace{2pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\RLSans\bfseries\fontsize{9.4}{10.6}\selectfont\color{RLBlueDeep}#1}\par
+        }%
+    }%
+    \par\vspace{3pt}%
 }
 \newenvironment{momtabletypeset}[1][6.1]{%
     \begingroup
     \fontsize{#1}{9.2}\selectfont
     \setlength{\tabcolsep}{1.65pt}%
     \renewcommand{\arraystretch}{1.50}%
-    \setlength{\arrayrulewidth}{0.45pt}%
+    \arrayrulecolor{RLLine}%
+    \setlength{\arrayrulewidth}{0.35pt}%
     \sloppy
     \hbadness=10001\relax
 }{\par\endgroup}

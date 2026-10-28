@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieee-hla-base}[2026/07/31 v1.0.1 IEEE HLA recreation base]
+\ProvidesPackage{ieee-hla-base}[2026/08/24 v1.1 Requirements Lab fixed-page body layer]
 
 \RequirePackage{fontspec}
 \RequirePackage{tikz}
@@ -8,38 +8,24 @@
 \RequirePackage{ragged2e}
 \RequirePackage{etoolbox}
 \RequirePackage[normalem]{ulem}
+\RequirePackage{fancyhdr}
+\setlength{\headheight}{20pt}
 
-\newfontfamily\HLAArial{Arimo}[
-    Ligatures=NoCommon,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    BoldItalicFont=*-BoldItalic
-]
-\newfontfamily\HLATimes{Tinos}[
-    Ligatures=NoCommon,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    BoldItalicFont=*-BoldItalic
-]
-\newfontfamily\HLACalibri{Carlito}[
-    Ligatures=NoCommon,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    BoldItalicFont=*-BoldItalic
-]
-\newfontfamily\HLAMontserrat{Noto Sans}[
-    Ligatures=NoCommon,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold
-]
-\newfontfamily\HLASymbol{Noto Sans}[Ligatures=NoCommon]
-\newfontfamily\HLAFallback{Noto Serif}[Ligatures=NoCommon]
+% The generated page adapters retain source coordinates, but their visual
+% roles belong to the independent Requirements Lab publication system.
+% Loading the shared role files here keeps the adapters thin and gives every
+% inherited block the same checked-in fonts and color tokens as the accepted
+% production interior.
+\input{../requirements-lab/style/rl-brand.sty}
+\input{../requirements-lab/style/rl-type.sty}
+\input{../requirements-lab/style/rl-publication.sty}
 
-\setmainfont{Tinos}[Ligatures=NoCommon]
-\setsansfont{Arimo}[Ligatures=NoCommon]
+\let\HLAArial\RLSans
+\let\HLATimes\RLSerif
+\let\HLACalibri\RLSans
+\let\HLAMontserrat\RLSans
+\let\HLASymbol\RLSans
+\let\HLAFallback\RLSerif
 
 \newcommand{\HLAFontArial}{\HLAArial}
 \newcommand{\HLAFontTimes}{\HLATimes}
@@ -67,8 +53,8 @@
 }
 
 \newcommand{\HLAUnofficialNotice}{%
-    \HLACalibri\fontsize{6.8bp}{7.8bp}\selectfont
-    Unofficial LaTeX recreation; not an IEEE publication.%
+    % Retained as an empty compatibility hook for retired source-page
+    % adapters. Independent Lab documents do not need a publisher disclaimer.
 }
 
 % Stable identifiers remain explicit in semantic source and manifests. PDF
@@ -86,6 +72,47 @@
 \newcommand{\HLASmallBodyFont}{\HLATimes\fontsize{9bp}{10.5bp}\selectfont}
 \newcommand{\HLAFootnoteFont}{\HLATimes\fontsize{7.15bp}{8.3bp}\selectfont}
 \newcommand{\HLAContentsFont}{\HLATimes\fontsize{9.96bp}{12bp}\selectfont}
+
+% The source-coordinate edition historically used a separate resizebox for
+% nearly every line of prose. That is useful for page-for-page comparison, but
+% it also lets TeX scale adjacent lines by slightly different amounts. The Lab
+% working edition can opt into stable paragraph typography while leaving
+% headings, figures, and tables on their existing layout adapters.
+\newif\ifHLALabModernTypography
+\HLALabModernTypographyfalse
+\newcommand{\HLAEnableModernTypography}{\HLALabModernTypographytrue}
+\newcommand{\HLADisableModernTypography}{\HLALabModernTypographyfalse}
+\newcommand{\HLAStableBlockText}[1]{%
+    \begingroup
+    \ifHLALabModernTypography
+        \renewcommand{\resizebox}[3]{##3}%
+    \fi
+    #1%
+    \endgroup
+}
+% Some fixed-page source lines use an explicit makebox whose width was
+% measured with a different source font. Keep the authored width and left
+% alignment, but scale only when the current role font would protrude.
+\newcommand{\HLAConditionalMakeBox}[2]{%
+    \begingroup
+    \sbox0{#2}%
+    \ifdim\wd0>#1bp
+        \resizebox{#1bp}{!}{\usebox0}%
+    \else
+        \makebox[#1bp][l]{\usebox0}%
+    \fi
+    \endgroup
+}
+\newcommand{\HLAConditionalLine}[1]{%
+    \begingroup
+    \sbox0{#1}%
+    \ifdim\wd0>\linewidth
+        \resizebox{\linewidth}{!}{\usebox0}%
+    \else
+        \usebox0%
+    \fi
+    \endgroup
+}
 \newcommand{\HLASup}[1]{%
     \raisebox{0.72ex}{\HLATimes\fontsize{6bp}{6bp}\selectfont #1}%
 }
@@ -103,25 +130,13 @@
 }
 
 \newcommand{\HLAStandardFooter}[1]{%
-% Emit page furniture before semantic body content so PDF extraction order
-% remains consistent with the reference publication.
-    \noindent\smash{\makebox[0pt][l]{%
-        \begin{tikzpicture}[
-            remember picture,
-            overlay,
-            shift={(current page.north west)},
-            x=1bp,
-            y=-1bp
-        ]
-        \node[anchor=base,inner sep=0bp,outer sep=0bp]
-        at (306,758.16)
-            {{\HLATimes\fontsize{9.96bp}{11.45bp}\selectfont #1}};
-        \node[anchor=base,inner sep=0bp,outer sep=0bp]
-        at (306,768.84)
-            {{\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont Copyright \textcopyright 2025 IEEE. All rights reserved.}};
-        \end{tikzpicture}%
-    }}\par\vspace{-\baselineskip}%
 }
+
+% The fixed-page body uses the same furniture as the accepted Requirements
+% Lab interior. The shared module keeps text dark blue/ink and reserves
+% orange for the short non-semantic marker.
+\newcommand{\HLARequirementsLabFurniture}{\RLFixedFurniture}
+\RLDefineFixedPageStyle{HLARL}
 
 % Fixed-layout front matter occasionally contains independent semantic blocks
 % whose visual order differs from the PDF content-stream order. This helper
@@ -144,7 +159,7 @@
 }
 
 \NewDocumentEnvironment{HLASemanticPage}{O{}}{%
-    \thispagestyle{empty}%
+    \thispagestyle{HLARL}%
     \IfBlankF{#1}{\HLAStandardFooter{#1}}%
     \HLABodyFont%
     \justifying%
@@ -190,7 +205,7 @@
     ]
     \node[anchor=north west,inner sep=0bp,outer sep=0bp,text width=#3bp]
     at (#1,#2) {\begin{minipage}[t]{#3bp}
-                    \setlength{\parindent}{0pt}#4
+    \setlength{\parindent}{0pt}#4
     \end{minipage}};
     \end{tikzpicture}%
     \par\vspace{-\baselineskip}%
@@ -206,20 +221,13 @@
     \par\vspace{-\baselineskip}%
 }
 
-\newcommand{\HLAClauseHeading}[1]{{\HLAArial\fontsize{13.98bp}{16.08bp}\selectfont\bfseries\mbox{#1}\par}}
-\newcommand{\HLASubclauseHeading}[1]{{\HLAArial\fontsize{10.98bp}{12.63bp}\selectfont\bfseries\mbox{#1}\par}}
-\newcommand{\HLAMinorClauseHeading}[1]{{\HLAArial\fontsize{9.96bp}{11.45bp}\selectfont\bfseries\mbox{#1}\par}}
-\newcommand{\HLADefinitionBlock}[2]{\textbf{#1:} #2\par}
-\newcommand{\HLAClauseParagraph}[1]{#1\par}
+\newcommand{\HLAClauseHeading}[1]{{\color{RLBlueDeep}\HLAConditionalLine{\HLAArial\fontsize{13.98bp}{16.08bp}\selectfont\bfseries\mbox{#1}}\par}}
+\newcommand{\HLASubclauseHeading}[1]{{\color{RLBlueDeep}\HLAConditionalLine{\HLAArial\fontsize{10.98bp}{12.63bp}\selectfont\bfseries\mbox{#1}}\par}}
+\newcommand{\HLAMinorClauseHeading}[1]{{\color{RLBlueDeep}\HLAConditionalLine{\HLAArial\fontsize{9.96bp}{11.45bp}\selectfont\bfseries\mbox{#1}}\par}}
+\newcommand{\HLADefinitionBlock}[2]{\textbf{#1:} \HLAStableBlockText{#2}\par}
+\newcommand{\HLAClauseParagraph}[1]{\HLAStableBlockText{#1}\par}
 \newcommand{\HLAClauseFootnote}[1]{{\HLAFootnoteFont #1\par}}
-\newcommand{\HLAClauseRunningHeader}{%
-    \HLAClausePlacedBlock{158.6}{23.4}{295}{%
-        \centering\HLAArial\fontsize{7.98bp}{9.18bp}\selectfont
-        \textbf{IEEE Std 1516.2-2025}\par
-        IEEE Standard for Modeling and Simulation (M\&S) High Level Architecture (HLA)—\par
-        Object Model Template (OMT) Specification\par
-    }%
-}
+\newcommand{\HLAClauseRunningHeader}{}
 
 % Clause pages need the running header to precede the printed-page/copyright
 % furniture in PDF content-stream order. This preserves source extraction order
@@ -245,13 +253,36 @@
     }{}
 }
 
+% The OMT Glyph category uses the same compact three-node hierarchy mark as
+% the 2010 volume. Keep it live TikZ so it remains crisp, portable, and
+% independent of source images.
+\NewDocumentCommand{\HLAObjectModelGlyphAt}{m m m m}{%
+    \par\noindent
+    \pgfmathsetmacro{\HLAObjectGlyphXScale}{#3/24}%
+    \pgfmathsetmacro{\HLAObjectGlyphYScale}{#4/24}%
+    \begin{tikzpicture}[
+        remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
+    ]
+    \begin{scope}[shift={(#1,#2)},xscale=\HLAObjectGlyphXScale,yscale=\HLAObjectGlyphYScale]
+        % This overlay uses a downward-positive y axis; keep the hierarchy
+        % root visually above its two child nodes.
+        \draw[RLBlue,line width=.8bp] (12,5) -- (7,13) -- (7,19);
+        \draw[RLBlue,line width=.8bp] (12,5) -- (17,13) -- (17,19);
+        \fill[RLOrange,draw=white,line width=.5bp] (12,5) circle (2.0);
+        \fill[RLBlue,draw=white,line width=.5bp] (7,19) circle (1.8);
+        \fill[RLBlue,draw=white,line width=.5bp] (17,19) circle (1.8);
+    \end{scope}
+    \end{tikzpicture}%
+    \par\vspace{-\baselineskip}%
+}
+
 \newcommand{\HLAClauseDashItem}[1]{%
     \begingroup
     \hfuzz=2.2pt%
     \setlength{\parindent}{0pt}%
     \hangindent=22bp%
     \hangafter=1%
-    \makebox[22bp][l]{—}#1\par
+    \makebox[22bp][l]{—}\HLAStableBlockText{#1}\par
     \endgroup
 }
 
@@ -261,7 +292,7 @@
     \setlength{\parindent}{0pt}%
     \hangindent=22bp%
     \hangafter=1%
-    \makebox[22bp][l]{#1}#2\par
+    \makebox[22bp][l]{#1}\HLAStableBlockText{#2}\par
     \endgroup
 }
 

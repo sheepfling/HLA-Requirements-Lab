@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_corpus, load_document_model
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 HLA_15161 = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 CORPUS_ROOTS = tuple(
     ROOT / "topics" / "ieee" / name
@@ -20,7 +20,7 @@ class SemanticGraphTests(unittest.TestCase):
     def test_authored_implementation_seams_have_provenance_without_becoming_concrete(self) -> None:
         model = load_document_model(HLA_15161, HLA_SOURCE)
 
-        self.assertEqual(len(model.implementations), 281)
+        self.assertEqual(len(model.implementations), 283)
         self.assertTrue(all(item.source is not None for item in model.implementations))
         self.assertTrue(all(item.status == "planned" for item in model.implementations))
         self.assertEqual(
@@ -28,7 +28,7 @@ class SemanticGraphTests(unittest.TestCase):
                 item.source.path == "semantic/implementations.json"
                 for item in model.implementations
             ),
-            247,
+            249,
         )
 
     def test_sequence_messages_remain_explicitly_unlinked_without_invented_transitions(

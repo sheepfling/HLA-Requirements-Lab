@@ -53,7 +53,7 @@ the default remains strict matching.
 Audit both editions with:
 
 ```console
-python -m hla_lab.traceability.api_traceability --check --require-complete --json
+python -m hla_lab.traceability.api_traceability --workspace-root . --check --require-complete --json
 ```
 
 The audit verifies manifest determinism, requirement coverage, language/source
@@ -85,6 +85,12 @@ The generic model in `hla_lab/core/semantic_model.py` provides:
 ownership vocabulary is isolated in `hla_lab/core/hla_surface_profile.py`, where
 the current mapping kinds are projected to `RTIambassador`,
 `FederateAmbassador`, RTI internal handlers, and integration adapters.
+
+Requirement arrays use one canonical presentation order: document clause order,
+then authoritative source/include order within each clause. The compliance
+publication and portable bundle preserve that sequence for both the 2010 and
+2025 editions. Requirement IDs remain stable semantic join keys; consumers must
+not use an array position or presentation ordinal as identity.
 
 ## Executable trace contract
 

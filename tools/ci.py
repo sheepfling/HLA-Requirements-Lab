@@ -11,16 +11,9 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-from hla_lab.paths import RESOURCES
+from hla_lab.paths import repository_root, resources
 
 __all__ = ["ci_commands", "main", "quality_commands", "release_commands", "run_command"]
-
-ROOT = RESOURCES.root
-HLA_TOPIC = RESOURCES.document("hla-1516.1-2025").root
-SURFACE_MANIFEST = RESOURCES.diagram_surfaces_manifest
-STATE_MACHINE_MANIFEST = RESOURCES.state_machine_manifest
-AUTHORITY_MANIFEST = RESOURCES.authority_manifest
-RELEASE_MANIFEST = RESOURCES.release_manifest
 
 
 def _python(python: str, *arguments: object) -> tuple[str, ...]:
@@ -28,23 +21,19 @@ def _python(python: str, *arguments: object) -> tuple[str, ...]:
 
 
 def _tool(name: str) -> str:
-    """Find a console tool in PATH or beside the active Python executable."""
-    executable = shutil.which(name)
-    if executable is not None:
-        return executable
-    for suffix in (".exe", ""):
-        sibling = Path(sys.executable).with_name(f"{name}{suffix}")
-        if sibling.is_file():
-            return str(sibling)
-    return name
+    """Resolve installed console tools through the active environment's PATH."""
+    return shutil.which(name) or name
 
 
 def quality_commands(
     python: str = sys.executable,
     *,
     fix: bool = False,
+    root: Path | None = None,
 ) -> tuple[tuple[str, ...], ...]:
     """Return the ordered quality commands used by the quality CI job."""
+    workspace = resources(root)
+    hla_topic = workspace.document("hla-1516.1-2025").root
     ruff_check = _python(python, "-m", "ruff", "check")
     if fix:
         ruff_check += ("--fix",)
@@ -68,8 +57,8 @@ def quality_commands(
         (_tool("mdrepo"), "check", ".", "--format", "github"),
         ruff_check,
         ruff_format,
+        _python(python, "-m", "pyright", "--pythonpath", python),
         _python(python, "-m", "compileall", "-q", "hla_lab", "tools", "topics"),
-        _python(python, "-m", "hla_lab.cli", "test", "--parallel"),
         _python(python, "-m", "hla_lab.build.build", "list"),
         _python(python, "-m", "hla_lab.reports.semantic_metrics", "--json"),
         _python(python, "-m", "hla_lab.reports.semantic_dashboard", "--json"),
@@ -78,6 +67,8 @@ def quality_commands(
             python,
             "-m",
             "hla_lab.traceability.api_traceability",
+            "--workspace-root",
+            workspace.root,
             "--check",
             "--require-complete",
             "--json",
@@ -88,7 +79,7 @@ def quality_commands(
             python,
             "-m",
             "hla_lab.diagrams.export_state_machine",
-            f"{HLA_TOPIC}/semantic/federate-lifetime.json",
+            f"{hla_topic}/semantic/federate-lifetime.json",
             "--output",
             ".tmp/ci-state-machines",
             "--format",
@@ -98,7 +89,7 @@ def quality_commands(
             python,
             "-m",
             "hla_lab.diagrams.export_sequence_diagram",
-            f"{HLA_TOPIC}/semantic/sequence-diagrams.json",
+            f"{hla_topic}/semantic/sequence-diagrams.json",
             "--output",
             ".tmp/ci-sequence-diagrams",
             "--format",
@@ -108,21 +99,29 @@ def quality_commands(
             python,
             "-m",
             "hla_lab.diagrams.export_graph_diagram",
-            f"{HLA_TOPIC}/semantic/graph-diagrams.json",
+            f"{hla_topic}/semantic/graph-diagrams.json",
             "--output",
             ".tmp/ci-graph-diagrams",
             "--format",
             "both",
         ),
-        _python(python, "-m", "hla_lab.build.topic", "generate", "--root", HLA_TOPIC),
+        _python(
+            python,
+            "-m",
+            "hla_lab.build.topic",
+            "generate",
+            "--root",
+            hla_topic,
+            "--skip-assets",
+        ),
         _python(
             python,
             "-m",
             "hla_lab.diagrams.review_state_machines",
             "--manifest",
-            STATE_MACHINE_MANIFEST,
+            workspace.state_machine_manifest,
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--reviews",
             ".tmp/ci-reviews",
             "--artifacts",
@@ -134,7 +133,7 @@ def quality_commands(
             "-m",
             "hla_lab.diagrams.diagram_qa",
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--artifacts",
             ".tmp/ci-review-artifacts",
             "--json",
@@ -144,33 +143,40 @@ def quality_commands(
             "-m",
             "hla_lab.diagrams.diagram_surface_qa",
             "--surface-manifest",
-            SURFACE_MANIFEST,
+            workspace.diagram_surfaces_manifest,
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--generated",
-            f"{HLA_TOPIC}/output/semantic",
+            f"{hla_topic}/output/semantic",
             "--expected-figures",
             "33",
             "--json",
         ),
-        _python(python, "-m", "hla_lab.diagrams.rti_diagram_check", HLA_TOPIC, "--json"),
+        _python(python, "-m", "hla_lab.diagrams.rti_diagram_check", hla_topic, "--json"),
+        # Tests consume generated semantic table and diagram artifacts. Prepare
+        # those outputs above so a clean CI checkout behaves like a built workspace.
+        _python(python, "-m", "hla_lab.cli", "test", "--parallel"),
     )
     if not fix:
         commands += (("git", "diff", "--exit-code"),)
     return commands
 
 
-def release_commands(python: str = sys.executable) -> tuple[tuple[str, ...], ...]:
+def release_commands(
+    python: str = sys.executable, *, root: Path | None = None
+) -> tuple[tuple[str, ...], ...]:
     """Return the ordered document-release commands."""
+    workspace = resources(root)
+    hla_topic = workspace.document("hla-1516.1-2025").root
     return (
         _python(
             python,
             "-m",
             "hla_lab.diagrams.review_state_machines",
             "--manifest",
-            STATE_MACHINE_MANIFEST,
+            workspace.state_machine_manifest,
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--reviews",
             ".tmp/release-reviews",
             "--artifacts",
@@ -183,33 +189,35 @@ def release_commands(python: str = sys.executable) -> tuple[tuple[str, ...], ...
             "-m",
             "hla_lab.diagrams.diagram_qa",
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--artifacts",
             ".tmp/release-review-artifacts",
             "--require-previews",
             "--json",
         ),
-        _python(python, "-m", "hla_lab.build.topic", "generate", "--root", HLA_TOPIC),
+        _python(python, "-m", "hla_lab.build.topic", "generate", "--root", hla_topic),
         _python(
             python,
             "-m",
             "hla_lab.diagrams.diagram_surface_qa",
             "--surface-manifest",
-            SURFACE_MANIFEST,
+            workspace.diagram_surfaces_manifest,
             "--models",
-            f"{HLA_TOPIC}/semantic",
+            f"{hla_topic}/semantic",
             "--generated",
-            f"{HLA_TOPIC}/output/semantic",
+            f"{hla_topic}/output/semantic",
             "--expected-figures",
             "33",
             "--json",
         ),
-        _python(python, "-m", "hla_lab.diagrams.rti_diagram_check", HLA_TOPIC, "--json"),
+        _python(python, "-m", "hla_lab.diagrams.rti_diagram_check", hla_topic, "--json"),
         _python(python, "-m", "hla_lab.reports.semantic_dashboard", "--json"),
         _python(
             python,
             "-m",
             "hla_lab.traceability.api_traceability",
+            "--workspace-root",
+            workspace.root,
             "--check",
             "--require-complete",
             "--json",
@@ -220,11 +228,11 @@ def release_commands(python: str = sys.executable) -> tuple[tuple[str, ...], ...
             "hla_lab.publication.release_check",
             "--build",
             "--manifest",
-            RELEASE_MANIFEST,
+            workspace.release_manifest,
             "--diagram-manifest",
-            STATE_MACHINE_MANIFEST,
+            workspace.state_machine_manifest,
             "--authority-manifest",
-            AUTHORITY_MANIFEST,
+            workspace.authority_manifest,
             "--json",
         ),
         _python(python, "-m", "pytest", "tests/integration/test_release_check.py", "-q"),
@@ -237,30 +245,29 @@ def ci_commands(
     python: str = sys.executable,
     *,
     fix: bool = False,
+    root: Path | None = None,
 ) -> tuple[tuple[str, ...], ...]:
     """Return commands for one CI job or the complete local CI sequence."""
     if job == "quality":
-        return quality_commands(python, fix=fix)
+        return quality_commands(python, fix=fix, root=root)
     if job == "release":
         if fix:
             raise ValueError("--fix is only supported for the quality job")
-        return release_commands(python)
+        return release_commands(python, root=root)
     if job == "all":
         if fix:
             raise ValueError("--fix is only supported for the quality job")
-        return quality_commands(python) + release_commands(python)
+        return quality_commands(python, root=root) + release_commands(python, root=root)
     raise ValueError(f"unknown CI job: {job}")
 
 
-def run_command(command: Sequence[str]) -> int:
+def run_command(command: Sequence[str], *, root: Path) -> int:
     """Run one CI command from the repository root and return its exit code."""
+    workspace_root = repository_root(root)
     environment = os.environ.copy()
-    existing_pythonpath = environment.get("PYTHONPATH")
-    environment["PYTHONPATH"] = os.pathsep.join(
-        path for path in (str(ROOT), existing_pythonpath) if path
-    )
+    environment["HLA_LAB_ROOT"] = str(workspace_root)
     try:
-        completed = subprocess.run(command, cwd=ROOT, env=environment, check=False)
+        completed = subprocess.run(command, cwd=workspace_root, env=environment, check=False)
     except OSError as error:
         print(f"CI command could not start: {shlex.join(command)}: {error}", file=sys.stderr)
         return 1
@@ -273,10 +280,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         description="Run the repository's checks in the same order as GitHub Actions.",
         epilog=(
             "Examples:\n"
-            "  python -m tools.ci quality\n"
-            "  python -m tools.ci quality --fix\n"
-            "  python -m tools.ci release\n"
-            "  python -m tools.ci all"
+            "  python -m tools.ci quality --root .\n"
+            "  python -m tools.ci quality --fix --root .\n"
+            "  python -m tools.ci release --root .\n"
+            "  python -m tools.ci all --root ."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -292,14 +299,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="allow Ruff and rumdl to rewrite files during the quality job",
     )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        help="explicit corpus workspace root; defaults to HLA_LAB_ROOT",
+    )
     args = parser.parse_args(argv)
     try:
-        commands = ci_commands(args.job, fix=args.fix)
-    except ValueError as error:
+        workspace_root = repository_root(args.root)
+        commands = ci_commands(args.job, fix=args.fix, root=workspace_root)
+    except (RuntimeError, ValueError) as error:
         parser.error(str(error))
     for command in commands:
         print(f"$ {shlex.join(command)}", flush=True)
-        return_code = run_command(command)
+        return_code = run_command(command, root=workspace_root)
         if return_code:
             return return_code
     return 0

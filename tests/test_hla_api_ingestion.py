@@ -5,13 +5,13 @@ from __future__ import annotations
 import json
 import unittest
 from collections import Counter
-from pathlib import Path
 
 from hla_lab.core.semantic_model import ApiSurfaceFile
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.corpus.ingest_hla_api import ingest_2010, ingest_2025
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 INBOX = ROOT / "inbox"
 HAS_2010_ARCHIVES = all(
     (INBOX / "1516.1-2010_downloads" / name).is_file()
@@ -77,7 +77,7 @@ class HlaApiIngestionTests(unittest.TestCase):
     def test_loaded_editions_keep_semantic_seams_and_exact_bindings(self) -> None:
         for document_id, expected_semantic in (
             ("hla-1516.1-2010", 212),
-            ("hla-1516.1-2025", 281),
+            ("hla-1516.1-2025", 283),
         ):
             model = load_hla_document_model(ROOT / "topics" / "ieee" / document_id)
             self.assertEqual(

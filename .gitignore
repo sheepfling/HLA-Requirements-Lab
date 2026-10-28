@@ -53,6 +53,7 @@ coverage.xml
 .pytest_cache/
 cover/
 inbox/
+.tools/
 
 # External compliance sidecar bundles and CI evidence
 .compliance/
@@ -303,3 +304,7 @@ reviews/
 **/reviews/
 review-artifacts/
 **/review-artifacts/
+
+# Local Alphus environment and review output
+out/alphus-env/
+out/quality/

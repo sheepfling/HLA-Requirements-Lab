@@ -15,15 +15,39 @@ from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
-from hla_lab.traceability.semantic_authority import validate_authority
+from hla_lab.traceability.semantic_authority import (
+    AuthoritySurface,
+    _generated_matches,
+    validate_authority,
+)
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOTS = tuple(sorted((REPO_ROOT / "topics" / "ieee").glob("hla-1516*/")))
 ROOTS_2025 = tuple(root for root in ROOTS if root.name.endswith("-2025"))
 ROOTS_2010 = tuple(root for root in ROOTS if root.name.endswith("-2010"))
 
 
 class AuthorityContractTests(unittest.TestCase):
+    def test_explicit_requirement_surface_ignores_candidate_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            output = root / "output" / "semantic"
+            output.mkdir(parents=True)
+            (output / "requirement-selected-data.tex").write_text("selected\n", encoding="utf-8")
+            (output / "requirement-candidate-data.tex").write_text("candidate\n", encoding="utf-8")
+            surface = AuthoritySurface(
+                id="requirements",
+                kind="requirements",
+                source_paths=("semantic/requirements.json",),
+                selection="explicit",
+                generated_glob="output/semantic/requirement-*-data.tex",
+            )
+
+            matches = _generated_matches(root, surface, ("selected",))
+
+        self.assertEqual([path.name for path in matches], ["requirement-selected-data.tex"])
+
     def test_authority_manifest_covers_migrated_surfaces(self) -> None:
         report = validate_authority(
             ROOTS, REPO_ROOT / "data" / "semantic" / "authority.json", check_generated=False
@@ -33,24 +57,24 @@ class AuthorityContractTests(unittest.TestCase):
         counts = {(item.document, item.surface): item.records for item in report.surfaces}
         self.assertEqual(counts[("hla-1516-2025", "definitions")], 161)
         self.assertEqual(counts[("hla-1516-2025", "requirements")], 20)
-        self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 439)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 1697)
-        self.assertEqual(counts[("hla-1516.1-2025", "transition-coverage")], 281)
-        self.assertEqual(counts[("hla-1516.1-2025", "implementations")], 281)
+        self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 432)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 2002)
+        self.assertEqual(counts[("hla-1516.1-2025", "transition-coverage")], 297)
+        self.assertEqual(counts[("hla-1516.1-2025", "implementations")], 283)
         self.assertEqual(counts[("hla-1516.1-2025", "requirement-links")], 32)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 1731)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 3428)
         self.assertEqual(counts[("hla-1516.2-2025", "definitions")], 83)
         self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 340)
-        self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 122)
-        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1078)
+        self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 113)
+        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1019)
         self.assertEqual(counts[("hla-1516.2-2025", "table-families")], 80)
-        self.assertEqual(counts[("hla-1516-2010", "requirements")], 55)
-        self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 942)
-        self.assertEqual(counts[("hla-1516.2-2010", "requirements")], 388)
+        self.assertEqual(counts[("hla-1516-2010", "requirements")], 56)
+        self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 1529)
+        self.assertEqual(counts[("hla-1516.2-2010", "requirements")], 589)
         self.assertEqual(counts[("hla-1516.1-2010", "transition-coverage")], 212)
         self.assertEqual(counts[("hla-1516.1-2010", "implementations")], 212)
         self.assertEqual(counts[("hla-1516.1-2010", "requirement-links")], 132)
-        self.assertEqual(counts[("hla-1516.1-2010", "requirement-api-bindings")], 1078)
+        self.assertEqual(counts[("hla-1516.1-2010", "requirement-api-bindings")], 1611)
         self.assertEqual(counts[("hla-1516.1-2010", "diagram-surfaces")], 20)
 
     def test_candidate_queue_has_explicit_review_dispositions(self) -> None:

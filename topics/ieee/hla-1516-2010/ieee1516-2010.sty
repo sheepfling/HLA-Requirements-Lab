@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieee1516-2010}[2026/08/07 IEEE 1516-2010 reconstruction style]
+\ProvidesPackage{ieee1516-2010}[2026/08/24 HLA Requirements Lab 2010 source-compilation style]
 
 \RequirePackage[letterpaper,left=1.25in,right=1.25in,top=0.94in,bottom=0.96in,headheight=12pt,headsep=14pt,footskip=28pt]{geometry}
 \RequirePackage{fontspec}
@@ -9,15 +9,23 @@
 \RequirePackage{hyperref}
 \RequirePackage{ragged2e}
 \RequirePackage{xcolor}
+\RequirePackage{colortbl}
 \RequirePackage{etoolbox}
 
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Tinos}
-\setsansfont{Arimo}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
 
 \hypersetup{
-    pdftitle={IEEE Std 1516-2010 - Framework and Rules - LaTeX reconstruction},
-    pdfauthor={Reconstruction from user-supplied IEEE Std 1516-2010 reference PDF},
+    pdftitle={HLA 1516 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
     colorlinks=false,
     hidelinks
 }
@@ -25,7 +33,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\JustifyingParindent}{0pt}
 \setlength{\parskip}{6.0pt}
-\setlength{\emergencystretch}{1.5em}
+\setlength{\emergencystretch}{3em}
 \widowpenalty=10000
 \clubpenalty=10000
 \displaywidowpenalty=10000
@@ -37,7 +45,6 @@
 \newcommand{\notefont}{\fontsize{9pt}{10.8pt}\selectfont}
 \newcommand{\headerfont}{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}
 \newcommand{\footerfont}{\fontsize{7.98pt}{9.2pt}\selectfont}
-\newcommand{\licensefont}{\sffamily\fontsize{7pt}{8pt}\selectfont}
 \newcommand{\footnotefont}{\fontsize{7.98pt}{9.2pt}\selectfont}
 
 \makeatletter
@@ -48,25 +55,18 @@
 }
 \makeatother
 
-\newif\ifShowLicenseFooter
-\ShowLicenseFootertrue
-\newcommand{\licensefootertext}{Authorized licensed use limited to: North Carolina State University. Downloaded on September 25,2012 at 14:34:55 UTC from IEEE Xplore. Restrictions apply.}
-
 \fancypagestyle{hla}{%
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-    \fancyhead[LE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont IEEE Std 1516-2010}}
-    \fancyhead[RE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont IEEE STANDARD FOR MODELING AND SIMULATION (M\&S)}}
-    \fancyhead[LO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HIGH LEVEL ARCHITECTURE (HLA)---FRAMEWORK AND RULES}}
-    \fancyhead[RO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont IEEE Std 1516-2010}}
+    \fancyhead[LE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
+    \fancyhead[RE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA REQUIREMENTS LAB}}
+    \fancyhead[LO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont FRAMEWORK AND RULES}}
+    \fancyhead[RO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
     \fancyfoot[LE]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont\thepage}}
-    \fancyfoot[RE]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
-    \fancyfoot[LO]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
+    \fancyfoot[RE]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont}}
+    \fancyfoot[LO]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont}}
     \fancyfoot[RO]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont\thepage}}
-    \ifShowLicenseFooter
-    \fancyfoot[C]{\raisebox{-34.3pt}[0pt][0pt]{\makebox[0pt][c]{\licensefont\licensefootertext}}}
-    \fi
 }
 
 
@@ -78,12 +78,9 @@
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-    \fancyhead[LE]{\raisebox{10.3pt}[0pt][0pt]{\headerfont IEEE Std 1516-2010}}
+    \fancyhead[LE]{\raisebox{10.3pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
     \fancyfoot[LE]{\hspace*{-1pt}\raisebox{-8.6pt}[0pt][0pt]{\footerfont\thepage}}
-    \fancyfoot[RE]{\raisebox{-10.2pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
-    \ifShowLicenseFooter
-    \fancyfoot[C]{\raisebox{-34.4pt}[0pt][0pt]{\makebox[0pt][c]{\licensefont\licensefootertext}}}
-    \fi
+    \fancyfoot[RE]{\raisebox{-10.2pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}}}
 }
 
 % First Arabic technical page (source PDF page 13 / printed page 1).
@@ -96,11 +93,8 @@
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-0.5pt}[0pt][0pt]{\footerfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
+    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-0.5pt}[0pt][0pt]{\footerfont}}
     \fancyfoot[RO]{\raisebox{1.2pt}[0pt][0pt]{\footerfont\thepage}}
-    \ifShowLicenseFooter
-    \fancyfoot[C]{\raisebox{-23.3pt}[0pt][0pt]{\makebox[0pt][c]{\hspace*{-2.3pt}\licensefont\licensefootertext}}}
-    \fi
 }
 
 \pagestyle{hla}
@@ -171,7 +165,11 @@
     \vspace{7pt}%
 }
 
-\AtBeginDocument{\bodyfont\justifying}
+% The family interior uses a calm ragged-right reading measure. This avoids
+% stretched spaces in definition-heavy source pages while retaining the
+% source's live, selectable text.
+\AtBeginDocument{\bodyfont\RaggedRight}
+
 
 % Technical-body baseline/footer calibration. Shrinking the text area by 9 pt
 % raises bottom-anchored footnotes to the source position; increasing footskip by
@@ -189,9 +187,6 @@
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-    \ifShowLicenseFooter
-    \fancyfoot[C]{\raisebox{-34.4pt}[0pt][0pt]{\makebox[0pt][c]{\licensefont\licensefootertext}}}
-    \fi
 }
 
 \newcommand{\frontTitleFont}{\sffamily\bfseries\fontsize{24pt}{26.04pt}\selectfont}
@@ -212,12 +207,9 @@
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
     \fancyfoot[LE]{\hspace*{-1pt}\raisebox{-8.5pt}[0pt][0pt]{\fontsize{9.96pt}{11pt}\selectfont\thepage}}
-    \fancyfoot[RE]{\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
-    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont Copyright \textcopyright\ 2010 IEEE. All rights reserved.}}
+    \fancyfoot[RE]{\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}}
+    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}}
     \fancyfoot[RO]{\raisebox{-8.5pt}[0pt][0pt]{\fontsize{9.96pt}{11pt}\selectfont\thepage}}
-    \ifShowLicenseFooter
-    \fancyfoot[C]{\raisebox{-34.4pt}[0pt][0pt]{\makebox[0pt][c]{\licensefont\licensefootertext}}}
-    \fi
 }
 
 \newcommand{\frontIntroductionHeading}{\sffamily\bfseries\fontsize{13.98pt}{16.2pt}\selectfont}

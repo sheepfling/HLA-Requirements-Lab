@@ -161,7 +161,7 @@
         {
           "figure": 4,
           "page_sequence": 41,
-          "record_id": "federate-lifetime"
+          "record_id": "joined-federate-state"
         },
         {
           "figure": 5,
@@ -229,6 +229,32 @@
           "record_id": "temporal-state"
         }
       ],
+      "landscape_figure_pages": [
+        {
+          "figure": 11,
+          "page_sequence": 87,
+          "record_id": "class-attribute",
+          "caption": "Class attribute (i, j)"
+        },
+        {
+          "figure": 12,
+          "page_sequence": 88,
+          "record_id": "class-attribute-privilege-to-delete-object",
+          "caption": "Class attribute (i, HLAprivilegeToDeleteObject)"
+        },
+        {
+          "figure": 16,
+          "page_sequence": 149,
+          "record_id": "establishing-ownership",
+          "caption": "Establishing ownership of instance attribute (i, k, j)"
+        },
+        {
+          "figure": 17,
+          "page_sequence": 186,
+          "record_id": "temporal-state",
+          "caption": "Temporal state"
+        }
+      ],
       "embedded_diagram_layout": [
         {
           "figure": 1,
@@ -249,49 +275,49 @@
           "x": 89.5,
           "y": 71.0,
           "width": 433.5,
-          "height": 281.0
+          "height": 230.0
         },
         {
           "figure": 4,
           "x": 77.52,
           "y": 277.02,
           "width": 453.48,
-          "height": 369.0
+          "height": 330.0
         },
         {
           "figure": 5,
           "x": 69.78,
           "y": 207.24,
           "width": 472.44,
-          "height": 397.62
+          "height": 360.0
         },
         {
           "figure": 6,
           "x": 92.82,
           "y": 129.54,
           "width": 448.74,
-          "height": 363.48
+          "height": 345.0
         },
         {
           "figure": 7,
           "x": 89.409,
           "y": 81.423,
           "width": 433.183,
-          "height": 317.035
+          "height": 280.0
         },
         {
           "figure": 8,
           "x": 89.28,
           "y": 396.785,
           "width": 433.44,
-          "height": 278.672
+          "height": 225.0
         },
         {
           "figure": 9,
           "x": 89.298,
           "y": 81.119,
           "width": 433.755,
-          "height": 373.141
+          "height": 305.0
         },
         {
           "figure": 10,

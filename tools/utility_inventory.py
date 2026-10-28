@@ -12,18 +12,21 @@ import argparse
 import ast
 import json
 from collections import defaultdict
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from hla_lab.paths import resources
 
-@dataclass(frozen=True)
+
+@dataclass(frozen=True, slots=True)
 class HelperDefinition:
     name: str
     path: str
     line: int
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class DuplicateHelper:
     name: str
     locations: tuple[str, ...]
@@ -51,7 +54,8 @@ def inventory(root: Path) -> tuple[tuple[HelperDefinition, ...], tuple[Duplicate
         except SyntaxError:
             continue
         relative = path.relative_to(root).as_posix()
-        for node in ast.walk(tree):
+        for raw_node in ast.walk(tree):
+            node: ast.AST = raw_node
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
             if not node.name.startswith("_"):
@@ -69,12 +73,13 @@ def inventory(root: Path) -> tuple[tuple[HelperDefinition, ...], tuple[Duplicate
     return ordered, duplicates
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser.add_argument("--root", type=Path)
     parser.add_argument("--format", choices=("text", "json"), default="text")
     args = parser.parse_args(argv)
-    definitions, duplicates = inventory(args.root.resolve())
+    root = args.root or resources().root
+    definitions, duplicates = inventory(root.resolve())
     payload = {
         "helper_definition_count": len(definitions),
         "duplicate_implementation_count": len(duplicates),

@@ -14,16 +14,17 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.semantic_generation import generate
 from hla_lab.reports.semantic_metrics import measure_document
 from hla_lab.traceability.semantic_authority import load_authority
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516-2025"
 
 
 class ContentExtractionTests(unittest.TestCase):
     def test_1516_content_is_typed_and_clause_owned(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
-        self.assertEqual(len(model.content_blocks), 38)
-        self.assertEqual(len(model.content_elements), 336)
+        self.assertEqual(len(model.content_blocks), 29)
+        self.assertEqual(len(model.content_elements), 289)
         self.assertEqual(
             {item.kind for item in model.content_elements},
             {"paragraph", "list", "list-item", "note", "footnote", "cross-reference"},
@@ -64,7 +65,7 @@ class ContentExtractionTests(unittest.TestCase):
         surface = next(item for item in document.surfaces if item.id == "content-elements")
         self.assertEqual(surface.kind, "content_elements")
         metrics = measure_document(ROOT)
-        self.assertEqual(metrics.content_elements, 336)
+        self.assertEqual(metrics.content_elements, 289)
         self.assertEqual(metrics.content_element_block_coverage, 1.0)
 
     def test_content_element_source_mutation_changes_generated_data(self) -> None:

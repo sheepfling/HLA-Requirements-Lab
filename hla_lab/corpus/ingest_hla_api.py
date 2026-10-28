@@ -12,23 +12,27 @@ import argparse
 import hashlib
 import re
 import xml.etree.ElementTree as ET
+from collections.abc import MutableSequence
 from pathlib import Path
+from types import MappingProxyType
 from zipfile import ZipFile
 
 from hla_lab.core.io import write_json
 from hla_lab.core.semantic_model import ApiParameter, ApiSurface, ApiSurfaceFile, SourceRef
 from hla_lab.core.text import normalize_whitespace, slugify
-from hla_lab.paths import REPO_ROOT, resources
+from hla_lab.paths import repository_root, resources
 
-ROOT = REPO_ROOT
-OWNER_BY_FILE = {
-    "RTIambassador": ("RTIambassador", "service"),
-    "FederateAmbassador": ("FederateAmbassador", "callback"),
-}
+_DELIMITER_PAIRS = (("<", ">"), ("(", ")"), ("[", "]"), ("{", "}"))
+OWNER_BY_FILE = MappingProxyType(
+    {
+        "RTIambassador": ("RTIambassador", "service"),
+        "FederateAmbassador": ("FederateAmbassador", "callback"),
+    }
+)
 
 
-def _relative(path: Path) -> str:
-    return path.resolve().relative_to(ROOT.resolve()).as_posix()
+def _relative(path: Path, root: Path) -> str:
+    return path.resolve().relative_to(root.resolve()).as_posix()
 
 
 def _source(path: str, line: int) -> SourceRef:
@@ -46,28 +50,24 @@ def _stable_id(edition: str, binding: str, owner: str, name: str, signature: str
     return f"api.{edition}.{binding}.{owner_slug}.{name_slug}.{digest}"
 
 
+def _update_nesting(depths: MutableSequence[int], char: str) -> None:
+    for index, (opening, closing) in enumerate(_DELIMITER_PAIRS):
+        if char == opening:
+            depths[index] += 1
+            return
+        if char == closing:
+            if depths[index]:
+                depths[index] -= 1
+            return
+
+
 def _split_top_level(value: str) -> tuple[str, ...]:
     parts: list[str] = []
     start = 0
-    angle = paren = bracket = brace = 0
+    depths = [0] * len(_DELIMITER_PAIRS)
     for index, char in enumerate(value):
-        if char == "<":
-            angle += 1
-        elif char == ">" and angle:
-            angle -= 1
-        elif char == "(":
-            paren += 1
-        elif char == ")" and paren:
-            paren -= 1
-        elif char == "[":
-            bracket += 1
-        elif char == "]" and bracket:
-            bracket -= 1
-        elif char == "{":
-            brace += 1
-        elif char == "}" and brace:
-            brace -= 1
-        elif char == "," and not any((angle, paren, bracket, brace)):
+        _update_nesting(depths, char)
+        if char == "," and not any(depths):
             parts.append(value[start:index].strip())
             start = index + 1
     tail = value[start:].strip()
@@ -146,6 +146,7 @@ def _matching_paren(value: str, opening: int) -> int:
 def _cxx_declarations(
     text: str,
     *,
+    root: Path,
     archive_path: Path,
     entry: str,
     edition: str,
@@ -159,7 +160,7 @@ def _cxx_declarations(
     while index < len(lines):
         line = lines[index]
         stripped = line.strip()
-        if stripped.startswith(("//", "/*", "*", "*/")):
+        if re.match(r"^(?://|/\*|\*|\*/)", stripped):
             comments.append(stripped)
             index += 1
             continue
@@ -200,7 +201,7 @@ def _cxx_declarations(
                         clause_ids=tuple(
                             item for item in (_clause_id("\n".join(comments)),) if item is not None
                         ),
-                        source=_source(f"{_relative(archive_path)}#{entry}", start_line),
+                        source=_source(f"{_relative(archive_path, root)}#{entry}", start_line),
                         notes="Extracted from the supplied IEEE C++ API declaration.",
                     )
                 )
@@ -212,6 +213,7 @@ def _cxx_declarations(
 def _java_declarations(
     text: str,
     *,
+    root: Path,
     archive_path: Path,
     entry: str,
     edition: str,
@@ -225,7 +227,7 @@ def _java_declarations(
     while index < len(lines):
         line = lines[index]
         stripped = line.strip()
-        if stripped.startswith(("//", "/*", "*", "*/")):
+        if re.match(r"^(?://|/\*|\*|\*/)", stripped):
             comments.append(stripped)
             index += 1
             continue
@@ -264,7 +266,7 @@ def _java_declarations(
                         clause_ids=tuple(
                             item for item in (_clause_id("\n".join(comments)),) if item is not None
                         ),
-                        source=_source(f"{_relative(archive_path)}#{entry}", start_line),
+                        source=_source(f"{_relative(archive_path, root)}#{entry}", start_line),
                         notes="Extracted from the supplied IEEE Java API declaration.",
                     )
                 )
@@ -276,6 +278,7 @@ def _java_declarations(
 def _proto_messages(
     text: str,
     *,
+    root: Path,
     archive_path: Path,
     entry: str,
     edition: str,
@@ -331,7 +334,7 @@ def _proto_messages(
                 parameters=tuple(fields),
                 result_type=None,
                 source=_source(
-                    f"{_relative(archive_path)}#{entry}",
+                    f"{_relative(archive_path, root)}#{entry}",
                     text.count("\n", 0, match.start()) + 1,
                 ),
                 notes=(
@@ -342,11 +345,11 @@ def _proto_messages(
     return tuple(records)
 
 
-def _wsdl_operations(path: Path, edition: str) -> tuple[ApiSurface, ...]:
+def _wsdl_operations(path: Path, edition: str, *, root: Path) -> tuple[ApiSurface, ...]:
     namespace = "http://schemas.xmlsoap.org/wsdl/"
-    root = ET.parse(path).getroot()
+    xml_root = ET.parse(path).getroot()
     records: list[ApiSurface] = []
-    for port_type in root.findall(f"{{{namespace}}}portType"):
+    for port_type in xml_root.findall(f"{{{namespace}}}portType"):
         owner = port_type.attrib.get("name", "WSAmbassador")
         for operation in port_type.findall(f"{{{namespace}}}operation"):
             name = operation.attrib.get("name", "operation")
@@ -361,7 +364,7 @@ def _wsdl_operations(path: Path, edition: str) -> tuple[ApiSurface, ...]:
                     language="wsdl",
                     protocol="wsdl",
                     signature=signature,
-                    source=_source(_relative(path), 1),
+                    source=_source(_relative(path, root), 1),
                     notes="Extracted from the supplied IEEE WSDL API definition.",
                 )
             )
@@ -408,6 +411,7 @@ def ingest_2010(root: Path) -> tuple[ApiSurface, ...]:
             records.extend(
                 parser(
                     text,
+                    root=root,
                     archive_path=archive,
                     entry=entry,
                     edition="2010",
@@ -415,7 +419,7 @@ def ingest_2010(root: Path) -> tuple[ApiSurface, ...]:
                     interface_kind=interface_kind,
                 )
             )
-    records.extend(_wsdl_operations(wsdl, "2010"))
+    records.extend(_wsdl_operations(wsdl, "2010", root=root))
     return _unique(tuple(records))
 
 
@@ -441,6 +445,7 @@ def ingest_2025(root: Path) -> tuple[ApiSurface, ...]:
             records.extend(
                 _cxx_declarations(
                     text,
+                    root=root,
                     archive_path=archive,
                     entry=entry,
                     edition="2025",
@@ -454,6 +459,7 @@ def ingest_2025(root: Path) -> tuple[ApiSurface, ...]:
             records.extend(
                 _java_declarations(
                     text,
+                    root=root,
                     archive_path=archive,
                     entry=entry,
                     edition="2025",
@@ -470,6 +476,7 @@ def ingest_2025(root: Path) -> tuple[ApiSurface, ...]:
             records.extend(
                 _proto_messages(
                     text,
+                    root=root,
                     archive_path=archive,
                     entry=entry,
                     edition="2025",
@@ -490,9 +497,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--edition", choices=("2010", "2025"), required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     args = parser.parse_args()
-    records = ingest_2010(args.root) if args.edition == "2010" else ingest_2025(args.root)
+    root = repository_root(args.root)
+    records = ingest_2010(root) if args.edition == "2010" else ingest_2025(root)
     write_records(args.output, records)
     print(f"wrote {len(records)} API surfaces to {args.output}")
 

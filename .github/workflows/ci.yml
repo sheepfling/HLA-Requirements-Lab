@@ -1,11 +1,14 @@
 name: CI
 
 on:
-  push:
   pull_request:
+    types: [closed]
+    branches: [feature/hla]
+  workflow_dispatch:
 
 jobs:
   quality:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -21,11 +24,12 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - name: Install development dependencies
-        run: python -m pip install -e . ruff pytest pytest-xdist "rumdl>=0.2.49,<0.3" "mdrepo>=0.0.1,<0.1"
+        run: python -m pip install -e . pyright==1.1.414 ruff pytest pytest-xdist "rumdl>=0.2.49,<0.3" "mdrepo>=0.0.1,<0.1"
       - name: Run repository CI
-        run: python -m tools.ci quality
+        run: python -m tools.ci quality --root .
 
   document-release:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     needs: quality
     steps:
@@ -37,32 +41,11 @@ jobs:
       - name: Provision XeLaTeX and visual-review tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-croscore fonts-crosextra-carlito fonts-noto-core fonts-lmodern graphviz latexmk texlive-fonts-recommended texlive-latex-extra texlive-xetex
-      - name: Preflight 1516.2 fonts
-        run: |
-          python - <<'PY'
-          import subprocess
-
-          required_fonts = {
-              "Arimo": "fonts-croscore",
-              "Tinos": "fonts-croscore",
-              "Carlito": "fonts-crosextra-carlito",
-              "Noto Sans": "fonts-noto-core",
-              "Noto Serif": "fonts-noto-core",
-          }
-          for font, package in required_fonts.items():
-              resolved = subprocess.check_output(
-                  ["fc-match", "-f", "%{family}", font], text=True
-              ).strip()
-              if resolved != font:
-                  raise SystemExit(
-                      f"Required font {font!r} did not resolve (got {resolved!r}); "
-                      f"install {package} from the OS package archive."
-                  )
-              print(f"{font}: {resolved}")
-          PY
+          sudo apt-get install -y fonts-lmodern fonts-noto-core graphviz latexmk texlive-fonts-recommended texlive-latex-extra texlive-xetex
       - run: python -m pip install --upgrade pip
       - name: Install development dependencies
         run: python -m pip install -e . pytest
+      - name: Install pinned PlantUML renderer
+        run: python -m hla_lab.diagrams.plantuml_install --root .
       - name: Run document-release CI
-        run: python -m tools.ci release
+        run: python -m tools.ci release --root .

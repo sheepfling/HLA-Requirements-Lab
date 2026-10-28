@@ -3,17 +3,106 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import subprocess
 import sys
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
+from typing import Annotated, Literal
 
 import fitz
+from pydantic import BaseModel, ConfigDict, Field
 
-from hla_lab.paths import REPO_ROOT, document_roots, resources
+from hla_lab.diagrams.state_machine_inventory import StateMachineInventory
+from hla_lab.paths import document_roots, repository_root, resources
+from hla_lab.publication.publication_registry import (
+    Publication,
+    ReleaseManifest,
+    ReleaseProject,
+    load_publication_registry,
+    load_release_manifest,
+    publication_projects,
+)
+from hla_lab.traceability.api_traceability import (
+    ApiTraceabilityReport,
+)
+from hla_lab.traceability.api_traceability import (
+    build_report as build_api_traceability_report,
+)
+from hla_lab.traceability.api_traceability import (
+    default_roots as api_traceability_roots,
+)
+from hla_lab.traceability.semantic_authority import (
+    AuthoritySurfaceReport,
+    AuthorityValidationReport,
+    validate_authority,
+)
+from hla_lab.traceability.semantic_coverage import (
+    CoverageReport,
+)
+from hla_lab.traceability.semantic_coverage import (
+    build_report as build_semantic_coverage,
+)
+
+
+class DiagramReviewReport(BaseModel):
+    """Status counts and unresolved diagram review gaps."""
+
+    model_config = ConfigDict(frozen=True)
+
+    available: bool
+    path: str | None = None
+    statuses: Annotated[Mapping[str, int], Field(default_factory=dict)]
+    review_gaps: tuple[str, ...] = ()
+
+
+class ProjectReleaseReport(BaseModel):
+    """PDF, build-log, and source-hygiene result for one release project."""
+
+    model_config = ConfigDict(frozen=True)
+
+    id: str
+    kind: str
+    pdf: str
+    log: str
+    expected_pages: int | None
+    pages: int | None
+    log_errors: tuple[str, ...]
+    pdf_ignored: bool
+    log_ignored: bool
+
+
+class AuthorityUnavailableReport(BaseModel):
+    """Result shape when a source workspace has no authority manifest."""
+
+    model_config = ConfigDict(frozen=True)
+
+    available: Literal[False] = False
+    surfaces: tuple[AuthoritySurfaceReport, ...] = ()
+    failures: tuple[str, ...] = ()
+    passed: Literal[True] = True
+
+
+ReleaseAuthorityReport = AuthorityValidationReport | AuthorityUnavailableReport
+
+
+class ReleaseCheckReport(BaseModel):
+    """Complete validated output from the release gate."""
+
+    model_config = ConfigDict(frozen=True)
+
+    manifest: str
+    built: bool
+    publication: Publication | None
+    projects: tuple[ProjectReleaseReport, ...]
+    diagram_review: DiagramReviewReport
+    semantic_authority: ReleaseAuthorityReport
+    semantic_coverage: CoverageReport
+    api_traceability: ApiTraceabilityReport
+    tracked_generated: tuple[str, ...]
+    failures: tuple[str, ...]
+    passed: bool
+
 
 ERROR_PATTERNS = (
     # TeX diagnostic lines begin with ``! ``. Do not mistake a wrapped math
@@ -25,30 +114,31 @@ ERROR_PATTERNS = (
     re.compile(r"Runaway argument", re.IGNORECASE),
     re.compile(r"No pages of output", re.IGNORECASE),
 )
-GENERATED_SUFFIXES = {
-    ".aux",
-    ".bbl",
-    ".bcf",
-    ".blg",
-    ".fdb_latexmk",
-    ".fls",
-    ".log",
-    ".out",
-    ".pdf",
-    ".run.xml",
-    ".synctex.gz",
-    ".toc",
-    ".xdv",
-}
-GENERATED_PARTS = {"build", "dist", "output", ".tmp", "reviews", "review-artifacts"}
+LAYOUT_ERROR_PATTERNS = (
+    re.compile(r"Overfull \\hbox", re.MULTILINE),
+    re.compile(r"Missing character:", re.MULTILINE),
+    re.compile(r"headheight.*too small", re.IGNORECASE),
+)
+GENERATED_SUFFIXES = frozenset(
+    {
+        ".aux",
+        ".bbl",
+        ".bcf",
+        ".blg",
+        ".fdb_latexmk",
+        ".fls",
+        ".log",
+        ".out",
+        ".pdf",
+        ".run.xml",
+        ".synctex.gz",
+        ".toc",
+        ".xdv",
+    }
+)
+GENERATED_PARTS = frozenset({"build", "dist", "output", ".tmp", "reviews", "review-artifacts"})
 SOURCE_BUILD_PATH = ("hla_lab", "build")
-
-
-def _load_manifest(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict) or not isinstance(payload.get("projects"), list):
-        raise ValueError(f"invalid release manifest: {path}")
-    return payload
+REFERENCE_PARTS = frozenset({"prototype-reference"})
 
 
 def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
@@ -69,15 +159,16 @@ def _run_build(repo_root: Path, publication_id: str | None = None) -> None:
     )
 
 
-def _log_errors(path: Path) -> list[str]:
+def _log_errors(path: Path, *, strict_layout: bool = False) -> list[str]:
     if not path.is_file():
         return [f"missing log: {path.as_posix()}"]
     text = path.read_text(encoding="utf-8", errors="replace")
     lines = text.splitlines()
+    patterns = ERROR_PATTERNS + (LAYOUT_ERROR_PATTERNS if strict_layout else ())
     return [
         f"{path.as_posix()}:{index}: {line.strip()}"
         for index, line in enumerate(lines, start=1)
-        if any(pattern.search(line) for pattern in ERROR_PATTERNS)
+        if any(pattern.search(line) for pattern in patterns)
     ]
 
 
@@ -98,7 +189,10 @@ def _tracked_generated(repo_root: Path) -> list[str]:
                 Path(path).parts[: len(SOURCE_BUILD_PATH)] != SOURCE_BUILD_PATH
                 and GENERATED_PARTS.intersection(Path(path).parts)
             )
-            or Path(path).suffix in GENERATED_SUFFIXES
+            or (
+                Path(path).suffix in GENERATED_SUFFIXES
+                and not REFERENCE_PARTS.intersection(Path(path).parts)
+            )
         )
     )
 
@@ -112,57 +206,82 @@ def _ignored(repo_root: Path, relative_path: str) -> bool:
     return result.returncode == 0
 
 
-def _diagram_report(path: Path | None) -> dict[str, Any]:
+def _diagram_report(path: Path | None) -> DiagramReviewReport:
     if path is None:
-        return {"available": False, "statuses": {}, "review_gaps": []}
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict) or not isinstance(payload.get("diagrams"), list):
-        raise ValueError(f"invalid diagram manifest: {path}")
-    diagrams = payload.get("diagrams", [])
+        return DiagramReviewReport(available=False, statuses={})
+    manifest = StateMachineInventory.model_validate_json(path.read_text(encoding="utf-8"))
     statuses: dict[str, int] = {}
-    for item in diagrams:
-        status = str(item.get("status", "unknown"))
+    for item in manifest.diagrams:
+        status = item.status
         statuses[status] = statuses.get(status, 0) + 1
     gaps = [
-        str(item.get("diagram_id", "unknown"))
-        for item in diagrams
-        if item.get("status") in {"needs_review", "unmodeled"}
+        item.diagram_id
+        for item in manifest.diagrams
+        if item.status in {"needs_review", "unmodeled"}
     ]
-    return {
-        "available": True,
-        "path": path.as_posix(),
-        "statuses": dict(sorted(statuses.items())),
-        "review_gaps": sorted(gaps),
-    }
+    return DiagramReviewReport(
+        available=True,
+        path=path.as_posix(),
+        statuses=dict(sorted(statuses.items())),
+        review_gaps=tuple(sorted(gaps)),
+    )
 
 
 def _selected_projects(
-    manifest: Mapping[str, Any],
-    manifest_path: Path,
+    manifest: ReleaseManifest,
     *,
     publication_id: str | None,
     publication_registry_path: Path,
-) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
+) -> tuple[tuple[ReleaseProject, ...], Publication | None]:
     """Return all projects or the explicit membership of one publication."""
-    projects = list(manifest["projects"])
     if publication_id is None:
-        return projects, None
-    from hla_lab.publication.publication_registry import (
-        load_publication_registry,
-        load_release_manifest,
-        publication_projects,
+        return manifest.projects, None
+    registry = load_publication_registry(publication_registry_path)
+    publication = registry.publication(publication_id)
+    return (
+        publication_projects(registry, manifest, publication_id),
+        publication,
     )
 
-    registry = load_publication_registry(publication_registry_path)
-    release_manifest = load_release_manifest(manifest_path)
-    publication = registry.publication(publication_id)
-    selected_ids = tuple(
-        item.id for item in publication_projects(registry, release_manifest, publication_id)
+
+def _inspect_project(
+    repo_root: Path,
+    project: ReleaseProject,
+) -> tuple[ProjectReleaseReport, list[str]]:
+    root = repo_root / project.root
+    pdf = root / project.pdf
+    log = root / project.log
+    relative_pdf = pdf.relative_to(repo_root).as_posix()
+    relative_log = log.relative_to(repo_root).as_posix()
+    log_errors = _log_errors(log, strict_layout=project.kind == "faithful")
+    pages: int | None = None
+    failures: list[str] = []
+    if pdf.is_file():
+        with fitz.open(pdf) as document:
+            pages = len(document)
+        if project.expected_pages is not None and pages != project.expected_pages:
+            failures.append(f"{project.id}: expected {project.expected_pages} pages, got {pages}")
+    else:
+        failures.append(f"{project.id}: missing PDF {relative_pdf}")
+    failures.extend(log_errors)
+    pdf_ignored = _ignored(repo_root, relative_pdf)
+    log_ignored = _ignored(repo_root, relative_log)
+    if not pdf_ignored:
+        failures.append(f"{project.id}: PDF is not ignored by Git: {relative_pdf}")
+    if not log_ignored:
+        failures.append(f"{project.id}: build log is not ignored by Git: {relative_log}")
+    report = ProjectReleaseReport(
+        id=project.id,
+        kind=project.kind,
+        pdf=relative_pdf,
+        log=relative_log,
+        expected_pages=project.expected_pages,
+        pages=pages,
+        log_errors=tuple(log_errors),
+        pdf_ignored=pdf_ignored,
+        log_ignored=log_ignored,
     )
-    raw_by_id = {str(item["id"]): item for item in projects}
-    return [raw_by_id[identifier] for identifier in selected_ids], publication.model_dump(
-        mode="json"
-    )
+    return report, failures
 
 
 def check_release(
@@ -174,17 +293,16 @@ def check_release(
     authority_manifest: Path | None = None,
     publication_id: str | None = None,
     publication_registry_path: Path | None = None,
-) -> dict[str, Any]:
+) -> ReleaseCheckReport:
     """Build when requested and return typed PDF/log/source-hygiene findings."""
     repo_root = repo_root.resolve()
     repo_resources = resources(repo_root)
     manifest_path = manifest_path.resolve()
-    manifest = _load_manifest(manifest_path)
+    manifest = load_release_manifest(manifest_path)
     if publication_registry_path is None:
         publication_registry_path = repo_resources.publications_manifest
     selected_projects, publication = _selected_projects(
         manifest,
-        manifest_path,
         publication_id=publication_id,
         publication_registry_path=publication_registry_path.resolve(),
     )
@@ -195,64 +313,25 @@ def check_release(
         candidate = repo_resources.authority_manifest
         authority_manifest = candidate if candidate.is_file() else None
     if authority_manifest is None:
-        authority_payload: dict[str, Any] = {
-            "available": False,
-            "surfaces": [],
-            "failures": [],
-            "passed": True,
-        }
+        authority_payload: ReleaseAuthorityReport = AuthorityUnavailableReport()
         authority_failures: tuple[str, ...] = ()
     else:
-        from hla_lab.traceability.semantic_authority import validate_authority
-
         authority_report = validate_authority(
             document_roots(repo_root),
             authority_manifest.resolve(),
             check_generated=True,
+            workspace_root=repo_root,
         )
-        authority_payload = authority_report.model_dump(mode="json")
+        authority_payload = authority_report
         authority_failures = authority_report.failures
-    from hla_lab.traceability.api_traceability import build_report as build_api_traceability_report
-    from hla_lab.traceability.api_traceability import default_roots as api_traceability_roots
-    from hla_lab.traceability.semantic_coverage import build_report as build_semantic_coverage
-
     semantic_coverage = build_semantic_coverage(document_roots(repo_root))
     api_traceability = build_api_traceability_report(api_traceability_roots(repo_root))
 
-    projects: list[dict[str, Any]] = []
+    projects: list[ProjectReleaseReport] = []
     failures: list[str] = []
     for project in selected_projects:
-        root = repo_root / str(project["root"])
-        pdf = root / str(project["pdf"])
-        log = root / str(project["log"])
-        relative_pdf = pdf.relative_to(repo_root).as_posix()
-        relative_log = log.relative_to(repo_root).as_posix()
-        project_report: dict[str, Any] = {
-            "id": project["id"],
-            "kind": project.get("kind", "document"),
-            "pdf": relative_pdf,
-            "log": relative_log,
-            "expected_pages": project.get("expected_pages"),
-            "pages": None,
-            "log_errors": _log_errors(log),
-            "pdf_ignored": _ignored(repo_root, relative_pdf),
-            "log_ignored": _ignored(repo_root, relative_log),
-        }
-        if pdf.is_file():
-            with fitz.open(pdf) as document:
-                project_report["pages"] = len(document)
-            expected = project.get("expected_pages")
-            if expected is not None and project_report["pages"] != expected:
-                failures.append(
-                    f"{project['id']}: expected {expected} pages, got {project_report['pages']}"
-                )
-        else:
-            failures.append(f"{project['id']}: missing PDF {relative_pdf}")
-        failures.extend(project_report["log_errors"])
-        if not project_report["pdf_ignored"]:
-            failures.append(f"{project['id']}: PDF is not ignored by Git: {relative_pdf}")
-        if not project_report["log_ignored"]:
-            failures.append(f"{project['id']}: build log is not ignored by Git: {relative_log}")
+        project_report, project_failures = _inspect_project(repo_root, project)
+        failures.extend(project_failures)
         projects.append(project_report)
 
     tracked_generated = _tracked_generated(repo_root)
@@ -261,21 +340,21 @@ def check_release(
     failures.extend(f"semantic authority: {failure}" for failure in authority_failures)
     failures.extend(f"semantic coverage: {failure}" for failure in semantic_coverage.failures)
     failures.extend(f"API traceability: {failure}" for failure in api_traceability.failures)
-    return {
-        "manifest": manifest_path.relative_to(repo_root).as_posix(),
-        "built": build,
-        "publication": publication,
-        "projects": projects,
-        "diagram_review": _diagram_report(
+    return ReleaseCheckReport(
+        manifest=manifest_path.relative_to(repo_root).as_posix(),
+        built=build,
+        publication=publication,
+        projects=tuple(projects),
+        diagram_review=_diagram_report(
             diagram_manifest.resolve() if diagram_manifest is not None else None
         ),
-        "semantic_authority": authority_payload,
-        "semantic_coverage": semantic_coverage.model_dump(mode="json"),
-        "api_traceability": api_traceability.model_dump(mode="json"),
-        "tracked_generated": tracked_generated,
-        "failures": failures,
-        "passed": not failures,
-    }
+        semantic_authority=authority_payload,
+        semantic_coverage=semantic_coverage,
+        api_traceability=api_traceability,
+        tracked_generated=tuple(tracked_generated),
+        failures=tuple(failures),
+        passed=not failures,
+    )
 
 
 def main() -> int:
@@ -283,47 +362,46 @@ def main() -> int:
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=resources(REPO_ROOT).release_manifest,
         help="Release project manifest",
     )
     parser.add_argument("--diagram-manifest", type=Path)
     parser.add_argument(
         "--authority-manifest",
         type=Path,
-        default=resources(REPO_ROOT).authority_manifest,
         help="Semantic authority manifest",
     )
     parser.add_argument("--publication", help="Check only one publication destination")
     parser.add_argument(
         "--publication-manifest",
         type=Path,
-        default=resources(REPO_ROOT).publications_manifest,
         help="Publication destination registry",
     )
+    parser.add_argument("--root", type=Path, help="explicit corpus workspace root")
     parser.add_argument("--build", action="store_true", help="Build every manifest project first")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
-    repo_root = REPO_ROOT
+    repo_root = repository_root(args.root)
+    registry_paths = resources(repo_root)
     report = check_release(
         repo_root,
-        args.manifest,
+        args.manifest or registry_paths.release_manifest,
         build=args.build,
         diagram_manifest=args.diagram_manifest,
-        authority_manifest=args.authority_manifest,
+        authority_manifest=args.authority_manifest or registry_paths.authority_manifest,
         publication_id=args.publication,
-        publication_registry_path=args.publication_manifest,
+        publication_registry_path=args.publication_manifest or registry_paths.publications_manifest,
     )
     if args.json:
-        print(json.dumps(report, ensure_ascii=False, indent=2))
+        print(report.model_dump_json(indent=2))
     else:
-        for project in report["projects"]:
-            print(f"{project['id']}: {project['pages']} pages")
-        print(f"diagram review gaps: {len(report['diagram_review']['review_gaps'])}")
-        print(f"tracked generated outputs: {len(report['tracked_generated'])}")
-        print(f"release checks: {'passed' if report['passed'] else 'failed'}")
-        for failure in report["failures"]:
+        for project in report.projects:
+            print(f"{project.id}: {project.pages} pages")
+        print(f"diagram review gaps: {len(report.diagram_review.review_gaps)}")
+        print(f"tracked generated outputs: {len(report.tracked_generated)}")
+        print(f"release checks: {'passed' if report.passed else 'failed'}")
+        for failure in report.failures:
             print(f"failure: {failure}")
-    return 0 if report["passed"] else 1
+    return 0 if report.passed else 1
 
 
 if __name__ == "__main__":

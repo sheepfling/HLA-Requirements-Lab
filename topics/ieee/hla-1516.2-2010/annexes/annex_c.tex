@@ -1,19 +1,19 @@
-% Annex C uses source-metric Tinos/Arimo faces at the standard 10/12 body geometry.
-% match the source Annex C vertical spacing without perturbing the other annexes.
-\newcommand{\annexcbodyfont}{\fontfamily{Tinos-TLF}\fontsize{10}{12}\selectfont}
+% Annex C retains its source-specific 10/12 body geometry without creating a
+% second font family; the shared Lab role faces remain authoritative.
+\newcommand{\annexcbodyfont}{\RLSerif\fontsize{10}{12}\selectfont}
 \newcommand{\annexchead}[3]{%
-    \par\noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{14}{16}\selectfont Annex #1\par}%
+    \par\noindent{\RLSans\bfseries\fontsize{14}{16}\selectfont Annex #1\par}%
     \vspace{2.5pt}%
-    \noindent{\fontfamily{Arimo-TLF}\fontsize{12}{14}\selectfont (#2)\par}%
+    \noindent{\RLSans\fontsize{12}{14}\selectfont (#2)\par}%
     \vspace{5.5pt}%
-    \noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{14}{16}\selectfont #3\par}%
+    \noindent{\RLSans\bfseries\fontsize{14}{16}\selectfont #3\par}%
     \vspace{2.1pt}%
 }
 \newcommand{\annexcsubhead}[2]{%
-    \par\vspace{10pt}\noindent{\fontfamily{Arimo-TLF}\bfseries\fontsize{12}{14}\selectfont #1 #2\par}\vspace{1pt}%
+    \par\vspace{10pt}\noindent{\RLSans\bfseries\fontsize{12}{14}\selectfont #1 #2\par}\vspace{1pt}%
 }
 \newcommand{\annexcstdnote}[1]{%
-    \par\noindent{\fontfamily{Tinos-TLF}\fontsize{9}{10.5}\selectfont NOTE---#1}\par
+    \par\noindent{\RLSerif\fontsize{9}{10.5}\selectfont NOTE---#1}\par
 }
 
 % ---------------------------------------------------------------------------

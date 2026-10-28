@@ -16,13 +16,18 @@ hla_lab/
 tools/migrations/    one-time corpus migrations retained for reproducibility
 topics/ieee/         source corpus, semantic records, and document adapters
 data/                authority, inventory, release, and cross-edition manifests
-schemas/             portable JSON contracts
+hla_lab/schemas.py    Pydantic contracts and generated JSON Schema export
 tests/               capability-oriented contract tests
 docs/                scope, method, and product contracts
 examples/            external-consumer examples
 ```
 
 The `hla_lab` package is the public boundary and owns reusable domain behavior.
+The installable `tools` package retains CI and one-time migration entry points.
+`HLA_LAB_ROOT` or the global `hla-lab --root` option selects the corpus
+workspace explicitly. The package does not infer it from the installation or
+current directory. JSON Schema is generated from Pydantic models through
+`hla-lab-schema`; generated copies are not maintained in source control.
 New code and user workflows should enter through `hla-lab` or a module under
 `hla_lab`. One-time migrations are explicitly isolated under
 `tools/migrations/`.
@@ -74,12 +79,12 @@ files from another job.
 
 ```console
 hla-lab                  # show the workflow menu
-hla-lab docs             # list document roots
-hla-lab status           # validate the complete corpus
-hla-lab build            # build all products
-hla-lab publish          # list publications
-hla-lab test --parallel  # run the contract suite in parallel
-hla-lab quality          # run the ordered CI-quality workflow
+hla-lab --root . docs             # list document roots
+hla-lab --root . status           # validate the complete corpus
+hla-lab --root . build            # build all products
+hla-lab --root . publish          # list publications
+hla-lab --root . test --parallel  # run the contract suite in parallel
+hla-lab --root . quality          # run the ordered CI-quality workflow
 ```
 
 `status` accepts `--document`, `--json`, `--require-api-contract`, and
@@ -96,9 +101,9 @@ The ordered repository validation contract lives in `tools/ci.py`, not in the
 workflow YAML. Run the same checks locally with:
 
 ```console
-python -m tools.ci quality
-python -m tools.ci release
-python -m tools.ci all
+python -m tools.ci quality --root .
+python -m tools.ci release --root .
+python -m tools.ci all --root .
 ```
 
 `.github/workflows/ci.yml` provisions the platform-specific toolchain and

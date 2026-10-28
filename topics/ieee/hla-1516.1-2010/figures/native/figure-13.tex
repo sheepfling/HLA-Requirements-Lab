@@ -10,11 +10,11 @@
     f13 stroke/.style={draw=black,line width=.90pt},
     f13 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
     f13 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
-    f13 title/.style={font=\fontfamily{qhv}\fontseries{b}\fontshape{n}\selectfont\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
-    f13 tab/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.8}{13.6}\selectfont,align=center,inner sep=0pt},
-    f13 text/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{15.0}{16.0}\selectfont,align=center,inner sep=0pt},
-    f13 small/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{12.5}{13.3}\selectfont,align=center,inner sep=0pt},
-    f13 tiny/.style={font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{11.4}{12.2}\selectfont,align=center,inner sep=0pt}
+    f13 title/.style={font=\RLSans\bfseries\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
+    f13 tab/.style={font=\RLSans\mdseries\fontsize{12.8}{13.6}\selectfont,align=center,inner sep=0pt},
+    f13 text/.style={font=\RLSans\mdseries\fontsize{15.0}{16.0}\selectfont,align=center,inner sep=0pt},
+    f13 small/.style={font=\RLSans\mdseries\fontsize{12.5}{13.3}\selectfont,align=center,inner sep=0pt},
+    f13 tiny/.style={font=\RLSans\mdseries\fontsize{11.4}{12.2}\selectfont,align=center,inner sep=0pt}
 ]
     \path[use as bounding box] (0,0) rectangle (960,720);
 
@@ -87,7 +87,7 @@
 
     % Deep-history H* and F13-E06 Send Interaction transition.
     \draw[f13 stroke] (179,329) circle[radius=17pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{20}{20}\selectfont,inner sep=0pt] at (179,329) {H*};
+    \node[font=\RLSans\mdseries\fontsize{20}{20}\selectfont,inner sep=0pt] at (179,329) {H*};
     % F13-E06 Published boundary -> deep history.
     \draw[f13 transition] (141,387)
     .. controls (160,387) and (177,371) .. (179,349);
@@ -96,7 +96,7 @@
     % Publication-relevance conditional entry.
     \fill (576,290) circle[radius=7pt];
     \draw[f13 stroke] (530,355) circle[radius=14pt];
-    \node[font=\fontfamily{qhv}\fontseries{c}\fontshape{n}\selectfont\fontsize{17}{17}\selectfont,inner sep=0pt] at (530,355) {C};
+    \node[font=\RLSans\mdseries\fontsize{17}{17}\selectfont,inner sep=0pt] at (530,355) {C};
     % F13-E07 Published internal initial -> C.
     \draw[f13 transition] (571,297) -- (538,344);
 

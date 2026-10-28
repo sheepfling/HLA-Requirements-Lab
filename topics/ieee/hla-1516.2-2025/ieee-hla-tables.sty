@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ieee-hla-tables}[2026/07/31 v1.0.1 IEEE HLA recreation table helpers]
+\ProvidesPackage{ieee-hla-tables}[2026/08/24 v1.1 Requirements Lab table helpers]
 
 \RequirePackage{array}
 \RequirePackage{tabularx}
@@ -49,7 +49,7 @@
     \begin{tikzpicture}[
         remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
     ]
-    \draw[line width=0.34bp] (#1,#2) rectangle ++(#3,#4);
+    \draw[draw=RLLine,line width=0.34bp] (#1,#2) rectangle ++(#3,#4);
     \end{tikzpicture}%
     \par\vspace{-\baselineskip}%
 }
@@ -59,7 +59,7 @@
     \begin{tikzpicture}[
         remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
     ]
-    \draw[line width=0.92bp] (#1,#2) rectangle ++(#3,#4);
+    \draw[draw=RLBlue,line width=0.92bp] (#1,#2) rectangle ++(#3,#4);
     \end{tikzpicture}%
     \par\vspace{-\baselineskip}%
 }
@@ -69,7 +69,7 @@
     \begin{tikzpicture}[
         remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp
     ]
-    \draw[line width=0.82bp] (#1,#2) -- ++(#3,0);
+    \draw[draw=RLBlue,line width=0.82bp] (#1,#2) -- ++(#3,0);
     \end{tikzpicture}%
     \par\vspace{-\baselineskip}%
 }
@@ -88,7 +88,7 @@
             \exhyphenpenalty=10000%
             \pretolerance=10000%
             \tolerance=10000%
-            \HLATimes\fontsize{#4bp}{#5bp}\selectfont%
+            \color{RLInk}\HLATimes\fontsize{#4bp}{#5bp}\selectfont%
             \ifstrequal{#6}{c}{\centering}{%
                 \ifstrequal{#6}{r}{\RaggedLeft}{\RaggedRight}%
             }%
@@ -100,5 +100,5 @@
 }
 
 \newcommand{\HLATableCaption}[1]{%
-        {\HLAArial\fontsize{8.5bp}{10bp}\selectfont\bfseries #1\par}%
+        {\color{RLBlueDeep}\HLAArial\fontsize{8.5bp}{10bp}\selectfont\bfseries #1\par}%
 }

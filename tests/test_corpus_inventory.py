@@ -6,16 +6,27 @@ import json
 import re
 import unittest
 from collections import Counter
-from pathlib import Path
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.corpus.corpus_inventory import CorpusInventory, build_inventory
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
+)
+INVENTORY_ROOTS = tuple(
+    REPO_ROOT / "topics" / "ieee" / name
+    for name in (
+        "hla-1516-2010",
+        "hla-1516.1-2010",
+        "hla-1516.2-2010",
+        "hla-1516-2025",
+        "hla-1516.1-2025",
+        "hla-1516.2-2025",
+    )
 )
 
 
@@ -25,14 +36,28 @@ class CorpusInventoryTests(unittest.TestCase):
         inventory = CorpusInventory.model_validate(json.loads(path.read_text(encoding="utf-8")))
         self.assertEqual(
             {item.document_id for item in inventory.documents},
-            {"hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025"},
+            {
+                "hla-1516-2010",
+                "hla-1516.1-2010",
+                "hla-1516.2-2010",
+                "hla-1516-2025",
+                "hla-1516.1-2025",
+                "hla-1516.2-2025",
+            },
         )
         self.assertGreaterEqual(inventory.totals["clause"], 1800)
         self.assertEqual(inventory.totals.get("status:unclassified", 0), 0)
-        # content-ownership closes the last HLA requirement queue; the inventory remains
-        # source-controlled even when no migration work is outstanding.
-        self.assertFalse(inventory.migration_queue)
-        rebuilt = build_inventory(ROOTS, REPO_ROOT / "data" / "release" / "documents.json")
+        # Table introductions and Annex E/F shall-like prose are reviewed as non-normative.
+        self.assertEqual(len(inventory.migration_queue), 12)
+        self.assertEqual({item.status for item in inventory.migration_queue}, {"non-normative"})
+        self.assertEqual(
+            sum(item.document == "hla-1516.1-2025" for item in inventory.migration_queue),
+            12,
+        )
+        rebuilt = build_inventory(
+            INVENTORY_ROOTS,
+            REPO_ROOT / "data" / "release" / "documents.json",
+        )
         self.assertEqual(
             {item.document_id for item in inventory.documents},
             {item.document_id for item in rebuilt.documents},
@@ -59,16 +84,16 @@ class CorpusInventoryTests(unittest.TestCase):
             )
             statements = re.findall(r"\\HLANormativeRuleStatement\{([^}]*)\}", text)
             self.assertTrue(statements)
-            self.assertTrue(all(value.startswith("\\SemanticRequirement") for value in statements))
+            self.assertTrue(all(re.match(r"^\\SemanticRequirement", value) for value in statements))
 
     def test_all_transitions_have_explicit_coverage_dispositions(self) -> None:
         model = load_document_model(ROOTS[1], HLA_SOURCE)
-        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 281)
-        self.assertEqual(len(model.transition_coverage), 281)
+        self.assertEqual(sum(len(machine.transitions) for machine in model.state_machines), 297)
+        self.assertEqual(len(model.transition_coverage), 297)
         self.assertEqual(model.transitions_missing_coverage(), ())
         self.assertEqual(
             model.transition_coverage_counts(),
-            {"mapped": 281, "not-applicable": 0, "deferred": 0, "unclassified": 0},
+            {"mapped": 297, "not-applicable": 0, "deferred": 0, "unclassified": 0},
         )
 
     def test_all_omt_tables_belong_to_families(self) -> None:

@@ -1,0 +1,74 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-publication.sty}[2026/08/24 v0.1 Requirements Lab HLA publication profile]
+
+% High-level bridge used by all six HLA source compilations.  It maps the
+% document-level HLA metadata used by the faithful body adapters into the
+% shared Requirements Lab style profile.  The body adapters remain free to
+% preserve edition-specific geometry; the visible style contract is shared.
+% Legacy adapters load their source-faithful style first, so install the
+% canonical reading faces here after that style has finished declaring its
+% defaults.  The modern class has already loaded rl-type.sty.
+\ifdefined\RLSerif\else
+    \input{../requirements-lab/style/rl-type.sty}
+\fi
+\input{../requirements-lab/style/rl-fixed-page.sty}
+\input{../requirements-lab/style/rl-page.sty}
+
+% The 1516-2025 natural-flow adapter has explicit role fonts for its source
+% renderer. Route those roles through the same Lab faces as the shared
+% \rmfamily/\sffamily defaults so it cannot drift back to Tinos/Arimo.
+\ifdefined\HLAFacSerif
+    \renewcommand{\HLAFacSerif}{\RLSerif}
+\fi
+\ifdefined\HLAFacSans
+    \renewcommand{\HLAFacSans}{\RLSans}
+\fi
+
+% Every product may still contain source-faithful \thispagestyle calls in its
+% generated body. Define the historical interior names against one shared
+% Requirements Lab style so those calls cannot reintroduce publisher headers
+% or edition-specific running furniture. Intentionally blank styles such as
+% empty and hla-empty are left untouched for covers and blank front matter.
+\RLDefineFixedPageStyle{RLHLA}
+\RLDefineFixedPageStyle{body}
+\RLDefineFixedPageStyle{firstbody}
+\RLDefineFixedPageStyle{hla}
+\RLDefineFixedPageStyle{hlafirst}
+\RLDefineFixedPageStyle{hlabibliography}
+\RLDefineFixedPageStyle{hlafrontlicense}
+\RLDefineFixedPageStyle{hlafrontroman}
+\RLDefineFixedPageStyle{hla-body}
+\RLDefineFixedPageStyle{hla-body-no-ieee}
+\RLDefineFixedPageStyle{hlaopener}
+\RLDefineFixedPageStyle{fancy}
+\RLDefineFixedPageStyle{firststandard}
+\RLDefineFixedPageStyle{bibliographylast}
+
+% Shared opening identity for natural-flow legacy adapters. The technical body
+% remains edition-specific, but every product introduces its first interior
+% page as an HLA Requirements Lab source compilation rather than as a
+% publisher-issued standard.
+\newcommand{\RLDocumentOpeningTitle}[3]{%
+    {\RLFixedSans\bfseries\fontsize{20pt}{23pt}\selectfont\color{RLBlueDeep}%
+        HLA Requirements Lab\\
+        HLA #1 family\\
+        #2-source compilation\\
+        #3\par}%
+}
+
+\newcommand{\RLConfigureHLAPublicationProfile}{%
+    \ifcsdef{HLALabEdition}{\renewcommand{\RLPublicationEdition}{\HLALabEdition}}{}%
+    \ifcsdef{HLALabEditionYear}{\renewcommand{\RLPublicationYear}{\HLALabEditionYear}}{}%
+    \ifcsdef{HLALabNumber}{\renewcommand{\RLPublicationNumber}{\HLALabNumber}}{}%
+    \ifcsdef{HLALabDocumentTitle}{\renewcommand{\RLPublicationTitle}{\HLALabDocumentTitle}}{}%
+    \ifcsdef{HLALabDescriptor}{\renewcommand{\RLPublicationDescriptor}{\HLALabDescriptor}}{}%
+    \ifcsdef{HLALabSeries}{\renewcommand{\RLPublicationFamily}{\HLALabSeries}}{}%
+    \ifcsdef{HLALabSourceAttribution}{\renewcommand{\RLPublicationSource}{\HLALabSourceAttribution}}{}%
+    \ifcsdef{HLALabTheme}{\renewcommand{\RLPublicationTheme}{\HLALabTheme}}{}%
+    \renewcommand{\RLFixedHeaderLeft}{%
+        \RLPublicationNumber\enspace\textbar\enspace\RLPublicationEdition}%
+    \renewcommand{\RLFixedHeaderRight}{\RLPublicationTitle}%
+    \renewcommand{\RLFixedFooterLeft}{%
+        HLA REQUIREMENTS LAB\enspace\textbar\enspace\RLPublicationEdition}%
+    \pagestyle{RLHLA}%
+}

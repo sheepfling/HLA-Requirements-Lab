@@ -4,46 +4,46 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Mapping
+from collections.abc import Sequence
+from collections.abc import Set as AbstractSet
 from pathlib import Path
 from typing import Literal
 
 from hla_lab.core.io import write_json
-from hla_lab.core.json_types import JsonObject, JsonValue
+from hla_lab.core.semantic_diagram_types import SemanticDiagramFileEnvelope
 from hla_lab.core.semantic_model import (
     DocumentModel,
     Requirement,
     RequirementFile,
     RequirementLink,
     RequirementLinkFile,
+    StateMachine,
     StateMachineFile,
 )
 from hla_lab.core.text import slugify
+from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.paths import DocumentResources
 
 RequirementLinkRelation = Literal[
     "governs", "precondition", "postcondition", "enables", "prohibits"
 ]
-
-
-def _json_payload(path: Path, default: Mapping[str, JsonValue]) -> JsonObject:
-    if not path.is_file():
-        return dict(default)
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"semantic source must be a JSON object: {path}")
-    return payload
+CoverageKind = Literal["transition", "cross-cutting", "document-wide", "not-applicable"]
 
 
 def _load_state_machine_payloads(
     root: Path,
-) -> tuple[tuple[Path, JsonObject, StateMachineFile], ...]:
-    payloads: list[tuple[Path, JsonObject, StateMachineFile]] = []
+) -> tuple[tuple[Path, StateMachineFile], ...]:
+    payloads: list[tuple[Path, StateMachineFile]] = []
     for path in sorted(DocumentResources(root).semantic.glob("*.json")):
-        payload = _json_payload(path, {})
-        if "state_machines" not in payload:
+        source = path.read_text(encoding="utf-8")
+        envelope = SemanticDiagramFileEnvelope.model_validate_json(source)
+        if "state_machines" not in envelope.model_fields_set:
             continue
-        payloads.append((path, payload, StateMachineFile.model_validate(payload)))
+        if envelope.schema_version is None or envelope.state_machines is None:
+            raise ValueError(
+                f"{path}: state-machine model requires schema_version and state_machines"
+            )
+        payloads.append((path, StateMachineFile.model_validate_json(source)))
     return tuple(payloads)
 
 
@@ -52,8 +52,6 @@ _write_json = write_json
 
 def _load_hla_model(root: Path) -> DocumentModel:
     """Load the HLA profile at the CLI boundary; the promotion logic is generic."""
-    from hla_lab.corpus.hla_semantic import load_hla_document_model
-
     return load_hla_document_model(root)
 
 
@@ -63,7 +61,7 @@ def promote_requirement(
     *,
     model: DocumentModel | None = None,
     transition_ids: tuple[str, ...] = (),
-    coverage_kind: str = "transition",
+    coverage_kind: CoverageKind = "transition",
     coverage_note: str = "",
     relation: RequirementLinkRelation = "governs",
     notes: str = "",
@@ -76,53 +74,110 @@ def promote_requirement(
     """
     root = root.resolve()
     model = model or _load_hla_model(root)
+    candidate = _candidate_for_promotion(model, candidate_id)
+    _validate_coverage(model, transition_ids, coverage_kind, coverage_note)
+    promoted = _promoted_requirement(candidate, transition_ids, coverage_kind, coverage_note)
+    requirement_path, requirement_file = _load_requirement_file(root, promoted)
+    link_path, link_file, links, new_links = _load_requirement_links(
+        root, promoted, transition_ids, relation, notes
+    )
+    state_payloads = _load_state_machine_payloads(root)
+    updated_machines, touched = _updated_state_machine_records(model, transition_ids, promoted.id)
+    _validate_touched_transitions(touched, transition_ids)
+    _validated_updated_model(model, candidate, promoted, links, updated_machines)
+    if not dry_run:
+        _write_promotion(
+            requirement_path,
+            requirement_file,
+            promoted,
+            link_path,
+            link_file,
+            links,
+            new_links,
+            state_payloads,
+            updated_machines,
+        )
+    return promoted
+
+
+def _candidate_for_promotion(model: DocumentModel, candidate_id: str) -> Requirement:
     candidates = {item.id: item for item in model.requirements if item.extraction == "candidate"}
     candidate = candidates.get(candidate_id)
-    if candidate is None:
-        if any(item.id == candidate_id for item in model.requirements):
-            raise ValueError(f"requirement is already explicit: {candidate_id}")
-        raise ValueError(f"candidate requirement not found: {candidate_id}")
+    if candidate is not None:
+        return candidate
+    if any(item.id == candidate_id for item in model.requirements):
+        raise ValueError(f"requirement is already explicit: {candidate_id}")
+    raise ValueError(f"candidate requirement not found: {candidate_id}")
+
+
+def _validate_coverage(
+    model: DocumentModel,
+    transition_ids: Sequence[str],
+    coverage_kind: CoverageKind,
+    coverage_note: str,
+) -> None:
     if coverage_kind == "transition" and not transition_ids:
         raise ValueError("transition coverage requires at least one --transition")
     if coverage_kind != "transition" and transition_ids:
         raise ValueError("non-transition coverage cannot name --transition")
     if coverage_kind != "transition" and not coverage_note.strip():
         raise ValueError("non-transition coverage requires --coverage-note")
-
     all_transitions = {
         transition.id for machine in model.state_machines for transition in machine.transitions
     }
-    missing_transitions = set(transition_ids) - all_transitions
-    if missing_transitions:
-        raise ValueError(f"unknown transition(s): {sorted(missing_transitions)}")
+    missing = set(transition_ids) - all_transitions
+    if missing:
+        raise ValueError(f"unknown transition(s): {sorted(missing)}")
 
-    requirement_payload = candidate.model_dump(mode="json")
-    requirement_payload.update(
-        {
-            "extraction": "explicit",
-            "transition_ids": list(transition_ids),
-            "coverage_kind": coverage_kind,
-            "coverage_note": coverage_note,
-        }
-    )
-    promoted = Requirement.model_validate(requirement_payload)
 
-    requirements_path = DocumentResources(root).semantic_file("requirements.json")
-    requirement_file = RequirementFile.model_validate(
-        _json_payload(requirements_path, {"schema_version": 1, "requirements": []})
+def _promoted_requirement(
+    candidate: Requirement,
+    transition_ids: Sequence[str],
+    coverage_kind: str,
+    coverage_note: str,
+) -> Requirement:
+    payload = candidate.model_dump()
+    payload.update(
+        extraction="explicit",
+        transition_ids=tuple(transition_ids),
+        coverage_kind=coverage_kind,
+        coverage_note=coverage_note,
     )
-    if any(item.id == promoted.id for item in requirement_file.requirements):
+    return Requirement.model_validate(payload)
+
+
+def _load_requirement_file(
+    root: Path,
+    promoted: Requirement,
+) -> tuple[Path, RequirementFile]:
+    path = DocumentResources(root).semantic_file("requirements.json")
+    record = (
+        RequirementFile.model_validate_json(path.read_text(encoding="utf-8"))
+        if path.is_file()
+        else RequirementFile(schema_version=1, requirements=())
+    )
+    if any(item.id == promoted.id for item in record.requirements):
         raise ValueError(f"requirement source already contains ID: {promoted.id}")
-    requirements = (*requirement_file.requirements, promoted)
+    return path, record
 
-    links_path = DocumentResources(root).semantic_file("requirement-links.json")
-    link_file = RequirementLinkFile.model_validate(
-        _json_payload(links_path, {"schema_version": 1, "links": []})
+
+def _load_requirement_links(
+    root: Path,
+    promoted: Requirement,
+    transition_ids: Sequence[str],
+    relation: RequirementLinkRelation,
+    notes: str,
+) -> tuple[Path, RequirementLinkFile, tuple[RequirementLink, ...], tuple[RequirementLink, ...]]:
+    path = DocumentResources(root).semantic_file("requirement-links.json")
+    record = (
+        RequirementLinkFile.model_validate_json(path.read_text(encoding="utf-8"))
+        if path.is_file()
+        else RequirementLinkFile(schema_version=1, links=())
     )
-    existing_pairs = {(item.requirement_id, item.transition_id) for item in link_file.links}
+    existing = {(item.requirement_id, item.transition_id) for item in record.links}
     new_links: list[RequirementLink] = []
     for transition_id in transition_ids:
-        if (promoted.id, transition_id) in existing_pairs:
+        if (promoted.id, transition_id) in existing:
             raise ValueError(
                 f"requirement-to-transition link already exists: {promoted.id} -> {transition_id}"
             )
@@ -136,89 +191,100 @@ def promote_requirement(
                 notes=notes or "Promoted by the semantic requirement coverage workflow.",
             )
         )
-    links = (*link_file.links, *new_links)
+    return path, record, (*record.links, *new_links), tuple(new_links)
 
-    state_payloads = _load_state_machine_payloads(root)
-    touched_transition_ids: set[str] = set()
-    updated_state_machines = []
+
+def _updated_state_machine_records(
+    model: DocumentModel,
+    transition_ids: Sequence[str],
+    requirement_id: str,
+) -> tuple[tuple[StateMachine, ...], set[str]]:
+    selected = set(transition_ids)
+    touched: set[str] = set()
+    machines: list[StateMachine] = []
     for machine in model.state_machines:
-        updated_transitions = []
+        transitions = []
         for transition in machine.transitions:
-            if transition.id in transition_ids:
-                touched_transition_ids.add(transition.id)
-                updated_transitions.append(
-                    transition.model_copy(
-                        update={
-                            "requirement_ids": tuple(
-                                dict.fromkeys((*transition.requirement_ids, promoted.id))
-                            )
-                        }
-                    )
-                )
+            if transition.id in selected:
+                touched.add(transition.id)
+                requirements = tuple(dict.fromkeys((*transition.requirement_ids, requirement_id)))
+                transitions.append(transition.model_copy(update={"requirement_ids": requirements}))
             else:
-                updated_transitions.append(transition)
-        updated_state_machines.append(
-            machine.model_copy(update={"transitions": tuple(updated_transitions)})
-        )
-    if touched_transition_ids != set(transition_ids):
+                transitions.append(transition)
+        machines.append(machine.model_copy(update={"transitions": tuple(transitions)}))
+    return tuple(machines), touched
+
+
+def _validate_touched_transitions(
+    touched: AbstractSet[str],
+    transition_ids: Sequence[str],
+) -> None:
+    expected = set(transition_ids)
+    if touched != expected:
         raise ValueError(
             "transition IDs were validated but not found in canonical state-machine records: "
-            f"{sorted(set(transition_ids) - touched_transition_ids)}"
+            f"{sorted(expected - touched)}"
         )
 
-    updated_model = model.model_copy(
+
+def _validated_updated_model(
+    model: DocumentModel,
+    candidate: Requirement,
+    promoted: Requirement,
+    links: Sequence[RequirementLink],
+    machines: Sequence[StateMachine],
+) -> DocumentModel:
+    updated = model.model_copy(
         update={
             "requirements": tuple(
                 promoted if item.id == candidate.id else item for item in model.requirements
             ),
-            "requirement_links": links,
-            "state_machines": tuple(updated_state_machines),
+            "requirement_links": tuple(links),
+            "state_machines": tuple(machines),
         }
     )
-    DocumentModel.model_validate(updated_model.model_dump(mode="json"))
+    return DocumentModel.model_validate(updated.model_dump(mode="json"))
 
-    if not dry_run:
+
+def _write_promotion(
+    requirement_path: Path,
+    requirement_file: RequirementFile,
+    promoted: Requirement,
+    link_path: Path,
+    link_file: RequirementLinkFile,
+    links: Sequence[RequirementLink],
+    new_links: Sequence[RequirementLink],
+    state_payloads: Sequence[tuple[Path, StateMachineFile]],
+    updated_machines: Sequence[StateMachine],
+) -> None:
+    _write_json(
+        requirement_path,
+        RequirementFile(
+            schema_version=requirement_file.schema_version,
+            requirements=(*requirement_file.requirements, promoted),
+        ),
+    )
+    if new_links:
         _write_json(
-            requirements_path,
-            RequirementFile(
-                schema_version=requirement_file.schema_version,
-                requirements=requirements,
-            ).model_dump(mode="json"),
+            link_path,
+            RequirementLinkFile(
+                schema_version=link_file.schema_version,
+                links=tuple(links),
+            ),
         )
-        if new_links:
+    updated_by_id = {machine.id: machine for machine in updated_machines}
+    for path, state_machine_file in state_payloads:
+        machines = tuple(
+            updated_by_id.get(machine.id, machine) for machine in state_machine_file.state_machines
+        )
+        if machines != state_machine_file.state_machines:
             _write_json(
-                links_path,
-                RequirementLinkFile(
-                    schema_version=link_file.schema_version,
-                    links=links,
-                ).model_dump(mode="json"),
+                path,
+                StateMachineFile(
+                    schema_version=state_machine_file.schema_version,
+                    state_machines=machines,
+                ),
             )
-        if transition_ids:
-            for path, payload, _ in state_payloads:
-                changed = False
-                state_machines = payload.get("state_machines", [])
-                if not isinstance(state_machines, list):
-                    continue
-                for machine_payload in state_machines:
-                    if not isinstance(machine_payload, dict):
-                        continue
-                    transitions = machine_payload.get("transitions", [])
-                    if not isinstance(transitions, list):
-                        continue
-                    for transition_payload in transitions:
-                        if not isinstance(transition_payload, dict):
-                            continue
-                        if transition_payload.get("id") not in transition_ids:
-                            continue
-                        raw_ids = transition_payload.get("requirement_ids", [])
-                        ids = list(raw_ids) if isinstance(raw_ids, list) else []
-                        if promoted.id not in ids:
-                            ids.append(promoted.id)
-                            transition_payload["requirement_ids"] = ids
-                            changed = True
-                if changed:
-                    _write_json(path, payload)
-    return promoted
 
 
 def main() -> None:

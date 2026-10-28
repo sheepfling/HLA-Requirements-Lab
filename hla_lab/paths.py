@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+import os
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
+from types import MappingProxyType
 
+from hla_lab.core.resource_paths import DocumentResources
 from hla_lab.corpus.edition_lineage import (
     EditionDocument,
     EditionLineageManifest,
@@ -13,8 +17,6 @@ from hla_lab.corpus.edition_lineage import (
 )
 
 __all__ = [
-    "DOCUMENT_CATALOG",
-    "DOCUMENT_IDS",
     "DOCUMENT_MANIFEST",
     "IEEE_ROOT",
     "REPO_ROOT",
@@ -25,65 +27,34 @@ __all__ = [
     "document_entry",
     "document_entry_for_path",
     "document_entry_for_root",
+    "document_ids",
     "document_roots",
+    "repository_root",
     "resources",
 ]
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+
+def repository_root(value: str | Path | None = None) -> Path:
+    """Resolve an explicit or configured workspace root.
+
+    Reusable callers pass a path. Workspace commands may set ``HLA_LAB_ROOT``;
+    the package never guesses from its install location or process directory.
+    """
+    selected = value if value is not None else os.environ.get("HLA_LAB_ROOT") or None
+    if selected is None:
+        raise RuntimeError("workspace root is required; pass a path or set HLA_LAB_ROOT")
+    return Path(selected).expanduser().resolve()
 
 
-@dataclass(frozen=True)
-class DocumentResources:
-    """Repository-owned paths belonging to one document product."""
-
-    root: Path
-
-    @property
-    def canonical(self) -> Path:
-        return self.root / "canonical"
-
-    @property
-    def semantic(self) -> Path:
-        return self.root / "semantic"
-
-    @property
-    def sections(self) -> Path:
-        return self.root / "sections"
-
-    @property
-    def output(self) -> Path:
-        return self.root / "output"
-
-    @property
-    def output_semantic(self) -> Path:
-        return self.output / "semantic"
-
-    @property
-    def build(self) -> Path:
-        return self.root / "build"
-
-    @property
-    def dist(self) -> Path:
-        return self.root / "dist"
-
-    @property
-    def main_tex(self) -> Path:
-        return self.root / "main.tex"
-
-    def canonical_file(self, name: str) -> Path:
-        return self.canonical / name
-
-    def semantic_file(self, name: str) -> Path:
-        return self.semantic / name
-
-    def output_file(self, name: str) -> Path:
-        return self.output / name
-
-    def output_semantic_file(self, name: str) -> Path:
-        return self.output_semantic / name
+def _configured_root() -> Path | None:
+    value = os.environ.get("HLA_LAB_ROOT")
+    return Path(value).expanduser().resolve() if value else None
 
 
-@dataclass(frozen=True)
+REPO_ROOT = _configured_root()
+
+
+@dataclass(frozen=True, slots=True)
 class RepositoryResources:
     """Named repository roots and manifests used by the lab."""
 
@@ -124,10 +95,6 @@ class RepositoryResources:
     @property
     def temporary(self) -> Path:
         return self.root / ".tmp"
-
-    @property
-    def schemas(self) -> Path:
-        return self.root / "schemas"
 
     @property
     def publications_manifest(self) -> Path:
@@ -174,108 +141,97 @@ class RepositoryResources:
         return self.inbox.joinpath(*parts)
 
 
-def resources(root: Path = REPO_ROOT) -> RepositoryResources:
-    """Return the path registry for ``root`` without requiring a process cwd."""
+def resources(root: Path | None = None) -> RepositoryResources:
+    """Return the path registry for an explicit or configured workspace."""
 
-    return RepositoryResources(Path(root))
-
-
-RESOURCES = resources()
-IEEE_ROOT = RESOURCES.ieee_topics
-DOCUMENT_MANIFEST = RESOURCES.edition_lineage_manifest
+    return RepositoryResources(repository_root(root))
 
 
-def _load_document_manifest() -> EditionLineageManifest:
-    return _load_document_manifest_from(RESOURCES)
+RESOURCES = resources(REPO_ROOT) if REPO_ROOT is not None else None
+IEEE_ROOT = RESOURCES.ieee_topics if RESOURCES is not None else None
+DOCUMENT_MANIFEST = RESOURCES.edition_lineage_manifest if RESOURCES is not None else None
 
 
-def _load_document_manifest_from(repository: RepositoryResources) -> EditionLineageManifest:
-    path = repository.edition_lineage_manifest
-    if not path.is_file():
-        raise FileNotFoundError(f"missing document manifest: {path}")
-    return load_edition_lineage(path)
+def document_catalog(root: Path | None = None) -> EditionLineageManifest:
+    """Load the workspace's document catalog on first corpus operation."""
+    return _document_catalog(repository_root(root))
 
 
-DOCUMENT_CATALOG = _load_document_manifest()
-DOCUMENT_IDS = tuple(item.document_id for item in DOCUMENT_CATALOG.documents)
-_DOCUMENTS_BY_ID = {item.document_id: item for item in DOCUMENT_CATALOG.documents}
+@cache
+def _document_catalog(root: Path) -> EditionLineageManifest:
+    manifest = resources(root).edition_lineage_manifest
+    if not manifest.is_file():
+        raise FileNotFoundError(f"missing document manifest: {manifest}")
+    return load_edition_lineage(manifest)
 
 
-def document_catalog(repo_root: Path = REPO_ROOT) -> EditionLineageManifest:
-    """Load the document identities declared by ``repo_root``."""
-
-    root = Path(repo_root)
-    if root.resolve() == REPO_ROOT:
-        return DOCUMENT_CATALOG
-    return _load_document_manifest_from(resources(root))
+def document_ids(root: Path | None = None) -> tuple[str, ...]:
+    """Return supported document IDs without loading corpus data at package import."""
+    return _catalog_document_ids(repository_root(root))
 
 
-def document_entry(document_id: str, repo_root: Path = REPO_ROOT) -> EditionDocument:
+def _catalog_document_ids(root: Path) -> tuple[str, ...]:
+    return tuple(item.document_id for item in document_catalog(root).documents)
+
+
+@cache
+def _documents_by_id(root: Path) -> Mapping[str, EditionDocument]:
+    return MappingProxyType({item.document_id: item for item in document_catalog(root).documents})
+
+
+def document_entry(document_id: str, root: Path | None = None) -> EditionDocument:
     """Return the canonical manifest entry for one corpus document."""
-
-    catalog = document_catalog(repo_root)
-    documents = (
-        _DOCUMENTS_BY_ID
-        if catalog is DOCUMENT_CATALOG
-        else {item.document_id: item for item in catalog.documents}
-    )
-    document_ids = (
-        DOCUMENT_IDS
-        if catalog is DOCUMENT_CATALOG
-        else tuple(item.document_id for item in catalog.documents)
-    )
+    entries = _documents_by_id(repository_root(root))
     try:
-        return documents[document_id]
+        return entries[document_id]
     except KeyError as error:
-        known = ", ".join(document_ids)
+        known = ", ".join(entries)
         raise ValueError(f"unknown HLA document {document_id}; known: {known}") from error
 
 
-def document_entry_for_root(root_name: str, repo_root: Path = REPO_ROOT) -> EditionDocument:
+def document_entry_for_root(root_name: str, root: Path | None = None) -> EditionDocument:
     """Resolve a document root, including isolated test/workspace suffixes."""
-
+    root = repository_root(root)
     try:
-        return document_entry(root_name, repo_root)
+        return document_entry(root_name, root)
     except ValueError:
-        catalog = document_catalog(repo_root)
         matches = tuple(
-            item for item in catalog.documents if root_name.startswith(item.document_id + "-")
+            item
+            for item in document_catalog(root).documents
+            if root_name.startswith(item.document_id + "-")
         )
         if len(matches) == 1:
             return matches[0]
         raise
 
 
-def document_entry_for_path(root: Path, repo_root: Path = REPO_ROOT) -> EditionDocument:
-    """Resolve a document root path using the selected corpus identity manifest."""
-
-    repository = resources(repo_root)
-    resolved = Path(root).resolve()
-    for entry in document_catalog(repository.root).documents:
-        relative_root = entry.root or f"topics/ieee/{entry.document_id}"
-        if (repository.root / relative_root).resolve() == resolved:
-            return entry
-    raise ValueError(f"unknown HLA document root {root} in corpus {repository.root}")
+def document_entry_for_path(path: Path, root: Path | None = None) -> EditionDocument:
+    """Prefer a catalog's declared root, with ID-based resolution for isolated copies."""
+    workspace = repository_root(root)
+    candidate = Path(path).resolve()
+    matches = tuple(
+        item
+        for item in document_catalog(workspace).documents
+        if (workspace / (item.root or f"topics/ieee/{item.document_id}")).resolve() == candidate
+    )
+    if len(matches) != 1:
+        if not matches:
+            return document_entry_for_root(candidate.name, workspace)
+        raise ValueError(f"document root {candidate} is declared more than once in the catalog")
+    return matches[0]
 
 
 def document_roots(
-    repo_root: Path = REPO_ROOT,
+    repo_root: Path | None = None,
+    # TODO name is shadowed from outside
     document_ids: Iterable[str] | None = None,
 ) -> tuple[Path, ...]:
     """Resolve requested HLA document roots and reject unknown documents."""
 
-    repository = resources(repo_root)
-    catalog = document_catalog(repository.root)
-    requested = tuple(document_ids or (item.document_id for item in catalog.documents))
-    documents = {item.document_id: item for item in catalog.documents}
-    known = ", ".join(documents)
-    missing_ids = tuple(document_id for document_id in requested if document_id not in documents)
-    if missing_ids:
-        raise ValueError(f"unknown HLA document(s): {', '.join(missing_ids)}; known: {known}")
-    entries = tuple(documents[document_id] for document_id in requested)
-    roots = tuple(
-        repository.root / (entry.root or f"topics/ieee/{entry.document_id}") for entry in entries
-    )
+    repo_root = repository_root(repo_root)
+    requested = tuple(document_ids or _catalog_document_ids(repo_root))
+    entries = tuple(document_entry(document_id, repo_root) for document_id in requested)
+    roots = tuple(resources(repo_root).document(entry.document_id).root for entry in entries)
     missing = tuple(path for path in roots if not path.is_dir())
     if missing:
         missing_ids = ", ".join(path.name for path in missing)

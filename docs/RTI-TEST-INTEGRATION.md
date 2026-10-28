@@ -12,9 +12,10 @@ Catch2 / JUnit 5 / another test runner
 ```
 
 The test framework executes behavior. The catalog gives that test a stable
-evidence ID and connects it to a corpus implementation mapping. The adapter
-translates test and source-inspection results into the portable compliance
-contract. The sidecar verifies the result against a pinned corpus bundle.
+evidence ID, names the exact requirement IDs it exercises, and connects it to
+a corpus implementation mapping. The adapter translates test and
+source-inspection results into the portable compliance contract. The sidecar
+verifies the result against a pinned corpus bundle.
 
 Declaring a test is never evidence. A test result is initially raw and
 unreviewed. A separate protected review or verification step must accept the
@@ -29,8 +30,8 @@ Python modules from this repository.
 
 An RTI repository should keep a small catalog such as
 [`examples/compliance-test-catalog.json`](../examples/compliance-test-catalog.json).
-The schema is
-[`schemas/compliance_test_catalog.schema.json`](../schemas/compliance_test_catalog.schema.json).
+Generate its JSON Schema with `hla-lab-schema compliance_test_catalog`.
+The source model is `hla_lab.traceability.compliance_contract.ComplianceTestCatalog`.
 
 Each entry has four important identities:
 
@@ -38,6 +39,14 @@ Each entry has four important identities:
 - `document_id`: the selected corpus edition;
 - `implementation_mapping_id`: the lab's semantic implementation seam;
 - `target`: the implementation target, normally `cpp` or `java`.
+
+`requirement_ids` is the explicit requirement join for a new catalog entry. It
+must match the selected implementation mapping's requirement IDs and must
+resolve in the ordered requirement catalog carried by the adapter request.
+Schema-v1 catalogs may omit it for compatibility; those entries use the
+mapping join and should be migrated when touched. The catalog position and
+source coordinates are presentation/provenance metadata; requirement IDs are
+the stable identity.
 
 `api_surface_ids` names the exact declaration surfaces selected by the corpus
 crosswalk. `result_selector` is the exact testcase name in the JUnit XML
@@ -65,14 +74,15 @@ Example:
       "language": "cpp",
       "symbol": "RTI::RTIambassador::connect",
       "api_surface_ids": ["cpp-rtiambassador-connect"],
+      "requirement_ids": ["<requirement-id-from-corpus-bundle>"],
       "execution_mode": "real"
     }
   ]
 }
 ```
 
-The IDs in this example are illustrative. Replace them with IDs from the
-selected `corpus-bundle.json`.
+The IDs in this example are illustrative. Replace the mapping, API, and
+requirement IDs with IDs from the selected `corpus-bundle.json`.
 
 ## C++ with Catch2
 
@@ -233,8 +243,11 @@ python -m hla_lab.traceability.junit_adapter --catalog compliance/test-catalog.j
 The second form is useful when the build system already owns the sidecar's
 split protocol. The adapter reports a missing `result_selector` as `planned`,
 and rejects ambiguous XML selectors or a catalog that disagrees with the
-request's language, mapping, target, or exact API surface IDs. This makes an
-incorrect catalog visible rather than creating an apparently successful bundle.
+request's language, mapping, target, exact API surface IDs, or explicit
+requirement IDs. The adapter request includes the same ordered requirement
+records as the corpus bundle, including source provenance and coverage links.
+This makes an incorrect catalog visible rather than creating an apparently
+successful bundle.
 One catalog may contain 2010 and 2025 entries together when the bundle was
 exported with `--edition all`; `document_id` keeps their evidence independent.
 

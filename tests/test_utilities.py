@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from hla_lab.core.coercions import coerce_int, optional_float
 from hla_lab.core.parsing import balanced_group, balanced_span, line_number, try_balanced_group
+from hla_lab.core.source_paths import is_source_frontmatter
 from hla_lab.core.text import (
     dot_quote,
     format_number,
@@ -15,6 +15,7 @@ from hla_lab.core.text import (
     slugify,
     tex_escape,
 )
+from tests.support import TEST_REPO_ROOT
 from tools.utility_inventory import inventory
 
 
@@ -55,8 +56,13 @@ class UtilityTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             coerce_int({})
 
+    def test_frontmatter_filter_accepts_both_source_path_styles(self) -> None:
+        self.assertTrue(is_source_frontmatter(r"content\FrontMatter\title.tex"))
+        self.assertTrue(is_source_frontmatter("content/front-matter/notice.tex"))
+        self.assertFalse(is_source_frontmatter("content/clauses/notice.tex"))
+
     def test_repository_helper_inventory_has_no_exact_duplicate_bodies(self) -> None:
-        _definitions, duplicates = inventory(Path(__file__).resolve().parents[1])
+        _definitions, duplicates = inventory(TEST_REPO_ROOT)
         self.assertEqual(duplicates, ())
 
 

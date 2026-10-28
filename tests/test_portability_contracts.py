@@ -4,18 +4,21 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
+from hla_lab.build.build import documents
 from hla_lab.core.semantic_model import DocumentModel, load_corpus, load_document_model
 from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 FIXTURE_ROOT = REPO_ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 
 
@@ -34,6 +37,172 @@ PROFILE = _load_fixture_profile()
 
 
 class PortabilityContractTests(unittest.TestCase):
+    def test_installed_modules_import_without_workspace_root(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.pop("HLA_LAB_ROOT", None)
+        script = (
+            "import importlib, pkgutil, hla_lab; "
+            "modules = [entry.name for entry in "
+            "pkgutil.walk_packages(hla_lab.__path__, hla_lab.__name__ + '.')]; "
+            "[importlib.import_module(name) for name in modules]; "
+            "print(len(modules))"
+        )
+        with tempfile.TemporaryDirectory() as workspace:
+            result = subprocess.run(
+                [sys.executable, "-B", "-c", script],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertGreater(int(result.stdout.strip()), 0)
+
+    def test_historical_migrations_import_without_workspace_root(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.pop("HLA_LAB_ROOT", None)
+        script = (
+            "import importlib, pkgutil, sys, tools.migrations as migrations; "
+            "from pathlib import Path; "
+            "from tools.migrations.workspace import document_root; "
+            "modules = [entry.name for entry in "
+            "pkgutil.iter_modules(migrations.__path__, migrations.__name__ + '.')]; "
+            "[importlib.import_module(name) for name in modules]; "
+            "assert document_root('hla-1516.1-2025', Path(sys.argv[1])).is_dir(); "
+            "print(len(modules))"
+        )
+        with tempfile.TemporaryDirectory() as workspace:
+            result = subprocess.run(
+                [sys.executable, "-B", "-c", script, str(REPO_ROOT)],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertGreaterEqual(int(result.stdout.strip()), 27)
+
+    def test_workspace_commands_show_help_without_configured_root(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.pop("HLA_LAB_ROOT", None)
+        modules = (
+            "hla_lab.corpus.corpus_inventory",
+            "hla_lab.corpus.hla_edition_diff",
+            "tools.check_module_layout",
+            "tools.utility_inventory",
+        )
+        with tempfile.TemporaryDirectory() as workspace:
+            for module in modules:
+                with self.subTest(module=module):
+                    result = subprocess.run(
+                        [sys.executable, "-B", "-m", module, "--help"],
+                        cwd=workspace,
+                        env=environment,
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                    )
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn("usage:", result.stdout)
+
+    def test_corpus_commands_accept_explicit_workspace_root(self) -> None:
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.pop("HLA_LAB_ROOT", None)
+        with tempfile.TemporaryDirectory() as workspace:
+            output = Path(workspace) / "inventory.json"
+            inventory = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "hla_lab.corpus.corpus_inventory",
+                    "--workspace-root",
+                    str(REPO_ROOT),
+                    "--root",
+                    str(REPO_ROOT / "topics/ieee/hla-1516.1-2025"),
+                    "--output",
+                    str(output),
+                    "--write",
+                ],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(inventory.returncode, 0, inventory.stderr)
+            self.assertIn("hla-1516.1-2025", output.read_text(encoding="utf-8"))
+            edition_diff = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "hla_lab.corpus.hla_edition_diff",
+                    "--root",
+                    str(REPO_ROOT),
+                    "--standard",
+                    "ieee-1516.1",
+                    "--format",
+                    "summary",
+                ],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(edition_diff.returncode, 0, edition_diff.stderr)
+            self.assertIn("hla-1516.1-2010 -> hla-1516.1-2025", edition_diff.stdout)
+            model_view = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "hla_lab.semantic_model_cli",
+                    str(REPO_ROOT / "topics/ieee/hla-1516.1-2025"),
+                    "--workspace-root",
+                    str(REPO_ROOT),
+                ],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(model_view.returncode, 0, model_view.stderr)
+            self.assertIn("requirements: ", model_view.stdout)
+            bundle_path = Path(workspace) / "bundle.json"
+            export = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "hla_lab.publication.export_compliance_bundle",
+                    "--corpus-root",
+                    str(REPO_ROOT),
+                    "--edition",
+                    "2025",
+                    "--revision",
+                    "package-portability-test",
+                    "--output",
+                    str(bundle_path),
+                ],
+                cwd=workspace,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(export.returncode, 0, export.stderr)
+            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(bundle["documents"]), 3)
+
     def test_non_hla_fixture_loads_and_supports_generic_queries(self) -> None:
         model = load_document_model(FIXTURE_ROOT, PROFILE.DEMO_SOURCE)
 
@@ -116,8 +285,6 @@ class PortabilityContractTests(unittest.TestCase):
 
 
 def _document_roots() -> tuple[Path, ...]:
-    from hla_lab.build.build import documents
-
     return tuple(path.resolve() for path in documents())
 
 

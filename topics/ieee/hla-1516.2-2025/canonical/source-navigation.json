@@ -4,133 +4,43 @@
   "outline": [
     [
       1,
-      "IEEE Std 1516.2™-2025 Front Cover",
+      "HLA Requirements Lab cover",
       1
     ],
     [
       1,
-      "Title page",
-      2
-    ],
-    [
-      1,
-      "Important Notices and Disclaimers Concerning IEEE Standards Documents",
-      4
-    ],
-    [
-      2,
-      "Notice and Disclaimer of Liability Concerning the Use of IEEE Standards Documents",
-      4
-    ],
-    [
-      2,
-      "Translations",
-      5
-    ],
-    [
-      2,
-      "Official statements",
-      5
-    ],
-    [
-      2,
-      "Comments on standards",
-      5
-    ],
-    [
-      2,
-      "Laws and regulations",
-      5
-    ],
-    [
-      2,
-      "Data privacy",
-      6
-    ],
-    [
-      2,
-      "Copyrights",
-      6
-    ],
-    [
-      2,
-      "Photocopies",
-      6
-    ],
-    [
-      2,
-      "Updating of IEEE Standards documents",
-      6
-    ],
-    [
-      2,
-      "Errata",
-      6
-    ],
-    [
-      2,
-      "Patents",
-      7
-    ],
-    [
-      2,
-      "IMPORTANT NOTICE",
-      7
-    ],
-    [
-      1,
-      "Participants",
-      8
-    ],
-    [
-      1,
-      "Introduction",
-      10
-    ],
-    [
-      2,
-      "Schema, API, and Documentation",
-      10
-    ],
-    [
-      1,
-      "Contents",
-      11
-    ],
-    [
-      1,
       "1. Overview",
-      13
+      2
     ],
     [
       2,
       "1.1 Scope",
-      13
+      2
     ],
     [
       2,
       "1.2 Purpose",
-      13
+      2
     ],
     [
       2,
       "1.3 Word Usage",
-      13
+      2
     ],
     [
       2,
       "1.4 Background",
-      14
+      3
     ],
     [
       3,
       "1.4.1 Object model template rationale",
-      14
+      3
     ],
     [
       3,
       "1.4.2 Federation object models",
-      14
+      3
     ],
     [
       3,
@@ -862,102 +772,6 @@
     }
   ],
   "links": [
-    {
-      "source_page": 2,
-      "source_kind": 2,
-      "rectangle": [
-        90.18,
-        695.52002,
-        172.860001,
-        703.5
-      ],
-      "type": "uri",
-      "uri": "http://www.ieee.org/web/aboutus/whatis/policies/p9-26.html"
-    },
-    {
-      "source_page": 4,
-      "source_kind": 2,
-      "rectangle": [
-        321.299988,
-        531.959961,
-        431.160004,
-        544.919983
-      ],
-      "type": "uri",
-      "uri": "https://development.standards.ieee.org/myproject-web/public/view.html#landing"
-    },
-    {
-      "source_page": 4,
-      "source_kind": 2,
-      "rectangle": [
-        310.440002,
-        567.960022,
-        355.140015,
-        580.919983
-      ],
-      "type": "uri",
-      "uri": "https://standards.ieee.org/content/ieee-standards/en/about/contact/index.html"
-    },
-    {
-      "source_page": 5,
-      "source_kind": 2,
-      "rectangle": [
-        353.519989,
-        568.679993,
-        406.140015,
-        581.700012
-      ],
-      "type": "uri",
-      "uri": "https://ieeexplore.ieee.org/browse/standards/collection/ieee/"
-    },
-    {
-      "source_page": 5,
-      "source_kind": 2,
-      "rectangle": [
-        420.899994,
-        568.679993,
-        474.660004,
-        581.700012
-      ],
-      "type": "uri",
-      "uri": "https://standards.ieee.org/content/ieee-standards/en/about/contact/index.html"
-    },
-    {
-      "source_page": 5,
-      "source_kind": 2,
-      "rectangle": [
-        330.540009,
-        633.660034,
-        402.600006,
-        646.679993
-      ],
-      "type": "uri",
-      "uri": "https://standards.ieee.org/standard/index.html"
-    },
-    {
-      "source_page": 6,
-      "source_kind": 2,
-      "rectangle": [
-        362.820007,
-        70.679993,
-        415.920013,
-        81.659973
-      ],
-      "type": "uri",
-      "uri": "https://ieeexplore.ieee.org/browse/standards/collection/ieee/"
-    },
-    {
-      "source_page": 6,
-      "source_kind": 2,
-      "rectangle": [
-        306.480011,
-        133.679993,
-        398.940002,
-        146.640015
-      ],
-      "type": "uri",
-      "uri": "https://standards.ieee.org/about/sasb/patcom/materials.html"
-    },
     {
       "source_page": 10,
       "source_kind": 4,

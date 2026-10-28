@@ -1,13 +1,40 @@
 \documentclass[10pt,twoside]{article}
 \usepackage{ieee1516style}
+\input{../requirements-lab/style/rl-graphics.sty}
+\newcommand{\RLSerifScale}{0.82}
+\input{../requirements-lab/style/rl-publication.sty}
 
 \hypersetup{
-    pdftitle={IEEE Std 1516.2-2010 OMT Specification - LaTeX reconstruction},
-    pdfauthor={Reconstruction from user-supplied IEEE Std 1516.2-2010 source},
-    pdfsubject={High Level Architecture Object Model Template Specification}
+    pdftitle={HLA 1516.2 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2010 HLA 1516.2 family source material}
 }
 
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabNumber}{HLA 1516.2}
+\newcommand{\HLALabDocumentTitle}{Object Model Template (OMT) Specification}
+\newcommand{\HLALabDescriptor}{Source-traceable object model requirements and table contracts}
+\newcommand{\HLALabTheme}{omt}
+\newcommand{\HLALabAccent}{HLALabOrange}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.2 family materials from 2010.}
+\RLConfigureHLAPublicationProfile
+% Align the 2010 table surface with the approved 2025 OMT visual system:
+% pale blue-gray captions, blue outer structure, and quiet internal rules.
+\arrayrulecolor{RLLine}
+\setlength{\arrayrulewidth}{0.35pt}
+% The source adapter's standardheaders command rewrites fancyhdr directly;
+% keep its call site but route it to the shared Requirements Lab style.
+\renewcommand{\standardheaders}{\pagestyle{RLHLA}}
+% The shared Lab header uses a taller measured line box than the source style.
+% Reserve it explicitly so XeLaTeX cannot report header/body collisions.
+\setlength{\headheight}{21pt}
+
 \begin{document}
+    \input{../hla-requirements-lab-cover}
+    \standardheaders
     \input{output/semantic/semantic-manifest}
     \input{output/semantic/faithful-body}
 

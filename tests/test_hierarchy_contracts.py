@@ -15,8 +15,9 @@ from hla_lab.generation.contracts import GenerationRequest
 from hla_lab.generation.generate_derivative import generate_derivative
 from hla_lab.generation.hierarchy_compiler import compile_hierarchy
 from hla_lab.generation.semantic_generation import generate
+from tests.support import TEST_REPO_ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = TEST_REPO_ROOT
 FIXTURE_ROOT = ROOT / "topics" / "fixture" / "non-hla-demo-2025"
 HLA_15161_ROOT = ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 

@@ -10,6 +10,8 @@ made here from :class:`~hla_lab.core.semantic_model.DocumentModel`.
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+from types import MappingProxyType
+from typing import Annotated, TypeAlias, cast
 
 from pydantic import Field
 
@@ -20,17 +22,38 @@ from hla_lab.adapters.latex_renderer import (
     tex_escape,
 )
 from hla_lab.core.semantic_model import (
+    Annex,
+    ApiCrosswalk,
+    ApiSurface,
     Clause,
     ContentBlock,
     ContentElement,
+    CrossReference,
+    Definition,
+    DiagramSurface,
     DocumentModel,
+    Example,
+    Figure,
+    GraphDiagram,
+    ImplementationMapping,
+    Note,
+    Reference,
+    Requirement,
+    RequirementApiBinding,
+    RequirementLink,
+    RequirementReview,
     SemanticRecord,
+    SequenceDiagram,
     SourceRef,
     State,
     StateMachine,
+    StateTrace,
     Table,
     TableCell,
+    TableFamily,
     Transition,
+    TransitionCoverage,
+    VerificationTest,
 )
 
 __all__ = [
@@ -46,27 +69,59 @@ __all__ = [
     "semantic_destination",
 ]
 
+DocumentRecord: TypeAlias = (
+    Annex
+    | ApiCrosswalk
+    | ApiSurface
+    | Clause
+    | ContentBlock
+    | ContentElement
+    | CrossReference
+    | Definition
+    | DiagramSurface
+    | Example
+    | Figure
+    | GraphDiagram
+    | ImplementationMapping
+    | Note
+    | Reference
+    | Requirement
+    | RequirementApiBinding
+    | RequirementLink
+    | RequirementReview
+    | SequenceDiagram
+    | State
+    | StateMachine
+    | StateTrace
+    | Table
+    | TableCell
+    | TableFamily
+    | Transition
+    | TransitionCoverage
+    | VerificationTest
+)
+
 
 class HierarchyRecord(SemanticRecord):
     """One addressable record in the compiled document graph."""
 
-    id: str = Field(min_length=1)
-    key: str = Field(min_length=1)
-    kind: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    key: Annotated[str, Field(min_length=1)]
+    kind: Annotated[str, Field(min_length=1)]
     owner_id: str | None = None
     parent_id: str | None = None
-    sequence: int = Field(default=0, ge=0)
+    sequence: Annotated[int, Field(ge=0)] = 0
     source: SourceRef | None = None
 
 
 class HierarchyNode(SemanticRecord):
     """A clause node with canonical children and directly owned records."""
 
-    id: str = Field(min_length=1)
-    number: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    id: Annotated[str, Field(min_length=1)]
+    number: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     parent_id: str | None = None
-    level: int = Field(ge=1)
+    level: Annotated[int, Field(ge=1)]
     child_ids: tuple[str, ...] = ()
     record_ids: tuple[str, ...] = ()
     source: SourceRef
@@ -75,28 +130,28 @@ class HierarchyNode(SemanticRecord):
 class HierarchyAnchor(SemanticRecord):
     """A stable destination generated from a semantic record ID."""
 
-    record_id: str = Field(min_length=1)
-    key: str = Field(min_length=1)
-    destination: str = Field(min_length=1)
-    kind: str = Field(min_length=1)
+    record_id: Annotated[str, Field(min_length=1)]
+    key: Annotated[str, Field(min_length=1)]
+    destination: Annotated[str, Field(min_length=1)]
+    kind: Annotated[str, Field(min_length=1)]
 
 
 class HierarchyLink(SemanticRecord):
     """An explicit relationship represented by the compiled document graph."""
 
-    source_id: str = Field(min_length=1)
-    source_key: str = Field(min_length=1)
-    target_document_id: str = Field(min_length=1)
-    target_id: str = Field(min_length=1)
-    target_key: str = Field(min_length=1)
-    relation: str = Field(min_length=1)
+    source_id: Annotated[str, Field(min_length=1)]
+    source_key: Annotated[str, Field(min_length=1)]
+    target_document_id: Annotated[str, Field(min_length=1)]
+    target_id: Annotated[str, Field(min_length=1)]
+    target_key: Annotated[str, Field(min_length=1)]
+    relation: Annotated[str, Field(min_length=1)]
 
 
 class CompiledHierarchy(SemanticRecord):
     """Complete hierarchy, ownership, navigation, and link output."""
 
-    schema_version: int = Field(default=1, ge=1)
-    document_id: str = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)] = 1
+    document_id: Annotated[str, Field(min_length=1)]
     root_ids: tuple[str, ...]
     nodes: tuple[HierarchyNode, ...]
     records: tuple[HierarchyRecord, ...]
@@ -131,23 +186,25 @@ _SURFACE_ORDER = (
     "annexes",
 )
 
-_SURFACE_KINDS = {
-    "clauses": "clause",
-    "definitions": "definition",
-    "requirements": "requirement",
-    "requirement_links": "requirement-link",
-    "content_blocks": "content-block",
-    "content_elements": "content-element",
-    "state_machines": "state-machine",
-    "implementations": "implementation",
-    "tables": "table",
-    "table_families": "table-family",
-    "references": "reference",
-    "notes": "note",
-    "figures": "figure",
-    "examples": "example",
-    "annexes": "annex",
-}
+_SURFACE_KINDS = MappingProxyType(
+    {
+        "clauses": "clause",
+        "definitions": "definition",
+        "requirements": "requirement",
+        "requirement_links": "requirement-link",
+        "content_blocks": "content-block",
+        "content_elements": "content-element",
+        "state_machines": "state-machine",
+        "implementations": "implementation",
+        "tables": "table",
+        "table_families": "table-family",
+        "references": "reference",
+        "notes": "note",
+        "figures": "figure",
+        "examples": "example",
+        "annexes": "annex",
+    }
+)
 
 
 def semantic_destination(document_id: str, record_id: str) -> str:
@@ -155,12 +212,11 @@ def semantic_destination(document_id: str, record_id: str) -> str:
     return f"{document_id}:{record_id}"
 
 
-def _source(record: SemanticRecord) -> SourceRef | None:
-    value = getattr(record, "source", None)
-    return value if isinstance(value, SourceRef) else None
+def _source(record: DocumentRecord) -> SourceRef | None:
+    return cast(SourceRef | None, getattr(record, "source", None))
 
 
-def _clause_owner(record: SemanticRecord) -> str | None:
+def _clause_owner(record: DocumentRecord) -> str | None:
     """Find a direct clause owner without using page or fragment filenames."""
     clause_id = getattr(record, "clause_id", None)
     if clause_id:
@@ -168,10 +224,11 @@ def _clause_owner(record: SemanticRecord) -> str | None:
     return getattr(record, "owner_id", None)
 
 
-def _surface_records(model: DocumentModel) -> tuple[tuple[str, SemanticRecord], ...]:
-    values: list[tuple[str, SemanticRecord]] = []
+def _surface_records(model: DocumentModel) -> tuple[tuple[str, DocumentRecord], ...]:
+    values: list[tuple[str, DocumentRecord]] = []
     for surface in _SURFACE_ORDER:
-        for record in getattr(model, surface):
+        records: tuple[DocumentRecord, ...] = getattr(model, surface)
+        for record in records:
             values.append((_SURFACE_KINDS[surface], record))
             if isinstance(record, StateMachine):
                 values.extend(("state", state) for state in record.states)
@@ -181,7 +238,7 @@ def _surface_records(model: DocumentModel) -> tuple[tuple[str, SemanticRecord], 
     return tuple(values)
 
 
-def _record_kind(surface: str, record: SemanticRecord) -> str:
+def _record_kind(surface: str, record: DocumentRecord) -> str:
     if isinstance(record, Clause):
         return "clause"
     if isinstance(record, ContentBlock):
@@ -213,7 +270,7 @@ def _key_for(compiled: CompiledHierarchy, record_id: str, *, kind: str | None = 
     return matches[0].key
 
 
-def _record_owner(record: SemanticRecord, *, by_id: Mapping[str, SemanticRecord]) -> str | None:
+def _record_owner(record: DocumentRecord, *, by_id: Mapping[str, DocumentRecord]) -> str | None:
     if isinstance(record, Clause):
         return record.parent_id
     if isinstance(record, ContentElement):
@@ -229,7 +286,7 @@ def _record_owner(record: SemanticRecord, *, by_id: Mapping[str, SemanticRecord]
     return _clause_owner(record)
 
 
-def _record_parent(record: SemanticRecord) -> str | None:
+def _record_parent(record: DocumentRecord) -> str | None:
     if isinstance(record, Clause):
         return record.parent_id
     if isinstance(record, ContentElement):
@@ -261,42 +318,95 @@ def _sort_records(
     )
 
 
-def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[HierarchyLink, ...]:
-    def link(
-        source_id: str,
-        target_document_id: str,
-        target_id: str,
-        relation: str,
-        *,
-        source_kind: str | None = None,
-        target_kind: str | None = None,
-    ) -> HierarchyLink:
-        return HierarchyLink(
-            source_id=source_id,
-            source_key=_key_for(compiled, source_id, kind=source_kind),
-            target_document_id=target_document_id,
-            target_id=target_id,
-            target_key=(
-                f"{target_kind}:{target_id}"
-                if target_kind in {"state", "transition", "table-cell"}
-                else (
-                    _key_for(compiled, target_id, kind=target_kind)
-                    if target_document_id == model.document_id
-                    else target_id
-                )
-            ),
-            relation=relation,
-        )
+def _hierarchy_link(
+    model: DocumentModel,
+    compiled: CompiledHierarchy,
+    source_id: str,
+    target_document_id: str,
+    target_id: str,
+    relation: str,
+    *,
+    source_kind: str | None = None,
+    target_kind: str | None = None,
+) -> HierarchyLink:
+    return HierarchyLink(
+        source_id=source_id,
+        source_key=_key_for(compiled, source_id, kind=source_kind),
+        target_document_id=target_document_id,
+        target_id=target_id,
+        target_key=(
+            f"{target_kind}:{target_id}"
+            if target_kind in {"state", "transition", "table-cell"}
+            else (
+                _key_for(compiled, target_id, kind=target_kind)
+                if target_document_id == model.document_id
+                else target_id
+            )
+        ),
+        relation=relation,
+    )
 
+
+def _state_machine_links(
+    model: DocumentModel,
+    compiled: CompiledHierarchy,
+    machine: StateMachine,
+) -> list[HierarchyLink]:
+    links: list[HierarchyLink] = []
+    if machine.clause_id:
+        links.append(
+            _hierarchy_link(
+                model,
+                compiled,
+                machine.id,
+                model.document_id,
+                machine.clause_id,
+                "owned-by-clause",
+                source_kind="state-machine",
+            )
+        )
+    for transition in machine.transitions:
+        links.extend(
+            _hierarchy_link(
+                model,
+                compiled,
+                transition.id,
+                model.document_id,
+                requirement_id,
+                "satisfies-requirement",
+                source_kind="transition",
+            )
+            for requirement_id in transition.requirement_ids
+        )
+        links.extend(
+            _hierarchy_link(
+                model,
+                compiled,
+                transition.id,
+                model.document_id,
+                implementation_id,
+                "implemented-by",
+                source_kind="transition",
+            )
+            for implementation_id in transition.implementation_ids
+        )
+    return links
+
+
+def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[HierarchyLink, ...]:
     links: list[HierarchyLink] = []
     for reference in model.references:
         links.extend(
-            link(reference.id, target.document_id, target.record_id, "references")
+            _hierarchy_link(
+                model, compiled, reference.id, target.document_id, target.record_id, "references"
+            )
             for target in reference.targets
         )
     for requirement in model.requirements:
         links.extend(
-            link(
+            _hierarchy_link(
+                model,
+                compiled,
                 requirement.id,
                 model.document_id,
                 transition_id,
@@ -306,41 +416,18 @@ def _links(model: DocumentModel, compiled: CompiledHierarchy) -> tuple[Hierarchy
             for transition_id in requirement.transition_ids
         )
     for machine in model.state_machines:
-        if machine.clause_id:
-            links.append(
-                link(
-                    machine.id,
-                    model.document_id,
-                    machine.clause_id,
-                    "owned-by-clause",
-                    source_kind="state-machine",
-                )
-            )
-        for transition in machine.transitions:
-            for requirement_id in transition.requirement_ids:
-                links.append(
-                    link(
-                        transition.id,
-                        model.document_id,
-                        requirement_id,
-                        "satisfies-requirement",
-                        source_kind="transition",
-                    )
-                )
-            for implementation_id in transition.implementation_ids:
-                links.append(
-                    link(
-                        transition.id,
-                        model.document_id,
-                        implementation_id,
-                        "implemented-by",
-                        source_kind="transition",
-                    )
-                )
+        links.extend(_state_machine_links(model, compiled, machine))
     for implementation in model.implementations:
         for requirement_id in implementation.requirement_ids:
             links.append(
-                link(implementation.id, model.document_id, requirement_id, "implements-requirement")
+                _hierarchy_link(
+                    model,
+                    compiled,
+                    implementation.id,
+                    model.document_id,
+                    requirement_id,
+                    "implements-requirement",
+                )
             )
     return tuple(sorted(links, key=lambda item: (item.source_id, item.relation, item.target_id)))
 
@@ -352,8 +439,8 @@ def compile_hierarchy(model: DocumentModel) -> CompiledHierarchy:
     surfaces are attached through explicit ``clause_id``/``owner_id`` fields;
     filenames are retained only as provenance on ``source``.
     """
-    by_id: dict[str, SemanticRecord] = {}
-    by_key: dict[str, SemanticRecord] = {}
+    by_id: dict[str, DocumentRecord] = {}
+    by_key: dict[str, DocumentRecord] = {}
     surface_records = _surface_records(model)
     for _surface, record in surface_records:
         record_id = getattr(record, "id", None)

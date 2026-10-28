@@ -4,15 +4,18 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from types import MappingProxyType
 
 from hla_lab.corpus.api_crosswalk import ApiTarget, build_api_crosswalk, write_api_crosswalk
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 
-HLA_OWNER_BY_INTERFACE = {
-    "service": "RTIambassador",
-    "callback": "FederateAmbassador",
-    "adapter": "FedProDataTypes",
-}
+HLA_OWNER_BY_INTERFACE = MappingProxyType(
+    {
+        "service": "RTIambassador",
+        "callback": "FederateAmbassador",
+        "adapter": "FedProDataTypes",
+    }
+)
 
 
 def hla_api_targets(edition: str) -> tuple[ApiTarget, ...]:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from hla_lab.adapters.latex_renderer import LatexDialect
 from hla_lab.core.semantic_model import DocumentModel
@@ -14,7 +15,7 @@ from hla_lab.generation.faithful_renderer import (
 )
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class GenerationRequest:
     """All inputs that control one deterministic semantic generation run."""
 
@@ -32,9 +33,13 @@ class GenerationRequest:
     include_faithful_body: bool = False
     faithful_layout_profile: FaithfulLayoutProfile | None = None
     faithful_body_exclude_path_parts: tuple[str, ...] = ()
+    use_generated_faithful_blocks: bool = False
+    state_machine_renderer: Literal["tikz", "plantuml"] = "tikz"
+    service_page_renderer: Literal["fixed", "flow"] = "fixed"
+    canonical_source: LatexSourceProfile | None = None
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class GenerationResult:
     """Typed outputs produced by one semantic generation run."""
 

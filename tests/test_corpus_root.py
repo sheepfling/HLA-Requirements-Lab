@@ -8,8 +8,8 @@ from unittest.mock import patch
 
 from hla_lab.build.topic import project_config
 from hla_lab.cli import main
-from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.core.hla_profile import source_profile_for_document
+from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.paths import DOCUMENT_IDS, RESOURCES, document_roots, resources
 
 
@@ -124,14 +124,13 @@ def test_hla_loader_uses_catalog_identity_when_directory_name_differs(tmp_path: 
         patch(
             "hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=object()
         ) as profile,
-        patch("hla_lab.corpus.hla_semantic.load_hla_api_owners", return_value={}),
         patch("hla_lab.corpus.hla_semantic.load_document_model", return_value=object()),
         patch(
             "hla_lab.corpus.hla_semantic.build_hla_surface_contract",
-            side_effect=lambda model, api_owners: model,
+            side_effect=lambda model: model,
         ),
     ):
-        load_hla_document_model(document_root, tmp_path)
+        load_hla_document_model(document_root, workspace_root=tmp_path)
 
     profile.assert_called_once_with("alternate-standard-9", tmp_path)
 
@@ -204,7 +203,7 @@ def test_matrix_generator_resolves_release_publication_and_source_roots_from_sel
     ):
         assert config.semantic_generator() == "generated"
 
-    load_corpus.assert_called_once_with((source_root,), tmp_path)
+    load_corpus.assert_called_once_with((source_root,), workspace_root=tmp_path)
     load_metadata.assert_called_once_with(tmp_path / "data" / "semantic" / "graph.json")
 
 
@@ -239,8 +238,8 @@ def test_matrix_cli_routes_to_project_declared_by_selected_release_manifest(
     assert Path(arguments[arguments.index("--root") + 1]) == (
         tmp_path / "topics" / "alternate" / "compliance-2025"
     )
-    assert Path(arguments[arguments.index("--repository-root") + 1]) == tmp_path
-    assert options["cwd"] != tmp_path
+    assert Path(arguments[arguments.index("--workspace-root") + 1]) == tmp_path
+    assert options["cwd"] == tmp_path
     assert "topics/alternate/compliance-2025/output/compliance/csv/requirements.csv" in (
         capsys.readouterr().out
     )

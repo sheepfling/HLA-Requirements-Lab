@@ -16,12 +16,11 @@ import re
 from collections import Counter, defaultdict
 from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import Field, model_validator
 
 from hla_lab.adapters.latex_renderer import tex_escape
-from hla_lab.core.json_types import JsonValue
 from hla_lab.core.links import latex_anchor, qualified_id
 from hla_lab.core.semantic_model import (
     ComplianceCorpus,
@@ -30,6 +29,7 @@ from hla_lab.core.semantic_model import (
     ImplementationEvidence,
     ImplementationMapping,
     SemanticRecord,
+    SourceRef,
 )
 from hla_lab.corpus.corpus_graph import CorpusSemanticGraph
 
@@ -47,6 +47,9 @@ __all__ = [
     "write_compliance_csv_exports",
     "write_compliance_publication",
 ]
+
+_CsvCell = str | int | bool | None
+_CsvRow = Mapping[str, _CsvCell]
 
 ComplianceView = Literal[
     "scope",
@@ -71,13 +74,13 @@ _anchor = latex_anchor
 class CompliancePublicationProfile(SemanticRecord):
     """Source-controlled contract for a compliance-oriented derivative."""
 
-    schema_version: int = Field(ge=1)
-    publication_id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    schema_version: Annotated[int, Field(ge=1)]
+    publication_id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     subtitle: str = ""
-    document_ids: tuple[str, ...] = Field(min_length=1)
-    scope_statement: str = Field(min_length=1)
-    evidence_boundary: str = Field(min_length=1)
+    document_ids: Annotated[tuple[str, ...], Field(min_length=1)]
+    scope_statement: Annotated[str, Field(min_length=1)]
+    evidence_boundary: Annotated[str, Field(min_length=1)]
     views: tuple[ComplianceView, ...] = (
         "scope",
         "requirements",
@@ -110,29 +113,29 @@ class CompliancePublicationProfile(SemanticRecord):
 class ComplianceDocumentSummary(SemanticRecord):
     """One selected corpus document's coverage and evidence totals."""
 
-    document_id: str = Field(min_length=1)
-    requirement_count: int = Field(ge=0)
-    definition_count: int = Field(ge=0)
-    table_count: int = Field(ge=0)
-    table_family_count: int = Field(ge=0)
-    state_machine_count: int = Field(ge=0)
-    transition_count: int = Field(ge=0)
-    sequence_message_count: int = Field(ge=0)
-    implementation_mapping_count: int = Field(ge=0)
-    concrete_implementation_count: int = Field(ge=0)
-    implementation_status_counts: dict[str, int] = Field(default_factory=dict)
-    table_definition_dependency_count: int = Field(ge=0)
-    cross_document_edge_count: int = Field(ge=0)
-    graph_finding_counts: dict[str, int] = Field(default_factory=dict)
+    document_id: Annotated[str, Field(min_length=1)]
+    requirement_count: Annotated[int, Field(ge=0)]
+    definition_count: Annotated[int, Field(ge=0)]
+    table_count: Annotated[int, Field(ge=0)]
+    table_family_count: Annotated[int, Field(ge=0)]
+    state_machine_count: Annotated[int, Field(ge=0)]
+    transition_count: Annotated[int, Field(ge=0)]
+    sequence_message_count: Annotated[int, Field(ge=0)]
+    implementation_mapping_count: Annotated[int, Field(ge=0)]
+    concrete_implementation_count: Annotated[int, Field(ge=0)]
+    implementation_status_counts: Annotated[dict[str, int], Field(default_factory=dict)]
+    table_definition_dependency_count: Annotated[int, Field(ge=0)]
+    cross_document_edge_count: Annotated[int, Field(ge=0)]
+    graph_finding_counts: Annotated[dict[str, int], Field(default_factory=dict)]
 
 
 class RequirementComplianceItem(SemanticRecord):
     """A normative record annotated with its current implementation evidence."""
 
-    qualified_id: str = Field(min_length=1)
-    document_id: str = Field(min_length=1)
-    requirement_id: str = Field(min_length=1)
-    title: str = Field(min_length=1)
+    qualified_id: Annotated[str, Field(min_length=1)]
+    document_id: Annotated[str, Field(min_length=1)]
+    requirement_id: Annotated[str, Field(min_length=1)]
+    title: Annotated[str, Field(min_length=1)]
     statement: str
     machine_statement: str
     clause_id: str | None = None
@@ -142,16 +145,23 @@ class RequirementComplianceItem(SemanticRecord):
     transition_ids: tuple[str, ...] = ()
     implementation_mapping_ids: tuple[str, ...] = ()
     evidence_status: RequirementEvidenceStatus
-    concrete_mapping_count: int = Field(ge=0)
+    concrete_mapping_count: Annotated[int, Field(ge=0)]
+    # Catalog position is presentation metadata only; requirement_id remains
+    # the stable semantic join key across editions and generated projections.
+    ordinal: Annotated[int | None, Field(ge=1)] = None
+    extraction: Literal["explicit", "candidate"] = "explicit"
+    semantic_group_id: str | None = None
+    source: SourceRef | None = None
+    additional_sources: tuple[SourceRef, ...] = ()
 
 
 class OperationalComplianceItem(SemanticRecord):
     """A state transition expressed as an implementable conformance rule."""
 
-    qualified_id: str = Field(min_length=1)
-    document_id: str = Field(min_length=1)
-    machine_id: str = Field(min_length=1)
-    transition_id: str = Field(min_length=1)
+    qualified_id: Annotated[str, Field(min_length=1)]
+    document_id: Annotated[str, Field(min_length=1)]
+    machine_id: Annotated[str, Field(min_length=1)]
+    transition_id: Annotated[str, Field(min_length=1)]
     source_state: str | None = None
     target_state: str | None = None
     event: str = ""
@@ -176,34 +186,34 @@ class OperationalComplianceItem(SemanticRecord):
 class ComplianceDependencySummary(SemanticRecord):
     """Human-scale dependency metrics while full edges remain queryable in JSON."""
 
-    document_id: str = Field(min_length=1)
-    semantic_dependency_count: int = Field(ge=0)
-    table_definition_dependency_count: int = Field(ge=0)
-    cross_document_edge_count: int = Field(ge=0)
-    candidate_cross_document_edge_count: int = Field(ge=0)
-    graph_finding_counts: dict[str, int] = Field(default_factory=dict)
+    document_id: Annotated[str, Field(min_length=1)]
+    semantic_dependency_count: Annotated[int, Field(ge=0)]
+    table_definition_dependency_count: Annotated[int, Field(ge=0)]
+    cross_document_edge_count: Annotated[int, Field(ge=0)]
+    candidate_cross_document_edge_count: Annotated[int, Field(ge=0)]
+    graph_finding_counts: Annotated[dict[str, int], Field(default_factory=dict)]
 
 
 class CompliancePublicationSummary(SemanticRecord):
     """Corpus-wide headline counts for a compliance publication."""
 
-    document_count: int = Field(ge=1)
-    requirement_count: int = Field(ge=0)
-    operational_transition_count: int = Field(ge=0)
-    sequence_message_count: int = Field(ge=0)
-    implementation_mapping_count: int = Field(ge=0)
-    concrete_implementation_count: int = Field(ge=0)
-    evidence_status_counts: dict[str, int] = Field(default_factory=dict)
-    issue_counts: dict[str, int] = Field(default_factory=dict)
-    semantic_dependency_count: int = Field(ge=0)
-    cross_document_edge_count: int = Field(ge=0)
-    graph_finding_counts: dict[str, int] = Field(default_factory=dict)
+    document_count: Annotated[int, Field(ge=1)]
+    requirement_count: Annotated[int, Field(ge=0)]
+    operational_transition_count: Annotated[int, Field(ge=0)]
+    sequence_message_count: Annotated[int, Field(ge=0)]
+    implementation_mapping_count: Annotated[int, Field(ge=0)]
+    concrete_implementation_count: Annotated[int, Field(ge=0)]
+    evidence_status_counts: Annotated[dict[str, int], Field(default_factory=dict)]
+    issue_counts: Annotated[dict[str, int], Field(default_factory=dict)]
+    semantic_dependency_count: Annotated[int, Field(ge=0)]
+    cross_document_edge_count: Annotated[int, Field(ge=0)]
+    graph_finding_counts: Annotated[dict[str, int], Field(default_factory=dict)]
 
 
 class CompliancePublicationManifest(SemanticRecord):
     """Pydantic-serializable source for the PDF and downstream RTI checks."""
 
-    schema_version: int = Field(default=1, ge=1)
+    schema_version: Annotated[int, Field(ge=1)] = 1
     profile: CompliancePublicationProfile
     summary: CompliancePublicationSummary
     documents: tuple[ComplianceDocumentSummary, ...]
@@ -221,6 +231,28 @@ class CompliancePublicationManifest(SemanticRecord):
         qualified_ids = [item.qualified_id for item in self.requirements]
         if len(qualified_ids) != len(set(qualified_ids)):
             raise ValueError("compliance manifest requirement IDs must be unique")
+        requirement_document_order = tuple(item.document_id for item in self.requirements)
+        expected_document_order = tuple(
+            document_id
+            for document_id in self.profile.document_ids
+            for item in self.requirements
+            if item.document_id == document_id
+        )
+        if requirement_document_order != expected_document_order:
+            raise ValueError("compliance manifest requirements must follow profile document order")
+        for document_id in self.profile.document_ids:
+            rows = tuple(item for item in self.requirements if item.document_id == document_id)
+            ordinals = tuple(item.ordinal for item in rows)
+            if any(item is not None for item in ordinals):
+                if any(item is None for item in ordinals):
+                    raise ValueError(
+                        f"compliance manifest {document_id} requirement ordinals must be complete"
+                    )
+                if ordinals != tuple(range(1, len(rows) + 1)):
+                    raise ValueError(
+                        f"compliance manifest {document_id} requirement ordinals must follow "
+                        "catalog order"
+                    )
         operation_ids = [item.qualified_id for item in self.operations]
         if len(operation_ids) != len(set(operation_ids)):
             raise ValueError("compliance manifest operation IDs must be unique")
@@ -254,6 +286,61 @@ def _display_text(value: str) -> str:
         (r"\ ", " "),
     ):
         value = value.replace(escaped, plain)
+    # Remove layout-adapter residue before this text enters a lab-authored
+    # compliance view. These markers describe source boxes and are not
+    # normative content.
+    value = value.replace(r"\textbackslash{}", " ")
+    value = re.sub(r"\[l\]", " ", value)
+    value = re.sub(
+        r"\bskip\d+(?:\.\d+)?pt(?:\s+plus\s+\d+(?:\.\d+)?pt\s+minus\s+\d+(?:\.\d+)?pt)?",
+        " ",
+        value,
+    )
+    value = re.sub(
+        r"(?<=[A-Za-z])\d+(?:\.\d+)?pt\d+(?:\.\d+)?pt\s*(?=\.)",
+        "",
+        value,
+    )
+    value = re.sub(r"\d+(?:\.\d+)?(?:pt|bp)!", " ", value)
+    value = re.sub(r"\d+(?:\.\d+)?pt", " ", value)
+    value = value.replace(
+        "Thefollowingappliesforeachnamedvariantrecorddatatypeusingthe",
+        "The following applies for each named variant record datatype using the ",
+    )
+    for collapsed, spaced in (
+        ("sub-elementsalternative", "sub-elements alternative"),
+        ("variantrecord", "variant record"),
+        ("discriminantenumerators", "discriminant enumerators"),
+        ("nameddiscriminant", "named discriminant"),
+        ("eachenumerator", "each enumerator"),
+        ("namedalternatives", "named alternatives"),
+        ("ofallassociated", "of all associated"),
+        ("classHLA", "class HLA"),
+        ("theHLA", "the HLA"),
+        ("oneinteraction", "one interaction"),
+        ("eachinteraction", "each interaction"),
+        ("eachnamed", "each named"),
+        ("for eachnamed", "for each named"),
+        ("a)The", "a) The"),
+        ("b)The", "b) The"),
+        ("c)The", "c) The"),
+        ("d)The", "d) The"),
+        ("e)The", "e) The"),
+        ("f)The", "f) The"),
+        ("a)Object", "a) Object"),
+        ("b)Object", "b) Object"),
+        ("c)Object", "c) Object"),
+        ("d)Object", "d) Object"),
+        ("e)Object", "e) Object"),
+        ("f)Object", "f) Object"),
+    ):
+        value = value.replace(collapsed, spaced)
+    # Recovered source prose is not always consistent about the space after
+    # an enumerator marker.  Keep the authored marker, but make the published
+    # compliance view readable for every alphabetic item rather than carrying
+    # through a source-extraction artifact such as ``a)Federate``.
+    value = re.sub(r"(?<![A-Za-z])([a-z])\)(?=[A-Za-z])", r"\1) ", value)
+    value = re.sub(r"(?<=[a-z])(?=[A-Z])", "@@hlabreak@@", value)
     value = re.sub(r"(?<!\d)(?<!\d\s)\s*%\s*", " ", value)
     return " ".join(value.split())
 
@@ -295,7 +382,7 @@ def _requirements(
 ) -> tuple[RequirementComplianceItem, ...]:
     result: list[RequirementComplianceItem] = []
     for model in models:
-        for requirement in model.ordered_requirements():
+        for ordinal, requirement in enumerate(model.ordered_requirements(), start=1):
             mappings = {
                 item.id: item
                 for item in (
@@ -330,9 +417,17 @@ def _requirements(
                     concrete_mapping_count=sum(
                         item.status in {"implemented", "verified"} for item in mappings.values()
                     ),
+                    ordinal=ordinal,
+                    extraction=requirement.extraction,
+                    semantic_group_id=requirement.semantic_group_id,
+                    source=requirement.source,
+                    additional_sources=requirement.additional_sources,
                 )
             )
-    return tuple(sorted(result, key=lambda item: (item.document_id, item.requirement_id)))
+    # ``model.ordered_requirements()`` is the canonical clause/source order.
+    # Do not re-sort by semantic ID here: IDs are stable cross-reference keys,
+    # and lexical sorting moves page 100 before page 20 (and item 10 before 2).
+    return tuple(result)
 
 
 def _operations(models: Iterable[DocumentModel]) -> tuple[OperationalComplianceItem, ...]:
@@ -484,9 +579,15 @@ def build_compliance_manifest(
 
 def _text(value: str) -> str:
     """Escape semantic source text while preserving source-style punctuation."""
+    rendered = tex_escape(_display_text(value)).replace("@@hlabreak@@", r"\allowbreak{}")
+    rendered = re.sub(
+        r"(?<=[A-Za-z0-9])\.(?=[A-Za-z])",
+        lambda match: f"{match.group(0)}\\allowbreak{{}}",
+        rendered,
+    )
+    rendered = rendered.replace(r"\_", r"\_\allowbreak{}")
     return (
-        tex_escape(_display_text(value))
-        .replace("ₛ", r"\textsubscript{s}")
+        rendered.replace("ₛ", r"\textsubscript{s}")
         .replace("∀", r"\ensuremath{\forall}")
         .replace("†", r"\textdagger{}")
         .replace("≤", r"\ensuremath{\leq}")
@@ -557,6 +658,18 @@ def _requirement_lines(
                         f"\\textbf{{ID.}} \\texttt{{{_identifier(item.requirement_id)}}}",
                         f"\\textbf{{Title.}} {_text(_requirement_title(item.title))}",
                         f"\\textbf{{Requirement.}} {_text(item.statement)}",
+                        "\\textbf{Source.} "
+                        + (
+                            ", ".join(
+                                _text(
+                                    f"{source.path}:{source.line}"
+                                    + (f"-{source.end_line}" if source.end_line else "")
+                                )
+                                for source in (item.source, *item.additional_sources)
+                                if source is not None
+                            )
+                            or "None recorded."
+                        ),
                         f"\\textbf{{Machine expression.}} {_text(item.machine_statement)}",
                         f"\\textbf{{Coverage.}} {_text(item.coverage_kind)}"
                         + (f" — {_text(item.coverage_note)}" if item.coverage_note else ""),
@@ -715,9 +828,7 @@ def _csv_source_fields(source: SemanticRecord | None) -> dict[str, str]:
     }
 
 
-def _write_csv(
-    path: Path, fieldnames: tuple[str, ...], rows: Iterable[Mapping[str, JsonValue]]
-) -> Path:
+def _write_csv(path: Path, fieldnames: tuple[str, ...], rows: Iterable[_CsvRow]) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fieldnames, extrasaction="raise")
@@ -760,6 +871,12 @@ def write_compliance_csv_exports(
             "coverage_note",
             "evidence_status",
             "concrete_mapping_count",
+            "ordinal",
+            "extraction",
+            "semantic_group_id",
+            "source_path",
+            "source_line",
+            "source_end_line",
         ),
         (
             {
@@ -775,8 +892,36 @@ def write_compliance_csv_exports(
                 "coverage_note": item.coverage_note,
                 "evidence_status": item.evidence_status,
                 "concrete_mapping_count": item.concrete_mapping_count,
+                "ordinal": item.ordinal or "",
+                "extraction": item.extraction,
+                "semantic_group_id": item.semantic_group_id or "",
+                **_csv_source_fields(item.source),
             }
             for item in manifest.requirements
+        ),
+    )
+    requirement_sources_path = _write_csv(
+        output / "requirement-source-spans.csv",
+        (
+            "qualified_requirement_id",
+            "document_id",
+            "requirement_id",
+            "span_order",
+            "source_path",
+            "source_line",
+            "source_end_line",
+        ),
+        (
+            {
+                "qualified_requirement_id": item.qualified_id,
+                "document_id": item.document_id,
+                "requirement_id": item.requirement_id,
+                "span_order": order,
+                **_csv_source_fields(source),
+            }
+            for item in manifest.requirements
+            for order, source in enumerate((item.source, *item.additional_sources), start=1)
+            if source is not None
         ),
     )
     transitions_path = _write_csv(
@@ -931,6 +1076,7 @@ def write_compliance_csv_exports(
     )
     return (
         requirements_path,
+        requirement_sources_path,
         transitions_path,
         mappings_path,
         requirement_links_path,

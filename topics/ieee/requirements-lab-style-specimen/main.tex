@@ -1,0 +1,287 @@
+\documentclass{requirements-lab}
+
+\hypersetup{
+    pdftitle={HLA Requirements Lab Design System v0.1 — Style Specimen},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={Shared publishing components for HLA Requirements Lab publications},
+    pdfkeywords={Requirements Lab, design system, typography, tables, HLA}
+}
+
+\renewcommand{\RLPublicationEdition}{Design System v0.1}
+\renewcommand{\RLPublicationNumber}{1516.2 family}
+\renewcommand{\RLPublicationTitle}{Style specimen and component gallery}
+\renewcommand{\RLPublicationDescriptor}{Shared technical publishing system for HLA Requirements Lab editions}
+\renewcommand{\RLPublicationSource}{the validated HLA 1516-family semantic corpus}
+\renewcommand{\RLPublicationStatus}{Prototype presentation layer; no normative content is defined here.}
+\renewcommand{\RLClauseContext}{STYLE SPECIMEN}
+
+\begin{document}
+
+\RLCoverPage
+\RLDocumentStatusPage
+\RLHowToReadPage
+
+\tableofcontents
+\clearpage
+
+\section{Design principles}
+\RLAccentRule
+\RLBodyFont
+The Requirements Lab publishing system separates semantic ownership from visual presentation. A semantic record says whether something is a clause, requirement, table, note, example, figure, or reference; the house style decides how that record appears in print and on screen.
+
+The system is intentionally restrained. It should feel like a contemporary systems-engineering reference, language specification, and standards handbook—not a corporate report and not a facsimile of an external publisher's document.
+
+\RLNote{A note is informative content. Its treatment provides a visual cue without changing the status of the surrounding prose.}
+
+\RLExample{An example illustrates a possible representation. It is not a new requirement.}
+
+\RLLabNote{This specimen is Lab-authored design-system documentation. It is not source-derived technical content.}
+
+\clearpage
+\section{Typography and technical tokens}
+\RLAccentRule
+\RLBodyFont
+Narrative prose remains calm and readable. Navigation and headings use a sans-serif voice.
+
+Machine-significant tokens use a compact monospace voice so the reader can distinguish the language of the specification from the language describing it.
+
+\subsection{Token examples}
+The root class is \RLClass{HLAobjectRoot}. An attribute such as \RLAttribute{HLAprivilegeToDeleteObject} is distinct from the prose around it. A service such as \RLService{Update Attribute Values} remains readable, while an XML element such as \RLXML{objectClass} and a value such as \RLValue{TimeStamp} remain visibly machine-oriented.
+
+\subsection{Body and table scale}
+\RLBodyFont Body prose uses approximately 9.75–10 points with generous leading. \par
+\RLTableFont Table text uses approximately 8–9 points. \par
+\RLSmallFont Notes and captions use approximately 8–8.5 points.
+
+\clearpage
+\section{Visible hierarchy}
+\RLAccentRule
+\RLBodyFont
+The hierarchy is structural first and visual second. Major clauses receive a strong opener; subclauses retain their numbers but use less visual weight as depth increases.
+
+\subsection{Major subclause}
+\subsubsection{Nested heading}
+\paragraph{Deep heading} The descriptive title remains readable while the number becomes secondary.
+
+\RLClauseOpener{04}{HLA OMT COMPONENTS}{Object models consist of interrelated components describing classes, attributes, interactions, parameters, and representations.}
+
+\section{Notes, examples, and editorial material}
+\RLAccentRule
+\RLBodyFont
+Source-derived material and Lab-authored interpretation should never be blended invisibly. The callouts below use the same family of colors and typography while declaring their role.
+
+\RLNote{Normative status belongs to the semantic content model. A visual note treatment does not, by itself, make surrounding content informative.}
+
+\RLExample{A reader can scan the page and locate an illustration without mistaking it for a conformance obligation.}
+
+\RLRationale{A rationale can explain a presentation or design choice where the Lab explicitly authors that explanation.}
+
+\RLLabNote{The Lab note is the only callout in this specimen that is explicitly editorial. It is kept visually separate from source-derived notes.}
+
+\clearpage
+\section{Reference tables}
+\RLAccentRule
+\RLBodyFont
+Simple reference tables favor whitespace and horizontal grouping over a heavy spreadsheet grid.
+
+\begin{RLReferenceTable}{Simple reference table}{tab:reference}
+    \RLIdentifier{HLAobjectRoot} & Root object class from which object classes are derived. \\
+    \RLIdentifier{HLAinteractionRoot} & Root interaction class from which interaction classes are derived. \\
+    \RLIdentifier{HLAinteger64Time} & Example of a machine-significant time representation. \\
+\end{RLReferenceTable}
+
+\begin{RLRegistryTable}{Registry/reference table}{tab:registry}
+    \RLIdentifier{HLAreliable} & transport & Reliable delivery semantics. \\
+    \RLIdentifier{HLAbestEffort} & transport & Best-effort delivery semantics. \\
+    \RLIdentifier{TimeStamp} & value & A sample machine-significant value. \\
+\end{RLRegistryTable}
+
+\clearpage
+\section{Dense normative matrix}
+\RLAccentRule
+\RLBodyFont
+Dense matrices require stronger structure because columns have formal meaning. The specimen uses grouped horizontal rules and a deliberate identifier column rather than a black box around every cell.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}L{0.20\linewidth}L{0.18\linewidth}L{0.17\linewidth}Y@{}}
+\toprule
+\RLTableHeader{Identifier} & \RLTableHeader{Type} & \RLTableHeader{Cardinality} & \RLTableHeader{Meaning} \\
+\midrule
+    \RLIdentifier{HLAdeletePrivilege} & attribute & 0..1 & Indicates whether a joined federate has the privilege to delete an object instance. \\
+\RLIdentifier{HLAinteractionRoot} & class & 1 & Root of the interaction-class hierarchy. \\
+\RLIdentifier{HLAinteger64BE} & datatype & 1 & Big-endian signed integer representation. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\RLExample{When a matrix has more semantic columns than portrait measure can support, landscape is the correct presentation—not a layout failure.}
+
+\clearpage
+\begin{landscape}
+\section{Landscape and continued tables}
+\RLAccentRule
+\RLBodyFont
+Landscape is reserved for information whose horizontal structure carries meaning. The following table is deliberately wide enough to preserve identifier and description readability.
+
+\begin{center}
+\begin{longtable}{@{}L{0.18\linewidth}L{0.13\linewidth}L{0.12\linewidth}L{0.13\linewidth}L{0.13\linewidth}L{0.18\linewidth}@{}}
+\caption{Landscape dense matrix with repeated semantic groups}\label{tab:landscape}\\
+\toprule
+\RLTableHeader{Identifier} & \RLTableHeader{Kind} & \RLTableHeader{Direction} & \RLTableHeader{Order} & \RLTableHeader{Cardinality} & \RLTableHeader{Description} \\
+\midrule
+\endfirsthead
+\caption[]{Landscape dense matrix (continued)}\\
+\toprule
+\RLTableHeader{Identifier} & \RLTableHeader{Kind} & \RLTableHeader{Direction} & \RLTableHeader{Order} & \RLTableHeader{Cardinality} & \RLTableHeader{Description} \\
+\midrule
+\endhead
+\RLIdentifier{UpdateAttributeValues} & service & federate $\rightarrow$ RTI & timestamp & 0..many & Sends updated attribute values for one or more object instances. \\
+    \RLIdentifier{SendInteraction} & service & federate $\rightarrow$ RTI & receive & 0..many & Sends an interaction and its associated parameters. \\
+\RLIdentifier{ReflectAttributeValues} & callback & RTI $\rightarrow$ federate & timestamp & 0..many & Delivers reflected attribute values to a subscribing federate. \\
+    \RLIdentifier{ReceiveInteraction} & callback & RTI $\rightarrow$ federate & receive & 0..many & Delivers an interaction and its parameters. \\
+\RLIdentifier{HLAinteger64Time} & datatype & value & n/a & 1 & Represents a logical time value. \\
+\RLIdentifier{HLAfloat64BE} & datatype & value & n/a & 1 & Represents a binary floating-point value. \\
+\bottomrule
+\end{longtable}
+\end{center}
+\end{landscape}
+
+\clearpage
+\section{Hierarchy views}
+\RLAccentRule
+\RLBodyFont
+Object and interaction class structures are not ordinary spreadsheets. A compact hierarchy view can expose parentage while preserving the strict tabular representation elsewhere.
+
+\begin{tabularx}{\linewidth}{@{}L{0.34\linewidth}Y@{}}
+\toprule
+\RLTableHeader{Class path} & \RLTableHeader{Role} \\
+\midrule
+\RLClass{HLAobjectRoot} & Root object class. \\
+\quad\,\RLClass{ObjectRoot} & Example child class. \\
+\qquad\,\RLClass{Vehicle} & Example nested class. \\
+\qquad\,\,\RLClass{Aircraft} & Example deep class. \\
+\bottomrule
+\end{tabularx}
+
+\clearpage
+\section{Equations and byte layouts}
+\RLAccentRule
+\RLBodyFont
+Equations should have breathing room, aligned labels, and an explanation that can be scanned independently.
+
+\begin{equation}
+    (\RLVariable{Offset}_{i} + \RLVariable{Size}_{i} + \RLVariable{P}_{i})
+    \bmod \RLVariable{V}_{i+1} = 0
+    \RLEquationLabel{1}
+\end{equation}
+
+\RLDefinitionPair{Offset\textsubscript{i}}{byte offset of component \RLValue{i}, in bytes}
+\RLDefinitionPair{Size\textsubscript{i}}{size of component \RLValue{i}, in bytes}
+\RLDefinitionPair{V\textsubscript{i+1}}{octet-boundary value of the following component}
+\RLDefinitionPair{P\textsubscript{i}}{required padding, in bytes}
+
+\subsection{Byte-layout example}
+\begin{center}
+\begin{tabular}{@{}c|c|c|c|c@{}}
+\toprule
+\RLTableHeader{0} & \RLTableHeader{1} & \RLTableHeader{2} & \RLTableHeader{3} & \RLTableHeader{4–7} \\
+\midrule
+\RLValue{octet} & \RLValue{padding} & \RLValue{padding} & \RLValue{flags} & \RLType{HLAinteger32BE} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage
+\section{Code, XML, and identifiers}
+\RLAccentRule
+\RLBodyFont
+Machine-oriented material should remain searchable and selectable while receiving enough visual separation from narrative prose.
+
+\RLCodeInline{HLAobjectRoot.Vehicle.Aircraft}
+
+\RLCodeStart
+\begin{verbatim}
+<objectClass name="Vehicle">
+  <attribute name="HLAprivilegeToDeleteObject"
+             dataType="HLAboolean"/>
+</objectClass>
+\end{verbatim}
+\RLCodeEnd
+
+\RLNote{The code treatment is a presentation choice. It does not introduce an implementation requirement beyond the source material represented by the example.}
+
+\clearpage
+\section{Figures and diagrams}
+\RLAccentRule
+\RLBodyFont
+Lab-authored diagrams should have a caption, stable identifier, and enough contrast to survive grayscale printing.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[node distance=1.7cm, every node/.style={font=\RLSans\small}]
+        \node[draw=RLBlue,fill=RLMist,rounded corners,minimum width=3.2cm,minimum height=0.8cm] (federate) {Federate};
+        \node[draw=RLOrange,fill=RLMist,rounded corners,minimum width=3.2cm,minimum height=0.8cm,right=of federate] (rti) {Runtime infrastructure};
+        \node[draw=RLBlue,fill=RLMist,rounded corners,minimum width=3.2cm,minimum height=0.8cm,right=of rti] (federation) {Federation};
+        \draw[-{Stealth},RLBlue,line width=1pt] (federate) -- node[above]{services} (rti);
+        \draw[-{Stealth},RLOrange,line width=1pt] (rti) -- node[above]{execution} (federation);
+    \end{tikzpicture}
+    \caption{Simple systems relationship diagram.}
+    \label{fig:systems-relationship}
+\end{figure}
+
+\clearpage
+\section{Cross-references and navigation}
+\RLAccentRule
+\RLBodyFont
+The modern edition should make navigation feel like documentation. Internal links, bookmarks, clause references, and figure references should be stable and meaningful.
+
+See \RLClauseLink{fig:systems-relationship}{Figure~\ref{fig:systems-relationship}} for the systems relationship example. A future generated edition can resolve a source identifier such as \RLIdentifier{content-15162-page-016} to a stable semantic destination.
+
+\begin{itemize}
+    \item Clickable table and figure references.
+    \item Hierarchical PDF bookmarks generated from the clause tree.
+    \item Meaningful PDF metadata and logical page labels.
+    \item Searchable text with identifiers preserved as selectable text.
+\end{itemize}
+
+\clearpage
+\section{Provenance-safe presentation}
+\RLAccentRule
+\RLBodyFont
+The publication has three conceptual provenance classes:
+
+\begin{description}[leftmargin=3.0cm,style=multiline]
+    \item[Source-derived] Faithful reconstruction, transcription, or paraphrase from supplied source material.
+    \item[Editorial apparatus] Navigation, repaired layout, source references, and formatting decisions.
+    \item[Requirements Lab analysis] Semantic decomposition, quality gates, traceability products, and explicit Lab commentary.
+\end{description}
+
+\RLLabNote{The shared style makes these distinctions available without stamping every paragraph or adding legal boilerplate to every page.}
+
+\clearpage
+\section{QA contract}
+\RLAccentRule
+\RLBodyFont
+The specimen is a visual unit test. A house-style change should be reviewed here before it is applied to a full publication.
+
+\begin{RLRegistryTable}{Design-system QA checklist}{tab:qa}
+    \RLIdentifier{RL-SEM-01} & semantics & No source record disappears during presentation migration. \\
+    \RLIdentifier{RL-TBL-01} & tables & Headers repeat and cell counts remain stable. \\
+    \RLIdentifier{RL-LAY-01} & layout & No clipped content, accidental blank pages, or orphan headings. \\
+    \RLIdentifier{RL-NAV-01} & navigation & Bookmarks, links, metadata, and searchable text work. \\
+    \RLIdentifier{RL-VIS-01} & visual & Specimen and approved pages remain visually coherent. \\
+\end{RLRegistryTable}
+
+\appendix
+\section{Component inventory}
+\RLAccentRule
+\RLBodyFont
+The v0.1 inventory is deliberately small and composable: brand tokens, type roles, page furniture, hierarchy, table taxonomy, code/XML, mathematics, notes, links, and front matter. The 1516.2 migration will add only components that are required by real source structures.
+
+\begin{itemize}
+    \item Standard profile: restrained source compilation.
+    \item Analysis profile: more explicit semantic and evidence surfaces.
+    \item Facsimile profile: source-oriented reconstruction for visual comparison.
+\end{itemize}
+
+\end{document}

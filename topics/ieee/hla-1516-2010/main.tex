@@ -1,11 +1,34 @@
 \documentclass[twoside]{article}
 \usepackage{ieee1516-2010}
+\input{../requirements-lab/style/rl-graphics.sty}
+\newcommand{\RLSerifScale}{0.82}
+\input{../requirements-lab/style/rl-publication.sty}
 
-% Full reconstruction of source PDF pages 1--38. The technical-body-only and
-% internal-front-matter review assemblies remain available as separate inputs.
-% Source attribution required by the supplied document's documentation license:
-% "Reprinted with permission from IEEE Std 1516™-2010."
+\hypersetup{
+    pdftitle={HLA 1516 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2010 HLA 1516 family source material}
+}
+
+% HLA Requirements Lab compilation of the supplied 2010 HLA 1516 family
+% source material. This edition is unofficial and non-authoritative; source
+% identifiers are retained only for traceability.
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabNumber}{HLA 1516}
+\newcommand{\HLALabDocumentTitle}{Framework and Rules}
+\newcommand{\HLALabDescriptor}{Source-traceable framework requirements and vocabulary}
+\newcommand{\HLALabTheme}{framework}
+\newcommand{\HLALabAccent}{HLALabBlue}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516 family materials from 2010.}
+\RLConfigureHLAPublicationProfile
+% The shared Lab header uses a taller measured line box than the source style.
+% Reserve it explicitly so XeLaTeX cannot report header/body collisions.
+\setlength{\headheight}{20pt}
 \begin{document}
+    \input{../hla-requirements-lab-cover}
     \input{output/semantic/semantic-manifest}
     \input{output/semantic/faithful-body}
 \end{document}

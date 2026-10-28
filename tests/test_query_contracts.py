@@ -6,7 +6,6 @@ import json
 import subprocess
 import sys
 import unittest
-from pathlib import Path
 
 from pydantic import ValidationError
 
@@ -17,8 +16,9 @@ from hla_lab.core.semantic_model import (
     ImplementationReference,
     load_document_model,
 )
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 HLA_ROOT = REPO_ROOT / "topics" / "ieee"
 DOCUMENT_ROOTS = tuple(
     HLA_ROOT / name
@@ -91,7 +91,7 @@ class QueryContractTests(unittest.TestCase):
         self.assertTrue(self.model.implementation_mappings_for_clause("clause-4.1.1"))
         self.assertEqual(
             len(self.model.implementation_mappings_for_interface("service")),
-            158,
+            159,
         )
         coverage = self.model.implementation_coverage_for_transition(
             "federate.connect", "federate-lifetime"
@@ -100,7 +100,7 @@ class QueryContractTests(unittest.TestCase):
         self.assertEqual(coverage.status, "planned")
         self.assertFalse(coverage.concrete)
         self.assertEqual(self.model.transitions_without_implementation_mapping(), ())
-        self.assertEqual(len(self.model.transitions_without_concrete_implementation()), 281)
+        self.assertEqual(len(self.model.transitions_without_concrete_implementation()), 297)
 
     def test_corpus_selects_a_document_for_the_same_query_api(self) -> None:
         result = self.corpus.compliance_query(

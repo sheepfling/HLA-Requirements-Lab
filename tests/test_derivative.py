@@ -9,10 +9,11 @@ from pathlib import Path
 
 from hla_lab.core.semantic_model import DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_corpus
-from hla_lab.generation.generate_derivative import generate_derivative
+from hla_lab.generation.generate_derivative import _requirement_heading, generate_derivative
 from hla_lab.publication.publication_registry import load_release_manifest
+from tests.support import TEST_REPO_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = TEST_REPO_ROOT
 DOCUMENT_ROOTS = tuple(
     REPO_ROOT / "topics" / "ieee" / name
     for name in ("hla-1516-2025", "hla-1516.1-2025", "hla-1516.2-2025")
@@ -79,6 +80,30 @@ class DerivativeTests(unittest.TestCase):
             item for item in framework_payload["requirements"] if item["id"] == requirement.id
         )
         self.assertEqual(summary_payload["statement"], changed_statement)
+
+    def test_cross_page_requirement_renders_continuation_source(self) -> None:
+        model = next(item for item in self.models if item.document_id == "hla-1516.1-2025")
+        requirement = next(item for item in model.requirements if item.additional_sources)
+        with tempfile.TemporaryDirectory() as temporary:
+            derivative = generate_derivative((model,), Path(temporary))
+            tex = derivative.read_text(encoding="utf-8")
+        self.assertIn("Additional source", tex)
+        self.assertIn("printed p.", tex)
+        self.assertIn(requirement.additional_sources[0].path.replace("_", r"\_"), tex)
+
+    def test_source_derived_requirement_uses_substantive_heading(self) -> None:
+        model = next(item for item in self.models if item.document_id == "hla-1516.1-2025")
+        requirement = next(
+            item
+            for item in model.requirements
+            if item.id.startswith("requirement-candidate-content-clauses-")
+            and "shall" in item.statement
+        )
+        heading = _requirement_heading(requirement)
+        self.assertIn("shall", heading)
+        self.assertLessEqual(len(heading), 112)
+        self.assertNotIn("content/clauses", heading)
+        self.assertEqual(heading, requirement.title)
 
     def test_derivative_project_is_a_top_level_build_target(self) -> None:
         root = REPO_ROOT / "topics" / "ieee" / "hla-semantic-derivative-2025"
