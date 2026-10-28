@@ -121,7 +121,9 @@ def test_hla_loader_uses_catalog_identity_when_directory_name_differs(tmp_path: 
     document_root.mkdir(parents=True)
 
     with (
-        patch("hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=object()) as profile,
+        patch(
+            "hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=object()
+        ) as profile,
         patch("hla_lab.corpus.hla_semantic.load_hla_api_owners", return_value={}),
         patch("hla_lab.corpus.hla_semantic.load_document_model", return_value=object()),
         patch(
