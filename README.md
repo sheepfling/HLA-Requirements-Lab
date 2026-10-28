@@ -54,10 +54,24 @@ To run either mapping or matrix command against another corpus checkout, add
 and `topics/`; document IDs, release projects, and semantic inputs are resolved
 from that root. Without the option, both commands use this repository.
 
-`planned` and `partial` implementation mappings describe seams or incomplete
-work; they are not verified implementation evidence. `hla-lab map` reports
+### External implementation and evidence status
+
+`planned` and `partial` describe external RTI implementation mappings and their
+evidence. They do not indicate unfinished `hla-lab` commands. The map keeps
 implementation mappings, API crosswalks, and requirement-to-API bindings as
-separate relationships so their statuses remain clear.
+separate relationships so their status is clear.
+
+### Verbose diagnostics
+
+Add `--verbose` before a command to print the subprocess command and working
+directory when the CLI delegates work. For example:
+
+```console
+hla-lab --verbose generate topics/ieee/hla-1516.1-2025
+hla-lab --verbose matrix --edition 2025
+```
+
+Use the normal command without `--verbose` for concise output.
 
 PDF builds need Python project dependencies, XeLaTeX, `latexmk`, Graphviz, and
 the fonts named by the document styles. `topics/ieee/hla-1516.2-2025/BUILDING.md`
