@@ -20,7 +20,7 @@ from hla_lab.core.semantic_model import (
     DocumentModel,
     load_document_model,
 )
-from hla_lab.paths import REPO_ROOT, resources
+from hla_lab.paths import REPO_ROOT, document_entry_for_path, resources
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -36,7 +36,8 @@ def load_hla_document_model(
     repository_root: Path = REPO_ROOT,
 ) -> DocumentModel:
     """Load one HLA source tree through the generic semantic model."""
-    source = source_profile_for_document(root.name, repository_root)
+    document = document_entry_for_path(root, repository_root)
+    source = source_profile_for_document(document.document_id, repository_root)
     api_owners = (
         HLA_API_OWNERS
         if Path(repository_root).resolve() == REPO_ROOT
