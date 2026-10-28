@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +23,48 @@ def parse_args() -> argparse.Namespace:
         help="navigation manifest (default: canonical/source-navigation.json)",
     )
     return parser.parse_args()
+
+
+def _close_sequence(actual: Any, expected: list[float], *, tolerance: float = 0.05) -> bool:
+    try:
+        return len(actual) == len(expected) and all(
+            math.isclose(float(value), float(target), rel_tol=0.0, abs_tol=tolerance)
+            for value, target in zip(actual, expected, strict=True)
+        )
+    except (TypeError, ValueError):
+        return False
+
+
+def _link_matches(actual: dict[str, Any], actual_page: int, expected: dict[str, Any]) -> bool:
+    kind_names = {
+        fitz.LINK_GOTO: "goto",
+        fitz.LINK_URI: "uri",
+        fitz.LINK_NAMED: "named",
+    }
+    if actual_page != int(expected["source_page"]):
+        return False
+    if kind_names.get(actual.get("kind")) != expected["type"]:
+        return False
+    if not _close_sequence(actual.get("from", ()), expected["rectangle"]):
+        return False
+
+    if expected["type"] == "uri":
+        return actual.get("uri") == expected.get("uri")
+    if expected["type"] == "named":
+        return actual.get("name", actual.get("nameddest")) == expected.get("name")
+    if expected["type"] == "goto":
+        if actual.get("page") != int(expected["target_page"]):
+            return False
+        target_point = expected.get("target_point")
+        if target_point is not None and not _close_sequence(actual.get("to", ()), target_point):
+            return False
+        return math.isclose(
+            float(actual.get("zoom", 0.0)),
+            float(expected.get("zoom", 0.0)),
+            rel_tol=0.0,
+            abs_tol=0.001,
+        )
+    return False
 
 
 def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
@@ -54,6 +97,11 @@ def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
                 f"Link-count mismatch: PDF has {len(links)}, manifest expects {len(expected_links)}"
             )
 
+        actual_links = [
+            (page_number, link)
+            for page_number, page in enumerate(document)
+            for link in page.get_links()
+        ]
         for index, record in enumerate(expected_links):
             source_page = int(record["source_page"])
             if not 0 <= source_page < document.page_count:
@@ -62,6 +110,21 @@ def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
                 target_page = int(record["target_page"])
                 if not 0 <= target_page < document.page_count:
                     raise ValueError(f"Link {index} has invalid target page {target_page}")
+
+            match_index = next(
+                (
+                    candidate_index
+                    for candidate_index, (actual_page, actual_link) in enumerate(actual_links)
+                    if _link_matches(actual_link, actual_page, record)
+                ),
+                None,
+            )
+            if match_index is None:
+                raise ValueError(
+                    f"Link {index} does not match the PDF at source page {source_page}: "
+                    f"expected {record['type']} link to its manifest destination"
+                )
+            actual_links.pop(match_index)
 
         first_page = document[0].get_text()
         if "IEEE Std 1516.2" not in first_page:
