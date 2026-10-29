@@ -1,0 +1,39 @@
+\documentclass[twoside]{article}
+\usepackage{ieee1516-2010}
+
+% Full reconstruction of source PDF pages 1--38; fidelity passes applied across all source pages 1--38.
+% IEEE identifiers are retained only as source references for traceability.
+\begin{document}
+    \pagestyle{empty}
+    \input{frontmatter/01-external-cover}
+    \input{frontmatter/02-external-cover-verso}
+
+    \pagenumbering{roman}
+    \pagestyle{empty}
+    \input{frontmatter/03-title-page}
+    \input{frontmatter/04-copyright-abstract}
+    \input{frontmatter/05-ieee-notices}
+    \input{frontmatter/06-introduction}
+    \input{frontmatter/07-updating-participants}
+    \input{frontmatter/08-participants-ballot}
+    \input{frontmatter/09-standards-board}
+    \input{frontmatter/10-blank-verso-viii}
+    \input{frontmatter/11-contents}
+    \input{frontmatter/12-blank-verso}
+
+    \pagenumbering{arabic}
+    \hlaTechnicalMetrics
+    \pagestyle{hla}
+    \thispagestyle{hlafirst}
+    \input{clauses/01-overview}
+    \input{clauses/02-normative-references}
+    \input{clauses/03-definitions-opening}
+    \input{clauses/03-definitions-part-02}
+    \input{clauses/03-definitions-part-03}
+    \input{clauses/03-abbreviations-acronyms}
+    \input{clauses/04-summary-hla-rules}
+    \input{clauses/05-federation-rules}
+    \input{clauses/06-federate-rules}
+    \input{clauses/annex-a-rationale}
+    \input{clauses/annex-b-bibliography}
+\end{document}

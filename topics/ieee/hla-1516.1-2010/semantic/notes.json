@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "notes": [
+    {
+      "id": "note-clauses-01-overview-tex-1",
+      "text": "Information on references can be found in Clause 2.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/01-overview.tex",
+        "line": 29,
+        "end_line": 29
+      }
+    },
+    {
+      "id": "note-clauses-02-normative-references-tex-1",
+      "text": "",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/02-normative-references.tex",
+        "line": 6,
+        "end_line": 6
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-1",
+      "text": "The IEEE Standards Dictionary: Glossary of Terms \\& Definitions is available at http://shop.ieee.org/.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 5,
+        "end_line": 5
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-2",
+      "text": "See 9.1.4.Notes in text, tables, and figures are given for information only and do not contain requirements needed to implement the standard.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 28,
+        "end_line": 28
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-3",
+      "text": "Notes in text, tables, and figures are given for information only and do not contain requirements needed to implement the standard.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 28,
+        "end_line": 28
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-4",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 81,
+        "end_line": 81
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-5",
+      "text": "See 6.14.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 84,
+        "end_line": 84
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-6",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 89,
+        "end_line": 89
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-7",
+      "text": "All RTI-initiated services are denoted with a \\ (printer's dagger) after the service name.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 91,
+        "end_line": 91
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-8",
+      "text": "See 6.9.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 92,
+        "end_line": 92
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-9",
+      "text": "See 5.1.2.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 96,
+        "end_line": 96
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-10",
+      "text": "See 6.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 141,
+        "end_line": 141
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-11",
+      "text": "See 6.16.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 165,
+        "end_line": 165
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-12",
+      "text": "See 6.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 207,
+        "end_line": 207
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-13",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 215,
+        "end_line": 215
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-14",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 233,
+        "end_line": 233
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-15",
+      "text": "See 5.1.2.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 240,
+        "end_line": 240
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-16",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 242,
+        "end_line": 242
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-17",
+      "text": "See 5.1.2.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 246,
+        "end_line": 246
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-18",
+      "text": "See 9.1.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 249,
+        "end_line": 249
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-19",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 252,
+        "end_line": 252
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-20",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 255,
+        "end_line": 255
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-21",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 259,
+        "end_line": 259
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-22",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 262,
+        "end_line": 262
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-23",
+      "text": "See 6.11.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 267,
+        "end_line": 267
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-24",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 272,
+        "end_line": 272
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-25",
+      "text": "See 9.1.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 275,
+        "end_line": 275
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-26",
+      "text": "See 9.1.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 278,
+        "end_line": 278
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-27",
+      "text": "See 6.8.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 283,
+        "end_line": 283
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-28",
+      "text": "See 6.15.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 293,
+        "end_line": 293
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-29",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 310,
+        "end_line": 310
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-30",
+      "text": "See 5.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 316,
+        "end_line": 316
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-31",
+      "text": "See 9.1.2.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 325,
+        "end_line": 325
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-32",
+      "text": "See 5.1.2 and 5.6.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 340,
+        "end_line": 340
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-33",
+      "text": "See 9.8.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 343,
+        "end_line": 343
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-34",
+      "text": "See 5.1.3 and 5.8.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 347,
+        "end_line": 347
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-35",
+      "text": "See 9.10.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 350,
+        "end_line": 350
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-36",
+      "text": "See 8.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 369,
+        "end_line": 369
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-37",
+      "text": "See 8.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 374,
+        "end_line": 374
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-38",
+      "text": "See 9.1.3.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 384,
+        "end_line": 384
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-39",
+      "text": "See 6.10.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 387,
+        "end_line": 387
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-40",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 398,
+        "end_line": 398
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-41",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 403,
+        "end_line": 403
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-42",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 405,
+        "end_line": 405
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-43",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 411,
+        "end_line": 411
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-44",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 415,
+        "end_line": 415
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-45",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 421,
+        "end_line": 421
+      }
+    },
+    {
+      "id": "note-clauses-03-definitions-tex-46",
+      "text": "See 9.1.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/03-definitions.tex",
+        "line": 423,
+        "end_line": 423
+      }
+    },
+    {
+      "id": "note-clauses-12-programming-language-mappings-tex-1",
+      "text": "See Stroustrup [B6] for a detailed description.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/12-programming-language-mappings.tex",
+        "line": 783,
+        "end_line": 783
+      }
+    }
+  ]
+}

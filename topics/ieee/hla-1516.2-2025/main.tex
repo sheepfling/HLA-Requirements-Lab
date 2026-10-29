@@ -1,0 +1,40 @@
+\documentclass{ieee-hla}
+\usepackage{textcomp}
+\input{../requirements-lab/style/rl-graphics.sty}
+\hypersetup{
+    pdftitle={HLA 1516.2 family - 2025 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={HLA Requirements Lab compilation of supplied 2025 HLA 1516.2 family source material},
+    pdfkeywords={HLA, OMT, 1516.2 family, 2025 source compilation}
+}
+
+\newcommand{\HLALabEdition}{2025-source compilation}
+\newcommand{\HLALabEditionYear}{2025}
+\newcommand{\HLALabNumber}{HLA 1516.2}
+\newcommand{\HLALabDocumentTitle}{Object Model Template (OMT) Specification}
+\newcommand{\HLALabDescriptor}{Source-traceable object model requirements and table contracts}
+\newcommand{\HLALabTheme}{omt}
+\newcommand{\HLALabAccent}{HLALabOrange}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA 1516 FAMILY}
+\newcommand{\HLALabSourceAttribution}{Source set: supplied HLA 1516.2 family materials from 2025.}
+\RLConfigureHLAPublicationProfile
+% The semantic body is a fixed-coordinate source reconstruction. Keep its
+% measured line fitting active so the wider Requirements Lab role fonts cannot
+% bleed beyond the recorded content frames. The Lab typography still supplies
+% the actual readable faces and colors; natural-flow Lab pages use their own
+% modern typography profile.
+
+\begin{document}
+    \def\HLASkipSemanticContentElementData{}
+    \input{../hla-requirements-lab-cover}
+    % Keep the accepted Requirements Lab furniture as the default for every
+    % subsequent semantic page, including dense pages that trigger an
+    % internal TeX break inside a fixed-page adapter.
+    \pagestyle{HLARL}
+    \input{output/semantic/semantic-manifest}
+    \input{frontmatter/cover}
+    \input{sections/semantic/frontmatter}
+    \input{output/semantic/faithful-body}
+    \input{frontmatter/back-cover}
+\end{document}

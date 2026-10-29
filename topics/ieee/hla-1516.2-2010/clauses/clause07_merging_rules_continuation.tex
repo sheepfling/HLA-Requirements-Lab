@@ -1,0 +1,84 @@
+% ---------------------------------------------------------------------------
+% Source PDF p. 96 / standard p. 84.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 50---FOM and SOM module merge results}\vspace{-7pt}
+\begingroup
+\fontsize{8.85}{10.05}\selectfont
+\setlength{\tabcolsep}{5.2pt}
+\setlength{\extrarowheight}{6pt}
+\renewcommand{\arraystretch}{1.10}
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth+42pt\relax}{|L{132pt}|Y|C{62pt}|C{49pt}|}
+\hline
+\rule{0pt}{38.5pt}\centering\arraybackslash\bfseries OMT Component &
+\centering\arraybackslash\bfseries Merge results &
+\centering\arraybackslash\shortstack{\bfseries OMT\\\bfseries component\\\bfseries clause} &
+\centering\arraybackslash\shortstack{\bfseries Merge\\\bfseries principle\\\bfseries clause} \\
+\hline
+Object model identification &
+Within the object model identification table, the Reference field of a resulting FOM or SOM shall contain ``Composed from'' references to each of the FOM module and/or SOM modules used. For all other object model identification table fields, it is the responsibility of the FOM/SOM developer to complete the required metadata elements. & 4.1 & C.1 \\
+\hline
+Object classes &
+The resulting FOM or SOM shall contain the union of the object classes in all modules. If several modules contain regular definitions of a named object class, all regular definitions shall be identical with respect to name, sharing, semantics and the set of named attributes. Attribute properties shall be compared as described in a subsequent table row. Scaffolding object class definitions shall not be taken into account. & 4.2 & C.2 \\
+\hline
+Interaction classes &
+The resulting FOM or SOM shall contain the union of the interaction classes in all modules. If several modules contain regular definitions of a named interaction class, all regular definitions shall be identical with respect to name, sharing, semantics, available dimensions, transportation type, order type and the set of named parameters. Datatypes, dimensions and transportation types shall be compared as described in a subsequent table row. Parameter properties shall be compared as described in a subsequent table row. Scaffolding interaction class definitions shall not be taken into account. & 4.3 & C.2 \\
+\hline
+Attributes &
+The resulting FOM or SOM shall contain the union of the attributes in all modules. If several modules contain definitions of a named attribute for a particular class, all definitions shall be identical with respect to datatype, update type, update condition, sharing, ownership, available dimensions, transportation type, order type and semantics. Datatypes, dimensions, and transportation types shall be compared as described in a subsequent table row. & 4.4 & C.2 \\
+\hline
+Parameters &
+The resulting FOM or SOM shall contain the union of the attributes in all modules. If several modules contain definitions of a named parameter for a particular class, all definitions shall be identical with respect to datatype and semantics. & 4.5 & C.2 \\
+\hline
+Dimensions &
+The resulting FOM or SOM shall contain the union of the dimensions in all modules. If several modules contain definitions of a named dimension, all definitions shall be identical with respect to datatype, dimension upper bound, normalization function, value when unspecified and semantics. Datatypes shall be compared as described in a subsequent table row. & 4.6 & C.4 \\
+\hline
+\end{tabularx}}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 97 / standard p. 85.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 50---FOM and SOM module merge results}\vspace{-7pt}
+\begingroup
+\fontsize{8.85}{10.05}\selectfont
+\setlength{\tabcolsep}{5.2pt}
+\setlength{\extrarowheight}{6pt}
+\renewcommand{\arraystretch}{1.10}
+\noindent\makebox[\textwidth][c]{\begin{tabularx}{\dimexpr\textwidth+42pt\relax}{|L{132pt}|Y|C{62pt}|C{49pt}|}
+\hline
+\rule{0pt}{38.5pt}\centering\arraybackslash\bfseries OMT Component &
+\centering\arraybackslash\bfseries Merge results &
+\centering\arraybackslash\shortstack{\bfseries OMT\\\bfseries component\\\bfseries clause} &
+\centering\arraybackslash\shortstack{\bfseries Merge\\\bfseries principle\\\bfseries clause} \\
+\hline
+Time representation &
+The resulting FOM or SOM shall contain the time representation table as provided in at least one FOM or SOM. If several modules contain the time representation table they shall be identical. & 4.7 & C.8 \\
+\hline
+User supplied tags &
+The resulting FOM or SOM shall contain the user supplied tags table as provided in at least one FOM or SOM. If several modules contain the user supplied tags table they shall be identical. & 4.8 & C.8 \\
+\hline
+Synchronization points &
+The resulting FOM or SOM shall contain the union of the synchronization points in all modules. If several modules contain definitions of a named synchronization points, all definitions shall be identical with respect to semantics. & 4.9 & C.5 \\
+\hline
+Transportation type &
+The resulting FOM or SOM shall contain the union of the transportation types in all modules. If several modules contain definitions of a named transportation type, all definitions shall be identical with respect to reliability and semantics. & 4.10 & C.6 \\
+\hline
+Update Rate &
+The resulting FOM or SOM shall contain the union of the update rates in all modules. If several modules contain definitions of a named update rate, all definitions shall be identical with respect to rate and semantics. & 4.11 & C.7 \\
+\hline
+Switches &
+The resulting FOM or SOM shall contain the switches table as provided in at least one FOM or SOM. If several modules contain the switches table they shall be identical. & 4.12 & C.8 \\
+\hline
+Datatypes &
+The resulting FOM or SOM shall contain the union of the datatypes in all modules. If several modules contain definitions of a named datatype, all definitions shall be identical with respect to all columns. & 4.13 & C.3.3 \\
+\hline
+Notes &
+The resulting FOM or SOM shall contain the union of the notes in all modules. If several modules contain definitions of a named note, all definitions shall be identical with respect to semantics. If a repeated definition is provided and the original definition\newline references a note, the repeated definition shall\newline reference the same note using the same note\newline identification. & 4.14 & C.7 \\
+\hline
+Service usage &
+The resulting FOM/SOM shall contain a service usage table if at least one of the contributing modules includes such a table. The value in the Usage column for each specific service shall be ``Yes'' if at least one contributing module has the value ``Yes'' in the Usage column for the same service. Otherwise it shall be ``No.'' & 6.3 & C.9 \\
+\hline
+\end{tabularx}}
+\endgroup

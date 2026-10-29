@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "outline": [
+    {
+      "id": "clause-1",
+      "number": "1",
+      "title": "Overview",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/01-overview.tex",
+        "line": 32,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3",
+      "number": "1.3",
+      "title": "1 Components of the HLA standard",
+      "parent_id": "clause-1",
+      "level": 2,
+      "source": {
+        "path": "clauses/01-overview.tex",
+        "line": 70,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-2",
+      "number": "2",
+      "title": "Normative references",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/02-normative-references.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-3",
+      "number": "3",
+      "title": "Definitions, acronyms, and abbreviations",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/03-definitions-opening.tex",
+        "line": 3,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4",
+      "number": "4",
+      "title": "Summary of the HLA rules",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/04-summary-hla-rules.tex",
+        "line": 7,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5",
+      "number": "5",
+      "title": "Federation rules",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/05-federation-rules.tex",
+        "line": 14,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6",
+      "number": "6",
+      "title": "Federate rules",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/06-federate-rules.tex",
+        "line": 9,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1",
+      "number": "A.1",
+      "title": "A.1 Federation rules",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 16,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1.1",
+      "number": "A.1.1",
+      "title": "A.1.1 Rationale for Rule 1",
+      "parent_id": "clause-A.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 19,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1.2",
+      "number": "A.1.2",
+      "title": "A.1.2 Rationale for Rule 2",
+      "parent_id": "clause-A.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 32,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1.3",
+      "number": "A.1.3",
+      "title": "A.1.3 Rationale for Rule 3",
+      "parent_id": "clause-A.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1.4",
+      "number": "A.1.4",
+      "title": "A.1.4 Rationale for Rule 4",
+      "parent_id": "clause-A.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 67,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1.5",
+      "number": "A.1.5",
+      "title": "A.1.5 Rationale for Rule 5",
+      "parent_id": "clause-A.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 82,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2",
+      "number": "A.2",
+      "title": "A.2 Federate rules",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 98,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2.1",
+      "number": "A.2.1",
+      "title": "A.2.1 Rationale for Rule 6",
+      "parent_id": "clause-A.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 101,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2.2",
+      "number": "A.2.2",
+      "title": "A.2.2 Rationale for Rule 7",
+      "parent_id": "clause-A.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 124,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2.3",
+      "number": "A.2.3",
+      "title": "A.2.3 Rationale for Rule 8",
+      "parent_id": "clause-A.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 134,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2.4",
+      "number": "A.2.4",
+      "title": "A.2.4 Rationale for Rule 9",
+      "parent_id": "clause-A.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 146,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2.5",
+      "number": "A.2.5",
+      "title": "A.2.5 Rationale for Rule 10",
+      "parent_id": "clause-A.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/annex-a-rationale.tex",
+        "line": 157,
+        "end_line": null
+      }
+    }
+  ]
+}

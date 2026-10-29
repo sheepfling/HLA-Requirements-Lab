@@ -1,0 +1,209 @@
+% Figure 12 - Class attribute (i, HLAprivilegeToDeleteObject)
+% Independently revalidated against source physical page 85 / standard page 71.
+% Natural coordinates follow the embedded 960 x 720 one-bit source image.
+% Edge IDs correspond to audit/figure12/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f12 stroke/.style={draw=black,line width=.90pt},
+    f12 partition/.style={draw=black,line width=.75pt,dash pattern=on 5pt off 4pt},
+    f12 transition/.style={draw=black,line width=.90pt,-{Stealth[length=7.0pt,width=6.0pt]}},
+    f12 title/.style={font=\RLSans\bfseries\fontsize{24.0}{25.0}\selectfont,align=center,inner sep=0pt},
+    f12 tab/.style={font=\RLSans\mdseries\fontsize{12.4}{13.2}\selectfont,align=center,inner sep=0pt},
+    f12 text/.style={font=\RLSans\mdseries\fontsize{14.2}{15.2}\selectfont,align=center,inner sep=0pt},
+    f12 small/.style={font=\RLSans\mdseries\fontsize{11.8}{12.6}\selectfont,align=center,inner sep=0pt},
+    f12 tiny/.style={font=\RLSans\mdseries\fontsize{10.7}{11.5}\selectfont,align=center,inner sep=0pt},
+    f12 note/.style={font=\RLSans\mdseries\fontsize{10.9}{11.7}\selectfont,align=left,inner sep=0pt}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % F12-S00 outer class-attribute composite.
+    \draw[f12 stroke]
+    (126,44) -- (833,44)
+    .. controls (870,44) and (900,76) .. (900,109)
+    -- (900,555)
+    .. controls (900,591) and (869,620) .. (834,620)
+    -- (125,620)
+    .. controls (89,620) and (60,591) .. (60,555)
+    -- (60,109)
+    .. controls (60,76) and (90,44) .. (126,44)
+    -- cycle;
+    \draw[f12 stroke] (60,106) -- (900,106);
+    \node[f12 title] at (480,76) {\scalebox{.93}[1]{Class Attribute $(i,\mathrm{HLAprivilegeToDeleteObject})$}};
+
+    % Orthogonal outer regions.
+    \draw[f12 partition] (622,106) -- (622,616);
+    \draw[f12 stroke] (60,106) -- (170,106) -- (170,135) -- (60,135);
+    \node[f12 tab] at (115,121) {Publication};
+    \draw[f12 stroke] (622,106) -- (737,106) -- (737,136) -- (622,136);
+    \node[f12 tab] at (679.5,121) {Subscription};
+
+    % Publication deep-history pseudo-state and empty-set transition.
+    \draw[f12 stroke] (398,132) circle[radius=16pt];
+    \node[font=\RLSans\mdseries\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (398,132) {H*};
+    % F12-E02 publication boundary -> H*.
+    \draw[f12 transition] (321,106)
+    .. controls (322,123) and (352,131) .. (381,132);
+    \node[f12 small,anchor=south east] at (321,130) {Publish $(i,\{\})$\\or\\Unpublish $(i,\{\})$};
+
+    % Publication initial marker.
+    \fill (69,173) circle[radius=7pt];
+
+    % F12-S01 Implicit publication composite.
+    \draw[f12 stroke]
+    (107,181) -- (264,181)
+    .. controls (279,181) and (289,192) .. (289,205)
+    -- (289,562)
+    .. controls (289,576) and (278,586) .. (264,586)
+    -- (107,586)
+    .. controls (93,586) and (82,575) .. (82,562)
+    -- (82,205)
+    .. controls (82,192) and (93,181) .. (107,181)
+    -- cycle;
+    \draw[f12 stroke] (82,207) -- (237,207) -- (237,181);
+    \node[f12 tab] at (159.5,195) {Implicit publication};
+
+    % F12-E01 publication initial -> implicit composite boundary.
+    \draw[f12 transition] (74,178) -- (84,190);
+
+    % F12-S02/S03 implicit publication states.
+    \draw[f12 stroke,rounded corners=8pt] (114,264) rectangle (250,330);
+    \node[f12 text] at (182,297) {Unpublished\\\scalebox{.80}[1]{$(i,\mathrm{privToDeleteObject})$}};
+    \draw[f12 stroke,rounded corners=8pt] (114,445) rectangle (250,512);
+    \node[f12 text] at (182,478.5) {Published\\\scalebox{.80}[1]{$(i,\mathrm{privToDeleteObject})$}};
+
+    % Implicit-region initial marker.
+    \fill (95,247) circle[radius=7pt];
+    % F12-E03 implicit initial -> implicit Unpublished.
+    \draw[f12 transition] (101,251) -- (115,270);
+
+    % F12-E04 implicit Unpublished -> Published.
+    \draw[f12 transition] (135,330) -- (135,441);
+    \node[f12 small,anchor=east] at (128,386) {Publish\\$(i,*)$};
+
+    % F12-E05 implicit Published -> Unpublished.
+    \draw[f12 transition] (199,445) -- (199,334);
+    \node[f12 tiny,anchor=west] at (207,385)
+        {Unpublish\\$(i,*)$\\$[$last explicitly\\published attr$]$\\or\\Unpublish $(i)$};
+
+    % F12-E06 implicit Unpublished self-loop.
+    \draw[f12 transition] (250,282)
+    .. controls (282,270) and (286,320) .. (252,318);
+    \node[f12 tiny,anchor=south] at (227,249)
+        {Unpublish $(i,*)$ or\\Unpublish $(i,\mathrm{pTDO})$ or\\Unpublish $(i)$};
+
+    % F12-E07 implicit Published self-loop.
+    \draw[f12 transition] (250,498)
+    .. controls (283,504) and (280,548) .. (239,514);
+    \node[f12 tiny,anchor=north] at (219,521)
+        {Publish $(i,*)$ or\\Unpublish $(i,*)$\\$[$not last explicitly\\published attr$]$};
+
+    % F12-S04 Explicit publication composite.
+    \draw[f12 stroke]
+    (425,181) -- (584,181)
+    .. controls (598,181) and (609,192) .. (609,205)
+    -- (609,562)
+    .. controls (609,576) and (598,586) .. (584,586)
+    -- (425,586)
+    .. controls (411,586) and (400,575) .. (400,562)
+    -- (400,205)
+    .. controls (400,192) and (411,181) .. (425,181)
+    -- cycle;
+    \draw[f12 stroke] (400,207) -- (541,207) -- (541,181);
+    \node[f12 tab] at (470.5,195) {Explicit publication};
+
+    % F12-S05/S06 explicit publication states.
+    \draw[f12 stroke,rounded corners=8pt] (432,297) rectangle (569,363);
+    \node[f12 text] at (500.5,330) {Unpublished\\\scalebox{.80}[1]{$(i,\mathrm{privToDeleteObject})$}};
+    \draw[f12 stroke,rounded corners=8pt] (432,461) rectangle (569,528);
+    \node[f12 text] at (500.5,494.5) {Published\\\scalebox{.80}[1]{$(i,\mathrm{privToDeleteObject})$}};
+
+    % F12-E08 explicit Unpublished -> Published.
+    \draw[f12 transition] (445,363) -- (445,457);
+    \node[f12 small,anchor=east] at (438,410) {Publish\\$(i,\mathrm{pTDO})$};
+
+    % F12-E09 explicit Published -> Unpublished.
+    \draw[f12 transition] (531,461) -- (531,367);
+    \node[f12 tiny,anchor=west] at (539,412)
+        {Unpublish\\$(i,\mathrm{pTDO})$\\$[$not last\\published attr$]$};
+
+    % F12-E10 explicit Unpublished self-loop.
+    \draw[f12 transition] (569,316)
+    .. controls (599,303) and (606,348) .. (571,349);
+    \node[f12 tiny,anchor=south] at (544,268)
+        {Publish $(i,*)$ or\\Unpublish $(i,\mathrm{pTDO})$ or\\Unpublish $(i,*)$\\$[$not last\\published attr$]$};
+
+    % F12-E11 explicit Published self-loop.
+    \draw[f12 transition] (569,514)
+    .. controls (601,520) and (596,557) .. (558,529);
+    \node[f12 tiny,anchor=north] at (535,537)
+        {Publish $(i,*)$ or\\Publish $(i,\mathrm{pTDO})$ or\\Unpublish $(i,*)$};
+
+    % Cross-composite publication transitions, independently traced.
+    % F12-E12 Explicit publication boundary -> Implicit publication boundary.
+    \draw[f12 transition] (400,230) -- (293,230);
+    \node[f12 small,anchor=south] at (346,223) {Unpublish\\$(i)$};
+
+    % F12-E13 explicit Unpublished -> Implicit publication boundary.
+    \draw[f12 transition] (432,319) -- (293,307);
+    \node[f12 small,anchor=south] at (351,300) {Unpublish $(i,*)$\\$[$last published attr$]$};
+
+    % F12-E14 implicit Published -> explicit Unpublished.
+    % NOTE: source starts at the right edge of the implicit Published state,
+    % not at the implicit composite boundary.
+    \draw[f12 transition] (250,460) -- (428,360);
+    \node[f12 small] at (351,389) {Unpublish\\$(i,\mathrm{pTDO})$};
+
+    % F12-E15 Implicit publication boundary -> explicit Published.
+    \draw[f12 transition] (289,486) -- (428,486);
+    \node[f12 small,anchor=south] at (360,479) {Publish $(i,\mathrm{pTDO})$};
+
+    % F12-E16 explicit Published -> Implicit publication boundary.
+    \draw[f12 transition] (432,503) -- (293,503);
+    \node[f12 small,anchor=north] at (360,511)
+        {Unpublish\\$(i,\mathrm{pTDO})$\\$[$last published\\attr$]$};
+
+    % Subscription history pseudo-state.
+    \draw[f12 stroke] (880,132) circle[radius=16pt];
+    \node[font=\RLSans\mdseries\fontsize{19.0}{19.0}\selectfont,inner sep=0pt] at (880,132) {H};
+    % F12-E17 subscription boundary -> history.
+    \draw[f12 transition] (788,106)
+    .. controls (788,123) and (834,132) .. (863,132);
+    \node[f12 small,anchor=south] at (798,129) {Subscribe $(i,\{\})$\\or Unsubscribe $(i,\{\})$};
+
+    % F12-S07/S08 subscription states.
+    \draw[f12 stroke,rounded corners=8pt] (677,196) rectangle (762,281);
+    \node[f12 text] at (719.5,238.5) {Subscribed\\$(i,\mathrm{pTDO})$};
+    \draw[f12 stroke,rounded corners=8pt] (677,472) rectangle (762,557);
+    \node[f12 text] at (719.5,514.5) {Unsubscribed\\$(i,\mathrm{pTDO})$};
+
+    % Subscription initial marker.
+    \fill (654,582) circle[radius=7pt];
+    % F12-E18 subscription initial -> Unsubscribed.
+    \draw[f12 transition] (660,578) -- (678,552);
+
+    % F12-E19 Unsubscribed -> Subscribed.
+    \draw[f12 transition] (687,472) -- (687,285);
+    \node[f12 small,anchor=east] at (678,376) {Subscribe\\$(i,\mathrm{pTDO})$};
+
+    % F12-E20 Subscribed -> Unsubscribed.
+    \draw[f12 transition] (752,281) -- (752,468);
+    \node[f12 small,anchor=west] at (761,374) {Unsubscribe $(i)$\\or\\Unsubscribe $(i,\mathrm{pTDO})$};
+
+    % F12-E21 Subscribed self-loop.
+    \draw[f12 transition] (762,219)
+    .. controls (790,205) and (797,246) .. (764,246);
+    \node[f12 small,anchor=west] at (791,220) {Subscribe\\$(i,\mathrm{pTDO})$};
+
+    % F12-E22 Unsubscribed self-loop.
+    \draw[f12 transition] (762,535)
+    .. controls (793,540) and (794,573) .. (749,557);
+    \node[f12 small,anchor=west] at (790,545) {Unsubscribe $(i)$\\or\\Unsubscribe $(i,\mathrm{pTDO})$};
+
+    % Source shorthand notes beneath the chart frame.
+    \node[f12 note,anchor=west] at (118,647) {pTDO is short for HLAprivilegeToDeleteObject};
+    \node[f12 note,anchor=west] at (503,647)
+        {Publish $(i,*)$ is short for publishing any attribute of object class $i$\\other than pTDO or $\{\}$};
+\end{tikzpicture}

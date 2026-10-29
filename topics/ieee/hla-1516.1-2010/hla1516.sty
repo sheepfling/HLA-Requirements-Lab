@@ -1,0 +1,375 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hla1516}[2026/08/07 IEEE 1516.1-2010 reconstruction style]
+
+\RequirePackage[letterpaper,left=0.95in,right=0.95in,top=0.70in,bottom=0.76in,headheight=12pt,headsep=25pt,footskip=28pt]{geometry}
+% Use the repository's XeLaTeX font contract.  The original handoff
+% references the unavailable newtx/scalefnt stack, while the source remains
+% otherwise faithful and searchable.
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{url}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{textcomp}
+\RequirePackage{array}
+\RequirePackage{longtable}
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{xcolor}
+\RequirePackage{colortbl}
+\RequirePackage{etoolbox}
+\RequirePackage{pdflscape}
+\RequirePackage{tabularx}
+\RequirePackage{ragged2e}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,fit,backgrounds}
+
+% The source MOM run uses the generic pdflscape `landscape` environment.
+% Route that legacy wrapper through the shared Requirements Lab true-landscape
+% page so its table pages keep horizontal Lab furniture and the correct media
+% orientation.  RLLandscapePage is provided by rl-publication.sty after this
+% source-faithful package is loaded, but the command is resolved when the
+% environment is used.
+\renewenvironment{landscape}{%
+    \begin{RLLandscapePage}%
+}{%
+    \end{RLLandscapePage}%
+}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7.2pt plus 1pt minus 1pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\frenchspacing
+\setcounter{secnumdepth}{5}
+
+\titleformat{\section}
+{\sffamily\bfseries\fontsize{12.4}{14.5}\selectfont}
+{\thesection.}{0.45em}{}
+\titlespacing*{\section}{0pt}{16pt plus 2pt minus 1pt}{9pt}
+
+\titleformat{\subsection}
+{\sffamily\bfseries\fontsize{10.8}{12.8}\selectfont}
+{\thesubsection}{0.55em}{}
+\titlespacing*{\subsection}{0pt}{14pt plus 2pt minus 1pt}{7pt}
+
+\titleformat{\subsubsection}
+{\sffamily\bfseries\fontsize{10.2}{12.0}\selectfont}
+{\thesubsubsection}{0.55em}{}
+\titlespacing*{\subsubsection}{0pt}{12pt plus 2pt minus 1pt}{6pt}
+
+\titleformat{\paragraph}[block]
+{\sffamily\bfseries\fontsize{9.8}{11.6}\selectfont}
+{\theparagraph}{0.55em}{}
+\titlespacing*{\paragraph}{0pt}{11pt plus 2pt minus 1pt}{5pt}
+
+\titleformat{\subparagraph}[block]
+{\sffamily\bfseries\fontsize{9.5}{11.2}\selectfont}
+{\thesubparagraph}{0.55em}{}
+\titlespacing*{\subparagraph}{0pt}{9pt plus 2pt minus 1pt}{4.5pt}
+
+\newcommand{\StdShort}{HLA 1516.1 \textbar\ 2010-source compilation}
+\newcommand{\StdLongHeader}{FEDERATE INTERFACE SPECIFICATION}
+\newcommand{\StdLongHeaderEven}{HLA REQUIREMENTS LAB}
+\newcommand{\CopyrightLine}{}
+
+\fancypagestyle{body}{%
+    \fancyhf{}
+    \fancyhead[LO]{\sffamily\fontsize{7.6}{9}\selectfont \StdLongHeader}
+    \fancyhead[RO]{\sffamily\fontsize{7.6}{9}\selectfont \StdShort}
+    \fancyhead[LE]{\sffamily\fontsize{7.6}{9}\selectfont \StdShort}
+    \fancyhead[RE]{\sffamily\fontsize{7.6}{9}\selectfont \StdLongHeaderEven}
+    \fancyfoot[LO]{\sffamily\fontsize{7.4}{9}\selectfont \CopyrightLine}
+    \fancyfoot[RO]{\sffamily\fontsize{8}{9}\selectfont \thepage}
+    \fancyfoot[LE]{\sffamily\fontsize{8}{9}\selectfont \thepage}
+    \fancyfoot[RE]{\sffamily\fontsize{7.4}{9}\selectfont \CopyrightLine}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{firstbody}{%
+    \fancyhf{}
+    \fancyfoot[L]{\sffamily\fontsize{7.4}{9}\selectfont \CopyrightLine}
+    \fancyfoot[R]{\sffamily\fontsize{8}{9}\selectfont \thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{front}{%
+    \fancyhf{}
+    % Source preliminary pages alternate page number and copyright by parity:
+    % even pages: page at left / copyright at right;
+    % odd pages:  copyright at left / page at right.
+    \fancyfoot[LE]{\sffamily\fontsize{7.4}{9}\selectfont \thepage}
+    \fancyfoot[RE]{\sffamily\fontsize{7.4}{9}\selectfont \CopyrightLine}
+    \fancyfoot[LO]{\sffamily\fontsize{7.4}{9}\selectfont \CopyrightLine}
+    \fancyfoot[RO]{\sffamily\fontsize{7.4}{9}\selectfont \thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\frontlink}[2]{\href{#1}{\textcolor{blue}{#2}}}
+\newcommand{\frontheading}[1]{%
+    \par\noindent{\sffamily\bfseries\fontsize{11.0}{13.0}\selectfont #1}\par\vspace{5pt}}
+
+\newenvironment{stdalphalist}{%
+    \begin{enumerate}[label=\alph*),leftmargin=2.35em,itemsep=1pt,topsep=3pt,parsep=0pt]
+}{\end{enumerate}}
+
+\newenvironment{stddashlist}{%
+    \begin{itemize}[label=---,leftmargin=1.7em,itemsep=2pt,topsep=3pt,parsep=0pt]
+}{\end{itemize}}
+
+\newenvironment{stdnumlist}{%
+    \begin{enumerate}[label=\arabic*),leftmargin=2.35em,itemsep=1pt,topsep=2pt,parsep=0pt]
+}{\end{enumerate}}
+
+\newcommand{\stdnote}[1]{%
+    \par\noindent\hspace{1.8em}{\fontsize{8.6}{10.2}\selectfont NOTE---#1}\par
+}
+
+\newcommand{\term}[1]{\textbf{#1}:}
+\newcommand{\rtiinitiated}{\textdagger}
+\newcommand{\sourceattribution}{Source set: supplied HLA 1516.1 family materials from 2010.}
+
+% Nonfloating standard figure used during page-faithful reconstruction.
+% The source figure stencil already contains its printed caption.
+\newcommand{\stdfigure}[4][\linewidth]{%
+    \par\vspace{4pt}
+    \begin{center}
+    \includegraphics[width=#1,height=.48\textheight,keepaspectratio]{#2}\par
+    \end{center}
+    \vspace{1pt}
+}
+
+
+% Native HLA state-chart/flow-diagram reconstruction support.
+% Geometry is deliberately source-oriented rather than modernized: thin black
+% strokes, rounded Harel-state frames, filled initial markers, bullseye final
+% markers, dashed orthogonal partitions, and compact searchable labels.
+\tikzset{
+    hla diagram/.style={font=\sffamily\fontsize{7.8}{8.7}\selectfont, line width=.38pt, >=Stealth},
+    hla state/.style={draw, rounded corners=2.0pt, align=center, inner xsep=4pt, inner ysep=3.5pt, minimum height=7mm},
+    hla superstate/.style={draw, rounded corners=12pt},
+    hla transition/.style={->, line width=.50pt},
+    hla thin transition/.style={->, line width=.38pt},
+    hla partition/.style={dash pattern=on 2.3pt off 2.1pt, line width=.35pt},
+    hla tab/.style={draw, fill=white, inner xsep=3.5pt, inner ysep=1.4pt, align=center},
+    hla caption/.style={font=\sffamily\bfseries\fontsize{9.2}{10.4}\selectfont, align=center},
+    hla title/.style={font=\sffamily\bfseries\fontsize{9.4}{10.6}\selectfont, align=center},
+    hla small/.style={font=\sffamily\fontsize{6.9}{7.8}\selectfont, align=center},
+    hla tiny/.style={font=\sffamily\fontsize{4.9}{5.7}\selectfont, align=center}
+}
+\newcommand{\hlainitial}[2]{\fill (#1,#2) circle[radius=1.55pt];}
+\newcommand{\hlafinal}[2]{%
+    \draw (#1,#2) circle[radius=3.2pt];%
+    \fill (#1,#2) circle[radius=1.55pt];%
+}
+\newcommand{\hlahistory}[3]{%
+    \draw (#1,#2) circle[radius=3.8pt] node[font=\sffamily\fontsize{7.6}{8}\selectfont] {#3};%
+}
+\newcommand{\stdnativefigure}[2][\linewidth]{%
+    \par\vspace{4pt}%
+    \begin{center}%
+    \filename@parse{#2}%
+    \def\HLANativePDFExtension{pdf}%
+    \ifx\filename@ext\HLANativePDFExtension
+        \includegraphics[width=#1,keepaspectratio]{#2}%
+    \else
+        \resizebox{#1}{!}{\input{#2}}%
+    \fi\par
+    \end{center}%
+    \vspace{1pt}%
+}
+
+% Generated vector figures use a document-owned caption rather than the
+% caption that was embedded in the legacy TikZ stencil.  Keeping the caption
+% outside the artwork preserves selectable text and makes the one-caption
+% invariant explicit in the generated faithful body.
+\newcommand{\stdsemanticcaption}[1]{%
+    \par\vspace{3pt}%
+    {\sffamily\bfseries\fontsize{9.2}{10.4}\selectfont #1\par}%
+    \vspace{1pt}%
+}
+\newcommand{\stdsemanticfigure}[3][\linewidth]{%
+    \par\vspace{4pt}%
+    \begin{center}%
+    \includegraphics[width=#1,keepaspectratio]{#2}\par
+    \stdsemanticcaption{#3}%
+    \end{center}%
+    \vspace{1pt}%
+}
+
+% Service direction is semantic metadata, not color coding.  The 2010 body
+% retains its numbered subsection headings, while the generated modernization
+% layer adds this quiet line directly beneath each service title.
+\newcommand{\HLAServiceDirectionLine}[1]{%
+    \par\vspace{-3pt}\noindent
+    {\RLSans\fontsize{7.1pt}{8.5pt}\selectfont
+    \addfontfeatures{LetterSpace=0.8}\color{RLBlue}\MakeUppercase{#1}\par}%
+    \vspace{3pt}%
+}
+
+\newcommand{\stdsemanticlandscapefigure}[3]{%
+    % RLLandscapePage establishes true landscape media dimensions. Do not
+    % nest pdflscape here: a second rotation would put page furniture on the
+    % short edges and leave following prose on the figure page.
+    \begin{RLLandscapePage}%
+    \thispagestyle{rl}%
+    \par\vspace*{4pt}%
+    {\sffamily\bfseries\fontsize{10.5}{12.5}\selectfont\color{RLBlueDeep}%
+        FIGURE~#1\par}%
+    \vspace{7pt}%
+    \begin{center}%
+    \includegraphics[width=.975\linewidth,height=.80\textheight,keepaspectratio]{#3}\par
+    \stdsemanticcaption{Figure #1---#2}%
+    \end{center}%
+    \vspace{2pt}%
+    \end{RLLandscapePage}%
+}
+
+
+% Tighter spacing for source pages that contain dense service metadata.
+% Kept local by the environment so earlier reconstructed clauses are unchanged.
+\newenvironment{compactstdpage}{%
+    \begingroup
+    \setlength{\parskip}{4.6pt plus .7pt minus .7pt}%
+    \titlespacing*{\subsection}{0pt}{9pt plus 1pt minus 1pt}{4.5pt}%
+    \titlespacing*{\subsubsection}{0pt}{6.5pt plus 1pt minus .5pt}{3.2pt}%
+    \titlespacing*{\paragraph}{0pt}{5.5pt plus 1pt minus .5pt}{3pt}%
+    \titlespacing*{\subparagraph}{0pt}{5.0pt plus 1pt minus .5pt}{2.8pt}%
+}{%
+    \endgroup
+}
+
+
+% Literal-label list helpers for page-faithful reconstruction where source
+% lists continue across physical page boundaries or deliberately contain
+% non-sequential labels/errata.
+\newcommand{\stdliteralitem}[2]{%
+    \par\noindent\hangindent=2.35em\hangafter=1%
+    \hspace*{1.0em}\makebox[1.35em][l]{#1}#2\par
+}
+\newcommand{\stdliteralsubitem}[2]{%
+    \par\noindent\hangindent=3.55em\hangafter=1%
+    \hspace*{2.2em}\makebox[1.35em][l]{#1}#2\par
+}
+\newcommand{\stdliteraldashitem}[1]{%
+    \par\noindent\hangindent=3.55em\hangafter=1%
+    \hspace*{2.2em}\makebox[1.35em][l]{---}#1\par
+}
+
+
+% MOM OMT table helpers. Each source table page is kept as an explicit page so
+% the standard's page numbering remains stable while the table data stays
+% native, searchable LaTeX rather than a page raster.
+\newcommand{\momtabletitle}[1]{%
+    \par\vspace{2pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\RLSans\bfseries\fontsize{9.4}{10.6}\selectfont\color{RLBlueDeep}#1}\par
+        }%
+    }%
+    \par\vspace{3pt}%
+}
+\newenvironment{momtabletypeset}[1][6.1]{%
+    \begingroup
+    \fontsize{#1}{9.2}\selectfont
+    \setlength{\tabcolsep}{1.65pt}%
+    \renewcommand{\arraystretch}{1.50}%
+    \arrayrulecolor{RLLine}%
+    \setlength{\arrayrulewidth}{0.35pt}%
+    \sloppy
+    \hbadness=10001\relax
+}{\par\endgroup}
+\newcolumntype{Y}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+
+% Annex helpers used by the API annexes. These are deliberately unnumbered by
+% LaTeX so the source's lettered Annex headings remain independent of article
+% section numbering.
+\newcommand{\stdannexheading}[3]{%
+    \par\noindent{\sffamily\bfseries\fontsize{13.0}{15.2}\selectfont Annex #1}\par
+    \vspace{8pt}%
+    \noindent{\fontsize{10.2}{12.0}\selectfont (#2)}\par
+    \vspace{11pt}%
+    \noindent{\sffamily\bfseries\fontsize{12.2}{14.2}\selectfont #3}\par
+    \vspace{4pt}%
+}
+
+\newenvironment{stdfileblock}{%
+    \par\vspace{3pt}%
+    \begingroup
+    \leftskip=0.86in
+    \rightskip=0pt
+    \parindent=0pt
+    \parskip=0pt
+    \fontsize{8.35}{9.45}\selectfont
+}{%
+    \par\endgroup
+}
+\newcommand{\stdfileline}[1]{\noindent #1\par}
+\newcommand{\stdfilegap}{\vspace{7.0pt}}
+\newcommand{\stdapilinkblue}[1]{%
+    \href{#1}{\textcolor{blue}{\begingroup\urlstyle{same}\nolinkurl{#1}\endgroup}}%
+}
+\newcommand{\stdapilinkblack}[1]{%
+    \href{#1}{\begingroup\urlstyle{same}\nolinkurl{#1}\endgroup}%
+}
+
+
+% Annex rationale heading helpers.
+\newcommand{\stdannexsection}[2]{%
+    \par\vspace{10pt}%
+    \noindent{\sffamily\bfseries\fontsize{10.8}{12.8}\selectfont #1\quad #2}\par
+    \vspace{3pt}%
+}
+\newcommand{\stdannexsubsection}[2]{%
+    \par\vspace{8pt}%
+    \noindent{\sffamily\bfseries\fontsize{10.2}{12.0}\selectfont #1\quad #2}\par
+    \vspace{2.5pt}%
+}
+
+
+% Prose annex pages use the normal body paragraph rhythm rather than the
+% denser service-metadata rhythm used by compactstdpage.
+\newenvironment{annexstdpage}{%
+    \begingroup
+    \setlength{\parskip}{7.2pt plus 1pt minus 1pt}%
+}{%
+    \endgroup
+}
+
+% Native landscape diagram rotated within a portrait standard page. The TikZ
+% source remains in its natural landscape orientation; the caption stays
+% horizontal, matching the printed standard.
+\newcommand{\stdrotatednativefigure}[3][.62\textheight]{%
+    \par\vspace{3pt}%
+    \begin{center}%
+    \rotatebox{90}{\resizebox{#1}{!}{\input{#2}}}\par
+    \vspace{4pt}%
+    {\sffamily\bfseries\fontsize{9.2}{10.4}\selectfont #3}\par
+    \end{center}%
+    \vspace{1pt}%
+}
+
+% Choice/conditional connector used by declaration-management state charts.
+\newcommand{\hlachoice}[3]{%
+    \draw (#1,#2) circle[radius=3.8pt]
+    node[font=\sffamily\fontsize{7.4}{7.8}\selectfont] {#3};%
+}

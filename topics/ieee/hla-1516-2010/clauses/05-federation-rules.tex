@@ -1,0 +1,98 @@
+% Clause 5: source PDF pages 32--33 / printed pages 20--21.
+% Fidelity pass 03: source-calibrated subclause spacing and paragraph rhythm.
+% The source uses an additional blank 6 pt between a rule statement and its
+% explanatory paragraph (and between the three Rule 3 explanatory paragraphs).
+% Forced line breaks preserve source line membership in the reconstructed body.
+
+\newcommand{\federationrulesubclause}[1]{%
+    \par\vspace{11.4pt}%
+    {\sffamily\bfseries\fontsize{10.98pt}{13.2pt}\selectfont #1\par}%
+    \vspace{6.6pt}%
+}
+
+\vspace{2.1pt}
+\clause{5. Federation rules}
+
+This clause describes the five rules that apply to HLA federations. Rationale for the inclusion of each rule is\linebreak
+located in Annex A.
+
+\federationrulesubclause{5.1 Rule 1}
+
+\textit{Federations shall have an HLA FOM, documented in accordance with the HLA OMT.}
+\vspace{6pt}
+
+All data to be exchanged in accordance with the HLA shall be documented in a FOM. The FOM is specified\linebreak
+using one or more FOM modules and one MOM and Initialization Module (MIM). A FOM shall document\linebreak
+the agreement among federates on data to be exchanged using the HLA services during federation execution\linebreak
+and the minimal set of conditions of the data exchange (e.g., updates to be sent when changes exceed a\linebreak
+certain value). As such, a FOM is an essential element in defining a federation. The HLA does not prescribe\linebreak
+which data are included in a FOM (this task is the responsibility of the federation user and developer).\linebreak
+FOMs shall be documented in the format prescribed in IEEE Std 1516.2-2010 to support reuse of a FOM by\linebreak
+new users for their purposes.
+
+\federationrulesubclause{5.2 Rule 2}
+
+\textit{In a federation, all simulation-associated object instance representation shall be in the federates, not in the\linebreak
+RTI.}
+\vspace{6pt}
+
+In the HLA, the responsibility for maintaining the values of HLA object instance attributes shall take place\linebreak
+in the joined federate. In an HLA federation, all joined federate-associated instance attributes shall be owned
+
+\newpage
+
+by federates, not by the RTI. However, the RTI may own instance attributes associated with the federation\linebreak
+MOM. The RTI may use data about instance attributes and interactions to support RTI services (e.g.,\linebreak
+Declaration Management), but these data are merely used by the RTI, not changed.
+
+\federationrulesubclause{5.3 Rule 3}
+
+\textit{During a federation execution, all exchange of FOM data among joined federates shall occur via the RTI.}
+\vspace{6pt}
+
+The HLA federate interface specification (see IEEE Std 1516.1-2010) specifies a set of interfaces to services\linebreak
+in the RTI to support coordinated exchange of instance attribute values and interactions in accordance with a\linebreak
+federation's FOM. Under the HLA, intercommunication of FOM data among joined federates participating\linebreak
+in a given federation execution shall be executed by the exchange of data via the RTI services. Based on the\linebreak
+FOM, joined federates shall identify to the RTI what information they will provide and require, along with\linebreak
+instance attribute and interaction data corresponding to the changing state of object instances in the joined\linebreak
+federate. The RTI shall then provide the coordination, synchronization, and data exchange among the joined\linebreak
+federates to permit a coherent execution of the federation.
+\vspace{6pt}
+
+Ensuring that the right data are provided at the right times and that the data are used in a substantively\linebreak
+correct way shall be the responsibility of the joined federates. The RTI shall ensure that the data are\linebreak
+delivered using joined federates in accordance with their declared requirements (e.g., which data, reliability\linebreak
+of transport, event ordering) to provide a common view of shared data across a given federation execution,\linebreak
+as specified in the FOM.
+\vspace{6pt}
+
+RTI services shall be used to ensure that the coordination needs of the distributed applications (federations)\linebreak
+are met in a consistent way across all participants in a federation and over the life of a federation execution.
+
+\federationrulesubclause{5.4 Rule 4}
+
+\textit{During a federation execution, joined federates shall interact with the RTI in accordance with the HLA\linebreak
+interface specification.}
+\vspace{6pt}
+
+The HLA provides a specification for a standard interface between the federate application and the RTI.\linebreak
+Joined federates shall use this standard interface to access RTI services (see IEEE Std 1516.1-2010). The\linebreak
+specification shall define how federate applications interact with the infrastructure. However, because the\linebreak
+interface and the RTI will be used for a wide variety of applications requiring data exchange of diverse\linebreak
+characteristics, the interface specification says nothing about the specific federate data to be exchanged over\linebreak
+the interface.
+
+\federationrulesubclause{5.5 Rule 5}
+
+\textit{During a federation execution, an instance attribute shall be owned by, at most, one joined federate at any\linebreak
+given time.}
+\vspace{6pt}
+
+The HLA allows for different joined federates to own different attributes of the same object instance (e.g., a\linebreak
+simulation of an aircraft might own the location of the airborne sensor, whereas a sensor system model\linebreak
+might own other instance attributes of the sensor). To ensure data coherency across the federation, at most,\linebreak
+one joined federate may own any given instance attribute of an object instance at any given time. Joined\linebreak
+federates may request that the ownership of instance attributes be acquired or divested, dynamically, during\linebreak
+federation execution. Thus, ownership can be transferred, dynamically during execution, from one joined\linebreak
+federate to another.

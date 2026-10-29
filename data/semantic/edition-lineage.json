@@ -1,0 +1,558 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "document_id": "hla-1516-2010",
+      "standard_id": "ieee-1516",
+      "edition": "2010",
+      "title": "IEEE 1516-2010 — Framework and Rules",
+      "root": "topics/ieee/hla-1516-2010",
+      "profile_id": "hla-2010",
+      "migration": "M9"
+    },
+    {
+      "document_id": "hla-1516.1-2010",
+      "standard_id": "ieee-1516.1",
+      "edition": "2010",
+      "title": "IEEE 1516.1-2010 — Federate Interface Specification",
+      "root": "topics/ieee/hla-1516.1-2010",
+      "profile_id": "hla-2010",
+      "migration": "M10"
+    },
+    {
+      "document_id": "hla-1516.2-2010",
+      "standard_id": "ieee-1516.2",
+      "edition": "2010",
+      "title": "IEEE 1516.2-2010 — Object Model Template Specification",
+      "root": "topics/ieee/hla-1516.2-2010",
+      "profile_id": "hla-2010",
+      "migration": "M11"
+    },
+    {
+      "document_id": "hla-1516-2025",
+      "standard_id": "ieee-1516",
+      "edition": "2025",
+      "title": "IEEE 1516-2025 — Framework and Rules",
+      "root": "topics/ieee/hla-1516-2025",
+      "profile_id": "hla-2025",
+      "migration": "M9"
+    },
+    {
+      "document_id": "hla-1516.1-2025",
+      "standard_id": "ieee-1516.1",
+      "edition": "2025",
+      "title": "IEEE 1516.1-2025 — Federate Interface Specification",
+      "root": "topics/ieee/hla-1516.1-2025",
+      "profile_id": "hla-2025",
+      "migration": "M10"
+    },
+    {
+      "document_id": "hla-1516.2-2025",
+      "standard_id": "ieee-1516.2",
+      "edition": "2025",
+      "title": "IEEE 1516.2-2025 — Object Model Template Specification",
+      "root": "topics/ieee/hla-1516.2-2025",
+      "profile_id": "hla-2025",
+      "migration": "M11"
+    }
+  ],
+  "relations": [
+    {
+      "id": "hla-1516.1-state-machine-federation-execution",
+      "stable_id": "hla-1516.1.state-machine.federation-execution",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-01",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federation-execution",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 1 and 2025 federation-execution surface describe the same federation-execution lifecycle, but the 2025 semantic graph is restructured and is not unchanged."
+    },
+    {
+      "id": "hla-1516.1-state-machine-federate-lifetime",
+      "stable_id": "hla-1516.1.state-machine.federate-lifetime",
+      "relation": "merged",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-03",
+          "kind": "state-machine"
+        },
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-04",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federate-lifetime",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 federate lifetime and save/restore surfaces are represented as one expanded 2025 federate-lifetime semantic machine."
+    },
+    {
+      "id": "hla-1516.1-state-machine-normal-activity",
+      "stable_id": "hla-1516.1.state-machine.normal-activity-permitted",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-05",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "normal-activity-permitted",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 5 normal-activity surface corresponds to the 2025 normal-activity-permitted machine, with expanded state detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-federation-sync-overview",
+      "stable_id": "hla-1516.1.state-machine.federation-execution-sync-overview",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-06",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federation-execution-sync-overview",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 6 synchronization overview is retained as the 2025 federation-execution-sync-overview family, with a richer semantic state inventory."
+    },
+    {
+      "id": "hla-1516.1-state-machine-global-sync",
+      "stable_id": "hla-1516.1.state-machine.global-synchronization-label",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-07",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "global-synchronization-label",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 7 global synchronization-label family remains present in 2025 but has revised state and event detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-awaiting-sync",
+      "stable_id": "hla-1516.1.state-machine.awaiting-synchronization",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-08",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "awaiting-synchronization",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 8 awaiting-synchronization family remains present in 2025 with revised lifecycle detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-local-sync",
+      "stable_id": "hla-1516.1.state-machine.local-synchronization-label",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-09",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "local-synchronization-label",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Figure 9 local synchronization-label family remains present in 2025 with revised state and event detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-object-class",
+      "stable_id": "hla-1516.1.state-machine.object-class",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-10",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "object-class",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Object class diagram and 2025 object-class machine share the same core lifecycle, while the 2025 record adds and renames state detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-class-attribute",
+      "stable_id": "hla-1516.1.state-machine.class-attribute",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-11",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "class-attribute",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Class attribute diagram corresponds to the 2025 class-attribute machine, with publication/subscription state structure revised."
+    },
+    {
+      "id": "hla-1516.1-state-machine-privilege-delete",
+      "stable_id": "hla-1516.1.state-machine.class-attribute-privilege-to-delete-object",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-12",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "class-attribute-privilege-to-delete-object",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 privilege-to-delete-object diagram corresponds to the expanded 2025 class-attribute-privilege-to-delete-object machine."
+    },
+    {
+      "id": "hla-1516.1-state-machine-interaction-class",
+      "stable_id": "hla-1516.1.state-machine.interaction-class",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-13",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "interaction-class",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Interaction class diagram corresponds to the 2025 interaction-class machine, with control-send and relevance states expanded."
+    },
+    {
+      "id": "hla-1516.1-state-machine-object-instance-known",
+      "stable_id": "hla-1516.1.state-machine.object-instance-known",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-14",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "object-instance-known",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 Object instance known diagram corresponds to the 2025 object-instance-known machine, which expands the concurrent state model."
+    },
+    {
+      "id": "hla-1516.1-state-machine-ownership-implications",
+      "stable_id": "hla-1516.1.state-machine.ownership-implications",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-15",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "ownership-implications",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 ownership-implications diagram corresponds to the 2025 ownership-implications machine, with revised state and transition detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-establishing-ownership",
+      "stable_id": "hla-1516.1.state-machine.establishing-ownership",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-16",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "establishing-ownership",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 establishing-ownership diagram corresponds to the 2025 establishing-ownership machine, with a revised ownership workflow."
+    },
+    {
+      "id": "hla-1516.1-state-machine-temporal-state",
+      "stable_id": "hla-1516.1.state-machine.temporal-state",
+      "relation": "revised",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [
+        {
+          "document_id": "hla-1516.1-2010",
+          "record_id": "hla-1516.1-2010:figure-17",
+          "kind": "state-machine"
+        }
+      ],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "temporal-state",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2010 temporal-state diagram corresponds to the 2025 temporal-state machine, with revised temporal and message-flow detail."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-federate-connection",
+      "stable_id": "hla-1516.1.state-machine.added.federate-connection-reconnection",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federate-connection-reconnection",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "No 2010 state-machine surface covers the 2025 federate connection and reconnection lifecycle."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-rti-connection",
+      "stable_id": "hla-1516.1.state-machine.added.rti-connection-reconnection",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "rti-connection-reconnection",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "No 2010 state-machine surface covers the 2025 RTI connection and reconnection lifecycle."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-federate-session-startup",
+      "stable_id": "hla-1516.1.state-machine.added.federate-session-startup",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "baseline_records": [],
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federate-session-startup",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 federate session startup state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-federate-resume",
+      "stable_id": "hla-1516.1.state-machine.added.federate-resume",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federate-resume",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 federate resume state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-federate-exception",
+      "stable_id": "hla-1516.1.state-machine.added.federate-exception",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "federate-exception",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 federate exception state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-rti-port",
+      "stable_id": "hla-1516.1.state-machine.added.rti-port-handling",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "rti-port-handling",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 RTI port handling state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-rti-session-startup",
+      "stable_id": "hla-1516.1.state-machine.added.rti-session-startup",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "rti-session-startup",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 RTI session startup state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-rti-resume",
+      "stable_id": "hla-1516.1.state-machine.added.rti-resume",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "rti-resume",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 RTI resume state machine has no corresponding 2010 state-machine record."
+    },
+    {
+      "id": "hla-1516.1-state-machine-added-rti-exception",
+      "stable_id": "hla-1516.1.state-machine.added.rti-exception-handling",
+      "relation": "added",
+      "baseline_document_id": "hla-1516.1-2010",
+      "target_document_id": "hla-1516.1-2025",
+      "target_records": [
+        {
+          "document_id": "hla-1516.1-2025",
+          "record_id": "rti-exception-handling",
+          "kind": "state-machine"
+        }
+      ],
+      "review_status": "reviewed",
+      "rationale": "The 2025 RTI exception-handling state machine has no corresponding 2010 state-machine record."
+    }
+  ]
+}

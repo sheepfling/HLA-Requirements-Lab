@@ -1,0 +1,82 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-tables.sty}[2026/08/23 v0.1 Requirements Lab table taxonomy]
+
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{xparse}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcommand{\RLTableHeader}[1]{\strut\RLSans\bfseries\color{RLBlueDeep}#1}
+\newcommand{\RLTableHeaderCell}[1]{\RLTableHeader{#1}}
+\newcommand{\RLTableHeaderBlock}[2]{%
+    \parbox{#1}{\RLSans\bfseries\fontsize{7.8pt}{9.2pt}\selectfont\color{RLBlueDeep}#2}%
+}
+\newcommand{\RLTableGroupHeader}[1]{%
+    {\RLSans\bfseries\fontsize{7.2pt}{8.5pt}\selectfont\addfontfeatures{LetterSpace=1.1}\color{RLBlue}\MakeUppercase{#1}}%
+}
+% The header band is a single colortbl row, matching the golden-master
+% prototype rather than a collection of individually filled label chips.
+\newcommand{\RLProductionHeaderBand}{\rowcolor{RLTableBand}}
+\newcommand{\RLProductionHeaderSpace}{\addlinespace[1.5pt]}
+\newcommand{\RLProductionTopRule}{\toprule[0.70pt]}
+\newcommand{\RLProductionHeaderRule}{\midrule[0.45pt]}
+\newcommand{\RLProductionRowRule}{\midrule[0.20pt]}
+\newcommand{\RLProductionBottomRule}{\bottomrule[0.80pt]}
+\newcommand{\RLTableCaption}[1]{%
+    \par\vspace{4pt}\noindent
+    {\RLSans\fontsize{7.4pt}{9pt}\selectfont\addfontfeatures{LetterSpace=1.2}\MakeUppercase{#1}}\par
+    \vspace{5pt}
+}
+\newcommand{\RLInlineTableCaption}[2]{%
+    \par\vspace{4pt}\noindent
+    {\RLSans\fontsize{7.4pt}{9pt}\selectfont\addfontfeatures{LetterSpace=1.2}\MakeUppercase{TABLE~#1}}\hspace{6pt}%
+    {\RLSans\bfseries\fontsize{9.3pt}{11.2pt}\selectfont #2}\par
+    \vspace{5pt}
+}
+
+\NewDocumentEnvironment{RLReferenceTable}{m m +b}{%
+    \RLTableCaption{#1}\phantomsection\label{#2}
+        \begin{tabularx}{\linewidth}{@{}L{0.27\linewidth}Y@{}}
+        \toprule
+        \RLTableHeaderCell{Term} & \RLTableHeaderCell{Meaning} \\
+        \midrule
+        #3
+        \bottomrule
+        \end{tabularx}
+}{ }
+
+\NewDocumentEnvironment{RLRegistryTable}{m m +b}{%
+    \RLTableCaption{#1}\phantomsection\label{#2}
+        \begin{tabularx}{\linewidth}{@{}L{0.22\linewidth}L{0.24\linewidth}Y@{}}
+        \toprule
+        \RLTableHeaderCell{Identifier} & \RLTableHeaderCell{Category} & \RLTableHeaderCell{Description} \\
+        \midrule
+        #3
+        \bottomrule
+        \end{tabularx}
+}{ }
+
+\NewDocumentEnvironment{RLDenseTable}{m m m +b}{%
+    \RLTableCaption{#1}\phantomsection\label{#2}
+        \begin{longtable}{@{}#3@{}}
+        \toprule
+        #4
+        \bottomrule
+    \end{longtable}
+}{ }
+
+\NewDocumentEnvironment{RLLandscapeTable}{m m m +b}{%
+    \begin{RLLandscapePage}
+        \RLTableCaption{#1}\phantomsection\label{#2}
+        \begin{longtable}{@{}#3@{}}
+        #4
+        \end{longtable}
+    \end{RLLandscapePage}
+}{ }
+
+\newcommand{\RLContinuedHeader}[1]{\multicolumn{1}{l}{\RLSans\fontsize{7.8pt}{9.3pt}\selectfont\color{RLMid}#1}\tabularnewline}

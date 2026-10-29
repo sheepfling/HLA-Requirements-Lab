@@ -1,0 +1,239 @@
+% Figure 15 - Implications of ownership of instance attribute (i, k, j)
+% Independently revalidated against IEEE Std 1516.1-2010 source physical page 104 / standard page 90.
+% Natural coordinates follow the embedded 863 x 710 one-bit source image.
+% Edge IDs correspond to audit/figure15/edges.csv.
+\begin{tikzpicture}[
+    x=1pt,
+    y=-1pt,
+    line cap=round,
+    line join=round,
+    f15 stroke/.style={draw=black,line width=.90pt},
+    f15 transition/.style={draw=black,line width=.92pt,-{Stealth[length=7.0pt,width=5.8pt]}},
+    f15 title/.style={font=\RLSans\bfseries\fontsize{23.1}{24.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.105},
+    f15 tab/.style={font=\RLSans\mdseries\fontsize{11.4}{12.0}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.11},
+    f15 text/.style={font=\RLSans\mdseries\fontsize{11.8}{12.5}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.18},
+    f15 small/.style={font=\RLSans\mdseries\fontsize{11.5}{12.8}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13},
+    f15 tiny/.style={font=\RLSans\mdseries\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.44},
+    f15 topguard/.style={font=\RLSans\mdseries\fontsize{9.9}{10.7}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.37},
+    f15 service/.style={font=\RLSans\mdseries\fontsize{11.9}{13.2}\selectfont,align=center,anchor=center,inner sep=0pt,xscale=1.13}
+]
+    \path[use as bounding box] (0,0) rectangle (863,710);
+
+    % F15-S00: outer composite state.
+    \draw[f15 stroke]
+    (86,34) -- (778,34)
+    .. controls (819,34) and (852,67) .. (852,108)
+    -- (852,592)
+    .. controls (852,633) and (819,666) .. (778,666)
+    -- (86,666)
+    .. controls (45,666) and (12,633) .. (12,592)
+    -- (12,108)
+    .. controls (12,67) and (45,34) .. (86,34)
+    -- cycle;
+    \draw[f15 stroke] (12,101) -- (852,101);
+    \node[f15 title] at (432,69) {Implications of Ownership of Instance Attribute (i, k, j)};
+
+    % ------------------------------------------------------------------
+    % Outer ownership entry selection.
+    % ------------------------------------------------------------------
+    % F15-P01 outer initial pseudo-state.
+    \fill (481,113) circle[radius=7pt];
+    % F15-P02 outer conditional connector C.
+    \draw[f15 stroke] (436,141) circle[radius=14pt];
+    \node[font=\RLSans\mdseries\fontsize{16}{16}\selectfont,inner sep=0pt] at (436,141) {C};
+    % F15-E01 outer initial -> outer C.
+    \draw[f15 transition] (475,119) -- (447,134);
+
+    % ------------------------------------------------------------------
+    % F15-S01: Is Owned composite.
+    % ------------------------------------------------------------------
+    \draw[f15 stroke]
+    (95,156) -- (346,156)
+    .. controls (369,156) and (388,175) .. (388,198)
+    -- (388,588)
+    .. controls (388,611) and (369,630) .. (346,630)
+    -- (95,630)
+    .. controls (72,630) and (53,611) .. (53,588)
+    -- (53,198)
+    .. controls (53,175) and (72,156) .. (95,156)
+    -- cycle;
+    \draw[f15 stroke] (53,184) -- (127,184) -- (127,156);
+    \node[f15 tab] at (91,171) {Is Owned};
+
+    % F15-E02 outer C -> Is Owned boundary.
+    \draw[f15 transition] (422,143)
+    .. controls (384,143) and (316,143) .. (270,155);
+    \node[f15 topguard] at (294,126) {$[$ Register $\wedge$ in \textquotedbl Published (i, j)\textquotedbl{} $]$};
+
+    % F15-P03 owned deep-history pseudo-state.
+    \draw[f15 stroke] (96,208) circle[radius=17pt];
+    \node[font=\RLSans\mdseries\fontsize{20}{20}\selectfont,inner sep=0pt] at (94,209) {H};
+    \node[font=\fontsize{10.5}{10.5}\selectfont,inner sep=0pt] at (104,201) {$\ast$};
+    % F15-E06 owned boundary -> H*.
+    \draw[f15 transition] (185,156)
+    .. controls (185,188) and (150,208) .. (114,208);
+    \node[f15 service] at (240,197) {Update Attr Values\\or\\Provide Update\textdagger{}/Update Attr Values};
+
+    % F15-P04 owned initial and F15-P05 owned conditional C.
+    \fill (366,208) circle[radius=7pt];
+    \draw[f15 stroke] (324,241) circle[radius=15pt];
+    \node[font=\RLSans\mdseries\fontsize{17}{17}\selectfont,inner sep=0pt] at (324,241) {C};
+    % F15-E07 owned initial -> owned C.
+    \draw[f15 transition] (360,214) -- (337,231);
+
+    % F15-S02 No Control Updates.
+    \draw[f15 stroke,rounded corners=7pt] (80,276) rectangle (169,329);
+    \node[f15 text] at (124.5,305.0) {No Control\\Updates};
+    % F15-E08 owned C -> No Control Updates.
+    \draw[f15 transition] (311,248) -- (173,294);
+    \node[f15 tiny] at (245,300) {$[$ Attribute\\Relevance is disabled $]$};
+
+    % F15-S03 Control Updates In Use composite.
+    \draw[f15 stroke]
+    (94,397) -- (351,397)
+    .. controls (367,397) and (379,410) .. (379,426)
+    -- (379,586)
+    .. controls (379,602) and (366,615) .. (350,615)
+    -- (95,615)
+    .. controls (79,615) and (66,602) .. (66,586)
+    -- (66,426)
+    .. controls (66,410) and (79,397) .. (94,397)
+    -- cycle;
+    \draw[f15 stroke] (66,430) -- (177,430) -- (177,397);
+    \node[f15 tab] at (121.5,414) {Control Updates\\In Use};
+
+    % F15-E09 owned C -> Control Updates In Use boundary.
+    \draw[f15 transition] (324,256) -- (324,394);
+    \node[f15 tiny] at (353,304) {$[$ Attribute\\Relevance\\is enabled $]$};
+    % F15-E10 No Control Updates -> Control Updates In Use.
+    \draw[f15 transition] (100,329) -- (100,394);
+    \node[f15 tiny] at (112,361) {$[$ Attribute Relevance\\is enabled $]$};
+    % F15-E11 Control Updates In Use -> No Control Updates.
+    \draw[f15 transition] (246,397) -- (172,330);
+    \node[f15 tiny] at (247,362) {$[$ Attribute Relevance\\is disabled $]$};
+
+    % F15-P06 nested owned initial -> relevance unknown.
+    \fill (298,421) circle[radius=7pt];
+    \node[f15 text,draw=black,line width=.90pt,rounded corners=7pt,minimum width=89pt,minimum height=54pt] (relunknown) at (224.5,469) {Attribute\\Relevance\\Unknown};
+    % F15-E12 nested initial -> Attribute Relevance Unknown.
+    \draw[f15 transition] (292,427) -- (267,442);
+
+    % F15-S05 / F15-S06 resolved update states.
+    \draw[f15 stroke,rounded corners=7pt] (83,544) rectangle (172,598);
+    \node[f15 text] at (127.5,573) {Updates\\Turned On};
+    \draw[f15 stroke,rounded corners=7pt] (275,545) rectangle (364,598);
+    \node[f15 text] at (319.5,573.5) {Updates\\Turned Off};
+
+    % F15-E13 relevance unknown -> Updates Turned On.
+    \draw[f15 transition] (180,469) -- (128,541);
+    \node[f15 small] at (126,474) {Turn Updates\\On for Object\\Instance \textdagger};
+    % F15-E14 relevance unknown -> Updates Turned Off.
+    \draw[f15 transition] (269,469) -- (319,542);
+    \node[f15 small] at (320,474) {Turn Updates\\Off for Object\\Instance \textdagger};
+    % F15-E15 Updates Turned On -> Updates Turned Off.
+    \draw[f15 transition] (172,558) -- (272,558);
+    \node[f15 small] at (223,535) {Turn Updates Off\\for Object Instance \textdagger};
+    % F15-E16 Updates Turned Off -> Updates Turned On.
+    \draw[f15 transition] (275,580) -- (175,580);
+    \node[f15 small] at (223,605) {Turn Updates On\\for Object Instance \textdagger};
+
+    % ------------------------------------------------------------------
+    % F15-S07: Is Not Owned composite.
+    % ------------------------------------------------------------------
+    \draw[f15 stroke]
+    (523,156) -- (772,156)
+    .. controls (795,156) and (814,175) .. (814,198)
+    -- (814,588)
+    .. controls (814,611) and (795,630) .. (772,630)
+    -- (523,630)
+    .. controls (500,630) and (481,611) .. (481,588)
+    -- (481,198)
+    .. controls (481,175) and (500,156) .. (523,156)
+    -- cycle;
+    \draw[f15 stroke] (481,183) -- (576,183) -- (576,156);
+    \node[f15 tab] at (528.5,170) {Is Not Owned};
+
+    % F15-E03 outer C -> Is Not Owned boundary.
+    \draw[f15 transition] (450,143)
+    .. controls (493,143) and (606,143) .. (663,155);
+    \node[f15 topguard] at (584,126) {$[$ Discover\textdagger{} $\vee$ in \textquotedbl Unpublished (i, j)\textquotedbl{} $]$};
+
+    % F15-P07 not-owned deep-history pseudo-state.
+    \draw[f15 stroke] (542,210) circle[radius=17pt];
+    \node[font=\RLSans\mdseries\fontsize{20}{20}\selectfont,inner sep=0pt] at (540,211) {H};
+    \node[font=\fontsize{10.5}{10.5}\selectfont,inner sep=0pt] at (550,203) {$\ast$};
+    % F15-E17 not-owned boundary -> H*.
+    \draw[f15 transition] (621,156)
+    .. controls (621,187) and (587,210) .. (560,210);
+    \node[f15 service] at (653,197) {Reflect\\Attribute Values\textdagger{}\\$[$ in \textquotedbl Subscribed (i, j)\textquotedbl{} $]$};
+
+    % F15-P08 not-owned initial and F15-P09 conditional C.
+    \fill (796,210) circle[radius=7pt];
+    \draw[f15 stroke] (749,239) circle[radius=14pt];
+    \node[font=\RLSans\mdseries\fontsize{16}{16}\selectfont,inner sep=0pt] at (749,239) {C};
+    % F15-E18 not-owned initial -> C.
+    \draw[f15 transition] (790,216) -- (760,231);
+
+    % F15-S08 No Scope Notification.
+    \draw[f15 stroke,rounded corners=7pt] (503,278) rectangle (592,331);
+    \node[f15 text] at (547.5,306.5) {No Scope\\Notification};
+    % F15-E19 not-owned C -> No Scope Notification.
+    \draw[f15 transition] (736,246) -- (596,300);
+    \node[f15 tiny] at (665,301) {$[$ Attribute Scope\\Advisory is disabled $]$};
+
+    % F15-S09 Notify of Scope In Use composite.
+    \draw[f15 stroke]
+    (518,397) -- (778,397)
+    .. controls (794,397) and (806,410) .. (806,426)
+    -- (806,586)
+    .. controls (806,602) and (793,615) .. (777,615)
+    -- (519,615)
+    .. controls (503,615) and (490,602) .. (490,586)
+    -- (490,426)
+    .. controls (490,410) and (503,397) .. (518,397)
+    -- cycle;
+    \draw[f15 stroke] (490,433) -- (588,433) -- (588,397);
+    \node[f15 tab] at (539,415) {Notify of Scope\\In Use};
+
+    % F15-E20 not-owned C -> Notify of Scope In Use boundary.
+    \draw[f15 transition] (749,253) -- (749,394);
+    \node[f15 tiny] at (781,307) {$[$ Attribute\\Scope\\Advisory\\is enabled $]$};
+    % F15-E21 No Scope Notification -> Notify of Scope In Use.
+    \draw[f15 transition] (547,331) -- (547,394);
+    \node[f15 tiny] at (549,365) {$[$ Attribute Scope\\Advisory is enabled $]$};
+    % F15-E22 Notify of Scope In Use -> No Scope Notification.
+    \draw[f15 transition] (664,397) -- (595,332);
+    \node[f15 tiny] at (667,365) {$[$ Attribute\\Scope Advisory\\is disabled $]$};
+
+    % F15-P10 nested not-owned initial -> scope unknown.
+    \fill (726,421) circle[radius=7pt];
+    \node[f15 text,draw=black,line width=.90pt,rounded corners=7pt,minimum width=89pt,minimum height=53pt] (scopeunknown) at (651.5,471.5) {Attribute\\Scope\\Unknown};
+    % F15-E23 nested initial -> Attribute Scope Unknown.
+    \draw[f15 transition] (720,427) -- (694,443);
+
+    % F15-S11 / F15-S12 resolved scope states.
+    \draw[f15 stroke,rounded corners=7pt] (498,542) rectangle (587,595);
+    \node[f15 text] at (542.5,570.5) {Attribute\\In-Scope};
+    \draw[f15 stroke,rounded corners=7pt] (708,542) rectangle (797,595);
+    \node[f15 text] at (752.5,570.5) {Attribute\\Out-of-Scope};
+
+    % F15-E24 scope unknown -> Attribute In-Scope.
+    \draw[f15 transition] (607,472) -- (543,539);
+    \node[f15 small] at (547,475) {Attribute\\In-Scope\textdagger};
+    % F15-E25 scope unknown -> Attribute Out-of-Scope.
+    \draw[f15 transition] (696,472) -- (752,539);
+    \node[f15 small] at (768,477) {Attribute Out-of-Scope\textdagger{}\\or\\$[$ in \textquotedbl Unsubscribed (i, j)\textquotedbl{} $]$};
+    % F15-E26 Attribute In-Scope -> Attribute Out-of-Scope.
+    \draw[f15 transition] (587,554) -- (705,554);
+    \node[f15 small] at (649,526) {Attribute Out-of-Scope\textdagger{}\\or\\$[$ in \textquotedbl Unsubscribed (i, j)\textquotedbl{} $]$};
+    % F15-E27 Attribute Out-of-Scope -> Attribute In-Scope.
+    \draw[f15 transition] (708,580) -- (590,580);
+    \node[f15 small] at (648,603) {Attribute In-Scope\textdagger};
+
+    % F15-E04 Is Owned -> Is Not Owned when attribute becomes unowned.
+    \draw[f15 transition] (388,263) -- (478,263);
+    \node[f15 tiny] at (433,244) {$[$ in \textquotedbl Unowned\\(i, k, j)\textquotedbl{} $]$};
+    % F15-E05 Is Not Owned -> Is Owned when attribute becomes owned.
+    \draw[f15 transition] (481,515) -- (391,515);
+    \node[f15 tiny] at (433,495) {$[$ in \textquotedbl Owned\\(i, k, j)\textquotedbl{} $]$};
+\end{tikzpicture}

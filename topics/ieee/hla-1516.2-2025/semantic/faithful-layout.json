@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516.2-2025",
+  "segments": [
+    {
+      "id": "interior",
+      "start_sequence": 1,
+      "end_sequence": 123
+    }
+  ]
+}

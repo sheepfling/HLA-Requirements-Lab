@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "publication_id": "hla-rti-compliance-requirements-2010",
+  "title": "HLA 2010 RTI Compliance Requirements",
+  "subtitle": "Generated requirements, operational rules, and evidence readiness for the 2010 HLA corpus",
+  "document_ids": [
+    "hla-1516-2010",
+    "hla-1516.1-2010",
+    "hla-1516.2-2010"
+  ],
+  "scope_statement": "This Lab-authored publication organizes semantic records recovered from the supplied HLA 1516-2010, 1516.1-2010, and 1516.2-2010 source set into an RTI compliance contract. It is generated from the source-owned Pydantic corpus and is intended for requirements tracing, implementation planning, and conformance-test design. It is a derivative requirements view, distinct from the source compilations.",
+  "evidence_boundary": "A planned mapping is an implementation seam, not code evidence. This publication never treats planned or partial mappings as proof of conformance. An RTI can be claimed compliant only after implementation symbols, source locations, tests, and verification results are connected to these records."
+}

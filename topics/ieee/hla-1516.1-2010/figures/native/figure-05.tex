@@ -1,0 +1,101 @@
+\begin{tikzpicture}[
+    x=0.01cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f5 stroke/.style={draw=black,line width=.28pt},
+    f5 transition/.style={draw=black,line width=.34pt,-{Stealth[length=2.20pt,width=2.00pt]}},
+    f5 partition/.style={draw=black,line width=.28pt,dash pattern=on .030cm off .030cm},
+    f5 title/.style={font=\RLSans\bfseries\fontsize{7.20}{7.70}\selectfont,align=center,inner sep=0pt},
+    f5 region/.style={font=\RLSans\mdseries\fontsize{4.05}{4.42}\selectfont,align=center,inner sep=0pt},
+    f5 text/.style={font=\RLSans\mdseries\fontsize{3.28}{3.58}\selectfont,align=center,inner sep=0pt},
+    f5 history/.style={font=\RLSans\mdseries\fontsize{6.40}{6.72}\selectfont,align=center,inner sep=0pt},
+    f5 caption/.style={font=\RLSans\bfseries\fontsize{6.25}{6.82}\selectfont,align=center,inner sep=0pt}
+]
+    \path[use as bounding box] (0,0) rectangle (960,720);
+
+    % The source page places the 960 x 720 figure XObject about 5.4 pt left
+    % of the physical page center while centering the native caption. The scope
+    % shift reproduces that placement without moving the caption.
+    \begin{scope}[xshift=-0.073cm]
+
+        % F05-S00: Normal Activity Permitted outer composite state.
+        \draw[f5 stroke,rounded corners=.75cm] (60,44) rectangle (900,676);
+        \draw[f5 stroke] (60,111) -- (900,111);
+        \node[f5 title] at (481.3,80.25) {\scalebox{1.019}[.967]{Normal Activity Permitted}};
+
+        % F05-C01: unnamed orthogonal-decomposition frame within F05-S00.
+        \draw[f5 stroke,rounded corners=.55cm] (274,200) rectangle (862,643);
+
+        % Seven concurrent regions: Temporal; first/ellipsis/last Object Class;
+        % first/ellipsis/last Interaction Class.
+        % F05-R01: Temporal State region, y=200..251.
+        % F05-R02: first Object Class region, y=251..327.
+        % F05-R03: omitted Object Class family region, y=327..374.
+        % F05-R04: last Object Class region, y=374..445.
+        % F05-R05: first Interaction Class region, y=445..518.
+        % F05-R06: omitted Interaction Class family region, y=518..559.
+        % F05-R07: last Interaction Class region, y=559..643.
+        \draw[f5 partition] (274,251) -- (862,251);
+        \draw[f5 partition] (274,327) -- (862,327);
+        \draw[f5 partition] (274,374) -- (862,374);
+        \draw[f5 partition] (274,445) -- (862,445);
+        \draw[f5 partition] (274,518) -- (862,518);
+        \draw[f5 partition] (274,559) -- (862,559);
+        \node[f5 region] at (562,231.5) {Temporal State};
+
+        % F05-S01: first Object Class placeholder state.
+        \draw[f5 stroke,rounded corners=.04cm] (488,270) rectangle (638,310);
+        \node[f5 text] at (561,292.5) {Object Class\\(first object class in FDD)};
+
+        % F05-S02: last Object Class placeholder state.
+        \draw[f5 stroke,rounded corners=.04cm] (488,389) rectangle (638,429);
+        \node[f5 text] at (560.5,409) {Object Class\\(last object class in FDD)};
+
+        % F05-S03: first Interaction Class placeholder state.
+        \draw[f5 stroke,rounded corners=.04cm] (487,462) rectangle (638,502);
+        \node[f5 text] at (559.5,482.5) {Interaction Class\\(first interaction class in FDD)};
+
+        % F05-S04: last Interaction Class placeholder state.
+        \draw[f5 stroke,rounded corners=.04cm] (487,579) rectangle (638,619);
+        \node[f5 text] at (561,599.5) {Interaction Class\\(last interaction class in FDD)};
+
+        % F05-P01: outer initial state.
+        \fill (118,229) circle[radius=.07cm];
+        % F05-E01: outer initial state to deep history.
+        \draw[f5 transition] (122,235) -- (136,273);
+
+        % F05-P02: deep-history state.
+        \draw[f5 stroke] (141,289) circle[radius=.165cm];
+        \node[f5 history] at (143,291) {\scalebox{1.15}[.84]{H\textsuperscript{*}}};
+        % F05-E02: deep history to the orthogonal-decomposition boundary.
+        \draw[f5 transition] (157.5,289) -- (272,289);
+
+        % F05-P03: first Object Class initial state.
+        % F05-E03: first Object Class initial transition.
+        \fill (438,291) circle[radius=.07cm];
+        \draw[f5 transition] (445,291) -- (483,291);
+
+        % F05-P04: last Object Class initial state.
+        % F05-E04: last Object Class initial transition.
+        \fill (438,409) circle[radius=.07cm];
+        \draw[f5 transition] (445,409) -- (483,409);
+
+        % F05-P05: first Interaction Class initial state.
+        % F05-E05: first Interaction Class initial transition.
+        \fill (438,482) circle[radius=.07cm];
+        \draw[f5 transition] (445,482) -- (482,482);
+
+        % F05-P06: last Interaction Class initial state.
+        % F05-E06: last Interaction Class initial transition.
+        \fill (439,600) circle[radius=.07cm];
+        \draw[f5 transition] (446,600) -- (482,600);
+
+        % Representative omitted class-state families.
+        \foreach \x in {533,560,587} {\fill (\x,350) circle[radius=.05cm];}
+        \foreach \x in {534,561,588} {\fill (\x,542) circle[radius=.05cm];}
+
+    \end{scope}
+
+    \node[f5 caption] at (483,716) {\scalebox{1.021}[1]{Figure 5---Normal Activity Permitted state}};
+\end{tikzpicture}

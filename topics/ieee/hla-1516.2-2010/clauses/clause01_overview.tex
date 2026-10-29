@@ -1,0 +1,53 @@
+% Source PDF pp. 13-15.
+% The supplied standard title is replaced by the Lab edition identity.  The
+% technical body below remains source-traceable; this opening identifies the
+% derivative publication that the reader is holding.
+\vspace*{0.62in}
+\RLDocumentOpeningTitle{1516.2}{2010}{Object Model Template (OMT)\\Specification}
+\vspace{0.42in}
+\section{Overview}
+
+\subsection{Scope}
+This document defines the format and syntax for recording information in High Level Architecture (HLA) object models, to include objects, attributes, interactions, and parameters. It does not define the specific data (e.g., vehicles, unit types) that will appear in the object models.
+
+\subsection{Purpose}
+The HLA has been developed to provide a common architecture for modeling and simulation. The HLA requires that federations (sets of federates) and individual federates (simulations, supporting utilities, or interfaces to live systems) be described by an object model that identifies the data exchanged at runtime to achieve federation objectives. This standard defines the documentation of the object model.
+
+\newpage
+
+\subsection{Background}
+
+\subsubsection{Object model template rationale}
+A standardized structural framework, or template, for specifying HLA object models is an essential component of the HLA for the following reasons:
+\begin{itemize}
+    \item It provides a commonly understood mechanism for specifying the exchange of data and general coordination among members of a federation.
+    \item It provides a common, standardized mechanism for describing the capabilities of potential federation members.
+    \item It facilitates the design and application of common tool sets for development of HLA object models.
+\end{itemize}
+
+HLA object models may be used to describe an individual federation member (federate), creating an HLA simulation object model (SOM), or to describe a named set of multiple interacting federates (federation), creating a federation object model (FOM). HLA object models may also be used to define subsets of a FOM or SOM, which are identified as FOM modules and SOM modules respectively. In whichever case, the primary objective of the HLA object model template (OMT) is to facilitate interoperability among simulations and reuse of simulation components. All discussion of HLA object models in this document applies to FOMs, SOMs, FOM modules, and SOM modules, unless explicitly stated otherwise.
+
+\subsubsection{Federation object models}
+During development of an HLA federation, it is critical that all federation members achieve a common understanding as to the nature or character of all required communications among participating federates. The primary purpose of an HLA FOM is to provide a specification for data exchange among federates in a common, standardized format. The content of this data includes an enumeration of all object and interaction classes pertinent to the federation and a specification of the attributes or parameters that characterize these classes. Taken together, the individual components of an HLA FOM establish the ``information model contract'' that is necessary (but not sufficient) to achieve interoperability among the federates.
+
+A FOM can be constructed as a single self-contained entity, or can be composed from multiple FOM modules. In this first case, the FOM is said to consist of exactly one FOM module. A base object model (BOM) represents one possible method for formulating a FOM module.
+
+\subsubsection{Simulation object models}
+A critical step in the formation of a federation is the process of determining the composition of individual federates to best meet the sponsor's overall objectives. An HLA SOM is a specification of the types of information that an individual federate can provide to HLA federations and the information that an individual federate can receive from other federates in HLA federations. The standard format in which SOMs are expressed facilitates determination of the suitability of federates for participation in a federation.
+
+The HLA OMT formats described in this document are generally applicable to either FOMs or SOMs, and also the FOM modules and SOM modules that can be used to formulate a FOM or SOM. Thus, SOMs and SOM modules are also characterized by their objects, attributes, interactions, and parameters. A SOM is specified using one or more SOM modules and one optional Management Object Model (MOM) and Initialization Module (MIM). The primary benefit from the common utilization of the OMT formats for FOMs, FOM modules, SOMs, and SOM modules is that it provides a common frame of reference for describing object models in the HLA community. In some cases, this commonality may even allow SOM modules to be integrated as piece parts in a FOM, facilitating FOM construction. A BOM represents an example of this ``piece part'' concept and can be used to formulate a SOM module.
+
+\newpage
+
+\subsubsection{Relationship of HLA and object-oriented concepts}
+Although the HLA OMT is the standardized documentation structure for HLA object models, FOMs, FOM modules, SOMs, and SOM modules do not completely correspond to common definitions of object models in object-oriented analysis and design (OOAD) techniques. In the OOAD literature, an object model is described as an abstraction of a system developed for the purpose of fully understanding the system. To achieve this understanding, most object-oriented (OO) techniques recommend defining several views of the system. For HLA object models, the intended scope of the system description is much narrower, focusing mainly on requirements and capabilities for federate information exchange. For SOMs and SOM modules, the intent is to describe the public interface of the federate in terms of an identified set of supported HLA object classes and interaction classes. A more complete description of how a federate is designed and functions internally (for example, a traditional OO object model) should be provided via documentation resources other than the SOM. For FOMs and FOM modules, the intent is to describe information exchange that happens during a federation execution.
+
+Differences between HLA and OOAD principles and concepts also appear at the individual object level. In the OOAD literature, objects are defined as software encapsulations of data and operations (methods). In the HLA, objects are defined entirely by the identifying characteristics (attributes), values of which are exchanged between federates during a federation execution. Any OO-related behaviors and operations that affect the values of HLA object attributes are kept resident in the federates. Although HLA class structures are driven by subscription requirements and FOM growth concerns, class structures in OO systems are typically driven by efficiency and maintainability concerns.
+
+As discussed above, HLA object classes are described by the attributes that are defined for them. These are, in OO parlance, data members of the class. These attributes, which are abstract properties of HLA object classes, are referred to as class attributes. HLA object instances are spawned via an HLA service using an HLA object class as a template. Each attribute contained by an HLA object instance is called an instance attribute.
+
+OO objects interact via message passing, in which one OO object invokes an operation provided by another OO object. HLA objects do not directly interact. It is the federates that interact, via HLA services, by updating instance attribute values or sending interactions. Also, responsibility for updating the instance attributes associated with an HLA object instance can be distributed among different federates in a federation (effectively distributing responsibility for maintaining the HLA object instance's state across the federation), whereas OO objects encapsulate state locally and associate update responsibilities with operations that are closely tied to the object's implementation in an OO programming language.
+
+Specialization of HLA object and interaction classes are discussed in terms of data tree structures. A data tree structure is defined as, ``an abstract hierarchical structure consisting of nodes [classes] connected by branches, in which; each branch connects one node [class] to a directly subsidiary node; there is a unique node called the root [root class] which is not subsidiary to any other node; and every node [class] besides the root is directly subsidiary to exactly one other node [class]'' (The IEEE Standards Dictionary: Glossary of Terms \& Definitions).\footnote{The IEEE Standards Dictionary: Glossary of Terms \& Definitions is available at \url{http://shop.ieee.org/}.} Furthermore, a node without any subsidiary node is called a leaf node [leaf class].
+
+In addition to the stated semantic variations in shared terminology, other differences may also exist. Precise definitions of all HLA terms can be found in Clause 3.

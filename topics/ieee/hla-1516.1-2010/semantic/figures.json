@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "figures": [
+    {
+      "id": "figure-1",
+      "number": "1",
+      "caption": "Figure 1",
+      "image": null,
+      "clause_id": "clause-E",
+      "source": {
+        "path": "annexes/annex-e-rationale.tex",
+        "line": 68,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-2",
+      "number": "2",
+      "caption": "Figure 2",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 25,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-3",
+      "number": "3",
+      "caption": "Figure 3",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 27,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-4",
+      "number": "4",
+      "caption": "Figure 4",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 29,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-5",
+      "number": "5",
+      "caption": "Figure 5",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 31,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-6",
+      "number": "6",
+      "caption": "Figure 6",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 33,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-7",
+      "number": "7",
+      "caption": "Figure 7",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 35,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-8",
+      "number": "8",
+      "caption": "Figure 8",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 37,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-9",
+      "number": "9",
+      "caption": "Figure 9",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 39,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-10",
+      "number": "10",
+      "caption": "Figure 10",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 41,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-11",
+      "number": "11",
+      "caption": "Figure 11",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 43,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-12",
+      "number": "12",
+      "caption": "Figure 12",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 45,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-13",
+      "number": "13",
+      "caption": "Figure 13",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 47,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-14",
+      "number": "14",
+      "caption": "Figure 14",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 49,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-15",
+      "number": "15",
+      "caption": "Figure 15",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 51,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-16",
+      "number": "16",
+      "caption": "Figure 16",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-17",
+      "number": "17",
+      "caption": "Figure 17",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 55,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-18",
+      "number": "18",
+      "caption": "Figure 18",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 57,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-19",
+      "number": "19",
+      "caption": "Figure 19",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 59,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-20",
+      "number": "20",
+      "caption": "Figure 20",
+      "image": null,
+      "clause_id": "clause-I",
+      "source": {
+        "path": "annexes/annex-i-figure-table.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-77",
+      "number": "77",
+      "caption": "Figure 77",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 18,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-01",
+      "number": "01",
+      "caption": "Figure 01",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 18,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-88",
+      "number": "88",
+      "caption": "Figure 88",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 26,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-02",
+      "number": "02",
+      "caption": "Figure 02",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 26,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-794",
+      "number": "794",
+      "caption": "Figure 794",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 36,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-03",
+      "number": "03",
+      "caption": "Figure 03",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 36,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-91",
+      "number": "91",
+      "caption": "Figure 91",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-04",
+      "number": "04",
+      "caption": "Figure 04",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-9765",
+      "number": "9765",
+      "caption": "Figure 9765",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-05",
+      "number": "05",
+      "caption": "Figure 05",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-460",
+      "number": "460",
+      "caption": "Figure 460",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-06",
+      "number": "06",
+      "caption": "Figure 06",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-436",
+      "number": "436",
+      "caption": "Figure 436",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 132,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-07",
+      "number": "07",
+      "caption": "Figure 07",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 132,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-08",
+      "number": "08",
+      "caption": "Figure 08",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 140,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-09",
+      "number": "09",
+      "caption": "Figure 09",
+      "image": null,
+      "clause_id": "clause-4.32.6",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 155,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-92",
+      "number": "92",
+      "caption": "Figure 92",
+      "image": null,
+      "clause_id": "clause-5.13.6",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 145,
+        "end_line": null
+      }
+    },
+    {
+      "id": "figure-363",
+      "number": "363",
+      "caption": "Figure 363",
+      "image": null,
+      "clause_id": null,
+      "source": {
+        "path": "frontmatter/contents.tex",
+        "line": 272,
+        "end_line": null
+      }
+    }
+  ]
+}

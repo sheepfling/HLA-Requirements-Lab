@@ -1,0 +1,384 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "federation-execution-sync-overview",
+      "title": "Federation Execution and Sync Points",
+      "clause_id": "clause-4.1.3",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-046.tex",
+        "line": 4
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p046-xref13873.png",
+        "page": 46,
+        "xref": "13873",
+        "caption": "Federation Execution and Sync Points"
+      },
+      "initial_state_ids": [
+        "overview.global.initial",
+        "overview.federate-1.initial",
+        "overview.federate-n.initial"
+      ],
+      "states": [
+        {
+          "id": "overview.global.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "overview.global.first",
+          "label": "Global Synch Label\n(\"first\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.global.ellipsis",
+          "label": "…",
+          "kind": "ellipsis"
+        },
+        {
+          "id": "overview.global.last",
+          "label": "Global Synch Label\n(\"last\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.global.final",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "overview.federate-1.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "overview.federate-1.first",
+          "label": "Local Synch Label\n(1, \"first\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.federate-1.ellipsis",
+          "label": "…",
+          "kind": "ellipsis"
+        },
+        {
+          "id": "overview.federate-1.last",
+          "label": "Local Synch Label\n(1, \"last\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.federate-1.final",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "overview.federate-n.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "overview.federate-n.first",
+          "label": "Local Synch Label\n(N, \"first\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.federate-n.ellipsis",
+          "label": "…",
+          "kind": "ellipsis"
+        },
+        {
+          "id": "overview.federate-n.last",
+          "label": "Local Synch Label\n(N, \"last\")",
+          "kind": "composite"
+        },
+        {
+          "id": "overview.federate-n.final",
+          "label": "",
+          "kind": "final"
+        },
+        {
+          "id": "overview.federates.ellipsis",
+          "label": "…",
+          "kind": "ellipsis"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "overview.create",
+          "source_state": "overview.global.initial",
+          "event": "Create Federation Execution",
+          "target_state": "overview.global.first",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-create"
+          ]
+        },
+        {
+          "id": "overview.destroy",
+          "source_state": "overview.global.last",
+          "event": "Destroy Federation Execution",
+          "target_state": "overview.global.final",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-destroy"
+          ]
+        },
+        {
+          "id": "overview.federate-1.join",
+          "source_state": "overview.federate-1.initial",
+          "event": "Join Federation Execution (F_1)",
+          "target_state": "overview.federate-1.first",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-federate-1-join"
+          ]
+        },
+        {
+          "id": "overview.federate-1.resign",
+          "source_state": "overview.federate-1.last",
+          "event": "Resign Federation Execution (F_1)",
+          "target_state": "overview.federate-1.final",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-federate-1-resign"
+          ]
+        },
+        {
+          "id": "overview.federate-n.join",
+          "source_state": "overview.federate-n.initial",
+          "event": "Join Federation Execution (F_N)",
+          "target_state": "overview.federate-n.first",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-federate-n-join"
+          ]
+        },
+        {
+          "id": "overview.federate-n.resign",
+          "source_state": "overview.federate-n.last",
+          "event": "Resign Federation Execution (F_N)",
+          "target_state": "overview.federate-n.final",
+          "clause_id": "clause-4.1.3",
+          "implementation_ids": [
+            "m16.transition.overview-federate-n-resign"
+          ]
+        }
+      ],
+      "layout": {
+        "engine": "manual",
+        "direction": "left-to-right",
+        "state_font": "tiny",
+        "edge_label_font": "tiny",
+        "containers": [
+          {
+            "id": "overview.outer",
+            "x": -0.8,
+            "y": -5.5,
+            "width": 21.5,
+            "height": 12.0,
+            "title": "Federation Execution and Sync Points"
+          },
+          {
+            "id": "overview.rti",
+            "x": -0.4,
+            "y": -5.0,
+            "width": 8.0,
+            "height": 11.0,
+            "title": "RTI"
+          },
+          {
+            "id": "overview.global.container",
+            "x": 0.5,
+            "y": -3.8,
+            "width": 6.5,
+            "height": 8.0,
+            "title": "Global Synch Labels",
+            "title_visible": false
+          },
+          {
+            "id": "overview.federate-1.container",
+            "x": 9.0,
+            "y": 1.2,
+            "width": 10.5,
+            "height": 4.2,
+            "title": "Federate F_1"
+          },
+          {
+            "id": "overview.federate-n.container",
+            "x": 9.0,
+            "y": -4.3,
+            "width": 10.5,
+            "height": 4.2,
+            "title": "Federate F_N"
+          },
+          {
+            "id": "overview.federate-1.sequence",
+            "x": 10.0,
+            "y": 1.7,
+            "width": 8.8,
+            "height": 3.1,
+            "title": "Local synchronization labels",
+            "title_visible": false
+          },
+          {
+            "id": "overview.federate-n.sequence",
+            "x": 10.0,
+            "y": -3.8,
+            "width": 8.8,
+            "height": 3.1,
+            "title": "Local synchronization labels",
+            "title_visible": false
+          }
+        ],
+        "rules": [
+          {
+            "x1": 0.5,
+            "y1": 1.7,
+            "x2": 7.0,
+            "y2": 1.7,
+            "style": "dashed"
+          },
+          {
+            "x1": 0.5,
+            "y1": -1.4,
+            "x2": 7.0,
+            "y2": -1.4,
+            "style": "dashed"
+          },
+          {
+            "x1": 13.0,
+            "y1": 1.7,
+            "x2": 13.0,
+            "y2": 4.8,
+            "style": "dashed"
+          },
+          {
+            "x1": 15.4,
+            "y1": 1.7,
+            "x2": 15.4,
+            "y2": 4.8,
+            "style": "dashed"
+          },
+          {
+            "x1": 13.0,
+            "y1": -3.8,
+            "x2": 13.0,
+            "y2": -0.7,
+            "style": "dashed"
+          },
+          {
+            "x1": 15.4,
+            "y1": -3.8,
+            "x2": 15.4,
+            "y2": -0.7,
+            "style": "dashed"
+          }
+        ],
+        "annotations": [
+          {
+            "id": "overview.create-label",
+            "x": 2.0,
+            "y": 4.6,
+            "text": "Create Federation Execution",
+            "width": 3.0,
+            "align": "left"
+          }
+        ],
+        "nodes": {
+          "overview.global.initial": {
+            "x": 0.0,
+            "y": 3.6
+          },
+          "overview.global.first": {
+            "x": 2.1,
+            "y": 3.6
+          },
+          "overview.global.ellipsis": {
+            "x": 3.2,
+            "y": 0.5
+          },
+          "overview.global.last": {
+            "x": 2.1,
+            "y": -2.7
+          },
+          "overview.global.final": {
+            "x": 6.2,
+            "y": -3.7
+          },
+          "overview.federate-1.initial": {
+            "x": 8.5,
+            "y": 3.0
+          },
+          "overview.federate-1.first": {
+            "x": 11.2,
+            "y": 3.0
+          },
+          "overview.federate-1.ellipsis": {
+            "x": 14.1,
+            "y": 3.0
+          },
+          "overview.federate-1.last": {
+            "x": 17.0,
+            "y": 3.0
+          },
+          "overview.federate-1.final": {
+            "x": 19.7,
+            "y": 3.0
+          },
+          "overview.federate-n.initial": {
+            "x": 8.5,
+            "y": -3.0
+          },
+          "overview.federate-n.first": {
+            "x": 11.2,
+            "y": -3.0
+          },
+          "overview.federate-n.ellipsis": {
+            "x": 14.1,
+            "y": -3.0
+          },
+          "overview.federate-n.last": {
+            "x": 17.0,
+            "y": -3.0
+          },
+          "overview.federate-n.final": {
+            "x": 19.7,
+            "y": -3.0
+          },
+          "overview.federates.ellipsis": {
+            "x": 14.1,
+            "y": -0.1
+          }
+        },
+        "transitions": {
+          "overview.create": {
+            "label_side": "right",
+            "label_pos": 0.15,
+            "label_visible": false
+          },
+          "overview.destroy": {
+            "label_side": "below",
+            "label_pos": 0.55
+          },
+          "overview.federate-1.join": {
+            "label_side": "below",
+            "label_pos": 0.55
+          },
+          "overview.federate-1.resign": {
+            "label_side": "right",
+            "label_pos": 0.5
+          },
+          "overview.federate-n.join": {
+            "label_side": "below",
+            "label_pos": 0.55
+          },
+          "overview.federate-n.resign": {
+            "label_side": "right",
+            "label_pos": 0.5
+          }
+        }
+      },
+      "notes": "Figure 6 is a parameterized overview: the RTI global synchronization labels are shown for first/last labels, and federate F_1/F_N local synchronization labels are representative instances of the federate set. The repeated middle labels and exact frame separators are intentionally represented with ellipsis states and containers; leaf semantics are linked to Figures 7–9."
+    }
+  ]
+}

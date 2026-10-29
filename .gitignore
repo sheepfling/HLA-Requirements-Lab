@@ -2,6 +2,8 @@
 __pycache__/
 *.py[codz]
 *$py.class
+.rumdl_cache/
+.uv-cache/
 
 # C extensions
 *.so
@@ -10,7 +12,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+**/dist/
 downloads/
 eggs/
 .eggs/
@@ -50,6 +52,11 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+inbox/
+.tools/
+
+# External compliance sidecar bundles and CI evidence
+.compliance/
 
 # Translations
 *.mo
@@ -195,9 +202,9 @@ cython_debug/
 .abstra/
 
 # Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
+#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
+#   and can be added to the global gitignore or merged into this file. However, if you prefer,
 #   you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 # Temporary file for partial code execution
@@ -216,3 +223,88 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Local Python environments and dependency caches
+.venv*/
+.codex_pydeps/
+.pip-cache/
+.pre-commit-cache/
+
+# Python caches and test/type-checking output
+.pyright/
+.tmp/
+**/.tmp/
+tmp/
+**/tmp/
+.temp/
+temp/
+*.py[cod]
+
+# Generated document output and packaging artifacts
+**/output/
+**/build/
+# The repository build orchestrators are source, not generated output.
+!hla_lab/build/
+!hla_lab/build/*.py
+# Generated page projections are derived from semantic source records.
+**/sections/generated/
+dist/
+*.pdf
+*.dot
+*.mmd
+*.svg
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tif
+*.tiff
+pip-wheel-metadata/
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.out
+**/*.run.xml
+**/*.synctex.gz
+**/*.toc
+**/*.xdv
+
+# IDE and editor metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local secrets, logs, and operating-system metadata
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# Local-only analogue and comparison material
+.local/
+**/reference/
+**/references/
+**/comparison/
+**/comparisons/
+**/tracking/
+**/audit/
+**/audits/
+**/verification/
+**/.trash/
+.trash/
+
+# Generated diagram exports and visual-review packets
+reviews/
+**/reviews/
+review-artifacts/
+**/review-artifacts/
+
+# Local Alphus environment and review output
+out/alphus-env/
+out/quality/

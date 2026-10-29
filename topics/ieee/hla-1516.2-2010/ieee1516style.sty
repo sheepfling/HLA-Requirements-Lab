@@ -1,0 +1,261 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee1516style}[2026/08/24 HLA Requirements Lab 2010 source-compilation style]
+
+\RequirePackage[letterpaper,top=0.74in,bottom=0.72in,left=0.80in,right=0.80in,headheight=14pt,headsep=0.18in,footskip=0.35in]{geometry}
+% Use the repository's installed XeLaTeX font contract. The handoff's
+% newtxtext/newtxmath stack is not consistently available in MiKTeX and
+% would otherwise force interactive, environment-specific installs.
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{tabularx}
+\RequirePackage{longtable}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{ragged2e}
+\RequirePackage{url}
+\RequirePackage[hidelinks,hypertexnames=false]{hyperref}
+\RequirePackage{textcomp}
+\RequirePackage{etoolbox}
+\RequirePackage{multicol}
+\RequirePackage{titlesec}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{multirow}
+\RequirePackage{etoolbox}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8.0pt plus 1.0pt minus 0.8pt}
+\setlength{\emergencystretch}{3em}
+\linespread{0.965}
+\setlist[itemize]{leftmargin=1.75em,label=---,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.75em,itemsep=2.2pt,topsep=2.5pt,parsep=0pt}
+
+% These labels identify the independent Lab compilation. IEEE identifiers remain
+% in the technical body only where they identify supplied source references.
+\newcommand{\stdnumber}{HLA 1516.2 \textbar\ 2010 source compilation}
+\newcommand{\stdtitleupper}{OBJECT MODEL TEMPLATE (OMT) SPECIFICATION}
+\newcommand{\stdshortupper}{HLA REQUIREMENTS LAB}
+\newcommand{\stdcopyright}{}
+
+\newcommand{\bodyfont}{\fontsize{10.0}{12.0}\selectfont}
+\newcommand{\smallbodyfont}{\fontsize{8.15}{9.65}\selectfont}
+\newcommand{\tinybodyfont}{\fontsize{7.25}{8.55}\selectfont}
+
+\titleformat{\section}[hang]
+{\sffamily\bfseries\fontsize{13.5}{16}\selectfont}
+{\thesection.}{0.42em}{}
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+
+\titleformat{\subsection}[hang]
+{\sffamily\bfseries\fontsize{12.0}{13.2}\selectfont}
+{\thesubsection}{0.48em}{}
+\titlespacing*{\subsection}{0pt}{0pt}{3.5pt}
+
+\titleformat{\subsubsection}[hang]
+{\sffamily\bfseries\fontsize{10.85}{12.4}\selectfont}
+{\thesubsubsection}{0.48em}{}
+\titlespacing*{\subsubsection}{0pt}{0pt}{1pt}
+
+\newcommand{\standardbodylayout}{%
+    \newgeometry{top=0.94in,bottom=0.87in,left=1.25in,right=1.25in,headheight=14pt,headsep=0.344in,footskip=0.43in}%
+    \setlength{\headwidth}{\textwidth}%
+    \linespread{1.0}\selectfont%
+    \setlength{\parskip}{12pt plus 1pt minus 1pt}%
+    \setlist[itemize]{leftmargin=32pt,labelwidth=10pt,labelsep=12pt,label=---,itemsep=2pt,topsep=3pt,parsep=0pt}%
+    \setlist[enumerate]{leftmargin=32pt,labelwidth=10pt,labelsep=12pt,itemsep=2pt,topsep=3pt,parsep=0pt}%
+    \bodyfont%
+}
+
+\newcommand{\standardheaders}{%
+    \pagestyle{fancy}%
+    \fancyhf{}%
+    \fancyhead[LE]{\sffamily\fontsize{8.67}{9.2}\selectfont \stdnumber}%
+    \fancyhead[RE]{\sffamily\fontsize{8.67}{9.2}\selectfont \stdshortupper}%
+    \fancyhead[LO]{\sffamily\fontsize{8.67}{9.2}\selectfont \stdtitleupper}%
+    \fancyhead[RO]{\sffamily\fontsize{8.67}{9.2}\selectfont \stdnumber}%
+    \fancyfoot[LE,RO]{\fontsize{10}{11}\selectfont\thepage}%
+    \fancyfoot[LO,RE]{\sffamily\fontsize{8.67}{9.2}\selectfont\stdcopyright}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+
+\newcommand{\frontheaders}{%
+    \pagestyle{fancy}%
+    \fancyhf{}%
+    \fancyfoot[LE,RO]{\fontsize{10}{11}\selectfont\thepage}%
+    \fancyfoot[LO,RE]{\sffamily\fontsize{8.67}{9.2}\selectfont\stdcopyright}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+
+\fancypagestyle{firststandard}{%
+    \fancyhf{}%
+    \fancyfoot[L]{\fontsize{7.1}{8}\selectfont\stdcopyright}%
+    \fancyfoot[R]{\fontsize{7.1}{8}\selectfont\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+}
+\newcommand{\firststandardpage}{\thispagestyle{firststandard}}
+
+\newenvironment{definition}[1]{%
+    \par\noindent\textbf{#1:}\ \ignorespaces
+}{\par}
+
+\newcommand{\stdnote}[1]{%
+    \par\vspace{-1pt}\noindent{\smallbodyfont NOTE---#1}\par
+}
+\newcommand{\stdnoteinline}[1]{%
+        {\smallbodyfont NOTE---#1}%
+}
+
+\newenvironment{sourcequote}{\begin{quote}\smallbodyfont}{\end{quote}}
+
+\newcommand{\sourcepage}[1]{\marginpar{\tiny\textsf{PDF p.~#1}}}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\newcommand{\ieeeattribution}{Source set: supplied HLA 1516.2 family materials from 2010.}
+
+% OMT table reconstruction helpers.  These are deliberately compact: the
+% source standard uses dense, fully ruled tables with small type.
+\definecolor{HLAOMTBlue}{HTML}{496B91}
+\definecolor{HLAOMTOrange}{HTML}{E7773F}
+\newcommand{\omttablefont}{\fontsize{9}{10.9}\selectfont}
+\newcommand{\omttablesmallfont}{\fontsize{9}{10.9}\selectfont}
+\newcommand{\omtcaption}[1]{%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1}\par
+        }%
+    }%
+    \par\vspace{3pt}%
+}
+\newcommand{\omtcontinuedcaption}[1]{%
+    \par\vspace{3pt}\noindent
+    \colorbox{RLTableBand}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+            {\sffamily\bfseries\fontsize{10.8}{12}\selectfont\color{RLBlueDeep} #1 \textit{(continued)}}\par
+        }%
+    }%
+    \par\vspace{3pt}%
+}
+\newcommand{\omtph}[1]{\textless#1\textgreater}
+\newcommand{\omtopt}[1]{[\textless#1\textgreater]}
+\newcommand{\omtsubfield}[1]{\hspace*{1.25em}\textit{#1}}
+\newcommand{\omtdash}{---\hspace{0.35em}}
+% The Glyph category is represented by a compact three-node hierarchy mark.
+% It is intentionally vector-only and contains no imported source artwork.
+\newcommand{\omtcategoryglyph}{%
+    \raisebox{-0.35ex}{%
+        \begin{tikzpicture}[x=1pt,y=1pt,baseline=(current bounding box.center)]
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (7,11) -- (7,5);
+        \draw[HLAOMTBlue,line width=.7pt] (12,18) -- (17,11) -- (17,5);
+        \fill[HLAOMTOrange,draw=white,line width=.45pt] (12,18) circle (2.0);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (7,5) circle (1.8);
+        \fill[HLAOMTBlue,draw=white,line width=.45pt] (17,5) circle (1.8);
+        \end{tikzpicture}%
+    }%
+}
+
+% Hierarchical class-structure table used by OMT Tables 4 and 6.  The source
+% uses merged cells that are considerably easier to reproduce faithfully as a
+% vector grid than as a conventional tabular.  Text remains live PDF text.
+\newcommand{\omtstructureph}{[\omtph{class} (\omtph{p/s})]}
+\newcommand{\omtclassstructuretemplate}[3]{%
+    \noindent\makebox[\textwidth][c]{%
+        \begin{tikzpicture}[x=1pt,y=-1pt,xscale=#3]
+        \tikzset{omtstruct/.style={anchor=west,inner sep=0pt,font=\fontsize{9}{10}\selectfont}}
+        % Outer frame and vertical hierarchy columns (source Table 6 geometry).
+        \draw[draw=RLBlue,line width=0.75pt] (0,0) rectangle (433.32,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,0)--(71.88,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,0)--(153.24,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,0)--(234.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (324.60,0)--(324.60,231.24);
+        \draw[draw=RLLine,line width=0.35pt] (355.68,0)--(355.68,231.24);
+        % Horizontal lines stop at the hierarchy level whose cell is being split.
+        \draw[draw=RLLine,line width=0.35pt] (153.24,15.48)--(433.32,15.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,30.48)--(433.32,30.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,55.44)--(433.32,55.44);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,70.44)--(433.32,70.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,85.44)--(433.32,85.44);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,110.46)--(433.32,110.46);
+        \draw[draw=RLLine,line width=0.35pt] (153.24,125.46)--(433.32,125.46);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,150.48)--(433.32,150.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,165.48)--(433.32,165.48);
+        \draw[draw=RLLine,line width=0.35pt] (234.60,180.48)--(433.32,180.48);
+        \draw[draw=RLLine,line width=0.35pt] (71.88,205.50)--(433.32,205.50);
+
+        % Root and the representative hierarchy entries.
+        \node[omtstruct] at (6.6,104.6) {#1};
+        \node[omtstruct] at (6.6,114.6) {#2};
+
+        \node[omtstruct] at (77.9,74.0) {\omtstructureph};
+        \node[omtstruct] at (77.9,176.0) {\omtstructureph};
+        \node[omtstruct] at (111.4,211.2) {$\vdots$};
+
+        \node[omtstruct] at (159.2,7.0) {\omtstructureph};
+        \node[omtstruct] at (159.2,42.0) {\omtstructureph};
+        \node[omtstruct] at (159.2,97.0) {\omtstructureph};
+        \node[omtstruct] at (159.2,176.0) {\omtstructureph};
+        \node[omtstruct] at (192.8,132.0) {$\vdots$};
+        \node[omtstruct] at (192.8,211.2) {$\vdots$};
+
+        \node[omtstruct] at (240.6,7.0) {\omtstructureph};
+        \node[omtstruct] at (240.6,22.0) {\omtstructureph};
+        \node[omtstruct] at (274.2,42.0) {$\vdots$};
+        \node[omtstruct] at (240.6,62.0) {\omtstructureph};
+        \node[omtstruct] at (240.6,77.0) {\omtstructureph};
+        \node[omtstruct] at (274.2,97.0) {$\vdots$};
+        \node[omtstruct] at (240.6,117.0) {\omtstructureph};
+        \node[omtstruct] at (274.2,132.0) {$\vdots$};
+        \node[omtstruct] at (240.6,157.0) {\omtstructureph};
+        \node[omtstruct] at (240.6,172.0) {\omtstructureph};
+        \node[omtstruct] at (274.2,192.0) {$\vdots$};
+        \node[omtstruct] at (274.2,211.2) {$\vdots$};
+
+        \node[omtstruct] at (335.6,7.0) {$\ldots$};
+        \node[omtstruct] at (335.6,22.0) {$\ldots$};
+        \node[omtstruct] at (335.6,42.0) {$\ldots$};
+        \node[omtstruct] at (335.6,62.0) {$\ldots$};
+        \node[omtstruct] at (335.6,77.0) {$\ldots$};
+        \node[omtstruct] at (335.6,97.0) {$\ldots$};
+        \node[omtstruct] at (335.6,117.0) {$\ldots$};
+        \node[omtstruct] at (335.6,132.0) {$\ldots$};
+        \node[omtstruct] at (335.6,157.0) {$\ldots$};
+        \node[omtstruct] at (335.6,172.0) {$\ldots$};
+        \node[omtstruct] at (335.6,192.0) {$\ldots$};
+        \node[omtstruct] at (335.6,211.2) {$\ldots$};
+
+        \node[omtstruct] at (361.7,7.0) {\omtstructureph};
+        \node[omtstruct] at (361.7,22.0) {\omtstructureph};
+        \node[omtstruct] at (394.8,42.0) {$\vdots$};
+        \node[omtstruct] at (361.7,62.0) {\omtstructureph};
+        \node[omtstruct] at (361.7,77.0) {\omtstructureph};
+        \node[omtstruct] at (394.8,97.0) {$\vdots$};
+        \node[omtstruct] at (361.7,117.0) {\omtstructureph};
+        \node[omtstruct] at (394.8,132.0) {$\vdots$};
+        \node[omtstruct] at (361.7,157.0) {\omtstructureph};
+        \node[omtstruct] at (361.7,172.0) {\omtstructureph};
+        \node[omtstruct] at (394.8,192.0) {$\vdots$};
+        \node[omtstruct] at (394.8,211.2) {$\vdots$};
+        \end{tikzpicture}%
+    }%
+}

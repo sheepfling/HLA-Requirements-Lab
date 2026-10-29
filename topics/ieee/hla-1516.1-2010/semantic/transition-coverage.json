@@ -1,0 +1,2761 @@
+{
+  "schema_version": 1,
+  "transition_coverage": [
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 19,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 36,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 41,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 47,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 51,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 56,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-01.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-01-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-01.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 38,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 56,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 97,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 100,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 105,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-03.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-03-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-03.tex",
+        "line": 110,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 101,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 106,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 113,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 117,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 121,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 125,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 129,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 133,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 137,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 141,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 145,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 149,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 153,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 157,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 163,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 166,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-04.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-04-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-04.tex",
+        "line": 170,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 65,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 71,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 75,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 80,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 85,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-05.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-05-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-05.tex",
+        "line": 90,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 103,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 110,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 116,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 129,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-06.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-06-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-06.tex",
+        "line": 136,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-07.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-07-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 70,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-07.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-07-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 73,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-07.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-07-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 77,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-07.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-07-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-07.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-07-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-07.tex",
+        "line": 85,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-08.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-08-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 52,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-08.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-08-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 58,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-08.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-08-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-08.tex",
+        "line": 62,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 54,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 57,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 61,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 65,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 69,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-09.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-09-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-09.tex",
+        "line": 73,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 27,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 35,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 47,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 67,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 69,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 73,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 77,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 107,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 109,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 113,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 117,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-10.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-10-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-10.tex",
+        "line": 121,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 51,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 56,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 71,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 74,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 78,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 87,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 92,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 107,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 110,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 114,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 118,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-11.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-11-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-11.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 46,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 68,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 79,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 82,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 86,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 91,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 97,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 123,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 127,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 132,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 138,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 145,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 149,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 153,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 159,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 163,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 171,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e18",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e18"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 184,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e19",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e19"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 187,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e20",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e20"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 191,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e21",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e21"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 195,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-12.e22",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-12-e22"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-12.tex",
+        "line": 200,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 49,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 54,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 74,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 78,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 82,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 88,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 100,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 107,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 111,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 129,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 133,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 141,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 151,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 155,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 159,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 163,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 178,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e18",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e18"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 183,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e19",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e19"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 188,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e20",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e20"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 192,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e21",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e21"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 196,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-13.e22",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-13-e22"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-13.tex",
+        "line": 201,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-14.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-14-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-14.tex",
+        "line": 44,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-14.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-14-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-14.tex",
+        "line": 62,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 44,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 63,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 72,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 87,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 105,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 108,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 111,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 118,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 127,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 130,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 133,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 136,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 156,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 165,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e18",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e18"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 174,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e19",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e19"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 180,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e20",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e20"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 198,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e21",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e21"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 201,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e22",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e22"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 204,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e23",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e23"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 211,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e24",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e24"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 220,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e25",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e25"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 223,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e26",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e26"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 226,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e27",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e27"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 229,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 233,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-15.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-15-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-15.tex",
+        "line": 236,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 46,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 49,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 79,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 94,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 99,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 104,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 108,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 112,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 116,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 120,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 126,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e19",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e19"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 155,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e20",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e20"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 157,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e21",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e21"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 184,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e22",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e22"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 187,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e23",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e23"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 190,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e24",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e24"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 226,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e25",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e25"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 229,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e26",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e26"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 232,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e27",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e27"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 235,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e28",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e28"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 238,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e29",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e29"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 242,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e30",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e30"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 257,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e31",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e31"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 260,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e32",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e32"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 263,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e33",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e33"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 266,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e34",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e34"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 274,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 283,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 287,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 291,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 295,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 299,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-16.e18",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-16-e18"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-16.tex",
+        "line": 303,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e01",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e01"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 53,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e02",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e02"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 58,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e05",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e05"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 89,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e03",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e03"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 93,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e04",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e04"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 93,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e07",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e07"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 100,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e08",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e08"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 100,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e09",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e09"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 106,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e10",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e10"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 106,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e11",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e11"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 112,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e12",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e12"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 112,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e13",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e13"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 118,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e14",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e14"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 118,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e06",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e06"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 124,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e15",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e15"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 142,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e16",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e16"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 145,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e17",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e17"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 145,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e18",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e18"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 162,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e19",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e19"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 165,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e20",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e20"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 165,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e21",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e21"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 182,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e22",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e22"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 185,
+        "end_line": null
+      }
+    },
+    {
+      "transition_id": "hla-1516.1-2010:figure-17.e23",
+      "status": "mapped",
+      "implementation_ids": [
+        "m2010.transition.hla-1516-1-2010-figure-17-e23"
+      ],
+      "reason": "Planned implementation seam exists; concrete implementation evidence remains separate.",
+      "source": {
+        "path": "figures/native/figure-17.tex",
+        "line": 185,
+        "end_line": null
+      }
+    }
+  ]
+}

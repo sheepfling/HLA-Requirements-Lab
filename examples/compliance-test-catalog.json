@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "tests": [
+    {
+      "id": "cpp-connect-integration",
+      "kind": "integration-test",
+      "runner": "catch2",
+      "selector": "[compliance][rti.service.connect]",
+      "result_selector": "RTIambassador connect",
+      "command": "build/rti_tests.exe --reporter junit --out build/compliance/connect.xml",
+      "document_id": "hla-1516.1-2025",
+      "implementation_mapping_id": "rti.service.connect",
+      "target": "cpp",
+      "language": "cpp",
+      "symbol": "RTI::RTIambassador::connect",
+      "api_surface_ids": [
+        "cpp-rtiambassador-connect"
+      ],
+      "requirement_ids": [
+        "<requirement-id-from-corpus-bundle>"
+      ],
+      "execution_mode": "real",
+      "notes": "Replace the illustrative mapping and API IDs with IDs from corpus-bundle.json."
+    },
+    {
+      "id": "java-connect-integration",
+      "kind": "integration-test",
+      "runner": "junit5",
+      "selector": "rti.service.connect",
+      "result_selector": "example.rti.RtiAmbassadorIT#connect",
+      "command": "./mvnw -Dgroups=compliance test",
+      "document_id": "hla-1516.1-2025",
+      "implementation_mapping_id": "rti.service.connect",
+      "target": "java",
+      "language": "java",
+      "symbol": "example.rti.RtiAmbassador#connect",
+      "api_surface_ids": [
+        "java-rtiambassador-connect"
+      ],
+      "requirement_ids": [
+        "<requirement-id-from-corpus-bundle>"
+      ],
+      "execution_mode": "real",
+      "notes": "Replace the illustrative mapping and API IDs with IDs from corpus-bundle.json."
+    }
+  ]
+}

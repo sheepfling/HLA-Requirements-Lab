@@ -1,0 +1,81 @@
+[project]
+name = "hla-requirements-lab"
+version = "0.1.0"
+description = "Source-controlled extraction, traceability, and verification of HLA requirements."
+requires-python = ">=3.11"
+dependencies = [
+    "pymupdf>=1.24",
+    "pydantic>=2.7",
+    "rich>=13.7",
+]
+
+[project.scripts]
+hla-lab = "hla_lab.cli:main"
+hla-lab-schema = "hla_lab.schemas:main"
+hla-lab-model = "hla_lab.semantic_model_cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel>=0.42"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["hla_lab*", "tools*"]
+
+[tool.setuptools.package-data]
+hla_lab = ["py.typed", "source_profiles.json"]
+
+[dependency-groups]
+dev = [
+    "alphus[python] @ git+https://github.com/sheepfling/alphus.git@b4b6055a6ae0286912b461cd2b4262b3318c5a0c",
+    "mdrepo>=0.0.1,<0.1",
+    "pre-commit>=4.0",
+    "pytest>=9.0.3,<10",
+    "pytest-xdist>=3.6,<4",
+    "pyright==1.1.414",
+    "rumdl>=0.2.49,<0.3",
+    "ruff==0.16.1",
+]
+
+[tool.rumdl]
+flavor = "gfm"
+disable = ["MD013"]
+extend-enable = ["MD060"]
+
+[tool.rumdl.MD060]
+style = "aligned"
+
+[tool.mdrepo]
+exclude = ["topics/**", "data/state_machines/**"]
+
+[tool.mdrepo.orphans]
+enabled = true
+roots = ["README.md", "docs/README.md", "tools/migrations/README.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [
+    "topics/*/*/HLA_*/**",
+    "topics/*/*/hla-*/**",
+]
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"topics/_template/**/*.py" = ["T201"]
+# Source-repair migrations embed long, typographically exact source fragments.
+"tools/migrations/*.py" = ["E501", "RUF001"]
+
+[tool.pyright]
+include = ["hla_lab", "tools", "topics"]
+# One-off source migrations mutate corpus files and retain legacy JSON handling.
+exclude = ["tools/migrations/**"]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+norecursedirs = ["integration"]
+cache_dir = ".tmp/pytest_cache"

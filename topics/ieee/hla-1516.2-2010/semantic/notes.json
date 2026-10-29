@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "notes": [
+    {
+      "id": "note-clauses-clause01-overview-tex-1",
+      "text": "The IEEE Standards Dictionary: Glossary of Terms \\& Definitions is available at http://shop.ieee.org/.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 43,
+        "end_line": 43
+      }
+    },
+    {
+      "id": "note-clauses-clause02-normative-references-tex-1",
+      "text": "",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause02_normative_references.tex",
+        "line": 6,
+        "end_line": 6
+      }
+    },
+    {
+      "id": "note-clauses-clause02-normative-references-tex-2",
+      "text": "",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause02_normative_references.tex",
+        "line": 8,
+        "end_line": 8
+      }
+    },
+    {
+      "id": "note-clauses-clause02-normative-references-tex-3",
+      "text": "",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause02_normative_references.tex",
+        "line": 8,
+        "end_line": 8
+      }
+    },
+    {
+      "id": "note-clauses-clause02-normative-references-tex-4",
+      "text": "",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause02_normative_references.tex",
+        "line": 12,
+        "end_line": 12
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-1",
+      "text": "See 9.1 in IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 21,
+        "end_line": 21
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-2",
+      "text": "See 9.1 in IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 118,
+        "end_line": 118
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-3",
+      "text": "See 6.10 in IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 126,
+        "end_line": 126
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-4",
+      "text": "See 9.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 136,
+        "end_line": 136
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-5",
+      "text": "All RTI-initiated services are denoted with a (printer's dagger) after the service name.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 139,
+        "end_line": 139
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-6",
+      "text": "See 6.5 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 142,
+        "end_line": 142
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-7",
+      "text": "See 5.1.2 in IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 148,
+        "end_line": 148
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-8",
+      "text": "See 6.12 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 274,
+        "end_line": 274
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-9",
+      "text": "See 9.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 361,
+        "end_line": 361
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-10",
+      "text": "See 5.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 391,
+        "end_line": 391
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-11",
+      "text": "See 5.1.2 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 412,
+        "end_line": 412
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-12",
+      "text": "See 9.1.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 418,
+        "end_line": 418
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-13",
+      "text": "See 9.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 424,
+        "end_line": 424
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-14",
+      "text": "See 9.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 430,
+        "end_line": 430
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-15",
+      "text": "See 5.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 436,
+        "end_line": 436
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-16",
+      "text": "See 5.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 442,
+        "end_line": 442
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-17",
+      "text": "See 6.7 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 452,
+        "end_line": 452
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-18",
+      "text": "See 9.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 462,
+        "end_line": 462
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-19",
+      "text": "See 9.1.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 470,
+        "end_line": 470
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-20",
+      "text": "See 9.1.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 476,
+        "end_line": 476
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-21",
+      "text": "See 6.4 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 486,
+        "end_line": 486
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-22",
+      "text": "See 6.11 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 504,
+        "end_line": 504
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-23",
+      "text": "See 5.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 540,
+        "end_line": 540
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-24",
+      "text": "See 5.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 550,
+        "end_line": 550
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-25",
+      "text": "See 9.1.2 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 568,
+        "end_line": 568
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-26",
+      "text": "See 5.1.2 and 5.6 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 595,
+        "end_line": 595
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-27",
+      "text": "See 9.8 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 601,
+        "end_line": 601
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-28",
+      "text": "See 5.1.3 and 5.8 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 607,
+        "end_line": 607
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-29",
+      "text": "See 9.10 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 613,
+        "end_line": 613
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-30",
+      "text": "See 8.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 647,
+        "end_line": 647
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-31",
+      "text": "See 8.1 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 657,
+        "end_line": 657
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-32",
+      "text": "See 9.1.3 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 675,
+        "end_line": 675
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-continuation-tex-33",
+      "text": "See 6.6 of IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_continuation.tex",
+        "line": 681,
+        "end_line": 681
+      }
+    },
+    {
+      "id": "note-clauses-clause03-definitions-initial-tex-1",
+      "text": "The IEEE Standards Dictionary: Glossary of Terms \\& Definitions is available at http://shop.ieee.org/.",
+      "kind": "footnote",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause03_definitions_initial.tex",
+        "line": 4,
+        "end_line": 4
+      }
+    },
+    {
+      "id": "note-clauses-clause04-omt-components-attributes-dimensions-tex-1",
+      "text": "One entry is required for Table 8. For this entry, the first column shall contain ``HLAobjectRoot'' and the second shall contain ``HLAprivilegeToDeleteObject;'' subsequent columns shall be completed as appropriate for the federate or federation. Uses and restrictions on this attribute are described in IEEE Std 1516.1-2010.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause04_omt_components_attributes_dimensions.tex",
+        "line": 101,
+        "end_line": 101
+      }
+    },
+    {
+      "id": "note-clauses-clause04-omt-components-datatypes-notes-tex-1",
+      "text": "That the name of any datatype or data representation shall be unique among all datatypes and data representations.",
+      "kind": "informative",
+      "owner_id": null,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 11,
+        "end_line": 11
+      }
+    }
+  ]
+}

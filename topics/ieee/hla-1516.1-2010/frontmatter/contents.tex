@@ -1,0 +1,274 @@
+% Printed Contents pages viii-xii, reconstructed as native LaTeX.
+% Entries deliberately preserve source omissions/irregularities (e.g. 4.11 is
+% absent from the printed Contents and 6.23 begins with a leading period).
+\newcommand{\toctop}[3]{%
+    \par\vspace{6.1pt}\noindent
+    \makebox[0.43in][l]{#1}%
+    \parbox[t]{\dimexpr\linewidth-0.43in\relax}{#2\dotfill\makebox[0.30in][r]{#3}}\par}
+\newcommand{\tocsub}[3]{%
+    \par\noindent\hspace*{0.43in}\makebox[0.42in][l]{#1}%
+    \parbox[t]{\dimexpr\linewidth-0.85in\relax}{#2\dotfill\makebox[0.30in][r]{#3}}\par}
+\newcommand{\tocannex}[2]{%
+    \par\vspace{5.0pt}\noindent
+    \parbox[t]{\linewidth}{#1\dotfill\makebox[0.30in][r]{#2}}\par}
+\setcounter{page}{8}
+\thispagestyle{front}
+{\sffamily\bfseries\fontsize{12.2}{14.0}\selectfont Contents\par}
+\vspace{8pt}
+\begingroup
+\fontsize{8.45}{10.15}\selectfont
+\setlength{\parskip}{0pt}
+\toctop{1.}{Overview}{1}
+\tocsub{1.1}{Scope}{1}
+\tocsub{1.2}{Purpose}{1}
+\tocsub{1.3}{Introduction}{2}
+\tocsub{1.4}{Background}{2}
+\toctop{2.}{Normative references}{7}
+\toctop{3.}{Definitions, abbreviations and acronyms}{9}
+\tocsub{3.1}{Definitions}{9}
+\tocsub{3.2}{Abbreviations and acronyms}{22}
+\toctop{4.}{Federation management}{25}
+\tocsub{4.1}{Overview}{25}
+\tocsub{4.2}{Connect service}{37}
+\tocsub{4.3}{Disconnect service}{38}
+\tocsub{4.4}{Connection Lost \textdagger\textsuperscript{a} service}{38}
+\tocsub{4.5}{Create Federation Execution service}{39}
+\tocsub{4.6}{Destroy Federation Execution service}{40}
+\tocsub{4.7}{List Federation Executions service}{41}
+\tocsub{4.8}{Report Federation Executions \textdagger service}{41}
+\tocsub{4.9}{Join Federation Execution service}{42}
+\tocsub{4.10}{Resign Federation Execution service}{43}
+\tocsub{4.12}{Confirm Synchronization Point Registration \textdagger service}{46}
+\tocsub{4.13}{Announce Synchronization Point \textdagger service}{47}
+\tocsub{4.14}{Synchronization Point Achieved service}{48}
+\tocsub{4.15}{Federation Synchronized \textdagger service}{49}
+\tocsub{4.16}{Request Federation Save service}{49}
+\tocsub{4.17}{Initiate Federate Save \textdagger service}{51}
+\tocsub{4.18}{Federate Save Begun service}{52}
+\tocsub{4.19}{Federate Save Complete service}{53}
+\tocsub{4.20}{Federation Saved \textdagger service}{53}
+\tocsub{4.21}{Abort Federation Save service}{54}
+\tocsub{4.22}{Query Federation Save Status service}{55}
+\tocsub{4.23}{Federation Save Status Response \textdagger service}{56}
+\tocsub{4.24}{Request Federation Restore service}{57}
+\tocsub{4.25}{Confirm Federation Restoration Request \textdagger service}{58}
+\tocsub{4.26}{Federation Restore Begun \textdagger service}{59}
+\tocsub{4.27}{Initiate Federate Restore \textdagger service}{59}
+\tocsub{4.28}{Federate Restore Complete service}{60}
+\tocsub{4.29}{Federation Restored \textdagger service}{61}
+\tocsub{4.30}{Abort Federation Restore service}{62}
+\tocsub{4.31}{Query Federation Restore Status service}{63}
+\tocsub{4.32}{Federation Restore Status Response \textdagger service}{64}
+
+\vfill
+{\fontsize{7.2}{8.4}\selectfont
+\noindent\rule{1.45in}{0.4pt}\par
+\noindent\textsuperscript{a}All RTI-initiated services are denoted with a \textdagger\ (printer's dagger) after the service name.\par}
+\endgroup
+\clearpage
+\thispagestyle{front}
+\begingroup
+\fontsize{8.45}{10.15}\selectfont
+\setlength{\parskip}{0pt}
+\toctop{5.}{Declaration management (DM)}{65}
+\tocsub{5.1}{Overview}{65}
+\tocsub{5.2}{Publish Object Class Attributes service}{73}
+\tocsub{5.3}{Unpublish Object Class Attributes service}{74}
+\tocsub{5.4}{Publish Interaction Class service}{76}
+\tocsub{5.5}{Unpublish Interaction Class service}{77}
+\tocsub{5.6}{Subscribe Object Class Attributes service}{77}
+\tocsub{5.7}{Unsubscribe Object Class Attributes service}{79}
+\tocsub{5.8}{Subscribe Interaction Class service}{80}
+\tocsub{5.9}{Unsubscribe Interaction Class service}{82}
+\tocsub{5.10}{Start Registration For Object Class \textdagger service}{82}
+\tocsub{5.11}{Stop Registration For Object Class \textdagger service}{83}
+\tocsub{5.12}{Turn Interactions On \textdagger service}{84}
+\tocsub{5.13}{Turn Interactions Off \textdagger service}{85}
+\toctop{6.}{Object management}{87}
+\tocsub{6.1}{Overview}{87}
+\tocsub{6.2}{Reserve Object Instance Name service}{92}
+\tocsub{6.3}{Object Instance Name Reserved \textdagger service}{93}
+\tocsub{6.4}{Release Object Instance Name service}{94}
+\tocsub{6.5}{Reserve Multiple Object Instance Names service}{94}
+\tocsub{6.6}{Multiple Object Instance Names Reserved \textdagger service}{95}
+\tocsub{6.7}{Release Multiple Object Instance Names service}{96}
+\tocsub{6.8}{Register Object Instance service}{97}
+\tocsub{6.9}{Discover Object Instance \textdagger service}{98}
+\tocsub{6.10}{Update Attribute Values service}{99}
+\tocsub{6.11}{Reflect Attribute Values \textdagger service}{101}
+\tocsub{6.12}{Send Interaction service}{102}
+\tocsub{6.13}{Receive Interaction \textdagger service}{104}
+\tocsub{6.14}{Delete Object Instance service}{105}
+\tocsub{6.15}{Remove Object Instance \textdagger service}{107}
+\tocsub{6.16}{Local Delete Object Instance service}{108}
+\tocsub{6.17}{Attributes In Scope \textdagger service}{109}
+\tocsub{6.18}{Attributes Out Of Scope \textdagger service}{110}
+\tocsub{6.19}{Request Attribute Value Update service}{111}
+\tocsub{6.20}{Provide Attribute Value Update \textdagger service}{112}
+\tocsub{6.21}{Turn Updates On For Object Instance \textdagger service}{113}
+\tocsub{6.22}{Turn Updates Off For Object Instance \textdagger service}{114}
+\tocsub{6.23}{.Request Attribute Transportation Type Change service}{114}
+\tocsub{6.24}{Confirm Attribute Transportation Type Change \textdagger service}{116}
+\tocsub{6.25}{Query Attribute Transportation Type service}{116}
+\tocsub{6.26}{Report Attribute Transportation Type \textdagger service}{117}
+\tocsub{6.27}{Request Interaction Transportation Type Change service}{118}
+\tocsub{6.28}{Confirm Interaction Transportation Type Change \textdagger service}{119}
+\tocsub{6.29}{Query Interaction Transportation Type service}{120}
+\tocsub{6.30}{Report Interaction Transportation Type \textdagger service}{120}
+\toctop{7.}{Ownership management}{123}
+\tocsub{7.1}{Overview}{123}
+\tocsub{7.2}{Unconditional Attribute Ownership Divestiture service}{129}
+\tocsub{7.3}{Negotiated Attribute Ownership Divestiture service}{130}
+\endgroup
+\clearpage
+\thispagestyle{front}
+\begingroup
+\fontsize{8.45}{10.15}\selectfont
+\setlength{\parskip}{0pt}
+\tocsub{7.4}{Request Attribute Ownership Assumption \textdagger service}{132}
+\tocsub{7.5}{Request Divestiture Confirmation \textdagger service}{133}
+\tocsub{7.6}{Confirm Divestiture service}{134}
+\tocsub{7.7}{Attribute Ownership Acquisition Notification \textdagger service}{135}
+\tocsub{7.8}{Attribute Ownership Acquisition service}{136}
+\tocsub{7.9}{Attribute Ownership Acquisition If Available service}{138}
+\tocsub{7.10}{Attribute Ownership Unavailable \textdagger service}{139}
+\tocsub{7.11}{Request Attribute Ownership Release \textdagger service}{140}
+\tocsub{7.12}{Attribute Ownership Release Denied service}{141}
+\tocsub{7.13}{Attribute Ownership Divestiture If Wanted service}{142}
+\tocsub{7.14}{Cancel Negotiated Attribute Ownership Divestiture service}{143}
+\tocsub{7.15}{Cancel Attribute Ownership Acquisition service}{143}
+\tocsub{7.16}{Confirm Attribute Ownership Acquisition Cancellation \textdagger service}{145}
+\tocsub{7.17}{Query Attribute Ownership service}{146}
+\tocsub{7.18}{Inform Attribute Ownership \textdagger service}{146}
+\tocsub{7.19}{Is Attribute Owned By Federate service}{147}
+\toctop{8.}{Time management}{149}
+\tocsub{8.1}{Overview}{149}
+\tocsub{8.2}{Enable Time Regulation service}{159}
+\tocsub{8.3}{Time Regulation Enabled \textdagger service}{160}
+\tocsub{8.4}{Disable Time Regulation service}{161}
+\tocsub{8.5}{Enable Time Constrained service}{162}
+\tocsub{8.6}{Time Constrained Enabled \textdagger service}{163}
+\tocsub{8.7}{Disable Time Constrained service}{164}
+\tocsub{8.8}{Time Advance Request service}{165}
+\tocsub{8.9}{Time Advance Request Available service}{166}
+\tocsub{8.10}{Next Message Request service}{167}
+\tocsub{8.11}{Next Message Request Available service}{169}
+\tocsub{8.12}{Flush Queue Request service}{171}
+\tocsub{8.13}{Time Advance Grant \textdagger service}{172}
+\tocsub{8.14}{Enable Asynchronous Delivery service}{173}
+\tocsub{8.15}{Disable Asynchronous Delivery service}{174}
+\tocsub{8.16}{Query GALT service}{175}
+\tocsub{8.17}{Query Logical Time service}{176}
+\tocsub{8.18}{Query LITS service}{176}
+\tocsub{8.19}{Modify Lookahead service}{177}
+\tocsub{8.20}{Query Lookahead service}{178}
+\tocsub{8.21}{Retract service}{179}
+\tocsub{8.22}{Request Retraction \textdagger service}{180}
+\tocsub{8.23}{Change Attribute Order Type service}{181}
+\tocsub{8.24}{Change Interaction Order Type service}{182}
+\toctop{9.}{Data distribution management (DDM)}{185}
+\tocsub{9.1}{Overview}{185}
+\tocsub{9.2}{Create Region service}{194}
+\tocsub{9.3}{Commit Region Modifications service}{195}
+\tocsub{9.4}{Delete Region service}{196}
+\tocsub{9.5}{Register Object Instance With Regions service}{197}
+\tocsub{9.6}{Associate Regions For Updates service}{199}
+\tocsub{9.7}{Unassociate Regions For Updates service}{200}
+\tocsub{9.8}{Subscribe Object Class Attributes With Regions service}{201}
+\endgroup
+\clearpage
+\thispagestyle{front}
+\begingroup
+\fontsize{8.45}{10.15}\selectfont
+\setlength{\parskip}{0pt}
+\tocsub{9.9}{Unsubscribe Object Class Attributes With Regions service}{203}
+\tocsub{9.10}{Subscribe Interaction Class With Regions service}{205}
+\tocsub{9.11}{Unsubscribe Interaction Class With Regions service}{207}
+\tocsub{9.12}{Send Interaction With Regions service}{208}
+\tocsub{9.13}{Request Attribute Value Update With Regions service}{209}
+\toctop{10.}{Support services}{213}
+\tocsub{10.1}{Overview}{213}
+\tocsub{10.2}{Get Automatic Resign Directive service}{214}
+\tocsub{10.3}{Set Automatic Resign Directive service}{215}
+\tocsub{10.4}{Get Federate Handle service}{215}
+\tocsub{10.5}{Get Federate Name service}{216}
+\tocsub{10.6}{Get Object Class Handle service}{217}
+\tocsub{10.7}{Get Object Class Name service}{217}
+\tocsub{10.8}{Get Known Object Class Handle service}{218}
+\tocsub{10.9}{Get Object Instance Handle service}{219}
+\tocsub{10.10}{Get Object Instance Name service}{220}
+\tocsub{10.11}{Get Attribute Handle service}{220}
+\tocsub{10.12}{Get Attribute Name service}{221}
+\tocsub{10.13}{Get Update Rate Value service}{222}
+\tocsub{10.14}{Get Update Rate Value For Attribute service}{222}
+\tocsub{10.15}{Get Interaction Class Handle service}{223}
+\tocsub{10.16}{Get Interaction Class Name service}{224}
+\tocsub{10.17}{Get Parameter Handle service}{225}
+\tocsub{10.18}{Get Parameter Name service}{225}
+\tocsub{10.19}{Get Order Type service}{226}
+\tocsub{10.20}{Get Order Name service}{227}
+\tocsub{10.21}{Get Transportation Type Handle service}{227}
+\tocsub{10.22}{Get Transportation Type Name service}{228}
+\tocsub{10.23}{Get Available Dimensions For Class Attribute service}{229}
+\tocsub{10.24}{Get Available Dimensions For Interaction Class service}{230}
+\tocsub{10.25}{Get Dimension Handle service}{230}
+\tocsub{10.26}{Get Dimension Name service}{231}
+\tocsub{10.27}{Get Dimension Upper Bound service}{232}
+\tocsub{10.28}{Get Dimension Handle Set service}{232}
+\tocsub{10.29}{Get Range Bounds service}{233}
+\tocsub{10.30}{Set Range Bounds service}{234}
+\tocsub{10.31}{Normalize Federate Handle service}{235}
+\tocsub{10.32}{Normalize Service Group service}{236}
+\tocsub{10.33}{Enable Object Class Relevance Advisory Switch service}{236}
+\tocsub{10.34}{Disable Object Class Relevance Advisory Switch service}{237}
+\tocsub{10.35}{Enable Attribute Relevance Advisory Switch service}{238}
+\tocsub{10.36}{Disable Attribute Relevance Advisory Switch service}{239}
+\tocsub{10.37}{Enable Attribute Scope Advisory Switch service}{239}
+\tocsub{10.38}{Disable Attribute Scope Advisory Switch service}{240}
+\tocsub{10.39}{Enable Interaction Relevance Advisory Switch service}{241}
+\tocsub{10.40}{Disable Interaction Relevance Advisory Switch service}{242}
+\tocsub{10.41}{Evoke Callback service}{242}
+\tocsub{10.42}{Evoke Multiple Callbacks service}{243}
+\tocsub{10.43}{Enable Callbacks service}{244}
+\tocsub{10.44}{Disable Callbacks service}{245}
+\toctop{11.}{Management object model (MOM)}{247}
+\endgroup
+\clearpage
+\thispagestyle{front}
+\begingroup
+\fontsize{8.45}{10.15}\selectfont
+\setlength{\parskip}{0pt}
+\tocsub{11.1}{Overview}{247}
+\tocsub{11.2}{MOM object classes}{247}
+\tocsub{11.3}{MOM interaction classes}{248}
+\tocsub{11.4}{MOM-related characteristics of the RTI}{250}
+\tocsub{11.5}{Service reporting}{252}
+\tocsub{11.6}{MOM OMT tables}{252}
+\toctop{12.}{Programming language mappings}{289}
+\tocsub{12.1}{Overview}{289}
+\tocsub{12.2}{Designators}{289}
+\tocsub{12.3}{Logical time, timestamps, and lookahead}{290}
+\tocsub{12.4}{Standardized time types}{291}
+\tocsub{12.5}{Connect}{292}
+\tocsub{12.6}{Concurrency and reentrancy}{292}
+\tocsub{12.7}{Dynamic link compatibility}{293}
+\tocsub{12.8}{Reflect Attribute Values service methods}{293}
+\tocsub{12.9}{Receive Interaction service methods}{293}
+\tocsub{12.10}{Remove Object Instance service methods}{294}
+\tocsub{12.11}{Java}{294}
+\tocsub{12.12}{C++}{309}
+\tocsub{12.13}{Web Service Definition Language (WSDL)}{324}
+\toctop{13.}{Conformance}{333}
+\tocsub{13.1}{Federate conformance}{333}
+\tocsub{13.2}{RTI conformance}{333}
+\tocannex{Annex A (informative) API information}{335}
+\tocannex{Annex B (normative) Java API}{337}
+\tocannex{Annex C (normative) C++ API}{343}
+\tocannex{Annex D (normative) Web Services API}{345}
+\tocannex{Annex E (informative) Rationale}{347}
+\tocannex{Annex F (normative) FOM Document Data (FDD) XML Schema declaration}{357}
+\tocannex{Annex G (normative) MOM and Initialization Module (MIM)}{359}
+\tocannex{Annex H (informative) Bibliography}{361}
+\tocannex{Annex I (informative) Figure table}{363}
+\endgroup
+\clearpage

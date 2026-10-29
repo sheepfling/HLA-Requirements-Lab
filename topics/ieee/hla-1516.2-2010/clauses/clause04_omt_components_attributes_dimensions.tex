@@ -1,0 +1,364 @@
+% Source PDF pp. 47-55 / standard pp. 35-43.
+% Continues Clause 4 from 4.4.2 through the opening of 4.7.1.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 47 / standard p. 35.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 8---Attribute table}
+\begingroup
+\fontsize{7.15}{8.0}\selectfont
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{1.12}
+\noindent\resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \bfseries Object & \bfseries Attribute & \bfseries Datatype & \shortstack{\bfseries Update\\\bfseries type} & \shortstack{\bfseries Update\\\bfseries condition} & \bfseries D/A & \bfseries P/S & \shortstack{\bfseries Available\\\bfseries dimensions}                 & \shortstack{\bfseries Transport-\\\bfseries ation}                 & \bfseries Order   \\
+        \hline
+        \shortstack{HLA\\object\\Root}                 & \shortstack{HLA\\privilege\\ToDelete\\Object}                 & HLAtoken   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \hline
+        \multirow{3}{*}{\shortstack{\omtph{object}\\\omtph{class}}}                 & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \cline{2-10}
+        & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \cline{2-10}
+        & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \hline
+        \multirow{3}{*}{\shortstack{\omtph{object}\\\omtph{class}}}                 & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \cline{2-10}
+        & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \cline{2-10}
+        & \omtph{attribute}   & \omtph{datatype}   & \shortstack{\omtph{update}\\\omtph{type}}                 & \shortstack{\omtph{update}\\\omtph{condition}}                 & \omtph{d/a}   & \omtph{p/s}   & \omtph{dimensions}   & \omtph{transport} & \omtph{order} \\
+        \hline
+    \end{tabular}%
+}
+\endgroup
+
+The first column (Object) shall contain names from the object class structure table for object classes that are associated with attributes. Object class names shall include the parentage (superclasses) of the class to the depth necessary to uniquely identify the class in this table and may include the full parentage of the class. In general, to reduce redundancy, attributes should be specified for classes at the highest point in the hierarchy to which they apply. For example, if all air vehicles have an attribute of \textit{MinimumTurnRadiusAtMaximumSpeed}, some redundancy can be avoided if this attribute is specified just once for the entire class of \textit{AirVehicle}. Given that all object classes inherit the attribute types of their superclasses, the subclasses of \textit{AirVehicle}, such as \textit{FixedWing} and \textit{RotaryWing}, also have this attribute with its specified characteristics.
+
+The second column (Attribute) shall list the attributes of the specified object class. Attribute names shall adhere to HLA naming conventions (see 3.3.1). The names assigned to attributes of any particular object class shall not duplicate (overload) the names of attributes of this class or any higher-level superclass. There may be many attributes for a single object class; however, all attribute names for a given class shall be unique.
+
+The third column (Datatype) shall identify the datatype of the attribute. This datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype described in subclauses of 4.13. The predefined datatype HLAtoken (see 4.13.6) can be used to indicate that the attribute never contains a value and is used only as a token.
+
+Although an attribute's datatype can be specified ``NA,'' that attribute shall have valid (non-``NA'') transportation and order types specified. When a datatype of ``NA'' is used, the update type, update condition, and available dimensions shall also be ``NA.''
+
+The fourth column (Update type) shall record the policy for updating an instance of the class attribute. The unique designations for this column shall be as follows:
+\begin{itemize}[topsep=1pt,itemsep=1.5pt]
+\item \textit{Static}: The value of the attribute is static; the owner of the attribute (federate or RTI) updates it upon registration and when requested.
+\item \textit{Periodic}: The owner of the attribute (federate or RTI) updates the attribute at regular time intervals.
+\item \textit{Conditional}: The owner of the attribute (federate or RTI) updates the attribute when unique conditions dictate.
+\item \textit{NA}: The federate never provides a value for this attribute.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 48 / standard p. 36.
+% ---------------------------------------------------------------------------
+\newpage
+The fifth column (Update condition) shall expand and explain the policies for updating an instance of the class attribute. When the update type is \textit{periodic}, a rate of the number of updates per time unit shall be specified in the Update Condition column. Attributes with a \textit{conditional} update type shall have the conditions for update specified in the ``Update condition'' column. The ``Update condition'' column may also be used to specify initial conditions for instance attribute updates. If a federate is capable of varying the rate and circumstances of the update of an instance object attribute, this information shall also be recorded in this column or through the OMT notes feature. If the update type is \textit{Static} or \textit{NA}, ``NA'' shall be entered in this column.
+
+The sixth column (D/A) shall indicate whether ownership of an instance of the class attribute can be divested or acquired.
+
+In a FOM or FOM module, the ownership of an instance attribute may be designated as divest, acquire, both or neither. Descriptions of the designations for this column are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{D (Divest)}: Some federate in the federation is capable of publishing the class attribute and can divest ownership of an instance of this attribute using the HLA ownership management services.
+\item \textit{A (Acquire)}: Some federate in the federation is capable of publishing the class attribute and can acquire ownership of an instance of this attribute.
+\item \textit{N (NoTransfer)}: Ownership of an instance of this class attribute is not transferable in this federation.
+\item \textit{DA (DivestAcquire)}: Some federate in the federation is capable of divesting ownership of instances of this class attribute and another federate is capable of acquiring ownership of instances of this class attribute.
+\end{itemize}
+
+In a SOM or SOM module, the federate may be able to divest ownership of an instance attribute, acquire ownership, both, or neither. Moreover, the corresponding class attribute shall be published for the federate to divest or acquire ownership. Descriptions of the designations for this column are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{D (Divest)}: The federate is capable of publishing the class attribute and can divest ownership of an instance of this attribute using the HLA ownership management services.
+\item \textit{A (Acquire)}: The federate is capable of publishing the class attribute and can acquire ownership of an instance of this attribute.
+\item \textit{N (NoTransfer)}: The federate is neither capable of divesting ownership of instances of this class attribute nor acquiring ownership of instances of this attribute.
+\item \textit{DA (DivestAcquire)}: The federate is capable of both divesting ownership of instances of this class attribute and acquiring ownership of instances of this class attribute.
+\end{itemize}
+
+The seventh column (P/S) shall identify the capabilities of a federate or federation with respect to class attribute publishing and subscribing.
+
+In a SOM or SOM module, the entry for this column shall take one of the following values:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{P (Publish)}: The federate is capable of publishing this class attribute, either in the context of the class where it is declared or in at least one subclass of that class (i.e., capable of invoking appropriate HLA publishing services with the class attribute as a supplied argument).
+\item \textit{S (Subscribe)}: The federate is capable of subscribing to this class attribute, either in the context of the class where it is declared or in at least one subclass of that class (i.e., capable of invoking HLA appropriate subscribing services with the class attribute as a supplied argument).
+\item \textit{PS (PublishSubscribe)}: The federate is capable of both publishing and subscribing to this class attribute.
+\item \textit{N (Neither)}: The federate neither publishes nor subscribes to this class attribute.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 49 / standard p. 37.
+% ---------------------------------------------------------------------------
+\newpage
+In a FOM or FOM module, the same basic designations shall apply.
+
+The eighth column (Available dimensions) shall record the association of the class attribute with a set of dimensions if a federate or federation is using data distribution management (DDM) services for this attribute. The column shall contain a comma-separated list of dimension names corresponding to rows in the dimension table described in 4.6. Class attributes can be individually associated with dimensions, regardless of the dimensions associated with other attributes of the same class. For SOMs and FOMs of federates and federations, respectively, that are not using DDM services or for class attributes that are not associated with dimensions, ``NA'' shall be entered in this column.
+
+The ninth column (Transportation) shall specify the type of transportation to be used with this attribute. These values shall be chosen from the name of any row in the transportation type table as described in 4.10.
+
+The tenth column (Order) shall specify the order of delivery to be used with instances of this class attribute. Valid values for entries in this column are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Receive}: Instances of the class attribute are delivered to a receiving federate in an undetermined order.
+\item \textit{TimeStamp}: Instances of the class attribute are delivered to a receiving federate in an order determined by timestamps assigned when the instance attributes were updated.
+\end{itemize}
+\stdnote{One entry is required for Table 8. For this entry, the first column shall contain ``HLAobjectRoot'' and the second shall contain ``HLAprivilegeToDeleteObject;'' subsequent columns shall be completed as appropriate for the federate or federation. Uses and restrictions on this attribute are described in IEEE Std 1516.1-2010.}
+
+\subsubsection{Inclusion criteria}
+All instance attributes whose values can be exchanged or ownership can be transferred during the course of an HLA federation execution shall be documented in the attribute table of a FOM and relevant FOM modules. All class attributes that can be either published or subscribed to by an individual federate shall be documented in the attribute table of its SOM and relevant SOM modules.
+
+\subsubsection{Example}
+Table 9 shows examples of attributes from the restaurant application described in 4.2.4. First, the Employee object class is characterized according to the four attributes shown in the table. The datatypes specified are defined in the examples provided in 4.13. Each of these four attributes is updated conditionally except for the YearsOfService attribute, which is updated periodically (yearly) on the employee's start date anniversary. As with most of the domain-specific attributes shown in this example, the attributes of Employee are assumed divestable, acquirable, publishable, and subscribable.
+
+The Waiter subclass of Employee is shown with three attributes. These are in addition to the four inherited attributes from its superclass. Each of the first two attributes, Efficiency and Cheerfulness, is intended to represent a performance measure that is assigned to the employee at performance reviews. The third attribute is intended to represent the state of the employee (the task he/she is performing) at any point in time during restaurant operations.
+
+In the final two entries, the Drink and Soda classes are each shown with a single attribute. The NumberCups attribute of the Drink class has been associated with the BarQuantity dimension, and the Flavor attribute of the Soda class has been associated with the SodaFlavor and BarQuantity dimensions; these dimensions are shown in the dimension table example in 4.6.4.
+
+The HLAprivilegeToDeleteObject attribute of class HLAobjectRoot is a different kind of attribute than the others in the table. This attribute has a datatype of ``HLAtoken,'' meaning that an instance of this attribute does not have a value to be updated. Instead, it is more of a token attribute, in which information is conveyed simply by determining which, if any, federate owns the attribute at any time. In this case,
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 50 / standard p. 38.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 9---Attribute table example}
+\begingroup
+\fontsize{6.55}{7.25}\selectfont
+\setlength{\tabcolsep}{1.8pt}
+\renewcommand{\arraystretch}{1.12}
+\noindent\resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|c|c|c|c|c|c|c|}
+        \hline
+        \bfseries Object & \bfseries Attribute & \bfseries Datatype & \shortstack{\bfseries Update\\\bfseries type} & \shortstack{\bfseries Update\\\bfseries condition} & \bfseries D/A & \bfseries P/S & \shortstack{\bfseries Available\\\bfseries dimensions} & \shortstack{\bfseries Transport-\\\bfseries ation} & \bfseries Order \\
+        \hline
+        \shortstack{HLAobject\\Root} & \shortstack{HLA\\privilege\\ToDelete\\Object} & HLAtoken & NA & NA & N & N & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \hline
+        \multirow{4}{*}{Employee} & PayRate & DollarRate & Conditional & \shortstack{Merit increase\\\mbox{*[Note3]}} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \cline{2-10}
+        & \shortstack{YearsOf\\Service} & Years & Periodic & \shortstack{1/year\\\mbox{*[Note4]}} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \cline{2-10}
+        & \shortstack{Home\\Number} & \shortstack{HLAASCII\\string} & Conditional & \shortstack{Employee\\request} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \cline{2-10}
+        & \shortstack{Home\\Address} & \shortstack{Address\\Type} & Conditional & \shortstack{Employee\\request} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \hline
+        \multirow{3}{*}{\shortstack{Employee.\\Waiter}} & Efficiency & Waiter Value & Conditional & \shortstack{Performance\\review} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \cline{2-10}
+        & \shortstack{Cheerful-\\ness} & Waiter Value & Conditional & \shortstack{Performance\\review} & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \cline{2-10}
+        & State & Waiter Tasks & Conditional & Work flow & DA & PS & NA & HLAreliable & \shortstack{Time-\\stamp} \\
+        \hline
+        Food.Drink & \shortstack{Number\\Cups} & DrinkCount & Conditional & \shortstack{Customer\\request} & N & PS & BarQuantity & HLAreliable & \shortstack{Time-\\stamp} \\
+        \hline
+        \shortstack{Food.Drink.\\Soda} & Flavor & FlavorType & Conditional & \shortstack{Customer\\request} & N & PS & \shortstack{SodaFlavor,\\BarQuantity} & HLAreliable & \shortstack{Time-\\stamp} \\
+        \hline
+        Note & \multicolumn{9}{l|}{NA} \\
+        \hline
+    \end{tabular}%
+}
+\endgroup
+
+HLAprivilegeToDeleteObject is a token attribute known by the RTI and used to determine whether or not a federate is permitted to delete an object instance.
+
+Two examples of notes have also been included in Table 9; this feature is fully explained in 4.14.
+
+\subsection{Parameter table}
+
+\subsubsection{Purpose/background}
+Most interaction classes are characterized according to a list of one or more interaction parameters. Interaction parameters are used to associate relevant and useful information with classes of interactions. Examples of interaction parameters include object class names, object instance attribute values, strings, and numerical constants. Although some circumstances may require that a subset of the associated parameters be sent with an interaction, other circumstances require that the full set of parameters be sent. However, for every interaction class identified in the interaction class structure table, the full set of parameters associated with that interaction class shall be described in the parameter table. The interaction class ``HLAinteractionRoot'' shall be a superclass of all other interaction classes in a FOM or FOM module and in a SOM or SOM module; parameters may be assigned to it like any other interaction class.
+
+Unlike class attributes, interaction parameters may not be subscribed to on an individual basis. Thus, dimension, transportation, and delivery order information is specified at the interaction class level rather than at the parameter level.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 51 / standard p. 39.
+% ---------------------------------------------------------------------------
+\newpage
+Interaction parameters may be associated with an interaction class at any level of an interaction class hierarchy. An interaction class inherits the parameters defined for its superclasses. In fact, the mechanisms and rules for inheritance of interaction parameters are identical to those of attributes. Thus, the specific placement of parameters throughout an interaction class hierarchy for a given federation is driven by the same needs that drive the placement of attributes in an object class hierarchy.
+
+\subsubsection{Table format}
+The parameter table of an HLA object model is designed to provide descriptive information about all parameters of all interactions represented in a federation. The template that shall be used for the parameter table is provided in Table 10.
+
+\omtcaption{Table 10---Parameter table}
+\begingroup
+\fontsize{7.7}{8.6}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.20}
+\noindent\resizebox{\textwidth}{!}{%
+    \begin{tabular}{|p{95pt}|p{70pt}|p{58pt}|p{62pt}|p{65pt}|p{40pt}|}
+        \hline
+        \centering\bfseries Interaction               & \centering\bfseries Parameter & \centering\bfseries Datatype & \centering\bfseries Available dimensions & \centering\bfseries Transportation & \centering\arraybackslash\bfseries Order \\
+        \hline
+        \multirow{3}{95pt}{\omtph{interaction class}} & \omtph{parameter}             & \omtph{datatype} & \multirow{3}{62pt}{\omtph{dimensions}} & \multirow{3}{65pt}{\omtph{transportation}} & \multirow{3}{40pt}{\omtph{order}} \\
+        \cline{2-3}
+        & \omtph{parameter}             & \omtph{datatype}             &                                          &                                            &                                          \\
+        \cline{2-3}
+        & \omtph{parameter}             & \omtph{datatype}             &                                          &                                            &                                          \\
+        \hline
+        \multirow{3}{95pt}{\omtph{interaction class}} & \omtph{parameter}             & \omtph{datatype} & \multirow{3}{62pt}{\omtph{dimensions}} & \multirow{3}{65pt}{\omtph{transportation}} & \multirow{3}{40pt}{\omtph{order}} \\
+        \cline{2-3}
+        & \omtph{parameter}             & \omtph{datatype}             &                                          &                                            &                                          \\
+        \cline{2-3}
+        & \omtph{parameter}             & \omtph{datatype}             &                                          &                                            &                                          \\
+        \hline
+    \end{tabular}%
+}
+\endgroup
+
+The first column (Interaction) shall contain names of interaction classes from the interaction class structure table. Interaction class names shall include the parentage (superclasses) of the class to the depth necessary to uniquely identify the class in this table and may include the full parentage of the class. In general, to reduce redundancy, parameters should be specified for classes at the highest point in the hierarchy in which they represent useful information, although this is not required. For example, if all weapon firings include a parameter that defines the infrared signature of the platform at the time the firing occurs, some redundancy would be avoided if this parameter is specified just once at the uppermost level of a \textit{WeaponFires} class. Given that all interaction subclasses inherit the parameter types of their superclasses, the subclasses of \textit{WeaponFires}, such as \textit{TankFires} and \textit{Shipfires}, also have this parameter with its specified characteristics. Note that an interaction class need not contain any parameters; however, all interaction classes shall be included in this table so that transportation and order can be specified.
+
+The second column (Parameter) shall list the parameters of each interaction. Parameter names shall adhere to HLA naming conventions (see 3.3.1). The names assigned to parameters of any particular interaction class shall not duplicate (overload) the names of parameters of this class or any higher-level superclass. There may be many parameters for a single interaction class; however, all parameter names for a given class shall be unique.
+
+If no parameters are specified for an interaction class, ``NA'' shall be entered in this column.
+
+The third column (Datatype) shall identify the datatype of the parameter. This datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype described in 4.13. If the interaction class has no parameters, ``NA'' shall be entered for this column.
+
+The fourth column (Available dimensions) shall record the association of an interaction class with a set of dimensions if the federate or federation is using DDM services for this interaction. The column shall contain a comma-separated list of dimension names corresponding to rows from the dimension table described in 4.6. This indicates that whole interactions of this class are subject to filtering through regions containing a
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 52 / standard p. 40.
+% ---------------------------------------------------------------------------
+\newpage
+subset of these dimensions when the interaction is sent. The available dimensions of an interaction class shall be a superset of the available dimensions of its immediate superclass to ensure that interactions of the specified class are received by subscribers to the superclass when interactions are promoted to the superclass. For SOMs and FOMs in which DDM services are not used or for interactions that are not associated with dimensions, ``NA'' shall be entered in this column.
+
+The fifth column (Transportation) shall specify the type of transportation to be used with this interaction. These values shall be chosen from the name of any row in the transportation type table as described in 4.10.
+
+The sixth column (Order) shall specify the order of delivery to be used with this interaction. Valid values for entry in this column are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Receive}: The interaction is delivered to a receiving federate in an undetermined order.
+\item \textit{TimeStamp}: The interaction is delivered to a receiving federate in an order determined by a timestamp assigned when the interaction was initiated.
+\end{itemize}
+
+\subsubsection{Inclusion criteria}
+In federations, any information elements that can be provided and associated with a given interaction class (by the class publishers) that are deemed to be useful to subscribers to that interaction class shall be included and documented as interaction parameters in the parameter table. For individual federates, SOM developers should associate with their publishable interaction classes whatever information they feel could be needed by the subscribers to their interaction classes. In addition, for interaction classes to which the federate can subscribe, SOM developers should determine what types of information need to be included with those interactions so that the federate can calculate associated effects.
+
+\vspace{-11pt}
+
+\subsubsection{Example}
+Table 11 shows a partial example of interactions and parameters chosen from the restaurant application described in 4.2.4. Here, the FoodServed.MainCourseServed interaction has three parameters associated with it. The third parameter uses a Boolean datatype to reflect whether the meal was served in a reasonable amount of time. In addition, this interaction has been associated with the WaiterId dimension from the dimension table example in 4.6.4 as a means of filtering on waiter identification numbers. CustomerSeated is an example of an interaction with no parameters; the sending and the receiving of the interaction is sufficient to convey the necessary information.
+
+\omtcaption{Table 11---Parameter table example}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.50}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|p{106.4pt}|p{65.6pt}|p{53.0pt}|p{50.6pt}|p{65.6pt}|p{51.2pt}|}
+        \hline
+        \centering\bfseries Interaction                             & \centering\bfseries Parameter & \centering\bfseries Datatype & \centering\bfseries Available dimensions & \centering\bfseries Transportation & \centering\arraybackslash\bfseries Order \\
+        \hline
+        CustomerSeated                                              & NA                            & NA                           & NA                                       & HLAreliable                        & TimeStamp                                \\
+        \hline
+        \multirow{3}{106.4pt}{FoodServed.MainCourse\newline Served} & TemperatureOk                 & ServiceStat & \multirow{3}{50.6pt}{WaiterId} & \multirow{3}{65.6pt}{HLAreliable} & \multirow{3}{51.2pt}{TimeStamp} \\
+        \cline{2-3}
+        & AccuracyOk                    & ServiceStat                  &                                          &                                    &                                          \\
+        \cline{2-3}
+        & TimelinessOk                  & HLAboolean                   &                                          &                                    &                                          \\
+        \hline
+        Note & \multicolumn{5}{l|}{NA} \\
+        \hline
+    \end{tabular}%
+}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 53 / standard p. 41.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsection{Dimension table}
+
+\subsubsection{Purpose/background}
+Federations use declaration management (DM) services to enable the flow of instance attribute and interaction data between federates and to limit the delivery of some data on the basis of object class, interaction class, and attribute name. This reduction of data may be insufficient to meet the needs of federations with large numbers of federates, large numbers of objects or interactions in classes, or large numbers of instance attribute updates per object. Such federations can use DDM services to further reduce the volume of data delivered to federates. When DDM services are used by a federation, a common framework for specifying the data distribution model for the federation is essential for the following reasons:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item It provides a commonly understood mechanism for specifying the exchange of public data and DDM coordination among members of a federation.
+\item It facilitates the design and application of common tool sets for specification of federation DDM needs.
+\end{itemize}
+
+Dimensions are the most fundamental DDM concept. Each attribute or interaction with which DDM services are used shall have a set of available dimensions, as indicated in the attribute table or parameter table, respectively. Each set of available dimensions is a subset of all dimensions that are defined in the dimension table, and defines a multidimensional coordinate system through which federates either express an interest in receiving data or declare their intention to send data. These intentions are specified by creating regions within the coordinate system that indicate particular areas of interest. The regions associated with an instance attribute or interaction shall contain only dimensions that are a subset of the attribute's or interaction's available dimensions, but need not contain all of the available dimensions. These regions are then used in one of the two following ways:
+
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Subscription regions}: Sets of ranges that narrow the scope of interest of the subscribing federate in object class attributes and interactions.
+\item \textit{Update regions}: Sets of ranges that advertise a publishing federate's ability to match subscription interests.
+\end{itemize}
+
+During development of an HLA federation that uses DDM, it is critical that all federation members achieve a common understanding of DDM dimensions and their semantics, and that they agree to a common set of dimension specifications. These agreements are necessary for federates to filter instance attribute updates and interactions in a correct and consistent manner. This shall include the names of dimensions, the association of attributes and interactions with dimensions, the federate view of each dimension, and the default ranges the RTI should supply for available dimensions of attributes and interactions when a federate does not specify ranges at region creation time.
+
+The federate view of each dimension is different from the RTI view of each dimension. The federate view gives each dimension user-defined semantics and an associated datatype in which values are expressed. The federate shall provide a normalization function for each dimension, that maps values from the federate view of a dimension to values in the RTI view of a dimension. Note that the federate view of a dimension is the same for each federate in a federation.
+
+The RTI view of a dimension is an interval of nonnegative integers. The lower bound is fixed for all dimensions, but the upper bound varies by dimension as indicated in the dimension table. The resolution of the RTI view of the dimension does not have to be the same as the resolution of the federate view of the same dimension.
+
+The dimensions form the basis by which update and subscription regions are specified by the federates to the RTI. By having this agreement about the meaning of dimensions enforced at the federate level, the RTI can
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 54 / standard p. 42.
+% ---------------------------------------------------------------------------
+\newpage
+calculate the overlaps of update and subscription regions efficiently without having to understand the semantics of the dimensions. The dimension table shall record all of the elements necessary to specify this agreement in a standard format.
+
+\subsubsection{Table format}
+The template that shall be used for recording dimensions is illustrated in Table 12.
+
+\omtcaption{Table 12---Dimension table}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.32}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|p{57.2pt}|p{43.4pt}|p{61.4pt}|p{122.6pt}|p{105.8pt}|}
+        \hline
+        \centering\bfseries Name & \centering\bfseries Datatype & \centering\bfseries Dimension upper bound & \centering\bfseries Normalization function & \centering\arraybackslash\bfseries Value when unspecified \\
+        \hline
+        \omtph{dimension}        & \omtph{type}                 & \omtph{bound}                             & \omtph{normalization function}             & \omtph{default range/excluded}                            \\
+        \hline
+        \omtph{dimension}        & \omtph{type}                 & \omtph{bound}                             & \omtph{normalization function}             & \omtph{default range/excluded}                            \\
+        \hline
+        \omtph{dimension}        & \omtph{type}                 & \omtph{bound}                             & \omtph{normalization function}             & \omtph{default range/excluded}                            \\
+        \hline
+    \end{tabular}%
+}
+\endgroup\vspace{7.1pt}
+
+The first column (Name) shall specify the name of the dimension. Dimension names shall adhere to HLA naming conventions (see 3.3.1). The names of dimensions in this column shall be unique. Each dimension represents a specific characteristic that may be used for filtering. For example, a dimension named \textit{AltitudeLimits} might indicate the desire to filter information based on altitude.
+
+The second column (Datatype) shall identify the datatype for the federate view of the dimension. This datatype shall be chosen from the name of a simple datatype or an enumerated datatype, as described in 4.13.
+
+The third column (Dimension upper bound) shall specify the upper bound for the dimension that meets the federation's requirement for dimension subrange resolution. The value for this column shall be a positive integer. This value limits the resolution the RTI provides to meet the federation's filtering requirements. It is also the maximum value a federate may use when communicating a range in this dimension to the RTI. For example, if a dimension represents radio frequencies in the range 88.1 MHz to 107.3 MHz in increments of .2, a dimension upper bound of 97 is sufficient where 88.1 is mapped to 0 and 107.3 is mapped to 96 in the RTI view.
+
+The fourth column (Normalization function) shall specify the map from a subscription/update region's bounding coordinates to nonnegative integer subranges in the range [0, dimension upper bound). Because regions communicated with an RTI are expressed by bounding coordinates expressed in values from an RTI's view of dimensions, normalization functions shall be used by federates to construct regions. For each dimension in a region, that dimension's normalization function shall be used to map the dimension bounds as expressed in the federate view of the dimension to subranges of [0, dimension upper bound). To ensure that the federation exhibits correct semantics, federation participants should agree on the normalization functions that they intend to use for each dimension. This agreement shall include the specification of the normalization function and all values that are to be used by the function. If an attribute or parameter is used in the normalization function, its class hierarchy shall be specified in dot notation to the extent necessary to identify the attribute or parameter uniquely. The normalization function shall specify whether it uses a subset of the entire range or a subset of the datatype that is the basis of the dimension type. Example normalization functions are listed in Annex B.
+
+The fifth column (Value when unspecified) shall specify a default range for the dimension that the RTI is to use in overlap calculations if the dimension is an available dimension of an attribute or interaction and has been left unspecified when a federate creates a region that is subsequently used (either for update or for subscription) with the attribute or interaction. The default range is specified as a nonnegative integer
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 55 / standard p. 43.
+% ---------------------------------------------------------------------------
+\newpage
+subrange of [0, dimension upper bound). Ranges shall be specified either by two values separated by two periods or by a single value. All ranges are closed on the lower bound (indicated by a left bracket), and open on the upper bound (indicated by a right parenthesis). The use of a single value shall specify a ``point'' range with the specified point as the lower bound and specified point plus one (1) for the upper bound, so that no other valid value lies between these points. An entry of ``Excluded'' indicates that the dimension shall not be used in overlap calculations unless a specific range is provided in the region specification.
+
+\subsubsection{Inclusion criteria}
+Federations that require more data reduction than the class-based filtering provided by DM services should use the dimension table to document federation-wide agreements on the semantics and use of DDM dimensions. The type and normalization function information is guidance to federates on the consistent use of dimensions to maintain correct DDM semantics across the federation. Similarly, federates that normally operate in such federations should document the mechanisms that they use to take advantage of DDM in their SOM. If DDM services are not used, no entries are required is this table.
+
+\subsubsection{Example}
+Table 13 illustrates an example of the use of the dimension table. The first dimension, \textit{SodaFlavor}, is an enumerated dimension, and its \textit{linearEnumerated} normalization function (see Annex B) would map \textit{Cola} to [0 .. 1), \textit{Orange} to [1 .. 2), and \textit{RootBeer} to [2 .. 3). The next two dimensions, \textit{BarQuantity} and \textit{WaiterId}, are integer-based dimensions and would be mapped at uniform intervals across the ranges [0 .. 25) and [0 .. 20), respectively. Notice that the default \textit{Value When Unspecified} for \textit{BarQuantity} is a point range that is equivalent to [0 .. 1), and also that a note has been attached to the full table.
+
+\omtcaption{Table 13---Dimension table example}\vspace{-8.8pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.30}
+\noindent\makebox[\textwidth][c]{%
+    \begin{tabular}{|p{57.8pt}|p{52.4pt}|p{61.4pt}|p{155.0pt}|p{74.6pt}|}
+        \hline
+        \centering\bfseries Name & \centering\bfseries Datatype & \centering\bfseries Dimension upper bound & \centering\bfseries Normalization function & \centering\arraybackslash\bfseries Value when unspecified \\
+        \hline
+        SodaFlavor               & FlavorType                   & 3                                         & linearEnumerated (Flavor, [Cola, Orange, RootBeer]) & [0 .. 3)                                                  \\
+        \hline
+        BarQuantity              & DrinkCount                   & 25                                        & linear (NumberCups, 1, 25)                          & [0)                                                       \\
+        \hline
+        WaiterId                 & EmplId                       & 20                                        & linear (WaiterId, 1, 20)                            & Excluded                                                  \\
+        \hline
+        Note & \multicolumn{4}{l|}{*[Note5]} \\
+        \hline
+    \end{tabular}%
+}
+\endgroup\vspace{6.6pt}
+
+\subsection{Time representation table}
+
+\subsubsection{Purpose/background}
+Simulations provide a means of exercising system models over time. During a federation execution, time may play two roles. Federates may associate themselves with points on the HLA time axis, and they may associate some of their activities, such as updating an instance attribute's value or sending an interaction, with points on the HLA time axis. These points on the HLA time axis are referred to as timestamps. As a federation execution progresses, federates may advance along the HLA time axis.
+
+The specific strategy used to advance time in a simulation is driven by the simulation's purpose. For example, faster-than-real time, event-stepped simulations are frequently used in analysis applications, whereas real time, time-stepped simulations are often used in training applications. The strategy chosen for advancing time is an important consideration in the design of a simulation, because it affects both simulation performance and the ability of a simulation to interoperate with other simulations in a federation. For this

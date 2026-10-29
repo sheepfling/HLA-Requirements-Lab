@@ -1,0 +1,37 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee-hla-frontmatter}[2026/07/31 v1.0.1 IEEE HLA recreation front matter]
+
+\RequirePackage{xparse}
+\RequirePackage{tabularx}
+
+\NewDocumentEnvironment{HLATitlePage}{}{%
+    \begin{HLASemanticPage}
+    \HLAStableID{front.title-page}%
+    \HLAArial%
+}{%
+    \end{HLASemanticPage}%
+}
+
+\NewDocumentEnvironment{HLAPublicationPage}{}{%
+    \begin{HLASemanticPage}
+    \HLAStableID{front.publication-page}%
+}{%
+    \end{HLASemanticPage}%
+}
+
+\newcommand{\HLATitleBlock}[1]{%
+        {\HLAArial\fontsize{24bp}{25.98bp}\selectfont\bfseries #1\par}%
+}
+
+\newcommand{\HLABoxedIntroductionNotice}[1]{%
+    \noindent\fbox{%
+        \begin{minipage}{\dimexpr\linewidth-10bp\relax}
+        \HLATimes\fontsize{9bp}{10.35bp}\selectfont
+        #1
+        \end{minipage}%
+    }%
+}
+
+\newcommand{\HLAFootnoteRule}{%
+    \rule{104bp}{0.4bp}\par\vspace{5bp}%
+}

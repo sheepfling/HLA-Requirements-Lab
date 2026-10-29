@@ -1,0 +1,395 @@
+% Native, searchable reconstructions of IEEE Std 1516.1-2010 Clause 12
+% Tables 18--28.  Each command is deliberately page-local so the printed
+% source pagination can remain fixed while the table text stays searchable.
+
+\newcommand{\cxiitabletitle}[1]{%
+    \par\vspace{2pt}%
+    \begin{center}\sffamily\bfseries\fontsize{9.5}{10.9}\selectfont #1\end{center}%
+    \vspace{3pt}%
+}
+
+\newenvironment{cxiitabletypeset}[2][8.0]{%
+    \begingroup
+    \fontsize{#1}{9.15}\selectfont
+    \setlength{\tabcolsep}{5.0pt}%
+    \renewcommand{\arraystretch}{#2}%
+    \setlength{\arrayrulewidth}{0.45pt}%
+    \sloppy
+    \hbadness=10001\relax
+}{%
+    \par\endgroup
+}
+
+\newcommand{\cxiitableeighteen}{%
+    \cxiitabletitle{Table 18---Standardized time types}%
+    \begin{cxiitabletypeset}[8.20]{1.72}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{116pt}|Y{116pt}|Y{140pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Property &
+        \Centering\arraybackslash\bfseries 64-bit integer time &
+        \Centering\arraybackslash\bfseries 64-bit float time \\
+        \hline
+        Symbolic name & ``HLAinteger64Time'' & ``HLAfloat64Time'' \\
+        \hline
+        Representation & 64-bit integer & 64-bit float \\
+        \hline
+        Encoded format & HLAinteger64BE & HLAfloat64BE \\
+        \hline
+        Initial value & 0 & 0.0 \\
+        \hline
+        Final value & $2^{63}-1$ & 0x1.FFFFFFFFFFFFFP+1023 \\
+        \hline
+        Zero value & 0 & 0.0 \\
+        \hline
+        Epsilon value & 1 & 0x0.0000000000001P-1022 \\
+        \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitablenineteenandtwenty}{%
+    \cxiitabletitle{Table 19---Noncomplex Java encoding helpers}%
+    \begin{cxiitabletypeset}[8.00]{1.34}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{132pt}|Y{132pt}|Y{132pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries HLA data\newline representation &
+        \Centering\arraybackslash\bfseries Encoding helper class &
+        \Centering\arraybackslash\bfseries Java type \\
+        \hline
+        HLAoctet & HLAoctet & byte \\ \hline
+        HLAoctetPairBE & HLAoctetPairBE & short \\ \hline
+        HLAoctetPairLE & HLAoctetPairLE & short \\ \hline
+        HLAinteger16BE & HLAinteger16BE & short \\ \hline
+        HLAinteger16LE & HLAinteger16LE & short \\ \hline
+        HLAinteger32BE & HLAinteger32BE & int \\ \hline
+        HLAinteger32LE & HLAinteger32LE & int \\ \hline
+        HLAinteger64BE & HLAinteger64BE & long \\ \hline
+        HLAinteger64LE & HLAinteger64LE & long \\ \hline
+        HLAfloat32BE & HLAfloat32BE & float \\ \hline
+        HLAfloat32LE & HLAfloat32LE & float \\ \hline
+        HLAfloat64BE & HLAfloat64BE & double \\ \hline
+        HLAfloat64LE & HLAfloat64LE & double \\ \hline
+        HLAASCIIchar & HLAASCIIchar & byte \\ \hline
+        HLAunicodeChar & HLAunicodeChar & short \\ \hline
+        HLAbyte & HLAbyte & byte \\ \hline
+        HLAhandle & HLAhandle & byte[] \\ \hline
+        HLAlogicalTime & HLAlogicalTime & byte[] \\ \hline
+        HLAlogicalTimeInterval & HLAbyte & byte[] \\ \hline
+        HLAASCIIString & HLAASCIIString & String \\ \hline
+        HLAunicodeString & HLAunicodeString & String \\ \hline
+        HLAopaqueData & HLAopaqueData & byte[] \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+    \vspace{8pt}%
+    \cxiitabletitle{Table 20---Complex Java encoding helpers}%
+    \begin{cxiitabletypeset}[8.00]{1.40}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{132pt}|Y{132pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries HLA data\newline representation &
+        \Centering\arraybackslash\bfseries Encoding helper class \\
+        \hline
+        HLAfixedRecord & HLAfixedRecord \\ \hline
+        HLAvariantRecord & HLAvariantRecord \\ \hline
+        HLAfixedArray & HLAfixedArray \\ \hline
+        HLAvariableArray & HLAvariableArray \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentyone}{%
+    \cxiitabletitle{Table 21---Noncomplex C++ encoding helpers}%
+    \begin{cxiitabletypeset}[8.00]{1.34}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{132pt}|Y{132pt}|Y{132pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries HLA data\newline representation &
+        \Centering\arraybackslash\bfseries Encoding helper class &
+        \Centering\arraybackslash\bfseries C++ type/macro \\
+        \hline
+        HLAoctet & HLAoctet & Octet \\ \hline
+        HLAoctetPairBE & HLAoctetPairBE & OctetPair \\ \hline
+        HLAoctetPairLE & HLAoctetPairLE & OctetPair \\ \hline
+        HLAinteger16BE & HLAinteger16BE & Integer16 \\ \hline
+        HLAinteger16LE & HLAinteger16LE & Integer16 \\ \hline
+        HLAinteger32BE & HLAinteger32BE & Integer32 \\ \hline
+        HLAinteger32LE & HLAinteger32LE & Integer32 \\ \hline
+        HLAinteger64BE & HLAinteger64BE & Integer64 \\ \hline
+        HLAinteger64LE & HLAinteger64LE & Integer64 \\ \hline
+        HLAfloat32BE & HLAfloat32BE & float \\ \hline
+        HLAfloat32LE & HLAfloat32LE & float \\ \hline
+        HLAfloat64BE & HLAfloat64BE & double \\ \hline
+        HLAfloat64LE & HLAfloat64LE & double \\ \hline
+        HLAASCIIchar & HLAASCIIchar & char \\ \hline
+        HLAunicodeChar & HLAunicodeChar & wchar\_t \\ \hline
+        HLAbyte & HLAbyte & char \\ \hline
+        HLAhandle & HLAhandle & char \\ \hline
+        HLAlogicalTime & HLAlogicalTime & char \\ \hline
+        HLAlogicalTimeInterval & HLAlogicalTimeInterval & char \\ \hline
+        HLAASCIIString & HLAASCIIString & std::string \\ \hline
+        HLAunicodeString & HLAunicodeString & std::wstring \\ \hline
+        HLAopaqueData & HLAopaqueData & HLAopaqueData \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentytwo}{%
+    \cxiitabletitle{Table 22---Complex C++ encoding helpers}%
+    \begin{cxiitabletypeset}[8.10]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{132pt}|Y{132pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries HLA data\newline representation &
+        \Centering\arraybackslash\bfseries Encoding helper class \\
+        \hline
+        HLAfixedRecord & HLAfixedRecord \\ \hline
+        HLAvariantRecord & HLAvariantRecord \\ \hline
+        HLAfixedArray & HLAfixedArray \\ \hline
+        HLAvariableArray & HLAvariableArray \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentythree}{%
+    \cxiitabletitle{Table 23---C++ API provided time implementations}%
+    \begin{cxiitabletypeset}[7.80]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{142pt}|Y{162pt}|Y{162pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Property &
+        \Centering\arraybackslash\bfseries 64-bit integer time &
+        \Centering\arraybackslash\bfseries 64-bit float time \\
+        \hline
+        Symbolic name & ``HLAinteger64Time'' & ``HLAfloat64Time'' \\ \hline
+        C++ time class name & rti1516e::HLAinteger64Time & rti1516e::HLAfloat64Time \\ \hline
+        C++ interval class name & rti1516e::HLAinteger64Interval & rti1516e::HLAfloat64Interval \\ \hline
+        C++ time factory class name & rti1516e::HLAinteger64TimeFactory & rti1516e::HLAfloat64TimeFactory \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentyfour}{%
+    \cxiitabletitle{Table 24---WSDL referenced standards}%
+    \begin{cxiitabletypeset}[8.00]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{154pt}|Y{292pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Specification & \Centering\arraybackslash\bfseries Location \\
+        \hline
+        WSDL 1.1 & {\urlstyle{same}\nolinkurl{http://www.w3.org/TR/wsdl.html}} \\ \hline
+        SOAP 1.1 & {\urlstyle{same}\nolinkurl{http://www.w3.org/TR/2000/NOTE-SOAP-20000508/}} \\ \hline
+        XML 1.0 & {\urlstyle{same}\nolinkurl{http://www.w3.org/TR/REC-xml/}} \\ \hline
+        HTTP 1.1 & {\urlstyle{same}\nolinkurl{http://www.ietf.org/rfc/rfc2616}} \\ \hline
+        XML Schema Part 1: Structures & {\urlstyle{same}\nolinkurl{http://www.w3.org/TR/xmlschema-1/}} \\ \hline
+        XML Schema Part 2: Datatypes & {\urlstyle{same}\nolinkurl{http://www.w3.org/TR/xmlschema-2/}} \\ \hline
+        WS-I Basic Profile 1.1 & {\urlstyle{same}\nolinkurl{http://www.ws-i.org/Profiles/BasicProfile-1.1-2004-08-24.html}} \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiiwsseq}[1]{\textless{}xsd:sequence\textgreater{} #1}
+\newcommand{\cxiiwsseqtight}[1]{\textless{}xsd:sequence\textgreater{}#1}
+\newcommand{\cxiiwsenum}{\textless{}xsd:enumeration\textgreater{} of \textless{}xsd:string\textgreater{}}
+
+\newcommand{\cxiitabletwentyfivea}{%
+    \cxiitabletitle{Table 25---Parameter type representations}%
+    \begin{cxiitabletypeset}[8.00]{1.92}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{220pt}|Y{300pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Parameter & \Centering\arraybackslash\bfseries Representation in Web Service API \\
+        \hline
+        userSuppliedTag & xsd:base64Binary \\ \hline
+        timeStamp & xsd:base64Binary \\ \hline
+        logicalTime & xsd:base64Binary \\ \hline
+        lookahead & xsd:base64Binary \\ \hline
+        messageRetractionDesignator & xsd:base64Binary \\ \hline
+        regionDesignator & xsd:base64Binary \\ \hline
+        attributeValue & xsd:base64Binary \\ \hline
+        parameterValue & xsd:base64Binary \\ \hline
+        encodedHandle & xsd:base64Binary \\ \hline
+        passiveSubscriptionIndicator & xsd:boolean \\ \hline
+        requestSuccessIndicator & xsd:boolean \\ \hline
+        federationRestoreSuccessIndicator & xsd:boolean \\ \hline
+        reservationSuccessIndicator & xsd:boolean \\ \hline
+        registrationSuccessIndicator & xsd:boolean \\ \hline
+        federationSaveSuccessIndicator & xsd:boolean \\ \hline
+        instanceAttributeOwnershipIndicator & xsd:boolean \\ \hline
+        timeIsValid & xsd:boolean \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentyfiveb}{%
+    \cxiitabletitle{Table 25---Parameter type representations \textit{(continued)}}%
+    \begin{cxiitabletypeset}[7.80]{1.90}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{220pt}|Y{300pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Parameter & \Centering\arraybackslash\bfseries Representation in Web Service API \\
+        \hline
+        dimensionBound & xsd:long \\ \hline
+        rangeBound & xsd:long \\ \hline
+        normalizedValue & xsd:long \\ \hline
+        maximumCallbackCount & xsd:long \\ \hline
+        pendingIndicator & xsd:long \\ \hline
+        updateRate & xsd:double \\ \hline
+        federateName & xsd:string \\ \hline
+        federationExecutionName & xsd:string \\ \hline
+        objectInstanceName & xsd:string \\ \hline
+        objectClassName & xsd:string \\ \hline
+        attributeName & xsd:string \\ \hline
+        interactionClassName & xsd:string \\ \hline
+        parameterName & xsd:string \\ \hline
+        dimensionName & xsd:string \\ \hline
+        transportationName & xsd:string \\ \hline
+        orderName & xsd:string \\ \hline
+        localSettingsDesignator & xsd:string \\ \hline
+        federateDesignator & xsd:string \\ \hline
+        objectClassDesignator & xsd:string \\ \hline
+        interactionClassDesignator & xsd:string \\ \hline
+        objectInstanceDesignator & xsd:string \\ \hline
+        updateRateDesignator & xsd:string \\ \hline
+        parameterDesignator & xsd:string \\ \hline
+        attributeDesignator & xsd:string \\ \hline
+        dimensionDesignator & xsd:string \\ \hline
+        ownershipDesignator & xsd:string \\ \hline
+        federateType & xsd:string \\ \hline
+        synchronizationPointLabel & xsd:string \\ \hline
+        federationSaveLabel & xsd:string \\ \hline
+        faultDescription & xsd:string \\ \hline
+        fomDocumentDesignator & xsd:anyURI \\ \hline
+        AttributeDesignatorValuePair & \cxiiwsseq{of attributeDesignator and attributeValue} \\ \hline
+        ParameterValuePair & \cxiiwsseq{of parameterDesignator and parameterValue} \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentyfivec}{%
+    \cxiitabletitle{Table 25---Parameter type representations \textit{(continued)}}%
+    \begin{cxiitabletypeset}[7.70]{1.88}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{220pt}|Y{300pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Parameter & \Centering\arraybackslash\bfseries Representation in Web Service API \\
+        \hline
+        AttributeDesignatorRegionDesignatorPair & \cxiiwsseq{of attributeDesignator and regionDesignator} \\ \hline
+        FederateDesignatorSaveStatusPair & \cxiiwsseq{of federateDesignator and SaveStatus} \\ \hline
+        FederateDesignatorRestoreStatusPair & \cxiiwsseq{of federateDesignator and RestoreStatus} \\ \hline
+        TimeQueryReturn & \cxiiwsseq{of timeIsValid and logicalTime} \\ \hline
+        RangeBounds & \cxiiwsseq{of two rangeBound} \\ \hline
+        Callback & \textless{}xsd:choice\textgreater{} between one of the callbacks \\ \hline
+        ResignAction & \cxiiwsenum \\ \hline
+        OrderType & \cxiiwsenum \\ \hline
+        TransportationType & \cxiiwsenum \\ \hline
+        ServiceGroup & \cxiiwsenum \\ \hline
+        SaveFailureReason & \cxiiwsenum \\ \hline
+        SynchronizationPointFailureReason & \cxiiwsenum \\ \hline
+        RestoreFailureReason & \cxiiwsenum \\ \hline
+        SaveStatus & \cxiiwsenum \\ \hline
+        RestoreStatus & \cxiiwsenum \\ \hline
+        AttributeDesignatorSet & \cxiiwsseq{of attributeDesignator} \\ \hline
+        AttributeDesignatorValuePairSet & \cxiiwsseq{of AttributeDesignatorValuePairs} \\ \hline
+        ParameterDesignatorValuePairSet & \cxiiwsseqtight{of ParameterDesignatorValuePairs} \\ \hline
+        DimensionDesignatorSet & \cxiiwsseqtight{of dimensionDesignators} \\ \hline
+        RegionDesignatorSet & \cxiiwsseq{of regionDesignators} \\ \hline
+        FederateDesignatorSet & \cxiiwsseq{of federateDesignators} \\ \hline
+        AttributeDesignatorRegionDesignatorPairList & \cxiiwsseq{of AttributeDesignatorRegionDesignatorPairs} \\ \hline
+        CallbackArray & \cxiiwsseq{of Callbacks} \\ \hline
+        CallbackReturn & \cxiiwsseq{of CallbackArray and pendingIndicator} \\ \hline
+        FederateDesignatorSaveStatusPairList & \cxiiwsseq{of FederateDesignatorSaveStatusPairs} \\ \hline
+        FederateDesignatorRestoreStatusPairList & \cxiiwsseq{of FederateDesignatorRestoreStatusPairs} \\ \hline
+        FederationExecutionNameSet & \cxiiwsseq{of federationExecutionNames} \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentysix}{%
+    \cxiitabletitle{Table 26---WSDL standard time types}%
+    \begin{cxiitabletypeset}[7.80]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{118pt}|Y{154pt}|Y{154pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Property &
+        \Centering\arraybackslash\bfseries 64-bit integer time\newline service name &
+        \Centering\arraybackslash\bfseries 64-bit float time\newline service name \\
+        \hline
+        Symbolic name & HLAinteger64Time & HLAfloat64Time \\ \hline
+        Encode time value & encodeHLAinteger64Time & encodeHLAfloat64Time \\ \hline
+        Decode time value & decodeHLAinteger64Time & decodeHLAfloat64Time \\ \hline
+        Encode interval value & encodeHLAinteger64Interval & encodeHLAfloat64Interval \\ \hline
+        Decode interval value & decodeHLAinteger64Interval & decodeHLAfloat64Interval \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentysevena}{%
+    \cxiitabletitle{Table 27---Handle name sources}%
+    \begin{cxiitabletypeset}[7.80]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{126pt}|Y{336pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Handle & \Centering\arraybackslash\bfseries Source for name \\
+        \hline
+        Object Class Handle & fully qualified name from FDD object class structure table \\ \hline
+        Attribute Handle & fully qualified name from FDD attribute table \\ \hline
+        Interaction Class Handle & fully qualified name from FDD interaction class structure table \\ \hline
+        Parameter Handle & fully qualified name from FDD parameter table \\ \hline
+        Dimension Handle & name from FDD dimension table \\ \hline
+        Object Instance Handle & object instance name as returned from registerObjectInstance operation \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentysevenb}{%
+    \cxiitabletitle{Table 27---Handle name sources \textit{(continued)}}%
+    \begin{cxiitabletypeset}[7.85]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{126pt}|Y{336pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Handle & \Centering\arraybackslash\bfseries Source for name \\
+        \hline
+        Federate Handle & federate name as provided to the joinFederationExecution operation \\ \hline
+        Transportation Type & name from FDD transportation type table \\ \hline
+        Order Type & name from FDD attribute table or FDD parameter table \\ \hline
+        Update Rate & name from FDD update rate table \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}
+
+\newcommand{\cxiitabletwentyeight}{%
+    \cxiitabletitle{Table 28---Handle encoding and decoding services}%
+    \begin{cxiitabletypeset}[7.80]{1.45}
+    \makebox[\linewidth][c]{%
+        \begin{tabular}{|Y{123pt}|Y{166pt}|Y{166pt}|}
+        \hline
+        \Centering\arraybackslash\bfseries Handle type &
+        \Centering\arraybackslash\bfseries Encoding service &
+        \Centering\arraybackslash\bfseries Decoding service \\
+        \hline
+        Federate Handle & \textit{Encode Federate Handle} & \textit{Decode Federate Handle} \\ \hline
+        Object Class Handle & \textit{Encode Object Class Handle} & \textit{Decode Object Class Handle} \\ \hline
+        Interaction Class Handle & \textit{Encode Interaction Class Handle} & \textit{Decode Interaction Class Handle} \\ \hline
+        Object Instance Handle & \textit{Encode Object Instance Handle} & \textit{Decode Object Instance Handle} \\ \hline
+        Parameter Handle & \textit{Encode Parameter Handle} & \textit{Decode Parameter Handle} \\ \hline
+        Attribute Handle & \textit{Encode Attribute Handle} & \textit{Decode Attribute Handle} \\ \hline
+        Dimension Handle & \textit{Encode Dimension Handle} & \textit{Decode Dimension Handle} \\ \hline
+        \end{tabular}%
+    }
+    \end{cxiitabletypeset}%
+}

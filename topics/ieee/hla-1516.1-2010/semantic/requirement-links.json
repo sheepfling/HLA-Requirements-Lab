@@ -1,0 +1,1589 @@
+{
+  "schema_version": 1,
+  "links": [
+    {
+      "id": "m2010.link.req-42e0b985bff4.hla-1516-1-2010-figure-01-e03",
+      "requirement_id": "req-42e0b985bff4",
+      "transition_id": "hla-1516.1-2010:figure-01.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 15,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-6a8c0463fc94.hla-1516-1-2010-figure-01-e03",
+      "requirement_id": "req-6a8c0463fc94",
+      "transition_id": "hla-1516.1-2010:figure-01.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 441,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-5eed6caef333.hla-1516-1-2010-figure-01-e03",
+      "requirement_id": "req-5eed6caef333",
+      "transition_id": "hla-1516.1-2010:figure-01.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 941,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-42e0b985bff4.hla-1516-1-2010-figure-01-e06",
+      "requirement_id": "req-42e0b985bff4",
+      "transition_id": "hla-1516.1-2010:figure-01.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 15,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-3878762a506a.hla-1516-1-2010-figure-01-e06",
+      "requirement_id": "req-3878762a506a",
+      "transition_id": "hla-1516.1-2010:figure-01.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 247,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-26084b0add33.hla-1516-1-2010-figure-03-e01",
+      "requirement_id": "req-26084b0add33",
+      "transition_id": "hla-1516.1-2010:figure-03.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-26084b0add33.hla-1516-1-2010-figure-03-e02",
+      "requirement_id": "req-26084b0add33",
+      "transition_id": "hla-1516.1-2010:figure-03.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-26084b0add33.hla-1516-1-2010-figure-03-e04",
+      "requirement_id": "req-26084b0add33",
+      "transition_id": "hla-1516.1-2010:figure-03.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-26084b0add33.hla-1516-1-2010-figure-03-e07",
+      "requirement_id": "req-26084b0add33",
+      "transition_id": "hla-1516.1-2010:figure-03.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-988b5834ce04.hla-1516-1-2010-figure-03-e07",
+      "requirement_id": "req-988b5834ce04",
+      "transition_id": "hla-1516.1-2010:figure-03.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 240,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-e67a5aa8e65c.hla-1516-1-2010-figure-03-e07",
+      "requirement_id": "req-e67a5aa8e65c",
+      "transition_id": "hla-1516.1-2010:figure-03.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 247,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-6b8d1fd1bd38.hla-1516-1-2010-figure-04-e07",
+      "requirement_id": "req-6b8d1fd1bd38",
+      "transition_id": "hla-1516.1-2010:figure-04.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1290,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-19bb20f5592b.hla-1516-1-2010-figure-04-e08",
+      "requirement_id": "req-19bb20f5592b",
+      "transition_id": "hla-1516.1-2010:figure-04.e08",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 55,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-36f2aac54a5a.hla-1516-1-2010-figure-04-e09",
+      "requirement_id": "req-36f2aac54a5a",
+      "transition_id": "hla-1516.1-2010:figure-04.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 100,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-bd3d7eca9485.hla-1516-1-2010-figure-04-e09",
+      "requirement_id": "req-bd3d7eca9485",
+      "transition_id": "hla-1516.1-2010:figure-04.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1122,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-1350bbec9fa1.hla-1516-1-2010-figure-04-e10",
+      "requirement_id": "req-1350bbec9fa1",
+      "transition_id": "hla-1516.1-2010:figure-04.e10",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1174,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b9051bb4cc50.hla-1516-1-2010-figure-04-e10",
+      "requirement_id": "req-b9051bb4cc50",
+      "transition_id": "hla-1516.1-2010:figure-04.e10",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1223,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-4e28c70017c6.hla-1516-1-2010-figure-04-e10",
+      "requirement_id": "req-4e28c70017c6",
+      "transition_id": "hla-1516.1-2010:figure-04.e10",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1648,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d2ef457d35a3.hla-1516-1-2010-figure-04-e11",
+      "requirement_id": "req-d2ef457d35a3",
+      "transition_id": "hla-1516.1-2010:figure-04.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1769,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-4e28c70017c6.hla-1516-1-2010-figure-04-e13",
+      "requirement_id": "req-4e28c70017c6",
+      "transition_id": "hla-1516.1-2010:figure-04.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1648,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-17147b632c5a.hla-1516-1-2010-figure-04-e13",
+      "requirement_id": "req-17147b632c5a",
+      "transition_id": "hla-1516.1-2010:figure-04.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1701,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d2ef457d35a3.hla-1516-1-2010-figure-04-e13",
+      "requirement_id": "req-d2ef457d35a3",
+      "transition_id": "hla-1516.1-2010:figure-04.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1769,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d2ef457d35a3.hla-1516-1-2010-figure-04-e14",
+      "requirement_id": "req-d2ef457d35a3",
+      "transition_id": "hla-1516.1-2010:figure-04.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 1769,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-bd481130d017.hla-1516-1-2010-figure-04-e16",
+      "requirement_id": "req-bd481130d017",
+      "transition_id": "hla-1516.1-2010:figure-04.e16",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 71,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-bd481130d017.hla-1516-1-2010-figure-04-e17",
+      "requirement_id": "req-bd481130d017",
+      "transition_id": "hla-1516.1-2010:figure-04.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 71,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-42e0b985bff4.hla-1516-1-2010-figure-05-e03",
+      "requirement_id": "req-42e0b985bff4",
+      "transition_id": "hla-1516.1-2010:figure-05.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 15,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-cfd6da896c5b.hla-1516-1-2010-figure-05-e03",
+      "requirement_id": "req-cfd6da896c5b",
+      "transition_id": "hla-1516.1-2010:figure-05.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-42e0b985bff4.hla-1516-1-2010-figure-05-e04",
+      "requirement_id": "req-42e0b985bff4",
+      "transition_id": "hla-1516.1-2010:figure-05.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 15,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-cfd6da896c5b.hla-1516-1-2010-figure-05-e04",
+      "requirement_id": "req-cfd6da896c5b",
+      "transition_id": "hla-1516.1-2010:figure-05.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-cfd6da896c5b.hla-1516-1-2010-figure-05-e05",
+      "requirement_id": "req-cfd6da896c5b",
+      "transition_id": "hla-1516.1-2010:figure-05.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-cfd6da896c5b.hla-1516-1-2010-figure-05-e06",
+      "requirement_id": "req-cfd6da896c5b",
+      "transition_id": "hla-1516.1-2010:figure-05.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 201,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-233195810cab.hla-1516-1-2010-figure-05-e06",
+      "requirement_id": "req-233195810cab",
+      "transition_id": "hla-1516.1-2010:figure-05.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 234,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-3878762a506a.hla-1516-1-2010-figure-05-e06",
+      "requirement_id": "req-3878762a506a",
+      "transition_id": "hla-1516.1-2010:figure-05.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 247,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-26084b0add33.hla-1516-1-2010-figure-06-e01",
+      "requirement_id": "req-26084b0add33",
+      "transition_id": "hla-1516.1-2010:figure-06.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 41,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-9704d8093af5.hla-1516-1-2010-figure-07-e01",
+      "requirement_id": "req-9704d8093af5",
+      "transition_id": "hla-1516.1-2010:figure-07.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 115,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ee57743ab872.hla-1516-1-2010-figure-07-e02",
+      "requirement_id": "req-ee57743ab872",
+      "transition_id": "hla-1516.1-2010:figure-07.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 717,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-e4166a1041d4.hla-1516-1-2010-figure-07-e02",
+      "requirement_id": "req-e4166a1041d4",
+      "transition_id": "hla-1516.1-2010:figure-07.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 777,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ee57743ab872.hla-1516-1-2010-figure-07-e03",
+      "requirement_id": "req-ee57743ab872",
+      "transition_id": "hla-1516.1-2010:figure-07.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 717,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-e4166a1041d4.hla-1516-1-2010-figure-07-e03",
+      "requirement_id": "req-e4166a1041d4",
+      "transition_id": "hla-1516.1-2010:figure-07.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 777,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-40bc59492506.hla-1516-1-2010-figure-07-e03",
+      "requirement_id": "req-40bc59492506",
+      "transition_id": "hla-1516.1-2010:figure-07.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 779,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-9704d8093af5.hla-1516-1-2010-figure-08-e01",
+      "requirement_id": "req-9704d8093af5",
+      "transition_id": "hla-1516.1-2010:figure-08.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 115,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b143297a98cf.hla-1516-1-2010-figure-08-e01",
+      "requirement_id": "req-b143297a98cf",
+      "transition_id": "hla-1516.1-2010:figure-08.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 717,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ee57743ab872.hla-1516-1-2010-figure-08-e01",
+      "requirement_id": "req-ee57743ab872",
+      "transition_id": "hla-1516.1-2010:figure-08.e01",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 717,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-9704d8093af5.hla-1516-1-2010-figure-08-e02",
+      "requirement_id": "req-9704d8093af5",
+      "transition_id": "hla-1516.1-2010:figure-08.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 115,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-9704d8093af5.hla-1516-1-2010-figure-08-e03",
+      "requirement_id": "req-9704d8093af5",
+      "transition_id": "hla-1516.1-2010:figure-08.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 115,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-959bfe345492.hla-1516-1-2010-figure-09-e04",
+      "requirement_id": "req-959bfe345492",
+      "transition_id": "hla-1516.1-2010:figure-09.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/04-federation-management.tex",
+        "line": 837,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ad9a01f64404.hla-1516-1-2010-figure-10-e05",
+      "requirement_id": "req-ad9a01f64404",
+      "transition_id": "hla-1516.1-2010:figure-10.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 10,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-f39daa299f9c.hla-1516-1-2010-figure-10-e07",
+      "requirement_id": "req-f39daa299f9c",
+      "transition_id": "hla-1516.1-2010:figure-10.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 67,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ad9a01f64404.hla-1516-1-2010-figure-10-e10",
+      "requirement_id": "req-ad9a01f64404",
+      "transition_id": "hla-1516.1-2010:figure-10.e10",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 10,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-f39daa299f9c.hla-1516-1-2010-figure-10-e12",
+      "requirement_id": "req-f39daa299f9c",
+      "transition_id": "hla-1516.1-2010:figure-10.e12",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 67,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-1efe59190faf.hla-1516-1-2010-figure-11-e07",
+      "requirement_id": "req-1efe59190faf",
+      "transition_id": "hla-1516.1-2010:figure-11.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 441,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-11-e03",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-11.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-11-e05",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-11.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-683b3ee99da7.hla-1516-1-2010-figure-11-e05",
+      "requirement_id": "req-683b3ee99da7",
+      "transition_id": "hla-1516.1-2010:figure-11.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 60,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-0f088f2482f2.hla-1516-1-2010-figure-11-e05",
+      "requirement_id": "req-0f088f2482f2",
+      "transition_id": "hla-1516.1-2010:figure-11.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 103,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-871f49507cea.hla-1516-1-2010-figure-11-e06",
+      "requirement_id": "req-871f49507cea",
+      "transition_id": "hla-1516.1-2010:figure-11.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 276,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-11-e09",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-11.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-11-e10",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-11.e10",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-11-e11",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-11.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-36dbf8db2e44.hla-1516-1-2010-figure-11-e11",
+      "requirement_id": "req-36dbf8db2e44",
+      "transition_id": "hla-1516.1-2010:figure-11.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 101,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-1efe59190faf.hla-1516-1-2010-figure-11-e11",
+      "requirement_id": "req-1efe59190faf",
+      "transition_id": "hla-1516.1-2010:figure-11.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 441,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-11-e12",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-11.e12",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d5f319469e60.hla-1516-1-2010-figure-11-e12",
+      "requirement_id": "req-d5f319469e60",
+      "transition_id": "hla-1516.1-2010:figure-11.e12",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 504,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-12-e04",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-12.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-a8f1396e2b51.hla-1516-1-2010-figure-12-e04",
+      "requirement_id": "req-a8f1396e2b51",
+      "transition_id": "hla-1516.1-2010:figure-12.e04",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 278,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-12-e05",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-12.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-a8f1396e2b51.hla-1516-1-2010-figure-12-e05",
+      "requirement_id": "req-a8f1396e2b51",
+      "transition_id": "hla-1516.1-2010:figure-12.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 278,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-12-e08",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-12.e08",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-a8f1396e2b51.hla-1516-1-2010-figure-12-e08",
+      "requirement_id": "req-a8f1396e2b51",
+      "transition_id": "hla-1516.1-2010:figure-12.e08",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 278,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-12-e09",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-12.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-a8f1396e2b51.hla-1516-1-2010-figure-12-e09",
+      "requirement_id": "req-a8f1396e2b51",
+      "transition_id": "hla-1516.1-2010:figure-12.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 278,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-12-e14",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-12.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-a8f1396e2b51.hla-1516-1-2010-figure-12-e14",
+      "requirement_id": "req-a8f1396e2b51",
+      "transition_id": "hla-1516.1-2010:figure-12.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 278,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-12-e19",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-12.e19",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-19b425a9de77.hla-1516-1-2010-figure-12-e19",
+      "requirement_id": "req-19b425a9de77",
+      "transition_id": "hla-1516.1-2010:figure-12.e19",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 506,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-12-e20",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-12.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-19b425a9de77.hla-1516-1-2010-figure-12-e20",
+      "requirement_id": "req-19b425a9de77",
+      "transition_id": "hla-1516.1-2010:figure-12.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 506,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-871f49507cea.hla-1516-1-2010-figure-13-e02",
+      "requirement_id": "req-871f49507cea",
+      "transition_id": "hla-1516.1-2010:figure-13.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 276,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-13-e03",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-13.e03",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c437518477fe.hla-1516-1-2010-figure-13-e05",
+      "requirement_id": "req-c437518477fe",
+      "transition_id": "hla-1516.1-2010:figure-13.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 52,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-683b3ee99da7.hla-1516-1-2010-figure-13-e05",
+      "requirement_id": "req-683b3ee99da7",
+      "transition_id": "hla-1516.1-2010:figure-13.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 60,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-0f088f2482f2.hla-1516-1-2010-figure-13-e05",
+      "requirement_id": "req-0f088f2482f2",
+      "transition_id": "hla-1516.1-2010:figure-13.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 103,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-13-e17",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-13.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-36dbf8db2e44.hla-1516-1-2010-figure-13-e17",
+      "requirement_id": "req-36dbf8db2e44",
+      "transition_id": "hla-1516.1-2010:figure-13.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 101,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-1efe59190faf.hla-1516-1-2010-figure-13-e17",
+      "requirement_id": "req-1efe59190faf",
+      "transition_id": "hla-1516.1-2010:figure-13.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 441,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-2f698415a1b7.hla-1516-1-2010-figure-13-e18",
+      "requirement_id": "req-2f698415a1b7",
+      "transition_id": "hla-1516.1-2010:figure-13.e18",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 107,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-13-e19",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-13.e19",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-13-e20",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-13.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-da1ff268af52.hla-1516-1-2010-figure-13-e21",
+      "requirement_id": "req-da1ff268af52",
+      "transition_id": "hla-1516.1-2010:figure-13.e21",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 50,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d5f319469e60.hla-1516-1-2010-figure-13-e21",
+      "requirement_id": "req-d5f319469e60",
+      "transition_id": "hla-1516.1-2010:figure-13.e21",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/05-declaration-management.tex",
+        "line": 504,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c8d82df9fd47.hla-1516-1-2010-figure-15-e09",
+      "requirement_id": "req-c8d82df9fd47",
+      "transition_id": "hla-1516.1-2010:figure-15.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1093,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-4035a87fed87.hla-1516-1-2010-figure-15-e13",
+      "requirement_id": "req-4035a87fed87",
+      "transition_id": "hla-1516.1-2010:figure-15.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1576,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-633db02bf878.hla-1516-1-2010-figure-15-e13",
+      "requirement_id": "req-633db02bf878",
+      "transition_id": "hla-1516.1-2010:figure-15.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1633,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-633db02bf878.hla-1516-1-2010-figure-15-e14",
+      "requirement_id": "req-633db02bf878",
+      "transition_id": "hla-1516.1-2010:figure-15.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1633,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-633db02bf878.hla-1516-1-2010-figure-15-e15",
+      "requirement_id": "req-633db02bf878",
+      "transition_id": "hla-1516.1-2010:figure-15.e15",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1633,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-633db02bf878.hla-1516-1-2010-figure-15-e16",
+      "requirement_id": "req-633db02bf878",
+      "transition_id": "hla-1516.1-2010:figure-15.e16",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1633,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-c8d82df9fd47.hla-1516-1-2010-figure-15-e20",
+      "requirement_id": "req-c8d82df9fd47",
+      "transition_id": "hla-1516.1-2010:figure-15.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1093,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-30edad7d3429.hla-1516-1-2010-figure-15-e20",
+      "requirement_id": "req-30edad7d3429",
+      "transition_id": "hla-1516.1-2010:figure-15.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1323,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e20",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e20",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-30edad7d3429.hla-1516-1-2010-figure-15-e21",
+      "requirement_id": "req-30edad7d3429",
+      "transition_id": "hla-1516.1-2010:figure-15.e21",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1323,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e21",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e21",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-30edad7d3429.hla-1516-1-2010-figure-15-e22",
+      "requirement_id": "req-30edad7d3429",
+      "transition_id": "hla-1516.1-2010:figure-15.e22",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1323,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e22",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e22",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e25",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e25",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e26",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e26",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-ef4fb15bbeb7.hla-1516-1-2010-figure-15-e27",
+      "requirement_id": "req-ef4fb15bbeb7",
+      "transition_id": "hla-1516.1-2010:figure-15.e27",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/06-object-management.tex",
+        "line": 1383,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b2e429348702.hla-1516-1-2010-figure-16-e05",
+      "requirement_id": "req-b2e429348702",
+      "transition_id": "hla-1516.1-2010:figure-16.e05",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 606,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b2e429348702.hla-1516-1-2010-figure-16-e06",
+      "requirement_id": "req-b2e429348702",
+      "transition_id": "hla-1516.1-2010:figure-16.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 606,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-bab8493d972a.hla-1516-1-2010-figure-16-e06",
+      "requirement_id": "req-bab8493d972a",
+      "transition_id": "hla-1516.1-2010:figure-16.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 831,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-97505399b0f0.hla-1516-1-2010-figure-16-e06",
+      "requirement_id": "req-97505399b0f0",
+      "transition_id": "hla-1516.1-2010:figure-16.e06",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 886,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b2e429348702.hla-1516-1-2010-figure-16-e07",
+      "requirement_id": "req-b2e429348702",
+      "transition_id": "hla-1516.1-2010:figure-16.e07",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 606,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b2e429348702.hla-1516-1-2010-figure-16-e08",
+      "requirement_id": "req-b2e429348702",
+      "transition_id": "hla-1516.1-2010:figure-16.e08",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 606,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-308c2967b99c.hla-1516-1-2010-figure-16-e09",
+      "requirement_id": "req-308c2967b99c",
+      "transition_id": "hla-1516.1-2010:figure-16.e09",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 472,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-308c2967b99c.hla-1516-1-2010-figure-16-e11",
+      "requirement_id": "req-308c2967b99c",
+      "transition_id": "hla-1516.1-2010:figure-16.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 472,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-b2e429348702.hla-1516-1-2010-figure-16-e11",
+      "requirement_id": "req-b2e429348702",
+      "transition_id": "hla-1516.1-2010:figure-16.e11",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 606,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-3d2e8fab2cfd.hla-1516-1-2010-figure-16-e21",
+      "requirement_id": "req-3d2e8fab2cfd",
+      "transition_id": "hla-1516.1-2010:figure-16.e21",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 68,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-e8a6dbee55e9.hla-1516-1-2010-figure-16-e26",
+      "requirement_id": "req-e8a6dbee55e9",
+      "transition_id": "hla-1516.1-2010:figure-16.e26",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 615,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-01f9cfef7112.hla-1516-1-2010-figure-16-e26",
+      "requirement_id": "req-01f9cfef7112",
+      "transition_id": "hla-1516.1-2010:figure-16.e26",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 618,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-e8a6dbee55e9.hla-1516-1-2010-figure-16-e27",
+      "requirement_id": "req-e8a6dbee55e9",
+      "transition_id": "hla-1516.1-2010:figure-16.e27",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 615,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-01f9cfef7112.hla-1516-1-2010-figure-16-e27",
+      "requirement_id": "req-01f9cfef7112",
+      "transition_id": "hla-1516.1-2010:figure-16.e27",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 618,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-97505399b0f0.hla-1516-1-2010-figure-16-e29",
+      "requirement_id": "req-97505399b0f0",
+      "transition_id": "hla-1516.1-2010:figure-16.e29",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 886,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-58e186923e87.hla-1516-1-2010-figure-16-e31",
+      "requirement_id": "req-58e186923e87",
+      "transition_id": "hla-1516.1-2010:figure-16.e31",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 95,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-58e186923e87.hla-1516-1-2010-figure-16-e32",
+      "requirement_id": "req-58e186923e87",
+      "transition_id": "hla-1516.1-2010:figure-16.e32",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 95,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-3d2e8fab2cfd.hla-1516-1-2010-figure-16-e13",
+      "requirement_id": "req-3d2e8fab2cfd",
+      "transition_id": "hla-1516.1-2010:figure-16.e13",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 68,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-58e186923e87.hla-1516-1-2010-figure-16-e14",
+      "requirement_id": "req-58e186923e87",
+      "transition_id": "hla-1516.1-2010:figure-16.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 95,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-308c2967b99c.hla-1516-1-2010-figure-16-e14",
+      "requirement_id": "req-308c2967b99c",
+      "transition_id": "hla-1516.1-2010:figure-16.e14",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 472,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-d516e29a1848.hla-1516-1-2010-figure-16-e16",
+      "requirement_id": "req-d516e29a1848",
+      "transition_id": "hla-1516.1-2010:figure-16.e16",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 26,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-3d85a97a649b.hla-1516-1-2010-figure-16-e16",
+      "requirement_id": "req-3d85a97a649b",
+      "transition_id": "hla-1516.1-2010:figure-16.e16",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 104,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-5421cc4829a9.hla-1516-1-2010-figure-16-e17",
+      "requirement_id": "req-5421cc4829a9",
+      "transition_id": "hla-1516.1-2010:figure-16.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 96,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-10364d92751b.hla-1516-1-2010-figure-16-e17",
+      "requirement_id": "req-10364d92751b",
+      "transition_id": "hla-1516.1-2010:figure-16.e17",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 950,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-4718f44df6e8.hla-1516-1-2010-figure-16-e18",
+      "requirement_id": "req-4718f44df6e8",
+      "transition_id": "hla-1516.1-2010:figure-16.e18",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/07-ownership-management.tex",
+        "line": 69,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    },
+    {
+      "id": "m2010.link.req-625332dd1f54.hla-1516-1-2010-figure-17-e02",
+      "requirement_id": "req-625332dd1f54",
+      "transition_id": "hla-1516.1-2010:figure-17.e02",
+      "relation": "governs",
+      "source": {
+        "path": "clauses/08-time-management.tex",
+        "line": 240,
+        "end_line": null
+      },
+      "notes": "Conservative same-clause event-term relationship for 2010 source review."
+    }
+  ]
+}

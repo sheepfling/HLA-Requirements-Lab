@@ -1,0 +1,1049 @@
+{
+  "schema_version": 1,
+  "outline": [
+    {
+      "id": "clause-1",
+      "number": "1",
+      "title": "Overview",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 2,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.1",
+      "number": "1.1",
+      "title": "Scope",
+      "parent_id": "clause-1",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.2",
+      "number": "1.2",
+      "title": "Purpose",
+      "parent_id": "clause-1",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 7,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3",
+      "number": "1.3",
+      "title": "Background",
+      "parent_id": "clause-1",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 11,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3.1",
+      "number": "1.3.1",
+      "title": "Object model template rationale",
+      "parent_id": "clause-1.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 13,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3.2",
+      "number": "1.3.2",
+      "title": "Federation object models",
+      "parent_id": "clause-1.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 23,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3.3",
+      "number": "1.3.3",
+      "title": "Simulation object models",
+      "parent_id": "clause-1.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 28,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-1.3.4",
+      "number": "1.3.4",
+      "title": "Relationship of HLA and object-oriented concepts",
+      "parent_id": "clause-1.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause01_overview.tex",
+        "line": 34,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-2",
+      "number": "2",
+      "title": "Normative references",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause02_normative_references.tex",
+        "line": 3,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-3.1",
+      "number": "3.1",
+      "title": "Abbreviations and acronyms",
+      "parent_id": "clause-3",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause03_definitions.tex",
+        "line": 10,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-3.2",
+      "number": "3.2",
+      "title": "Conventions",
+      "parent_id": "clause-3",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause03_definitions.tex",
+        "line": 55,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-3.2.1",
+      "number": "3.2.1",
+      "title": "Names",
+      "parent_id": "clause-3.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause03_definitions.tex",
+        "line": 60,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4",
+      "number": "4",
+      "title": "HLA OMT components",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause04_omt_components_initial.tex",
+        "line": 2,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1",
+      "number": "4.1",
+      "title": "Object model identification table",
+      "parent_id": "clause-4",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 38,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.1",
+      "number": "4.1.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 40,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.2",
+      "number": "4.1.2",
+      "title": "Table format",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 43,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.3",
+      "number": "4.1.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 193,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.4",
+      "number": "4.1.4",
+      "title": "Example",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 196,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.2",
+      "number": "4.2",
+      "title": "Object class structure table",
+      "parent_id": "clause-4",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 256,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.2.1",
+      "number": "4.2.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-4.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_continuation.tex",
+        "line": 257,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.3",
+      "number": "4.3",
+      "title": "Example",
+      "parent_id": "clause-4",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause04_omt_components_hierarchies.tex",
+        "line": 57,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.2.2",
+      "number": "4.2.2",
+      "title": "Table format",
+      "parent_id": "clause-4.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_hierarchies.tex",
+        "line": 261,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.2.3",
+      "number": "4.2.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-4.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_attributes_dimensions.tex",
+        "line": 327,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.2.4",
+      "number": "4.2.4",
+      "title": "Example",
+      "parent_id": "clause-4.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_attributes_dimensions.tex",
+        "line": 330,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.3.1",
+      "number": "4.3.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-4.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_attributes_dimensions.tex",
+        "line": 356,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.3.2",
+      "number": "4.3.2",
+      "title": "Table format",
+      "parent_id": "clause-4.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 256,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.3.3",
+      "number": "4.3.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-4.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 287,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.3.4",
+      "number": "4.3.4",
+      "title": "Example",
+      "parent_id": "clause-4.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 291,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.4",
+      "number": "4.4",
+      "title": "Update rate table",
+      "parent_id": "clause-4",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 314,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.4.1",
+      "number": "4.4.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-4.4",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 316,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.4.2",
+      "number": "4.4.2",
+      "title": "Table format",
+      "parent_id": "clause-4.4",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 319,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.4.3",
+      "number": "4.4.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-4.4",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 348,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.4.4",
+      "number": "4.4.4",
+      "title": "Example",
+      "parent_id": "clause-4.4",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 351,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.5",
+      "number": "4.5",
+      "title": "Switches table",
+      "parent_id": "clause-4",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 374,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.5.1",
+      "number": "4.5.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-4.5",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 375,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.5.2",
+      "number": "4.5.2",
+      "title": "Table format",
+      "parent_id": "clause-4.5",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 384,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.5.3",
+      "number": "4.5.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-4.5",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 449,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.5.4",
+      "number": "4.5.4",
+      "title": "Example",
+      "parent_id": "clause-4.5",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_time_tags_switches.tex",
+        "line": 452,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.5",
+      "number": "4.1.5",
+      "title": "Enumerated datatype table",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 190,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.6",
+      "number": "4.1.6",
+      "title": "Array datatype table",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 335,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.7",
+      "number": "4.1.7",
+      "title": "Fixed record datatype table",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 382,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.8",
+      "number": "4.1.8",
+      "title": "Variant record datatype table",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 499,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-4.1.9",
+      "number": "4.1.9",
+      "title": "Predefined encodings for constructed datatypes",
+      "parent_id": "clause-4.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause04_omt_components_datatypes_notes.tex",
+        "line": 578,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5",
+      "number": "5",
+      "title": "FOM/SOM lexicon",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 1,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5.1",
+      "number": "5.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-5",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 3,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5.2",
+      "number": "5.2",
+      "title": "Object class definition table",
+      "parent_id": "clause-5",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 6,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5.3",
+      "number": "5.3",
+      "title": "Interaction class definition table",
+      "parent_id": "clause-5",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 55,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5.4",
+      "number": "5.4",
+      "title": "Attribute definition table",
+      "parent_id": "clause-5",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 81,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-5.5",
+      "number": "5.5",
+      "title": "Parameter definition table",
+      "parent_id": "clause-5",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause05_fom_som_lexicon.tex",
+        "line": 153,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6",
+      "number": "6",
+      "title": "Conformance",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 1,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.1",
+      "number": "6.1",
+      "title": "Conformance labels",
+      "parent_id": "clause-6",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 4,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.1.1",
+      "number": "6.1.1",
+      "title": "Object model conformance",
+      "parent_id": "clause-6.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 7,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.1.2",
+      "number": "6.1.2",
+      "title": "Object model tool conformance",
+      "parent_id": "clause-6.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 14,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.1.3",
+      "number": "6.1.3",
+      "title": "XML product conformance",
+      "parent_id": "clause-6.1",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 17,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2",
+      "number": "6.2",
+      "title": "Conformance verification",
+      "parent_id": "clause-6",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 20,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.1",
+      "number": "6.2.1",
+      "title": "Object model identification table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 23,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.2",
+      "number": "6.2.2",
+      "title": "Object class structure table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 31,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.3",
+      "number": "6.2.3",
+      "title": "Interaction class structure table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 38,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.4",
+      "number": "6.2.4",
+      "title": "Attribute table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 45,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.5",
+      "number": "6.2.5",
+      "title": "Parameter table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 66,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.6",
+      "number": "6.2.6",
+      "title": "Dimension table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 77,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.7",
+      "number": "6.2.7",
+      "title": "Time representation table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 87,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.8",
+      "number": "6.2.8",
+      "title": "User-supplied tag table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 94,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.9",
+      "number": "6.2.9",
+      "title": "Synchronization table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 104,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.10",
+      "number": "6.2.10",
+      "title": "Transportation type table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 113,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.11",
+      "number": "6.2.11",
+      "title": "Update rate table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 120,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.12",
+      "number": "6.2.12",
+      "title": "Switches table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 127,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.13",
+      "number": "6.2.13",
+      "title": "Basic data representation table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 135,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.14",
+      "number": "6.2.14",
+      "title": "Simple datatype table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 142,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.15",
+      "number": "6.2.15",
+      "title": "Enumerated datatype table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 149,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.16",
+      "number": "6.2.16",
+      "title": "Array datatype table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 162,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.17",
+      "number": "6.2.17",
+      "title": "Fixed record datatype table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 171,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.2.18",
+      "number": "6.2.18",
+      "title": "Variable record datatype table",
+      "parent_id": "clause-6.2",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 180,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.3",
+      "number": "6.3",
+      "title": "Interface specification services usage table",
+      "parent_id": "clause-6",
+      "level": 2,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 198,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.3.1",
+      "number": "6.3.1",
+      "title": "Purpose/background",
+      "parent_id": "clause-6.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 199,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.3.2",
+      "number": "6.3.2",
+      "title": "Table format",
+      "parent_id": "clause-6.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 206,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.3.3",
+      "number": "6.3.3",
+      "title": "Inclusion criteria",
+      "parent_id": "clause-6.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 425,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-6.3.4",
+      "number": "6.3.4",
+      "title": "Example",
+      "parent_id": "clause-6.3",
+      "level": 3,
+      "source": {
+        "path": "clauses/clause06_conformance.tex",
+        "line": 428,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-7",
+      "number": "7",
+      "title": "FOM module/SOM module merging rules",
+      "parent_id": null,
+      "level": 1,
+      "source": {
+        "path": "clauses/clause07_merging_rules_initial.tex",
+        "line": 1,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.1",
+      "number": "A.1",
+      "title": "B.1",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_a_b.tex",
+        "line": 33,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.2",
+      "number": "A.2",
+      "title": "B.2",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_a_b.tex",
+        "line": 47,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.3",
+      "number": "A.3",
+      "title": "B.3",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_a_b.tex",
+        "line": 63,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.4",
+      "number": "A.4",
+      "title": "B.4",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_a_b.tex",
+        "line": 82,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-A.5",
+      "number": "A.5",
+      "title": "B.5",
+      "parent_id": "clause-A",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_a_b.tex",
+        "line": 96,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-D.1",
+      "number": "D.1",
+      "title": "D.1",
+      "parent_id": "clause-D",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_d_h.tex",
+        "line": 11,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-D.2",
+      "number": "D.2",
+      "title": "D.2",
+      "parent_id": "clause-D",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_d_h.tex",
+        "line": 14,
+        "end_line": null
+      }
+    },
+    {
+      "id": "clause-D.3",
+      "number": "D.3",
+      "title": "E.1",
+      "parent_id": "clause-D",
+      "level": 2,
+      "source": {
+        "path": "annexes/annex_d_h.tex",
+        "line": 59,
+        "end_line": null
+      }
+    }
+  ]
+}

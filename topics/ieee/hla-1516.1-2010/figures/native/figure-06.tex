@@ -1,0 +1,145 @@
+\begin{tikzpicture}[
+    x=0.01cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f6 stroke/.style={draw=black,line width=.29pt},
+    f6 transition/.style={draw=black,line width=.36pt,-{Stealth[length=2.35pt,width=2.20pt]}},
+    f6 partition/.style={draw=black,line width=.28pt,dash pattern=on .030cm off .030cm},
+    f6 title/.style={font=\rmfamily\fontsize{4.90}{5.25}\selectfont,align=center,inner sep=0pt},
+    f6 tab/.style={font=\rmfamily\fontsize{4.15}{4.55}\selectfont,align=center,inner sep=0pt},
+    f6 text/.style={font=\rmfamily\fontsize{4.55}{5.05}\selectfont,align=center,inner sep=0pt},
+    f6 small/.style={font=\rmfamily\fontsize{4.15}{4.60}\selectfont,align=center,inner sep=0pt},
+    f6 caption/.style={font=\RLSans\bfseries\fontsize{6.44}{7.02}\selectfont,align=center,inner sep=0pt}
+]
+    % The source page contains a 960 x 720 one-bit figure image followed by a
+    % separately typeset caption.  The 960 x 748 bounding box preserves that
+    % combined source footprint when resized to the original 460.02 pt width.
+    \path[use as bounding box] (0,0) rectangle (960,748);
+
+    % The source image is centered 8.1 pt left of the page center.  At the final
+    % resize factor, this -0.170 cm source-space shift reproduces that placement.
+    \begin{scope}[xscale=1.013,yscale=1.013,xshift=-0.1886cm,yshift=0.2885cm]
+
+        % F06-S00: Federation Execution and Sync Points outer composite state.
+        \draw[f6 stroke]
+        (133,55) -- (826,55)
+        .. controls (869,55) and (903,89) .. (903,132)
+        -- (903,593)
+        .. controls (903,636) and (868,671) .. (824,671)
+        -- (134,671)
+        .. controls (90,671) and (55,636) .. (55,592)
+        -- (55,134)
+        .. controls (55,90) and (89,55) .. (133,55)
+        -- cycle;
+
+        % F06-C01: RTI global-synchronization-label decomposition frame.
+        \draw[f6 stroke,rounded corners=.36cm] (103,151) rectangle (391,575);
+        % F06-R05 / F06-R06 / F06-R07 separators.
+        \draw[f6 partition] (103,303) -- (391,303);
+        \draw[f6 partition] (103,399) -- (391,399);
+
+        % F06-C02: Federate F_1 local-synchronization-label decomposition frame.
+        \draw[f6 stroke,rounded corners=.29cm] (503,111) rectangle (839,311);
+        \draw[f6 partition] (615,111) -- (615,311);
+        \draw[f6 partition] (719,111) -- (719,311);
+
+        % F06-C03: Federate F_N local-synchronization-label decomposition frame.
+        \draw[f6 stroke,rounded corners=.29cm] (503,431) rectangle (839,631);
+        \draw[f6 partition] (615,431) -- (615,631);
+        \draw[f6 partition] (719,431) -- (719,631);
+
+        % F06-R01: RTI outer orthogonal region.
+        % F06-R02: Federate F_1 outer orthogonal region.
+        % F06-R03: omitted middle-federate outer orthogonal region.
+        % F06-R04: Federate F_N outer orthogonal region.
+        \draw[f6 partition] (431,55) -- (431,671);
+        \draw[f6 partition] (431,343) -- (903,343);
+        \draw[f6 partition] (431,383) -- (903,383);
+
+        % Source-like state/region tabs.  White fills mask the underlying borders.
+        \fill[white] (345,31) rectangle (599,55);
+        \draw[f6 stroke] (345,31) rectangle (599,55);
+        \node[f6 title] at (472,43) {\scalebox{.935}[1]{Federation Execution and Sync Points}};
+
+        \fill[white] (71,55) rectangle (143,87);
+        \draw[f6 stroke] (71,55) rectangle (143,87);
+        \node[f6 tab] at (107,73) {RTI};
+
+        \fill[white] (431,55) rectangle (520,84);
+        \draw[f6 stroke] (431,55) rectangle (520,84);
+        \node[f6 tab] at (476,70) {Federate $F_1$};
+
+        \fill[white] (431,383) rectangle (527,415);
+        \draw[f6 stroke] (431,383) rectangle (527,415);
+        \node[f6 tab] at (479,399) {Federate $F_N$};
+
+        % F06-R05: first Global Synch Label state-machine region.
+        % F06-R06: omitted middle Global Synch Label regions.
+        % F06-R07: last Global Synch Label state-machine region.
+        \node[f6 text] at (247,226) {Global Synch Label\\(``first'')};
+        \foreach \x in {211,238,265} {\fill (\x,356) circle[radius=6.0];}
+        \node[f6 text] at (247,474) {Global Synch Label\\(``last'')};
+
+        % F06-R08: first Local Synch Label region for F_1.
+        % F06-R09: omitted middle Local Synch Label regions for F_1.
+        % F06-R10: last Local Synch Label region for F_1.
+        \node[f6 text] at (559,209) {Local Synch\\Label\\(1, ``first'')};
+        \foreach \x in {637,664,691} {\fill (\x,208) circle[radius=6.0];}
+        \node[f6 text] at (779,209) {Local Synch\\Label\\(1, ``last'')};
+
+        % F06-R11: first Local Synch Label region for F_N.
+        % F06-R12: omitted middle Local Synch Label regions for F_N.
+        % F06-R13: last Local Synch Label region for F_N.
+        \node[f6 text] at (559,529) {Local Synch\\Label\\($N$, ``first'')};
+        \foreach \x in {637,664,691} {\fill (\x,528) circle[radius=6.0];}
+        \node[f6 text] at (779,529) {Local Synch\\Label\\($N$, ``last'')};
+
+        % Representative omitted joined-federate regions.
+        \foreach \x in {613,640,667} {\fill (\x,363) circle[radius=6.0];}
+
+        % F06-P01: RTI initial pseudo-state.
+        \fill (126,109) circle[radius=7.0];
+        % F06-E01: Create Federation Execution, RTI initial to global-label frame.
+        \draw[f6 transition] (132,115) -- (166,150);
+        \node[f6 small,anchor=west] at (145,117) {Create Federation Execution};
+
+        % F06-P02: RTI final pseudo-state.
+        \draw[f6 stroke] (371,652) circle[radius=12.0];
+        \fill (371,652) circle[radius=6.5];
+        % F06-E02: Destroy Federation Execution, global-label frame to RTI final.
+        \draw[f6 transition] (287,575) -- (361,643);
+        \node[f6 small] at (242,622) {Destroy Federation Execution};
+
+        % F06-P03: Federate F_1 initial pseudo-state.
+        \fill (462,166) circle[radius=7.0];
+        % F06-E03: Join Federation Execution (F_1), initial to local-label frame.
+        \draw[f6 transition] (469,166) -- (502,166);
+        \node[f6 small] at (468,215) {Join\\Federation\\Execution\\($F_1$)};
+
+        % F06-P04: Federate F_1 final pseudo-state.
+        \draw[f6 stroke] (883,163) circle[radius=12.0];
+        \fill (883,163) circle[radius=6.5];
+        % F06-E04: Resign Federation Execution (F_1), frame to final.
+        \draw[f6 transition] (839,166) -- (872,166);
+        \node[f6 small] at (870,215) {Resign\\Federation\\Execution\\($F_1$)};
+
+        % F06-P05: Federate F_N initial pseudo-state.
+        \fill (462,486) circle[radius=7.0];
+        % F06-E05: Join Federation Execution (F_N), initial to local-label frame.
+        \draw[f6 transition] (469,486) -- (502,486);
+        \node[f6 small] at (468,535) {Join\\Federation\\Execution\\($F_N$)};
+
+        % F06-P06: Federate F_N final pseudo-state.
+        \draw[f6 stroke] (883,483) circle[radius=12.0];
+        \fill (883,483) circle[radius=6.5];
+        % F06-E06: Resign Federation Execution (F_N), frame to final.
+        \draw[f6 transition] (839,486) -- (872,486);
+        \node[f6 small] at (870,535) {Resign\\Federation\\Execution\\($F_N$)};
+
+    \end{scope}
+
+    % Source caption is a separate Arial Bold line centered 10.3 pt right of the
+    % page center.  x=501 reproduces that offset after final resizing.
+    \node[f6 caption] at (506,715) {Figure 6---Federation execution and sync points};
+\end{tikzpicture}

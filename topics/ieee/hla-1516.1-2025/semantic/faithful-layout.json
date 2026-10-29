@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516.1-2025",
+  "segments": [
+    {
+      "id": "interior",
+      "start_sequence": 3,
+      "end_sequence": 438
+    }
+  ],
+  "static_entries": [
+    {
+      "id": "introduction-page",
+      "source_path": "content/frontmatter/introduction.tex",
+      "sequence": 9
+    }
+  ]
+}

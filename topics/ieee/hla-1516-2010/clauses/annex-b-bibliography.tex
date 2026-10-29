@@ -1,0 +1,35 @@
+% Annex B: source PDF page 38 / printed page 26.
+
+\newpage
+\thispagestyle{hlabibliography}
+
+% The source uses a short footnote rule and flush-left footnote numbers on this
+% final page. The adjustments are local in effect because Annex B is last.
+\renewcommand{\footnoterule}{\kern-3pt\hrule width 0.40in\kern2.6pt}
+\makeatletter
+\renewcommand{\@makefntext}[1]{\noindent\@makefnmark#1}
+\makeatother
+\renewcommand{\footnotefont}{\fontsize{7.98pt}{10.8pt}\selectfont}
+\enlargethispage{-2.0pt}
+
+% Match the tighter Annex-B title stack in the supplied page. Annex A uses a
+% deliberately looser stack, so these are page-local corrections rather than
+% changes to the shared annex macros.
+\addtolength{\topskip}{1.5pt}
+\vspace{1.5pt}
+\annexdesignation{B}
+\vspace{-7pt}
+\annexstatus{informative}
+\vspace{-7.5pt}
+\annextitle{Bibliography}
+\vspace{-11.9pt}
+
+[B1] IEEE Std 1516.3\textsuperscript{\texttrademark}, IEEE Recommended Practice for High Level Architecture (HLA) Federation Development and Execution Process (FEDEP).
+
+\vspace{6pt}
+[B2] IEEE Std 1516.4\textsuperscript{\texttrademark}-2007, IEEE Recommended Practice for Verification, Validation, and Accreditation\\
+of a Federation --- An Overlay to the High Level Architecture Federation Development and Execution\\
+Process.
+
+\vspace{6pt}
+[B3] SISO-STD-003-2006, Base Object Model (BOM) Template Specification, Simulation Interoperability Standards Organization (SISO), March 2006.\footnote{This document is available from the Simulation Interoperability Standards Organization (\href{http://www.sisostds.org/}{http://www.sisostds.org/}).}

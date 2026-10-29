@@ -1,0 +1,1340 @@
+{
+  "schema_version": 1,
+  "source": "User-provided Requirements Lab open issue queue, 2026-10-24",
+  "authority": "Tracking snapshot; the originating known-issues.json remains authoritative for issue status.",
+  "issues": [
+    {
+      "id": "RL-261",
+      "category": "Umbra-local plan and traceability follow-ups",
+      "location": "`catch2-test-plan.json`, lines 35514–35521",
+      "complaint": "Catch2 plan JSON syntax and row identity corruption recurred after RL-260 repair",
+      "candidate_records": 0,
+      "resolution": "verified-in-umbra",
+      "verification": "Read-only JSON parse and exact plan-row inspection in Umbra, 2026-10-25",
+      "resolution_note": "Umbra catch2-test-plan.json parses as JSON. The custom-transportation-handle-stability row has a matching test title and eight complete selected API IDs; the former truncated joind string is absent.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": []
+    },
+    {
+      "id": "RL-268",
+      "category": "Umbra-local plan and traceability follow-ups",
+      "location": "`catch2-test-plan.json`, validator-reported rows: timestamped attribute update, negotiated/confirmed divestiture, timestamped directed interaction, and process restore status",
+      "complaint": "Global Catch2 plan audit reports stale mappings and missing next actions in unrelated rows",
+      "candidate_records": 4,
+      "resolution": "verified-in-umbra",
+      "verification": "Read-only Umbra tools/requirements_lab.py check-plan, 2026-10-25",
+      "resolution_note": "The check-plan command no longer reports the eight stale mapping or missing-next-action findings. It exits nonzero only for the separate historical RL-001..RL-157 observation-baseline drift.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-185-l17-5",
+        "requirement-candidate-content-clauses-08-time-management-page-194-l21-3",
+        "requirement-candidate-content-clauses-08-time-management-page-194-l69-19",
+        "requirement-candidate-content-clauses-08-time-management-page-210-l21-3"
+      ]
+    },
+    {
+      "id": "RL-354",
+      "category": "Umbra-local plan and traceability follow-ups",
+      "location": "`available_time_advance_inclusive_galt_catch2.cpp`, case `umbra-cpp-time-advance-grant-requested-logical-time`",
+      "complaint": "Time Advance Grant case claimed a Time Constrained Enabled argument rule",
+      "candidate_records": 1,
+      "resolution": "verified-in-umbra",
+      "verification": "Read-only exact Time Advance Grant plan-row inspection in Umbra, 2026-10-25",
+      "resolution_note": "Current grant row selects only page-203-l95-25; page-192-l66-18 is selected by the time-constrained-enabled-current-time-regulating row.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-192-l66-18"
+      ]
+    },
+    {
+      "id": "RL-371",
+      "category": "Umbra-local plan and traceability follow-ups",
+      "location": "p.51, id=umbra-cpp-connect-requirement-traceability, requirements_lab_api_surface_status",
+      "complaint": "Connect API traceability row cites unresolvable RL-045",
+      "candidate_records": 2,
+      "resolution": "verified-in-umbra",
+      "verification": "Read-only current Connect plan-row and exact issue-ID inspection in Umbra, 2026-10-25",
+      "resolution_note": "The historical umbra-cpp-connect-requirement-traceability row is absent from the current plan. The current umbra-cpp-connect-integration row identifies RL-045 as absent, cites RL-371 as the live record, and preserves all four Connect API declarations as API-only evidence.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-051-l18-3",
+        "requirement-candidate-content-clauses-04-federation-management-page-051-l23-4"
+      ]
+    },
+    {
+      "id": "RL-369",
+      "category": "Cross-source name discrepancy",
+      "location": "p.297, content-15161-page-297 layout_body, Table 5 restore-status collection row; semantic/requirements.json candidate r007",
+      "complaint": "Table 5 restore-status set name conflicts with the MIM; prior RL-083 citation",
+      "candidate_records": 1,
+      "resolution": "source-conflict-dispositioned",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_source_conflicts_remain_explicit; pinned 1516.1 Table 14 and 1516.2 MIM comparison; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "resolution_note": "The printed Table 5 row is a high-confidence editorial typo: it adds Handle to both FederateRestoreStatusSet and FederateRestoreStatus. Table 14 in the same standard maps type 20 to FederateRestoreStatusSet and type 19 to FederateRestoreStatus; the official Java/C++ callbacks and FedPro data types corroborate FederateRestoreStatus. Map the semantic collection to type 20 and its elements to type 19. Preserve the literal Table 5 text and do not invent API symbols from it. No IEEE correction was found, so this is a semantic mapping resolution, not a publisher correction.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p297-r007"
+      ]
+    },
+    {
+      "id": "RL-253",
+      "category": "Missing requirement or service-flow candidates",
+      "location": "p.259, 144-146",
+      "complaint": "Get Dimension Handle NameNotFound is declared by the 2025 C++ API but not extracted as a separate requirement",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_missing_service_flow_items_have_source_and_direct_api_bindings; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "resolution_note": "The original page-259 candidate remains a §10.23.3 return rule. A distinct NameNotFound exception item now cites the dimension-not-defined list item at page-260 line 35 under §10.23.5 and the getDimensionHandle C++ API declaration. Affected clipped sentence boundaries were restored from the pinned semantic page layout.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-259-l144-44"
+      ],
+      "created_requirement_ids": [
+        "requirement-service-flow-get-dimension-handle-name-not-found"
+      ]
+    },
+    {
+      "id": "RL-321",
+      "category": "Missing requirement or service-flow candidates",
+      "location": "p.199, 145-150",
+      "complaint": "Next Message Request Available backward-time precondition and exception lack candidates",
+      "candidate_records": 0,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_missing_service_flow_items_have_source_and_direct_api_bindings",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [],
+      "resolution_note": "The logical-time precondition at page-199 line 145 and the corresponding already-passed exception at page-200 line 62 have distinct source-backed records and direct Next Message Request Available API bindings.",
+      "created_requirement_ids": [
+        "requirement-service-flow-nmra-current-time-precondition",
+        "requirement-service-flow-nmra-time-passed-exception"
+      ]
+    },
+    {
+      "id": "RL-322",
+      "category": "Missing requirement or service-flow candidates",
+      "location": "p.200, 11, 23",
+      "complaint": "Next Message Request Available Time Advancing precondition and exception lack candidates",
+      "candidate_records": 0,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_missing_service_flow_items_have_source_and_direct_api_bindings",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [],
+      "resolution_note": "The not-Time-Advancing precondition at page-200 line 11 and the corresponding Time-Advancing exception at page-200 line 74 have distinct source-backed records and direct Next Message Request Available API bindings.",
+      "created_requirement_ids": [
+        "requirement-service-flow-nmra-not-advancing-precondition",
+        "requirement-service-flow-nmra-advancing-exception"
+      ]
+    },
+    {
+      "id": "RL-256",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, 32-35",
+      "complaint": "Table 5 candidates may contain spelling and markup defects in ConfigurationResult fields",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_source_conflicts_remain_explicit; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "resolution_note": "The candidates now state the clean ConfigurationResult field and message type. IEEE SA's linked 2025 Java ConfigurationResult declaration independently spells the field additionalSettingsResultCode (data/hla-15161-official-auxiliary-evidence-2026-10-25.json). The printed addtionalSettingsResultCode example remains a distinct unresolved source anomaly, quoted only as provenance and not treated as a lexical requirement.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r004",
+        "requirement-candidate-table-5-p296-r005"
+      ]
+    },
+    {
+      "id": "RL-257",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, 56",
+      "complaint": "Table 5 Credentials candidate omits its full local encoding and example",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_parent_rows_have_complete_shapes; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r006"
+      ]
+    },
+    {
+      "id": "RL-312",
+      "category": "Table and structured-record extraction",
+      "location": "p.178, 45-54",
+      "complaint": "Page 178 TAR timestamp-boundary candidate contains TeX artifacts and mixes adjacent table columns",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_time_table_and_caption",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-178-l45-12"
+      ]
+    },
+    {
+      "id": "RL-358",
+      "category": "Table and structured-record extraction",
+      "location": "p.295, content-15161-page-295 layout_body, Table 5 AdditionalSettingsResultCode row",
+      "complaint": "Table 5 AdditionalSettingsResultCode encoding candidate omits two enumerants",
+      "candidate_records": 3,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_fragmented_children_keep_their_parent_type; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p295-r001",
+        "requirement-candidate-table-5-p295-r002",
+        "requirement-candidate-table-5-p295-r003"
+      ]
+    },
+    {
+      "id": "RL-364",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, content-15161-page-296 layout_body, Table 5 ConfigurationResult row",
+      "complaint": "Table 5 ConfigurationResult candidate omits its record shape",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_parent_rows_have_complete_shapes; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r001"
+      ]
+    },
+    {
+      "id": "RL-365",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, content-15161-page-296 layout_body, Table 5 FactoryClass row; structured candidate source lines 98-155",
+      "complaint": "Table 5 FactoryClass enumeration is fragmented across candidates",
+      "candidate_records": 18,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_fragmented_children_keep_their_parent_type; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r011",
+        "requirement-candidate-table-5-p296-r012",
+        "requirement-candidate-table-5-p296-r013",
+        "requirement-candidate-table-5-p296-r014",
+        "requirement-candidate-table-5-p296-r015",
+        "requirement-candidate-table-5-p296-r016",
+        "requirement-candidate-table-5-p296-r017",
+        "requirement-candidate-table-5-p296-r018",
+        "requirement-candidate-table-5-p296-r019",
+        "requirement-candidate-table-5-p296-r020",
+        "requirement-candidate-table-5-p296-r021",
+        "requirement-candidate-table-5-p296-r022",
+        "requirement-candidate-table-5-p296-r023",
+        "requirement-candidate-table-5-p296-r024",
+        "requirement-candidate-table-5-p296-r025",
+        "requirement-candidate-table-5-p296-r026",
+        "requirement-candidate-table-5-p296-r027",
+        "requirement-candidate-table-5-p296-r028"
+      ]
+    },
+    {
+      "id": "RL-366",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, content-15161-page-296 layout_body, Table 5 FederateAttributes row; structured candidate source lines 167-182",
+      "complaint": "Table 5 FederateAttributes record is split and column-shifted",
+      "candidate_records": 5,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_fragmented_children_keep_their_parent_type; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r030",
+        "requirement-candidate-table-5-p296-r031",
+        "requirement-candidate-table-5-p296-r032",
+        "requirement-candidate-table-5-p296-r033",
+        "requirement-candidate-table-5-p296-r034"
+      ]
+    },
+    {
+      "id": "RL-367",
+      "category": "Table and structured-record extraction",
+      "location": "p.296, content-15161-page-296 layout_body, Table 5 FederateHandleSaveStatusPair row; semantic/requirements.json candidates r036-r037",
+      "complaint": "Table 5 FederateHandleSaveStatusPair record is split and column-shifted",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_fragmented_children_keep_their_parent_type; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p296-r036",
+        "requirement-candidate-table-5-p296-r037"
+      ]
+    },
+    {
+      "id": "RL-368",
+      "category": "Table and structured-record extraction",
+      "location": "p.297, content-15161-page-297 layout_body, Table 5 FederateRestoreStatus row; semantic/requirements.json candidates r003-r006",
+      "complaint": "Table 5 FederateRestoreStatus record is split and column-shifted",
+      "candidate_records": 4,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_fragmented_children_keep_their_parent_type; tests/test_hla_backflow.py::HlaBackflowTests::test_table_5_sources_point_to_printed_values_and_examples",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-table-5-p297-r003",
+        "requirement-candidate-table-5-p297-r004",
+        "requirement-candidate-table-5-p297-r005",
+        "requirement-candidate-table-5-p297-r006"
+      ]
+    },
+    {
+      "id": "RL-387",
+      "category": "Table and structured-record extraction",
+      "location": "p.180-181, page-180 candidate l156-161; page-181 candidate l115-117; page-181 Table 2 caption and matrix",
+      "complaint": "Page-181 §8.1.4 Table 2 caption is exported as a normative requirement",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_time_table_and_caption; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_continuations_point_to_their_actual_rules",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-180-l156-49",
+        "requirement-candidate-content-clauses-08-time-management-page-181-l115-2"
+      ],
+      "resolution_note": "The Table 2 introduction remains a reviewed non-normative candidate. Its requirement, review, and API binding now cite the complete sentence at page-181 lines 112-115; the adjacent order-type rule retains its own requirement."
+    },
+    {
+      "id": "RL-177",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.132, 107-118",
+      "complaint": "Page-132 object-management postconditions inherit the following 6.18.1 heading",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-132-l107-30",
+        "requirement-candidate-content-clauses-06-object-management-page-132-l113-32"
+      ]
+    },
+    {
+      "id": "RL-248",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.236, 32-37",
+      "complaint": "Page-236 regional-registration invalid-region precondition is exported as clause 9.10",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "resolution_note": "Visible page-235/236 heading is §9.9.3, not the §9.5.3 suggested by the input ledger.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-236-l32-9"
+      ]
+    },
+    {
+      "id": "RL-259",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.187, 16-22",
+      "complaint": "Page 187 Delay Subscription Evaluation candidate fragments repeat the §8.1.10 crosswalk error",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-187-l16-3",
+        "requirement-candidate-content-clauses-08-time-management-page-187-l22-5"
+      ]
+    },
+    {
+      "id": "RL-265",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.288, 9",
+      "complaint": "Page 288 HLAfederate MOM candidate is assigned to 11.3 instead of 11.2",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-288-l9-2"
+      ],
+      "resolution_note": "The page-288 HLAfederate candidate belongs to the visible §11.2.1 subsection within the ledger's broader §11.2 section."
+    },
+    {
+      "id": "RL-267",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.67, 22",
+      "complaint": "Page-67 Initiate Federate Save label candidate recurs under Federate Save Begun",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-067-l22-3"
+      ]
+    },
+    {
+      "id": "RL-317",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.122, 73-80",
+      "complaint": "Page 122 Reflect Attribute Values preamble candidates are labeled 6.11.1 instead of 6.11",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-122-l61-17",
+        "requirement-candidate-content-clauses-06-object-management-page-122-l79-23"
+      ]
+    },
+    {
+      "id": "RL-323",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.286, 18-36",
+      "complaint": "Evoke Callback postcondition candidate has Disable Callbacks clause label",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-286-l20-3"
+      ]
+    },
+    {
+      "id": "RL-324",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.139, 2920-2925",
+      "complaint": "Attribute transportation default-on-reacquisition candidate has supplied-arguments clause label",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-139-l150-40"
+      ]
+    },
+    {
+      "id": "RL-325",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.141, 2963-2968",
+      "complaint": "Attribute transportation one-request/one-confirmation candidate has change-default clause label",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-141-l11-1"
+      ]
+    },
+    {
+      "id": "RL-328",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "pp.84, 124, 191–192, 194, 206–207, 286",
+      "complaint": "Queued-TSO save anchors recur across later-heading clause boundaries",
+      "candidate_records": 11,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-05-declaration-management-page-084-l32-10",
+        "requirement-candidate-content-clauses-06-object-management-page-124-l41-12",
+        "requirement-candidate-content-clauses-06-object-management-page-124-l47-14",
+        "requirement-candidate-content-clauses-06-object-management-page-124-l53-16",
+        "requirement-candidate-content-clauses-08-time-management-page-191-l73-17",
+        "requirement-candidate-content-clauses-08-time-management-page-192-l63-17",
+        "requirement-candidate-content-clauses-08-time-management-page-194-l21-3",
+        "requirement-candidate-content-clauses-08-time-management-page-194-l27-5",
+        "requirement-candidate-content-clauses-08-time-management-page-206-l29-4",
+        "requirement-candidate-content-clauses-08-time-management-page-207-l112-28",
+        "requirement-candidate-content-clauses-10-support-services-page-286-l20-3"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-329",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.165, 14-19",
+      "complaint": "Page-165 Attribute Ownership Unavailable introduction inherits later 7.10.6 heading",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-165-l14-1"
+      ]
+    },
+    {
+      "id": "RL-330",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.180, 9-68",
+      "complaint": "Page-180 mixed-passel message rule inherits later 8.1.4 heading",
+      "candidate_records": 5,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-180-l9-1",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l21-5",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l27-7",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l39-11",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l45-13"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-331",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.153, 15-111",
+      "complaint": "Page-153 acquisition and privilege rules inherit later 7.1.4 heading",
+      "candidate_records": 12,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries; tests/test_hla_backflow.py::HlaBackflowTests::test_split_service_names_keep_the_full_condition",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l15-4",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l30-9",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l36-11",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l45-14",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l60-19",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l75-24",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l84-26",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l87-27",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l96-30",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l99-31",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l108-34",
+        "requirement-candidate-content-clauses-07-ownership-management-page-153-l111-35"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-339",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.203, 13-50",
+      "complaint": "Page-203 time-management candidates inherit §8.14.3 across service boundaries",
+      "candidate_records": 5,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries; tests/test_hla_backflow.py::HlaBackflowTests::test_split_service_names_keep_the_full_condition",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-203-l47-12",
+        "requirement-candidate-content-clauses-08-time-management-page-203-l68-19",
+        "requirement-candidate-content-clauses-08-time-management-page-203-l95-25",
+        "requirement-candidate-content-clauses-08-time-management-page-203-l104-28",
+        "requirement-candidate-content-clauses-08-time-management-page-203-l113-31"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-340",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.229 and 231, page-229 preconditions j; page-231 preconditions j",
+      "complaint": "Pages 229 and 231 DDM invalid-region requirements are assigned to postconditions/reference-state subsections",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l146-44",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-231-l100-28"
+      ]
+    },
+    {
+      "id": "RL-341",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.229 and 230, page-229 candidate l20; page-230 Associate Regions For Updates text",
+      "complaint": "Update-region ownership-loss postcondition is attributed to Register Object Instance",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "resolution_note": "The source paragraph precedes §9.5.1 under the §9.5 service heading; the input ledger's §9.6 suggestion follows on page 230 and does not own this text.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-229-l20-5"
+      ]
+    },
+    {
+      "id": "RL-342",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.43-44, page-043 heading clause:4.1.2; page-044 lines 57-64",
+      "complaint": "Page-44 saved-message restore requirement is exported only under Clause 4",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l54-17"
+      ]
+    },
+    {
+      "id": "RL-343",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.204, content-15161-page-204: §8.14.4(d) and (e) precede the §8.15 service heading; §8.15.3 is Preconditions",
+      "complaint": "Page-204 TSO delivery cutoffs are exported under asynchronous-delivery preconditions",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries; tests/test_hla_backflow.py::HlaBackflowTests::test_split_service_names_keep_the_full_condition",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-204-l74-21",
+        "requirement-candidate-content-clauses-08-time-management-page-204-l86-25"
+      ],
+      "resolution_note": "The affected page-204 rules belong to §8.14.4. The model stores the numbered subsection, while the ledger identifies its lettered item (d). Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-344",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.62, content-15161-page-062: failed Register Federation Synchronization Point indication and no-effect rule precede the 4.16 Announce Synchronization Point heading",
+      "complaint": "Page-62 failed synchronization-registration no-effect rule is assigned to the following service",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-062-l28-6"
+      ]
+    },
+    {
+      "id": "RL-345",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.225, content-15161-page-225: region-copy lifetime guarantee follows the §9.1.7 Convey Region Designator Sets Switch material and precedes the §9.1.8 Allow Relaxed DDM heading",
+      "complaint": "Page-225 region-designator copy-lifetime guarantee is assigned to §9.1.8 instead of §9.1.7",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-225-l96-30"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-346",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.193, page 193 semantic flow: the first two statements are under §8.6.4 Postconditions; the Disable Time Constrained description is under §8.7 before its numbered subsections",
+      "complaint": "Page-193 time-constrained requirements are assigned to Disable Time Constrained exceptions",
+      "candidate_records": 3,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-193-l31-6",
+        "requirement-candidate-content-clauses-08-time-management-page-193-l34-7",
+        "requirement-candidate-content-clauses-08-time-management-page-193-l61-13"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-347",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.43-44, page-043 heading clause:4.1.2 Federation execution save and restore; page-044 per-federate-type count and same-type interchangeability statements precede the next §4.1.3 heading",
+      "complaint": "Page-44 federate-type restore requirements continue to export only under Clause 4",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l72-23",
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l78-25"
+      ]
+    },
+    {
+      "id": "RL-348",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.57, page-057 §4.11 Join Federation Execution service description: the federate-type argument distinguishes categories for save and restore, before §4.11.1–§4.11.4",
+      "complaint": "Page-57 federate-type join requirement is exported only under Clause 4",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-057-l32-5"
+      ]
+    },
+    {
+      "id": "RL-349",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.202, content-15161-page-202 layout_body: Flush Queue Grant result paragraph after the §8.13 heading and before §8.13.1 through §8.13.3",
+      "complaint": "Page-202 Flush Queue Grant result is assigned to §8.13.3 preconditions",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-202-l104-28",
+        "requirement-candidate-content-clauses-08-time-management-page-202-l107-29"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-350",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.182, content-15161-page-182 layout_body: FQG optimistic-lookahead restriction under §8.1.5 before the §8.1.6 heading",
+      "complaint": "Page-182 optimistic Flush Queue lookahead rule is exported only under Clause 8",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-182-l73-23"
+      ]
+    },
+    {
+      "id": "RL-351",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.182, content-15161-page-182 layout_body: time-regulating TSO sender rule and timestamped-order statement within §8.1.5, before the §8.1.6 heading",
+      "complaint": "Page-182 §8.1.5 time-management rules are exported only under Clause 8",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-182-l7-1",
+        "requirement-candidate-content-clauses-08-time-management-page-182-l88-28"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-352",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.182, content-15161-page-182 layout_body: Enable Time Constrained request/callback statement within §8.1.6, following its heading",
+      "complaint": "Page-182 Enable Time Constrained transition is exported only under Clause 8",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-182-l100-31"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-356",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.175, logical-time paragraph continuing beyond the truncated candidate",
+      "complaint": "Page-175 logical-time requirement is truncated and clause-only",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-175-l131-40"
+      ]
+    },
+    {
+      "id": "RL-357",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.57-58, page 57 §4.8 heading and page 58 required-representations paragraph",
+      "complaint": "Page-58 time-representation requirement loses §4.8 attribution",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_time_and_ddm_continuations",
+      "resolution_note": "The visible paragraph is within §4.8.1 Purpose/background, before §4.8.2.",
+      "document_id": "hla-1516.2-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-sections-semantic-clause-4b-page-058-l34-8"
+      ]
+    },
+    {
+      "id": "RL-360",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.220, content-15161-page-220 layout_body, object-attribute update/subscription relationship paragraphs before the visible §9.1.3.3 heading",
+      "complaint": "Page-220 object-attribute continuation is assigned to the interaction subsection",
+      "candidate_records": 16,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "resolution_note": "The page contains 17 candidate records before the visible §9.1.3.3 heading; all 17 continue §9.1.3.2 from page 219. Affected clipped sentence boundaries were restored from the pinned semantic page layout.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l8-2",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l11-3",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l14-4",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l17-5",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l26-8",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l35-11",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l41-13",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l50-16",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l56-18",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l65-21",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l77-25",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l86-28",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l92-30",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l95-31",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l107-35",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l113-37"
+      ]
+    },
+    {
+      "id": "RL-362",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.192, TCE service narrative after §8.6 heading and before §8.6.1 supplied-arguments heading",
+      "complaint": "Page-192 TCE service narrative is attributed to §8.6.3",
+      "candidate_records": 5,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_time_and_ddm_continuations",
+      "resolution_note": "All five affected candidates now belong to §8.6. The page-192 §8.6.1 heading begins after the service narrative; l93-27 and l99-29 also have complete statements.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-192-l72-20",
+        "requirement-candidate-content-clauses-08-time-management-page-192-l78-22",
+        "requirement-candidate-content-clauses-08-time-management-page-192-l84-24",
+        "requirement-candidate-content-clauses-08-time-management-page-192-l93-27",
+        "requirement-candidate-content-clauses-08-time-management-page-192-l99-29"
+      ]
+    },
+    {
+      "id": "RL-370",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.181, content-15161-page-181 layout_body: TSO ordering statement under §8.1.4 Message order type",
+      "complaint": "Page-181 TSO-order rule is exported only under Clause 8",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution; tests/test_hla_backflow.py::HlaBackflowTests::test_corrected_candidates_have_complete_statement_boundaries",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-181-l148-13"
+      ],
+      "resolution_note": "Affected clipped sentence boundaries were restored from the pinned semantic page layout."
+    },
+    {
+      "id": "RL-380",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.216, content-element-content-15161-page-216-paragraph-001",
+      "complaint": "Page-216 DDM content element is classified as Clause 8",
+      "candidate_records": 6,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-216-l48-13",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l54-15",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l66-19",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l69-20",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l72-21",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l78-23"
+      ]
+    },
+    {
+      "id": "RL-384",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.143, page-143 service paragraph 42-46; next heading at 47",
+      "complaint": "Page-143 Report Attribute Transportation Type candidate truncates its unowned rule and inherits §6.29.1",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-143-l156-42",
+        "requirement-candidate-content-clauses-06-object-management-page-143-l162-44"
+      ]
+    },
+    {
+      "id": "RL-385",
+      "category": "Clause, subsection, and source-boundary attribution",
+      "location": "p.191, page 191 service description before the 8.5.1 heading; candidate lines 76-81",
+      "complaint": "Page-191 Enable Time Constrained result is assigned to §8.5.5",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_clause_complaint_has_reviewed_attribution",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-191-l76-18"
+      ]
+    },
+    {
+      "id": "RL-249",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.109, 10",
+      "complaint": "Page-109 interaction-receipt requirement loses federate/subscription notation and is incomplete",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-109-l10-1"
+      ]
+    },
+    {
+      "id": "RL-250",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.224, 89-100",
+      "complaint": "Page-224 Receive Interaction requirement is split across adjacent records",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-224-l89-29",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-224-l92-30"
+      ]
+    },
+    {
+      "id": "RL-251",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.224, 137-147",
+      "complaint": "Page-224 DDM reinterpretation requirement omits its service list",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-224-l137-44"
+      ]
+    },
+    {
+      "id": "RL-258",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.187, 16-22",
+      "complaint": "Page 187 Delay Subscription Evaluation candidate fragments clip intact local source context",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-187-l16-3",
+        "requirement-candidate-content-clauses-08-time-management-page-187-l22-5"
+      ]
+    },
+    {
+      "id": "RL-263",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.290, 12-14",
+      "complaint": "Page 290 §11.4.1 candidate contains only a trailing new-parameters fragment",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "The repaired page-290 sentence precedes the visible §11.4.1 heading at line 88 and continues §11.3; the originating ledger's §11.4.1 attribution is too late.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-11-management-object-model-page-290-l12-3"
+      ]
+    },
+    {
+      "id": "RL-264",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.290, 75-78",
+      "complaint": "Adjacent page 290 §11.4.1 candidates split the ignored-interaction statement",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "The repaired page-290 sentence precedes the visible §11.4.1 heading at line 88 and continues §11.3; the originating ledger's §11.4.1 attribution is too late.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-11-management-object-model-page-290-l75-24",
+        "requirement-candidate-content-clauses-11-management-object-model-page-290-l78-25"
+      ]
+    },
+    {
+      "id": "RL-309",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.148, 94-111",
+      "complaint": "Page 148 ownership paragraph is split between l94 and l100 requirement candidates",
+      "candidate_records": 4,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l94-29",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l100-31",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l103-32",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l106-33"
+      ]
+    },
+    {
+      "id": "RL-310",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.148, 124-132",
+      "complaint": "Page 148 RTI ownership-control exception requirement omits its MOM interaction list",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l124-39"
+      ]
+    },
+    {
+      "id": "RL-311",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.148, 112-123",
+      "complaint": "Page 148 ownership-transfer rule is truncated across l112 and l121",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l112-35",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l121-38"
+      ]
+    },
+    {
+      "id": "RL-313",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.178, 51-52",
+      "complaint": "Page 178 pre-grant delivery rule is truncated before its limiting clause",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-178-l51-14"
+      ]
+    },
+    {
+      "id": "RL-314",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.294, 14-16",
+      "complaint": "Page 294 service-report log-format candidate truncates the record subject",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-11-management-object-model-page-294-l14-4"
+      ]
+    },
+    {
+      "id": "RL-315",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.69, 64-75",
+      "complaint": "Page-069 Federation Saved success condition is split across three incomplete candidates",
+      "candidate_records": 3,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-069-l64-15",
+        "requirement-candidate-content-clauses-04-federation-management-page-069-l67-16",
+        "requirement-candidate-content-clauses-04-federation-management-page-069-l70-17"
+      ]
+    },
+    {
+      "id": "RL-316",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.195, 137-161",
+      "complaint": "Section 8.9 message-set candidate omits the enumerated delivery rules",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-195-l137-40"
+      ]
+    },
+    {
+      "id": "RL-318",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.233, 30-41",
+      "complaint": "Page 233 regional-subscription discovery obligation is split across three candidate rows",
+      "candidate_records": 3,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-233-l30-7",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-233-l33-8",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-233-l36-9"
+      ]
+    },
+    {
+      "id": "RL-319",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.110, 90-91",
+      "complaint": "Annex C.3 extendable-variant candidate stops mid-conflict rule",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_statements_are_complete; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_continuations_point_to_their_actual_rules",
+      "resolution_note": "The Annex C.3 candidate includes the final HLAother merge-failure condition. Its continuation is on the source layout page 111 line 5; generated semantic output places the same text at lines 37-38. The earlier source-layout citation to lines 37-40 pointed to a dimension rule and was corrected.",
+      "document_id": "hla-1516.2-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-110-l90-20"
+      ]
+    },
+    {
+      "id": "RL-320",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.115, 104-115",
+      "complaint": "Page-115 Reserve Multiple Names candidates split illegal-name abort from callback result",
+      "candidate_records": 3,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-06-object-management-page-115-l104-28",
+        "requirement-candidate-content-clauses-06-object-management-page-115-l107-29",
+        "requirement-candidate-content-clauses-06-object-management-page-115-l110-30"
+      ]
+    },
+    {
+      "id": "RL-326",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.67, 37-44",
+      "complaint": "Timed Initiate Federate Save candidate on page 67 ends mid-sentence",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-067-l37-8"
+      ]
+    },
+    {
+      "id": "RL-327",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.65, 109-113",
+      "complaint": "Timed Request Federation Save candidate on page 65 stops at page boundary",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-065-l109-26"
+      ]
+    },
+    {
+      "id": "RL-332",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.180, 87-93",
+      "complaint": "Page-180 Delete Object Instance order rule is split mid-sentence",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-180-l87-26",
+        "requirement-candidate-content-clauses-08-time-management-page-180-l93-28"
+      ]
+    },
+    {
+      "id": "RL-333",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.192, 69-71",
+      "complaint": "Page-192 Time Constrained Enabled precondition ends mid-sentence",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "The complete page-192 statement occurs in the §8.6 service narrative before the visible §8.6.1 heading; the originating ledger's §8.6.3 attribution is too late.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-192-l69-19"
+      ]
+    },
+    {
+      "id": "RL-334",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.192, 72-77",
+      "complaint": "Page-192 smallest-feasible-time requirement ends mid-sentence",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "The complete page-192 statement occurs in the §8.6 service narrative before the visible §8.6.1 heading; the originating ledger's §8.6.3 attribution is too late.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-192-l72-20"
+      ]
+    },
+    {
+      "id": "RL-335",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.197, 98-110",
+      "complaint": "Page-197 Time Advance Grant result statement is split mid-sentence",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-197-l98-29",
+        "requirement-candidate-content-clauses-08-time-management-page-197-l104-31"
+      ]
+    },
+    {
+      "id": "RL-337",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.200, 33-44",
+      "complaint": "Page-200 Flush Queue Request delivery and grant rule is split across fragments",
+      "candidate_records": 5,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-200-l131-38",
+        "requirement-candidate-content-clauses-08-time-management-page-200-l134-39",
+        "requirement-candidate-content-clauses-08-time-management-page-200-l140-41",
+        "requirement-candidate-content-clauses-08-time-management-page-200-l164-49",
+        "requirement-candidate-content-clauses-08-time-management-page-200-l170-51"
+      ]
+    },
+    {
+      "id": "RL-359",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.219, page-219 layout_body, incomplete Set Range Bounds / Commit Region Modifications paragraph before the visible §9.1.3.2 heading",
+      "complaint": "Commit Region candidate truncates its rule and misattributes the subsection",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_page_219_region_rules_precede_instance_attribute_heading; tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "Page-219 l50-16 now contains the complete Invalid region condition and belongs to §9.1.3.1. Its pending-effects continuation is complete in l62-20; the neighboring pre-heading candidates also retain §9.1.3.1 and complete statements.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-219-l50-16"
+      ]
+    },
+    {
+      "id": "RL-361",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.220, content-15161-page-220 layout_body, interaction send-region dimension-subset sentence and following default-region sentence",
+      "complaint": "Interaction dimension-subset rule is split and conflated with default-region behavior",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l140-45",
+        "requirement-candidate-content-clauses-09-data-distribution-management-page-220-l143-46"
+      ]
+    },
+    {
+      "id": "RL-373",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.40, 33-53",
+      "complaint": "Page-40 federation-lifecycle candidate is truncated and combines distinct obligations",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-040-l33-8"
+      ]
+    },
+    {
+      "id": "RL-374",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.213, 76-102",
+      "complaint": "Page-213 order-type paragraph is split into incomplete mixed candidates",
+      "candidate_records": 4,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-213-l76-20",
+        "requirement-candidate-content-clauses-08-time-management-page-213-l79-21",
+        "requirement-candidate-content-clauses-08-time-management-page-213-l88-24",
+        "requirement-candidate-content-clauses-08-time-management-page-213-l94-26"
+      ]
+    },
+    {
+      "id": "RL-375",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.150, 153-160",
+      "complaint": "Page-150 unconditional-divestiture candidate omits its service invocation",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-150-l152-47"
+      ]
+    },
+    {
+      "id": "RL-376",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.161, 152-172",
+      "complaint": "Page-161 §7.8 acquisition requirements are split and truncated",
+      "candidate_records": 4,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_continuations_point_to_their_actual_rules",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45",
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l152-45-confirm",
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l158-47",
+        "requirement-candidate-content-clauses-07-ownership-management-page-161-l167-50"
+      ]
+    },
+    {
+      "id": "RL-377",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.148, 16-93",
+      "complaint": "Page-148 §7 overview and ownership-state candidates are split",
+      "candidate_records": 8,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l16-3",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l22-5",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l52-15",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l58-17",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l61-18",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l70-21",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l82-25",
+        "requirement-candidate-content-clauses-07-ownership-management-page-148-l88-27"
+      ]
+    },
+    {
+      "id": "RL-378",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.178, 93-110",
+      "complaint": "Page 178 OLT delivery-guarantee sentence is split across candidates",
+      "candidate_records": 2,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-178-l93-28",
+        "requirement-candidate-content-clauses-08-time-management-page-178-l108-33"
+      ]
+    },
+    {
+      "id": "RL-379",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.216, 87-89",
+      "complaint": "Page 216 region-dimension candidate drops its subject and merges the next rule",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-216-l87-26"
+      ]
+    },
+    {
+      "id": "RL-381",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.216, page-216 lines 66-80",
+      "complaint": "Page-216 §9.1.1 range definition is fragmented across four candidates",
+      "candidate_records": 4,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "All four stable IDs hold complete sentence-level facets and share the dedicated m16.range-definition.9.1.1 semantic group. Each has a coverage note requiring the four IDs to be mapped together before claiming the full semi-open range definition, bound order, strict upper-bound relation, and minimum unit span.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-216-l66-19",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l69-20",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l72-21",
+        "requirement-candidate-content-clauses-08-time-management-page-216-l78-23"
+      ]
+    },
+    {
+      "id": "RL-382",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.44, page-44 source lines 10-17; candidate source range 15-26",
+      "complaint": "Page-44 save-state identity candidate starts mid-sentence and omits §4.1.3",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "resolution_note": "The visible §4.1.3 heading occurs after this text; §4.1.2 continues from page 43.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-04-federation-management-page-044-l15-4"
+      ]
+    },
+    {
+      "id": "RL-383",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.40, page-40 source paragraph; candidate source range 54-59",
+      "complaint": "Page-40 Disconnect candidate omits its condition and §4.1.1 mapping",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "req-federate-disconnect-after-resign"
+      ],
+      "resolution_note": "The complete rule is carried by the authored transition requirement; the former candidate ID resolves through requirement-id-aliases.json."
+    },
+    {
+      "id": "RL-386",
+      "category": "Incomplete, fragmented, or corrupted candidate text",
+      "location": "p.198-199, page-198 candidate l192-57; page-199 continuation and zero-lookahead statement",
+      "complaint": "Page-198 §8.11.3 equal-time grant rule is clipped before its zero-lookahead continuation",
+      "candidate_records": 1,
+      "resolution": "corrected-in-lab",
+      "verification": "tests/test_hla_backflow.py::HlaBackflowTests::test_every_fragment_complaint_retains_its_missing_rule; tests/test_hla_backflow.py::HlaBackflowTests::test_cross_page_continuations_point_to_their_actual_rules",
+      "resolution_note": "The complete page-198 passage follows the visible §8.11 service heading; the §8.11.3 heading comes later on page 199.",
+      "document_id": "hla-1516.1-2025",
+      "affected_requirement_ids": [
+        "requirement-candidate-content-clauses-08-time-management-page-198-l192-57"
+      ]
+    }
+  ]
+}

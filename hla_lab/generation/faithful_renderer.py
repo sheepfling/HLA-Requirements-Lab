@@ -1,0 +1,300 @@
+"""Render generic, data-driven LaTeX entrypoints for faithful page layouts.
+
+Faithful recreations retain page-sized adapters for pagination and visual
+comparison.  This module makes their order a projection of semantic content
+blocks instead of a hand-maintained list in ``main.tex``.  The adapters remain
+layout-only: semantic ownership stays in the validated document model.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Callable, MutableSet
+from os import PathLike
+from pathlib import Path, PurePosixPath
+from typing import Annotated
+
+from pydantic import Field, model_validator
+
+from hla_lab.adapters.latex_renderer import tex_escape
+from hla_lab.core.semantic_model import ContentBlock, DocumentModel, SemanticRecord
+from hla_lab.core.text import safe_filename
+
+__all__ = [
+    "FaithfulLayoutEntry",
+    "FaithfulLayoutInsertion",
+    "FaithfulLayoutProfile",
+    "FaithfulLayoutProjection",
+    "FaithfulLayoutSegment",
+    "FaithfulLayoutStaticEntry",
+    "build_faithful_layout_projection",
+    "load_faithful_layout_profile",
+    "render_faithful_body",
+]
+
+
+class FaithfulLayoutEntry(SemanticRecord):
+    """One source-controlled layout adapter selected by semantic block order."""
+
+    source_path: Annotated[str, Field(min_length=1)]
+    sequence: Annotated[int, Field(ge=0)]
+    content_block_ids: tuple[str, ...] = ()
+    clause_ids: tuple[str, ...] = ()
+    layout_only: bool = False
+    before_latex: str = ""
+    after_latex: str = ""
+
+
+class FaithfulLayoutInsertion(SemanticRecord):
+    """A layout-only command inserted before one semantic page sequence."""
+
+    before_sequence: Annotated[int, Field(ge=0)]
+    latex: Annotated[str, Field(min_length=1)]
+
+
+class FaithfulLayoutSegment(SemanticRecord):
+    """A contiguous semantic page range with optional layout wrappers."""
+
+    id: Annotated[str, Field(min_length=1)]
+    start_sequence: Annotated[int, Field(ge=0)]
+    end_sequence: Annotated[int, Field(ge=0)]
+    before_latex: str = ""
+    after_latex: str = ""
+    insertions: tuple[FaithfulLayoutInsertion, ...] = ()
+
+    @model_validator(mode="after")
+    def validate_sequence_range(self) -> FaithfulLayoutSegment:
+        if self.end_sequence < self.start_sequence:
+            raise ValueError("faithful layout segment end must not precede start")
+        return self
+
+
+class FaithfulLayoutStaticEntry(SemanticRecord):
+    """An intentional layout-only page that has no semantic content block."""
+
+    id: Annotated[str, Field(min_length=1)]
+    source_path: Annotated[str, Field(min_length=1)]
+    sequence: Annotated[int, Field(ge=0)]
+    before_latex: str = ""
+    after_latex: str = ""
+
+
+class FaithfulLayoutProfile(SemanticRecord):
+    """Source-controlled pagination boundaries independent of semantic prose."""
+
+    schema_version: Annotated[int, Field(ge=1)] = 1
+    document_id: Annotated[str, Field(min_length=1)]
+    segments: tuple[FaithfulLayoutSegment, ...] = ()
+    static_entries: tuple[FaithfulLayoutStaticEntry, ...] = ()
+
+
+class FaithfulLayoutProjection(SemanticRecord):
+    """A generated body include stream and its semantic provenance."""
+
+    schema_version: Annotated[int, Field(ge=1)] = 1
+    document_id: Annotated[str, Field(min_length=1)]
+    entries: tuple[FaithfulLayoutEntry, ...]
+
+
+def _input_path(source_path: str) -> str:
+    path = PurePosixPath(source_path)
+    if path.is_absolute() or ".." in path.parts or path.suffix != ".tex":
+        raise ValueError(f"faithful layout source must be a relative .tex path: {source_path}")
+    return path.with_suffix("").as_posix()
+
+
+def load_faithful_layout_profile(path: PathLike[str] | str) -> FaithfulLayoutProfile:
+    """Load a typed layout-boundary profile without treating it as prose."""
+    location = Path(path)
+    return FaithfulLayoutProfile.model_validate_json(location.read_text(encoding="utf-8"))
+
+
+def _append_latex(existing: str, addition: str) -> str:
+    return "\n".join(value for value in (existing, addition) if value)
+
+
+def _static_entries(
+    profile: FaithfulLayoutProfile,
+    included: Callable[[str], bool],
+) -> tuple[FaithfulLayoutEntry, ...]:
+    return tuple(
+        FaithfulLayoutEntry(
+            source_path=entry.source_path,
+            sequence=entry.sequence,
+            layout_only=True,
+            before_latex=entry.before_latex,
+            after_latex=entry.after_latex,
+        )
+        for entry in profile.static_entries
+        if included(entry.source_path)
+    )
+
+
+def _segment_entries(
+    segment: FaithfulLayoutSegment,
+    adapters: tuple[FaithfulLayoutEntry, ...],
+    used_sources: MutableSet[str],
+) -> tuple[FaithfulLayoutEntry, ...]:
+    entries = [
+        entry
+        for entry in adapters
+        if segment.start_sequence <= entry.sequence <= segment.end_sequence
+    ]
+    entries.sort(key=lambda item: (item.sequence, item.layout_only, item.source_path))
+    if not entries:
+        return ()
+    duplicates = set(used_sources).intersection(item.source_path for item in entries)
+    if duplicates:
+        raise ValueError(
+            f"faithful layout adapters appear in multiple segments: {sorted(duplicates)}"
+        )
+    for entry in entries:
+        used_sources.add(entry.source_path)
+    entries[0] = entries[0].model_copy(
+        update={"before_latex": _append_latex(entries[0].before_latex, segment.before_latex)}
+    )
+    entries[-1] = entries[-1].model_copy(
+        update={"after_latex": _append_latex(entries[-1].after_latex, segment.after_latex)}
+    )
+    for insertion in segment.insertions:
+        index = next(
+            (
+                item
+                for item, entry in enumerate(entries)
+                if entry.sequence == insertion.before_sequence
+            ),
+            None,
+        )
+        if index is None:
+            raise ValueError(
+                f"faithful layout insertion in {segment.id} has no entry at "
+                f"sequence {insertion.before_sequence}"
+            )
+        entries[index] = entries[index].model_copy(
+            update={"before_latex": _append_latex(entries[index].before_latex, insertion.latex)}
+        )
+    return tuple(entries)
+
+
+def _profile_entries(
+    profile: FaithfulLayoutProfile,
+    semantic_entries: tuple[FaithfulLayoutEntry, ...],
+    included: Callable[[str], bool],
+) -> tuple[FaithfulLayoutEntry, ...]:
+    static_entries = _static_entries(profile, included)
+    for entry in static_entries:
+        _input_path(entry.source_path)
+    adapters = (*semantic_entries, *static_entries)
+    used_sources: set[str] = set()
+    entries = tuple(
+        entry
+        for segment in profile.segments
+        for entry in _segment_entries(segment, adapters, used_sources)
+    )
+    expected_sources = {item.source_path for item in adapters}
+    if used_sources != expected_sources:
+        missing = sorted(expected_sources - used_sources)
+        raise ValueError(f"faithful layout profile does not place adapters: {missing}")
+    return entries
+
+
+def build_faithful_layout_projection(
+    model: DocumentModel,
+    *,
+    content_block_ids: tuple[str, ...] | None = None,
+    profile: FaithfulLayoutProfile | None = None,
+    exclude_path_parts: tuple[str, ...] = (),
+) -> FaithfulLayoutProjection:
+    """Group page adapters by semantic source and order them by block sequence."""
+    selected_ids = set(content_block_ids) if content_block_ids is not None else None
+    excluded_parts = {part for part in exclude_path_parts if part}
+
+    def included(source_path: str) -> bool:
+        return not excluded_parts.intersection(PurePosixPath(source_path).parts)
+
+    grouped: dict[str, list[ContentBlock]] = {}
+    candidates = tuple(
+        block
+        for block in model.content_blocks
+        if (selected_ids is None or block.id in selected_ids) and included(block.source.path)
+    )
+    layout_blocks = tuple(block for block in candidates if block.layout_body is not None)
+    # Small generic fixtures may not need an exact-page adapter. HLA's typed
+    # profile always selects layout-body pages, which prevents derived prose
+    # fragments from moving a physical page out of sequence.
+    selected_blocks = layout_blocks or candidates
+    for block in selected_blocks:
+        _input_path(block.source.path)
+        grouped.setdefault(block.source.path, []).append(block)
+
+    semantic_entries = tuple(
+        FaithfulLayoutEntry(
+            source_path=source_path,
+            sequence=min(item.sequence for item in blocks),
+            content_block_ids=tuple(item.id for item in sorted(blocks, key=lambda item: item.id)),
+            clause_ids=tuple(
+                sorted({item.clause_id for item in blocks if item.clause_id is not None})
+            ),
+        )
+        for source_path, blocks in grouped.items()
+    )
+    if profile is None:
+        entries = tuple(
+            sorted(semantic_entries, key=lambda item: (item.sequence, item.source_path))
+        )
+    else:
+        if profile.document_id != model.document_id:
+            raise ValueError(
+                f"faithful layout profile {profile.document_id} does not match {model.document_id}"
+            )
+        entries = _profile_entries(profile, semantic_entries, included)
+    return FaithfulLayoutProjection(
+        document_id=model.document_id,
+        entries=entries,
+    )
+
+
+def render_faithful_body(
+    projection: FaithfulLayoutProjection,
+    *,
+    use_generated_blocks: bool = False,
+) -> str:
+    """Render a deterministic LaTeX include stream for faithful layout adapters."""
+    lines = [
+        "% Generated faithful body; edit semantic content-block records instead.",
+        (
+            "\\providecommand{\\SemanticFaithfulBodyDocumentID}"
+            f"{{{tex_escape(projection.document_id)}}}"
+        ),
+        f"\\providecommand{{\\SemanticFaithfulBodyEntryCount}}{{{len(projection.entries)}}}",
+    ]
+    if use_generated_blocks:
+        # Generated semantic blocks contain technical identifiers and long
+        # registry paths that are not present in the source-page adapters.
+        # Give ordinary prose enough stretch to avoid release-blocking boxes
+        # without changing the source-owned text or breaking identifiers.
+        lines.extend(("\\sloppy", "\\setlength{\\emergencystretch}{4em}"))
+    for entry in projection.entries:
+        block_ids = ",".join(entry.content_block_ids)
+        comment = (
+            f"% sequence={entry.sequence}; blocks={block_ids}; "
+            f"layout-only={str(entry.layout_only).lower()}"
+        )
+        if entry.before_latex:
+            lines.append(entry.before_latex)
+        input_path = _input_path(entry.source_path)
+        if use_generated_blocks and entry.content_block_ids and not entry.layout_only:
+            # Older products keep the authored clause file as a complete page
+            # adapter. Pointing the body at the generated semantic block lets
+            # asset substitutions reach the actual build instead of remaining
+            # stranded in an unused generated sidecar.
+            block_id = entry.content_block_ids[0]
+            input_path = f"output/semantic/content-block-{safe_filename(block_id, max_length=96)}"
+        lines.extend(
+            (
+                comment,
+                f"\\input{{{input_path}}}",
+            )
+        )
+        if entry.after_latex:
+            lines.append(entry.after_latex)
+    return "\n".join(lines)

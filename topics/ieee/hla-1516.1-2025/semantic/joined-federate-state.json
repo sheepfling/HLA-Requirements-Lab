@@ -1,0 +1,315 @@
+{
+  "schema_version": 2,
+  "state_machines": [
+    {
+      "id": "joined-federate-state",
+      "title": "Joined federate state",
+      "clause_id": "clause-4.1.1",
+      "source": {
+        "path": "content/clauses/04-federation-management-page-041.tex",
+        "line": 6
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p042-xref13871.png",
+        "page": 42,
+        "xref": "13871",
+        "caption": "Joined federate state"
+      },
+      "initial_state_ids": [
+        "joined.active.initial"
+      ],
+      "states": [
+        {
+          "id": "joined.active.initial",
+          "label": "",
+          "kind": "initial"
+        },
+        {
+          "id": "joined.active.active",
+          "label": "Active"
+        },
+        {
+          "id": "joined.active.restore-request-pending",
+          "label": "Restore Request\nPending"
+        },
+        {
+          "id": "joined.active.waiting-for-restore-to-begin",
+          "label": "Waiting for Restore\nto Begin"
+        },
+        {
+          "id": "joined.active.history",
+          "label": "H",
+          "kind": "history"
+        },
+        {
+          "id": "joined.save.instructed",
+          "label": "Instructed\nto Save"
+        },
+        {
+          "id": "joined.save.saving",
+          "label": "Saving"
+        },
+        {
+          "id": "joined.save.waiting",
+          "label": "Waiting for\nFederation to Save"
+        },
+        {
+          "id": "joined.restore.prepared",
+          "label": "Prepared to\nRestore"
+        },
+        {
+          "id": "joined.restore.restoring",
+          "label": "Restoring"
+        },
+        {
+          "id": "joined.restore.waiting",
+          "label": "Waiting for\nFederation to Restore"
+        },
+        {
+          "id": "joined.normal.permitted",
+          "label": "Normal Activity\nPermitted"
+        },
+        {
+          "id": "joined.normal.not-permitted",
+          "label": "Normal Activity Not\nPermitted"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "joined-federate.initial-enter-active",
+          "source_state": "joined.active.initial",
+          "event": "",
+          "target_state": "joined.active.active",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.request-save",
+          "source_state": "joined.active.active",
+          "event": "Request Federation Save",
+          "target_state": "joined.active.history",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.request-restore",
+          "source_state": "joined.active.active",
+          "event": "Request Federation Restore",
+          "target_state": "joined.active.restore-request-pending",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.restore-request-failure",
+          "source_state": "joined.active.restore-request-pending",
+          "event": "Confirm Federation Restoration Request †",
+          "guard": "failure",
+          "target_state": "joined.active.active",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.restore-request-success",
+          "source_state": "joined.active.restore-request-pending",
+          "event": "Confirm Federation Restoration Request †",
+          "guard": "success",
+          "target_state": "joined.active.waiting-for-restore-to-begin",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.initiate-save",
+          "source_state": "joined.active.active",
+          "event": "Initiate Federate Save †",
+          "guard": "in \"Not Constrained\" or in \"Time Advancing\"",
+          "target_state": "joined.save.instructed",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.save-begun",
+          "source_state": "joined.save.instructed",
+          "event": "Federate Save Begun †",
+          "target_state": "joined.save.saving",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.save-complete",
+          "source_state": "joined.save.saving",
+          "event": "Federate Save Complete",
+          "target_state": "joined.save.waiting",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.federation-saved",
+          "source_state": "joined.save.waiting",
+          "event": "Federation Saved †",
+          "target_state": "joined.active.history",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.restore-begun",
+          "source_state": "joined.active.waiting-for-restore-to-begin",
+          "event": "Federation Restore Begun †",
+          "target_state": "joined.restore.prepared",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.initiate-restore",
+          "source_state": "joined.restore.prepared",
+          "event": "Initiate Federate Restore †",
+          "target_state": "joined.restore.restoring",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.restore-complete",
+          "source_state": "joined.restore.restoring",
+          "event": "Federate Restore Complete",
+          "target_state": "joined.restore.waiting",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.federation-restored",
+          "source_state": "joined.restore.waiting",
+          "event": "Federation Restored †",
+          "target_state": "joined.active.active",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.activity-permission-lost",
+          "source_state": "joined.normal.permitted",
+          "event": "",
+          "guard": "not in \"Active Federate\"",
+          "target_state": "joined.normal.not-permitted",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        },
+        {
+          "id": "joined-federate.activity-permission-restored",
+          "source_state": "joined.normal.not-permitted",
+          "event": "",
+          "guard": "in \"Active Federate\"",
+          "target_state": "joined.normal.permitted",
+          "clause_id": "clause-4.1.1",
+          "implementation_ids": [
+            "m16.transition.joined-federate-statechart"
+          ]
+        }
+      ],
+      "layout": {
+        "engine": "automatic",
+        "direction": "top-to-bottom",
+        "containers": [
+          {
+            "id": "joined.outer",
+            "title": "Joined Federate",
+            "x": 0,
+            "y": 0,
+            "width": 14,
+            "height": 10
+          },
+          {
+            "id": "joined.active.container",
+            "title": "Active Federate",
+            "x": 0.5,
+            "y": 0.5,
+            "width": 4,
+            "height": 8
+          },
+          {
+            "id": "joined.save.container",
+            "title": "Federate Save in Progress",
+            "x": 4.8,
+            "y": 0.5,
+            "width": 3.5,
+            "height": 4
+          },
+          {
+            "id": "joined.restore.container",
+            "title": "Federate Restore in Progress",
+            "x": 4.8,
+            "y": 4.8,
+            "width": 3.5,
+            "height": 4
+          },
+          {
+            "id": "joined.normal.container",
+            "title": "Normal Activity",
+            "x": 8.7,
+            "y": 0.5,
+            "width": 4.5,
+            "height": 8
+          }
+        ],
+        "nodes": {
+          "joined.active.initial": {"x": 2.0, "y": 1.0, "visible": false},
+          "joined.active.active": {"x": 2.0, "y": 2.0},
+          "joined.active.restore-request-pending": {"x": 2.0, "y": 3.2},
+          "joined.active.waiting-for-restore-to-begin": {"x": 2.0, "y": 4.4},
+          "joined.active.history": {"x": 1.0, "y": 5.5},
+          "joined.save.instructed": {"x": 6.0, "y": 1.5},
+          "joined.save.saving": {"x": 6.0, "y": 2.6},
+          "joined.save.waiting": {"x": 6.0, "y": 3.7},
+          "joined.restore.prepared": {"x": 6.0, "y": 5.2},
+          "joined.restore.restoring": {"x": 6.0, "y": 6.3},
+          "joined.restore.waiting": {"x": 6.0, "y": 7.4},
+          "joined.normal.permitted": {"x": 10.0, "y": 2.3},
+          "joined.normal.not-permitted": {"x": 10.0, "y": 3.8}
+        },
+        "transitions": {
+          "joined-federate.initial-enter-active": {},
+          "joined-federate.request-save": {},
+          "joined-federate.request-restore": {},
+          "joined-federate.restore-request-failure": {},
+          "joined-federate.restore-request-success": {},
+          "joined-federate.initiate-save": {},
+          "joined-federate.save-begun": {},
+          "joined-federate.save-complete": {},
+          "joined-federate.federation-saved": {},
+          "joined-federate.restore-begun": {},
+          "joined-federate.initiate-restore": {},
+          "joined-federate.restore-complete": {},
+          "joined-federate.federation-restored": {},
+          "joined-federate.activity-permission-lost": {},
+          "joined-federate.activity-permission-restored": {}
+        }
+      },
+      "notes": "Figure 4 is modeled as four concurrent regions inside Joined Federate. The source-visible save, restore, and normal-activity contracts are retained as typed transitions; Figure 5 separately expands the normal-activity state into representative FDD class states."
+    }
+  ]
+}

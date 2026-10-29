@@ -1,0 +1,1084 @@
+{
+  "schema_version": 1,
+  "definitions": [
+    {
+      "id": "def-omt-semantics-m7-p121-t02-r1",
+      "term": "FoodWeight",
+      "text": "Weight of a food item",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 180,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p121-t02-r2",
+      "term": "DollarAmount",
+      "text": "Amount in USD",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 204,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p121-t03-r1",
+      "term": "DrinkType / IrishCoffee",
+      "text": "Type of drink",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 244,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p121-t04-r2",
+      "term": "DrinkGarnish / ExtraWhippedCr eam",
+      "text": "Extendable data type describing how a drink is garnished. New alternatives can safely be added later.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 324,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p121-t05-r1",
+      "term": "Food.Drink.Wine",
+      "text": "Alcoholic beverage made from grapes",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-121.tex",
+        "line": 340,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p122-t01-r1",
+      "term": "CustomerTransactions.OrderTaken.FromCatchOfThe Day",
+      "text": "The food order relates to the Catch of the Day, updated daily",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 55,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p122-t01-r2",
+      "term": "ServerAction.CleanFloor",
+      "text": "Basic floor cleaning of the entire restaurant",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 63,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p122-t02-r1",
+      "term": "Food.Drink.Soda / Organic",
+      "text": "Whether the soda is marked as containing only organic ingredients or not",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 87,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p122-t03-r1",
+      "term": "CustomerTransactions.CustomerPays / DollarAmount",
+      "text": "Amount paid, rounded to full dollars",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 111,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m7-p122-t03-r2",
+      "term": "CustomerTransactions.OrderTaken.Catch OfTheDay / FoodWeight",
+      "text": "Weight of a food item before cooking",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/annexes-d-h/page-122.tex",
+        "line": 123,
+        "end_line": null
+      },
+      "clause_id": "clause-G"
+    },
+    {
+      "id": "def-omt-semantics-m4-p059-t02-r1",
+      "term": "LogicalTime",
+      "text": "Integer value expressed in seconds",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-059.tex",
+        "line": 151,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p059-t02-r2",
+      "term": "LogicalTimeInterval",
+      "text": "Integer value expressed in seconds",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-059.tex",
+        "line": 163,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p061-t01-r3",
+      "term": "Delete/remove",
+      "text": "Reason for deletion",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-061.tex",
+        "line": 141,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p061-t01-r4",
+      "term": "Divestiture request",
+      "text": "High value for immediate transfer",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-061.tex",
+        "line": 153,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p061-t01-r6",
+      "term": "Acquisition request",
+      "text": "High value for immediate transfer",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-061.tex",
+        "line": 177,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p062-t01-r1",
+      "term": "InitialPublish",
+      "text": "Achieved when all classes are published and subscribed, and all initially present objects are registered",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-062.tex",
+        "line": 118,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p062-t01-r2",
+      "term": "InitialUpdate",
+      "text": "Achieved when instance attribute values for all initially present objects are updated",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-062.tex",
+        "line": 134,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p062-t01-r3",
+      "term": "BeginTimeAdvance",
+      "text": "Achieved when time management services are invoked",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-062.tex",
+        "line": 150,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p062-t01-r4",
+      "term": "PauseExecution",
+      "text": "Achieved when the time advance after the time in the user-supplied tag is attained; time advance requests should then cease",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-062.tex",
+        "line": 166,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p063-t01-r1",
+      "term": "HLAreliable",
+      "text": "Provide reliable delivery of data in the sense that TCP/IP delivers its data reliably",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 102,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p063-t01-r2",
+      "term": "HLAbestEffort",
+      "text": "Make an effort to deliver data in the sense that UDP provides best-effort delivery",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 114,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p063-t02-r1",
+      "term": "HLAreliable",
+      "text": "Provide reliable delivery of data in the sense that TCP/IP delivers its data reliably",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 154,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p063-t02-r2",
+      "term": "HLAbestEffort",
+      "text": "Make an effort to deliver data in the sense that UDP provides best-effort delivery",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 166,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p063-t02-r3",
+      "term": "PriorityBestEffort",
+      "text": "Deliver best effort data with higher priority than HLAbestEffort",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4b/page-063.tex",
+        "line": 178,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p071-t01-r1",
+      "term": "HLAASCIIchar",
+      "text": "[l]StandardASCIIcharacter (see ANSI X3.4-1986)",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 136,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p071-t01-r2",
+      "term": "HLAunicodeChar",
+      "text": "Unicode UTF-16 character (see The Unicode Standard, 48.539bp!Version 3.0)*",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 160,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p071-t01-r3",
+      "term": "HLAbyte",
+      "text": "Uninterpreted 8-bit byte",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 188,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p071-t01-r4",
+      "term": "HLAinteger64Time",
+      "text": "Standardized integer HLA time type according to IEEE Std 1516.1-2025",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 212,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p071-t01-r5",
+      "term": "HLAfloat64Time",
+      "text": "Standardized float HLA time type according to IEEE Std 1516.1-2025",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 236,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r1",
+      "term": "HLAASCIIchar",
+      "text": "Standard ASCII character (see ANSI X3.4-1986)",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 179,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r2",
+      "term": "HLAunicodeChar",
+      "text": "Unicode UTF-16 character (see The Unicode Standard, Version 3.0)",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 203,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r3",
+      "term": "HLAbyte",
+      "text": "Uninterpreted 8-bit byte",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 227,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r4",
+      "term": "HLAinteger64time",
+      "text": "Standardized integer HLA time type according to IEEE Std 1516.1-2025",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 251,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r5",
+      "term": "HLAfloat64time",
+      "text": "Standardized float HLA time type according to IEEE Std 1516.1- 2025",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 275,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r6",
+      "term": "DollarRate",
+      "text": "Cost per hour",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 299,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r7",
+      "term": "Years",
+      "text": "Elapsed time in years",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 323,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r8",
+      "term": "DrinkCount",
+      "text": "Measure of number of drinks",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 347,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r9",
+      "term": "EmployeeId",
+      "text": "Employee identifier",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 371,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r10",
+      "term": "RateScale",
+      "text": "Evaluation of staff where 1 = best",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 395,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t01-r11",
+      "term": "FruitCount",
+      "text": "Number of fruits",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 419,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p072-t02-r1",
+      "term": "HLAboolean / HLAfalse",
+      "text": "Standard Boolean type",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-072.tex",
+        "line": 471,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r1",
+      "term": "HLAboolean / HLAfalse",
+      "text": "Standard Boolean type",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 146,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r3",
+      "term": "PriorityLevel / Low",
+      "text": "General three-level priority indicator",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 174,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r6",
+      "term": "ServerTasks / TakingOrder",
+      "text": "Possible activities of servers",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 210,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r11",
+      "term": "FlavorType / Cola",
+      "text": "Possible flavors of soda",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 262,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r15",
+      "term": "ExperienceLevel / Trainee",
+      "text": "Level of experience of servers",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 306,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r21",
+      "term": "GlutenLevel / No",
+      "text": "Possible levels of gluten remov- ability from an ingredients list",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 366,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p073-t01-r26",
+      "term": "DrinkType / Margarita",
+      "text": "Type of drink",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-073.tex",
+        "line": 418,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p074-t01-r1",
+      "term": "HLAASCIIstring",
+      "text": "ASCII string representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-074.tex",
+        "line": 119,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p074-t01-r2",
+      "term": "HLAunicodeString",
+      "text": "[l]Unicodestring representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-074.tex",
+        "line": 139,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p074-t01-r3",
+      "term": "HLAopaqueData",
+      "text": "Uninterpreted sequence of bytes",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-074.tex",
+        "line": 159,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p074-t01-r4",
+      "term": "HLAtoken",
+      "text": "Token representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-074.tex",
+        "line": 179,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r1",
+      "term": "HLAASCIIString",
+      "text": "[l]ASCIIstring representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 135,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r2",
+      "term": "HLAunicodeString",
+      "text": "[l]Unicodestring representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 155,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r3",
+      "term": "HLAopaqueData",
+      "text": "Uninterpreted sequence of bytes",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 175,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r4",
+      "term": "HLAtoken",
+      "text": "Token representation",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 195,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r5",
+      "term": "Employees",
+      "text": "Identifiers of employees currently working",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 215,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p075-t01-r6",
+      "term": "AddressBook",
+      "text": "[l]Collectionofall employee addresses",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-075.tex",
+        "line": 235,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p076-t01-r2",
+      "term": "ServiceStat / EntreeOk",
+      "text": "[l]Check-offon whether the server performed proper- ly on elements of the meal",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-076.tex",
+        "line": 135,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p076-t01-r5",
+      "term": "AddressType / Name",
+      "text": "Mailing address",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-076.tex",
+        "line": 183,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p078-t01-r2",
+      "term": "Server Value / Course Passed",
+      "text": "Data type for server per- formance rat- ing value. This data type cannot safely be extended with more alternatives later.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-078.tex",
+        "line": 155,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p078-t01-r5",
+      "term": "Drink Gar- nish / HasSal- tRim",
+      "text": "Extendable data type describing how a drink is garnished. New alter- natiives can safely be added later.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-078.tex",
+        "line": 223,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p079-t02-r1",
+      "term": "EmployeeReference",
+      "text": "Data type for referencing an employee",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-079.tex",
+        "line": 184,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r1",
+      "term": "Note 1",
+      "text": "http://www.seasonalfoods.com/lobster",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 107,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r2",
+      "term": "Note 2",
+      "text": "For most general-purpose restaurant simulations, this is Subscribe only.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 115,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r3",
+      "term": "Note 3",
+      "text": "Merit raises are not provided according to any regular time interval; they are provided on a supervi- sor’s recommendation based on evidence of exceptional effort and performance.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 123,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r4",
+      "term": "Note 4",
+      "text": "Years of service are a factor in any merit raise. This value is only changed on the anniversary of the employee’s hire.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 131,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r5",
+      "term": "Note 5",
+      "text": "Sometimes a dish can be modified to be gluten- or wheat-free, e.g. gluten-free pasta can be used for some pasta dishes, but dishes like ravioli and lasagna are usually pre-made with wheat pasta and can’t be modified.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 139,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r6",
+      "term": "Note 6",
+      "text": "Gluten Normalization Function: 1) No—Ingredients contain wheat and those ingredients can’t be modified 2) Intolerant—Ingredients can be modified to remove wheat, rye, or barley (cross-contamination free environment is N/A) 3) Celiac —Ingredients can be modified to remove wheat, rye, or barley; prepared in cross-contami- nation free environment 4) Allergy—Ingredients can be modified to remove wheat; prepared in cross-contamination free en- vironment 5) All—No ingredients contain wheat, rye, or barley; prepared in cross-contamination free environ- ment",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 147,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m4-p087-t02-r7",
+      "term": "Note 7",
+      "text": "Gluten is found in three grains: wheat, barley, and rye. Gluten intolerant individuals will have varying degrees of negative, but not necessarily debilitating, reactions to these foods. Individuals with Celiac disease will have debilitating reactions to these foods and suffer long-term, potentially life-threatening effects. Those with wheat allergies may suffer immediate, life-threatening reactions, but may be able to eat barley and rye. Depending on levels of sensitivity, cross-contamination in the kitchen can be dangerous to the extent that separate food preparation areas and tools are required.",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clause-4c/page-087.tex",
+        "line": 155,
+        "end_line": null
+      },
+      "clause_id": "clause-4"
+    },
+    {
+      "id": "def-omt-semantics-m5-p088-t02-r1",
+      "term": "Customer",
+      "text": "Patron of the restaurant",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-088.tex",
+        "line": 129,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p088-t02-r2",
+      "term": "Employee",
+      "text": "A person working for the restaurant",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-088.tex",
+        "line": 137,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p088-t02-r3",
+      "term": "Employee.Dishwasher",
+      "text": "Cleaner of plates, pots, and utensils",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-088.tex",
+        "line": 145,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p089-t02-r1",
+      "term": "CustomerTransactions",
+      "text": "The base class of interactions between customers and employee",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 124,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p089-t02-r2",
+      "term": "CustomerTransactions.FoodServed",
+      "text": "Server has served food",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 132,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p089-t02-r3",
+      "term": "CustomerTransactions. FoodServed.DrinkServed",
+      "text": "Server has served a drink",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-089.tex",
+        "line": 140,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t01-r1",
+      "term": "Employee / PayRate",
+      "text": "Amount the employee is paid per hour",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 108,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t01-r2",
+      "term": "YearsOfService",
+      "text": "Number of years the employee has worked for the restaurant",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 116,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t01-r3",
+      "term": "HomeNumber",
+      "text": "Employee home phone number",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 124,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t01-r4",
+      "term": "HomeAddress",
+      "text": "Employee home address",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 132,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t03-r1",
+      "term": "CustomerTransactions.FoodServed. MainCourseServed / TemperatureOk",
+      "text": "Whether the food was the correct temperature",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 220,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t03-r2",
+      "term": "AccuracyOk",
+      "text": "Whether the correct food was served",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 228,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    },
+    {
+      "id": "def-omt-semantics-m5-p090-t03-r3",
+      "term": "TimelinessOk",
+      "text": "Whether the food was served in a reasonable amount of time",
+      "layout_body": null,
+      "leading_gap": null,
+      "source": {
+        "path": "sections/semantic/clauses-5-6/page-090.tex",
+        "line": 236,
+        "end_line": null
+      },
+      "clause_id": "clause-5"
+    }
+  ]
+}

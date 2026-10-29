@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "aliases": [
+    {
+      "alias_id": "req-3377db4800fb",
+      "canonical_id": "req-8eaabda3418b",
+      "relation": "merged",
+      "reason": "Legacy line-local table record is represented by the complete Identification conditions candidate."
+    }
+  ]
+}

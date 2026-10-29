@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,landscape,top=0.66in,bottom=0.62in,left=0.72in,right=0.72in,headheight=22pt,headsep=14pt,footskip=20pt]{geometry}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{hyperref}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}
+\setmonofont{DejaVu Sans Mono}
+\definecolor{Ink}{HTML}{172334}
+\definecolor{Muted}{HTML}{687386}
+\definecolor{Blue}{HTML}{496B91}
+\definecolor{BlueLight}{HTML}{EAF0F6}
+\definecolor{Rule}{HTML}{D6DEE8}
+\definecolor{Orange}{HTML}{E7773F}
+\color{Ink}
+\newcommand{\tech}[1]{{\ttfamily #1}}
+\newcommand{\caps}[1]{{\sffamily\fontsize{7.4}{9}\selectfont\addfontfeatures{LetterSpace=5.0}\MakeUppercase{#1}}}
+\newcommand{\tblcaption}[2]{\noindent{\caps{TABLE #1}}\hspace{6pt}{\sffamily\bfseries\fontsize{9.8}{11.6}\selectfont #2}\par\vspace{7pt}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\raisebox{0.5pt}{\color{Orange}\rule{12pt}{2.2pt}}\hspace{6pt}{\caps{HLA 1516.2-2025}}}
+\fancyhead[R]{{\caps{Object Model Template Specification · 4.14 Data Type Tables}}}
+\fancyfoot[L]{{\caps{HLA Requirements Lab · Derived Working Edition}}}
+\fancyfoot[R]{{\sffamily\fontsize{8}{9}\selectfont\color{Muted}\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\parindent}{0pt}
+\setcounter{page}{58}
+\begin{document}
+\tblcaption{29}{Basic data representation table}
+\begingroup
+\sffamily\fontsize{7.35}{9.25}\selectfont
+\renewcommand{\arraystretch}{1.28}
+\setlength{\tabcolsep}{5.6pt}
+\arrayrulecolor{Rule}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.20\linewidth} >{\centering\arraybackslash}p{0.065\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}p{0.075\linewidth} X}
+\rowcolor{BlueLight}
+\textbf{Name} & \textbf{Size} & \textbf{Interpretation} & \textbf{Endian} & \textbf{Encoding} \\
+\addlinespace[1.0pt]
+\tech{HLAinteger16BE} & 16 bit & Integer in the range $[-2^{15},\,2^{15}-1]$ & Big & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAinteger32BE} & 32 bit & Integer in the range $[-2^{31},\,2^{31}-1]$ & Big & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAinteger64BE} & 64 bit & Integer in the range $[-2^{63},\,2^{63}-1]$ & Big & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger16BE} & 16 bit & Integer in the range $[0,\,2^{16}-1]$ & Big & 16-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger32BE} & 32 bit & Integer in the range $[0,\,2^{32}-1]$ & Big & 32-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger64BE} & 64 bit & Integer in the range $[0,\,2^{64}-1]$ & Big & 64-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAfloat32BE} & 32 bit & Single-precision floating point number & Big & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\midrule[0.3pt]
+\tech{HLAfloat64BE} & 64 bit & Double-precision floating point number & Big & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\midrule[0.3pt]
+\tech{HLAoctetPairBE} & 16 bit & 16-bit value & Big & Assumed to be portable among hardware devices. \\
+\midrule[0.7pt]
+\tech{HLAinteger16LE} & 16 bit & Integer in the range $[-2^{15},\,2^{15}-1]$ & Little & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAinteger32LE} & 32 bit & Integer in the range $[-2^{31},\,2^{31}-1]$ & Little & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAinteger64LE} & 64 bit & Integer in the range $[-2^{63},\,2^{63}-1]$ & Little & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger8} & 8 bit & Integer in the range $[0,\,2^{8}-1]$ & Little & 8-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger16LE} & 16 bit & Integer in the range $[0,\,2^{16}-1]$ & Little & 16-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger32LE} & 32 bit & Integer in the range $[0,\,2^{32}-1]$ & Little & 32-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAunsignedInteger64LE} & 64 bit & Integer in the range $[0,\,2^{64}-1]$ & Little & 64-bit unsigned integer. \\
+\midrule[0.3pt]
+\tech{HLAfloat32LE} & 32 bit & Single-precision floating point number & Little & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\midrule[0.3pt]
+\tech{HLAfloat64LE} & 64 bit & Double-precision floating point number & Little & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\midrule[0.3pt]
+\tech{HLAoctetPairLE} & 16 bit & 16-bit value & Little & Assumed to be portable among hardware devices. \\
+\midrule[0.3pt]
+\tech{HLAoctet} & 8 bit & 8-bit value & Big & Assumed to be portable among hardware devices. \\
+\midrule[0.7pt]
+\tech{<name>} & \tech{<size>} & \tech{<interpretation>} & \tech{<endian>} & \tech{<encoding>} \\
+\midrule[0.3pt]
+\tech{<name>} & \tech{<size>} & \tech{<interpretation>} & \tech{<endian>} & \tech{<encoding>} \\
+\bottomrule[0.9pt]
+\end{tabularx}
+\endgroup
+\end{document}

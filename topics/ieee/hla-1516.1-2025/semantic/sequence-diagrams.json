@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "sequence_diagrams": [
+    {
+      "id": "hla-1516.1.figure-22-message-sequence-numbers",
+      "title": "Federate and RTI message sequence numbers",
+      "clause_id": "clause-12.13.4.2",
+      "participants": [
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "message sender"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "message sender"
+        }
+      ],
+      "messages": [
+        {
+          "id": "figure-22-f1",
+          "order": 1,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "Federate message sequence number F1",
+          "kind": "message"
+        },
+        {
+          "id": "figure-22-f2",
+          "order": 2,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "Federate message sequence number F2",
+          "kind": "message"
+        },
+        {
+          "id": "figure-22-r1",
+          "order": 3,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "RTI message sequence number R1",
+          "kind": "message"
+        },
+        {
+          "id": "figure-22-r2",
+          "order": 4,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "RTI message sequence number R2",
+          "kind": "message"
+        }
+      ],
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-398.tex",
+        "line": 1
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p399-xref13909.png",
+        "page": 399,
+        "xref": "13909",
+        "caption": "Figure 22---Federate and RTI message sequence numbers"
+      }
+    },
+    {
+      "id": "hla-1516.1.figure-23-response-messages",
+      "title": "Response messages",
+      "clause_id": "clause-12.13.4.2",
+      "participants": [
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "message sender"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "message sender"
+        }
+      ],
+      "messages": [
+        {
+          "id": "figure-23-f1",
+          "order": 1,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "F1",
+          "kind": "request"
+        },
+        {
+          "id": "figure-23-f2",
+          "order": 2,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "F2",
+          "kind": "request"
+        },
+        {
+          "id": "figure-23-r3",
+          "order": 3,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "R3 (response to F2)",
+          "kind": "response",
+          "response_to": "figure-23-f2"
+        },
+        {
+          "id": "figure-23-f3",
+          "order": 4,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "F3",
+          "kind": "request"
+        },
+        {
+          "id": "figure-23-r4",
+          "order": 5,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "R4 (response to F3)",
+          "kind": "response",
+          "response_to": "figure-23-f3"
+        }
+      ],
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-398.tex",
+        "line": 1
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p399-xref13910.png",
+        "page": 399,
+        "xref": "13910",
+        "caption": "Figure 23---Response messages"
+      }
+    },
+    {
+      "id": "hla-1516.1.figure-26-successful-reconnection",
+      "title": "Successful reconnection",
+      "clause_id": "clause-12.13.4.3",
+      "participants": [
+        {
+          "id": "federate",
+          "label": "Federate",
+          "role": "session endpoint"
+        },
+        {
+          "id": "rti",
+          "label": "RTI",
+          "role": "session endpoint"
+        }
+      ],
+      "messages": [
+        {
+          "id": "figure-26-resume-request",
+          "order": 1,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "Resume Request (LRR, OAF)",
+          "kind": "request"
+        },
+        {
+          "id": "figure-26-resume-status",
+          "order": 2,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "Resume Status (success or failure)",
+          "kind": "response",
+          "response_to": "figure-26-resume-request"
+        },
+        {
+          "id": "figure-26-federate-service",
+          "order": 3,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "Resend lost HLA service messages",
+          "kind": "message"
+        },
+        {
+          "id": "figure-26-rti-service",
+          "order": 4,
+          "source_participant": "rti",
+          "target_participant": "federate",
+          "label": "Resend lost HLA service messages",
+          "kind": "message"
+        },
+        {
+          "id": "figure-26-new-messages",
+          "order": 5,
+          "source_participant": "federate",
+          "target_participant": "rti",
+          "label": "New messages can be exchanged",
+          "kind": "message"
+        }
+      ],
+      "source": {
+        "path": "content/clauses/12-programming-language-mappings-page-401.tex",
+        "line": 1
+      },
+      "provenance": {
+        "image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p402-xref13919.png",
+        "page": 402,
+        "xref": "13919",
+        "caption": "Figure 26---Successful reconnection"
+      }
+    }
+  ]
+}

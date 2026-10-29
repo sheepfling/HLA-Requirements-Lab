@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "aliases": [
+    {
+      "alias_id": "requirement-candidate-content-clauses-04-federation-management-page-040-l54-15",
+      "canonical_id": "req-federate-disconnect-after-resign",
+      "relation": "merged",
+      "reason": "Exact duplicate of the authored Disconnect transition requirement; its full printed sentence is retained by the canonical record."
+    }
+  ]
+}

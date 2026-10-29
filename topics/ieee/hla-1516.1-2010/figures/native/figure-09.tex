@@ -1,0 +1,80 @@
+\begin{tikzpicture}[
+    x=0.01cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f9 stroke/.style={draw=black,line width=.29pt},
+    f9 transition/.style={draw=black,line width=.36pt,-{Stealth[length=2.25pt,width=2.05pt]}},
+    f9 title/.style={font=\rmfamily\fontsize{4.45}{4.90}\selectfont,align=center,inner sep=0pt},
+    f9 text/.style={font=\rmfamily\fontsize{4.55}{5.05}\selectfont,align=center,inner sep=0pt},
+    f9 small/.style={font=\rmfamily\fontsize{4.05}{4.65}\selectfont,align=center,inner sep=0pt},
+    f9 caption/.style={font=\RLSans\bfseries\fontsize{4.87}{5.35}\selectfont,align=center,inner sep=0pt}
+]
+    % Source physical page 48 contains an embedded 767 x 612 one-bit Figure 9
+    % image, placed at x=86.4225..522.8934 pt and y=81.1131..429.2391 pt.
+    % The caption is separately typeset inside the blank lower band of that
+    % image footprint.  Coordinates below are source-image coordinates.
+    \path[use as bounding box] (0,0) rectangle (767,612);
+
+    % F09-S00: outer composite state, Local Synch Label (s,L).
+    \draw[f9 stroke]
+    (97,20) -- (670,20)
+    .. controls (706,20) and (735,49) .. (735,85)
+    -- (735,475)
+    .. controls (735,511) and (706,540) .. (670,540)
+    -- (97,540)
+    .. controls (61,540) and (31,511) .. (31,475)
+    -- (31,85)
+    .. controls (31,49) and (61,20) .. (97,20)
+    -- cycle;
+
+    % Source title tab shares the upper-left outer boundary.
+    \draw[f9 stroke] (31,52) -- (240,52) -- (240,20);
+    \node[f9 title] at (143.5,36.0) {Local Synch Label $(s,L)$};
+
+    % F09-S01: No Activity.
+    \draw[f9 stroke,rounded corners=.060cm] (127,140) rectangle (263,204);
+    \node[f9 text] at (195,172) {No Activity};
+
+    % F09-S02: Attempting to Register Synch Point.
+    \draw[f9 stroke,rounded corners=.060cm] (127,372) rectangle (263,436);
+    \node[f9 text] at (195,404) {Attempting\\to Register\\Synch Point};
+
+    % F09-S03: Moving to Synch Point.
+    \draw[f9 stroke,rounded corners=.060cm] (535,372) rectangle (671,436);
+    \node[f9 text] at (603,404) {Moving to\\Synch Point};
+
+    % F09-S04: Waiting for Rest of Federation to Synchronize.
+    \draw[f9 stroke,rounded corners=.060cm] (535,140) rectangle (671,204);
+    \node[f9 text] at (603,172) {Waiting for Rest\\of Federation to\\Synchronize};
+
+    % F09-P01: initial pseudo-state.
+    \fill (126,98.5) circle[radius=6.5];
+
+    % F09-E01: initial transition into No Activity.
+    \draw[f9 transition] (132,105) -- (168,140);
+
+    % F09-E02: register synchronization point; No Activity -> Attempting.
+    \draw[f9 transition] (151.5,204) -- (151.5,371);
+    \node[f9 small] at (94.0,278.0) {Register\\Federation\\Synchronization\\Point $(F_s,L)$};
+
+    % F09-E03: confirmation returns Attempting -> No Activity.
+    \draw[f9 transition] (239.5,372) -- (239.5,205);
+    \node[f9 small] at (318.0,302.0) {Confirm\\Synchronization\\Point\\Registration \textdagger{}\\$(F_s,L,*)$};
+
+    % F09-E04: announcement starts movement to the synchronization point.
+    \draw[f9 transition] (263,204) -- (535,372);
+    \node[f9 small] at (463.0,265.0) {Announce\\Synchronization\\Point \textdagger{} $(F_s,L)$};
+
+    % F09-E05: the joined federate reaches the point and waits for the rest.
+    \draw[f9 transition] (599.5,372) -- (599.5,205);
+    \node[f9 small] at (675.0,291.0) {Synchronization\\Point Achieved\\$(F_s,L)$};
+
+    % F09-E06: federation-wide synchronization returns the local label to idle.
+    \draw[f9 transition] (535,172) -- (264,172);
+    \node[f9 small] at (399.5,158.0) {Federation Synchronized \textdagger{} $(F_s,L)$};
+
+    % Source caption is separately typeset in the lower blank band.  The source
+    % text bbox center maps to approximately (389.5,570.7) image coordinates.
+    \node[f9 caption] at (389.63,570.00) {\scalebox{1.103}[1.298]{Figure 9---Local synch label (s, L)}};
+\end{tikzpicture}

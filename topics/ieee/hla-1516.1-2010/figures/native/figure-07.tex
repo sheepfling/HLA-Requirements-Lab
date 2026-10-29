@@ -1,0 +1,96 @@
+\begin{tikzpicture}[
+    x=0.01cm,
+    y=-0.01cm,
+    line cap=round,
+    line join=round,
+    f7 stroke/.style={draw=black,line width=.29pt},
+    f7 transition/.style={draw=black,line width=.36pt,-{Stealth[length=2.25pt,width=2.05pt]}},
+    f7 partition/.style={draw=black,line width=.28pt,dash pattern=on .030cm off .030cm},
+    f7 title/.style={font=\rmfamily\fontsize{4.45}{4.90}\selectfont,align=center,inner sep=0pt},
+    f7 text/.style={font=\rmfamily\fontsize{4.55}{5.05}\selectfont,align=center,inner sep=0pt},
+    f7 small/.style={font=\rmfamily\fontsize{3.90}{5.43}\selectfont,align=center,inner sep=0pt},
+    f7 tiny/.style={font=\rmfamily\fontsize{4.10}{4.65}\selectfont,align=left,inner sep=0pt},
+    f7 caption/.style={font=\RLSans\bfseries\fontsize{5.78}{6.35}\selectfont,align=center,inner sep=0pt}
+]
+    % Source physical page 47 contains an embedded 867 x 631 one-bit figure
+    % image.  The caption is separately typeset over the blank lower band of the
+    % image rectangle.  Reusing that source coordinate system preserves the
+    % original figure footprint on standard page 33.
+    \path[use as bounding box] (0,0) rectangle (867,631);
+
+    % Uniform 1.014 source-geometry correction derived from the first matched
+    % 400-dpi render.  Scaling is about the embedded-image center, not the page.
+    \begin{scope}[shift={(433.5,304)},scale=1.014,shift={(-433.5,-304)}]
+
+        % F07-S00: Global Synch Label (L) outer composite state.
+        \draw[f7 stroke]
+        (153,44) -- (727,44)
+        .. controls (764,44) and (791,70) .. (791,99)
+        -- (791,510)
+        .. controls (791,540) and (766,564) .. (737,564)
+        -- (142,564)
+        .. controls (111,564) and (87,538) .. (87,500)
+        -- (87,110)
+        .. controls (87,78) and (118,44) .. (153,44)
+        -- cycle;
+
+        % Source title tab shares the outer rounded upper-left boundary.
+        \draw[f7 stroke] (96,76) -- (295,76) -- (295,44);
+        \node[f7 title] at (214.0,61.0) {Global Synch Label ($L$)};
+
+        % F07-S01: Synch Point Not Registered.
+        \draw[f7 stroke,rounded corners=.060cm] (171,164) rectangle (307,229);
+        \node[f7 text] at (242,198.5) {Synch Point\\Not Registered};
+
+        % F07-S02: Validating Synch Point.
+        \draw[f7 stroke,rounded corners=.060cm] (171,412) rectangle (307,477);
+        \node[f7 text] at (241,446.5) {Validating\\Synch Point};
+
+        % F07-C01: unnamed repeated Awaiting Synchronization decomposition frame.
+        \draw[f7 stroke]
+        (550,164) -- (737,164)
+        .. controls (751,164) and (759,176) .. (759,188)
+        -- (759,478)
+        .. controls (759,491) and (748,500) .. (737,500)
+        -- (550,500)
+        .. controls (536,500) and (527,488) .. (527,472)
+        -- (527,194)
+        .. controls (527,176) and (538,164) .. (550,164)
+        -- cycle;
+
+        % F07-R01 / F07-R02 / F07-R03 orthogonal-region separators.
+        \draw[f7 partition] (527,296) -- (759,296);
+        \draw[f7 partition] (527,355) -- (759,355);
+        \node[f7 text] at (632.5,240) {Awaiting\\Synchronization\\$(1,L)$};
+        \foreach \x in {613,640,666} {\fill (\x,329) circle[radius=5.8];}
+        \node[f7 text] at (640.5,432) {Awaiting\\Synchronization\\$(N,L)$};
+
+        % F07-P01: initial pseudo-state.
+        \fill (166,123) circle[radius=6.7];
+        % F07-E01: initial entry to Synch Point Not Registered.
+        \draw[f7 transition] (173,130) -- (205,163);
+
+        % F07-E02: registration request, Not Registered -> Validating.
+        \draw[f7 transition] (280,229) -- (280,411);
+        \node[f7 small] at (349.5,314.5) {Register\\Federation\\Synchronization\\Point $(F_s,L)$};
+
+        % F07-E03: registration failure, Validating -> Not Registered.
+        \draw[f7 transition] (200,412) -- (200,230);
+        \node[f7 small] at (140.5,316) {\scalebox{1.12}[.93]{\shortstack{Confirm\\Synchronization\\Point\\Registration \textdagger{}\\$(F_s,L,\ \mathrm{fail})$}}};
+
+        % F07-E04: registration success, Validating -> repeated Awaiting family.
+        \draw[f7 transition] (307,445) -- (526,445);
+        \node[f7 small] at (382.5,500) {\scalebox{1.07}[.93]{\shortstack{Confirm\\Synchronization\\Point\\Registration \textdagger{}\\$(F_s,L,\ \mathrm{success})$}}};
+
+        % F07-E05: all subordinate members are complete; return to unregistered.
+        \draw[f7 transition] (527,189) -- (308,189);
+        \node[f7 tiny,anchor=west,xscale=1.12] at (315,147) {[
+        $\forall\ s{:}\mathrm{synch\_set}\ \bullet$ in ``end state'' of ``Awaiting Synchronization $(s,L)$'' ] /\\
+        $\forall\ s{:}\mathrm{synch\_set}\ \bullet$ Federation Synchronized \textdagger{} $(F_s,L)$};
+
+    \end{scope}
+
+    % Source caption (Arial Bold, separately typeset in the original PDF) is
+    % centered slightly right of the image center in the blank lower image band.
+    \node[f7 caption] at (449.7,595.5) {\scalebox{1.049}[.837]{Figure 7---Global synch label ($L$)}};
+\end{tikzpicture}

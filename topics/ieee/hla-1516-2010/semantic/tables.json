@@ -1,0 +1,992 @@
+{
+  "schema_version": 1,
+  "tables": [
+    {
+      "id": "table-clauses-03-abbreviations-acronyms-tex-1",
+      "title": "table-clauses-03-abbreviations-acronyms-tex-1",
+      "caption": "table-clauses-03-abbreviations-acronyms-tex-1",
+      "number": "1",
+      "continuation": false,
+      "cells": [
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r0-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "@p0.528inp4.75in@ ADT",
+          "row": 0,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r0-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "abstract datatype",
+          "row": 0,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r1-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "API",
+          "row": 1,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r1-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "application programmer's interface",
+          "row": 1,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r2-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "BNF",
+          "row": 2,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r2-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Backus Naur Form",
+          "row": 2,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r3-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "BOM",
+          "row": 3,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r3-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "base object model",
+          "row": 3,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r4-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "DDM",
+          "row": 4,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r4-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "data distribution management",
+          "row": 4,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r5-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "DIF",
+          "row": 5,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r5-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "data interchange format",
+          "row": 5,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r6-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "DM",
+          "row": 6,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r6-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "declaration management",
+          "row": 6,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r7-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "DTD",
+          "row": 7,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r7-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "document type declaration",
+          "row": 7,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r8-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "FDD",
+          "row": 8,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r8-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "FOM Document Data",
+          "row": 8,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r9-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "FEDEP",
+          "row": 9,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r9-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Federation Development and Execution Process",
+          "row": 9,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r10-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "FOM",
+          "row": 10,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r10-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "federation object model",
+          "row": 10,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r11-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "GALT",
+          "row": 11,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r11-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Greatest Available Logical Time",
+          "row": 11,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r12-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "HLA",
+          "row": 12,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r12-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "High Level Architecture",
+          "row": 12,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r13-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "JAR",
+          "row": 13,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r13-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Java Archive",
+          "row": 13,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r14-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "LIS",
+          "row": 14,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r14-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "language-independent specification",
+          "row": 14,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r15-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "LITS",
+          "row": 15,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r15-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Least Incoming Timestamp",
+          "row": 15,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r16-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "LRC",
+          "row": 16,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r16-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Local Runtime Component",
+          "row": 16,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r17-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "MIM",
+          "row": 17,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r17-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "MOM and Initialization Module",
+          "row": 17,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r18-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "MOM",
+          "row": 18,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r18-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Management Object Model",
+          "row": 18,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r19-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "M\\",
+          "row": 19,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r19-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "S",
+          "row": 19,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r19-c2",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "modeling and simulation",
+          "row": 19,
+          "column": 2,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r20-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "NA",
+          "row": 20,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r20-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "not applicable",
+          "row": 20,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r21-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "OMT",
+          "row": 21,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r21-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "object model template",
+          "row": 21,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r22-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "OO",
+          "row": 22,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r22-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "object oriented",
+          "row": 22,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r23-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "OOAD",
+          "row": 23,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r23-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "object-oriented analysis and design",
+          "row": 23,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r24-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "POC",
+          "row": 24,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r24-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "point of contact",
+          "row": 24,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r25-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "RID",
+          "row": 25,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r25-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "RTI initialization data",
+          "row": 25,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r26-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "RO",
+          "row": 26,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r26-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "receive order",
+          "row": 26,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r27-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "RTI",
+          "row": 27,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r27-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "runtime infrastructure",
+          "row": 27,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r28-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "SOM",
+          "row": 28,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r28-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "simulation object model",
+          "row": 28,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r29-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "TRADT",
+          "row": 29,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r29-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "time representation abstract datatype",
+          "row": 29,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r30-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "TSO",
+          "row": 30,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r30-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "timestamp order",
+          "row": 30,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r31-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "WSDL",
+          "row": 31,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r31-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Web Service Definition Language",
+          "row": 31,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r32-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "WSPRC",
+          "row": 32,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r32-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "Web Service Provider RTI Component",
+          "row": 32,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r33-c0",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "XML",
+          "row": 33,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-clauses-03-abbreviations-acronyms-tex-1-r33-c1",
+          "table_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+          "text": "extensible markup language",
+          "row": 33,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "clauses/03-abbreviations-acronyms.tex",
+            "line": 15,
+            "end_line": null
+          }
+        }
+      ],
+      "source": {
+        "path": "clauses/03-abbreviations-acronyms.tex",
+        "line": 15,
+        "end_line": 50
+      },
+      "logical_id": "table-clauses-03-abbreviations-acronyms-tex-1",
+      "domain": "generic",
+      "omt_kind": null,
+      "continued_from": null,
+      "family_id": null
+    },
+    {
+      "id": "table-frontmatter-04-copyright-abstract-tex-1",
+      "title": "table-frontmatter-04-copyright-abstract-tex-1",
+      "caption": "table-frontmatter-04-copyright-abstract-tex-1",
+      "number": "1",
+      "continuation": false,
+      "cells": [
+        {
+          "id": "table-frontmatter-04-copyright-abstract-tex-1-r0-c0",
+          "table_id": "table-frontmatter-04-copyright-abstract-tex-1",
+          "text": "@l@ l@ PDF:",
+          "row": 0,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "frontmatter/04-copyright-abstract.tex",
+            "line": 51,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-frontmatter-04-copyright-abstract-tex-1-r0-c1",
+          "table_id": "table-frontmatter-04-copyright-abstract-tex-1",
+          "text": "ISBN 978-0-7381-6251-5 STD96061",
+          "row": 0,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "frontmatter/04-copyright-abstract.tex",
+            "line": 51,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-frontmatter-04-copyright-abstract-tex-1-r1-c0",
+          "table_id": "table-frontmatter-04-copyright-abstract-tex-1",
+          "text": "[-0.4pt] Print:",
+          "row": 1,
+          "column": 0,
+          "record_ids": [],
+          "source": {
+            "path": "frontmatter/04-copyright-abstract.tex",
+            "line": 51,
+            "end_line": null
+          }
+        },
+        {
+          "id": "table-frontmatter-04-copyright-abstract-tex-1-r1-c1",
+          "table_id": "table-frontmatter-04-copyright-abstract-tex-1",
+          "text": "ISBN 978-0-7381-6252-2 STDPD96061",
+          "row": 1,
+          "column": 1,
+          "record_ids": [],
+          "source": {
+            "path": "frontmatter/04-copyright-abstract.tex",
+            "line": 51,
+            "end_line": null
+          }
+        }
+      ],
+      "source": {
+        "path": "frontmatter/04-copyright-abstract.tex",
+        "line": 51,
+        "end_line": 54
+      },
+      "logical_id": "table-frontmatter-04-copyright-abstract-tex-1",
+      "domain": "generic",
+      "omt_kind": null,
+      "continued_from": null,
+      "family_id": null
+    }
+  ]
+}

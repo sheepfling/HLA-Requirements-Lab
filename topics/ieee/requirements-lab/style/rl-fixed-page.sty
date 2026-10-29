@@ -1,0 +1,84 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{rl-fixed-page.sty}[2026/08/24 v0.1 Requirements Lab fixed-page furniture]
+
+% Shared page furniture for source-faithful fixed-coordinate adapters.  The
+% adapter deliberately depends on the same Requirements Lab tokens as the
+% natural-flow class, so a document can preserve its measured body geometry
+% without inventing a second visual language.
+\RequirePackage{etoolbox}
+\RequirePackage{fancyhdr}
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+
+\makeatletter
+\@ifundefined{RLPublicationName}{\input{../requirements-lab/style/rl-brand.sty}}{}
+\makeatother
+
+% The modern class already exposes the Inter role font. Legacy source
+% adapters keep their body font stacks, so provide the same local header role
+% without changing their main or sans-serif document fonts.
+\ifdefined\RLSans
+    \let\RLFixedSans\RLSans
+\else
+    \newfontfamily\RLFixedSans{Inter}[
+        Path=../requirements-lab/fonts/,
+        UprightFont=Inter-Regular.ttf,
+        ItalicFont=Inter-Italic.ttf,
+        BoldFont=Inter-ExtraBold.ttf,
+        BoldItalicFont=Inter-Italic.ttf,
+        Ligatures=NoCommon,
+        RawFeature={-calt}]
+\fi
+
+\newcommand{\RLFixedHeaderLeft}{\RLHeaderLeft}
+\newcommand{\RLFixedHeaderRight}{\RLHeaderRight}
+\newcommand{\RLFixedFooterLeft}{\RLHeaderFooter}
+
+\newcommand{\RLFixedHeaderFurniture}{%
+    \begin{tikzpicture}[remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp]
+        \draw[RLOrange,line width=2.2bp] (90,31) -- (102,31);
+        \node[anchor=north west,inner sep=0pt,text=RLInk]
+            at (108,26) {\RLFixedSans\fontsize{7.8bp}{9bp}\selectfont\RLFixedHeaderLeft};
+        \node[anchor=north east,inner sep=0pt,text=RLInk]
+            at (522,26) {\RLFixedSans\fontsize{7.8bp}{9bp}\selectfont
+                \MakeUppercase{\RLFixedHeaderRight}};
+        \draw[RLLine,line width=.45bp] (90,43) -- (522,43);
+    \end{tikzpicture}%
+}
+
+\newcommand{\RLFixedFooterFurniture}{%
+    \begin{tikzpicture}[remember picture,overlay,shift={(current page.north west)},x=1bp,y=-1bp]
+        \node[anchor=south west,inner sep=0pt,text=RLMid]
+            at (90,760) {\RLFixedSans\fontsize{7.2bp}{8.4bp}\selectfont\RLFixedFooterLeft};
+        \node[anchor=south east,inner sep=0pt,text=RLMid]
+            at (522,760) {\RLFixedSans\fontsize{8bp}{9bp}\selectfont\thepage};
+    \end{tikzpicture}%
+}
+
+\newcommand{\RLFixedFurniture}{\RLFixedHeaderFurniture\RLFixedFooterFurniture}
+
+% Define a reusable fixed-page style.  The values are intentionally late
+% bound through the three profile macros above, allowing each publication
+% preamble to supply its own number, edition, title, and footer label while
+% retaining the same page-furniture contract.
+\newcommand{\RLDefineFixedPageStyle}[1]{%
+    \fancypagestyle{#1}{%
+        \fancyhf{}%
+        \fancyhead[L]{%
+            \RLFixedSans\fontsize{7.8bp}{9bp}\selectfont\color{RLInk}%
+            \raisebox{0.5pt}{\color{RLOrange}\rule{12bp}{2.2bp}}\hspace{6bp}%
+            \RLFixedHeaderLeft}%
+        \fancyhead[R]{%
+            \RLFixedSans\fontsize{7.8bp}{9bp}\selectfont\color{RLInk}%
+            \MakeUppercase{\RLFixedHeaderRight}}%
+        \fancyfoot[L]{%
+            \RLFixedSans\fontsize{7.2bp}{8.4bp}\selectfont\color{RLMid}%
+            \RLFixedFooterLeft}%
+        \fancyfoot[R]{%
+            \RLFixedSans\fontsize{8bp}{9bp}\selectfont\color{RLMid}\thepage}%
+        \renewcommand{\headrulewidth}{0.45bp}%
+        \renewcommand{\footrulewidth}{0pt}%
+        \renewcommand{\headrule}{%
+            \hbox to\headwidth{\color{RLLine}\leaders\hrule height \headrulewidth\hfill}}%
+    }%
+}

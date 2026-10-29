@@ -1,0 +1,55 @@
+\documentclass[10pt,oneside]{article}
+
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\input{../requirements-lab/style/rl-graphics.sty}
+\input{../requirements-lab/style/rl-publication.sty}
+\input{../requirements-lab/style/rl-derived.sty}
+
+\title{HLA Requirements Lab semantic architecture --- 2010 source compilation}
+\author{HLA Requirements Lab}
+\date{2026-08-24}
+
+\hypersetup{
+    pdftitle={HLA Requirements Lab semantic architecture --- 2010 source compilation},
+    pdfauthor={HLA Requirements Lab},
+    pdfsubject={Lab-authored semantic derivative of supplied HLA 2010 source material},
+    pdfkeywords={HLA, semantic architecture, requirements, traceability, 2010}
+}
+
+\newcommand{\HLALabEdition}{2010-source compilation}
+\newcommand{\HLALabEditionYear}{2010}
+\newcommand{\HLALabNumber}{HLA semantic derivative}
+\newcommand{\HLALabDocumentTitle}{Semantic Architecture}
+\newcommand{\HLALabDescriptor}{Hierarchy-first requirements, operational behavior, and conformance views}
+\newcommand{\HLALabTheme}{framework}
+\newcommand{\HLALabAccent}{HLALabBlue}
+\newcommand{\HLALabYearAccent}{HLALabBlue}
+\newcommand{\HLALabSeries}{HLA REQUIREMENTS LAB DERIVATIVES}
+\newcommand{\HLALabSourceAttribution}{Supplied HLA 1516-family source materials from 2010.}
+\newcommand{\HLALabStatusLine}{Lab-authored derivative for requirements analysis and traceability.}
+\RLConfigureHLAPublicationProfile
+\RLConfigureDerivativeTypography
+\setlength{\headheight}{19pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{nosep,leftmargin=*}
+\setcounter{tocdepth}{1}
+\begin{document}
+    \input{../hla-requirements-lab-cover}
+    \tableofcontents
+    \clearpage
+    \RaggedRight
+    \emergencystretch=2em
+    \input{output/semantic/reflowable}
+
+\end{document}

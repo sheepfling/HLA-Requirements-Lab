@@ -1,0 +1,202 @@
+\section{FOM/SOM lexicon}
+
+\subsection{Purpose/background}
+If interoperability among simulations is to be achieved, it is necessary not only to specify the classes of data required by the templates in Clause 4, but also to achieve a common understanding of the semantics of this data. The FOM/SOM lexicon provides a means for federations to define all object classes, interaction classes, object class attributes, and interaction parameters in their FOMs and relevant FOM modules, and for individual federates to define these terms in their SOMs and relevant SOM modules.
+
+\subsection{Object class definition table}
+This subclause provides the format for describing HLA object classes. The template that shall be used for this information is provided in Table 40.
+
+The first column (Class) shall contain the names of all object classes described in the FOM, FOM module, SOM, or SOM module. Object class names shall use dot notation as necessary to uniquely identify the object class being defined and may include the full parentage of the class.
+
+The second column (Semantics) shall describe the semantics for the object class.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 83 / standard p. 71.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 40---Object class definition table}
+\begingroup
+\fontsize{8.35}{9.55}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.13}
+\noindent\begin{tabularx}{0.73\textwidth}{|C{145pt}|Y|}
+\hline
+\bfseries Class & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\omtph{class} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\ldots & \centering\arraybackslash \ldots \\
+\hline
+\omtph{class} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\end{tabularx}
+\endgroup
+
+Table 41 provides an example of the use of the table. The object classes are taken from the examples in the object class structure table (see Table 5).
+
+\omtcaption{Table 41---Object class definition table example}
+\begingroup
+\fontsize{8.35}{9.55}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.13}
+\noindent\begin{tabularx}{0.73\textwidth}{|L{145pt}|Y|}
+\hline
+\centering\arraybackslash\bfseries Class & \centering\arraybackslash\bfseries Semantics \\
+\hline
+Customer & Patron of the restaurant \\
+\hline
+Employee & A person working for the restaurant \\
+\hline
+Employee.Dishwasher & Cleaner of plates, pots, and utensils \\
+\hline
+Note & NA \\
+\hline
+\end{tabularx}
+\endgroup
+
+\subsection{Interaction class definition table}
+This subclause provides the format for describing HLA interactions. The structure that shall be used for this information is provided in Table 42.
+
+\omtcaption{Table 42---Interaction class definition table}
+\begingroup
+\fontsize{8.35}{9.55}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.13}
+\noindent\begin{tabularx}{0.73\textwidth}{|C{145pt}|Y|}
+\hline
+\bfseries Class & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\omtph{class} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\ldots & \centering\arraybackslash \ldots \\
+\hline
+\omtph{class} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\end{tabularx}
+\endgroup
+
+The first column (Class) shall contain the name of each interaction class. Interaction class names shall use dot notation as necessary to uniquely identify the interaction class being defined and may include the full parentage of the class.
+
+The second column (Semantics) shall describe the semantics of the interaction class.
+
+Table 43 provides an example of the use of the table. The interaction classes are taken from the examples in the interaction class structure table (see Table 7).
+
+\subsection{Attribute definition table}
+This subclause provides the format for describing the attributes that characterize object classes. The structure that shall be used for this information is provided in Table 44. A separate row shall be completed for each attribute of an object class.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 84 / standard p. 72.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 43---Interaction class definition table example}
+\begingroup
+\fontsize{8.15}{9.3}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\textwidth}{|L{178pt}|Y|}
+\hline
+\centering\arraybackslash\bfseries Class & \centering\arraybackslash\bfseries Semantics \\
+\hline
+CustomerTransaction & The base class of interactions between customers and employee \\
+\hline
+CustomerTransaction.FoodServed & Waiter has served food \\
+\hline
+\shortstack[l]{CustomerTransaction.\\FoodServed.DrinkServed} & Waiter has served a drink \\
+\hline
+Note & NA \\
+\hline
+\end{tabularx}
+\endgroup
+
+\omtcaption{Table 44---Attribute definition table}
+\begingroup
+\fontsize{8.25}{9.45}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.13}
+\noindent\begin{tabularx}{0.80\textwidth}{|C{80pt}|C{70pt}|Y|}
+\hline
+\bfseries Class & \bfseries Attribute & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\omtph{class} & \omtph{attribute} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\ldots & \ldots & \centering\arraybackslash \ldots \\
+\hline
+\omtph{class} & \omtph{attribute} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\end{tabularx}
+\endgroup
+
+The first column (Class) shall contain the name of the object class to which a given attribute belongs. Dot notation shall be used as necessary to uniquely identify the object class and may include the full parentage of the class.
+
+The second column (Attribute) shall contain the name of the attribute.
+
+The third column (Semantics) shall describe the characteristic of the object class that this attribute is designed to model.
+
+Table 45 provides an example of the use of the table. The object classes and attributes are taken from the examples in the attribute table (see Table 9).
+
+\omtcaption{Table 45---Attribute definition table example}
+\begingroup
+\fontsize{7.9}{9.1}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.14}
+\noindent\begin{tabularx}{0.92\textwidth}{|L{58pt}|L{88pt}|Y|}
+\hline
+\centering\arraybackslash\bfseries Class & \centering\arraybackslash\bfseries Attribute & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\multirow{4}{*}{Employee} & PayRate & Amount the employee is paid per hour \\
+\cline{2-3}
+& YearsOfService & Number of years the employee has worked for the restaurant \\
+\cline{2-3}
+& HomeNumber & Employee home phone number \\
+\cline{2-3}
+& HomeAddress & Employee home address \\
+\hline
+Note & NA & \\
+\hline
+\end{tabularx}
+\endgroup
+
+\subsection{Parameter definition table}
+This subclause provides the format for describing the parameters that are associated with interaction classes. The structure that shall be used for this information is provided in Table 46. A separate row shall be completed for each parameter of an interaction class.
+
+The first column (Class) shall contain the name of the interaction class with which a given parameter is associated. Interaction class names shall use dot notation as necessary to uniquely identify the interaction class and may include the full parentage of the class.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 85 / standard p. 73.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 46---Parameter definition table}
+\begingroup
+\fontsize{8.25}{9.45}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.13}
+\noindent\begin{tabularx}{0.82\textwidth}{|C{82pt}|C{70pt}|Y|}
+\hline
+\bfseries Class & \bfseries Parameter & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\omtph{class} & \omtph{parameter} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\ldots & \ldots & \centering\arraybackslash \ldots \\
+\hline
+\omtph{class} & \omtph{parameter} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\end{tabularx}
+\endgroup
+
+The second column (Parameter) shall contain the name of the parameter.
+
+The third column (Semantics) shall describe the specific information that this parameter is designed to convey.
+
+Table 47 provides an example of the use of the table. The interaction classes and parameters are taken from the examples in the parameter table (see Table 11).
+
+\omtcaption{Table 47---Parameter definition table example}
+\begingroup
+\fontsize{7.7}{8.9}\selectfont
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.16}
+\noindent\begin{tabularx}{\textwidth}{|L{150pt}|L{72pt}|Y|}
+\hline
+\centering\arraybackslash\bfseries Class & \centering\arraybackslash\bfseries Parameter & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\multirow{3}{150pt}{CustomerTransaction.FoodServed.\\MainCourseServed} & TemperatureOk & Whether the food was the correct temperature \\
+\cline{2-3}
+& AccuracyOk & Whether the correct food was served \\
+\cline{2-3}
+& TimelinessOk & Whether the food was served in a reasonable amount of time \\
+\hline
+Note & NA & \\
+\hline
+\end{tabularx}
+\endgroup

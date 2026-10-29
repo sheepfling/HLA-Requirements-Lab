@@ -1,0 +1,954 @@
+% IEEE Std 1516.2-2010 reconstruction
+% Source PDF pp. 65-81 / printed pp. 53-69.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 65 / standard p. 53.
+% ---------------------------------------------------------------------------
+\subsection{Datatype tables}
+
+\subsubsection{Purpose/background}
+Several of the OMT tables (attribute table, parameter table, dimension table, time representation table, user-supplied tag table, and synchronization table) provide columns for datatype specifications. This subclause describes additional tables that shall be used to specify the characteristics of these datatypes. A datatype used in these tables shall be specified in a row of one of the following tables: simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table. As described in 4.13.3 through 4.13.8, members of these datatype tables may contain members of other datatype tables in order to create arbitrarily complex datatypes.
+
+\stdnote{That the name of any datatype or data representation shall be unique among all datatypes and data representations.}
+
+\subsubsection{Inclusion criteria}
+All federations shall describe and document the datatypes that are referenced in any OMT table that requires the specification of datatypes (attribute table, parameter table, dimension table, time representation table, user-supplied tag table, and synchronization table) in their FOM and relevant FOM modules. They shall also describe and document datatypes referenced in other datatype tables. Similarly, federates shall document the datatypes referenced in these tables in their SOM and relevant SOM modules.
+
+\subsubsection{Basic data representation table}
+Basic data representation is the underpinning of all OMT datatypes. A set of widely-used basic data representations have been pre-defined for use as the basis for the OMT datatypes and this list may be expanded. These basic data representations cannot be directly used as a named datatype in any OMT datatype table, but rather are the basis upon which named datatypes are built. Table 26 illustrates the format that shall be used for the basic representation of data. The table includes a predefined set of data representations (HLAinteger16BE, HLAinteger32BE, HLAinteger64BE, HLAfloat32BE, HLAfloat64BE, HLAoctetPairBE, HLAinteger16LE, HLAinteger32LE, HLAinteger64LE, HLAfloat32LE, HLAfloat64LE, HLAoctetPairLE, HLAoctet) that shall be present in all FOMs, SOMs, and MIMs; other entries may be added after these entries. Although these entries shall be present, there is no requirement that federates or federations use or support all of these representations.
+
+\omtcaption{Table 26---Basic data representation table}
+\begingroup
+\fontsize{8.0}{9.25}\selectfont
+\setlength{\tabcolsep}{2.3pt}
+\renewcommand{\arraystretch}{1.16}
+\noindent\begin{tabularx}{\textwidth}{|L{88pt}|C{34pt}|L{112pt}|C{43pt}|Y|}
+\hline
+\centering\bfseries Name & \bfseries Size in bits & \centering\bfseries Interpretation & \bfseries Endian & \centering\arraybackslash\bfseries Encoding \\
+\hline
+HLAinteger16BE & 16 & Integer in the range $[-2^{15},\,2^{15}-1]$ & Big & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger32BE & 32 & Integer in the range $[-2^{31},\,2^{31}-1]$ & Big & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger64BE & 64 & Integer in the range $[-2^{63},\,2^{63}-1]$ & Big & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAfloat32BE & 32 & Single-precision floating point number & Big & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAfloat64BE & 64 & Double-precision floating point number & Big & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAoctetPairBE & 16 & 16-bit value & Big & Assumed to be portable among hardware devices. \\
+\hline
+HLAinteger16LE & 16 & Integer in the range $[-2^{15},\,2^{15}-1]$ & Little & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+\end{tabularx}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 66 / standard p. 54.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcontinuedcaption{Table 26---Basic data representation table}
+\begingroup
+\fontsize{8.0}{9.25}\selectfont
+\setlength{\tabcolsep}{2.3pt}
+\renewcommand{\arraystretch}{1.16}
+\noindent\begin{tabularx}{\textwidth}{|L{88pt}|C{34pt}|L{112pt}|C{43pt}|Y|}
+\hline
+\centering\bfseries Name & \bfseries Size in bits & \centering\bfseries Interpretation & \bfseries Endian & \centering\arraybackslash\bfseries Encoding \\
+\hline
+HLAinteger32LE & 32 & Integer in the range $[-2^{31},\,2^{31}-1]$ & Little & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger64LE & 64 & Integer in the range $[-2^{63},\,2^{63}-1]$ & Little & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAfloat32LE & 32 & Single-precision floating point number & Little & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAfloat64LE & 64 & Double-precision floating point number & Little & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAoctetPairLE & 16 & 16-bit value & Little & Assumed to be portable among hardware devices. \\
+\hline
+HLAoctet & 8 & 8-bit value & Big & Assumed to be portable among hardware devices. \\
+\hline
+\omtph{name} & \omtph{size} & \omtph{interpretation} & \omtph{endian} & \omtph{encoding} \\
+\hline
+\omtph{name} & \omtph{size} & \omtph{interpretation} & \omtph{endian} & \omtph{encoding} \\
+\hline
+\end{tabularx}
+\endgroup
+
+The first column (Name) shall identify the name of the basic data representation. Basic data representation names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Size in bits) shall define the size of the data representation in terms of the number of bits contained in the data representation. Entries in this column shall be consistent with the associated encoding descriptions.
+
+The third column (Interpretation) shall describe how the data representation should be interpreted.
+
+The fourth column (Endian) shall describe how multiple bytes within the representation are arranged. Valid values shall be as follows:
+\begin{itemize}
+    \item \textit{Big}: The most significant byte comes first.
+    \item \textit{Little}: The least significant byte comes first.
+\end{itemize}
+
+The fifth column (Encoding) shall describe, in detail, the encoding of the data representation (e.g., the bit ordering) as delivered to and received from the RTI.
+
+An example of the use of the basic data representation table is provided in Table 27. This example includes the pre-defined set of basic data representations and follows with a user-defined entry (UnsignedShort).
+
+\subsubsection{Simple datatype table}
+The simple datatype table shall be used to describe simple, scalar data items. Table 28 illustrates the format that shall be used for the simple datatype table. The table includes five predefined simple datatypes (HLAASCIIchar, HLAunicodeChar, HLAbyte, HLAinteger64time, HLAfloat64time) that shall be present in all FOMs, SOMs, and MIMs; additional entries may be added after them. Although these required datatypes shall be present, no requirement exists that federates or federations use them.
+
+The first column (Name) shall identify the name of the simple datatype. Simple datatype names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Representation) shall identify the basic data representation of this datatype. It shall be the name of a row in the basic data representation table.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 67 / standard p. 55.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 27---Basic data representation table example}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.60}
+\noindent\begin{tabularx}{\textwidth}{|L{81pt}|C{37pt}|L{113pt}|C{40pt}|Y|}
+\hline
+\centering\bfseries Name & \bfseries Size in bits & \centering\bfseries Interpretation & \bfseries Endian & \centering\arraybackslash\bfseries Encoding \\
+\hline
+HLAinteger16BE & 16 & Integer in the range $[-2^{15},\,2^{15}-1]$ & Big & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger32BE & 32 & Integer in the range $[-2^{31},\,2^{31}-1]$ & Big & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger64BE & 64 & Integer in the range $[-2^{63},\,2^{63}-1]$ & Big & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAfloat32BE & 32 & Single-precision floating point number. & Big & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAfloat64BE & 64 & Double-precision floating point number & Big & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAoctetPairBE & 16 & 16-bit value & Big & Assumed to be portable among hardware devices. \\
+\hline
+HLAinteger16LE & 16 & Integer in the range $[-2^{15},\,2^{15}-1]$ & Little & 16-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger32LE & 32 & Integer in the range $[-2^{31},\,2^{31}-1]$ & Little & 32-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAinteger64LE & 64 & Integer in the range $[-2^{63},\,2^{63}-1]$ & Little & 64-bit two's complement signed integer. The most significant bit contains the sign. \\
+\hline
+HLAfloat32LE & 32 & Single-precision floating point number & Little & 32-bit IEEE normalized single-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAfloat64LE & 64 & Double-precision floating point number & Little & 64-bit IEEE normalized double-precision format. See IEEE Std 754-1985. \\
+\hline
+HLAoctetPairLE & 16 & 16-bit value & Little & Assumed to be portable among hardware devices. \\
+\hline
+HLAoctet & 8 & 8-bit value & Big & Assumed to be portable among hardware devices. \\
+\hline
+UnsignedShort & 16 & Integer in the range $[0,\,2^{16}-1]$ & Big & 16-bit unsigned integer. \\
+\hline
+Note & \multicolumn{4}{l|}{NA} \\
+\hline
+\end{tabularx}
+\endgroup
+
+The third column (Units) shall identify the units of measure (e.g., m, km, kg) for the datatype whenever such units exist. Any units entered in this column also specify the units of the entries in the Resolution and Accuracy columns that follow it. ``NA'' shall be entered in this column for datatypes without units.
+
+The fourth column (Resolution) shall describe the precision of measure for the datatype. In general, this entry specifies the smallest resolvable increment between different values that can be effectively discriminated. In some situations, such as when values are stored in floating point datatypes, the resolution might vary with the magnitude of the value. Hence, in cases like this, a better sense of the resolution may be conveyed by the datatype. ``NA'' shall be entered in this column for datatypes for which resolution information does not apply.
+
+The fifth column (Accuracy) shall describe maximum deviation of the value from its intended value in the federate or federation. This is ordinarily expressed as a dimensioned value, but it may also be \textit{perfect} for
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 68 / standard p. 56.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 28---Simple datatype table}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\begin{tabularx}{\textwidth}{|L{83pt}|L{75pt}|C{41pt}|C{58pt}|C{50pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Representation & \bfseries Units & \bfseries Resolution & \bfseries Accuracy & \centering\arraybackslash\bfseries Semantics \\
+\hline
+HLAASCIIchar & HLAoctet & NA & NA & NA & Standard ASCII character (see ANSI X3.4-1986) \\
+\hline
+HLAunicodeChar & HLAoctetPairBE & NA & NA & NA & Unicode UTF-16 character (see \textit{The Unicode Standard}, Version 3.0)* \\
+\hline
+HLAbyte & HLAoctet & NA & NA & NA & Uninterpreted 8-bit byte \\
+\hline
+HLAinteger64Time & HLAinteger64BE & NA & 1 & 0 & Standardized integer HLA time type according to IEEE Std 1516.1-2010 \\
+\hline
+HLAfloat64Time & HLAfloat64BE & NA & NA & NA & Standardized float HLA time type according to IEEE Std 1516.1-2010 \\
+\hline
+\omtph{simple type} & \omtph{representation} & \omtph{units} & \omtph{resolution} & \omtph{accuracy} & \omtph{semantics} \\
+\hline
+\omtph{simple type} & \omtph{representation} & \omtph{units} & \omtph{resolution} & \omtph{accuracy} & \omtph{semantics} \\
+\hline
+\end{tabularx}
+\vspace{2pt}
+{\fontsize{7.45}{8.55}\selectfont *IETF RFC 2781 [B4] defines UTF-16, UTF-16BE and UTF-16LE. UTF-16 with a BOM should be treated as UTF-16BE. UTF-16 with a FOM or SOM can be UTF-16BE or UTF-16LE.\par}
+\endgroup
+
+\noindent discrete values. ``NA'' shall be entered in this column for datatypes for which accuracy information does not apply.
+
+The sixth column (Semantics) shall describe the meaning and use of the datatype. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+An example of the use of the simple datatype table is provided in Table 29. These datatypes are used in examples elsewhere in this document. The examples in this table are aimed at a big-endian platform; for a little-endian platform substitute BE with LE. Note that \textit{DrinkCount} is used for attributes and for dimension definition, and \textit{EmplId} is used for dimension and array definition.
+
+\subsubsection{Enumerated datatype table}
+The enumerated datatype table shall be used to describe data elements that can take on a finite discrete set of possible values. Table 30 illustrates the format that shall be used for the enumerated datatype table. The table includes a single predefined datatype (HLAboolean) that shall be present in all FOMs, SOMs, and MIMs; additional entries may be added after it. Although this required datatype shall be present, no requirement exists that federates or federations use it.
+
+The first column (Name) shall identify the name of the enumerated datatype. Enumerated datatype names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Representation) shall identify the basic data representation that forms the basis of this datatype. It shall be the name of a row in the basic data representation table that specifies discrete values.
+
+The third column (Enumerator) shall provide the names of all enumerators associated with this datatype. Enumerator names shall adhere to HLA naming conventions (see 3.3.1).
+
+The fourth column (Values) shall provide values that correspond to each enumerator in the same row. The values presented in the enumerator shall adhere to the data representation specified in the Representation
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 69 / standard p. 57.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 29---Simple datatype table example}
+\begingroup
+\fontsize{7.9}{9.15}\selectfont
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.28}
+\noindent\begin{tabularx}{\textwidth}{|L{78pt}|L{75pt}|C{42pt}|C{52pt}|C{47pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Representation & \bfseries Units & \bfseries Resolution & \bfseries Accuracy & \centering\arraybackslash\bfseries Semantics \\
+\hline
+HLAASCIIchar & HLAoctet & NA & NA & NA & Standard ASCII character (see ANSI X3.4-1986) \\
+\hline
+HLAunicodeChar & HLAoctetPairBE & NA & NA & NA & Unicode UTF-16 character (see \textit{The Unicode Standard}, Version 3.0) \\
+\hline
+HLAbyte & HLAoctet & NA & NA & NA & Uninterpreted 8-bit byte \\
+\hline
+HLAinteger64time & HLAinteger64BE & NA & 1 & 0 & Standardized integer HLA time type according to IEEE Std 1516.1-2010 \\
+\hline
+HLAfloat64time & HLAfloat64BE & NA & NA & NA & Standardized float HLA time type according to IEEE Std 1516.1-2010 \\
+\hline
+TimeType & HLAfloat32BE & Minutes & 0.01667 & NA & Time representation \\
+\hline
+LAType & HLAfloat32BE & Minutes & 0.01667 & NA & Time interval (nonnegative) \\
+\hline
+DollarRate & HLAfloat32BE & \$/hour & 0.01 & Perfect & Cost per hour \\
+\hline
+Years & HLAinteger32BE & Years & 1 & Perfect & Elapsed time in years \\
+\hline
+DrinkCount & UnsignedShort & Cups & 1 & Perfect & Measure of number of drinks \\
+\hline
+EmplId & HLAinteger32BE & NA & 1 & Perfect & Employee identifier \\
+\hline
+RateScale & HLAinteger32BE & NA & 1 & Perfect & Evaluation of staff where 1 = best \\
+\hline
+Note & \multicolumn{5}{l|}{NA} \\
+\hline
+\end{tabularx}
+\endgroup
+
+\noindent column. If multiple values are associated with a single enumerator, commas shall be used to separate the values.
+
+The fifth column (Semantics) shall describe the meaning and use of this datatype. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+\omtcaption{Table 30---Enumerated datatype table}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.3pt}
+\renewcommand{\arraystretch}{1.60}
+\noindent\begin{tabularx}{\textwidth}{|L{90pt}|L{77pt}|L{95pt}|L{72pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Representation & \centering\bfseries Enumerator & \centering\bfseries Values & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\multirow{2}{*}{HLAboolean} & \multirow{2}{*}{HLAinteger32BE} & HLAfalse & 0 & \multirow{2}{=}{Standard Boolean type} \\
+\cline{3-4}
+& & HLAtrue & 1 & \\
+\hline
+\multirow{3}{*}{\omtph{enumerated type}} & \multirow{3}{*}{\omtph{representation}} & \omtph{enumerator 1} & \omtph{value(s)} & \multirow{3}{=}{\omtph{semantics}} \\
+\cline{3-4}
+& & \ldots & \ldots & \\
+\cline{3-4}
+& & \omtph{enumerator n} & \omtph{value(s)} & \\
+\hline
+\multirow{3}{*}{\omtph{enumerated type}} & \multirow{3}{*}{\omtph{representation}} & \omtph{enumerator 1} & \omtph{value(s)} & \multirow{3}{=}{\omtph{semantics}} \\
+\cline{3-4}
+& & \ldots & \ldots & \\
+\cline{3-4}
+& & \omtph{enumerator m} & \omtph{value(s)} & \\
+\hline
+\end{tabularx}
+\endgroup
+
+An example of the use of the enumerated datatype table is provided in Table 31.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 70 / standard p. 58.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 31---Enumerated datatype table example}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.58}
+\noindent\begin{tabularx}{\textwidth}{|L{90pt}|L{76pt}|L{74pt}|C{50pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Representation & \centering\bfseries Enumerator & \bfseries Values & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\multirow{2}{*}{HLAboolean} & \multirow{2}{*}{HLAinteger32BE} & HLAfalse & 0 & \multirow{2}{=}{Standard Boolean type} \\
+\cline{3-4}
+& & HLAtrue & 1 & \\
+\hline
+\multirow{3}{*}{PriorityLevel} & \multirow{3}{*}{HLAinteger32BE} & Low & 0 & \multirow{3}{=}{General three-level priority indicator} \\
+\cline{3-4}
+& & Medium & 1 & \\
+\cline{3-4}
+& & High & 2 & \\
+\hline
+\multirow{5}{*}{WaiterTasks} & \multirow{5}{*}{HLAinteger32BE} & TakingOrder & 1 & \multirow{5}{=}{Possible activities of waiters} \\
+\cline{3-4}
+& & Serving & 2 & \\
+\cline{3-4}
+& & Cleaning & 3 & \\
+\cline{3-4}
+& & CalculatingBill & 4 & \\
+\cline{3-4}
+& & Other & 5 & \\
+\hline
+\multirow{4}{*}{FlavorType} & \multirow{4}{*}{HLAinteger32BE} & Cola & 101 & \multirow{4}{=}{Possible flavors of soda} \\
+\cline{3-4}
+& & Orange & 102 & \\
+\cline{3-4}
+& & RootBeer & 103 & \\
+\cline{3-4}
+& & Cream & 104 & \\
+\hline
+\multirow{6}{*}{ExperienceLevel} & \multirow{6}{*}{HLAinteger32BE} & Trainee & 0 & \multirow{6}{=}{Level of experience of waiters} \\
+\cline{3-4}
+& & Apprentice & 1 & \\
+\cline{3-4}
+& & Journeyman & 2 & \\
+\cline{3-4}
+& & Senior & 3 & \\
+\cline{3-4}
+& & Temporary & 4 & \\
+\cline{3-4}
+& & Master & 5 & \\
+\hline
+Note & \multicolumn{4}{l|}{NA} \\
+\hline
+\end{tabularx}
+\endgroup
+
+\subsubsection{Array datatype table}
+The array datatype table shall describe indexed homogenous collections of datatypes; these constructs are also known as arrays or sequences. Table 32 illustrates the format that shall be used for the array datatype table. The table includes four predefined array datatypes (HLAASCIIstring, HLAunicodeString, HLAopaqueData, HLAtoken) that shall be present in all FOMs, SOMs, and MIMs; additional entries may be added after them. Although these required datatypes shall be present, no requirement exists that federates or federations use them.
+
+The first column (Name) shall identify the name of the array datatype. Array datatype names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Element Type) shall identify the datatype of an element of this datatype. Values in this column shall be names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table). Note that higher dimensional arrays may be specified by using array datatypes in the element type column of this table.
+
+The third column (Cardinality) shall contain the number of elements that are contained in the array datatype. Multidimensional arrays can be specified via a comma-separated list of values, each representing one dimension. If the number of elements in the array varies during the use of the datatype, a range of values may be provided; if used, this range shall take the form of upper and lower bound values, separated by two
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 71 / standard p. 59.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 32---Array datatype table}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.30}
+\noindent\begin{tabularx}{\textwidth}{|L{91pt}|L{78pt}|L{64pt}|L{83pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Element type & \centering\bfseries Cardinality & \centering\bfseries Encoding & \centering\arraybackslash\bfseries Semantics \\
+\hline
+HLAASCIIstring & HLAASCIIchar & Dynamic & HLAvariableArray & ASCII string representation \\
+\hline
+HLAunicodeString & HLAunicodeChar & Dynamic & HLAvariableArray & Unicode string representation \\
+\hline
+HLAopaqueData & HLAbyte & Dynamic & HLAvariableArray & Uninterpreted sequence of bytes \\
+\hline
+HLAtoken & HLAbyte & 0 & Zero-length array; no contents & Token representation \\
+\hline
+\omtph{array type} & \omtph{type} & \omtph{cardinality} & \omtph{encoding} & \omtph{semantics} \\
+\hline
+\omtph{array type} & \omtph{type} & \omtph{cardinality} & \omtph{encoding} & \omtph{semantics} \\
+\hline
+\end{tabularx}
+\endgroup
+
+\noindent periods and surrounded by brackets. Alternatively, the keyword ``Dynamic'' may be entered into this column for these types of arrays.
+
+The fourth column (Encoding) shall describe, in detail, the encoding of the array datatype (e.g., the sequence of elements and the order of elements in multi-dimensional arrays) as delivered to and received from the RTI. Encoding of elements in an array is determined by the datatype specified in the Element type column. Encoding of the array is determined by the encoding specified in the Encoding column. Array data should be interpreted first through the array encoding scheme, and then through the encoding scheme of the element's datatype.
+
+{\setlength{\emergencystretch}{1em}%
+For one-dimensional array datatypes that use one of the two predefined array encodings, the appropriate keyword ``HLAfixed\allowbreak Array'' or ``HLAvariable\allowbreak Array'' shall be entered in the Encoding column. The ``HLAfixed\allowbreak Array'' encoding is intended for arrays with fixed cardinality and consists of the encoding of each element in sequence. The ``HLAvariable\allowbreak Array'' encoding is intended for arrays with variable (including dynamic) cardinality, and consists of the number of elements encoded as an HLAinteger32BE, followed by the encoding of each element in sequence. Full details of these predefined encodings are given in 4.13.9.\par}
+
+The fifth column (Semantics) shall describe the meaning and use of this datatype. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+An example of the use of the array datatype table is provided in Table 33. \textit{Employees} is a fixed-length array type that holds the employee identifiers of everyone currently working; It uses the standard HLAfixedArray encoding. \textit{AddressBook} is an array type that can be used to hold a collection of addresses; because it is encoded as a sparse array, addresses can be updated selectively without sending every element of the array. Because one may want to update addresses selectively without sending every element of the array, a special encoding is defined for this datatype.
+
+\subsubsection{Fixed record datatype table}
+The fixed record datatype table shall be used to describe heterogeneous collections of types; these constructs are also known as records or structures. Each entry in the fixed record datatype table may contain fields that are of other types, such as simple datatypes, fixed records, arrays, enumerations, or variant records. This allows users to build ``structures of data structures'' according to the needs of their federate or federation. Table 34 illustrates the format that shall be used for the fixed record datatype table.
+
+The first column (Record name) shall identify the name of the fixed record datatype. Record names shall adhere to HLA naming conventions (see 3.3.1).
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 72 / standard p. 60.
+% ---------------------------------------------------------------------------
+\newpage
+\omtcaption{Table 33---Array datatype table example}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\begin{tabularx}{\textwidth}{|L{82pt}|L{75pt}|C{55pt}|L{110pt}|Y|}
+\hline
+\centering\bfseries Name & \centering\bfseries Element type & \bfseries Cardinality & \centering\bfseries Encoding & \centering\arraybackslash\bfseries Semantics \\
+\hline
+HLAASCIIString & HLAASCIIchar & Dynamic & HLAvariableArray & ASCII string representation \\
+\hline
+HLAunicodeString & HLAunicodeChar & Dynamic & HLAvariableArray & Unicode string representation \\
+\hline
+HLAopaqueData & HLAbyte & Dynamic & HLAvariableArray & Uninterpreted sequence of bytes \\
+\hline
+HLAtoken & HLAbyte & 0 & Zero-length array; no contents & Token representation \\
+\hline
+Employees & EmplId & 10 & HLAfixedArray & Identifiers of employees currently working \\
+\hline
+AddressBook & AddressType & Dynamic & An HLAinteger32BE followed by a set of index-value tuples. Each tuple consists of an HLAinteger32BE indicating the array index, followed by the element for that index. The initial HLAinteger32BE indicates the number of index-value pairs to follow, since all array elements need not be included. & Collection of all employee addresses \\
+\hline
+Note & \multicolumn{4}{l|}{NA} \\
+\hline
+\end{tabularx}
+\endgroup
+
+\omtcaption{Table 34---Fixed record datatype table}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.50}
+\noindent\begin{tabular}{|L{64pt}|L{58pt}|L{58pt}|L{78pt}|L{56pt}|L{88pt}|}
+             \hline
+             \multirow{2}{36pt}{\centering\bfseries \shortstack{Record\\name}}                                     & \multicolumn{3}{c|}{\bfseries Field} & \multirow{2}{*}{\bfseries Encoding} & \multirow{2}{*}{\bfseries Semantics} \\
+             \cline{2-4}
+             & \centering\bfseries Name          & \centering\bfseries Type           & \centering\bfseries Semantics & & \\
+             \hline
+             \multirow{3}{*}{\omtph{record type}}                                     & \omtph{field 1}                   & \omtph{type 1}                   & \omtph{semantics}                        & \multirow{3}{56pt}{\omtph{encoding}}                                      & \multirow{3}{88pt}{\omtph{semantics}}                                       \\
+             \cline{2-4}
+             & \ldots          & \ldots           & \ldots             &                                      &                                       \\
+             \cline{2-4}
+             & \omtph{field n}          & \omtph{type n}           & \omtph{semantics} & & \\
+             \hline
+             \multirow{3}{*}{\omtph{record type}}                                     & \omtph{field 1}                   & \omtph{type 1}                   & \omtph{semantics}                        & \multirow{3}{56pt}{\omtph{encoding}}                                      & \multirow{3}{88pt}{\omtph{semantics}}                                       \\
+             \cline{2-4}
+             & \ldots          & \ldots           & \ldots             &                                      &                                       \\
+             \cline{2-4}
+             & \omtph{field m}          & \omtph{type m}           & \omtph{semantics}             &                                      &                                       \\
+             \hline
+\end{tabular}
+\endgroup
+
+The second column (Field name) shall identify the name of a field in the fixed record datatype. Field names shall adhere to HLA naming conventions (see 3.3.1).
+
+The third column (Field type) shall identify the datatype of the field. Values in this column shall be names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table).
+
+The fourth column (Field semantics) shall describe the meaning and use of this field. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+The fifth column (Encoding) shall describe, in detail, the encoding of the fixed record datatype (i.e., the organization of fields) as delivered to and received from the RTI. Encoding of fields in a fixed record is determined by the datatype specified in the Field Type column. Encoding of the fixed record is determined
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 73 / standard p. 61.
+% ---------------------------------------------------------------------------
+\newpage
+\noindent by the encoding specified in the Encoding column. Record data should be interpreted first through the record encoding scheme, and then through the encoding scheme of the field's datatype.
+
+For fixed record datatypes that use the predefined fixed record encoding, the keyword ``HLAfixedRecord'' shall be entered in the Encoding column (see 4.13.9). The ``HLAfixedRecord'' encoding consists of the encoding of each field in sequence, in the order in which they are declared. Full details of this predefined encoding are given in 4.13.9.
+
+The sixth column (Semantics) shall describe the meaning and use of this datatype. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+An example of the use of the fixed record datatype table is provided in Table 35. These datatypes are used in examples elsewhere in this document. \textit{ServiceStat} combines three HLAboolean values into one record. \textit{AddressType} creates a record of components of a mailing address. Both datatypes use the standard HLAfixedRecord encoding.
+
+\omtcaption{Table 35---Fixed record datatype table example}
+\begingroup
+\fontsize{8.0}{9.3}\selectfont
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.55}
+\noindent\begin{tabular}{|L{59pt}|L{52pt}|L{72pt}|L{76pt}|L{72pt}|L{73pt}|}
+             \hline
+             \multirow{2}{36pt}{\centering\bfseries \shortstack{Record\\name}}                             & \multicolumn{3}{c|}{\bfseries Field} & \multirow{2}{*}{\bfseries Encoding} & \multirow{2}{*}{\bfseries Semantics} \\
+             \cline{2-4}
+             & \centering\bfseries Name                 & \centering\bfseries Type               & \centering\bfseries Semantics                 & & \\
+             \hline
+             \multirow{3}{*}{ServiceStat}                             & EntreeOk                 & HLAboolean               & Entree status            & \multirow{3}{72pt}{HLAfixedRecord}                                    & \multirow{3}{73pt}{Check-off on whether the server performed properly on elements of the meal}                                                                                                \\
+             \cline{2-4}
+             & Veggy1Ok                 & HLAboolean               & Vegetable 1 status            &                                    &                                                                                                \\
+             \cline{2-4}
+             & Veggy2Ok                     & HLAboolean           & Vegetable 2 status                 & & \\
+             \hline
+             \multirow{5}{*}{AddressType}                             & Name                   & HLAASCIIstring           & Employee name                & \multirow{5}{72pt}{HLAfixedRecord}                                    & \multirow{5}{73pt}{Mailing address}                                                                                                \\
+             \cline{2-4}
+             & Street                     & HLAASCIIstring           & Street address                     &                                    &                                                                                                \\
+             \cline{2-4}
+             & City                    & HLAASCIIstring           & City name            &                                    &                                                                                                \\
+             \cline{2-4}
+             & State                      & HLAASCIIstring           & State abbreviation                   &                                    &                                                                                                \\
+             \cline{2-4}
+             & Zip & HLAASCIIstring & Postal code & & \\
+             \hline
+             Note & \multicolumn{5}{l|}{NA} \\
+             \hline
+\end{tabular}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 74 / standard p. 62.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsubsection{Variant record datatype table}
+The variant record datatype table shall describe discriminated unions of types; these constructs are also known as variant or choice records. Table 36 illustrates the format that shall be used for the variant record datatype table.
+
+\omtcaption{Table 36---Variant record datatype table}
+\begingroup
+\fontsize{7.9}{9.15}\selectfont
+\setlength{\tabcolsep}{1.65pt}
+\renewcommand{\arraystretch}{1.38}
+\noindent\begin{tabular}{|L{36pt}|L{39pt}|L{35pt}|L{51pt}|L{46pt}|L{42pt}|L{50pt}|L{50pt}|L{50pt}|}
+             \hline
+             \multirow{2}{36pt}{\centering\bfseries \shortstack{Record\\name}}                                         & \multicolumn{3}{c|}{\bfseries Discriminant}         & \multicolumn{3}{c|}{\bfseries Alternative}         & \multirow{2}{*}{\bfseries Encoding} & \multirow{2}{*}{\bfseries Semantics} \\
+             \cline{2-7}
+             & \centering\bfseries Name & \centering\bfseries Type & \centering\bfseries Enumerator & \centering\bfseries Name & \centering\bfseries Type & \centering\bfseries Semantics & & \\
+             \hline
+             \multirow{3}{36pt}{\omtph{variant type}}                                         & \multirow{3}{39pt}{\omtph{name}}                                  & \multirow{3}{35pt}{\omtph{type}}                                  & \omtph{set 1}                         & \omtph{name 1}                   & \omtph{type 1}                   & \omtph{semantics}                        & \multirow{3}{50pt}{\omtph{encoding}}                                      & \multirow{3}{50pt}{\omtph{semantics}}                                       \\
+             \cline{4-7}
+             &                                  &                                  & \ldots                  & \ldots           & \ldots           & \ldots             &                                      &                                       \\
+             \cline{4-7}
+             & & & \omtph{set n} & \omtph{name n} & \omtph{type n} & \omtph{semantics} & & \\
+             \hline
+             \multirow{3}{36pt}{\omtph{variant type}}                                         & \multirow{3}{39pt}{\omtph{name}}                                  & \multirow{3}{35pt}{\omtph{type}}                                  & \omtph{set 1}                         & \omtph{name 1}                   & \omtph{type 1}                   & \omtph{semantics}                        & \multirow{3}{50pt}{\omtph{encoding}}                                      & \multirow{3}{50pt}{\omtph{semantics}}                                       \\
+             \cline{4-7}
+             &                                  &                                  & \ldots                  & \ldots           & \ldots           & \ldots             &                                      &                                       \\
+             \cline{4-7}
+             &                                  &                                  & \omtph{set m}                  & \omtph{name m}           & \omtph{type m}           & \omtph{semantics}             &                                      &                                       \\
+             \hline
+\end{tabular}
+\endgroup
+
+The first column (Record name) shall identify the name of the variant record datatype. Record names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Discriminant name) shall identify the name of the discriminant. Discriminant names shall adhere to HLA naming conventions (see 3.3.1).
+
+The third column (Discriminant type) shall identify the datatype of the discriminant. Values in this column shall be names from the enumerated datatype table.
+
+The fourth column (Discriminant enumerator) shall be a set of enumerators that determines the alternative. The enumerators shall be from the enumerated datatype specified in the Discriminant type column. The set shall consist of one or more individual enumerators or enumerator ranges separated by commas, or the special symbol ``HLAother.'' An enumerator range shall be specified by two enumerators, separated by two periods, and enclosed in square brackets. The enumerator range shall denote all enumerators in the enumerated datatype whose definition in the enumerated datatype table occurs in between the specified enumerators (including the specified enumerators themselves). The symbol ``HLAother'' shall denote all enumerators in the enumerated datatype that are not explicitly included in any of the other Enumerator entries for the associated record name. The symbol ``HLAother'' shall only occur at most once for each record name.
+
+The fifth column (Alternative name) shall define the identifier or name for the alternative. Alternative names shall adhere to the HLA naming conventions (see 3.3.1). If no alternative applies to the enumerator described in the Discriminant enumerator column, ``NA'' shall be entered in this column.
+
+The sixth column (Alternative type) shall identify the datatype of the field. Values in this column shall be names from other datatype tables (simple datatype table, enumerated datatype table, fixed record datatype table, array datatype table, or variant record datatype table). If no alternative applies to the enumerator described in the Discriminant enumerator column, ``NA'' shall be entered in this column.
+
+The seventh column (Alternative semantics) describe the meaning and use of this alternative. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+The eighth column (Encoding) shall describe, in detail, the encoding of the variant record datatype (e.g., the location of the discriminant) as delivered to and received from the RTI. Encoding of fields in a variant
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 75 / standard p. 63.
+% ---------------------------------------------------------------------------
+\newpage
+\noindent record is determined by the datatype specified in the Alternative type column. Encoding of the variant record is determined by the encoding specified in the Encoding column. Record data should be interpreted first through the record encoding scheme and then through the encoding scheme of the field's datatype.
+
+For variant record datatypes that use the predefined variant record encoding, the keyword ``HLAvariantRecord'' shall be entered in the Encoding column (see 4.13.9). The ``HLAvariantRecord'' encoding consists of the discriminant followed by the alternative associated with the value of the discriminant. Full details of this predefined encoding are given in 4.13.9.
+
+The ninth column (Semantics) shall describe the meaning and use of this variant record datatype. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+An example of the variant record table is provided in Table 37. In this example, the WaiterValue datatype associated with the Efficiency and Cheerfulness attributes of the Waiter class is characterized as a variant record. The discriminant is based on the level of experience accumulated by the employee. For new employees, the alternative CoursePassed might be represented as an enumeration indicating whether the employee passed training, until the required tasks are learned. For more experienced employees, the alternative Rating might support a more expanded scale (e.g., 1--10) to support management decisions on relative pay increases and possible bonuses. For all other waiter types, i.e., temporary staff (presumably only hired for special functions), the alternative is empty. The discriminant itself is represented as an enumerated datatype, as is illustrated in Table 31.
+
+\omtcaption{Table 37---Variant record datatype table example}
+\begingroup
+\fontsize{7.8}{9.05}\selectfont
+\setlength{\tabcolsep}{1.55pt}
+\renewcommand{\arraystretch}{1.45}
+\noindent\resizebox{0.99\textwidth}{!}{%
+\begin{tabular}{|L{36pt}|L{39pt}|L{37pt}|L{51pt}|L{46pt}|L{42pt}|L{50pt}|L{50pt}|L{50pt}|}
+             \hline
+             \multirow{2}{36pt}{\centering\bfseries \shortstack{Record\\Name}} & \multicolumn{3}{c|}{\bfseries Discriminant} & \multicolumn{3}{c|}{\bfseries Alternative} & \multirow{2}{*}{\bfseries Encoding} & \multirow{2}{*}{\bfseries Semantics} \\
+             \cline{2-7}
+             & \centering\bfseries Name & \centering\bfseries Type & \centering\bfseries Enumerator & \centering\bfseries Name & \centering\bfseries Type & \centering\bfseries Semantics & & \\
+             \hline
+             \multirow{3}{36pt}{\shortstack[l]{Waiter\\Value}} & \multirow{3}{39pt}{\shortstack[l]{Val\\Index}} & \multirow{3}{37pt}{\shortstack[l]{Experience\\Level}} & Trainee & \shortstack[l]{Course\\Passed} & HLAboolean & Ratings scale for employees under training & \multirow{3}{50pt}{{\fontsize{7.3}{8.2}\selectfont \shortstack{HLAvariant\\Record}}} & \multirow{3}{50pt}{Datatype for waiter performance rating value} \\
+             \cline{4-7}
+             & & & \shortstack[l]{[Apprentice ..\\Senior], Master} & Rating & RateScale & Ratings scale for permanent employees & & \\
+             \cline{4-7}
+             & & & HLAother & NA & NA & All others & & \\
+             \hline
+             Note & \multicolumn{8}{l|}{NA} \\
+             \hline
+\end{tabular}
+}
+\endgroup
+
+\subsubsection{Predefined encodings for constructed datatypes}
+Each of the constructed datatypes (arrays, fixed records, and variant records) has a predefined encoding that describes how the components (i.e., elements of an array, or fields of a fixed or variant record) within the constructed datatype are laid out with respect to each other. These encodings are defined precisely in the appropriate subclauses (4.13.9.1 through 4.13.9.4). These predefined encoding definitions include a description of how each component in a constructed datatype shall be padded in order to ensure proper byte alignment of the component that follows it. The use of any of the predefined keywords HLAfixedArray, HLAvariableArray, HLAfixedRecord, or HLAvariantRecord to describe the encoding for a constructed datatype shall indicate adherence to these padding requirements. Object modelers may define and use alternative encoding schemes as needed.
+
+In general, padding bytes shall be added as necessary within a constructed type so that each component is properly aligned. For example, a 32-bit float should be aligned on a 32-bit boundary, and a 64-bit float on a 64-bit boundary. Determining the number of padding bytes needed after a component in a constructed type depends on up to three factors, as follows:
+\begin{itemize}
+    \item The offset in bytes of that component from the beginning of the constructed type
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 76 / standard p. 64.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{itemize}
+    \item The size in bytes of that component
+    \item The ``octet boundary value'' of the following component
+\end{itemize}
+
+The octet boundary value for simple datatypes and enumerated datatypes is derived from the type's entry in the basic data representation table. The octet boundary value is defined as the smallest value $2^n$, where $n$ is a non-negative integer, for which $(8 \times 2^n)$ is greater than or equal to the size of the datatype in bits. Octet boundary values of the predefined basic data representations are as follows:
+
+\begin{center}
+    \begingroup
+    \fontsize{8.2}{9.4}\selectfont
+    \setlength{\tabcolsep}{11pt}
+    \renewcommand{\arraystretch}{1.55}
+    \begin{tabular}{|l|c|}
+        \hline
+        \bfseries Basic representation & \bfseries Octet boundary value \\
+        \hline
+        HLAoctet                       & 1                              \\
+        HLAoctetPairBE                 & 2                              \\
+        HLAinteger16BE                 & 2                              \\
+        HLAinteger32BE                 & 4                              \\
+        HLAinteger64BE                 & 8                              \\
+        HLAfloat32BE                   & 4                              \\
+        HLAfloat64BE                   & 8                              \\
+        HLAoctetPairLE                 & 2                              \\
+        HLAinteger16LE                 & 2                              \\
+        HLAinteger32LE                 & 4                              \\
+        HLAinteger64LE                 & 8                              \\
+        HLAfloat32LE                   & 4                              \\
+        HLAfloat64LE                   & 8                              \\
+        \hline
+    \end{tabular}
+    \endgroup
+\end{center}
+
+The octet boundary value for a constructed datatype is the maximum octet boundary value of all components within that constructed datatype. For example, a fixed record containing an HLAboolean field (based on HLAinteger32BE), a field based on HLAoctet and a field based on HLAfloat64BE, has an octet boundary value of 8. Any constructed datatype that contains this fixed record has an octet boundary value of at least 8, and it may be larger depending on the octet boundary value of its other components.
+
+The following subclauses describe each of the four predefined constructed datatype encodings, including the number of padding bytes to be added after the components of each constructed datatype. If these predefined encodings are used with any datatype whose size in bits is not an integer multiple of 8, padding bits shall be added to the datatype to increase its size in bits to the next integer multiple of 8. Padding bits and bytes are always represented by 0s (zeros).
+
+\par\noindent{\sffamily\bfseries\fontsize{10.85}{12.4}\selectfont 4.13.9.1 HLAfixedRecord}\par\vspace{1pt}
+The HLAfixedRecord encoding shall consist of the encoding of each component in sequence, in the order in which they are declared. The first component in a fixed record shall start at offset 0 of the record.
+
+Zero or more padding bytes shall be added to each component, except the last, to ensure that the next component in the record is properly aligned. The number of padding bytes after such a component $i$ of a fixed record with this encoding is the smallest nonnegative value of $P_i$ that satisfies Equation (1):
+\begin{equation}
+    (\mathrm{Offset}_i + \mathrm{Size}_i + P_i) \bmod V_{i+1} = 0
+\end{equation}
+where
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 77 / standard p. 65.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{tabbing}
+    \hspace{42pt}\=\kill
+    $\mathrm{Offset}_i$ \> is the offset of the component $i$ of the record (in bytes)\\
+    $\mathrm{Size}_i$ \> is the size of the component $i$ of the record (in bytes)\\
+    $V_{i+1}$ \> is the octet boundary value of component $(i+1)$ of the record
+\end{tabbing}
+
+Padding bytes shall not be added after the last component of the record. The size of a fixed record shall include any added padding bytes.
+
+For example, consider a fixed record using the HLAfixedRecord encoding that consists of a component based on HLAoctet, an HLAboolean component, and a component based on HLAfloat64BE, in that order. The encoding calculation is as follows:
+
+\begin{tabbing}
+    \hspace{45pt}\=\hspace{18pt}\=\kill
+    Field 1: \> $(\mathrm{Offset}_1 + \mathrm{Size}_1 + P_1) \bmod V_2 = 0$\\
+    \> $(0 + 1 + P_1) \bmod 4 = 0$\\
+    \> $(1 + P_1) \bmod 4 = 0$\\
+    \> $P_1 = 3$\\[4pt]
+    Field 2: \> $(\mathrm{Offset}_2 + \mathrm{Size}_2 + P_2) \bmod V_3 = 0$\\
+    \> $(4 + 4 + P_2) \bmod 8 = 0$\\
+    \> $(8 + P_2) \bmod 8 = 0$\\
+    \> $P_2 = 0$\\[4pt]
+    Field 3: \> No padding bytes are added after this, the last, component.
+\end{tabbing}
+
+Thus, 3 padding bytes are added after the HLAoctet-based component and no padding bytes after the HLAboolean component or the HLAfloat64BE-based component. The total size of this fixed record is 16 bytes. A graphical representation of this example, showing the contents of each of the 16 bytes with padding bytes represented as 0s, is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.5}{8.6}\selectfont\setlength{\tabcolsep}{3.7pt}\renewcommand{\arraystretch}{1.34}
+    \resizebox{0.99\textwidth}{!}{%
+        \begin{tabular}{|*{16}{c|}}
+            \hline
+            \multicolumn{16}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\\hline
+            \multicolumn{1}{|c|}{HLAoctet} & 0 & 0 & 0 & \multicolumn{4}{c|}{HLAboolean} & \multicolumn{8}{c|}{HLAfloat64BE} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+Note that if the fixed record consisted of the same three components, but in the reverse order, no padding bytes are added after any component, and the size of this fixed record is 13 bytes.
+
+\par\noindent{\sffamily\bfseries\fontsize{10.85}{12.4}\selectfont 4.13.9.2 HLAvariantRecord}\par\vspace{1pt}
+The HLAvariantRecord encoding shall consist of the discriminant followed by the alternative associated with the value of the discriminant. The discriminant shall be placed at offset 0 of the record.
+
+If no alternative applies to the value contained in the discriminant, padding bytes shall be added (if required) after the discriminant to ensure that its size in bytes is equal to its octet boundary value.
+
+If there is an alternative for the value contained in the discriminant, padding bytes shall be added (if required) after the discriminant to ensure that the alternative is properly aligned. The number of padding bytes after such a discriminant of a variant record with this encoding is the smallest nonnegative value of $P$ that satisfies Equation (2):
+\begin{equation}
+    (\mathrm{Size} + P) \bmod V = 0
+\end{equation}
+where
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 78 / standard p. 66.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{tabbing}
+    \hspace{30pt}\=\kill
+    $\mathrm{Size}$ \> is the size of the discriminant (in bytes).\\
+    $V$ \> is the maximum of the octet boundary values of the alternatives.
+\end{tabbing}
+
+Padding bytes shall not be added after the alternative. The size of the variant record shall include any added padding bytes.
+
+For example, consider a variant record with a discriminant based on the HLAoctet representation, one alternative consisting of a field based on the HLAinteger32BE representation, and a second alternative consisting of a fixed record containing two fields, both based on the HLAoctet representation. The encoding calculation is as follows:
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(\mathrm{Size}+P) \bmod V = 0$\\
+    \> $(1+P) \bmod 4 = 0$\\
+    \> $P=3$
+\end{tabbing}
+
+Thus, 3 bytes of padding are added after the discriminant.
+
+In a case in which the discriminant contains a value that indicates that the HLAinteger32BE-based alternative is used, a graphical representation of the variant record is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.6}{8.7}\selectfont\setlength{\tabcolsep}{6.5pt}\renewcommand{\arraystretch}{1.32}
+    \resizebox{0.96\textwidth}{!}{%
+        \begin{tabular}{|*{8}{c|}}
+            \hline
+            \multicolumn{8}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\\hline
+            HLAoctet & 0 & 0 & 0 & \multicolumn{4}{c|}{HLAinteger32BE} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+In a case in which the discriminant contains a value that indicates that the fixed record alternative is used, a graphical representation of the variant record is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.6}{8.7}\selectfont\setlength{\tabcolsep}{8.0pt}\renewcommand{\arraystretch}{1.32}
+    \resizebox{0.73\textwidth}{!}{%
+        \begin{tabular}{|*{6}{c|}}
+            \hline
+            \multicolumn{6}{|c|}{\bfseries Byte} \\\hline
+            0        & 1 & 2 & 3 & 4        & 5        \\\hline
+            HLAoctet & 0 & 0 & 0 & HLAoctet & HLAoctet \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+\par\noindent{\sffamily\bfseries\fontsize{10.85}{12.4}\selectfont 4.13.9.3 HLAfixedArray}\par\vspace{1pt}
+The HLAfixedArray encoding is intended for arrays with fixed cardinality and shall consist of the encoding of each element in sequence. The first element of the array shall be placed starting at offset 0 of the array.
+
+The number of padding bytes after each element $i$ of an array, except the last element, with this encoding is the smallest nonnegative value of $P_i$ that satisfies Equation (3):
+\begin{equation}
+    (\mathrm{Size}_i + P_i) \bmod V = 0
+\end{equation}
+where
+\begin{tabbing}
+    \hspace{34pt}\=\kill
+    $\mathrm{Size}_i$ \> is the size of the $i$th element of the array (in bytes)\\
+    $V$ \> is the octet boundary value of the element type
+\end{tabbing}
+
+Padding bytes shall not be added after the last element of the array. The size of the fixed array shall include any added padding bytes.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 79 / standard p. 67.
+% ---------------------------------------------------------------------------
+\newpage
+For example, consider an array consisting of a fixed number of elements, each of which is a fixed record encoded using HLAfixedRecord and consisting of a field based on the HLAinteger32BE representation, followed by a field based on the HLAoctet representation.
+
+The size of each element in this array is the same, 5 bytes, as calculated following the rules for the HLAfixedRecord encoding. The octet boundary value of each element in this array is 4 bytes, the maximum of the octet boundary values of the two fields of the record. The calculations for the padding after each element, except the last, are as follows:
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(\mathrm{Size}_i + P_i) \bmod V = 0$\\
+    \> $(5 + P_i) \bmod 4 = 0$\\
+    \> $P_i = 3$
+\end{tabbing}
+
+Thus, 3 bytes of padding are added after each element of the array, except for the last element. A graphical representation of such an array, containing exactly two elements, is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.4}{8.5}\selectfont\setlength{\tabcolsep}{5.3pt}\renewcommand{\arraystretch}{1.38}
+    \resizebox{0.94\textwidth}{!}{%
+        \begin{tabular}{|*{13}{c|}}
+            \hline
+            \multicolumn{13}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\\hline
+            \multicolumn{4}{|c|}{HLAinteger32BE} & \shortstack{HLA\\octet} & 0 & 0 & 0 & \multicolumn{4}{c|}{HLAinteger32BE} & \shortstack{HLA\\octet} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+\par\noindent{\sffamily\bfseries\fontsize{10.85}{12.4}\selectfont 4.13.9.4 HLAvariableArray}\par\vspace{1pt}
+The HLAvariableArray encoding is intended for arrays with variable (including dynamic) cardinality and shall consist of a number\_of\_elements component encoded as an HLAinteger32BE, followed by the encoding of each element in sequence. The number\_of\_elements component shall start at offset 0 of the array.
+
+Padding bytes, if required, shall be added after the number\_of\_elements component to ensure that the first element in the array is properly aligned. The number of padding bytes here is the smallest nonnegative value of $P$ that satisfies Equation (4).
+\begin{equation}
+    (4 + P) \bmod V = 0
+\end{equation}
+where
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    $V$ \> is the maximum of the octet boundary value of the element type, and the octet boundary value of HLAinteger32BE.
+\end{tabbing}
+
+The number of padding bytes after each element of a variable array is calculated in the same way as for HLAfixedArray. The size of the variable array shall include any added padding bytes.
+
+For example, consider an array consisting of a variable number of elements based on the HLAfloat64BE representation. The padding calculation for the number\_of\_elements component is as follows:
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(4+P) \bmod V = 0$\\
+    \> $V = \max(8,4) = 8$\\
+    \> $(4+P) \bmod 8 = 0$\\
+    \> $P=4$
+\end{tabbing}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 80 / standard p. 68.
+% ---------------------------------------------------------------------------
+\newpage
+Thus, 4 bytes of padding are added after the number of elements component. A graphical representation of such an array, containing only one element, is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.35}{8.45}\selectfont\setlength{\tabcolsep}{4.05pt}\renewcommand{\arraystretch}{1.36}
+    \resizebox{0.92\textwidth}{!}{%
+        \begin{tabular}{|*{16}{c|}}
+            \hline
+            \multicolumn{16}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\\hline
+            \multicolumn{4}{|c|}{HLAinteger32BE} & 0 & 0 & 0 & 0 & \multicolumn{8}{c|}{HLAfloat64BE} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+As a second example, consider an array, called \textit{VarArray}, consisting of a variable number of elements based on a 24-bit representation. The calculation for padding after the number\_of\_elements component is as follows:
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(4+P) \bmod V = 0$\\
+    \> $V = \max(4,4) = 4$\\
+    \> $(4+P) \bmod 4 = 0$\\
+    \> $P=0$
+\end{tabbing}
+
+Thus, no padding is added after the number\_of\_elements component. The amount of padding after each element, except the last, is calculated as follows (using the formula for HLAfixedArray encoding):
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(\mathrm{Size}_i + P_i) \bmod V = 0$\\
+    \> $V = \max(4,4) = 4$\\
+    \> $(3+P_i) \bmod 4 = 0$\\
+    \> $P_i = 1$
+\end{tabbing}
+
+Thus, 1 byte of padding is added after each element of the array, except for the last. A graphical representation of such an array, consisting of two elements, is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.5}{8.6}\selectfont\setlength{\tabcolsep}{5.3pt}\renewcommand{\arraystretch}{1.36}
+    \resizebox{0.63\textwidth}{!}{%
+        \begin{tabular}{|*{11}{c|}}
+            \hline
+            \multicolumn{11}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\\hline
+            \multicolumn{4}{|c|}{HLAinteger32BE} & \multicolumn{3}{c|}{24-bit value} & 0 & \multicolumn{3}{c|}{24-bit value} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+As a final example, consider a variable length array of \textit{VarArray} elements as described above. In particular, consider an instance that contains two arrays, the first of which contains one element and the second two elements. Here, the entire array of arrays is referred to as the outer array, and each element is referred to as an inner array. Padding after the number\_of\_elements component of the outer array is calculated as follows:
+
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(4+P) \bmod V = 0$\\
+    \> $V = \max(1,4) = 4$\\
+    \> $(4+P) \bmod 4 = 0$\\
+    \> $P=0$
+\end{tabbing}
+
+No padding is added after the number\_of\_elements component of the outer array. The padding after the first element of the outer array is calculated as follows (using the formula for HLAfixedArray encoding):
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 81 / standard p. 69.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{tabbing}
+    \hspace{18pt}\=\kill
+    \> $(\mathrm{Size}_1 + P_1) \bmod V = 0$\\
+    \> $V = \max(1,4) = 4$\\
+    \> $(7+P_1) \bmod 4 = 0$\\
+    \> $P_1 = 1$
+\end{tabbing}
+
+Thus, 1 byte of padding is added after the first element of the outer array, which is the first inner array. No padding is added after the second element of the outer array, which is the second inner array. A graphical representation of this is as follows:
+
+\begin{center}
+    \begingroup\fontsize{7.3}{8.4}\selectfont\setlength{\tabcolsep}{3.75pt}\renewcommand{\arraystretch}{1.36}
+    \resizebox{0.92\textwidth}{!}{%
+        \begin{tabular}{|*{16}{c|}}
+            \hline
+            \multicolumn{16}{|c|}{\bfseries Byte} \\\hline
+            0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\\hline
+            \multicolumn{4}{|c|}{HLAinteger32BE} & \multicolumn{4}{c|}{HLAinteger32BE} & \multicolumn{3}{c|}{24-bit value}& 0& \multicolumn{4}{c|}{HLAinteger32BE}\\\hline
+        \end{tabular}
+    }
+    \par\vspace{8pt}
+    \resizebox{0.40\textwidth}{!}{%
+        \begin{tabular}{|*{7}{c|}}
+            \hline
+            16 & 17 & 18 & 19 & 20 & 21 & 22 \\\hline
+            \multicolumn{3}{|c|}{24-bit value} & 0 & \multicolumn{3}{c|}{24-bit value} \\\hline
+        \end{tabular}
+    }
+    \endgroup
+\end{center}
+
+\subsection{Notes table}
+
+\subsubsection{Purpose/background}
+Any entry within any of the OMT tables may be annotated with additional descriptive information outside of the immediate table structure. This feature permits users to associate explanatory information with individual table entries to facilitate effective use of the data.
+
+The mechanism for attaching one or more notes to an OMT table entry shall be to include a notes pointer in the appropriate table cell. In the tabular OMT format, this notes pointer shall consist of a uniquely identifying note label (or a series of comma-separated labels) preceded by an asterisk and enclosed by brackets. The notes themselves shall be associated with the note label and included in this table. For table cells with more than one information entry (e.g., a class name and a publish/subscribe designation), each entry may receive a separate note. Also, a single note may be referenced numerous times in OMT tables and that a single OMT table entry may reference numerous notes.
+
+\subsubsection{Table format}
+The template that shall be used for recording notes is illustrated in Table 38.
+
+\omtcaption{Table 38---Notes table}
+\begingroup
+\fontsize{8.1}{9.3}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.38}
+\begin{center}
+    \begin{minipage}{0.70\textwidth}
+        \noindent\begin{tabularx}{\linewidth}{|Y|Y|}
+\hline
+\centering\bfseries Label & \centering\arraybackslash\bfseries Semantics \\
+\hline
+\centering\arraybackslash \omtph{label} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\centering\arraybackslash \omtph{label} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+\centering\arraybackslash \omtph{label} & \centering\arraybackslash \omtph{semantics} \\
+\hline
+        \end{tabularx}
+    \end{minipage}
+\end{center}
+\endgroup

@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "surfaces": [
+    {
+      "id": "figure-01",
+      "document_id": "hla-1516.1-2025",
+      "page": 39,
+      "figure_number": 1,
+      "status": "generated",
+      "record_id": "federation-execution",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-02",
+      "document_id": "hla-1516.1-2025",
+      "page": 40,
+      "figure_number": 2,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-2-federate-rti-relationship",
+      "record_kind": "graph_diagram"
+    },
+    {
+      "id": "figure-03",
+      "document_id": "hla-1516.1-2025",
+      "page": 41,
+      "figure_number": 3,
+      "status": "generated",
+      "record_id": "federate-lifetime",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-04",
+      "document_id": "hla-1516.1-2025",
+      "page": 42,
+      "figure_number": 4,
+      "status": "generated",
+      "record_id": "federate-lifetime",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-05",
+      "document_id": "hla-1516.1-2025",
+      "page": 44,
+      "figure_number": 5,
+      "status": "generated",
+      "record_id": "normal-activity-permitted",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-06",
+      "document_id": "hla-1516.1-2025",
+      "page": 46,
+      "figure_number": 6,
+      "status": "generated",
+      "record_id": "federation-execution-sync-overview",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-07",
+      "document_id": "hla-1516.1-2025",
+      "page": 47,
+      "figure_number": 7,
+      "status": "generated",
+      "record_id": "global-synchronization-label",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-08",
+      "document_id": "hla-1516.1-2025",
+      "page": 47,
+      "figure_number": 8,
+      "status": "generated",
+      "record_id": "awaiting-synchronization",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-09",
+      "document_id": "hla-1516.1-2025",
+      "page": 48,
+      "figure_number": 9,
+      "status": "generated",
+      "record_id": "local-synchronization-label",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-10",
+      "document_id": "hla-1516.1-2025",
+      "page": 87,
+      "figure_number": 10,
+      "status": "generated",
+      "record_id": "object-class",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-11",
+      "document_id": "hla-1516.1-2025",
+      "page": 88,
+      "figure_number": 11,
+      "status": "generated",
+      "record_id": "class-attribute",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-12",
+      "document_id": "hla-1516.1-2025",
+      "page": 89,
+      "figure_number": 12,
+      "status": "generated",
+      "record_id": "class-attribute-privilege-to-delete-object",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-13",
+      "document_id": "hla-1516.1-2025",
+      "page": 90,
+      "figure_number": 13,
+      "status": "generated",
+      "record_id": "interaction-class",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-14",
+      "document_id": "hla-1516.1-2025",
+      "page": 111,
+      "figure_number": 14,
+      "status": "generated",
+      "record_id": "object-instance-known",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-15",
+      "document_id": "hla-1516.1-2025",
+      "page": 112,
+      "figure_number": 15,
+      "status": "generated",
+      "record_id": "ownership-implications",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-16",
+      "document_id": "hla-1516.1-2025",
+      "page": 150,
+      "figure_number": 16,
+      "status": "generated",
+      "record_id": "establishing-ownership",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-17",
+      "document_id": "hla-1516.1-2025",
+      "page": 187,
+      "figure_number": 17,
+      "status": "generated",
+      "record_id": "temporal-state",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-18",
+      "document_id": "hla-1516.1-2025",
+      "page": 223,
+      "figure_number": 18,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-18-region-two-dimensions",
+      "record_kind": "graph_diagram"
+    },
+    {
+      "id": "figure-19",
+      "document_id": "hla-1516.1-2025",
+      "page": 289,
+      "figure_number": 19,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-19-mom-object-hierarchy",
+      "record_kind": "graph_diagram"
+    },
+    {
+      "id": "figure-20",
+      "document_id": "hla-1516.1-2025",
+      "page": 290,
+      "figure_number": 20,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-20-mom-interaction-hierarchy",
+      "record_kind": "graph_diagram"
+    },
+    {
+      "id": "figure-21",
+      "document_id": "hla-1516.1-2025",
+      "page": 396,
+      "figure_number": 21,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-21-federate-protocol-layers",
+      "record_kind": "graph_diagram"
+    },
+    {
+      "id": "figure-22",
+      "document_id": "hla-1516.1-2025",
+      "page": 399,
+      "figure_number": 22,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-22-message-sequence-numbers",
+      "record_kind": "sequence_diagram"
+    },
+    {
+      "id": "figure-23",
+      "document_id": "hla-1516.1-2025",
+      "page": 399,
+      "figure_number": 23,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-23-response-messages",
+      "record_kind": "sequence_diagram"
+    },
+    {
+      "id": "figure-24",
+      "document_id": "hla-1516.1-2025",
+      "page": 400,
+      "figure_number": 24,
+      "status": "generated",
+      "record_id": "federate-connection-reconnection",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-25",
+      "document_id": "hla-1516.1-2025",
+      "page": 401,
+      "figure_number": 25,
+      "status": "generated",
+      "record_id": "rti-connection-reconnection",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-26",
+      "document_id": "hla-1516.1-2025",
+      "page": 402,
+      "figure_number": 26,
+      "status": "generated",
+      "record_id": "hla-1516.1.figure-26-successful-reconnection",
+      "record_kind": "sequence_diagram"
+    },
+    {
+      "id": "figure-27",
+      "document_id": "hla-1516.1-2025",
+      "page": 410,
+      "figure_number": 27,
+      "status": "generated",
+      "record_id": "federate-session-startup",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-28",
+      "document_id": "hla-1516.1-2025",
+      "page": 410,
+      "figure_number": 28,
+      "status": "generated",
+      "record_id": "federate-resume",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-29",
+      "document_id": "hla-1516.1-2025",
+      "page": 411,
+      "figure_number": 29,
+      "status": "generated",
+      "record_id": "federate-exception",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-30",
+      "document_id": "hla-1516.1-2025",
+      "page": 411,
+      "figure_number": 30,
+      "status": "generated",
+      "record_id": "rti-port-handling",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-31",
+      "document_id": "hla-1516.1-2025",
+      "page": 411,
+      "figure_number": 31,
+      "status": "generated",
+      "record_id": "rti-session-startup",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-32",
+      "document_id": "hla-1516.1-2025",
+      "page": 412,
+      "figure_number": 32,
+      "status": "generated",
+      "record_id": "rti-resume",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "figure-33",
+      "document_id": "hla-1516.1-2025",
+      "page": 412,
+      "figure_number": 33,
+      "status": "generated",
+      "record_id": "rti-exception-handling",
+      "record_kind": "state_machine"
+    },
+    {
+      "id": "asset-cover-xref114",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref114.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-cover-xref115",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref115.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-cover-xref116",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref116.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-cover-xref117",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref117.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-cover-xref118",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref118.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-cover-xref119",
+      "document_id": "hla-1516.1-2025",
+      "page": 1,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p001-xref119.png",
+      "reason": "Front-matter mark or logo; not a document figure surface."
+    },
+    {
+      "id": "asset-tail-xref11589",
+      "document_id": "hla-1516.1-2025",
+      "page": 440,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p440-xref11589.png",
+      "reason": "Tail-page extraction artifact; not a document figure surface."
+    },
+    {
+      "id": "asset-tail-xref11590",
+      "document_id": "hla-1516.1-2025",
+      "page": 440,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p440-xref11590.png",
+      "reason": "Tail-page extraction artifact; not a document figure surface."
+    },
+    {
+      "id": "asset-tail-xref11591",
+      "document_id": "hla-1516.1-2025",
+      "page": 440,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p440-xref11591.png",
+      "reason": "Tail-page extraction artifact; not a document figure surface."
+    },
+    {
+      "id": "asset-tail-xref11592",
+      "document_id": "hla-1516.1-2025",
+      "page": 440,
+      "status": "non-generatable",
+      "record_kind": "asset",
+      "source_image": "topics/ieee/hla-1516.1-2025/assets/extracted/source-p440-xref11592.png",
+      "reason": "Tail-page extraction artifact; not a document figure surface."
+    }
+  ]
+}

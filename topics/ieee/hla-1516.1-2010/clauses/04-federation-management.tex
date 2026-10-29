@@ -1,0 +1,1947 @@
+% Faithful initial reconstruction of Clause 4 from source PDF pages 39--78
+% (standard pages 25--64). Source-page boundaries are intentionally preserved.
+
+% --- Standard page 25 / source PDF page 39 ---
+\section{Federation management}
+
+\subsection{Overview}
+
+Federation management refers to the creation, dynamic control, modification, and deletion of a federation execution.
+
+Before any interaction can take place between a federate and an RTI, such as creating a federation execution or joining, the unjoined federate shall perform a Connect to the RTI. When a federate has resigned and has no further intent to join or create federation executions, it shall perform a Disconnect.
+
+The exact manner in which RTI-initiated services (callbacks) are invoked on a federate by the RTI is programming-language specific. However, the HLA defines two callback models that govern when callbacks may be invoked. The two callback models are: IMMEDIATE and EVOKED. In the IMMEDIATE model, the RTI shall invoke callbacks immediately when they are available, unless the callbacks have been disabled using the Disable Callbacks service. In the EVOKED model, callbacks are only made when the federate calls the Evoke Callback/Evoke Multiple Callbacks services, unless callbacks have been disabled using the Disable Callbacks service. RTIs may implement both callback models, but shall implement at least one. The callback model is specified as an argument to the Connect service.
+
+Figure 1 shows the overall state of a federation execution as certain basic federation management services are employed. The figure starts in the Federation Execution Does Not Exist state, representing that the RTI has been started up, but that no services have been invoked relative to the federation execution. After the federation execution is created, it is now in the No Joined Federates state. This state represents the clean, or freshly initialized, federation execution; no federates are joined, no object instances exist, and no messages are queued. From the point that the first federate joins this execution until the point that the last federate resigns from the execution, the federation execution is in the Supporting Joined Federates state. This state represents an operational federation execution in which the services documented in this specification are usable. If all joined federates resign before a willing joined federate is identified, all unowned instance attributes shall cease to exist as if their object instances were deleted at the time of the last federate resign.
+
+\vspace*{0.75in}
+\stdnativefigure[.77\textwidth]{figures/native/figure-01.tex}
+
+\clearpage
+
+% --- Standard page 26 / source PDF page 40 ---
+Once a federation execution exists, federates may join and resign from it in any sequence that is meaningful to the federation user. Figure 2 presents a generalized view of the basic relationship between a federate and the RTI during the federate participation in a federation execution. The broad arrows in Figure 2 represent the general invocation of HLA service groups and are not intended to demonstrate strict ordering requirements on the use of the services. An RTI shall allow an application to participate in a federation as multiple joined federates, and an RTI shall allow a single application to participate in multiple federations as a joined federate or federates.
+
+\vspace*{0.28in}
+\stdnativefigure[.88\textwidth]{figures/native/figure-02.tex}
+
+The state diagram in Figure 3 is the first of a series of hierarchical state diagrams that formally describe the exchanges between federates and an RTI. These state diagrams are formal, accurate descriptions of federate state information depicted in the highly structured, compact, and expressive state chart notation pioneered by David Harel [B2]. This specification contains two independent sets of state charts. The first set, beginning in Figure 3 and including all other state charts except Figure 6 through Figure 9, describes the state of a given federate, from the perspective of that federate, in varying levels of detail. The second set, Figure 6 through Figure 9, describes the state of a federation execution (including the RTI and all joined federates) strictly with respect to the use of synchronization points. Finally, Figure 1 is unrelated to either of these sets of state charts. It is a stand-alone overview of the basic states of a federation execution.
+
+The next few subclauses describe the first two of these state charts in detail as a way of introducing some of Harel's notation and providing an understanding of how the complete collection of state charts in this document are hierarchically interrelated.
+
+\clearpage
+
+% --- Standard page 27 / source PDF page 41 ---
+\vspace*{-0.09in}
+\stdnativefigure[.794\textwidth]{figures/native/figure-03.tex}
+\vspace*{-0.19in}
+
+\subsubsection{Federate lifetime}
+
+As shown in Figure 3, the initial state of any federate is ``Not Connected.'' Before a federate can work with an RTI, such as to create a federation execution or join one, the federate shall perform a Connect to the RTI. The Connect service allows the RTI to set up and initialize its communication infrastructure. After successful invocation of the Join Federation Execution service, a federate will be in the Joined Federate state, where distributed simulation activities take place. If an infrastructure problem is detected during these activities, the Connection Lost \rtiinitiated{} service notifies the federate that a fault has been detected and that it has been forced to the Not Connected state. If previously joined, it shall be now no longer joined to the federation execution. As described in 4.1.5, the effect will be as if the federate had resigned with a resign action specified by the Automatic Resign Directive. Following successful simulation activities, the federate invokes the Resign Federation Execution service to leave the Joined Federate state. When a federate has resigned and has no further intent to join or create federation executions, it shall perform a Disconnect. The Disconnect service allows the RTI to break down and clean up its communication infrastructure. Figure 4 shows the federate's lifetime in the Joined Federate state.
+
+As indicated by the dashed line in Figure 4, the Joined Federate state consists of two parallel state machines: one having to do with whether the joined federate is in the process of saving or restoring the Joined Federate state (depicted to the left of the dashed line), and the other having to do with whether the joined federate is permitted to perform normal activity (depicted to the right of the dashed line). While in the Joined Federate state, the joined federate is simultaneously in both a state depicted in the state machine to the left of the dashed line and a state depicted in the state machine to the right of the dashed line. Initially, upon entering the Joined Federate state, the joined federate will be in the Active and Normal Activity Permitted states, as indicated by the dark-circle start transitions. There are interdependencies between these two parallel state machines and between the state machine on the left and the Temporal state machine, Figure 17 (in 8.1.7). These interdependencies are depicted by the guards (shown within square brackets) that are associated with some state transitions. If a transition has a guard associated with it, then when the assertion within the guard is true, the joined federate may make the associated transition from one state to another. If a transition has only a guard (with no associated service invocation), the joined federate will immediately make the associated transition as soon as the guard is true. As an example of an interdependency between the two parallel state machines depicted in the Joined Federate state, if a joined federate that is in the Active state receives a Federation Restore Begun \rtiinitiated{} service invocation, it will transition into the Prepared to Restore state (as indicated by the label on the transition from the Active state to the Prepared to Restore state). Once the
+
+\footnotetext[5]{All RTI-initiated services are denoted with a \rtiinitiated\ (printer's dagger) after the service name.}
+
+\clearpage
+
+% --- Standard page 28 / source PDF page 42 ---
+joined federate enters the Prepared to Restore state, it also enters the Normal Activity Not Permitted state (as indicated by the guard on the transition from the Normal Activity Permitted state to the Normal Activity Not Permitted state). In other words, the guards impose the following constraints on a joined federate: A joined federate may be in the Normal Activity Permitted state (right side) if and only if it is also in the Active Federate state (left side); and a joined federate may be in the Normal Activity Not Permitted state (right side) if and only if it is also in the Instructed to Save, Saving, Waiting for Federation to Save, Prepared to Restore, Restoring, Waiting for Federation to Restore, or Waiting for Restore to Begin state (left side).
+
+\vspace*{0.20in}
+\stdnativefigure[.91\textwidth]{figures/native/figure-04.tex}
+
+The interdependency between the state machine on the left and the Temporal state machine, Figure 17 (in 8.1.7), is this: a joined federate that is in the Active state will not receive an invocation of the Initiate Federate Save \rtiinitiated{} service unless that joined federate is either in the Not Constrained state or the Time Advancing state. The Not Constrained state and Time Advancing state are depicted in Figure 17. The fact that these two states related to time management are mentioned in the guard on the transition from the Active state to the Instructed to Save state demonstrates the interdependencies between a joined federate's save/restore state and its Temporal state. Specifically, it indicates that a joined federate shall either not be constrained by time management or be in a position to receive a time advance grant in order for it to receive an invocation of the Initiate Federate Save \rtiinitiated{} service.
+
+A state chart notation that needs additional explanation is the shallow history state, depicted by a state labeled H. This notation means to enter the most recently visited of all the states at the level of the H state or enter the initial state (as indicated by the dark-circle start transition) if this occurrence is the first entry. For example, in Figure 4, there is a shallow history state within the Active Federate state. The transition for the Request Federation Save service originates from the outer edge of the Active Federate state, i.e., the transition can occur from any state within the Active Federate state (i.e., Active or Restore Request Pending). The transition terminates at the shallow history state; in other words, on completing the transition, the federate will return to the state within the Active Federate state in which it was previously (i.e., it will return to Active or to Restore Request Pending). Transition from a superstate to a shallow history state is a
+
+\clearpage
+
+% --- Standard page 29 / source PDF page 43 ---
+common idiom denoting that the transition can occur while in any substate of the superstate and will result in the machine's returning to the same state in which it was prior to the transition.
+
+If a joined federate is in the Normal Activity Permitted state, the joined federate may perform normal joined federate activity, such as registering and discovering object instances, publishing and subscribing to object class attributes and interactions, updating and reflecting instance attribute values, sending and receiving interactions, deleting and removing object instances, and requesting or receiving time advance grants. During federation save or restore, a joined federate will enter the Normal Activity Not Permitted state. In this state, the only permitted activities are those performed by the joined federate and with the joined federate (by the RTI) related to the save or restore in progress. Additionally, while in the Normal Activity Not Permitted state, a joined federate may
+
+\begin{stddashlist}
+    \item Resign the federation execution or
+    \item Send certain save- or restore-related interactions.
+\end{stddashlist}
+
+The Normal Activity Permitted state, simple as it may appear in Figure 4, actually contains all of the other states that appear in the first set of state charts that appear subsequently in this document. Together, these state charts formally describe the state of a joined federate from that joined federate's perspective. These state charts are complete in the sense that all transitions shown represent legal operations and transitions that are not shown represent illegal operations. The RTI shall generate exceptions if illegal operations are invoked. The state charts do not include MOM or data distribution management (DDM) activities.
+
+The Normal Activity Permitted state depicted in Figure 4 is enhanced in Figure 5 to identify the major portions of the Joined Federate state. Additionally, the states in Figure 5 are further detailed as follows:
+
+\begin{stddashlist}
+    \item Temporal state (Figure 17, in 8.1.7)
+    \item States associated with each object class (Figure 10, in 5.1.4)
+    \item States associated with each interaction class (Figure 13, in 5.1.4)
+\end{stddashlist}
+
+When a federate enters the Joined Federate state, the joined federate will have a Temporal state, object class states, and interaction class states. The joined federate will have an Object Class state for each object class that is defined in the FDD that is associated with the federation execution. Likewise, the joined federate will have an Interaction Class state for each interaction class that is defined in the FDD. A joined federate will be in the Temporal state, in each of these Object Class states, and in each of these Interaction Class states simultaneously (as depicted by the dashed lines separating the state machines within the Normal Activity Permitted state). Time management is detailed in Figure 17. The state of an arbitrary object class is detailed in Figure 10, and the state of an arbitrary interaction class is detailed in Figure 13. Indices, such as ``i'' in Object Class (i), are used in the names of many state charts to denote that the state chart refers to an arbitrary occurrence of something. These indices are used consistently throughout this specification and are described as follows:
+
+i Object class designator j Attribute designator k Object instance designator m Interaction class designator L Synchronization label s sth joined federate; also used as Fs
+
+Another state chart notation that needs additional explanation is the deep history state, depicted by a state labeled H*. This notation means to enter the most recently visited of all the states at the level of the H* state or enter the initial state (as indicated by the dark-circle start transition) if this occurrence is the first entry and to do the same for all relevant substates.
+
+\clearpage
+
+% --- Standard page 30 / source PDF page 44 ---
+\vspace*{-0.35in}
+\stdnativefigure[.9765\textwidth]{figures/native/figure-05.tex}
+\vspace*{-0.04in}
+
+\subsubsection{Federation execution save and restore}
+
+Any joined federate in the federation execution may initiate a save by invoking the Request Federation Save service. If there is no timestamp argument provided with the invocation of this service, the RTI shall instruct all of the joined federates in the federation execution (including the requesting joined federate) to save state by invoking the Initiate Federate Save \rtiinitiated{} service at all of these joined federates as soon as possible. If there is a timestamp argument provided, the RTI will invoke the Initiate Federate Save \rtiinitiated{} service at each of the timeconstrained joined federates when their value of logical time advances to the value provided, and it will invoke the Initiate Federate Save \rtiinitiated{} service at all nontime-constrained joined federates as soon as all of the time-constrained joined federates are eligible to be instructed to save.
+
+When a joined federate receives an Initiate Federate Save \rtiinitiated{} service invocation and subsequently saves its state, it shall use the federation save label (that was specified by the joined federate requesting the save in the Request Federation Save service), its federate type (that it specified when it joined the federation execution), and its federate designator (that was returned when it joined the federation execution) to distinguish the saved information.
+
+Once a federation execution save has begun, an RTI shall save all queued messages that have not been delivered to the intended joined federates (e.g., future timestamp order (TSO) messages or receive order (RO) messages that were sent by other joined federates not yet in the Federate Save in Progress state). All saved information (by both the RTI and the joined federates) shall be persistent, i.e., it is stored onto disk or some other persistent medium, and it remains intact even after the federation execution is destroyed.
+
+\clearpage
+
+% --- Standard page 31 / source PDF page 45 ---
+The saved information can be used at a later date, by some new set of joined federates, to restore all joined federates in the federation execution to the state in which they were when the save was accomplished. The federation can then resume effecting the execution from that saved point. Once a restore has begun, any messages that have not been delivered to the intended joined federates in the restoring federation execution shall be lost. After a restore is complete, the RTI shall deliver all related saved messages as appropriate to the joined federates in the restored federation execution (e.g., TSO messages at the appropriate logical time or RO messages as soon as possible in wall-clock time).
+
+The set of federates joined to a federation execution when state is restored from a previously saved state need not be the exact set of federates that were joined to the federation execution when the state being restored was saved. The number of federates of each federate type that are joined to the federation execution, however, shall be the same. The federate-type argument supplied in the Join Federation Execution service invocation, therefore, is crucial to the save-and-restore process. Declaring a federate to be of a given type shall be equivalent to asserting that the joined federate can be restored using the state information saved by any other joined federate of that type.
+
+There is no requirement that a save taken by one RTI implementation be restorable by another RTI implementation.
+
+\subsubsection{Synchronization discussion}
+
+Figure 6 depicts the state of a federation execution with respect to synchronization points. In order to fully explain synchronization points, both the state of the RTI and the state of each joined federate are detailed. Because multiple joined federates are involved, each transition within this set of state charts includes an argument denoting to which joined federate a service invocation applies (i.e., an argument of Fs denotes the sth joined federate).
+
+The RTI shall keep track of each synchronization point separately, and the treatment of an arbitrary synchronization point by the RTI is expanded in Figure 7. Not shown in this diagram is how the RTI calculates the synchronization set (shown as synch\_set within the state chart); this information is detailed in the service descriptions. Use of the synchronization set, however, is depicted in the state chart on the transition from the Synchronizing (s, L) states to the Synch Point Not Registered state. This transition denotes, by use of the universal quantifier over the synchronization set in the guard, that synchronization throughout a federation is achieved only when all joined federates in the synchronization set have concluded their individual synchronizations. A joined federate's individual synchronization, from the RTI's point of view, is detailed in Figure 8.
+
+The final state chart in the set describing synchronization points is Figure 9. This state chart depicts how an arbitrary joined federate keeps track of an arbitrary synchronization point. This diagram includes how a joined federate registers a synchronization point as well as how a joined federate actually synchronizes.
+
+\clearpage
+
+% --- Standard page 32 / source PDF page 46 ---
+\vspace*{1.12in}
+\stdnativefigure[460.02pt]{figures/native/figure-06.tex}
+
+\clearpage
+
+% --- Standard page 33 / source PDF page 47 ---
+% Figure 7 uses the source embedded-image footprint directly.  A small page-
+% local offset compensates TeX list/centering glue so the source image top and
+% caption align at matched scale.
+\vspace*{0.4pt}
+\stdnativefigure[436.26pt]{figures/native/figure-07.tex}
+
+% Figure 8 is independently revalidated in Tranche 34.  The source embedded
+% image footprint is retained exactly and shifted right by 26.2 pt inside the
+% text block to reproduce the source page placement.
+\vspace*{41.31pt}
+\par\vspace{4pt}
+\begin{center}
+    \makebox[\linewidth][c]{\hspace*{26.2pt}\resizebox{407.04pt}{!}{\input{figures/native/figure-08.tex}}}\par
+\end{center}
+\vspace{1pt}
+
+\clearpage
+
+% --- Standard page 34 / source PDF page 48 ---
+% Figure 9 is independently revalidated in Tranche 35.  The source embedded
+% image is 767 x 612 and occupies x=86.4225..522.8934 pt and
+% y=81.1131..429.2391 pt on physical source page 48.  The local placement
+% below reproduces that footprint while preserving the source page's following
+% FOM heading position.
+\vspace*{-1.44pt}
+\par\vspace{4pt}
+\begin{center}
+    \makebox[\linewidth][c]{\hspace*{2.32pt}\resizebox{443.10pt}{!}{\input{figures/native/figure-09.tex}}}\par
+\end{center}
+\vspace{-23.02pt}
+
+\subsubsection{FOM Document Data (FDD)}
+
+The FDD is data and information extracted and combined from FOM modules in order to support functionality described in this specification. The FOM module format and rules for combination are defined in IEEE Std 1516.2-2010. The FDD that the RTI retains and combines from the FOM modules shall be, at a minimum, the following:
+
+\begin{stddashlist}
+    \item Object class structure table (complete)
+    \item Interaction class structure table (complete)
+    \item Attribute table (object, attribute, available dimensions, transportation, and order columns)
+    \item Parameter table (interaction, parameter, available dimensions, transportation, and order columns)
+    \item Dimension table (complete)
+    \item Transportation type table (name and reliability columns)
+    \item Update rate table (name and maximum update rate columns)
+    \item Switches table (complete)
+\end{stddashlist}
+
+All the names within an FDD shall be case sensitive.
+
+When the Create Federation Execution service is invoked, the RTI shall initialize the federation execution using FDD first from the MIM and then from the specified FOM modules. A user-extended MIM may be provided; otherwise, the RTI shall provide the standard MIM automatically.
+
+\clearpage
+
+% --- Standard page 35 / source PDF page 49 ---
+Additional FOM modules may be provided in the Join Federation Execution service invocations. The FOM module designator arguments supplied to the Create Federation Execution service and the Join Federation Execution service shall designate compliant FOM modules (IEEE P1516/D5 and IEEE Std 1516.2-2010). Create Federation Execution and Join Federation Execution service invocations shall reject, issuing an exception, any entity that is not a compliant FOM module.
+
+\paragraph{Rules for combining information from FOM modules}
+
+The RTI shall combine the FDD data of the MIM and FOM modules according to the rules for combining FOM data in IEEE Std 1516.2-2010 when the Create Federation Execution service is invoked as well as whenever the set of FOM modules has changed due to an invocation of the Join Federation Execution service. The RTI shall consider only the FDD when combining FOM modules. In case the FDD of the FOM modules provided in such a service call cannot be successfully combined or the invocation fails for any other reason, the FDD provided in the call shall not be included in the current FOM.
+
+The RTI shall reject, issuing an exception, any attempt to load a FOM module for the following cases:
+
+\begin{stddashlist}
+    \item When trying to define an object class, already existing in the current FOM, that is not a scaffolding class or that has a different set of class attributes compared to the current FOM. The set of class attributes is considered different from the current FOM if the sets are not identical in number of attributes or the attributes are not identical in name, available dimensions, transportation, or order.
+    \item When trying to define an interaction class, already existing in the current FOM, that is not a scaffolding class or that has a different set of parameters compared to the current FOM. The set of parameters is considered different from the current FOM if the sets are not identical in number of parameters or the parameters are not identical in name, available dimensions, transportation, or order.
+    \item When trying to define dimension, already existing in the current FOM, with a different definition compared to the current FOM.
+    \item When trying to define transportation type, already existing in the current FOM, with a different reliability compared to the current FOM. (Comment note - description is not part of FDD nor should it be and thus cannot be used for rejection.)
+    \item When trying to define update rate, already existing in the current FOM, with a different maximum rate compared to the current FOM.
+    \item When trying to define switches, already existing in the current FOM, with a different definition.
+    \item When the MIM or FOM module is noncompliant.
+\end{stddashlist}
+
+If a FOM module or MIM contains any definition that is rejected by the RTI, the RTI shall reject the FOM module or MIM in its entirety and shall not add any element to the FDD.
+
+The union of all FOM modules in a given Create Federation Execution or Join Federation Execution service when added to the previously existing current FOM shall not result in any object class or interaction class not having a full definition. If this is the case, the entire service invocation shall fail. In case any of the FOM modules provided was rejected by the RTI, the entire service invocation shall also fail.
+
+After a Create Federation Execution or Join Federation Execution service has completed successfully, all the provided FOM modules shall be available in the current FOM, and the corresponding MOM information shall be updated to reflect this.
+
+Furthermore, any FDD provided as per above, once available in the federation execution, shall be available for the remaining life span of the federation execution.
+
+\clearpage
+
+% --- Standard page 36 / source PDF page 50 ---
+
+\paragraph{Access to Current FOM information}
+
+The RTI shall provide access to the current FDD, the content of individual FOM modules, as well as the MIM. The following MOM interactions are provided:
+
+\begin{stdalphalist}
+    \item For the federation execution:
+    \begin{stdnumlist}
+        \item The attribute HLAFOMmoduleDesignatorList provides a list of designators for the FOM modules that specified the current FOM. Only FOM modules that resulted in the addition of one or more classes, dimensions, transportations, or update rates shall be included. Specifically, if several FOM modules with identical content have been specified, only the first shall be included and then only if it satisfies the preceding requirement.
+        \item The attribute HLAfederation.HLAMIMDesignator provides the designator for the MIM used in the current FOM.
+        \item The attribute HLAcurrentFDD provides the contents of the current FDD.
+        \item The interactions HLArequestFOMmoduleData and HLAreportFOMmoduleData provide the contents of a specified FOM module.
+        \item The interactions HLArequestMIMData and HLAreportMIMData provides the content of the MIM.
+    \end{stdnumlist}
+    \item For each federate:
+    \begin{stdnumlist}
+        \item The attribute HLAfederate.HLAFOMmoduleDesignatorList provides a list of designators for the FOM modules that were specified by that federate when invoking the Create Federation Execution and Join Federation Execution service.
+        \item The interactions HLArequestFOMmoduleData and HLAreportFOMmoduleData provide the contents of a specified FOM module.
+    \end{stdnumlist}
+\end{stdalphalist}
+
+A FOM module designator shall be equal to the string (file name or URL) as supplied as part of the Create Federation Execution or Join Federation Execution service invocation. The FOM module designator for the HLAstandardMIM as supplied automatically by the RTI shall be ``HLAstandardMIM.''
+
+\subsubsection{Fault tolerance support}
+
+At any point during the execution, a fault may occur. A fault is defined as an event that prevents the entire federation from executing in an HLA-compliant manner. As a result, one or more federates may be disconnected from the federation. The RTI shall then send a HLAreportFederateLost MOM interaction. If the lost federate was time regulating, this interaction shall also provide the last known good logical timestamp to which the federate was granted.
+
+The RTI shall then perform a resign on behalf of the lost federate, using the current Automatic Resign Directive, and then restart all federation-wide synchronized operations with the remaining federates. MOM data and advisories shall be updated to reflect the new state.
+
+All TSO messages sent by the lost federate no later than the last known good logical timestamp before the fault shall be delivered. TSO messages sent by the lost federate after this point may or may not reach subscribing federates. RO messages from the lost federate may or may not reach subscribing federates.
+
+The RTI shall attempt to notify any lost federate that it has been disconnected and is no longer a member of the federation using the Connection Lost \rtiinitiated{} service invocation. The federate will then enter the Not Connected state (see Figure 3). Since the federate or its environment is subject to a fault, invoking the Connection Lost \rtiinitiated{} service and entering the Not Connected state may or may not be attempted and may or may not be successful.
+
+The disconnected federate may try to connect to the federation again using the regular connect and join sequence. This attempt may or may not be successful.
+
+\clearpage
+
+% --- Standard page 37 / source PDF page 51 ---
+The fault detection methods and criteria depend on the technical implementation of the RTI and are not part of the HLA standard. A fault is an event that prevents the federation execution from continuing in an HLAcompliant manner. In particular, a fault may result in one or more federates being disconnected or lost from the federation. Such a federate shall be referred to as a lost federate. As a result of detection of a fault, the RTI shall send a separate HLAreportFederateLost MOM interaction identifying each lost federate. If a lost federate was time regulating, this interaction shall provide its last known good logical timestamp. The last known good logical timestamp shall be determined by the RTI for a lost federate so that all reliable TSO messages sent by the federate before the fault with timestamps less than or equal to the last known good logical timestamp are deliverable to federates that remain in the federation. After the HLAreportFederateLost interaction has been sent, the RTI shall process a resign on behalf of the lost federate, using the federate's current Automatic Resign Directive. The resignation of the federate shall result in the restart of all federation-wide synchronized operations with the remaining federates as if the lost federate itself had resigned. MOM data and advisories shall be updated to reflect the new state. TSO messages sent by the lost federate after the last known good timestamp may or may not be delivered to subscribing federates. RO messages from the lost federate may or may not be delivered to subscribing federates. When a federate becomes lost, the RTI may notify it using the Connection Lost \rtiinitiated{} service invocation. The invocation of the Connection Lost \rtiinitiated{} service by the RTI on the federate shall enter the federate into the Not Connected state (see Figure 3). Because a lost federate or its environment is subject to a fault, a federate that has been reported to the federation execution as lost but has not received the Connection Lost \rtiinitiated{} service invocation is in an undefined state. A lost federate may try to connect to the RTI and join the federation execution again using the connect and join sequence. The attempts may or may not be successful, depending on the fault and steps taken outside of HLA to repair it. A fault may divide the federation into multiple independent segments, each having the potential to continue an HLA-compliant federation execution. Should this event occur, the RTI shall select exactly one such segment to continue the federation execution. Federates contained in all other segments shall be considered lost. It may be that the fault is catastrophic with no segment remaining to continue the federation execution. Each RTI implementation will define a mechanism for making this decision.
+
+\subsubsection{Logical time implementation}
+
+A federation execution must share a common implementation of logical time in order for joined federates and the RTI to have meaningful interactions involving logical time. No universal implementation of logical time has been proposed that will satisfy all federation executions. When a federation execution is created, a logical time implementation shall be identified. RTIs shall provide two default implementations of logical time, one integer and one floating point. The federate creating a federation execution may provide its own implementation of logical time for use in the federation execution.
+
+\subsection{Connect service}
+
+The Connect service shall be used to establish a connection between the unjoined federate and the RTI. No interaction between the unjoined federate and the RTI may take place until a successful invocation of the Connect service has been performed. If the optional local settings designator is not present, the default local settings shall be used.
+
+The callback model argument indicates the desired callback model, either IMMEDIATE or EVOKED.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Callback model.
+    \item Optional local settings designator.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 38 / source PDF page 52 ---
+\begin{compactstdpage}
+    \subsubsection{Returned arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+
+    \begin{stdalphalist}
+        \item Not connected.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+
+    \begin{stdalphalist}
+        \item The unjoined federate is connected to the RTI.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+
+    \begin{stdalphalist}
+        \item Connection failed.
+        \item Unsupported callback model.
+        \item Invalid local settings designator.
+        \item Already connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsection{Disconnect service}
+
+    The Disconnect service shall be used to terminate the connection between a federate and the RTI.
+
+    The federate cannot be a member of the execution.
+
+    \subsubsection{Supplied arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+        \item Federate is not a member of the execution.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+
+    \begin{stdalphalist}
+        \item The federate is disconnected from the RTI.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+
+    \begin{stdalphalist}
+        \item Federate is a member of the execution.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsection{Connection Lost \rtiinitiated{} service}
+
+    The Connection Lost \rtiinitiated{} service shall notify a previously joined federate that it has entered the Disconnected state as the result of a fault. Being disconnected, the federate is no longer joined to the federation execution.
+
+\end{compactstdpage}
+\clearpage
+
+% --- Standard page 39 / source PDF page 53 ---
+The RTI will attempt the invocation of this service on a best-effort basis; however, it may fail since the RTI or federate may be in a faulty or invalid state.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Text description of the fault.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The joined federate is connected.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item Federate is notified that it has entered the Disconnected state.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsection{Create Federation Execution service}
+
+The Create Federation Execution service shall create a new federation execution and add it to the set of supported federation executions. Each federation execution created by this service shall be independent of all other federation executions, and there shall be no intercommunication within the RTI between federation executions.
+
+The RTI shall load the supplied MIM if specified; otherwise, it shall automatically load the standard MIM (see Annex G). The MIM shall be loaded before any supplied FOM module is loaded. If a MIM argument is supplied, the supplied MIM module designator shall not be ``HLAstandardMIM.''
+
+At least one FOM module shall be supplied.
+
+The FOM modules supplied, together with the default or supplied MIM, shall result in a compliant FDD. The FOM module designators argument identifies the FOM modules that, together with the MIM, shall furnish the FDD for the federation execution to be created.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation execution name.
+    \item Set of FOM module designators.
+    \item Optional MIM designator.
+    \item Optional logical time implementation. If not provided, the RTI provided HLAfloat64Time representation of logical time shall be used.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 40 / source PDF page 54 ---
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution does not exist.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item A federation execution, with the given name, exists and may be joined by federates.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Could not create logical time implementation
+    \item Invalid FOM module.
+    \item Could not locate FOM module indicated by supplied designator.
+    \item MIM designator shall not be HLAstandardMIM.
+    \item Invalid MIM.
+    \item Could not locate MIM indicated by supplied designator.
+    \item The specified federation execution already exists.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 1.
+    \item Figure 6.
+\end{stdalphalist}
+
+\subsection{Destroy Federation Execution service}
+
+The Destroy Federation Execution service shall remove a federation execution from the RTI set of supported federation executions. All federation activity shall have stopped, and there shall be no joined federates (all joined federates shall have resigned, either by explicit action or via MOM activity) before this service is invoked.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation execution name.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item There are no federates joined to this federation execution.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The federation execution does not exist.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 41 / source PDF page 55 ---
+\begin{compactstdpage}
+    \subsubsection{Exceptions}
+
+    \begin{stdalphalist}
+        \item Federates are joined to the federation execution.
+        \item The federation execution does not exist.
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+
+    \begin{stdalphalist}
+        \item Figure 1.
+        \item Figure 6.
+    \end{stdalphalist}
+
+    \subsection{List Federation Executions service}
+
+    The List Federation Executions service shall be used to request a list of the currently existing federation executions.
+
+    \subsubsection{Supplied arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+
+    \begin{stdalphalist}
+        \item The federate is connected to the RTI.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+
+    \begin{stdalphalist}
+        \item Not connected.
+        \item RTI internal error.
+    \end{stdalphalist}
+
+    \subsection{Report Federation Executions \rtiinitiated{} service}
+
+    The Report Federation Executions \rtiinitiated{} service provides a list of the currently existing federation executions.
+
+    \subsubsection{Supplied arguments}
+
+    \begin{stdalphalist}
+        \item List of pairs of federation executions and time representations.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+\end{compactstdpage}
+\clearpage
+
+% --- Standard page 42 / source PDF page 56 ---
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsection{Join Federation Execution service}
+
+The Join Federation Execution service shall affiliate the federate with a federation execution. Invocation of the Join Federation Execution service shall indicate the intention to participate in the specified federation. The federate name argument shall be unique within a federation execution at any given time. It may, however, be assigned to a different federate after a restore operation. The RTI shall provide a unique name if no federate name is provided, and it is the responsibility of the federate to obtain and preserve this unique name for potential restore operations. The federate type argument shall distinguish federate categories for federation save-and-restore purposes. The returned joined federate designator shall be unique for the lifetime of the federation execution as long as a restore is not in progress at any federate.
+
+In addition, the Join Federation Execution service may also be used to provide additional FOM module designators. The optional set of additional FOM module designators argument identifies the FOM modules that provide additional FDD. Contents of the FOM modules may duplicate information in the current FDD of the federation execution, but they shall not conflict with the current FDD.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Optional federate name. If not provided, the RTI shall assign a unique name.
+    \item Federate type.
+    \item Federation execution name.
+    \item Optional set of additional FOM module designators.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item Joined federate designator.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is not joined to that federation execution.
+    \item Federate name not already in use.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate is a member of the federation execution.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Could not create logical time implementation.
+    \item Federate name already in use.
+    \item The specified federation execution does not exist.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 43 / source PDF page 57 ---
+\begin{stdalphalist}
+    \setcounter{enumi}{3}
+    \item Invalid FOM module.
+    \item Inconsistent FOM module.
+    \item Could not locate FOM module indicated by supplied designator.
+    \item Federate save in progress.
+    \item Federate restore in progress.
+    \item The federate is already joined to the federation execution.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 1.
+    \item Figure 3.
+    \item Figure 6.
+\end{stdalphalist}
+
+\subsection{Resign Federation Execution service}
+
+The Resign Federation Execution service shall indicate the requested cessation of federation participation. Before resigning, ownership of instance attributes held by the joined federate should be resolved. The joined federate may transfer ownership of these instance attributes to other joined federates, unconditionally divest them for ownership acquisition at a later point, or delete the object instance of which they are a part (assuming the joined federate has the privilege to delete these object instances). As a convenience to the joined federate, the Resign Federation Execution service shall accept an action argument that directs the RTI to perform zero or more of the following actions:
+
+\begin{stddashlist}
+    \item Unconditionally divest all owned instance attributes for future ownership acquisition. This action shall place the instance attributes into an unowned state (implying that their values are not being updated), which shall make them eligible for ownership by another joined federate. See Clause 7 for a more detailed description.
+    \item Delete all object instances for which the joined federate has that privilege (implied invocation of the Delete Object Instance service).
+    \item Cancel all pending instance attribute ownership acquisitions. The use of this directive may interfere with the intended semantics of negotiated instance attribute ownership divestiture by allowing instance attributes divested in this way to be unowned (because the cancellation directive may not succeed).
+\end{stddashlist}
+
+If a federate invokes this service with either directive 1, 4, or 5 as listed in 4.10.1, then for each instance attribute that becomes unowned as a result, if no joined federates are in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI shall try to identify other joined federates that are willing to own the instance attribute. If any joined federate is in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute, the RTI may try to identify other joined federates that are willing to own the instance attribute. The mechanism that the RTI shall use to try to identify other joined federates that are willing to own the instance attribute is invocation of the Request Attribute Ownership Assumption \rtiinitiated{} service at joined federates that are both eligible to own the instance attribute and not in either the Acquiring state or the Willing to Acquire state with respect to the specified instance attribute. As long as the instance attribute remains unowned, the RTI shall try to identify joined federates that are willing to own the instance attribute; but once the instance attribute becomes owned, the RTI shall not invoke the Request Attribute Ownership Assumption \rtiinitiated{} service at any additional federates. If no other federates are joined to the federation execution, then the resigning federate is the last joined federate, and RTI shall process directive 2 as listed in 4.10.1 regardless of supplied arguments.
+
+\clearpage
+
+% --- Standard page 44 / source PDF page 58 ---
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Directive to
+    \begin{stdnumlist}
+        \item Unconditionally divest ownership of all owned instance attributes.
+        \item Delete all object instances for which the joined federate has the delete privilege.
+        \item Cancel all pending instance attribute ownership acquisitions.
+        \item Perform action 2) and then action 1).
+        \item Perform action 3), action 2), and then action 1).
+        \item Perform no actions.
+    \end{stdnumlist}
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item If directive 2 (as listed in 4.10.1) is supplied, the joined federate does not own any instance attributes of object instances for which it does not also have the delete privilege.
+    \item If directive 3 or 6 (as listed in 4.10.1) is supplied, the joined federate does not own any instance attributes in the federation execution.
+    \item If directive 1, 2, 4, or 6 (as listed in 4.10.1) is specified, there are no instance attributes for which the joined federate has performed one of the following actions:
+    \begin{stdnumlist}
+        \item Invoked the Attribute Ownership Acquisition service and has not yet received a corresponding invocation of the Confirm Attribute Ownership Acquisition Cancellation \rtiinitiated{} service, the Attribute Ownership Unavailable \rtiinitiated{} service, or the Attribute Ownership Acquisition Notification \rtiinitiated{} service.
+        \item Invoked the Attribute Ownership Acquisition If Available service and has not yet received a corresponding invocation of either the Attribute Ownership Unavailable \rtiinitiated{} service or the Attribute Ownership Acquisition Notification \rtiinitiated{} service.
+        \item Invoked the Attribute Ownership Acquisition If Available service and has subsequently invoked the Attribute Ownership Acquisition service (after which action 1 applies)
+    \end{stdnumlist}
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The federate is not a member of the federation execution.
+    \item There are no instance attributes in the federation execution owned by the joined federate.
+    \item If directive 2, 4, or 5 (as listed in 4.10.1) is supplied, all object instances for which the joined federate has the delete privilege are deleted.
+    \item If directive 3 or 5 (as listed in 4.10.1) is supplied, all pending instance attribute ownership acquisitions for the joined federate are canceled.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Invalid resign directive.
+    \item Cannot resign due to pending attempt to acquire instance attribute ownership.
+    \item The joined federate owns instance attributes.
+    \item The federate is not a federation execution member.
+    \item The specified federation execution does not exist.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 45 / source PDF page 59 ---
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 1.
+    \item Figure 3.
+    \item Figure 6.
+    \item Figure 8.
+\end{stdalphalist}
+
+\subsection{Register Federation Synchronization Point service}
+
+The Register Federation Synchronization Point service shall be used to initiate the registration of an upcoming synchronization point label. When a synchronization point label has been successfully registered (indicated through the Confirm Synchronization Point Registration \rtiinitiated{} service), the RTI shall inform some or all joined federates of the label's existence by invoking the Announce Synchronization Point \rtiinitiated{} service at those joined federates. The optional set of joined federate designators shall be provided by the joined federate if only a subset of joined federates in the federation execution are to be informed of the label existence. If the set is provided, joined federates in the federation execution, which are members of the set, shall be informed of the label existence. The set may contain valid federate designators of federates no longer joined in the federation execution. If the optional set of joined federate designators is empty or not supplied, all joined federates in the federation execution shall be informed of the label's existence. If the optional set of designators is not empty, all designated joined federates shall be federation execution members. The user-supplied tag shall provide a vehicle for information to be associated with the synchronization point and shall be announced along with the synchronization label. It is possible for multiple synchronization points registered by the same or different joined federates to be pending at the same point.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Synchronization point label.
+    \item User-supplied tag.
+    \item Optional set of joined federate designators.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item If an optional set of joined federate designators is supplied, those federate designators shall be valid.
+    \item The supplied synchronization point label is not in use.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The synchronization label is known to the RTI.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate save in progress.
+    \item Federate restore in progress.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 46 / source PDF page 60 ---
+\begin{stdalphalist}
+    \setcounter{enumi}{2}
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 7.
+    \item Figure 9.
+\end{stdalphalist}
+
+\subsection{Confirm Synchronization Point Registration \rtiinitiated{} service}
+
+The Confirm Synchronization Point Registration \rtiinitiated{} service shall indicate to the requesting joined federate the status of a requested federation synchronization point registration. This service shall be invoked in response to a Register Federation Synchronization Point service invocation. A registration-success indicator argument indicating success shall mean the label has been successfully registered.
+
+If the registration-success indicator argument indicates failure, the failure reason argument shall be provided to identify the reason that the synchronization point registration failed. Possible reasons for the synchronization point registration failure are the following:
+
+\begin{stddashlist}
+    \item The specified label is already in use.
+    \item A synchronization set member is not a joined federate.
+\end{stddashlist}
+
+A registration attempt that ends with a negative success indicator shall have no other effect on the federation execution.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Synchronization point label.
+    \item Registration-success indicator.
+    \item Optional failure reason.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate has invoked Register Federation Synchronization Point service for the specified label.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item If the registration-success indicator is positive, the specified label and associated user-supplied tag shall be announced to the appropriate joined federates.
+    \item If the registration-success indicator is negative, this service and the corresponding Register Federation Synchronization Point service invocation have no consequence.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 47 / source PDF page 61 ---
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 7.
+    \item Figure 9.
+\end{stdalphalist}
+
+\subsection{Announce Synchronization Point \rtiinitiated{} service}
+
+The Announce Synchronization Point \rtiinitiated{} service shall inform a joined federate of the existence of a new synchronization point label. When a synchronization point label has been registered with the Register Federation Synchronization Point service, the RTI shall invoke the Announce Synchronization Point \rtiinitiated{} service, either at all the joined federates in the federation execution or at the specified set of joined federates, to inform them of the label existence. The joined federates informed of the existence of a given synchronization point label via the Announce Synchronization Point \rtiinitiated{} service shall form the synchronization set for that point. If the optional set of joined federate designators was null or not provided when the synchronization point label was registered, the RTI shall also invoke the Announce Synchronization Point \rtiinitiated{} service at all federates that join the federation execution after the synchronization label was registered but before the RTI has ascertained that all joined federates that were informed of the synchronization label existence have invoked the Synchronization Point Achieved service. These newly joining federates shall also become part of the synchronization set for that point. Joined federates that resign from the federation execution after the announcement of a synchronization point but before the federation synchronizes at that point shall be removed from the synchronization set. The user-supplied tag supplied by the Announce Synchronization Point \rtiinitiated{} service shall be the tag that was supplied to the corresponding Register Federation Synchronization Point service invocation.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Synchronization point label.
+    \item User-supplied tag.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The synchronization point has been registered.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The synchronization label is known to the joined federate and may be used in the Synchronization Point Achieved and Federation Synchronized \rtiinitiated{} services.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 48 / source PDF page 62 ---
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 8.
+    \item Figure 9.
+\end{stdalphalist}
+
+\subsection{Synchronization Point Achieved service}
+
+The Synchronization Point Achieved service shall inform the RTI that the joined federate has reached the specified synchronization point. Once all joined federates in the synchronization set for a given point have invoked this service, the RTI shall not invoke the Announce Synchronization Point \rtiinitiated{} on any newly joining federates. The optional synchronization-success indicator shall inform the RTI that the joined federate was synchronized either successfully or unsuccessfully. The RTI shall consider the absence of the indicator as if the joined federate synchronized successfully.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Synchronization point label.
+    \item Optional synchronization-success indicator.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The synchronization point has been announced at this federate.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate is noted as having reached the specified synchronization point.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item The synchronization point label is not announced.
+    \item Federate save in progress.
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 8.
+    \item Figure 9.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 49 / source PDF page 63 ---
+
+\subsection{Federation Synchronized \rtiinitiated{} service}
+
+The Federation Synchronized \rtiinitiated{} service shall inform the joined federate that all joined federates in the synchronization set of the specified synchronization point have invoked the Synchronization Point Achieved service for that point. This service shall be invoked at all joined federates that are in the synchronization set for that point to indicate that the joined federates in the synchronization set have synchronized at that point. Once the synchronization set for a point synchronizes (i.e., the Federation Synchronized \rtiinitiated{} service has been invoked at all joined federates in the set), that point shall no longer be registered, and the synchronization set for that point shall no longer exist. The set of joined federate designators indicates which federates in the synchronization set invoked the Synchronization Point Achieved service with an indication of an unsuccessful synchronization (via the synchronization-success indicator).
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Synchronization point label.
+    \item Set of joined federate designators.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The synchronization point has been registered.
+    \item The synchronization point has been announced at this federate.
+    \item All joined federates in the synchronization set have invoked the Synchronization Point Achieved service using the specified label.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate is informed that all joined federates in the synchronization set, including it if appropriate, have invoked the Synchronization Point Achieved service using the specified label.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 7.
+    \item Figure 9.
+\end{stdalphalist}
+
+\subsection{Request Federation Save service}
+
+The Request Federation Save service shall specify that a federation save should take place.
+
+If the optional timestamp argument is not present, the RTI shall instruct all federation execution members to save state as soon as possible after the invocation of the Request Federation Save service.
+
+\clearpage
+
+% --- Standard page 50 / source PDF page 64 ---
+An optional timestamp argument may be supplied only if the joined federate is time-regulating or if the Greatest Available Logical Time (GALT) is defined for the joined federate. Supplied timestamp arguments shall be larger than the logical time of all time-constrained joined federates in the federation execution. For time-regulating joined federates, this is ensured by using only timestamps that are valid for the joined federate to send in a TSO message (see 8.1 for more information on valid TSO message timestamps). For nonregulating joined federates at which GALT is defined, this can be ensured by only using timestamps that are greater than the joined federate's GALT value.
+
+If a valid optional timestamp argument is present, the RTI shall instruct each time-constrained joined federate to save state (via the Initiate Federate Save \rtiinitiated{} service) as soon as the joined federate has received all messages that it will receive as TSO messages that have timestamps less than or equal to the timestamp of the scheduled save6 and either
+
+\begin{stddashlist}
+    \item The joined federate is in the Time Advancing state as a result of invocation of a Time Advance Request Available, Next Message Request Available, or Flush Queue Request service and the logical time of the next grant is greater than the timestamp of the scheduled save, or
+    \item The joined federate is in the Time Advancing state as a result of invocation of either a Time Advance Request or Next Message Request service and the logical time of the next grant is greater than or equal to the timestamp of the scheduled save
+\end{stddashlist}
+
+When all time-constrained joined federates are eligible to be instructed to save, the RTI shall instruct all nontime-constrained joined federates to save state.
+
+The RTI shall instruct a joined federate to save state by invoking the Initiate Federate Save \rtiinitiated{} service at that joined federate.
+
+At most, one requested save shall be outstanding. A new save request shall replace any outstanding save request. However, a save request cannot happen during a federate save in progress, which is between the RTI invocation of the Initiate Federate Save \rtiinitiated{} service and the RTI invocation of the Federation Saved \rtiinitiated{} service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save label.
+    \item Optional timestamp.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item If an optional timestamp is supplied, either
+    \begin{stdnumlist}
+        \item The joined federate is time-regulating, and the timestamp is a valid timestamp for the joined federate to send in a TSO message, or
+        \item GALT is defined for the joined federate, and the timestamp is greater than the joined federate's GALT value.
+    \end{stdnumlist}
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+6In other words, the federate's GALT will always be greater than the timestamp of the scheduled save.
+
+\clearpage
+
+% --- Standard page 51 / source PDF page 65 ---
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item A federation save has been requested.
+    \item All previous requested saves are canceled.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Timestamp has already passed (if optional timestamp argument supplied).
+    \item Timestamp is invalid (if optional timestamp argument is supplied).
+    \item Federate may not use the timestamp argument (if optional timestamp argument is supplied).
+    \item Federate save in progress.
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Initiate Federate Save \rtiinitiated{} service}
+
+The Initiate Federate Save \rtiinitiated{} service shall instruct the joined federate to save state. The joined federate should save as soon as possible after the invocation of the Initiate Federate Save \rtiinitiated{} service. The label provided to the RTI when the save was requested, via the Request Federation Save service, shall be supplied to the joined federate. The joined federate shall use this label, the name of the federation execution, its joined federate designator, and its federate type, which it supplied when it invoked the Join Federation Execution service, to distinguish the saved state information. If a joined federate is not time constrained, it shall expect to receive an Initiate Federate Save \rtiinitiated{} service invocation at any point. If a joined federate is time-constrained, it shall expect to receive an Initiate Federate Save \rtiinitiated{} service invocation only when it is in the Time Advancing state. The joined federate shall stop providing new information to the federation immediately after receiving the Initiate Federate Save \rtiinitiated{} service invocation. The joined federate may resume providing new information to the federation only after receiving the Federation Saved \rtiinitiated{} service invocation.
+
+If the corresponding Request Federation Save service invocation had a timestamp argument, that timestamp shall be provided to the resulting Initiate Federate Save\rtiinitiated{} service invocation.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save label.
+    \item Optional timestamp.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item A federation save has been scheduled via the Request Federation Save service.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 52 / source PDF page 66 ---
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been instructed to begin saving its state.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Federate Save Begun service}
+
+The Federate Save Begun service shall notify the RTI that the joined federate is beginning to save its state.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate has received an Initiate Federate Save \rtiinitiated{} invocation.
+    \item The joined federate is ready to start saving its state.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The RTI has been informed that the joined federate has begun saving its state.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Save not initiated.
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 53 / source PDF page 67 ---
+
+\subsection{Federate Save Complete service}
+
+The Federate Save Complete service shall notify the RTI that the joined federate has completed its save attempt. The save-success indicator shall inform the RTI that the joined federate save either succeeded or failed.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federate save-success indicator.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate has invoked the Federate Save Begun service for this save.
+    \item The joined federate has completed the attempt to save its state.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The RTI has been informed of the status of the state save attempt.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate has not begun save.
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Federation Saved \rtiinitiated{} service}
+
+The Federation Saved \rtiinitiated{} service shall inform the joined federate that the federation save process is complete, and it shall indicate whether it completed successfully. A save-success indicator argument indicating success shall mean that all joined federates at which the Initiate Federate Save \rtiinitiated{} service was invoked have invoked the Federate Save Complete service with a save-success indicator that indicated success.
+
+If the save-success indicator argument indicates failure, the optional failure reason argument shall be provided to identify the reason that the federation save failed. Possible reasons for the failure of a federation save are as follows:
+
+\begin{stddashlist}
+    \item RTI was unable to save.
+    \item One or more joined federates at which the Initiate Federate Save \rtiinitiated{} service was invoked have invoked the Federate Save Complete service with a save-success indicator that indicated failure.
+\end{stddashlist}
+
+\clearpage
+
+% --- Standard page 54 / source PDF page 68 ---
+\begin{stddashlist}
+    \item One or more joined federates at which the Initiate Federate Save \rtiinitiated{} service was invoked have resigned from the federation execution.
+    \item The RTI has detected failure at one or more of the joined federates at which the Initiate Federate Save \rtiinitiated{} service was invoked.
+    \item The optional timestamp supplied with the save request cannot be honored (due to possible race conditions in the distributed calculation of GALT).
+    \item Federation save aborted.
+\end{stddashlist}
+
+All joined federates that received an invocation of the Initiate Federate Save \rtiinitiated{} service shall receive an invocation of the Federation Saved \rtiinitiated{} service. Also, a joined federate that has invoked the Request Federation Save service may receive an invocation of the Federation Saved \rtiinitiated{} service without having first received an invocation of the Initiate Federate Save \rtiinitiated{} service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save-success indicator.
+    \item Optional failure reason.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been informed of the success or failure of the federation save attempt.
+    \item The joined federate may resume providing new information to the federation.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Abort Federation Save service}
+
+The Abort Federation Save service requests the RTI to abort the federation save that is underway.
+
+The service takes no arguments and affects the current save. This service may be invoked only while the federate is in the Federate Save in Progress state. Upon return of the service invocation, a request to abort the current save has successfully been made.
+
+The RTI shall abort the current save by invoking the Federation Saved \rtiinitiated{} service on all federates that are in the Federate Save in Progress state, regardless of each individual federate's save substate. Joined federates not in the Federation Save in Progress state may not receive the Initiate Federation Saved \rtiinitiated{} callback for this federation save. The save-success indicator for the Federation Saved \rtiinitiated{} service shall indicate failure
+
+\clearpage
+
+% --- Standard page 55 / source PDF page 69 ---
+(federate save aborted) if not all federates have successfully invoked the Federate Save Complete service with a save-success indicator that indicated success. Since a federate remains in the Federate Save in Progress state after it successfully invokes the Federate Save Complete service and before the Federation Saved \rtiinitiated{} service is invoked on it by the RTI, it is possible that all other federates may have invoked the Federate Save Complete service with a save-success indicator of indicating success. In this case, it is possible that the Federation Saved \rtiinitiated{} service is invoked at each federate with a save-success indicator indicating success after a invocation of the Abort Federation Save service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The federate is in the Save in Progress state.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item An abort federation save has been requested.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate save not in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Query Federation Save Status service}
+
+The Query Federation Save Status service shall be used to request the status of a federation save. The RTI shall provide the federation save status via a Federation Save Status Response \rtiinitiated{} service invocation. No save label argument is needed since at most one federation save can be in progress.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 56 / source PDF page 70 ---
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The request for a federation save status has been received by the RTI.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsection{Federation Save Status Response \rtiinitiated{} service}
+
+The Federation Save Status Response \rtiinitiated{} service shall be used to provide the status of a federation save. This service shall be invoked by the RTI at a joined federate in response to a Query Federation Save Status service invocation by the same joined federate. This service shall supply a list of the joined federates participating in the federation save and the save status for each one. A joined federate save status shall be one of the following values:
+
+\begin{stddashlist}
+    \item No federate save in progress
+    \item Federate instructed to save
+    \item Federate saving
+    \item Federate waiting for federation to save
+\end{stddashlist}
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item List of joined federates and save status for each.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item Federate restore not in progress.
+    \item Joined federate requested save status via Query Federation Save Status service.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been informed of the status of the federation save.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 57 / source PDF page 71 ---
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsection{Request Federation Restore service}
+
+The Request Federation Restore service shall direct the RTI to begin the federation execution restoration process. Federation restoration shall begin as soon after the validation of the Request Federation Restore service invocation as possible. A valid federation restoration request shall be indicated with the Confirm Federation Restoration Request \rtiinitiated{} service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save label.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The federation has a save with the specified label.
+    \item The correct number of joined federates of the correct types that were joined to the federation execution when the save was accomplished are a subset of the federates currently joined to the federation execution.
+    \item All previous Request Federation Restore service invocations from the joined federate have been acknowledged with a corresponding Confirm Federation Restoration Request \rtiinitiated{} service.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The RTI has been notified of the request to restore a former federation execution state.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate save in progress.
+    \item Federate restore in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 58 / source PDF page 72 ---
+
+\subsection{Confirm Federation Restoration Request \rtiinitiated{} service}
+
+The Confirm Federation Restoration Request \rtiinitiated{} service shall indicate to the requesting joined federate the status of a requested federation restoration. This service shall be invoked in response to a Request Federation Restore service invocation. A positive request-success indicator informs the joined federate that RTI restoration state information has been located that corresponds to the following:
+
+\begin{stddashlist}
+    \item The indicated label.
+    \item Federation execution name and FDD of this federation execution.
+    \item The census of joined federates matches in number and type the census of joined federates present when the save was taken.
+\end{stddashlist}
+
+Additionally, no other joined federate is currently attempting to restore the federation. Should more than one joined federate attempt to restore the federation at a given point, at most, one joined federate shall receive a positive indication through this service, and all others shall receive a negative indication. A federation restoration attempt that ends with a negative request-success indicator shall have no other effect on the federation execution.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save label.
+    \item Request-success indicator.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate has requested a federation restore via the Request Federation Restore service.
+    \item Federate restore not in progress.
+    \item Federate save not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item If the request-success indicator is positive, federate restore in progress.
+    \item If the request-success indicator is positive, the federation has a saved state with the specified label.
+    \item If the request-success indicator is positive, the correct number of joined federates of the correct types that were joined to the federation execution when the save was accomplished are currently joined to the federation execution.
+    \item If the request-success indicator is negative, this service and the corresponding Request Federation Restore service invocation have no consequence.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 59 / source PDF page 73 ---
+
+\subsection{Federation Restore Begun \rtiinitiated{} service}
+
+The Federation Restore Begun \rtiinitiated{} service shall inform the joined federate that a federation restoration is imminent. The joined federate shall stop providing new information to the federation immediately after receiving the Federation Restore Begun \rtiinitiated{} service invocation. The joined federate may resume providing new information to the federation only after receiving the Federation Restored \rtiinitiated{} service invocation. The RTI shall invoke this service at all joined federates, including the joined federate that requested the restore.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item Federate save not in progress.
+    \item Federate restore not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been instructed to stop providing new information to the federation.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Initiate Federate Restore \rtiinitiated{} service}
+
+The Initiate Federate Restore \rtiinitiated{} service shall instruct the joined federate to return to a previously saved state. The joined federate shall select the appropriate restoration state information based on the name of the current federation execution, the supplied federation save label, the supplied joined federate designator, and the supplied federate name. As a result of this service invocation, a joined federate's designator and name could change from the value supplied by the Join Federation Execution service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation save label.
+    \item Joined federate designator.
+    \item Federate name.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 60 / source PDF page 74 ---
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate has a save with the specified label.
+    \item Federate save not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been informed to begin restoring state.
+    \item The joined federate's designator and name may be changed.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Federate Restore Complete service}
+
+The Federate Restore Complete service shall notify the RTI that the joined federate has completed its restore attempt. If the restore was successful, the joined federate shall be in the state that either it or some other joined federate of its type was in when the federation save associated with the label occurred, with the distinction that the joined federate shall now be waiting for an invocation of the Federation Restored \rtiinitiated{} service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federate restore-success indicator.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The joined federate was directed to restore through invocation of the Initiate Restore service.
+    \item If the restore was successful, the joined federate is in a state identical to the state that either it or some other joined federate of its type was in when the federation save associated with the supplied label occurred, with the distinction that the joined federate is now waiting for an invocation of the Federation Restored \rtiinitiated{} service.
+    \item If the restore was unsuccessful, the joined federate is in an undefined state.
+    \item Federate save not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The RTI has been informed of the status of the restore attempt.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 61 / source PDF page 75 ---
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Restore not requested.
+    \item Federate save in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Federation Restored \rtiinitiated{} service}
+
+The Federation Restored \rtiinitiated{} service shall inform the joined federate that the federation restore process is complete, and it shall indicate whether it completed successfully. A restore-success indicator argument indicating success shall mean that all joined federates at which the Federation Restore Begun \rtiinitiated{} service was invoked have invoked the Federate Restore Complete service with a restore-success indicator that indicated success.
+
+If the restore-success indicator argument indicates failure, the optional failure reason argument shall be provided to identify the reason that the federation restore failed. Possible reasons for the failure of a federation restore are as follows:
+
+\begin{stddashlist}
+    \item The RTI was unable to restore.
+    \item One or more joined federates at which the Federation Restore Begun \rtiinitiated{} service was invoked have invoked the Federate Restore Complete service with a restore-success indicator that indicated failure.
+    \item One or more joined federates at which the Federation Restore Begun \rtiinitiated{} service was invoked have resigned.
+    \item The RTI detected failure at one or more of the joined federates at which the Federation Restore Begun \rtiinitiated{} service was invoked.
+    \item Federation restore aborted.
+\end{stddashlist}
+
+All joined federates that received an invocation of the Federation Restore Begun \rtiinitiated{} service shall receive an invocation of the Federation Restored \rtiinitiated{} service. If a joined federate that received an invocation of the Federation Restore Begun \rtiinitiated{} service resigns from the federation execution before the Federation Restored \rtiinitiated{} service for that restore is invoked, this resignation shall be considered a failure of the federation restoration, and the Federation Restored \rtiinitiated{} service shall be invoked with a restore-success indicator of failure.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item Federation restore-success indicator.
+    \item Optional failure reason.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 62 / source PDF page 76 ---
+\begin{stdalphalist}
+    \setcounter{enumi}{2}
+    \item The joined federate has a save with the specified label.
+    \item Federate save not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The joined federate has been informed regarding the success or failure of the restoration attempt.
+    \item The joined federate may resume providing new information to the federation.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Abort Federation Restore service}
+
+The Abort Federation Restore service requests the RTI to abort the federation restore that is underway.
+
+The service takes no arguments and affects the current restore. This service may be invoked only while the federate is in the Federate Restore in Progress state. Upon return of the service invocation, a request to abort the current restore has successfully been made.
+
+The RTI shall abort the current restore by invoking the Federation Restored \rtiinitiated{} service on all federates that are in the Federate Restore in Progress state, regardless of each individual federate's restore substate. Joined federates not in the Federation Restore in Progress state may not receive the Federation Restore Begun \rtiinitiated{} callback for this federation restore. The restore-success indicator for the Federation Restored \rtiinitiated{} service shall indicate failure (federation restore aborted) if not all federates have successfully invoked the Federate Restore Complete service with a restore-success indicator indicating success. Since a federate remains in the Federate Restore in Progress state after it successfully invokes the Federate Restore Complete service and before the Federation Restored \rtiinitiated{} service is invoked on it by the RTI, it is possible that all other federates may have also already invoked the Federate Restore Complete service with a success indicator indicating success. In this case, it is possible that the Federation Restored \rtiinitiated{} service is invoked at each federate with a success indicator indicating success after invocation of the Abort Federation Restore service.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item The federate is in the Federate Restore in Progress state.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 63 / source PDF page 77 ---
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item An abort federation restore has been requested.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate restore not in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item Figure 3.
+\end{stdalphalist}
+
+\subsection{Query Federation Restore Status service}
+
+The Query Federation Restore Status service shall be used to request the status of a federation restore. The RTI shall provide the federation restore status via a Federation Restore Status Response \rtiinitiated{} service invocation. No save label argument is needed because at most one federation restore can be in progress.
+
+\subsubsection{Supplied arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Returned arguments}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\subsubsection{Preconditions}
+
+\begin{stdalphalist}
+    \item The federate is connected to the RTI.
+    \item The federation execution exists.
+    \item The federate is joined to that federation execution.
+    \item Federate save not in progress.
+\end{stdalphalist}
+
+\subsubsection{Postconditions}
+
+\begin{stdalphalist}
+    \item The request for a federation restore status has been received by the RTI.
+\end{stdalphalist}
+
+\subsubsection{Exceptions}
+
+\begin{stdalphalist}
+    \item Federate save in progress.
+    \item The federate is not a federation execution member.
+    \item Not connected.
+    \item RTI internal error.
+\end{stdalphalist}
+
+\subsubsection{Reference state charts}
+
+\begin{stdalphalist}
+    \item None.
+\end{stdalphalist}
+
+\clearpage
+
+% --- Standard page 64 / source PDF page 78 ---
+\begin{compactstdpage}
+    \subsection{Federation Restore Status Response \rtiinitiated{} service}
+
+    The Federation Restore Status Response \rtiinitiated{} service shall be used to provide the status of a federation restore. This service shall be invoked by the RTI at a joined federate in response to a Query Federation Restore Status service invocation by the same joined federate. This service shall supply a list of restore status descriptors. The list shall contain one descriptor for each joined federate participating in the restore. A restore status descriptor shall have the following information:
+
+    \begin{stddashlist}
+        \item Pre-restore joined federate designator
+        \item Post-restore joined federate designator
+        \item Restore status
+    \end{stddashlist}
+
+    A joined federate shall use the pre-restore joined federate designators to identify joined federates until the Initiate Federate Restore \rtiinitiated{} service has been successfully invoked and indicates restore successful at that joined federate. After that successful service invocation, that joined federate shall use the post-restore joined federate designators to identify joined federates.
+
+    A restore status descriptor with a federate status of ``No federate restore in progress'' shall have a null designator for the post-restore joined federate designator. The post-restore joined federate designator in this case has no meaning since the federate is not participating in a restore.
+
+    A joined federate restore status shall be one of the following values:
+
+    \begin{stddashlist}
+        \item No federate restore in progress
+        \item Federate restore request pending
+        \item Federate waiting for restore to begin
+        \item Federate prepared to restore
+        \item Federate restoring
+        \item Federate waiting for federation to restore
+    \end{stddashlist}
+
+    \subsubsection{Supplied arguments}
+
+    \begin{stdalphalist}
+        \item List of joined federates and restore status for each.
+    \end{stdalphalist}
+
+    \subsubsection{Returned arguments}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+
+    \subsubsection{Preconditions}
+
+    \begin{stdalphalist}
+        \item The federation execution exists.
+        \item The federate is joined to that federation execution.
+        \item Federate save not in progress.
+        \item Joined federate requested restore status via Query Federation Restore Status service.
+    \end{stdalphalist}
+
+    \subsubsection{Postconditions}
+
+    \begin{stdalphalist}
+        \item The joined federate has been informed of the status of the federation restore.
+    \end{stdalphalist}
+
+    \subsubsection{Exceptions}
+
+    \begin{stdalphalist}
+        \item Federate internal error.
+    \end{stdalphalist}
+
+    \subsubsection{Reference state charts}
+
+    \begin{stdalphalist}
+        \item None.
+    \end{stdalphalist}
+\end{compactstdpage}

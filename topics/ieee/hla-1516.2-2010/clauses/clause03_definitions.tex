@@ -1,0 +1,89 @@
+% Complete Clause 3 reconstruction through source PDF p. 31.
+% Source PDF p. 16 begins in the initial file; pp. 17-29 continue definitions;
+% p. 30 contains 3.2 and the opening of 3.3; p. 31 contains 3.3.1.
+
+\input{clauses/clause03_definitions_initial}
+\input{clauses/clause03_definitions_continuation}
+
+\newpage
+% Source PDF p. 30 / standard p. 18
+
+\subsection{Abbreviations and acronyms}
+The following abbreviations and acronyms pertain to this standard, IEEE Std 1516-2010, and IEEE Std 1516.1-2010:
+
+\begingroup
+\fontsize{10.0}{12.0}\selectfont
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{50pt}p{382pt}@{}}
+    ADT   & abstract datatype                            \\
+    API   & application programmer's interface           \\
+    BNF   & Backus Naur Form                             \\
+    BOM   & base object model                            \\
+    DDM   & data distribution management                 \\
+    DIF   & data interchange format                      \\
+    DM    & declaration management                       \\
+    DTD   & document type declaration                    \\
+    FDD   & FOM Document Data                            \\
+    FEDEP & Federation Development and Execution Process \\
+    FOM   & federation object model                      \\
+    GALT  & Greatest Available Logical Time              \\
+    HLA   & High Level Architecture                      \\
+    JAR   & Java Archive                                 \\
+    LIS   & language-independent specification           \\
+    LITS  & Least Incoming Timestamp                     \\
+    LRC   & Local Runtime Component                      \\
+    MIM   & MOM and Initialization Module                \\
+    MOM   & Management Object Model                      \\
+    M\&S  & modeling and simulation                      \\
+    NA    & not applicable                               \\
+    OMT   & object model template                        \\
+    OO    & object oriented                              \\
+    OOAD  & object-oriented analysis and design          \\
+    POC   & point of contact                             \\
+    RID   & RTI initialization data                      \\
+    RO    & receive order                                \\
+    RTI   & runtime infrastructure                       \\
+    SOM   & simulation object model                      \\
+    TRADT & time representation abstract datatype        \\
+    TSO   & timestamp order                              \\
+    WSDL  & Web Service Definition Language              \\
+    WSPRC & Web Service Provider RTI Component           \\
+    XML   & extensible markup language                   \\
+\end{tabular}
+\endgroup
+
+\subsection{Conventions}
+Conventions in this standard specify how entries are to be formulated when completing an HLA object model. The following conventions pertain to this standard.
+
+\newpage
+% Source PDF p. 31 / standard p. 19
+
+\subsubsection{Names}
+Names in object models shall adhere to eXtensible Markup Language (XML) naming conventions. XML conventions state that names cannot begin with a number or punctuation character, and require that names be constructed from a combination of letters, digits, hyphens, colons, full stops (periods), and underscores with no spaces or other breaking characters (e.g., tabs, carriage returns). In HLA object models, allowable names shall be further restricted as follows:
+
+\begin{enumerate}[label=\alph*)]
+\item The period (full stop) is reserved for qualifying class names and shall not be included in a user-defined name within an object model. When fully qualified, the class name includes all predecessor class names (separated by periods) beginning at the root and ending at the class name in question.
+\item As recommended in the XML specification, the colon character shall not be used.
+\item Names beginning with the string ``hla,'' or any string that would match (('H'\textbar{}'h') ('L'\textbar{}'l') ('A'\textbar{}'a')), are reserved and shall not be included in user-defined names.
+\item The case of all textual data within HLA object models (including names) shall be significant; all textual data defined in an object model document shall be case-sensitive.
+\item A name consisting of the string ``na,'' or any string that would match (('N'\textbar{}'n') ('A'\textbar{}'a')), is reserved to indicate that a name is not applicable in this circumstance and shall not be included as a user-defined name.
+\end{enumerate}
+
+These rules apply to the following names in HLA object models:
+
+\begin{itemize}
+    \item Object class names
+    \item Interaction class names
+    \item Attribute names
+    \item Parameter names
+    \item Datatype names
+    \item Enumerated datatype enumerators
+    \item Fixed record field names
+    \item Variant record alternative names
+    \item Basic data representation names
+    \item Dimension names
+    \item Transportation type names
+    \item Synchronization point labels
+    \item Note identifying labels
+\end{itemize}

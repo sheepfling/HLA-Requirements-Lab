@@ -1,0 +1,262 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ieee1516-2010}[2026/08/24 HLA Requirements Lab 2010 source-compilation style]
+
+\RequirePackage[letterpaper,left=1.25in,right=1.25in,top=0.94in,bottom=0.96in,headheight=12pt,headsep=14pt,footskip=28pt]{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{microtype}
+\RequirePackage{hyperref}
+\RequirePackage{ragged2e}
+\RequirePackage{xcolor}
+\RequirePackage{colortbl}
+\RequirePackage{etoolbox}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Noto Serif}
+\setsansfont{Inter}[
+    Path=../requirements-lab/fonts/,
+    UprightFont=Inter-Regular.ttf,
+    ItalicFont=Inter-Italic.ttf,
+    BoldFont=Inter-ExtraBold.ttf,
+    BoldItalicFont=Inter-Italic.ttf,
+    Ligatures=NoCommon,
+    RawFeature={-calt}]
+
+\hypersetup{
+    pdftitle={HLA 1516 family - 2010 source compilation - HLA Requirements Lab},
+    pdfauthor={HLA Requirements Lab},
+    colorlinks=false,
+    hidelinks
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\JustifyingParindent}{0pt}
+\setlength{\parskip}{6.0pt}
+\setlength{\emergencystretch}{3em}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\interfootnotelinepenalty=10000
+
+\newcommand{\bodyfont}{\fontsize{9.96pt}{12pt}\selectfont}
+\newcommand{\notefont}{\fontsize{9pt}{10.8pt}\selectfont}
+\newcommand{\headerfont}{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}
+\newcommand{\footerfont}{\fontsize{7.98pt}{9.2pt}\selectfont}
+\newcommand{\footnotefont}{\fontsize{7.98pt}{9.2pt}\selectfont}
+
+\makeatletter
+\renewcommand\footnoterule{\kern-3pt\hrule width 0pt\kern2.6pt}
+\renewcommand\footnotesize{\footnotefont}
+\renewcommand\@makefntext[1]{%
+    \noindent\hbox{\raisebox{3.5pt}{\fontsize{6.36pt}{6.36pt}\selectfont\@thefnmark}}#1%
+}
+\makeatother
+
+\fancypagestyle{hla}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[LE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
+    \fancyhead[RE]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA REQUIREMENTS LAB}}
+    \fancyhead[LO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont FRAMEWORK AND RULES}}
+    \fancyhead[RO]{\raisebox{9.6pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
+    \fancyfoot[LE]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont\thepage}}
+    \fancyfoot[RE]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont}}
+    \fancyfoot[LO]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont}}
+    \fancyfoot[RO]{\raisebox{-10.5pt}[0pt][0pt]{\footerfont\thepage}}
+}
+
+
+% The final bibliography page in the supplied 2010 PDF uses a reduced running
+% header and sits its folio/copyright line slightly lower than the technical
+% body page style. Keep this isolated so earlier reconstructed pages do not
+% reflow while the front matter remains deferred.
+\fancypagestyle{hlabibliography}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[LE]{\raisebox{10.3pt}[0pt][0pt]{\headerfont HLA 1516 \textbar\ 2010-source compilation}}
+    \fancyfoot[LE]{\hspace*{-1pt}\raisebox{-8.6pt}[0pt][0pt]{\footerfont\thepage}}
+    \fancyfoot[RE]{\raisebox{-10.2pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}}}
+}
+
+% First Arabic technical page (source PDF page 13 / printed page 1).
+% \hlaTechnicalMetrics is invoked after \begin{document}; TeX's first page has
+% already initialized its output box at that point, so its footer needs a
+% page-specific 9--11 pt lift to occupy the same physical baseline as later
+% technical pages.  Keep that correction isolated here rather than perturbing
+% the already-calibrated pages 2--26.
+\fancypagestyle{hlafirst}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-0.5pt}[0pt][0pt]{\footerfont}}
+    \fancyfoot[RO]{\raisebox{1.2pt}[0pt][0pt]{\footerfont\thepage}}
+}
+
+\pagestyle{hla}
+
+\newcommand{\clause}[1]{%
+    \par\vspace{10.0pt}%
+    {\sffamily\bfseries\fontsize{12pt}{14.4pt}\selectfont #1\par}%
+    \vspace{7.5pt}%
+}
+\newcommand{\subclause}[1]{%
+    \par\vspace{8.0pt}%
+    {\sffamily\bfseries\fontsize{10.98pt}{13.2pt}\selectfont #1\par}%
+    \vspace{6.0pt}%
+}
+\newcommand{\subsubclause}[1]{%
+    \par\vspace{7.0pt}%
+    {\sffamily\bfseries\fontsize{9.96pt}{12pt}\selectfont #1\par}%
+    \vspace{5.0pt}%
+}
+
+\newcommand{\hlaNote}[1]{%
+    \par\vspace{0pt}{\notefont NOTE---#1\par}\vspace{0pt}%
+}
+
+\newcommand{\defentry}[2]{%
+    \par\noindent\textbf{#1:} #2\par
+}
+\newcommand{\hlaService}[1]{\textit{#1}}
+\newcommand{\hlaSeeAlso}[1]{\textit{See also}: #1}
+\newcommand{\hlaTermRef}[1]{\textbf{#1}}
+
+\newenvironment{hlalist}{%
+    \begin{enumerate}[label=\alph*),labelindent=10pt,labelwidth=8pt,labelsep=14pt,leftmargin=32pt,itemsep=0pt,topsep=2pt,parsep=0pt,partopsep=0pt]
+}{\end{enumerate}}
+
+\newenvironment{hlarules}{%
+% Clause 4 source geometry: labels begin at x ~= 122 pt and text at
+% x ~= 142 pt on the 90 pt technical-body left margin.  The source has
+% no inter-item gap beyond the 12 pt body leading and uses one blank line
+% above and below each rule list.
+    \begin{enumerate}[label=\arabic*),leftmargin=52pt,labelsep=11.6pt,itemsep=0pt,topsep=6pt,parsep=0pt,partopsep=0pt]
+}{\end{enumerate}}
+
+
+% Informative annex headings.  These are kept separate from clause headings
+% because the source uses a visibly looser, larger title stack on annex pages.
+\newcommand{\annexdesignation}[1]{%
+    \par\vspace{8pt}%
+    {\sffamily\bfseries\fontsize{14.4pt}{17.2pt}\selectfont Annex #1\par}%
+    \vspace{13pt}%
+}
+\newcommand{\annexstatus}[1]{%
+        {\fontsize{12pt}{14.4pt}\selectfont (#1)\par}%
+    \vspace{18pt}%
+}
+\newcommand{\annextitle}[1]{%
+        {\sffamily\bfseries\fontsize{14.4pt}{17.2pt}\selectfont #1\par}%
+    \vspace{20pt}%
+}
+\newcommand{\annexsection}[1]{%
+    \par\vspace{7pt}%
+    {\sffamily\bfseries\fontsize{11.0pt}{13.2pt}\selectfont #1\par}%
+    \vspace{8pt}%
+}
+\newcommand{\annexsubsection}[1]{%
+    \par\vspace{8pt}%
+    {\sffamily\bfseries\fontsize{10.0pt}{12pt}\selectfont #1\par}%
+    \vspace{7pt}%
+}
+
+% The family interior uses a calm ragged-right reading measure. This avoids
+% stretched spaces in definition-heavy source pages while retaining the
+% source's live, selectable text.
+\AtBeginDocument{\bodyfont\RaggedRight}
+
+
+% Technical-body baseline/footer calibration. Shrinking the text area by 9 pt
+% raises bottom-anchored footnotes to the source position; increasing footskip by
+% the same amount keeps the running footer at its calibrated physical baseline.
+\newcommand{\hlaTechnicalMetrics}{%
+    \addtolength{\textheight}{-9pt}%
+    \addtolength{\footskip}{9pt}%
+}
+
+% -----------------------------------------------------------------------------
+% Front-matter reconstruction helpers (source PDF pages 3--5).
+% These styles intentionally do not alter the technical-body page geometry.
+% -----------------------------------------------------------------------------
+\fancypagestyle{hlafrontlicense}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\frontTitleFont}{\sffamily\bfseries\fontsize{24pt}{26.04pt}\selectfont}
+\newcommand{\frontStdFont}{\sffamily\bfseries\fontsize{11pt}{12.5pt}\selectfont}
+\newcommand{\frontRevisionFont}{\sffamily\fontsize{8pt}{9.7pt}\selectfont}
+\newcommand{\frontLabelFont}{\sffamily\fontsize{10pt}{12pt}\selectfont}
+\newcommand{\frontSponsorFont}{\sffamily\bfseries\fontsize{11pt}{13pt}\selectfont}
+\newcommand{\frontBodySans}{\sffamily\fontsize{10pt}{12pt}\selectfont}
+\newcommand{\frontNoticeBody}{\rmfamily\fontsize{8.5pt}{10.5pt}\selectfont}
+\newcommand{\frontPublisherFont}{\sffamily\fontsize{6.9pt}{7.0pt}\selectfont}
+\newcommand{\frontPublisherBold}{\sffamily\bfseries\fontsize{6.9pt}{7.0pt}\selectfont}
+
+% -----------------------------------------------------------------------------
+% Front-matter continuation helpers (source PDF pages 6--10 / printed iv--viii).
+% -----------------------------------------------------------------------------
+\fancypagestyle{hlafrontroman}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyfoot[LE]{\hspace*{-1pt}\raisebox{-8.5pt}[0pt][0pt]{\fontsize{9.96pt}{11pt}\selectfont\thepage}}
+    \fancyfoot[RE]{\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}}
+    \fancyfoot[LO]{\hspace*{-1pt}\raisebox{-8.5pt}[0pt][0pt]{\sffamily\fontsize{7.98pt}{9.2pt}\selectfont}}
+    \fancyfoot[RO]{\raisebox{-8.5pt}[0pt][0pt]{\fontsize{9.96pt}{11pt}\selectfont\thepage}}
+}
+
+\newcommand{\frontIntroductionHeading}{\sffamily\bfseries\fontsize{13.98pt}{16.2pt}\selectfont}
+\newcommand{\frontSectionHeading}{\sffamily\bfseries\fontsize{10.98pt}{13.2pt}\selectfont}
+\newcommand{\frontBody}{\rmfamily\fontsize{9.96pt}{12pt}\selectfont}
+\newcommand{\frontBoxBody}{\rmfamily\fontsize{9pt}{10.02pt}\selectfont}
+\newcommand{\frontNames}{\rmfamily\fontsize{9pt}{10.30pt}\selectfont}
+% Page-specific participant-list leading in the supplied source varies between
+% the working-group, ballot, and Standards Board lists. Keep explicit variants
+% rather than perturbing the already matched front-matter prose.
+\newcommand{\frontNamesTight}{\rmfamily\fontsize{9pt}{10.08pt}\selectfont}
+\newcommand{\frontNamesContinuation}{\rmfamily\fontsize{9pt}{10.33pt}\selectfont}
+\newcommand{\frontBallotNames}{\rmfamily\fontsize{9pt}{10.06pt}\selectfont}
+\newcommand{\frontBoardNamesA}{\rmfamily\fontsize{9pt}{10.54pt}\selectfont}
+\newcommand{\frontBoardNamesB}{\rmfamily\fontsize{9pt}{10.33pt}\selectfont}
+\newcommand{\frontBoardNamesC}{\rmfamily\fontsize{9pt}{10.20pt}\selectfont}
+\newcommand{\frontOfficer}{\rmfamily\fontsize{9.96pt}{12pt}\selectfont}
+\newcommand{\frontBlueUrl}[1]{\textcolor{blue}{\underline{#1}}}
+
+% -----------------------------------------------------------------------------
+% External cover helpers (source PDF pages 1--2).
+% Coordinates are reproduced on the native 612 x 792 pt Letter page using
+% TikZ overlay nodes. The IEEE emblem/wordmark is rendered as source-
+% controlled TikZ; no binary source-page logo is required.
+% -----------------------------------------------------------------------------
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\definecolor{ieeecoverblack}{RGB}{35,31,32}
+\definecolor{ieeecoverline}{RGB}{167,169,172}
+\definecolor{ieeecoverrule}{RGB}{146,148,151}
+\definecolor{ieeecovergray}{RGB}{157,159,161}
+
+\newcommand{\coverTitleFont}{\sffamily\bfseries\fontsize{24pt}{28.8pt}\selectfont}
+\newcommand{\coverSocietyFont}{\sffamily\bfseries\fontsize{16pt}{19.2pt}\selectfont}
+\newcommand{\coverSponsorFont}{\sffamily\fontsize{12pt}{14.4pt}\selectfont}
+\newcommand{\coverPublisherFont}{\sffamily\fontsize{8pt}{9.6pt}\selectfont}
+\newcommand{\coverStdFont}{\sffamily\bfseries\fontsize{11pt}{13.2pt}\selectfont}
+\newcommand{\coverRevisionFont}{\sffamily\fontsize{9pt}{10.8pt}\selectfont}
+\newcommand{\coverNumberFont}{\sffamily\bfseries\fontsize{90pt}{90pt}\selectfont}
+\newcommand{\coverTrademarkFont}{\sffamily\fontsize{18pt}{18pt}\selectfont}
+\newcommand{\IEEEWordmark}{%
+    \begin{tikzpicture}[x=1pt,y=1pt,baseline=-2pt]
+    \draw[ieeecoverblack,line width=0.75pt] (8,10) circle (8.5);
+    \node[anchor=center,text=ieeecoverblack,font=\sffamily\bfseries\fontsize{7.5pt}{7.5pt}\selectfont]
+    at (8,10) {IEEE};
+    \node[anchor=west,text=ieeecoverblack,font=\sffamily\bfseries\fontsize{17pt}{17pt}\selectfont]
+    at (22,10) {IEEE};
+    \end{tikzpicture}%
+}

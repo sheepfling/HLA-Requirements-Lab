@@ -1,0 +1,507 @@
+% Source PDF pp. 56-64 / standard pp. 44-52.
+% Continues Clause 4 from the remainder of 4.7.1 through completion of 4.12.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 56 / standard p. 44.
+% ---------------------------------------------------------------------------
+\newpage
+reason, it is important to document how a simulation supports the advancement of time in a federate's SOM and relevant SOM modules.
+
+IEEE Std 1516.1-2010 provides a variety of time management services to control the advancement of federates along the HLA time axis. These services allow multiple federates with differing internal time advancement strategies to interoperate in a meaningful way. For this reason, it is vital for all federation members to agree on how timestamps are represented across the federation, and document this agreement in the federation's FOM and relevant FOM modules.
+
+During federation execution, timestamps are represented as instances of the time representation abstract datatype (TRADT). This abstract datatype is provided to the RTI when a federate joins a federation execution so that an RTI knows how to use the timestamps. This table allows the datatype and semantics of the abstract datatype for timestamps to be explained in FOMs, FOM modules, SOMs, and SOM modules.
+
+It is also important to define the lookahead characteristics of both federates and federations. At the individual federate level, the specific means by which lookahead is supported may be a factor in assessing compatibility with other potential federates for a given federation application. For federations, it is important to document a common set of characteristics for how lookahead will be supported across the full federation. Thus, SOMs, SOM modules, FOMs and FOM modules all include representations of lookahead as well as timestamps. Representations of lookahead shall be drawn from nonnegative datatypes.
+
+An abstract datatype for lookahead is supplied when a federate joins a federation execution. The lookahead entry in this table allows the datatype and semantics of this abstract datatype to be documented in FOMs, SOMs, FOM modules, and SOM modules.
+
+Semantic differences exist between the way time is represented for the purpose of depicting timestamps versus calculating lookahead. When depicting timestamps, time can be considered to be an absolute value on a timeline (the HLA time axis), and thus, time comparisons can be drawn to determine if one timestamp is greater than another. Lookahead, in contrast, represents a duration of time, which can be added to timestamps but is generally not used for comparison purposes.
+
+Two time representations, HLAinteger64Time and HLAfloat64Time, are required to be supported by the HLA and are described in detail in IEEE Std 1516.1-2010. These types shall be provided by all RTIs. Federations may choose to use these default datatypes, supply their own time representations, or not supply any time representation (e.g., NA).
+
+\vspace{-14pt}
+
+\subsubsection{Table format}
+The template that shall be used for recording time representation is illustrated in Table 14.
+
+\omtcaption{Table 14---Time representation table}\vspace{-8.8pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.34}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{106.2pt}|p{126.6pt}|p{126.0pt}|}
+                                     \hline
+                                     \centering\bfseries Category & \centering\bfseries Datatype & \centering\arraybackslash\bfseries Semantics \\
+                                     \hline
+                                     \centering Timestamp         & \centering \omtph{type}      & \centering\arraybackslash \omtph{semantics}  \\
+                                     \hline
+                                     \centering Lookahead         & \centering \omtph{type}      & \centering\arraybackslash \omtph{semantics}  \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6.7pt}
+
+The first column (Category) presents the two time-related values that are to be specified in the table: timestamp and lookahead. \textit{Timestamp} and \textit{Lookahead} correspond to the only two rows in this table.
+
+The second column (Datatype) shall identify the datatype of the time value. This datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype described in 4.13. ``NA'' shall be entered in this column when timestamp or lookahead information is inappropriate to the federate or federation.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 57 / standard p. 45.
+% ---------------------------------------------------------------------------
+\newpage
+The third column (Semantics) shall expand and describe the use of the datatype for time values. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+\subsubsection{Inclusion criteria}
+All federations shall document their use of timestamp and lookahead via the time representation table in a FOM and relevant FOM modules. All federates shall document their representation of timestamps via the time representation table in a SOM and relevant SOM modules to the extent that it is used in the federate. For federates that support lookahead, the representation of lookahead shall be documented via the time representation table in a SOM and relevant SOM modules.
+
+\vspace{-8pt}
+
+\subsubsection{Example}
+Table 15 provides an example of how the OMT tables are used to describe the representation of time for the restaurant application.
+
+\omtcaption{Table 15---Time representation table example}\vspace{-9.4pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.34}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{82.8pt}|p{90.6pt}|p{222.6pt}|}
+                                     \hline
+                                     \centering\bfseries Category & \centering\bfseries Datatype & \centering\arraybackslash\bfseries Semantics             \\
+                                     \hline
+                                     Timestamp                    & TimeType                     & Floating point value expressed in minutes                \\
+                                     \hline
+                                     Lookahead                    & LAType                       & Floating point value expressed in minutes (non-negative) \\
+                                     \hline
+                                     Note & \multicolumn{2}{l|}{NA} \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6.3pt}
+
+\subsection{User-supplied tag table}
+
+\subsubsection{Purpose/background}
+The HLA RTI provides a mechanism for federates to supply tags with certain HLA services. These tags can be used to provide additional coordination and control over these services. The user-supplied tag table provides a means of documenting federation agreements regarding the datatype to be used with these tags.
+
+\vspace{-11.8pt}
+
+\subsubsection{Table format}
+\vspace{-2.8pt}
+The template that shall be used for recording information on user-supplied tags is illustrated in Table 16.
+
+\omtcaption{Table 16---User-supplied tag table}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.26}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{114.6pt}|p{118.2pt}|p{126.0pt}|}
+                                     \hline
+                                     \centering\bfseries Category & \centering\bfseries Datatype & \centering\arraybackslash\bfseries Semantics \\
+                                     \hline
+                                     Update/reflect               & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Send/receive                 & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Delete/remove                & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Divestiture request          & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Divestiture completion       & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Acquisition request          & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+                                     Request update               & \omtph{type}                 & \omtph{semantics}                            \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{5.9pt}
+
+The first column (Category) presents the HLA service categories that are capable of accepting a user-supplied tag.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 58 / standard p. 46.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{itemize}[topsep=0pt,itemsep=2pt]
+\item \textit{Update/Reflect}: Updating and the corresponding reflection of instance attribute values.
+\item \textit{Send/Receive}: Sending and the corresponding reception of an interaction.
+\item \textit{Delete/Remove}: Deletion and the corresponding removal of an object instance.
+\item \textit{Divestiture Request}: Negotiations involved in divesting ownership of instance attributes.
+\item \textit{Divestiture Completion}: Confirmation and completion of the negotiated divestiture of ownership of instance attributes.
+\item \textit{Acquisition Request}: Negotiations involved in acquiring ownership of instance attributes.
+\item \textit{Request Update}. Requesting update of instance attribute values and the corresponding RTI direction to provide instance attribute values.
+\end{itemize}
+
+These seven service categories correspond to the only seven rows in Table 16.
+
+The second column (Datatype) shall identify the datatype of the user-supplied tag for those categories of service that the federate or federation designate as providing a user-supplied tag. This datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype described in subclauses of 4.13. ``NA'' shall be entered in this column when this category of user-supplied tag is not used by the federate or federation.
+
+The third column (Semantics) shall expand and describe the use of the datatype for this user-supplied tag. ``NA'' shall be entered in this column when semantics information is unnecessary.
+
+\vspace{14pt}
+
+\subsubsection{Inclusion criteria}
+All federations that make use of user-supplied tags shall document the appropriate representations of these tags in the user-supplied tag table in a FOM and relevant FOM modules. All federates that can make use of user-supplied tags shall document their tag representations via the user-supplied tag table in a SOM and relevant SOM modules.
+
+\vspace{-7.5pt}
+
+\subsubsection{Example}
+Table 17 provides an example of how the OMT tables are used to describe the representation of user-supplied tags by the restaurant federate. In this example, no tags are specified for update/reflect, send/receive, divestiture completion, or request update. A simple text string is used for delete/remove that describes the reasons for the action. A priority entry is specified for ownership transfer negotiations (both divestiture requests and acquisition requests). This entry indicates the criticality of the transfer; a high value tells the federate to accept or divest ownership immediately.
+
+\omtcaption{Table 17---User-supplied tag table example}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{114.6pt}|p{118.2pt}|p{156.0pt}|}
+                                     \hline
+                                     \centering\bfseries Category & \centering\bfseries Datatype & \centering\arraybackslash\bfseries Semantics \\
+                                     \hline
+                                     Update/reflect               & NA                           & NA                                           \\
+                                     \hline
+                                     Send/receive                 & NA                           & NA                                           \\
+                                     \hline
+                                     Delete/remove                & HLAASCIIstring               & Reason for deletion                          \\
+                                     \hline
+                                     Divestiture request          & PriorityLevel                & High value for immediate transfer            \\
+                                     \hline
+                                     Divestiture completion       & NA                           & NA                                           \\
+                                     \hline
+                                     Acquisition request          & PriorityLevel                & High value for immediate transfer            \\
+                                     \hline
+                                     Request update               & NA                           & NA                                           \\
+                                     \hline
+                                     Note & \multicolumn{2}{l|}{NA} \\
+                                     \hline
+\end{tabular}}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 59 / standard p. 47.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsection{Synchronization table}
+
+\subsubsection{Purpose/background}
+The HLA RTI provides a mechanism for federates to synchronize activities using a feature called Synchronization Points. The synchronization table provides the means for a federate to describe the synchronization points that it is capable of honoring and for a federation to document agreements regarding synchronization points to be used.
+
+\vspace{-13.8pt}
+
+\subsubsection{Table format}
+The template that shall be used for recording information to be used in synchronization points is illustrated in Table 18.
+
+\omtcaption{Table 18---Synchronization table}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{73.8pt}|p{99.0pt}|p{91.2pt}|p{132.0pt}|}
+                                     \hline
+                                     \centering\bfseries Label & \centering\bfseries Tag datatype & \centering\bfseries Capability & \centering\arraybackslash\bfseries Semantics \\
+                                     \hline
+                                     \omtph{label}             & \omtph{type}                     & \omtph{capability}             & \omtph{semantics}                            \\
+                                     \hline
+                                     \omtph{label}             & \omtph{type}                     & \omtph{capability}             & \omtph{semantics}                            \\
+                                     \hline
+                                     \omtph{label}             & \omtph{type}                     & \omtph{capability}             & \omtph{semantics}                            \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6.5pt}
+
+The first column (Label) shall contain a text string that defines the label associated with a synchronization point. Synchronization labels shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Tag datatype) shall identify the datatype of the user-supplied tag for those synchronization points that the federate or federation designate as providing a user-supplied tag. If used, this datatype shall be chosen from the name of any simple, enumerated, array, fixed record, or variant record datatype described in 4.13. If no user-supplied tag is provided, a value of ``NA'' should be used for the tag datatype.
+
+The third column (Capability) shall indicate the level of interaction that a federate is capable of honoring. For FOMs and FOM modules, this column does not apply and shall contain ``NA.'' For SOMs and SOM modules, valid values for this column are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Register}: The federate is capable of invoking HLA services to register the synchronization point.
+\item \textit{Achieve}: The federate is capable of invoking HLA services to indicate achieving the synchronization point.
+\item \textit{RegisterAchieve}: The federate is capable of both registering and achieving the synchronization point.
+\item \textit{NoSynch}: The federate is capable of neither registering nor achieving the synchronization point.
+\end{itemize}
+
+The fourth column (Semantics) shall expand and describe the use of the synchronization point.
+
+\vspace{23.5pt}
+
+\subsubsection{Inclusion criteria}
+All federations that make use of synchronization points shall document the appropriate representations of these points in the synchronization table of a FOM and relevant FOM modules. All federates that make use of synchronization points shall document them via the synchronization table in a SOM and relevant SOM modules.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 60 / standard p. 48.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsubsection{Example}
+Table 19 provides an example of how synchronization points might be described for a particular federate. In this example, no tags are specified for the first three synchronization points and a tag of type TimeType is included in the fourth. This federate is able to achieve all of the synchronization points and to register the fourth as well.
+
+\vspace{-19.6pt}\omtcaption{Table 19---Synchronization table example}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.21}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{79.4pt}|p{60.2pt}|p{57.2pt}|p{213.8pt}|}
+                                     \hline
+                                     \centering\bfseries Label & \centering\bfseries Tag datatype & \centering\bfseries Capability & \centering\arraybackslash\bfseries Semantics \\
+                                     \hline
+                                     InitialPublish            & NA                               & Achieve                        & Achieved when all classes are published and subscribed, and all initially present objects are registered                    \\
+                                     \hline
+                                     InitialUpdate             & NA                               & Achieve                        & Achieved when instance attribute values for all initially present objects are updated                                       \\
+                                     \hline
+                                     BeginTimeAdvance          & NA                               & Achieve                        & Achieved when time management services are invoked                                                                          \\
+                                     \hline
+                                     PauseExecution            & TimeType                         & Register\newline Achieve       & Achieved when the time advance after the time in the user-supplied tag is attained; time advance requests should then cease \\
+                                     \hline
+                                     Note & \multicolumn{3}{l|}{NA} \\
+                                     \hline
+\end{tabular}}
+\endgroup
+
+\vspace{-2pt}
+
+\subsection{Transportation type table}
+\vspace{-10pt}
+
+\subsubsection{Purpose/background}
+The HLA RTI provides different mechanisms for the transportation of data (interactions and object instance attribute values) among federates. The transportation type table provides a means for a federate designer to describe the types of transportation that can be supported and for federation designers to document agreements regarding transportation of instance attributes and interactions.
+
+Two transportation types, HLAreliable and HLAbestEffort, are required by the HLA and are described in detail in IEEE Std 1516.1-2010. These types shall be provided by all RTIs. Other transportation types may be provided by specific RTIs.
+
+\vspace{-6.5pt}
+
+\subsubsection{Table format}
+The template that shall be used for recording information about transportation types is illustrated in Table 20. Note that the transportation types required by the HLA to be provided by all RTIs are predefined in the table. Other entries may be added after these entries.
+
+\omtcaption{Table 20---Transportation type table}\vspace{-7pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.30}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{81.4pt}|p{82.0pt}|p{235.6pt}|}
+                                     \hline
+                                     \centering\bfseries Name & \centering\bfseries Reliability & \centering\arraybackslash\bfseries Semantics                                          \\
+                                     \hline
+                                     HLAreliable              & Reliable                        & Provide reliable delivery of data in the sense that TCP/IP delivers its data reliably \\
+                                     \hline
+                                     HLAbestEffort            & Best Effort                     & Make an effort to deliver data in the sense that UDP provides best-effort delivery    \\
+                                     \hline
+                                     \omtph{name}             & \omtph{reliability}             & \omtph{semantics}                                                                     \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6pt}
+
+The first column (Name) shall contain a text string that defines the name associated with a transportation type. Transportation type names shall adhere to HLA naming conventions (see 3.3.1).
+
+The second column (Reliability) shall indicate whether reliable delivery is guaranteed or not for this transportation. The following entries are valid: ``Reliable'' and ``Best Effort.''
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 61 / standard p. 49.
+% ---------------------------------------------------------------------------
+\newpage
+The third column (Semantics) shall describe the transportation type.
+
+\subsubsection{Inclusion criteria}
+The two transportation types (HLAreliable and HLAbestEffort) that are required by the HLA shall be included in this table. Federations may choose to use one, both, or neither of these types depending on their needs. Other transportation types that are provided by specific RTIs shall be included in this table when used by a federate or federation.
+
+\vspace{-8pt}
+
+\subsubsection{Example}
+Table 21 provides an example of how the OMT tables are used to describe the transportation types. The two required transportation types are followed by a user-defined type that delivers best effort data with higher priority.
+
+\omtcaption{Table 21---Transportation type table example}\vspace{-8.5pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.22}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{83.8pt}|p{80.8pt}|p{232.0pt}|}
+                                     \hline
+                                     \centering\bfseries Name & \centering\bfseries Reliability & \centering\arraybackslash\bfseries Semantics                                          \\
+                                     \hline
+                                     HLAreliable              & Reliable                        & Provide reliable delivery of data in the sense that TCP/IP delivers its data reliably \\
+                                     \hline
+                                     HLAbestEffort            & Best Effort                     & Make an effort to deliver data in the sense that UDP provides best-effort delivery    \\
+                                     \hline
+                                     PriorityBestEffort       & Best Effort                     & Deliver best effort data with higher priority than HLAbestEf-\newline fort.           \\
+                                     \hline
+                                     Note                     & NA                              & NA                                                                                    \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{5.8pt}
+
+\subsection{Update rate table}
+\vspace{-5.2pt}
+
+\subsubsection{Purpose/background}
+The HLA RTI provides a mechanism for reducing the update rate in a federation. The update rate may be reduced by the RTI for attribute updates using best effort transportation. For attribute updates using reliable or best effort transportation, the RTI also provides signaling that enables owning federates to adjust their update rates. The update rate table provides a means for aligning specific names with maximum update rates. The use of update rates is described in detail in IEEE Std 1516.1-2010.
+
+\subsubsection{Table format}
+The template that shall be used for recording information about update rates is illustrated in Table 22.
+
+\omtcaption{Table 22---Update Rate table}\vspace{-9pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{103.2pt}|p{295.2pt}|}
+                                     \hline
+                                     \centering\bfseries Name & \centering\arraybackslash\bfseries Maximum update rate \\
+                                     \hline
+                                     \omtph{name}             & \centering\arraybackslash\omtph{value}                 \\
+                                     \hline
+                                     \omtph{name}             & \centering\arraybackslash\omtph{value}                 \\
+                                     \hline
+                                     \omtph{name}             & \centering\arraybackslash\omtph{value}                 \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6.9pt}
+
+The first column (Name) shall contain a text string that defines the name associated with the update rate. Update rate names shall adhere to HLA naming conventions (see 3.3.1).
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 62 / standard p. 50.
+% ---------------------------------------------------------------------------
+\newpage
+The second column (Maximum update rate) shall specify the associated maximum update rate in Hz using a decimal number greater than zero.
+
+\subsubsection{Inclusion criteria}
+All federations that make use of smart update rates shall document the appropriate representations of them in the update rate table of a FOM and relevant FOM modules. All federates that make use of smart update rates shall document them in the update rate table of a SOM and relevant SOM modules.
+
+\subsubsection{Example}
+Table 23 provides an example of how the OMT tables are used to describe three different maximum update rates.
+
+\omtcaption{Table 23---Update Rate table example}\vspace{-9.5pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.35}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{103.2pt}|p{295.2pt}|}
+                                     \hline
+                                     \centering\bfseries Name & \centering\arraybackslash\bfseries Maximum update rate \\
+                                     \hline
+                                     High                     & \centering\arraybackslash 30.0                         \\
+                                     \hline
+                                     Medium                   & \centering\arraybackslash 5.0                          \\
+                                     \hline
+                                     Low                      & \centering\arraybackslash 0.2                          \\
+                                     \hline
+                                     Note                     & NA                                                     \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{5.8pt}
+
+\subsection{Switches table}
+
+\subsubsection{Purpose/background}
+The HLA RTI performs actions on behalf of federates. Some of these actions may be enabled or disabled based on the capabilities of the federates or desires of the federation designers. These actions include automatically soliciting updates of instance attribute values when an object is newly discovered (controlled by the Auto Provide switch); and advising federates when certain events occur (controlled by the advisory switches). The switches table permits the specification of the initial setting of each switch, indicating whether the RTI should perform these actions. The functionality of these switches is described fully in IEEE Std 1516.1-2010.
+
+Although the initial setting of each switch is specified in this table, the value of each switch, excluding Delay Subscription Evaluation, may be changed during execution. Some switches are controlled on a federation-wide basis. For such switches, a federate making a change to one of these switch settings affects how the RTI interacts with all federates in the execution. The federation-wide switches are Auto Provide and Automatic Resign Action. Other switches are controlled on a per-federate basis. In such cases, each federate in a federation has the same initial settings, as indicated in this table, but a change to a switch setting is specified for an individual federate and the change only affects how the RTI interacts with that federate. For example, the RTI initializes each federate to report service invocations or not, as indicated by the Service Reporting switch found in this table; a federate making a change to this switch setting on another federate affects whether the RTI reports service invocations for the specified federate. The per-federate switches are Attribute Relevance Advisory, Attribute Scope Advisory, Convey Producing Federate, Convey Region Designators, Exception Reporting, Interaction Relevance Advisory, Object Class Relevance Advisory, and Service Reporting. Finally, the Delay Subscription Evaluation switch is a federation-wide-static switch and it cannot be changed during execution. The setting found in this table controls how the RTI interacts with all federates for the duration of the federation execution.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 63 / standard p. 51.
+% ---------------------------------------------------------------------------
+\newpage
+
+\subsubsection{Table format}
+The switch settings shall be provided in a simple two-column table. The structure that shall be used to describe these settings is provided in Table 24.
+
+\omtcaption{Table 24---Switches table}\vspace{-8.2pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{163.8pt}|p{231.0pt}|}
+                                     \hline
+                                     \centering\bfseries Switch      & \centering\arraybackslash\bfseries Setting                       \\
+                                     \hline
+                                     Auto Provide                    & \centering\arraybackslash\omtph{auto provide}                    \\
+                                     \hline
+                                     Convey Region Designator Sets   & \centering\arraybackslash\omtph{convey region designator sets}   \\
+                                     \hline
+                                     Convey Producing Federate       & \centering\arraybackslash\omtph{convey producing federate}       \\
+                                     \hline
+                                     Attribute Scope Advisory        & \centering\arraybackslash\omtph{attribute scope advisory}        \\
+                                     \hline
+                                     Attribute Relevance Advisory    & \centering\arraybackslash\omtph{attribute relevance advisory}    \\
+                                     \hline
+                                     Object Class Relevance Advisory & \centering\arraybackslash\omtph{object class relevance advisory} \\
+                                     \hline
+                                     Interaction Relevance Advisory  & \centering\arraybackslash\omtph{interaction relevance advisory}  \\
+                                     \hline
+                                     Service Reporting               & \centering\arraybackslash\omtph{service reporting}               \\
+                                     \hline
+                                     Exception Reporting             & \centering\arraybackslash\omtph{exception reporting}             \\
+                                     \hline
+                                     Delay Subscription Evaluation   & \centering\arraybackslash\omtph{delay subscription evaluation}   \\
+                                     \hline
+                                     Automatic Resign Action         & \centering\arraybackslash\omtph{automatic resign action}         \\
+                                     \hline
+\end{tabular}}
+\endgroup\vspace{6.6pt}
+
+The first column (Switch) presents the name of the switch whose setting shall be provided in this table. The definitions of these switches are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Auto Provide}: Whether the RTI should automatically solicit updates from instance attribute owners when an object is discovered.
+\item \textit{Convey Region Designator Sets}: Whether the RTI should provide the optional Sent Region Set argument with invocations of Reflect Attribute Values and Receive Interaction.
+\item \textit{Convey Producing Federate}: Whether the RTI should provide the optional Producing Federate with invocations of Discover Object Instances, Remove Object Instances, Reflect Attribute Values and Receive Interaction.
+\item \textit{Attribute Scope Advisory}: Whether the RTI should advise federates when attributes of an object instance come into or go out of scope.
+\item \textit{Attribute Relevance Advisory}: Whether the RTI should advise federates about whether they should provide attribute value updates for the value of an attribute of an object instance; the RTI bases this advisory on whether the value of the instance attribute is required by other federates.
+\item \textit{Object Class Relevance Advisory}: Whether the RTI should advise federates about whether they should register instances of an object class; the RTI bases this advisory on whether other federates have expressed an interest in attribute(s) of the object class.
+\item \textit{Interaction Relevance Advisory}: Whether the RTI should advise federates about whether they should send interactions of an interaction class; the RTI bases this advisory on whether other federates have expressed an interest in the interaction class.
+\item \textit{Service Reporting}: Whether the RTI should report service invocations using MOM.
+\item \textit{Exception Reporting}: Whether the RTI should report exceptions using MOM.
+\item \textit{Delay Subscription Evaluation}: Whether the RTI should filter messages as soon as possible to reflect the current known federate subscriptions, if disabled, or if enabled, defer subscription evaluation until only just before delivery to the federate.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 64 / standard p. 52.
+% ---------------------------------------------------------------------------
+\newpage
+\begin{itemize}[topsep=0pt,itemsep=2pt]
+\item \textit{Automatic Resign Action}: What resign action the RTI shall perform when it invokes the Resign Federation Execution service on behalf of a federate that was lost due to a fault. The value shall be one of the following: UnconditionallyDivestAttributes, DeleteObjects, CancelPendingOwnershipAcquisitions, DeleteObjectsThenDivest, CancelThenDeleteThenDivest, NoAction.
+\end{itemize}
+
+The second column (Setting) shall specify the setting for the switch. For SOMs and SOM modules, these entries are optional; ``NA'' shall be entered for all rows where no value is appropriate. For FOMs and FOM modules, entries shall be provided for all rows; valid values (with the exception of Automatic Resign Action, whose valid values are described above) are as follows:
+\begin{itemize}[topsep=1pt,itemsep=2pt]
+\item \textit{Enabled}: The switch is enabled, and the RTI should perform the action when appropriate.
+\item \textit{Disabled}: The switch is disabled, and the RTI should not perform the action.
+\end{itemize}
+
+\subsubsection{Inclusion criteria}
+The switch settings specified in this table shall be included in all FOMs and relevant FOM modules to document agreements among federation developers as to the initial values of the switches at the beginning of federation execution. The switch settings may optionally be provided in SOMs and SOM modules to indicate switch settings that are desired by federate designers.
+
+\subsubsection{Example}
+Table 25 shows an example of the switches table for the Restaurant federate. In this example, the Auto Provide entry indicates that the federate developer does not desire the RTI to solicit updates of attributes of newly discovered object instances, the Convey Region Designator Sets entry indicates that the RTI should not provide the Sent Region Set argument, the Convey Producing Federate entry indicates that Producing Federate should not be provided, the Service Reporting entry indicates that the RTI should not report service invocations using the MOM, the Exception Reporting entry indicates that the RTI should not report exceptions using the MOM, and the Delay Subscription Evaluation entry indicates that the RTI should filter messages as soon as possible to reflect the current known federate subscriptions. However, the RTI should advise the federate regarding when attributes of object instances come into or go out of scope (Attribute Scope Advisory), whether the federate should register object instances based on subscriptions of other federates (Object Class Relevance Advisory), whether the federate should provide attribute value updates of object instances based on the interest of other federates (Attribute Relevance Advisory), and whether the federate should send interactions based on the interest of other federates (Interaction Relevance Advisory). Finally, the ``CancelThenDeleteThenDivest'' option is selected as the Automatic Resign Action.
+
+\vspace{-14.5pt}\omtcaption{Table 25---Switches table example}\vspace{-8.6pt}
+\begingroup
+\fontsize{9}{10.9}\selectfont
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\noindent\makebox[\textwidth][c]{\begin{tabular}{|p{164.4pt}|p{241.2pt}|}
+                                     \hline
+                                     \centering\bfseries Switch      & \centering\arraybackslash\bfseries Setting           \\
+                                     \hline
+                                     Auto Provide                    & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Convey Region Designator Sets   & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Convey Producing Federate       & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Attribute Scope Advisory        & \centering\arraybackslash Enabled                    \\
+                                     \hline
+                                     Attribute Relevance Advisory    & \centering\arraybackslash Enabled                    \\
+                                     \hline
+                                     Object Class Relevance Advisory & \centering\arraybackslash Enabled                    \\
+                                     \hline
+                                     Interaction Relevance Advisory  & \centering\arraybackslash Enabled                    \\
+                                     \hline
+                                     Service Reporting               & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Exception Reporting             & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Delay Subscription Evaluation   & \centering\arraybackslash Disabled                   \\
+                                     \hline
+                                     Automatic Resign Action         & \centering\arraybackslash CancelThenDeleteThenDivest \\
+                                     \hline
+                                     Note                            & \centering\arraybackslash NA                         \\
+                                     \hline
+\end{tabular}}
+\endgroup

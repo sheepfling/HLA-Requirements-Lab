@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516-2010",
+  "segments": [
+    {
+      "id": "external-cover",
+      "start_sequence": 0,
+      "end_sequence": 1,
+      "before_latex": "\\pagestyle{empty}"
+    },
+    {
+      "id": "frontmatter",
+      "start_sequence": 2,
+      "end_sequence": 11,
+      "before_latex": "\\pagenumbering{roman}\n\\pagestyle{empty}"
+    },
+    {
+      "id": "body",
+      "start_sequence": 12,
+      "end_sequence": 22,
+      "before_latex": "\\pagenumbering{arabic}\n\\hlaTechnicalMetrics\n\\pagestyle{hla}\n\\thispagestyle{hlafirst}"
+    }
+  ]
+}

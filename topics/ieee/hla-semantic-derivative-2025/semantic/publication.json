@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "profile_id": "hla-semantic-derivative-2025",
+  "title": "HLA semantic architecture",
+  "subtitle": "Hierarchy-first requirements, operational behavior, and conformance views",
+  "description": "A generated publication contract for the supplied HLA 1516-family 2025 source corpus.",
+  "style_id": "semantic-reflowable-default",
+  "documents": [
+    {
+      "id": "hla-1516-2025",
+      "title": "HLA 1516-2025 source material — Framework and Rules",
+      "short_title": "IEEE 1516"
+    },
+    {
+      "id": "hla-1516.1-2025",
+      "title": "HLA 1516.1-2025 source material — HLA Interface Specification",
+      "short_title": "IEEE 1516.1"
+    },
+    {
+      "id": "hla-1516.2-2025",
+      "title": "HLA 1516.2-2025 source material — Object Model Template",
+      "short_title": "IEEE 1516.2"
+    }
+  ],
+  "projections": [
+    {
+      "id": "scope",
+      "title": "Scope and corpus",
+      "purpose": "Identify the three source standards and their semantic boundaries.",
+      "record_kinds": [
+        "clause",
+        "content-block"
+      ],
+      "output": "section",
+      "per_document": false,
+      "renderer": "scope"
+    },
+    {
+      "id": "concepts",
+      "title": "Concepts and terminology",
+      "purpose": "Present reusable definitions and the hierarchy that owns them.",
+      "record_kinds": [
+        "clause",
+        "definition"
+      ],
+      "output": "section",
+      "per_document": true,
+      "renderer": "concepts"
+    },
+    {
+      "id": "normative",
+      "title": "Normative requirements",
+      "purpose": "Present reviewed requirements, coverage semantics, and clause relationships.",
+      "record_kinds": [
+        "requirement",
+        "requirement-link"
+      ],
+      "output": "section",
+      "per_document": true,
+      "renderer": "normative"
+    },
+    {
+      "id": "operations",
+      "title": "Services and operational behavior",
+      "purpose": "Present services, callbacks, implementations, and operational prose.",
+      "record_kinds": [
+        "content-block",
+        "content-element",
+        "implementation"
+      ],
+      "output": "section",
+      "per_document": true,
+      "renderer": "operations"
+    },
+    {
+      "id": "state-logic",
+      "title": "State machines and message sequences",
+      "purpose": "Present states, events, transitions, guards, actions, and sequence messages.",
+      "record_kinds": [
+        "state-machine",
+        "state",
+        "transition"
+      ],
+      "output": "section",
+      "per_document": true,
+      "renderer": "state-logic"
+    },
+    {
+      "id": "tables",
+      "title": "Semantic tables",
+      "purpose": "Present reusable table families, rows, columns, cells, and dependencies.",
+      "record_kinds": [
+        "table-family",
+        "table",
+        "table-cell"
+      ],
+      "output": "table",
+      "per_document": true,
+      "renderer": "tables"
+    },
+    {
+      "id": "traceability",
+      "title": "Traceability and compliance annexes",
+      "purpose": "Connect requirements to clauses, behavior, references, dependencies, and evidence.",
+      "record_kinds": [
+        "reference",
+        "cross-reference",
+        "requirement-link",
+        "implementation",
+        "figure",
+        "note",
+        "example",
+        "annex"
+      ],
+      "output": "annex",
+      "per_document": false,
+      "renderer": "traceability"
+    }
+  ],
+  "sections": [
+    {
+      "id": "scope",
+      "title": "Scope and corpus",
+      "order": 1,
+      "projection_id": "scope",
+      "level": 1,
+      "per_document": false,
+      "required": true
+    },
+    {
+      "id": "concepts",
+      "title": "Concepts and terminology",
+      "order": 2,
+      "projection_id": "concepts",
+      "level": 1,
+      "per_document": true,
+      "required": true
+    },
+    {
+      "id": "normative",
+      "title": "Normative requirements",
+      "order": 3,
+      "projection_id": "normative",
+      "level": 1,
+      "per_document": true,
+      "required": true
+    },
+    {
+      "id": "operations",
+      "title": "Services and operational behavior",
+      "order": 4,
+      "projection_id": "operations",
+      "level": 1,
+      "per_document": true,
+      "required": true
+    },
+    {
+      "id": "state-logic",
+      "title": "State machines and message sequences",
+      "order": 5,
+      "projection_id": "state-logic",
+      "level": 1,
+      "per_document": true,
+      "required": true
+    },
+    {
+      "id": "tables",
+      "title": "Semantic tables",
+      "order": 6,
+      "projection_id": "tables",
+      "level": 1,
+      "per_document": true,
+      "required": true
+    },
+    {
+      "id": "traceability",
+      "title": "Traceability and compliance annexes",
+      "order": 7,
+      "projection_id": "traceability",
+      "level": 1,
+      "per_document": false,
+      "required": true
+    }
+  ]
+}

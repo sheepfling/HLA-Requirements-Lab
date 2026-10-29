@@ -1,0 +1,109 @@
+% Annex title helper kept local to the annex tranche.
+\newcommand{\annexbodyfont}{\RLSerif\fontsize{10}{12}\selectfont}
+\newcommand{\annexhead}[3]{%
+    \par\noindent{\RLSans\bfseries\fontsize{14}{16}\selectfont Annex #1\par}%
+    \vspace{2.5pt}%
+    \noindent{\RLSans\fontsize{12}{14}\selectfont (#2)\par}%
+    \vspace{5.5pt}%
+    \noindent{\RLSans\bfseries\fontsize{14}{16}\selectfont #3\par}%
+    \vspace{2.1pt}%
+}
+\newcommand{\annexsubhead}[2]{%
+    \par\vspace{10pt}\noindent{\RLSans\bfseries\fontsize{12}{14}\selectfont #1 #2\par}\vspace{1pt}%
+}
+
+\begingroup
+\annexbodyfont
+\setlength{\parskip}{12pt plus 1pt minus 1pt}
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 98 / standard p. 86.
+% ---------------------------------------------------------------------------
+\newpage
+\annexhead{A}{informative}{Table entry notation}
+The OMT table specifications use a subset of Backus Naur Form (BNF) [B5] to specify the types of entries that belong in particular table cells. In BNF, the types of terms to be substituted in the table are enclosed in angle brackets (e.g., \omtph{class}). Optional entries are enclosed in square brackets (e.g., [\omtph{class} (\omtph{p/s})]). Any parentheses are terminal characters that should appear as shown. Thus, the basic entry in a cell of the object class structure table, designated by \omtph{class} (\omtph{p/s}), indicates a class name followed by a Publish/Subscribe code in parentheses.
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 99 / standard p. 87.
+% ---------------------------------------------------------------------------
+\newpage
+\annexhead{B}{normative}{Common normalization functions}
+The following normalization functions are commonly used and may be referred to directly in dimension tables. The term DUB refers to the dimension upper bound specified for the dimension in the third column of Table 12. Ranges are indicated by two values separated by two periods and surrounded by brackets (indicating a closed range) or parentheses (indicating an open range).
+
+\vspace{1.3pt}\annexsubhead{B.1}{Linear normalization function}
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.0}
+\vspace{3pt}
+\noindent\begin{tabularx}{\textwidth}{L{54pt}Y}
+Form & linear (domain, dimensionLower, dimensionUpper) \\[12pt]
+Parameters & \textit{domain}: a nonenumerated value known to the federate using the dimension\\
+& \textit{dimensionLower}: the lower bound on the value of \textit{domain}\\
+& \textit{dimensionUpper}: the upper bound on the value of \textit{domain}\\[12pt]
+Function & $[(\mathrm{domain}-\mathrm{dimensionLower})/(\mathrm{dimensionUpper}-\mathrm{dimensionLower})]\times(\mathrm{DUB}-1)$
+\end{tabularx}
+\endgroup
+
+\vspace{1.5pt}\annexsubhead{B.2}{Linear enumerated normalization function}
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.0}
+\vspace{3pt}
+\noindent\begin{tabularx}{\textwidth}{L{54pt}Y}
+Form & linearEnumerated (domain, mappedSet) \\[12pt]
+\multicolumn{2}{l}{\makebox[44.4pt][l]{Parameters}\textit{domain}: an enumerated value known to the federate using the dimension}\\
+\multicolumn{2}{l}{\hspace*{36pt}\textit{mappedSet}: the enumerated values that \textit{domain} can take (compact on the set of integers)}\\[12pt]
+Function & $[\mathrm{positionInMappedSet}(\mathrm{domain})/(\mathrm{mappedSetLength}-1)]\times(\mathrm{DUB}-1)$\\
+& where\\
+& \textit{positionInMappedSet(domain)}\hspace{0.9em} is a function returning the position of \textit{domain} in \textit{mappedSet},\linebreak starting at zero\\
+& \textit{mappedSetLength}\hspace{1.0em} is the number of elements in \textit{mappedSet}
+\end{tabularx}
+\endgroup
+
+\vspace{1.7pt}\annexsubhead{B.3}{Enumerated set normalization function}
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.08}
+\vspace{4.7pt}
+\noindent\begin{tabularx}{\textwidth}{L{53pt}Y}
+Form & enumeratedSet(domain, mappedSet) \\[6pt]
+Parameters & \textit{domain}: an enumerated value known to the federate using the dimension\\
+& \textit{mappedSet}: the enumerated values that \textit{domain} can take (not necessarily compact on the set of integers)\\[13.35pt]\noalign{\vskip 6pt}
+Function & RTIset (domain)\\
+& where\\
+& \textit{RTIset (domain)}\hspace{1.1em} is a function that maps \textit{mappedSet} onto a range in the interval [0..DUB).
+\end{tabularx}
+\endgroup
+
+% ---------------------------------------------------------------------------
+% Source PDF p. 100 / standard p. 88.
+% ---------------------------------------------------------------------------
+\newpage
+\annexsubhead{B.4}{Logarithmic normalization function}
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.08}
+\vspace{1.7pt}
+\noindent\begin{tabularx}{\textwidth}{L{54pt}Y}
+Form & logarithmic(domain, domainLower, domainUpper)\\[6pt]
+Parameters & \textit{domain}: a positive, nonenumerated value known to the federate using the dimension.\\
+& \textit{domainLower}: the lower bound on the value of domain (shall be positive)\\
+& \textit{domainUpper}: the upper bound on the value of domain (shall be greater than domainLower)\\[7pt]
+Function & $[\log(\mathrm{domain}/\mathrm{domainLower})/\log(\mathrm{domainUpper}/\mathrm{domainLower})]\times(\mathrm{DUB}-1)$
+\end{tabularx}
+\endgroup
+
+\vspace{1.9pt}\annexsubhead{B.5}{Hyperbolic tangent normalization function}
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.08}
+\vspace{2pt}
+\noindent\begin{tabularx}{\textwidth}{L{54pt}Y}
+Form: & tanh(domain, domainCenter, domainSize)\\[6pt]
+Parameters: & \textit{domain}: a nonenumerated value known to the federate using the dimension\\
+& \textit{domainCenter}: the value of domain around which the user desires the greatest precision\\
+& \textit{domainSize}: a generic measure of the distance around the domainCenter for which the user desires the relatively high precision\\[7pt]\noalign{\vskip 9pt}
+Function: & $[\{\tanh([\mathrm{domain}-\mathrm{domainCenter}]/\mathrm{domainSize})+1\}/2]\times(\mathrm{DUB}-1)$
+\end{tabularx}
+\endgroup
+\endgroup

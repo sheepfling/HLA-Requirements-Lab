@@ -1,0 +1,119 @@
+% Figure 3 - Lifetime of a federate
+% Independently revalidated against source physical page 41 / standard page 27.
+% Edge IDs correspond to audit/figure03/edges.csv.
+\begin{tikzpicture}[hla diagram,x=1cm,y=1cm,>={Stealth[length=3.8pt,width=3.8pt]}]
+    \path[use as bounding box] (0,0.30) rectangle (14.65,7.80);
+
+    % F03-S00: outer Lifetime of a Federate composite state.
+    % The source frame uses visibly elliptical rather than circular corner radii.
+    \draw[line width=.48pt]
+    (1.79,7.55) -- (12.61,7.55)
+    arc[start angle=90,end angle=0,x radius=1.44cm,y radius=.91cm]
+    -- (14.05,1.96)
+    arc[start angle=0,end angle=-90,x radius=1.28cm,y radius=.91cm]
+    -- (1.63,1.05)
+    arc[start angle=-90,end angle=-180,x radius=1.28cm,y radius=.91cm]
+    -- (0.35,6.64)
+    arc[start angle=180,end angle=90,x radius=1.44cm,y radius=.91cm]
+    -- cycle;
+    \draw[line width=.48pt] (0.39,6.90) -- (13.35,6.90);
+    \node[font=\sffamily\bfseries\fontsize{10.55}{11.25}\selectfont]
+    at (7.20,7.23) {\scalebox{1.21}[1]{Lifetime of a Federate}};
+
+    % F03-P01 and F03-S01: outer initial state and Not Connected.
+    \fill (0.59,6.47) circle[radius=2.50pt];
+    \draw[line width=.48pt]
+    (1.92,6.00) -- (3.65,6.00)
+    arc[start angle=90,end angle=0,x radius=.64cm,y radius=.51cm]
+    -- (4.29,3.95)
+    arc[start angle=0,end angle=-90,x radius=.59cm,y radius=.51cm]
+    -- (1.87,3.44)
+    arc[start angle=-90,end angle=-180,x radius=.59cm,y radius=.51cm]
+    -- (1.28,5.49)
+    arc[start angle=180,end angle=90,x radius=.64cm,y radius=.51cm]
+    -- cycle;
+    \draw[line width=.48pt] (1.28,5.14) -- (4.29,5.14);
+    \node[font=\sffamily\fontsize{8.0}{8.8}\selectfont]
+    at (2.785,5.66) {\scalebox{1.21}[1]{Not Connected}};
+    % F03-E01: outer initial -> Not Connected.
+    \draw[hla transition,line width=.62pt] (0.70,6.38) -- (1.43,5.86);
+
+    % F03-S02: Connected composite state.
+    \draw[line width=.48pt]
+    (7.19,6.08) -- (12.03,6.08)
+    arc[start angle=90,end angle=0,x radius=.77cm,y radius=.67cm]
+    -- (12.80,3.11)
+    arc[start angle=0,end angle=-90,x radius=.82cm,y radius=.67cm]
+    -- (7.24,2.44)
+    arc[start angle=-90,end angle=-180,x radius=.82cm,y radius=.67cm]
+    -- (6.42,5.41)
+    arc[start angle=180,end angle=90,x radius=.77cm,y radius=.67cm]
+    -- cycle;
+    \draw[line width=.48pt] (6.42,5.54) -- (12.80,5.54);
+    \node[font=\sffamily\bfseries\fontsize{8.5}{9.2}\selectfont]
+    at (9.61,5.83) {\scalebox{1.16}[1]{Connected}};
+
+    % F03-E02: Not Connected -> Connected composite boundary; Connect.
+    \draw[hla transition,line width=.62pt] (4.29,4.81) -- (6.42,4.81);
+    \node[font=\rmfamily\fontsize{5.05}{5.75}\selectfont,anchor=south]
+    at (4.95,4.91) {\scalebox{1.09}[1]{Connect}};
+
+    % F03-E03: Connected composite boundary -> Not Connected; Disconnect.
+    \draw[hla transition,line width=.62pt] (6.42,4.22) -- (4.29,4.22);
+    \node[font=\rmfamily\fontsize{5.05}{5.75}\selectfont,anchor=north]
+    at (5.08,4.15) {\scalebox{1.10}[1]{Disconnect}};
+
+    % F03-P02, F03-S03, and F03-S04: nested membership states.
+    \fill (7.50,4.69) circle[radius=2.50pt];
+
+    \draw[line width=.48pt]
+    (7.14,4.10) -- (8.76,4.10)
+    arc[start angle=90,end angle=0,x radius=.30cm,y radius=.24cm]
+    -- (9.06,3.04)
+    arc[start angle=0,end angle=-90,x radius=.32cm,y radius=.24cm]
+    -- (7.16,2.80)
+    arc[start angle=-90,end angle=-180,x radius=.32cm,y radius=.24cm]
+    -- (6.84,3.86)
+    arc[start angle=180,end angle=90,x radius=.30cm,y radius=.24cm]
+    -- cycle;
+    \draw[line width=.48pt] (6.84,3.77) -- (9.06,3.77);
+    \node[font=\rmfamily\fontsize{5.10}{5.75}\selectfont]
+    at (7.95,3.94) {\scalebox{1.11}[1]{Not Joined}};
+
+    \draw[line width=.48pt]
+    (10.57,4.16) -- (12.19,4.16)
+    arc[start angle=90,end angle=0,x radius=.30cm,y radius=.24cm]
+    -- (12.49,3.11)
+    arc[start angle=0,end angle=-90,x radius=.31cm,y radius=.24cm]
+    -- (10.58,2.87)
+    arc[start angle=-90,end angle=-180,x radius=.31cm,y radius=.24cm]
+    -- (10.27,3.92)
+    arc[start angle=180,end angle=90,x radius=.30cm,y radius=.24cm]
+    -- cycle;
+    \draw[line width=.48pt] (10.27,3.85) -- (12.49,3.85);
+    \node[font=\rmfamily\fontsize{5.0}{5.65}\selectfont]
+    at (11.38,4.01) {\scalebox{1.12}[1]{Joined Federate}};
+
+    % F03-E04: nested initial -> Not Joined.
+    \draw[hla transition,line width=.62pt] (7.54,4.57) -- (7.69,4.10);
+
+    % F03-E05: Not Joined -> Joined Federate; join.
+    \draw[hla transition,line width=.62pt] (9.06,3.71) -- (10.27,3.71);
+    \node[font=\rmfamily\fontsize{4.25}{4.75}\selectfont,anchor=south west]
+    at (9.20,3.76) {\scalebox{1.25}[1]{\shortstack[l]{Join\\Federation\\Execution}}};
+
+    % F03-E06: Joined Federate -> Not Joined; resign.
+    \draw[hla transition,line width=.62pt] (10.27,3.14) -- (9.06,3.14);
+    \node[font=\rmfamily\fontsize{4.25}{4.75}\selectfont,anchor=north west]
+    at (9.08,3.08) {\scalebox{1.25}[1]{\shortstack[l]{Resign\\Federation\\Execution}}};
+
+    % F03-E07: Connected composite boundary -> Not Connected; fault/exception route.
+    \draw[hla transition,line width=.62pt]
+    (9.62,2.44) -- (9.62,2.07) -- (2.80,2.07) -- (2.80,3.44);
+    \node[font=\rmfamily\fontsize{5.0}{5.60}\selectfont,anchor=north,align=center]
+    at (7.24,2.09)
+        {\scalebox{1.11}[1]{Connection Lost\textdagger{} service invocation or Not Connected exception from any federate initiated service}};
+
+    \node[font=\sffamily\bfseries\fontsize{11.8}{12.7}\selectfont]
+    at (7.20,0.48) {Figure 3---Lifetime of a federate};
+\end{tikzpicture}
