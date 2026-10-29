@@ -193,15 +193,23 @@ def _layout_table_headings(
     text: str,
     primitives: Sequence[TablePrimitive],
     source: LatexSourceProfile,
-) -> list[tuple[int, str, str, str, float, SourceRef]]:
-    headings: list[tuple[int, str, str, str, float, SourceRef]] = []
+) -> list[tuple[int, str, str, str, float, float, SourceRef]]:
+    headings: list[tuple[int, str, str, str, float, float, SourceRef]] = []
     for offset, kind, args in primitives:
         heading = _table_heading(args[-1], source)
         if heading is None:
             continue
         number, title = heading
         headings.append(
-            (offset, kind, number, title, float(args[0]), _source(root, path, text, offset))
+            (
+                offset,
+                kind,
+                number,
+                title,
+                float(args[0]),
+                float(args[1]),
+                _source(root, path, text, offset),
+            )
         )
     return headings
 
@@ -216,6 +224,11 @@ def _layout_table_position(args: Sequence[str], kind: str) -> tuple[float, float
         # Body prose uses 9.96pt; table cells and headers are 9pt or smaller.
         if font_size > 9.2:
             return None
+        # Portrait fixed blocks use (x, y); semantic row and column indices
+        # must follow reading order rather than preserve those layout axes.
+        return float(args[1]), first
+    # Rotated table text uses the first coordinate for row progression and
+    # the second for columns, matching the already-rotated reading direction.
     return first, float(args[1])
 
 
@@ -230,6 +243,9 @@ def _layout_table_candidates(
     offset: int,
     next_offset: int,
     heading_first: float,
+    next_heading_first: float | None,
+    heading_second: float,
+    continuation_page: bool,
 ) -> list[_TableLayoutText]:
     candidates: list[_TableLayoutText] = []
     for primitive_offset, primitive_kind, args in primitives:
@@ -238,8 +254,16 @@ def _layout_table_candidates(
         in_source_segment = offset < primitive_offset < next_offset
         # Rotated pages can draw rows before the heading; use the visible table band.
         first = float(args[0])
-        in_rotated_table_band = kind == "rotated" and heading_first + 20.0 <= first <= 500.0
-        if not in_source_segment and not in_rotated_table_band:
+        in_rotated_table_band = (
+            kind == "rotated"
+            and heading_first + 20.0 <= first <= 500.0
+            and (next_heading_first is None or first < next_heading_first)
+        )
+        second = float(args[1])
+        in_fixed_continuation_band = (
+            kind == "fixed" and continuation_page and second >= heading_second + 20.0
+        )
+        if not in_source_segment and not in_rotated_table_band and not in_fixed_continuation_band:
             continue
         value = _table_text(args[-1])
         if not value or _table_heading(value, source) is not None:
@@ -270,8 +294,23 @@ def _layout_table_record(
     heading_index: int,
     existing_ids: AbstractSet[str],
 ) -> Table | None:
-    offset, kind, number, title, heading_first, heading_source = headings[heading_index]
+    (
+        offset,
+        kind,
+        number,
+        title,
+        heading_first,
+        heading_second,
+        heading_source,
+    ) = headings[heading_index]
     next_offset = headings[heading_index + 1][0] if heading_index + 1 < len(headings) else len(text)
+    next_same_kind = next(
+        (item for item in headings[heading_index + 1 :] if item[1] == kind),
+        None,
+    )
+    continuation_page = "continued" in title.casefold() or bool(
+        re.search(r"\\emph\s*\{\s*\(continued\)\s*\}", text, re.IGNORECASE)
+    )
     candidates = _layout_table_candidates(
         root,
         path,
@@ -282,6 +321,9 @@ def _layout_table_record(
         offset=offset,
         next_offset=next_offset,
         heading_first=heading_first,
+        next_heading_first=next_same_kind[4] if next_same_kind is not None else None,
+        heading_second=heading_second,
+        continuation_page=continuation_page,
     )
     if not candidates:
         return None
@@ -310,7 +352,7 @@ def _layout_table_record(
         title=title,
         caption=title,
         number=number,
-        continuation=False,
+        continuation=continuation_page,
         cells=cells,
         source=heading_source,
         logical_id=f"table-{number}",

@@ -48,7 +48,7 @@ class CrossReferenceContractTests(unittest.TestCase):
     def test_all_three_documents_have_projected_tables_definitions_and_links(self) -> None:
         expected = {
             "hla-1516-2025": (161, 0, 0),
-            "hla-1516.1-2025": (161, 92, 46),
+            "hla-1516.1-2025": (161, 94, 46),
             "hla-1516.2-2025": (83, 89, 80),
         }
         for document_id, (definition_count, table_count, family_count) in expected.items():

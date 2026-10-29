@@ -22,6 +22,16 @@
     \renewcommand{\headrule}{\hbox to\headwidth{\color{RLLine}\leaders\hrule height \headrulewidth\hfill}}
 }
 
+\fancypagestyle{rl-landscape}{%
+    \fancyhf{}
+    \fancyhead[L]{\RLSans\fontsize{7.8pt}{9pt}\selectfont\color{RLInk}\RLHeaderMark\hspace{6pt}\RLHeaderLeft}
+    \fancyhead[C]{}
+    \fancyhead[R]{\RLSans\fontsize{7.8pt}{9pt}\selectfont\color{RLInk}\MakeUppercase{\RLHeaderRight}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \renewcommand{\headrule}{\hbox to\headwidth{\color{RLLine}\leaders\hrule height \headrulewidth\hfill}}
+}
+
 \newcommand{\RLPageBreak}{\clearpage}
 % Landscape pages may be embedded in a document with a different normal-page
 % style. The caller can override this hook so the next portrait page restores
@@ -42,6 +52,7 @@
 % the furniture. The supplied prototype uses true landscape media dimensions;
 % this environment follows that behavior so headers, footers, and folios stay
 % horizontal in landscape output.
+\makeatletter
 \newenvironment{RLLandscapePage}{%
     \clearpage
     \begingroup
@@ -57,6 +68,12 @@
     \setlength{\pdfpageheight}{612bp}%
     \setlength{\textwidth}{688.32bp}%
     \setlength{\textheight}{464bp}%
+    % Keep the page builder and longtable on the same landscape text height.
+    % Updating \textheight alone leaves the portrait \vsize active, allowing
+    % long rows to pass through the landscape footer before a page break.
+    \setlength{\vsize}{\textheight}%
+    \setlength{\@colht}{\textheight}%
+    \setlength{\@colroom}{\textheight}%
     \setlength{\hsize}{688.32bp}%
     \setlength{\columnwidth}{688.32bp}%
     \setlength{\linewidth}{688.32bp}%
@@ -65,7 +82,8 @@
     % Keep the landscape furniture local to this page. A global pagestyle
     % switch here leaks the landscape footer geometry into the next portrait
     % source page.
-    \thispagestyle{rl}%
+    \pagestyle{rl-landscape}%
+    \thispagestyle{rl-landscape}%
     % A source landscape environment may contain several physical pages. A
     % one-shot overlay at environment end only reaches the last one, so use a
     % shipout hook for the complete run. This also survives source-level
@@ -86,3 +104,4 @@
     \special{papersize=612bp,792bp}%
     \RLAfterLandscapePage
 }
+\makeatother

@@ -8,6 +8,13 @@
 \input{../requirements-lab/style/rl-headings.sty}
 \input{../requirements-lab/style/rl-tables.sty}
 \RequirePackage{needspace}
+\RequirePackage{multicol}
+
+\newcounter{hlabsembookmark}
+\newcommand{\HLASemanticBookmark}[2]{%
+    \stepcounter{hlabsembookmark}%
+    \pdfbookmark[#1]{#2}{hlab-semantic-\arabic{hlabsembookmark}}%
+}
 
 \newcommand{\RLConfigureDerivativeTypography}{%
     \AtBeginDocument{%

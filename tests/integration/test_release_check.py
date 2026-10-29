@@ -26,6 +26,9 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
         self.assertEqual(report.diagram_review.review_gaps, ())
         self.assertTrue(report.semantic_authority.passed)
         self.assertTrue(report.api_traceability.passed)
+        sniffed = [item for item in report.projects if item.pdf_sniff is not None]
+        self.assertEqual([item.id for item in sniffed], ["hla-semantic-derivative-2025"])
+        self.assertTrue(sniffed[0].pdf_sniff.passed)
         self.assertEqual(
             {item.id: item.pages for item in report.projects},
             {

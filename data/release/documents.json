@@ -93,7 +93,7 @@
       "root": "topics/ieee/hla-1516.1-2025",
       "pdf": "dist/hla-requirements-lab-1516.1-2025-federate-interface.pdf",
       "log": "build/main.log",
-      "expected_pages": 502,
+      "expected_pages": 520,
       "kind": "faithful",
       "build": {
         "strategy": "faithful",
@@ -140,7 +140,7 @@
       "root": "topics/ieee/hla-semantic-derivative-2010",
       "pdf": "dist/hla-semantic-derivative-2010.pdf",
       "log": "build/main.log",
-      "expected_pages": 1054,
+      "expected_pages": 857,
       "kind": "derivative",
       "build": {
         "strategy": "semantic-derivative",
@@ -153,8 +153,9 @@
       "root": "topics/ieee/hla-semantic-derivative-2025",
       "pdf": "dist/hla-semantic-derivative-2025.pdf",
       "log": "build/main.log",
-      "expected_pages": 1368,
+      "expected_pages": 815,
       "kind": "derivative",
+      "check_pdf_sniff": true,
       "build": {
         "strategy": "semantic-derivative",
         "graph_metadata": "topics/ieee/hla-semantic-derivative-2025/semantic/corpus.json"

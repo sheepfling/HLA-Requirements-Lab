@@ -55,7 +55,7 @@ class SemanticProjectionTests(unittest.TestCase):
     def test_surface_records_are_recovered_behind_thin_page_adapters(self) -> None:
         expected = {
             "hla-1516-2025": (4, 0, 6, 0),
-            "hla-1516.1-2025": (0, 17, 45, 92),
+            "hla-1516.1-2025": (0, 17, 45, 94),
             "hla-1516.2-2025": (0, 0, 2, 89),
         }
         for name, root in ROOTS.items():

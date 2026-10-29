@@ -89,7 +89,7 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
                     self.assertEqual((record.source.line, record.source.end_line), (start, end))
                     source_lines = layouts[record.source.path][start - 1 : end]
                     self.assertRegex(
-                        _machine_statement(" ".join(source_lines), HLA_SOURCE), r"\bshall\b"
+                        _machine_statement("\n".join(source_lines), HLA_SOURCE), r"\bshall\b"
                     )
 
     def test_java_annex_obligations_are_complete_and_source_traced(self) -> None:

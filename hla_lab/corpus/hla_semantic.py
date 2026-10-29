@@ -34,6 +34,13 @@ _NOTICE_MARKER = re.compile(
 )
 _CLAUSE_ONE_MARKER = re.compile(r"(?<![\w.])1\.\s+Overview\b", re.IGNORECASE)
 _INTERFACE_OVERVIEW_MARKER = re.compile(r"\bOverview\s+Scope\b", re.IGNORECASE)
+_SOURCE_FIGURE_CAPTION = re.compile(
+    r"\bFigure\s+(?P<number>\d+)\s*(?:[\u2010-\u2015\u2212\ufffd-])\s*"
+    r"(?P<caption>[A-Za-z][A-Za-z0-9 ,()/.’'\-]{1,120}?)"
+    r"(?=\s+\d{1,3}\.\d{3}\b|"
+    r"\s+hlafixedpage\b|$)",
+    re.IGNORECASE,
+)
 
 
 def _is_frontmatter(path: str) -> bool:
@@ -89,8 +96,32 @@ def _sanitize_hla_derivative_model(model: DocumentModel) -> DocumentModel:
         )
         for item in model.content_elements
     )
+    elements_by_source: dict[str, list[str]] = {}
+    for element in model.content_elements:
+        elements_by_source.setdefault(element.source.path, []).append(element.text)
+    figures = []
+    for figure in model.figures:
+        caption = figure.caption.strip()
+        if not caption:
+            for text in elements_by_source.get(figure.source.path, ()):
+                match = next(
+                    (
+                        item
+                        for item in _SOURCE_FIGURE_CAPTION.finditer(text)
+                        if item.group("number") == figure.number
+                    ),
+                    None,
+                )
+                if match is not None:
+                    caption = " ".join(match.group("caption").split()).strip(" .;:")
+                    break
+        figures.append(figure.model_copy(update={"caption": caption}))
     return model.model_copy(
-        update={"content_blocks": content_blocks, "content_elements": content_elements}
+        update={
+            "content_blocks": content_blocks,
+            "content_elements": content_elements,
+            "figures": tuple(figures),
+        }
     )
 
 

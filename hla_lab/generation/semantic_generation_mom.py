@@ -479,21 +479,31 @@ def _modern_mom_hierarchy_names(table: Table) -> list[str]:
     # stable semantic grammar, so recover depth from the class role instead
     # of exposing extraction coordinates.
     names: list[str] = []
+    name_indexes: dict[str, int] = {}
+    last_name_by_column: dict[int, int] = {}
     for _row_number, cells in sorted(_modern_mom_cells_by_row(table).items()):
         for cell in cells:
             text = _modern_table_text(cell.text)
             if not text or text.casefold() == "(continued)":
                 continue
-            marker = ""
             if text in {"(N)", "(P)", "(S)"}:
-                marker = f" {text}"
-                if names:
-                    names[-1] = f"{names[-1]}{marker}"
+                name_index = (
+                    last_name_by_column.get(cell.column) if cell.column is not None else None
+                )
+                if name_index is None and names:
+                    name_index = len(names) - 1
+                if name_index is not None and not names[name_index].endswith(text):
+                    names[name_index] = f"{names[name_index]} {text}"
                 continue
             # Keep one logical node per extracted identifier.  Siblings that
             # share a source row must not be joined with a slash.
-            if text not in names:
+            name_index = name_indexes.get(text)
+            if name_index is None:
+                name_index = len(names)
+                name_indexes[text] = name_index
                 names.append(text)
+            if cell.column is not None:
+                last_name_by_column[cell.column] = name_index
     return names
 
 

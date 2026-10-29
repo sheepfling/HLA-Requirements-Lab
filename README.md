@@ -432,6 +432,21 @@ both derivatives, and the one-page non-HLA portability fixture:
 python -m hla_lab.publication.release_check --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --authority-manifest data/semantic/authority.json --json
 ```
 
+The 2025 semantic derivative has a reusable artifact sniffer enabled in the
+release check. It checks for
+visible source/TeX residue, suspicious coordinate text, text outside page
+bounds, overlapping words, unlinked URLs, code-like text in prose fonts,
+duplicate semantic anchors, invalid or out-of-page PDF links, and overfull TeX
+boxes that may indicate clipping. Run it directly while iterating with:
+
+```console
+hla-lab --root . sniff-pdf topics/ieee/hla-semantic-derivative-2025/dist/hla-semantic-derivative-2025.pdf --source-tex topics/ieee/hla-semantic-derivative-2025/output/semantic/reflowable.tex --build-log topics/ieee/hla-semantic-derivative-2025/build/main.log
+```
+
+Text heuristics are reported as warnings where ordinary prose can resemble an
+artifact. Visual review is still required for table meaning, hierarchy, and
+other defects that have no reliable text or geometry signature.
+
 Capture a fresh, stdout-only semantic baseline with:
 
 ```console

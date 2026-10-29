@@ -11,6 +11,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
+from hla_lab.publication.hla_pdf_sniffer import sniff_hla_pdf
+from hla_lab.publication.pdf_sniffer import PdfSniffReport
 from hla_lab.traceability import semantic_coverage, spec_readiness
 
 from .paths import document_ids, document_roots, repository_root, resources
@@ -210,6 +212,37 @@ def _schema_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def _sniff_pdf_command(args: argparse.Namespace) -> int:
+    root = repository_root()
+
+    def rooted(path: Path) -> Path:
+        if path.is_absolute():
+            return path
+        return root / path
+
+    def optional_rooted(path: Path | None) -> Path | None:
+        return rooted(path) if path is not None else None
+
+    report = sniff_hla_pdf(
+        rooted(args.pdf),
+        source_tex=optional_rooted(args.source_tex),
+        build_log=optional_rooted(args.build_log),
+    )
+    _print_pdf_sniff_report(report, json_output=args.json)
+    return 0 if report.passed else 1
+
+
+def _print_pdf_sniff_report(report: PdfSniffReport, *, json_output: bool) -> None:
+    if json_output:
+        print(report.model_dump_json(indent=2))
+        return
+    print(f"pages: {report.pages}; links: {report.links}")
+    print(f"PDF sniff: {'passed' if report.passed else 'failed'}")
+    for finding in report.findings:
+        location = f" page {finding.page}" if finding.page is not None else ""
+        print(f"{finding.severity.upper()} {finding.code}{location}: {finding.message}")
+
+
 def _test_command(args: argparse.Namespace) -> int:
     if args.pytest_args[:1] == ["--"]:
         args.pytest_args = args.pytest_args[1:]
@@ -277,6 +310,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     quality.add_argument("--fix", action="store_true", help="allow formatters to rewrite files")
     quality.set_defaults(handler=_quality_command)
+
+    sniff_pdf_command = subparsers.add_parser(
+        "sniff-pdf",
+        help="scan a generated PDF for text artifacts, collisions, and broken navigation",
+    )
+    sniff_pdf_command.add_argument("pdf", type=Path)
+    sniff_pdf_command.add_argument("--source-tex", type=Path)
+    sniff_pdf_command.add_argument("--build-log", type=Path)
+    sniff_pdf_command.add_argument("--json", action="store_true")
+    sniff_pdf_command.set_defaults(handler=_sniff_pdf_command)
 
     test = subparsers.add_parser("test", aliases=("tests",), help="run the pytest contract suite")
     test.add_argument(

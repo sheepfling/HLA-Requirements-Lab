@@ -35,8 +35,8 @@ class ContentOwnershipTests(unittest.TestCase):
                 self.assertEqual(len(model.requirements), 2014)
                 self.assertEqual(len(model.requirement_reviews), 12)
                 self.assertEqual(len(model.definitions), 161)
-                self.assertEqual(len(model.tables), 92)
-                self.assertEqual(sum(len(item.cells) for item in model.tables), 5159)
+                self.assertEqual(len(model.tables), 94)
+                self.assertEqual(sum(len(item.cells) for item in model.tables), 5184)
                 self.assertEqual(len(model.table_families), 46)
             else:
                 page_files = tuple((root / "sections" / "semantic").rglob("page-*.tex"))

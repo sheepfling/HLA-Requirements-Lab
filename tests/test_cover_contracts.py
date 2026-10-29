@@ -38,7 +38,7 @@ class CoverContractTests(unittest.TestCase):
     def test_all_source_compilations_use_the_shared_cover(self) -> None:
         expected = {
             ("1516.1", "2010"): (340,),
-            ("1516.1", "2025"): (502,),
+            ("1516.1", "2025"): (520,),
             ("1516", "2010"): (27,),
             ("1516", "2025"): (30,),
             ("1516.2", "2010"): (101,),

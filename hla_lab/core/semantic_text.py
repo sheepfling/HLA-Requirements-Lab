@@ -73,8 +73,40 @@ def _unwrap_commands(value: str, names: Sequence[str], count: int, body_index: i
     return value
 
 
+def _unwrap_layout_text_commands(value: str, source: LatexSourceProfile) -> str:
+    """Unwrap positioned text blocks and their layout-only percent markers."""
+    replacements: list[tuple[int, int, str]] = []
+    for command, argument_count in source.layout_text_block_commands:
+        pattern = re.compile(rf"\\{re.escape(command)}\b")
+        for match in pattern.finditer(value):
+            try:
+                parsed = _arguments(value, match.end(), argument_count)
+            except ValueError:
+                # Callers can pass an excerpt ending in the middle of a layout
+                # macro; skip that incomplete event and keep scanning.
+                continue
+            if parsed is None:
+                continue
+            args, end = parsed
+            body = args[-1]
+            # Layout blocks commonly use ``{%`` and a trailing ``%}`` to
+            # suppress TeX whitespace. When callers flatten the source lines,
+            # those markers look like a comment that hides the whole sentence.
+            body = re.sub(r"^\s*%(?!\\)", "", body, count=1)
+            body = re.sub(r"(?<!\\)%\s*$", "", body, count=1)
+            replacements.append((match.start(), end, body))
+    for start, end, replacement in reversed(replacements):
+        value = value[:start] + replacement + value[end:]
+    return value
+
+
 def _latex_text(value: str, source: LatexSourceProfile | None = None) -> str:
-    value = re.sub(r"(?m)^\s*%.*$", "", value)
+    if source is not None:
+        value = _unwrap_layout_text_commands(value, source)
+    # TeX comments may be used at the end of a macro argument (``text}%``),
+    # not only on their own line. Remove unescaped comments while retaining
+    # escaped percent signs, which are visible source text.
+    value = re.sub(r"(?<!\\)(?:\\\\)*%[^\n]*", "", value)
     value = value.replace(r"\ ", " ")
     value = re.sub(r"\\([&_#$%])", r"\1", value)
     value = value.replace("\\linebreak", " ").replace("\\par", " ")
