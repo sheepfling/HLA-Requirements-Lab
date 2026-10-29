@@ -103,14 +103,17 @@ class AuthorityContractTests(unittest.TestCase):
         }
         self.assertEqual(len(inputs), 161)
 
-    def test_no_legacy_page_inputs_or_hand_authored_back_cover_remain(self) -> None:
+    def test_back_cover_reuses_retained_text_without_unverified_artwork(self) -> None:
         root = next(root for root in ROOTS if root.name == "hla-1516.2-2025")
         generated_pages = list((root / "sections" / "generated").rglob("*.tex"))
         self.assertEqual(generated_pages, [])
-        self.assertFalse((root / "frontmatter" / "back-cover.tex").exists())
         self.assertFalse((root / "frontmatter" / "back-cover-vector.tex").exists())
-        main = (root / "main.tex").read_text(encoding="utf-8")
-        self.assertNotIn("frontmatter/back-cover", main)
+        back_cover = (root / "frontmatter" / "back-cover.tex").read_text(encoding="utf-8")
+        self.assertIn("retained v1.0.1 PDF text", back_cover)
+        self.assertIn("original back-cover artwork source is not present", back_cover)
+        self.assertIn(r"\HLAUnofficialNotice", back_cover)
+        self.assertNotIn(r"\fill", back_cover)
+        self.assertNotIn(r"\draw", back_cover)
 
     def test_semantic_mutation_changes_faithful_and_derivative_views(self) -> None:
         """A source-record edit must reach both document products."""

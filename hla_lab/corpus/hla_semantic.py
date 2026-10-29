@@ -18,6 +18,7 @@ from hla_lab.core.semantic_model import (
     load_document_model,
 )
 from hla_lab.core.source_paths import is_source_frontmatter, source_path_parts
+from hla_lab.paths import document_entry_for_path
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -96,7 +97,8 @@ def _sanitize_hla_derivative_model(model: DocumentModel) -> DocumentModel:
 
 def load_hla_document_model(root: Path, *, workspace_root: Path | None = None) -> DocumentModel:
     """Load one HLA source tree through the generic semantic model."""
-    source = source_profile_for_document(root.name, workspace_root)
+    document = document_entry_for_path(root, workspace_root)
+    source = source_profile_for_document(document.document_id, workspace_root)
     return _sanitize_hla_derivative_model(
         build_hla_surface_contract(load_document_model(root, source))
     )

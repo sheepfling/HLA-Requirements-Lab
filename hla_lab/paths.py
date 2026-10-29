@@ -25,6 +25,7 @@ __all__ = [
     "RepositoryResources",
     "document_catalog",
     "document_entry",
+    "document_entry_for_path",
     "document_entry_for_root",
     "document_ids",
     "document_roots",
@@ -202,6 +203,22 @@ def document_entry_for_root(root_name: str, root: Path | None = None) -> Edition
         if len(matches) == 1:
             return matches[0]
         raise
+
+
+def document_entry_for_path(path: Path, root: Path | None = None) -> EditionDocument:
+    """Prefer a catalog's declared root, with ID-based resolution for isolated copies."""
+    workspace = repository_root(root)
+    candidate = Path(path).resolve()
+    matches = tuple(
+        item
+        for item in document_catalog(workspace).documents
+        if (workspace / (item.root or f"topics/ieee/{item.document_id}")).resolve() == candidate
+    )
+    if len(matches) != 1:
+        if not matches:
+            return document_entry_for_root(candidate.name, workspace)
+        raise ValueError(f"document root {candidate} is declared more than once in the catalog")
+    return matches[0]
 
 
 def document_roots(

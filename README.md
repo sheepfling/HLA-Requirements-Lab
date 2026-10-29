@@ -108,7 +108,10 @@ The stable command has defaults for the common workflows:
 hla-lab                  # show the workflow menu
 hla-lab --root . docs             # list supported document roots
 hla-lab --root . status           # check all documents
+hla-lab --root . map hla-1516.1-2025  # show semantic mapping coverage
+hla-lab --root . matrix --edition 2025 # generate compliance manifest and CSVs
 hla-lab --root . build            # build all document products
+hla-lab --root . generate topics/ieee/hla-1516.1-2025
 hla-lab --root . build topics/fixture/non-hla-demo-2025
 hla-lab --root . publish          # list declared publications
 hla-lab --root . publish hla-hierarchy-reconstruction-2025
