@@ -198,12 +198,35 @@ _LOG_WARNINGS = (
         re.compile(r"(?m)Missing character: There is no .+? in font .+"),
         "TeX could not render a character in the selected font",
     ),
-    (
-        "overfull-tex-box",
-        re.compile(r"(?i)Overfull \\[hv]box"),
-        "TeX reported an overfull box; inspect for clipped or crowded content",
-    ),
 )
+_OVERFULL_BOX = re.compile(
+    r"(?i)Overfull \\(?P<direction>[hv])box "
+    r"\((?P<amount>[\d.]+)pt too (?:wide|high)\) in "
+    r"(?P<context>paragraph|alignment) at lines "
+    r"(?P<start>\d+)--(?P<end>\d+)"
+)
+
+
+def _overfull_box_finding(log_text: str) -> PdfSniffFinding | None:
+    """Summarize overfull boxes with their largest widths and generated-source lines."""
+    matches = tuple(_OVERFULL_BOX.finditer(log_text))
+    if not matches:
+        return None
+    largest = sorted(matches, key=lambda match: float(match.group("amount")), reverse=True)[:5]
+    examples = "; ".join(
+        f"{match.group('amount')} pt at lines {match.group('start')}-{match.group('end')} "
+        f"({match.group('context')})"
+        for match in largest
+    )
+    maximum = float(largest[0].group("amount"))
+    return PdfSniffFinding(
+        code="overfull-tex-box",
+        severity="warning",
+        message=(
+            f"TeX reported {len(matches)} overfull box(es); maximum overflow "
+            f"{maximum:.2f} pt. Largest locations: {examples}"
+        ),
+    )
 
 
 def _add_page_text_findings(
@@ -591,6 +614,9 @@ def sniff_pdf(
                             message=f"{description} ({len(matches)} log occurrence(s))",
                         )
                     )
+            overfull_finding = _overfull_box_finding(log_text)
+            if overfull_finding is not None:
+                findings.append(overfull_finding)
 
     return PdfSniffReport(
         pdf=pdf_path.as_posix(),

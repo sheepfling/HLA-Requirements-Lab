@@ -117,7 +117,9 @@ def _table_text(value: str) -> str:
     value = re.sub(r"(?m)^\s*%.*$", "", value)
     value = value.replace(r"\newline", " ").replace(r"\linebreak", " ")
     value = value.replace(r"\space{}", " ")
-    value = re.sub(r"\\(?:hspace|vspace)\*?\{[^{}]*\}", "", value)
+    value = re.sub(r"\\hfill\s*(?:\{\})?", " ", value)
+    value = re.sub(r"\\hspace\*?\{[^{}]*\}", " ", value)
+    value = re.sub(r"\\vspace\*?\{[^{}]*\}", "", value)
     for _ in range(6):
         previous = value
         value = re.sub(
@@ -132,6 +134,7 @@ def _table_text(value: str) -> str:
     value = re.sub(r"\\[a-zA-Z]+(?:\[[^]]*\])?", "", value)
     value = value.replace("{", "").replace("}", "")
     value = re.sub(r"\s+", " ", value)
+    value = re.sub(r"(?<=[a-z])- (?=[a-z])", "", value)
     return value.strip()
 
 

@@ -64,9 +64,9 @@ class AuthorityContractTests(unittest.TestCase):
         self.assertEqual(counts[("hla-1516.1-2025", "requirement-links")], 32)
         self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 3428)
         self.assertEqual(counts[("hla-1516.2-2025", "definitions")], 83)
-        self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 340)
+        self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 350)
         self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 113)
-        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1019)
+        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1033)
         self.assertEqual(counts[("hla-1516.2-2025", "table-families")], 80)
         self.assertEqual(counts[("hla-1516-2010", "requirements")], 56)
         self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 1529)
@@ -82,6 +82,10 @@ class AuthorityContractTests(unittest.TestCase):
             model = load_document_model(root, HLA_SOURCE)
             self.assertEqual(model.requirement_review_counts()["deferred"], 0)
             self.assertEqual(model.requirement_review_counts()["unreviewed"], 0)
+            if root.name == "hla-1516.2-2025":
+                self.assertEqual(model.requirement_review_counts()["layout-only"], 1)
+            else:
+                self.assertEqual(model.requirement_review_counts()["layout-only"], 0)
         for root in ROOTS_2010:
             model = load_document_model(root, HLA_SOURCE)
             self.assertEqual(model.requirement_review_counts()["deferred"], 0)

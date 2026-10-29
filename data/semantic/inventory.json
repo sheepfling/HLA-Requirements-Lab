@@ -5689,14 +5689,14 @@
         "clause": 33,
         "content-block": 29,
         "content-element": 289,
-        "cross-reference": 177,
+        "cross-reference": 181,
         "definition": 161,
         "note": 6,
         "reference": 4,
         "requirement": 20
       },
       "status_counts": {
-        "reviewed": 721
+        "reviewed": 725
       },
       "items": [
         {
@@ -12496,6 +12496,58 @@
             "end_line": 66
           },
           "owner_id": "content-element-content-front-matter-normative-003-list-item-020",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-def-attribute-surface-def-attribute",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M9",
+          "source": {
+            "path": "semantic/definitions.json",
+            "line": 31,
+            "end_line": null
+          },
+          "owner_id": "def-attribute",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-def-attribute-surface-def-class",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M9",
+          "source": {
+            "path": "semantic/definitions.json",
+            "line": 31,
+            "end_line": null
+          },
+          "owner_id": "def-attribute",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-def-attribute-surface-def-class-attribute",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M9",
+          "source": {
+            "path": "semantic/definitions.json",
+            "line": 31,
+            "end_line": null
+          },
+          "owner_id": "def-attribute",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-def-attribute-surface-def-instance-attribute",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M9",
+          "source": {
+            "path": "semantic/definitions.json",
+            "line": 31,
+            "end_line": null
+          },
+          "owner_id": "def-attribute",
           "notes": ""
         },
         {
@@ -169483,7 +169535,7 @@
       "document_id": "hla-1516.1-2025",
       "source_root": "topics/ieee/hla-1516.1-2025",
       "migration": "M10",
-      "expected_pages": 502,
+      "expected_pages": 520,
       "surface_counts": {
         "clause": 1691,
         "content-block": 432,
@@ -435675,19 +435727,20 @@
       "expected_pages": 112,
       "surface_counts": {
         "annex": 8,
-        "clause": 163,
+        "clause": 180,
         "content-block": 113,
-        "content-element": 1019,
-        "cross-reference": 6984,
+        "content-element": 1033,
+        "cross-reference": 7004,
         "definition": 83,
         "note": 2,
-        "requirement": 340,
+        "requirement": 351,
         "table": 89,
         "table-cell": 2840,
         "table-family": 80
       },
       "status_counts": {
-        "reviewed": 11721
+        "layout-only": 1,
+        "reviewed": 11782
       },
       "items": [
         {
@@ -435808,6 +435861,110 @@
           "notes": ""
         },
         {
+          "record_id": "clause-1.1",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.2",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.3",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.4",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.4.1",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.4.2",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.4.3",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-1.4.4",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
           "record_id": "clause-2",
           "kind": "clause",
           "status": "reviewed",
@@ -435822,6 +435979,58 @@
         },
         {
           "record_id": "clause-3",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-3.1",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-3.2",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-3.3",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-3.3.1",
           "kind": "clause",
           "status": "reviewed",
           "migration": "complete",
@@ -435852,9 +436061,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-034.tex",
-            "line": 30,
-            "end_line": 30
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435865,9 +436074,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-034.tex",
-            "line": 34,
-            "end_line": 34
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435878,9 +436087,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-035.tex",
-            "line": 60,
-            "end_line": 60
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435891,9 +436100,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-038.tex",
-            "line": 67,
-            "end_line": 67
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435904,9 +436113,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-038.tex",
-            "line": 75,
-            "end_line": 75
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435917,9 +436126,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-061.tex",
-            "line": 70,
-            "end_line": 70
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435930,9 +436139,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-061.tex",
-            "line": 74,
-            "end_line": 74
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435943,9 +436152,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-061.tex",
-            "line": 82,
-            "end_line": 82
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435956,9 +436165,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-062.tex",
-            "line": 59,
-            "end_line": 59
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435969,9 +436178,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-062.tex",
-            "line": 67,
-            "end_line": 67
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435982,9 +436191,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-062.tex",
-            "line": 75,
-            "end_line": 75
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -435995,9 +436204,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-062.tex",
-            "line": 79,
-            "end_line": 79
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436008,9 +436217,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-063.tex",
-            "line": 43,
-            "end_line": 43
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436021,9 +436230,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-063.tex",
-            "line": 63,
-            "end_line": 63
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436034,9 +436243,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-063.tex",
-            "line": 71,
-            "end_line": 71
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436047,9 +436256,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-064.tex",
-            "line": 30,
-            "end_line": 30
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436060,9 +436269,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-064.tex",
-            "line": 34,
-            "end_line": 34
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436073,9 +436282,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-064.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436086,9 +436295,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-064.tex",
-            "line": 58,
-            "end_line": 58
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436099,9 +436308,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-064.tex",
-            "line": 66,
-            "end_line": 66
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436112,9 +436321,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-065.tex",
-            "line": 39,
-            "end_line": 39
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436125,9 +436334,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-065.tex",
-            "line": 43,
-            "end_line": 43
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436138,9 +436347,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-065.tex",
-            "line": 55,
-            "end_line": 55
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436151,9 +436360,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-067.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436164,9 +436373,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-067.tex",
-            "line": 54,
-            "end_line": 54
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436177,9 +436386,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-068.tex",
-            "line": 25,
-            "end_line": 25
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436190,9 +436399,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-068.tex",
-            "line": 29,
-            "end_line": 29
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436203,9 +436412,74 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-079.tex",
-            "line": 69,
-            "end_line": 69
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-4.14.10.1",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-4.14.10.2",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-4.14.10.3",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-4.14.10.4",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
+          },
+          "owner_id": null,
+          "notes": ""
+        },
+        {
+          "record_id": "clause-4.14.10.5",
+          "kind": "clause",
+          "status": "reviewed",
+          "migration": "complete",
+          "source": {
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436216,9 +436490,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-068.tex",
-            "line": 37,
-            "end_line": 37
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436229,9 +436503,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-068.tex",
-            "line": 45,
-            "end_line": 45
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436242,9 +436516,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-070.tex",
-            "line": 106,
-            "end_line": 106
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436255,9 +436529,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-072.tex",
-            "line": 116,
-            "end_line": 116
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436268,9 +436542,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-074.tex",
-            "line": 44,
-            "end_line": 44
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436281,9 +436555,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-075.tex",
-            "line": 84,
-            "end_line": 84
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436294,9 +436568,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-076.tex",
-            "line": 76,
-            "end_line": 76
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436307,9 +436581,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-079.tex",
-            "line": 37,
-            "end_line": 37
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436320,9 +436594,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-086.tex",
-            "line": 64,
-            "end_line": 64
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436333,9 +436607,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-086.tex",
-            "line": 68,
-            "end_line": 68
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436346,9 +436620,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-086.tex",
-            "line": 80,
-            "end_line": 80
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436359,9 +436633,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-087.tex",
-            "line": 40,
-            "end_line": 40
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436372,9 +436646,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4c/page-087.tex",
-            "line": 48,
-            "end_line": 48
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436385,9 +436659,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-039.tex",
-            "line": 6,
-            "end_line": 6
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436398,9 +436672,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-039.tex",
-            "line": 10,
-            "end_line": 10
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436411,9 +436685,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-040.tex",
-            "line": 14,
-            "end_line": 14
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436424,9 +436698,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-041.tex",
-            "line": 54,
-            "end_line": 54
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436437,9 +436711,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-042.tex",
-            "line": 22,
-            "end_line": 22
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436450,9 +436724,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-043.tex",
-            "line": 117,
-            "end_line": 117
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436463,9 +436737,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-043.tex",
-            "line": 121,
-            "end_line": 121
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436476,9 +436750,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-044.tex",
-            "line": 70,
-            "end_line": 70
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436489,9 +436763,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-045.tex",
-            "line": 38,
-            "end_line": 38
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436502,9 +436776,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-045.tex",
-            "line": 54,
-            "end_line": 54
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436515,9 +436789,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-046.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436528,9 +436802,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-046.tex",
-            "line": 46,
-            "end_line": 46
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436541,9 +436815,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-046.tex",
-            "line": 54,
-            "end_line": 54
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436554,9 +436828,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-047.tex",
-            "line": 31,
-            "end_line": 31
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436567,9 +436841,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-047.tex",
-            "line": 39,
-            "end_line": 39
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436580,9 +436854,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-047.tex",
-            "line": 51,
-            "end_line": 51
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436593,9 +436867,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4a/page-047.tex",
-            "line": 55,
-            "end_line": 55
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436606,9 +436880,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-048.tex",
-            "line": 89,
-            "end_line": 89
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436619,9 +436893,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-051.tex",
-            "line": 150,
-            "end_line": 150
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436632,9 +436906,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-051.tex",
-            "line": 158,
-            "end_line": 158
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436645,9 +436919,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-052.tex",
-            "line": 26,
-            "end_line": 26
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436658,9 +436932,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-052.tex",
-            "line": 30,
-            "end_line": 30
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436671,9 +436945,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-052.tex",
-            "line": 46,
-            "end_line": 46
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436684,9 +436958,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-053.tex",
-            "line": 79,
-            "end_line": 79
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436697,9 +436971,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-054.tex",
-            "line": 37,
-            "end_line": 37
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436710,9 +436984,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-054.tex",
-            "line": 45,
-            "end_line": 45
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436723,9 +436997,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-054.tex",
-            "line": 49,
-            "end_line": 49
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436736,9 +437010,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-055.tex",
-            "line": 65,
-            "end_line": 65
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436749,9 +437023,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-056.tex",
-            "line": 36,
-            "end_line": 36
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436762,9 +437036,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-057.tex",
-            "line": 50,
-            "end_line": 50
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436775,9 +437049,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-057.tex",
-            "line": 62,
-            "end_line": 62
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436788,9 +437062,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-057.tex",
-            "line": 66,
-            "end_line": 66
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436801,9 +437075,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-058.tex",
-            "line": 38,
-            "end_line": 38
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436814,9 +437088,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-059.tex",
-            "line": 44,
-            "end_line": 44
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436827,9 +437101,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-059.tex",
-            "line": 52,
-            "end_line": 52
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436840,9 +437114,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-059.tex",
-            "line": 60,
-            "end_line": 60
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436853,9 +437127,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-059.tex",
-            "line": 64,
-            "end_line": 64
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436866,9 +437140,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-059.tex",
-            "line": 72,
-            "end_line": 72
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436879,9 +437153,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-061.tex",
-            "line": 54,
-            "end_line": 54
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436892,9 +437166,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clause-4b/page-061.tex",
-            "line": 62,
-            "end_line": 62
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436918,9 +437192,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-088.tex",
-            "line": 34,
-            "end_line": 34
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436931,9 +437205,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-088.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436944,9 +437218,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-088.tex",
-            "line": 62,
-            "end_line": 62
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436957,9 +437231,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-089.tex",
-            "line": 49,
-            "end_line": 49
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436970,9 +437244,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-090.tex",
-            "line": 53,
-            "end_line": 53
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -436996,9 +437270,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 6,
-            "end_line": 6
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437009,9 +437283,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 14,
-            "end_line": 14
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437022,9 +437296,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 22,
-            "end_line": 22
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437035,9 +437309,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 30,
-            "end_line": 30
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437048,9 +437322,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 38,
-            "end_line": 38
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437061,9 +437335,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 46,
-            "end_line": 46
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437074,9 +437348,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 62,
-            "end_line": 62
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437087,9 +437361,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 86,
-            "end_line": 86
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437100,9 +437374,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 102,
-            "end_line": 102
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437113,9 +437387,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 6,
-            "end_line": 6
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437126,9 +437400,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 26,
-            "end_line": 26
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437139,9 +437413,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437152,9 +437426,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 58,
-            "end_line": 58
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437165,9 +437439,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 78,
-            "end_line": 78
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437178,9 +437452,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-094.tex",
-            "line": 106,
-            "end_line": 106
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437191,9 +437465,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-095.tex",
-            "line": 14,
-            "end_line": 14
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437204,9 +437478,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-091.tex",
-            "line": 66,
-            "end_line": 66
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437217,9 +437491,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-095.tex",
-            "line": 38,
-            "end_line": 38
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437230,9 +437504,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-092.tex",
-            "line": 6,
-            "end_line": 6
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437243,9 +437517,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-092.tex",
-            "line": 22,
-            "end_line": 22
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437256,9 +437530,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-092.tex",
-            "line": 42,
-            "end_line": 42
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437269,9 +437543,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-092.tex",
-            "line": 98,
-            "end_line": 98
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437282,9 +437556,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 6,
-            "end_line": 6
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437295,9 +437569,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 34,
-            "end_line": 34
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437308,9 +437582,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-093.tex",
-            "line": 50,
-            "end_line": 50
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437321,9 +437595,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-095.tex",
-            "line": 82,
-            "end_line": 82
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437334,9 +437608,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-095.tex",
-            "line": 86,
-            "end_line": 86
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437347,9 +437621,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-096.tex",
-            "line": 76,
-            "end_line": 76
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437360,9 +437634,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-096.tex",
-            "line": 84,
-            "end_line": 84
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -437373,9 +437647,9 @@
           "status": "reviewed",
           "migration": "complete",
           "source": {
-            "path": "sections/semantic/clauses-5-6/page-100.tex",
-            "line": 120,
-            "end_line": 120
+            "path": "canonical/source-navigation.json",
+            "line": 1,
+            "end_line": null
           },
           "owner_id": null,
           "notes": ""
@@ -438196,7 +438470,7 @@
             "line": 1,
             "end_line": 121
           },
-          "owner_id": "clause-1",
+          "owner_id": null,
           "notes": ""
         },
         {
@@ -439383,6 +439657,201 @@
           "notes": ""
         },
         {
+          "record_id": "content-15162-page-032-list-001",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-001-item-001",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-001-item-002",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-001-item-003",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-001-item-004",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-001-item-005",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002-item-001",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002-item-002",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002-item-003",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002-item-004",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-list-002-item-005",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed list-item content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-paragraph-001",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3",
+          "notes": "Typed paragraph content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-paragraph-002",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed paragraph content owned by content-15162-page-032."
+        },
+        {
+          "record_id": "content-15162-page-032-paragraph-003",
+          "kind": "content-element",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clauses-1-3/page-032.tex",
+            "line": 1,
+            "end_line": 121
+          },
+          "owner_id": "clause-3.3.1",
+          "notes": "Typed paragraph content owned by content-15162-page-032."
+        },
+        {
           "record_id": "content-element-content-15162-page-011-paragraph-001",
           "kind": "content-element",
           "status": "reviewed",
@@ -440213,19 +440682,6 @@
           },
           "owner_id": "clause-1",
           "notes": "Typed paragraph content owned by content-15162-page-031."
-        },
-        {
-          "record_id": "content-element-content-15162-page-032-paragraph-001",
-          "kind": "content-element",
-          "status": "reviewed",
-          "migration": "M11",
-          "source": {
-            "path": "sections/semantic/clauses-1-3/page-032.tex",
-            "line": 1,
-            "end_line": 121
-          },
-          "owner_id": "clause-1",
-          "notes": "Typed paragraph content owned by content-15162-page-032."
         },
         {
           "record_id": "content-element-content-15162-page-033-list-001",
@@ -453956,6 +454412,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-040-paragraph-003-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4a/page-040.tex",
+            "line": 18,
+            "end_line": 57
+          },
+          "owner_id": "content-element-content-15162-page-040-paragraph-003",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-040-paragraph-003-surface-omt-table-4",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -454633,6 +455102,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-044-paragraph-005-004",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4a/page-044.tex",
+            "line": 74,
+            "end_line": 265
+          },
+          "owner_id": "content-element-content-15162-page-044-paragraph-005",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-044-paragraph-005-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -456323,6 +456805,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-048-paragraph-003-005",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-048.tex",
+            "line": 101,
+            "end_line": 436
+          },
+          "owner_id": "content-element-content-15162-page-048-paragraph-003",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-048-paragraph-003-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -462146,6 +462641,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-053-paragraph-002-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-053.tex",
+            "line": 39,
+            "end_line": 194
+          },
+          "owner_id": "content-element-content-15162-page-053-paragraph-002",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-053-paragraph-003-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -463837,6 +464345,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-056-paragraph-001-005",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-056.tex",
+            "line": 6,
+            "end_line": 43
+          },
+          "owner_id": "content-element-content-15162-page-056-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-056-paragraph-001-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -465747,6 +466268,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-061-paragraph-005-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-061.tex",
+            "line": 90,
+            "end_line": 269
+          },
+          "owner_id": "content-element-content-15162-page-061-paragraph-005",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-062-list-003-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -466748,6 +467282,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-063-paragraph-003-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-063.tex",
+            "line": 51,
+            "end_line": 194
+          },
+          "owner_id": "content-element-content-15162-page-063-paragraph-003",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-063-paragraph-004-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -467230,6 +467777,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-064-paragraph-003-004",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-064.tex",
+            "line": 50,
+            "end_line": 153
+          },
+          "owner_id": "content-element-content-15162-page-064-paragraph-003",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-064-paragraph-003-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -468737,6 +469297,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-068-paragraph-004-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4b/page-068.tex",
+            "line": 64,
+            "end_line": 127
+          },
+          "owner_id": "content-element-content-15162-page-068-paragraph-004",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-068-paragraph-005-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -469349,6 +469922,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-071-paragraph-002-006",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-071.tex",
+            "line": 61,
+            "end_line": 288
+          },
+          "owner_id": "content-element-content-15162-page-071-paragraph-002",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-071-paragraph-002-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -470011,6 +470597,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-072-paragraph-002-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-072.tex",
+            "line": 124,
+            "end_line": 555
+          },
+          "owner_id": "content-element-content-15162-page-072-paragraph-002",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-072-paragraph-003-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -470077,6 +470676,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-073-paragraph-001-003",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-073.tex",
+            "line": 91,
+            "end_line": 438
+          },
+          "owner_id": "content-element-content-15162-page-073-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-073-paragraph-001-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -470402,6 +471014,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-074-paragraph-002-007",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-074.tex",
+            "line": 52,
+            "end_line": 223
+          },
+          "owner_id": "content-element-content-15162-page-074-paragraph-002",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-074-paragraph-002-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -471064,6 +471689,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-075-paragraph-003-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-075.tex",
+            "line": 92,
+            "end_line": 375
+          },
+          "owner_id": "content-element-content-15162-page-075-paragraph-003",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-076-paragraph-001-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -471143,6 +471781,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-076-paragraph-001-007",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-076.tex",
+            "line": 48,
+            "end_line": 243
+          },
+          "owner_id": "content-element-content-15162-page-076-paragraph-001",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-076-paragraph-001-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -472078,6 +472729,19 @@
           "notes": ""
         },
         {
+          "record_id": "xref-content-element-content-15162-page-077-paragraph-002-surface-clause-3-3-1",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-077.tex",
+            "line": 58,
+            "end_line": 273
+          },
+          "owner_id": "content-element-content-15162-page-077-paragraph-002",
+          "notes": ""
+        },
+        {
           "record_id": "xref-content-element-content-15162-page-077-paragraph-003-001",
           "kind": "cross-reference",
           "status": "reviewed",
@@ -472183,6 +472847,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-077-paragraph-003-009",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-077.tex",
+            "line": 62,
+            "end_line": 273
+          },
+          "owner_id": "content-element-content-15162-page-077-paragraph-003",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-077-paragraph-003-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -472534,6 +473211,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-077-paragraph-006-009",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-077.tex",
+            "line": 74,
+            "end_line": 273
+          },
+          "owner_id": "content-element-content-15162-page-077-paragraph-006",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-077-paragraph-006-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -473314,6 +474004,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-079-paragraph-002-008",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-079.tex",
+            "line": 45,
+            "end_line": 188
+          },
+          "owner_id": "content-element-content-15162-page-079-paragraph-002",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-079-paragraph-002-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -477318,6 +478021,19 @@
         },
         {
           "record_id": "xref-content-element-content-15162-page-086-paragraph-009-003",
+          "kind": "cross-reference",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-086.tex",
+            "line": 88,
+            "end_line": 219
+          },
+          "owner_id": "content-element-content-15162-page-086-paragraph-009",
+          "notes": ""
+        },
+        {
+          "record_id": "xref-content-element-content-15162-page-086-paragraph-009-surface-clause-3-3-1",
           "kind": "cross-reference",
           "status": "reviewed",
           "migration": "M11",
@@ -544644,6 +545360,19 @@
           "notes": "Semantic group: m17.clause-G.1."
         },
         {
+          "record_id": "requirement-candidate-sections-semantic-clause-4a-page-033-l43-1",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4a/page-033.tex",
+            "line": 43,
+            "end_line": 43
+          },
+          "owner_id": "clause-4.1",
+          "notes": "Semantic group: m17.clause-4.1."
+        },
+        {
           "record_id": "requirement-candidate-sections-semantic-clause-4a-page-034-l14-3",
           "kind": "requirement",
           "status": "reviewed",
@@ -544704,6 +545433,19 @@
             "path": "sections/semantic/clause-4a/page-039.tex",
             "line": 18,
             "end_line": 18
+          },
+          "owner_id": "clause-4.2.1",
+          "notes": "Semantic group: m17.clause-4.2.1."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-4a-page-039-l22-3",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4a/page-039.tex",
+            "line": 22,
+            "end_line": 22
           },
           "owner_id": "clause-4.2.1",
           "notes": "Semantic group: m17.clause-4.2.1."
@@ -544902,6 +545644,19 @@
           },
           "owner_id": "clause-4",
           "notes": "Semantic group: m17.clause-4."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-4a-page-046-l50-1",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4a/page-046.tex",
+            "line": 50,
+            "end_line": 50
+          },
+          "owner_id": "clause-4.4.1",
+          "notes": "Semantic group: m17.clause-4.4.1."
         },
         {
           "record_id": "requirement-candidate-sections-semantic-clause-4a-page-046-l58-2",
@@ -546035,6 +546790,19 @@
           "notes": "Semantic group: m17.clause-4."
         },
         {
+          "record_id": "requirement-candidate-sections-semantic-clause-4c-page-071-l57-1",
+          "kind": "requirement",
+          "status": "layout-only",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-071.tex",
+            "line": 57,
+            "end_line": 57
+          },
+          "owner_id": "clause-4.14.4",
+          "notes": "This source span is the page-break continuation of the five predefined simple data types requirement in 4.14.4. Its complete normative meaning is now represented in requirement-candidate-sections-semantic-clause-4c-page-070-l110-4, with this page retained as an additional source location; it is not a separate requirement."
+        },
+        {
           "record_id": "requirement-candidate-sections-semantic-clause-4c-page-071-l61-2",
           "kind": "requirement",
           "status": "reviewed",
@@ -546646,6 +547414,19 @@
           "notes": "Semantic group: m17.clause-4.14.10."
         },
         {
+          "record_id": "requirement-candidate-sections-semantic-clause-4c-page-080-l61-4",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-4c/page-080.tex",
+            "line": 61,
+            "end_line": 61
+          },
+          "owner_id": "clause-4.14.10",
+          "notes": "Semantic group: m17.clause-4.14.10."
+        },
+        {
           "record_id": "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
           "kind": "requirement",
           "status": "reviewed",
@@ -546984,6 +547765,19 @@
           "notes": "Semantic group: m17.clause-C.1."
         },
         {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-109-l38-5",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-109.tex",
+            "line": 38,
+            "end_line": 38
+          },
+          "owner_id": "clause-C.1",
+          "notes": "Semantic group: m17.clause-C.1."
+        },
+        {
           "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-109-l46-6",
           "kind": "requirement",
           "status": "reviewed",
@@ -547231,6 +548025,32 @@
           "notes": "Semantic group: m17.clause-C.3."
         },
         {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-111-l62-11",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-111.tex",
+            "line": 62,
+            "end_line": 62
+          },
+          "owner_id": "clause-C.5",
+          "notes": "Semantic group: m17.clause-C.5."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-111-l70-13",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-111.tex",
+            "line": 70,
+            "end_line": 70
+          },
+          "owner_id": "clause-C.5",
+          "notes": "Semantic group: m17.clause-C.5."
+        },
+        {
           "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-111-l78-15",
           "kind": "requirement",
           "status": "reviewed",
@@ -547242,6 +548062,19 @@
           },
           "owner_id": "clause-C.5",
           "notes": "Semantic group: m17.clause-C.5."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l30-2",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-112.tex",
+            "line": 30,
+            "end_line": 30
+          },
+          "owner_id": "clause-C.6",
+          "notes": "Semantic group: m17.clause-C.6."
         },
         {
           "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l34-3",
@@ -547268,6 +548101,32 @@
           },
           "owner_id": "clause-C.6",
           "notes": "Semantic group: m17.clause-C.6."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l46-6",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-112.tex",
+            "line": 46,
+            "end_line": 46
+          },
+          "owner_id": "clause-C.6",
+          "notes": "Semantic group: m17.clause-C.6."
+        },
+        {
+          "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l6-1",
+          "kind": "requirement",
+          "status": "reviewed",
+          "migration": "M11",
+          "source": {
+            "path": "sections/semantic/clause-7-annexes-a-c/page-112.tex",
+            "line": 6,
+            "end_line": 6
+          },
+          "owner_id": "clause-C.5",
+          "notes": "Semantic group: m17.clause-C.5."
         },
         {
           "record_id": "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l70-9",
@@ -588068,22 +588927,23 @@
   ],
   "totals": {
     "annex": 10,
-    "clause": 3361,
+    "clause": 3378,
     "content-block": 630,
-    "content-element": 1947,
-    "cross-reference": 12278,
+    "content-element": 1961,
+    "cross-reference": 12302,
     "definition": 822,
     "figure": 55,
     "implementation": 495,
     "note": 197,
     "reference": 4,
-    "requirement": 4548,
+    "requirement": 4559,
     "requirement-link": 164,
     "state": 467,
     "state-machine": 41,
+    "status:layout-only": 1,
     "status:mapped": 1004,
     "status:non-normative": 12,
-    "status:reviewed": 44371,
+    "status:reviewed": 44436,
     "table": 372,
     "table-cell": 19172,
     "table-family": 315,
@@ -588185,6 +589045,14 @@
       "record_id": "requirement-candidate-content-clauses-12-programming-language-mappings-page-433-l46-15",
       "status": "non-normative",
       "notes": "Annex F is labeled informative. IEEE SA Standards Board Operations Manual 8.1.4 says informative annexes are for information only and are not normative. Preserve this sentence as source text; it creates no independent conformance requirement."
+    },
+    {
+      "document": "hla-1516.2-2025",
+      "migration": "M11",
+      "kind": "requirement",
+      "record_id": "requirement-candidate-sections-semantic-clause-4c-page-071-l57-1",
+      "status": "layout-only",
+      "notes": "This source span is the page-break continuation of the five predefined simple data types requirement in 4.14.4. Its complete normative meaning is now represented in requirement-candidate-sections-semantic-clause-4c-page-070-l110-4, with this page retained as an additional source location; it is not a separate requirement."
     }
   ]
 }

@@ -108,8 +108,11 @@ def _latex_text(value: str, source: LatexSourceProfile | None = None) -> str:
     # escaped percent signs, which are visible source text.
     value = re.sub(r"(?<!\\)(?:\\\\)*%[^\n]*", "", value)
     value = value.replace(r"\ ", " ")
+    # Source-layout captures use explicit spacing and line-break macros.
+    # Removing these as generic commands joins neighboring prose words.
+    value = re.sub(r"\\(?:space|newline|linebreak)\b", " ", value)
     value = re.sub(r"\\([&_#$%])", r"\1", value)
-    value = value.replace("\\linebreak", " ").replace("\\par", " ")
+    value = value.replace("\\par", " ")
     value = re.sub(r"\\(?:begin|end)\{[^{}]*\}", " ", value)
     value = re.sub(r"\\(?:addvspace|vspace|hspace)\*?\{[^{}]*\}", " ", value)
     value = re.sub(r"\\item\b", "; ", value)

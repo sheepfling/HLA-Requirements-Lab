@@ -89,6 +89,36 @@ def _math_text(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
+def _breakable_code_identifier(value: str) -> str:
+    """Insert TeX break opportunities without changing identifier characters."""
+
+    def allowbreak(_match: re.Match[str]) -> str:
+        return r"\allowbreak{}"
+
+    value = re.sub(r"(?<=\.)(?=[A-Za-z])", allowbreak, value)
+    value = re.sub(r"\\_(?=[A-Za-z0-9])", lambda _match: r"\_\allowbreak{}", value)
+    value = re.sub(r"(?<=[a-z])(?=[A-Z])", allowbreak, value)
+    value = re.sub(r"\bHLA(?=[a-z])", lambda _match: r"HLA\allowbreak{}", value)
+    return re.sub(
+        r"[A-Za-z]{12,}",
+        lambda match: r"\allowbreak{}".join(
+            match.group(0)[index : index + 8] for index in range(0, len(match.group(0)), 8)
+        ),
+        value,
+    )
+
+
+def _break_long_camel_case_parts(value: str) -> str:
+    """Add invisible breakpoints inside long components of camel-case text."""
+    return re.sub(
+        r"[A-Za-z]{12,}(?=@@hlabreak@@[A-Z])",
+        lambda match: "@@hlabreak@@".join(
+            match.group(0)[offset : offset + 8] for offset in range(0, len(match.group(0)), 8)
+        ),
+        value,
+    )
+
+
 def _text(value: str) -> str:
     """Escape semantic prose, preserving inline math and styling source notes."""
     # A legacy plain-text handoff collapses the source ``\\leq`` command to
@@ -174,6 +204,15 @@ def _text(value: str) -> str:
     # Preserve camel-case technical names as one searchable token while
     # giving TeX a legal break opportunity when the token is too wide.
     value = re.sub(r"(?<=[a-z])(?=[A-Z])", "@@hlabreak@@", value)
+    value = re.sub(r"\bHLA(?=[a-z])", lambda _match: "HLA@@hlabreak@@", value)
+    value = _break_long_camel_case_parts(value)
+    value = re.sub(
+        r"[A-Z]{12,}",
+        lambda match: "@@hlabreak@@".join(
+            match.group(0)[offset : offset + 8] for offset in range(0, len(match.group(0)), 8)
+        ),
+        value,
+    )
     token_pattern = re.compile(
         r"\\\((.+?)\\\)|\$([^$]+)\$|NOTE---(.*)$",
         flags=re.IGNORECASE,
@@ -228,25 +267,19 @@ def _text(value: str) -> str:
         for start, end, kind, token in matches:
             if start < cursor or start < occupied_until:
                 continue
-            parts.append(prose(fragment[cursor:start]))
+            preceding = fragment[cursor:start]
+            parts.append(prose(preceding))
+            if kind == "code" and len(token) >= 36 and preceding.rstrip().endswith(":"):
+                parts.append(r"\linebreak{}")
             if kind == "url":
                 parts.append(rf"\href{{\detokenize{{{token}}}}}{{\nolinkurl{{{token}}}}}")
             elif kind == "bnf":
-                parts.append(r"\texttt{\textless{}" + tex_escape(token[1:-1]) + r"\textgreater{}}")
+                identifier = _breakable_code_identifier(tex_escape(token[1:-1]))
+                parts.append(r"\texttt{\textless{}" + identifier + r"\textgreater{}}")
             else:
                 code = re.sub(r"\s+\(", "(", token).replace("@@hlabreak@@", "")
-                escaped_code = tex_escape(code)
-                escaped_code = re.sub(
-                    r"(?<=\.)(?=[A-Za-z])",
-                    lambda _match: r"\allowbreak{}",
-                    escaped_code,
-                )
-                escaped_code = re.sub(
-                    r"(?<=[a-z])(?=[A-Z])",
-                    lambda _match: r"\allowbreak{}",
-                    escaped_code,
-                )
-                parts.append(r"\texttt{" + escaped_code + "}")
+                escaped_code = _breakable_code_identifier(tex_escape(code))
+                parts.append(r"\allowbreak{}\texttt{" + escaped_code + "}")
             cursor = end
             occupied_until = end
         parts.append(prose(fragment[cursor:]))
@@ -372,6 +405,7 @@ def _text_with_semantic_links(
     fallback_record_id: str | None = None,
 ) -> str:
     """Typeset prose while linking explicit clause and modeled-figure references."""
+
     def plain(fragment: str) -> str:
         if fallback_record_id and fragment:
             return _link(model.document_id, fallback_record_id, fragment)
@@ -420,9 +454,7 @@ def _text_with_semantic_links(
     for number, target_id in figure_ids.items():
         title = figure_titles.get(number)
         title_pattern = (
-            rf"(?:\s*[,\u2014\u2013-]\s*{_flexible_reference_title(title)})"
-            if title
-            else ""
+            rf"(?:\s*[,\u2014\u2013-]\s*{_flexible_reference_title(title)})" if title else ""
         )
         pattern = re.compile(
             rf"\bFigure\s+{re.escape(number)}\b{title_pattern}",
@@ -467,12 +499,35 @@ def _text_with_semantic_links(
 def _heading(level: int, title: str, *, numbered: bool = False) -> str:
     command = {1: "section", 2: "subsection", 3: "subsubsection"}.get(level, "paragraph")
     suffix = "" if numbered else "*"
+    title_text = _text(title)
     bookmark = (
-        f"\\HLASemanticBookmark{{{level}}}{{{_text(title)}}}\n"
+        f"\\HLASemanticBookmark{{{level}}}{{{title_text}}}\n"
         if not numbered and level in {2, 3}
         else ""
     )
-    return f"{bookmark}\\{command}{suffix}{{{_text(title)}}}"
+    return f"{bookmark}\\{command}{suffix}{{{title_text}}}"
+
+
+def _document_section_heading(
+    label: str,
+    profile: PublicationProfile,
+    model: DocumentModel,
+) -> str:
+    source_title = _document_title(profile, model)
+    toc_title = _text(f"{label} — {source_title}")
+    display = (
+        rf"\thesection\quad {_text(label)}"
+        + r"\\{\fontsize{12pt}{15pt}\selectfont "
+        + _text(source_title)
+        + "}"
+    )
+    return (
+        r"\refstepcounter{section}"
+        + "\n"
+        + rf"\addcontentsline{{toc}}{{section}}{{\protect\numberline{{\thesection}}{toc_title}}}"
+        + "\n"
+        + rf"\section*{{{display}}}"
+    )
 
 
 def _short_requirement_identifier(requirement) -> str:
@@ -506,6 +561,8 @@ def _printed_source_label(source, clause: str | None = None) -> str:
 
 def _clause_title(number: str, title: str) -> str:
     """Avoid repeating a clause number recovered inside its title text."""
+    if re.fullmatch(r"[A-Z]", number) and title.strip().startswith(f"Annex {number} "):
+        return title.strip()
     prefixes = (f"{number}. ", f"{number} ")
     normalized = title.strip()
     if number == "3" and normalized.rstrip(".").strip() == "3":
@@ -964,6 +1021,21 @@ def _render_concepts(model: DocumentModel, profile: PublicationProfile) -> list[
     definitions = _clause_groups(model.definitions, clause_getter=lambda item: item.clause_id)
     extracted_definitions = _source_definition_entries(model)
     definition_introduction = _source_definition_introduction(model)
+    convention_elements = tuple(
+        element
+        for element in model.content_elements
+        if element.clause_id in {"clause-3.3", "clause-3.3.1"}
+        and element.source.path.endswith("clauses-1-3/page-032.tex")
+    )
+    convention_children: dict[str, tuple[ContentElement, ...]] = {}
+    grouped_convention_children: dict[str, list[ContentElement]] = defaultdict(list)
+    for element in convention_elements:
+        if element.parent_id:
+            grouped_convention_children[element.parent_id].append(element)
+    convention_children = {
+        parent_id: tuple(sorted(items, key=_content_element_order))
+        for parent_id, items in grouped_convention_children.items()
+    }
     extracted_by_clause: dict[str | None, list[tuple[ContentElement, str, str, str]]] = defaultdict(
         list
     )
@@ -974,6 +1046,7 @@ def _render_concepts(model: DocumentModel, profile: PublicationProfile) -> list[
         (
             *(item.clause_id for item in model.definitions if _clean_content_text(item.text)),
             *(element.clause_id for element, _key, _label, _meaning in extracted_definitions),
+            *(element.clause_id for element in convention_elements),
         ),
     )
     if definition_introduction and definition_introduction[0].clause_id:
@@ -1023,14 +1096,25 @@ def _render_concepts(model: DocumentModel, profile: PublicationProfile) -> list[
                     f"{{\\footnotesize Source: {_text(source_label)}.}}\\par",
                 )
             )
+        if clause_id in {"clause-3.3", "clause-3.3.1"}:
+            for element in sorted(convention_elements, key=_content_element_order):
+                if element.clause_id != clause_id or element.parent_id is not None:
+                    continue
+                lines.extend(
+                    _render_content_element(
+                        model,
+                        element,
+                        convention_children,
+                        {},
+                        included_clause_ids=included_clauses,
+                    )
+                )
+                if element.kind not in {"list", "formula"}:
+                    lines.append("\\par")
         return lines
 
     lines = [
-        _heading(
-            1,
-            f"Concepts and terminology — {_document_title(profile, model)}",
-            numbered=True,
-        ),
+        _document_section_heading("Concepts and terminology", profile, model),
         _text(
             "Bold terms identify concepts; each meaning follows directly below. "
             "Acronym entries show the bold abbreviation, its source key, and its meaning."
@@ -1662,11 +1746,7 @@ def _render_operations(model: DocumentModel, profile: PublicationProfile) -> lis
         return lines
 
     lines = [
-        _heading(
-            1,
-            f"Services and operational behavior — {_document_title(profile, model)}",
-            numbered=True,
-        ),
+        _document_section_heading("Services and operational behavior", profile, model),
         _text(
             "The source overview is retained as context. Definitions and normative "
             "references are presented in their dedicated sections; the clauses below "
@@ -1733,11 +1813,7 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
         return lines
 
     lines = [
-        _heading(
-            1,
-            f"Normative requirements — {_document_title(profile, model)}",
-            numbered=True,
-        ),
+        _document_section_heading("Normative requirements", profile, model),
         _text(
             "Clause headings show each requirement's context. Every record begins "
             "with a linked source locator, followed by its normative statement and "
@@ -1775,13 +1851,7 @@ def _render_requirements(model: DocumentModel, profile: PublicationProfile) -> l
 
 
 def _render_state_logic(model: DocumentModel, profile: PublicationProfile) -> list[str]:
-    lines = [
-        _heading(
-            1,
-            f"State machines and message sequences — {_document_title(profile, model)}",
-            numbered=True,
-        )
-    ]
+    lines = [_document_section_heading("State machines and message sequences", profile, model)]
     if not model.state_machines and not model.sequence_diagrams:
         return [*lines, r"\emph{No state machines or message sequences are currently modeled.}"]
     for machine in model.state_machines:
@@ -1806,7 +1876,8 @@ def _render_state_logic(model: DocumentModel, profile: PublicationProfile) -> li
             lines.extend(
                 (
                     _anchor(model.document_id, transition.id),
-                    f"\\paragraph*{{{_text(transition.event)}}} {source} $\\rightarrow$ {target}.",
+                    f"\\RLMinorHeadingSmall{{{_text(transition.event)}}}",
+                    f"\\noindent {source} $\\rightarrow$ {target}.\\par",
                 )
             )
             if transition.guard:
@@ -1855,6 +1926,16 @@ def _table_cell_text(model: DocumentModel, cell, value: str | None = None) -> st
                 parts.append(_link(model.document_id, cell.record_ids[0], after))
             label = "".join(parts)
     return f"{_anchor(model.document_id, cell.id)}{label}"
+
+
+def _table_column_spec(widths: Sequence[float]) -> str:
+    """Fit table columns and their gutters inside the available line width."""
+    if not widths:
+        raise ValueError("semantic tables need at least one column")
+    gutter = min(0.006, 0.035 / max(1, len(widths) - 1))
+    separator = rf"@{{\hspace{{{gutter:.4f}\linewidth}}}}"
+    columns = separator.join(f"L{{{width:.3f}\\linewidth}}" for width in widths)
+    return f"@{{}}{columns}@{{}}"
 
 
 _PARAMETER_TABLE_COLUMNS = (
@@ -1936,8 +2017,8 @@ def _render_parameter_table_family(
             title,
             flags=re.IGNORECASE,
         )
-    widths = ("0.10", "0.13", "0.14", "0.16", "0.18", "0.24")
-    spec = "@{}" + "".join(f"L{{{width}\\linewidth}}" for width in widths) + "@{}"
+    widths = (0.10, 0.13, 0.14, 0.16, 0.18, 0.24)
+    spec = _table_column_spec(widths)
     lines = [
         r"\begin{RLLandscapePage}",
         f"\\HLASemanticBookmark{{1}}{{{_text(family_label)}}}",
@@ -2219,8 +2300,8 @@ def _table_local_schema(
             semantic_columns = [
                 cell.column
                 for row_number, cells in _table_row_groups(table).items()
-                    if row_number > matching_row
-                    and (following_header is None or row_number < following_header)
+                if row_number > matching_row
+                and (following_header is None or row_number < following_header)
                 for cell in cells
                 if cell.column is not None
                 and cell.column < first_class_column
@@ -2269,9 +2350,7 @@ def _table_local_schema(
                 if _table_cell_key(cell.text) == "attribute"
             )
             class_header_column = next(
-                cell.column
-                for cell in matching_headers
-                if _table_cell_key(cell.text) == "class"
+                cell.column for cell in matching_headers if _table_cell_key(cell.text) == "class"
             )
             if attribute_header_column is None or class_header_column is None:
                 return tuple(fallback), None
@@ -2582,9 +2661,7 @@ def _mom_interaction_table_rows(
             (
                 row_number
                 for row_number, cells in sorted(_table_row_groups(table).items())
-                if expected_headers.issubset(
-                    {_table_cell_key(cell.text) for cell in cells}
-                )
+                if expected_headers.issubset({_table_cell_key(cell.text) for cell in cells})
             ),
             None,
         )
@@ -2617,9 +2694,7 @@ def _mom_interaction_table_rows(
                 continue
             text_values = [_clean_table_cell_text(cell.text) for cell in cells]
             if not any(text_values) or all(
-                _table_cell_key(value) in {"continued", "cont"}
-                for value in text_values
-                if value
+                _table_cell_key(value) in {"continued", "cont"} for value in text_values if value
             ):
                 continue
 
@@ -2669,7 +2744,9 @@ def _mom_interaction_table_rows(
             starts_record = "Interaction class" in row
             if starts_record:
                 if not result:
-                    row["Interaction class"] = f"{_anchor(model.document_id, table.id)}{row['Interaction class']}"
+                    row["Interaction class"] = (
+                        f"{_anchor(model.document_id, table.id)}{row['Interaction class']}"
+                    )
                 result.append(row)
                 continue
             if not result:
@@ -3142,6 +3219,8 @@ def _join_table8_fragments(
         label = _table_cell_text(model, cell, value)
         if index:
             rendered.append(separators[index - 1])
+            if not separators[index - 1] and field in {"Data type", "Attribute", "Object class"}:
+                rendered.append(r"\allowbreak{}")
         if field == "Object class" and value.endswith("."):
             label += r"\allowbreak{}"
         rendered.append(label)
@@ -3413,11 +3492,7 @@ def _render_mom_attribute_table(
         "Object class",
     )
     widths = (0.065, 0.115, 0.15, 0.25, 0.095, 0.13, 0.115)
-    spec = (
-        "@{}"
-        + r"@{\hspace{0.010\linewidth}}".join(f"L{{{width:.3f}\\linewidth}}" for width in widths)
-        + "@{}"
-    )
+    spec = _table_column_spec(widths)
     anchors = _anchor(model.document_id, family.id) + "".join(
         _anchor(model.document_id, table.id) for table in tables
     )
@@ -3555,11 +3630,7 @@ def _render_generic_table_family(
         else:
             weights.append(1.0)
     weight_total = sum(weights)
-    spec = (
-        "@{}"
-        + "".join(f"L{{{total * weight / weight_total:.3f}\\linewidth}}" for weight in weights)
-        + "@{}"
-    )
+    spec = _table_column_spec(tuple(total * weight / weight_total for weight in weights))
     begin = r"\begin{RLLandscapePage}" if landscape else ""
     end = r"\end{RLLandscapePage}" if landscape else ""
     display_title = _table_display_label(tables[0], family_label)
@@ -4018,13 +4089,7 @@ def _render_traceability(
     labels: Mapping[tuple[str, str], str] | None = None,
 ) -> list[str]:
     labels = labels or {}
-    lines = [
-        _heading(
-            1,
-            f"Traceability and dependencies — {_document_title(profile, model)}",
-            numbered=True,
-        )
-    ]
+    lines = [_document_section_heading("Traceability and dependencies", profile, model)]
     lines.extend(
         _traceability_list_section(
             "References",

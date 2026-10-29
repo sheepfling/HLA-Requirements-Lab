@@ -8,12 +8,14 @@ from pathlib import Path
 
 import pymupdf
 
-from hla_lab.publication.hla_pdf_sniffer import sniff_hla_pdf
 from hla_lab.publication.hla_pdf_sniffer import (
+    _hla_text_findings,
     _list_label_sequence_findings,
     _missing_internal_reference_findings,
+    _normalized_handle_semantics_findings,
+    sniff_hla_pdf,
 )
-from hla_lab.publication.pdf_sniffer import sniff_pdf
+from hla_lab.publication.pdf_sniffer import _overfull_box_finding, sniff_pdf
 
 
 class PdfSnifferTests(unittest.TestCase):
@@ -60,6 +62,41 @@ class PdfSnifferTests(unittest.TestCase):
         finding = next(item for item in report.findings if item.code == "semantic-table-layout")
         self.assertIn("class", finding.message)
 
+    def test_mom_simple_data_type_table_requires_all_six_columns(self) -> None:
+        text = "Table 12 MOM simple data type table Name Representation Units Resolution Semantics"
+        with tempfile.TemporaryDirectory() as temporary:
+            report = sniff_hla_pdf(self._pdf(Path(temporary), text))
+
+        finding = next(item for item in report.findings if item.code == "semantic-table-layout")
+        self.assertIn("accuracy", finding.message)
+
+    def test_rotated_mom_normalization_sentence_order_is_checked(self) -> None:
+        broken = (
+            "HLAnormalizedFederateHandle Normalize Federate Handle "
+            "The normalized value of a federate handle as returned by the service."
+        )
+        corrected = (
+            "HLAnormalizedFederateHandle The normalized value of a federate handle "
+            "as returned by the Normalize Federate Handle service."
+        )
+
+        self.assertEqual(len(_normalized_handle_semantics_findings(broken, 1)), 1)
+        self.assertEqual(_normalized_handle_semantics_findings(corrected, 1), ())
+
+    def test_overfull_tex_warning_includes_largest_source_locations(self) -> None:
+        log = (
+            "Overfull \\hbox (12.50pt too wide) in paragraph at lines 200--201\n"
+            "Overfull \\hbox (28.75pt too wide) in alignment at lines 900--904\n"
+        )
+
+        finding = _overfull_box_finding(log)
+
+        self.assertIsNotNone(finding)
+        assert finding is not None
+        self.assertIn("2 overfull box(es)", finding.message)
+        self.assertIn("900-904", finding.message)
+        self.assertIn("28.75 pt", finding.message)
+
     def test_duplicate_semantic_destinations_are_an_error(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -86,6 +123,63 @@ class PdfSnifferTests(unittest.TestCase):
             report = sniff_hla_pdf(self._pdf(Path(temporary), "The <P/S> field is retained."))
 
         self.assertNotIn("p-s-placeholder-residue", {finding.code for finding in report.findings})
+
+    def test_hla_sniffer_flags_joined_source_words(self) -> None:
+        findings = _hla_text_findings(
+            "The switch cannot be insertedfail; see the equivalentto rule.",
+            578,
+        )
+
+        finding = next(item for item in findings if item.code == "joined-source-token")
+        self.assertEqual(finding.severity, "warning")
+        self.assertIn("insertedfail", finding.message)
+
+    def test_hla_sniffer_rejoins_line_wraps_before_checking_source_words(self) -> None:
+        findings = _hla_text_findings("The rule was equiv-\nalentto the text.", 323)
+
+        finding = next(item for item in findings if item.code == "joined-source-token")
+        self.assertIn("equivalentto", finding.message)
+
+    def test_hla_sniffer_does_not_flag_separated_source_words(self) -> None:
+        findings = _hla_text_findings(
+            "The switch cannot be inserted. The merge shall fail.",
+            578,
+        )
+
+        self.assertNotIn("joined-source-token", {finding.code for finding in findings})
+
+    def test_hla_sniffer_ignores_mixed_case_api_names_and_common_words(self) -> None:
+        findings = _hla_text_findings(
+            "Within the document, another federate uses HLAobjectClass and federateType.",
+            578,
+        )
+
+        self.assertNotIn("joined-source-token", {finding.code for finding in findings})
+
+    def test_hla_sniffer_preserves_intentional_hyphenation(self) -> None:
+        findings = _hla_text_findings("A user- supplied tag is valid.", 67)
+
+        self.assertNotIn("joined-source-token", {finding.code for finding in findings})
+
+    def test_hla_sniffer_flags_fused_definition_phrases_and_source_markers(self) -> None:
+        findings = _hla_text_findings(
+            "[l]Collectionofall employee addresses; Check-offon whether the server succeeded.",
+            41,
+        )
+
+        self.assertIn("source-list-marker-residue", {finding.code for finding in findings})
+        joined = next(item for item in findings if item.code == "joined-source-token")
+        self.assertIn("Collectionofall", joined.message)
+        self.assertIn("Check-offon", joined.message)
+
+    def test_hla_sniffer_flags_flattened_see_also_terms(self) -> None:
+        findings = _hla_text_findings(
+            "A named characteristic of an object class or object instance. "
+            "class attribute instance attribute.",
+            5,
+        )
+
+        self.assertIn("flattened-see-also-terms", {finding.code for finding in findings})
 
     def test_hla_list_sequence_ignores_valid_source_label_gaps(self) -> None:
         document = pymupdf.open()
