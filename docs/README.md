@@ -2,6 +2,7 @@
 
 Current product boundaries and operating contracts:
 
+- [CI triggers and local verification](CI-TRIGGERS.md)
 - [Scope and definition of done](SCOPE.md)
 - [Architecture and ownership](ARCHITECTURE.md)
 - [Publication products](PUBLICATION-PRODUCTS.md)
