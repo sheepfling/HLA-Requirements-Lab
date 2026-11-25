@@ -32,7 +32,7 @@ class ContentOwnershipTests(unittest.TestCase):
             model = load_document_model(root, HLA_SOURCE)
             if document_id == "hla-1516.1-2025":
                 page_files = tuple((root / "content").rglob("*-page-*.tex"))
-                self.assertEqual(len(model.requirements), 2014)
+                self.assertEqual(len(model.requirements), 2017)
                 self.assertEqual(len(model.requirement_reviews), 12)
                 self.assertEqual(len(model.definitions), 161)
                 self.assertEqual(len(model.tables), 94)
@@ -41,9 +41,15 @@ class ContentOwnershipTests(unittest.TestCase):
             else:
                 page_files = tuple((root / "sections" / "semantic").rglob("page-*.tex"))
                 self.assertEqual(len(model.definitions), 83)
-                self.assertEqual(len(model.requirements), 340)
-                self.assertEqual(len(model.requirement_reviews), 0)
-                self.assertTrue(all(item.extraction == "explicit" for item in model.requirements))
+                self.assertEqual(
+                    sum(item.extraction == "explicit" for item in model.requirements), 353
+                )
+                self.assertEqual(
+                    {item.id for item in model.requirements if item.extraction == "candidate"},
+                    {"requirement-candidate-sections-semantic-clause-4c-page-071-l57-1"},
+                )
+                self.assertEqual(len(model.requirement_reviews), 1)
+                self.assertEqual(model.requirement_review_counts()["layout-only"], 1)
                 self.assertTrue(all(item.clause_id for item in model.requirements))
                 self.assertEqual(len(model.tables), 89)
                 self.assertEqual(sum(len(item.cells) for item in model.tables), 2840)

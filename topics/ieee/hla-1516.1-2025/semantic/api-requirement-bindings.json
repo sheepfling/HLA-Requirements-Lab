@@ -52750,9 +52750,9 @@
       "api_surface_id": null,
       "candidate_api_surface_ids": [],
       "language": "unspecified",
-      "relationship": "cross-cutting",
+      "relationship": "not-applicable",
       "status": "reviewed",
-      "rationale": "Source clause rule with no one-to-one callable declaration in the reviewed Java/C++ API headings.",
+      "rationale": "Section lead-in only; it does not define a separate callable API behavior.",
       "source": {
         "path": "content/clauses/12-programming-language-mappings-page-411.tex",
         "line": 14,

@@ -439,7 +439,12 @@ class ReflowableRendererTests(unittest.TestCase):
                 "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-112-l34-3"
             ],
         )
-        self.assertIn("cannot be inserted; the merge fails.", switch_merge_requirement.statement)
+        self.assertIn(
+            "a warning shall be provided to the user.", switch_merge_requirement.statement
+        )
+        self.assertIn(
+            "cannot be inserted; the merge shall fail.", switch_merge_requirement.statement
+        )
         self.assertIn(
             "verify against the licensed source", switch_merge_requirement.coverage_note.casefold()
         )
