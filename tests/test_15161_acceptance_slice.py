@@ -190,10 +190,20 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             "table-record-table-33-p402-data.tex",
             "table-record-table-34-p404-data.tex",
         )
-        generated_tables = "\n".join(
-            (DOC_ROOT / "output" / "semantic" / filename).read_text(encoding="utf-8")
-            for filename in generated_table_files
-        )
+        with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
+            output = Path(temporary)
+            generate(
+                GenerationRequest(
+                    root=DOC_ROOT,
+                    output=output,
+                    source=source_profile_for_document("hla-1516.1-2025", ROOT),
+                    dialect=HLA_LATEX_DIALECT,
+                )
+            )
+            generated_tables = "\n".join(
+                (output / filename).read_text(encoding="utf-8")
+                for filename in generated_table_files
+            )
         for marker in (
             "AttributeRegionAssociationList",
             "ConfigurationResult",
@@ -452,9 +462,7 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
                 self.assertIn(r"\begin{tabularx}{\linewidth}", rendered)
                 header_cells = re.findall(r"\\RLTableHeaderCell\{", rendered)
                 self.assertEqual(len(header_cells), expected_columns[number])
-                rendered_rows = [
-                    line for line in rendered.splitlines() if " & " in line
-                ]
+                rendered_rows = [line for line in rendered.splitlines() if " & " in line]
                 self.assertEqual(len(rendered_rows), expected_rows[number] + 1)
                 self.assertTrue(
                     all(line.count("&") == expected_columns[number] - 1 for line in rendered_rows)
@@ -465,7 +473,9 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
         self.assertIn("heartbeat message", rendered_by_number["32"])
         self.assertIn("this timeout", rendered_by_number["32"])
         self.assertIn("HLA_CALL_RESPONSE", " ".join(" ".join(row) for row in rows_by_number["34"]))
-        self.assertIn("HLA_CALLBACK_RESPONSE", " ".join(" ".join(row) for row in rows_by_number["34"]))
+        self.assertIn(
+            "HLA_CALLBACK_RESPONSE", " ".join(" ".join(row) for row in rows_by_number["34"])
+        )
         for number in ("37", "39"):
             self.assertNotIn(r"\RLTableHeaderCell{Direction}", rendered_by_number[number])
         self.assertIn(r"\RLTableHeaderCell{Direction}", rendered_by_number["38"])
@@ -474,7 +484,11 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
             (DOC_ROOT / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
         )["content_blocks"]
         by_sequence = {item["sequence"]: item for item in blocks}
-        for sequence, numbers in ((402, ("31", "32", "33")), (404, ("34", "35")), (405, ("36", "37", "38", "39"))):
+        for sequence, numbers in (
+            (402, ("31", "32", "33")),
+            (404, ("34", "35")),
+            (405, ("36", "37", "38", "39")),
+        ):
             page = _modernize_2025_semantic_table_page(
                 by_sequence[sequence]["layout_body"],
                 sequence,

@@ -124,7 +124,8 @@ class AuthorityContractTests(unittest.TestCase):
         source_root = next(root for root in ROOTS if root.name == "hla-1516-2025")
         requirement_id = "summary-rule-1"
         changed_statement = "Federations shall expose a semantically generated FOM."
-        with tempfile.TemporaryDirectory() as temporary:
+        # Keep generated record paths below Windows' legacy path limit.
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temporary:
             workspace = Path(temporary)
             mutated_root = workspace / source_root.name
             shutil.copytree(
