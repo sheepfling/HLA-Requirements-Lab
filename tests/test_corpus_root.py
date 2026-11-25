@@ -160,6 +160,13 @@ def test_alternate_document_identity_resolves_its_selected_source_profile(tmp_pa
     )
 
 
+def test_canonical_profile_manifest_matches_packaged_fallback() -> None:
+    canonical = resources(Path(__file__).resolve().parents[1]).source_profiles_manifest
+    assert json.loads(canonical.read_text(encoding="utf-8")) == json.loads(
+        SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8")
+    )
+
+
 def test_package_profile_fallback_only_when_corpus_manifest_absent(tmp_path: Path) -> None:
     _write_document_manifest(tmp_path, profile_id="hla-2025")
     assert source_profile_for_document("alternate-standard-9", tmp_path) == HLA_SOURCE
