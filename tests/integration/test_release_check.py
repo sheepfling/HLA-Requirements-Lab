@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import unittest
 
 import fitz
@@ -36,6 +38,18 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
                 for item in json.loads(manifest_path.read_text(encoding="utf-8"))["projects"]
             },
         )
+
+    def test_omt_navigation_matches_the_built_lab_compilation(self) -> None:
+        project = REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025"
+        pdf = project / "dist" / "hla-requirements-lab-1516.2-2025-object-model-template.pdf"
+        result = subprocess.run(
+            [sys.executable, "tools/verify_pdf_navigation.py", str(pdf)],
+            cwd=project,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_faithful_pdfs_preserve_letter_geometry_and_lab_furniture(self) -> None:
         manifest = json.loads(
