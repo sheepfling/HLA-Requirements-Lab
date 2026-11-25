@@ -444,7 +444,10 @@
         "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6",
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3-naming",
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6-fom-classification",
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6-instance-eligibility"
       ],
       "element_ids": [
         "content-element-content-15162-page-040-paragraph-001",
@@ -853,7 +856,8 @@
         "requirement-candidate-sections-semantic-clause-4b-page-053-l59-7",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l63-8",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l67-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l83-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-053-l83-10",
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
       ],
       "element_ids": [
         "content-element-content-15162-page-053-paragraph-001",
@@ -1513,7 +1517,8 @@
         "requirement-candidate-sections-semantic-clause-4c-page-076-l60-4",
         "requirement-candidate-sections-semantic-clause-4c-page-076-l64-5",
         "requirement-candidate-sections-semantic-clause-4c-page-076-l68-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-076-l80-8"
+        "requirement-candidate-sections-semantic-clause-4c-page-076-l80-8",
+        "requirement-candidate-sections-semantic-clause-4c-page-077-l54-1"
       ],
       "element_ids": [
         "content-element-content-15162-page-076-paragraph-001",
@@ -1575,7 +1580,8 @@
       "clause_id": "clause-4",
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4c-page-078-l56-2",
-        "requirement-candidate-sections-semantic-clause-4c-page-078-l60-3"
+        "requirement-candidate-sections-semantic-clause-4c-page-078-l60-3",
+        "requirement-candidate-sections-semantic-clause-4c-page-077-l86-9"
       ],
       "element_ids": [
         "content-element-content-15162-page-078-paragraph-001",

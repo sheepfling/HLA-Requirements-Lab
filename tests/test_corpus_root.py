@@ -10,7 +10,7 @@ from hla_lab.build.topic import project_config
 from hla_lab.cli import main
 from hla_lab.core.hla_profile import source_profile_for_document
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import DOCUMENT_IDS, RESOURCES, document_roots, resources
+from hla_lab.paths import RESOURCES, document_ids, document_roots, resources
 
 
 def _write_document_manifest(root: Path, *, profile_id: str | None = None) -> None:
@@ -112,7 +112,7 @@ def test_document_resources_and_identities_come_from_selected_catalog(tmp_path: 
     )
     (tmp_path / "topics" / "alternate" / "standard-9").mkdir(parents=True)
     assert document_roots(tmp_path) == (tmp_path / "topics" / "alternate" / "standard-9",)
-    assert DOCUMENT_IDS != ("alternate-standard-9",)
+    assert document_ids() != ("alternate-standard-9",)
 
 
 def test_hla_loader_uses_catalog_identity_when_directory_name_differs(tmp_path: Path) -> None:
@@ -221,6 +221,8 @@ def test_matrix_cli_routes_to_project_declared_by_selected_release_manifest(
             "compliance-manifest.json",
             "compliance-requirements.tex",
             "csv/requirements.csv",
+            "csv/source-anomalies.csv",
+            "csv/requirement-source-anomaly-links.csv",
             "csv/transitions.csv",
             "csv/implementation-mappings.csv",
             "csv/requirement-mapping-links.csv",
@@ -240,8 +242,8 @@ def test_matrix_cli_routes_to_project_declared_by_selected_release_manifest(
     )
     assert Path(arguments[arguments.index("--workspace-root") + 1]) == tmp_path
     assert options["cwd"] == tmp_path
-    assert "topics/alternate/compliance-2025/output/compliance/csv/requirements.csv" in (
-        capsys.readouterr().out
+    assert "topics/alternate/compliance-2025/output/compliance" in (
+        capsys.readouterr().out.replace("\\", "/")
     )
 
 

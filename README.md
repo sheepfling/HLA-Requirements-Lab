@@ -372,12 +372,14 @@ implementation evidence. Use `--corpus-report --json` with
 The compliance publication builder also emits ignored, normalized CSV
 projections under
 `topics/ieee/hla-rti-compliance-2025/output/compliance/csv/`: requirements,
-transitions, implementation mappings, and one-to-many requirement/transition
-mapping link tables. The JSON manifest remains canonical; use the standalone
-export option when working from an existing semantic model:
+source anomalies, transitions, implementation mappings, and one-to-many
+requirement/mapping and requirement/source-anomaly link tables. Requirement rows
+carry linked anomaly IDs; source-only anomalies remain in `source-anomalies.csv`
+without being promoted to requirements. The JSON manifest remains canonical;
+use the standalone export option when working from an existing semantic model:
 
 ```console
-python -m hla_lab.publication.compliance_publication topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json topics/ieee/hla-rti-compliance-2025/semantic/publication.json --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
+python -m hla_lab.publication.compliance_publication topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json topics/ieee/hla-rti-compliance-2025/semantic/publication.json --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv --source-anomaly-ledger topics/ieee/hla-1516.1-2025/semantic/source-anomaly-ledger.json --source-anomaly-ledger topics/ieee/hla-1516.2-2025/semantic/source-anomaly-ledger.json
 ```
 
 Cross-edition requirements traceability is source-controlled separately in

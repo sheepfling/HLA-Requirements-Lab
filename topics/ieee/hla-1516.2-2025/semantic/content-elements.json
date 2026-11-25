@@ -2262,12 +2262,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-040",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
         "line": 6,
@@ -2282,12 +2277,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-040",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
         "line": 10,
@@ -2304,9 +2294,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3-naming"
       ],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
@@ -2323,10 +2311,7 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4"
       ],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
@@ -2343,10 +2328,7 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5"
       ],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
@@ -2363,9 +2345,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2383,9 +2362,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2403,9 +2379,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": "content-element-content-15162-page-040-list-007",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2423,9 +2396,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2443,9 +2413,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": "content-element-content-15162-page-040-list-009",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2463,9 +2430,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2483,9 +2447,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": "content-element-content-15162-page-040-list-011",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2503,9 +2464,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2523,9 +2481,6 @@
       "block_id": "content-15162-page-040",
       "parent_id": "content-element-content-15162-page-040-list-013",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
         "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
       ],
       "source": {
@@ -2543,10 +2498,7 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6-fom-classification"
       ],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
@@ -2563,10 +2515,7 @@
       "block_id": "content-15162-page-040",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l18-3",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l22-4",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l26-5",
-        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6"
+        "requirement-candidate-sections-semantic-clause-4a-page-040-l30-6-instance-eligibility"
       ],
       "source": {
         "path": "sections/semantic/clause-4a/page-040.tex",
@@ -4936,8 +4885,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -4955,8 +4903,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -4974,8 +4921,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -4993,8 +4939,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -5012,8 +4957,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -5031,8 +4975,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -5050,8 +4993,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -5069,8 +5011,7 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4b-page-052-l34-6",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l50-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-052.tex",
@@ -5106,7 +5047,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5114,7 +5054,10 @@
         "requirement-candidate-sections-semantic-clause-4b-page-053-l59-7",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l63-8",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l67-9",
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l83-10"
+        "requirement-candidate-sections-semantic-clause-4b-page-053-l83-10",
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10",
+        "requirement-candidate-sections-semantic-clause-4b-page-052-l54-10",
+        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1"
       ],
       "source": {
         "path": "sections/semantic/clause-4b/page-053.tex",
@@ -5131,7 +5074,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5156,7 +5098,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5181,7 +5122,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5206,7 +5146,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5231,7 +5170,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5256,7 +5194,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5281,7 +5218,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5306,7 +5242,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5331,7 +5266,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5356,7 +5290,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": "content-element-content-15162-page-053-list-010",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5381,7 +5314,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5406,7 +5338,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": "content-element-content-15162-page-053-list-012",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -5431,7 +5362,6 @@
       "block_id": "content-15162-page-053",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4b-page-053-l35-1",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l39-2",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l43-3",
         "requirement-candidate-sections-semantic-clause-4b-page-053-l47-4",
@@ -9067,7 +8997,8 @@
         "requirement-candidate-sections-semantic-clause-4c-page-076-l60-4",
         "requirement-candidate-sections-semantic-clause-4c-page-076-l64-5",
         "requirement-candidate-sections-semantic-clause-4c-page-076-l68-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-076-l80-8"
+        "requirement-candidate-sections-semantic-clause-4c-page-076-l80-8",
+        "requirement-candidate-sections-semantic-clause-4c-page-077-l54-1"
       ],
       "source": {
         "path": "sections/semantic/clause-4c/page-076.tex",
@@ -9310,7 +9241,8 @@
       "parent_id": null,
       "record_ids": [
         "requirement-candidate-sections-semantic-clause-4c-page-078-l56-2",
-        "requirement-candidate-sections-semantic-clause-4c-page-078-l60-3"
+        "requirement-candidate-sections-semantic-clause-4c-page-078-l60-3",
+        "requirement-candidate-sections-semantic-clause-4c-page-077-l86-9"
       ],
       "source": {
         "path": "sections/semantic/clause-4c/page-078.tex",
@@ -9632,10 +9564,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 37,
@@ -9650,10 +9579,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 41,
@@ -9668,10 +9594,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": "content-element-content-15162-page-080-list-002",
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 41,
@@ -9686,10 +9609,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 45,
@@ -9704,10 +9624,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": "content-element-content-15162-page-080-list-004",
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 45,
@@ -9722,10 +9639,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 49,
@@ -9740,10 +9654,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": "content-element-content-15162-page-080-list-006",
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 49,
@@ -9758,10 +9669,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 53,
@@ -9776,10 +9684,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 57,
@@ -9794,10 +9699,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 61,
@@ -9812,10 +9714,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 65,
@@ -9827,12 +9726,11 @@
       "id": "content-element-content-15162-page-080-paragraph-012",
       "kind": "paragraph",
       "text": "The HLAfixedRecord encoding shall consist of the encoding of each component in sequence, in the order in which they are declared. The first component in a fixed record shall start at offset 0 of the record.",
-      "clause_id": "clause-4",
+      "clause_id": "clause-4.14.10.1",
       "block_id": "content-15162-page-080",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
+        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6"
       ],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
@@ -9845,11 +9743,10 @@
       "id": "content-element-content-15162-page-080-paragraph-013",
       "kind": "paragraph",
       "text": "Zero or more padding bytes shall be added to each component, except the last, to ensure that the next ! { {component in the record is properly aligned. The number of padding bytes after such a component i of a}} ! { {fixed record with this encoding is the smallest nonnegative value of P i that satisfies Equation (1):",
-      "clause_id": "clause-4",
+      "clause_id": "clause-4.14.10.1",
       "block_id": "content-15162-page-080",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
         "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
       ],
       "source": {
@@ -9866,10 +9763,7 @@
       "clause_id": "clause-4",
       "block_id": "content-15162-page-080",
       "parent_id": null,
-      "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l69-6",
-        "requirement-candidate-sections-semantic-clause-4c-page-080-l73-7"
-      ],
+      "record_ids": [],
       "source": {
         "path": "sections/semantic/clause-4c/page-080.tex",
         "line": 77,
@@ -9885,7 +9779,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -9901,14 +9794,14 @@
       "id": "content-element-content-15162-page-081-paragraph-002",
       "kind": "paragraph",
       "text": "Padding bytes shall not be added after the last component of the record. The size of a fixed record shall include any added padding bytes.",
-      "clause_id": "clause-4",
+      "clause_id": "clause-4.14.10.1",
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
+        "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11",
+        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2"
       ],
       "source": {
         "path": "sections/semantic/clause-4c/page-081.tex",
@@ -9925,7 +9818,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -9945,7 +9837,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -9965,7 +9856,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -9985,7 +9875,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10005,7 +9894,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10025,7 +9913,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10045,7 +9932,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10065,7 +9951,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10085,7 +9970,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10105,7 +9989,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -10125,7 +10008,6 @@
       "block_id": "content-15162-page-081",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-4c-page-081-l36-2",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l68-9",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l72-10",
         "requirement-candidate-sections-semantic-clause-4c-page-081-l76-11"
@@ -14123,8 +14005,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14148,8 +14028,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-001",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14173,8 +14051,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14198,15 +14074,14 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-003",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l50-9",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l62-10",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l66-11",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l74-12"
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l74-12",
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2"
       ],
       "source": {
         "path": "sections/semantic/clause-7-annexes-a-c/page-113.tex",
@@ -14223,8 +14098,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14248,8 +14121,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-005",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14273,15 +14144,14 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l50-9",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l62-10",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l66-11",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l74-12"
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l74-12",
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4"
       ],
       "source": {
         "path": "sections/semantic/clause-7-annexes-a-c/page-113.tex",
@@ -14298,8 +14168,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14323,8 +14191,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-008",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14348,8 +14214,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14373,8 +14237,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-010",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14398,8 +14260,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14423,8 +14283,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14448,8 +14306,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14473,8 +14329,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-014",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14498,8 +14352,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14523,8 +14375,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-016",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14548,8 +14398,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14573,8 +14421,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-018",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14598,8 +14444,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14623,8 +14467,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14648,8 +14490,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-021",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14673,8 +14513,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14698,8 +14536,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": "content-element-content-15162-page-113-list-023",
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",
@@ -14723,8 +14559,6 @@
       "block_id": "content-15162-page-113",
       "parent_id": null,
       "record_ids": [
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l10-2",
-        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l18-4",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l34-5",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l38-6",
         "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l42-7",

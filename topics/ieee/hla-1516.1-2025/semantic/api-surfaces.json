@@ -4770,7 +4770,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-194-l21-3",
         "requirement-candidate-content-clauses-08-time-management-page-194-l27-5",
         "requirement-candidate-content-clauses-08-time-management-page-194-l45-11",
-        "requirement-candidate-content-clauses-08-time-management-page-194-l69-19"
+        "requirement-candidate-content-clauses-08-time-management-page-194-l69-19",
+        "requirement-service-flow-tar-current-time-precondition",
+        "requirement-service-flow-tar-time-passed-exception"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -4823,7 +4825,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-195-l137-40",
         "requirement-candidate-content-clauses-08-time-management-page-195-l164-49",
         "requirement-candidate-content-clauses-08-time-management-page-196-l12-2",
-        "requirement-candidate-content-clauses-08-time-management-page-196-l9-1"
+        "requirement-candidate-content-clauses-08-time-management-page-196-l9-1",
+        "requirement-service-flow-tara-equal-time-send-permission"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7343,9 +7346,7 @@
         "clause-10.20"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-257-l108-25",
-        "requirement-candidate-content-clauses-10-support-services-page-258-l64-18",
-        "requirement-candidate-content-clauses-10-support-services-page-258-l67-19"
+        "requirement-candidate-content-clauses-10-support-services-page-257-l108-25"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7387,8 +7388,8 @@
         "clause-10.21"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-259-l30-6",
-        "requirement-candidate-content-clauses-10-support-services-page-259-l36-8"
+        "requirement-candidate-content-clauses-10-support-services-page-258-l64-18",
+        "requirement-candidate-content-clauses-10-support-services-page-258-l67-19"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7430,7 +7431,8 @@
         "clause-10.22"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-259-l144-44"
+        "requirement-candidate-content-clauses-10-support-services-page-259-l30-6",
+        "requirement-candidate-content-clauses-10-support-services-page-259-l36-8"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7472,7 +7474,7 @@
         "clause-10.23"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23",
+        "requirement-candidate-content-clauses-10-support-services-page-259-l144-44",
         "requirement-service-flow-get-dimension-handle-name-not-found"
       ],
       "transition_ids": [],
@@ -7515,7 +7517,7 @@
         "clause-10.24"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-261-l30-6"
+        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7557,7 +7559,7 @@
         "clause-10.25"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-261-l141-43"
+        "requirement-candidate-content-clauses-10-support-services-page-261-l30-6"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7601,7 +7603,7 @@
         "clause-10.26"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-262-l113-35",
+        "requirement-candidate-content-clauses-10-support-services-page-261-l141-43",
         "requirement-candidate-content-clauses-10-support-services-page-262-l29-7"
       ],
       "transition_ids": [],
@@ -7656,8 +7658,8 @@
         "clause-10.27"
       ],
       "requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-262-l113-35",
         "requirement-candidate-content-clauses-10-support-services-page-262-l203-65",
-        "requirement-candidate-content-clauses-10-support-services-page-263-l125-39",
         "requirement-candidate-content-clauses-10-support-services-page-263-l20-4"
       ],
       "transition_ids": [],
@@ -7723,7 +7725,7 @@
         "clause-10.28"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-264-l133-41"
+        "requirement-candidate-content-clauses-10-support-services-page-263-l125-39"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7765,7 +7767,7 @@
         "clause-10.29"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-265-l45-11"
+        "requirement-candidate-content-clauses-10-support-services-page-264-l133-41"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7807,7 +7809,7 @@
         "clause-10.30"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-265-l150-46"
+        "requirement-candidate-content-clauses-10-support-services-page-265-l45-11"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7849,7 +7851,7 @@
         "clause-10.31"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-266-l95-28"
+        "requirement-candidate-content-clauses-10-support-services-page-265-l150-46"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7891,7 +7893,7 @@
         "clause-10.32"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-267-l39-9"
+        "requirement-candidate-content-clauses-10-support-services-page-266-l95-28"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7933,8 +7935,7 @@
         "clause-10.33"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-267-l144-44",
-        "requirement-candidate-content-clauses-10-support-services-page-267-l147-45"
+        "requirement-candidate-content-clauses-10-support-services-page-267-l39-9"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -7967,8 +7968,8 @@
         "clause-10.34"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-268-l101-30",
-        "requirement-candidate-content-clauses-10-support-services-page-268-l104-31"
+        "requirement-candidate-content-clauses-10-support-services-page-267-l144-44",
+        "requirement-candidate-content-clauses-10-support-services-page-267-l147-45"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8011,8 +8012,8 @@
         "clause-10.35"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-269-l50-13",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l53-14"
+        "requirement-candidate-content-clauses-10-support-services-page-268-l101-30",
+        "requirement-candidate-content-clauses-10-support-services-page-268-l104-31"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8045,9 +8046,8 @@
         "clause-10.36"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-269-l164-51",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-269-l50-13",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l53-14"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8090,8 +8090,9 @@
         "clause-10.37"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-270-l122-37",
-        "requirement-candidate-content-clauses-10-support-services-page-270-l125-38"
+        "requirement-candidate-content-clauses-10-support-services-page-269-l164-51",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8124,9 +8125,8 @@
         "clause-10.38"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-271-l64-18",
-        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19",
-        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-270-l122-37",
+        "requirement-candidate-content-clauses-10-support-services-page-270-l125-38"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8169,8 +8169,9 @@
         "clause-10.39"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-272-l29-6",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l32-7"
+        "requirement-candidate-content-clauses-10-support-services-page-271-l64-18",
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19",
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8203,9 +8204,8 @@
         "clause-10.40"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-272-l143-44",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-272-l29-6",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l32-7"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8248,8 +8248,9 @@
         "clause-10.41"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-273-l113-34",
-        "requirement-candidate-content-clauses-10-support-services-page-273-l116-35"
+        "requirement-candidate-content-clauses-10-support-services-page-272-l143-44",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8282,9 +8283,8 @@
         "clause-10.42"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-274-l55-15",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-273-l113-34",
+        "requirement-candidate-content-clauses-10-support-services-page-273-l116-35"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8327,8 +8327,9 @@
         "clause-10.43"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-274-l181-57",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58"
+        "requirement-candidate-content-clauses-10-support-services-page-274-l55-15",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8361,8 +8362,8 @@
         "clause-10.44"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-275-l119-36",
-        "requirement-candidate-content-clauses-10-support-services-page-275-l122-37"
+        "requirement-candidate-content-clauses-10-support-services-page-274-l181-57",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8406,8 +8407,8 @@
         "clause-10.45"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-276-l86-25",
-        "requirement-candidate-content-clauses-10-support-services-page-276-l89-26"
+        "requirement-candidate-content-clauses-10-support-services-page-275-l119-36",
+        "requirement-candidate-content-clauses-10-support-services-page-275-l122-37"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8440,10 +8441,8 @@
         "clause-10.46"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-277-l28-6",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7-effect",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l37-9"
+        "requirement-candidate-content-clauses-10-support-services-page-276-l86-25",
+        "requirement-candidate-content-clauses-10-support-services-page-276-l89-26"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8487,8 +8486,10 @@
         "clause-10.47"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-277-l184-58",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59"
+        "requirement-candidate-content-clauses-10-support-services-page-277-l28-6",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7-effect",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l37-9"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8521,9 +8522,8 @@
         "clause-10.48"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-278-l110-33",
-        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34",
-        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-277-l184-58",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8566,8 +8566,9 @@
         "clause-10.49"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-279-l70-20",
-        "requirement-candidate-content-clauses-10-support-services-page-279-l73-21"
+        "requirement-candidate-content-clauses-10-support-services-page-278-l110-33",
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34",
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8600,8 +8601,8 @@
         "clause-10.50"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-280-l29-6",
-        "requirement-candidate-content-clauses-10-support-services-page-280-l32-7"
+        "requirement-candidate-content-clauses-10-support-services-page-279-l70-20",
+        "requirement-candidate-content-clauses-10-support-services-page-279-l73-21"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8644,8 +8645,8 @@
         "clause-10.51"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-280-l155-48",
-        "requirement-candidate-content-clauses-10-support-services-page-280-l158-49"
+        "requirement-candidate-content-clauses-10-support-services-page-280-l29-6",
+        "requirement-candidate-content-clauses-10-support-services-page-280-l32-7"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8678,8 +8679,8 @@
         "clause-10.52"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-281-l101-30",
-        "requirement-candidate-content-clauses-10-support-services-page-281-l104-31"
+        "requirement-candidate-content-clauses-10-support-services-page-280-l155-48",
+        "requirement-candidate-content-clauses-10-support-services-page-280-l158-49"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8712,8 +8713,8 @@
         "clause-10.53"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-282-l38-9",
-        "requirement-candidate-content-clauses-10-support-services-page-282-l41-10"
+        "requirement-candidate-content-clauses-10-support-services-page-281-l101-30",
+        "requirement-candidate-content-clauses-10-support-services-page-281-l104-31"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8746,8 +8747,8 @@
         "clause-10.54"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-282-l152-47",
-        "requirement-candidate-content-clauses-10-support-services-page-282-l155-48"
+        "requirement-candidate-content-clauses-10-support-services-page-282-l38-9",
+        "requirement-candidate-content-clauses-10-support-services-page-282-l41-10"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8780,8 +8781,8 @@
         "clause-10.55"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-283-l110-33",
-        "requirement-candidate-content-clauses-10-support-services-page-283-l113-34"
+        "requirement-candidate-content-clauses-10-support-services-page-282-l152-47",
+        "requirement-candidate-content-clauses-10-support-services-page-282-l155-48"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8814,12 +8815,8 @@
         "clause-10.56"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20-precision",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l74-21",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22-true",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l80-23"
+        "requirement-candidate-content-clauses-10-support-services-page-283-l110-33",
+        "requirement-candidate-content-clauses-10-support-services-page-283-l113-34"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8859,14 +8856,12 @@
         "clause-10.57"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-284-l158-49",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l164-51",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l167-52",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-false",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-true",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2"
+        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20-precision",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l74-21",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22-true",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l80-23"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -8914,7 +8909,16 @@
       "clause_ids": [
         "clause-10.58"
       ],
-      "requirement_ids": [],
+      "requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-284-l158-49",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l164-51",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l167-52",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-false",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-true",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2"
+      ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
       "source": {
@@ -18180,7 +18184,9 @@
         "requirement-candidate-content-clauses-08-time-management-page-194-l21-3",
         "requirement-candidate-content-clauses-08-time-management-page-194-l27-5",
         "requirement-candidate-content-clauses-08-time-management-page-194-l45-11",
-        "requirement-candidate-content-clauses-08-time-management-page-194-l69-19"
+        "requirement-candidate-content-clauses-08-time-management-page-194-l69-19",
+        "requirement-service-flow-tar-current-time-precondition",
+        "requirement-service-flow-tar-time-passed-exception"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -18233,7 +18239,8 @@
         "requirement-candidate-content-clauses-08-time-management-page-195-l137-40",
         "requirement-candidate-content-clauses-08-time-management-page-195-l164-49",
         "requirement-candidate-content-clauses-08-time-management-page-196-l12-2",
-        "requirement-candidate-content-clauses-08-time-management-page-196-l9-1"
+        "requirement-candidate-content-clauses-08-time-management-page-196-l9-1",
+        "requirement-service-flow-tara-equal-time-send-permission"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -20941,9 +20948,7 @@
         "clause-10.20"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-257-l108-25",
-        "requirement-candidate-content-clauses-10-support-services-page-258-l64-18",
-        "requirement-candidate-content-clauses-10-support-services-page-258-l67-19"
+        "requirement-candidate-content-clauses-10-support-services-page-257-l108-25"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -20985,8 +20990,8 @@
         "clause-10.21"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-259-l30-6",
-        "requirement-candidate-content-clauses-10-support-services-page-259-l36-8"
+        "requirement-candidate-content-clauses-10-support-services-page-258-l64-18",
+        "requirement-candidate-content-clauses-10-support-services-page-258-l67-19"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21028,7 +21033,8 @@
         "clause-10.22"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-259-l144-44"
+        "requirement-candidate-content-clauses-10-support-services-page-259-l30-6",
+        "requirement-candidate-content-clauses-10-support-services-page-259-l36-8"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21070,7 +21076,7 @@
         "clause-10.23"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23"
+        "requirement-candidate-content-clauses-10-support-services-page-259-l144-44"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21112,7 +21118,7 @@
         "clause-10.24"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-261-l30-6"
+        "requirement-candidate-content-clauses-10-support-services-page-260-l80-23"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21154,7 +21160,7 @@
         "clause-10.25"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-261-l141-43"
+        "requirement-candidate-content-clauses-10-support-services-page-261-l30-6"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21198,7 +21204,7 @@
         "clause-10.26"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-262-l113-35",
+        "requirement-candidate-content-clauses-10-support-services-page-261-l141-43",
         "requirement-candidate-content-clauses-10-support-services-page-262-l29-7"
       ],
       "transition_ids": [],
@@ -21253,8 +21259,8 @@
         "clause-10.27"
       ],
       "requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-262-l113-35",
         "requirement-candidate-content-clauses-10-support-services-page-262-l203-65",
-        "requirement-candidate-content-clauses-10-support-services-page-263-l125-39",
         "requirement-candidate-content-clauses-10-support-services-page-263-l20-4"
       ],
       "transition_ids": [],
@@ -21320,7 +21326,7 @@
         "clause-10.28"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-264-l133-41"
+        "requirement-candidate-content-clauses-10-support-services-page-263-l125-39"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21362,7 +21368,7 @@
         "clause-10.29"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-265-l45-11"
+        "requirement-candidate-content-clauses-10-support-services-page-264-l133-41"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21404,7 +21410,7 @@
         "clause-10.30"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-265-l150-46"
+        "requirement-candidate-content-clauses-10-support-services-page-265-l45-11"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21446,7 +21452,7 @@
         "clause-10.31"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-266-l95-28"
+        "requirement-candidate-content-clauses-10-support-services-page-265-l150-46"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21488,7 +21494,7 @@
         "clause-10.32"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-267-l39-9"
+        "requirement-candidate-content-clauses-10-support-services-page-266-l95-28"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21530,8 +21536,7 @@
         "clause-10.33"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-267-l144-44",
-        "requirement-candidate-content-clauses-10-support-services-page-267-l147-45"
+        "requirement-candidate-content-clauses-10-support-services-page-267-l39-9"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21564,8 +21569,8 @@
         "clause-10.34"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-268-l101-30",
-        "requirement-candidate-content-clauses-10-support-services-page-268-l104-31"
+        "requirement-candidate-content-clauses-10-support-services-page-267-l144-44",
+        "requirement-candidate-content-clauses-10-support-services-page-267-l147-45"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21608,8 +21613,8 @@
         "clause-10.35"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-269-l50-13",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l53-14"
+        "requirement-candidate-content-clauses-10-support-services-page-268-l101-30",
+        "requirement-candidate-content-clauses-10-support-services-page-268-l104-31"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21642,9 +21647,8 @@
         "clause-10.36"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-269-l164-51",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52",
-        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-269-l50-13",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l53-14"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21687,8 +21691,9 @@
         "clause-10.37"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-270-l122-37",
-        "requirement-candidate-content-clauses-10-support-services-page-270-l125-38"
+        "requirement-candidate-content-clauses-10-support-services-page-269-l164-51",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52",
+        "requirement-candidate-content-clauses-10-support-services-page-269-l167-52-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21721,9 +21726,8 @@
         "clause-10.38"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-271-l64-18",
-        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19",
-        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-270-l122-37",
+        "requirement-candidate-content-clauses-10-support-services-page-270-l125-38"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21766,8 +21770,9 @@
         "clause-10.39"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-272-l29-6",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l32-7"
+        "requirement-candidate-content-clauses-10-support-services-page-271-l64-18",
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19",
+        "requirement-candidate-content-clauses-10-support-services-page-271-l67-19-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21800,9 +21805,8 @@
         "clause-10.40"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-272-l143-44",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45",
-        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-272-l29-6",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l32-7"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21845,8 +21849,9 @@
         "clause-10.41"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-273-l113-34",
-        "requirement-candidate-content-clauses-10-support-services-page-273-l116-35"
+        "requirement-candidate-content-clauses-10-support-services-page-272-l143-44",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45",
+        "requirement-candidate-content-clauses-10-support-services-page-272-l146-45-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21879,9 +21884,8 @@
         "clause-10.42"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-274-l55-15",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-273-l113-34",
+        "requirement-candidate-content-clauses-10-support-services-page-273-l116-35"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21924,8 +21928,9 @@
         "clause-10.43"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-274-l181-57",
-        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58"
+        "requirement-candidate-content-clauses-10-support-services-page-274-l55-15",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l58-16-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -21958,8 +21963,8 @@
         "clause-10.44"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-275-l119-36",
-        "requirement-candidate-content-clauses-10-support-services-page-275-l122-37"
+        "requirement-candidate-content-clauses-10-support-services-page-274-l181-57",
+        "requirement-candidate-content-clauses-10-support-services-page-274-l184-58"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22002,8 +22007,8 @@
         "clause-10.45"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-276-l86-25",
-        "requirement-candidate-content-clauses-10-support-services-page-276-l89-26"
+        "requirement-candidate-content-clauses-10-support-services-page-275-l119-36",
+        "requirement-candidate-content-clauses-10-support-services-page-275-l122-37"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22036,10 +22041,8 @@
         "clause-10.46"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-277-l28-6",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7-effect",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l37-9"
+        "requirement-candidate-content-clauses-10-support-services-page-276-l86-25",
+        "requirement-candidate-content-clauses-10-support-services-page-276-l89-26"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22083,8 +22086,10 @@
         "clause-10.47"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-277-l184-58",
-        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59"
+        "requirement-candidate-content-clauses-10-support-services-page-277-l28-6",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l31-7-effect",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l37-9"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22117,9 +22122,8 @@
         "clause-10.48"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-278-l110-33",
-        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34",
-        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34-effect"
+        "requirement-candidate-content-clauses-10-support-services-page-277-l184-58",
+        "requirement-candidate-content-clauses-10-support-services-page-277-l187-59"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22162,8 +22166,9 @@
         "clause-10.49"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-279-l70-20",
-        "requirement-candidate-content-clauses-10-support-services-page-279-l73-21"
+        "requirement-candidate-content-clauses-10-support-services-page-278-l110-33",
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34",
+        "requirement-candidate-content-clauses-10-support-services-page-278-l113-34-effect"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22196,8 +22201,8 @@
         "clause-10.50"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-280-l29-6",
-        "requirement-candidate-content-clauses-10-support-services-page-280-l32-7"
+        "requirement-candidate-content-clauses-10-support-services-page-279-l70-20",
+        "requirement-candidate-content-clauses-10-support-services-page-279-l73-21"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22240,8 +22245,8 @@
         "clause-10.51"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-280-l155-48",
-        "requirement-candidate-content-clauses-10-support-services-page-280-l158-49"
+        "requirement-candidate-content-clauses-10-support-services-page-280-l29-6",
+        "requirement-candidate-content-clauses-10-support-services-page-280-l32-7"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22274,8 +22279,8 @@
         "clause-10.52"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-281-l101-30",
-        "requirement-candidate-content-clauses-10-support-services-page-281-l104-31"
+        "requirement-candidate-content-clauses-10-support-services-page-280-l155-48",
+        "requirement-candidate-content-clauses-10-support-services-page-280-l158-49"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22308,8 +22313,8 @@
         "clause-10.53"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-282-l38-9",
-        "requirement-candidate-content-clauses-10-support-services-page-282-l41-10"
+        "requirement-candidate-content-clauses-10-support-services-page-281-l101-30",
+        "requirement-candidate-content-clauses-10-support-services-page-281-l104-31"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22342,8 +22347,8 @@
         "clause-10.54"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-282-l152-47",
-        "requirement-candidate-content-clauses-10-support-services-page-282-l155-48"
+        "requirement-candidate-content-clauses-10-support-services-page-282-l38-9",
+        "requirement-candidate-content-clauses-10-support-services-page-282-l41-10"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22376,8 +22381,8 @@
         "clause-10.55"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-283-l110-33",
-        "requirement-candidate-content-clauses-10-support-services-page-283-l113-34"
+        "requirement-candidate-content-clauses-10-support-services-page-282-l152-47",
+        "requirement-candidate-content-clauses-10-support-services-page-282-l155-48"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22410,12 +22415,8 @@
         "clause-10.56"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20-precision",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l74-21",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22-true",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l80-23"
+        "requirement-candidate-content-clauses-10-support-services-page-283-l110-33",
+        "requirement-candidate-content-clauses-10-support-services-page-283-l113-34"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22455,14 +22456,12 @@
         "clause-10.57"
       ],
       "requirement_ids": [
-        "requirement-candidate-content-clauses-10-support-services-page-284-l158-49",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l164-51",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l167-52",
-        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-false",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-true",
-        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2"
+        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l71-20-precision",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l74-21",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l77-22-true",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l80-23"
       ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
@@ -22510,7 +22509,16 @@
       "clause_ids": [
         "clause-10.58"
       ],
-      "requirement_ids": [],
+      "requirement_ids": [
+        "requirement-candidate-content-clauses-10-support-services-page-284-l158-49",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l164-51",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l167-52",
+        "requirement-candidate-content-clauses-10-support-services-page-284-l170-53",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-false",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l14-1-true",
+        "requirement-candidate-content-clauses-10-support-services-page-285-l17-2"
+      ],
       "transition_ids": [],
       "implementation_mapping_ids": [],
       "source": {

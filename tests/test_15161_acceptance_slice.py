@@ -15,6 +15,7 @@ from hla_lab.core.hla_profile import (
 )
 from hla_lab.core.semantic_model import load_document_model
 from hla_lab.generation.contracts import GenerationRequest
+from hla_lab.generation.reflowable_renderer import _render_generic_table_family
 from hla_lab.generation.semantic_generation import (
     _modern_2025_statechart_reflow_page,
     _modern_api_manifest_page,
@@ -27,6 +28,13 @@ from hla_lab.generation.semantic_generation import (
     _modern_table_text,
     _semanticize_visible_surfaces,
     generate,
+)
+from hla_lab.generation.semantic_generation_protocol import (
+    _modern_protocol_rows,
+    _modern_protocol_table,
+)
+from hla_lab.generation.semantic_generation_source_surface import (
+    _modernize_2025_semantic_table_page,
 )
 from tests.support import TEST_REPO_ROOT
 
@@ -351,6 +359,130 @@ class HLA15161AcceptanceSliceTests(unittest.TestCase):
         overview = _modern_protocol_prose_page(by_sequence[395]["layout_body"])
         self.assertIn(r"\HLAProtocolBullet{", overview)
         self.assertNotIn("HLA_CALL_RE- ", protocol)
+
+    def test_protocol_tables_keep_their_source_columns_and_wrapped_rows(self) -> None:
+        model = load_document_model(DOC_ROOT, HLA_SOURCE)
+        tables_by_id = {table.id: table for table in model.tables}
+        expected_data_rows = {
+            "31": 2,
+            "32": 3,
+            "33": 6,
+            "34": 15,
+            "35": 2,
+            "36": 2,
+            "37": 1,
+            "38": 2,
+            "39": 1,
+        }
+        expected_columns = {
+            "31": 3,
+            "32": 3,
+            "33": 3,
+            "34": 2,
+            "35": 3,
+            "36": 3,
+            "37": 3,
+            "38": 3,
+            "39": 3,
+        }
+        rendered_by_number: dict[str, list[str]] = {}
+        for number, row_count in expected_data_rows.items():
+            family = next(
+                item for item in model.table_families if item.id == f"table-family-table-{number}"
+            )
+            tables = [tables_by_id[table_id] for table_id in family.table_ids]
+            rendered = _render_generic_table_family(model, family, tables, family.title)
+            table_spec = next(line for line in rendered if line.startswith(r"\begin{longtable}"))
+            self.assertEqual(table_spec.count("L{"), expected_columns[number], number)
+            last_foot = rendered.index(r"\endlastfoot")
+            bottom_rule = rendered.index(r"\bottomrule", last_foot + 1)
+            data_rows = rendered[last_foot + 1 : bottom_rule]
+            self.assertEqual(len(data_rows), row_count, number)
+            for row in data_rows:
+                self.assertEqual(row.count("&"), expected_columns[number] - 1, (number, row))
+            rendered_by_number[number] = data_rows
+
+        self.assertIn("RTI", rendered_by_number["31"][0])
+        self.assertIn("180", rendered_by_number["31"][0])
+        self.assertIn("to detect an offline federate", rendered_by_number["31"][0])
+        self.assertIn("FED", rendered_by_number["32"][0])
+        self.assertIn("60", rendered_by_number["32"][0])
+        self.assertIn("Protocol version", rendered_by_number["35"][1])
+        self.assertIn("Constant 1 for HLA 4", rendered_by_number["35"][1])
+        self.assertIn("99 = Failure: Other error", rendered_by_number["36"][1])
+
+    def test_production_protocol_renderer_preserves_table_31_through_39_shapes(self) -> None:
+        model = load_document_model(DOC_ROOT, HLA_SOURCE)
+        tables_by_number = {
+            table.number: table
+            for table in model.tables
+            if table.number in {str(number) for number in range(31, 40)}
+        }
+        expected_columns = {
+            "31": 3,
+            "32": 3,
+            "33": 3,
+            "34": 4,
+            "35": 4,
+            "36": 4,
+            "37": 3,
+            "38": 4,
+            "39": 3,
+        }
+        expected_rows = {
+            "31": 2,
+            "32": 3,
+            "33": 6,
+            "34": 15,
+            "35": 2,
+            "36": 2,
+            "37": 1,
+            "38": 2,
+            "39": 1,
+        }
+        rendered_by_number: dict[str, str] = {}
+        rows_by_number: dict[str, list[list[str]]] = {}
+        for number, table in tables_by_number.items():
+            headers, rows = _modern_protocol_rows(table)
+            rendered = _modern_protocol_table(table)
+            with self.subTest(table=number):
+                self.assertEqual(len(headers), expected_columns[number])
+                self.assertTrue(all(len(row) == expected_columns[number] for row in rows))
+                self.assertEqual(len(rows), expected_rows[number])
+                self.assertIn(r"\begin{tabularx}{\linewidth}", rendered)
+                header_cells = re.findall(r"\\RLTableHeaderCell\{", rendered)
+                self.assertEqual(len(header_cells), expected_columns[number])
+                rendered_rows = [
+                    line for line in rendered.splitlines() if " & " in line
+                ]
+                self.assertEqual(len(rendered_rows), expected_rows[number] + 1)
+                self.assertTrue(
+                    all(line.count("&") == expected_columns[number] - 1 for line in rendered_rows)
+                )
+                rendered_by_number[number] = rendered
+                rows_by_number[number] = rows
+
+        self.assertIn("heartbeat message", rendered_by_number["32"])
+        self.assertIn("this timeout", rendered_by_number["32"])
+        self.assertIn("HLA_CALL_RESPONSE", " ".join(" ".join(row) for row in rows_by_number["34"]))
+        self.assertIn("HLA_CALLBACK_RESPONSE", " ".join(" ".join(row) for row in rows_by_number["34"]))
+        for number in ("37", "39"):
+            self.assertNotIn(r"\RLTableHeaderCell{Direction}", rendered_by_number[number])
+        self.assertIn(r"\RLTableHeaderCell{Direction}", rendered_by_number["38"])
+
+        blocks = json.loads(
+            (DOC_ROOT / "semantic" / "content-blocks.json").read_text(encoding="utf-8")
+        )["content_blocks"]
+        by_sequence = {item["sequence"]: item for item in blocks}
+        for sequence, numbers in ((402, ("31", "32", "33")), (404, ("34", "35")), (405, ("36", "37", "38", "39"))):
+            page = _modernize_2025_semantic_table_page(
+                by_sequence[sequence]["layout_body"],
+                sequence,
+                model.tables,
+            )
+            self.assertIsNotNone(page)
+            for number in numbers:
+                self.assertIn(rf"\RLInlineTableCaption{{{number}}}", page)
 
     def test_reflowed_protocol_pages_keep_figures_21_through_26(self) -> None:
         source = source_profile_for_document("hla-1516.1-2025", ROOT)

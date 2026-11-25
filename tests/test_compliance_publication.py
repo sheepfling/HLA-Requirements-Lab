@@ -14,6 +14,7 @@ from hla_lab.core.semantic_model import (
     ImplementationMapping,
     Requirement,
     RequirementLink,
+    SourceAnomalyLedger,
     SourceRef,
     State,
     StateMachine,
@@ -198,8 +199,79 @@ class CompliancePublicationTests(unittest.TestCase):
 
             direct_csv_output = output / "direct-csv"
             written_paths = write_compliance_csv_exports(manifest, direct_csv_output)
-            self.assertEqual(len(written_paths), 6)
+            self.assertEqual(len(written_paths), 8)
             self.assertTrue(all(path.is_file() for path in written_paths))
+
+    def test_requirement_csv_links_source_anomalies_and_exports_unlinked_anomalies(self) -> None:
+        requirement_id = "requirement-connect"
+        ledger = SourceAnomalyLedger(
+            schema_version=1,
+            document_id="fixture-2025",
+            purpose="Fixture source discrepancies.",
+            entries=(
+                {
+                    "source_id": "fixture-source-spelling",
+                    "related_requirement_ids": [requirement_id],
+                    "location": "Clause 1, paragraph 2",
+                    "source_text": "conect",
+                    "rendered_text": "connect",
+                    "classification": "SOURCE_ANOMALY",
+                    "reason": "The source contains a spelling error.",
+                    "review_status": "RESOLVED",
+                    "resolution": "Use the corrected label for semantic mapping.",
+                    "mapping_effect": "The source spelling does not create another requirement.",
+                    "evidence_refs": ["fixture-page-1"],
+                },
+                {
+                    "source_id": "fixture-context-only",
+                    "location": "Informative introduction",
+                    "source_text": "a conflicting introductory phrase",
+                    "rendered_text": "the phrase is preserved in source context",
+                    "classification": "SOURCE_ANOMALY",
+                    "reason": "This context does not express a requirement.",
+                    "review_status": "DISPOSITIONED",
+                    "resolution": "Preserve it in the source anomaly record.",
+                    "mapping_effect": "No requirement is derived.",
+                    "evidence_refs": ["fixture-page-0"],
+                },
+            ),
+        )
+        manifest = build_compliance_manifest(
+            _corpus(),
+            _profile(),
+            source_anomaly_ledgers=(ledger,),
+        )
+
+        self.assertEqual(
+            manifest.requirements[0].source_anomaly_ids,
+            ("fixture-source-spelling",),
+        )
+        self.assertEqual(len(manifest.source_anomalies), 2)
+        mismatched_ledger = ledger.model_copy(update={"document_id": "other-document"})
+        with self.assertRaisesRegex(ValueError, "not selected by the compliance publication"):
+            build_compliance_manifest(
+                _corpus(),
+                _profile(),
+                source_anomaly_ledgers=(mismatched_ledger,),
+            )
+        with tempfile.TemporaryDirectory() as temporary:
+            paths = write_compliance_csv_exports(manifest, Path(temporary))
+            requirements = _csv_rows(Path(temporary) / "requirements.csv")
+            anomaly_rows = _csv_rows(Path(temporary) / "source-anomalies.csv")
+            links = _csv_rows(Path(temporary) / "requirement-source-anomaly-links.csv")
+
+        self.assertEqual(requirements[0]["source_anomaly_ids"], "fixture-source-spelling")
+        self.assertEqual(
+            {row["source_id"] for row in anomaly_rows},
+            {
+                "fixture-source-spelling",
+                "fixture-context-only",
+            },
+        )
+        self.assertEqual(len(links), 1)
+        self.assertEqual(links[0]["requirement_id"], requirement_id)
+        self.assertEqual(links[0]["source_anomaly_id"], "fixture-source-spelling")
+        self.assertEqual(len(paths), 8)
 
     def test_cross_page_requirement_keeps_all_source_spans_in_every_projection(self) -> None:
         model = _corpus().documents[0]

@@ -2113,6 +2113,19 @@ def _table_header_row(table: Table) -> tuple[int | None, tuple[TableCell, ...]]:
 
 def _explicit_table_schema(family: TableFamily) -> tuple[tuple[str, int, int], ...] | None:
     """Preserve known semantic spans where source layout columns are fragmented."""
+    protocol_schemas = {
+        "table-family-table-31": (("Name", 0, 0), ("Description", 1, 1), ("Default (s)", 2, 2)),
+        "table-family-table-32": (("Name", 0, 0), ("Description", 1, 1), ("Default (s)", 2, 2)),
+        "table-family-table-33": (("Byte", 0, 0), ("Name", 1, 1), ("Interpretation", 2, 2)),
+        "table-family-table-34": (("Value", 0, 0), ("Type", 1, 1)),
+        "table-family-table-35": (("Byte", 0, 0), ("Name", 1, 1), ("Description", 2, 2)),
+        "table-family-table-36": (("Byte", 0, 0), ("Name", 1, 1), ("Description", 2, 2)),
+        "table-family-table-37": (("Byte", 0, 0), ("Name", 1, 1), ("Description", 2, 2)),
+        "table-family-table-38": (("Byte", 0, 0), ("Name", 1, 1), ("Description", 2, 2)),
+        "table-family-table-39": (("Byte", 0, 0), ("Name", 1, 1), ("Description", 2, 2)),
+    }
+    if family.id in protocol_schemas:
+        return protocol_schemas[family.id]
     if family.id == "table-family-table-9":
         return _PARAMETER_TABLE_COLUMNS
     if family.id == "table-family-table-5":
@@ -2487,6 +2500,15 @@ def _table_family_rows(
             nonempty = [value for value in text_values if value]
             if not nonempty or row_number == header_row:
                 continue
+            if (
+                family.id == "table-family-table-31"
+                and row_number == (header_row or 0) + 1
+                and len(nonempty) == 1
+                and _table_cell_key(nonempty[0]) == "s"
+            ):
+                # The source wraps the ``Default (s)`` heading across two
+                # physical baselines. Keep it as one semantic column label.
+                continue
             if all(_table_cell_key(value) in {"continued", "cont"} for value in nonempty):
                 continue
             normalized = {_table_cell_key(value) for value in nonempty}
@@ -2553,6 +2575,32 @@ def _merge_continuation_table_rows(
 ) -> list[dict[str, str]]:
     title = family.title.casefold()
     result: list[dict[str, str]] = []
+    if family.id in {
+        "table-family-table-31",
+        "table-family-table-32",
+        "table-family-table-35",
+        "table-family-table-36",
+        "table-family-table-37",
+        "table-family-table-38",
+        "table-family-table-39",
+    }:
+        key_column = "Name" if family.id in {"table-family-table-31", "table-family-table-32"} else "Byte"
+        for row in rows:
+            if key_column in row:
+                result.append(dict(row))
+                continue
+            if not result:
+                result.append(dict(row))
+                continue
+            target = result[-1]
+            for column, value in row.items():
+                if not value:
+                    continue
+                previous = target.get(column, "")
+                separator = r"\newline " if previous else ""
+                target[column] = previous + separator + value
+        return result
+
     if family.id in {"table-family-table-18", "table-family-table-19"}:
         identifier_column = "Interaction" if family.id == "table-family-table-18" else "Attribute"
         for row in rows:

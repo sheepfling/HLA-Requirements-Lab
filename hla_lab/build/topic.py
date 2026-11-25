@@ -18,7 +18,7 @@ from hla_lab.adapters.document_builder import (
     clean as clean_document,
 )
 from hla_lab.core.hla_profile import HLA_LATEX_DIALECT, source_profile_for_document
-from hla_lab.core.semantic_model import load_document_model
+from hla_lab.core.semantic_model import SourceAnomalyLedger, load_document_model
 from hla_lab.corpus.corpus_graph import build_corpus_graph, load_document_metadata
 from hla_lab.corpus.hla_semantic import load_hla_corpus
 from hla_lab.diagrams.plantuml_render import render_sources
@@ -147,6 +147,12 @@ def _compliance_generator(
     def generate_blocks() -> object:
         corpus = load_hla_corpus(source_roots, workspace_root=workspace_root)
         profile = load_compliance_publication_profile(document.semantic_file("publication.json"))
+        anomaly_ledgers = tuple(
+            SourceAnomalyLedger.model_validate_json(ledger_path.read_text(encoding="utf-8"))
+            for source_root in source_roots
+            for ledger_path in (source_root / "semantic" / "source-anomaly-ledger.json",)
+            if ledger_path.is_file()
+        )
         metadata = load_document_metadata(metadata_path)
         graph = build_corpus_graph(corpus, metadata=metadata)
         return write_compliance_publication(
@@ -155,6 +161,7 @@ def _compliance_generator(
             document.output / "compliance",
             graph=graph,
             csv_output=document.output / "compliance" / "csv",
+            source_anomaly_ledgers=anomaly_ledgers,
         )
 
     return generate_blocks

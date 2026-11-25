@@ -996,6 +996,8 @@ class SourceAnomaly(SemanticRecord):
     """A source discrepancy with an explicit, mapping-safe disposition."""
 
     source_id: Annotated[str, Field(min_length=1)]
+    related_issue_id: str | None = None
+    related_requirement_ids: tuple[Annotated[str, Field(min_length=1)], ...] = ()
     location: Annotated[str, Field(min_length=1)]
     source_text: Annotated[str, Field(min_length=1)]
     rendered_text: Annotated[str, Field(min_length=1)]
@@ -1026,4 +1028,10 @@ class SourceAnomalyLedger(SemanticRecord):
         ids = [item.source_id for item in self.entries]
         if len(ids) != len(set(ids)):
             raise ValueError("source anomaly IDs must be unique")
+        for item in self.entries:
+            requirement_ids = item.related_requirement_ids
+            if len(requirement_ids) != len(set(requirement_ids)):
+                raise ValueError(
+                    f"source anomaly {item.source_id} has duplicate related requirement IDs"
+                )
         return self

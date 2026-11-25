@@ -12,10 +12,11 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
-from hla_lab.publication.hla_pdf_sniffer import sniff_hla_pdf
-from hla_lab.publication.pdf_sniffer import PdfSniffReport
 from rich.console import Console
 from rich.table import Table
+
+from hla_lab.publication.hla_pdf_sniffer import sniff_hla_pdf
+from hla_lab.publication.pdf_sniffer import PdfSniffReport
 from hla_lab.traceability import semantic_coverage, spec_readiness
 
 from .paths import document_entry_for_path, document_ids, document_roots, repository_root, resources
@@ -316,6 +317,8 @@ def _matrix_command(args: argparse.Namespace) -> int:
             output / "csv" / name
             for name in (
                 "requirements.csv",
+                "source-anomalies.csv",
+                "requirement-source-anomaly-links.csv",
                 "transitions.csv",
                 "implementation-mappings.csv",
                 "requirement-mapping-links.csv",

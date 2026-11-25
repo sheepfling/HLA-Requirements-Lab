@@ -8,9 +8,12 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
+from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.json_types import JsonObject
-from hla_lab.core.semantic_model import ContentBlockFile
+from hla_lab.core.semantic_model import ContentBlockFile, Requirement, load_document_model
+from hla_lab.core.semantic_model_records import _load_requirement_candidates
 from tests.support import TEST_REPO_ROOT
+from tools.migrations.trace_15161_api_clause_surfaces import _surface_family
 
 ROOT = TEST_REPO_ROOT
 SEMANTIC = ROOT / "topics/ieee/hla-1516.1-2025/semantic"
@@ -30,6 +33,103 @@ def _layout_by_source(path: Path) -> dict[str, list[str]]:
 
 
 class HlaBackflowTests(unittest.TestCase):
+    def test_page_216_ddm_sources_use_clause_9_adapter(self) -> None:
+        document = ROOT / "topics/ieee/hla-1516.1-2025"
+        semantic = document / "semantic"
+        old_path = "content/clauses/08-time-management-page-216.tex"
+        new_path = "content/clauses/09-data-distribution-management-page-216.tex"
+        requirements = json.loads((semantic / "requirements.json").read_text(encoding="utf-8"))[
+            "requirements"
+        ]
+        page_records = [item for item in requirements if "page-216" in item["id"]]
+        self.assertTrue(page_records)
+        self.assertTrue(all(item["clause_id"].startswith("clause-9") for item in page_records))
+        self.assertTrue(
+            all(item["source"]["path"] == new_path for item in page_records)
+        )
+        self.assertTrue((document / new_path).is_file())
+        self.assertFalse((document / old_path).exists())
+        loaded = load_document_model(document, HLA_SOURCE)
+        loaded_ids = {item.id for item in loaded.requirements}
+        self.assertIn(
+            "requirement-candidate-content-clauses-08-time-management-page-216-l129-40",
+            loaded_ids,
+        )
+        self.assertFalse(any("09-data-distribution-management-page-216" in item for item in loaded_ids))
+        for name, collection in (
+            ("content-blocks.json", "content_blocks"),
+            ("content-elements.json", "content_elements"),
+            ("api-requirement-bindings.json", "bindings"),
+        ):
+            payload = json.loads((semantic / name).read_text(encoding="utf-8"))[collection]
+            serialized = json.dumps(payload, ensure_ascii=False)
+            with self.subTest(file=name):
+                self.assertNotIn(old_path, serialized)
+                if name != "api-requirement-bindings.json":
+                    page_entries = [item for item in payload if "page-216" in item["id"]]
+                    self.assertTrue(page_entries)
+                    self.assertTrue(
+                        all(item["source"]["path"] == new_path for item in page_entries)
+                    )
+
+    def test_page_225_allow_relaxed_ddm_candidate_has_complete_sentence_and_owner(self) -> None:
+        requirements = _read("requirements.json")["requirements"]
+        record_id = (
+            "requirement-candidate-content-clauses-09-data-distribution-management-"
+            "page-225-l120-37"
+        )
+        record = next(item for item in requirements if item["id"] == record_id)
+        self.assertEqual(
+            record["statement"],
+            "This switch setting shall not be modifiable during a federation execution.",
+        )
+        blocks = _read("content-blocks.json")["content_blocks"]
+        owners = [item["id"] for item in blocks if record_id in item["record_ids"]]
+        self.assertEqual(owners, ["content-15161-page-225"])
+
+    def test_federate_protocol_argument_rules_retain_applicability(self) -> None:
+        requirements = json.loads(
+            (
+                ROOT
+                / "topics/ieee/hla-1516.1-2025/semantic/requirements.json"
+            ).read_text(encoding="utf-8")
+        )["requirements"]
+        ids = {
+            "requirement-candidate-content-clauses-12-programming-language-mappings-"
+            "page-396-l147-48",
+            "requirement-candidate-content-clauses-12-programming-language-mappings-"
+            "page-396-l159-52",
+            "requirement-candidate-content-clauses-12-programming-language-mappings-"
+            "page-396-l168-55",
+        }
+        selected = [item for item in requirements if item["id"] in ids]
+        self.assertEqual({item["id"] for item in selected}, ids)
+        self.assertTrue(
+            all("invoked over the Federate Protocol" in item["statement"] for item in selected)
+        )
+        for item in selected:
+            context = next(
+                (
+                    source
+                    for source in item["additional_sources"]
+                    if source["path"] == item["source"]["path"] and source["line"] == 109
+                ),
+                None,
+            )
+            self.assertIsNotNone(context, item["id"])
+            self.assertEqual(context["end_line"], 109)
+        self.assertTrue(all(item["api_surface_scope"] == "cross-cutting" for item in selected))
+
+    def test_transport_layer_lead_in_is_context_not_an_independent_requirement(self) -> None:
+        record_id = (
+            "requirement-candidate-content-clauses-12-programming-language-mappings-"
+            "page-411-l14-4"
+        )
+        record = next(item for item in _read("requirements.json")["requirements"] if item["id"] == record_id)
+        self.assertEqual(record["coverage_kind"], "not-applicable")
+        self.assertEqual(record["api_surface_scope"], "not-applicable")
+        self.assertIn("no independent behavior", record["coverage_note"])
+
     def test_source_page_clause_owners_for_umbra_tck(self) -> None:
         expected = {
             "hla-1516.1-2025": {
@@ -447,6 +547,8 @@ class HlaBackflowTests(unittest.TestCase):
             "content-15161-page-199",
             "content-15161-page-200",
             "content-15161-page-260",
+            "content-15161-page-194",
+            "content-15161-page-195",
         }
         page_layouts = {
             item["id"]: item["layout_body"].splitlines()
@@ -458,8 +560,8 @@ class HlaBackflowTests(unittest.TestCase):
                 "8.11.3",
                 "199",
                 "nextmessagerequestavailable",
-                145,
-                147,
+                146,
+                148,
                 "greater than or equal to",
                 "greater than or equal to",
                 "LogicalTimeAlreadyPassed",
@@ -468,8 +570,8 @@ class HlaBackflowTests(unittest.TestCase):
                 "8.11.5",
                 "200",
                 "nextmessagerequestavailable",
-                62,
-                62,
+                63,
+                63,
                 "Logical time has already passed",
                 "Logical Time Already Passed",
                 "LogicalTimeAlreadyPassed",
@@ -478,8 +580,8 @@ class HlaBackflowTests(unittest.TestCase):
                 "8.11.3",
                 "200",
                 "nextmessagerequestavailable",
-                11,
-                11,
+                12,
+                12,
                 "not in the Time Advancing state",
                 "must not be in the Time Advancing state",
                 "InTimeAdvancingState",
@@ -488,8 +590,8 @@ class HlaBackflowTests(unittest.TestCase):
                 "8.11.5",
                 "200",
                 "nextmessagerequestavailable",
-                74,
-                74,
+                75,
+                75,
                 "Joined federate in Time Advancing state",
                 "Joined Federate in Time Advancing State",
                 "InTimeAdvancingState",
@@ -498,11 +600,41 @@ class HlaBackflowTests(unittest.TestCase):
                 "10.23.5",
                 "260",
                 "getdimensionhandle",
-                35,
-                35,
+                36,
+                36,
                 "dimension is not defined in the FDD",
                 "NameNotFound",
                 "NameNotFound",
+            ),
+            "requirement-service-flow-tar-current-time-precondition": (
+                "8.8.3",
+                "194",
+                "timeadvancerequest",
+                127,
+                127,
+                "The specified logical time is greater than or equal to",
+                "greater than or equal to",
+                "LogicalTimeAlreadyPassed",
+            ),
+            "requirement-service-flow-tar-time-passed-exception": (
+                "8.8.5",
+                "195",
+                "timeadvancerequest",
+                42,
+                42,
+                "Logical time already passed",
+                "Logical Time Already Passed",
+                "LogicalTimeAlreadyPassed",
+            ),
+            "requirement-service-flow-tara-equal-time-send-permission": (
+                "8.9",
+                "195",
+                "timeadvancerequestavailable",
+                129,
+                135,
+                "can send additional messages with timestamps equal to",
+                "actual lookahead is zero",
+                "LogicalTimeAlreadyPassed",
             ),
         }
         for requirement_id, (
@@ -522,10 +654,8 @@ class HlaBackflowTests(unittest.TestCase):
                 self.assertIn(f"page-{page}.tex", record["source"]["path"])
                 self.assertEqual(record["source"]["line"], line)
                 self.assertEqual(record["source"]["end_line"], end_line)
-                self.assertIn(
-                    source_witness,
-                    page_layouts[f"content-15161-page-{page}"][line],
-                )
+                source_span = page_layouts[f"content-15161-page-{page}"][line - 1 : end_line]
+                self.assertIn(source_witness, "\n".join(source_span))
                 self.assertIn(statement_witness, record["statement"])
                 self.assertTrue(record["statement"].endswith("."))
                 matching = [
@@ -565,6 +695,37 @@ class HlaBackflowTests(unittest.TestCase):
                 self.assertEqual(issues[issue_id]["created_requirement_ids"], list(created_ids))
                 self.assertTrue(set(created_ids) <= requirements.keys())
 
+    def test_receive_interaction_tag_candidate_keeps_its_source_subject(self) -> None:
+        requirement_id = (
+            "requirement-candidate-content-clauses-06-object-management-page-125-l82-23"
+        )
+        requirements = {item["id"]: item for item in _read("requirements.json")["requirements"]}
+        record = requirements[requirement_id]
+        self.assertIn("The user-supplied tag argument", record["statement"])
+        self.assertIn("Send Interaction With Regions", record["statement"])
+        self.assertIn("all corresponding Receive Interaction service invocations", record["statement"])
+        self.assertEqual(record["source"]["line"], 80)
+        self.assertEqual(record["source"]["end_line"], 87)
+        bindings = [
+            item
+            for item in _read("api-requirement-bindings.json")["bindings"]
+            if item["requirement_id"] == requirement_id and item["status"] == "matched"
+        ]
+        self.assertTrue(bindings)
+        self.assertTrue(all("receiveinteraction" in item["api_surface_id"] for item in bindings))
+
+    def test_page_185_tso_continuation_uses_the_visible_817_bookmark(self) -> None:
+        blocks = {
+            item["id"]: item
+            for item in _read("content-blocks.json")["content_blocks"]
+        }
+        layout = blocks["content-15161-page-185"]["layout_body"]
+        self.assertIn(
+            r"\HLAServiceBookmark{8.1.7}{2}{Putting it all together}",
+            layout,
+        )
+        self.assertNotIn(r"\HLAServiceBookmark{8.1.6}{2}{Lookahead}", layout)
+
     def test_service_boundaries_follow_visible_headings(self) -> None:
         by_id = {item["id"]: item for item in _read("requirements.json")["requirements"]}
         cases = {
@@ -601,6 +762,59 @@ class HlaBackflowTests(unittest.TestCase):
             body.index("When a joined federate receives"),
             body.index(r"\textbf{4.1.3 Synchronization discussion}"),
         )
+
+    def test_support_service_clause_and_api_ownership_follow_visible_headings(self) -> None:
+        document_root = ROOT / "topics/ieee/hla-1516.1-2025"
+        model = load_document_model(document_root, HLA_SOURCE)
+        requirements_by_id = {item.id: item for item in model.requirements}
+        candidates_by_path: dict[str, list[Requirement]] = {}
+        for candidate in _load_requirement_candidates(document_root, HLA_SOURCE):
+            if candidate.id.startswith(
+                "requirement-candidate-content-clauses-10-support-services-page-"
+            ):
+                candidates_by_path.setdefault(candidate.source.path, []).append(candidate)
+
+        bindings_by_requirement: dict[str, set[str]] = {}
+        for binding in model.requirement_api_bindings:
+            if binding.status == "matched" and binding.api_surface_id is not None:
+                bindings_by_requirement.setdefault(binding.requirement_id, set()).add(
+                    binding.api_surface_id
+                )
+
+        checked = 0
+        for requirement in model.requirements:
+            prefix = "requirement-candidate-content-clauses-10-support-services-page-"
+            if not requirement.id.startswith(prefix):
+                continue
+            page = int(requirement.id.removeprefix(prefix).split("-", 1)[0])
+            if not 258 <= page <= 285:
+                continue
+            checked += 1
+            requirement_end = requirement.source.end_line or requirement.source.line
+            matching_candidates = [
+                candidate
+                for candidate in candidates_by_path.get(requirement.source.path, ())
+                if candidate.source.line <= requirement_end
+                and (candidate.source.end_line or candidate.source.line)
+                >= requirement.source.line
+            ]
+            with self.subTest(requirement=requirement.id):
+                self.assertTrue(matching_candidates)
+                self.assertEqual(len({item.clause_id for item in matching_candidates}), 1)
+                candidate = matching_candidates[0]
+                self.assertEqual(requirement.clause_id, candidate.clause_id)
+                self.assertEqual(
+                    requirement.semantic_group_id,
+                    f"m16.clause.{candidate.clause}",
+                )
+                family = _surface_family(model, requirement)
+                self.assertIsNotNone(family)
+                assert family is not None
+                self.assertEqual(
+                    bindings_by_requirement.get(requirement.id, set()),
+                    set(family[1]),
+                )
+        self.assertEqual(checked, 85)
 
     def test_reviewed_clause_boundary_repairs(self) -> None:
         by_id = {item["id"]: item for item in _read("requirements.json")["requirements"]}
@@ -969,9 +1183,209 @@ class HlaBackflowTests(unittest.TestCase):
             by_id["requirement-candidate-table-5-p296-r031"]["statement"],
         )
         self.assertIn(
-            "use FederateRestoreStatusSet (type 20)",
-            by_id["requirement-candidate-table-5-p297-r007"]["coverage_note"],
+            "use federaterestorestatusset (type 20)",
+            by_id["requirement-candidate-table-5-p297-r007"]["coverage_note"].casefold(),
         )
+
+    def test_2026_table_5_backflow_rows_are_complete_and_source_addressable(self) -> None:
+        requirements = {
+            item["id"]: item for item in _read("requirements.json")["requirements"]
+        }
+        expected = {
+            "p297-r008": (
+                "FederationAttributes",
+                "HLAautoProvide:Boolean",
+                'HLARTIversion="FooBar1.0"',
+            ),
+            "p297-r014": (
+                "FederationExecutionInformation",
+                "logicalTimeImplementationName:string",
+                'logicalTimeImplementationName="HLAfloat64Time"',
+            ),
+            "p298-r002": (
+                "FederationExecutionMemberInformation",
+                "federateType:string",
+                'federateType="Logger"',
+            ),
+            "p298-r005": (
+                "FederationExecutionMemberInformationSet",
+                "Array<FederationExecutionMemberInformation>",
+                "Aircraft Simulator",
+            ),
+            "p298-r008": (
+                "FomDesignatorSet",
+                "Array<FomDesignator>",
+                "/foms/DogFightExtensions.xml",
+            ),
+            "p298-r009": (
+                "HLAargument",
+                "HLAargumentValue:String",
+                "HLAargumentType=58",
+            ),
+            "p298-r012": (
+                "HLAreturnedArgument",
+                "HLAargumentValue:String",
+                "HLAargumentType=24",
+            ),
+            "p298-r019": (
+                "MessageRetractionReturn",
+                "handle:MessageRetractionHandle",
+                "MessageRetractionHandle<2345>",
+            ),
+            "p300-r001": (
+                "SaveFailureReason",
+                "SAVE_TIME_CANNOT_BE_HONORED",
+                "SAVE_ABORTED",
+            ),
+            "p300-r006": (
+                "SaveStatus",
+                "FEDERATE_WAITING_FOR_FEDERATION_TO_SAVE",
+                "NO_SAVE_IN_PROGRESS",
+            ),
+            "p300-r010": (
+                "ServiceGroup",
+                "DATA_DISTRIBUTION_MANAGEMENT",
+                "SUPPORT_SERVICES",
+            ),
+            "p300-r016": (
+                "ServiceReportInitialRecord",
+                "HLAmanager.HLAfederation:FederationAttributes",
+                "HLAmanager.HLAfederate:FederateAttributes",
+            ),
+            "p301-r001": (
+                "ServiceReportRecord",
+                "HLAservice:String",
+                "HLAservice",
+            ),
+            "p303-r001": (
+                "SuppliedArgumentList",
+                "Array<HLAargument>",
+                "page 304",
+            ),
+            "p304-r002": (
+                "SynchronizationPointFailureReason",
+                "SYNCHRONIZATION_POINT_LABEL_NOT_UNIQUE",
+                "SYNCHRONIZATION_SET_MEMBER_NOT_JOINED",
+            ),
+            "p304-r005": (
+                "TimeIntervalQueryReturn",
+                "interval:LogicalTimeInterval",
+                "HLAfloat64TimeInterval<0.05>",
+            ),
+            "p304-r007": (
+                "TimeQueryReturn",
+                "time:LogicalTime",
+                "HLAfloat64Time<1.0>",
+            ),
+        }
+        layouts = _layout_by_source(SEMANTIC / "content-blocks.json")
+        for suffix, fragments in expected.items():
+            requirement_id = f"requirement-candidate-table-5-{suffix}"
+            with self.subTest(requirement=requirement_id):
+                record = requirements[requirement_id]
+                self.assertTrue(all(fragment in record["statement"] for fragment in fragments))
+                source = record["source"]
+                lines = layouts[source["path"]]
+                self.assertLessEqual(source["line"], source["end_line"])
+                self.assertLess(source["end_line"], len(lines))
+                self.assertTrue(lines[source["line"]].strip())
+                type_name = record["title"].removeprefix("Table 5 ")
+                self.assertIn(type_name[:20], lines[source["line"]])
+
+        child_suffixes = (
+            "p297-r009",
+            "p297-r010",
+            "p297-r011",
+            "p297-r012",
+            "p297-r013",
+            "p297-r015",
+            "p297-r016",
+            "p298-r003",
+            "p298-r004",
+            "p298-r006",
+            "p298-r010",
+            "p298-r011",
+            "p298-r013",
+            "p298-r020",
+            "p300-r002",
+            "p300-r003",
+            "p300-r004",
+            "p300-r005",
+            "p300-r007",
+            "p300-r008",
+            "p300-r009",
+            "p300-r011",
+            "p300-r012",
+            "p300-r013",
+            "p300-r014",
+            "p300-r015",
+            "p300-r017",
+            "p300-r018",
+            "p301-r002",
+            "p301-r003",
+            "p301-r004",
+            "p301-r005",
+            "p301-r006",
+            "p302-r001",
+            "p304-r001",
+            "p304-r003",
+            "p304-r004",
+            "p304-r006",
+            "p304-r008",
+        )
+        for suffix in child_suffixes:
+            record = requirements[f"requirement-candidate-table-5-{suffix}"]
+            with self.subTest(child=suffix):
+                self.assertTrue(
+                    "not a separate Table 5 type" in record["statement"]
+                    or "not separate Table 5 types" in record["statement"]
+                    or "not a separate Table 5 enumerant" in record["statement"]
+                    or "does not define a separate Table 5 type or requirement" in record[
+                        "statement"
+                    ]
+                    or "not a separate Table 5 type or requirement" in record["statement"]
+                    or "not an independent Table 5 type" in record["statement"],
+                    record["statement"],
+                )
+
+    def test_table_5_source_anomalies_have_explicit_semantic_mappings(self) -> None:
+        anomalies = {
+            item["source_id"]: item
+            for item in _read("source-anomaly-ledger.json")["entries"]
+        }
+        expected = {
+            "hla15161-table-5-hlaargument-example-type-codes": (
+                "58 and 24 on page 298",
+                "InteractionClassHandle=27",
+                "UserSuppliedTag=60",
+            ),
+            "hla15161-table-5-binary-data-examples": (
+                "xFDcMa",
+                "base-64-encoded data",
+                "non-canonical",
+            ),
+            "hla15161-table-5-servicereportrecord-field-spelling": (
+                "HLAservce:String",
+                "HLAservice as the semantic field name",
+            ),
+        }
+        expected_issue_ids = {"RL-399", "RL-403", "RL-407"}
+        for source_id, fragments in expected.items():
+            with self.subTest(source_id=source_id):
+                anomaly = anomalies[source_id]
+                self.assertEqual(anomaly["review_status"], "DISPOSITIONED")
+                self.assertIn(anomaly["related_issue_id"], expected_issue_ids)
+                self.assertTrue(
+                    all(
+                        text in anomaly["source_text"] + anomaly["rendered_text"]
+                        for text in fragments
+                    )
+                )
+
+        argument_types = anomalies["hla15161-table-5-hlaargument-example-type-codes"]
+        self.assertIn("Table 14 directly defines the enum values", argument_types["reason"])
+        self.assertIn("325", " ".join(argument_types["evidence_refs"]))
+        self.assertIn("326", " ".join(argument_types["evidence_refs"]))
 
     def test_table_5_fragmented_children_keep_their_parent_type(self) -> None:
         issues = {
@@ -1096,6 +1510,7 @@ class HlaBackflowTests(unittest.TestCase):
         }
         configuration = anomalies["hla15161-table-5-configuration-result-example"]
         restore_set = anomalies["hla15161-table-5-restore-status-set-name"]
+        variant_method = anomalies["hla15161-variant-record-method-name-conflict"]
         self.assertEqual(configuration["review_status"], "DISPOSITIONED")
         self.assertIn("addtionalSettingsResultCode", configuration["source_text"])
         self.assertIn("additionalSettingsResultCode", configuration["source_text"])
@@ -1106,6 +1521,11 @@ class HlaBackflowTests(unittest.TestCase):
         self.assertIn("FederateRestoreStatusSet (MIM type 20)", restore_set["rendered_text"])
         self.assertIn("FederateRestoreStatus (type 19)", restore_set["rendered_text"])
         self.assertIn("type 20", restore_set["mapping_effect"])
+        self.assertEqual(variant_method["related_issue_id"], "RL-420")
+        self.assertIn("addMapping", variant_method["source_text"])
+        self.assertIn("addVariant", variant_method["source_text"])
+        self.assertIn("no literal addMapping member is claimed", variant_method["mapping_effect"])
+        self.assertIn("addVariant", variant_method["mapping_effect"])
         table_14_page = next(
             item
             for item in _read("content-blocks.json")["content_blocks"]

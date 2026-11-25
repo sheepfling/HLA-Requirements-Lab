@@ -65,6 +65,22 @@ from hla_lab.core.source_adapter import (
 
 def _record_id(prefix: str, root: Path, path: Path, text: str, offset: int, ordinal: int) -> str:
     relative = path.relative_to(root).with_suffix("").as_posix()
+    # Page adapters 353–393 were mislabeled as Clause 11 even though their
+    # visible source headings belong to Clause 12.  Keep the published IDs
+    # stable while correcting the source labels and adapter filenames.
+    relative = re.sub(
+        r"^content/clauses/12-programming-language-mappings-page-(?P<page>35[3-9]|3[6-8][0-9]|39[0-3])$",
+        r"content/clauses/11-management-object-model-page-\g<page>",
+        relative,
+    )
+    # Page 216 was historically named as Clause 8 even though it is the
+    # Clause 9 DDM page. Keep generated candidate IDs stable after its source
+    # adapter is relabeled to the correct Clause 9 filename.
+    relative = re.sub(
+        r"^content/clauses/09-data-distribution-management-page-216$",
+        "content/clauses/08-time-management-page-216",
+        relative,
+    )
     slug = re.sub(r"[^a-z0-9]+", "-", relative.casefold()).strip("-")
     return f"{prefix}-{slug}-l{line_number(text, offset)}-{ordinal}"
 
@@ -206,6 +222,57 @@ def _fixed_text_heading_parts(
     return f"clause-{match.group('number')}", value
 
 
+def _split_fixed_heading_parts(
+    fixed_events: Sequence[CommandEvent],
+    index: int,
+    source: LatexSourceProfile,
+) -> tuple[str, str] | None:
+    """Join a bold numeric label with same-baseline bold title fragments.
+
+    Some recreated source pages position a heading as separate fixed blocks:
+    the clause number, italic title, and a trailing word such as ``service``.
+    Parsing only the first block loses the parent heading, allowing an earlier
+    navigation bookmark to own the prose that follows.
+    """
+    offset, args, _end_offset = fixed_events[index]
+    raw_value = args[-1]
+    if r"\textbf" not in raw_value and r"\bfseries" not in args[3]:
+        return None
+    value = _latex_text(raw_value, source).replace("%", "").strip()
+    number_match = re.fullmatch(r"(?P<number>[A-Za-z]\.\d+(?:\.\d+)*|\d+(?:\.\d+)*)\.?", value)
+    if number_match is None:
+        return None
+    try:
+        baseline = round(float(args[1]), 3)
+        start_x = float(args[0])
+    except ValueError:
+        return None
+
+    title_parts: list[str] = []
+    for _next_offset, next_args, _next_end_offset in fixed_events[index + 1 :]:
+        try:
+            next_baseline = round(float(next_args[1]), 3)
+            next_x = float(next_args[0])
+        except ValueError:
+            continue
+        if next_baseline != baseline:
+            continue
+        if next_x < start_x:
+            continue
+        next_raw = next_args[-1]
+        if r"\textbf" not in next_raw and r"\bfseries" not in next_args[3]:
+            break
+        fragment = _latex_text(next_raw, source).replace("%", "").strip()
+        if fragment:
+            title_parts.append(fragment)
+
+    title = re.sub(r"\s+", " ", " ".join(title_parts)).strip()
+    if not title:
+        return None
+    number = number_match.group("number")
+    return f"clause-{number}", f"{number} {title}"
+
+
 def _collect_fixed_text_headings(
     events: MutableMapping[int, HeadingEvent],
     root: Path,
@@ -213,8 +280,11 @@ def _collect_fixed_text_headings(
     text: str,
     source: LatexSourceProfile,
 ) -> None:
-    for offset, args, end_offset in _command_events(text, source.fixed_text_block, 7):
+    fixed_events = _command_events(text, source.fixed_text_block, 7)
+    for index, (offset, args, end_offset) in enumerate(fixed_events):
         parts = _fixed_text_heading_parts(args[-1], source, args[3])
+        if parts is None:
+            parts = _split_fixed_heading_parts(fixed_events, index, source)
         if parts is None and r"\textbf" in args[-1]:
             annex = re.fullmatch(r"Annex\s+([A-Za-z])", _latex_text(args[-1], source).strip("% \n"))
             if annex is not None:

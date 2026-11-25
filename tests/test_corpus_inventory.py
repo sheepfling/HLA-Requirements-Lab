@@ -47,9 +47,18 @@ class CorpusInventoryTests(unittest.TestCase):
         )
         self.assertGreaterEqual(inventory.totals["clause"], 1800)
         self.assertEqual(inventory.totals.get("status:unclassified", 0), 0)
-        # Table introductions and Annex E/F shall-like prose are reviewed as non-normative.
-        self.assertEqual(len(inventory.migration_queue), 12)
-        self.assertEqual({item.status for item in inventory.migration_queue}, {"non-normative"})
+        # The inventory includes 12 reviewed non-normative paragraphs and one
+        # legacy layout-only OMT candidate that has no independent prose surface.
+        self.assertEqual(len(inventory.migration_queue), 13)
+        self.assertEqual(
+            Counter(item.status for item in inventory.migration_queue),
+            Counter({"non-normative": 12, "layout-only": 1}),
+        )
+        layout_only = [item for item in inventory.migration_queue if item.status == "layout-only"]
+        self.assertEqual(
+            [item.record_id for item in layout_only],
+            ["requirement-candidate-sections-semantic-clause-4c-page-071-l57-1"],
+        )
         self.assertEqual(
             sum(item.document == "hla-1516.1-2025" for item in inventory.migration_queue),
             12,
@@ -57,6 +66,7 @@ class CorpusInventoryTests(unittest.TestCase):
         rebuilt = build_inventory(
             INVENTORY_ROOTS,
             REPO_ROOT / "data" / "release" / "documents.json",
+            workspace_root=REPO_ROOT,
         )
         self.assertEqual(
             {item.document_id for item in inventory.documents},

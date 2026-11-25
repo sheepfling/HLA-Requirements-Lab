@@ -472,12 +472,15 @@ REPAIRS: dict[str, tuple[str, int, int]] = {
         140,
     ),
     "12-programming-language-mappings-page-396-l147-48": (
-        "Time Representation arguments shall use the HLA time type name, such as HLAinteger64Time.",
+        "For HLA service arguments invoked over the Federate Protocol, Time Representation "
+        "arguments shall use the HLA time type name, such as HLAinteger64Time.",
         143,
         152,
     ),
     "12-programming-language-mappings-page-396-l159-52": (
-        "Handle arguments other than Conveyed Regions shall contain the opaque encoded bytes resulting from the handle’s encode operation.",
+        "For HLA service arguments invoked over the Federate Protocol, Handle arguments other "
+        "than Conveyed Regions shall contain the opaque encoded bytes resulting from the "
+        "handle’s encode operation.",
         156,
         170,
     ),

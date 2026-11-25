@@ -1,6 +1,17 @@
 # HLA implementation backflow acceptance
 
-This branch reviews the 89 Requirements Lab issues that were open in the
+## Current handoff: 2026-11-23 queue
+
+The current queue and local disposition are documented in the
+[2026-11-23 backflow review](HLA-BACKFLOW-2026-11-23.md) and its
+[63-record snapshot](../data/hla-backflow-2026-11-23.json). The snapshot keeps
+each full upstream record beside the local status and verification references.
+Umbra's `compliance/requirements-lab/known-issues.json` remains authoritative;
+all 63 records were open when reviewed, and no upstream status was changed.
+
+## Historical handoff: 2026-10-24 queue
+
+The earlier branch review covered the 89 Requirements Lab issues that were open in the
 2026-10-24 Umbra queue. The [frozen ID list](../data/hla-open-issue-ids-2026-10-24.txt)
 guards against omission. The [issue snapshot](../data/hla-backflow-2026-10-24.json)
 records each complaint, its affected candidate IDs, the local disposition, and
