@@ -329,7 +329,7 @@ def _render_figures(model: DocumentModel) -> list[str]:
         lines.append(r"\emph{No semantic figures are currently authored for this document.}")
         return lines
     for figure in model.figures:
-        caption = figure.caption or r"\emph{Caption not recorded.}"
+        caption = figure.caption or r"\emph{Caption unavailable in source data.}"
         lines.extend(
             (
                 _anchor(model.document_id, figure.id),

@@ -15,6 +15,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from hla_lab.diagrams.state_machine_inventory import StateMachineInventory
 from hla_lab.paths import document_roots, repository_root, resources
+from hla_lab.publication.hla_pdf_sniffer import sniff_hla_pdf
+from hla_lab.publication.pdf_sniffer import PdfSniffReport
 from hla_lab.publication.publication_registry import (
     Publication,
     ReleaseManifest,
@@ -70,6 +72,7 @@ class ProjectReleaseReport(BaseModel):
     log_errors: tuple[str, ...]
     pdf_ignored: bool
     log_ignored: bool
+    pdf_sniff: PdfSniffReport | None = None
 
 
 class AuthorityUnavailableReport(BaseModel):
@@ -256,11 +259,26 @@ def _inspect_project(
     log_errors = _log_errors(log, strict_layout=project.kind == "faithful")
     pages: int | None = None
     failures: list[str] = []
+    pdf_sniff: PdfSniffReport | None = None
     if pdf.is_file():
         with fitz.open(pdf) as document:
             pages = len(document)
         if project.expected_pages is not None and pages != project.expected_pages:
             failures.append(f"{project.id}: expected {project.expected_pages} pages, got {pages}")
+        if project.check_pdf_sniff:
+            generated_tex = root / "output" / "semantic" / "reflowable.tex"
+            pdf_sniff = sniff_hla_pdf(
+                pdf,
+                source_tex=generated_tex if generated_tex.is_file() else None,
+                build_log=log if log.is_file() else None,
+            )
+            failures.extend(
+                f"{project.id}: PDF sniffer {finding.code}"
+                f"{f' on page {finding.page}' if finding.page is not None else ''}: "
+                f"{finding.message}"
+                for finding in pdf_sniff.findings
+                if finding.severity == "error"
+            )
     else:
         failures.append(f"{project.id}: missing PDF {relative_pdf}")
     failures.extend(log_errors)
@@ -280,6 +298,7 @@ def _inspect_project(
         log_errors=tuple(log_errors),
         pdf_ignored=pdf_ignored,
         log_ignored=log_ignored,
+        pdf_sniff=pdf_sniff,
     )
     return report, failures
 
@@ -395,7 +414,10 @@ def main() -> int:
         print(report.model_dump_json(indent=2))
     else:
         for project in report.projects:
-            print(f"{project.id}: {project.pages} pages")
+            summary = f"{project.id}: {project.pages} pages"
+            if project.pdf_sniff is not None:
+                summary += f"; PDF findings={len(project.pdf_sniff.findings)}"
+            print(summary)
         print(f"diagram review gaps: {len(report.diagram_review.review_gaps)}")
         print(f"tracked generated outputs: {len(report.tracked_generated)}")
         print(f"release checks: {'passed' if report.passed else 'failed'}")

@@ -29,6 +29,7 @@ from hla_lab.core.semantic_model import (
     ImplementationEvidence,
     ImplementationMapping,
     SemanticRecord,
+    SourceAnomalyLedger,
     SourceRef,
 )
 from hla_lab.corpus.corpus_graph import CorpusSemanticGraph
@@ -39,6 +40,7 @@ __all__ = [
     "CompliancePublicationManifest",
     "CompliancePublicationProfile",
     "CompliancePublicationSummary",
+    "ComplianceSourceAnomalyItem",
     "OperationalComplianceItem",
     "RequirementComplianceItem",
     "build_compliance_manifest",
@@ -151,8 +153,34 @@ class RequirementComplianceItem(SemanticRecord):
     ordinal: Annotated[int | None, Field(ge=1)] = None
     extraction: Literal["explicit", "candidate"] = "explicit"
     semantic_group_id: str | None = None
+    source_anomaly_ids: tuple[str, ...] = ()
     source: SourceRef | None = None
     additional_sources: tuple[SourceRef, ...] = ()
+
+
+class ComplianceSourceAnomalyItem(SemanticRecord):
+    """A source anomaly retained beside the requirement projection."""
+
+    qualified_id: Annotated[str, Field(min_length=1)]
+    document_id: Annotated[str, Field(min_length=1)]
+    source_id: Annotated[str, Field(min_length=1)]
+    related_issue_id: str | None = None
+    related_requirement_ids: tuple[str, ...] = ()
+    location: Annotated[str, Field(min_length=1)]
+    source_text: Annotated[str, Field(min_length=1)]
+    rendered_text: Annotated[str, Field(min_length=1)]
+    classification: Literal[
+        "SOURCE_ANOMALY",
+        "COMPILATION_DEFECT",
+        "ENCODING_REPAIR",
+        "EDITORIAL_CONTAMINATION",
+        "CROSS_REFERENCE_DEFECT",
+    ]
+    reason: Annotated[str, Field(min_length=1)]
+    review_status: Literal["RESOLVED", "DISPOSITIONED"]
+    resolution: Annotated[str, Field(min_length=1)]
+    mapping_effect: Annotated[str, Field(min_length=1)]
+    evidence_refs: tuple[str, ...]
 
 
 class OperationalComplianceItem(SemanticRecord):
@@ -218,6 +246,7 @@ class CompliancePublicationManifest(SemanticRecord):
     summary: CompliancePublicationSummary
     documents: tuple[ComplianceDocumentSummary, ...]
     requirements: tuple[RequirementComplianceItem, ...]
+    source_anomalies: tuple[ComplianceSourceAnomalyItem, ...] = ()
     operations: tuple[OperationalComplianceItem, ...]
     implementation_evidence: tuple[ImplementationEvidence, ...]
     gaps: tuple[ComplianceIssue, ...]
@@ -231,6 +260,28 @@ class CompliancePublicationManifest(SemanticRecord):
         qualified_ids = [item.qualified_id for item in self.requirements]
         if len(qualified_ids) != len(set(qualified_ids)):
             raise ValueError("compliance manifest requirement IDs must be unique")
+        anomaly_ids = [item.qualified_id for item in self.source_anomalies]
+        if len(anomaly_ids) != len(set(anomaly_ids)):
+            raise ValueError("compliance manifest source anomaly IDs must be unique")
+        anomalies_by_requirement: dict[tuple[str, str], list[str]] = defaultdict(list)
+        for anomaly in self.source_anomalies:
+            for requirement_id in anomaly.related_requirement_ids:
+                anomalies_by_requirement[(anomaly.document_id, requirement_id)].append(
+                    anomaly.source_id
+                )
+        for requirement in self.requirements:
+            expected_anomalies = tuple(
+                sorted(
+                    anomalies_by_requirement.get(
+                        (requirement.document_id, requirement.requirement_id), ()
+                    )
+                )
+            )
+            if requirement.source_anomaly_ids != expected_anomalies:
+                raise ValueError(
+                    f"requirement {requirement.qualified_id} source anomaly links do not match "
+                    "the manifest anomaly records"
+                )
         requirement_document_order = tuple(item.document_id for item in self.requirements)
         expected_document_order = tuple(
             document_id
@@ -379,6 +430,7 @@ def _mapping_index(
 def _requirements(
     models: Iterable[DocumentModel],
     mapping_index: Mapping[str, tuple[ImplementationMapping, ...]],
+    anomaly_index: Mapping[tuple[str, str], tuple[str, ...]] | None = None,
 ) -> tuple[RequirementComplianceItem, ...]:
     result: list[RequirementComplianceItem] = []
     for model in models:
@@ -420,6 +472,9 @@ def _requirements(
                     ordinal=ordinal,
                     extraction=requirement.extraction,
                     semantic_group_id=requirement.semantic_group_id,
+                    source_anomaly_ids=(anomaly_index or {}).get(
+                        (model.document_id, requirement.id), ()
+                    ),
                     source=requirement.source,
                     additional_sources=requirement.additional_sources,
                 )
@@ -428,6 +483,61 @@ def _requirements(
     # Do not re-sort by semantic ID here: IDs are stable cross-reference keys,
     # and lexical sorting moves page 100 before page 20 (and item 10 before 2).
     return tuple(result)
+
+
+def _source_anomaly_items(
+    ledgers: Iterable[SourceAnomalyLedger],
+    models: Iterable[DocumentModel],
+) -> tuple[ComplianceSourceAnomalyItem, ...]:
+    """Validate ledger links against selected requirements and project anomalies."""
+    requirements_by_document = {
+        model.document_id: {item.id for item in model.requirements} for model in models
+    }
+    projected: list[ComplianceSourceAnomalyItem] = []
+    seen_documents: set[str] = set()
+    seen_ids: set[tuple[str, str]] = set()
+    for ledger in ledgers:
+        if ledger.document_id not in requirements_by_document:
+            raise ValueError(
+                f"source anomaly ledger document {ledger.document_id} is not selected by "
+                "the compliance publication profile"
+            )
+        if ledger.document_id in seen_documents:
+            raise ValueError(f"multiple source anomaly ledgers for {ledger.document_id}")
+        seen_documents.add(ledger.document_id)
+        valid_requirement_ids = requirements_by_document[ledger.document_id]
+        for anomaly in ledger.entries:
+            key = (ledger.document_id, anomaly.source_id)
+            if key in seen_ids:
+                raise ValueError(
+                    f"duplicate source anomaly {anomaly.source_id} in {ledger.document_id}"
+                )
+            seen_ids.add(key)
+            unknown = set(anomaly.related_requirement_ids) - valid_requirement_ids
+            if unknown:
+                raise ValueError(
+                    f"source anomaly {anomaly.source_id} references unknown requirements: "
+                    + ", ".join(sorted(unknown))
+                )
+            projected.append(
+                ComplianceSourceAnomalyItem(
+                    qualified_id=_qualified_id(ledger.document_id, anomaly.source_id),
+                    document_id=ledger.document_id,
+                    source_id=anomaly.source_id,
+                    related_issue_id=anomaly.related_issue_id,
+                    related_requirement_ids=anomaly.related_requirement_ids,
+                    location=anomaly.location,
+                    source_text=anomaly.source_text,
+                    rendered_text=anomaly.rendered_text,
+                    classification=anomaly.classification,
+                    reason=anomaly.reason,
+                    review_status=anomaly.review_status,
+                    resolution=anomaly.resolution,
+                    mapping_effect=anomaly.mapping_effect,
+                    evidence_refs=anomaly.evidence_refs,
+                )
+            )
+    return tuple(projected)
 
 
 def _operations(models: Iterable[DocumentModel]) -> tuple[OperationalComplianceItem, ...]:
@@ -524,11 +634,20 @@ def build_compliance_manifest(
     profile: CompliancePublicationProfile,
     *,
     graph: CorpusSemanticGraph | None = None,
+    source_anomaly_ledgers: Iterable[SourceAnomalyLedger] = (),
 ) -> CompliancePublicationManifest:
     """Project the selected semantic corpus into a requirements/evidence contract."""
     selected = _selected_corpus(corpus, profile)
     mapping_index = _mapping_index(selected.documents)
-    requirements = _requirements(selected.documents, mapping_index)
+    source_anomalies = _source_anomaly_items(source_anomaly_ledgers, selected.documents)
+    anomaly_index_builder: dict[tuple[str, str], list[str]] = defaultdict(list)
+    for anomaly in source_anomalies:
+        for requirement_id in anomaly.related_requirement_ids:
+            anomaly_index_builder[(anomaly.document_id, requirement_id)].append(anomaly.source_id)
+    anomaly_index = {
+        key: tuple(sorted(source_ids)) for key, source_ids in anomaly_index_builder.items()
+    }
+    requirements = _requirements(selected.documents, mapping_index, anomaly_index)
     operations = _operations(selected.documents)
     evidence = selected.implementation_evidence()
     gaps = tuple(
@@ -570,6 +689,7 @@ def build_compliance_manifest(
         ),
         documents=documents,
         requirements=requirements,
+        source_anomalies=source_anomalies,
         operations=operations,
         implementation_evidence=evidence,
         gaps=gaps,
@@ -850,8 +970,8 @@ def write_compliance_csv_exports(
     """Write normalized CSV projections for spreadsheet and RTI tooling.
 
     The Pydantic manifest remains canonical.  Primary tables contain one row per
-    semantic record; link tables preserve one-to-many requirement/transition to
-    mapping relationships without packing lists into CSV cells.
+    semantic record; link tables preserve one-to-many requirement, transition,
+    mapping, and source-anomaly relationships.
     """
     mapping_by_key = {
         (item.document_id, item.mapping_id): item for item in manifest.implementation_evidence
@@ -874,6 +994,7 @@ def write_compliance_csv_exports(
             "ordinal",
             "extraction",
             "semantic_group_id",
+            "source_anomaly_ids",
             "source_path",
             "source_line",
             "source_end_line",
@@ -895,6 +1016,7 @@ def write_compliance_csv_exports(
                 "ordinal": item.ordinal or "",
                 "extraction": item.extraction,
                 "semantic_group_id": item.semantic_group_id or "",
+                "source_anomaly_ids": ";".join(item.source_anomaly_ids),
                 **_csv_source_fields(item.source),
             }
             for item in manifest.requirements
@@ -922,6 +1044,63 @@ def write_compliance_csv_exports(
             for item in manifest.requirements
             for order, source in enumerate((item.source, *item.additional_sources), start=1)
             if source is not None
+        ),
+    )
+    source_anomalies_path = _write_csv(
+        output / "source-anomalies.csv",
+        (
+            "qualified_id",
+            "document_id",
+            "source_id",
+            "related_issue_id",
+            "location",
+            "source_text",
+            "rendered_text",
+            "classification",
+            "reason",
+            "review_status",
+            "resolution",
+            "mapping_effect",
+            "evidence_refs",
+        ),
+        (
+            {
+                "qualified_id": item.qualified_id,
+                "document_id": item.document_id,
+                "source_id": item.source_id,
+                "related_issue_id": item.related_issue_id or "",
+                "location": item.location,
+                "source_text": item.source_text,
+                "rendered_text": item.rendered_text,
+                "classification": item.classification,
+                "reason": item.reason,
+                "review_status": item.review_status,
+                "resolution": item.resolution,
+                "mapping_effect": item.mapping_effect,
+                "evidence_refs": ";".join(item.evidence_refs),
+            }
+            for item in manifest.source_anomalies
+        ),
+    )
+    requirement_anomalies_path = _write_csv(
+        output / "requirement-source-anomaly-links.csv",
+        (
+            "qualified_requirement_id",
+            "document_id",
+            "requirement_id",
+            "qualified_source_anomaly_id",
+            "source_anomaly_id",
+        ),
+        (
+            {
+                "qualified_requirement_id": _qualified_id(item.document_id, requirement_id),
+                "document_id": item.document_id,
+                "requirement_id": requirement_id,
+                "qualified_source_anomaly_id": item.qualified_id,
+                "source_anomaly_id": item.source_id,
+            }
+            for item in manifest.source_anomalies
+            for requirement_id in item.related_requirement_ids
         ),
     )
     transitions_path = _write_csv(
@@ -1077,6 +1256,8 @@ def write_compliance_csv_exports(
     return (
         requirements_path,
         requirement_sources_path,
+        source_anomalies_path,
+        requirement_anomalies_path,
         transitions_path,
         mappings_path,
         requirement_links_path,
@@ -1144,9 +1325,15 @@ def write_compliance_publication(
     *,
     graph: CorpusSemanticGraph | None = None,
     csv_output: Path | None = None,
+    source_anomaly_ledgers: Iterable[SourceAnomalyLedger] = (),
 ) -> CompliancePublicationManifest:
     """Generate the JSON contract and LaTeX body below an ignored output directory."""
-    manifest = build_compliance_manifest(corpus, profile, graph=graph)
+    manifest = build_compliance_manifest(
+        corpus,
+        profile,
+        graph=graph,
+        source_anomaly_ledgers=source_anomaly_ledgers,
+    )
     output.mkdir(parents=True, exist_ok=True)
     (output / "compliance-manifest.json").write_text(manifest.to_json() + "\n", encoding="utf-8")
     if graph is not None:
@@ -1170,11 +1357,26 @@ def main() -> None:
         type=Path,
         help="Write normalized requirements, transitions, mappings, and link CSVs",
     )
+    parser.add_argument(
+        "--source-anomaly-ledger",
+        type=Path,
+        action="append",
+        default=[],
+        help="Include a source-anomaly-ledger.json in the compliance projection (repeatable)",
+    )
     args = parser.parse_args()
     payload = json.loads(args.semantic_model.read_text(encoding="utf-8"))
     corpus = ComplianceCorpus.model_validate({"documents": payload["documents"]})
     profile = load_compliance_publication_profile(args.profile)
-    manifest = build_compliance_manifest(corpus, profile)
+    source_anomaly_ledgers = tuple(
+        SourceAnomalyLedger.model_validate_json(path.read_text(encoding="utf-8"))
+        for path in args.source_anomaly_ledger
+    )
+    manifest = build_compliance_manifest(
+        corpus,
+        profile,
+        source_anomaly_ledgers=source_anomaly_ledgers,
+    )
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(manifest.to_json() + "\n", encoding="utf-8")

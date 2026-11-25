@@ -1,4 +1,15 @@
 {
   "schema_version": 1,
-  "reviews": []
+  "reviews": [
+    {
+      "requirement_id": "requirement-candidate-sections-semantic-clause-4c-page-071-l57-1",
+      "status": "layout-only",
+      "reason": "This source span is the page-break continuation of the five predefined simple data types requirement in 4.14.4. The complete normative statement cites both page spans and is represented once; this continuation is not a separate requirement.",
+      "source": {
+        "path": "sections/semantic/clause-4c/page-071.tex",
+        "line": 57,
+        "end_line": 57
+      }
+    }
+  ]
 }

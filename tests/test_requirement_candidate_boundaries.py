@@ -9,7 +9,7 @@ from collections import Counter
 
 from hla_lab.core.hla_profile import HLA_SOURCE
 from hla_lab.core.semantic_model import load_document_model
-from hla_lab.core.semantic_model_records import _load_requirement_candidates
+from hla_lab.core.semantic_model_records import _load_requirement_candidates, _record_id
 from hla_lab.core.semantic_text import _machine_statement
 from hla_lab.publication.export_compliance_bundle import _document
 from tests.support import TEST_REPO_ROOT
@@ -27,6 +27,14 @@ from tools.migrations.repair_15161_shared_sentences import REPAIRS as SHARED_SEN
 
 
 class RequirementCandidateBoundaryTests(unittest.TestCase):
+    def test_clause_12_adapter_rename_preserves_candidate_ids(self) -> None:
+        root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
+        old_path = root / "content/clauses/11-management-object-model-page-378.tex"
+        new_path = root / "content/clauses/12-programming-language-mappings-page-378.tex"
+        old_id = _record_id("requirement-candidate", root, old_path, "candidate\n", 0, 1)
+        new_id = _record_id("requirement-candidate", root, new_path, "candidate\n", 0, 1)
+        self.assertEqual(old_id, new_id)
+
     def test_promoted_requirements_have_closed_statements_and_real_source_spans(self) -> None:
         root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
         model = load_document_model(root, HLA_SOURCE)
@@ -89,7 +97,7 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
                     self.assertEqual((record.source.line, record.source.end_line), (start, end))
                     source_lines = layouts[record.source.path][start - 1 : end]
                     self.assertRegex(
-                        _machine_statement(" ".join(source_lines), HLA_SOURCE), r"\bshall\b"
+                        _machine_statement("\n".join(source_lines), HLA_SOURCE), r"\bshall\b"
                     )
 
     def test_java_annex_obligations_are_complete_and_source_traced(self) -> None:
@@ -312,6 +320,17 @@ class RequirementCandidateBoundaryTests(unittest.TestCase):
         ]
         self.assertEqual(enable_result.clause, "8.3.4")
         self.assertEqual(disable_service.clause, "8.4")
+
+    def test_split_fixed_service_headings_own_following_prose(self) -> None:
+        root = TEST_REPO_ROOT / "topics/ieee/hla-1516.1-2025"
+        candidates = {item.id: item for item in _load_requirement_candidates(root, HLA_SOURCE)}
+        expected = {
+            "requirement-candidate-content-clauses-10-support-services-page-261-l30-6": "10.25",
+            "requirement-candidate-content-clauses-10-support-services-page-284-l158-49": "10.58",
+        }
+        for requirement_id, clause in expected.items():
+            with self.subTest(requirement=requirement_id):
+                self.assertEqual(candidates[requirement_id].clause, clause)
 
 
 if __name__ == "__main__":

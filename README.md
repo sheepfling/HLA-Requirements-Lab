@@ -372,12 +372,14 @@ implementation evidence. Use `--corpus-report --json` with
 The compliance publication builder also emits ignored, normalized CSV
 projections under
 `topics/ieee/hla-rti-compliance-2025/output/compliance/csv/`: requirements,
-transitions, implementation mappings, and one-to-many requirement/transition
-mapping link tables. The JSON manifest remains canonical; use the standalone
-export option when working from an existing semantic model:
+source anomalies, transitions, implementation mappings, and one-to-many
+requirement/mapping and requirement/source-anomaly link tables. Requirement rows
+carry linked anomaly IDs; source-only anomalies remain in `source-anomalies.csv`
+without being promoted to requirements. The JSON manifest remains canonical;
+use the standalone export option when working from an existing semantic model:
 
 ```console
-python -m hla_lab.publication.compliance_publication topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json topics/ieee/hla-rti-compliance-2025/semantic/publication.json --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv
+python -m hla_lab.publication.compliance_publication topics/ieee/hla-semantic-derivative-2025/output/semantic/semantic-model.json topics/ieee/hla-rti-compliance-2025/semantic/publication.json --csv-output topics/ieee/hla-rti-compliance-2025/output/compliance/csv --source-anomaly-ledger topics/ieee/hla-1516.1-2025/semantic/source-anomaly-ledger.json --source-anomaly-ledger topics/ieee/hla-1516.2-2025/semantic/source-anomaly-ledger.json
 ```
 
 Cross-edition requirements traceability is source-controlled separately in
@@ -404,7 +406,7 @@ The current content slices are complete: 1516 generates selected Clause 3 summar
 requirements, 1516.1 generates the Connect/Disconnect/Connection Lost/Federate
 Resigned service-family prose and mappings, and 1516.2 generates the typed
 Object model identification table family. The three source builds remain at
-40, 440, and 124 pages.
+40, 440, and 113 pages.
 
 The hierarchy-first reconstruction is implemented at
 `topics/ieee/hla-semantic-derivative-2025/`. Its generated document has four
@@ -434,6 +436,21 @@ both derivatives, and the one-page non-HLA portability fixture:
 ```console
 python -m hla_lab.publication.release_check --manifest data/release/documents.json --diagram-manifest data/state_machines/manifest.json --authority-manifest data/semantic/authority.json --json
 ```
+
+The 2025 semantic derivative has a reusable artifact sniffer enabled in the
+release check. It checks for
+visible source/TeX residue, suspicious coordinate text, text outside page
+bounds, overlapping words, unlinked URLs, code-like text in prose fonts,
+duplicate semantic anchors, invalid or out-of-page PDF links, and overfull TeX
+boxes that may indicate clipping. Run it directly while iterating with:
+
+```console
+hla-lab --root . sniff-pdf topics/ieee/hla-semantic-derivative-2025/dist/hla-semantic-derivative-2025.pdf --source-tex topics/ieee/hla-semantic-derivative-2025/output/semantic/reflowable.tex --build-log topics/ieee/hla-semantic-derivative-2025/build/main.log
+```
+
+Text heuristics are reported as warnings where ordinary prose can resemble an
+artifact. Visual review is still required for table meaning, hierarchy, and
+other defects that have no reliable text or geometry signature.
 
 Capture a fresh, stdout-only semantic baseline with:
 

@@ -19,8 +19,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=Path("canonical/source-navigation.json"),
-        help="navigation manifest (default: canonical/source-navigation.json)",
+        default=Path("canonical/lab-navigation.json"),
+        help="navigation manifest (default: canonical/lab-navigation.json)",
     )
     return parser.parse_args()
 
@@ -88,7 +88,7 @@ def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
         expected_labels = payload["page_labels"]
         labels = document.get_page_labels()
         if labels != expected_labels:
-            raise ValueError("Page-label rules do not match canonical/source-navigation.json")
+            raise ValueError("Page-label rules do not match the navigation manifest")
 
         expected_links = payload["links"]
         links = [link for page in document for link in page.get_links()]
@@ -131,11 +131,29 @@ def verify(pdf_path: Path, manifest_path: Path) -> dict[str, int]:
             raise ValueError("First PDF page is missing the Requirements Lab cover")
         if document[0].get_label() != "Front Cover":
             raise ValueError("First PDF page is missing the Front Cover page label")
-        body_lines = [line.strip() for line in document[12].get_text().splitlines() if line.strip()]
-        if not body_lines or body_lines[0] != "12":
-            raise ValueError("Physical page 13 is missing its printed footer number 12")
-        back_page = document[123].get_text()
-        if document[123].get_label() != "Back Cover" or "RAISING THE" not in back_page:
+        target_checks = payload.get("outline_text_checks", ())
+        if target_checks:
+            for page_number, marker in target_checks:
+                if not 1 <= page_number <= document.page_count:
+                    raise ValueError(f"Invalid outline marker page {page_number}: {marker!r}")
+                text = " ".join(document[page_number - 1].get_text().casefold().split())
+                if " ".join(marker.casefold().split()) not in text:
+                    raise ValueError(f"Outline marker not found on page {page_number}: {marker!r}")
+            for index in range(1, document.page_count - 1):
+                page = document[index]
+                if page.get_label() != str(index + 1):
+                    raise ValueError(f"Unexpected body page label on physical page {index + 1}")
+                lines = page.get_text().splitlines()
+                if not lines or lines[-1].strip() != str(index + 1):
+                    raise ValueError(f"Unexpected printed body page number on page {index + 1}")
+        else:
+            body_lines = [
+                line.strip() for line in document[12].get_text().splitlines() if line.strip()
+            ]
+            if not body_lines or body_lines[0] != "12":
+                raise ValueError("Physical page 13 is missing its printed footer number 12")
+        back = document[document.page_count - 1]
+        if back.get_label() != "Back Cover" or "RAISING THE" not in back.get_text():
             raise ValueError("Last PDF page is missing the reconstructed back-cover text")
 
         return {

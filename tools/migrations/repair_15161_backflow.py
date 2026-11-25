@@ -43,6 +43,13 @@ from tools.migrations.backflow_tables import (
     repair_time_table_and_caption,
     restore_missing_service_flow_candidates,
 )
+from tools.migrations.backflow_service_attribution import repair_service_attribution
+from tools.migrations.backflow_service_flows import repair_tar_tara_and_receive_tag_flows
+from tools.migrations.backflow_source_path_labels import (
+    repair_programming_language_source_paths,
+)
+from tools.migrations.backflow_15161_context import repair_15161_context
+from tools.migrations.backflow_source_anomalies import repair_backflow_source_anomalies
 from tools.migrations.workspace import migration_root
 
 
@@ -306,6 +313,11 @@ def main() -> None:
     repair_table_5_records()
     repair_time_table_and_caption()
     restore_missing_service_flow_candidates()
+    repair_tar_tara_and_receive_tag_flows()
+    repair_service_attribution()
+    repair_programming_language_source_paths()
+    repair_15161_context(migration_root())
+    repair_backflow_source_anomalies(migration_root())
     rebuild_api_bindings()
     rebuild_api_crosswalk()
     mark_resolved(

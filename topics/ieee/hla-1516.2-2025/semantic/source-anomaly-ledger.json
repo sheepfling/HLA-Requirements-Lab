@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "document_id": "hla-1516.2-2025",
+  "purpose": "Record source, compilation, encoding, and editorial anomalies without silently rewriting unresolved source meaning.",
+  "entries": [
+    {
+      "source_id": "hla15162-model-identification-name-example",
+      "related_issue_id": "RL-441",
+      "location": "Clause 6.2.1 page 91; Clause 3.3.1 page 32; Restaurant FOM example",
+      "source_text": "Clause 6.2.1 requires the Model Identification Name to conform to Clause 3.3. Clause 3.3.1 says object-model names have no spaces. The published Restaurant FOM module names its model 'Restaurant FOM Module Example'.",
+      "rendered_text": "Map the normative requirement by applying the Clause 3.3 name rules to the Model Identification Name. Preserve the example string as conflicting source evidence; do not infer an unstated exception.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The requirement and Clause 3.3 determine the mapping, while the supplied example contains spaces and conflicts with that rule. The example does not make the normative name requirement ambiguous.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Treat names with spaces as violating the explicit Clause 3.3 requirement when checking Model Identification Name. Preserve the published example unchanged and record its nonconforming form as a source anomaly.",
+      "mapping_effect": "The semantic requirement is mapped to the Clause 3.3 naming constraints. Do not treat 'Restaurant FOM Module Example' as evidence that spaces are permitted.",
+      "evidence_refs": [
+        "requirement-candidate-sections-semantic-clauses-5-6-page-091-l54-7",
+        "content-element-content-15162-page-032-paragraph-002",
+        "Umbra third_party/ieee1516.2-2025/resources/examples/RestaurantFOMmodule-2025.xml:6; SHA256 8df2b31a09ebfadb206476c99f52dbcd4503fddb60445df2dc06e39b78a31a3d"
+      ]
+    },
+    {
+      "source_id": "hla15162-c8-switch-warning-and-merge-failure-wording",
+      "related_issue_id": "RL-443",
+      "location": "Annex C.8 page 113; switch merge conflict statement",
+      "source_text": "The captured semantic text reads 'a warning the merge shall be provided back to the user' and concludes 'cannot be inserted; the merge fails.' The captured page layout ends the corresponding line with 'cannot be insertedfail.'",
+      "rendered_text": "The derived requirement states two outcomes separately: a warning is provided to the user, and the non-equivalent switch is not inserted because the merge fails. The source wording and layout transcription remain unchanged in their source records.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The source sentence has a duplicated phrase boundary and the layout joins 'inserted' with 'fail'. Its explanation independently states that the switch cannot be inserted and the merge fails. Separating the outcomes repairs the semantic candidate without inventing an additional diagnostic channel.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Use the normalized candidate that states the warning and failed merge as separate outcomes. Preserve the captured wording verbatim in the content element and layout source.",
+      "mapping_effect": "Map the warning obligation and merge-failure obligation distinctly. A consumer may crosswalk an exception detail to the warning only with an explicit interpretation note; the Lab does not assert a separate callback or log.",
+      "evidence_refs": [
+        "requirement-candidate-sections-semantic-clause-7-annexes-a-c-page-113-l50-9",
+        "content-element-content-15162-page-113-list-item-019",
+        "content-15162-page-113",
+        "data/hla-backflow-2026-11-23.json#RL-443 upstream_record"
+      ]
+    },
+    {
+      "source_id": "hla15162-annex-d2-note-prefix-and-ncname-example",
+      "related_issue_id": "RL-444",
+      "location": "Annex D.2 page 114; DIF XSD and Restaurant/MIM examples",
+      "source_text": "Annex D.2 says note labels and references shall be prefixed with an underscore. The DIF schema declares note labels as xs:ID and noteReferences as xs:IDREFS. The published Restaurant FOM uses Note1/Note2 without underscores, and the MIM uses MOM1.",
+      "rendered_text": "Map the standalone normative rule as written: prefix note labels and note references with an underscore. Preserve the schema and example values unchanged as contradictory source evidence; do not reinterpret 'shall' as conditional.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The normative sentence unambiguously specifies prefixing, while the schema types and supplied examples accept or use unprefixed NCName-compatible values. This is a source-set contradiction, not a reason to leave the Lab mapping undefined.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Keep the isolated normative candidate and map mandatory underscore prefixing. Keep the official example and schema literals as source evidence; do not alter them or claim they satisfy the prefix sentence.",
+      "mapping_effect": "The requirement mapping is explicit: labels and references are prefixed with an underscore. Conformance of the supplied unprefixed examples remains a separate source anomaly.",
+      "evidence_refs": [
+        "requirement-candidate-sections-semantic-annexes-d-h-page-114-l42-5",
+        "content-element-content-15162-page-114-paragraph-005",
+        "Umbra third_party/ieee1516.2-2025/resources/schemas/IEEE1516-DIF-2025.xsd:2849,3045-3046; SHA256 7763639590950dba87d2a7f29d5735c78835855852113509754c24f20ceb3774",
+        "Umbra third_party/ieee1516.2-2025/resources/examples/RestaurantFOMmodule-2025.xml:347-348,1048-1052; SHA256 8df2b31a09ebfadb206476c99f52dbcd4503fddb60445df2dc06e39b78a31a3d",
+        "Umbra third_party/ieee1516.2-2025/resources/mim/HLAstandardMIM-2025.xml:3804"
+      ]
+    },
+    {
+      "source_id": "hla15162-fom-synchronization-capability-example",
+      "related_issue_id": "RL-456",
+      "location": "Clause 4.10 page 62; Clause 6.2.10 page 93; Restaurant FOM example",
+      "source_text": "Clauses 4.10 and 6.2.10 require Capability to be NA for FOMs and FOM modules. The published Restaurant FOM example assigns Achieve to InitialPublish, InitialUpdate, and BeginTimeAdvance, and RegisterAchieve to PauseExecution.",
+      "rendered_text": "Map the FOM/FOM-module Capability field to NA for every synchronization row. Preserve the four conflicting example values and do not treat them as exceptions.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The two normative requirement locations agree on NA; the provided example uses non-NA values without a stated exception. This conflict does not leave the semantic rule ambiguous.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Follow the explicit NA rule for the semantic mapping and preserve the original example values unchanged as contradictory source evidence.",
+      "mapping_effect": "A check of FOM/FOM-module synchronization Capability maps to NA. Do not count acceptance of the supplied Restaurant example as satisfying this rule.",
+      "evidence_refs": [
+        "requirement-candidate-sections-semantic-clause-4b-page-062-l35-2",
+        "requirement-candidate-sections-semantic-clauses-5-6-page-093-l78-15",
+        "Umbra third_party/ieee1516.2-2025/resources/examples/RestaurantFOMmodule-2025.xml:630-650; SHA256 8df2b31a09ebfadb206476c99f52dbcd4503fddb60445df2dc06e39b78a31a3d"
+      ]
+    }
+  ]
+}

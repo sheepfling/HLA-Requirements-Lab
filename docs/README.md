@@ -13,5 +13,6 @@ Current product boundaries and operating contracts:
 - [Document-family onboarding](DOCUMENT-FAMILY-ONBOARDING.md)
 - [Utility consolidation](UTILITY-CONSOLIDATION.md)
 - [HLA implementation backflow acceptance](HLA-BACKFLOW-ACCEPTANCE.md)
+- [2026-11-23 HLA backflow review](HLA-BACKFLOW-2026-11-23.md)
 - [Requirements Lab rights](HLA-REQUIREMENTS-LAB-RIGHTS.md)
 - [Semantic quality gates](SEMANTIC-QUALITY-GATES.md)

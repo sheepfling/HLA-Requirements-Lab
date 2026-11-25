@@ -9,13 +9,13 @@ without inventing 2025-only table-row requirements in the 2010 editions.
 from __future__ import annotations
 
 import argparse
-from collections import Counter
+import re
 from pathlib import Path
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from hla_lab.corpus.hla_2010_semantic import _requirements, _surface_inputs
+from hla_lab.corpus.hla_2010_semantic import _plain, _requirements, _surface_inputs
 from hla_lab.corpus.hla_semantic import load_hla_document_model
 from hla_lab.paths import repository_root, resources
 
@@ -72,15 +72,38 @@ def _document_report(root: Path) -> RequirementClosureDocument:
     extracted = _requirements(root, _surface_inputs(root))
     requirement_ids = {item.id for item in model.requirements}
     binding_ids = {item.requirement_id for item in model.requirement_api_bindings}
-    source_counts = Counter(item.source.path for item in extracted)
-    catalog_counts = Counter(item.source.path for item in model.requirements)
-    source_path_mismatches = tuple(
-        sorted(
-            path
-            for path in set(source_counts) | set(catalog_counts)
-            if source_counts[path] != catalog_counts[path]
+
+    # The legacy scanner segments prose into candidate paragraphs, while the
+    # curated semantic catalog may split or combine those candidates. Compare
+    # the normalized source statements, not their raw record counts.
+    def statement_key(value: str) -> str:
+        return re.sub(r"[^a-z0-9]+", "", _plain(value).casefold())
+
+    candidate_statements = tuple(
+        (item.source.path, statement_key(item.statement)) for item in extracted
+    )
+    catalog_statements = tuple(
+        (item.source.path, statement_key(item.statement)) for item in model.requirements
+    )
+    uncovered_candidates = tuple(
+        path
+        for path, candidate in candidate_statements
+        if not candidate
+        or not any(
+            path == catalog_path and (candidate in catalog or catalog in candidate)
+            for catalog_path, catalog in catalog_statements
         )
     )
+    unmatched_catalog = tuple(
+        path
+        for path, catalog in catalog_statements
+        if not catalog
+        or not any(
+            path == candidate_path and (catalog in candidate or candidate in catalog)
+            for candidate_path, candidate in candidate_statements
+        )
+    )
+    source_path_mismatches = tuple(sorted(set(uncovered_candidates + unmatched_catalog)))
     missing_source_paths = tuple(
         sorted(item.id for item in model.requirements if not (root / item.source.path).is_file())
     )
@@ -92,12 +115,8 @@ def _document_report(root: Path) -> RequirementClosureDocument:
     )
     api_binding_audit = bool(model.requirement_api_bindings)
     failures: list[str] = []
-    if len(extracted) != len(model.requirements):
-        failures.append(
-            "promoted requirement count does not match the legacy source candidate inventory"
-        )
     if source_path_mismatches:
-        failures.append("promoted and extracted requirement counts differ by source path")
+        failures.append("promoted requirements do not cover the legacy source statements")
     if any(item.extraction != "explicit" for item in model.requirements):
         failures.append("2010 requirement catalog contains unpromoted candidates")
     if model.requirement_reviews:

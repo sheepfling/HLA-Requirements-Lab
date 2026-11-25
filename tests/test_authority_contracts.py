@@ -58,15 +58,15 @@ class AuthorityContractTests(unittest.TestCase):
         self.assertEqual(counts[("hla-1516-2025", "definitions")], 161)
         self.assertEqual(counts[("hla-1516-2025", "requirements")], 20)
         self.assertEqual(counts[("hla-1516.1-2025", "content-blocks")], 432)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 2002)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirements")], 2005)
         self.assertEqual(counts[("hla-1516.1-2025", "transition-coverage")], 297)
         self.assertEqual(counts[("hla-1516.1-2025", "implementations")], 283)
         self.assertEqual(counts[("hla-1516.1-2025", "requirement-links")], 32)
-        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 3428)
+        self.assertEqual(counts[("hla-1516.1-2025", "requirement-api-bindings")], 3434)
         self.assertEqual(counts[("hla-1516.2-2025", "definitions")], 83)
-        self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 340)
+        self.assertEqual(counts[("hla-1516.2-2025", "requirements")], 353)
         self.assertEqual(counts[("hla-1516.2-2025", "content-blocks")], 113)
-        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1019)
+        self.assertEqual(counts[("hla-1516.2-2025", "content-elements")], 1033)
         self.assertEqual(counts[("hla-1516.2-2025", "table-families")], 80)
         self.assertEqual(counts[("hla-1516-2010", "requirements")], 56)
         self.assertEqual(counts[("hla-1516.1-2010", "requirements")], 1529)
@@ -82,6 +82,10 @@ class AuthorityContractTests(unittest.TestCase):
             model = load_document_model(root, HLA_SOURCE)
             self.assertEqual(model.requirement_review_counts()["deferred"], 0)
             self.assertEqual(model.requirement_review_counts()["unreviewed"], 0)
+            if root.name == "hla-1516.2-2025":
+                self.assertEqual(model.requirement_review_counts()["layout-only"], 1)
+            else:
+                self.assertEqual(model.requirement_review_counts()["layout-only"], 0)
         for root in ROOTS_2010:
             model = load_document_model(root, HLA_SOURCE)
             self.assertEqual(model.requirement_review_counts()["deferred"], 0)
@@ -120,7 +124,8 @@ class AuthorityContractTests(unittest.TestCase):
         source_root = next(root for root in ROOTS if root.name == "hla-1516-2025")
         requirement_id = "summary-rule-1"
         changed_statement = "Federations shall expose a semantically generated FOM."
-        with tempfile.TemporaryDirectory() as temporary:
+        # Keep generated record paths below Windows' legacy path limit.
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temporary:
             workspace = Path(temporary)
             mutated_root = workspace / source_root.name
             shutil.copytree(

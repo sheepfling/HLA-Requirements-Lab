@@ -16,8 +16,17 @@ ROOT = REPO_ROOT / "topics" / "ieee" / "hla-1516.1-2025"
 class ContentClosureTests(unittest.TestCase):
     def test_all_15161_requirement_candidates_are_authoritative(self) -> None:
         model = load_document_model(ROOT, HLA_SOURCE)
-        self.assertEqual(len(model.requirements), 2014)
-        self.assertEqual(sum(item.extraction == "explicit" for item in model.requirements), 2002)
+        self.assertEqual(len(model.requirements), 2017)
+        explicit = {item.id for item in model.requirements if item.extraction == "explicit"}
+        self.assertEqual(len(explicit), 2005)
+        self.assertTrue(
+            {
+                "requirement-service-flow-tar-current-time-precondition",
+                "requirement-service-flow-tar-time-passed-exception",
+                "requirement-service-flow-tara-equal-time-send-permission",
+            }
+            <= explicit
+        )
         self.assertEqual(sum(item.extraction == "candidate" for item in model.requirements), 12)
         self.assertTrue(all(item.clause_id for item in model.requirements))
         self.assertEqual(len(model.requirement_reviews), 12)

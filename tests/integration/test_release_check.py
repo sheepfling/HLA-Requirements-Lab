@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import unittest
 
 import fitz
@@ -26,6 +28,9 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
         self.assertEqual(report.diagram_review.review_gaps, ())
         self.assertTrue(report.semantic_authority.passed)
         self.assertTrue(report.api_traceability.passed)
+        sniffed = [item for item in report.projects if item.pdf_sniff is not None]
+        self.assertEqual([item.id for item in sniffed], ["hla-semantic-derivative-2025"])
+        self.assertTrue(sniffed[0].pdf_sniff.passed)
         self.assertEqual(
             {item.id: item.pages for item in report.projects},
             {
@@ -33,6 +38,18 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
                 for item in json.loads(manifest_path.read_text(encoding="utf-8"))["projects"]
             },
         )
+
+    def test_omt_navigation_matches_the_built_lab_compilation(self) -> None:
+        project = REPO_ROOT / "topics" / "ieee" / "hla-1516.2-2025"
+        pdf = project / "dist" / "hla-requirements-lab-1516.2-2025-object-model-template.pdf"
+        result = subprocess.run(
+            [sys.executable, "tools/verify_pdf_navigation.py", str(pdf)],
+            cwd=project,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_faithful_pdfs_preserve_letter_geometry_and_lab_furniture(self) -> None:
         manifest = json.loads(
@@ -53,7 +70,12 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
 
                 sample_indices = {0, min(22, len(document) - 1), len(document) - 1}
                 for index in sorted(sample_indices):
-                    self.assertIn("HLA REQUIREMENTS LAB", document[index].get_text())
+                    page = document[index]
+                    if item["id"] == "hla-1516.2-2025" and index == len(document) - 1:
+                        self.assertEqual(page.get_label(), "Back Cover")
+                        self.assertIn("RAISING THE", page.get_text())
+                    else:
+                        self.assertIn("HLA REQUIREMENTS LAB", page.get_text())
                 self.assertNotIn("IEEE Standard for", document[0].get_text())
 
 

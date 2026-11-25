@@ -28,12 +28,19 @@ def _protocol_cells_by_row(table: Table) -> dict[int, dict[int, list[str]]]:
             continue
         cells.append((cell.row, cell.column, cell))
     for row, column, cell in sorted(cells, key=lambda item: (item[0], item[1], item[2].id)):
-        by_row.setdefault(row, {}).setdefault(column, []).append(_modern_table_text(cell.text))
+        # In fixed-layout captures, a trailing ``-%`` marks a word split at
+        # the end of a visual line (``mes-%`` + ``sage``). The shared table
+        # normalizer removes that layout hyphen, which is right for standalone
+        # cells but loses the evidence needed to rejoin this protocol cell.
+        # Preserve it here; ``_join_protocol_wrapped`` removes it only when
+        # the following fragment starts with a lowercase letter.
+        value = cell.text.replace("-%", "-")
+        by_row.setdefault(row, {}).setdefault(column, []).append(_modern_table_text(value))
     return by_row
 
 
 def _join_protocol_wrapped(values: Sequence[str]) -> str:
-    text = " ".join(values)
+    text = " ".join(value.strip() for value in values if value.strip())
     return re.sub(r"(?<=[A-Za-z])-\s+(?=[a-z])", "", text)
 
 
@@ -42,53 +49,68 @@ _PROTOCOL_GROUP_LABELS = frozenset(
 )
 
 
-def _protocol_row_values(
+def _protocol_header_row(
+    by_row: Mapping[int, Mapping[int, Sequence[str]]],
+    first: str,
+    second: str,
+    third: str | None = None,
+) -> int | None:
+    expected = {first.casefold(), second.casefold()}
+    if third is not None:
+        expected.add(third.casefold())
+    for row, cells in sorted(by_row.items()):
+        values = {
+            re.sub(r"\s*\([^)]*\)", "", " ".join(parts)).strip().casefold()
+            for parts in cells.values()
+        }
+        if expected.issubset(values):
+            return row
+    return None
+
+
+def _protocol_cell(
     by_row: Mapping[int, Mapping[int, Sequence[str]]],
     row: int,
-) -> list[str]:
-    return [
-        value for column in sorted(by_row.get(row, {})) for value in by_row[row][column] if value
-    ]
+    column: int,
+) -> str:
+    return _join_protocol_wrapped(by_row.get(row, {}).get(column, ()))
 
 
 def _protocol_registry_31_32(
     by_row: Mapping[int, Mapping[int, Sequence[str]]],
 ) -> tuple[list[str], list[list[str]]]:
-    names_by_column = by_row.get(0, {})
-    descriptions = by_row.get(1, {})
-    defaults = by_row.get(2, {})
+    header = _protocol_header_row(by_row, "Name", "Description", "Default")
+    if header is None:
+        return ["Name", "Description", "Default (s)"], []
     rows: list[list[str]] = []
-    for column in sorted(names_by_column):
-        names = [value for value in names_by_column[column] if value.casefold() != "name"]
-        if not names:
+    for row_number, cells in sorted(by_row.items()):
+        if row_number <= header:
             continue
-        description = [
-            value for value in descriptions.get(column, ()) if value.casefold() != "description"
-        ]
-        default = [
-            value
-            for value in defaults.get(column, ())
-            if not value.casefold().startswith("default") and value.casefold() != "(s)"
-        ]
-        rows.append(
-            [names[-1], _join_protocol_wrapped(description), _join_protocol_wrapped(default)]
-        )
+        name = _protocol_cell(by_row, row_number, 0)
+        description = _protocol_cell(by_row, row_number, 1)
+        default = _protocol_cell(by_row, row_number, 2)
+        if name and name.casefold() != "name":
+            rows.append([name, description, default])
+            continue
+        if not rows:
+            continue
+        if description:
+            rows[-1][1] = _join_protocol_wrapped((rows[-1][1], description))
+        if default and default.casefold() != "(s)":
+            rows[-1][2] = _join_protocol_wrapped((rows[-1][2], default))
     return ["Name", "Description", "Default (s)"], rows
 
 
 def _protocol_registry_33(
     by_row: Mapping[int, Mapping[int, Sequence[str]]],
 ) -> tuple[list[str], list[list[str]]]:
-    byte_ranges = [value for value in _protocol_row_values(by_row, 0) if value.casefold() != "byte"]
-    names = [value for value in _protocol_row_values(by_row, 1) if value.casefold() != "name"]
-    interpretations = [
-        value for value in _protocol_row_values(by_row, 2) if value.casefold() != "interpretation"
-    ]
+    header = _protocol_header_row(by_row, "Byte", "Name", "Interpretation")
+    if header is None:
+        return ["Bytes", "Field", "Interpretation"], []
     rows = [
-        [byte_range, name, interpretation]
-        for byte_range, name, interpretation in zip(
-            byte_ranges, names, interpretations, strict=False
-        )
+        [_protocol_cell(by_row, row, 0), _protocol_cell(by_row, row, 1), _protocol_cell(by_row, row, 2)]
+        for row in sorted(by_row)
+        if row > header and any(_protocol_cell(by_row, row, column) for column in range(3))
     ]
     return ["Bytes", "Field", "Interpretation"], rows
 
@@ -98,22 +120,20 @@ def _protocol_registry_34(
 ) -> tuple[list[str], list[list[str]]]:
     rows: list[list[str]] = []
     current_group = ""
-    columns = sorted(set(by_row.get(0, {})) | set(by_row.get(1, {})))
-    for column in columns:
-        values = [
-            value for value in by_row.get(0, {}).get(column, ()) if value.casefold() != "value"
-        ]
-        types = [value for value in by_row.get(1, {}).get(column, ()) if value.casefold() != "type"]
-        messages: list[str] = []
-        for value in types:
-            if value.casefold() in _PROTOCOL_GROUP_LABELS:
-                current_group = value
-            else:
-                messages.append(value)
-        rows.extend(
-            [value, message, current_group, _protocol_message_direction(message)]
-            for value, message in zip(values, messages, strict=False)
-        )
+    header = _protocol_header_row(by_row, "Value", "Type")
+    if header is None:
+        return ["Value", "Message", "Group", "Direction"], []
+    for row in sorted(by_row):
+        if row <= header:
+            continue
+        value = _protocol_cell(by_row, row, 0)
+        message = _protocol_cell(by_row, row, 1)
+        if not value and message.casefold() in _PROTOCOL_GROUP_LABELS:
+            current_group = message
+            rows.append(["", "", current_group, ""])
+            continue
+        if value and message:
+            rows.append([value, message, current_group, _protocol_message_direction(message)])
     return ["Value", "Message", "Group", "Direction"], rows
 
 
@@ -121,22 +141,42 @@ def _protocol_registry_default(
     table: Table,
     by_row: Mapping[int, Mapping[int, Sequence[str]]],
 ) -> tuple[list[str], list[list[str]]]:
-    byte_ranges = [value for value in _protocol_row_values(by_row, 0) if value.casefold() != "byte"]
-    names = [value for value in _protocol_row_values(by_row, 1) if value.casefold() != "name"]
-    descriptions = [
-        value for value in _protocol_row_values(by_row, 2) if value.casefold() != "description"
-    ]
-    if len(descriptions) > len(names) and names:
-        descriptions = [
-            *descriptions[: len(names) - 1],
-            _join_protocol_wrapped(descriptions[len(names) - 1 :]),
-        ]
-    descriptions.extend([""] * max(0, len(names) - len(descriptions)))
-    rows = [
-        [byte_range, name, _protocol_message_direction(table.title or name), description]
-        for byte_range, name, description in zip(byte_ranges, names, descriptions, strict=False)
-    ]
-    return ["Bytes", "Field", "Direction", "Description"], rows
+    header = _protocol_header_row(by_row, "Byte", "Name", "Description")
+    message_number = table.number or ""
+    has_derived_direction = message_number not in {"37", "39"}
+    headers = (
+        ["Bytes", "Field", "Direction", "Description"]
+        if has_derived_direction
+        else ["Bytes", "Field", "Description"]
+    )
+    if header is None:
+        return headers, []
+
+    rows: list[list[str]] = []
+    for row_number, cells in sorted(by_row.items()):
+        if row_number <= header:
+            continue
+        byte_range = _protocol_cell(by_row, row_number, 0)
+        name = _protocol_cell(by_row, row_number, 1)
+        description = _protocol_cell(by_row, row_number, 2)
+        if byte_range:
+            row = [byte_range, name]
+            if has_derived_direction:
+                row.append(_protocol_message_direction(table.title or name))
+            row.append(description)
+            rows.append(row)
+            continue
+        if not rows:
+            continue
+        if name:
+            previous_name = rows[-1][1]
+            rows[-1][1] = _join_protocol_wrapped((previous_name, name))
+        if description:
+            description_index = 3 if has_derived_direction else 2
+            rows[-1][description_index] = _join_protocol_wrapped(
+                (rows[-1][description_index], description)
+            )
+    return headers, rows
 
 
 def _modern_protocol_rows(table: Table) -> tuple[list[str], list[list[str]]]:

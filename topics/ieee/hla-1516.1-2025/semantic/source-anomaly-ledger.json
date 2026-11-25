@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "document_id": "hla-1516.1-2025-federate-interface",
+  "document_id": "hla-1516.1-2025",
   "purpose": "Record source, compilation, encoding, and editorial anomalies without silently rewriting unresolved source meaning.",
   "entries": [
     {
@@ -224,6 +224,10 @@
       "evidence_refs": [
         "content-15161-page-296",
         "data/hla-15161-official-auxiliary-evidence-2026-10-25.json: RL-256"
+      ],
+      "related_requirement_ids": [
+        "requirement-candidate-table-5-p296-r001",
+        "requirement-candidate-table-5-p296-r004"
       ]
     },
     {
@@ -244,6 +248,87 @@
         "api.2025.cpp.federateambassador.federationrestorestatusresponse.000dead4d6cb",
         "api.2025.fedpro.fedprodatatypes.federaterestorestatus.1e54de9139cb",
         "1516.2-2025 MIM semantic source"
+      ],
+      "related_requirement_ids": [
+        "requirement-candidate-table-5-p297-r007"
+      ]
+    },
+    {
+      "source_id": "hla15161-table-5-hlaargument-example-type-codes",
+      "related_issue_id": "RL-399",
+      "location": "Table 5, pages 298, 301, and 303, HLAargument examples",
+      "source_text": "Table 14 defines HLAargumentType enumerants UserSuppliedTag=60 and InteractionClassHandle=27. Table 5 examples instead print 58 and 24 on page 298, 63 for UserSuppliedTag on pages 301 and 303, and 27 for InteractionClassHandle on pages 301 and 303. The 1516.2 MIM agrees with the Table 14 enumerants.",
+      "rendered_text": "Use Table 14's HLAargumentType enumerants as the semantic mapping: InteractionClassHandle=27 and UserSuppliedTag=60. Preserve each differing Table 5 example number verbatim and label it as conflicting example evidence.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "Table 14 directly defines the enum values and the source states that HLAargumentType follows that table. The conflicting Table 5 examples therefore do not leave the semantic type mapping ambiguous, although the example defect itself remains unresolved.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Map argument types from Table 14: InteractionClassHandle=27 and UserSuppliedTag=60. Preserve Table 5 example values 24, 58, and 63 with their page and record provenance; do not normalize or promote them to enum values.",
+      "mapping_effect": "Consumers can map the canonical enum values from Table 14 while retaining conflicting Table 5 example literals as source anomalies.",
+      "evidence_refs": [
+        "content-15161-page-298",
+        "content-15161-page-301",
+        "content-15161-page-303",
+        "content-15161-page-325",
+        "content-15161-page-326",
+        "1516.1 Table 14, HLAargumentType enumerants, pp. 325-326",
+        "Umbra third_party/ieee1516.2-2025/resources/mim/HLAstandardMIM-2025.xml:3323-3324,3455-3456"
+      ]
+    },
+    {
+      "source_id": "hla15161-table-5-binary-data-examples",
+      "related_issue_id": "RL-403",
+      "location": "Table 5, page 299, ParameterHandleValueMap example",
+      "source_text": "The ParameterHandleValueMap example prints xFDcMa and R6lkHla as values for Binary Data. The page-292 Binary Data definition describes base-64 encoded data. These example literals omit base-64 padding and do not encode canonical zero pad bits.",
+      "rendered_text": "Map BinaryData as base-64-encoded data. Preserve xFDcMa and R6lkHla as printed examples, but do not treat their malformed/non-canonical spelling as an executable encoder contract.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The captured definition specifies base-64 while the printed examples omit padding and have non-zero pad bits under the standard base-64 alphabet. The source text does not authorize this alternate lexical form.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Retain the exact example literals as conflicting source examples. Validate BinaryData against the base-64 definition using independently valid values; do not invent an unpadded/non-canonical encoding profile to fit the examples.",
+      "mapping_effect": "The PairList<ParameterHandle:BinaryData> structure and base-64 semantic type are mapped; only the conformance of the printed example strings remains open.",
+      "evidence_refs": [
+        "content-15161-page-292",
+        "content-15161-page-295",
+        "content-15161-page-299",
+        "data/hla-backflow-2026-11-23.json#RL-403 upstream_record"
+      ]
+    },
+    {
+      "source_id": "hla15161-table-5-servicereportrecord-field-spelling",
+      "related_issue_id": "RL-407",
+      "location": "Table 5, page 301, ServiceReportRecord row",
+      "source_text": "The encoding column prints HLAservce:String, while the example object prints the corresponding key as HLAservice.",
+      "rendered_text": "Use HLAservice as the semantic field name, matching the same-row JSON example and the document's repeated identifier spelling. Preserve HLAservce:String as the printed encoding typo in this anomaly record.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The encoding and example in the same captured row disagree by one omitted letter; the example and the rest of the document consistently use HLAservice.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Normalize the derived field identity to HLAservice:String because the same-row example key and document terminology corroborate it. Keep HLAservce:String verbatim in the source evidence; do not alter the captured source.",
+      "mapping_effect": "The ServiceReportRecord has one semantic HLAservice field. HLAservce is a source spelling anomaly, not a second field or API member.",
+      "evidence_refs": [
+        "content-15161-page-301",
+        "data/hla-backflow-2026-11-23.json#RL-407 upstream_record"
+      ],
+      "related_requirement_ids": [
+        "requirement-candidate-table-5-p301-r001",
+        "requirement-candidate-table-5-p301-r003"
+      ]
+    },
+    {
+      "source_id": "hla15161-variant-record-method-name-conflict",
+      "related_issue_id": "RL-420",
+      "location": "Clause 12.12.4.2, page 381; HLAvariantRecord C++ declaration",
+      "source_text": "The Lab source calls the operation addMapping to associate encoders/decoders with discriminants. The published C++ header names the operation addVariant and documents it as adding a discriminant/variant pair that maps a unique discriminant to a copied value element; the header also has a distinct addVariantPointer operation.",
+      "rendered_text": "Keep addMapping as the IEEE 1516.1 requirement wording. Crosswalk its mapping behavior to HLAvariantRecord::addVariant, whose header description matches the discriminant-to-variant association. Preserve the different API spelling.",
+      "classification": "SOURCE_ANOMALY",
+      "reason": "The source/API identifier differs, but the official header directly documents addVariant as adding the same discriminant-to-variant mapping described by the requirement. The semantic operation is therefore mappable without treating the names as literal aliases.",
+      "review_status": "DISPOSITIONED",
+      "resolution": "Map the addMapping requirement behavior to addVariant and retain the source/API name discrepancy. Do not map addVariantPointer to the copy-based addMapping requirement; it has a distinct pointer-lifetime contract.",
+      "mapping_effect": "A C++ implementation crosswalk can target HLAvariantRecord::addVariant for the discriminant/variant association, together with setDiscriminant/getDiscriminant. The semantic requirement remains named addMapping, and no literal addMapping member is claimed.",
+      "evidence_refs": [
+        "requirement-candidate-content-clauses-11-management-object-model-page-381-l16-5",
+        "Umbra third_party/ieee1516.1-2025/include/RTI/encoding/HLAvariantRecord.h:87-127; SHA256 cfc4d1eb57f83df9b485e6da7422b01f10304d720e6a9c38d177b73192e9fcda"
+      ],
+      "related_requirement_ids": [
+        "requirement-candidate-content-clauses-11-management-object-model-page-381-l16-5"
       ]
     }
   ]

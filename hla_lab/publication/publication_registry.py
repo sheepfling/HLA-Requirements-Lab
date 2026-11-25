@@ -67,6 +67,7 @@ class ReleaseProject(BaseModel):
     log: Annotated[str, Field(min_length=1)]
     expected_pages: Annotated[int | None, Field(ge=1)] = None
     kind: Annotated[str, Field(min_length=1)]
+    check_pdf_sniff: bool = False
     build: BuildSettings | None = None
 
 

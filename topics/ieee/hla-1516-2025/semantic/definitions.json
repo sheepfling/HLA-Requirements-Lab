@@ -30,7 +30,7 @@
     {
       "id": "def-attribute",
       "term": "attribute",
-      "text": "A named characteristic of an object class or object instance. class attribute instance attribute.",
+      "text": "A named characteristic of an object class or object instance. See also: class attribute; instance attribute.",
       "layout_body": "A named characteristic of an object class or object instance. \\HLASeeAlso{\\HLATermReference{class attribute}\\HLASemicolon{} \\HLATermReference{instance attribute}.}",
       "leading_gap": null,
       "source": {

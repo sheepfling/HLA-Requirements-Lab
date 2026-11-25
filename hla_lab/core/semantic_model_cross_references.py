@@ -400,7 +400,7 @@ def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
                 pass
         label = str(label).strip()
         annex = re.match(r"Annex\s+([A-H])\s+\((?:normative|informative)\).+", label)
-        numbered = re.match(r"(?P<number>\d+(?:\.\d+)*)\.\s+.+", label)
+        numbered = re.match(r"(?P<number>\d+(?:\.\d+)*)(?:\.)?\s+(?P<title>.+)", label)
         if annex:
             identifier = f"clause-{annex.group(1)}"
             number = annex.group(1)
@@ -413,7 +413,7 @@ def _load_navigation_clauses(root: Path) -> tuple[Clause, ...]:
         clauses[identifier] = Clause(
             id=identifier,
             number=clause_number,
-            title=label,
+            title=numbered.group("title").strip() if numbered else label,
             parent_id=parent_id,
             level=level,
             source=source,

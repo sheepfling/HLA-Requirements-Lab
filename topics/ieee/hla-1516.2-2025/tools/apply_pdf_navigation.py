@@ -54,6 +54,7 @@ class _NavigationManifest(BaseModel):
 
     schema_version: Literal[1]
     page_count: Annotated[int, Field(gt=0)]
+    outline_text_checks: tuple[tuple[int, str], ...] = ()
     outline: tuple[tuple[int, str, int], ...]
     page_labels: tuple[_PageLabel, ...]
     links: tuple[_NavigationLink, ...]
@@ -111,7 +112,19 @@ def apply(input_pdf: Path, manifest_path: Path, output_pdf: Path) -> None:
                 "Page-count mismatch: "
                 f"PDF has {document.page_count}, manifest expects {expected_pages}"
             )
-        delete_existing_links(document)
+        if payload.outline_text_checks and tuple(
+            page_number for page_number, _ in payload.outline_text_checks
+        ) != tuple(page_number for _, _, page_number in payload.outline):
+            raise ValueError("Outline marker pages must match bookmark destination pages")
+        for page_number, marker in payload.outline_text_checks:
+            if not 1 <= page_number <= document.page_count:
+                raise ValueError(f"Outline marker has invalid page {page_number}: {marker!r}")
+            text = " ".join(document[page_number - 1].get_text().casefold().split())
+            normalized_marker = " ".join(marker.casefold().split())
+            if not normalized_marker or normalized_marker not in text:
+                raise ValueError(f"Outline marker not found on page {page_number}: {marker!r}")
+        if not payload.outline_text_checks:
+            delete_existing_links(document)
         document.set_toc([list(item) for item in payload.outline])
         document.set_page_labels(
             [label.model_dump(exclude_none=True) for label in payload.page_labels]

@@ -369,24 +369,48 @@ class _DocumentModelBuilder:
         local_headings: Sequence[HeadingEvent],
     ) -> None:
         assert block.layout_body is not None
-        for offset, args, end_offset in _command_events(
-            block.layout_body, self.source.definition_at, 2
-        ):
+        definition_events = _command_events(block.layout_body, self.source.definition_at, 2)
+        for event_index, (offset, args, end_offset) in enumerate(definition_events):
             anchor = _commands(args[1], self.source.definition_anchor, 1)
             term = _commands(args[1], self.source.definition_term, 1)
             if not anchor or not term:
                 continue
             definition_id = anchor[0][1][0]
+            definition_body = _definition_text(args[1], self.source)
+            if not definition_body:
+                following_definition = (
+                    definition_events[event_index + 1][0]
+                    if event_index + 1 < len(definition_events)
+                    else len(block.layout_body)
+                )
+                definition_body = self._layout_definition_body(
+                    block.layout_body, end_offset, following_definition
+                )
             self.definitions.setdefault(
                 definition_id,
                 Definition(
                     id=definition_id,
                     term=_latex_text(term[0][1][0], self.source),
-                    text=_definition_text(args[1], self.source),
+                    text=definition_body,
                     clause_id=_nearest_heading(tuple(sorted(local_headings)), offset),
                     source=_source(self.root, virtual_path, block.layout_body, offset, end_offset),
                 ),
             )
+
+    def _layout_definition_body(self, body: str, start: int, stop: int) -> str:
+        """Recover prose placed in fixed-position blocks after a definition term."""
+        layout_commands = (
+            ("HLAFixedBlock", 7),
+            ("HLAFixedAlphaList", 5),
+            ("HLAFixedAlphaListFrom", 6),
+        )
+        fragments: list[tuple[int, str]] = []
+        for command, argument_count in layout_commands:
+            for offset, args, _ in _command_events(body, command, argument_count):
+                if start <= offset < stop and args[-1].strip():
+                    fragments.append((offset, _latex_text(args[-1], self.source)))
+        fragments.sort(key=lambda item: item[0])
+        return " ".join(text for _, text in fragments if text).strip()
 
     def _load_layout_block_clauses(self, local_headings: Sequence[HeadingEvent]) -> None:
         for _, identifier, title, heading_source in sorted(local_headings):

@@ -745,8 +745,8 @@
     {
       "id": "def-omt-semantics-m4-p075-t01-r6",
       "term": "AddressBook",
-      "text": "[l]Collectionofall employee addresses",
-      "layout_body": null,
+      "text": "Collection of all employee addresses",
+      "layout_body": "[l]Collectionofall employee addresses",
       "leading_gap": null,
       "source": {
         "path": "sections/semantic/clause-4c/page-075.tex",
@@ -758,8 +758,8 @@
     {
       "id": "def-omt-semantics-m4-p076-t01-r2",
       "term": "ServiceStat / EntreeOk",
-      "text": "[l]Check-offon whether the server performed proper- ly on elements of the meal",
-      "layout_body": null,
+      "text": "Check-off on whether the server performed properly on elements of the meal",
+      "layout_body": "[l]Check-offon whether the server performed proper- ly on elements of the meal",
       "leading_gap": null,
       "source": {
         "path": "sections/semantic/clause-4c/page-076.tex",

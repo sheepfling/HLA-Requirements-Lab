@@ -36,7 +36,7 @@ class RequirementApiBindingTests(unittest.TestCase):
             Counter(item.status for item in restored.bindings),
             Counter(
                 reviewed=1194,
-                matched=2234,
+                matched=2240,
             ),
         )
         self.assertEqual(build_requirement_api_bindings(self.model), restored.bindings)
@@ -46,7 +46,7 @@ class RequirementApiBindingTests(unittest.TestCase):
         matched = tuple(
             item for item in self.model.requirement_api_bindings if item.status == "matched"
         )
-        self.assertEqual(len(matched), 2234)
+        self.assertEqual(len(matched), 2240)
         for binding in matched:
             self.assertIsNotNone(binding.api_surface_id)
             surface = surfaces[binding.api_surface_id]
@@ -92,7 +92,7 @@ class RequirementApiBindingTests(unittest.TestCase):
 
     def test_portable_bundle_preserves_binding_and_declaration_sources(self) -> None:
         document = _document(self.model)
-        self.assertEqual(len(document.requirement_api_bindings), 3428)
+        self.assertEqual(len(document.requirement_api_bindings), 3434)
         self.assertEqual(
             [item.ordinal for item in document.requirements],
             list(range(1, len(document.requirements) + 1)),

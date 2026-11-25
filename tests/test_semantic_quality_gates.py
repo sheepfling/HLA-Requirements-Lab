@@ -99,7 +99,7 @@ class SemanticQualityGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(payload["entries"]), 10)
         self.assertTrue(all(required <= set(entry) for entry in payload["entries"]))
         self.assertTrue(all(entry["classification"] in allowed for entry in payload["entries"]))
-        self.assertEqual(len(ledger.entries), 16)
+        self.assertEqual(len(ledger.entries), 20)
         self.assertTrue(
             all(item.review_status in {"RESOLVED", "DISPOSITIONED"} for item in ledger.entries)
         )

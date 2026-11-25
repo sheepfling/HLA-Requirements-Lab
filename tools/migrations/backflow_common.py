@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
+from typing import Any
 
 from pydantic import ConfigDict
 
@@ -274,3 +276,11 @@ def _set_clause(record: _MutableRequirement, clause: str) -> None:
     record.clause = clause
     record.clause_id = f"clause-{clause}"
     record.semantic_group_id = f"m16.clause.{clause}"
+
+
+def read_backflow_payload(path: Path) -> dict[str, Any]:
+    """Read an existing migration input with explicit JSON object validation."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"expected a JSON object: {path}")
+    return payload

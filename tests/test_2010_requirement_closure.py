@@ -36,8 +36,10 @@ class RequirementClosure2010Tests(unittest.TestCase):
             },
             {
                 "hla-1516-2010": (56, 56, 56, 0, 0, 2),
-                "hla-1516.1-2010": (1529, 1529, 1529, 0, 0, 111),
-                "hla-1516.2-2010": (589, 589, 589, 0, 0, 76),
+                # Legacy candidates and semantic requirements are segmented
+                # differently when source statements are split or combined.
+                "hla-1516.1-2010": (1529, 1530, 1529, 0, 0, 111),
+                "hla-1516.2-2010": (589, 583, 589, 0, 0, 76),
             },
         )
 
