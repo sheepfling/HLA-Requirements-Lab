@@ -406,7 +406,7 @@ The current content slices are complete: 1516 generates selected Clause 3 summar
 requirements, 1516.1 generates the Connect/Disconnect/Connection Lost/Federate
 Resigned service-family prose and mappings, and 1516.2 generates the typed
 Object model identification table family. The three source builds remain at
-40, 440, and 124 pages.
+40, 440, and 113 pages.
 
 The hierarchy-first reconstruction is implemented at
 `topics/ieee/hla-semantic-derivative-2025/`. Its generated document has four

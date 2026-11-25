@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "page_count": 113,
+  "outline": [
+    [
+      1,
+      "HLA Requirements Lab cover",
+      1
+    ],
+    [
+      1,
+      "1. Overview",
+      2
+    ],
+    [
+      1,
+      "2. Normative references",
+      5
+    ],
+    [
+      1,
+      "3. Definitions, acronyms, and abbreviations",
+      5
+    ],
+    [
+      1,
+      "4. HLA OMT components",
+      22
+    ],
+    [
+      1,
+      "5. FOM/SOM lexicon",
+      77
+    ],
+    [
+      1,
+      "6. Conformance",
+      79
+    ],
+    [
+      1,
+      "7. FOM module/SOM module merging rules",
+      90
+    ],
+    [
+      1,
+      "Annex A",
+      95
+    ],
+    [
+      1,
+      "Annex B",
+      96
+    ],
+    [
+      1,
+      "Annex C",
+      98
+    ],
+    [
+      1,
+      "Annex D",
+      103
+    ],
+    [
+      1,
+      "Annex E",
+      105
+    ],
+    [
+      1,
+      "Annex F",
+      106
+    ],
+    [
+      1,
+      "Annex G",
+      107
+    ],
+    [
+      1,
+      "Annex H",
+      112
+    ],
+    [
+      1,
+      "Bibliography",
+      112
+    ],
+    [
+      1,
+      "Back Cover",
+      113
+    ]
+  ],
+  "outline_text_checks": [
+    [
+      1,
+      "HLA REQUIREMENTS LAB"
+    ],
+    [
+      2,
+      "1. Overview"
+    ],
+    [
+      5,
+      "2. Normative references"
+    ],
+    [
+      5,
+      "3. Definitions, acronyms, and abbreviations"
+    ],
+    [
+      22,
+      "4. HLA OMT components"
+    ],
+    [
+      77,
+      "5. FOM/SOM lexicon"
+    ],
+    [
+      79,
+      "6. Conformance"
+    ],
+    [
+      90,
+      "7. FOM module/SOM module merging rules"
+    ],
+    [
+      95,
+      "Annex A"
+    ],
+    [
+      96,
+      "Annex B"
+    ],
+    [
+      98,
+      "Annex C"
+    ],
+    [
+      103,
+      "Annex D"
+    ],
+    [
+      105,
+      "Annex E"
+    ],
+    [
+      106,
+      "Annex F"
+    ],
+    [
+      107,
+      "Annex G"
+    ],
+    [
+      112,
+      "Annex H"
+    ],
+    [
+      112,
+      "Bibliography"
+    ],
+    [
+      113,
+      "RAISING THE"
+    ]
+  ],
+  "page_labels": [
+    {
+      "startpage": 0,
+      "prefix": "Front Cover",
+      "firstpagenum": 1
+    },
+    {
+      "startpage": 1,
+      "prefix": "",
+      "firstpagenum": 2,
+      "style": "D"
+    },
+    {
+      "startpage": 112,
+      "prefix": "Back Cover",
+      "firstpagenum": 1
+    }
+  ],
+  "links": []
+}

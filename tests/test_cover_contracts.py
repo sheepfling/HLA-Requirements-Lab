@@ -42,7 +42,7 @@ class CoverContractTests(unittest.TestCase):
             ("1516", "2010"): (27,),
             ("1516", "2025"): (30,),
             ("1516.2", "2010"): (101,),
-            ("1516.2", "2025"): (112,),
+            ("1516.2", "2025"): (113,),
         }
         for (standard, edition), (expected_pages,) in expected.items():
             main = (ROOT / "topics" / "ieee" / f"hla-{standard}-{edition}" / "main.tex").read_text(
