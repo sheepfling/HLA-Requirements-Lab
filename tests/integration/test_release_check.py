@@ -56,7 +56,12 @@ class ReleaseCheckIntegrationTests(unittest.TestCase):
 
                 sample_indices = {0, min(22, len(document) - 1), len(document) - 1}
                 for index in sorted(sample_indices):
-                    self.assertIn("HLA REQUIREMENTS LAB", document[index].get_text())
+                    page = document[index]
+                    if item["id"] == "hla-1516.2-2025" and index == len(document) - 1:
+                        self.assertEqual(page.get_label(), "Back Cover")
+                        self.assertIn("RAISING THE", page.get_text())
+                    else:
+                        self.assertIn("HLA REQUIREMENTS LAB", page.get_text())
                 self.assertNotIn("IEEE Standard for", document[0].get_text())
 
 
