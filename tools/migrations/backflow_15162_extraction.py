@@ -2,18 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-
-def _read(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+from hla_lab.core.io import write_json as _write
+from tools.migrations.backflow_common import read_backflow_payload as _read
 
 
 def _record(records: list[dict[str, Any]], record_id: str) -> dict[str, Any]:
@@ -62,7 +56,9 @@ def _new_companion(
     return companion
 
 
-def _insert_after(records: list[dict[str, Any]], anchor_id: str, new_record: dict[str, Any]) -> None:
+def _insert_after(
+    records: list[dict[str, Any]], anchor_id: str, new_record: dict[str, Any]
+) -> None:
     records[:] = [item for item in records if item["id"] != new_record["id"]]
     anchor = next(index for index, item in enumerate(records) if item["id"] == anchor_id)
     records.insert(anchor + 1, new_record)
@@ -348,7 +344,9 @@ def repair_15162_backflow(repository_root: Path) -> None:
     for record_id in fixed_record_ids:
         requirement = _record(requirements, record_id)
         if record_id == fixed_record_ids[0]:
-            requirement["title"] = "Fixed record components shall follow declaration order and begin at offset zero"
+            requirement["title"] = (
+                "Fixed record components shall follow declaration order and begin at offset zero"
+            )
         elif record_id == fixed_record_ids[1]:
             requirement["title"] = "Fixed record components shall be padded to satisfy alignment"
         else:

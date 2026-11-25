@@ -2,20 +2,14 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
+from hla_lab.core.io import write_json as _write
+from tools.migrations.backflow_common import read_backflow_payload as _read
+
 OLD_PAGE_216 = "content/clauses/08-time-management-page-216.tex"
 NEW_PAGE_216 = "content/clauses/09-data-distribution-management-page-216.tex"
-
-
-def _read(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _rewrite_source_paths(value: Any) -> bool:
@@ -83,12 +77,9 @@ def repair_15161_context(repository_root: Path) -> None:
     # candidate instead of leaving its scope as orphan page context.
     protocol_applicability = "For HLA service arguments invoked over the Federate Protocol, "
     scoped_statements = {
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l147-48":
-            "Time Representation arguments shall use the HLA time type name, such as HLAinteger64Time.",
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l159-52":
-            "Handle arguments other than Conveyed Regions shall contain the opaque encoded bytes resulting from the handle’s encode operation.",
-        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l168-55":
-            "Conveyed Regions shall not be passed as handles, but shall be passed as a full encoding of their constituent parts using the ConveyedRegionSet data type, as specified in Annex D.",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l147-48": "Time Representation arguments shall use the HLA time type name, such as HLAinteger64Time.",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l159-52": "Handle arguments other than Conveyed Regions shall contain the opaque encoded bytes resulting from the handle’s encode operation.",
+        "requirement-candidate-content-clauses-12-programming-language-mappings-page-396-l168-55": "Conveyed Regions shall not be passed as handles, but shall be passed as a full encoding of their constituent parts using the ConveyedRegionSet data type, as specified in Annex D.",
     }
     for record_id, statement in scoped_statements.items():
         record = by_id[record_id]
