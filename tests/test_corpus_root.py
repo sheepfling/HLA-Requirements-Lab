@@ -6,11 +6,18 @@ import json
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
+
 from hla_lab.build.topic import project_config
 from hla_lab.cli import main
-from hla_lab.core.hla_profile import source_profile_for_document
+from hla_lab.core.hla_profile import (
+    HLA_SOURCE,
+    SOURCE_PROFILE_MANIFEST,
+    source_profile_for_document,
+)
+from hla_lab.core.semantic_document import DocumentModel
 from hla_lab.corpus.hla_semantic import load_hla_document_model
-from hla_lab.paths import RESOURCES, document_ids, document_roots, resources
+from hla_lab.paths import document_ids, document_roots, resources
 
 
 def _write_document_manifest(root: Path, *, profile_id: str | None = None) -> None:
@@ -120,24 +127,28 @@ def test_hla_loader_uses_catalog_identity_when_directory_name_differs(tmp_path: 
     document_root = tmp_path / "topics" / "alternate" / "standard-9"
     document_root.mkdir(parents=True)
 
+    model = DocumentModel(
+        document_id="alternate-standard-9", clauses=(), definitions=(), requirements=()
+    )
     with (
         patch(
-            "hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=object()
+            "hla_lab.corpus.hla_semantic.source_profile_for_document", return_value=HLA_SOURCE
         ) as profile,
-        patch("hla_lab.corpus.hla_semantic.load_document_model", return_value=object()),
+        patch("hla_lab.corpus.hla_semantic.load_document_model", return_value=model) as load_model,
         patch(
             "hla_lab.corpus.hla_semantic.build_hla_surface_contract",
             side_effect=lambda model: model,
         ),
     ):
-        load_hla_document_model(document_root, workspace_root=tmp_path)
+        assert load_hla_document_model(document_root, workspace_root=tmp_path) == model
 
     profile.assert_called_once_with("alternate-standard-9", tmp_path)
+    load_model.assert_called_once_with(document_root, HLA_SOURCE)
 
 
 def test_alternate_document_identity_resolves_its_selected_source_profile(tmp_path: Path) -> None:
     _write_document_manifest(tmp_path, profile_id="alternate-hla-profile")
-    source_profiles = json.loads(RESOURCES.source_profiles_manifest.read_text(encoding="utf-8"))
+    source_profiles = json.loads(SOURCE_PROFILE_MANIFEST.read_text(encoding="utf-8"))
     source_profiles["profiles"][0]["id"] = "alternate-hla-profile"
     source_profiles["command_vocabulary"]["content_marker"] = "AlternateContentMarker"
     target = tmp_path / "data" / "semantic" / "source-profiles.json"
@@ -147,6 +158,16 @@ def test_alternate_document_identity_resolves_its_selected_source_profile(tmp_pa
     assert source_profile_for_document("alternate-standard-9", tmp_path).content_marker == (
         "AlternateContentMarker"
     )
+
+
+def test_package_profile_fallback_only_when_corpus_manifest_absent(tmp_path: Path) -> None:
+    _write_document_manifest(tmp_path, profile_id="hla-2025")
+    assert source_profile_for_document("alternate-standard-9", tmp_path) == HLA_SOURCE
+
+    profile_path = resources(tmp_path).source_profiles_manifest
+    profile_path.write_text("{", encoding="utf-8")
+    with pytest.raises(ValueError, match="Invalid JSON"):
+        source_profile_for_document("alternate-standard-9", tmp_path)
 
 
 def test_map_cli_reads_selected_corpus_and_preserves_default_json_shape(
@@ -192,7 +213,7 @@ def test_matrix_generator_resolves_release_publication_and_source_roots_from_sel
     source_root.mkdir(parents=True)
     project_root = _write_compliance_project(tmp_path)
 
-    config = project_config(project_root, tmp_path)
+    config = project_config(project_root, workspace_root=tmp_path)
     assert config.semantic_generator is not None
     with (
         patch("hla_lab.build.topic.load_hla_corpus") as load_corpus,

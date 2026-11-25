@@ -123,7 +123,9 @@ def _mapping_records(
     path = root / "semantic" / filename
     if not path.is_file():
         if required:
-            raise FileNotFoundError(f"missing canonical mapping file {path.relative_to(workspace)}")
+            raise FileNotFoundError(
+                f"missing canonical mapping file {path.relative_to(workspace).as_posix()}"
+            )
         return None
     payload = json.loads(path.read_text(encoding="utf-8"))
     records = payload.get(key) if isinstance(payload, dict) else None
@@ -291,7 +293,14 @@ def _matrix_command(args: argparse.Namespace) -> int:
     project_id = f"hla-rti-compliance-requirements-{args.edition}"
     try:
         project = load_release_manifest(resources(workspace).release_manifest).project(project_id)
-    except (FileNotFoundError, ValueError) as error:
+    except FileNotFoundError as error:
+        print(
+            f"Cannot resolve matrix project {project_id}: "
+            f"missing release manifest {error.filename}",
+            file=sys.stderr,
+        )
+        return 2
+    except ValueError as error:
         print(f"Cannot resolve matrix project {project_id}: {error}", file=sys.stderr)
         return 2
     if project.build is None or project.build.strategy != "compliance":

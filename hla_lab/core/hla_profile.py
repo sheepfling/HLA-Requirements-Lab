@@ -10,7 +10,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 from hla_lab.adapters.latex_renderer import LatexDialect
-from hla_lab.paths import document_entry_for_root
+from hla_lab.paths import document_entry_for_root, resources
 
 __all__ = [
     "HLA_LATEX_DIALECT",
@@ -183,11 +183,22 @@ def source_profile_for_document(
 ) -> HlaSourceCommands:
     """Resolve the source profile declared by the canonical document registry."""
 
-    profile_id = document_entry_for_root(document_id, workspace_root).profile_id
+    workspace = resources(workspace_root)
+    profile_id = document_entry_for_root(document_id, workspace.root).profile_id
     if profile_id is None:
         raise ValueError(f"document {document_id} has no source profile")
+    profile_path = workspace.source_profiles_manifest
     try:
-        return HLA_SOURCE_PROFILES[profile_id]
+        profile_json = profile_path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        # External corpora can use the packaged vocabulary without copying it.
+        profiles = HLA_SOURCE_PROFILES
+    else:
+        profiles = _load_source_profiles(
+            _HlaSourceProfileManifest.model_validate_json(profile_json)
+        )
+    try:
+        return profiles[profile_id]
     except KeyError as error:
         raise ValueError(
             f"document {document_id} references unknown source profile {profile_id}"
